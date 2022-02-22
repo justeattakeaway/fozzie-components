@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.24.0
+------------------------------
+*Februrary 22, 2022*
+### Changed
+- Styled the positioning of restaurant card data points
+- Split storybook card into multiple variants such as list-item, regular, verbose data etc
+
 v0.23.0
 ------------------------------
 *Februrary 17, 2022*

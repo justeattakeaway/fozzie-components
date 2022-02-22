@@ -13,8 +13,8 @@ export const RestaurantCardVerboseComponent = (args, { argTypes }) => ({
     components: { RestaurantCard },
     props: Object.keys(argTypes),
     template:  `
-    <div style="min-height: 100vh; display: grid; place-items: center;">
-        <div style="width: 350px;">
+    <div style="display: grid; place-items: center;">
+        <div style="max-width: 350px;">
             <restaurant-card v-bind="$props"/>
         </div>
     </div>`

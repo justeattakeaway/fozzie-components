@@ -60,10 +60,13 @@ export default {
     font-size: $font-paragraph-03 * 1px;
     color: $color-content-default;
     background-color: $color-container-subtle;
-    max-width: 50ch;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+
+    @include media('<mid') {
+         max-width: 30ch;
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+    }
 }
 
 .c-restaurantTag--isLarge {
