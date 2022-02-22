@@ -1,8 +1,8 @@
 import { withA11y } from '@storybook/addon-a11y';
-import RestaurantDish from '../../src/components/subcomponents/RestaurantDishes/RestaurantDish.vue';
+import RestaurantDish from '../src/components/subcomponents/RestaurantDishes/RestaurantDish.vue';
 
 export default {
-    title: 'Components/Molecules/f-restaurant-card/Subcomponents',
+    title: 'Components/Molecules/f-restaurant-card',
     decorators: [withA11y]
 };
 

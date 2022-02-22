@@ -1,8 +1,8 @@
 import { withA11y } from '@storybook/addon-a11y';
-import RestaurantRating from '../../src/components/subcomponents/RestaurantRating/RestaurantRating.vue';
+import RestaurantRating from '../src/components/subcomponents/RestaurantRating/RestaurantRating.vue';
 
 export default {
-    title: 'Components/Molecules/f-restaurant-card/Subcomponents',
+    title: 'Components/Molecules/f-restaurant-card',
     decorators: [withA11y]
 };
 

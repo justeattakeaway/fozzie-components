@@ -1,9 +1,9 @@
 import { withA11y } from '@storybook/addon-a11y';
 import { ClockIcon } from '@justeat/f-vue-icons';
-import IconText from '../../src/components/subcomponents/IconText.vue';
+import IconText from '../src/components/subcomponents/IconText.vue';
 
 export default {
-    title: 'Components/Molecules/f-restaurant-card/Subcomponents',
+    title: 'Components/Molecules/f-restaurant-card',
     decorators: [withA11y]
 };
 

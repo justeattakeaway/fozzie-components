@@ -1,6 +1,6 @@
 import { withA11y } from '@storybook/addon-a11y';
 import PieTokens from '@justeat/pie-design-tokens/dist/tokens.json';
-import RestaurantTag from '../../src/components/subcomponents/RestaurantTags/RestaurantTag.vue';
+import RestaurantTag from '../src/components/subcomponents/RestaurantTags/RestaurantTag.vue';
 
 const tagColourSchemes = {
     promoted: {
@@ -9,7 +9,7 @@ const tagColourSchemes = {
     }
 };
 export default {
-    title: 'Components/Molecules/f-restaurant-card/Subcomponents',
+    title: 'Components/Molecules/f-restaurant-card',
     decorators: [withA11y]
 };
 
