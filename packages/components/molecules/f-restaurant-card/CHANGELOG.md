@@ -8,7 +8,6 @@ v0.24.0
 *Februrary 22, 2022*
 ### Changed
 - Styled the positioning of restaurant card data points
-- Split storybook card into multiple variants such as list-item, regular, verbose data etc
 
 v0.23.0
 ------------------------------
