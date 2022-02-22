@@ -333,7 +333,7 @@ export default {
 
   .c-restaurantCard--listItem & {
       @include media('>mid') {
-        min-height: 125px;
+        min-height: 100px;
         height: 100%;
       }
   }
@@ -379,13 +379,39 @@ export default {
     align-items: center;
 }
 
-// List-item data positioning
-// List-item mode should only kick in at larger screen sizes when the class is applied
+// Regular inner-content positioning
+.c-restaurantCard-content {
+    display: flex;
+    align-items: center;
+    flex-flow: row wrap;
+    gap: 0 spacing(c);
+
+    // an alternative to using bottom gap so that none is applied to the clearfix
+    > * {
+        margin-bottom: spacing(a);
+    }
+}
+
+// name, tags and offer need to be full-width
+.c-restaurantCard-name,
+.c-restaurantCard-tags,
+.c-restaurantCard-offer {
+    flex: 0 0 100%;
+}
+
+.c-restaurantCard-offer {
+    order: 1; // places as last flex item
+    margin-top: spacing(a);
+}
+
+// List-item inner-content positioning (should only kick in at larger screen sizes when the class is applied)
 @include media('>mid') {
     .c-restaurantCard-content {
         .c-restaurantCard--listItem & {
             display: grid;
             grid-template-columns: 1fr 1fr;
+            grid-auto-rows: min-content;
+            place-content: center;
             grid-auto-flow: dense;
             align-items: center;
             gap: spacing(a) spacing(d);
@@ -435,42 +461,17 @@ export default {
 
     .c-restaurantCard-content {
         .c-restaurantCard--listItem & {
-            // remove gap
+            // remove gap set by base styles
             > * {
                 margin-bottom: 0;
             }
         }
     }
-}
 
-// Regular style data positioning
-.c-restaurantCard-content {
-    display: flex;
-    align-items: center;
-    flex-flow: row wrap;
-    gap: 0 spacing(c);
-
-    // an alternative to using bottom gap so that none is applied to the clearfix
-    > * {
-        margin-bottom: spacing(a);
-    }
-}
-
-// name, tags and offer need to be full-width
-.c-restaurantCard-name,
-.c-restaurantCard-tags,
-.c-restaurantCard-offer {
-    flex: 0 0 100%;
-}
-
-.c-restaurantCard-offer {
-    order: 1; // places as last flex item
-    margin-top: spacing(a);
-
-    .c-restaurantCard--listItem .c-restaurantCard-content & {
-        @include media('>mid') {
+    .c-restaurantCard-offer {
+        .c-restaurantCard--listItem .c-restaurantCard-content & {
             margin-top: 0;
-            order: initial; // ignore for list-item desktop
+            order: initial;
         }
     }
 }
