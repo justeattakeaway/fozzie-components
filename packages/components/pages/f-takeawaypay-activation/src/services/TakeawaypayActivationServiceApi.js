@@ -12,7 +12,7 @@ const activateLogData = (employeeId, consumerId) => ({
 });
 
 export default {
-    async isActivationAvailable (url, employeeId, store, logger) {
+    async isActivationAvailable (url, employeeId, logger) {
         try {
             const config = {
                 headers: {
@@ -26,8 +26,7 @@ export default {
             logInvoker({
                 message: 'TakeawayPay account linking fetched availability',
                 data: availabilityLogData(employeeId, data.available),
-                logMethod: logger.logInfo,
-                store
+                logMethod: logger.info
             });
 
             return data.available;
@@ -35,15 +34,14 @@ export default {
             logInvoker({
                 message: 'TakeawayPay account linking not available',
                 data: availabilityLogData(employeeId),
-                logMethod: logger.logWarn,
-                error,
-                store
+                logMethod: logger.warn,
+                error
             });
             return false;
         }
     },
 
-    async activate (url, employeeId, authToken, consumerId, store, logger) {
+    async activate (url, employeeId, authToken, consumerId, logger) {
         try {
             const authHeader = authToken && `Bearer ${authToken}`;
 
@@ -71,8 +69,7 @@ export default {
                 logInvoker({
                     message: 'TakeawayPay account linking succeeded',
                     data: activateLogData(employeeId, consumerId),
-                    logMethod: logger.logInfo,
-                    store
+                    logMethod: logger.info
                 });
                 return true;
             }
@@ -82,9 +79,8 @@ export default {
             logInvoker({
                 message: 'TakeawayPay account linking failed',
                 data: activateLogData(employeeId, consumerId),
-                logMethod: logger.logError,
-                error,
-                store
+                logMethod: logger.error,
+                error
             });
             return false;
         }
