@@ -42,9 +42,7 @@
             </h3>
 
             <div
-                :class="[
-                    $style['c-restaurantCard-ratingContainer'],
-                    $style['c-restaurantCard-data']]">
+                :class="$style['c-restaurantCard-ratingContainer']">
                 <!-- Ratings -->
                 <component
                     :is="errorBoundary"
@@ -77,11 +75,12 @@
                 v-if="hasCuisines"
                 :tier="3">
                 <restaurant-cuisines
-                    :class="[$style['c-restaurantCard-data'], $style['c-restaurantCard-cuisines']]"
+                    :class="$style['c-restaurantCard-cuisines']"
                     :cuisines="cuisines" />
             </component>
 
-            <div :class="[$style['c-restaurantCard-break']]" />
+            <!-- This is a clearfix to force anything after cuisines to a new line (won't affect list-item mode) -->
+            <div :class="[$style['c-restaurantCard-clearfix']]" />
 
             <!-- Delivery Meta (etas, distance etc) -->
             <component
@@ -90,7 +89,7 @@
                 :tier="3">
                 <delivery-time-meta
                     v-bind="deliveryTimeData"
-                    :class="[$style['c-restaurantCard-data']]"
+                    :class="$style['c-restaurantCard-distance']"
                     data-test-id="restaurant-delivery-time-meta" />
             </component>
 
@@ -99,9 +98,7 @@
                 :is="errorBoundary"
                 v-if="availability"
                 :tier="3">
-                <restaurant-availability
-                    :class="[$style['c-restaurantCard-data']]"
-                    v-bind="availability" />
+                <restaurant-availability v-bind="availability" />
             </component>
 
 
@@ -110,9 +107,7 @@
                 :is="errorBoundary"
                 v-if="hasFees"
                 :tier="3">
-                <restaurant-fees
-                    :class="[$style['c-restaurantCard-data']]"
-                    v-bind="fees" />
+                <restaurant-fees v-bind="fees" />
             </component>
 
             <!-- Offer -->
@@ -120,7 +115,7 @@
                 v-if="hasOffer"
                 data-test-id="restaurant-discounts"
                 :text="offer"
-                :class="[$style['c-restaurantCard-offer'], $style['c-restaurantCard-data']]"
+                :class="$style['c-restaurantCard-offer']"
                 is-bold>
                 <offer-icon />
             </icon-text>
@@ -141,7 +136,6 @@
                 v-if="disabledMessage"
                 data-test-id="restaurant-offline"
                 :text="disabledMessage"
-                :class="$style['c-restaurantCard-data']"
                 color="colorSupportError"
                 hide-icon-in-tile-view>
                 <clock-small-icon />
@@ -386,13 +380,8 @@ export default {
 }
 
 // List-item data positioning
+// List-item mode should only kick in at larger screen sizes when the class is applied
 @include media('>mid') {
-    .c-restaurantCard-data {
-        .c-restaurantCard--listItem .c-restaurantCard-content & {
-            grid-column: 2;
-        }
-    }
-
     .c-restaurantCard-content {
         .c-restaurantCard--listItem & {
             display: grid;
@@ -400,6 +389,11 @@ export default {
             grid-auto-flow: dense;
             align-items: center;
             gap: spacing(a) spacing(d);
+
+            // all data points apart from ratingContainer and cuisines should be in the second column
+            > * {
+                grid-column: 2;
+            }
         }
     }
 
@@ -410,6 +404,7 @@ export default {
         }
     }
 
+    // name and tags should be full-width
     .c-restaurantCard-name,
     .c-restaurantCard-tags {
         .c-restaurantCard--listItem .c-restaurantCard-content & {
@@ -417,12 +412,14 @@ export default {
         }
     }
 
+    // double the whitespace for name
     .c-restaurantCard-name {
         .c-restaurantCard--listItem .c-restaurantCard-content & {
             margin-bottom: spacing(a);
         }
     }
 
+    // double the whitespace for tags
     .c-restaurantCard-tags {
         .c-restaurantCard--listItem .c-restaurantCard-content & {
             margin-top: spacing(a);
@@ -430,7 +427,7 @@ export default {
     }
 
     // Prevent the cleafix from working on the list-item styling
-    .c-restaurantCard-break {
+    .c-restaurantCard-clearfix {
         .c-restaurantCard--listItem .c-restaurantCard-content & {
             display: none;
         }
@@ -443,7 +440,7 @@ export default {
                 margin-bottom: 0;
             }
         }
-}
+    }
 }
 
 // Regular style data positioning
@@ -453,12 +450,13 @@ export default {
     flex-flow: row wrap;
     gap: 0 spacing(c);
 
-    // an alternative to using gap so that none is applied to the clearfix
+    // an alternative to using bottom gap so that none is applied to the clearfix
     > * {
         margin-bottom: spacing(a);
     }
 }
 
+// name, tags and offer need to be full-width
 .c-restaurantCard-name,
 .c-restaurantCard-tags,
 .c-restaurantCard-offer {
@@ -466,7 +464,7 @@ export default {
 }
 
 .c-restaurantCard-offer {
-    order: 1; // places as last flex item if no other orders specified
+    order: 1; // places as last flex item
     margin-top: spacing(a);
 
     .c-restaurantCard--listItem .c-restaurantCard-content & {
@@ -477,8 +475,8 @@ export default {
     }
 }
 
-// Used as a clearfix within a flex-container
-.c-restaurantCard-break {
+// forces elements after to a new line within a flex container/grid
+.c-restaurantCard-clearfix {
     width: 100%;
     margin: 0;
 }
