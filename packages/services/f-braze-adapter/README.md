@@ -145,7 +145,7 @@ The callback to be invoked when in-app messages have been clicked.
 
 A dictionary of functions that should accept the parameters:
 
-* `level` String - one of (`logInfo`|`logWarn`|`logError`)
+* `level` String - one of (`info`|`warn`|`error`)
 * `message` String - A useful log message
 * `payload` Object - Any other relevant info for logging
 
