@@ -1,4 +1,3 @@
-import { select, boolean } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import VueFooter from '../src/components/Footer.vue';
 
@@ -19,19 +18,9 @@ export default {
     }
 };
 
-export const FooterComponent = () => ({
+export const FooterComponent = (args, { argTypes }) => ({
     components: { VueFooter },
-    props: {
-        locale: {
-            default: select('Locale', ['en-GB', 'en-AU', 'da-DK', 'en-IE', 'en-NZ', 'es-ES', 'it-IT', 'nb-NO'])
-        },
-        showCourierLinks: {
-            default: boolean('Show courier links', false)
-        },
-        showCountrySelector: {
-            default: boolean('Show country selector', false)
-        }
-    },
+    props: Object.keys(argTypes),
     template: `
         <vue-footer
             style="margin-top: 300px"
@@ -41,3 +30,29 @@ export const FooterComponent = () => ({
 });
 
 FooterComponent.storyName = 'f-footer';
+
+FooterComponent.args = {
+    locale: 'en-GB',
+    showCourierLinks: false,
+    showCountrySelector: false
+};
+
+
+FooterComponent.argTypes = {
+    locale: {
+        control: { type: 'select' },
+        description: 'Select a tenant',
+        options: ['en-GB', 'en-AU', 'da-DK', 'en-IE', 'en-NZ', 'es-ES', 'it-IT', 'nb-NO']
+    },
+
+    showCourierLinks: {
+        control: { type: 'boolean' },
+        description: 'If set to true, courier links are displayed'
+    },
+
+    showCountrySelector: {
+        control: { type: 'boolean' },
+        description: 'If set to true, country selector is displayed'
+    }
+};
+
