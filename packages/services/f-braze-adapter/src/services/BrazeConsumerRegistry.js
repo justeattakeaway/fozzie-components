@@ -89,7 +89,11 @@ class BrazeConsumerRegistry {
                 }, {});
                 // adding tags in so logs can be sorted
                 if (logger[type] !== undefined && typeof logger[type] === 'function') {
-                    logger[type](message, null, loggingData);
+                    if (type === 'error') {
+                        logger[type](message, null, 'brazeAdapter', loggingData);
+                    } else {
+                        logger[type](message, 'brazeAdapter', loggingData);
+                    }
                 }
             });
     }
