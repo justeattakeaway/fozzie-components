@@ -66,8 +66,7 @@ export const VoucherCardComponent = (args, { argTypes }) => ({
             this.cardTitle,
             this.voucherCode,
             this.icon,
-            this.subtitle,
-            this.cardType
+            this.subtitle
         );
     },
 
@@ -82,8 +81,7 @@ VoucherCardComponent.args = {
     subtitle: 'Voluptas sint id pariatur.',
     image: 'https://picsum.photos/seed/VoucherCard_image/384/216?blur=3',
     icon: 'https://picsum.photos/seed/VoucherCard_icon/48/48',
-    voucherCode: 'SPECIALVOUCHER',
-    cardType: 'Voucher_Card_1'
+    voucherCode: 'SPECIALVOUCHER'
 };
 
 VoucherCardComponent.argTypes = {
