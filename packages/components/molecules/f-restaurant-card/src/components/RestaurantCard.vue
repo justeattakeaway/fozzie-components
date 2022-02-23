@@ -430,6 +430,12 @@ export default {
         }
     }
 
+    .c-restaurantCard-cuisines {
+        .c-restaurantCard--listItem .c-restaurantCard-content & {
+            align-self: start;
+        }
+    }
+
     // name and tags should be full-width
     .c-restaurantCard-name,
     .c-restaurantCard-tags {
