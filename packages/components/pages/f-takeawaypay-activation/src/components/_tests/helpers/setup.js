@@ -7,13 +7,13 @@ const i18n = {
     }
 };
 
-const $logger = {
-    logInfo: jest.fn(),
-    logWarn: jest.fn(),
-    logError: jest.fn()
+const $log = {
+    info: jest.fn(),
+    warn: jest.fn(),
+    error: jest.fn()
 };
 
 export {
     i18n,
-    $logger
+    $log
 };

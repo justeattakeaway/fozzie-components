@@ -53,9 +53,9 @@ const mockConsumerOptions = {
         clickEvents: jest.fn()
     },
     logger: {
-        logInfo: jest.fn(),
-        logWarn: jest.fn(),
-        logError: jest.fn()
+        info: jest.fn(),
+        warn: jest.fn(),
+        error: jest.fn()
     },
     brands: [
         'a',
@@ -131,11 +131,12 @@ describe('BrazeConsumerRegistry', () => {
             // Arrange
             const mockMessage = '__TEST_MESSAGE__';
             const mockData = { test: '__TEST__' };
+
             // Act
-            consumerRegistry.applyLogger('logError', mockMessage, mockData);
+            consumerRegistry.applyLogger('error', mockMessage, mockData);
 
             // Assert
-            expect(mockConsumerOptions.logger.logError).toHaveBeenCalledWith(mockMessage, null, { data: mockData, tags: 'global' });
+            expect(mockConsumerOptions.logger.error).toHaveBeenCalledWith(mockMessage, null, 'brazeAdapter', { data: mockData, tags: 'global' });
         });
     });
 

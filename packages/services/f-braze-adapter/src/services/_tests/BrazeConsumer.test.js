@@ -47,9 +47,9 @@ const mockConsumerOptions = {
         clickEvents: jest.fn()
     },
     logger: {
-        logInfo: jest.fn(),
-        logWarn: jest.fn(),
-        logError: jest.fn()
+        info: jest.fn(),
+        warn: jest.fn(),
+        error: jest.fn()
     },
     brands: [
         'a',

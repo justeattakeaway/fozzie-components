@@ -44,8 +44,16 @@ class BrazeConsumer {
     }) {
         this.$logger = logger;
         // temp logging function as dispatcher event stream is not available until the consumer is registered
-        const logWhileInitialising = ({ type, message, data }) => {
-            logger[type](message, null, { data, tags });
+        const logWhileInitialising = ({
+            type,
+            message,
+            data
+        }) => {
+            if (type === 'error') {
+                logger[type](message, null, 'brazeAdapter', { data, tags });
+            } else {
+                logger[type](message, 'brazeAdapter', { data, tags });
+            }
         };
 
         // key for logging

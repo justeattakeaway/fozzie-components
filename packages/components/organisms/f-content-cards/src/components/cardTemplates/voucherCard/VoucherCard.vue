@@ -4,8 +4,7 @@
         :has-cta="false"
         :should-isolate-hero-image="isAnniversaryCard"
         :should-embolden-text="isAnniversaryCard"
-        :bold-title="true"
-    >
+        :bold-title="true">
         <button
             type="button"
             :class="$style['c-contentCard-voucher']"
@@ -171,8 +170,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-    @include badge();
-
     .c-contentCard-voucher {
         display: flex;
         width: 100%;
