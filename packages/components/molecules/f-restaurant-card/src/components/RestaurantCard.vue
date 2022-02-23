@@ -333,7 +333,7 @@ export default {
 
   .c-restaurantCard--listItem & {
       @include media('>mid') {
-        min-height: 100px;
+        min-height: 125px;
         height: 100%;
       }
   }
