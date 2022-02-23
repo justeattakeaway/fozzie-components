@@ -53,18 +53,18 @@ TermsAndConditionsCardComponent.args = {
 TermsAndConditionsCardComponent.argTypes = {
     title: {
         control: { type: 'text' },
-        description: 'Changes text of Card Title'
+        description: 'Changes text of card title'
     },
     subtitle: {
         control: { type: 'text' },
-        description: 'Changes text of Card Subtitle'
+        description: 'Changes text of card subtitle'
     },
     url: {
         control: { type: 'text' },
-        description: 'Changes text of URL'
+        description: 'Changes text of card url'
     },
     ctaText: {
         control: { type: 'text' },
-        description: 'Changes text of label'
+        description: 'Changes text of card cta'
     }
 };
