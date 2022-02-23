@@ -141,17 +141,6 @@ A callback to be invoked when in-app messages have been retrieved.
 
 The callback to be invoked when in-app messages have been clicked.
 
-#### `config.loggerCallbacks`
-
-A dictionary of functions that should accept the parameters:
-
-* `level` String - one of (`logInfo`|`logWarn`|`logError`)
-* `message` String - A useful log message
-* `payload` Object - Any other relevant info for logging
-
-This will be used to log out any information from the service. In a later version it will also be set up as a log target
-for the braze SDK, based on the `enableLogging` configuration value.
-
 ## Migration to v2
 
 Version 2 exposes the appboy instance as opposed to content cards as part of the refresh callback, this makes it easier to access properties on the instance such as `getUnviewedCardCount` and is a step closer to an isomorphic solution.
