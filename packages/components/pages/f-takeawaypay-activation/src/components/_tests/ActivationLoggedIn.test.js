@@ -2,7 +2,7 @@ import Vuex from 'vuex';
 import { mount, shallowMount, createLocalVue } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
 import ActivationLoggedIn from '../ActivationLoggedIn.vue';
-import { i18n, $logger } from './helpers/setup';
+import { i18n, $log } from './helpers/setup';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
@@ -60,7 +60,7 @@ describe('ActivationLoggedIn', () => {
                 localVue,
                 propsData,
                 mocks: {
-                    $logger
+                    $log
                 }
             });
 

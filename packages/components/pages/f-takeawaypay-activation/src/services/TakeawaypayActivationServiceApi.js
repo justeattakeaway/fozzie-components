@@ -1,5 +1,4 @@
 import axios from 'axios';
-import logInvoker from './LoggingService';
 
 const availabilityLogData = (employeeId, linkingAvailable = false) => ({
     TakeawayPayEmployeeId: employeeId,
@@ -12,7 +11,8 @@ const activateLogData = (employeeId, consumerId) => ({
 });
 
 export default {
-    async isActivationAvailable (url, employeeId, store, logger) {
+    async isActivationAvailable (url, employeeId, logger) {
+        const logData = availabilityLogData(employeeId);
         try {
             const config = {
                 headers: {
@@ -23,27 +23,33 @@ export default {
 
             const { data } = await axios.get(url, config);
 
-            logInvoker({
-                message: 'TakeawayPay account linking fetched availability',
-                data: availabilityLogData(employeeId, data.available),
-                logMethod: logger.logInfo,
-                store
-            });
+            logger.info(
+                'TakeawayPay account linking fetched availability',
+                'takeawaypay',
+                logData
+            );
 
             return data.available;
         } catch (error) {
-            logInvoker({
-                message: 'TakeawayPay account linking not available',
-                data: availabilityLogData(employeeId),
-                logMethod: logger.logWarn,
+            logger.error(
+                'TakeawayPay account linking not available',
                 error,
-                store
-            });
+                'takeawaypay',
+                {
+                    ...logData,
+                    exception: error.name,
+                    exceptionMessage: error.message,
+                    exceptionStackTrace: error.stack,
+                    traceId: error.traceId || (error.response && error.response.data.traceId),
+                    errorCode: error.errorCode
+                }
+            );
             return false;
         }
     },
 
-    async activate (url, employeeId, authToken, consumerId, store, logger) {
+    async activate (url, employeeId, authToken, consumerId, logger) {
+        const logData = activateLogData(employeeId, consumerId);
         try {
             const authHeader = authToken && `Bearer ${authToken}`;
 
@@ -68,24 +74,29 @@ export default {
             const { status } = await axios.patch(url, request, config);
 
             if (status === 200) {
-                logInvoker({
-                    message: 'TakeawayPay account linking succeeded',
-                    data: activateLogData(employeeId, consumerId),
-                    logMethod: logger.logInfo,
-                    store
-                });
+                logger.info(
+                    'TakeawayPay account linking succeeded',
+                    'takeawaypay',
+                    logData
+                );
                 return true;
             }
 
             return false;
         } catch (error) {
-            logInvoker({
-                message: 'TakeawayPay account linking failed',
-                data: activateLogData(employeeId, consumerId),
-                logMethod: logger.logError,
+            logger.error(
+                'TakeawayPay account linking failed',
                 error,
-                store
-            });
+                'takeawaypay',
+                {
+                    ...logData,
+                    exception: error.name,
+                    exceptionMessage: error.message,
+                    exceptionStackTrace: error.stack,
+                    traceId: error.traceId || (error.response && error.response.data.traceId),
+                    errorCode: error.errorCode
+                }
+            );
             return false;
         }
     }
