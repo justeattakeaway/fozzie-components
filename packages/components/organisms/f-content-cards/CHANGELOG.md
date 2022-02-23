@@ -10,7 +10,6 @@ Latest – to be added to the next release
 
 ### Changed
 - Storybook knobs to controls
-- Browser tests refactored accordingly
 
 
 v7.3.0
