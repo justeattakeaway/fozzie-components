@@ -51,7 +51,6 @@ export default {
 
 .c-restaurantCard-fees-item {
     white-space: nowrap;
-    margin: spacing(a) 0;
 
     &:after {
         content: '\2022'; // round bullet character

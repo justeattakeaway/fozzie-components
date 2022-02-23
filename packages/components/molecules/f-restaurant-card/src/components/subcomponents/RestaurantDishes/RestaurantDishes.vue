@@ -86,6 +86,10 @@ $scrollOffset: spacing(d);
         // needed to override & remove legacy fozzie <li> styling
         content: none;
     }
+
+    &:only-child {
+        margin-bottom: 0;
+    }
 }
 
 .c-restaurantCard-dishes--isScrollable > .c-restaurantCard-dishes-item {
