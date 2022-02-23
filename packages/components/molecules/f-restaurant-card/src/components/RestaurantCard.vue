@@ -392,7 +392,6 @@ export default {
     }
 }
 
-// name, tags and offer need to be full-width
 .c-restaurantCard-name,
 .c-restaurantCard-tags,
 .c-restaurantCard-offer {
@@ -400,7 +399,7 @@ export default {
 }
 
 .c-restaurantCard-offer {
-    order: 1; // places as last flex item
+    order: 1;
     margin-top: spacing(a);
 }
 
@@ -416,7 +415,6 @@ export default {
             align-items: baseline;
             gap: spacing(a) spacing(d);
 
-            // all data points apart from ratingContainer and cuisines should be in the second column
             > * {
                 grid-column: 2;
             }
@@ -436,7 +434,6 @@ export default {
         }
     }
 
-    // name and tags should be full-width
     .c-restaurantCard-name,
     .c-restaurantCard-tags {
         .c-restaurantCard--listItem .c-restaurantCard-content & {
@@ -444,14 +441,12 @@ export default {
         }
     }
 
-    // double the whitespace for name
     .c-restaurantCard-name {
         .c-restaurantCard--listItem .c-restaurantCard-content & {
             margin-bottom: spacing(a);
         }
     }
 
-    // double the whitespace for tags
     .c-restaurantCard-tags {
         .c-restaurantCard--listItem .c-restaurantCard-content & {
             margin-top: spacing(a);
@@ -467,7 +462,6 @@ export default {
 
     .c-restaurantCard-content {
         .c-restaurantCard--listItem & {
-            // remove gap set by base styles
             > * {
                 margin-bottom: 0;
             }
