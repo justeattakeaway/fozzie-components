@@ -413,7 +413,7 @@ export default {
             grid-auto-rows: min-content;
             place-content: center;
             grid-auto-flow: dense;
-            align-items: center;
+            align-items: baseline;
             gap: spacing(a) spacing(d);
 
             // all data points apart from ratingContainer and cuisines should be in the second column
