@@ -198,7 +198,7 @@ Storybook can be used to develop new and existing components.
 
 To start storybook:
 
-> Please ensure you are in the root level of the momorepo.
+> Please ensure you are in the root level of the monorepo.
 
 ```bash
 # Run storybook
