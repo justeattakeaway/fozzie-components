@@ -1,3 +1,3 @@
-export const LOG_INFO = 'logInfo';
-export const LOG_WARN = 'logWarn';
-export const LOG_ERROR = 'logError';
+export const LOG_INFO = 'info';
+export const LOG_WARN = 'warn';
+export const LOG_ERROR = 'error';
