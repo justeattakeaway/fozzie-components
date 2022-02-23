@@ -2251,13 +2251,6 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
-"@justeat/f-alert@4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-4.2.0.tgz#fe2ca873fdbb4b18c6ac41a4ed702ca689a77e0f"
-  integrity sha512-1dUOkKrY5NGXjJPa+jTP2JpHfRXqNXFtJ9U0enCS+/uHf/4aKcbd5wwX6fLZLcHCoZUoBu3jXO/tPdFrQSotWw==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-
 "@justeat/f-button@3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.0.2.tgz#9560d0caf56ae0801208ddd0c27cb50d670d54a8"
@@ -2465,6 +2458,14 @@
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.11.0.tgz#2705cdcb83434527c9fe1bccfbdd0222e25ab38b"
   integrity sha512-/DCnsOQmfEkz/dyD/u5VMaKDwEzAAjwW+qePXh6ofxNRm7SR9dWS0Qvwzg+kQvZ3ktN6b20PfcUcalLf00guFw==
+  dependencies:
+    lodash-es "4.17.21"
+    window-or-global "1.0.1"
+
+"@justeat/f-services@1.13.0":
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.13.0.tgz#bb8d92eb77d6b62b571edcd618dbc54ffedcb8ac"
+  integrity sha512-jm3DW0sI1A3VAKvSM511Hm6rWRxbXBKxsjLrkFEpwJ5Opn/EB0av14DbyeljSDjGACJjDKfmY3K+/fviL2bofg==
   dependencies:
     lodash-es "4.17.21"
     window-or-global "1.0.1"
