@@ -198,17 +198,14 @@ Storybook can be used to develop new and existing components.
 
 To start storybook:
 
-> Please ensure you are in the f-content-card directory as outlined in the above instructions.
+> Please ensure you are in the root level of the monorepo.
 
 ```bash
-# cd to the storybook package
-$ cd ../storybook
-
 # Run storybook
 $ yarn storybook:serve
 ```
 
-This will build and serve storybook at [http://localhost:6006](http://localhost:6006).
+This will build and serve storybook at [http://localhost:8080/](http://localhost:8080/).
 
 ## Issues
 
@@ -233,27 +230,9 @@ For more information on versioning and previous examples please see the [CHANGEL
 
 ### Deployment
 
-Once your change has been merged you must tag, push and deploy your changes using `yarn publish` or `npm publish`.
+Publishing to npm is handled automatically as part of our CI process. Once a PR has been merged to master, any package versions that are not present on npm will be published as part of the master build.
 
-```sh
-# Checkout master
-$ git checkout master
-
-# Check your PR was the last commit
-$ git log
-
-# Add a tag (Replacing 0.0.0 with the version)
-$ git tag f-content-card@0.0.0
-
-# Push tags
-$ git push --tags
-
-# Optional: cd to f-content-cards package
-$ cd packages/f-content-cards
-
-# Publish
-$ yarn publish
-```
+More information on publihing via npm can be found in our [monorepo docs](https://vue.pie.design/?path=/story/documentation-getting-started-contributing--page/#publishing-via-npm).
 
 ## License
 
