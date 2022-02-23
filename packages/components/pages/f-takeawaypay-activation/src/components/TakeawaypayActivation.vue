@@ -166,7 +166,7 @@ export default {
     methods: {
         async initialize () {
             this.shouldShowSpinner = true;
-            const available = await TakeawaypayActivationServiceApi.isActivationAvailable(this.getActivationStatusUrl, this.employeeId, this.$store, this.$logger);
+            const available = await TakeawaypayActivationServiceApi.isActivationAvailable(this.getActivationStatusUrl, this.employeeId, this.$log);
 
             if (available) {
                 this.determineActivationState();
