@@ -38,7 +38,7 @@ export const TermsAndConditionsCardComponent = (args, { argTypes }) => ({
         };
     },
 
-    template: '<terms-and-conditions-card :card="{title,subtitle,url,ctaText:label}" />'
+    template: '<terms-and-conditions-card :card="{title,subtitle,url,ctaText}" />'
 });
 
 TermsAndConditionsCardComponent.storyName = 'terms-and-conditions-card';
@@ -47,7 +47,7 @@ TermsAndConditionsCardComponent.args = {
     title: 'T&amp;C Example Title',
     subtitle: 'Example subtitle',
     url: '/termsandconditions#ii.just-eat-voucher-terms-conditions',
-    label: 'See the terms and conditions'
+    ctaText: 'See the terms and conditions'
 };
 
 TermsAndConditionsCardComponent.argTypes = {
@@ -63,7 +63,7 @@ TermsAndConditionsCardComponent.argTypes = {
         control: { type: 'text' },
         description: 'Changes text of URL'
     },
-    label: {
+    ctaText: {
         control: { type: 'text' },
         description: 'Changes text of label'
     }

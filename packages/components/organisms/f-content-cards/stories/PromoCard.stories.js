@@ -102,23 +102,23 @@ const args = {
 const argTypes = {
     title: {
         control: { type: 'text' },
-        description: 'Changes text of Card Title'
+        description: 'Changes text of card title'
     },
     description: {
         control: { type: 'text' },
-        description: 'Changes text of Card Subtitle'
+        description: 'Changes text of card subtitle'
     },
     image: {
         control: { type: 'text' },
-        description: 'Changes text of Card image'
+        description: 'Changes text of card mage'
     },
     icon: {
         control: { type: 'text' },
-        description: 'Changes text of Card icon'
+        description: 'Changes text of card icon'
     },
     cta: {
         control: { type: 'text' },
-        description: 'Changes text of Card cta'
+        description: 'Changes text of card cta'
     }
 };
 
