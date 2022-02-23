@@ -32,38 +32,42 @@
         </restaurant-image>
 
         <!-- primary content -->
-        <div :class="$style['c-restaurantCard-content']">
+        <section :class="$style['c-restaurantCard-content']">
             <!-- Restaurant Name -->
             <h3
-                :class="$style['c-restaurantCard-name']"
+                :class="[$style['c-restaurantCard-name']]"
                 data-test-id="restaurant_name"
                 data-search-name>
                 {{ name }}
             </h3>
 
-            <!-- Premier Icon -->
-            <legend-icon
-                v-if="isPremier"
-                :class="[$style['c-restaurantCard-premier']]"
-                data-test-id="restaurant-premier" />
+            <div
+                :class="$style['c-restaurantCard-ratingContainer']">
+                <!-- Ratings -->
+                <component
+                    :is="errorBoundary"
+                    v-if="rating"
+                    :tier="3">
+                    <restaurant-rating
+                        v-bind="rating" />
+                </component>
 
-            <!-- 'New' label -->
-            <restaurant-tag
-                v-if="newTagText"
-                :is-large="true"
-                :is-uppercase="true"
-                :text="newTagText"
-                data-test-id="restaurant-new-badge"
-                color-scheme="positive" />
+                <!-- Premier Icon -->
+                <legend-icon
+                    v-if="isPremier"
+                    :class="[$style['c-restaurantCard-premier']]"
+                    data-test-id="restaurant-premier" />
 
-            <!-- Ratings -->
-            <component
-                :is="errorBoundary"
-                v-if="rating"
-                :tier="3">
-                <restaurant-rating
-                    v-bind="rating" />
-            </component>
+                <!-- 'New' label -->
+                <restaurant-tag
+                    v-if="newTagText"
+                    :is-large="true"
+                    :is-uppercase="true"
+                    :text="newTagText"
+                    data-test-id="restaurant-new-badge"
+                    color-scheme="positive" />
+            </div>
+
 
             <!-- Cuisines -->
             <component
@@ -71,17 +75,12 @@
                 v-if="hasCuisines"
                 :tier="3">
                 <restaurant-cuisines
+                    :class="$style['c-restaurantCard-cuisines']"
                     :cuisines="cuisines" />
             </component>
 
-            <!-- Availability -->
-            <component
-                :is="errorBoundary"
-                v-if="availability"
-                :tier="3">
-                <restaurant-availability
-                    v-bind="availability" />
-            </component>
+            <!-- This is a clearfix to force anything after cuisines to a new line (won't affect list-item mode) -->
+            <div :class="[$style['c-restaurantCard-clearfix']]" />
 
             <!-- Delivery Meta (etas, distance etc) -->
             <component
@@ -90,27 +89,25 @@
                 :tier="3">
                 <delivery-time-meta
                     v-bind="deliveryTimeData"
+                    :class="$style['c-restaurantCard-distance']"
                     data-test-id="restaurant-delivery-time-meta" />
             </component>
+
+            <!-- Availability -->
+            <component
+                :is="errorBoundary"
+                v-if="availability"
+                :tier="3">
+                <restaurant-availability v-bind="availability" />
+            </component>
+
 
             <!-- Fees -->
             <component
                 :is="errorBoundary"
                 v-if="hasFees"
                 :tier="3">
-                <restaurant-fees
-                    v-bind="fees" />
-            </component>
-
-            <!-- Content Tags -->
-            <component
-                :is="errorBoundary"
-                v-if="hasContentTags"
-                :tier="3">
-                <restaurant-tags
-                    :class="$style['c-restaurantCard-tags']"
-                    test-id-position="inner-content"
-                    :tags="tags.contentTags" />
+                <restaurant-fees v-bind="fees" />
             </component>
 
             <!-- Offer -->
@@ -118,9 +115,21 @@
                 v-if="hasOffer"
                 data-test-id="restaurant-discounts"
                 :text="offer"
+                :class="$style['c-restaurantCard-offer']"
                 is-bold>
                 <offer-icon />
             </icon-text>
+
+            <!-- Content Tags -->
+            <component
+                :is="errorBoundary"
+                v-if="hasContentTags"
+                :tier="3">
+                <restaurant-tags
+                    :class="[$style['c-restaurantCard-tags']]"
+                    test-id-position="inner-content"
+                    :tags="tags.contentTags" />
+            </component>
 
             <!-- Disabled Message -->
             <icon-text
@@ -131,7 +140,7 @@
                 hide-icon-in-tile-view>
                 <clock-small-icon />
             </icon-text>
-        </div>
+        </section>
 
         <!-- Dishes -->
         <component
@@ -320,11 +329,11 @@ export default {
 
 .c-restaurantCard-img {
   width: 100%;
-  height: 200px; // TODO: agree with design
+  height: 144px;
 
   .c-restaurantCard--listItem & {
       @include media('>mid') {
-        min-height: 125px; // TODO: agree with design
+        min-height: 125px;
         height: 100%;
       }
   }
@@ -354,15 +363,122 @@ export default {
 }
 
 .c-restaurantCard-imageTags {
-    bottom: spacing();
+    bottom: spacing(d);
     left: spacing(d);
     position: absolute;
-    @include media('>mid') {
-        bottom: spacing(c);
-    }
+    margin-bottom: 0;
 }
 
 .c-restaurantCard-premier {
     height: 21px;
+}
+
+.c-restaurantCard-ratingContainer {
+    display: flex;
+    gap: spacing(c);
+    align-items: center;
+}
+
+// Regular inner-content positioning
+.c-restaurantCard-content {
+    display: flex;
+    align-items: center;
+    flex-flow: row wrap;
+    gap: 0 spacing(c);
+
+    // an alternative to using bottom gap so that none is applied to the clearfix
+    > * {
+        margin-bottom: spacing(a);
+    }
+}
+
+.c-restaurantCard-name,
+.c-restaurantCard-tags,
+.c-restaurantCard-offer {
+    flex: 0 0 100%;
+}
+
+.c-restaurantCard-offer {
+    order: 1;
+    margin-top: spacing(a);
+}
+
+// List-item inner-content positioning (should only kick in at larger screen sizes when the class is applied)
+@include media('>mid') {
+    .c-restaurantCard-content {
+        .c-restaurantCard--listItem & {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-auto-rows: min-content;
+            place-content: center;
+            grid-auto-flow: dense;
+            align-items: baseline;
+            gap: spacing(a) spacing(d);
+
+            > * {
+                grid-column: 2;
+            }
+        }
+    }
+
+    .c-restaurantCard-ratingContainer,
+    .c-restaurantCard-cuisines {
+        .c-restaurantCard--listItem .c-restaurantCard-content & {
+            grid-column: 1;
+        }
+    }
+
+    .c-restaurantCard-cuisines {
+        .c-restaurantCard--listItem .c-restaurantCard-content & {
+            align-self: start;
+        }
+    }
+
+    .c-restaurantCard-name,
+    .c-restaurantCard-tags {
+        .c-restaurantCard--listItem .c-restaurantCard-content & {
+            grid-column: 1 / 3;
+        }
+    }
+
+    .c-restaurantCard-name {
+        .c-restaurantCard--listItem .c-restaurantCard-content & {
+            margin-bottom: spacing(a);
+        }
+    }
+
+    .c-restaurantCard-tags {
+        .c-restaurantCard--listItem .c-restaurantCard-content & {
+            margin-top: spacing(a);
+        }
+    }
+
+    // Prevent the cleafix from working on the list-item styling
+    .c-restaurantCard-clearfix {
+        .c-restaurantCard--listItem .c-restaurantCard-content & {
+            display: none;
+        }
+    }
+
+    .c-restaurantCard-content {
+        .c-restaurantCard--listItem & {
+            > * {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .c-restaurantCard-offer {
+        .c-restaurantCard--listItem .c-restaurantCard-content & {
+            margin-top: 0;
+            order: initial;
+        }
+    }
+}
+
+// forces elements after to a new line within a flex container/grid
+.c-restaurantCard-clearfix {
+    width: 100%;
+    margin: 0;
 }
 </style>
