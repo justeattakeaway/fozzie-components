@@ -8,10 +8,10 @@ const header = new Header();
 describe('Accessibility tests', () => {
     forEach(['en-GB', 'en-AU', 'en-NZ', 'en-IE', 'it-IT', 'es-ES'])
         .it('a11y - should test f-header component WCAG compliance for "%s"', tenant => {
+            // Arrange
+            header.withQuery('args', `locale:${tenant};showOffersLink:true;showDeliveryEnquiry:true`);
+
             // Act
-            header.withQuery('&knob-Locale', tenant);
-            header.withQuery('&knob-Show offers link', 'true');
-            header.withQuery('&knob-Show delivery enquiry', 'true');
             header.load();
             const axeResults = getAccessibilityTestResults('f-header');
 

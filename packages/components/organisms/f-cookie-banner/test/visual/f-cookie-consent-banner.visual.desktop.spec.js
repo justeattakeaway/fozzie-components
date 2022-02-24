@@ -6,9 +6,11 @@ let cookieBanner;
 
 describe('New - f-cookie-banner Desktop Visual Tests', () => {
     beforeEach(() => {
+        // Arrange
         cookieBanner = new CookieBanner();
-        cookieBanner.withQuery('&knob-Locale', 'en-IE');
+        cookieBanner.withQuery('args', 'locale:en-IE');
 
+        // Act
         cookieBanner.load();
     });
 
@@ -17,7 +19,7 @@ describe('New - f-cookie-banner Desktop Visual Tests', () => {
     .it('should display the f-cookie-banner component for "%s"', tenant => {
         // Arrange
         cookieBanner = new CookieBanner();
-        cookieBanner.withQuery('&knob-Locale', tenant);
+        cookieBanner.withQuery('args', `locale:${tenant}`);
 
         // Act
         cookieBanner.load();
