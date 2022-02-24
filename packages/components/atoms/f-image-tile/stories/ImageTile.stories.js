@@ -4,6 +4,8 @@ import TestContainer from './TestContainer.vue';
 import ImageTileWallpaper from './images/wallpaper.png';
 import ImageTileCuisine from './images/burgers.jpg';
 
+const fakeImage = 'This creates a broken image';
+
 export default {
     title: 'Components/Atoms',
     decorators: [withA11y]
@@ -51,7 +53,8 @@ ImageTileComponent.argTypes = {
         defaultValue: 'Chicken'
     },
     imgSrc: {
-        control: { type: 'select', options: [ImageTileCuisine, null] },
+        control: { type: 'select' },
+        options: [ImageTileCuisine, null, fakeImage],
         description: 'Cuisine image link',
         defaultValue: ImageTileCuisine
     },

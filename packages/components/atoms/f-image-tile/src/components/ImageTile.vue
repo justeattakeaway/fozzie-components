@@ -35,12 +35,13 @@
                 :class="$style['c-imageTile-imageContainer']"
                 :style="cssVars">
                 <img
-                    v-if="imgSrc"
+                    v-if="imgSrc && !imgError"
                     :class="$style['c-imageTile-image']"
                     :src="imgSrc"
                     data-test-id="image-tile-image"
                     :alt="altText"
-                    :role="isPresentationRole ? 'presentation' : false">
+                    :role="isPresentationRole ? 'presentation' : false"
+                    @error="handleImgError">
             </span>
             <span
                 :class="$style['c-imageTile-textContainer']"
@@ -98,7 +99,8 @@ export default {
     },
     data () {
         return {
-            isToggleSelected: false
+            isToggleSelected: false,
+            imgError: false
         };
     },
     computed: {
@@ -150,6 +152,13 @@ export default {
             return {
                 tileId
             };
+        },
+        /**
+         * Updates the imgError data property
+         * when image errors
+         */
+        handleImgError () {
+            this.imgError = true;
         }
     }
 };
