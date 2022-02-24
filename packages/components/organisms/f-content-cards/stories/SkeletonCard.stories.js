@@ -1,23 +1,32 @@
-import { withKnobs, number, select } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import SkeletonLoader from '../src/components/cardTemplates/SkeletonLoader.vue';
 
 export default {
     title: 'Components/Molecules/f-content-cards',
-    decorators: [withKnobs, withA11y]
+    decorators: [withA11y]
 };
 
-export const SkeletonLoaderComponent = () => ({
+export const SkeletonLoaderComponent = (args, { argTypes }) => ({
     components: { SkeletonLoader },
-    props: {
-        count: {
-            default: number('Count', 1)
-        },
-        type: {
-            default: select('Type', ['promo', 'postOrder'], 'promo')
-        }
-    },
+    props: Object.keys(argTypes),
     template: '<skeleton-loader :count="count" :type="type" />'
 });
 
 SkeletonLoaderComponent.storyName = 'skeleton-card';
+
+SkeletonLoaderComponent.args = {
+    count: 1,
+    type: 'promo'
+};
+
+SkeletonLoaderComponent.argTypes = {
+    count: {
+        control: { type: 'number' },
+        description: 'Increases the amount of visible skeleton cards'
+    },
+    type: {
+        control: { type: 'select' },
+        description: 'Changes skeleton card type on select',
+        options: ['promo', 'postOrder']
+    }
+};
