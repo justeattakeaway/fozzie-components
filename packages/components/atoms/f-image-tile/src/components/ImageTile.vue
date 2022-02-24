@@ -126,7 +126,7 @@ export default {
             }
         }
     },
-    mounted () {
+    created () {
         this.isToggleSelected = this.isSelected;
     },
     methods: {
