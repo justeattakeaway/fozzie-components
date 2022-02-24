@@ -6,10 +6,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest – to be added to the next release
 ------------------------------
-*February 23, 2022*
+*February 24, 2022*
 
 ### Changed
 - Storybook knobs to controls
+
+
+v7.4.0
+------------------------------
+*February 23, 2022*
+
+### Changed
+- Updated f-braze-adapter package version to support new `$log` interface.
+- Reame update.
+
+### Removed
+- `badge()` styles import as outdated and unused.
 
 
 v7.3.0

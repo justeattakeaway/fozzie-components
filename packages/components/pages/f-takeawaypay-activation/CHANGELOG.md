@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v2.10.0
+------------------------------
+*February 23, 2022*
+
+### Changed
+- $logger interface to $log.
+
+
 v2.9.0
 ------------------------------
 *January 14, 2022*
@@ -10,12 +19,14 @@ v2.9.0
 ### Changed
 - Accessibility improvements. Added an announcement about progress of takeaway pay activation
 
+
 v2.8.0
 ------------------------------
 *December 1, 2021*
 
 ### Changed
 - Update visual regression tests to include UK and AU tenants, as they have different branding (JustEat Pay / Menulog Pay).
+
 
 v2.7.0
 ------------------------------

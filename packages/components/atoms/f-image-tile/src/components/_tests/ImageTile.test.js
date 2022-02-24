@@ -207,5 +207,21 @@ describe('ImageTile', () => {
                 expect(spy).toReturnWith(emitObject);
             });
         });
+
+        describe('handleImgError :: ', () => {
+            it('should update imgError to true when there is an error loading an image', () => {
+                // Arrange
+                const wrapper = shallowMount(ImageTile, { imgError: false });
+                const image = wrapper.find('[data-test-id="image-tile-image"]');
+
+
+                // Act
+                wrapper.vm.handleImgError();
+
+                // Assert
+                expect(wrapper.vm.imgError).toBe(true);
+                expect(image.exists()).toBe(false);
+            });
+        });
     });
 });
