@@ -27,7 +27,10 @@
             :tabindex="!isLink ? 0 : -1"
             @change="toggleFilter">
         <label
-            :class="$style['c-imageTile-label']"
+            :class="[
+                $style['c-imageTile-label'], {
+                    [$style['c-imageTile-label--link']]: isLink
+                }]"
             :for="`imageTileToggle-${tileId}`"
             data-test-id="image-tile-label"
             :tabindex="!isLink ? -1 : false">
@@ -126,7 +129,7 @@ export default {
             }
         }
     },
-    mounted () {
+    created () {
         this.isToggleSelected = this.isSelected;
     },
     methods: {
@@ -221,6 +224,10 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
     &:focus {
         outline: none; // Prevents Safari doubling focus styles.
     }
+}
+
+.c-imageTile-label--link {
+    pointer-events: none;
 }
 
 .c-imageTile-imageContainer {
