@@ -1,9 +1,9 @@
 {
   "name": "@justeat/f-offers",
   "description": "Fozzie Offers - displays offers to the customers",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "main": "dist/f-offers.umd.min.js",
-  "maxBundleSize": "140kB",
+  "maxBundleSize": "150kB",
   "files": [
     "dist",
     "test-utils"
@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "@braze/web-sdk": "3.3.0",
-    "@justeat/f-content-cards": "6.0.0-beta.2",
+    "@justeat/f-content-cards": "7.4.0",
     "@justeat/f-button": "3.0.2",
     "@justeat/f-media-element": "2.0.0",
     "@justeat/f-searchbox": "6.3.0",
