@@ -5,7 +5,7 @@
                 [$style['c-filterPill--selected']]: isToggleSelected,
                 [$style['c-filterPill--disabled']]: isToggleDisabled
             }]"
-        data-test-id="filter-pill-component">
+        data-test-id="filter-item">
         <input
             :id="`filterPillToggle-${inputId}`"
             type="checkbox"
