@@ -65,7 +65,7 @@ export default {
             default: null
         },
         displayNumber: {
-            type: String,
+            type: Number,
             default: null
         }
     },

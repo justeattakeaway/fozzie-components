@@ -45,9 +45,9 @@ FilterPillComponent.argTypes = {
         defaultValue: 'Low Delivery Fee'
     },
     displayNumber: {
-        control: { type: 'text' },
+        control: { type: 'number' },
         description: 'Displays filter number',
-        defaultValue: '15'
+        defaultValue: 15
     }
 };
 

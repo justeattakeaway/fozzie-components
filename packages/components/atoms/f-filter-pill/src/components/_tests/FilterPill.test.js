@@ -119,7 +119,7 @@ describe('FilterPill', () => {
         describe('displayNumber :: ', () => {
             it('should show filter number', () => {
                 // Arrange
-                const propsData = { displayNumber: '15' };
+                const propsData = { displayNumber: 15 };
 
                 // Act
                 const wrapper = shallowMount(FilterPill, {
@@ -129,7 +129,7 @@ describe('FilterPill', () => {
                 const element = wrapper.find('[data-test-id="filter-pill-number"]');
 
                 // Assert
-                expect(element.text()).toBe(propsData.displayNumber);
+                expect(element.text()).toBe(propsData.displayNumber.toString());
             });
         });
     });
