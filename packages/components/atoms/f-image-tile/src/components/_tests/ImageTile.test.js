@@ -175,6 +175,24 @@ describe('ImageTile', () => {
         });
     });
 
+    describe('created :: ', () => {
+        it.each([
+            [true, true],
+            [false, false]
+        ])('should update `isToggleSelected` %s when set to %s', (expectedValue, isSelected) => {
+            // Arrange
+            const propsData = { isSelected };
+
+            // Act
+            const wrapper = shallowMount(ImageTile, {
+                propsData
+            });
+
+            // Assert
+            expect(wrapper.vm.isToggleSelected).toBe(expectedValue);
+        });
+    });
+
     describe('methods :: ', () => {
         describe('toggleFilter :: ', () => {
             it('should update `isToggleSelected` value and $emit toggle event when called', async () => {
