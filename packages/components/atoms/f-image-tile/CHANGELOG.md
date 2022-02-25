@@ -9,7 +9,7 @@ v0.10.0
 
 ### Changed
         
-- Moved `isToggleSelected` assignement into created lifecycle method for SSR
+- Moved `isToggleSelected` assignment into created lifecycle method for SSR
 - Updated stories to use args instead of default value
 - Added label style for `isLink`
 
