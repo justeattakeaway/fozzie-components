@@ -110,6 +110,7 @@ export default {
 <style lang="scss" module>
 .c-checkoutHeader {
     text-align: center;
+    background-color: #93e9be;
 }
 
 .c-checkoutHeader-title {
