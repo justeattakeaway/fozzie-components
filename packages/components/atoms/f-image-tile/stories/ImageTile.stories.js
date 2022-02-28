@@ -36,47 +36,50 @@ export const ImageTileComponent = (args, { argTypes }) => ({
             `
 });
 
+ImageTileComponent.args = {
+    href: '/Chicken',
+    tileId: 'Chicken',
+    displayText: 'Chicken',
+    imgSrc: ImageTileCuisine,
+    isSelected: false,
+    isLink: false,
+    altText: '',
+    fallbackImage: ImageTileWallpaper
+};
+
 ImageTileComponent.argTypes = {
     href: {
         control: { type: 'text' },
-        description: 'Anchor link path',
-        defaultValue: '/Chicken'
+        description: 'Anchor link path'
     },
     tileId: {
         control: { type: 'text' },
-        description: 'Image tile filter id',
-        defaultValue: 'Chicken'
+        description: 'Image tile filter id'
     },
     displayText: {
         control: { type: 'text' },
-        description: 'Component display text',
-        defaultValue: 'Chicken'
+        description: 'Component display text'
     },
     imgSrc: {
         control: { type: 'select' },
         options: [ImageTileCuisine, null, fakeImage],
-        description: 'Cuisine image link',
-        defaultValue: ImageTileCuisine
+        description: 'Cuisine image link'
     },
     isSelected: {
         control: { type: 'boolean' },
-        description: 'Marks the filter as selected',
-        defaultValue: false
+        description: 'Marks the filter as selected'
     },
     isLink: {
         control: { type: 'boolean' },
-        description: 'Component acts as a link, rather than default toggle',
-        defaultValue: false
+        description: 'Component acts as a link, rather than default toggle'
     },
     altText: {
         control: { type: 'text' },
-        description: 'Image alt text',
-        defaultValue: ''
+        description: 'Image alt text'
     },
     fallbackImage: {
         control: { type: 'text' },
-        description: 'Fallback image url',
-        defaultValue: ImageTileWallpaper
+        description: 'Fallback image url'
     }
 };
 

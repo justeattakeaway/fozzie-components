@@ -80,7 +80,7 @@ describe('RestaurantDish.vue', () => {
         expect(wrapper.find(dishPortionSelector).exists()).toBe(true);
     });
 
-    it('does not display portion if value is passed as prop but calories are missing', () => {
+    it('displays portion if value is passed as prop and calories are missing', () => {
         // arrange
         const propsData = {
             portion: '2 servings'
@@ -90,7 +90,7 @@ describe('RestaurantDish.vue', () => {
         const wrapper = mount(sut, { propsData });
 
         // assert
-        expect(wrapper.find(dishPortionSelector).exists()).toBe(false);
+        expect(wrapper.find(dishPortionSelector).exists()).toBe(true);
     });
 
     it('does not display portion if value is null', () => {

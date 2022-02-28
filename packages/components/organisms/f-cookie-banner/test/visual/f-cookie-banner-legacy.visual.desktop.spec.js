@@ -5,8 +5,9 @@ const cookieBanner = new CookieBanner();
 describe('Legacy - f-cookie-banner Desktop Visual Tests', () => {
     it('should display the f-cookie-banner component', () => {
         // Arrange
-        cookieBanner.withQuery('&knob-Locale', 'en-AU');
+        cookieBanner.withQuery('args', 'locale:en-AU');
 
+        // Act
         cookieBanner.load();
 
         // Assert

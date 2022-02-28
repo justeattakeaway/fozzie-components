@@ -11,11 +11,10 @@ const cookieConsentBanner = new CookieConsentBanner();
 describe('Legacy Accessibility tests', () => {
     it('a11y - should test legacy f-cookie-banner component WCAG compliance', () => {
         // Arrange
-        const formattedLocale = 'en-AU';
-        legacyCookieBanner.withQuery('&knob-Locale', formattedLocale);
-        legacyCookieBanner.load();
+        legacyCookieBanner.withQuery('args', 'locale:en-AU');
 
         // Act
+        legacyCookieBanner.load();
         const axeResults = getAccessibilityTestResults('f-cookie-banner');
 
         // Assert
@@ -24,11 +23,10 @@ describe('Legacy Accessibility tests', () => {
 
     it('a11y - should test new f-cookie-banner component WCAG compliance', () => {
         // Arrange
-        const formattedLocale = 'en-GB';
-        cookieConsentBanner.withQuery('&knob-Locale', formattedLocale);
-        cookieConsentBanner.load();
+        legacyCookieBanner.withQuery('args', 'locale:en-GB');
 
         // Act
+        cookieConsentBanner.load();
         const axeResults = getAccessibilityTestResults('f-cookie-banner');
 
         // Assert
