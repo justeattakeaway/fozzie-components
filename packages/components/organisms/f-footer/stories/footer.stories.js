@@ -1,5 +1,6 @@
 import { withA11y } from '@storybook/addon-a11y';
 import VueFooter from '../src/components/Footer.vue';
+import content from '../test/data/footer-content.json';
 
 export default {
     title: 'Components/Organisms',
@@ -26,7 +27,8 @@ export const FooterComponent = (args, { argTypes }) => ({
             style="margin-top: 300px"
             :showCourierLinks="showCourierLinks"
             :locale="locale"
-            :showCountrySelector="showCountrySelector" />`
+            :showCountrySelector="showCountrySelector"
+            :content="content" />`
 });
 
 FooterComponent.storyName = 'f-footer';
@@ -34,7 +36,8 @@ FooterComponent.storyName = 'f-footer';
 FooterComponent.args = {
     locale: 'en-GB',
     showCourierLinks: false,
-    showCountrySelector: false
+    showCountrySelector: false,
+    content
 };
 
 
@@ -53,6 +56,11 @@ FooterComponent.argTypes = {
     showCountrySelector: {
         control: { type: 'boolean' },
         description: 'If set to true, country selector is displayed'
+    },
+
+    content: {
+        control: { type: 'object' },
+        description: 'JSON content, which dictates what sections and links are displayed'
     }
 };
 

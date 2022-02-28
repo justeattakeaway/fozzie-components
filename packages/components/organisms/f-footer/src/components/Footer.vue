@@ -11,9 +11,9 @@
                 $style['c-footer-row--noPadBelowWide']
             ]">
             <link-list
-                v-for="(linkList, i) in copy.linkLists"
+                v-for="(section, i) in content.sections"
                 :key="`${i}_LinkList`"
-                :link-list="linkList" />
+                :link-list="section" />
         </div>
 
         <div :class="$style['c-footer-light']">
@@ -111,7 +111,6 @@ export default {
             type: String,
             default: ''
         },
-
         showCourierLinks: {
             type: Boolean,
             default: true
@@ -119,6 +118,11 @@ export default {
         showCountrySelector: {
             type: Boolean,
             default: true
+        },
+        content: {
+            type: Object,
+            required: true,
+            default: () => {}
         }
     },
     computed: {
