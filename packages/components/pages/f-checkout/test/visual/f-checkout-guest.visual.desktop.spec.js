@@ -1,7 +1,8 @@
+import argumentStringBuilder from '../../test-utils/component-objects/argumentStringBuilder';
+
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout = new Checkout();
-let checkoutInfo;
 
 const illegalMobileNumber = '123';
 
@@ -9,14 +10,9 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'collection',
-            isAuthenticated: false,
-            isASAP: true
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
+
+        const args = argumentStringBuilder({ serviceType: 'collection', isLoggedIn: false });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
@@ -47,16 +43,9 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'collection',
-            isAuthenticated: false,
-            isASAP: true,
-            orderError: 'duplicate'
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-            .withQuery('&knob-Place Order Errors', checkoutInfo.orderError);
+
+        const args = argumentStringBuilder({ serviceType: 'collection', isLoggedIn: false, placeOrderError: 'duplicate' });
+        checkout.withQuery('args', args);
 
         const customerInfo = {
             firstName: 'Jerry',
@@ -93,14 +82,9 @@ describe('f-checkout - Collection - Guest - isAsapAvailable: false Desktop Visua
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'collection',
-            isAuthenticated: false,
-            isASAP: false
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
+
+        const args = argumentStringBuilder({ serviceType: 'collection', isLoggedIn: false, isAsapAvailable: false });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
@@ -116,14 +100,9 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'delivery',
-            isAuthenticated: false,
-            isASAP: true
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
+
+        const args = argumentStringBuilder({ isLoggedIn: false });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
@@ -155,16 +134,9 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'delivery',
-            isAuthenticated: false,
-            isASAP: true,
-            orderError: 'duplicate'
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-            .withQuery('&knob-Place Order Errors', checkoutInfo.orderError);
+
+        const args = argumentStringBuilder({ isLoggedIn: false, placeOrderError: 'duplicate' });
+        checkout.withQuery('args', args);
 
         const customerInfo = {
             firstName: 'Jerry',
@@ -204,14 +176,9 @@ describe('f-checkout - Delivery - Guest - isAsapAvailable: false Desktop Visual 
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'delivery',
-            isAuthenticated: false,
-            isASAP: false
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
+
+        const args = argumentStringBuilder({ isLoggedIn: false, isAsapAvailable: false });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
@@ -227,14 +194,9 @@ describe('f-checkout - Dine In - Guest - Desktop Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'dinein',
-            isAuthenticated: false,
-            isASAP: false
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
+
+        const args = argumentStringBuilder({ serviceType: 'dinein', isLoggedIn: false, isAsapAvailable: false });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
@@ -266,16 +228,12 @@ describe('f-checkout - Dine In - Guest - Desktop Visual Tests', () => {
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'dinein',
-            isAuthenticated: false,
-            isASAP: false,
-            orderErrors: 'duplicate'
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-            .withQuery('&knob-Place Order Errors', checkoutInfo.orderErrors);
+
+        const args = argumentStringBuilder({
+            serviceType: 'dinein', isLoggedIn: false, isAsapAvailable: false, placeOrderError: 'duplicate'
+        });
+        checkout.withQuery('args', args);
+
 
         const customerInfo = {
             firstName: 'Jerry',

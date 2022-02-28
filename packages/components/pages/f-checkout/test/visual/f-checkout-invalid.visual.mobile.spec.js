@@ -1,22 +1,16 @@
+import argumentStringBuilder from '../../test-utils/component-objects/argumentStringBuilder';
+
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
-let checkoutInfo;
 
 describe('f-checkout - Invalid - Mobile Visual Tests', () => {
     it('should display the "Get Checkout" error page', () => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'delivery',
-            isAuthenticated: true,
-            isASAP: true,
-            errorCode: '500'
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-            .withQuery('&knob-Get Checkout Options', checkoutInfo.errorCode);
+
+        const args = argumentStringBuilder({ getCheckoutOption: '500' });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.loadError();
@@ -28,16 +22,9 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
     it('should display the "Get Checkout 403" error page', () => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'delivery',
-            isAuthenticated: true,
-            isASAP: true,
-            errorCode: '403'
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-            .withQuery('&knob-Get Checkout Options', checkoutInfo.errorCode);
+
+        const args = argumentStringBuilder({ getCheckoutOption: '403' });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.loadError();
