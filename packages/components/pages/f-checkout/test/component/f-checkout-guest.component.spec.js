@@ -1,4 +1,5 @@
 import forEach from 'mocha-each';
+import argumentStringBuilder from '../../test-utils/component-objects/argumentStringBuilder';
 
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
@@ -8,9 +9,9 @@ describe('f-checkout "guest" component tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'delivery')
-            .withQuery('&knob-Is User Logged In', false)
-            .withQuery('&knob-Is ASAP available', true);
+
+        const args = argumentStringBuilder({ isLoggedIn: false });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
