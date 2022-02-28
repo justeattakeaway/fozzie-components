@@ -7,7 +7,7 @@ v7.0.0
 ------------------------------
 *February 28, 2022*
 
-### Changed
+### Added
 - `content` prop.
 
 ### Changed
