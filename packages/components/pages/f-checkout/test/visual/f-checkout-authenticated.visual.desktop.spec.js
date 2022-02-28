@@ -36,7 +36,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ serviceType: 'collection', patchCheckoutErrors: 'SERVER' });
+        const args = argumentStringBuilder({ serviceType: 'collection', patchCheckoutError: 'SERVER' });
         checkout.withQuery('args', args);
 
         // Act
@@ -52,7 +52,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ serviceType: 'collection', patchCheckoutErrors: 'restaurant-not-taking-orders' });
+        const args = argumentStringBuilder({ serviceType: 'collection', patchCheckoutError: 'restaurant-not-taking-orders' });
         checkout.withQuery('args', args);
 
         // Act
@@ -94,7 +94,7 @@ describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Deskt
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ isAsapAvailable: false, placeOrderError: 'duplicate' });
+        const args = argumentStringBuilder({ serviceType: 'collection', isAsapAvailable: false });
         checkout.withQuery('args', args);
 
         // Act
@@ -274,7 +274,7 @@ describe('f-checkout - Delivery - AU Tenant - age verification page - Desktop Vi
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ getBasketOption: 'age-restriction', locale: 'en-AU' });
+        const args = argumentStringBuilder({ getBasketError: 'age-restriction', locale: 'en-AU' });
         checkout.withQuery('args', args);
 
         // Act
