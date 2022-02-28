@@ -9,7 +9,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ getCheckoutOption: '500' });
+        const args = argumentStringBuilder({ getCheckoutOptions: '500' });
         checkout.withQuery('args', args);
 
         // Act
@@ -23,7 +23,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ getCheckoutOption: '403' });
+        const args = argumentStringBuilder({ getCheckoutOptions: '403' });
         checkout.withQuery('args', args);
 
         // Act

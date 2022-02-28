@@ -256,7 +256,7 @@ describe('f-checkout - Delivery - AU Tenant - visibile state field - Desktop Vis
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ isAsapAvailable: false, placeOrderError: 'duplicate' });
+        const args = argumentStringBuilder({ isAsapAvailable: false, locale: 'en-AU' });
         checkout.withQuery('args', args);
 
         // Act

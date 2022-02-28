@@ -123,7 +123,7 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ serviceType: 'collection', isLoggedIn: false, placeOrderError: 'duplicate' });
+        const args = argumentStringBuilder({ isLoggedIn: false, placeOrderError: 'duplicate' });
         checkout.withQuery('args', args);
 
         checkout.load();
