@@ -72,6 +72,14 @@ The props that can be defined are as follows (if any):
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
+| `href` | `String` | `null` | The link URL |
+| `tileId` | `String` | `null` | The id of the tile | 
+| `isSelected` | `Boolean` | `false` | Marks the tile as selected |
+| `isLink` | `Boolean` | `false` | Component acts as a link, rather than default toggle | 
+| `displayText` | `String` | `null` | Component display text | 
+| `imgSrc` | `String` | `''` | Component image link | 
+| `altText` | `String` | `''` | Component image alt text | 
+| `fallbackImage` | `String` | `''` | Component fallback image url
 
 ### Events
 
@@ -79,6 +87,8 @@ The events that can be subscribed to are as follows (if any):
 
 | Event | Description |
 | ----- | ----------- |
+| `toggleFilter` | Fired when a tile is interacted with, toggles between selected and not selected | 
+| `handleImgError` |  Fired there is an error with the component image |
 
 ## Development
 
@@ -123,6 +133,5 @@ yarn test-component:chrome
 ```bash
 yarn test-a11y:chrome
 ```
-## Documentation to be completed once module is in stable state.
 
 
