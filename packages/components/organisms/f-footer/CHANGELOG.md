@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.0.0
+------------------------------
+*February 28, 2022*
+
+### Changed
+- `content` prop.
+
+### Changed
+- Now the links displayed by the footer is driven by its `content` prop, rather than relying on local translation files.
+
 
 Latest – to be added to the next release
 ------------------------------

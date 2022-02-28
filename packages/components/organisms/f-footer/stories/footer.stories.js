@@ -1,6 +1,6 @@
 import { withA11y } from '@storybook/addon-a11y';
 import VueFooter from '../src/components/Footer.vue';
-import content from '../test/data/footer-content.json';
+import content from '../data/footer-content.json';
 
 export default {
     title: 'Components/Organisms',
