@@ -36,9 +36,6 @@ export const CheckoutComponent = (args, { argTypes }) => ({
     },
 
     props: Object.keys(argTypes),
-    beforeCreate () {
-        console.log(args, argTypes);
-    },
 
     computed: {
         createGuestUrl () {
