@@ -10,7 +10,7 @@ function isFullPostCode (postcode, tenant) {
     return !postcode ? false : countryPostcodeLengths[tenant];
 }
 
-const formatPostcode = postcode => postcode.replace(/\s/g, '').replace(/-/g, '');
+const formatPostcode = postcode => postcode.toString().replace(/\s/g, '').replace(/-/g, '');
 
 function toFormattedPostcode (postcode, tenant) {
     if (!postcode) {
@@ -80,8 +80,6 @@ function getAddressClosestToPostcode (postcode, addressData, tenant) {
     if (isFullPostCode(formattedPostcode, tenant)) {
         formattedPostcode = formattedPostcode.slice(0, formattedPostcode.length - 3);
     }
-
-
 
     address = address || addresses.find(a => a && a.ZipCode.startsWith(formattedPostcode));
 
