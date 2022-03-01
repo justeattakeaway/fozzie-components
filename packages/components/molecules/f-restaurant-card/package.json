@@ -46,7 +46,7 @@
   ],
   "dependencies": {
     "@justeat/f-services": "1.7.0",
-    "@justeat/f-vue-icons": "3.5.0"
+    "@justeat/f-vue-icons": "3.8.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
