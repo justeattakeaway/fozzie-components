@@ -1,32 +1,34 @@
 <template>
     <div
-        :class="$style['c-restaurantCard-Ratingskeleton']"
+        :class="$style['c-restaurantCard-ratingSkeleton']"
         aria-hidden="true">
-        <div :class="$style['c-restaurantCard-Ratingskeleton-icon']">
+        <div :class="$style['c-restaurantCard-ratingSkeleton-icon']">
             <star-filled-icon />
         </div>
-        <div :class="$style['c-restaurantCard-skeleton']" />
+        <restaurant-content-skeleton :class="$style['c-restaurantCard-ratingSkeleton-content']" />
     </div>
 </template>
 
 <script>
 import { StarFilledIcon } from '@justeat/f-vue-icons';
+import RestaurantContentSkeleton from './RestaurantContentSkeleton.vue';
 
 export default {
-    name: 'RestaurantRating',
+    name: 'RestaurantRatingSkeleton',
     components: {
-        StarFilledIcon
+        StarFilledIcon,
+        RestaurantContentSkeleton
     }
 };
 </script>
 
 <style lang="scss" module>
-.c-restaurantCard-Ratingskeleton {
+.c-restaurantCard-ratingSkeleton {
     width: 100%;
     display: flex;
 }
 
-.c-restaurantCard-Ratingskeleton svg {
+.c-restaurantCard-ratingSkeleton svg {
     width: spacing(d);
     height: spacing(d);
     margin-right: spacing(a);
@@ -39,17 +41,13 @@ export default {
     }
 }
 
-.c-restaurantCard-skeleton {
+.c-restaurantCard-ratingSkeleton-content {
     width: 85%;
     background-color: $color-skeleton-02;
 }
 
-.c-restaurantCard-skeleton,
-.c-restaurantCard-Ratingskeleton-icon {
+.c-restaurantCard-ratingSkeleton-icon {
     @include skeletonLoader();
-}
-
-.c-restaurantCard-Ratingskeleton-icon {
     border-radius: 0;
     display: flex;
     align-items: center;
