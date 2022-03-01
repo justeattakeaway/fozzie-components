@@ -130,78 +130,89 @@ CheckoutComponent.args = {
     serviceType: 'delivery',
     locale: locales.gb,
     isAsapAvailable: true,
-    getCheckoutOptions:  null,
-    getBasketError:  null,
-    patchCheckoutError:  null,
-    createGuestError: null,
-    placeOrderError: null,
-    fulfilmentTimeErrors: null,
-    noteType: null
+    getCheckoutOptions:  propOptions.getCheckoutOptions.None,
+    getBasketError:  propOptions.getBasketOptions.None,
+    patchCheckoutError:  propOptions.patchCheckoutErrorOptions.None,
+    createGuestError: propOptions.createGuestErrorOptions.None,
+    placeOrderError: propOptions.placeOrderErrorOptions.None,
+    fulfilmentTimeErrors: propOptions.fulfilmentTimeErrors.none,
+    noteType: propOptions.noteTypeOptions['Legacy notes']
 };
 
 CheckoutComponent.argTypes = {
     isLoggedIn: {
         control: { type: 'boolean' },
-        description: 'Is User Logged In'
+        description: 'Is User Logged In',
+        defaultValue: false
     },
 
     serviceType: {
         control: { type: 'select' },
         options: propOptions.serviceTypeOptions,
-        description: 'Service Type'
+        description: 'Service Type',
+        defaultValue: 'delivery'
     },
 
     locale: {
         control: { type: 'select' },
         options: [locales.gb, locales.au, locales.nz],
-        description: 'Locale'
+        description: 'Locale',
+        defaultValue: locales.gb
     },
 
     isAsapAvailable: {
         control: { type: 'boolean' },
-        description: 'Is ASAP available'
+        description: 'Is ASAP available',
+        defaultValue: true
     },
 
     getCheckoutOptions: {
         control: { type: 'select' },
         options: propOptions.getCheckoutOptions,
-        description: 'Get Checkout Options'
+        description: 'Get Checkout Options',
+        defaultValue: propOptions.getCheckoutOptions.None
     },
 
     getBasketError: {
         control: { type: 'select' },
         options: propOptions.getBasketOptions,
-        description: 'Get Basket Options'
+        description: 'Get Basket Options',
+        defaultValue: propOptions.getBasketOptions.None
     },
 
     patchCheckoutError: {
         control: { type: 'select' },
         options: propOptions.patchCheckoutErrorOptions,
-        description: 'Patch Checkout Errors'
+        description: 'Patch Checkout Errors',
+        defaultValue: propOptions.patchCheckoutErrorOptions.None
     },
 
     createGuestError: {
         control: { type: 'select' },
         options: propOptions.createGuestErrorOptions,
-        description: 'Create Guest Errors'
+        description: 'Create Guest Errors',
+        defaultValue: propOptions.createGuestErrorOptions.None
     },
 
     placeOrderError: {
         control: { type: 'select' },
         options: propOptions.placeOrderErrorOptions,
-        description: 'Place Order Errorss'
+        description: 'Place Order Errors',
+        defaultValue: propOptions.placeOrderErrorOptions.None
     },
 
     fulfilmentTimeErrors: {
         control: { type: 'select' },
         options: propOptions.fulfilmentTimeErrors,
-        description: 'Fulfilment Time Options'
+        description: 'Fulfilment Time Options',
+        defaultValue: propOptions.fulfilmentTimeErrors.none
     },
 
     noteType: {
         control: { type: 'select' },
         options: propOptions.noteTypeOptions,
-        description: 'Note types'
+        description: 'Note types',
+        defaultValue: propOptions.noteTypeOptions['Legacy notes']
     }
 };
 
