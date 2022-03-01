@@ -1,6 +1,24 @@
 import { withA11y } from '@storybook/addon-a11y';
 import VueFooter from '../src/components/Footer.vue';
-import content from '../data/footer-content.json';
+import gbContent from '../data/en-GB.json';
+import esContent from '../data/es-ES.json';
+import itContent from '../data/it-IT.json';
+import noContent from '../data/nb-NO.json';
+import dkContent from '../data/da-DK.json';
+import auContent from '../data/en-AU.json';
+import nzContent from '../data/en-NZ.json';
+import ieContent from '../data/en-IE.json';
+
+const contents = {
+    'da-DK': dkContent,
+    'en-AU': auContent,
+    'en-GB': gbContent,
+    'en-IE': ieContent,
+    'en-NZ': nzContent,
+    'es-ES': esContent,
+    'it-IT': itContent,
+    'nb-NO': noContent
+};
 
 export default {
     title: 'Components/Organisms',
@@ -21,14 +39,22 @@ export default {
 
 export const FooterComponent = (args, { argTypes }) => ({
     components: { VueFooter },
+
     props: Object.keys(argTypes),
+
+    computed: {
+        contentByLocale () {
+            return contents[this.locale];
+        }
+    },
+
     template: `
         <vue-footer
             style="margin-top: 300px"
             :showCourierLinks="showCourierLinks"
             :locale="locale"
             :showCountrySelector="showCountrySelector"
-            :content="content" />`
+            :content="contentByLocale" />`
 });
 
 FooterComponent.storyName = 'f-footer';
@@ -37,9 +63,8 @@ FooterComponent.args = {
     locale: 'en-GB',
     showCourierLinks: false,
     showCountrySelector: false,
-    content
+    content: contents['en-GB']
 };
-
 
 FooterComponent.argTypes = {
     locale: {
@@ -59,8 +84,6 @@ FooterComponent.argTypes = {
     },
 
     content: {
-        control: { type: 'object' },
-        description: 'JSON content, which dictates what sections and links are displayed'
+        control: false // This is driven by the locale + data file combination.
     }
 };
-

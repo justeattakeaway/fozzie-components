@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import Footer from '../Footer.vue';
-import content from '../../../data/footer-content.json';
+import content from '../../../data/en-GB.json';
 
 let propsData;
 

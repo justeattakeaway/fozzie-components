@@ -1,0 +1,212 @@
+{
+  "sections": [
+    {
+      "name": "Cuisines",
+      "id": "footer-cuisines",
+      "links": [
+        {
+          "text": "Chinese",
+          "href": "https://www.menulog.co.nz/browse/cuisines/chinese",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisines_chinese"
+        },
+        {
+          "text": "Indian",
+          "href": "https://www.menulog.co.nz/browse/cuisines/indian",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisines_indian"
+        },
+        {
+          "text": "Thai",
+          "href": "https://www.menulog.co.nz/browse/cuisines/thai",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisines_thai"
+        },
+        {
+          "text": "Pizza",
+          "href": "https://www.menulog.co.nz/browse/cuisines/pizza",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisines_pizza"
+        },
+        {
+          "text": "View all cuisines",
+          "href": "https://www.menulog.co.nz/browse",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisines_view_all"
+        }
+      ]
+    },
+    {
+      "name": "Cities",
+      "id": "footer-cities",
+      "links": [
+        {
+          "text": "Auckland",
+          "href": "https://www.menulog.co.nz/browse/locations/auckland/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cities_auckland"
+        },
+        {
+          "text": "Wellington",
+          "href": "https://www.menulog.co.nz/browse/locations/wellington/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cities_wellington"
+        },
+        {
+          "text": "Christchurch",
+          "href": "https://www.menulog.co.nz/browse/locations/christchurch/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cities_christchurch"
+        },
+        {
+          "text": "Dunedin",
+          "href": "https://www.menulog.co.nz/browse/locations/dunedin/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cities_dunedin"
+        },
+        {
+          "text": "View all cities",
+          "href": "https://www.menulog.co.nz/takeaway/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cities_view_all"
+        }
+      ]
+    },
+    {
+      "name": "About Us",
+      "id": "footer-about-us",
+      "links": [
+        {
+          "text": "Get to know us",
+          "href": "https://www.menulog.co.nz/info/about-us",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_get_to_know_us"
+        },
+        {
+          "text": "Contact us",
+          "href": "https://www.menulog.co.nz/info/contact-us",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_contact_us"
+        },
+        {
+          "text": "Help Centre",
+          "href": "https://www.menulog.co.nz/help",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_help"
+        },
+        {
+          "text": "Menulog Blog",
+          "href": "https://www.menulog.co.nz/blog",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_blog"
+        },
+        {
+          "text": "Privacy Policy / Terms & Conditions",
+          "href": "https://www.menulog.co.nz/info/privacy-policy",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_privacy_policy"
+        },
+        {
+          "text": "Manage Restaurant",
+          "href": "https://partner.menulog.co.nz/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_manage_restaurant"
+        },
+        {
+          "text": "List your Restaurant",
+          "href": "https://www.menulog.co.nz/join_takeaway_section",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_list_your_restaurant"
+        },
+        {
+          "text": "Ethics hotline",
+          "href": "https://app.convercent.com/en-NZ/LandingPage/d8e86634-ec59-ec11-a985-000d3ab9f296",
+          "alt": "",
+          "rel": "",
+          "target": "_blank",
+          "gtmLabel": "click_ethics_hotline"
+        }
+      ]
+    },
+    {
+      "name": "Brands",
+      "id": "footer-brands",
+      "links": [
+        {
+          "text": "Burger King Delivery",
+          "href": "https://www.menulog.co.nz/takeaway/brands/burger-king",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": ""
+        },
+        {
+          "text": "KFC Delivery",
+          "href": "https://www.menulog.co.nz/takeaway/brands/kfc",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": ""
+        },
+        {
+          "text": "Mad Mex Delivery",
+          "href": "https://www.menulog.co.nz/takeaway/brands/mad-mex",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": ""
+        },
+        {
+          "text": "McDonald's Delivery",
+          "href": "https://www.menulog.co.nz/takeaway/brands/mcdonalds",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": ""
+        },
+        {
+          "text": "Taco Bell Delivery",
+          "href": "https://www.menulog.co.nz/takeaway/brands/taco-bell",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": ""
+        }
+      ]
+    }
+  ]
+}
