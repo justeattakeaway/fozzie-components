@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-image-tile",
   "description": "Fozzie Image Tile - An interactive tile component containing an image, text and link.",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "main": "dist/f-image-tile.umd.min.js",
   "files": [
     "dist",
