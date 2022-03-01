@@ -88,7 +88,7 @@ export default {
             }
         }
     },
-    mounted () {
+    created () {
         this.isToggleSelected = this.isSelected;
         this.isToggleDisabled = this.isDisabled;
     },
@@ -155,7 +155,8 @@ $filter-pill-checkbox-width: 16px;
     opacity: 0;
     width: 0;
 
-    .c-filterPill--selected &, .c-filterPill:hover:not(.c-filterPill--disabled) & {
+    .c-filterPill--selected &,
+    .c-filterPill:hover:not(.c-filterPill--disabled) & {
         opacity: 1;
         width: $filter-pill-checkbox-width;
         min-width: $filter-pill-checkbox-width;
