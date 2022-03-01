@@ -82,8 +82,8 @@
                         $style['c-restaurantCard-skeleton'],
                         $style['c-restaurantCard-content--left-col'],
                         $style['c-restaurantCard-skeleton--m'],
-                        $style['c-restaurantCard-skeleton--displayInListItem']]" />
-                <restaurant-data-point-skeleton :class="[$style['c-restaurantCard-skeleton'], $style['c-restaurantCard-skeleton--s'], $style['c-restaurantCard-skeleton--displayInListItem']]" />
+                        $style['c-restaurantCard-skeleton--hideOnMobile']]" />
+                <restaurant-data-point-skeleton :class="[$style['c-restaurantCard-skeleton'], $style['c-restaurantCard-skeleton--s'], $style['c-restaurantCard-skeleton--hideOnMobile']]" />
                 <restaurant-data-point-skeleton :class="$style['c-restaurantCard-skeleton']" />
             </template>
 
@@ -514,7 +514,7 @@ export default {
         }
     }
 
-    .c-restaurantCard-skeleton--displayInListItem {
+    .c-restaurantCard-skeleton--hideOnMobile {
         .c-restaurantCard--listItem .c-restaurantCard-content & {
             display: block;
         }
@@ -544,7 +544,7 @@ export default {
     width: 85%;
 }
 
-.c-restaurantCard-skeleton--displayInListItem {
+.c-restaurantCard-skeleton--hideOnMobile {
     display: none;
 }
 </style>
