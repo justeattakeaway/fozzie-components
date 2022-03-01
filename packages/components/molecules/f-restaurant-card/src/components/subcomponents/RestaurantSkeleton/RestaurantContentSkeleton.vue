@@ -1,12 +1,19 @@
 <template>
     <div
         :class="$style['c-restaurantCard-skeleton']"
+        :style="`width: ${widthPercentage}%;`"
         aria-hidden="true" />
 </template>
 
 <script>
 export default {
-    name: 'RestaurantContentSkeleton'
+    name: 'RestaurantContentSkeleton',
+    props: {
+        widthPercentage: {
+            type: Number,
+            default: 100
+        }
+    }
 };
 </script>
 

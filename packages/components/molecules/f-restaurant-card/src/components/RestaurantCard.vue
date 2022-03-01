@@ -45,6 +45,7 @@
 
             <restaurant-rating-skeleton
                 v-if="isLoading"
+                :width-percentage="75"
                 :class="$style['c-restaurantCard-ratingSkeleton']" />
 
             <div
@@ -77,22 +78,20 @@
 
             <template v-if="isLoading">
                 <restaurant-content-skeleton
+                    :width-percentage="90"
                     :class="[
-                        $style['c-restaurantCard-skeleton'],
                         $style['c-restaurantCard-content--left-col'],
                         $style['c-restaurantCard--hideOnMob']]" />
                 <restaurant-content-skeleton
+                    :width-percentage="80"
                     :class="[
-                        $style['c-restaurantCard-skeleton'],
                         $style['c-restaurantCard-content--left-col'],
-                        $style['c-restaurantCard-skeleton--m'],
                         $style['c-restaurantCard--hideOnMob']]" />
                 <restaurant-content-skeleton
+                    :width-percentage="40"
                     :class="[
-                        $style['c-restaurantCard-skeleton'],
-                        $style['c-restaurantCard-skeleton--s'],
                         $style['c-restaurantCard--hideOnMob']]" />
-                <restaurant-content-skeleton :class="$style['c-restaurantCard-skeleton']" />
+                <restaurant-content-skeleton :width-percentage="90" />
             </template>
 
             <template v-else>
@@ -533,23 +532,6 @@ export default {
 .c-restaurantCard-clearfix {
     width: 100%;
     margin: 0;
-}
-
-// Skeleton loader styles
-.c-restaurantCard-ratingSkeleton {
-    width: 70%;
-}
-
-.c-restaurantCard-skeleton {
-    width: 100%;
-}
-
-.c-restaurantCard-skeleton--s {
-    width: 40%;
-}
-
-.c-restaurantCard-skeleton--m {
-    width: 85%;
 }
 
 .c-restaurantCard--hideOnMob {

@@ -1,6 +1,7 @@
 <template>
     <div
         :class="$style['c-restaurantCard-ratingSkeleton']"
+        :style="`width: ${widthPercentage}%;`"
         aria-hidden="true">
         <div :class="$style['c-restaurantCard-ratingSkeleton-icon']">
             <star-filled-icon />
@@ -18,14 +19,20 @@ export default {
     components: {
         StarFilledIcon,
         RestaurantContentSkeleton
+    },
+    props: {
+        widthPercentage: {
+            type: Number,
+            default: 100
+        }
     }
 };
 </script>
 
 <style lang="scss" module>
 .c-restaurantCard-ratingSkeleton {
-    width: 100%;
     display: flex;
+    align-items: center;
 }
 
 .c-restaurantCard-ratingSkeleton svg {
@@ -42,7 +49,6 @@ export default {
 }
 
 .c-restaurantCard-ratingSkeleton-content {
-    width: 85%;
     background-color: $color-skeleton-02;
 }
 
