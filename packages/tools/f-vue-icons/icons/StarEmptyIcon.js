@@ -9,7 +9,7 @@ export default {
     return h("svg", _mergeJSXProps([{
       attrs: {
         xmlns: "http://www.w3.org/2000/svg",
-        viewBox: "0 0 18 17"
+        viewBox: "0.5 0.64 17.06 16.42"
       },
       "class": "c-ficon c-ficon--star-empty"
     }, ctx.data]), [h("path", {
