@@ -8,17 +8,17 @@ export default () => {
     };
 
     const logger = {
-        logError: (logMessage, store, logPayload = {}) => {
+        error: (logMessage, exception, tags, logPayload = {}) => {
             appendStandardProperties(logPayload, logMessage, 'Error', 'client');
-            console.error(logMessage, logPayload);
+            console.error(logMessage, tags, logPayload);
         },
-        logWarn: (logMessage, store, logPayload = {}) => {
+        warn: (logMessage, tags, logPayload = {}) => {
             appendStandardProperties(logPayload, logMessage, 'Warn', 'client');
-            console.warn(logMessage, logPayload);
+            console.warn(logMessage, tags, logPayload);
         },
-        logInfo: (logMessage, store, logPayload = {}) => {
+        info: (logMessage, tags, logPayload = {}) => {
             appendStandardProperties(logPayload, logMessage, 'Info', 'client');
-            console.log(logMessage, logPayload);
+            console.log(logMessage, tags, logPayload);
         }
     };
 
