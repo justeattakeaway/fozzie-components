@@ -76,15 +76,23 @@
             </div>
 
             <template v-if="isLoading">
-                <restaurant-data-point-skeleton :class="[$style['c-restaurantCard-skeleton'], $style['c-restaurantCard-content--left-col']]" />
-                <restaurant-data-point-skeleton
+                <restaurant-content-skeleton
+                    :class="[
+                        $style['c-restaurantCard-skeleton'],
+                        $style['c-restaurantCard-content--left-col'],
+                        $style['c-restaurantCard--hideOnMob']]" />
+                <restaurant-content-skeleton
                     :class="[
                         $style['c-restaurantCard-skeleton'],
                         $style['c-restaurantCard-content--left-col'],
                         $style['c-restaurantCard-skeleton--m'],
-                        $style['c-restaurantCard-skeleton--hideOnMobile']]" />
-                <restaurant-data-point-skeleton :class="[$style['c-restaurantCard-skeleton'], $style['c-restaurantCard-skeleton--s'], $style['c-restaurantCard-skeleton--hideOnMobile']]" />
-                <restaurant-data-point-skeleton :class="$style['c-restaurantCard-skeleton']" />
+                        $style['c-restaurantCard--hideOnMob']]" />
+                <restaurant-content-skeleton
+                    :class="[
+                        $style['c-restaurantCard-skeleton'],
+                        $style['c-restaurantCard-skeleton--s'],
+                        $style['c-restaurantCard--hideOnMob']]" />
+                <restaurant-content-skeleton :class="$style['c-restaurantCard-skeleton']" />
             </template>
 
             <template v-else>
@@ -190,7 +198,7 @@ import RestaurantFees from './subcomponents/RestaurantFees/RestaurantFees.vue';
 import RestaurantAvailability from './subcomponents/RestaurantAvailability/RestaurantAvailability.vue';
 import RenderlessSlotWrapper from './RenderlessSlotWrapper';
 import RestaurantRatingSkeleton from './subcomponents/RestaurantSkeleton/RestaurantRatingSkeleton.vue';
-import RestaurantDataPointSkeleton from './subcomponents/RestaurantSkeleton/RestaurantDataPointSkeleton.vue';
+import RestaurantContentSkeleton from './subcomponents/RestaurantSkeleton/RestaurantContentSkeleton.vue';
 import { EVENT_CLICK_RESTAURANT_CARD } from '../constants/custom-events';
 
 export default {
@@ -212,7 +220,7 @@ export default {
         RestaurantAvailability,
         RenderlessSlotWrapper,
         RestaurantRatingSkeleton,
-        RestaurantDataPointSkeleton
+        RestaurantContentSkeleton
     },
     provide () {
         return {
@@ -514,7 +522,7 @@ export default {
         }
     }
 
-    .c-restaurantCard-skeleton--hideOnMobile {
+    .c-restaurantCard--hideOnMob {
         .c-restaurantCard--listItem .c-restaurantCard-content & {
             display: block;
         }
@@ -544,7 +552,7 @@ export default {
     width: 85%;
 }
 
-.c-restaurantCard-skeleton--hideOnMobile {
+.c-restaurantCard--hideOnMob {
     display: none;
 }
 </style>

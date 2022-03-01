@@ -1,5 +1,5 @@
 @mixin skeletonLoader () {
-    height: 1.25em;
+    min-height: 1em;
     border-radius: 100px;
     position: relative;
     overflow: hidden;

@@ -48,4 +48,10 @@ export default {
 .c-restaurantCard-Ratingskeleton-icon {
     @include skeletonLoader();
 }
+
+.c-restaurantCard-Ratingskeleton-icon {
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+}
 </style>
