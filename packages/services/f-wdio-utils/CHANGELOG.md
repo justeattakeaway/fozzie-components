@@ -8,7 +8,7 @@ v0.7.0
 *March 02, 2022*
 
 ### Added
-- `getAccessibilityTestResults`
+- `getAccessibilityTestResults` to `page.object.js` file.
 
 
 v0.6.0
