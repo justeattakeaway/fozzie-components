@@ -50,7 +50,9 @@
 
             <div
                 v-else
-                :class="[$style['c-restaurantCard-content--left-col'], $style['c-restaurantCard-ratingContainer']]">
+                :class="[
+                    $style['c-restaurantCard-content--left-col'],
+                    $style['c-restaurantCard-ratingContainer']]">
                 <!-- Ratings -->
                 <component
                     :is="errorBoundary"
@@ -101,7 +103,9 @@
                     v-if="hasCuisines"
                     :tier="3">
                     <restaurant-cuisines
-                        :class="[$style['c-restaurantCard-content--left-col'], $style['c-restaurantCard-cuisines']]"
+                        :class="[
+                            $style['c-restaurantCard-content--left-col'],
+                            $style['c-restaurantCard-cuisines']]"
                         :cuisines="cuisines" />
                 </component>
 
