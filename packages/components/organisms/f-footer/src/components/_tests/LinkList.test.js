@@ -4,10 +4,10 @@ import LinkList from '../LinkList.vue';
 
 const propsData = {
     linkList: {
-        title: 'Customer service',
+        name: 'Customer service',
         links: [
             {
-                url: '/contact',
+                href: '/contact',
                 text: 'Contact us'
             }
         ]

@@ -1,0 +1,402 @@
+{
+  "sections": [
+    {
+      "name": "Customer Service",
+      "id": "footer-customer-service",
+      "links": [
+        {
+          "text": "Log in",
+          "href": "https://prod-ie-green.cms.just-eat.com/account/login?returnurl=%2F",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_service_login"
+        },
+        {
+          "text": "Sign up",
+          "href": "https://prod-ie-green.cms.just-eat.com/account/register/?returnurl=%2F",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_service_signup"
+        },
+        {
+          "text": "Blog",
+          "href": "https://prod-ie-green.cms.just-eat.com/blog",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_service_blog"
+        },
+        {
+          "text": "My account",
+          "href": "https://prod-ie-green.cms.just-eat.com/account/info/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_service_account"
+        },
+        {
+          "text": "Help",
+          "href": "https://prod-ie-green.cms.just-eat.com/help",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_service_help"
+        }
+      ]
+    },
+    {
+      "name": "Popular locations",
+      "id": "footer-popular-locations",
+      "links": [
+        {
+          "text": "Dublin",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/dublin",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_locations_dublin"
+        },
+        {
+          "text": "Limerick",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/limerick",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_locations_limerick"
+        },
+        {
+          "text": "Cork",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/cork",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_locations_cork"
+        },
+        {
+          "text": "Galway",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/galway",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_locations_galway"
+        },
+        {
+          "text": "Waterford",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/waterford",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_locations_waterford"
+        },
+        {
+          "text": "View all locations",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_locations_view_all"
+        }
+      ]
+    },
+    {
+      "name": "Top cuisines",
+      "id": "footer-top-cuisines",
+      "links": [
+        {
+          "text": "Chinese",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/nearme/chinese",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_chinese"
+        },
+        {
+          "text": "Pizza",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/nearme/pizza",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_pizza"
+        },
+        {
+          "text": "Indian",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/nearme/indian",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_indian"
+        },
+        {
+          "text": "Thai",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/nearme/thai",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_thai"
+        },
+        {
+          "text": "Chipper",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/nearme/traditional-chipper",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_chipper"
+        },
+        {
+          "text": "Sushi",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/nearme/sushi",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_sushi"
+        },
+        {
+          "text": "Burgers",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/nearme/burgers",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_burgers"
+        },
+        {
+          "text": "Mexican",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/nearme/mexican",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_mexican"
+        },
+        {
+          "text": "Italian",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/nearme/italian",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_italian"
+        },
+        {
+          "text": "Dessert",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/nearme/dessert",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_dessert"
+        },
+        {
+          "text": "Vegan",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/nearme/vegan",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_vegan"
+        },
+        {
+          "text": "Vegetarian",
+          "href": "https://www.just-eat.ie/takeaway/nearme/vegetarian",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_vegetarian"
+        },
+        {
+          "text": "View all cuisines",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/nearme",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_view_all"
+        }
+      ]
+    },
+    {
+      "name": "Top brands",
+      "id": "footer-top-brands",
+      "links": [
+        {
+          "text": "McDonald's ",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/brands/mcdonalds",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_mcdonalds"
+        },
+        {
+          "text": "KFC",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/brands/kfc",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_kfc"
+        },
+        {
+          "text": "Burger King",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/brands/burger-king",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_burger_king"
+        },
+        {
+          "text": "Supermac's",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/brands/supermacs",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_supermacs"
+        },
+        {
+          "text": "Apache Pizza",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/brands/apache-pizza",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_apache_pizza"
+        },
+        {
+          "text": "Subway",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/brands/subway",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_subway"
+        },
+        {
+          "text": "Pizza Hut",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/brands/pizza-hut-delivery",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_pizza_hut"
+        },
+        {
+          "text": "Papa John's",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/brands/papa-johns",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_papa_johns"
+        },
+        {
+          "text": "Boojum",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/brands/boojum-mex",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_boojum"
+        },
+        {
+          "text": "Camile Thai",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/brands/camile-thai",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_camille_thai"
+        },
+        {
+          "text": "Eddie Rockets",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/brands/eddie-rockets",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_eddie_rockets"
+        },
+        {
+          "text": "Krispy Kreme",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/brands/krispy-kreme",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_krispy_kreme"
+        },
+        {
+          "text": "View all brands",
+          "href": "https://prod-ie-green.cms.just-eat.com/takeaway/brands",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_all"
+        }
+      ]
+    },
+    {
+      "name": "A bit more about us",
+      "id": "footer-a-bit-more-about-us",
+      "links": [
+        {
+          "text": "About Just Eat",
+          "href": "https://prod-ie-green.cms.just-eat.com/info/about-us",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_about_justeat"
+        },
+        {
+          "text": "Price Promise",
+          "href": "https://prod-ie-green.cms.just-eat.com/pricepromise",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_price_promise"
+        },
+        {
+          "text": "Just Eat Giftcards",
+          "href": "https://giftcards.just-eat.ie/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_giftcards"
+        },
+        {
+          "text": "Restaurant sign up",
+          "href": "https://restaurants.just-eat.ie/signup",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_restaurant_signup"
+        },
+        {
+          "text": "Deliver with Just Eat",
+          "href": "https://couriers.just-eat.ie/application",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_deliverwithjusteatfooter"
+        },
+        {
+          "text": "Privacy Policy",
+          "href": "https://prod-ie-green.cms.just-eat.com/info/privacy-policy",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_privacy_policy"
+        },
+        {
+          "text": "Terms & Conditions",
+          "href": "https://prod-ie-green.cms.just-eat.com/info/terms-and-conditions",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_tandcs"
+        },
+        {
+          "text": "Cookie Policy",
+          "href": "https://prod-ie-green.cms.just-eat.com/info/cookies-policy",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_cookie_policy"
+        },
+        {
+          "text": "Ethics hotline",
+          "href": "https://app.convercent.com/en-IE/LandingPage/d8e86634-ec59-ec11-a985-000d3ab9f296",
+          "alt": "",
+          "rel": "",
+          "target": "_blank",
+          "gtmLabel": "click_ethics_hotline"
+        }
+      ]
+    }
+  ]
+}
