@@ -11,6 +11,7 @@ v0.25.0
 ### Changed
 - Update `f-vue-icons` package to `3.8.0`
 - Use darker background color for restaurant tags
+- use `$color-focus` for outline
 
 v0.24.1
 ------------------------------

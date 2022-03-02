@@ -347,6 +347,7 @@ export default {
   grid-gap: spacing(d);
   grid-template-columns: 1fr;
   position: relative;
+  outline-color: $color-focus;
 
   &.c-restaurantCard--listItem {
       @include media('>mid') {
