@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.0.1
+------------------------------
+*March 1, 2022*
+
+### Added
+- `resource_class` to circleci `config.yml` file to increase resource level for more powerful VMs.
+
 
 v7.0.0
 ------------------------------
