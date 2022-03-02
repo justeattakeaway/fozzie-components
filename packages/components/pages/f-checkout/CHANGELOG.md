@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest – to be added to the next release
 ------------------------------
-*March 1, 2022*
+*March 2, 2022*
 ### Changed
 - Converted knobs to controls in `checkout.stories.js`
 

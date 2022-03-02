@@ -149,77 +149,66 @@ CheckoutComponent.args = {
 CheckoutComponent.argTypes = {
     isLoggedIn: {
         control: { type: 'boolean' },
-        description: 'Is User Logged In',
-        defaultValue: false
+        description: 'Is User Logged In'
     },
 
     serviceType: {
         control: { type: 'select' },
         options: propOptions.serviceTypeOptions,
-        description: 'Service Type',
-        defaultValue: 'delivery'
+        description: 'Service Type'
     },
 
     locale: {
         control: { type: 'select' },
         options: [locales.gb, locales.au, locales.nz],
-        description: 'Locale',
-        defaultValue: locales.gb
+        description: 'Locale'
     },
 
     isAsapAvailable: {
         control: { type: 'boolean' },
-        description: 'Is ASAP available',
-        defaultValue: true
+        description: 'Is ASAP available'
     },
 
     getCheckoutOptions: {
         control: { type: 'select' },
         options: propOptions.getCheckoutOptions,
-        description: 'Get Checkout Options',
-        defaultValue: propOptions.getCheckoutOptions.None
+        description: 'Get Checkout Options'
     },
 
     getBasketError: {
         control: { type: 'select' },
         options: propOptions.getBasketOptions,
-        description: 'Get Basket Options',
-        defaultValue: propOptions.getBasketOptions.None
+        description: 'Get Basket Options'
     },
 
     patchCheckoutError: {
         control: { type: 'select' },
         options: propOptions.patchCheckoutErrorOptions,
-        description: 'Patch Checkout Errors',
-        defaultValue: propOptions.patchCheckoutErrorOptions.None
+        description: 'Patch Checkout Errors'
     },
 
     createGuestError: {
         control: { type: 'select' },
         options: propOptions.createGuestErrorOptions,
-        description: 'Create Guest Errors',
-        defaultValue: propOptions.createGuestErrorOptions.None
+        description: 'Create Guest Errors'
     },
 
     placeOrderError: {
         control: { type: 'select' },
         options: propOptions.placeOrderErrorOptions,
-        description: 'Place Order Errors',
-        defaultValue: propOptions.placeOrderErrorOptions.None
+        description: 'Place Order Errors'
     },
 
     fulfilmentTimeErrors: {
         control: { type: 'select' },
         options: propOptions.fulfilmentTimeErrors,
-        description: 'Fulfilment Time Options',
-        defaultValue: propOptions.fulfilmentTimeErrors.none
+        description: 'Fulfilment Time Options'
     },
 
     noteType: {
         control: { type: 'select' },
         options: propOptions.noteTypeOptions,
-        description: 'Note types',
-        defaultValue: propOptions.noteTypeOptions['Legacy notes']
+        description: 'Note types'
     }
 };
 
