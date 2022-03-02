@@ -457,77 +457,53 @@ export default {
 
             > * {
                 grid-column: 2;
-            }
-        }
-
-    }
-
-    .c-restaurantCard--listItem.c-restaurantCard--isLoading .c-restaurantCard-content {
-        align-items: center;
-    }
-
-    .c-restaurantCard-content--left-col {
-        .c-restaurantCard--listItem .c-restaurantCard-content & {
-            grid-column: 1;
-        }
-    }
-
-    .c-restaurantCard-cuisines {
-        .c-restaurantCard--listItem .c-restaurantCard-content & {
-            align-self: start;
-        }
-    }
-
-    .c-restaurantCard-name,
-    .c-restaurantCard-tags {
-        .c-restaurantCard--listItem .c-restaurantCard-content & {
-            grid-column: 1 / 3;
-        }
-    }
-
-    .c-restaurantCard-name {
-        .c-restaurantCard--listItem .c-restaurantCard-content & {
-            margin-bottom: spacing(a);
-        }
-    }
-
-    .c-restaurantCard-tags {
-        .c-restaurantCard--listItem .c-restaurantCard-content & {
-            margin-top: spacing(a);
-        }
-    }
-
-    // Prevent the cleafix from working on the list-item styling
-    .c-restaurantCard-clearfix {
-        .c-restaurantCard--listItem .c-restaurantCard-content & {
-            display: none;
-        }
-    }
-
-    .c-restaurantCard-content {
-        .c-restaurantCard--listItem & {
-            > * {
                 margin-bottom: 0;
             }
         }
+
+        .c-restaurantCard--listItem.c-restaurantCard--isLoading & {
+            align-items: center;
+        }
     }
 
-    .c-restaurantCard-offer {
-        .c-restaurantCard--listItem .c-restaurantCard-content & {
+    .c-restaurantCard--listItem .c-restaurantCard-content {
+        .c-restaurantCard-content--left-col {
+            grid-column: 1;
+        }
+
+        .c-restaurantCard-cuisines {
+            align-self: start;
+        }
+
+        .c-restaurantCard-name,
+        .c-restaurantCard-tags {
+            grid-column: 1 / 3;
+        }
+
+        .c-restaurantCard-name {
+            margin-bottom: spacing(a);
+        }
+
+        .c-restaurantCard-tags {
+            margin-top: spacing(a);
+        }
+
+        // Prevent the cleafix from working on the list-item styling
+        .c-restaurantCard-clearfix {
+            display: none;
+        }
+
+        .c-restaurantCard-offer {
             margin-top: 0;
             order: initial;
         }
-    }
 
-    .c-restaurantCard-ratingSkeleton {
-        .c-restaurantCard--listItem .c-restaurantCard-content & {
+        .c-restaurantCard-ratingSkeleton {
             grid-column: 1;
             width: 100%;
         }
-    }
 
-    .c-restaurantCard--hideOnMobile {
-        .c-restaurantCard--listItem .c-restaurantCard-content & {
+        .c-restaurantCard--hideOnMobile {
             display: block;
         }
     }
