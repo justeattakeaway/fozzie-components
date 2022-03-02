@@ -31,7 +31,14 @@ export const CheckoutComponent = (args, { argTypes }) => ({
             loginUrl: '/login',
             paymentPageUrlPrefix: '#/pay',
             getGeoLocationUrl: '/get-geo-location',
-            getCustomerUrl: '/get-customer'
+            getCustomerUrl: '/get-customer',
+
+            // default values are lost when opening storybook canvas in new tab
+            tenant: this.locale || locales.gb,
+            service: this.serviceType || 'delivery',
+            isAsap: this.isAsapAvailable || true,
+            isAuthenticated: this.isLoggedIn || false,
+            notes: this.noteType || propOptions.noteTypeOptions['Legacy notes']
         };
     },
 
@@ -44,22 +51,22 @@ export const CheckoutComponent = (args, { argTypes }) => ({
 
         getCheckoutUrl () {
             if (this.getCheckoutOptions) {
-                return `/checkout-${this.serviceType}-${this.getCheckoutOptions}`;
+                return `/checkout-${this.service}-${this.getCheckoutOptions}`;
             }
 
-            return `/checkout-${this.serviceType}-${TENANT_MAP[this.locale]}`;
+            return `/checkout-${this.service}-${TENANT_MAP[this.tenant]}`;
         },
 
         getBasketUrl () {
-            return this.getBasketError ? `/get-basket-${this.getBasketError}` : `/get-basket-${this.serviceType}`;
+            return this.getBasketError ? `/get-basket-${this.getBasketError}` : `/get-basket-${this.service}`;
         },
 
         getAddressUrl () {
-            return `/get-address-${TENANT_MAP[this.locale]}`;
+            return `/get-address-${TENANT_MAP[this.tenant]}`;
         },
 
         authToken () {
-            return this.isLoggedIn ? authToken : '';
+            return this.isAuthenticated ? authToken : '';
         },
 
         updateCheckoutUrl () {
@@ -75,7 +82,7 @@ export const CheckoutComponent = (args, { argTypes }) => ({
                 return `/checkout-available-fulfilment-${this.fulfilmentTimeErrors}`;
             }
 
-            return this.isAsapAvailable ? '/checkout-available-fulfilment' : '/checkout-available-fulfilment-preorder';
+            return this.isAsap ? '/checkout-available-fulfilment' : '/checkout-available-fulfilment-preorder';
         },
 
         getNoteConfigUrl () {
@@ -111,7 +118,7 @@ export const CheckoutComponent = (args, { argTypes }) => ({
         ':get-basket-url="getBasketUrl" ' +
         ':authToken="authToken" ' +
         ':otacToAuthExchanger="otacToAuthExchanger"' +
-        ':locale="locale" ' +
+        ':locale="tenant" ' +
         ':loginUrl="loginUrl" ' +
         ':getAddressUrl="getAddressUrl" ' +
         ':placeOrderUrl="placeOrderUrl" ' +
