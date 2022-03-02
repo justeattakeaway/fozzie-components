@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.25.0
+------------------------------
+*Februrary 22, 2022*
+### Added
+- Skeleton loader styling and animations
+### Changed
+- Update `f-vue-icons` package to `3.8.0`
+- Use darker background color for restaurant tags
+- use `$color-focus` for outline
+
 v0.24.1
 ------------------------------
 *Februrary 22, 2022*
