@@ -81,16 +81,16 @@
                     :width-percentage="90"
                     :class="[
                         $style['c-restaurantCard-content--left-col'],
-                        $style['c-restaurantCard--hideOnMob']]" />
+                        $style['c-restaurantCard--hideOnMobile']]" />
                 <restaurant-content-skeleton
                     :width-percentage="80"
                     :class="[
                         $style['c-restaurantCard-content--left-col'],
-                        $style['c-restaurantCard--hideOnMob']]" />
+                        $style['c-restaurantCard--hideOnMobile']]" />
                 <restaurant-content-skeleton
                     :width-percentage="40"
                     :class="[
-                        $style['c-restaurantCard--hideOnMob']]" />
+                        $style['c-restaurantCard--hideOnMobile']]" />
                 <restaurant-content-skeleton :width-percentage="90" />
             </template>
 
@@ -522,7 +522,7 @@ export default {
         }
     }
 
-    .c-restaurantCard--hideOnMob {
+    .c-restaurantCard--hideOnMobile {
         .c-restaurantCard--listItem .c-restaurantCard-content & {
             display: block;
         }
@@ -535,7 +535,7 @@ export default {
     margin: 0;
 }
 
-.c-restaurantCard--hideOnMob {
+.c-restaurantCard--hideOnMobile {
     display: none;
 }
 </style>
