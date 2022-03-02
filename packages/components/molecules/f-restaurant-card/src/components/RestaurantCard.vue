@@ -192,7 +192,8 @@ export default {
     },
     provide () {
         return {
-            isListItem: this.isListItem
+            isListItem: this.isListItem,
+            performanceTracker: this.performanceTracker
         };
     },
     props: {
@@ -268,6 +269,11 @@ export default {
         errorBoundary: {
             type: Object,
             default: () => RenderlessSlotWrapper // by default returns a renderless component that will just render it's slot and not bloat markup
+        },
+        // An optional library for tracking rendering performance
+        performanceTracker: {
+            type: Object,
+            default: null
         }
     },
     computed: {
@@ -293,6 +299,13 @@ export default {
         },
         hasCuisines () {
             return !!this.cuisines?.length;
+        }
+    },
+    mounted () {
+        if (this.performanceTracker) {
+            this.$nextTick(() => {
+                this.performanceTracker.time('tier-1');
+            });
         }
     },
     methods: {
