@@ -1,0 +1,458 @@
+{
+  "sections": [
+    {
+      "name": "Servicio al Cliente\t",
+      "id": "footer-servicio-al-cliente\t",
+      "links": [
+        {
+          "text": "Ayuda",
+          "href": "https://www.just-eat.es/help",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_servicio_al_cliente_ayuda"
+        },
+        {
+          "text": "Iniciar sesión",
+          "href": "https://www.just-eat.es/account/login",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_servicio_al_cliente_iniciar_sesion"
+        },
+        {
+          "text": "Regístrate",
+          "href": "https://www.just-eat.es/account/register",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_servicio_al_cliente_registrate"
+        },
+        {
+          "text": "Garantía de precio",
+          "href": "https://www.just-eat.es/info/garantia-de-precio",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_servicio_al_cliente_garantia_de_precio"
+        }
+      ]
+    },
+    {
+      "name": "Tipos de cocina",
+      "id": "footer-tipos-de-cocina",
+      "links": [
+        {
+          "text": "Comida china",
+          "href": "https://www.just-eat.es/a-domicilio/cerca-de-mi/comida-china",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_tipos_de_cocina_china"
+        },
+        {
+          "text": "Kebab",
+          "href": "https://www.just-eat.es/a-domicilio/cerca-de-mi/kebab",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_tipos_de_cocina_kebab"
+        },
+        {
+          "text": "Pizza",
+          "href": "https://www.just-eat.es/a-domicilio/cerca-de-mi/pizza",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_tipos_de_cocina_pizza"
+        },
+        {
+          "text": "Sushi",
+          "href": "https://www.just-eat.es/a-domicilio/cerca-de-mi/sushi",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_tipos_de_cocina_sushi"
+        },
+        {
+          "text": "Hamburguesas",
+          "href": "https://www.just-eat.es/a-domicilio/cerca-de-mi/hamburguesas",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_tipos_de_cocina_hamburguesas"
+        },
+        {
+          "text": "Pollo",
+          "href": "https://www.just-eat.es/a-domicilio/cerca-de-mi/pollo",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_tipos_de_cocina_pollo"
+        },
+        {
+          "text": "Comida mexicana",
+          "href": "https://www.just-eat.es/a-domicilio/cerca-de-mi/comida-mexicana",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_tipos_de_cocina_mexicana"
+        },
+        {
+          "text": "Comida japonesa",
+          "href": "https://www.just-eat.es/a-domicilio/cerca-de-mi/comida-japonesa",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_tipos_de_cocina_japonesa"
+        },
+        {
+          "text": "Bocadillos",
+          "href": "https://www.just-eat.es/a-domicilio/cerca-de-mi/bocadillos",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_tipos_de_cocina_bocadillos"
+        },
+        {
+          "text": "Comida india",
+          "href": "https://www.just-eat.es/a-domicilio/cerca-de-mi/comida-india",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_tipos_de_cocina_india"
+        },
+        {
+          "text": "Comida sana",
+          "href": "https://www.just-eat.es/a-domicilio/cerca-de-mi/comida-sana",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_tipos_de_cocina_sana"
+        },
+        {
+          "text": "Desayunos",
+          "href": "https://www.just-eat.es/a-domicilio/cerca-de-mi/desayunos",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_tipos_de_cocina_desayunos"
+        },
+        {
+          "text": "Más tipos de cocina",
+          "href": "https://www.just-eat.es/a-domicilio/cerca-de-mi",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_tipos_de_cocina_mas"
+        }
+      ]
+    },
+    {
+      "name": "Ciudades",
+      "id": "footer-ciudades",
+      "links": [
+        {
+          "text": "Madrid",
+          "href": "https://www.just-eat.es/a-domicilio/madrid",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_ciudades_madrid"
+        },
+        {
+          "text": "Barcelona",
+          "href": "https://www.just-eat.es/a-domicilio/barcelona",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_ciudades_barcelona"
+        },
+        {
+          "text": "Bilbao",
+          "href": "https://www.just-eat.es/a-domicilio/bilbao",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_ciudades_bilbao"
+        },
+        {
+          "text": "Valencia",
+          "href": "https://www.just-eat.es/a-domicilio/valencia",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_ciudades_valencia"
+        },
+        {
+          "text": "A Coruña",
+          "href": "https://www.just-eat.es/a-domicilio/a-coruna",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_ciudades_a_coruna"
+        },
+        {
+          "text": "Alicante",
+          "href": "https://www.just-eat.es/a-domicilio/alicante",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_ciudades_alicante"
+        },
+        {
+          "text": "Palma",
+          "href": "https://www.just-eat.es/a-domicilio/palma",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_ciudades_palma"
+        },
+        {
+          "text": "Málaga",
+          "href": "https://www.just-eat.es/a-domicilio/malaga",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_ciudades_malaga"
+        },
+        {
+          "text": "Sevilla",
+          "href": "https://www.just-eat.es/a-domicilio/sevilla",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_ciudades_sevilla"
+        },
+        {
+          "text": "Las Palmas",
+          "href": "https://www.just-eat.es/a-domicilio/las-palmas-de-gran-canaria",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_ciudades_las_palmas"
+        },
+        {
+          "text": "Pamplona",
+          "href": "https://www.just-eat.es/a-domicilio/pamplona",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_ciudades_pamplona"
+        },
+        {
+          "text": "Zaragoza",
+          "href": "https://www.just-eat.es/a-domicilio/zaragoza",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_ciudades_zaragoza"
+        },
+        {
+          "text": "Más ciudades",
+          "href": "https://www.just-eat.es/a-domicilio",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_ciudades_mas_ciudades"
+        }
+      ]
+    },
+    {
+      "name": "Más buscados",
+      "id": "footer-más-buscados",
+      "links": [
+        {
+          "text": "Burger King",
+          "href": "https://www.just-eat.es/a-domicilio/cadenas/burger-king",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_mas_buscados_burger_king"
+        },
+        {
+          "text": "KFC",
+          "href": "https://www.just-eat.es/a-domicilio/cadenas/kfc",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_mas_buscados_kfc"
+        },
+        {
+          "text": "McDonald's",
+          "href": "https://www.just-eat.es/a-domicilio/cadenas/mcdonalds",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_mas_buscados_McDonalds"
+        },
+        {
+          "text": "Taco Bell",
+          "href": "https://www.just-eat.es/a-domicilio/cadenas/taco-bell",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_mas_buscados_taco_bell"
+        },
+        {
+          "text": "Papa John's",
+          "href": "https://www.just-eat.es/a-domicilio/cadenas/papa-johns",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_mas_buscados_papa_johns"
+        },
+        {
+          "text": "Popeyes",
+          "href": "https://www.just-eat.es/a-domicilio/cadenas/popeyes",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_mas_buscados_popeyes"
+        },
+        {
+          "text": "Telepizza",
+          "href": "https://www.just-eat.es/a-domicilio/cadenas/telepizza",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_mas_buscados_telepizza"
+        },
+        {
+          "text": "TGB The Good Burger",
+          "href": "https://www.just-eat.es/a-domicilio/cadenas/the-good-burger",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_mas_buscados_tgb"
+        },
+        {
+          "text": "Viena Capellanes",
+          "href": "https://www.just-eat.es/a-domicilio/cadenas/viena-capellanes",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_mas_buscados_viena_capellanes"
+        },
+        {
+          "text": "Vips",
+          "href": "https://www.just-eat.es/a-domicilio/cadenas/vips",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_mas_buscados_vips"
+        },
+        {
+          "text": "Goiko",
+          "href": "https://www.just-eat.es/a-domicilio/cadenas/goiko",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_mas_buscados_goiko"
+        },
+        {
+          "text": "La Gran Familia Mediterranea",
+          "href": "https://www.just-eat.es/a-domicilio/cadenas/dani-garcia",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_mas_buscados_la_gran_familia_mediterranea"
+        },
+        {
+          "text": "Más cadenas",
+          "href": "https://www.just-eat.es/a-domicilio/cadenas",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_mas_buscados_mas_cadenas"
+        }
+      ]
+    },
+    {
+      "name": "Sobre nosotros",
+      "id": "footer-sobre-nosotros",
+      "links": [
+        {
+          "text": "Quienes somos",
+          "href": "https://www.justeattakeaway.com/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_sobre_nosotros_quienes_somos"
+        },
+        {
+          "text": "Trabaja con nosotros",
+          "href": "https://careers.justeattakeaway.com/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_sobre_nosotros_trabaja_con_nosotros"
+        },
+        {
+          "text": "Regístra tu restaurante",
+          "href": "https://restaurantes.just-eat.es/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_sobre_nosotros_restaurante_unete_a_nosotros"
+        },
+        {
+          "text": "Gestiona tu restaurante",
+          "href": "https://partner.just-eat.es/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_sobre_nosotros_gestiona_tu_restaurante"
+        },
+        {
+          "text": "Política de Privacidad",
+          "href": "https://www.just-eat.es/info/politica-de-privacidad",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_sobre_nosotros_politica_de_privacidad"
+        },
+        {
+          "text": "Política de Cookies",
+          "href": "https://www.just-eat.es/info/politica-de-cookies",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_sobre_nosotros_politica_de_cookies"
+        },
+        {
+          "text": "Términos y Condiciones",
+          "href": "https://www.just-eat.es/info/terminos-y-condiciones",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_sobre_nosotros_terminos_y_condiciones"
+        },
+        {
+          "text": "Linea directa de ética",
+          "href": "https://app.convercent.com/es-ES/LandingPage/d8e86634-ec59-ec11-a985-000d3ab9f296",
+          "alt": "",
+          "rel": "",
+          "target": "_blank",
+          "gtmLabel": "click_linea_directa_de_etica"
+        },
+        {
+          "text": "Informe de tendencias gastronómicas 2021",
+          "href": "https://www.just-eat.es/deals/el-gastrometro-2021/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_sobre_nosotros_tendencias_gastronomicas"
+        },
+        {
+          "text": "Prensa",
+          "href": "https://www.just-eat.es/info/prensa",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_sobre_nosotros_prensa"
+        }
+      ]
+    }
+  ]
+}
