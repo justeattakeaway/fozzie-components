@@ -36,8 +36,6 @@ export const CheckoutComponent = (args, { argTypes }) => ({
             // default values are lost when opening storybook canvas in new tab
             tenant: this.locale || locales.gb,
             service: this.serviceType || 'delivery',
-            isAsap: this.isAsapAvailable || true,
-            isAuthenticated: this.isLoggedIn || false,
             notes: this.noteType || propOptions.noteTypeOptions['Legacy notes']
         };
     },
@@ -66,7 +64,7 @@ export const CheckoutComponent = (args, { argTypes }) => ({
         },
 
         authToken () {
-            return this.isAuthenticated ? authToken : '';
+            return this.isLoggedIn ? authToken : '';
         },
 
         updateCheckoutUrl () {
@@ -82,7 +80,7 @@ export const CheckoutComponent = (args, { argTypes }) => ({
                 return `/checkout-available-fulfilment-${this.fulfilmentTimeErrors}`;
             }
 
-            return this.isAsap ? '/checkout-available-fulfilment' : '/checkout-available-fulfilment-preorder';
+            return this.isAsapAvailable ? '/checkout-available-fulfilment' : '/checkout-available-fulfilment-preorder';
         },
 
         getNoteConfigUrl () {
