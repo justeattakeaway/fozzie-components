@@ -10,6 +10,7 @@ v0.25.0
 - Skeleton loader styling and animations
 ### Changed
 - Update `f-vue-icons` package to `3.8.0`
+- Use darker background color for restaurant tags
 
 v0.24.1
 ------------------------------
