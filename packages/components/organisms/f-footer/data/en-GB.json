@@ -1,0 +1,354 @@
+{
+  "sections": [
+    {
+      "name": "Customer service",
+      "id": "footer-customer-service",
+      "links": [
+        {
+          "text": "Contact us",
+          "href": "https://www.just-eat.co.uk/help",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": ""
+        },
+        {
+          "text": "Log in",
+          "href": "https://www.just-eat.co.uk/account/login",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": ""
+        },
+        {
+          "text": "Sign up",
+          "href": "https://www.just-eat.co.uk/account/register",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_service_signup"
+        },
+        {
+          "text": "Mobile Apps",
+          "href": "https://prod-uk-green.cms.just-eat.com/info/apps",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_service_apps"
+        },
+        {
+          "text": "My account",
+          "href": "https://prod-uk-green.cms.just-eat.com/member/updateuserinfo",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_service_account"
+        },
+        {
+          "text": "Redeem a Giftcard",
+          "href": "https://www.just-eat.co.uk/giftcards/redeem",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": ""
+        },
+        {
+          "text": "Buy a Giftcard",
+          "href": "https://giftcards.just-eat.co.uk/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": ""
+        },
+        {
+          "text": "Local Legends",
+          "href": "https://prod-uk-green.cms.just-eat.com/blog/local/local-legends-the-best-takeaways-in-your-area",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_service_local_legends"
+        }
+      ]
+    },
+    {
+      "name": "Top cuisines",
+      "id": "footer-top-cuisines",
+      "links": [
+        {
+          "text": "Chinese",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/nearme/chinese",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_chinese"
+        },
+        {
+          "text": "Fish & Chips",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/nearme/fish-and-chips",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_fish_and_chips"
+        },
+        {
+          "text": "Indian",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/nearme/indian",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_indian"
+        },
+        {
+          "text": "Pizza",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/nearme/pizza",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_pizza"
+        },
+        {
+          "text": "Italian",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/nearme/italian",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_italian"
+        },
+        {
+          "text": "Kebabs",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/nearme/kebabs",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_kebabs"
+        },
+        {
+          "text": "Sushi",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/nearme/sushi",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_japanese"
+        },
+        {
+          "text": "View all cuisines",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/nearme",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_view_all"
+        }
+      ]
+    },
+    {
+      "name": "Popular locations",
+      "id": "footer-popular-locations",
+      "links": [
+        {
+          "text": "London",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/london",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_location_london"
+        },
+        {
+          "text": "Manchester",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/manchester",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_location_manchester"
+        },
+        {
+          "text": "Birmingham",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/birmingham",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_location_birmingham"
+        },
+        {
+          "text": "Leeds",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/leeds",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_location_leeds"
+        },
+        {
+          "text": "Glasgow",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/glasgow",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_location_glasgow"
+        },
+        {
+          "text": "View all locations",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_location_view_all"
+        }
+      ]
+    },
+    {
+      "name": "Top brands",
+      "id": "footer-top-brands",
+      "links": [
+        {
+          "text": "McDonald's",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/brands/mcdonalds",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_mcdonalds"
+        },
+        {
+          "text": "KFC",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/brands/kfc",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_kfc"
+        },
+        {
+          "text": "Burger King",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/brands/burgerking",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_burger_king"
+        },
+        {
+          "text": "Greggs",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/brands/greggs",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_greggs"
+        },
+        {
+          "text": "Subway",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/brands/subway",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_subway"
+        },
+        {
+          "text": "View all brands",
+          "href": "https://prod-uk-green.cms.just-eat.com/takeaway/brands",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_view_all"
+        }
+      ]
+    },
+    {
+      "name": "Get to know us",
+      "id": "footer-get-to-know-us",
+      "links": [
+        {
+          "text": "Restaurant sign up",
+          "href": "https://restaurants.just-eat.co.uk/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_restaurant_signup"
+        },
+        {
+          "text": "About us",
+          "href": "https://www.justeattakeaway.com/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_just_eat"
+        },
+        {
+          "text": "Careers",
+          "href": "https://careers.justeattakeaway.com/global/en",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_careers"
+        },
+        {
+          "text": "Deliver with Just Eat",
+          "href": "https://prod-uk-green.cms.just-eat.com/explore/delivering-with-just-eat",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_couriers_signup"
+        },
+        {
+          "text": "Just Eat for Business",
+          "href": "https://business.just-eat.co.uk/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_justeatforbusiness"
+        },
+        {
+          "text": "Price promise",
+          "href": "https://prod-uk-green.cms.just-eat.com/pricepromise",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_service_price_promise"
+        },
+        {
+          "text": "Privacy Policy",
+          "href": "https://prod-uk-green.cms.just-eat.com/info/privacy-policy",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_privacy_policy"
+        },
+        {
+          "text": "Terms and Conditions",
+          "href": "https://prod-uk-green.cms.just-eat.com/info/terms-and-conditions",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_tandcs"
+        },
+        {
+          "text": "Cookie Policy",
+          "href": "https://prod-uk-green.cms.just-eat.com/info/cookies-policy",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_cookie_policy"
+        },
+        {
+          "text": "Modern Slavery Statement",
+          "href": "https://prod-uk-green.cms.just-eat.com/CmsAssets/media/Files/Common/legal/modern-slavery-statement/Just-Eat-Modern-Slavery-Statement-2020.pdf?bid=1b91091942b64c72afcf3d0a2bbee7c3",
+          "alt": "Modern Slavery Statement",
+          "rel": "",
+          "target": "_blank",
+          "gtmLabel": "click_about_modern_slavery_statement"
+        },
+        {
+          "text": "Gender Pay Gap 2019-2021",
+          "href": "https://www.just-eat.co.uk/CmsAssets/media/Files/Common/legal/gender-pay-gap/gender-pay-gap-2019-2021",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": ""
+        },
+        {
+          "text": "Ethics hotline",
+          "href": "https://app.convercent.com/en-GB/LandingPage/d8e86634-ec59-ec11-a985-000d3ab9f296",
+          "alt": "",
+          "rel": "",
+          "target": "_blank",
+          "gtmLabel": "click_ethics_hotline"
+        }
+      ]
+    }
+  ]
+}

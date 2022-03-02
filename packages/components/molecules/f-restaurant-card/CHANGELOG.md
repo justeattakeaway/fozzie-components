@@ -11,6 +11,12 @@ v0.25.0
 ### Changed
 - Update `f-vue-icons` package to `3.8.0`
 
+v0.24.1
+------------------------------
+*Februrary 22, 2022*
+### Changed
+- Make Servings not dependant on Calories data being present
+
 v0.24.0
 ------------------------------
 *Februrary 22, 2022*

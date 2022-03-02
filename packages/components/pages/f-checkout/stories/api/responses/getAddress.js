@@ -12,7 +12,7 @@ function buildAddresses () {
 
     Object.values(TENANTS).forEach(tenant => {
         tenantRequests.push({
-            url: `/address-${tenant}`,
+            url: `/get-address-${tenant}`,
             ...getSuccess,
             payload: getAddress(tenant)
         });

@@ -3,6 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.10.1
+------------------------------
+*February 28, 2022*
+
+### Updated
+- Props and Events within `README.md`
+
+v0.10.0
+------------------------------
+*February 25, 2022*
+
+### Changed
+        
+- Moved `isToggleSelected` assignment into created lifecycle method for SSR
+- Updated stories to use args instead of default value
+- Added label style for `isLink`
+
+
 v0.9.2
 ------------------------------
 *February 23, 2022*

@@ -1,0 +1,348 @@
+{
+  "sections": [
+    {
+      "name": "Cuisines",
+      "id": "footer-cuisines",
+      "links": [
+        {
+          "text": "Burger Delivery",
+          "href": "https://www.menulog.com.au/takeaway/nearme/burgers",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_burger"
+        },
+        {
+          "text": "Chinese Delivery",
+          "href": "https://www.menulog.com.au/takeaway/nearme/chinese",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_chinese"
+        },
+        {
+          "text": "Indian Delivery",
+          "href": "https://www.menulog.com.au/takeaway/nearme/indian",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_indian"
+        },
+        {
+          "text": "Italian Delivery",
+          "href": "https://www.menulog.com.au/takeaway/nearme/italian",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_italian"
+        },
+        {
+          "text": "Japanese Delivery",
+          "href": "https://www.menulog.com.au/takeaway/nearme/japanese",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_Japanese"
+        },
+        {
+          "text": "Korean Delivery",
+          "href": "https://www.menulog.com.au/takeaway/nearme/korean",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_korean"
+        },
+        {
+          "text": "Pizza Delivery",
+          "href": "https://www.menulog.com.au/takeaway/nearme/pizza",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_pizza"
+        },
+        {
+          "text": "Thai Delivery",
+          "href": "https://www.menulog.com.au/takeaway/nearme/thai",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_thai"
+        },
+        {
+          "text": "Vietnamese Delivery",
+          "href": "https://www.menulog.com.au/takeaway/nearme/vietnamese",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_vietnamese"
+        },
+        {
+          "text": "Browse more cuisines",
+          "href": "https://www.menulog.com.au/takeaway/nearme/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cuisine_more"
+        }
+      ]
+    },
+    {
+      "name": "Brands",
+      "id": "footer-brands",
+      "links": [
+        {
+          "text": "McDonald's Delivery",
+          "href": "https://www.menulog.com.au/takeaway/brands/mcdonalds",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": ""
+        },
+        {
+          "text": "Hungry Jack's Delivery",
+          "href": "https://www.menulog.com.au/takeaway/brands/hungry-jacks",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_hungry_jacks"
+        },
+        {
+          "text": "KFC Delivery",
+          "href": "https://www.menulog.com.au/takeaway/brands/kfc",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_kfc"
+        },
+        {
+          "text": "Guzman y Gomez Delivery",
+          "href": "https://www.menulog.com.au/takeaway/brands/guzman-y-gomez",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": ""
+        },
+        {
+          "text": "Nando's Delivery",
+          "href": "https://www.menulog.com.au/takeaway/brands/nandos",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": ""
+        },
+        {
+          "text": "Oporto Delivery",
+          "href": "https://www.menulog.com.au/takeaway/brands/oporto",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_oporto"
+        },
+        {
+          "text": "Red Rooster Delivery",
+          "href": "https://www.menulog.com.au/takeaway/brands/red-rooster",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_red_rooster"
+        },
+        {
+          "text": "Subway Delivery",
+          "href": "https://www.menulog.com.au/takeaway/brands/subway",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_subway"
+        },
+        {
+          "text": "Sushi Hub Delivery",
+          "href": "https://www.menulog.com.au/takeaway/brands/sushi-hub",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": ""
+        },
+        {
+          "text": "Browse more brands",
+          "href": "https://www.menulog.com.au/takeaway/brands",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_brands_more"
+        }
+      ]
+    },
+    {
+      "name": "Cities",
+      "id": "footer-cities",
+      "links": [
+        {
+          "text": "Sydney Food Delivery",
+          "href": "https://www.menulog.com.au/takeaway/sydney-inner-city-nsw",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cities_sydney"
+        },
+        {
+          "text": "Melbourne Food Delivery",
+          "href": "https://www.menulog.com.au/takeaway/melbourne-city-vic",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cities_melbourne"
+        },
+        {
+          "text": "Perth Food Delivery",
+          "href": "https://www.menulog.com.au/takeaway/perth-city-wa",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cities_perth"
+        },
+        {
+          "text": "Brisbane Food Delivery",
+          "href": "https://www.menulog.com.au/takeaway/brisbane-qld",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cities_brisbane"
+        },
+        {
+          "text": "Canberra Food Delivery",
+          "href": "https://www.menulog.com.au/takeaway/canberra-queanbeyan-act",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cities_canberra"
+        },
+        {
+          "text": "Adelaide Food Delivery",
+          "href": "https://www.menulog.com.au/takeaway/adelaide-city-sa/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cities_adelaide"
+        },
+        {
+          "text": "Hobart Food Delivery",
+          "href": "https://www.menulog.com.au/takeaway/hobart-inner-tas",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cities_hobart"
+        },
+        {
+          "text": "Gold Coast Food Delivery",
+          "href": "https://www.menulog.com.au/takeaway/gold-coast-qld",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cities_gold_coast"
+        },
+        {
+          "text": "Newcastle Food Delivery",
+          "href": "https://www.menulog.com.au/takeaway/newcastle-and-lake-macquarie-nsw",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cities_newcastle"
+        },
+        {
+          "text": "Browse more cities",
+          "href": "https://www.menulog.com.au/takeaway",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cities_browse"
+        }
+      ]
+    },
+    {
+      "name": "About Us",
+      "id": "footer-about-us",
+      "links": [
+        {
+          "text": "About Menulog",
+          "href": "https://www.menulog.com.au/info/about-us",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_about_menulog"
+        },
+        {
+          "text": "Partner with Us",
+          "href": "https://www.menulog.com.au/info/partner-with-us",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_partner_with_us"
+        },
+        {
+          "text": "Corporate Partners",
+          "href": "https://www.menulog.com.au/info/corporate-partners",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_corporate_partners"
+        },
+        {
+          "text": "Contact Us",
+          "href": "https://www.menulog.com.au/help",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_contact_us"
+        },
+        {
+          "text": "Media Centre",
+          "href": "https://www.menulog.com.au/info/press",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_media_centre"
+        },
+        {
+          "text": "Privacy Policy and Terms of Use",
+          "href": "https://www.menulog.com.au/info/privacy-policy",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_privacy_policy"
+        },
+        {
+          "text": "Menulog Blog",
+          "href": "https://www.menulog.com.au/blog",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_blog"
+        },
+        {
+          "text": "Partner Centre",
+          "href": "https://partner.menulog.com.au/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_partner_centre"
+        },
+        {
+          "text": "Help Centre",
+          "href": "https://www.menulog.com.au/help",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_about_help_centre"
+        },
+        {
+          "text": "Ethics hotline",
+          "href": "https://app.convercent.com/en-AU/LandingPage/d8e86634-ec59-ec11-a985-000d3ab9f296",
+          "alt": "",
+          "rel": "",
+          "target": "_blank",
+          "gtmLabel": "click_ethics_hotline"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,490 @@
+{
+  "sections": [
+    {
+      "name": "Servizio Clienti",
+      "id": "footer-servizio-clienti",
+      "links": [
+        {
+          "text": "Domande frequenti",
+          "href": "https://www.justeat.it/help",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_servizio_clienti_domande_frequenti"
+        },
+        {
+          "text": "Accedi",
+          "href": "https://www.justeat.it/account/login",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_servizio_clienti_accedi"
+        },
+        {
+          "text": "Registrati su Just Eat",
+          "href": "https://www.justeat.it/account/register",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_servizio_clienti_registrati_su_just_eat"
+        },
+        {
+          "text": "Miglior Prezzo Garantito",
+          "href": "https://www.justeat.it/informazioni/miglior-prezzo-garantito",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_servizio_clienti_migilor_prezzo_garantito"
+        },
+        {
+          "text": "Scarica l'app di Just Eat",
+          "href": "https://www.justeat.it/informazioni/apps",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_servizio_clienti_apps"
+        }
+      ]
+    },
+    {
+      "name": "Cucine",
+      "id": "footer-cucine",
+      "links": [
+        {
+          "text": "Pizza",
+          "href": "https://www.justeat.it/domicilio/vicino-a-me/pizza/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cucine_pizza"
+        },
+        {
+          "text": "Sushi",
+          "href": "https://www.justeat.it/domicilio/vicino-a-me/sushi/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cucine_sushi"
+        },
+        {
+          "text": "Cibo cinese",
+          "href": "https://www.justeat.it/domicilio/vicino-a-me/cinese/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cucine_cinese"
+        },
+        {
+          "text": "Kebab",
+          "href": "https://www.justeat.it/domicilio/vicino-a-me/kebab/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cucine_kebab"
+        },
+        {
+          "text": "Gelato",
+          "href": "https://www.justeat.it/domicilio/vicino-a-me/gelato",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cucine_gelato"
+        },
+        {
+          "text": "Dolci",
+          "href": "https://www.justeat.it/domicilio/vicino-a-me/dolci",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cucine_dolci"
+        },
+        {
+          "text": "Cibo italiano",
+          "href": "https://www.justeat.it/domicilio/vicino-a-me/italiano",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cucine_italiano"
+        },
+        {
+          "text": "Hamburger",
+          "href": "https://www.justeat.it/domicilio/vicino-a-me/hamburger",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cucine_hamburger"
+        },
+        {
+          "text": "Panini",
+          "href": "https://www.justeat.it/domicilio/vicino-a-me/panini",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cucine_panini"
+        },
+        {
+          "text": "Colazione",
+          "href": "https://www.justeat.it/domicilio/vicino-a-me/colazione",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cucine_colazione"
+        },
+        {
+          "text": "Pollo",
+          "href": "https://www.justeat.it/domicilio/vicino-a-me/pollo",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cucine_pollo"
+        },
+        {
+          "text": "Cibo messicano",
+          "href": "https://www.justeat.it/domicilio/vicino-a-me/messicano",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cucine_messicano"
+        },
+        {
+          "text": "Tutti i tipi di cucine",
+          "href": "https://www.justeat.it/domicilio/vicino-a-me/tipi-cucina/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_cucine_tutti"
+        }
+      ]
+    },
+    {
+      "name": "Città",
+      "id": "footer-città",
+      "links": [
+        {
+          "text": "Roma",
+          "href": "https://www.justeat.it/domicilio/roma",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_citta_roma"
+        },
+        {
+          "text": "Milano",
+          "href": "https://www.justeat.it/domicilio/milano",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_citta_milano"
+        },
+        {
+          "text": "Bologna",
+          "href": "https://www.justeat.it/domicilio/bologna",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_citta_bologna"
+        },
+        {
+          "text": "Genova",
+          "href": "https://www.justeat.it/domicilio/genova",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_citta_genova"
+        },
+        {
+          "text": "Torino",
+          "href": "https://www.justeat.it/domicilio/torino",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_citta_torino"
+        },
+        {
+          "text": "Ferrara",
+          "href": "https://www.justeat.it/domicilio/ferrara",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_citta_ferrara"
+        },
+        {
+          "text": "Trieste",
+          "href": "https://www.justeat.it/domicilio/trieste",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_citta_trieste"
+        },
+        {
+          "text": "Padova",
+          "href": "https://www.justeat.it/domicilio/padova",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_citta_padova"
+        },
+        {
+          "text": "Parma",
+          "href": "https://www.justeat.it/domicilio/parma",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_citta_parma"
+        },
+        {
+          "text": "Pisa",
+          "href": "https://www.justeat.it/domicilio/pisa",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_citta_pisa"
+        },
+        {
+          "text": "Firenze",
+          "href": "https://www.justeat.it/domicilio/florence",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_citta_firenze"
+        },
+        {
+          "text": "Palermo",
+          "href": "https://www.justeat.it/domicilio/palermo",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_citta_palermo"
+        },
+        {
+          "text": "Napoli",
+          "href": "https://www.justeat.it/domicilio/napoli",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_citta_napoli"
+        },
+        {
+          "text": "Tutte le città",
+          "href": "https://www.justeat.it/domicilio",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_citta_tutte_le_citta"
+        }
+      ]
+    },
+    {
+      "name": "Catene",
+      "id": "footer-catene",
+      "links": [
+        {
+          "text": "Alice Pizza",
+          "href": "https://www.justeat.it/domicilio/catene-ristoranti/alice-pizza",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_catene_alicepizza"
+        },
+        {
+          "text": "Burger King",
+          "href": "https://www.justeat.it/domicilio/catene-ristoranti/burger-king",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_catene_burgerking"
+        },
+        {
+          "text": "Domino's Pizza",
+          "href": "https://www.justeat.it/domicilio/catene-ristoranti/dominos-pizza",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_catene_dominos"
+        },
+        {
+          "text": "Fratelli La Bufala",
+          "href": "https://www.justeat.it/domicilio/catene-ristoranti/fratelli-la-bufala",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_catene_fratellilabufala"
+        },
+        {
+          "text": "KFC",
+          "href": "https://www.justeat.it/domicilio/catene-ristoranti/kfc",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_catene_kfc"
+        },
+        {
+          "text": "La Piadineria",
+          "href": "https://www.justeat.it/domicilio/catene-ristoranti/la-piadineria",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_catene_lapiadineria"
+        },
+        {
+          "text": "McDonald's",
+          "href": "https://www.justeat.it/domicilio/catene-ristoranti/McDonald's",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_catene_mcdonalds"
+        },
+        {
+          "text": "Old Wild West",
+          "href": "https://www.justeat.it/domicilio/catene-ristoranti/old-wild-west",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_catene_oldwildwest"
+        },
+        {
+          "text": "Poke House",
+          "href": "https://www.justeat.it/domicilio/catene-ristoranti/poke-house",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_catene_pokehouse"
+        },
+        {
+          "text": "Roadhouse",
+          "href": "https://www.justeat.it/domicilio/catene-ristoranti/Roadhouse",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_catene_roadhouse"
+        },
+        {
+          "text": "Sushiko",
+          "href": "https://www.justeat.it/domicilio/catene-ristoranti/sushiko",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_catene_sushiko"
+        },
+        {
+          "text": "Zushi",
+          "href": "https://www.justeat.it/domicilio/catene-ristoranti/zushi",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_catene_zushi"
+        },
+        {
+          "text": "Tutte le catene",
+          "href": "https://www.justeat.it/domicilio/catene-ristoranti",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_catene_tuttelecatene"
+        }
+      ]
+    },
+    {
+      "name": "Chi siamo",
+      "id": "footer-chi-siamo",
+      "links": [
+        {
+          "text": "Informazioni su Just Eat",
+          "href": "https://www.justeattakeaway.com/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_chi_siamo_informazioni"
+        },
+        {
+          "text": "Diventa partner di Just Eat",
+          "href": "https://ristoranti.justeat.it/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": ""
+        },
+        {
+          "text": "Diventa un rider su Just Eat",
+          "href": "https://www.justeat.it/rider",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_chi_siamo_diventa_un_rider"
+        },
+        {
+          "text": "Partner Center",
+          "href": "https://partner.justeat.it/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_chi_siamo_partner_center"
+        },
+        {
+          "text": "Lavora con noi",
+          "href": "https://careers.justeattakeaway.com/global/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_chi_siamo_lavora_con_noi"
+        },
+        {
+          "text": "Media & Press",
+          "href": "https://www.justeat.it/informazioni/media-and-press",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_chi_siamo_media_and_press"
+        },
+        {
+          "text": "Informativa sulla Privacy",
+          "href": "https://www.justeat.it/informazioni/privacy-policy",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_chi_siamo_informativa_sulla_privacy"
+        },
+        {
+          "text": "Politica dei cookie",
+          "href": "https://www.justeat.it/informazioni/politica-dei-cookie",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_chi_siamo_cookies_policy"
+        },
+        {
+          "text": "Termini e Condizioni",
+          "href": "https://www.justeat.it/informazioni/termini-e-condizioni",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_chi_siamo_termini_e_condizioni"
+        },
+        {
+          "text": "Linea diretta per l’Etica",
+          "href": "https://secure.ethicspoint.eu/domain/media/it/gui/106834/index.html",
+          "alt": "",
+          "rel": "",
+          "target": "_blank",
+          "gtmLabel": "click_linea_diretta_per_letica"
+        },
+        {
+          "text": "Codice Etico",
+          "href": "https://app.convercent.com/it-IT/LandingPage/d8e86634-ec59-ec11-a985-000d3ab9f296",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "Codice Etico"
+        },
+        {
+          "text": "Mappa del cibo a domicilio in Italia in 2021",
+          "href": "https://www.justeat.it/deals/la-mappa-del-cibo-a-domicilio/",
+          "alt": "",
+          "rel": "",
+          "target": "",
+          "gtmLabel": "click_chi_siamo_food_trends_report"
+        }
+      ]
+    }
+  ]
+}
