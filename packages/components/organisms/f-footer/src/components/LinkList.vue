@@ -19,7 +19,7 @@
                 data-test-id="linkList-header-button"
                 type="button"
                 @click="onPanelClick">
-                {{ linkList.title }}
+                {{ linkList.name }}
                 <chevron-icon
                     :class="[$style['c-icon--chevron'], {
                         [$style['c-icon--chevron--up']]: !panelCollapsed
@@ -33,7 +33,7 @@
                 :class="[
                     $style['c-footer-heading'],
                     $style['c-footer-heading--button']
-                ]">{{ linkList.title }}</span>
+                ]">{{ linkList.name }}</span>
         </h2>
 
         <ul
@@ -45,7 +45,7 @@
                 v-for="(link, i) in linkList.links"
                 :key="`${i}_Link`">
                 <a
-                    :href="link.url"
+                    :href="link.href"
                     :rel="link.rel"
                     :target="link.target"
                     :class="$style['c-footer-list-link']"
@@ -53,7 +53,7 @@
                         "trakEvent": "click",
                         "category": "engagement",
                         "action": "footer",
-                        "label": "${link.gtm}"
+                        "label": "${link.gtmLabel}"
                     }`'>
                     {{ link.text }}
                 </a>
@@ -85,7 +85,7 @@ export default {
     },
     computed: {
         listId () {
-            return `footer-${this.linkList.title.toLowerCase().split(' ').join('-')}`;
+            return `footer-${this.linkList.name.toLowerCase().split(' ').join('-')}`;
         },
 
         listHeadingId () {
