@@ -2572,13 +2572,6 @@
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
-"@justeat/f-vue-icons@3.5.0":
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-3.5.0.tgz#c0c70b0cd1d47c388b37f81eb7d7fc998a214f2f"
-  integrity sha512-X6DKmIOt85tqkuTVsZSTC0X7rUbiL6377zGesi8P6F+YJgNzM7AHKUDb+QLQYwTrJVfYXT4amzDS4nCNaCDTkA==
-  dependencies:
-    babel-helper-vue-jsx-merge-props "2.0.3"
-
 "@justeat/f-vue-icons@3.7.0":
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-3.7.0.tgz#53c343d32d4fc132fca8eb146521c5513c81c8bd"
@@ -2599,6 +2592,21 @@
   integrity sha512-1it45TISsNbxioD6a86EkpijEQ1Zrsa7eKeq1yBYmJOP3S6+UhA7KMgjv/OV2+8LoKvfEy0UTOeLeuiqAYzlQg==
   dependencies:
     "@justeat/f-services" "1.7.0"
+
+"@justeat/f-wdio-utils@0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.6.0.tgz#0d5ea0ca9cc5b6bc9cd74b350e74cc62379d88f0"
+  integrity sha512-/yI/Nq3IZ8X0k+V0RBB4dNWFPOomSIt67FxBqgvI1Ig0HKd9tqTCxzTaDiKP3Bu9GlxLDHhdpS9HLNawTLsLgQ==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
+
+"@justeat/feature-management@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/feature-management/-/feature-management-1.0.0.tgz#bd522a2ad1f7d5982496ca7c8f157b5e1f06b87d"
+  integrity sha512-sdm2HZ2EZsAC5Xm8ZumRge5w1IpMrV/LbOe8Do6axJs/cEbmay4ONbbyJYAUcV0ITroqR+mGh4vB6c7dOEeYRg==
+  dependencies:
+    axios "0.25.0"
+    crypto-js "4.1.1"
 
 "@justeat/fozzie@8.0.0":
   version "8.0.0"
@@ -7127,6 +7135,13 @@ axios@0.21.4, axios@^0.21.1, axios@^0.21.2:
   integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
   dependencies:
     follow-redirects "^1.14.0"
+
+axios@0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.25.0.tgz#349cfbb31331a9b4453190791760a8d35b093e0a"
+  integrity sha512-cD8FOb0tRH3uuEe6+evtAbgJtfxr7ly3fQjYcMcuPlgkwVS9xboaVIpcDV+cYQe+yGykgwZCs1pzjntcGa6l5g==
+  dependencies:
+    follow-redirects "^1.14.7"
 
 axios@^0.19.0:
   version "0.19.2"
@@ -12721,6 +12736,11 @@ follow-redirects@^1.0.0, follow-redirects@^1.10.0, follow-redirects@^1.14.0:
   version "1.14.8"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.8.tgz#016996fb9a11a100566398b1c6839337d7bfa8fc"
   integrity sha512-1x0S9UVJHsQprFcEC/qnNzBLcIxsjAV905f/UkQxbclCsoTWlacCNOpQa/anodLl2uaEKFhfWOvM2Qg77+15zA==
+
+follow-redirects@^1.14.7:
+  version "1.14.9"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.9.tgz#dd4ea157de7bfaf9ea9b3fbd85aa16951f78d8d7"
+  integrity sha512-MQDfihBQYMcyy5dhRDJUHcw7lb2Pv/TuE6xP1vyraLukNDHKbDxDNaOE3NbCAdKQApno+GPRyo1YAp89yCjK4w==
 
 for-each@^0.3.3:
   version "0.3.3"
