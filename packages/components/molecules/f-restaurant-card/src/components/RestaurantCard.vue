@@ -343,6 +343,7 @@ export default {
     mounted () {
         if (this.performanceTracker) {
             this.$nextTick(() => {
+                // Hard coding temporarily. We can eventually configure this
                 this.performanceTracker.time('tier-1');
             });
         }
