@@ -2572,10 +2572,17 @@
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
-"@justeat/f-vue-icons@3.8.0":
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-3.8.0.tgz#1d4ff74158a8ca63ec5fea429e772f087c365547"
-  integrity sha512-6dEkYZevqi+Do2AiC0EoseGAxoqLRWwz/VJ57owa2IYd1ubJexaRYR4H6tGCqP7Bsn7B/cQgRdbGXQubRMLeeQ==
+"@justeat/f-vue-icons@3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-3.5.0.tgz#c0c70b0cd1d47c388b37f81eb7d7fc998a214f2f"
+  integrity sha512-X6DKmIOt85tqkuTVsZSTC0X7rUbiL6377zGesi8P6F+YJgNzM7AHKUDb+QLQYwTrJVfYXT4amzDS4nCNaCDTkA==
+  dependencies:
+    babel-helper-vue-jsx-merge-props "2.0.3"
+
+"@justeat/f-vue-icons@3.7.0":
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-3.7.0.tgz#53c343d32d4fc132fca8eb146521c5513c81c8bd"
+  integrity sha512-WQsu949l7+yXLaK3tDHomhV9oEQpMyj/THJx2tZ55kwUQEeDAjqpAKaljk+YVyDRD35WhkyQFH2z6rsMjQTO+A==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
