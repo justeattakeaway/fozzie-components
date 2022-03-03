@@ -385,4 +385,24 @@ describe('RestaurantCard', () => {
             expect(emittedEvent.length).toBe(1);
         });
     });
+
+    describe('performance tracking', () => {
+        it('calls the performance tracker with `tier-1` after rendering if prop value exists', async () => {
+            // arrange
+            const performanceTrackerMock = {
+                time: jest.fn()
+            };
+
+            const propsData = {
+                performanceTracker: performanceTrackerMock
+            };
+
+            // act
+            await mount(RestaurantCard, { propsData });
+
+            // assert
+            expect(performanceTrackerMock.time).toHaveBeenCalledTimes(1);
+            expect(performanceTrackerMock.time).toHaveBeenCalledWith('tier-1');
+        });
+    });
 });
