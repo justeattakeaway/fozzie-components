@@ -71,7 +71,8 @@ RestaurantCardComponent.args = {
         availabilityTranslatedName: 'Pre-order',
         availabilityMessage: 'Opening at 13:20'
     },
-    disabledMessage: 'Not taking orders at the moment'
+    disabledMessage: 'Not taking orders at the moment',
+    isLoading: false
 };
 
 RestaurantCardComponent.storyName = 'f-restaurant-card';

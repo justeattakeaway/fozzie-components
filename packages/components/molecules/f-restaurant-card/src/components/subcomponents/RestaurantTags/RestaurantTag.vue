@@ -59,7 +59,7 @@ export default {
     border-radius: $radius-rounded-a;
     font-size: $font-paragraph-03 * 1px;
     color: $color-content-default;
-    background-color: $color-container-subtle;
+    background-color: $color-container-strong;
 
     @include media('<mid') {
          max-width: 30ch;
