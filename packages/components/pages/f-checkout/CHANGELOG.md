@@ -3,12 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest – to be added to the next release
+
+v3.22.3
+------------------------------
+*March 3, 2022*
+
+### Added
+- GTM event fired when GCO successful.
+
+v3.22.2
 ------------------------------
 *March 2, 2022*
 ### Changed
 - Converted knobs to controls in `checkout.stories.js`
-
 
 v3.22.1
 ------------------------------

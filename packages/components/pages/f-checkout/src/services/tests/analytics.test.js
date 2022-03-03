@@ -290,4 +290,16 @@ describe('Analytic Service ::', () => {
             expect($gtm.pushEvent).not.toHaveBeenCalled();
         });
     });
+
+    describe('trackGuestCheckoutSubmission', () => {
+        it('should call `pushEvent` with correct arguments', () => {
+            analyticsService.trackGuestCheckoutSubmission();
+            expect($gtm.pushEvent).toHaveBeenCalledWith({
+                event: 'trackEvent',
+                eventCategory: 'engagement',
+                eventAction: 'form_checkout_guest',
+                eventLabel: 'success'
+            });
+        });
+    });
 });
