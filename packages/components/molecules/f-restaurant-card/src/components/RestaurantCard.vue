@@ -227,7 +227,8 @@ export default {
     },
     provide () {
         return {
-            isListItem: this.isListItem
+            isListItem: this.isListItem,
+            performanceTracker: this.performanceTracker
         };
     },
     props: {
@@ -307,6 +308,11 @@ export default {
         isLoading: {
             type: Boolean,
             default: false
+        },
+        // An optional library for tracking rendering performance
+        performanceTracker: {
+            type: Object,
+            default: null
         }
     },
     computed: {
@@ -332,6 +338,14 @@ export default {
         },
         hasCuisines () {
             return !!this.cuisines?.length;
+        }
+    },
+    mounted () {
+        if (this.performanceTracker) {
+            this.$nextTick(() => {
+                // Hard coding temporarily. We can eventually configure this
+                this.performanceTracker.time('tier-1');
+            });
         }
     },
     methods: {
