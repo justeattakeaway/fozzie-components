@@ -3,10 +3,12 @@
         :href="url"
         :class="[
             $style['c-restaurantCard'], {
-                [$style['c-restaurantCard--listItem']]: isListItem
+                [$style['c-restaurantCard--listItem']]: isListItem,
+                [$style['c-restaurantCard--isLoading']]: isLoading
             }]"
         data-test-id="restaurant"
         :data-restaurant-id="id"
+        :aria-busy="`${isLoading}`"
         @click="handleClick">
 
         <!-- background image -->
@@ -41,8 +43,16 @@
                 {{ name }}
             </h3>
 
+            <restaurant-rating-skeleton
+                v-if="isLoading"
+                :width-percentage="75"
+                :class="$style['c-restaurantCard-ratingSkeleton']" />
+
             <div
-                :class="$style['c-restaurantCard-ratingContainer']">
+                v-else
+                :class="[
+                    $style['c-restaurantCard-content--left-col'],
+                    $style['c-restaurantCard-ratingContainer']]">
                 <!-- Ratings -->
                 <component
                     :is="errorBoundary"
@@ -68,78 +78,99 @@
                     color-scheme="positive" />
             </div>
 
+            <template v-if="isLoading">
+                <restaurant-content-skeleton
+                    :width-percentage="90"
+                    :class="[
+                        $style['c-restaurantCard-content--left-col'],
+                        $style['c-restaurantCard--hideOnMobile']]" />
+                <restaurant-content-skeleton
+                    :width-percentage="80"
+                    :class="[
+                        $style['c-restaurantCard-content--left-col'],
+                        $style['c-restaurantCard--hideOnMobile']]" />
+                <restaurant-content-skeleton
+                    :width-percentage="40"
+                    :class="[
+                        $style['c-restaurantCard--hideOnMobile']]" />
+                <restaurant-content-skeleton :width-percentage="90" />
+            </template>
 
-            <!-- Cuisines -->
-            <component
-                :is="errorBoundary"
-                v-if="hasCuisines"
-                :tier="3">
-                <restaurant-cuisines
-                    :class="$style['c-restaurantCard-cuisines']"
-                    :cuisines="cuisines" />
-            </component>
+            <template v-else>
+                <!-- Cuisines -->
+                <component
+                    :is="errorBoundary"
+                    v-if="hasCuisines"
+                    :tier="3">
+                    <restaurant-cuisines
+                        :class="[
+                            $style['c-restaurantCard-content--left-col'],
+                            $style['c-restaurantCard-cuisines']]"
+                        :cuisines="cuisines" />
+                </component>
 
-            <!-- This is a clearfix to force anything after cuisines to a new line (won't affect list-item mode) -->
-            <div :class="[$style['c-restaurantCard-clearfix']]" />
+                <!-- This is a clearfix to force anything after cuisines to a new line (won't affect list-item mode) -->
+                <div :class="[$style['c-restaurantCard-clearfix']]" />
 
-            <!-- Delivery Meta (etas, distance etc) -->
-            <component
-                :is="errorBoundary"
-                v-if="displayDeliveryTimeMeta"
-                :tier="3">
-                <delivery-time-meta
-                    v-bind="deliveryTimeData"
-                    :class="$style['c-restaurantCard-distance']"
-                    data-test-id="restaurant-delivery-time-meta" />
-            </component>
+                <!-- Delivery Meta (etas, distance etc) -->
+                <component
+                    :is="errorBoundary"
+                    v-if="displayDeliveryTimeMeta"
+                    :tier="3">
+                    <delivery-time-meta
+                        v-bind="deliveryTimeData"
+                        :class="[$style['c-restaurantCard-distance']]"
+                        data-test-id="restaurant-delivery-time-meta" />
+                </component>
 
-            <!-- Availability -->
-            <component
-                :is="errorBoundary"
-                v-if="availability"
-                :tier="3">
-                <restaurant-availability v-bind="availability" />
-            </component>
+                <!-- Availability -->
+                <component
+                    :is="errorBoundary"
+                    v-if="availability"
+                    :tier="3">
+                    <restaurant-availability v-bind="availability" />
+                </component>
 
 
-            <!-- Fees -->
-            <component
-                :is="errorBoundary"
-                v-if="hasFees"
-                :tier="3">
-                <restaurant-fees v-bind="fees" />
-            </component>
+                <!-- Fees -->
+                <component
+                    :is="errorBoundary"
+                    v-if="hasFees"
+                    :tier="3">
+                    <restaurant-fees v-bind="fees" />
+                </component>
 
-            <!-- Offer -->
-            <icon-text
-                v-if="hasOffer"
-                data-test-id="restaurant-discounts"
-                :text="offer"
-                :class="$style['c-restaurantCard-offer']"
-                is-bold>
-                <offer-icon />
-            </icon-text>
+                <!-- Offer -->
+                <icon-text
+                    v-if="hasOffer"
+                    data-test-id="restaurant-discounts"
+                    :text="offer"
+                    :class="$style['c-restaurantCard-offer']"
+                    is-bold>
+                    <offer-icon />
+                </icon-text>
 
-            <!-- Content Tags -->
-            <component
-                :is="errorBoundary"
-                v-if="hasContentTags"
-                :tier="3">
-                <restaurant-tags
-                    :class="[$style['c-restaurantCard-tags']]"
-                    test-id-position="inner-content"
-                    :tags="tags.contentTags" />
-            </component>
+                <!-- Content Tags -->
+                <component
+                    :is="errorBoundary"
+                    v-if="hasContentTags"
+                    :tier="3">
+                    <restaurant-tags
+                        :class="[$style['c-restaurantCard-tags']]"
+                        test-id-position="inner-content"
+                        :tags="tags.contentTags" />
+                </component>
 
-            <!-- Disabled Message -->
-            <icon-text
-                v-if="disabledMessage"
-                data-test-id="restaurant-offline"
-                :text="disabledMessage"
-                color="colorSupportError"
-                hide-icon-in-tile-view>
-                <clock-small-icon />
-            </icon-text>
+                <!-- Disabled Message -->
+                <icon-text
+                    v-if="disabledMessage"
+                    data-test-id="restaurant-offline"
+                    :text="disabledMessage"
+                    color="colorSupportError"
+                    hide-icon-in-tile-view>
+                    <clock-small-icon />
+                </icon-text>
+            </template>
         </section>
 
         <!-- Dishes -->
@@ -169,6 +200,8 @@ import IconText from './subcomponents/IconText.vue';
 import RestaurantFees from './subcomponents/RestaurantFees/RestaurantFees.vue';
 import RestaurantAvailability from './subcomponents/RestaurantAvailability/RestaurantAvailability.vue';
 import RenderlessSlotWrapper from './RenderlessSlotWrapper';
+import RestaurantRatingSkeleton from './subcomponents/RestaurantSkeleton/RestaurantRatingSkeleton.vue';
+import RestaurantContentSkeleton from './subcomponents/RestaurantSkeleton/RestaurantContentSkeleton.vue';
 import { EVENT_CLICK_RESTAURANT_CARD } from '../constants/custom-events';
 
 export default {
@@ -188,7 +221,9 @@ export default {
         ClockSmallIcon,
         RestaurantFees,
         RestaurantAvailability,
-        RenderlessSlotWrapper
+        RenderlessSlotWrapper,
+        RestaurantRatingSkeleton,
+        RestaurantContentSkeleton
     },
     provide () {
         return {
@@ -270,6 +305,10 @@ export default {
             type: Object,
             default: () => RenderlessSlotWrapper // by default returns a renderless component that will just render it's slot and not bloat markup
         },
+        isLoading: {
+            type: Boolean,
+            default: false
+        },
         // An optional library for tracking rendering performance
         performanceTracker: {
             type: Object,
@@ -325,6 +364,7 @@ export default {
   grid-gap: spacing(d);
   grid-template-columns: 1fr;
   position: relative;
+  outline-color: $color-focus;
 
   &.c-restaurantCard--listItem {
       @include media('>mid') {
@@ -430,61 +470,54 @@ export default {
 
             > * {
                 grid-column: 2;
-            }
-        }
-    }
-
-    .c-restaurantCard-ratingContainer,
-    .c-restaurantCard-cuisines {
-        .c-restaurantCard--listItem .c-restaurantCard-content & {
-            grid-column: 1;
-        }
-    }
-
-    .c-restaurantCard-cuisines {
-        .c-restaurantCard--listItem .c-restaurantCard-content & {
-            align-self: start;
-        }
-    }
-
-    .c-restaurantCard-name,
-    .c-restaurantCard-tags {
-        .c-restaurantCard--listItem .c-restaurantCard-content & {
-            grid-column: 1 / 3;
-        }
-    }
-
-    .c-restaurantCard-name {
-        .c-restaurantCard--listItem .c-restaurantCard-content & {
-            margin-bottom: spacing(a);
-        }
-    }
-
-    .c-restaurantCard-tags {
-        .c-restaurantCard--listItem .c-restaurantCard-content & {
-            margin-top: spacing(a);
-        }
-    }
-
-    // Prevent the cleafix from working on the list-item styling
-    .c-restaurantCard-clearfix {
-        .c-restaurantCard--listItem .c-restaurantCard-content & {
-            display: none;
-        }
-    }
-
-    .c-restaurantCard-content {
-        .c-restaurantCard--listItem & {
-            > * {
                 margin-bottom: 0;
             }
         }
+
+        .c-restaurantCard--listItem.c-restaurantCard--isLoading & {
+            align-items: center;
+        }
     }
 
-    .c-restaurantCard-offer {
-        .c-restaurantCard--listItem .c-restaurantCard-content & {
+    .c-restaurantCard--listItem .c-restaurantCard-content {
+        .c-restaurantCard-content--left-col {
+            grid-column: 1;
+        }
+
+        .c-restaurantCard-cuisines {
+            align-self: start;
+        }
+
+        .c-restaurantCard-name,
+        .c-restaurantCard-tags {
+            grid-column: 1 / 3;
+        }
+
+        .c-restaurantCard-name {
+            margin-bottom: spacing(a);
+        }
+
+        .c-restaurantCard-tags {
+            margin-top: spacing(a);
+        }
+
+        // Prevent the cleafix from working on the list-item styling
+        .c-restaurantCard-clearfix {
+            display: none;
+        }
+
+        .c-restaurantCard-offer {
             margin-top: 0;
             order: initial;
+        }
+
+        .c-restaurantCard-ratingSkeleton {
+            grid-column: 1;
+            width: 100%;
+        }
+
+        .c-restaurantCard--hideOnMobile {
+            display: block;
         }
     }
 }
@@ -493,5 +526,9 @@ export default {
 .c-restaurantCard-clearfix {
     width: 100%;
     margin: 0;
+}
+
+.c-restaurantCard--hideOnMobile {
+    display: none;
 }
 </style>
