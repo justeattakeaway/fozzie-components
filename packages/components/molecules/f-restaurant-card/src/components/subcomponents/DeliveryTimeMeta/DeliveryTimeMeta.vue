@@ -39,6 +39,11 @@ export default {
         MapPinIcon,
         ClockSmallIcon
     },
+    inject: {
+        performanceTracker: {
+            default: null
+        }
+    },
     props: {
         address: {
             type: String,
@@ -51,6 +56,14 @@ export default {
         eta: {
             type: String,
             default: null
+        }
+    },
+    mounted () {
+        if (this.performanceTracker) {
+            this.$nextTick(() => {
+                // Hard coding temporarily. We can eventually configure this
+                this.performanceTracker.time('tier-3');
+            });
         }
     }
 };
