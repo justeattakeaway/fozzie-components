@@ -1,3 +1,5 @@
+import argumentStringBuilder from '../../test-utils/component-objects/argumentStringBuilder';
+
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
@@ -6,8 +8,8 @@ describe('f-checkout "dinein" component tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'dinein')
-            .withQuery('&knob-Is User Logged In', false);
+        const args = argumentStringBuilder({ serviceType: 'dinein', isLoggedIn: false });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
