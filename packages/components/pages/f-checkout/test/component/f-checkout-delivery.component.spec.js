@@ -1,5 +1,6 @@
-const Checkout = require('../../test-utils/component-objects/f-checkout.component');
+import argumentStringBuilder from '../../test-utils/component-objects/argumentStringBuilder';
 
+const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
 
@@ -8,9 +9,9 @@ describe('f-checkout "delivery" component tests', () => {
         beforeEach(() => {
             // Arrange
             checkout = new Checkout();
-            checkout.withQuery('&knob-Service Type', 'delivery')
-                .withQuery('&knob-Is User Logged In', true)
-                .withQuery('&knob-Is ASAP available', true);
+
+            const args = argumentStringBuilder();
+            checkout.withQuery('args', args);
 
             // Act
             checkout.load();
@@ -30,10 +31,9 @@ describe('f-checkout "delivery" component tests', () => {
             beforeEach(() => {
                 // Arrange
                 checkout = new Checkout();
-                checkout.withQuery('&knob-Service Type', 'delivery')
-                    .withQuery('&knob-Is User Logged In', false)
-                    .withQuery('&knob-Is ASAP available', true)
-                    .withQuery('&knob-Locale', 'en-AU');
+
+                const args = argumentStringBuilder({ isLoggedIn: false, locale: 'en-AU' });
+                checkout.withQuery('args', args);
 
                 // Act
                 checkout.load();
@@ -56,18 +56,9 @@ describe('f-checkout "delivery" component tests', () => {
             beforeEach(() => {
                 // Arrange
                 checkout = new Checkout();
-                const checkoutInfo = {
-                    serviceType: 'delivery',
-                    isAuthenticated: true,
-                    isASAP: true,
-                    locale: 'en-AU',
-                    restrictions: 'age-restriction'
-                };
-                checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-                .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-                .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-                .withQuery('&knob-Locale', checkoutInfo.locale)
-                .withQuery('&knob-Get Basket Options', checkoutInfo.restrictions);
+
+                const args = argumentStringBuilder({ locale: 'en-AU', getBasketError: 'age-restriction' });
+                checkout.withQuery('args', args);
 
                 // Act
                 checkout.loadAgeVerification();
@@ -99,26 +90,12 @@ describe('f-checkout "delivery" component tests', () => {
 });
 
 describe('f-checkout "delivery" - split notes - component tests', () => {
-    beforeEach(() => {
-        // Arrange
-        checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'delivery')
-                .withQuery('&knob-Is User Logged In', true)
-                .withQuery('&knob-Is ASAP available', true)
-                .withQuery('&knob-Note types', 'get-notes-config-split');
-
-        // Act
-        checkout.load();
-        checkout.waitForComponent();
-    });
-
     it('should open the courier and kitchen notes accordions and populate them', () => {
         // Arrange
         checkout = new Checkout();
-        checkout.withQuery('&knob-Service Type', 'delivery')
-                .withQuery('&knob-Is User Logged In', true)
-                .withQuery('&knob-Is ASAP available', true)
-                .withQuery('&knob-Note types', 'get-notes-config-split');
+
+        const args = argumentStringBuilder({ noteType: 'get-notes-config-split' });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();

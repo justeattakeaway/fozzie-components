@@ -1,7 +1,8 @@
+import argumentStringBuilder from '../../test-utils/component-objects/argumentStringBuilder';
+
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
-let checkoutInfo;
 
 const illegalMobileNumber = '123';
 
@@ -9,14 +10,9 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'collection',
-            isAuthenticated: true,
-            isASAP: true
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
+
+        const args = argumentStringBuilder({ serviceType: 'collection' });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
@@ -39,16 +35,9 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
     it('should display the "Something went wrong" error.', () => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'collection',
-            isAuthenticated: true,
-            isASAP: true,
-            patchError: 'SERVER'
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-            .withQuery('&knob-Patch Checkout Errors', checkoutInfo.patchError);
+
+        const args = argumentStringBuilder({ serviceType: 'collection', patchCheckoutError: 'SERVER' });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
@@ -61,16 +50,10 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
     it('should display the "Restaurant not taking orders" modal', () => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'collection',
-            isAuthenticated: true,
-            isASAP: true,
-            patchError: 'restaurant-not-taking-orders'
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-            .withQuery('&knob-Patch Checkout Errors', checkoutInfo.patchError);
+
+        const args = argumentStringBuilder({ serviceType: 'collection', patchCheckoutError: 'restaurant-not-taking-orders' });
+        checkout.withQuery('args', args);
+
         // Act
         checkout.load();
         checkout.goToPayment();
@@ -82,16 +65,9 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
     it('should display the "Additional Items Required" modal', () => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'collection',
-            isAuthenticated: true,
-            isASAP: true,
-            patchError: 'additional-items-required'
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-            .withQuery('&knob-Patch Checkout Errors', checkoutInfo.patchError);
+
+        const args = argumentStringBuilder({ serviceType: 'collection', patchCheckoutError: 'additional-items-required' });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
@@ -114,16 +90,9 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'collection',
-            isAuthenticated: true,
-            isASAP: true,
-            orderError: 'duplicate'
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-            .withQuery('&knob-Place Order Errors', checkoutInfo.orderError);
+
+        const args = argumentStringBuilder({ serviceType: 'collection', placeOrderError: 'duplicate' });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
@@ -138,14 +107,9 @@ describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Mobil
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'collection',
-            isAuthenticated: true,
-            isASAP: false
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
+
+        const args = argumentStringBuilder({ isAsapAvailable: false });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
@@ -161,14 +125,9 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'delivery',
-            isAuthenticated: true,
-            isASAP: true
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
+
+        const args = argumentStringBuilder();
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
@@ -214,16 +173,9 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'delivery',
-            isAuthenticated: true,
-            isASAP: true,
-            orderError: 'duplicate'
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-            .withQuery('&knob-Place Order Errors', checkoutInfo.orderError);
+
+        const args = argumentStringBuilder({ placeOrderError: 'duplicate' });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
@@ -236,16 +188,9 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
     it('should display the "Restaurant not taking orders" modal', () => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'delivery',
-            isAuthenticated: true,
-            isASAP: true,
-            patchError: 'restaurant-not-taking-orders'
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-            .withQuery('&knob-Patch Checkout Errors', checkoutInfo.patchError);
+
+        const args = argumentStringBuilder({ patchCheckoutError: 'restaurant-not-taking-orders' });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
@@ -258,16 +203,9 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
     it('should display the "Additional Items Required" modal', () => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'delivery',
-            isAuthenticated: true,
-            isASAP: true,
-            patchError: 'additional-items-required'
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-            .withQuery('&knob-Patch Checkout Errors', checkoutInfo.patchError);
+
+        const args = argumentStringBuilder({ patchCheckoutError: 'additional-items-required' });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
@@ -282,14 +220,9 @@ describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Mobile 
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'delivery',
-            isAuthenticated: true,
-            isASAP: false
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
+
+        const args = argumentStringBuilder({ isAsapAvailable: false });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
@@ -305,14 +238,9 @@ describe('f-checkout - Dine In - Authenticated - Mobile Visual Tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'dinein',
-            isAuthenticated: true,
-            isASAP: true
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP);
+
+        const args = argumentStringBuilder({ serviceType: 'dinein' });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
@@ -345,16 +273,9 @@ describe('f-checkout - Dine In - Authenticated - Mobile Visual Tests', () => {
     it('should display the "Duplicate Order Warning" modal', () => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'dinein',
-            isAuthenticated: true,
-            isASAP: true,
-            orderError: 'duplicate'
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', checkoutInfo.isASAP)
-            .withQuery('&knob-Place Order Errors', checkoutInfo.orderError);
+
+        const args = argumentStringBuilder({ serviceType: 'dinein', placeOrderError: 'duplicate' });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
