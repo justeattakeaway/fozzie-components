@@ -3,9 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.26.0
+------------------------------
+*March 03, 2022*
+### Added
+- Performance tracking prop
+- Calls to performance tracking on `mounted` lifecycle hook for the Card container and delivery meta components
+
 v0.25.0
 ------------------------------
-*Februrary 22, 2022*
+*March 02, 2022*
 ### Added
 - Skeleton loader styling and animations
 ### Changed
