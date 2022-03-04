@@ -14,7 +14,7 @@ exports[`Analytics trackFormSubmission :: address has been updated should push s
     Array [
       Object {
         "action": "account info",
-        "category": "my acccount",
+        "category": "my account",
         "event": "trackEvent",
         "label": "address change intent",
       },
