@@ -75,7 +75,6 @@ export const consumerDetailsMappedModel = {
 export const consumerAddressMappedModel = {
     line1: consumerAddressGetResponse.Line1,
     line2: consumerAddressGetResponse.Line2,
-    line3: consumerAddressGetResponse.Line3,
     locality: consumerAddressGetResponse.City,
     postcode: consumerAddressGetResponse.ZipCode
 };
@@ -93,14 +92,14 @@ export const consumerStateModel = {
 };
 
 export const consumerUpdateBody = {
-    FirstName: 'harry',
-    LastName: 'Potter',
+    FirstName: consumerDetailsGetResponse.data.FirstName,
+    LastName: consumerDetailsGetResponse.data.LastName,
     Address: {
-        Line1: '4 Privet Drive',
-        Line2: 'Little Whinging',
+        Line1: consumerAddressGetResponse.Line1,
+        Line2: consumerAddressGetResponse.Line2,
         Line3: null,
-        City: 'Surrey',
-        ZipCode: 'CR25ER'
+        City: consumerAddressGetResponse.City,
+        ZipCode: consumerAddressGetResponse.ZipCode
     },
-    PhoneNumber: '+441234567890'
+    PhoneNumber: consumerDetailsGetResponse.data.PhoneNumber
 };
