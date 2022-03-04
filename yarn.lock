@@ -2572,13 +2572,6 @@
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
-"@justeat/f-vue-icons@3.5.0":
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-3.5.0.tgz#c0c70b0cd1d47c388b37f81eb7d7fc998a214f2f"
-  integrity sha512-X6DKmIOt85tqkuTVsZSTC0X7rUbiL6377zGesi8P6F+YJgNzM7AHKUDb+QLQYwTrJVfYXT4amzDS4nCNaCDTkA==
-  dependencies:
-    babel-helper-vue-jsx-merge-props "2.0.3"
-
 "@justeat/f-vue-icons@3.7.0":
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-3.7.0.tgz#53c343d32d4fc132fca8eb146521c5513c81c8bd"
@@ -2597,6 +2590,13 @@
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.5.0.tgz#d81310b4068a740465535c5740139dace04f1154"
   integrity sha512-1it45TISsNbxioD6a86EkpijEQ1Zrsa7eKeq1yBYmJOP3S6+UhA7KMgjv/OV2+8LoKvfEy0UTOeLeuiqAYzlQg==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
+
+"@justeat/f-wdio-utils@0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.6.0.tgz#0d5ea0ca9cc5b6bc9cd74b350e74cc62379d88f0"
+  integrity sha512-/yI/Nq3IZ8X0k+V0RBB4dNWFPOomSIt67FxBqgvI1Ig0HKd9tqTCxzTaDiKP3Bu9GlxLDHhdpS9HLNawTLsLgQ==
   dependencies:
     "@justeat/f-services" "1.7.0"
 

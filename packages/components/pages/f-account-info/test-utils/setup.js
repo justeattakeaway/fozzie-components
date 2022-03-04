@@ -91,3 +91,16 @@ export const consumerStateModel = {
         ...consumerAddressMappedModel
     }
 };
+
+export const consumerUpdateBody = {
+    FirstName: 'harry',
+    LastName: 'Potter',
+    Address: {
+        Line1: '4 Privet Drive',
+        Line2: 'Little Whinging',
+        Line3: null,
+        City: 'Surrey',
+        ZipCode: 'CR25ER'
+    },
+    PhoneNumber: '+441234567890'
+};
