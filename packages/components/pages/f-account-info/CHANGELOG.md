@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.17.0
+------------------------------
+*March 3, 2022*
+
+### Added
+- Method to API provider for updating the consumer details/address data
+
+
 v0.16.1
 ------------------------------
 *January 27, 2022*
