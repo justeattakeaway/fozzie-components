@@ -53,10 +53,12 @@
     "@justeat/f-button": "3.2.0",
     "@justeat/f-card": "3.4.0",
     "@justeat/f-card-with-content": "1.0.0",
+    "@justeat/f-error-message": "1.1.0",
     "@justeat/f-form-field": "4.5.0",
     "@justeat/f-globalisation": "1.0.0",
-    "@justeat/f-vue-icons": "3.3.0",
+    "@justeat/f-link": "2.3.0",
     "@justeat/f-services": "1.13.0",
+    "@justeat/f-vue-icons": "3.3.0",
     "vuelidate": "0.7.6"
   },
   "peerDependencies": {
