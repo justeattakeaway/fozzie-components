@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.8.0
+------------------------------
+*March 07, 2022*
+
+### Added
+- `axe-core` to `page.object.js` file & devDeps.
+
+
 v0.7.0
 ------------------------------
 *March 02, 2022*

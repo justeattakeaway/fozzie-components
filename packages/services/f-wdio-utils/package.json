@@ -38,6 +38,7 @@
     "@justeat/f-services": "1.7.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "4.4.6"
+    "@vue/cli-plugin-babel": "4.4.6",
+    "axe-core": "4.3.3"
   }
 }
