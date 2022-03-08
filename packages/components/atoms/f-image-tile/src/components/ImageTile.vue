@@ -249,7 +249,7 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
 }
 
 .c-imageTile-textContainer {
-    margin-top: spacing(d);
+    margin-top: spacing(b);
     display: flex;
     max-width: 100%;
 
