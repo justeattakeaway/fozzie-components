@@ -1,4 +1,4 @@
-import { source } from 'axe-core';
+const { source } = require('axe-core');
 const { buildUrl } = require('./storybook-extensions');
 
 class Page {
