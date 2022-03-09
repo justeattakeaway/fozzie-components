@@ -2285,13 +2285,6 @@
   dependencies:
     "@justeat/f-services" "0.13.0"
 
-"@justeat/f-card@3.5.0":
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.5.0.tgz#ecfa557a8a60445ffb01a91b353a1306990b82b6"
-  integrity sha512-jm507qjql+rMolL5y9l3QLE88ZZPF/NWK2Z6wQzfpii74/dR/Bs1SYxnPMQJI3ZjddzzM9CQuMmIaDvvMGbRfw==
-  dependencies:
-    "@justeat/f-services" "0.13.0"
-
 "@justeat/f-dom@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-0.4.0.tgz#3e838a2dd06d4d5281c17f5fb9f66d7485fd759a"

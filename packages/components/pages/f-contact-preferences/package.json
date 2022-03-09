@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-contact-preferences",
   "description": "Fozzie Contact Preferences - Fozzie user contact preferences form component",
-  "version": "0.18.0",
+  "version": "0.18.1",
   "main": "dist/f-contact-preferences.umd.min.js",
   "maxBundleSize": "100kB",
   "files": [
@@ -59,9 +59,9 @@
   },
   "devDependencies": {
     "@justeat/f-vue-icons": "3.3.0",
-    "@justeat/f-button": "3.2.0",
-    "@justeat/f-card": "3.5.0",
-    "@justeat/f-card-with-content": "1.0.0",
+    "@justeat/f-button": "3.3.1",
+    "@justeat/f-card": "3.6.0",
+    "@justeat/f-card-with-content": "1.1.0",
     "@justeat/f-alert": "4.3.0",
     "@justeat/f-form-field": "4.5.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
