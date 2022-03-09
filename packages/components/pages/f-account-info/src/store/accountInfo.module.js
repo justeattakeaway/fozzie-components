@@ -1,6 +1,7 @@
 import {
     mapToConsumerDetails,
-    mapToConsumerAddress
+    mapToConsumerAddress,
+    mapToConsumerUpdate
 } from '../services/mapping/consumer.mapper';
 import {
     UPDATE_CONSUMER_DETAILS,
@@ -26,6 +27,12 @@ export default {
             const address = mapToConsumerAddress(responses[1]?.data?.Addresses);
 
             commit(UPDATE_CONSUMER_DETAILS, { details, address });
+        },
+
+        async saveConsumerDetails ({ state }, { api, authToken }) {
+            const body = mapToConsumerUpdate(state);
+
+            await api.patchConsumer(authToken, body);
         },
 
         editConsumerDetails ({ commit, state }, { field, value }) {
