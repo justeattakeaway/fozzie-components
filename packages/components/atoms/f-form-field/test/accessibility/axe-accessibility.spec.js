@@ -1,4 +1,4 @@
-const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
+const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
 
 const FormField = require('../../test-utils/component-objects/f-form-field.component');
 
@@ -11,7 +11,7 @@ describe('Accessibility tests', () => {
 
     it('a11y - should test f-formField component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-form-field');
+        const axeResults = getAxeResults('f-form-field');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

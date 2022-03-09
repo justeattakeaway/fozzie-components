@@ -1,41 +1,21 @@
-const { source } = require('axe-core');
 const AxeReports = require('axe-reports');
 const { exec } = require('child_process');
 const fs = require('fs');
-const path = require('path');
+const Page = require('@justeat/f-wdio-utils/src/page.object');
 const { getTestConfiguration } = require('../../test/configuration/configuration-helper');
 const configuration = getTestConfiguration();
 
 /**
- * Runs the WCAG accessibility tests on the curent page of the global browser
+ * Wrapper for our Page.object `getAccessibilityTestResults` method so we
+ * can invoke and process the results from the `processResults` call.
+ *
+ * @param componentName
  */
-exports.getAccessibilityTestResults = (componentName) => {
-    browser.execute(source);
+exports.getAxeResults = (componentName) => {
+    const newPageInstance = new Page();
+    const results = newPageInstance.getAccessibilityTestResults();
 
-    // https://github.com/dequelabs/axe-core/blob/develop/doc/API.md
-
-    const results = browser.executeAsync(done => {
-        const options = {
-            runOnly: {
-                type: 'tag',
-                values: ['wcag21a', 'wcag21aa', 'wcag143', 'cat.color', 'cat.aria']
-            },
-            rules: {
-				'duplicate-id': { enabled: false },
-                'bypass': { enabled: false }
-			}
-        };
-
-        axe.run(document, options, (err, results) => {
-            if (err) throw err;
-            done(results);
-
-            return results;
-        });
-    });
-
-    if(results.violations.length > 0)
-    {
+    if (results.violations.length > 0) {
         exports.processResults(results, componentName);
     }
 
