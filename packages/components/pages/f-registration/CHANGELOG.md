@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (to be added to next release)
 ------------------------------
-*February 4, 2022*
+*February 6, 2022*
 
 ### Changed
 - Upgraded to ESLint v8
