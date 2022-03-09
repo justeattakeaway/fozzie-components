@@ -3,7 +3,7 @@ import Vue from 'vue';
 import i18nContext from './i18n.context';
 import storeContext from './vuex.context';
 
-import './logger.context';
+import './log.context';
 import './cookie.context';
 import './analytics.context';
 

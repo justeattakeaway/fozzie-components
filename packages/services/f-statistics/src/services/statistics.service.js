@@ -3,18 +3,18 @@ import defaultOptions from '../defaultOptions';
 
 export default class StatisticsService {
     #configuration;
-    #logger;
+    #log;
     #basePayload;
     #logs = [];
     #publishIntervalTimer = null;
 
-    constructor (logger, options = {}, basePayload = {}) {
+    constructor (log, options = {}, basePayload = {}) {
         this.#configuration = {
             ...defaultOptions,
             ...options
         };
         this.#basePayload = this.#makeBasePayload(basePayload);
-        this.#logger = logger;
+        this.#log = log;
     }
 
     #makeBasePayload (basePayload) {
@@ -53,7 +53,7 @@ export default class StatisticsService {
     }
 
     #createLogFunction ({ message, payload }) {
-        return () => this.#logger.info(message, {
+        return () => this.#log.info(message, 'f-statistics', {
             ...payload
         });
     }

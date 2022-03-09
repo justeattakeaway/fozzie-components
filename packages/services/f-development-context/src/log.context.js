@@ -6,7 +6,7 @@ const appendStandardProperties = (logPayload, message, level, mode) => {
     logPayload.mode = mode || 'client';
 };
 
-const logger = {
+const log = {
     error: (logMessage, exception, tags, logPayload = {}) => {
         appendStandardProperties(logPayload, logMessage, 'Error', 'client');
         console.error(logMessage, tags, logPayload);
@@ -21,4 +21,4 @@ const logger = {
     }
 };
 
-Vue.prototype.$logger = logger;
+Vue.prototype.$log = log;
