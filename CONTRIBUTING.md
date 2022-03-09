@@ -1,5 +1,7 @@
 # Contributing
 
+Test
+
 *_[This contributing guide can also be viewed in our Storybook documentation](https://vue.pie.design/?path=/story/documentation-getting-started-contributing--page)_*
 
 - Before creating a new component, please discuss it with us in #help-web
