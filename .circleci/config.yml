@@ -69,7 +69,6 @@ commands:
               yarn << parameters.command_name >> --since master...HEAD
             fi
 
-
   run_command_plus_dependencies:
     parameters:
       command_description:
