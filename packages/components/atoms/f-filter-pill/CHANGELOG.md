@@ -10,6 +10,9 @@ v0.3.0
 ### Added
 - Animation
 
+### Changed
+- Renamed SCSS variables
+
 ### Fixed
 - Outline in Safari
 
