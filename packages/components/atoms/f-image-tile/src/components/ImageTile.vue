@@ -51,7 +51,9 @@
                 :class="$style['c-imageTile-textContainer']"
                 :aria-hidden="isLink">
                 <tick-icon :class="$style['c-imageTile-icon']" />
-                <span :class="$style['c-imageTile-text']">
+                <span
+                    :class="$style['c-imageTile-text']"
+                    data-test-id="image-tile-text">
                     {{ displayText }}
                 </span>
             </span>

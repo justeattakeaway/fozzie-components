@@ -5,10 +5,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.11.0
 ------------------------------
-*March 14, 2022*
+*March 11, 2022*
 
 ### Added
-- Unit tests for props: `href`, `displayText`, `altText` & `fallbackImage`
+- Unit tests for props: `href`, `displayText` & `altText`
 
 ### Changed
 `outline` to `box-shadow` to create rounded corners in safari

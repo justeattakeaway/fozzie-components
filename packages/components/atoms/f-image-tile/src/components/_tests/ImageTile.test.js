@@ -33,16 +33,55 @@ describe('ImageTile', () => {
             });
         });
 
-        xdescribe('href :: ', () => {
+        describe('href :: ', () => {
+            it('should apply `href` to the link', () => {
+                // Arrange
+                const propsData = { href: 'https://www.google.com' };
+
+                // Act
+                const wrapper = shallowMount(ImageTile, {
+                    propsData
+                });
+
+                const link = wrapper.find('[data-test-id="image-tile-link"]');
+
+                // Assert
+                expect(link.attributes('href')).toBe(propsData.href);
+            });
         });
 
-        xdescribe('displayText :: ', () => {
+        describe('displayText :: ', () => {
+            it('should apply `displayText` to the image tile', () => {
+                // Arrange
+                const propsData = { displayText: 'Chicken' };
+
+                // Act
+                const wrapper = shallowMount(ImageTile, {
+                    propsData
+                });
+
+                const text = wrapper.find('[data-test-id="image-tile-text"]');
+
+                // Assert
+                expect(text.text()).toBe(propsData.displayText);
+            });
         });
 
-        xdescribe('altText :: ', () => {
-        });
+        describe('altText :: ', () => {
+            it('should apply `altText` to the image alt', () => {
+                // Arrange
+                const propsData = { imgSrc: 'https://via.placeholder.com/150', altText: '' };
 
-        xdescribe('fallbackImage :: ', () => {
+                // Act
+                const wrapper = shallowMount(ImageTile, {
+                    propsData
+                });
+
+                const image = wrapper.find('[data-test-id="image-tile-image"]');
+
+                // Assert
+                expect(image.attributes('alt')).toContain(propsData.altText);
+            });
         });
 
         describe('tileId :: ', () => {
