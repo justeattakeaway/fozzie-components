@@ -16,7 +16,7 @@
         <button
             ref="countrySelectorToggle"
             type="button"
-            data-test-id="country-selector-action-button"
+            data-test-id="action-button-component"
             :tabindex="tabindex"
             :class="[
                 $style['c-nav-list-link'],
