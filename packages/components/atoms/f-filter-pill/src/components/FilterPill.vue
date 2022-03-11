@@ -105,10 +105,10 @@ export default {
 </script>
 
 <style lang="scss" module>
-$selected-color: $color-content-positive;
-$checkbox-width: 16px;
-$transition-duration: 0.2s;
-$ease: ease-in-out;
+$filter-pill-selected-color: $color-content-positive;
+$filter-pill-checkbox-width: 16px;
+$filter-pill-transition-duration: 0.2s;
+$filter-pill-ease: ease-in-out;
 
 @mixin ellipsis() {
     white-space: nowrap;
@@ -117,7 +117,7 @@ $ease: ease-in-out;
 }
 
 .c-filterPill {
-    box-shadow: 0 0 0 1px $color-grey-30;
+    box-shadow: 0 0 0 1px $color-border-default;
     border-radius: $radius-rounded-e;
     background: $color-white;
     transition: .1s;
@@ -145,7 +145,7 @@ $ease: ease-in-out;
     }
 
     .c-filterPill--selected & {
-        color: $selected-color;
+        color: $filter-pill-selected-color;
     }
 
     .c-filterPill--disabled & {
@@ -163,24 +163,24 @@ $ease: ease-in-out;
     will-change: transform, opacity, width, min-width, margin-right;
 
     @media (prefers-reduced-motion: no-preference) {
-        transition: transform $transition-duration $ease,
-                    opacity $transition-duration $ease,
-                    width $transition-duration $ease,
-                    min-width $transition-duration $ease,
-                    margin-right $transition-duration $ease;
+        transition: transform $filter-pill-transition-duration $filter-pill-ease,
+                    opacity $filter-pill-transition-duration $filter-pill-ease,
+                    width $filter-pill-transition-duration $filter-pill-ease,
+                    min-width $filter-pill-transition-duration $filter-pill-ease,
+                    margin-right $filter-pill-transition-duration $filter-pill-ease;
     }
 
     .c-filterPill--selected &,
     .c-filterPill:hover:not(.c-filterPill--disabled) & {
         transform: translate3d(0, 0, 0) scale(1);
         opacity: 1;
-        width: $checkbox-width;
-        min-width: $checkbox-width;
+        width: $filter-pill-checkbox-width;
+        min-width: $filter-pill-checkbox-width;
         margin-right: spacing(b);
     }
 
     .c-filterPill--selected & path {
-        fill: $selected-color;
+        fill: $filter-pill-selected-color;
     }
 }
 
@@ -194,7 +194,7 @@ $ease: ease-in-out;
     padding-left: spacing(d);
 
     .c-filterPill--selected & {
-        color: $selected-color;
+        color: $filter-pill-selected-color;
     }
 }
 </style>
