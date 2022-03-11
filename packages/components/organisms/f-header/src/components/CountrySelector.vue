@@ -7,33 +7,33 @@
         ]"
         v-on="isBelowMid ? null : { mouseover: openCountrySelector, mouseleave: (() => closeCountrySelector(false)) }"
         @keyup.esc="closeCountrySelector">
+        <flag-icon
+            data-test-id="current-flag-icon"
+            :country-code="copy.currentCountryKey"
+            :class="[
+                { [$style['c-nav-list-icon--feature-flag']]: !isBelowMid },
+                { [$style['c-nav-list-icon--flag']]: isBelowMid }]" />
         <button
             ref="countrySelectorToggle"
             type="button"
             data-test-id="action-button-component"
             :tabindex="tabindex"
             :class="[
-                $style['c-nav-list-text'],
-                $style['c-nav-list-btn']
+                $style['c-nav-list-link'],
+                $style['c-nav-list-btn'],
+                { [$style['c-nav-list-link--alt']]: isAltColour },
+                { [$style['c-nav-list-link-with-border']]: hasBorderBottom },
+                { [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent' }
             ]"
             :aria-expanded="(!isBelowMid && isCountrySelectorOpen) ? 'true' : 'false'"
             :aria-haspopup="!isBelowMid"
             :aria-label="copy.changeCurrentCountry"
             @click="toggleCountrySelector">
-            <span :class="$style['c-nav-list-iconWrapper']">
-                <flag-icon
-                    data-test-id="current-flag-icon"
-                    :country-code="copy.currentCountryKey"
-                    :class="[
-                        $style['c-nav-list-icon--flag'],
-                        $style['c-nav-list-icon--flagCurrent']
-                    ]" />
-            </span>
-            <span :class="$style['c-nav-list-title']">
+            <span
+                :class="$style['country-selector-text']">
                 {{ copy.selectYourCountryText }}
             </span>
         </button>
-
         <v-popover
             data-test-id="countrySelector-popover"
             :aria-hidden="!isCountrySelectorOpen"
@@ -111,36 +111,10 @@ export default {
 <style lang="scss" module>
 @import '../assets/scss/navigation.scss';
 
-.c-nav-list-iconWrapper {
-    height: $countrySelector-flag-height;
-    width: $countrySelector-flag-width;
-
-    @include media('<=mid') {
-        margin-right: spacing();
-    }
+.country-selector-text {
 
     @include media('>mid') {
-        background-color: $color-container-default;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-}
-
-.c-nav-list-icon--flagCurrent {
-    margin-right: 0;
-}
-
-.c-nav-list-title {
-    width: 0;
-    overflow: hidden;
-    @include font-size(heading-s, true, narrow);
-
-    @include media('<=mid') {
-        width: auto;
+        display:none
     }
 }
 </style>

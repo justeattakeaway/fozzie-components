@@ -2,22 +2,20 @@
     <div>
         <slot
             name="icon" />
-        <a
+        <button
+            type="button"
             v-bind="$attrs"
             :data-trak="JSON.stringify(dataTrak)"
-            :href="href"
             :class="[
                 $style['c-nav-list-link'],
-                { [$style['c-nav-list-link--country-selector']]: isCountrySelectorPanel & !isBelowMid },
                 { [$style['c-nav-list-link--alt']]: isAltColour },
-                { [$style['c-nav-list-link-with-border']]: hasBorderBottom & isBelowMid },
+                { [$style['c-nav-list-link-with-border']]: hasBorderBottom },
                 { [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent' }
             ]">
-
             {{ text }}
             <br>
             {{ subText }}
-        </a>
+        </button>
     </div>
 </template>
 
@@ -29,12 +27,6 @@ export default {
         dataTrak: {
             type: Object,
             default: () => undefined
-        },
-
-        href: {
-            type: String,
-            required: false,
-            default: null
         },
 
         text: {
@@ -66,16 +58,6 @@ export default {
         hasBorderBottom: {
             type: Boolean,
             default: true
-        },
-
-        isBelowMid: {
-            type: Boolean,
-            default: true
-        },
-
-        isCountrySelectorPanel: {
-            type: Boolean,
-            default: false
         }
     }
 };
@@ -83,4 +65,11 @@ export default {
 
 <style lang="scss" module>
 @import '../assets/scss/navigation.scss';
+    .u-showBelowMid {
+        margin-left: 0px !important;
+        padding-left: 0px !important;
+        @include media('>mid') {
+            display: none !important;
+        }
+    }
 </style>

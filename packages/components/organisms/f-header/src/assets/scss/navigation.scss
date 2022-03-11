@@ -8,18 +8,18 @@
 */
 
 $nav-text-size                     : 'body-l';
-$nav-text-size--narrow             : 'body-s';
+$nav-text-size--narrow             : 'body-1';
 $nav-text-weight                   : $font-weight-bold;
 $nav-text-color                    : $color-content-link;
 $nav-text-color--hover             : darken($color-content-link, $color-hover-01);
-$nav-text-color--narrow            : $color-content-subdued;
+$nav-text-color--narrow            : $color-interactive-primary;
 $nav-text-color--transparent       : $color-content-link-inverse;
 $nav-text-subFont                  : $font-family-base;
 
 $nav-transition-duration           : 250ms;
 
 $nav-trigger-width                 : 56px;
-$nav-trigger-height                : 48px;
+$nav-trigger-height                : 56px;
 $nav-trigger-focus-color           : $color-content-interactive-secondary;
 $nav-trigger-focus-bg              : $color-interactive-secondary;
 
@@ -27,11 +27,11 @@ $nav-popover-width                 : 300px;
 $nav-popover-transition-delay      : 200ms;
 $nav-popover-transition-duration   : 200ms;
 
-$countrySelector-flag-width        : 16px;
-$countrySelector-flag-height       : 16px;
+$countrySelector-flag-width        : 21px;
+$countrySelector-flag-height       : 21px;
 
-$nav-featureLinkIcon-width         : 28px;
-$nav-featureLinkIcon-height        : 28px;
+$nav-featureLinkIcon-width         : 24px;
+$nav-featureLinkIcon-height        : 24px;
 
 $nav-icon-color                    : $color-interactive-primary;
 $nav-icon-color--transparent       : $color-interactive-inverse;
@@ -133,22 +133,29 @@ $nav-toggleIcon-space              : 5px;
 }
 
 .c-nav-list-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 0;
     background: transparent;
-
-    @include media('<=mid') {
-        width: 100%;
-        text-align: left;
-    }
+    border: 0;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
 }
 
 .c-nav-list-icon--flag {
     height: $countrySelector-flag-height;
     width: $countrySelector-flag-width;
-    margin-right: spacing();
+    display: flex;
+    float: left;
+    margin-top: 12px;
+    margin-right: 16px;
+    margin-left: 16px;
+
+}
+
+.c-nav-list-icon--feature-flag {
+    height: $countrySelector-flag-height;
+    width: $countrySelector-flag-width;
+    margin-right: 16px;
+    margin-left: 16px;
 }
 
 .c-nav-popoverList--twoColumns {
@@ -186,31 +193,72 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
-.c-nav-list-link,
-.c-nav-list-text {
-    display: flex;
-    align-items: center;
-    padding: spacing(c) spacing(d);
-    margin: 0;
-    font-family: $nav-text-subFont;
-    color: $nav-text-color--narrow;
-    @include font-size($nav-text-size--narrow);
-    font-weight: 300;
+.c-nav-list-link {
     text-decoration: none;
-    border-bottom: 1px solid $color-border-default;
+    font-family: $nav-text-subFont;
+
+    @include media('<=mid') {
+        display: flex;
+        float: center;
+        margin-left: 56px;
+        padding: spacing(c) spacing(d) spacing(c) 0px;
+        color: $nav-text-color;
+        @include font-size($nav-text-size);
+        font-weight: 300;
+    }
 
     @include media('>mid') {
-        @include font-size($nav-text-size);
         font-weight: $nav-text-weight;
-        color: $nav-text-color;
-        border-bottom: none;
-        height: $header-height;
+        margin: 0;
+        padding: 0;
     }
+}
+
+// TODO: MAKE THIS NOT USE FLOATS
+// global modifier for list items horizontally aligned
+.c-nav-list-item--horizontallyAlignedAboveMid {
+    @include media('>mid') {
+        float: left;
+        padding-top: 28px;
+        padding-bottom: 28px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+.country-selector--horizontallyAlignedAboveMid {
+    margin-bottom: 26px;
+    margin-top: 26px;
+    padding-left: 16px;
+    padding-right: 16px;
+    float: left;
+}
+
+
+.c-nav-list-link-with-border {
+    border-bottom: 1px solid $color-border-default;
 }
 
 .c-nav-list-link--alt {
     @include media('>mid') {
         color: $nav-text-color--transparent;
+    }
+}
+
+.c-nav-list-link--country-selector {
+    @include media('>mid') {
+        text-decoration: none;
+        display: flex;
+        float: center;
+        margin-left: 56px;
+        padding: spacing(c) spacing(d) spacing(c) 0px;
+        color: $nav-text-color;
+        @include font-size($nav-text-size);
+        font-weight: 300;
+    }
+    
+    &:hover {
+        text-decoration: none;
     }
 }
 
@@ -224,17 +272,11 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
-.c-nav-list-text {
-    @include media('<=mid') {
-        display: block;
-    }
-}
-
-.c-nav-list-link--leftPaddingBelowMid {
-    @include media('<=mid') {
-        padding-left: spacing(h);
-    }
-}
+// .c-nav-list-text {
+//     @include media('<=mid') {
+//         display: block;
+//     }
+// }
 
 .has-sublist {
     // ensures the dropdown/popover is relative to the hover element, on wider views
@@ -275,6 +317,7 @@ $nav-toggleIcon-space              : 5px;
 
 .c-nav-popover.c-nav-popover--countrySelector {
     @include media('>mid') {
+        margin-top: 24px;
         // tooltip arrow
         &:before {
             right: 4%;

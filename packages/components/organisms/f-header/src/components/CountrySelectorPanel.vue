@@ -10,6 +10,7 @@
             <header :class="$style['c-countrySelector-header']">
                 <f-button
                     button-type="ghost"
+                    button-size="small"
                     is-icon
                     :class="$style['c-countrySelector-header-button']"
                     :aria-label="copy.goBackToMainMenu"
@@ -34,7 +35,7 @@
                     :key="country.key"
                     :class="$style['c-countrySelector-country']"
                     :data-test-id="[`countrySelector-countryList-${country.dataTestKey}`]">
-                    <a
+                    <nav-link
                         :data-trak='`{
                             "trakEvent": "click",
                             "category": "engagement",
@@ -42,15 +43,18 @@
                             "label": "${country.gtm}"
                         }`'
                         :tabindex="isOpen ? 0 : -1"
-                        :href="country.siteUrl"
-                        :class="$style['c-countrySelector-link']">
-                        <flag-icon
-                            :country-code="country.flagKey"
-                            :class="$style['c-nav-list-icon--flag']" />
-                        <span>
-                            {{ country.localisedName }}
-                        </span>
-                    </a>
+                        :has-border-bottom="false"
+                        :is-below-mid="isBelowMid"
+                        :is-country-selector-panel="true"
+                        :text="country.localisedName"
+                        :href="country.siteUrl">
+                        <template #icon>
+                            <flag-icon
+                                :country-code="country.flagKey"
+                                :class="[$style['c-nav-list-icon--flag'],
+                                         $style['c-nav-icon']]" />
+                        </template>
+                    </nav-link>
                 </li>
             </ul>
         </div>
@@ -61,13 +65,15 @@
 import FButton from '@justeat/f-button';
 import { ArrowIcon } from '@justeat/f-vue-icons';
 import FlagIcon from './FlagIcon.vue';
+import NavLink from './NavLink.vue';
 import { countries } from '../tenants';
 
 export default {
     components: {
         FButton,
         ArrowIcon,
-        FlagIcon
+        FlagIcon,
+        NavLink
     },
     props: {
         copy: {
@@ -142,33 +148,54 @@ $countrySelector-text-bg-hover : $color-container-subtle;
     }
 
     .c-countrySelector-header-button {
-        margin: spacing(d);
+        margin-left: spacing(b);
         @include media('>mid') {
             display: none;
         }
 
         svg.c-countrySelector-goBackIcon {
             transform: rotate(180deg);
+            width: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
     }
 }
 
 .c-countrySelector-country {
-    padding: 0;
     white-space: nowrap;
-    margin-bottom: 0;
-
     &:hover {
         background: $countrySelector-text-bg-hover;
+        text-decoration: none;
     }
 }
 
-.c-countrySelector-link {
-    display: block;
-    text-decoration: none;
-    color: $countrySelector-text-color;
-    @include font-size(body-l);
-    padding: spacing(c) spacing(e);
-    width: 100%;
-}
+// .c-countrySelector-link {
+//     display: block;
+//     text-decoration: none;
+//     color: $countrySelector-text-color;
+//     @include font-size(body-l);
+//     padding: spacing(c) spacing(e);
+//     width: 100%;
+// }
+//     padding: 0;
+//     white-space: nowrap;
+//     margin-bottom: 0;
+
+//     &:hover {
+//         background: $countrySelector-text-bg-hover;
+//     }
+// }
+
+// .c-countrySelector-link {
+//     float: center;
+//      @include media('>mid') {
+//     margin-left: 56px;
+//     padding: spacing(c) spacing(d) spacing(c) 0px;
+//     text-decoration: none;
+//     color: $countrySelector-text-color;
+//     @include font-size('body-l');
+//     }
+// }
 </style>

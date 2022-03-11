@@ -63,8 +63,7 @@
             ]">
             <gift-icon
                 :class="[
-                    $style['c-nav-icon'],
-                    $style['c-nav-icon--offers'],
+                    $style['c-nav-icon-offers-feature'],
                     { [$style['c-nav-icon--alt']]: isAltColour }
                 ]" />
             <span class="is-visuallyHidden">
@@ -87,6 +86,7 @@
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
                         :tabindex="tabIndex"
+                        :is-below-mid="isBelowMid"
                         :text="customNavLink.text"
                         :href="customNavLink.url"
                         :data-trak="customNavLink.gtm && analyticsObjects.navigation.clickHeaderLink({ ...customNavLink.gtm })"
@@ -95,9 +95,10 @@
                 </li>
 
                 <li
+                    v-if="showOffersLink"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
-                        v-if="showOffersLink"
+                        :is-below-mid="isBelowMid"
                         :text="copy.offers.text"
                         :tabindex="tabIndex"
                         :href="copy.offers.url"
@@ -117,9 +118,10 @@
                 </li>
 
                 <li
+                    v-if="showDeliveryEnquiry"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
-                        v-if="showDeliveryEnquiry"
+                        :is-below-mid="isBelowMid"
                         :text="copy.deliveryEnquiry.text"
                         :tabindex="tabIndex"
                         :href="copy.deliveryEnquiry.url"
@@ -152,41 +154,32 @@
                     data-test-id="user-info-icon"
                     v-on="isBelowMid ? null : { mouseover: openUserMenu, mouseleave: closeUserMenu }"
                     @keyup.esc="closeUserMenu">
-                    <button
-                        type="button"
+                    <nav-link
                         data-test-id="user-info-link"
                         :tabindex="isBelowMid ? -1 : 0"
                         :aria-expanded="!isBelowMid && userMenuIsOpen ? 'true' : 'false'"
                         :aria-haspopup="isBelowMid ? false : true"
                         :aria-label="copy.userMenu.buttonLabel(userInfo.friendlyName)"
-                        :class="[
-                            $style['c-nav-list-text'],
-                            $style['c-nav-list-btn']
-                        ]"
+                        :text="userInfo.friendlyName"
+                        :is-alt-colour="isAltColour"
+                        :is-below-mid="isBelowMid"
+                        :background-theme="headerBackgroundTheme"
+                        :sub-text=" isBelowMid ? userInfo.email : null"
                         @click.prevent="toggleUserMenu"
                         @keydown.space.prevent="toggleUserMenu">
-                        <profile-icon
-                            :class="[
-                                $style['c-nav-icon'],
-                                $style['c-nav-icon--profile'],
-                                { [$style['c-nav-icon--alt']]: isAltColour }
-                            ]" />
-                        <span
-                            :class="[
-                                $style['c-nav-list-text-sub'],
-                                { [$style['c-nav-list-link--alt']]: isAltColour },
-                                { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
-                            ]">
-                            {{ userInfo.friendlyName }}
-                        </span>
-                        <span
-                            :class="[
-                                $style['c-nav-list-text-sub'],
-                                $style['u-showBelowMid']
-                            ]">
-                            {{ userInfo.email }}
-                        </span>
-                    </button>
+                        <template #icon>
+                            <profile-icon
+                                :class="
+                                    [
+                                        $style['c-nav-icon'],
+                                        $style['c-nav-icon--profile'],
+                                        {
+                                            [$style['c-nav-icon--alt']]:
+                                                isAltColour
+                                        }
+                                    ]" />
+                        </template>
+                    </nav-link>
 
                     <v-popover :class="$style['c-nav-popover']">
                         <user-navigation-panel
@@ -202,39 +195,40 @@
                 </li>
 
                 <li
+                    v-if="!userInfo && showLoginInfo"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
-                        v-if="!userInfo && showLoginInfo"
                         :text="copy.accountLogin.text"
                         :tabindex="tabIndex"
+                        :is-below-mid="isBelowMid"
                         :href="returnLoginUrl"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
                             label: copy.accountLogin.gtm
                         })"
                         :is-alt-colour="isAltColour"
                         :background-theme="headerBackgroundTheme"
-                        :left-padding-below-mid="Boolean(userInfo)"
                         rel="nofollow"
                         data-test-id="login-link" />
                 </li>
 
                 <li
+                    v-if="showHelpLink"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
-                        v-if="showHelpLink"
                         :text="copy.help.text"
                         :tabindex="tabIndex"
+                        :is-below-mid="isBelowMid"
                         :href="copy.help.url"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
                             label: copy.help.gtm
                         })"
                         :is-alt-colour="isAltColour"
-                        :left-padding-below-mid="Boolean(userInfo)"
                         :background-theme="headerBackgroundTheme"
                         data-test-id="help-link" />
                 </li>
 
                 <li
+                    v-if="userInfo && isBelowMid && showLoginInfo"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
                         v-if="userInfo && isBelowMid && showLoginInfo"
@@ -245,15 +239,14 @@
                             label: copy.accountLogout.gtm
                         })"
                         :is-alt-colour="isAltColour"
-                        :left-padding-below-mid="Boolean(userInfo)"
                         :background-theme="headerBackgroundTheme"
                         data-test-id="logout-link" />
                 </li>
 
                 <li
+                    v-if="showCountrySelector"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <country-selector
-                        v-if="showCountrySelector"
                         :is-below-mid="isBelowMid"
                         :copy="copy.countrySelector"
                         :tabindex="tabIndex"
@@ -663,38 +656,21 @@ export default {
     display: none;
     @include media('>mid') {
         display: block;
+        height: 80px;
     }
     &.is-visible {
         display: block;
     }
 }
 
-// TODO: MAKE THIS NOT USE FLOATS
-// global modifier for list items horizontally aligned
-.c-nav-list-item--horizontallyAlignedAboveMid {
-    @include media('>mid') {
-        float: left;
-    }
-}
-
-.c-nav-list-text-sub {
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 300px;
-
-    &.u-showBelowMid {
-        @include media('>mid') {
-            display: none !important;
-        }
-    }
-}
-
 .c-nav-featureLink {
-    display: block;
     width: $nav-featureLinkIcon-width;
     height: $nav-featureLinkIcon-height;
+
+    & path {
+            fill: $nav-icon-color;
+        }
+
 
     @include media('<=mid') {
         position: absolute;
@@ -726,10 +702,14 @@ export default {
     }
 }
 
+
+
 .c-nav-icon--delivery,
 .c-nav-icon--offers,
 .c-nav-icon--profile {
     @include media('<=mid') {
+        margin-left: 16px;
+        margin-top: 12px;
         & path {
             fill: $nav-icon-color--mobileWhiteBg;
         }
