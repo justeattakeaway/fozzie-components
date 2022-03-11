@@ -14,9 +14,9 @@ describe('ImageTile', () => {
             const isLinkFalse = false;
 
             it.each([
-                ['https://www.google.com', isLinkTrue],
-                ['#', isLinkFalse]
-            ])('should update `href` to %s when set to %s', (expectedValue, isLink) => {
+                ['https://www.google.com', undefined, isLinkTrue],
+                ['https://www.google.com', '-1', isLinkFalse]
+            ])('should pass `href` and update `tabindex` to expected values', (expectedValue, expectedTabindex, isLink) => {
                 // Arrange
                 const propsData = { isLink, href: 'https://www.google.com' };
 
@@ -29,6 +29,7 @@ describe('ImageTile', () => {
 
                 // Assert
                 expect(link.attributes('href')).toBe(expectedValue);
+                expect(link.attributes('tabindex')).toBe(expectedTabindex);
             });
         });
 
