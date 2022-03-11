@@ -36,12 +36,12 @@
                     :class="$style['c-countrySelector-country']"
                     :data-test-id="[`countrySelector-countryList-${country.dataTestKey}`]">
                     <nav-link
-                        :data-trak='`{
-                            "trakEvent": "click",
-                            "category": "engagement",
-                            "action": "header",
-                            "label": "${country.gtm}"
-                        }`'
+                        :data-trak="{
+                            trakEvent: 'click',
+                            category: 'engagement',
+                            action: 'header',
+                            label: `${country.gtm}`
+                        }"
                         :tabindex="isOpen ? 0 : -1"
                         :has-border-bottom="false"
                         :is-below-mid="isBelowMid"

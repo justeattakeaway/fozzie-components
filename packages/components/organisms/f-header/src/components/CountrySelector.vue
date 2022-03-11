@@ -20,10 +20,7 @@
             :tabindex="tabindex"
             :class="[
                 $style['c-nav-list-link'],
-                $style['c-nav-list-btn'],
-                { [$style['c-nav-list-link--alt']]: isAltColour },
-                { [$style['c-nav-list-link-with-border']]: hasBorderBottom },
-                { [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent' }
+                $style['c-nav-list-btn']
             ]"
             :aria-expanded="(!isBelowMid && isCountrySelectorOpen) ? 'true' : 'false'"
             :aria-haspopup="!isBelowMid"
