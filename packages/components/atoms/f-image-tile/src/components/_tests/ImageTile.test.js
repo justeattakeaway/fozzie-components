@@ -33,6 +33,18 @@ describe('ImageTile', () => {
             });
         });
 
+        xdescribe('href :: ', () => {
+        });
+
+        xdescribe('displayText :: ', () => {
+        });
+
+        xdescribe('altText :: ', () => {
+        });
+
+        xdescribe('fallbackImage :: ', () => {
+        });
+
         describe('tileId :: ', () => {
             it('should apply `tileId` to the input id', () => {
                 // Arrange

@@ -183,8 +183,8 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
 }
 
 @mixin image-tile-focus() {
-    outline: 2px solid $color-focus;
     border-radius: $radius-rounded-b;
+    box-shadow: 0 0 0 2px $color-focus;
 }
 
 .c-imageTile {
