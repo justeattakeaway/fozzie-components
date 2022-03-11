@@ -195,7 +195,7 @@ $nav-toggleIcon-space              : 5px;
     @include media('<=mid') {
         display: flex;
         float: center;
-        margin-left: 56px;
+        margin-left: spacing(h);
         padding: spacing(c) spacing(d) spacing(c) 0;
         color: $nav-text-color;
         @include font-size($nav-text-size);
@@ -214,18 +214,9 @@ $nav-toggleIcon-space              : 5px;
 .c-nav-list-item--horizontallyAlignedAboveMid {
     @include media('>mid') {
         float: left;
-        padding: 28px 16px;
+        padding: 28px spacing(d);
     }
 }
-
-.country-selector--horizontallyAlignedAboveMid {
-    margin-bottom: 26px;
-    margin-top: 26px;
-    padding-left: 16px;
-    padding-right: 16px;
-    float: left;
-}
-
 
 .c-nav-list-link-with-border {
     border-bottom: 1px solid $color-border-default;
@@ -242,7 +233,7 @@ $nav-toggleIcon-space              : 5px;
         text-decoration: none;
         display: flex;
         float: center;
-        margin-left: 56px;
+        margin-left: spacing(h);
         padding: spacing(c) spacing(d) spacing(c) 0;
         color: $nav-text-color;
         @include font-size($nav-text-size);
@@ -302,7 +293,7 @@ $nav-toggleIcon-space              : 5px;
 
 .c-nav-popover.c-nav-popover--countrySelector {
     @include media('>mid') {
-        margin-top: 24px;
+        margin-top: spacing(e);
         // tooltip arrow
         &:before {
             right: 4%;
