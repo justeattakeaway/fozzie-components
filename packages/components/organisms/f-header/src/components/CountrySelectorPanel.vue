@@ -139,7 +139,7 @@ $countrySelector-text-bg-hover : $color-container-subtle;
     display: flex;
     align-items: center;
 
-    @include media('>mid'){
+    @include media('>mid') {
         padding-bottom: spacing(d);
         padding-left: spacing(d);
     }
