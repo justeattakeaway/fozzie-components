@@ -53,7 +53,8 @@ jest.mock('../../services/analytics', () => jest.fn().mockImplementation(() => (
     trackInitialLoad: jest.fn(),
     trackFormErrors: jest.fn(),
     trackDialogEvent: jest.fn(),
-    trackLowValueOrderExperiment: jest.fn()
+    trackLowValueOrderExperiment: jest.fn(),
+    trackGuestCheckoutSubmission: jest.fn()
 })));
 
 const message = {
@@ -1077,7 +1078,8 @@ describe('Checkout', () => {
                             await wrapper.vm.submitCheckout();
 
                             // Assert
-                            expect(setupGuestUserSpy).toHaveBeenCalled();
+                            expect(setupGuestUserSpy)
+                                .toHaveBeenCalled();
                         });
                     });
 
@@ -1106,7 +1108,6 @@ describe('Checkout', () => {
                         });
                     });
                 });
-
                 describe('AND `isLoggedIn` is truthy', () => {
                     describe('AND `isGuestCreated` is falsey', () => {
                         it('should not call `setupGuestUser`', async () => {
@@ -1134,8 +1135,29 @@ describe('Checkout', () => {
                             // Assert
                             expect(setupGuestUserSpy).not.toHaveBeenCalled();
                         });
-                    });
 
+                        it('should not call `trackGuestCheckoutSubmission`', async () => {
+                            // Arrange
+                            wrapper = mount(VueCheckout, {
+                                store: createStore({
+                                    ...defaultCheckoutState,
+                                    isLoggedIn: true,
+                                    isGuestCreated: false
+                                }),
+                                i18n,
+                                localVue,
+                                propsData,
+                                mocks: {
+                                    $cookies
+                                }
+                            });
+                            // Act
+                            await wrapper.vm.submitCheckout();
+
+                            // Assert
+                            expect(wrapper.vm.checkoutAnalyticsService.trackGuestCheckoutSubmission).not.toHaveBeenCalled();
+                        });
+                    });
                     describe('AND `isGuestCreated` is truthy', () => {
                         it('should not call `setupGuestUser`', async () => {
                             // Arrange
@@ -1161,6 +1183,29 @@ describe('Checkout', () => {
 
                             // Assert
                             expect(setupGuestUserSpy).not.toHaveBeenCalled();
+                        });
+
+                        it('should call `trackGuestCheckoutSubmission`', async () => {
+                            // Arrange
+                            wrapper = mount(VueCheckout, {
+                                store: createStore({
+                                    ...defaultCheckoutState,
+                                    isLoggedIn: true,
+                                    isGuestCreated: true
+                                }),
+                                i18n,
+                                localVue,
+                                propsData,
+                                mocks: {
+                                    $cookies
+                                }
+                            });
+
+                            // Act
+                            await wrapper.vm.submitCheckout();
+
+                            // Assert
+                            expect(wrapper.vm.checkoutAnalyticsService.trackGuestCheckoutSubmission).toBeCalledTimes(1);
                         });
                     });
                 });
@@ -2772,7 +2817,6 @@ describe('Checkout', () => {
 
         describe('submitOrder (split notes disabled)::', () => {
             const basketId = 'myBasketId-v1';
-
             let handleEventLoggingSpy;
             let wrapper;
 
@@ -2848,6 +2892,61 @@ describe('Checkout', () => {
 
                     // Assert
                     expect(handleEventLoggingSpy).toHaveBeenCalledWith('CheckoutSuccess');
+                });
+
+                describe('when `isGuestCheckout` is falsey', () => {
+                    it('should call not `trackGuestCheckoutSubmission`', async () => {
+                        wrapper = shallowMount(VueCheckout, {
+                            store: createStore({
+                                ...defaultCheckoutState,
+                                basket: {
+                                    id: basketId
+                                },
+                                isGuestCreated: false,
+                                isLoggedIn: true
+                            }),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $cookies
+                            }
+                        });
+
+                        // Act
+                        await wrapper.vm.submitOrder();
+
+                        // Assert
+                        expect(wrapper.vm.checkoutAnalyticsService.trackGuestCheckoutSubmission).not.toHaveBeenCalled();
+                    });
+                });
+
+
+                describe('when `isGuestCheckout` is truthy', () => {
+                    it('should call `trackGuestCheckoutSubmission`', async () => {
+                        wrapper = shallowMount(VueCheckout, {
+                            store: createStore({
+                                ...defaultCheckoutState,
+                                basket: {
+                                    id: basketId
+                                },
+                                isGuestCreated: true,
+                                isLoggedIn: true
+                            }),
+                            i18n,
+                            localVue,
+                            propsData,
+                            mocks: {
+                                $cookies
+                            }
+                        });
+
+                        // Act
+                        await wrapper.vm.submitOrder();
+
+                        // Assert
+                        expect(wrapper.vm.checkoutAnalyticsService.trackGuestCheckoutSubmission).toBeCalledTimes(1);
+                    });
                 });
             });
 

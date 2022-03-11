@@ -3,6 +3,31 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.10.3
+------------------------------
+*March 10, 2022*
+
+### Added
+- checked attribute 
+
+### Updated
+- `href` always added to link
+- `isLink` test updated
+
+v0.10.2
+------------------------------
+*March 8, 2022*
+
+### Updated
+- Margin between text and image
+
+v0.10.1
+------------------------------
+*February 28, 2022*
+
+### Updated
+- Props and Events within `README.md`
+
 v0.10.0
 ------------------------------
 *February 25, 2022*

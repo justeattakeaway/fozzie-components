@@ -10,7 +10,7 @@
                 $style['c-imageTile-link'], {
                     [$style['c-imageTile-link--toggle']]: !isLink
                 }]"
-            :href="isLink ? href : '#'"
+            :href="href"
             :aria-hidden="!isLink"
             :tabindex="isLink ? false : -1"
             data-test-id="image-tile-link">
@@ -21,6 +21,7 @@
         <input
             :id="`imageTileToggle-${tileId}`"
             type="checkbox"
+            :checked="isToggleSelected"
             class="is-visuallyHidden"
             :class="$style['c-imageTile-checkbox']"
             data-test-id="image-tile-input"
@@ -249,7 +250,7 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
 }
 
 .c-imageTile-textContainer {
-    margin-top: spacing(d);
+    margin-top: spacing(b);
     display: flex;
     max-width: 100%;
 

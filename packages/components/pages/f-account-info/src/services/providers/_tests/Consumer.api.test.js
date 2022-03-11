@@ -2,12 +2,16 @@ import ConsumerApi from '../Consumer.api';
 
 import {
     CONSUMER_DETAILS_URL,
-    CONSUMER_ADDRESSES_URL
+    CONSUMER_ADDRESSES_URL,
+    CONVERSATION_ID_HEADER_NAME,
+    AUTHORISATION_HEADER_NAME,
+    CONVERSATION_ID_COOKIE_NAME
 } from '../../../constants';
 import {
     baseUrl,
     token,
-    conversationId
+    conversationId,
+    consumerUpdateBody
 } from '../../../../test-utils/setup';
 
 let apiProvider;
@@ -15,11 +19,13 @@ let httpClientMock;
 let cookiesMock;
 const cookiesSetSpy = jest.fn();
 const httpGetSpy = jest.fn();
+const httpPatchSpy = jest.fn();
 
 describe('ConsumerApi Provider', () => {
     beforeEach(() => {
         httpClientMock = {
-            get: httpGetSpy
+            get: httpGetSpy,
+            patch: httpPatchSpy
         };
         cookiesMock = {
             set: cookiesSetSpy
@@ -52,7 +58,7 @@ describe('ConsumerApi Provider', () => {
             await apiProvider.getConsumerDetails(token);
 
             // Assert
-            expect(cookiesSetSpy).toHaveBeenCalledWith('x-je-conversation', expect.anything());
+            expect(cookiesSetSpy).toHaveBeenCalledWith(CONVERSATION_ID_COOKIE_NAME, expect.anything());
         });
 
         it('should not set the cookie if already provided with a conversation id', async () => {
@@ -67,8 +73,8 @@ describe('ConsumerApi Provider', () => {
             // Arrange
             const expectedUri = `${baseUrl}/${CONSUMER_DETAILS_URL}`;
             const expectedHeaders = {
-                Authorization: `Bearer ${token}`,
-                'x-je-conversation': conversationId
+                [AUTHORISATION_HEADER_NAME]: `Bearer ${token}`,
+                [CONVERSATION_ID_HEADER_NAME]: conversationId
             };
 
             // Act
@@ -85,7 +91,7 @@ describe('ConsumerApi Provider', () => {
             await apiProvider.getConsumerAddresses(token);
 
             // Assert
-            expect(cookiesSetSpy).toHaveBeenCalledWith('x-je-conversation', expect.anything());
+            expect(cookiesSetSpy).toHaveBeenCalledWith(CONVERSATION_ID_COOKIE_NAME, expect.anything());
         });
 
         it('should not set the cookie if already provided with a conversation id', async () => {
@@ -100,8 +106,8 @@ describe('ConsumerApi Provider', () => {
             // Arrange
             const expectedUri = `${baseUrl}/${CONSUMER_ADDRESSES_URL}`;
             const expectedHeaders = {
-                Authorization: `Bearer ${token}`,
-                'x-je-conversation': conversationId
+                [AUTHORISATION_HEADER_NAME]: `Bearer ${token}`,
+                [CONVERSATION_ID_HEADER_NAME]: conversationId
             };
 
             // Act
@@ -109,6 +115,40 @@ describe('ConsumerApi Provider', () => {
 
             // Assert
             expect(httpGetSpy).toHaveBeenCalledWith(expectedUri, expectedHeaders);
+        });
+    });
+
+    describe('When calling `patchConsumer`', () => {
+        it('should set the cookie with a new conversation id if not provided with one', async () => {
+            // Act
+            await apiProvider.patchConsumer(token);
+
+            // Assert
+            expect(cookiesSetSpy).toHaveBeenCalledWith(CONVERSATION_ID_COOKIE_NAME, expect.anything());
+        });
+
+        it('should not set the cookie if already provided with a conversation id', async () => {
+            // Act
+            await apiProvider.patchConsumer(token, consumerUpdateBody, conversationId);
+
+            // Assert
+            expect(cookiesSetSpy).not.toHaveBeenCalled();
+        });
+
+        it('should send the correct parameters', async () => {
+            // Arrange
+            const expectedUri = `${baseUrl}/${CONSUMER_DETAILS_URL}`;
+            const expectedBody = consumerUpdateBody;
+            const expectedHeaders = {
+                [AUTHORISATION_HEADER_NAME]: `Bearer ${token}`,
+                [CONVERSATION_ID_HEADER_NAME]: conversationId
+            };
+
+            // Act
+            await apiProvider.patchConsumer(token, consumerUpdateBody, conversationId);
+
+            // Assert
+            expect(httpPatchSpy).toHaveBeenCalledWith(expectedUri, expectedBody, expectedHeaders);
         });
     });
 });

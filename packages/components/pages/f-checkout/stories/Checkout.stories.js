@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { select, boolean } from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import { locales } from '@justeat/storybook/constants/globalisation';
 
@@ -24,61 +23,24 @@ export default {
 Vue.use(Vuex);
 CheckoutMock();
 
-export const CheckoutComponent = () => ({
+export const CheckoutComponent = (args, { argTypes }) => ({
     components: { VueCheckout },
+
     data () {
         return {
             loginUrl: '/login',
             paymentPageUrlPrefix: '#/pay',
             getGeoLocationUrl: '/get-geo-location',
-            getCustomerUrl: '/get-customer'
+            getCustomerUrl: '/get-customer',
+
+            // default values are lost when opening storybook canvas in new tab
+            tenant: this.locale || locales.gb,
+            service: this.serviceType || 'delivery',
+            notes: this.noteType || propOptions.noteTypeOptions['Legacy notes']
         };
     },
-    props: {
-        isLoggedIn: {
-            default: boolean('Is User Logged In', false)
-        },
 
-        serviceType: {
-            default: select('Service Type', propOptions.serviceTypeOptions, 'delivery')
-        },
-
-        locale: {
-            default: select('Locale', [locales.gb, locales.au, locales.nz], locales.gb)
-        },
-
-        isAsapAvailable: {
-            default: boolean('Is ASAP available', true)
-        },
-
-        getCheckoutOptions: {
-            default: select('Get Checkout Options', propOptions.getCheckoutOptions, null)
-        },
-
-        getBasketError: {
-            default: select('Get Basket Options', propOptions.getBasketOptions, null)
-        },
-
-        patchCheckoutError: {
-            default: select('Patch Checkout Errors', propOptions.patchCheckoutErrorOptions)
-        },
-
-        createGuestError: {
-            default: select('Create Guest Errors', propOptions.createGuestErrorOptions, null)
-        },
-
-        placeOrderError: {
-            default: select('Place Order Errors', propOptions.placeOrderErrorOptions)
-        },
-
-        fulfilmentTimeErrors: {
-            default: select('Fulfilment Time Options', propOptions.fulfilmentTimeErrors)
-        },
-
-        noteType: {
-            default: select('Note types', propOptions.noteTypeOptions, null)
-        }
-    },
+    props: Object.keys(argTypes),
 
     computed: {
         createGuestUrl () {
@@ -87,18 +49,18 @@ export const CheckoutComponent = () => ({
 
         getCheckoutUrl () {
             if (this.getCheckoutOptions) {
-                return `/checkout-${this.serviceType}-${this.getCheckoutOptions}`;
+                return `/checkout-${this.service}-${this.getCheckoutOptions}`;
             }
 
-            return `/checkout-${this.serviceType}-${TENANT_MAP[this.locale]}`;
+            return `/checkout-${this.service}-${TENANT_MAP[this.tenant]}`;
         },
 
         getBasketUrl () {
-            return this.getBasketError ? `/get-basket-${this.getBasketError}` : `/get-basket-${this.serviceType}`;
+            return this.getBasketError ? `/get-basket-${this.getBasketError}` : `/get-basket-${this.service}`;
         },
 
         getAddressUrl () {
-            return `/get-address-${TENANT_MAP[this.locale]}`;
+            return `/get-address-${TENANT_MAP[this.tenant]}`;
         },
 
         authToken () {
@@ -154,7 +116,7 @@ export const CheckoutComponent = () => ({
         ':get-basket-url="getBasketUrl" ' +
         ':authToken="authToken" ' +
         ':otacToAuthExchanger="otacToAuthExchanger"' +
-        ':locale="locale" ' +
+        ':locale="tenant" ' +
         ':loginUrl="loginUrl" ' +
         ':getAddressUrl="getAddressUrl" ' +
         ':placeOrderUrl="placeOrderUrl" ' +
@@ -167,5 +129,85 @@ export const CheckoutComponent = () => ({
         // eslint-disable-next-line no-template-curly-in-string
         ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl},${getNoteConfigUrl},${checkoutFeatures}`" />'
 });
+
+CheckoutComponent.args = {
+    isLoggedIn: false,
+    serviceType: 'delivery',
+    locale: locales.gb,
+    isAsapAvailable: true,
+    getCheckoutOptions:  propOptions.getCheckoutOptions.None,
+    getBasketError:  propOptions.getBasketOptions.None,
+    patchCheckoutError:  propOptions.patchCheckoutErrorOptions.None,
+    createGuestError: propOptions.createGuestErrorOptions.None,
+    placeOrderError: propOptions.placeOrderErrorOptions.None,
+    fulfilmentTimeErrors: propOptions.fulfilmentTimeErrors.none,
+    noteType: propOptions.noteTypeOptions['Legacy notes']
+};
+
+CheckoutComponent.argTypes = {
+    isLoggedIn: {
+        control: { type: 'boolean' },
+        description: 'Is User Logged In'
+    },
+
+    serviceType: {
+        control: { type: 'select' },
+        options: propOptions.serviceTypeOptions,
+        description: 'Service Type'
+    },
+
+    locale: {
+        control: { type: 'select' },
+        options: [locales.gb, locales.au, locales.nz],
+        description: 'Locale'
+    },
+
+    isAsapAvailable: {
+        control: { type: 'boolean' },
+        description: 'Is ASAP available'
+    },
+
+    getCheckoutOptions: {
+        control: { type: 'select' },
+        options: propOptions.getCheckoutOptions,
+        description: 'Get Checkout Options'
+    },
+
+    getBasketError: {
+        control: { type: 'select' },
+        options: propOptions.getBasketOptions,
+        description: 'Get Basket Options'
+    },
+
+    patchCheckoutError: {
+        control: { type: 'select' },
+        options: propOptions.patchCheckoutErrorOptions,
+        description: 'Patch Checkout Errors'
+    },
+
+    createGuestError: {
+        control: { type: 'select' },
+        options: propOptions.createGuestErrorOptions,
+        description: 'Create Guest Errors'
+    },
+
+    placeOrderError: {
+        control: { type: 'select' },
+        options: propOptions.placeOrderErrorOptions,
+        description: 'Place Order Errors'
+    },
+
+    fulfilmentTimeErrors: {
+        control: { type: 'select' },
+        options: propOptions.fulfilmentTimeErrors,
+        description: 'Fulfilment Time Options'
+    },
+
+    noteType: {
+        control: { type: 'select' },
+        options: propOptions.noteTypeOptions,
+        description: 'Note types'
+    }
+};
 
 CheckoutComponent.storyName = 'f-checkout';

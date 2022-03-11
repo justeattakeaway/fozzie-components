@@ -1,3 +1,4 @@
+const { source } = require('axe-core');
 const { buildUrl } = require('./storybook-extensions');
 
 class Page {
@@ -87,6 +88,36 @@ class Page {
         });
         return tabOrderValue;
     }
+
+    /**
+     * Runs accessibility test results against a set of rules defined.
+     *
+     * @returns {ThenArg<ReturnType<BrowserCommandsType["executeAsync"]>>}
+     */
+    getAccessibilityTestResults = () => {
+        browser.execute(source);
+
+        // https://github.com/dequelabs/axe-core/blob/develop/doc/API.md
+
+        return browser.executeAsync(done => {
+            const options = {
+                runOnly: {
+                    type: 'tag',
+                    values: ['wcag21a', 'wcag21aa', 'wcag143', 'cat.color', 'cat.aria']
+                },
+                rules: {
+                    'duplicate-id': { enabled: false },
+                    // Ignoring as lang attribute is provided via a mixin, however Axe still fails.
+                    'html-has-lang': { enabled: false }
+                }
+            };
+
+            axe.run(document, options, (err, results) => {
+                if (err) throw err;
+                done(results);
+            });
+        });
+    };
 }
 
 module.exports = Page;
