@@ -11,6 +11,7 @@ export const FilterPillComponent = (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     template: `<filter-pill
                     :input-id='inputId'
+                    :toggle-value='toggleValue'
                     :is-selected='isSelected'
                     :is-disabled='isDisabled'
                     :display-text='displayText'
