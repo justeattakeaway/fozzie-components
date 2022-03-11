@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-filter-pill",
   "description": "Fozzie Filter Pill - An interactive component for filter toggles.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "dist/f-filter-pill.umd.min.js",
   "files": [
     "dist",
