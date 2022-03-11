@@ -170,32 +170,4 @@ $countrySelector-text-bg-hover : $color-container-subtle;
         text-decoration: none;
     }
 }
-
-// .c-countrySelector-link {
-//     display: block;
-//     text-decoration: none;
-//     color: $countrySelector-text-color;
-//     @include font-size(body-l);
-//     padding: spacing(c) spacing(e);
-//     width: 100%;
-// }
-//     padding: 0;
-//     white-space: nowrap;
-//     margin-bottom: 0;
-
-//     &:hover {
-//         background: $countrySelector-text-bg-hover;
-//     }
-// }
-
-// .c-countrySelector-link {
-//     float: center;
-//      @include media('>mid') {
-//     margin-left: 56px;
-//     padding: spacing(c) spacing(d) spacing(c) 0px;
-//     text-decoration: none;
-//     color: $countrySelector-text-color;
-//     @include font-size('body-l');
-//     }
-// }
 </style>

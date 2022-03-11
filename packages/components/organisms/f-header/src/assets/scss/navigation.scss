@@ -201,7 +201,7 @@ $nav-toggleIcon-space              : 5px;
         display: flex;
         float: center;
         margin-left: 56px;
-        padding: spacing(c) spacing(d) spacing(c) 0px;
+        padding: spacing(c) spacing(d) spacing(c) 0;
         color: $nav-text-color;
         @include font-size($nav-text-size);
         font-weight: 300;
@@ -219,10 +219,7 @@ $nav-toggleIcon-space              : 5px;
 .c-nav-list-item--horizontallyAlignedAboveMid {
     @include media('>mid') {
         float: left;
-        padding-top: 28px;
-        padding-bottom: 28px;
-        padding-left: 16px;
-        padding-right: 16px;
+        padding: 28px 16px;
     }
 }
 
@@ -251,12 +248,11 @@ $nav-toggleIcon-space              : 5px;
         display: flex;
         float: center;
         margin-left: 56px;
-        padding: spacing(c) spacing(d) spacing(c) 0px;
+        padding: spacing(c) spacing(d) spacing(c) 0;
         color: $nav-text-color;
         @include font-size($nav-text-size);
         font-weight: 300;
     }
-    
     &:hover {
         text-decoration: none;
     }
@@ -271,12 +267,6 @@ $nav-toggleIcon-space              : 5px;
         }
     }
 }
-
-// .c-nav-list-text {
-//     @include media('<=mid') {
-//         display: block;
-//     }
-// }
 
 .has-sublist {
     // ensures the dropdown/popover is relative to the hover element, on wider views

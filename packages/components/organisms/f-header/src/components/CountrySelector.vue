@@ -111,7 +111,7 @@ export default {
 .country-selector-text {
 
     @include media('>mid') {
-        display:none
+        display: none;
     }
 }
 </style>
