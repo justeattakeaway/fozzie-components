@@ -4,8 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest – to be added to the next release
+v3.8.1
 ------------------------------
+*March 11, 2022*
+
+### Added
+- `data-test-id` to the cookie banner title for testing.
+- `f-cookie-banner-selectors.js` file and selectors for UI element assertions in tests.
+
 *February 23, 2022*
 
 ### Changed
