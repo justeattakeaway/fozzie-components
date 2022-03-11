@@ -160,7 +160,6 @@ $filter-pill-ease: ease-in-out;
     width: 0;
     min-width: 0;
     transform: translate3d(0, 0, 0) scale(0) rotate(-45deg);
-    will-change: transform, opacity, width, min-width, margin-right;
 
     @media (prefers-reduced-motion: no-preference) {
         transition: transform $filter-pill-transition-duration $filter-pill-ease,

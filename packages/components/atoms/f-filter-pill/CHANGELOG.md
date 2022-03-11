@@ -8,7 +8,7 @@ v0.3.0
 *March 10, 2022*
 
 ### Added
-- Animation
+- Animation on hover/select/unselect
 
 ### Changed
 - Renamed SCSS variables
