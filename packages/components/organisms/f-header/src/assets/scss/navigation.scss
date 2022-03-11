@@ -145,17 +145,13 @@ $nav-toggleIcon-space              : 5px;
     width: $countrySelector-flag-width;
     display: flex;
     float: left;
-    margin-top: 12px;
-    margin-right: 16px;
-    margin-left: 16px;
-
+    margin: spacing(c) spacing(d);
 }
 
 .c-nav-list-icon--feature-flag {
     height: $countrySelector-flag-height;
     width: $countrySelector-flag-width;
-    margin-right: 16px;
-    margin-left: 16px;
+    margin: 0 spacing(d);
 }
 
 .c-nav-popoverList--twoColumns {
