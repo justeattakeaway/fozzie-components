@@ -97,7 +97,6 @@ export default {
         font-family: $font-family-base;
         font-weight: 300;
         height: auto;
-        @include font-size('body-1');
         text-decoration: none;
         border-bottom: 1px solid $color-border-default;
     }
