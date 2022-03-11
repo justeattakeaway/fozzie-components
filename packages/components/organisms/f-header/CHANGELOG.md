@@ -4,8 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest – to be added to the next release
+v9.7.0
 ------------------------------
+*March 11, 2022*
+
+### Changed
+- Updated component to match latest designs
+
+
 *February 23, 2022*
 
 ### Changed
