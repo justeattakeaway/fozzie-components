@@ -9,8 +9,7 @@ v9.7.0
 *March 11, 2022*
 
 ### Changed
-- Updated component to match latest designs
-
+- component to match latest designs
 
 *February 23, 2022*
 

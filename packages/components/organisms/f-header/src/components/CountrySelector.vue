@@ -16,7 +16,7 @@
         <button
             ref="countrySelectorToggle"
             type="button"
-            data-test-id="action-button-component"
+            data-test-id="country-selector-action-button"
             :tabindex="tabindex"
             :class="[
                 $style['c-nav-list-link'],
@@ -109,7 +109,6 @@ export default {
 @import '../assets/scss/navigation.scss';
 
 .country-selector-text {
-
     @include media('>mid') {
         display: none;
     }

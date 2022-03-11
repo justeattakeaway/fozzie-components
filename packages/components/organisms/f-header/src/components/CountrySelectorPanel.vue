@@ -18,7 +18,9 @@
                     <arrow-icon :class="$style['c-countrySelector-goBackIcon']" />
                 </f-button>
 
-                <h3 id="selectYourCountry">
+                <h3
+                    id="selectYourCountry"
+                    :class="$style['c-countrySelector-title']">
                     {{ copy.selectYourCountryText }}
                 </h3>
             </header>
@@ -120,6 +122,13 @@ export default {
 $countrySelector-text-color    : $color-content-default;
 $countrySelector-text-bg-hover : $color-container-subtle;
 
+.c-countrySelector-title {
+    @include media('<=mid'){
+        padding-top: spacing(d);
+        padding-bottom: spacing(a);
+    }
+}
+
 .c-countrySelector {
     @include media('>mid') {
         padding: spacing(e) 0;
@@ -148,6 +157,7 @@ $countrySelector-text-bg-hover : $color-container-subtle;
     }
 
     .c-countrySelector-header-button {
+        margin-top: spacing(b);
         margin-left: spacing(b);
         @include media('>mid') {
             display: none;
@@ -157,8 +167,6 @@ $countrySelector-text-bg-hover : $color-container-subtle;
             transform: rotate(180deg);
             width: 10px;
             display: block;
-            margin-left: auto;
-            margin-right: auto;
         }
     }
 }
