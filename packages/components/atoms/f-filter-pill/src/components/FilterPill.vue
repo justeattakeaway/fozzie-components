@@ -12,6 +12,7 @@
             class="is-visuallyHidden"
             :class="$style['c-filterPill-checkbox']"
             data-test-id="filter-pill-input"
+            :checked="isToggleSelected"
             :tabindex="0"
             :disabled="isToggleDisabled"
             @change="toggleFilter">
