@@ -23,6 +23,7 @@
                     data-test-id="cookieBannerContent">
                     <h2
                         id="cookieConsentTitle"
+                        data-test-id="cookieConsentTitle"
                         ref="cookieBannerHeading"
                         tabindex="0"
                         :class="$style['c-cookieBanner-title']"
