@@ -10,7 +10,7 @@
         <flag-icon
             data-test-id="current-flag-icon"
             :country-code="copy.currentCountryKey"
-            :class="$style['c-nav-icon-flag-feature']" />
+            :class="$style['c-nav-icon-current-flag']" />
         <button
             ref="countrySelectorToggle"
             type="button"
