@@ -51,7 +51,9 @@
                 :class="$style['c-imageTile-textContainer']"
                 :aria-hidden="isLink">
                 <tick-icon :class="$style['c-imageTile-icon']" />
-                <span :class="$style['c-imageTile-text']">
+                <span
+                    :class="$style['c-imageTile-text']"
+                    data-test-id="image-tile-text">
                     {{ displayText }}
                 </span>
             </span>
@@ -183,8 +185,8 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
 }
 
 @mixin image-tile-focus() {
-    outline: 2px solid $color-focus;
     border-radius: $radius-rounded-b;
+    box-shadow: 0 0 0 2px $color-focus;
 }
 
 .c-imageTile {
