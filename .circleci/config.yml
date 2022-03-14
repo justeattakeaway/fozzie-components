@@ -32,7 +32,7 @@ commands:
             }
 
             echo 'Checking changes'
-            changes=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig' || true; }`
+            changes=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig|services/f-development-context' || true; }`
             echo 'Changes detected:'
             echo $changes
 
@@ -367,7 +367,7 @@ executors:
     docker:
       # specify the version you desire here
       - image: circleci/node:14.18.1-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
-    
+
     resource_class: large
 
 jobs:
