@@ -138,7 +138,7 @@ export default {
     margin-top: spacing(d);
     margin-bottom: spacing(d);
     text-transform: uppercase;
-    font-weight: 300;
+    font-weight: $font-weight-regular;
     overflow: hidden;
 
     > span {

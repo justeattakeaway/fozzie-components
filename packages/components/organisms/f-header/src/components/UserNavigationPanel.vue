@@ -8,7 +8,8 @@
             data-test-id="nav-links">
             <a
                 :class="[
-                    $style['c-nav-list-link'], $style['c-nav-list-link-with-border'], $style['list-link']]"
+                    $style['c-nav-list-link'],
+                    $style['list-link']]"
                 :tabindex="tabIndex"
                 :href="link.url"
                 :data-trak='`{
@@ -90,22 +91,21 @@ export default {
 @import '../assets/scss/navigation.scss';
 
 .list-link {
+    border-bottom: 1px solid $color-border-default;
+    font-weight: $font-weight-regular;
+
     @include media('>mid') {
         display: block;
         padding: spacing(c) spacing(d);
         margin: 0;
-        font-family: $font-family-base;
-        font-weight: 300;
         height: auto;
         text-decoration: none;
-        border-bottom: 1px solid $color-border-default;
     }
 
     &:hover,
     &:focus {
         font-weight: $font-weight-bold;
         text-decoration: none;
-        color: $color-content-subdued;
     }
 }
 </style>

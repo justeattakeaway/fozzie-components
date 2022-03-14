@@ -8,9 +8,7 @@
             :href="href"
             :class="[
                 $style['c-nav-list-link'],
-                { [$style['c-nav-list-link--country-selector']]: isCountrySelectorPanel & !isBelowMid },
                 { [$style['c-nav-list-link--alt']]: isAltColour },
-                { [$style['c-nav-list-link-with-border']]: hasBorderBottom & isBelowMid },
                 { [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent' }
             ]">
 
@@ -61,21 +59,6 @@ export default {
         backgroundTheme: {
             type: String,
             default: 'white'
-        },
-
-        hasBorderBottom: {
-            type: Boolean,
-            default: true
-        },
-
-        isBelowMid: {
-            type: Boolean,
-            default: true
-        },
-
-        isCountrySelectorPanel: {
-            type: Boolean,
-            default: false
         }
     }
 };

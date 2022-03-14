@@ -86,8 +86,8 @@
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
                         :tabindex="tabIndex"
-                        :is-below-mid="isBelowMid"
                         :text="customNavLink.text"
+                        :class="$style['c-nav-list-link-withBorder']"
                         :href="customNavLink.url"
                         :data-trak="customNavLink.gtm && analyticsObjects.navigation.clickHeaderLink({ ...customNavLink.gtm })"
                         :is-alt-colour="isAltColour"
@@ -98,9 +98,9 @@
                     v-if="showOffersLink"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
-                        :is-below-mid="isBelowMid"
                         :text="copy.offers.text"
                         :tabindex="tabIndex"
+                        :class="$style['c-nav-list-link-withBorder']"
                         :href="copy.offers.url"
                         :data-trak="analyticsObjects.navigation.offers.clickLink"
                         :is-alt-colour="isAltColour"
@@ -121,9 +121,9 @@
                     v-if="showDeliveryEnquiry"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
-                        :is-below-mid="isBelowMid"
                         :text="copy.deliveryEnquiry.text"
                         :tabindex="tabIndex"
+                        :class="$style['c-nav-list-link-withBorder']"
                         :href="copy.deliveryEnquiry.url"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
                             label: copy.deliveryEnquiry.gtm
@@ -161,8 +161,8 @@
                         :aria-haspopup="isBelowMid ? false : true"
                         :aria-label="copy.userMenu.buttonLabel(userInfo.friendlyName)"
                         :text="userInfo.friendlyName"
+                        :class="$style['c-nav-list-link-withBorder']"
                         :is-alt-colour="isAltColour"
-                        :is-below-mid="isBelowMid"
                         :background-theme="headerBackgroundTheme"
                         :sub-text=" isBelowMid ? userInfo.email : null"
                         @click.prevent="toggleUserMenu"
@@ -199,8 +199,8 @@
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
                         :text="copy.accountLogin.text"
+                        :class="$style['c-nav-list-link-withBorder']"
                         :tabindex="tabIndex"
-                        :is-below-mid="isBelowMid"
                         :href="returnLoginUrl"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
                             label: copy.accountLogin.gtm
@@ -217,7 +217,7 @@
                     <nav-link
                         :text="copy.help.text"
                         :tabindex="tabIndex"
-                        :is-below-mid="isBelowMid"
+                        :class="$style['c-nav-list-link-withBorder']"
                         :href="copy.help.url"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
                             label: copy.help.gtm
@@ -234,6 +234,7 @@
                         v-if="userInfo && isBelowMid && showLoginInfo"
                         :text="copy.accountLogout.text"
                         :tabindex="tabIndex"
+                        :class="$style['c-nav-list-link-withBorder']"
                         :href="copy.accountLogout.url"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
                             label: copy.accountLogout.gtm

@@ -8,11 +8,9 @@
 */
 
 $nav-text-size                     : 'body-l';
-$nav-text-size--narrow             : 'body-l';
 $nav-text-weight                   : $font-weight-bold;
 $nav-text-color                    : $color-content-link;
 $nav-text-color--hover             : darken($color-content-link, $color-hover-01);
-$nav-text-color--narrow            : $color-interactive-primary;
 $nav-text-color--transparent       : $color-content-link-inverse;
 $nav-text-subFont                  : $font-family-base;
 
@@ -148,9 +146,15 @@ $nav-toggleIcon-space              : 5px;
     margin: spacing(c) spacing(d);
 }
 
-.c-nav-list-icon--feature-flag {
+.c-nav-icon-flag-feature {
     height: $countrySelector-flag-height;
     width: $countrySelector-flag-width;
+
+    @include media('<=mid') {
+        display: flex;
+        float: left;
+        margin: spacing(c) spacing(d);
+    }
 }
 
 .c-nav-popoverList--twoColumns {
@@ -191,15 +195,14 @@ $nav-toggleIcon-space              : 5px;
 .c-nav-list-link {
     text-decoration: none;
     font-family: $nav-text-subFont;
+    color: $nav-text-color;
+    font-weight: $font-weight-regular;
+    font-size: $nav-text-size;
 
     @include media('<=mid') {
         display: flex;
-        float: center;
         margin-left: spacing(h);
         padding: spacing(c) spacing(d) spacing(c) 0;
-        color: $nav-text-color;
-        @include font-size($nav-text-size);
-        font-weight: 300;
     }
 
     @include media('>mid') {
@@ -218,8 +221,10 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
-.c-nav-list-link-with-border {
-    border-bottom: 1px solid $color-border-default;
+.c-nav-list-link-withBorder a{
+    @include media('<=mid'){
+        border-bottom: 1px solid $color-border-default;
+    }
 }
 
 .c-nav-list-link--alt {
@@ -228,17 +233,17 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
-.c-nav-list-link--country-selector {
+.c-nav-list-link--countrySelector a {
     @include media('>mid') {
         text-decoration: none;
         display: flex;
         float: center;
         margin-left: spacing(h);
         padding: spacing(c) spacing(d) spacing(c) 0;
-        color: $nav-text-color;
         @include font-size($nav-text-size);
-        font-weight: 300;
-    }
+        font-weight: $font-weight-regular;    }
+
+    
     &:hover {
         text-decoration: none;
     }

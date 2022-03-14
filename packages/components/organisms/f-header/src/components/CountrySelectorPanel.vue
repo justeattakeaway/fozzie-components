@@ -45,10 +45,8 @@
                             label: `${country.gtm}`
                         }"
                         :tabindex="isOpen ? 0 : -1"
-                        :has-border-bottom="false"
-                        :is-below-mid="isBelowMid"
-                        :is-country-selector-panel="true"
                         :text="country.localisedName"
+                        :class="$style['c-nav-list-link--countrySelector']"
                         :href="country.siteUrl">
                         <template #icon>
                             <flag-icon

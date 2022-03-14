@@ -10,9 +10,7 @@
         <flag-icon
             data-test-id="current-flag-icon"
             :country-code="copy.currentCountryKey"
-            :class="[
-                { [$style['c-nav-list-icon--feature-flag']]: !isBelowMid },
-                { [$style['c-nav-list-icon--flag']]: isBelowMid }]" />
+            :class="$style['c-nav-icon-flag-feature']" />
         <button
             ref="countrySelectorToggle"
             type="button"
