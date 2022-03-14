@@ -165,8 +165,7 @@
                         :is-alt-colour="isAltColour"
                         :background-theme="headerBackgroundTheme"
                         :sub-text=" isBelowMid ? userInfo.email : null"
-                        @click.prevent="toggleUserMenu"
-                        @keydown.space.prevent="toggleUserMenu">
+                        @click.prevent="toggleUserMenu">
                         <template #icon>
                             <profile-icon
                                 :class="

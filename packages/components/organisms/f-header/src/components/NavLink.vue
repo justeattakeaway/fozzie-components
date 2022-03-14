@@ -1,7 +1,6 @@
 <template>
     <div>
-        <slot
-            name="icon" />
+        <slot name="icon" />
         <a
             v-bind="$attrs"
             :data-trak="JSON.stringify(dataTrak)"

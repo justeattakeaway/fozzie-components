@@ -51,8 +51,7 @@
                         <template #icon>
                             <flag-icon
                                 :country-code="country.flagKey"
-                                :class="[$style['c-nav-list-icon--flag'],
-                                         $style['c-nav-icon']]" />
+                                :class="[$style['c-nav-list-icon--flag']]" />
                         </template>
                     </nav-link>
                 </li>
@@ -123,13 +122,15 @@ $countrySelector-text-bg-hover : $color-container-subtle;
 .c-countrySelector-title {
     @include media('<=mid') {
         padding-top: spacing(d);
-        padding-bottom: spacing(a);
+        padding-bottom: spacing(c);
     }
 }
 
 .c-countrySelector {
     @include media('>mid') {
-        padding: spacing(e) 0;
+        padding-top: spacing(e);
+        padding-bottom: spacing(c);
+        width: 416px;
     }
 }
 
@@ -169,7 +170,6 @@ $countrySelector-text-bg-hover : $color-container-subtle;
 }
 
 .c-countrySelector-country {
-    white-space: nowrap;
     &:hover {
         background: $countrySelector-text-bg-hover;
         text-decoration: none;
