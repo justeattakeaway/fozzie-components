@@ -12,6 +12,7 @@ export const FilterPillComponent = (args, { argTypes }) => ({
     template: `<filter-pill
                     :input-id='inputId'
                     :toggle-value='toggleValue'
+                    :href='href'
                     :is-selected='isSelected'
                     :is-disabled='isDisabled'
                     :display-text='displayText'
@@ -29,6 +30,11 @@ FilterPillComponent.argTypes = {
         control: { type: 'text' },
         description: 'Filter pill toggle value',
         defaultValue: 'low_delivery_fee'
+    },
+    href: {
+        control: { type: 'text' },
+        description: 'Filter pill href value',
+        defaultValue: '/area/cf10-cardiff/?refine=low_delivery_fee'
     },
     isSelected: {
         control: { type: 'boolean' },

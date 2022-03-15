@@ -8,7 +8,7 @@
         data-test-id="filter-item">
         <a
             :class="$style['c-filterPill-link']"
-            :href="toggleValue"
+            :href="href"
             tabindex="-1"
             aria-hidden="true"
             data-test-id="filter-pill-link">
@@ -60,6 +60,10 @@ export default {
             default: null
         },
         toggleValue: {
+            type: String,
+            default: null
+        },
+        href: {
             type: String,
             default: null
         },
