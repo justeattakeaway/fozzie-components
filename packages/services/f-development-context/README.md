@@ -5,16 +5,16 @@
 <hr>
 
 ## Contexts Added
-- **$log** - The standard way to provide diagnostic output through `this.$log`
+- **$logger** - The standard way to provide diagnostic output through `this.$logger`
 - **$cookies** - The standard way to interact with cookies through `this.$cookies`
 - **i18n** - The standard way to localise your components using `<i18n>`, `this.i18n` and `$t('message')`
 - **VueX** - The standard way to store state information in components
 - **$gtm** - The standard way to provide GTM access via `this.$gtm` (note: the variable name `gtm` is configurable)
 
-### $log Interface
-- error(message, exception, tags, additionalProperties)
-- warn(message, tags, additionalProperties)
-- info(message, tags, additionalProperties)
+### $logger Interface
+- logError(message, store, additionalProperties)
+- logWarn(message, store, additionalProperties)
+- logInfo(message, store, additionalProperties)
 
 ### $cookies Interface
 - Refer to third party documentation: https://www.npmjs.com/package/cookie-universal
