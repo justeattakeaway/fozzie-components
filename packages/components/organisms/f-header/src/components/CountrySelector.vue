@@ -7,17 +7,13 @@
         ]"
         v-on="isBelowMid ? null : { mouseover: openCountrySelector, mouseleave: (() => closeCountrySelector(false)) }"
         @keyup.esc="closeCountrySelector">
-        <flag-icon
-            data-test-id="current-flag-icon"
-            :country-code="copy.currentCountryKey"
-            :class="$style['c-nav-icon-current-flag']" />
         <button
             ref="countrySelectorToggle"
             type="button"
             data-test-id="action-button-component"
             :tabindex="tabindex"
             :class="[
-                $style['c-nav-list-link'],
+                $style['c-nav-list-link-countrySelector'],
                 $style['c-nav-list-link-countrySelector-withBorderTop'],
                 $style['c-nav-list-btn']
             ]"
@@ -25,6 +21,10 @@
             :aria-haspopup="!isBelowMid"
             :aria-label="copy.changeCurrentCountry"
             @click="toggleCountrySelector">
+            <flag-icon
+                data-test-id="current-flag-icon"
+                :country-code="copy.currentCountryKey"
+                :class="$style['c-nav-icon-current-flag']" />
             <span
                 :class="$style['country-selector-text']">
                 {{ copy.selectYourCountryText }}
@@ -110,6 +110,13 @@ export default {
 .country-selector-text {
     @include media('>mid') {
         display: none;
+    }
+}
+
+.c-nav-list-link-countrySelector {
+    @include media('<=mid') {
+        padding-top: 12px;
+        padding-bottom: 12px;
     }
 }
 </style>

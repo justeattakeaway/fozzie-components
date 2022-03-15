@@ -153,12 +153,6 @@
                     data-test-id="user-info-icon"
                     v-on="isBelowMid ? null : { mouseover: openUserMenu, mouseleave: closeUserMenu }"
                     @keyup.esc="closeUserMenu">
-                    <profile-icon
-                        :class="[
-                            $style['c-nav-icon'],
-                            $style['c-nav-icon--profile'],
-                            { [$style['c-nav-icon--alt']]: isAltColour }
-                        ]" />
                     <button
                         type="button"
                         data-test-id="user-info-link"
@@ -172,6 +166,12 @@
                         ]"
                         @click.prevent="toggleUserMenu"
                         @keydown.space.prevent="toggleUserMenu">
+                        <profile-icon
+                            :class="[
+                                $style['c-nav-icon'],
+                                $style['c-nav-icon-profile'],
+                                { [$style['c-nav-icon--alt']]: isAltColour }
+                            ]" />
                         <span
                             :class="[
                                 $style['c-nav-list-text-sub'],
@@ -737,11 +737,20 @@ export default {
 
 
 .c-nav-icon--delivery,
-.c-nav-icon--offers,
-.c-nav-icon--profile {
+.c-nav-icon--offers {
     @include media('<=mid') {
-        margin-left: 16px;
-        margin-top: 12px;
+        margin-left: spacing(d);
+        margin-top: spacing(c);
+        & path {
+            fill: $nav-icon-color--mobileWhiteBg;
+        }
+    }
+}
+
+.c-nav-icon-profile {
+    @include media('<=mid') {
+        margin-left: spacing(b);
+        margin-right: spacing(d);
         & path {
             fill: $nav-icon-color--mobileWhiteBg;
         }

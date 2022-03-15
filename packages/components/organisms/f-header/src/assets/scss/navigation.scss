@@ -119,6 +119,10 @@ $nav-toggleIcon-space              : 5px;
     &:active {
         text-decoration: none;
 
+        @include media('<=mid') {
+            font-weight: $font-weight-bold;
+        }
+
         @include media('>mid') {
             color: $nav-text-color--hover;
             text-decoration: underline;
@@ -139,6 +143,7 @@ $nav-toggleIcon-space              : 5px;
 
     @include media('<=mid') {
         text-align: left;
+        width: 100%;
     }
 }
 
@@ -154,10 +159,15 @@ $nav-toggleIcon-space              : 5px;
     height: $countrySelector-flag-height;
     width: $countrySelector-flag-width;
 
+    @include media('>mid') {
+        margin-top: 0 !important;
+    }
+
     @include media('<=mid') {
-        display: flex;
+        display: block;
+        margin-left: 16px;
+        margin-right: 16px;
         float: left;
-        margin: spacing(c) spacing(d);
     }
 }
 
