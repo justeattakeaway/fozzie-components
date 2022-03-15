@@ -8,7 +8,7 @@ v0.19.0
 ------------------------------
 *March 15, 2022*
 
-### Updated
+### Changed
 - Wired up the Template save action to the Vuex store save method
 
 
