@@ -9,7 +9,7 @@ v1.9.0
 *March 15, 2022*
 
 ### Changed
-- Updated background color to `$support-brand-01`
+- Updated background color to `$color-support-brand-01`
 
 
 v1.8.0
