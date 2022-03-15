@@ -30,8 +30,7 @@ export default {
 
         href: {
             type: String,
-            required: false,
-            default: null
+            required: true
         },
 
         text: {

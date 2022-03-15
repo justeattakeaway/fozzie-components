@@ -46,7 +46,7 @@
                         }"
                         :tabindex="isOpen ? 0 : -1"
                         :text="country.localisedName"
-                        :class="$style['c-nav-list-link--countrySelector']"
+                        :class="$style['c-countrySelector-country-link']"
                         :href="country.siteUrl">
                         <template #icon>
                             <flag-icon

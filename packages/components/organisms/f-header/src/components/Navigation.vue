@@ -87,7 +87,6 @@
                     <nav-link
                         :tabindex="tabIndex"
                         :text="customNavLink.text"
-                        :class="$style['c-nav-list-link-withBorder']"
                         :href="customNavLink.url"
                         :data-trak="customNavLink.gtm && analyticsObjects.navigation.clickHeaderLink({ ...customNavLink.gtm })"
                         :is-alt-colour="isAltColour"
@@ -100,8 +99,8 @@
                     <nav-link
                         :text="copy.offers.text"
                         :tabindex="tabIndex"
-                        :class="$style['c-nav-list-link-withBorder']"
                         :href="copy.offers.url"
+                        :class="$style['c-nav-list-link-withBorderBottom']"
                         :data-trak="analyticsObjects.navigation.offers.clickLink"
                         :is-alt-colour="isAltColour"
                         :background-theme="headerBackgroundTheme"
@@ -123,7 +122,7 @@
                     <nav-link
                         :text="copy.deliveryEnquiry.text"
                         :tabindex="tabIndex"
-                        :class="$style['c-nav-list-link-withBorder']"
+                        :class="$style['c-nav-list-link-withBorderBottom']"
                         :href="copy.deliveryEnquiry.url"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
                             label: copy.deliveryEnquiry.gtm
@@ -168,9 +167,8 @@
                         :aria-haspopup="isBelowMid ? false : true"
                         :aria-label="copy.userMenu.buttonLabel(userInfo.friendlyName)"
                         :class="[
-                            $style['c-nav-list-link'],
                             $style['c-nav-list-btn'],
-                            $style['c-nav-list-link-withBorder']
+                            $style['c-nav-list-text']
                         ]"
                         @click.prevent="toggleUserMenu"
                         @keydown.space.prevent="toggleUserMenu">
@@ -190,6 +188,7 @@
                             {{ userInfo.email }}
                         </span>
                     </button>
+                    <span :class="$style['with-border']" />
 
                     <v-popover :class="$style['c-nav-popover']">
                         <user-navigation-panel
@@ -209,7 +208,7 @@
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
                         :text="copy.accountLogin.text"
-                        :class="$style['c-nav-list-link-withBorder']"
+                        :class="$style['c-nav-list-link-withBorderTop']"
                         :tabindex="tabIndex"
                         :href="returnLoginUrl"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
@@ -227,7 +226,7 @@
                     <nav-link
                         :text="copy.help.text"
                         :tabindex="tabIndex"
-                        :class="$style['c-nav-list-link-withBorder']"
+                        :class="$style['c-nav-list-link-withBorderTop']"
                         :href="copy.help.url"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
                             label: copy.help.gtm
@@ -244,7 +243,9 @@
                         v-if="userInfo && isBelowMid && showLoginInfo"
                         :text="copy.accountLogout.text"
                         :tabindex="tabIndex"
-                        :class="$style['c-nav-list-link-withBorder']"
+                        :class="[
+                            $style['c-nav-list-link-withBorderTop'],
+                            $style['c-nav-list-link-withBorderBottom']]"
                         :href="copy.accountLogout.url"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
                             label: copy.accountLogout.gtm
@@ -699,6 +700,15 @@ export default {
     }
 }
 
+.c-nav-list-text {
+    font-weight: $nav-text-weight;
+    @include media('<=mid') {
+        margin-left: spacing(b);
+        padding: spacing(c) spacing(d) spacing(c) 0;
+        font-weight: $font-weight-regular;
+    }
+}
+
 // Icons, such as the profile icon
 .c-nav-icon {
     float: left;
@@ -725,7 +735,6 @@ export default {
         }
     }
 }
-
 
 
 .c-nav-icon--delivery,

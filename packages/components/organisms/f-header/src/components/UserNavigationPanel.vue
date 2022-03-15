@@ -1,7 +1,8 @@
 <template>
     <ul
         :aria-label="copy.navTitle"
-        :class="$style['c-nav-popoverList']">
+        :class="[$style['c-nav-popoverList'],
+                 $style['with-border-top']]">
         <li
             v-for="(link, index) in copy.navLinks"
             :key="index"
@@ -91,7 +92,7 @@ export default {
 @import '../assets/scss/navigation.scss';
 
 .list-link {
-    border-bottom: 1px solid $color-border-default;
+    border-top: 1px solid $color-border-default;
     font-weight: $font-weight-regular;
 
     @include media('>mid') {

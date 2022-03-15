@@ -135,7 +135,11 @@ $nav-toggleIcon-space              : 5px;
     border: 0;
     font-size: 1rem;
     margin: 0;
-    padding: 0; 
+    padding: 0;
+
+    @include media('<=mid') {
+        text-align: left;
+    }
 }
 
 .c-nav-list-icon--flag {
@@ -219,11 +223,18 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
-.c-nav-list-link-withBorder a{
+.c-nav-list-link-withBorderTop a {
+    @include media('<=mid'){
+        border-top: 1px solid $color-border-default;
+    }
+}
+
+.c-nav-list-link-withBorderBottom a {
     @include media('<=mid'){
         border-bottom: 1px solid $color-border-default;
     }
 }
+
 
 .c-nav-list-link--alt {
     @include media('>mid') {
@@ -231,7 +242,7 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
-.c-nav-list-link--countrySelector a {
+.c-countrySelector-country-link a {
     @include media('>mid') {
         text-decoration: none;
         display: flex;
