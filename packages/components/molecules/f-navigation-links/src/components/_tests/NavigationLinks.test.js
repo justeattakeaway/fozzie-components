@@ -147,6 +147,14 @@ describe('NavigationLinks', () => {
         expect(link.exists()).toBeFalsy();
     });
 
+    it('should contain `aria-label` with content `navigation`', () => {
+        const wrapper = shallowMount(NavigationLinks);
+
+        const links = wrapper.find('[data-test-id="navigationLinks"]');
+
+        expect(links.attributes('aria-label')).toBe('navigation');
+    });
+
     describe('computed ::', () => {
         describe('filterLinks ::', () => {
             it('should filter props.links if link does not have `to` or `href` property', () => {
