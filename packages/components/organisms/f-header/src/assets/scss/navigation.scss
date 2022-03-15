@@ -142,8 +142,8 @@ $nav-toggleIcon-space              : 5px;
     padding: 0;
 
     @include media('<=mid') {
-        text-align: left;
         width: 100%;
+        text-align: left;
     }
 }
 
@@ -159,14 +159,8 @@ $nav-toggleIcon-space              : 5px;
     height: $countrySelector-flag-height;
     width: $countrySelector-flag-width;
 
-    @include media('>mid') {
-        margin-top: 0 !important;
-    }
-
     @include media('<=mid') {
-        display: block;
-        margin-left: 16px;
-        margin-right: 16px;
+        margin: 0 spacing(d);
         float: left;
     }
 }

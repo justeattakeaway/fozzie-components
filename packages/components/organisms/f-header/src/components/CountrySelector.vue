@@ -14,7 +14,6 @@
             :tabindex="tabindex"
             :class="[
                 $style['c-nav-list-link-countrySelector'],
-                $style['c-nav-list-link-countrySelector-withBorderTop'],
                 $style['c-nav-list-btn']
             ]"
             :aria-expanded="(!isBelowMid && isCountrySelectorOpen) ? 'true' : 'false'"
@@ -30,6 +29,7 @@
                 {{ copy.selectYourCountryText }}
             </span>
         </button>
+
         <v-popover
             data-test-id="countrySelector-popover"
             :aria-hidden="!isCountrySelectorOpen"
