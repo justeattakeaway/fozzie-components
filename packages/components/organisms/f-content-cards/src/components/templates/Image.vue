@@ -47,7 +47,7 @@ $image-borderRadius: $radius-rounded-c;
 }
 
 .c-content-cardImage {
-    width:100%;
+    width: 100%;
     border-radius: $image-borderRadius;
 
     @include media('<=narrow') {
