@@ -154,31 +154,42 @@
                     data-test-id="user-info-icon"
                     v-on="isBelowMid ? null : { mouseover: openUserMenu, mouseleave: closeUserMenu }"
                     @keyup.esc="closeUserMenu">
-                    <nav-link
+                    <profile-icon
+                        :class="[
+                            $style['c-nav-icon'],
+                            $style['c-nav-icon--profile'],
+                            { [$style['c-nav-icon--alt']]: isAltColour }
+                        ]" />
+                    <button
+                        type="button"
                         data-test-id="user-info-link"
                         :tabindex="isBelowMid ? -1 : 0"
                         :aria-expanded="!isBelowMid && userMenuIsOpen ? 'true' : 'false'"
                         :aria-haspopup="isBelowMid ? false : true"
                         :aria-label="copy.userMenu.buttonLabel(userInfo.friendlyName)"
-                        :text="userInfo.friendlyName"
-                        :class="$style['c-nav-list-link-withBorder']"
-                        :is-alt-colour="isAltColour"
-                        :background-theme="headerBackgroundTheme"
-                        :sub-text=" isBelowMid ? userInfo.email : null"
-                        @click.prevent="toggleUserMenu">
-                        <template #icon>
-                            <profile-icon
-                                :class="
-                                    [
-                                        $style['c-nav-icon'],
-                                        $style['c-nav-icon--profile'],
-                                        {
-                                            [$style['c-nav-icon--alt']]:
-                                                isAltColour
-                                        }
-                                    ]" />
-                        </template>
-                    </nav-link>
+                        :class="[
+                            $style['c-nav-list-link'],
+                            $style['c-nav-list-btn'],
+                            $style['c-nav-list-link-withBorder']
+                        ]"
+                        @click.prevent="toggleUserMenu"
+                        @keydown.space.prevent="toggleUserMenu">
+                        <span
+                            :class="[
+                                $style['c-nav-list-text-sub'],
+                                { [$style['c-nav-list-link--alt']]: isAltColour },
+                                { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
+                            ]">
+                            {{ userInfo.friendlyName }}
+                        </span>
+                        <span
+                            :class="[
+                                $style['c-nav-list-text-sub'],
+                                $style['u-showBelowMid']
+                            ]">
+                            {{ userInfo.email }}
+                        </span>
+                    </button>
 
                     <v-popover :class="$style['c-nav-popover']">
                         <user-navigation-panel
@@ -698,6 +709,19 @@ export default {
     @include media('>mid') {
         & path {
             fill: $nav-icon-color;
+        }
+    }
+}
+
+.c-nav-list-text-sub {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 300px;
+    &.u-showBelowMid {
+        @include media('>mid') {
+            display: none !important;
         }
     }
 }

@@ -135,7 +135,7 @@ $nav-toggleIcon-space              : 5px;
     border: 0;
     font-size: 1rem;
     margin: 0;
-    padding: 0;
+    padding: 0; 
 }
 
 .c-nav-list-icon--flag {
@@ -212,8 +212,6 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
-// TODO: MAKE THIS NOT USE FLOATS
-// global modifier for list items horizontally aligned
 .c-nav-list-item--horizontallyAlignedAboveMid {
     @include media('>mid') {
         float: left;
@@ -241,8 +239,8 @@ $nav-toggleIcon-space              : 5px;
         margin-left: spacing(h);
         padding: spacing(c) spacing(d) spacing(c) 0;
         @include font-size($nav-text-size);
-        font-weight: $font-weight-regular;    }
-
+        font-weight: $font-weight-regular;    
+    }
     
     &:hover {
         text-decoration: none;
