@@ -27,6 +27,8 @@ $nav-popover-transition-duration   : 200ms;
 
 $countrySelector-flag-width        : 21px;
 $countrySelector-flag-height       : 21px;
+$countrySelector-arrowIcon-height  : 10px;
+$countrySelector-arrowIcon-width   : 10px;
 
 $nav-featureLinkIcon-width         : 24px;
 $nav-featureLinkIcon-height        : 24px;
@@ -223,7 +225,8 @@ $nav-toggleIcon-space              : 5px;
 .c-nav-list-item--horizontallyAlignedAboveMid {
     @include media('>mid') {
         float: left;
-        padding: 28px spacing(d);
+        padding: 28px 16px;
+
     }
 }
 

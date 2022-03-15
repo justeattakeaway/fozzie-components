@@ -115,8 +115,7 @@ export default {
 
 .c-nav-list-link-countrySelector {
     @include media('<=mid') {
-        padding-top: 12px;
-        padding-bottom: 12px;
+        padding: spacing(c) 0;
     }
 }
 </style>

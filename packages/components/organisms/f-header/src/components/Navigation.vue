@@ -169,7 +169,7 @@
                         <profile-icon
                             :class="[
                                 $style['c-nav-icon'],
-                                $style['c-nav-icon-profile'],
+                                $style['c-nav-icon--profile'],
                                 { [$style['c-nav-icon--alt']]: isAltColour }
                             ]" />
                         <span
@@ -188,7 +188,6 @@
                             {{ userInfo.email }}
                         </span>
                     </button>
-                    <span :class="$style['with-border']" />
 
                     <v-popover :class="$style['c-nav-popover']">
                         <user-navigation-panel
@@ -667,10 +666,23 @@ export default {
     display: none;
     @include media('>mid') {
         display: block;
-        height: 80px;
+        height: $header-height;
     }
     &.is-visible {
         display: block;
+    }
+}
+
+.c-nav-list-text-sub {
+    display: block;
+    overflow: hidden;
+    // text-overflow: ellipsis;
+    // white-space: nowrap;
+    // max-width: 300px;
+    &.u-showBelowMid {
+        @include media('>mid') {
+            display: none !important;
+        }
     }
 }
 
@@ -681,7 +693,6 @@ export default {
     & path {
             fill: $nav-icon-color;
         }
-
 
     @include media('<=mid') {
         position: absolute;
@@ -702,8 +713,7 @@ export default {
 .c-nav-list-text {
     font-weight: $nav-text-weight;
     @include media('<=mid') {
-        margin-left: spacing(b);
-        padding: spacing(c) spacing(d) spacing(c) 0;
+        padding: spacing(c) spacing(a);
         font-weight: $font-weight-regular;
     }
 }
@@ -722,20 +732,6 @@ export default {
     }
 }
 
-.c-nav-list-text-sub {
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 300px;
-    &.u-showBelowMid {
-        @include media('>mid') {
-            display: none !important;
-        }
-    }
-}
-
-
 .c-nav-icon--delivery,
 .c-nav-icon--offers {
     @include media('<=mid') {
@@ -747,9 +743,9 @@ export default {
     }
 }
 
-.c-nav-icon-profile {
+.c-nav-icon--profile {
     @include media('<=mid') {
-        margin-left: spacing(b);
+        margin-left: spacing(c);
         margin-right: spacing(d);
         & path {
             fill: $nav-icon-color--mobileWhiteBg;

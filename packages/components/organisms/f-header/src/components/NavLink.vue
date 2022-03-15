@@ -12,8 +12,6 @@
             ]">
 
             {{ text }}
-            <br>
-            {{ subText }}
         </a>
     </div>
 </template>
@@ -36,17 +34,6 @@ export default {
         text: {
             type: String,
             required: true
-        },
-
-        subText: {
-            type: String,
-            required: false,
-            default: null
-        },
-
-        leftPaddingBelowMid: {
-            type: Boolean,
-            default: false
         },
 
         isAltColour: {

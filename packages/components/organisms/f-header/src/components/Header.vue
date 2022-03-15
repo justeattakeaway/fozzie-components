@@ -264,13 +264,13 @@ html:global(.is-navInView) {
         background-color: $color-support-brand-01;
 
         @include media('>mid') {
-            min-height: 80px;
+            min-height: $header-height;
         }
     }
 
     .c-header--tallBelowMid {
         @include media('<=mid') {
-            min-height: 80px;
+            min-height: $header-height;
         }
     }
 

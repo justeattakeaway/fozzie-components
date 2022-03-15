@@ -164,7 +164,8 @@ $countrySelector-text-bg-hover : $color-container-subtle;
 
         svg.c-countrySelector-goBackIcon {
             transform: rotate(180deg);
-            width: 10px;
+            width: $countrySelector-arrowIcon-width;
+            height: $countrySelector-arrowIcon-height;
         }
     }
 }
