@@ -52,7 +52,6 @@ describe('FilterPill', () => {
                 });
 
                 const link = wrapper.find('[data-test-id="filter-pill-link"]');
-                console.log(link);
 
                 // Assert
                 expect(link.attributes('href')).toBe(propsData.href);
