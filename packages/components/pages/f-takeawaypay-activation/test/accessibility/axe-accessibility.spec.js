@@ -1,4 +1,4 @@
-const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
+const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
 
 const TakeawaypayActivation = require('../../test-utils/component-objects/f-takeawaypayActivation.component');
 const { AUTHENTICATION_JWT } = require('../../test-utils/constants/f-takeawaypayActivation');
@@ -15,7 +15,7 @@ describe('Accessibility tests', () => {
         takeawayPayComponent.load();
 
         // Act
-        const axeResults = getAccessibilityTestResults('f-takeawaypayActivation-unauthenticated');
+        const axeResults = getAxeResults('f-takeawaypayActivation-unauthenticated');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
@@ -32,7 +32,7 @@ describe('Accessibility tests', () => {
         takeawayPayComponent.load('loggedIn');
 
         // Act
-        const axeResults = getAccessibilityTestResults('f-takeawaypayActivation-authenticated');
+        const axeResults = getAxeResults('f-takeawaypayActivation-authenticated');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
@@ -51,7 +51,7 @@ describe('Accessibility tests', () => {
         takeawayPayComponent.waitForActivationSuccessComponent();
 
         // Act
-        const axeResults = getAccessibilityTestResults('f-takeawaypayActivation-successfulActivation');
+        const axeResults = getAxeResults('f-takeawaypayActivation-successfulActivation');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
@@ -68,7 +68,7 @@ describe('Accessibility tests', () => {
         takeawayPayComponent.load('error');
 
         // Act
-        const axeResults = getAccessibilityTestResults('f-takeawaypayActivation-error');
+        const axeResults = getAxeResults('f-takeawaypayActivation-error');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

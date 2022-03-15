@@ -1,4 +1,4 @@
-import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
+import { getAxeResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
 
 const Form = require('../../test-utils/component-objects/f-form.component');
 
@@ -11,7 +11,7 @@ describe('Accessibility tests', () => {
 
     it('a11y - should test f-form component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-form');
+        const axeResults = getAxeResults('f-form');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
