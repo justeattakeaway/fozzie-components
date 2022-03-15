@@ -3,13 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.4.0
+------------------------------
+*March 15, 2022*
+
+### Added
+- `a` tag for the SEO reasons
+
 v0.3.1
 ------------------------------
 *March 14, 2022*
 
 ### Added
 - Checked Attribute to Filter Pill
-  
+
 v0.3.0
 ------------------------------
 *March 10, 2022*
