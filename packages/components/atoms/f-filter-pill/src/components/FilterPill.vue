@@ -6,6 +6,16 @@
                 [$style['c-filterPill--disabled']]: isToggleDisabled
             }]"
         data-test-id="filter-item">
+        <a
+            :class="$style['c-filterPill-link']"
+            :href="href"
+            tabindex="-1"
+            aria-hidden="true"
+            data-test-id="filter-pill-link">
+            <span class="is-visuallyHidden">
+                {{ displayText }}
+            </span>
+        </a>
         <input
             :id="`filterPillToggle-${inputId}`"
             type="checkbox"
@@ -50,6 +60,10 @@ export default {
             default: null
         },
         toggleValue: {
+            type: String,
+            default: null
+        },
+        href: {
             type: String,
             default: null
         },
@@ -130,6 +144,10 @@ $filter-pill-ease: ease-in-out;
 
 .c-filterPill--selected {
     box-shadow: 0 0 0 2px $color-focus;
+}
+
+.c-filterPill-link {
+    pointer-events: none;
 }
 
 .c-filterPill-label {
