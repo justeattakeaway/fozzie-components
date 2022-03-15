@@ -41,6 +41,23 @@ describe('FilterPill', () => {
             });
         });
 
+        describe('href :: ', () => {
+            it('should have filter `href` value', () => {
+                // Arrange
+                const propsData = { href: '/area/cf10-cardiff/?refine=low_delivery_fee' };
+
+                // Act
+                const wrapper = shallowMount(FilterPill, {
+                    propsData
+                });
+
+                const link = wrapper.find('[data-test-id="filter-pill-link"]');
+
+                // Assert
+                expect(link.attributes('href')).toBe(propsData.href);
+            });
+        });
+
         describe('isSelected :: ', () => {
             it.each([
                 [true, true],
