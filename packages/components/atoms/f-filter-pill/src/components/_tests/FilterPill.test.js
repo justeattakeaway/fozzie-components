@@ -151,4 +151,50 @@ describe('FilterPill', () => {
             });
         });
     });
+
+    describe('checked :: ', () => {
+        it('should have a true checked state when filter is selected', () => {
+            // Arrange
+            const propsData = { isSelected: true };
+
+            // Act
+            const wrapper = shallowMount(FilterPill, {
+                propsData
+            });
+
+            const { checked } = wrapper.find('input').element;
+
+            // Assert
+            expect(checked).toBe(true);
+        });
+
+        it('should have a false checked state when filter is not selected', () => {
+            // Arrange
+            const propsData = { isSelected: false };
+
+            // Act
+            const wrapper = shallowMount(FilterPill, {
+                propsData
+            });
+
+            const { checked } = wrapper.find('input').element;
+
+            // Assert
+            expect(checked).toBe(false);
+        });
+
+        it('should have a true checked state when filter is clicked', () => {
+            // Arrange & Act
+            const wrapper = shallowMount(FilterPill);
+
+            const inputEl = wrapper.find('input');
+
+            inputEl.trigger('click');
+
+            const { checked } = inputEl.element;
+
+            // Assert
+            expect(checked).toBe(true);
+        });
+    });
 });
