@@ -224,13 +224,13 @@ $nav-toggleIcon-space              : 5px;
 }
 
 .c-nav-list-link-withBorderTop a {
-    @include media('<=mid'){
+    @include media('<=mid') {
         border-top: 1px solid $color-border-default;
     }
 }
 
 .c-nav-list-link-withBorderBottom a {
-    @include media('<=mid'){
+    @include media('<=mid') {
         border-bottom: 1px solid $color-border-default;
     }
 }
@@ -250,9 +250,8 @@ $nav-toggleIcon-space              : 5px;
         margin-left: spacing(h);
         padding: spacing(c) spacing(d) spacing(c) 0;
         @include font-size($nav-text-size);
-        font-weight: $font-weight-regular;    
+        font-weight: $font-weight-regular;
     }
-    
     &:hover {
         text-decoration: none;
     }
