@@ -92,7 +92,6 @@ export default {
 @import '../assets/scss/navigation.scss';
 
 .list-link {
-    border-top: 1px solid $color-border-default;
     font-weight: $font-weight-regular;
 
     @include media('>mid') {
@@ -101,6 +100,11 @@ export default {
         margin: 0;
         height: auto;
         text-decoration: none;
+        border-bottom: 1px solid $color-border-default;
+    }
+
+    @include media('<=mid') {
+        border-top: 1px solid $color-border-default;
     }
 
     &:hover,

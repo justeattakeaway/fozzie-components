@@ -208,7 +208,6 @@
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
                         :text="copy.accountLogin.text"
-                        :class="$style['c-nav-list-link-withBorderTop']"
                         :tabindex="tabIndex"
                         :href="returnLoginUrl"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
@@ -226,7 +225,9 @@
                     <nav-link
                         :text="copy.help.text"
                         :tabindex="tabIndex"
-                        :class="$style['c-nav-list-link-withBorderTop']"
+                        :class="[
+                            $style['c-nav-list-link-withBorderTop'],
+                            $style['c-nav-list-link-withBorderBottom']]"
                         :href="copy.help.url"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
                             label: copy.help.gtm
@@ -243,9 +244,7 @@
                         v-if="userInfo && isBelowMid && showLoginInfo"
                         :text="copy.accountLogout.text"
                         :tabindex="tabIndex"
-                        :class="[
-                            $style['c-nav-list-link-withBorderTop'],
-                            $style['c-nav-list-link-withBorderBottom']]"
+                        :class="{ [$style['c-nav-list-link-withBorderBottom']]: showLoginInfo }"
                         :href="copy.accountLogout.url"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
                             label: copy.accountLogout.gtm
