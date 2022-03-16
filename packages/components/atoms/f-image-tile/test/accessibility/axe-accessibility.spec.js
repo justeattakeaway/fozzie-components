@@ -1,4 +1,4 @@
-import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
+import { getAxeResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
 
 const ImageTile = require('../../test-utils/component-objects/f-image-tile.component');
 
@@ -10,7 +10,7 @@ describe('Accessibility tests', () => {
     });
     it('a11y - should test f-image-tile component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-image-tile');
+        const axeResults = getAxeResults('f-image-tile');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

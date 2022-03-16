@@ -1,4 +1,4 @@
-const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
+const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
 
 const LegacyCookieBanner = require('../../test-utils/component-objects/f-cookie-banner-legacy.component');
 
@@ -15,7 +15,7 @@ describe('Legacy Accessibility tests', () => {
 
         // Act
         legacyCookieBanner.load();
-        const axeResults = getAccessibilityTestResults('f-cookie-banner');
+        const axeResults = getAxeResults('f-cookie-banner');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
@@ -27,7 +27,7 @@ describe('Legacy Accessibility tests', () => {
 
         // Act
         cookieConsentBanner.load();
-        const axeResults = getAccessibilityTestResults('f-cookie-banner');
+        const axeResults = getAxeResults('f-cookie-banner');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

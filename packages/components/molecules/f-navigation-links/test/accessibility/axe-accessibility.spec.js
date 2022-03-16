@@ -1,4 +1,4 @@
-import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
+import { getAxeResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
 
 const NavigationLinks = require('../../test-utils/component-objects/f-navigation-links.component');
 
@@ -13,7 +13,7 @@ describe('Accessibility tests', () => {
 
     it('a11y - should test f-navigation-links component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-navigation-links');
+        const axeResults = getAxeResults('f-navigation-links');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
