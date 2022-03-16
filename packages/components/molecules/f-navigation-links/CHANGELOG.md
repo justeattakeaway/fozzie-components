@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.1.0
+------------------------------
+*March 15, 2022*
+
+### Added
+- `aria-label` and `nav` landmark to navigation.
+- Tests to cover changes.
+
 
 v1.0.0
 ------------------------------
