@@ -76,7 +76,7 @@ describe('AccountInfo', () => {
         // Arrange
         dataDefaults = () => ({
             hasFormUpdate: false,
-            shouldShowErrorPage: false
+            shouldShowLoadErrorCard: false
         });
         cookiesSpy = jest.fn();
         httpSpy = jest.fn();
@@ -169,7 +169,7 @@ describe('AccountInfo', () => {
             );
         });
 
-        it('should set shouldShowErrorPage flag to true if an error occurs', async () => {
+        it('should set shouldShowLoadErrorCard flag to true if an error occurs', async () => {
             // Arrange & Act
             const errorActions = {
                 loadConsumerDetails: jest.fn().mockImplementationOnce(() => {
@@ -179,7 +179,7 @@ describe('AccountInfo', () => {
             wrapper = await mountAccountInfo({ actions: errorActions });
 
             // Assert
-            expect(wrapper.vm.shouldShowErrorPage).toEqual(true);
+            expect(wrapper.vm.shouldShowLoadErrorCard).toEqual(true);
         });
 
         it('should not show the error card if no errors', async () => {
@@ -191,10 +191,10 @@ describe('AccountInfo', () => {
             expect(element.exists()).toEqual(false);
         });
 
-        it('should show the error card if shouldShowErrorPage is true', async () => {
+        it('should show the error card if shouldShowLoadErrorCard is true', async () => {
             // Arrange & Act
             wrapper = await mountAccountInfo();
-            await wrapper.setData({ shouldShowErrorPage: true });
+            await wrapper.setData({ shouldShowLoadErrorCard: true });
             const element = wrapper.find('[data-test-id="account-info-error-card"]');
 
             // Assert
@@ -350,7 +350,7 @@ describe('AccountInfo', () => {
             });
 
             // to be added in a future pr
-            it.skip('should set shouldShowErrorPage flag to true if an error occurs', async () => {
+            it.skip('should set shouldShowLoadErrorCard flag to true if an error occurs', async () => {
 
             });
 

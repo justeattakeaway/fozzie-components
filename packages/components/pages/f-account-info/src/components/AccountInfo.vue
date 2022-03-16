@@ -1,7 +1,7 @@
 <template>
     <div>
         <f-card
-            v-if="!shouldShowErrorPage"
+            v-if="!shouldShowLoadErrorCard"
             :card-heading="$t('accountDetails')"
             data-test-id="account-info"
             has-inner-spacing-large
@@ -170,6 +170,11 @@
                     </template>
                 </form-field>
 
+                <notifications
+                    :error-message-key="error.messageKey"
+                    :show-save-error-alert="shouldShowSaveErrorAlert"
+                    :show-successful-alert="shouldShowSuccessfulAlert" />
+
                 <f-button
                     :class="[$style['c-accountInfo-submitButton']]"
                     data-test-id="account-info-save-changes-button"
@@ -231,15 +236,17 @@ import {
 import EmailAddressField from './EmailAddressField.vue';
 import DeleteAccount from './DeleteAccount.vue';
 import AccountInfoValidationMixin from './AccountInfoValidationMixin.vue';
+import Notifications from './Notifications.vue';
 import tenantConfigs from '../tenants';
 import ConsumerApi from '../services/providers/Consumer.api';
 import fAccountInfoModule from '../store/accountInfo.module';
 import AccountInfoAnalyticsService from '../services/analytics';
-
 import {
     EVENT_SPINNER_STOP_LOADING
 } from '../constants';
-import { AccountInfoError } from '../exceptions';
+import InfoPageError from '../exceptions/InfoPageError';
+
+const standardLogTags = ['account-pages', 'account-info'];
 
 export default {
     components: {
@@ -250,6 +257,7 @@ export default {
         FErrorMessage,
         EmailAddressField,
         DeleteAccount,
+        Notifications,
         BagSadBgIcon
     },
 
@@ -285,7 +293,9 @@ export default {
             isFormSubmitting: false,
             hasFormUpdate: false,
             hasAddressBeenUpdated: false,
-            shouldShowErrorPage: false,
+            shouldShowLoadErrorCard: false,
+            shouldShowSaveErrorAlert: false,
+            shouldShowSuccessfulAlert: false,
             error: {}
         };
     },
@@ -319,13 +329,24 @@ export default {
             'editConsumerDetails'
         ]),
 
+        setFormUpdateState (isDirty, isAddressField) {
+            this.hasFormUpdate = isDirty;
+            this.shouldShowSaveErrorAlert = false;
+            this.shouldShowSuccessfulAlert = !isDirty;
+
+            if (isAddressField) {
+                this.hasAddressBeenUpdated = true;
+            }
+        },
+
         /**
         * Informs the template that we are in an Error State.
-        * @param {object} Error - The error that has recently occurred
+        * @param {object} error - The error that has recently occurred
+        * @param {boolean} isLoading - indicates if a loading error or saving error
         */
-        handleErrorState (error) {
-            this.shouldShowErrorPage = true;
-            this.error = error;
+        handleErrorState (error, isLoading) {
+            this.shouldShowLoadErrorCard = true;
+            this.error = new InfoPageError(error?.message, error?.response?.status, isLoading ? 'errorMessages.loading.description' : 'errorMessages.saving.description');
         },
 
         /**
@@ -339,11 +360,10 @@ export default {
         async initialise () {
             try {
                 await this.loadConsumerDetails({ api: this.consumerApi, authToken: this.authToken });
-                this.$log.info('Consumer details fetched successfully', ['account-pages', 'account-info']);
-                this.hasFormUpdate = false;
+                this.$log.info('Consumer details fetched successfully', standardLogTags);
             } catch (error) {
-                this.$log.error('Error fetching consumer details', error, ['account-pages', 'account-info']);
-                this.handleErrorState(new AccountInfoError(error.message, error?.response?.status));
+                this.$log.error('Error fetching consumer details', error, standardLogTags);
+                this.handleErrorState(error, true);
             } finally {
                 this.$nextTick(() => {
                     this.$parent.$emit(EVENT_SPINNER_STOP_LOADING);
@@ -351,6 +371,16 @@ export default {
             }
         },
 
+        /**
+        * If there are any form changes
+        * then informs the Template that we are submitting the form
+        * then Saves the State (via the api)
+        * then lowers the hasFormUpdate flag as the form data is now currently clean again
+        * then informs the Template that we are now not submitting the form
+        *
+        * If an error occurs then this is logged and the Template is
+        * informed that it is in a state of error.
+        */
         onFormSubmit () {
             if (this.isFormInvalid()) {
                 this.logValidationFailure();
@@ -365,13 +395,12 @@ export default {
 
             try {
                 // TODO - to be added with next ticket
-                this.$log.info('Consumer details saved successfully', ['account-pages', 'account-info']);
-                this.hasFormUpdate = false;
+                this.$log.info('Consumer details saved successfully', standardLogTags);
                 this.accountInfoAnalyticsService.trackFormSubmission(this.hasAddressBeenUpdated);
-                this.hasAddressBeenUpdated = false;
+                this.setFormUpdateState(false, false);
             } catch (error) {
-                this.$log.error('Error saving consumer details', error, ['account-pages', 'account-info']);
-                this.handleErrorState(new AccountInfoError(error.message, error?.response?.status));
+                this.$log.error('Error saving consumer details', error, standardLogTags);
+                this.handleErrorState(error, false);
             } finally {
                 this.setSubmittingState(false);
             }
@@ -393,11 +422,7 @@ export default {
         */
         onEditConsumer (field, value, isAddressField = false) {
             this.editConsumerDetails({ field, value });
-            this.hasFormUpdate = true;
-
-            if (isAddressField) {
-                this.hasAddressBeenUpdated = true;
-            }
+            this.setFormUpdateState(true, isAddressField);
         }
     }
 };
