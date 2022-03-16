@@ -38,10 +38,12 @@ v7.4.1
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
 
+v8.0.0-alpha.1
 ------------------------------
-*February 24, 2022*
+*March 15, 2022*
 
-### Changed
+### Added
+- Added Image component as part of the new Icing changes
 - Storybook knobs to controls
 
 
