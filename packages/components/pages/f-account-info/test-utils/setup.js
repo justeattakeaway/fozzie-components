@@ -75,7 +75,6 @@ export const consumerDetailsMappedModel = {
 export const consumerAddressMappedModel = {
     line1: consumerAddressGetResponse.Line1,
     line2: consumerAddressGetResponse.Line2,
-    line3: consumerAddressGetResponse.Line3,
     locality: consumerAddressGetResponse.City,
     postcode: consumerAddressGetResponse.ZipCode
 };
@@ -90,4 +89,17 @@ export const consumerStateModel = {
         ...consumerDetailsMappedModel,
         ...consumerAddressMappedModel
     }
+};
+
+export const consumerUpdateBody = {
+    FirstName: consumerDetailsGetResponse.data.FirstName,
+    LastName: consumerDetailsGetResponse.data.LastName,
+    Address: {
+        Line1: consumerAddressGetResponse.Line1,
+        Line2: consumerAddressGetResponse.Line2,
+        Line3: null,
+        City: consumerAddressGetResponse.City,
+        ZipCode: consumerAddressGetResponse.ZipCode
+    },
+    PhoneNumber: consumerDetailsGetResponse.data.PhoneNumber
 };

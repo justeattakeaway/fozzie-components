@@ -10,7 +10,8 @@ import {
     consumerAddressesGetResponse,
     consumerViewModel,
     consumerDetailsMappedModel,
-    consumerAddressMappedModel
+    consumerAddressMappedModel,
+    consumerUpdateBody
 } from '../../../test-utils/setup';
 
 describe('AccountInfo Store', () => {
@@ -18,16 +19,19 @@ describe('AccountInfo Store', () => {
     let setConversationIdMock;
     let getConsumerDetailsMock;
     let getConsumerAddressesMock;
+    let patchConsumerDetailsMock;
 
     beforeEach(() => {
         // Arrange
         setConversationIdMock = jest.fn(() => conversationId);
         getConsumerDetailsMock = jest.fn(() => consumerDetailsGetResponse);
         getConsumerAddressesMock = jest.fn(() => consumerAddressesGetResponse);
+        patchConsumerDetailsMock = jest.fn(() => {});
         apiClientMock = {
             setConversationId: setConversationIdMock,
             getConsumerDetails: getConsumerDetailsMock,
-            getConsumerAddresses: getConsumerAddressesMock
+            getConsumerAddresses: getConsumerAddressesMock,
+            patchConsumer: patchConsumerDetailsMock
         };
     });
 
@@ -118,7 +122,7 @@ describe('AccountInfo Store', () => {
             });
         });
 
-        describe('editPreference ::', () => {
+        describe('editConsumerDetails ::', () => {
             it(`should call ${UPDATE_CONSUMER_DETAIL} mutation with the correct data`, () => {
                 // Arrange
                 const currentState = { consumer: { ...consumerViewModel, firstName: 'Tester1' } };
@@ -141,6 +145,16 @@ describe('AccountInfo Store', () => {
 
                 // Assert
                 expect(commitSpy).not.toHaveBeenCalled();
+            });
+        });
+
+        describe('saveConsumerDetails ::', () => {
+            it('should call the patchConsumer api method with the correct parameters', async () => {
+                // Act
+                await accountInfoModule.actions.saveConsumerDetails({ state: consumerViewModel }, { api: apiClientMock, authToken: token });
+
+                // Assert
+                expect(patchConsumerDetailsMock).toHaveBeenCalledWith(token, consumerUpdateBody);
             });
         });
     });

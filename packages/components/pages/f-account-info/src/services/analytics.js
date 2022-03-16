@@ -19,7 +19,7 @@ export default class AccountInfoAnalyticsService {
         if (hasAddressBeenUpdated) {
             this.#$gtm.pushEvent({
                 event: 'trackEvent',
-                category: 'my acccount',
+                category: 'my account',
                 action: 'account info',
                 label: 'address change intent'
             });

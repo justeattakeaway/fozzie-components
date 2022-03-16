@@ -1,9 +1,9 @@
 import forEach from 'mocha-each';
+import argumentStringBuilder from '../../test-utils/component-objects/argumentStringBuilder';
 
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
-let checkoutInfo;
 
 const orderTime = 'Wednesday 01:45';
 
@@ -11,13 +11,9 @@ describe('f-checkout component tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
-        checkoutInfo = {
-            serviceType: 'delivery',
-            isAuthenticated: true
-        };
-        checkout.withQuery('&knob-Service Type', checkoutInfo.serviceType)
-            .withQuery('&knob-Is User Logged In', checkoutInfo.isAuthenticated)
-            .withQuery('&knob-Is ASAP available', true);
+
+        const args = argumentStringBuilder();
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
@@ -65,7 +61,10 @@ describe('f-checkout component tests', () => {
 
     it('should close the checkout error when "Retry" is clicked', () => {
         // Arrange
-        checkout.withQuery('&knob-Patch Checkout Errors', 'restaurant-not-taking-orders');
+        checkout = new Checkout();
+
+        const args = argumentStringBuilder({ patchCheckoutError: 'restaurant-not-taking-orders' });
+        checkout.withQuery('args', args);
 
         // Act
         checkout.load();
@@ -80,7 +79,10 @@ describe('f-checkout component tests', () => {
     describe('when the "Duplicate Order Warning" modal is displayed', () => {
         beforeEach(() => {
             // Arrange
-            checkout.withQuery('&knob-Place Order Errors', 'duplicate');
+            checkout = new Checkout();
+
+            const args = argumentStringBuilder({ placeOrderError: 'duplicate' });
+            checkout.withQuery('args', args);
 
             // Act
             checkout.load();

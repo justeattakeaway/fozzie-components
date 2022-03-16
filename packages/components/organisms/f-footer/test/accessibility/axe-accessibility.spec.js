@@ -1,6 +1,6 @@
 import forEach from 'mocha-each';
 
-const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
+const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
 const Footer = require('../../test-utils/component-objects/f-footer.component');
 
 let footer;
@@ -17,7 +17,7 @@ describe('Accessibility tests', () => {
 
             // Act
             footer.load();
-            const axeResults = getAccessibilityTestResults('f-footer');
+            const axeResults = getAxeResults('f-footer');
 
             // Assert
             expect(axeResults.violations.length).toBe(0);
@@ -30,7 +30,7 @@ describe('Accessibility tests', () => {
 
             // Act
             footer.load();
-            const axeResults = getAccessibilityTestResults('f-footer');
+            const axeResults = getAxeResults('f-footer');
 
             // Assert
             expect(axeResults.violations.length).toBe(0);

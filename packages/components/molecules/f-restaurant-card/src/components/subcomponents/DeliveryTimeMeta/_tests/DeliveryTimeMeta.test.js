@@ -1,5 +1,5 @@
 import { shallowMount, mount, config } from '@vue/test-utils';
-import sut from '../DeliveryTimeMeta.vue';
+import DeliveryTimeMeta from '../DeliveryTimeMeta.vue';
 
 
 describe('DeliveryTimeMeta', () => {
@@ -17,7 +17,7 @@ describe('DeliveryTimeMeta', () => {
         };
 
         // act
-        const wrapper = shallowMount(sut, { propsData });
+        const wrapper = shallowMount(DeliveryTimeMeta, { propsData });
 
         // assert
         expect(wrapper.exists()).toBe(true);
@@ -31,7 +31,7 @@ describe('DeliveryTimeMeta', () => {
         };
 
         // act
-        const wrapper = mount(sut, { propsData });
+        const wrapper = mount(DeliveryTimeMeta, { propsData });
 
         const visibleText = wrapper.text();
         const etaExists = wrapper.find(etaSelector).exists();
@@ -49,7 +49,7 @@ describe('DeliveryTimeMeta', () => {
         };
 
         // act
-        const wrapper = mount(sut, { propsData });
+        const wrapper = mount(DeliveryTimeMeta, { propsData });
 
         const visibleText = wrapper.text();
         const distanceExists = wrapper.find(locationSelector).exists();
@@ -66,7 +66,7 @@ describe('DeliveryTimeMeta', () => {
         };
 
         // act
-        const wrapper = mount(sut, { propsData });
+        const wrapper = mount(DeliveryTimeMeta, { propsData });
 
         const visibleText = wrapper.text();
         const addressExists = wrapper.find(locationSelector).exists();
@@ -84,7 +84,7 @@ describe('DeliveryTimeMeta', () => {
             };
 
             // act
-            const wrapper = mount(sut, { propsData });
+            const wrapper = mount(DeliveryTimeMeta, { propsData });
 
             const etaText = wrapper.text();
             const etaIconExists = wrapper.find(etaIconSelector).exists();
@@ -101,7 +101,7 @@ describe('DeliveryTimeMeta', () => {
             };
 
             // act
-            const wrapper = mount(sut, { propsData });
+            const wrapper = mount(DeliveryTimeMeta, { propsData });
 
             const distanceText = wrapper.text();
             const distanceIconExists = wrapper.find(distanceIconSelector).exists();
@@ -118,7 +118,7 @@ describe('DeliveryTimeMeta', () => {
             };
 
             // act
-            const wrapper = mount(sut, { propsData });
+            const wrapper = mount(DeliveryTimeMeta, { propsData });
 
             const addressText = wrapper.text();
             const addressIconExists = wrapper.find(addressIconSelector).exists();
@@ -145,7 +145,7 @@ describe('DeliveryTimeMeta', () => {
             };
 
             // act
-            const wrapper = mount(sut, { propsData });
+            const wrapper = mount(DeliveryTimeMeta, { propsData });
 
             const etaText = wrapper.text();
             const etaIconExists = wrapper.find(etaIconSelector).exists();
@@ -162,7 +162,7 @@ describe('DeliveryTimeMeta', () => {
             };
 
             // act
-            const wrapper = mount(sut, { propsData });
+            const wrapper = mount(DeliveryTimeMeta, { propsData });
 
             const distanceText = wrapper.text();
             const distanceIconExists = wrapper.find(distanceIconSelector).exists();
@@ -179,7 +179,7 @@ describe('DeliveryTimeMeta', () => {
             };
 
             // act
-            const wrapper = mount(sut, { propsData });
+            const wrapper = mount(DeliveryTimeMeta, { propsData });
 
             const addressText = wrapper.text();
             const addressIconExists = wrapper.find(addressIconSelector).exists();
@@ -187,6 +187,37 @@ describe('DeliveryTimeMeta', () => {
             // assert
             expect(addressText).toBeTruthy();
             expect(addressIconExists).toBe(true);
+        });
+    });
+
+    describe('performance tracking', () => {
+        const performanceTrackerMock = {
+            time: jest.fn()
+        };
+
+        beforeEach(() => {
+            jest.resetAllMocks();
+            config.provide = {
+                performanceTracker: performanceTrackerMock
+            };
+        });
+
+        afterEach(() => {
+            config.provide = {};
+        });
+
+        it('calls the performance tracker with `tier-3` after rendering if prop value exists', async () => {
+            // arrange
+            const propsData = {
+                performanceTracker: performanceTrackerMock
+            };
+
+            // act
+            await mount(DeliveryTimeMeta, { propsData });
+
+            // assert
+            expect(performanceTrackerMock.time).toHaveBeenCalledTimes(1);
+            expect(performanceTrackerMock.time).toHaveBeenCalledWith('tier-3');
         });
     });
 });

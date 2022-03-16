@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-wdio-utils",
   "description": "Fozzie Wdio Utils - webdriverIO page object",
-  "version": "0.7.0",
+  "version": "0.8.1",
   "files": [
     "src/"
   ],
@@ -38,6 +38,7 @@
     "@justeat/f-services": "1.7.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "4.4.6"
+    "@vue/cli-plugin-babel": "4.4.6",
+    "axe-core": "4.3.3"
   }
 }

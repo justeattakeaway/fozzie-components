@@ -1,4 +1,4 @@
-import createFeatureManagementInstance from '../../lib/createFeatureManagementInstance';
+import createFeatureManagementInstance from '@justeat/feature-management';
 import featuresModule from '../store/features.module';
 
 const namespace = 'f-feature-management';
