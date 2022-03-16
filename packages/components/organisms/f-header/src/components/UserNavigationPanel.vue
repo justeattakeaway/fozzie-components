@@ -1,8 +1,7 @@
 <template>
     <ul
         :aria-label="copy.navTitle"
-        :class="[$style['c-nav-popoverList'],
-                 $style['with-border-top']]">
+        :class="$style['c-nav-popoverList']">
         <li
             v-for="(link, index) in copy.navLinks"
             :key="index"

@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v9.7.0
 ------------------------------
-*March 11, 2022*
+*March 16, 2022*
 
 ### Changed
 - component to match latest designs

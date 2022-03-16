@@ -161,8 +161,8 @@
                         :aria-haspopup="isBelowMid ? false : true"
                         :aria-label="copy.userMenu.buttonLabel(userInfo.friendlyName)"
                         :class="[
-                            $style['c-nav-list-btn'],
-                            $style['c-nav-list-text']
+                            $style['c-nav-list-text'],
+                            $style['c-nav-list-btn']
                         ]"
                         @click.prevent="toggleUserMenu"
                         @keydown.space.prevent="toggleUserMenu">
@@ -676,9 +676,6 @@ export default {
 .c-nav-list-text-sub {
     display: block;
     overflow: hidden;
-    // text-overflow: ellipsis;
-    // white-space: nowrap;
-    // max-width: 300px;
     &.u-showBelowMid {
         @include media('>mid') {
             display: none !important;
