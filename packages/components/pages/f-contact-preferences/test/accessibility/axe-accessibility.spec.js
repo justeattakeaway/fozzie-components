@@ -1,5 +1,5 @@
 import forEach from 'mocha-each';
-import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
+import { getAxeResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
 
 const ContactPreferences = require('../../test-utils/component-objects/f-contactPreferences.component');
 
@@ -19,7 +19,7 @@ describe('Accessibility tests', () => {
 
         // Act
         contactPreferences.load();
-        const axeResults = getAccessibilityTestResults('f-contact-preferences');
+        const axeResults = getAxeResults('f-contact-preferences');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
@@ -35,7 +35,7 @@ describe('Accessibility tests', () => {
         contactPreferences.load();
         contactPreferences.clickNewsEmailCheckbox();
         contactPreferences.clickSubmitButton();
-        const axeResults = getAccessibilityTestResults('f-contact-preferences - save error alert');
+        const axeResults = getAxeResults('f-contact-preferences - save error alert');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
@@ -49,7 +49,7 @@ describe('Accessibility tests', () => {
 
         // Act
         contactPreferences.loadError();
-        const axeResults = getAccessibilityTestResults('f-contact-preferences - load error page');
+        const axeResults = getAxeResults('f-contact-preferences - load error page');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

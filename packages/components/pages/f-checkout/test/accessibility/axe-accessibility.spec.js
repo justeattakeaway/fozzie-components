@@ -1,7 +1,7 @@
 import forEach from 'mocha-each';
 import argumentStringBuilder from '../../test-utils/component-objects/argumentStringBuilder';
 
-const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
+const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
 
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
@@ -19,7 +19,7 @@ describe('Accessibility tests', () => {
 
         // Act
         checkout.load();
-        const axeResults = getAccessibilityTestResults('f-checkout-delivery');
+        const axeResults = getAxeResults('f-checkout-delivery');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
@@ -32,7 +32,7 @@ describe('Accessibility tests', () => {
 
         // Act
         checkout.load();
-        const axeResults = getAccessibilityTestResults('f-checkout-collection');
+        const axeResults = getAxeResults('f-checkout-collection');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
@@ -45,7 +45,7 @@ describe('Accessibility tests', () => {
 
         // Act
         checkout.load();
-        const axeResults = getAccessibilityTestResults('f-checkout-guest');
+        const axeResults = getAxeResults('f-checkout-guest');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
@@ -57,7 +57,7 @@ describe('Accessibility tests', () => {
         checkout.withQuery('args', args);
         // Act
         checkout.loadError();
-        const axeResults = getAccessibilityTestResults('f-checkout-error-page');
+        const axeResults = getAxeResults('f-checkout-error-page');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
