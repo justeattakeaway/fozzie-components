@@ -240,7 +240,6 @@ import Notifications from './Notifications.vue';
 import tenantConfigs from '../tenants';
 import ConsumerApi from '../services/providers/Consumer.api';
 import fAccountInfoModule from '../store/accountInfo.module';
-import AccountInfoAnalyticsService from '../services/analytics';
 import {
     EVENT_SPINNER_STOP_LOADING
 } from '../constants';
@@ -288,7 +287,6 @@ export default {
                 cookies: this.$cookies,
                 baseUrl: this.smartGatewayBaseUrl
             }),
-            accountInfoAnalyticsService: new AccountInfoAnalyticsService(this.$gtm),
             tenantConfigs,
             isFormSubmitting: false,
             hasFormUpdate: false,
@@ -326,7 +324,8 @@ export default {
     methods: {
         ...mapActions('fAccountInfoModule', [
             'loadConsumerDetails',
-            'editConsumerDetails'
+            'editConsumerDetails',
+            'saveConsumerDetails'
         ]),
 
         setFormUpdateState (isDirty, isAddressField) {
@@ -351,8 +350,9 @@ export default {
 
         /**
         * Gets the form data (from the api) and assigns it to State
-        * then lowers the hasFormUpdate flag as the form data is currently clean
-        * then stops the on-screen spinner from showing
+        * then lowers the hasFormUpdate + hasAddressBeenUpdated flag
+        * as the form data is currently clean then stops the on-screen
+        * spinner from showing
         *
         * If an error occurs then this is logged and the Template is
         * informed that it is in a state of error.
@@ -381,7 +381,7 @@ export default {
         * If an error occurs then this is logged and the Template is
         * informed that it is in a state of error.
         */
-        onFormSubmit () {
+        async onFormSubmit () {
             if (this.isFormInvalid()) {
                 this.logValidationFailure();
                 return;
@@ -394,9 +394,9 @@ export default {
             this.setSubmittingState(true);
 
             try {
-                // TODO - to be added with next ticket
+                await this.saveConsumerDetails({ api: this.consumerApi, authToken: this.authToken });
                 this.$log.info('Consumer details saved successfully', standardLogTags);
-                this.accountInfoAnalyticsService.trackFormSubmission(this.hasAddressBeenUpdated);
+                this.analyticsTrackFormSubmission(this.hasAddressBeenUpdated);
                 this.setFormUpdateState(false, false);
             } catch (error) {
                 this.$log.error('Error saving consumer details', error, standardLogTags);
@@ -423,6 +423,27 @@ export default {
         onEditConsumer (field, value, isAddressField = false) {
             this.editConsumerDetails({ field, value });
             this.setFormUpdateState(true, isAddressField);
+        },
+
+        /**
+        * Pushes `form` event to the dataLayer with correct data
+        */
+        analyticsTrackFormSubmission (hasAddressBeenUpdated) {
+            this.$gtm.pushEvent({
+                event: 'trackEvent',
+                category: 'account',
+                action: 'save_accountinfo_changes',
+                label: 'submit'
+            });
+
+            if (hasAddressBeenUpdated) {
+                this.$gtm.pushEvent({
+                    event: 'trackEvent',
+                    category: 'my account',
+                    action: 'account info',
+                    label: 'address change intent'
+                });
+            }
         }
     }
 };

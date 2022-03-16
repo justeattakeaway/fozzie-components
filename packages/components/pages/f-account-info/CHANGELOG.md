@@ -12,6 +12,14 @@ v0.20.0
 - Alerts for failed and successful saving.
 
 
+v0.19.0
+------------------------------
+*March 15, 2022*
+
+### Changed
+- Wired up the Template save action to the Vuex store save method
+
+
 v0.18.0
 ------------------------------
 *March 4, 2022*

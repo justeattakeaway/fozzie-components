@@ -1,4 +1,4 @@
-const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
+const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
 
 const StatusBanner = require('../../test-utils/component-objects/f-status-banner.component');
 
@@ -11,7 +11,7 @@ describe('Accessibility tests', () => {
     });
     it('a11y - should test f-status-banner component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-status-banner');
+        const axeResults = getAxeResults('f-status-banner');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

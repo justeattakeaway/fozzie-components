@@ -1,4 +1,4 @@
-import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
+import { getAxeResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
 
 const Loyalty = require('../../test-utils/component-objects/f-loyalty.component');
 
@@ -10,7 +10,7 @@ describe('Accessibility tests', () => {
     });
     xit('a11y - should test f-loyalty component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-loyalty');
+        const axeResults = getAxeResults('f-loyalty');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
