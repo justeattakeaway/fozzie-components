@@ -9,6 +9,7 @@ v0.5.0
 
 ### Added
 - `isLoading` prop to trigger skeleton loading
+
 ### Changed
 - Removed `isToggleDisabled` property from filter pill component and instead directly reference the `isDisabled` prop
 - Shorten how we pass props into the Storybook component
