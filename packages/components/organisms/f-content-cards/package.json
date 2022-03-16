@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-content-cards",
   "description": "Fozzie Content Cards",
-  "version": "7.4.0",
+  "version": "8.0.0-alpha.1",
   "main": "dist/f-content-cards.umd.min.js",
   "maxBundleSize": "75kB",
   "files": [
