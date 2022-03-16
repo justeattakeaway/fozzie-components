@@ -41,7 +41,7 @@ const messages = {
     deleteAccountLink: 'Delete my account',
     errorMessages: {
         loading: {
-            heading: 'Error',
+            heading: 'Something went wrong',
             description: 'Sorry, there was a problem fetching your account information. Please try again later.'
         },
         saving: {
