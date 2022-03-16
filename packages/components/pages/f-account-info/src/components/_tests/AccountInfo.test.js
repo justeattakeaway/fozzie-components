@@ -1,8 +1,6 @@
 import Vuex from 'vuex';
 import { shallowMount } from '@vue/test-utils';
 import AccountInfo from '../AccountInfo.vue';
-// eslint-disable-next-line no-unused-vars
-import AccountInfoAnalyticsService from '../../services/analytics';
 import AccountInfoValidationMixin from '../AccountInfoValidationMixin.vue';
 
 import {
@@ -16,12 +14,11 @@ import {
 let wrapper;
 let cookiesSpy;
 let httpSpy;
+let pushEventSpy;
 let sutMocks;
 let sutProps;
 let dataDefaults;
 let initialiseSpy;
-
-jest.mock('../../services/analytics.js');
 
 const logMocks = {
     info: jest.fn(),
@@ -30,7 +27,8 @@ const logMocks = {
 
 const storeActions = {
     loadConsumerDetails: jest.fn(),
-    editConsumerDetails: jest.fn()
+    editConsumerDetails: jest.fn(),
+    saveConsumerDetails: jest.fn()
 };
 
 const storeState = consumerStateModel;
@@ -80,13 +78,17 @@ describe('AccountInfo', () => {
         });
         cookiesSpy = jest.fn();
         httpSpy = jest.fn();
+        pushEventSpy = jest.fn();
         sutMocks = {
             $parent: {
                 $emit: jest.fn()
             },
             $http: httpSpy,
             $cookies: cookiesSpy,
-            $log: logMocks
+            $log: logMocks,
+            $gtm: {
+                pushEvent:  pushEventSpy
+            }
         };
         sutProps = {
             authToken: token,
@@ -172,6 +174,7 @@ describe('AccountInfo', () => {
         it('should set shouldShowErrorPage flag to true if an error occurs', async () => {
             // Arrange & Act
             const errorActions = {
+                ...storeActions,
                 loadConsumerDetails: jest.fn().mockImplementationOnce(() => {
                     throw new Error('some-error');
                 })
@@ -204,6 +207,7 @@ describe('AccountInfo', () => {
         it('should log an error if loading preferences throws an error', async () => {
             // Arrange
             const errorActions = {
+                ...storeActions,
                 loadConsumerDetails: jest.fn().mockImplementationOnce(() => {
                     throw new Error('some-error');
                 })
@@ -223,38 +227,6 @@ describe('AccountInfo', () => {
     });
 
     describe('`methods`', () => {
-        describe('`onFormSubmit`', () => {
-            describe('form is valid', () => {
-                it('address has not changed', async () => {
-                    // Arrange
-                    wrapper = await mountAccountInfo();
-                    await wrapper.setData({ hasAddressBeenUpdated: false, hasFormUpdate: true });
-
-                    jest.spyOn(wrapper.vm, 'isFormInvalid').mockImplementation(() => false);
-
-                    // Act
-                    wrapper.vm.onFormSubmit();
-
-                    // Assert
-                    expect(wrapper.vm.accountInfoAnalyticsService.trackFormSubmission).toHaveBeenCalledWith(false);
-                });
-
-                it('address has changed', async () => {
-                    // Arrange
-                    wrapper = await mountAccountInfo();
-                    await wrapper.setData({ hasAddressBeenUpdated: true, hasFormUpdate: true });
-
-                    jest.spyOn(wrapper.vm, 'isFormInvalid').mockImplementation(() => false);
-
-                    // Act
-                    wrapper.vm.onFormSubmit();
-
-                    // Assert
-                    expect(wrapper.vm.accountInfoAnalyticsService.trackFormSubmission).toHaveBeenCalledWith(true);
-                });
-            });
-        });
-
         describe('`onEditConsumer`', () => {
             describe('when editing the form', () => {
                 it.each([
@@ -334,6 +306,21 @@ describe('AccountInfo', () => {
         });
 
         describe('onFormSubmit ::', () => {
+            it('should call the save action with the correct parameters', async () => {
+                // Arrange
+                wrapper = await mountAccountInfo();
+                await wrapper.setData({ hasFormUpdate: true });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+
+                // Assert
+                expect(storeActions.saveConsumerDetails).toHaveBeenCalledWith(expect.any(Object), {
+                    api: wrapper.vm.$data.consumerApi,
+                    authToken: token
+                });
+            });
+
             it('should log an info log', async () => {
                 // Act
                 wrapper = await mountAccountInfo();
@@ -349,13 +336,80 @@ describe('AccountInfo', () => {
                 );
             });
 
-            // to be added in a future pr
-            it.skip('should set shouldShowErrorPage flag to true if an error occurs', async () => {
+            it('should set shouldShowErrorPage flag to true if an error occurs', async () => {
+                // Arrange & Act
+                const errorActions = {
+                    ...storeActions,
+                    saveConsumerDetails: jest.fn().mockImplementationOnce(() => {
+                        throw new Error('some-error');
+                    })
+                };
+                wrapper = await mountAccountInfo({ actions: errorActions });
+                await wrapper.setData({ hasFormUpdate: true });
 
+                // Act
+                await wrapper.vm.onFormSubmit();
+
+                // Assert
+                expect(wrapper.vm.shouldShowErrorPage).toEqual(true);
             });
 
-            // to be added in a future pr
-            it.skip('should not call the save action if no changes', async () => {
+            it('should not call the save action if no changes', async () => {
+                // Arrange & Act
+                wrapper = await mountAccountInfo();
+                await wrapper.setData({ hasFormUpdate: false });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+
+                // Assert
+                expect(storeActions.saveConsumerDetails).not.toHaveBeenCalledWith();
+            });
+
+            it('should set shouldShowErrorPage flag to true if an error occurs', async () => {
+                // Arrange & Act
+                const errorActions = {
+                    ...storeActions,
+                    saveConsumerDetails: jest.fn().mockImplementationOnce(() => {
+                        throw new Error('some-error');
+                    })
+                };
+                wrapper = await mountAccountInfo({ actions: errorActions });
+                await wrapper.setData({ hasFormUpdate: true });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+
+                // Assert
+                expect(wrapper.vm.shouldShowErrorPage).toEqual(true);
+            });
+
+            describe('publishing analytics', () => {
+                describe('form is valid', () => {
+                    it('address has not changed', async () => {
+                        // Arrange
+                        wrapper = await mountAccountInfo();
+                        await wrapper.setData({ hasAddressBeenUpdated: false, hasFormUpdate: true });
+
+                        // Act
+                        await wrapper.vm.onFormSubmit();
+
+                        // Assert
+                        expect(pushEventSpy).toMatchSnapshot();
+                    });
+
+                    it('address has changed', async () => {
+                        // Arrange
+                        wrapper = await mountAccountInfo();
+                        await wrapper.setData({ hasAddressBeenUpdated: true, hasFormUpdate: true });
+
+                        // Act
+                        await wrapper.vm.onFormSubmit();
+
+                        // Assert
+                        expect(pushEventSpy).toMatchSnapshot();
+                    });
+                });
             });
         });
     });

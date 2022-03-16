@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Analytics trackFormSubmission :: address has been updated should push submit and address changed events 1`] = `
+exports[`AccountInfo \`methods\` onFormSubmit :: publishing analytics form is valid address has changed 1`] = `
 [MockFunction] {
   "calls": Array [
     Array [
@@ -33,7 +33,7 @@ exports[`Analytics trackFormSubmission :: address has been updated should push s
 }
 `;
 
-exports[`Analytics trackFormSubmission :: address has not been updated should push submit event only  1`] = `
+exports[`AccountInfo \`methods\` onFormSubmit :: publishing analytics form is valid address has not changed 1`] = `
 [MockFunction] {
   "calls": Array [
     Array [
