@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.5.0
+------------------------------
+*March 16, 2022*
+
+### Added
+- `isLoading` prop to trigger skeleton loading
+### Changed
+- Removed `isToggleDisabled` property from filter pill component and instead directly reference the `isDisabled` prop
+- Shorten how we pass props into the Storybook component
+
 v0.4.0
 ------------------------------
 *March 15, 2022*
