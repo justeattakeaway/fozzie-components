@@ -1,4 +1,4 @@
-const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
+const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
 
 const MediaElement = require('../../test-utils/component-objects/f-media-element.component');
 
@@ -11,7 +11,7 @@ describe('Accessibility tests', () => {
 
     it('a11y - should test f-media-element component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-media-element');
+        const axeResults = getAxeResults('f-media-element');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
