@@ -30,7 +30,7 @@ export default {
         },
 
         async saveConsumerDetails ({ state }, { api, authToken }) {
-            const body = mapToConsumerUpdate(state);
+            const body = mapToConsumerUpdate(state.consumer);
 
             await api.patchConsumer(authToken, body);
         },
