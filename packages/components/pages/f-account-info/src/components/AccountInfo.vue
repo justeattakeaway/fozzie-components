@@ -204,12 +204,8 @@
         <f-card-with-content
             v-else
             data-test-id="account-info-error-card"
-            :card-heading="$t('errorMessages.errorHeading')"
-            :card-description="$t(error.messageKey)"
-            has-inner-spacing-large
-            card-size-custom="medium"
-            has-outline
-            :class="[$style['c-accountInfo-errorCard']]">
+            :card-heading="$t('errorMessages.loading.heading')"
+            :card-description="$t(error.messageKey)">
             <template #icon>
                 <bag-sad-bg-icon />
             </template>
@@ -341,11 +337,19 @@ export default {
         /**
         * Informs the template that we are in an Error State.
         * @param {object} error - The error that has recently occurred
-        * @param {boolean} isLoading - indicates if a loading error or saving error
         */
-        handleErrorState (error, isLoading) {
+        handleLoadErrorState (error) {
             this.shouldShowLoadErrorCard = true;
-            this.error = new InfoPageError(error?.message, error?.response?.status, isLoading ? 'errorMessages.loading.description' : 'errorMessages.saving.description');
+            this.error = new InfoPageError(error?.message, error?.response?.status, 'errorMessages.loading.description');
+        },
+
+        /**
+        * Informs the template that we failed to save.
+        * @param {object} error - The error that has recently occurred
+        */
+        handleSaveErrorState (error) {
+            this.shouldShowSaveErrorAlert = true;
+            this.error = new InfoPageError(error?.message, error?.response?.status, 'errorMessages.saving.description');
         },
 
         /**
@@ -363,7 +367,7 @@ export default {
                 this.$log.info('Consumer details fetched successfully', standardLogTags);
             } catch (error) {
                 this.$log.error('Error fetching consumer details', error, standardLogTags);
-                this.handleErrorState(error, true);
+                this.handleLoadErrorState(error);
             } finally {
                 this.$nextTick(() => {
                     this.$parent.$emit(EVENT_SPINNER_STOP_LOADING);
@@ -400,7 +404,7 @@ export default {
                 this.setFormUpdateState(false, false);
             } catch (error) {
                 this.$log.error('Error saving consumer details', error, standardLogTags);
-                this.handleErrorState(error, false);
+                this.handleSaveErrorState(error);
             } finally {
                 this.setSubmittingState(false);
             }
@@ -456,9 +460,5 @@ export default {
 
 .c-accountInfo-changePasswordButton {
     margin-top: spacing(d);
-}
-
-.c-accountInfo-errorCard {
-    margin-left: 0;
 }
 </style>

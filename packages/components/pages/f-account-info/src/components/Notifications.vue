@@ -61,6 +61,6 @@ export default {
 }
 
 .c-accountInfo-alert {
-    margin: -(spacing()) 0 spacing(f); // Negative top margin needed to offset the fieldset's bottom margin.
+    margin-top: spacing(f);
 }
 </style>

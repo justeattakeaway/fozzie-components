@@ -340,7 +340,7 @@ describe('AccountInfo', () => {
                 );
             });
 
-            it('should set shouldShowLoadErrorCard flag to true if an error occurs', async () => {
+            it('should set shouldShowSaveErrorAlert flag to true if a save error occurs', async () => {
                 // Arrange
                 const errorActions = {
                     ...storeActions,
@@ -355,7 +355,7 @@ describe('AccountInfo', () => {
                 await wrapper.vm.onFormSubmit();
 
                 // Assert
-                expect(wrapper.vm.shouldShowLoadErrorCard).toEqual(true);
+                expect(wrapper.vm.shouldShowSaveErrorAlert).toEqual(true);
             });
 
             it('should not call the save action if no changes', async () => {
@@ -370,7 +370,7 @@ describe('AccountInfo', () => {
                 expect(storeActions.saveConsumerDetails).not.toHaveBeenCalledWith();
             });
 
-            it('should set shouldShowLoadErrorCard flag to true if an error occurs', async () => {
+            it('should set shouldShowSaveErrorAlert flag to true if a save error occurs', async () => {
                 // Arrange
                 const errorActions = {
                     ...storeActions,
@@ -385,7 +385,7 @@ describe('AccountInfo', () => {
                 await wrapper.vm.onFormSubmit();
 
                 // Assert
-                expect(wrapper.vm.shouldShowLoadErrorCard).toEqual(true);
+                expect(wrapper.vm.shouldShowSaveErrorAlert).toEqual(true);
             });
 
             describe('publishing analytics', () => {
