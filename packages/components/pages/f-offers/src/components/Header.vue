@@ -117,7 +117,7 @@ $header-height: 275px;
     left: 0;
     width: 100%;
     height: 40%;
-    background-color: $color-content-brand;
+    background-color: $color-support-brand-01;
     transform: skewY(4.5deg);
     transform-origin: top right;
 
