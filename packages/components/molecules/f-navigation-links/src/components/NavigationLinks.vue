@@ -1,25 +1,28 @@
 <template>
-    <ul
-        v-if="filterLinks.length"
-        :class="$style['c-navigationLinks']"
+    <nav
+        aria-label="navigation"
         data-test-id="navigationLinks">
-        <li
-            v-for="({
-                id, href, to, name
-            }, i) in filterLinks"
-            :key="i"
-            :class="$style['c-navigationLinks-item']">
-            <v-link
-                :data-test-id="id"
-                :has-text-decoration="false"
-                link-class="c-navigationLinks-link"
-                v-bind="{
-                    ...(href ? { href } : to ? { to } : {})
-                }">
-                {{ name }}
-            </v-link>
-        </li>
-    </ul>
+        <ul
+            v-if="filterLinks.length"
+            :class="$style['c-navigationLinks']">
+            <li
+                v-for="({
+                    id, href, to, name
+                }, i) in filterLinks"
+                :key="i"
+                :class="$style['c-navigationLinks-item']">
+                <v-link
+                    :data-test-id="id"
+                    :has-text-decoration="false"
+                    link-class="c-navigationLinks-link"
+                    v-bind="{
+                        ...(href ? { href } : to ? { to } : {})
+                    }">
+                    {{ name }}
+                </v-link>
+            </li>
+        </ul>
+    </nav>
 </template>
 
 <script>

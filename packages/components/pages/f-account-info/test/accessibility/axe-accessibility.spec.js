@@ -1,4 +1,4 @@
-import { getAccessibilityTestResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
+import { getAxeResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
 
 const AccountInfo = require('../../test-utils/component-objects/f-account-info.component');
 
@@ -11,7 +11,7 @@ describe('Accessibility tests', () => {
 
     it('a11y - should test f-account-info component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-account-info');
+        const axeResults = getAxeResults('f-account-info');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

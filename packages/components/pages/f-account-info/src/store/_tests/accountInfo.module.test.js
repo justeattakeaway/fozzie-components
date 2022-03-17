@@ -150,8 +150,13 @@ describe('AccountInfo Store', () => {
 
         describe('saveConsumerDetails ::', () => {
             it('should call the patchConsumer api method with the correct parameters', async () => {
+                const state = {
+                    state: {
+                        consumer: { ...consumerViewModel }
+                    }
+                };
                 // Act
-                await accountInfoModule.actions.saveConsumerDetails({ state: consumerViewModel }, { api: apiClientMock, authToken: token });
+                await accountInfoModule.actions.saveConsumerDetails(state, { api: apiClientMock, authToken: token });
 
                 // Assert
                 expect(patchConsumerDetailsMock).toHaveBeenCalledWith(token, consumerUpdateBody);

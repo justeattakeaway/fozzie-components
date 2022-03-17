@@ -40,9 +40,18 @@ const messages = {
     deleteAccountMessage: 'Do you want to delete your Just Eat account?',
     deleteAccountLink: 'Delete my account',
     errorMessages: {
-        errorHeading: 'Something went wrong',
-        generic: {
-            description: 'Looks like a problem on our end, sorry. Try again soon.'
+        loading: {
+            heading: 'Something went wrong',
+            description: 'Sorry, there was a problem fetching your account information. Please try again later.'
+        },
+        saving: {
+            heading: 'Something went wrong',
+            description: 'Sorry, it\'s not you, it\'s us. If the problem continues, get in touch.'
+        }
+    },
+    successMessages: {
+        saving: {
+            heading: 'Changes saved'
         }
     }
 };

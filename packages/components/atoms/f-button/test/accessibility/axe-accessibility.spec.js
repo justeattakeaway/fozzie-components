@@ -1,4 +1,4 @@
-const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
+const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
 
 const ActionButton = require('../../test-utils/component-objects/f-button--action.component');
 const LinkButton = require('../../test-utils/component-objects/f-button--link.component');
@@ -13,7 +13,7 @@ describe('Accessibility tests', () => {
 
         // Act
         button.load();
-        const axeResults = getAccessibilityTestResults('f-button - action');
+        const axeResults = getAxeResults('f-button - action');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
@@ -25,7 +25,7 @@ describe('Accessibility tests', () => {
 
         // Act
         button.load();
-        const axeResults = getAccessibilityTestResults('f-button - link');
+        const axeResults = getAxeResults('f-button - link');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
@@ -37,7 +37,7 @@ describe('Accessibility tests', () => {
 
         // Act
         button.load();
-        const axeResults = getAccessibilityTestResults('f-button - icon');
+        const axeResults = getAxeResults('f-button - icon');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
