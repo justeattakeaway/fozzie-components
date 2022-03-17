@@ -15,7 +15,6 @@
 
 <script>
 export default {
-    name: 'ContentCardImage',
     props: {
         backgroundImageUrl: {
             type: String,
