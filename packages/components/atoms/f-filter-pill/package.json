@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-filter-pill",
   "description": "Fozzie Filter Pill - An interactive component for filter toggles.",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "main": "dist/f-filter-pill.umd.min.js",
   "files": [
     "dist",
@@ -42,6 +42,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
+    "@justeat/f-vue-icons": "3.7.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
