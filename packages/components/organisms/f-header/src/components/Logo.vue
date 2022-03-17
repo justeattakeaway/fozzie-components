@@ -96,12 +96,12 @@ export default {
         display: flex;
         justify-content: center;
         height: $header-height--narrow;
-        padding-top: spacing(d);
+        padding: spacing(d) 0;
 
         @include media('>mid') {
             justify-content: left;
             height: $header-height;
-            padding-top: 20px;
+            padding: 20px 0;
         }
     }
 

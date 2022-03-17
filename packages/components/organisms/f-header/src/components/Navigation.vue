@@ -683,8 +683,8 @@ export default {
     height: $nav-featureLinkIcon-height;
 
     & path {
-            fill: $nav-icon-color;
-        }
+        fill: $nav-icon-color;
+    }
 
     @include media('<=mid') {
         position: absolute;
