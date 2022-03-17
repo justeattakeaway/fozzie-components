@@ -173,6 +173,7 @@ $countrySelector-text-bg-hover : $color-container-subtle;
 
 .c-countrySelector-country {
     @include media('>mid') {
+        // container for country link so countries are all 120h * 24w
         min-width: 192px;
     }
 
