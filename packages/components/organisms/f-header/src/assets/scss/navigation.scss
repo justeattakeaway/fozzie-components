@@ -226,13 +226,13 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
-.c-nav-list-link-withBorderTop {
+.c-nav-list-link-borderTop {
     @include media('<=mid') {
         border-top: 1px solid $color-border-default;
     }
 }
 
-.c-nav-list-link-withBorderBottom {
+.c-nav-list-link-borderBottom {
     @include media('<=mid') {
         border-bottom: 1px solid $color-border-default;
     }
@@ -257,6 +257,7 @@ $nav-toggleIcon-space              : 5px;
     }
     &:hover {
         text-decoration: none;
+        font-weight: $font-weight-regular;
     }
 }
 
