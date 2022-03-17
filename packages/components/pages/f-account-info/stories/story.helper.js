@@ -8,15 +8,15 @@ const httpStatusCodes = {
 
 const httpVerbs = {
     get: 'GET',
-    post: 'POST'
+    patch: 'PATCH'
 };
 
 const apiStates = {
     none: 'no-issues',
     apiGetDetailsFailed: 'get-details-fails',
     apiGetAddressFailed: 'get-address-fails',
-    apiPostDetailsFailed: 'post-details-fails',
-    apiPostAddressFailed: 'post-address-fails'
+    apiPostDetailsFailed: 'patch-details-fails',
+    apiPostAddressFailed: 'patch-address-fails'
 };
 
 // Consumer Details
@@ -38,19 +38,19 @@ const consumerDetailsGET500 = {
     responseData: null
 };
 
-const consumerDetailsPOST200 = {
-    // POST consumer details successfully
+const consumerDetailsPATCH200 = {
+    // PATCH consumer details successfully
     url: '/consumer',
-    method: httpVerbs.post,
+    method: httpVerbs.patch,
     responseStatus: httpStatusCodes.ok,
     requestData: null,
     responseData: getConsumerDetails
 };
 
-const consumerDetailsPOST500 = {
-    // Fail to POST consumer details
+const consumerDetailsPATCH500 = {
+    // Fail to PATCH consumer details
     url: '/consumer',
-    method: httpVerbs.post,
+    method: httpVerbs.patch,
     responseStatus: httpStatusCodes.internalServerError,
     requestData: null,
     responseData: getConsumerDetails
@@ -75,19 +75,19 @@ const consumerAddressGET500 = {
     responseData: null
 };
 
-const consumerAddressPOST200 = {
-    // POST consumer address successfully
+const consumerAddressPATCH200 = {
+    // PATCH consumer address successfully
     url: '/consumer/addresses',
-    method: httpVerbs.post,
+    method: httpVerbs.patch,
     responseStatus: httpStatusCodes.ok,
     requestData: null,
     responseData: getConsumerAddresses
 };
 
-const consumerAddressPOST500 = {
-    // Failed to POST consumer address
+const consumerAddressPATCH500 = {
+    // Failed to PATCH consumer address
     url: '/consumer/addresses',
-    method: httpVerbs.post,
+    method: httpVerbs.patch,
     responseStatus: httpStatusCodes.internalServerError,
     requestData: null,
     responseData: getConsumerAddresses
@@ -98,45 +98,45 @@ const apiDefinitions = [
         state: apiStates.none,
         states: [
             consumerDetailsGET200,
-            consumerDetailsPOST200,
+            consumerDetailsPATCH200,
             consumerAddressGET200,
-            consumerAddressPOST200
+            consumerAddressPATCH200
         ]
     },
     {
         state: apiStates.apiPostDetailsFailed,
         states: [
             consumerDetailsGET200,
-            consumerDetailsPOST500, // Fail
+            consumerDetailsPATCH500, // Fail
             consumerAddressGET200,
-            consumerAddressPOST200
+            consumerAddressPATCH200
         ]
     },
     {
         state: apiStates.apiPostAddressFailed,
         states: [
             consumerDetailsGET200,
-            consumerDetailsPOST200,
+            consumerDetailsPATCH200,
             consumerAddressGET200,
-            consumerAddressPOST500 // Fail
+            consumerAddressPATCH500 // Fail
         ]
     },
     {
         state: apiStates.apiGetDetailsFailed,
         states: [
             consumerDetailsGET500, // Fail
-            consumerDetailsPOST200,
+            consumerDetailsPATCH200,
             consumerAddressGET200,
-            consumerAddressPOST200
+            consumerAddressPATCH200
         ]
     },
     {
         state: apiStates.apiGetAddressFailed,
         states: [
             consumerDetailsGET200,
-            consumerDetailsPOST200,
+            consumerDetailsPATCH200,
             consumerAddressGET500, // Fail
-            consumerAddressPOST200
+            consumerAddressPATCH200
         ]
     }
 ];
@@ -154,7 +154,7 @@ export const apiStateOptions = {
 };
 
 /**
-* Prepares the GET/POST mocks for the api calls to reflect what value the Storybook Control equals.
+* Prepares the GET/PATCH mocks for the api calls to reflect what value the Storybook Control equals.
 * @param {apiStates} apiState - The current set value of the requested api state
 */
 export const setupApiMockState = (apiState = apiStates.none) => {

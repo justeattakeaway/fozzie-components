@@ -103,4 +103,38 @@ describe('f-account-info component tests', () => {
         // Assert
         expect(accountInfo.isErrorCardComponentDisplayed()).toBe(true);
     });
+
+    forEach([
+        ['en-GB']
+    ]).it('should display the %s Submit success alert if Submit succeed', locale => {
+        // Arrange
+        accountInfo.withQuery('args', `locale:${locale}`);
+        accountInfo.load();
+        accountInfo.clearBlurField('firstName');
+        accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
+
+        // Act
+        accountInfo.clickSaveButton();
+
+        // Assert
+        expect(accountInfo.isErrorAlertDisplayed()).toBe(false);
+        expect(accountInfo.isSuccessAlertDisplayed()).toBe(true);
+    });
+
+    forEach([
+        ['en-GB']
+    ]).it('should display the %s Submit error alert if Submit fails', locale => {
+        // Arrange
+        accountInfo.withQuery('args', `locale:${locale};apiState:patch-details-fails`);
+        accountInfo.load();
+        accountInfo.clearBlurField('firstName');
+        accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
+
+        // Act
+        accountInfo.clickSaveButton();
+
+        // Assert
+        expect(accountInfo.isSuccessAlertDisplayed()).toBe(false);
+        expect(accountInfo.isErrorAlertDisplayed()).toBe(true);
+    });
 });
