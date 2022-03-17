@@ -3,46 +3,51 @@
         :class="[
             $style['c-filterPill'], {
                 [$style['c-filterPill--selected']]: isToggleSelected,
-                [$style['c-filterPill--disabled']]: isToggleDisabled
+                [$style['c-filterPill--disabled']]: isDisabled
             }]"
         data-test-id="filter-item">
-        <a
-            :class="$style['c-filterPill-link']"
-            :href="href"
-            tabindex="-1"
-            aria-hidden="true"
-            data-test-id="filter-pill-link">
-            <span class="is-visuallyHidden">
-                {{ displayText }}
-            </span>
-        </a>
-        <input
-            :id="`filterPillToggle-${inputId}`"
-            type="checkbox"
-            class="is-visuallyHidden"
-            :class="$style['c-filterPill-checkbox']"
-            data-test-id="filter-pill-input"
-            :checked="isToggleSelected"
-            :tabindex="0"
-            :disabled="isToggleDisabled"
-            @change="toggleFilter">
-        <label
-            :class="$style['c-filterPill-label']"
-            :for="`filterPillToggle-${inputId}`"
-            data-test-id="filter-pill-label"
-            :tabindex="-1">
-            <tick-icon :class="$style['c-filterPill-icon']" />
-            <span
-                :class="$style['c-filterPill-text']"
-                data-test-id="filter-pill-text">
-                {{ displayText }}
-            </span>
-            <span
-                :class="$style['c-filterPill-number']"
-                data-test-id="filter-pill-number">
-                {{ displayNumber }}
-            </span>
-        </label>
+        <div v-if="isLoading">
+            Loading
+        </div>
+        <template v-else>
+            <a
+                :class="$style['c-filterPill-link']"
+                :href="href"
+                tabindex="-1"
+                aria-hidden="true"
+                data-test-id="filter-pill-link">
+                <span class="is-visuallyHidden">
+                    {{ displayText }}
+                </span>
+            </a>
+            <input
+                :id="`filterPillToggle-${inputId}`"
+                type="checkbox"
+                class="is-visuallyHidden"
+                :class="$style['c-filterPill-checkbox']"
+                data-test-id="filter-pill-input"
+                :checked="isToggleSelected"
+                :tabindex="0"
+                :disabled="isDisabled"
+                @change="toggleFilter">
+            <label
+                :class="$style['c-filterPill-label']"
+                :for="`filterPillToggle-${inputId}`"
+                data-test-id="filter-pill-label"
+                :tabindex="-1">
+                <tick-icon :class="$style['c-filterPill-icon']" />
+                <span
+                    :class="$style['c-filterPill-text']"
+                    data-test-id="filter-pill-text">
+                    {{ displayText }}
+                </span>
+                <span
+                    :class="$style['c-filterPill-number']"
+                    data-test-id="filter-pill-number">
+                    {{ displayNumber }}
+                </span>
+            </label>
+        </template>
     </div>
 </template>
 
@@ -82,12 +87,15 @@ export default {
         displayNumber: {
             type: Number,
             default: null
+        },
+        isLoading: {
+            type: Boolean,
+            default: false
         }
     },
     data () {
         return {
-            isToggleSelected: false,
-            isToggleDisabled: false
+            isToggleSelected: false
         };
     },
     computed: {},
@@ -96,16 +104,10 @@ export default {
             if (newValue !== this.isToggleSelected) {
                 this.isToggleSelected = newValue;
             }
-        },
-        isDisabled (newValue) {
-            if (newValue !== this.isToggleDisabled) {
-                this.isToggleDisabled = newValue;
-            }
         }
     },
     created () {
         this.isToggleSelected = this.isSelected;
-        this.isToggleDisabled = this.isDisabled;
     },
     methods: {
         toggleFilter () {
@@ -143,7 +145,7 @@ $filter-pill-ease: ease-in-out;
 }
 
 .c-filterPill--selected {
-    box-shadow: 0 0 0 2px $color-focus;
+    box-shadow: 0 0 0 1px $filter-pill-selected-color;
 }
 
 .c-filterPill-link {
