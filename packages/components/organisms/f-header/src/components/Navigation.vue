@@ -668,6 +668,19 @@ export default {
     }
 }
 
+.c-nav-list-btn {
+    background: transparent;
+    border: 0;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+
+    @include media('<=mid') {
+        width: 100%;
+        text-align: left;
+    }
+}
+
 .c-nav-list-text-sub {
     display: block;
     overflow: hidden;

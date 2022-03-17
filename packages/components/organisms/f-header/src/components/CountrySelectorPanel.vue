@@ -48,11 +48,12 @@
                         :text="country.localisedName"
                         :class="$style['c-countrySelector-country-link']"
                         :has-border-bottom="false"
+                        :is-country-link="true"
                         :href="country.siteUrl">
                         <template #icon>
                             <flag-icon
                                 :country-code="country.flagKey"
-                                :class="[$style['c-nav-list-icon--flag']]" />
+                                :class="[$style['c-countrySelector-country-flag']]" />
                         </template>
                     </nav-link>
                 </li>
@@ -179,5 +180,13 @@ $countrySelector-text-bg-hover : $color-container-subtle;
         background: $countrySelector-text-bg-hover;
         text-decoration: none;
     }
+}
+
+.c-countrySelector-country-flag {
+    height: $countrySelector-flag-height;
+    width: $countrySelector-flag-width;
+    display: flex;
+    float: left;
+    margin: spacing(c) spacing(d);
 }
 </style>

@@ -13,8 +13,7 @@
             data-test-id="action-button-component"
             :tabindex="tabindex"
             :class="[
-                $style['c-nav-list-text'],
-                $style['c-nav-list-btn']
+                $style['c-countrySelector-btn']
             ]"
             :aria-expanded="(!isBelowMid && isCountrySelectorOpen) ? 'true' : 'false'"
             :aria-haspopup="!isBelowMid"
@@ -23,9 +22,9 @@
             <flag-icon
                 data-test-id="current-flag-icon"
                 :country-code="copy.currentCountryKey"
-                :class="$style['c-nav-icon-current-flag']" />
+                :class="$style['c-countrySelector-current-flag']" />
             <span
-                :class="$style['country-selector-text']">
+                :class="$style['c-countrySelector-text']">
                 {{ copy.selectYourCountryText }}
             </span>
         </button>
@@ -107,30 +106,37 @@ export default {
 <style lang="scss" module>
 @import '../assets/scss/navigation.scss';
 
-.country-selector-text {
+.c-countrySelector-text {
     @include media('>mid') {
         display: none;
     }
 }
 
-.c-nav-list-text {
+.c-countrySelector-btn {
+    background: transparent;
+    border: 0;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+
     @include media('<=mid') {
+        width: 100%;
+        text-align: left;
         padding: spacing(c) spacing(a);
     }
 
-    &:hover {
+     &:hover {
         font-weight: $font-weight-bold;
     }
 }
 
-.c-nav-list-link-countrySelector {
-    @include media('<=mid') {
-        color: $nav-text-color;
-        padding: spacing(c) 0;
-    }
+.c-countrySelector-current-flag {
+    height: $countrySelector-flag-height;
+    width: $countrySelector-flag-width;
 
-    &:hover {
-        font-weight: $font-weight-bold;
+    @include media('<=mid') {
+        margin: 0 spacing(d);
+        float: left;
     }
 }
 </style>

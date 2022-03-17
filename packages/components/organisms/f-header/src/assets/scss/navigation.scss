@@ -114,58 +114,6 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
-.c-nav-list-link {
-    &:hover,
-    &:focus,
-    &:active {
-        text-decoration: none;
-
-        @include media('<=mid') {
-            font-weight: $font-weight-bold;
-        }
-
-        @include media('>mid') {
-            color: $nav-text-color--hover;
-            text-decoration: underline;
-
-            .c-header--transparent .c-nav-popoverList & {
-                color: inherit;
-            }
-        }
-    }
-}
-
-.c-nav-list-btn {
-    background: transparent;
-    border: 0;
-    font-size: 1rem;
-    margin: 0;
-    padding: 0;
-
-    @include media('<=mid') {
-        width: 100%;
-        text-align: left;
-    }
-}
-
-.c-nav-list-icon--flag {
-    height: $countrySelector-flag-height;
-    width: $countrySelector-flag-width;
-    display: flex;
-    float: left;
-    margin: spacing(c) spacing(d);
-}
-
-.c-nav-icon-current-flag {
-    height: $countrySelector-flag-height;
-    width: $countrySelector-flag-width;
-
-    @include media('<=mid') {
-        margin: 0 spacing(d);
-        float: left;
-    }
-}
-
 .c-nav-popoverList--twoColumns {
     @include media('>mid') {
         column-count: 2;
@@ -201,24 +149,6 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
-.c-nav-list-link {
-    text-decoration: none;
-    color: $nav-text-color;
-    font-size: $nav-text-size;
-
-    @include media('<=mid') {
-        display: flex;
-        margin-left: spacing(h);
-        padding: spacing(c) spacing(d) spacing(c) 0;
-    }
-
-    @include media('>mid') {
-        font-weight: $nav-text-weight;
-        margin: 0;
-        padding: 0;
-    }
-}
-
 .c-nav-list-item--horizontallyAlignedAboveMid {
     @include media('>mid') {
         float: left;
@@ -226,38 +156,10 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
-.c-nav-list-link-borderTop {
-    @include media('<=mid') {
-        border-top: 1px solid $color-border-default;
-    }
-}
-
-.c-nav-list-link-borderBottom {
-    @include media('<=mid') {
-        border-bottom: 1px solid $color-border-default;
-    }
-}
-
 
 .c-nav-list-link--alt {
     @include media('>mid') {
         color: $nav-text-color--transparent;
-    }
-}
-
-.c-countrySelector-country-link a {
-    @include media('>mid') {
-        text-decoration: none;
-        display: flex;
-        float: center;
-        margin-left: spacing(h);
-        padding: spacing(c) spacing(d) spacing(c) 0;
-        @include font-size($nav-text-size);
-        font-weight: $font-weight-regular;
-    }
-    &:hover {
-        text-decoration: none;
-        font-weight: $font-weight-regular;
     }
 }
 
