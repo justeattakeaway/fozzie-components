@@ -6,7 +6,9 @@ const {
     CHANGE_PASSWORD_BUTTON,
     DELETE_ACCOUNT_LINK,
     FIELDS,
-    ERROR_CARD
+    ERROR_CARD,
+    ERROR_ALERT,
+    SUCCESS_ALERT
 } = require('./f-account-info-selectors');
 
 module.exports = class AccountInfo extends Page {
@@ -17,6 +19,10 @@ module.exports = class AccountInfo extends Page {
     get component () { return $(COMPONENT); }
 
     get errorCardComponent () { return $(ERROR_CARD); }
+
+    get errorAlert () { return $(ERROR_ALERT); }
+
+    get successAlert () { return $(SUCCESS_ALERT); }
 
     LinksAndButtons = {
         changeEmailAddressLink: {
@@ -104,6 +110,10 @@ module.exports = class AccountInfo extends Page {
         this.component.click();
     }
 
+    clickSaveButton () {
+        return this.LinksAndButtons.saveChangesButton.cta.click();
+    }
+
     isEmptyErrorMessageDisplayed (fieldName) {
         return this.fields[fieldName].emptyError.isDisplayed();
     }
@@ -118,5 +128,13 @@ module.exports = class AccountInfo extends Page {
 
     isDisabled (field) {
         return !this.fields[field].input.isEnabled();
+    }
+
+    isErrorAlertDisplayed () {
+        return this.errorAlert.isDisplayed();
+    }
+
+    isSuccessAlertDisplayed () {
+        return this.successAlert.isDisplayed();
     }
 };

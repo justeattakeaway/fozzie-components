@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.20.1
+------------------------------
+*March 17, 2022*
+
+### Added
+- Chrome & Visual tests to cover the additional f-alert states.
+
+
 v0.20.0
 ------------------------------
 *March 16, 2022*
