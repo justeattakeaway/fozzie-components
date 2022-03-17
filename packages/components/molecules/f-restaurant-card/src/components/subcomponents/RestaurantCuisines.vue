@@ -26,12 +26,12 @@ export default {
 <style lang="scss" module>
 .c-restaurantCard-cuisines {
     display: flex;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
     align-items: center;
-    margin: 0;
+    margin: 0 0 4px 0;
     padding: 0;
     list-style: none;
-    list-style-image: none;
+    // list-style-image: none;
 
     & + & {
         margin-top: 0;
@@ -43,7 +43,7 @@ export default {
     padding-right: spacing();
     margin: 0 spacing(a) 0 0;
     white-space: nowrap;
-    font-size: $font-body-s-paragraph * 1px;
+    @include font-size($font-body-s-paragraph);
 
     &:before {
         display: none;

@@ -53,6 +53,15 @@
                 :class="[
                     $style['c-restaurantCard-content--left-col'],
                     $style['c-restaurantCard-ratingContainer']]">
+                <!-- 'New' label -->
+                <restaurant-tag
+                    v-if="newTagText"
+                    :is-large="true"
+                    :is-uppercase="true"
+                    :text="newTagText"
+                    data-test-id="restaurant-new-badge"
+                    color-scheme="positive" />
+
                 <!-- Ratings -->
                 <component
                     :is="errorBoundary"
@@ -63,19 +72,12 @@
                 </component>
 
                 <!-- Premier Icon -->
-                <legend-icon
-                    v-if="isPremier"
-                    :class="[$style['c-restaurantCard-premier']]"
-                    data-test-id="restaurant-premier" />
-
-                <!-- 'New' label -->
-                <restaurant-tag
-                    v-if="newTagText"
-                    :is-large="true"
-                    :is-uppercase="true"
-                    :text="newTagText"
-                    data-test-id="restaurant-new-badge"
-                    color-scheme="positive" />
+                <span :class="[$style['c-restaurantCard-premier-iconWrapper']]">
+                    <legend-icon
+                        v-if="isPremier"
+                        :class="[$style['c-restaurantCard-premier']]"
+                        data-test-id="restaurant-premier" />
+                </span>
             </div>
 
             <template v-if="isLoading">
@@ -362,7 +364,7 @@ export default {
 .c-restaurantCard {
   text-decoration: none;
   display: grid;
-  grid-gap: spacing(d);
+  grid-gap: spacing(c);
   grid-template-columns: 1fr;
   position: relative;
   outline-color: $color-focus;
@@ -417,19 +419,26 @@ export default {
 }
 
 .c-restaurantCard-imageTags {
-    bottom: spacing(d);
+    bottom: spacing(b);
     left: spacing(d);
     position: absolute;
     margin-bottom: 0;
 }
 
-.c-restaurantCard-premier {
-    height: 21px;
+.c-restaurantCard-premier-iconWrapper {
+    width: 41px;
+    height: auto;
+
+    svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
 }
 
 .c-restaurantCard-ratingContainer {
     display: flex;
-    gap: spacing(c);
+    gap: spacing(b);
     align-items: center;
 }
 
@@ -443,6 +452,14 @@ export default {
     // an alternative to using bottom gap so that none is applied to the clearfix
     > * {
         margin-bottom: spacing(a);
+    }
+}
+
+.c-restaurantCard-name {
+    margin-bottom: spacing(a);
+
+    @include media('>mid') {
+        margin-bottom: spacing(b);
     }
 }
 
@@ -463,15 +480,15 @@ export default {
         .c-restaurantCard--listItem & {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-auto-rows: min-content;
-            place-content: center;
+            // grid-auto-rows: min-content;
+            // place-content: center;
             grid-auto-flow: dense;
-            align-items: baseline;
-            gap: spacing(a) spacing(d);
+            // align-items: baseline;
+            // gap: spacing(a) spacing(d);
 
             > * {
                 grid-column: 2;
-                margin-bottom: 0;
+                // margin-bottom: 0;
             }
         }
 
@@ -485,22 +502,18 @@ export default {
             grid-column: 1;
         }
 
-        .c-restaurantCard-cuisines {
-            align-self: start;
-        }
+        // .c-restaurantCard-cuisines {
+        //     align-self: start;
+        // }
 
         .c-restaurantCard-name,
         .c-restaurantCard-tags {
             grid-column: 1 / 3;
         }
 
-        .c-restaurantCard-name {
-            margin-bottom: spacing(a);
-        }
-
-        .c-restaurantCard-tags {
-            margin-top: spacing(a);
-        }
+        // .c-restaurantCard-tags {
+        //     margin-top: spacing(a);
+        // }
 
         // Prevent the cleafix from working on the list-item styling
         .c-restaurantCard-clearfix {

@@ -57,16 +57,13 @@ export default {
     display: inline-block;
     padding: spacing(a);
     border-radius: $radius-rounded-a;
-    font-size: $font-paragraph-03 * 1px;
+    @include font-size($font-paragraph-03);
     color: $color-content-default;
     background-color: $color-container-strong;
-
-    @include media('<mid') {
-         max-width: 30ch;
-         white-space: nowrap;
-         overflow: hidden;
-         text-overflow: ellipsis;
-    }
+    max-width: 30ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .c-restaurantTag--isLarge {

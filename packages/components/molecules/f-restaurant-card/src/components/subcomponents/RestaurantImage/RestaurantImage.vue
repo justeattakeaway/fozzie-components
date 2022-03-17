@@ -24,7 +24,7 @@ export default {
 $img-borderRadius : $radius-rounded-c;
 
 .c-restaurantCard-img {
-  background-color: $color-grey-30;
+  background-color: $color-container-strong;
   background-size: cover;
   background-position: center;
   border-radius: $img-borderRadius;

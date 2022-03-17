@@ -1,18 +1,19 @@
 <template>
     <p :class="[$style['c-restaurantCard-rating']]">
         <!-- Icons -->
-        <star-empty-icon
-            v-if="noRatingsAvailable"
-            aria-hidden="true"
-            data-test-id="ratings-star-empty"
-            :class="[$style['c-restaurantCard-rating-star']]" />
+        <span :class="[$style['c-restaurantCard-rating-iconWrapper']]">
+            <star-empty-icon
+                v-if="noRatingsAvailable"
+                aria-hidden="true"
+                data-test-id="ratings-star-empty"
+                :class="[$style['c-restaurantCard-rating-star']]" />
 
-        <star-filled-icon
-            v-else
-            aria-hidden="true"
-            data-test-id="ratings-star-filled"
-            :class="[$style['c-restaurantCard-rating-star']]" />
-
+            <star-filled-icon
+                v-else
+                aria-hidden="true"
+                data-test-id="ratings-star-filled"
+                :class="[$style['c-restaurantCard-rating-star']]" />
+        </span>
         <!-- No ratings message -->
         <span
             v-if="noRatingsAvailable"
@@ -163,13 +164,19 @@ export default {
     margin: 0;
 }
 
-.c-restaurantCard-rating-star {
-    width: spacing(d);
-    height: spacing(d);
+.c-restaurantCard-rating-iconWrapper {
+    width: 14px;
+    height: auto;
     margin-right: spacing(a);
+}
+
+.c-restaurantCard-rating-star {
+    width: 100%;
+    height: 100%;
+    display: block;
 
     & path {
-        fill: $color-orange-30;
+        fill: $color-dark-content-brand;
     }
 }
 

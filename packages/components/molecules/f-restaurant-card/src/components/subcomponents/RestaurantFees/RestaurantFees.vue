@@ -55,7 +55,7 @@ export default {
     &:after {
         content: '\2022'; // round bullet character
         color: $color-content-subdued;
-        line-height: 1;
+        // line-height: 1;
         margin: 0 spacing(a);
     }
 
