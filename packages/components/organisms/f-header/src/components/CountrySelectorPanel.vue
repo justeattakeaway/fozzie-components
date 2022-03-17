@@ -47,6 +47,7 @@
                         :tabindex="isOpen ? 0 : -1"
                         :text="country.localisedName"
                         :class="$style['c-countrySelector-country-link']"
+                        :has-border-bottom="false"
                         :href="country.siteUrl">
                         <template #icon>
                             <flag-icon
@@ -130,7 +131,7 @@ $countrySelector-text-bg-hover : $color-container-subtle;
     @include media('>mid') {
         padding-top: spacing(e);
         padding-bottom: spacing(c);
-        width: 416px;
+        // width: 416px;
     }
 }
 
@@ -171,6 +172,10 @@ $countrySelector-text-bg-hover : $color-container-subtle;
 }
 
 .c-countrySelector-country {
+    @include media('>mid') {
+        min-width: 192px;
+    }
+
     &:hover {
         background: $countrySelector-text-bg-hover;
         text-decoration: none;

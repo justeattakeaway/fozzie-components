@@ -7,6 +7,8 @@
             :href="href"
             :class="[
                 $style['c-nav-list-link'],
+                { [$style['c-nav-list-link-withBorderBottom']]: hasBorderBottom },
+                { [$style['c-nav-list-link-withBorderTop']]: hasBorderTop },
                 { [$style['c-nav-list-link--alt']]: isAltColour },
                 { [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent' }
             ]">
@@ -34,6 +36,16 @@ export default {
         text: {
             type: String,
             required: true
+        },
+
+        hasBorderTop: {
+            type: Boolean,
+            default: false
+        },
+
+        hasBorderBottom: {
+            type: Boolean,
+            default: true
         },
 
         isAltColour: {

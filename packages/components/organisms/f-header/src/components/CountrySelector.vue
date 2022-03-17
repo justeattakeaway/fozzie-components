@@ -13,7 +13,7 @@
             data-test-id="action-button-component"
             :tabindex="tabindex"
             :class="[
-                $style['c-nav-list-link-countrySelector'],
+                $style['c-nav-list-text'],
                 $style['c-nav-list-btn']
             ]"
             :aria-expanded="(!isBelowMid && isCountrySelectorOpen) ? 'true' : 'false'"
@@ -113,9 +113,22 @@ export default {
     }
 }
 
+.c-nav-list-text {
+    font-weight: $nav-text-weight;
+    @include media('<=mid') {
+        padding: spacing(c) spacing(a);
+        font-weight: $font-weight-regular;
+    }
+}
+
 .c-nav-list-link-countrySelector {
     @include media('<=mid') {
+        color: $nav-text-color;
         padding: spacing(c) 0;
+    }
+
+    &:hover {
+        font-weight: $font-weight-bold;
     }
 }
 </style>

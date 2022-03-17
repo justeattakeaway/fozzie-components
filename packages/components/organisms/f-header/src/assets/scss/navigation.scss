@@ -12,7 +12,6 @@ $nav-text-weight                   : $font-weight-bold;
 $nav-text-color                    : $color-content-link;
 $nav-text-color--hover             : darken($color-content-link, $color-hover-01);
 $nav-text-color--transparent       : $color-content-link-inverse;
-$nav-text-subFont                  : $font-family-base;
 
 $nav-transition-duration           : 250ms;
 
@@ -204,9 +203,7 @@ $nav-toggleIcon-space              : 5px;
 
 .c-nav-list-link {
     text-decoration: none;
-    font-family: $nav-text-subFont;
     color: $nav-text-color;
-    font-weight: $font-weight-regular;
     font-size: $nav-text-size;
 
     @include media('<=mid') {
@@ -230,13 +227,13 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
-.c-nav-list-link-withBorderTop a {
+.c-nav-list-link-withBorderTop {
     @include media('<=mid') {
         border-top: 1px solid $color-border-default;
     }
 }
 
-.c-nav-list-link-withBorderBottom a {
+.c-nav-list-link-withBorderBottom {
     @include media('<=mid') {
         border-bottom: 1px solid $color-border-default;
     }

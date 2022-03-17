@@ -100,7 +100,6 @@
                         :text="copy.offers.text"
                         :tabindex="tabIndex"
                         :href="copy.offers.url"
-                        :class="$style['c-nav-list-link-withBorderBottom']"
                         :data-trak="analyticsObjects.navigation.offers.clickLink"
                         :is-alt-colour="isAltColour"
                         :background-theme="headerBackgroundTheme"
@@ -122,7 +121,6 @@
                     <nav-link
                         :text="copy.deliveryEnquiry.text"
                         :tabindex="tabIndex"
-                        :class="$style['c-nav-list-link-withBorderBottom']"
                         :href="copy.deliveryEnquiry.url"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
                             label: copy.deliveryEnquiry.gtm
@@ -219,31 +217,13 @@
                 </li>
 
                 <li
-                    v-if="showHelpLink"
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
-                    <nav-link
-                        :text="copy.help.text"
-                        :tabindex="tabIndex"
-                        :class="[
-                            $style['c-nav-list-link-withBorderTop'],
-                            $style['c-nav-list-link-withBorderBottom']]"
-                        :href="copy.help.url"
-                        :data-trak="analyticsObjects.navigation.clickHeaderLink({
-                            label: copy.help.gtm
-                        })"
-                        :is-alt-colour="isAltColour"
-                        :background-theme="headerBackgroundTheme"
-                        data-test-id="help-link" />
-                </li>
-
-                <li
                     v-if="userInfo && isBelowMid && showLoginInfo"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
                         v-if="userInfo && isBelowMid && showLoginInfo"
                         :text="copy.accountLogout.text"
                         :tabindex="tabIndex"
-                        :class="{ [$style['c-nav-list-link-withBorderBottom']]: showLoginInfo }"
+                        :has-border-top="true"
                         :href="copy.accountLogout.url"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
                             label: copy.accountLogout.gtm
@@ -251,6 +231,21 @@
                         :is-alt-colour="isAltColour"
                         :background-theme="headerBackgroundTheme"
                         data-test-id="logout-link" />
+                </li>
+
+                <li
+                    v-if="showHelpLink"
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    <nav-link
+                        :text="copy.help.text"
+                        :tabindex="tabIndex"
+                        :href="copy.help.url"
+                        :data-trak="analyticsObjects.navigation.clickHeaderLink({
+                            label: copy.help.gtm
+                        })"
+                        :is-alt-colour="isAltColour"
+                        :background-theme="headerBackgroundTheme"
+                        data-test-id="help-link" />
                 </li>
 
                 <li

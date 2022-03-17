@@ -7,9 +7,7 @@
             :key="index"
             data-test-id="nav-links">
             <a
-                :class="[
-                    $style['c-nav-list-link'],
-                    $style['list-link']]"
+                :class="$style['list-link']"
                 :tabindex="tabIndex"
                 :href="link.url"
                 :data-trak='`{
@@ -91,18 +89,20 @@ export default {
 @import '../assets/scss/navigation.scss';
 
 .list-link {
-    font-weight: $font-weight-regular;
+    text-decoration: none;
 
     @include media('>mid') {
         display: block;
         padding: spacing(c) spacing(d);
         margin: 0;
         height: auto;
-        text-decoration: none;
         border-bottom: 1px solid $color-border-default;
     }
 
     @include media('<=mid') {
+        display: flex;
+        margin-left: spacing(h);
+        padding: spacing(c) spacing(d) spacing(c) 0;
         border-top: 1px solid $color-border-default;
     }
 
