@@ -74,7 +74,7 @@ describe('AccountInfo', () => {
         // Arrange
         dataDefaults = () => ({
             hasFormUpdate: false,
-            shouldShowErrorPage: false
+            shouldShowLoadErrorCard: false
         });
         cookiesSpy = jest.fn();
         httpSpy = jest.fn();
@@ -103,7 +103,7 @@ describe('AccountInfo', () => {
 
     describe('when creating the component', () => {
         it('should register the Store Module', async () => {
-            // Arrange
+            // Arrange & Act
             wrapper = await mountAccountInfo({ storeOverride: new Vuex.Store() });
 
             // Assert
@@ -171,18 +171,20 @@ describe('AccountInfo', () => {
             );
         });
 
-        it('should set shouldShowErrorPage flag to true if an error occurs', async () => {
-            // Arrange & Act
+        it('should set shouldShowLoadErrorCard flag to true if an error occurs', async () => {
+            // Arrange
             const errorActions = {
                 ...storeActions,
                 loadConsumerDetails: jest.fn().mockImplementationOnce(() => {
                     throw new Error('some-error');
                 })
             };
+
+            // Act
             wrapper = await mountAccountInfo({ actions: errorActions });
 
             // Assert
-            expect(wrapper.vm.shouldShowErrorPage).toEqual(true);
+            expect(wrapper.vm.shouldShowLoadErrorCard).toEqual(true);
         });
 
         it('should not show the error card if no errors', async () => {
@@ -194,10 +196,10 @@ describe('AccountInfo', () => {
             expect(element.exists()).toEqual(false);
         });
 
-        it('should show the error card if shouldShowErrorPage is true', async () => {
+        it('should show the error card if shouldShowLoadErrorCard is true', async () => {
             // Arrange & Act
             wrapper = await mountAccountInfo();
-            await wrapper.setData({ shouldShowErrorPage: true });
+            await wrapper.setData({ shouldShowLoadErrorCard: true });
             const element = wrapper.find('[data-test-id="account-info-error-card"]');
 
             // Assert
@@ -322,10 +324,12 @@ describe('AccountInfo', () => {
             });
 
             it('should log an info log', async () => {
-                // Act
+                // Arrange
                 wrapper = await mountAccountInfo();
                 await wrapper.setData({ hasFormUpdate: true });
                 logMocks.info.mockClear(); // initialise has already logged info once
+
+                // Act
                 await wrapper.vm.onFormSubmit();
 
                 // Assert
@@ -336,8 +340,8 @@ describe('AccountInfo', () => {
                 );
             });
 
-            it('should set shouldShowErrorPage flag to true if an error occurs', async () => {
-                // Arrange & Act
+            it('should set shouldShowSaveErrorAlert flag to true if a save error occurs', async () => {
+                // Arrange
                 const errorActions = {
                     ...storeActions,
                     saveConsumerDetails: jest.fn().mockImplementationOnce(() => {
@@ -351,11 +355,11 @@ describe('AccountInfo', () => {
                 await wrapper.vm.onFormSubmit();
 
                 // Assert
-                expect(wrapper.vm.shouldShowErrorPage).toEqual(true);
+                expect(wrapper.vm.shouldShowSaveErrorAlert).toEqual(true);
             });
 
             it('should not call the save action if no changes', async () => {
-                // Arrange & Act
+                // Arrange
                 wrapper = await mountAccountInfo();
                 await wrapper.setData({ hasFormUpdate: false });
 
@@ -366,8 +370,8 @@ describe('AccountInfo', () => {
                 expect(storeActions.saveConsumerDetails).not.toHaveBeenCalledWith();
             });
 
-            it('should set shouldShowErrorPage flag to true if an error occurs', async () => {
-                // Arrange & Act
+            it('should set shouldShowSaveErrorAlert flag to true if a save error occurs', async () => {
+                // Arrange
                 const errorActions = {
                     ...storeActions,
                     saveConsumerDetails: jest.fn().mockImplementationOnce(() => {
@@ -381,7 +385,7 @@ describe('AccountInfo', () => {
                 await wrapper.vm.onFormSubmit();
 
                 // Assert
-                expect(wrapper.vm.shouldShowErrorPage).toEqual(true);
+                expect(wrapper.vm.shouldShowSaveErrorAlert).toEqual(true);
             });
 
             describe('publishing analytics', () => {
