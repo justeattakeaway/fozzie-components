@@ -35,15 +35,15 @@ const mockCookies = {};
 
 const mockAnalytics = {};
 
-const mockLogger = {
-    logInfo: jest.fn()
+const mockLog = {
+    info: jest.fn()
 };
 
 const createSUT = () => new FeaturesService(mockStore, {
     httpClient: mockHttpClient,
     cookies: mockCookies,
     analytics: mockAnalytics,
-    logger: mockLogger
+    log: mockLog
 });
 
 describe('Feature Service tests', () => {
