@@ -32,4 +32,21 @@ describe('Legacy Accessibility tests', () => {
         // Assert
         expect(axeResults.violations.length).toBe(0);
     });
+
+    it('a11y - should have a correct tab loop order in the cookie banner component', () => {
+        // Arrange
+        legacyCookieBanner.withQuery('args', 'locale:en-GB');
+
+        // Act
+        cookieConsentBanner.load();
+        const expectedTabOrder = [
+            cookieConsentBanner.cookiePolicyLink,
+            cookieConsentBanner.cookieAcceptAllButton,
+            cookieConsentBanner.cookieAcceptNecessaryButton,
+            cookieConsentBanner.cookieBannerTitle];
+        const result = cookieConsentBanner.testTabOrder(expectedTabOrder);
+
+        // Assert
+        expect(result.actual).toEqual(result.expected);
+    });
 });
