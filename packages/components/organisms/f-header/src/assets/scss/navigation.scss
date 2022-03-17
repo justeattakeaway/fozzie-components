@@ -149,14 +149,6 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
-.c-nav-list-item--horizontallyAlignedAboveMid {
-    @include media('>mid') {
-        float: left;
-        padding: 28px 16px;
-    }
-}
-
-
 .c-nav-list-link--alt {
     @include media('>mid') {
         color: $nav-text-color--transparent;

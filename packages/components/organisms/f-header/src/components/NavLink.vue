@@ -7,9 +7,9 @@
             :href="href"
             :class="[
                 $style['c-navLink'],
-                { [$style['c-navLink-borderBottom']]: hasBorderBottom },
-                { [$style['c-navLink-borderTop']]: hasBorderTop },
-                { [$style['c-navLink-countryLink']]: isCountryLink },
+                { [$style['c-navLink--borderBottomBelowMid']]: hasBorderBottom },
+                { [$style['c-navLink--borderTopBelowMid']]: hasBorderTop },
+                { [$style['c-navLink--countryLink']]: isCountryLink },
                 { [$style['c-nav-list-link--alt']]: isAltColour },
                 { [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent' }
             ]">
@@ -107,19 +107,19 @@ export default {
     }
 }
 
-.c-navLink-borderTop {
+.c-navLink--borderTopBelowMid {
     @include media('<=mid') {
         border-top: 1px solid $color-border-default;
     }
 }
 
-.c-navLink-borderBottom {
+.c-navLink--borderBottomBelowMid {
     @include media('<=mid') {
         border-bottom: 1px solid $color-border-default;
     }
 }
 
-.c-navLink-country-link {
+.c-navLink--countryLink {
     @include media('>mid') {
         text-decoration: none;
         display: flex;

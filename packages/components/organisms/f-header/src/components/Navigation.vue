@@ -62,10 +62,7 @@
                 $style['c-nav-featureLink--hideAboveMid']
             ]">
             <gift-icon
-                :class="[
-                    $style['c-nav-icon-offers-feature'],
-                    { [$style['c-nav-icon--alt']]: isAltColour }
-                ]" />
+                :class="{ [$style['c-nav-icon--alt']]: isAltColour }" />
             <span class="is-visuallyHidden">
                 {{ copy.offers.text }}
             </span>
@@ -665,6 +662,13 @@ export default {
     }
     &.is-visible {
         display: block;
+    }
+}
+
+.c-nav-list-item--horizontallyAlignedAboveMid {
+    @include media('>mid') {
+        float: left;
+        padding: 28px 16px;
     }
 }
 
