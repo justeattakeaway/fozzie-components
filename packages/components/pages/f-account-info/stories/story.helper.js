@@ -15,8 +15,8 @@ const apiStates = {
     none: 'no-issues',
     apiGetDetailsFailed: 'get-details-fails',
     apiGetAddressFailed: 'get-address-fails',
-    apiPostDetailsFailed: 'patch-details-fails',
-    apiPostAddressFailed: 'patch-address-fails'
+    apiPatchDetailsFailed: 'patch-details-fails',
+    apiPatchAddressFailed: 'patch-address-fails'
 };
 
 // Consumer Details
@@ -104,7 +104,7 @@ const apiDefinitions = [
         ]
     },
     {
-        state: apiStates.apiPostDetailsFailed,
+        state: apiStates.apiPatchDetailsFailed,
         states: [
             consumerDetailsGET200,
             consumerDetailsPATCH500, // Fail
@@ -113,7 +113,7 @@ const apiDefinitions = [
         ]
     },
     {
-        state: apiStates.apiPostAddressFailed,
+        state: apiStates.apiPatchAddressFailed,
         states: [
             consumerDetailsGET200,
             consumerDetailsPATCH200,
@@ -148,8 +148,8 @@ export const apiStateOptions = {
         apiStates.none,
         apiStates.apiGetDetailsFailed,
         apiStates.apiGetAddressFailed,
-        apiStates.apiPostDetailsFailed,
-        apiStates.apiPostAddressFailed
+        apiStates.apiPatchDetailsFailed,
+        apiStates.apiPatchAddressFailed
     ]
 };
 
