@@ -61,4 +61,36 @@ forEach(['desktop', 'mobile'])
         // Assert
         browser.percyScreenshot(`f-account-info - Load Error Page - ${locale}`, device);
     });
+
+    forEach([
+        ['en-GB']
+    ]).it('should display the %s Submit success alert if Submit succeed', locale => {
+        // Arrange
+        accountInfo.withQuery('args', `locale:${locale}`);
+        accountInfo.load();
+        accountInfo.clearBlurField('firstName');
+        accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
+
+        // Act
+        accountInfo.clickSaveButton();
+
+        // Assert
+        browser.percyScreenshot(`f-account-info - Submit Success Alert - ${locale}`, device);
+    });
+
+    forEach([
+        ['en-GB']
+    ]).it('should display the %s Submit error alert if Submit fails', locale => {
+        // Arrange
+        accountInfo.withQuery('args', `locale:${locale};apiState:patch-details-fails`);
+        accountInfo.load();
+        accountInfo.clearBlurField('firstName');
+        accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
+
+        // Act
+        accountInfo.clickSaveButton();
+
+        // Assert
+        browser.percyScreenshot(`f-account-info - Submit Error Alert - ${locale}`, device);
+    });
 });
