@@ -9,7 +9,7 @@
                 $style['c-navLink'],
                 { [$style['c-navLink-borderBottom']]: hasBorderBottom },
                 { [$style['c-navLink-borderTop']]: hasBorderTop },
-                { [$style['c-navLink-country-link']]: isCountryLink },
+                { [$style['c-navLink-countryLink']]: isCountryLink },
                 { [$style['c-nav-list-link--alt']]: isAltColour },
                 { [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent' }
             ]">
