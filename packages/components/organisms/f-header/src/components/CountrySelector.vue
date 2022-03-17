@@ -114,10 +114,12 @@ export default {
 }
 
 .c-nav-list-text {
-    font-weight: $nav-text-weight;
     @include media('<=mid') {
         padding: spacing(c) spacing(a);
-        font-weight: $font-weight-regular;
+    }
+
+    &:hover {
+        font-weight: $font-weight-bold;
     }
 }
 
