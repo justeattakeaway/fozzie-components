@@ -145,7 +145,7 @@ $filter-pill-ease: ease-in-out;
 }
 
 .c-filterPill--selected {
-    box-shadow: 0 0 0 2px $color-focus;
+    box-shadow: 0 0 0 1px $filter-pill-selected-color;
 }
 
 .c-filterPill-link {

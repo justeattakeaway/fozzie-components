@@ -13,6 +13,7 @@ v0.5.0
 ### Changed
 - Removed `isToggleDisabled` property from filter pill component and instead directly reference the `isDisabled` prop
 - Shorten how we pass props into the Storybook component
+- Use selected color for outline when selected, instead of focus colour
 
 v0.4.0
 ------------------------------
