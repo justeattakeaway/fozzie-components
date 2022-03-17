@@ -1,18 +1,18 @@
 # Feature Management
 
-This service allows querying of feature flags as configured using the Feature 
+This service allows querying of feature flags as configured using the Feature
 Management service via an injectable Nuxt plugin
 
 ## Usage
 
-To create an instance of the service: 
+To create an instance of the service:
 
 ```javascript
 const featuresService = new FeaturesService(store, {
     httpClient: $axios, // nuxt-axios plugin instance or compliant http client
     cookies: $cookies, // cookie-universal-nuxt plugin or compliant cookie store
     analytics: $gtm, // @justeat/f-analytics instance
-    logger: $logger // See below
+    log: $log // See below
 });
 ```
 
@@ -41,7 +41,7 @@ The following configuration should be available in the store:
 }
 ```
 
-The service accesses this configuration from the store at the following 
+The service accesses this configuration from the store at the following
 location:
 
 ```javascript
@@ -50,15 +50,14 @@ store.state.configuration.settings.featureManagement
 
 ## Logging
 
-The logger must provide the following interface:
+The log class must provide the following interface:
 
 ```javascript
 
-class Logger {
-
+class Log {
   info (message, tags, payload = {}) { ... }
 
-   warn (message, tags, payload = {}) { ... }
+  warn (message, tags, payload = {}) { ... }
 
   error (message, exception, tags, payload = {}) { ... }
 }
