@@ -482,10 +482,8 @@ export default {
         .c-restaurantCard--listItem & {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-auto-rows: min-content;
-            place-content: center;
             grid-auto-flow: dense;
-            gap: spacing(a) spacing(d);
+            gap: 0 spacing(d);
 
             > * {
                 grid-column: 2;
