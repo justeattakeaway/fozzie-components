@@ -21,7 +21,7 @@ describe('Desktop - f-header component tests', () => {
     });
 
     forEach(['help', 'userAccount', 'countrySelector', 'offersLink', 'delivery'])
-    .it('should test that each navigation link is clickable', link => {
+    .it('should test that %s navigation link is clickable', link => {
         // Assert
         expect(header.isNavigationItemClickable(link)).toBe(true);
     });
