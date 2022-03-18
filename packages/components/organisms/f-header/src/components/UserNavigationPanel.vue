@@ -7,6 +7,7 @@
             :key="index"
             data-test-id="nav-links">
             <a
+                :class="$style['list-link']"
                 :tabindex="tabIndex"
                 :href="link.url"
                 :data-trak='`{
@@ -15,7 +16,6 @@
                     "action": "header",
                     "label": "${link.gtm}"
                 }`'
-                :class="$style['list-link']"
                 @blur="$emit('deactivateNav')"
                 @focus="$emit('activateNav')">
                 {{ link.text }}
@@ -89,31 +89,27 @@ export default {
 @import '../assets/scss/navigation.scss';
 
 .list-link {
-    display: block;
-    padding: spacing(c) spacing(d);
-    margin: 0;
-    font-family: $font-family-base;
-    font-weight: 300;
-    color: $color-content-subdued;
-    height: auto;
-    @include font-size('body-s');
     text-decoration: none;
-    border-bottom: 1px solid $color-border-default;
+
+    @include media('>mid') {
+        display: block;
+        padding: spacing(c) spacing(d);
+        margin: 0;
+        height: auto;
+        border-bottom: 1px solid $color-border-default;
+    }
+
+    @include media('<=mid') {
+        display: flex;
+        margin-left: spacing(h);
+        padding: spacing(c) spacing(d) spacing(c) 0;
+        border-top: 1px solid $color-border-default;
+    }
 
     &:hover,
     &:focus {
         font-weight: $font-weight-bold;
         text-decoration: none;
-        color: $color-content-subdued;
     }
-
-    @include media('>mid') {
-        @include font-size('body-l');
-    }
-
-    @include media('<=mid') {
-        padding-left: spacing(h);
-    }
-
 }
 </style>

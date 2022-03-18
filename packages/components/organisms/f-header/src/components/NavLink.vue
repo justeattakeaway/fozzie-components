@@ -1,18 +1,22 @@
 <template>
-    <a
-        v-bind="$attrs"
-        :data-trak="JSON.stringify(dataTrak)"
-        :href="href"
-        :class="[
-            $style['c-nav-list-link'],
-            { [$style['c-nav-list-link--leftPaddingBelowMid']]: leftPaddingBelowMid },
-            { [$style['c-nav-list-link--alt']]: isAltColour },
-            { [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent' }
-        ]">
+    <div>
         <slot name="icon" />
+        <a
+            v-bind="$attrs"
+            :data-trak="JSON.stringify(dataTrak)"
+            :href="href"
+            :class="[
+                $style['c-navLink'],
+                { [$style['c-navLink--borderBottomBelowMid']]: hasBorderBottom },
+                { [$style['c-navLink--borderTopBelowMid']]: hasBorderTop },
+                { [$style['c-navLink--countryLink']]: isCountryLink },
+                { [$style['c-nav-list-link--alt']]: isAltColour },
+                { [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent' }
+            ]">
 
-        {{ text }}
-    </a>
+            {{ text }}
+        </a>
+    </div>
 </template>
 
 <script>
@@ -35,12 +39,22 @@ export default {
             required: true
         },
 
-        leftPaddingBelowMid: {
+        hasBorderTop: {
             type: Boolean,
             default: false
         },
 
+        hasBorderBottom: {
+            type: Boolean,
+            default: true
+        },
+
         isAltColour: {
+            type: Boolean,
+            default: false
+        },
+
+        isCountryLink: {
             type: Boolean,
             default: false
         },
@@ -55,4 +69,69 @@ export default {
 
 <style lang="scss" module>
 @import '../assets/scss/navigation.scss';
+
+.c-navLink {
+    text-decoration: none;
+    color: $nav-text-color;
+    font-size: $nav-text-size;
+
+    @include media('<=mid') {
+        display: flex;
+        margin-left: spacing(h);
+        padding: spacing(c) spacing(d) spacing(c) 0;
+    }
+
+    @include media('>mid') {
+        font-weight: $nav-text-weight;
+        margin: 0;
+        padding: 0;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        text-decoration: none;
+
+        @include media('<=mid') {
+            font-weight: $font-weight-bold;
+        }
+
+        @include media('>mid') {
+            color: $nav-text-color--hover;
+            text-decoration: underline;
+
+            .c-header--transparent .c-nav-popoverList & {
+                color: inherit;
+            }
+        }
+    }
+}
+
+.c-navLink--borderTopBelowMid {
+    @include media('<=mid') {
+        border-top: 1px solid $color-border-default;
+    }
+}
+
+.c-navLink--borderBottomBelowMid {
+    @include media('<=mid') {
+        border-bottom: 1px solid $color-border-default;
+    }
+}
+
+.c-navLink--countryLink {
+    @include media('>mid') {
+        text-decoration: none;
+        display: flex;
+        float: center;
+        margin-left: spacing(h);
+        padding: spacing(c) spacing(d) spacing(c) 0;
+        @include font-size($nav-text-size);
+        font-weight: $font-weight-regular;
+    }
+    &:hover {
+        text-decoration: none;
+        font-weight: $font-weight-regular;
+    }
+}
 </style>
