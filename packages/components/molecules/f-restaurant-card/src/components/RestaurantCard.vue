@@ -455,6 +455,12 @@ export default {
     }
 }
 
+.c-restaurantCard-name,
+.c-restaurantCard-tags,
+.c-restaurantCard-offer {
+    flex: 0 0 100%;
+}
+
 .c-restaurantCard-name {
     margin-bottom: spacing(a);
     width: 100%;
@@ -473,12 +479,14 @@ export default {
 @include media('>mid') {
     .c-restaurantCard-content {
         .c-restaurantCard--listItem & {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-auto-rows: min-content;
+            place-content: center;
             grid-auto-flow: dense;
+            gap: spacing(a) spacing(d);
 
             > * {
                 grid-column: 2;
+                margin: 0;
             }
         }
 
@@ -492,9 +500,21 @@ export default {
             grid-column: 1;
         }
 
+        .c-restaurantCard-cuisines {
+            align-self: start;
+        }
+
         .c-restaurantCard-name,
         .c-restaurantCard-tags {
             grid-column: 1 / 3;
+        }
+
+        .c-restaurantCard-name {
+            margin-bottom: spacing(a);
+        }
+
+        .c-restaurantCard-tags {
+            margin-top: spacing(a);
         }
 
         // Prevent the cleafix from working on the list-item styling
