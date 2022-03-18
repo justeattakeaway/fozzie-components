@@ -362,64 +362,64 @@ export default {
 
 <style lang="scss" module>
 .c-restaurantCard {
-  text-decoration: none;
-  display: grid;
-  grid-gap: spacing(c);
-  grid-template-columns: 1fr;
-  position: relative;
-  outline-color: $color-focus;
+    text-decoration: none;
+    display: grid;
+    grid-gap: spacing(c);
+    grid-template-columns: 1fr;
+    position: relative;
+    outline-color: $color-focus;
 
-  &.c-restaurantCard--listItem {
-      @include media('>mid') {
+    &.c-restaurantCard--listItem {
+        @include media('>mid') {
         grid-gap: spacing() spacing(d);
         grid-template-columns: minmax(180px, 30%) 1fr;
-      }
-  }
+        }
+    }
 
-  &:hover {
-      .c-restaurantCard-name {
-          text-decoration: underline;
-      }
-  }
+    &:hover {
+        .c-restaurantCard-name {
+            text-decoration: underline;
+        }
+    }
 }
 
 .c-restaurantCard-img {
-  width: 100%;
-  height: 144px;
+    width: 100%;
+    height: 144px;
 
-  .c-restaurantCard--listItem & {
-      @include media('>mid') {
-        min-height: 125px;
-        height: 100%;
-      }
-  }
+    .c-restaurantCard--listItem & {
+        @include media('>mid') {
+            min-height: 125px;
+            height: 100%;
+        }
+    }
 }
 
 .c-restaurantCard-logo {
-  top: spacing(d);
-  left: spacing(d);
-  position: absolute;
+    top: spacing(d);
+    left: spacing(d);
+    position: absolute;
 }
 
 .c-restaurantCard-content {
-  .c-restaurantCard--listItem & {
-    @include media('>mid') {
-      padding: spacing() 0;
-      grid-column: 2/3;
+    .c-restaurantCard--listItem & {
+        @include media('>mid') {
+            padding: spacing() 0;
+            grid-column: 2/3;
+        }
     }
-  }
 }
 
 .c-restaurantCard-dishes {
-  .c-restaurantCard--listItem & {
-      @include media('>mid') {
-        grid-column: 1/3;
-      }
-  }
+    .c-restaurantCard--listItem & {
+        @include media('>mid') {
+            grid-column: 1/3;
+        }
+    }
 }
 
 .c-restaurantCard-imageTags {
-    bottom: spacing(b);
+    bottom: spacing(d);
     left: spacing(d);
     position: absolute;
     margin-bottom: 0;
@@ -440,6 +440,7 @@ export default {
     display: flex;
     gap: spacing(b);
     align-items: center;
+    margin-right: spacing(b);
 }
 
 // Regular inner-content positioning
@@ -447,7 +448,6 @@ export default {
     display: flex;
     align-items: center;
     flex-flow: row wrap;
-    gap: 0 spacing(c);
 
     // an alternative to using bottom gap so that none is applied to the clearfix
     > * {
@@ -457,16 +457,11 @@ export default {
 
 .c-restaurantCard-name {
     margin-bottom: spacing(a);
+    width: 100%;
 
     @include media('>mid') {
         margin-bottom: spacing(b);
     }
-}
-
-.c-restaurantCard-name,
-.c-restaurantCard-tags,
-.c-restaurantCard-offer {
-    flex: 0 0 100%;
 }
 
 .c-restaurantCard-offer {
@@ -480,15 +475,10 @@ export default {
         .c-restaurantCard--listItem & {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            // grid-auto-rows: min-content;
-            // place-content: center;
             grid-auto-flow: dense;
-            // align-items: baseline;
-            // gap: spacing(a) spacing(d);
 
             > * {
                 grid-column: 2;
-                // margin-bottom: 0;
             }
         }
 
@@ -502,18 +492,10 @@ export default {
             grid-column: 1;
         }
 
-        // .c-restaurantCard-cuisines {
-        //     align-self: start;
-        // }
-
         .c-restaurantCard-name,
         .c-restaurantCard-tags {
             grid-column: 1 / 3;
         }
-
-        // .c-restaurantCard-tags {
-        //     margin-top: spacing(a);
-        // }
 
         // Prevent the cleafix from working on the list-item styling
         .c-restaurantCard-clearfix {

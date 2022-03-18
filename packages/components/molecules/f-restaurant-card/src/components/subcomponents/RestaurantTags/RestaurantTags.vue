@@ -38,11 +38,10 @@ export default {
     margin-top: 0;
     margin-left: 0;
     padding: 0;
-    // line-height: 1;
     display: flex;
     flex-flow: row wrap;
     align-items: center;
-    gap: spacing(a);
+    gap: 0 spacing(a);
 }
 
 .c-restaurantTags-tag {

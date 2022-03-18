@@ -54,8 +54,8 @@ export default {
 
 <style lang="scss" module>
 .c-restaurantTag {
-    display: inline-block;
-    padding: spacing(a);
+    display: block;
+    padding: 0 spacing(a);
     border-radius: $radius-rounded-a;
     @include font-size($font-paragraph-03);
     color: $color-content-default;

@@ -74,7 +74,7 @@ export default {
 }
 
 .c-restaurantCard-iconText {
-    @include font-size();
+    @include font-size($font-body-s-paragraph);
     margin: 0;
     display: flex;
     align-items: center;
@@ -86,12 +86,11 @@ export default {
 
 .c-restaurantCard-iconText-content {
     flex: 1;
-    // line-height: spacing(d);
 }
 
 .c-restaurantCard-iconText-icon {
     width: 14px;
-    height: auto;
+    height: 100%;
     margin-right: spacing(a);
 
     svg {

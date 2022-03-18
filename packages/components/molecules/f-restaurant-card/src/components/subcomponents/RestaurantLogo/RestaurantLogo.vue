@@ -38,16 +38,16 @@ export default {
 </script>
 
 <style lang="scss" module>
-$logo-borderRadius                        : $radius-rounded-b;
-$logo-borderColor                         : $color-border-default;
+$logo-borderRadius: $radius-rounded-b;
+$logo-borderColor: $color-border-default;
 
 .c-restaurantCard-logo {
-  border: 1px solid $logo-borderColor;
-  border-radius: $logo-borderRadius;
+    border: 1px solid $logo-borderColor;
+    border-radius: $logo-borderRadius;
 }
 
 .c-restaurantCard-logo--hidden {
-  // as this is a purely presentational image, there's no harm in simply using display: nones
-  display: none;
+    // as this is a purely presentational image, there's no harm in simply using display: nones
+    display: none;
 }
 </style>

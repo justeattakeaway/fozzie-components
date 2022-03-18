@@ -21,13 +21,13 @@ export default {
 </script>
 
 <style lang="scss" module>
-$img-borderRadius : $radius-rounded-c;
+$img-borderRadius: $radius-rounded-c;
 
 .c-restaurantCard-img {
-  background-color: $color-container-strong;
-  background-size: cover;
-  background-position: center;
-  border-radius: $img-borderRadius;
-  position: relative;
+    background-color: $color-container-strong;
+    background-size: cover;
+    background-position: center;
+    border-radius: $img-borderRadius;
+    position: relative;
 }
 </style>

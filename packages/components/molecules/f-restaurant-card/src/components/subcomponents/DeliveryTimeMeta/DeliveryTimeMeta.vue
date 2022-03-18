@@ -1,12 +1,13 @@
 <template>
-    <div>
+    <div :class="[$style['c-deliveryTimeMeta']]">
         <icon-text
             v-if="eta"
             :text="eta"
             :is-bold="true"
             color="colorSupportPositive"
             :hide-icon-in-tile-view="true"
-            data-test-id="restaurant-eta">
+            data-test-id="restaurant-eta"
+            :class="[$style['c-deliveryTimeMeta-iconText']]">
             <clock-small-icon data-test-id="restaurant-eta-icon" />
         </icon-text>
 
@@ -68,3 +69,20 @@ export default {
     }
 };
 </script>
+
+<style lang="scss" module>
+.c-deliveryTimeMeta-iconText {
+    &:after {
+        content: '\2022'; // round bullet character
+        color: $color-content-subdued;
+        font-weight: $font-weight-regular;
+        margin: 0 spacing(a);
+    }
+
+    @include media('>mid') {
+        &:after {
+            display: none;
+        }
+    }
+}
+</style>
