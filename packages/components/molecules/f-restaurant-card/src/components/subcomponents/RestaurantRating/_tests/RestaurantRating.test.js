@@ -29,17 +29,12 @@ describe('RestaurantRating component', () => {
         expect(screenReaderMessageElement.text()).toStrictEqual(screenReaderMessage);
     });
 
-    it.each([
-        'mean',
-        'count'
-    ])('does not render a summary ratings message for screenreaders if %p prop is missing', propToMiss => {
+    it('does not render a summary ratings message for screenreaders if `mean` prop is missing', () => {
         // arrange
         const screenReaderMessage = 'foo';
 
-        const propToAdd = propToMiss === 'mean' ? { count: 10 } : { mean: 5 };
-
         const propsData = {
-            ...propToAdd,
+            count: 10,
             accessibleMessage: screenReaderMessage
         };
 
@@ -110,16 +105,12 @@ describe('RestaurantRating component', () => {
             expect(ownRatingMessageElement.text()).toStrictEqual(isOwnRatingMessage);
         });
 
-        it.each([
-            'mean',
-            'count'
-        ])('shows an empty star and a no ratings message if %p is missing', propToMiss => {
+        it('shows an empty star and a no ratings message if `mean` is missing', () => {
             // arrange
             const notRatedMessage = 'Not rated yet';
-            const propToAdd = propToMiss === 'mean' ? { count: 10 } : { mean: 5 };
 
             const propsData = {
-                ...propToAdd,
+                count: 10,
                 isOwnRating,
                 isOwnRatingMessage: 'You',
                 notRatedMessage
@@ -184,16 +175,12 @@ describe('RestaurantRating component', () => {
             expect(countMessage.text()).toStrictEqual('250');
         });
 
-        it.each([
-            'mean',
-            'count'
-        ])('shows an empty star and a no ratings message if %p is missing', propToMiss => {
+        it('shows an empty star and a no ratings message if `mean` is missing', () => {
             // arrange
             const notRatedMessage = 'Not rated yet';
-            const propToAdd = propToMiss === 'mean' ? { count: 10 } : { mean: 5 };
 
             const propsData = {
-                ...propToAdd,
+                count: 10,
                 isOwnRating,
                 notRatedMessage
             };

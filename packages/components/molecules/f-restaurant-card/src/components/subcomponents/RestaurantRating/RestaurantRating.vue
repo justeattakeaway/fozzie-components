@@ -54,18 +54,26 @@
                 {{ ratingsMax }}
             </data>
 
-            <!-- Number of ratings/Own rating message -->
-            <span aria-hidden="true">
+            <!-- Number of ratings -->
+            <span
+                v-if="count && !isOwnRating"
+                aria-hidden="true">
                 &#40;
                 <data
-                    v-if="!isOwnRating"
                     data-test-id="rating"
                     :class="[$style['c-restaurantCard-rating-count']]"
                     :value="count">
                     {{ count }}
                 </data>
+                &#41;
+            </span>
+
+            <!-- Own rating message -->
+            <span
+                v-else-if="isOwnRating"
+                aria-hidden="true">
+                &#40;
                 <span
-                    v-else
                     data-test-id="rating-own-rating-message"
                     :class="[$style['c-restaurantCard-rating-count']]">
                     {{ isOwnRatingMessage }}
@@ -145,7 +153,7 @@ export default {
     },
     computed: {
         noRatingsAvailable () {
-            return !this.count || !this.mean;
+            return !this.mean;
         },
         meanFormatted () {
             return Number.parseFloat(this.mean).toFixed(2);
