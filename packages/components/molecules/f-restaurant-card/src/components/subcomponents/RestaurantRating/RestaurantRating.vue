@@ -54,9 +54,22 @@
                 {{ ratingsMax }}
             </data>
 
+            <!-- Own rating message -->
+            <span
+                v-if="isOwnRating"
+                aria-hidden="true">
+                &#40;
+                <span
+                    data-test-id="rating-own-rating-message"
+                    :class="[$style['c-restaurantCard-rating-count']]">
+                    {{ isOwnRatingMessage }}
+                </span>
+                &#41;
+            </span>
+
             <!-- Number of ratings -->
             <span
-                v-if="count && !isOwnRating"
+                v-else-if="count"
                 aria-hidden="true">
                 &#40;
                 <data
@@ -65,19 +78,6 @@
                     :value="count">
                     {{ count }}
                 </data>
-                &#41;
-            </span>
-
-            <!-- Own rating message -->
-            <span
-                v-else-if="isOwnRating"
-                aria-hidden="true">
-                &#40;
-                <span
-                    data-test-id="rating-own-rating-message"
-                    :class="[$style['c-restaurantCard-rating-count']]">
-                    {{ isOwnRatingMessage }}
-                </span>
                 &#41;
             </span>
         </template>
