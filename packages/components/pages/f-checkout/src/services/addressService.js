@@ -4,7 +4,8 @@ function isFullPostCode (postcode, tenant) {
     const countryPostcodeLengths = {
         uk: postcode.length >= 5,
         au: postcode.length === 4,
-        nz: postcode.length === 4
+        nz: postcode.length === 4,
+        it: postcode.length === 5
     };
 
     return !postcode ? false : countryPostcodeLengths[tenant];
@@ -35,19 +36,19 @@ function getAddress (postcode, tenant, address) {
         return {
             line1: '',
             line2: '',
+            line3: '',
             locality: '',
-            ...(shouldShowAdministrativeArea ? { administrativeArea: '' } : {}),
+            ...(shouldShowAdministrativeArea ? { administrativeArea: '' } : { line4: '' }),
             postcode: toFormattedPostcode(postcode, tenant)
         };
     }
 
-    const lines = [address.Line2, address.Line3];
-
     return {
         line1: address.Line1,
-        line2: lines.filter(l => l).join(', '),
+        line2: address.Line2,
+        line3: address.Line3,
         locality: address.City,
-        ...(shouldShowAdministrativeArea ? { administrativeArea: address.Line4 } : {}),
+        ...(shouldShowAdministrativeArea ? { administrativeArea: address.Line4 } : { line4: address.Line4 }),
         postcode: address.ZipCode
     };
 }
@@ -104,9 +105,12 @@ const isAddressInLocalStorage = () => {
  * @param address - The address from local storage
  * @returns The address but mapped to how the API shapes it
  */
-function getMappedLocalStorageAddress (address) {
+function getMappedLocalStorageAddress (address, administrativeAreaRequired) {
     return {
-        lines: [address.Line1, address.Line2, address.Line3],
+        line1: address.Line1,
+        line2: address.Line2,
+        line3: address.Line3,
+        ...(administrativeAreaRequired ? { administrativeArea: address.Line4 } : { line4: address.Line4 }),
         locality: address.City,
         postalCode: address.PostalCode || address.ZipCode
     };
@@ -117,12 +121,12 @@ function getMappedLocalStorageAddress (address) {
  * @param mapped - boolean deciding whether to return the address in a mapped state
  * @returns address - The address from local storage
  */
-function getAddressFromLocalStorage (mapped = true) {
+function getAddressFromLocalStorage (tenant, mapped = true) {
     if (window.localStorage) {
         const storedLocation = window.localStorage.getItem(storedLocationKey);
 
         if (storedLocation) {
-            return mapped ? getMappedLocalStorageAddress(JSON.parse(storedLocation)) : JSON.parse(storedLocation);
+            return mapped ? getMappedLocalStorageAddress(JSON.parse(storedLocation), tenant === 'au') : JSON.parse(storedLocation);
         }
     }
 

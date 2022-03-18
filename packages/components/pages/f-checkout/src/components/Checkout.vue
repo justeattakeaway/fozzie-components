@@ -453,8 +453,8 @@ export default {
          *
          * */
         loadAddressFromLocalStorage () {
-            const address = addressService.getAddressFromLocalStorage();
-
+            const address = addressService.getAddressFromLocalStorage(this.tenant);
+            // TODO: DOES THIS NEED A SEPARATE MUTATION? CAN WE USE STARNDARD STORE STUFF
             if (address) {
                 this.updateAddress(address);
             }
@@ -771,7 +771,8 @@ export default {
                         await this.getGeoLocation({
                             url: this.getGeoLocationUrl,
                             postData: locationData,
-                            timeout: this.checkoutTimeout
+                            timeout: this.checkoutTimeout,
+                            tenant: this.tenant
                         });
                     }
                 } catch (error) {

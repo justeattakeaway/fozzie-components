@@ -122,6 +122,9 @@ export default {
         address: {
             line1: '',
             line2: '',
+            line3: '',
+            line4: '',
+            administrativeArea: '',
             locality: '',
             postcode: ''
         },
@@ -150,12 +153,12 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getCheckout: async ({ commit, state, dispatch }, { url, timeout }) => {
+        getCheckout: async ({ commit, state, dispatch }, { url, timeout, tenant }) => {
             const { data } = await checkoutApi.getCheckout(url, state, timeout);
 
             resolveCustomerDetails(data, state);
 
-            commit(UPDATE_STATE, data);
+            commit(UPDATE_STATE, { ...data, tenant });
             commit(UPDATE_HAS_ASAP_SELECTED, data.fulfilment.time.asap);
 
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
@@ -405,13 +408,15 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getGeoLocation: async ({ commit, state }, { url, postData, timeout }) => {
+        getGeoLocation: async ({ commit, state }, {
+            url, postData, timeout, tenant
+        }) => {
             let addressCoords;
 
             const isAddressInLocalStorage = addressService.isAddressInLocalStorage();
 
             if (isAddressInLocalStorage) {
-                const storedAddress = addressService.getAddressFromLocalStorage(false);
+                const storedAddress = addressService.getAddressFromLocalStorage(tenant, false);
 
                 if (addressService.doesAddressInStorageAndFormMatch(storedAddress, state.address)) {
                     addressCoords = storedAddress.Field1 && storedAddress.Field2 ? [storedAddress.Field2, storedAddress.Field1] : null;
@@ -423,6 +428,8 @@ export default {
                         PostalCode: addressDetails.postcode,
                         Line1: addressDetails.line1,
                         Line2: addressDetails.line2,
+                        Line3: addressDetails.line3,
+                        Line4: addressDetails.line4,
                         City: addressDetails.locality
                     }));
                 }
@@ -483,7 +490,8 @@ export default {
             isFulfillable,
             notices,
             messages,
-            notes
+            notes,
+            tenant
         }) => {
             state.id = id;
             state.serviceType = serviceType;
@@ -498,17 +506,14 @@ export default {
 
             let address = null;
             if (addressService.isAddressInLocalStorage()) {
-                address = addressService.getAddressFromLocalStorage();
-            } else if (fulfilment.location && fulfilment.location.address && fulfilment.location.address.lines) {
+                address = addressService.getAddressFromLocalStorage(tenant);
+            } else if (fulfilment?.location?.address?.lines) {
                 /* eslint-disable prefer-destructuring */
                 address = fulfilment.location.address;
             }
 
             if (address) {
-                /* eslint-disable prefer-destructuring */
-                state.address.line1 = address.lines[0];
-                state.address.line2 = address.lines[1];
-                /* eslint-enable prefer-destructuring */
+                [state.address.line1, state.address.line2, state.address.line3, state.address.line4] = address.lines;
 
                 state.address.locality = address.locality;
                 state.address.postcode = address.postalCode;
@@ -619,10 +624,7 @@ export default {
         },
 
         [UPDATE_ADDRESS]: (state, address) => {
-            /* eslint-disable prefer-destructuring */
-            state.address.line1 = address.lines[0];
-            state.address.line2 = address.lines[1];
-            /* eslint-enable prefer-destructuring */
+            [state.address.line1, state.address.line2, state.address.line3, state.address.line4] = address.lines; // TODO: THIS IS WRONG
 
             state.address.locality = address.locality;
             state.address.administrativeArea = address.administrativeArea;
