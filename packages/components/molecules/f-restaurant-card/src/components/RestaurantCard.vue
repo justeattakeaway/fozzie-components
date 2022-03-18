@@ -72,9 +72,10 @@
                 </component>
 
                 <!-- Premier Icon -->
-                <span :class="[$style['c-restaurantCard-premier-iconWrapper']]">
+                <span
+                    v-if="isPremier"
+                    :class="[$style['c-restaurantCard-premier-iconWrapper']]">
                     <legend-icon
-                        v-if="isPremier"
                         :class="[$style['c-restaurantCard-premier']]"
                         data-test-id="restaurant-premier" />
                 </span>
@@ -479,6 +480,8 @@ export default {
 @include media('>mid') {
     .c-restaurantCard-content {
         .c-restaurantCard--listItem & {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             grid-auto-rows: min-content;
             place-content: center;
             grid-auto-flow: dense;
