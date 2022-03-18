@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+Latest (to be added to next release)
+------------------------------
+*March 18, 2022*
+
+### Added
+- Italian translations.
+
+
 v3.22.3
 ------------------------------
 *March 3, 2022*
