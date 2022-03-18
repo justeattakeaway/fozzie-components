@@ -284,13 +284,13 @@ const messages = {
     checkoutTermsAndConditions: 'Effettuando un ordine, accetti i nostri {termsAndConditions}. Leggi la nostra {privacyPolicy} e la {cookiePolicy}.',
 
     termsAndConditionsLinkText: 'Termini & Condizioni',
-    termsAndConditionsLinkUrl: 'https://www.just-eat.es/info/terminos-y-condiciones',
+    termsAndConditionsLinkUrl: 'https://www.justeat.it/informazioni/termini-e-condizioni',
 
     privacyPolicyLinkText: 'Informativa sulla Privacy',
-    privacyPolicyLinkUrl: 'https://www.just-eat.es/info/politica-de-privacidad',
+    privacyPolicyLinkUrl: 'https://www.justeat.it/informazioni/privacy-policy',
 
     cookiePolicyLinkText: 'Consenso ai cookie',
-    cookiePolicyLinkUrl: 'https://www.just-eat.it/info/politica-de-privacidad',
+    cookiePolicyLinkUrl: 'https://www.justeat.it/informazioni/politica-dei-cookie',
 
     ageVerification: {
         heading: 'Conferma la tua data di nascita',
