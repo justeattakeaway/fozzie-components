@@ -58,7 +58,7 @@
     "@justeat/f-vue-icons": "3.0.0",
     "@justeat/f-wdio-utils": "0.5.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
-    "@vue/cli-plugin-babel": "4.4.6",
+    "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3"
   }
