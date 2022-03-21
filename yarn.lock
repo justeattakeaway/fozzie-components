@@ -94,7 +94,7 @@
     semver "^6.3.0"
     source-map "^0.5.0"
 
-"@babel/core@>=7.9.0", "@babel/core@^7.0.0", "@babel/core@^7.1.0", "@babel/core@^7.1.6", "@babel/core@^7.11.0", "@babel/core@^7.12.10", "@babel/core@^7.12.3", "@babel/core@^7.15.8", "@babel/core@^7.7.5", "@babel/core@^7.9.6":
+"@babel/core@>=7.9.0", "@babel/core@^7.0.0", "@babel/core@^7.1.0", "@babel/core@^7.1.6", "@babel/core@^7.11.0", "@babel/core@^7.12.10", "@babel/core@^7.12.3", "@babel/core@^7.15.8", "@babel/core@^7.7.5":
   version "7.17.5"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.17.5.tgz#6cd2e836058c28f06a4ca8ee7ed955bbf37c8225"
   integrity sha512-/BBMw4EvjmyquN5O+t5eh0+YqB3XXJkYD2cjKpYtWOfFy4lQ4UozNSmxAcWT8r2XtZs0ewG+zrfsqeR15i1ajA==
@@ -5583,27 +5583,6 @@
   dependencies:
     "@vue/cli-shared-utils" "^4.5.16"
 
-"@vue/cli-plugin-unit-jest@4.4.6":
-  version "4.4.6"
-  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-unit-jest/-/cli-plugin-unit-jest-4.4.6.tgz#31a25154424300f1b303f1d76bd19a8c3bb68721"
-  integrity sha512-TwvCZV03JgXLSdc1UaD+Fjt3ooeX0gvRH2bUy58uuEx3qyk7xYx7vRM4uyJ51XZs9l4SEcegwtOlBga6lc6okA==
-  dependencies:
-    "@babel/core" "^7.9.6"
-    "@babel/plugin-transform-modules-commonjs" "^7.9.6"
-    "@types/jest" "^24.0.19"
-    "@vue/cli-shared-utils" "^4.4.6"
-    babel-core "^7.0.0-bridge.0"
-    babel-jest "^24.9.0"
-    babel-plugin-transform-es2015-modules-commonjs "^6.26.2"
-    deepmerge "^4.2.2"
-    jest "^24.9.0"
-    jest-environment-jsdom-fifteen "^1.0.2"
-    jest-serializer-vue "^2.0.2"
-    jest-transform-stub "^2.0.0"
-    jest-watch-typeahead "^0.4.2"
-    ts-jest "^24.2.0"
-    vue-jest "^3.0.5"
-
 "@vue/cli-plugin-unit-jest@4.5.15":
   version "4.5.15"
   resolved "https://registry.yarnpkg.com/@vue/cli-plugin-unit-jest/-/cli-plugin-unit-jest-4.5.15.tgz#7be914ca1507ca344487eb377ed925c9db0b772a"
@@ -5753,7 +5732,7 @@
     semver "^6.0.0"
     string.prototype.padstart "^3.0.0"
 
-"@vue/cli-shared-utils@^4.4.6", "@vue/cli-shared-utils@^4.5.13", "@vue/cli-shared-utils@^4.5.15", "@vue/cli-shared-utils@^4.5.8":
+"@vue/cli-shared-utils@^4.5.13", "@vue/cli-shared-utils@^4.5.15", "@vue/cli-shared-utils@^4.5.8":
   version "4.5.15"
   resolved "https://registry.yarnpkg.com/@vue/cli-shared-utils/-/cli-shared-utils-4.5.15.tgz#dba3858165dbe3465755f256a4890e69084532d6"
   integrity sha512-SKaej9hHzzjKSOw1NlFmc6BSE0vcqUQMQiv1cxQ2DhVyy4QxZXBmzmiLBUBe+hYZZs1neXW7n//udeN9bCAY+Q==

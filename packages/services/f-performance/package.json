@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "4.5.16",
-    "@vue/cli-plugin-unit-jest": "4.4.6",
+    "@vue/cli-plugin-unit-jest": "4.5.16",
     "@justeat/f-wdio-utils": "0.4.0",
     "@vue/test-utils": "1.0.3"
   }

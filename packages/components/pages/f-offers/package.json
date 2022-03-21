@@ -68,7 +68,7 @@
     "@justeat/f-mega-modal": "3.0.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.5.16",
-    "@vue/cli-plugin-unit-jest": "4.4.6",
+    "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3",
     "faker": "5.5.3",
     "js-cookie": "2.2.1",
