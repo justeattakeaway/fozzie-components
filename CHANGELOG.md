@@ -10,6 +10,7 @@ v7.2.0
 ### Changed
 - Upgraded "@vue/cli-plugin-babel" to 5.0.3
 - Upgraded "@vue/cli-plugin-unit-jest" to 5.0.3
+- Upgraded "@vue/babel-preset-app" to 5.0.3
 
 
 v7.1.0
