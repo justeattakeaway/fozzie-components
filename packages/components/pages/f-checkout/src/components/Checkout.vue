@@ -454,7 +454,7 @@ export default {
          * */
         loadAddressFromLocalStorage () {
             const address = addressService.getAddressFromLocalStorage(this.tenant);
-            // TODO: DOES THIS NEED A SEPARATE MUTATION? CAN WE USE STARNDARD STORE STUFF
+
             if (address) {
                 this.updateAddress(address);
             }
@@ -666,7 +666,8 @@ export default {
             try {
                 await this.getCheckout({
                     url: this.getCheckoutUrl,
-                    timeout: this.checkoutTimeout
+                    timeout: this.checkoutTimeout,
+                    tenant: this.tenant
                 });
 
                 this.handleEventLogging('CheckoutGetSuccess');

@@ -26,7 +26,7 @@ import {
     UPDATE_BASKET_DETAILS,
     UPDATE_CUSTOMER_DETAILS,
     UPDATE_ERRORS,
-    UPDATE_ADDRESS_DETAILS,
+    UPDATE_ADDRESS,
     UPDATE_FULFILMENT_TIME,
     UPDATE_HAS_ASAP_SELECTED,
     UPDATE_IS_FULFILLABLE,
@@ -420,7 +420,7 @@ describe('CheckoutModule', () => {
         });
 
         it.each([
-            [UPDATE_ADDRESS_DETAILS, 'address', address],
+            [UPDATE_ADDRESS, 'address', address],
             [UPDATE_FULFILMENT_TIME, 'time', time],
             [UPDATE_IS_FULFILLABLE, 'isFulfillable', isFulfillable],
             [UPDATE_ERRORS, 'errors', issues],
@@ -737,7 +737,7 @@ describe('CheckoutModule', () => {
         });
 
         describe('getAddress ::', () => {
-            it(`should get the address details from the backend and call ${UPDATE_ADDRESS_DETAILS} mutation.`, async () => {
+            it(`should get the address details from the backend and call ${UPDATE_ADDRESS} mutation.`, async () => {
                 // Arrange
                 const config = {
                     headers: {
@@ -767,7 +767,7 @@ describe('CheckoutModule', () => {
                 // Assert
                 expect(addressServiceSpy).toHaveBeenCalledWith(customerAddresses, payload.tenant, payload.currentPostcode);
                 expect(axios.get).toHaveBeenCalledWith(payload.url, config);
-                expect(commit).toHaveBeenCalledWith(UPDATE_ADDRESS_DETAILS, expectedFormattedAddress);
+                expect(commit).toHaveBeenCalledWith(UPDATE_ADDRESS, expectedFormattedAddress);
             });
 
             it(`should call '${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill' mutation with an array of updated field names.`, async () => {
@@ -1288,7 +1288,7 @@ describe('CheckoutModule', () => {
 
             it.each([
                 [UPDATE_CUSTOMER_DETAILS, 'customer'],
-                [UPDATE_ADDRESS_DETAILS, 'address'],
+                [UPDATE_ADDRESS, 'address'],
                 [UPDATE_DINEIN_DETAILS, 'dineIn']
             ])('should commit %s with expected payload when `fieldType` is %s', (mutation, fieldType) => {
                 // Arrange

@@ -13,7 +13,6 @@ import accountApi from '../services/accountApi';
 
 import {
     CLEAR_DOB_ERROR,
-    UPDATE_ADDRESS,
     UPDATE_AUTH,
     UPDATE_AUTH_GUEST,
     UPDATE_AVAILABLE_FULFILMENT_TIMES,
@@ -21,7 +20,7 @@ import {
     UPDATE_CUSTOMER_DETAILS,
     UPDATE_DATE_OF_BIRTH,
     UPDATE_ERRORS,
-    UPDATE_ADDRESS_DETAILS,
+    UPDATE_ADDRESS,
     UPDATE_FULFILMENT_TIME,
     UPDATE_GEO_LOCATION,
     UPDATE_HAS_ASAP_SELECTED,
@@ -328,7 +327,7 @@ export default {
 
             const addressDetails = addressService.getClosestAddress(data, tenant, currentPostcode);
 
-            commit(UPDATE_ADDRESS_DETAILS, addressDetails);
+            commit(UPDATE_ADDRESS, addressDetails);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
         },
 
@@ -430,6 +429,7 @@ export default {
                         Line2: addressDetails.line2,
                         Line3: addressDetails.line3,
                         Line4: addressDetails.line4,
+                        administrativeArea: addressDetails.administrativeArea,
                         City: addressDetails.locality
                     }));
                 }
@@ -572,7 +572,7 @@ export default {
             state.dineIn = payload;
         },
 
-        [UPDATE_ADDRESS_DETAILS]: (state, address) => {
+        [UPDATE_ADDRESS]: (state, address) => {
             state.address = {
                 ...state.address,
                 ...address
@@ -621,14 +621,6 @@ export default {
 
         [UPDATE_CHECKOUT_ERROR_MESSAGE]: (state, message) => {
             state.checkoutErrorMessage = message;
-        },
-
-        [UPDATE_ADDRESS]: (state, address) => {
-            [state.address.line1, state.address.line2, state.address.line3, state.address.line4] = address.lines; // TODO: THIS IS WRONG
-
-            state.address.locality = address.locality;
-            state.address.administrativeArea = address.administrativeArea;
-            state.address.postcode = address.postalCode;
         },
 
         [UPDATE_PHONE_NUMBER]: (state, phoneNumber) => {
