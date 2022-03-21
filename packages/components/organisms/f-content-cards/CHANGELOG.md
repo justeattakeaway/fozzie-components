@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v8.0.0-alpha.2
+------------------------------
+*March 21, 2022*
+
+### Added
+- Added Body component as part of the new Icing changes
+
 v8.0.0-alpha.1
 ------------------------------
 *March 15, 2022*
