@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.2.0
+------------------------------
+*March 21, 2022*
+
+### Changed
+- Upgraded "@vue/cli-plugin-babel" to 5.0.3
+- Upgraded "@vue/cli-plugin-unit-jest" to 5.0.3
+
+
 v7.1.0
 ------------------------------
 *March 9, 2022*

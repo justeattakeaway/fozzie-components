@@ -65,8 +65,8 @@
     "@justeat/f-trak": "0.7.1",
     "@justeat/f-wdio-utils": "0.4.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
-    "@vue/cli-plugin-babel": "4.4.6",
-    "@vue/cli-plugin-unit-jest": "4.4.6",
+    "@vue/cli-plugin-babel": "5.0.3",
+    "@vue/cli-plugin-unit-jest": "5.0.3",
     "@vue/test-utils": "1.0.3",
     "faker": "5.5.3",
     "miragejs": "0.1.42"
