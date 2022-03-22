@@ -7,7 +7,7 @@
             :is="iconComponent"
             :class="[
                 $style['c-logo-img'],
-                { [$style['c-logo-img--jet']]: theme === 'jet' && resizeLogo },
+                { [$style['c-logo-img--jet']]: theme === 'jet' && shouldResizeLogo },
                 { [$style['c-logo-img--alt']]: isAltLogo }
             ]"
             :data-theme-logo="iconComponent"
@@ -54,7 +54,7 @@ export default {
             type: Boolean,
             default: false
         },
-        resizeLogo: {
+        shouldResizeLogo: {
             type: Boolean,
             default: false
         }

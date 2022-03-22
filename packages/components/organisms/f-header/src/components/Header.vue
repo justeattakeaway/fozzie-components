@@ -21,7 +21,7 @@
                 :is-logo-disabled="isLogoLinkDisabled"
                 :logo-gtm-label="copy.logo.gtm"
                 :header-background-theme="headerBackgroundTheme"
-                :resize-logo="showDeliveryEnquiryWithContent && showCountrySelector"
+                :should-resize-logo="showDeliveryEnquiryWithContent && showCountrySelector"
                 :is-open="mobileNavIsOpen" />
 
             <navigation
