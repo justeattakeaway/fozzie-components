@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-account-info",
   "description": "Fozzie Account Info - The account information page",
-  "version": "0.17.0",
+  "version": "0.20.1",
   "main": "dist/f-account-info.umd.min.js",
   "maxBundleSize": "100kB",
   "files": [
@@ -50,13 +50,9 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-button": "3.2.0",
-    "@justeat/f-card": "3.4.0",
-    "@justeat/f-card-with-content": "1.0.0",
-    "@justeat/f-form-field": "4.5.0",
     "@justeat/f-globalisation": "1.0.0",
-    "@justeat/f-vue-icons": "3.3.0",
     "@justeat/f-services": "1.13.0",
+    "@justeat/f-vue-icons": "3.3.0",
     "vuelidate": "0.7.6"
   },
   "peerDependencies": {
@@ -64,6 +60,13 @@
     "vuex": ">=3.5.1"
   },
   "devDependencies": {
+    "@justeat/f-button": "3.2.0",
+    "@justeat/f-card": "3.4.0",
+    "@justeat/f-card-with-content": "1.0.0",
+    "@justeat/f-alert": "4.3.0",
+    "@justeat/f-error-message": "1.1.0",
+    "@justeat/f-form-field": "4.5.0",
+    "@justeat/f-link": "2.3.0",
     "@justeat/f-wdio-utils": "0.6.0",
     "@samhammer/vue-cli-plugin-stylelint": "2.1.0",
     "@vue/cli-plugin-babel": "4.5.15",

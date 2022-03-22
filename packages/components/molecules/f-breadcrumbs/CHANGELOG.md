@@ -3,12 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (to be added to next release)
+v3.2.1
 ------------------------------
-*February 4, 2022*
+*March 18, 2022*
+
+### Changed
+- `package` version as previous bump does not seem to pull through changes.
+
+
+v3.2.0
+------------------------------
+*March 15, 2022*
 
 ### Changed
 - Upgraded to ESLint v8
+
+### Added
+- `nav` landmark & `aria-label`.
+- Tests to cover change.
 
 
 v3.1.0

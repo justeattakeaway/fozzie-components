@@ -3,6 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.5.1
+------------------------------
+*March 18, 2022*
+
+### Changed
+- `f-breadcrumbs` version as previous version wasn't pulling correct markup changes through.
+
+
+v0.5.0
+------------------------------
+*March 16, 2022*
+
+### Changed
+- `f-breadcrumbs` & `f-navigation-links` to pull in a11y changes.
+
 
 v0.4.0
 ------------------------------

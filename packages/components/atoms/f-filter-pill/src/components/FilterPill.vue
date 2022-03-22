@@ -3,35 +3,51 @@
         :class="[
             $style['c-filterPill'], {
                 [$style['c-filterPill--selected']]: isToggleSelected,
-                [$style['c-filterPill--disabled']]: isToggleDisabled
+                [$style['c-filterPill--disabled']]: isDisabled
             }]"
         data-test-id="filter-item">
-        <input
-            :id="`filterPillToggle-${inputId}`"
-            type="checkbox"
-            class="is-visuallyHidden"
-            :class="$style['c-filterPill-checkbox']"
-            data-test-id="filter-pill-input"
-            :tabindex="0"
-            :disabled="isToggleDisabled"
-            @change="toggleFilter">
-        <label
-            :class="$style['c-filterPill-label']"
-            :for="`filterPillToggle-${inputId}`"
-            data-test-id="filter-pill-label"
-            :tabindex="-1">
-            <tick-icon :class="$style['c-filterPill-icon']" />
-            <span
-                :class="$style['c-filterPill-text']"
-                data-test-id="filter-pill-text">
-                {{ displayText }}
-            </span>
-            <span
-                :class="$style['c-filterPill-number']"
-                data-test-id="filter-pill-number">
-                {{ displayNumber }}
-            </span>
-        </label>
+        <div v-if="isLoading">
+            Loading
+        </div>
+        <template v-else>
+            <a
+                :class="$style['c-filterPill-link']"
+                :href="href"
+                tabindex="-1"
+                aria-hidden="true"
+                data-test-id="filter-pill-link">
+                <span class="is-visuallyHidden">
+                    {{ displayText }}
+                </span>
+            </a>
+            <input
+                :id="`filterPillToggle-${inputId}`"
+                type="checkbox"
+                class="is-visuallyHidden"
+                :class="$style['c-filterPill-checkbox']"
+                data-test-id="filter-pill-input"
+                :checked="isToggleSelected"
+                :tabindex="0"
+                :disabled="isDisabled"
+                @change="toggleFilter">
+            <label
+                :class="$style['c-filterPill-label']"
+                :for="`filterPillToggle-${inputId}`"
+                data-test-id="filter-pill-label"
+                :tabindex="-1">
+                <tick-icon :class="$style['c-filterPill-icon']" />
+                <span
+                    :class="$style['c-filterPill-text']"
+                    data-test-id="filter-pill-text">
+                    {{ displayText }}
+                </span>
+                <span
+                    :class="$style['c-filterPill-number']"
+                    data-test-id="filter-pill-number">
+                    {{ displayNumber }}
+                </span>
+            </label>
+        </template>
     </div>
 </template>
 
@@ -52,6 +68,10 @@ export default {
             type: String,
             default: null
         },
+        href: {
+            type: String,
+            default: null
+        },
         isSelected: {
             type: Boolean,
             default: false
@@ -67,12 +87,15 @@ export default {
         displayNumber: {
             type: Number,
             default: null
+        },
+        isLoading: {
+            type: Boolean,
+            default: false
         }
     },
     data () {
         return {
-            isToggleSelected: false,
-            isToggleDisabled: false
+            isToggleSelected: false
         };
     },
     computed: {},
@@ -81,16 +104,10 @@ export default {
             if (newValue !== this.isToggleSelected) {
                 this.isToggleSelected = newValue;
             }
-        },
-        isDisabled (newValue) {
-            if (newValue !== this.isToggleDisabled) {
-                this.isToggleDisabled = newValue;
-            }
         }
     },
     created () {
         this.isToggleSelected = this.isSelected;
-        this.isToggleDisabled = this.isDisabled;
     },
     methods: {
         toggleFilter () {
@@ -105,8 +122,10 @@ export default {
 </script>
 
 <style lang="scss" module>
-$filter-pill-selected: $color-content-positive;
+$filter-pill-selected-color: $color-content-positive;
 $filter-pill-checkbox-width: 16px;
+$filter-pill-transition-duration: 0.2s;
+$filter-pill-ease: ease-in-out;
 
 @mixin ellipsis() {
     white-space: nowrap;
@@ -115,17 +134,22 @@ $filter-pill-checkbox-width: 16px;
 }
 
 .c-filterPill {
-    outline: 1px solid $color-grey-30;
+    box-shadow: 0 0 0 1px $color-border-default;
     border-radius: $radius-rounded-e;
     background: $color-white;
+    transition: .1s;
 
     &:focus-within:not(.c-filterPill--disabled) {
-        outline: 2px solid $color-focus;
+        box-shadow: 0 0 0 2px $color-focus;
     }
 }
 
 .c-filterPill--selected {
-    outline-color: $filter-pill-selected;
+    box-shadow: 0 0 0 1px $filter-pill-selected-color;
+}
+
+.c-filterPill-link {
+    pointer-events: none;
 }
 
 .c-filterPill-label {
@@ -138,10 +162,11 @@ $filter-pill-checkbox-width: 16px;
 
     &:focus {
         outline: none; // Prevents Safari doubling focus styles.
+        box-shadow: none;
     }
 
     .c-filterPill--selected & {
-        color: $filter-pill-selected;
+        color: $filter-pill-selected-color;
     }
 
     .c-filterPill--disabled & {
@@ -154,17 +179,28 @@ $filter-pill-checkbox-width: 16px;
     align-self: center;
     opacity: 0;
     width: 0;
+    min-width: 0;
+    transform: translate3d(0, 0, 0) scale(0) rotate(-45deg);
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: transform $filter-pill-transition-duration $filter-pill-ease,
+                    opacity $filter-pill-transition-duration $filter-pill-ease,
+                    width $filter-pill-transition-duration $filter-pill-ease,
+                    min-width $filter-pill-transition-duration $filter-pill-ease,
+                    margin-right $filter-pill-transition-duration $filter-pill-ease;
+    }
 
     .c-filterPill--selected &,
     .c-filterPill:hover:not(.c-filterPill--disabled) & {
+        transform: translate3d(0, 0, 0) scale(1);
         opacity: 1;
         width: $filter-pill-checkbox-width;
         min-width: $filter-pill-checkbox-width;
         margin-right: spacing(b);
+    }
 
-        path {
-            fill: $filter-pill-selected;
-        }
+    .c-filterPill--selected & path {
+        fill: $filter-pill-selected-color;
     }
 }
 
@@ -178,7 +214,7 @@ $filter-pill-checkbox-width: 16px;
     padding-left: spacing(d);
 
     .c-filterPill--selected & {
-        color: $filter-pill-selected;
+        color: $filter-pill-selected-color;
     }
 }
 </style>

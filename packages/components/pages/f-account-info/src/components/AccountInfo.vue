@@ -1,7 +1,7 @@
 <template>
     <div>
         <f-card
-            v-if="!shouldShowErrorPage"
+            v-if="!shouldShowLoadErrorCard"
             :card-heading="$t('accountDetails')"
             data-test-id="account-info"
             has-inner-spacing-large
@@ -170,6 +170,11 @@
                     </template>
                 </form-field>
 
+                <notifications
+                    :error-message-key="error.messageKey"
+                    :show-save-error-alert="shouldShowSaveErrorAlert"
+                    :show-successful-alert="shouldShowSuccessfulAlert" />
+
                 <f-button
                     :class="[$style['c-accountInfo-submitButton']]"
                     data-test-id="account-info-save-changes-button"
@@ -199,12 +204,8 @@
         <f-card-with-content
             v-else
             data-test-id="account-info-error-card"
-            :card-heading="$t('errorMessages.errorHeading')"
-            :card-description="$t(error.messageKey)"
-            has-inner-spacing-large
-            card-size-custom="medium"
-            has-outline
-            :class="[$style['c-accountInfo-errorCard']]">
+            :card-heading="$t('errorMessages.loading.heading')"
+            :card-description="$t(error.messageKey)">
             <template #icon>
                 <bag-sad-bg-icon />
             </template>
@@ -231,15 +232,16 @@ import {
 import EmailAddressField from './EmailAddressField.vue';
 import DeleteAccount from './DeleteAccount.vue';
 import AccountInfoValidationMixin from './AccountInfoValidationMixin.vue';
+import Notifications from './Notifications.vue';
 import tenantConfigs from '../tenants';
 import ConsumerApi from '../services/providers/Consumer.api';
 import fAccountInfoModule from '../store/accountInfo.module';
-import AccountInfoAnalyticsService from '../services/analytics';
-
 import {
     EVENT_SPINNER_STOP_LOADING
 } from '../constants';
-import { AccountInfoError } from '../exceptions';
+import InfoPageError from '../exceptions/InfoPageError';
+
+const standardLogTags = ['account-pages', 'account-info'];
 
 export default {
     components: {
@@ -250,6 +252,7 @@ export default {
         FErrorMessage,
         EmailAddressField,
         DeleteAccount,
+        Notifications,
         BagSadBgIcon
     },
 
@@ -280,12 +283,13 @@ export default {
                 cookies: this.$cookies,
                 baseUrl: this.smartGatewayBaseUrl
             }),
-            accountInfoAnalyticsService: new AccountInfoAnalyticsService(this.$gtm),
             tenantConfigs,
             isFormSubmitting: false,
             hasFormUpdate: false,
             hasAddressBeenUpdated: false,
-            shouldShowErrorPage: false,
+            shouldShowLoadErrorCard: false,
+            shouldShowSaveErrorAlert: false,
+            shouldShowSuccessfulAlert: false,
             error: {}
         };
     },
@@ -316,22 +320,43 @@ export default {
     methods: {
         ...mapActions('fAccountInfoModule', [
             'loadConsumerDetails',
-            'editConsumerDetails'
+            'editConsumerDetails',
+            'saveConsumerDetails'
         ]),
+
+        setFormUpdateState (isDirty, isAddressField) {
+            this.hasFormUpdate = isDirty;
+            this.shouldShowSaveErrorAlert = false;
+            this.shouldShowSuccessfulAlert = !isDirty;
+
+            if (isAddressField) {
+                this.hasAddressBeenUpdated = true;
+            }
+        },
 
         /**
         * Informs the template that we are in an Error State.
-        * @param {object} Error - The error that has recently occurred
+        * @param {object} error - The error that has recently occurred
         */
-        handleErrorState (error) {
-            this.shouldShowErrorPage = true;
-            this.error = error;
+        handleLoadErrorState (error) {
+            this.shouldShowLoadErrorCard = true;
+            this.error = new InfoPageError(error?.message, error?.response?.status, 'errorMessages.loading.description');
+        },
+
+        /**
+        * Informs the template that we failed to save.
+        * @param {object} error - The error that has recently occurred
+        */
+        handleSaveErrorState (error) {
+            this.shouldShowSaveErrorAlert = true;
+            this.error = new InfoPageError(error?.message, error?.response?.status, 'errorMessages.saving.description');
         },
 
         /**
         * Gets the form data (from the api) and assigns it to State
-        * then lowers the hasFormUpdate flag as the form data is currently clean
-        * then stops the on-screen spinner from showing
+        * then lowers the hasFormUpdate + hasAddressBeenUpdated flag
+        * as the form data is currently clean then stops the on-screen
+        * spinner from showing
         *
         * If an error occurs then this is logged and the Template is
         * informed that it is in a state of error.
@@ -339,11 +364,10 @@ export default {
         async initialise () {
             try {
                 await this.loadConsumerDetails({ api: this.consumerApi, authToken: this.authToken });
-                this.$log.info('Consumer details fetched successfully', ['account-pages', 'account-info']);
-                this.hasFormUpdate = false;
+                this.$log.info('Consumer details fetched successfully', standardLogTags);
             } catch (error) {
-                this.$log.error('Error fetching consumer details', error, ['account-pages', 'account-info']);
-                this.handleErrorState(new AccountInfoError(error.message, error?.response?.status));
+                this.$log.error('Error fetching consumer details', error, standardLogTags);
+                this.handleLoadErrorState(error);
             } finally {
                 this.$nextTick(() => {
                     this.$parent.$emit(EVENT_SPINNER_STOP_LOADING);
@@ -351,7 +375,17 @@ export default {
             }
         },
 
-        onFormSubmit () {
+        /**
+        * If there are any form changes
+        * then informs the Template that we are submitting the form
+        * then Saves the State (via the api)
+        * then lowers the hasFormUpdate flag as the form data is now currently clean again
+        * then informs the Template that we are now not submitting the form
+        *
+        * If an error occurs then this is logged and the Template is
+        * informed that it is in a state of error.
+        */
+        async onFormSubmit () {
             if (this.isFormInvalid()) {
                 this.logValidationFailure();
                 return;
@@ -364,14 +398,13 @@ export default {
             this.setSubmittingState(true);
 
             try {
-                // TODO - to be added with next ticket
-                this.$log.info('Consumer details saved successfully', ['account-pages', 'account-info']);
-                this.hasFormUpdate = false;
-                this.accountInfoAnalyticsService.trackFormSubmission(this.hasAddressBeenUpdated);
-                this.hasAddressBeenUpdated = false;
+                await this.saveConsumerDetails({ api: this.consumerApi, authToken: this.authToken });
+                this.$log.info('Consumer details saved successfully', standardLogTags);
+                this.analyticsTrackFormSubmission(this.hasAddressBeenUpdated);
+                this.setFormUpdateState(false, false);
             } catch (error) {
-                this.$log.error('Error saving consumer details', error, ['account-pages', 'account-info']);
-                this.handleErrorState(new AccountInfoError(error.message, error?.response?.status));
+                this.$log.error('Error saving consumer details', error, standardLogTags);
+                this.handleSaveErrorState(error);
             } finally {
                 this.setSubmittingState(false);
             }
@@ -393,10 +426,27 @@ export default {
         */
         onEditConsumer (field, value, isAddressField = false) {
             this.editConsumerDetails({ field, value });
-            this.hasFormUpdate = true;
+            this.setFormUpdateState(true, isAddressField);
+        },
 
-            if (isAddressField) {
-                this.hasAddressBeenUpdated = true;
+        /**
+        * Pushes `form` event to the dataLayer with correct data
+        */
+        analyticsTrackFormSubmission (hasAddressBeenUpdated) {
+            this.$gtm.pushEvent({
+                event: 'trackEvent',
+                category: 'account',
+                action: 'save_accountinfo_changes',
+                label: 'submit'
+            });
+
+            if (hasAddressBeenUpdated) {
+                this.$gtm.pushEvent({
+                    event: 'trackEvent',
+                    category: 'my account',
+                    action: 'account info',
+                    label: 'address change intent'
+                });
             }
         }
     }
@@ -410,9 +460,5 @@ export default {
 
 .c-accountInfo-changePasswordButton {
     margin-top: spacing(d);
-}
-
-.c-accountInfo-errorCard {
-    margin-left: 0;
 }
 </style>

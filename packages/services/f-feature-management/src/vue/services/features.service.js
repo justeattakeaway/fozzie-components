@@ -3,6 +3,7 @@ import featuresModule from '../store/features.module';
 
 const namespace = 'f-feature-management';
 const storeAction = `${namespace}/update`;
+const loggingTags = 'feature-management';
 
 function trackExperiment (key, variant, analytics) {
     analytics.pushEvent({
@@ -24,7 +25,7 @@ function contextGetter (store, cookies) {
     };
 }
 
-function createSettings (store, serviceStore, cookies, analytics, logger) {
+function createSettings (store, serviceStore, cookies, analytics, log) {
     const { featureManagement: envConfig } = store.state.configuration.settings;
 
     const settings = {
@@ -41,26 +42,17 @@ function createSettings (store, serviceStore, cookies, analytics, logger) {
         onTrack: (key, variant) => trackExperiment(key, variant, analytics)
     };
 
-    if (logger) {
-        settings.logger = logger;
+    if (log) {
+        settings.log = log;
     }
 
     const initialConfigAsJson = serviceStore && serviceStore.configJson;
     if (initialConfigAsJson && initialConfigAsJson.features) {
-        logger.logInfo('[FeaturesService] Initialising with stored config');
+        log.info('[FeaturesService] Initialising with stored config', loggingTags);
         settings.initialConfigAsJson = initialConfigAsJson;
     }
 
     return settings;
-}
-
-function createLoggerWrapper (store, logger) {
-    const tags = ['feature-management'];
-    return {
-        logInfo: (message, metadata) => logger?.logInfo(message, store, { tags, ...metadata }),
-        logWarn: (message, metadata) => logger?.logWarn(message, store, { tags, ...metadata }),
-        logError: (message, metadata) => logger?.logError(message, store, { tags, ...metadata })
-    };
 }
 
 /**
@@ -73,15 +65,15 @@ export default class FeaturesService {
             httpClient,
             cookies,
             analytics,
-            logger
+            log
         }
     ) {
         this.store = store;
-        this.logger = createLoggerWrapper(store, logger);
+        this.log = log;
 
         store.registerModule(namespace, featuresModule, { preserveState: !!this.serviceStore });
 
-        const settings = createSettings(this.store, this.serviceStore, cookies, analytics, this.logger);
+        const settings = createSettings(this.store, this.serviceStore, cookies, analytics, this.log);
         this.featureManagement = createFeatureManagementInstance(settings, httpClient);
     }
 
@@ -93,7 +85,7 @@ export default class FeaturesService {
             const newConfigJson = await this.featureManagement.loadFromCdn();
             await this.store.dispatch(storeAction, newConfigJson);
         } catch (error) {
-            this.logger.logError('Failed to update features config file', { error });
+            this.log.error('Failed to update features config file', error, loggingTags);
         }
     }
 

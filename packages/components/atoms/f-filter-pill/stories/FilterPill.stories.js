@@ -9,13 +9,7 @@ export default {
 export const FilterPillComponent = (args, { argTypes }) => ({
     components: { FilterPill },
     props: Object.keys(argTypes),
-    template: `<filter-pill
-                    :input-id='inputId'
-                    :is-selected='isSelected'
-                    :is-disabled='isDisabled'
-                    :display-text='displayText'
-                    :display-number='displayNumber'
-                ></filter-pill>`
+    template: '<filter-pill v-bind="$props"/>'
 });
 
 FilterPillComponent.argTypes = {
@@ -28,6 +22,11 @@ FilterPillComponent.argTypes = {
         control: { type: 'text' },
         description: 'Filter pill toggle value',
         defaultValue: 'low_delivery_fee'
+    },
+    href: {
+        control: { type: 'text' },
+        description: 'Filter pill href value',
+        defaultValue: '/area/cf10-cardiff/?refine=low_delivery_fee'
     },
     isSelected: {
         control: { type: 'boolean' },
@@ -48,6 +47,11 @@ FilterPillComponent.argTypes = {
         control: { type: 'number' },
         description: 'Displays filter number',
         defaultValue: 15
+    },
+    isLoading: {
+        control: { type: 'boolean' },
+        description: 'Indicates whether or not to display a loading state',
+        defaultValue: false
     }
 };
 

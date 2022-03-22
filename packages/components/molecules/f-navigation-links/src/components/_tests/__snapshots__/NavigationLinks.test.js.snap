@@ -1,48 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NavigationLinks should display the list elements correctly for each \`link\` supplied 1`] = `
-<ul data-test-id="navigationLinks" class="c-navigationLinks">
-  <li class="c-navigationLinks-item">
-    <v-link-stub data-test-id="link1" link-class="c-navigationLinks-link" to="/account/info">
-      Your account
-    </v-link-stub>
-  </li>
-  <li class="c-navigationLinks-item">
-    <v-link-stub data-test-id="link2" link-class="c-navigationLinks-link" to="/order-history">
-      Your orders
-    </v-link-stub>
-  </li>
-  <li class="c-navigationLinks-item">
-    <v-link-stub data-test-id="link3" link-class="c-navigationLinks-link" to="/account/paymentoptions">
-      Your saved cards
-    </v-link-stub>
-  </li>
-  <li class="c-navigationLinks-item">
-    <v-link-stub data-test-id="link4" link-class="c-navigationLinks-link" to="/member/addressbook">
-      Your address book
-    </v-link-stub>
-  </li>
-  <li class="c-navigationLinks-item">
-    <v-link-stub data-test-id="link5" link-class="c-navigationLinks-link" to="/account/credit">
-      Redeem a voucher
-    </v-link-stub>
-  </li>
-  <li class="c-navigationLinks-item">
-    <v-link-stub data-test-id="link6" link-class="c-navigationLinks-link" to="/giftcards/redeem">
-      Redeem a gift card
-    </v-link-stub>
-  </li>
-  <li class="c-navigationLinks-item">
-    <v-link-stub data-test-id="link7" link-class="c-navigationLinks-link" to="/account/preferences">
-      Contact preferences
-    </v-link-stub>
-  </li>
-  <li class="c-navigationLinks-item">
-    <v-link-stub data-test-id="link8" link-class="c-navigationLinks-link" href="/anchor-link">
-      Anchor link
-    </v-link-stub>
-  </li>
-</ul>
+<nav aria-label="navigation" data-test-id="navigationLinks">
+  <ul class="c-navigationLinks">
+    <li class="c-navigationLinks-item">
+      <v-link-stub data-test-id="link1" link-class="c-navigationLinks-link" to="/account/info">
+        Your account
+      </v-link-stub>
+    </li>
+    <li class="c-navigationLinks-item">
+      <v-link-stub data-test-id="link2" link-class="c-navigationLinks-link" to="/order-history">
+        Your orders
+      </v-link-stub>
+    </li>
+    <li class="c-navigationLinks-item">
+      <v-link-stub data-test-id="link3" link-class="c-navigationLinks-link" to="/account/paymentoptions">
+        Your saved cards
+      </v-link-stub>
+    </li>
+    <li class="c-navigationLinks-item">
+      <v-link-stub data-test-id="link4" link-class="c-navigationLinks-link" to="/member/addressbook">
+        Your address book
+      </v-link-stub>
+    </li>
+    <li class="c-navigationLinks-item">
+      <v-link-stub data-test-id="link5" link-class="c-navigationLinks-link" to="/account/credit">
+        Redeem a voucher
+      </v-link-stub>
+    </li>
+    <li class="c-navigationLinks-item">
+      <v-link-stub data-test-id="link6" link-class="c-navigationLinks-link" to="/giftcards/redeem">
+        Redeem a gift card
+      </v-link-stub>
+    </li>
+    <li class="c-navigationLinks-item">
+      <v-link-stub data-test-id="link7" link-class="c-navigationLinks-link" to="/account/preferences">
+        Contact preferences
+      </v-link-stub>
+    </li>
+    <li class="c-navigationLinks-item">
+      <v-link-stub data-test-id="link8" link-class="c-navigationLinks-link" href="/anchor-link">
+        Anchor link
+      </v-link-stub>
+    </li>
+  </ul>
+</nav>
 `;
 
 exports[`NavigationLinks should not fail if no \`links\` prop supplied 1`] = `[Function]`;

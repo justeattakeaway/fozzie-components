@@ -7,17 +7,17 @@ const appendStandardProperties = (logPayload, message, level, mode) => {
 };
 
 const logger = {
-    error: (logMessage, exception, tags, logPayload = {}) => {
+    logError: (logMessage, store, logPayload = {}) => {
         appendStandardProperties(logPayload, logMessage, 'Error', 'client');
-        console.error(logMessage, tags, logPayload);
+        console.error(logMessage, logPayload);
     },
-    warn: (logMessage, tags, logPayload = {}) => {
+    logWarn: (logMessage, store, logPayload = {}) => {
         appendStandardProperties(logPayload, logMessage, 'Warn', 'client');
-        console.warn(logMessage, tags, logPayload);
+        console.warn(logMessage, logPayload);
     },
-    info: (logMessage, tags, logPayload = {}) => {
+    logInfo: (logMessage, store, logPayload = {}) => {
         appendStandardProperties(logPayload, logMessage, 'Info', 'client');
-        console.log(logMessage, tags, logPayload);
+        console.log(logMessage, logPayload);
     }
 };
 

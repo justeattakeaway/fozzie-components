@@ -41,6 +41,23 @@ describe('FilterPill', () => {
             });
         });
 
+        describe('href :: ', () => {
+            it('should have filter `href` value', () => {
+                // Arrange
+                const propsData = { href: '/area/cf10-cardiff/?refine=low_delivery_fee' };
+
+                // Act
+                const wrapper = shallowMount(FilterPill, {
+                    propsData
+                });
+
+                const link = wrapper.find('[data-test-id="filter-pill-link"]');
+
+                // Assert
+                expect(link.attributes('href')).toBe(propsData.href);
+            });
+        });
+
         describe('isSelected :: ', () => {
             it.each([
                 [true, true],
@@ -67,35 +84,6 @@ describe('FilterPill', () => {
 
                 // Assert
                 expect(wrapper.vm.isToggleSelected).toBe(true);
-            });
-        });
-
-        describe('isDisabled :: ', () => {
-            it.each([
-                [true, true],
-                [false, false]
-            ])('should update `isToggleDisabled` %s when set to %s', (expectedValue, isDisabled) => {
-                // Arrange
-                const propsData = { isDisabled };
-
-                // Act
-                const wrapper = shallowMount(FilterPill, {
-                    propsData
-                });
-
-                // Assert
-                expect(wrapper.vm.isToggleDisabled).toBe(expectedValue);
-            });
-
-            it('should update `isToggleDisabled` when changed', async () => {
-                // Arrange
-                const wrapper = shallowMount(FilterPill, { isToggleDisabled: false, isDisabled: false });
-
-                // Act
-                await wrapper.vm.$options.watch.isDisabled.call(wrapper.vm, true);
-
-                // Assert
-                expect(wrapper.vm.isToggleDisabled).toBe(true);
             });
         });
 
@@ -149,6 +137,52 @@ describe('FilterPill', () => {
                 expect(wrapper.vm.isToggleSelected).toBe(true);
                 expect(spy).toHaveBeenCalledWith('toggle', wrapper.vm.toggleValue);
             });
+        });
+    });
+
+    describe('checked :: ', () => {
+        it('should have a true checked state when filter is selected', () => {
+            // Arrange
+            const propsData = { isSelected: true };
+
+            // Act
+            const wrapper = shallowMount(FilterPill, {
+                propsData
+            });
+
+            const { checked } = wrapper.find('input').element;
+
+            // Assert
+            expect(checked).toBe(true);
+        });
+
+        it('should have a false checked state when filter is not selected', () => {
+            // Arrange
+            const propsData = { isSelected: false };
+
+            // Act
+            const wrapper = shallowMount(FilterPill, {
+                propsData
+            });
+
+            const { checked } = wrapper.find('input').element;
+
+            // Assert
+            expect(checked).toBe(false);
+        });
+
+        it('should have a true checked state when filter is clicked', () => {
+            // Arrange & Act
+            const wrapper = shallowMount(FilterPill);
+
+            const inputEl = wrapper.find('input');
+
+            inputEl.trigger('click');
+
+            const { checked } = inputEl.element;
+
+            // Assert
+            expect(checked).toBe(true);
         });
     });
 });

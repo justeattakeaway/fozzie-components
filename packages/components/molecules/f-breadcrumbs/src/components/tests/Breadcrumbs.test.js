@@ -13,6 +13,17 @@ describe('BreadCrumbs', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
+    it('should contain `aria-label` with content `breadcrumbs`', () => {
+        // Arrange
+        const wrapper = shallowMount(BreadCrumbs);
+
+        // Act
+        const result = wrapper.find("[data-test-id='breadcrumbs-component']");
+
+        // Assert
+        expect(result.attributes('aria-label')).toBe('breadcrumbs');
+    });
+
     describe('props::', () => {
         describe('`links`', () => {
             it('should render a link when a url is supplied', () => {

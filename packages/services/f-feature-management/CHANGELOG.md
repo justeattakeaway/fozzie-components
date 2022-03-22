@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.9.0
+------------------------------
+*March 17, 2022*
+
+### Changed
+ - Replace old deprecated logger with new interface
+
+
 v0.8.0
 ------------------------------
 *March 3, 2022*
@@ -14,21 +22,21 @@ v0.7.2
 ------------------------------
 *February 21, 2022*
 
-### Changed 
+### Changed
  - Fix import of config JSON action import for features store module
 
 v0.7.1
 ------------------------------
 *November 23, 2021*
 
-### Changed 
+### Changed
  - Enable namespacing for store
 
 v0.7.0
 ------------------------------
 *November 18, 2021*
 
-### Changed 
+### Changed
  - Improved error logging
 
 v0.6.0

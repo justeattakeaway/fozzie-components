@@ -4,6 +4,8 @@ exports.SAVE_CHANGES_BUTTON = '[data-test-id="account-info-save-changes-button"]
 exports.CHANGE_PASSWORD_BUTTON = '[data-test-id="account-info-change-password-button"]';
 exports.DELETE_ACCOUNT_LINK = '[name="account-info-delete-account-link"]';
 exports.ERROR_CARD = '[data-test-id="account-info-error-card"]';
+exports.ERROR_ALERT = '[data-test-id="account-info-error-alert"]';
+exports.SUCCESS_ALERT = '[data-test-id="account-info-success-alert"]';
 
 exports.FIELDS = {
     firstName: {

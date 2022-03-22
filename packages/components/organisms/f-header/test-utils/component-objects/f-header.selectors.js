@@ -18,7 +18,7 @@ exports.NAVIGATION = {
         link: '[data-test-id="user-info-link"]'
     },
     countrySelector: {
-        link: '[data-test-id="country-selector"] button',
+        link: '[data-test-id="country-selector"]',
         currentIcon: '[data-test-id="current-flag-icon"]',
         countryList: '[data-test-id="countrySelector-list"] li'
     }

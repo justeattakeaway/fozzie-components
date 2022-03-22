@@ -1,5 +1,6 @@
 <template>
-    <div
+    <nav
+        aria-label="breadcrumbs"
         data-test-id="breadcrumbs-component"
         :class="$style['c-breadcrumbs']">
         <ul
@@ -39,7 +40,7 @@
                 </li>
             </template>
         </ul>
-    </div>
+    </nav>
 </template>
 
 <script>

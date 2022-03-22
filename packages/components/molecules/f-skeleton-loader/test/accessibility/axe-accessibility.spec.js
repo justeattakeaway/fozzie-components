@@ -1,4 +1,4 @@
-const { getAccessibilityTestResults } = require('../../../../../../test/utils/axe-helper');
+const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
 
 const SkeletonLoader = require('../../test-utils/component-objects/f-skeleton-loader.component');
 
@@ -10,7 +10,7 @@ describe('Accessibility tests', () => {
     });
     it('a11y - should test f-skeleton-loader component WCAG compliance', () => {
         // Act
-        const axeResults = getAccessibilityTestResults('f-skeleton-loader');
+        const axeResults = getAxeResults('f-skeleton-loader');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
