@@ -92,7 +92,8 @@
 
                 <li
                     v-if="showOffersLink"
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    :class="[$style['c-nav-list-item--horizontallyAlignedAboveMid'],
+                             { [$style['c-nav-list-jetLogoTheme']]: isJetLogoTheme }]">
                     <nav-link
                         :text="copy.offers.text"
                         :tabindex="tabIndex"
@@ -114,7 +115,8 @@
 
                 <li
                     v-if="showDeliveryEnquiry"
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    :class="[$style['c-nav-list-item--horizontallyAlignedAboveMid'],
+                             { [$style['c-nav-list-jetLogoTheme']]: isJetLogoTheme }]">
                     <nav-link
                         :text="copy.deliveryEnquiry.text"
                         :tabindex="tabIndex"
@@ -139,12 +141,12 @@
                 </li>
 
                 <li
-                    :class="[
-                        $style['c-nav-list-item--horizontallyAlignedAboveMid'],
-                        $style['has-sublist'], {
-                            'is-hidden': !userInfo || !showLoginInfo,
-                            [$style['is-open']]: userMenuIsOpen
-                        }]"
+                    :class="[$style['c-nav-list-item--horizontallyAlignedAboveMid'],
+                             $style['has-sublist'], {
+                                 'is-hidden': !userInfo || !showLoginInfo,
+                                 [$style['is-open']]: userMenuIsOpen
+                             },
+                             { [$style['c-nav-list-jetLogoTheme']]: isJetLogoTheme }]"
                     data-test-id="user-info-icon"
                     v-on="isBelowMid ? null : { mouseover: openUserMenu, mouseleave: closeUserMenu }"
                     @keyup.esc="closeUserMenu">
@@ -199,7 +201,8 @@
 
                 <li
                     v-if="!userInfo && showLoginInfo"
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    :class="[$style['c-nav-list-item--horizontallyAlignedAboveMid'],
+                             { [$style['c-nav-list-jetLogoTheme']]: isJetLogoTheme }]">
                     <nav-link
                         :text="copy.accountLogin.text"
                         :tabindex="tabIndex"
@@ -215,7 +218,8 @@
 
                 <li
                     v-if="userInfo && isBelowMid && showLoginInfo"
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    :class="[$style['c-nav-list-item--horizontallyAlignedAboveMid'],
+                             { [$style['c-nav-list-jetLogoTheme']]: isJetLogoTheme }]">
                     <nav-link
                         v-if="userInfo && isBelowMid && showLoginInfo"
                         :text="copy.accountLogout.text"
@@ -232,7 +236,8 @@
 
                 <li
                     v-if="showHelpLink"
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    :class="[$style['c-nav-list-item--horizontallyAlignedAboveMid'],
+                             { [$style['c-nav-list-jetLogoTheme']]: isJetLogoTheme }]">
                     <nav-link
                         :text="copy.help.text"
                         :tabindex="tabIndex"
@@ -247,7 +252,8 @@
 
                 <li
                     v-if="showCountrySelector"
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    :class="[$style['c-nav-list-item--horizontallyAlignedAboveMid'],
+                             { [$style['c-nav-list-jetLogoTheme']]: isJetLogoTheme }]">
                     <country-selector
                         :is-below-mid="isBelowMid"
                         :copy="copy.countrySelector"
@@ -336,6 +342,11 @@ export default {
         isOrderCountSupported: {
             type: Boolean,
             default: true
+        },
+
+        isJetLogoTheme: {
+            type: Boolean,
+            default: false
         },
 
         headerBackgroundTheme: {
@@ -668,8 +679,20 @@ export default {
 .c-nav-list-item--horizontallyAlignedAboveMid {
     @include media('>mid') {
         float: left;
-        padding: 28px 16px;
+        padding: spacing(c) spacing(c);
+        margin-top: spacing(d);
+        margin-bottom: spacing(d);
     }
+}
+
+.c-nav-list-jetLogoTheme {
+    // for tablets - keeps navigation all inline when larger JET logo is used
+    @media (min-width:834px) and (max-width:900px) {
+        float: left;
+        padding: spacing(b) spacing(b);
+        margin-top: spacing(e);
+        margin-bottom: spacing(d);
+  }
 }
 
 .c-nav-list-btn {

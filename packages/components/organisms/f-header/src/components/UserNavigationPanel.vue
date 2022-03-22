@@ -1,7 +1,8 @@
 <template>
     <ul
         :aria-label="copy.navTitle"
-        :class="$style['c-nav-popoverList']">
+        :class="[$style['c-nav-popoverList'],
+                 $style['c-user-list']]">
         <li
             v-for="(link, index) in copy.navLinks"
             :key="index"
@@ -88,15 +89,18 @@ export default {
 <style lang="scss" module>
 @import '../assets/scss/navigation.scss';
 
+.c-user-list {
+    margin: spacing(b) 0;
+    padding: 0 !important;
+}
+
 .list-link {
     text-decoration: none;
 
     @include media('>mid') {
         display: block;
-        padding: spacing(c) spacing(d);
-        margin: 0;
+        padding: spacing(c) 0;
         height: auto;
-        border-bottom: 1px solid $color-border-default;
     }
 
     @include media('<=mid') {
