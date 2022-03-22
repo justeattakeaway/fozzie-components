@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.27.0
+------------------------------
+*March 18, 2022*
+### Changed
+- Show ratings if count is missing
+- Split count and 'own rating' message elements to simplify template
+
 v0.26.0
 ------------------------------
 *March 03, 2022*

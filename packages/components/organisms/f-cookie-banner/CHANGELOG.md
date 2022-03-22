@@ -3,6 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.8.2
+------------------------------
+*March 17, 2022*
+
+### Added
+- Tab loop test into `axe-accessibility.spec.js`.
+- Selector imports into component object for assertion.
+- `testTabOrder` function into component object.
+
+### Changed
+- Selector naming convention.
+
+### Fixed
+- Linting issues.
+
 
 v3.8.1
 ------------------------------
