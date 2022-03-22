@@ -90,8 +90,10 @@ export default {
 @import '../assets/scss/navigation.scss';
 
 .c-user-list {
-    margin: spacing(b) 0;
-    padding: 0 !important;
+    @include media('>mid') {
+        margin: spacing(b) 0;
+        padding: 0 !important;
+    }
 }
 
 .list-link {
