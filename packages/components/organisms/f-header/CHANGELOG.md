@@ -11,7 +11,7 @@ v9.8.0
 ### Changed
 - corner radius when navigation is closed on mobile view
 - horizontal navigation when using a tablet
-- padding and border in account popover
+- padding and bottom-border in account popover
 
 
 v9.7.0
