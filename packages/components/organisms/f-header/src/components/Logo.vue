@@ -122,7 +122,7 @@ export default {
         }
     }
 
-    // shrinks long JET logo (for tablet screen) when long delivery link is displayed
+    // resizes takeaway logo for tablets if delivery link and country selector are also visible
     .c-logo-img--jet {
         @include media('>mid') {
             @include media('<wide') {
