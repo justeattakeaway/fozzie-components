@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v7.1.0
+------------------------------
+*March 22, 2022*
+
+### Added
+- `lang` attribute for country selector links.
+- `outline-offset` to make to easier to see when app store links are focused.
+
+### Changed
+- Moved region from `ul` to containing element.
+
+
 v7.0.0
 ------------------------------
 *February 28, 2022*

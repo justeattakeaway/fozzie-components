@@ -4,6 +4,7 @@ import CountrySelector from '../CountrySelector.vue';
 describe('CountrySelector', () => {
     let wrapper,
         button,
+        lang,
         list,
         localisedName,
         siteUrl;
@@ -11,6 +12,7 @@ describe('CountrySelector', () => {
     beforeEach(() => {
         localisedName = 'Denmark';
         siteUrl = 'https://www.just-eat.dk';
+        lang = 'da-DK';
 
         const propsData = {
             currentCountryName: 'United Kingdom',
@@ -18,6 +20,7 @@ describe('CountrySelector', () => {
             countries: [
                 {
                     key: 'dk',
+                    lang,
                     localisedName,
                     siteUrl
                 }
@@ -60,5 +63,10 @@ describe('CountrySelector', () => {
     it('should contain correct link', () => {
         const link = wrapper.find('[data-test-id="countrySelector-countryLink"]');
         expect(link.attributes('href')).toBe(siteUrl);
+    });
+
+    it('should contain `lang` attribute', () => {
+        const text = wrapper.find('[data-test-id="countrySelector-countryLink"]').find('p');
+        expect(text.attributes('lang')).toBe(lang);
     });
 });
