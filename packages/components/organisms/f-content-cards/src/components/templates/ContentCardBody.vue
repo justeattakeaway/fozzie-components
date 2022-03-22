@@ -68,7 +68,7 @@ export default {
     background-color: #fff;
     padding: spacing(d);
     border-radius: 12px;
-    box-shadow: 0px 2px 2px rgba(27, 35, 36, 0.03), 0px 3px 1px -2px rgba(27, 35, 36, 0.07), 0px 1px 5px rgba(27, 35, 36, 0.06);
+    box-shadow: $elevation-box-shadow-01;
 }
 
 .c-content-card-title {
