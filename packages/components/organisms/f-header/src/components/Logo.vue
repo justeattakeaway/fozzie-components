@@ -7,7 +7,7 @@
             :is="iconComponent"
             :class="[
                 $style['c-logo-img'],
-                { [$style['c-logo-img--jet']]: theme === 'jet' },
+                { [$style['c-logo-img--jet']]: theme === 'jet' && resizeLogo },
                 { [$style['c-logo-img--alt']]: isAltLogo }
             ]"
             :data-theme-logo="iconComponent"
@@ -51,6 +51,10 @@ export default {
             default: 'white'
         },
         isOpen: {
+            type: Boolean,
+            default: false
+        },
+        resizeLogo: {
             type: Boolean,
             default: false
         }
@@ -118,11 +122,19 @@ export default {
         }
     }
 
+    // shrinks long JET logo (for tablet screen) when long delivery link is displayed
     .c-logo-img--jet {
         @include media('>mid') {
             @include media('<wide') {
-                height: 32px;
+                height: 35px;
             }
+
+            // tablet
+            @media screen and (max-width:833px){
+                height: 25px;
+                margin-top: spacing(b);
+            }
+
             @include media('>wide') {
                 height: 40px;
             }
