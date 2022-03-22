@@ -101,7 +101,7 @@ export default {
 .c-content-card-bodyWrapper {
     z-index: 10;
     width: 100%;
-    @include media('<=narrow'){
+    @include media('<=narrow') {
         padding: spacing(d);
     }
 }
