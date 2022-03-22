@@ -283,6 +283,11 @@ html:global(.is-navInView) {
         min-height: $header-height--narrow;
 
         @include media('>mid') {
+            padding-left: #{$layout-margin}px;
+            padding-right: #{$layout-margin}px;
+        }
+
+        @include media('<wide') {
             padding-left: #{$layout-margin--mid}px;
             padding-right: #{$layout-margin--mid}px;
         }
