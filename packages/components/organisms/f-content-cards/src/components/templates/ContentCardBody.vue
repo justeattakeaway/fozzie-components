@@ -64,7 +64,7 @@ export default {
 <style lang="scss" module>
 .c-content-card-body {
     margin-top: -(spacing(e));
-    width:100%;
+    width: 100%;
     background-color: #fff;
     padding: spacing(d);
     border-radius: 12px;
@@ -100,7 +100,7 @@ export default {
 
 .c-content-card-bodyWrapper {
     z-index: 10;
-    width:100%;
+    width: 100%;
     @include media('<=narrow'){
         padding: spacing(d);
     }
