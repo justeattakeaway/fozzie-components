@@ -206,7 +206,6 @@ $nav-toggleIcon-space              : 5px;
     @include media('>mid') {
         margin-top: spacing(c);
     }
-    
     // tooltip arrow
     &:before {
         right: 4%;

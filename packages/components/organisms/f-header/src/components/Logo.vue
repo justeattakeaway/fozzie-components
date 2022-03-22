@@ -7,6 +7,7 @@
             :is="iconComponent"
             :class="[
                 $style['c-logo-img'],
+                { [$style['c-logo-img--jet']]: theme === 'jet' },
                 { [$style['c-logo-img--alt']]: isAltLogo }
             ]"
             :data-theme-logo="iconComponent"
@@ -112,8 +113,19 @@ export default {
         margin-left: -10.5px; //half of hamburger menu width
 
         @include media('>mid') {
-            height: 40px;
             margin-left: 0;
+            height: 40px;
+        }
+    }
+
+    .c-logo-img--jet {
+        @include media('>mid') {
+            @include media('<wide') {
+                height: 32px;
+            }
+            @include media('>wide') {
+                height: 40px;
+            }
         }
     }
 

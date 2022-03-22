@@ -25,7 +25,6 @@
 
             <navigation
                 :copy="copy"
-                :is-jet-logo-theme="shouldUseJetLogo"
                 :custom-nav-links="customNavLinks"
                 :show-delivery-enquiry="showDeliveryEnquiryWithContent"
                 :show-offers-link="showOffersLinkWithContent"
@@ -282,8 +281,7 @@ html:global(.is-navInView) {
         position: relative;
         min-height: $header-height--narrow;
 
-        // tablet size or less
-        @media screen and (max-width: 834px) {
+        @include media('>mid') {
             padding-left: #{$layout-margin--mid}px;
             padding-right: #{$layout-margin--mid}px;
         }
