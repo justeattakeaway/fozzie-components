@@ -9,8 +9,9 @@ v9.8.0
 *March 22, 2022*
 
 ### Changed
-- extra small padding changes
-- navigation fix when using a tablet
+- corner radius when navigation is closed on mobile view
+- horizontal navigation when using a tablet
+- padding in account popover
 
 
 v9.7.0
