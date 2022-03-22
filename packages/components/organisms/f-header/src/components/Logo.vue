@@ -130,7 +130,7 @@ export default {
             }
 
             // tablet
-            @media screen and (max-width:833px){
+            @media screen and (max-width: 833px) {
                 height: 25px;
                 margin-top: spacing(b);
             }
