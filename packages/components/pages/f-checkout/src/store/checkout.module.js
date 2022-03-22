@@ -20,7 +20,7 @@ import {
     UPDATE_CUSTOMER_DETAILS,
     UPDATE_DATE_OF_BIRTH,
     UPDATE_ERRORS,
-    UPDATE_ADDRESS,
+    UPDATE_ADDRESS_DETAILS,
     UPDATE_FULFILMENT_TIME,
     UPDATE_GEO_LOCATION,
     UPDATE_HAS_ASAP_SELECTED,
@@ -327,7 +327,7 @@ export default {
 
             const addressDetails = addressService.getClosestAddress(data, tenant, currentPostcode);
 
-            commit(UPDATE_ADDRESS, addressDetails);
+            commit(UPDATE_ADDRESS_DETAILS, addressDetails);
             dispatch(`${VUEX_CHECKOUT_ANALYTICS_MODULE}/updateAutofill`, state, { root: true });
         },
 
@@ -472,7 +472,7 @@ export default {
         },
 
         updateAddress: ({ commit }, address) => {
-            commit(UPDATE_ADDRESS, address);
+            commit(UPDATE_ADDRESS_DETAILS, address);
         },
 
         updateDateOfBirth: ({ commit }, dateOfBirth) => {
@@ -572,7 +572,7 @@ export default {
             state.dineIn = payload;
         },
 
-        [UPDATE_ADDRESS]: (state, address) => {
+        [UPDATE_ADDRESS_DETAILS]: (state, address) => {
             state.address = {
                 ...state.address,
                 ...address

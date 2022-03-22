@@ -2191,6 +2191,7 @@ describe('Checkout', () => {
                             'BS1 1AA'
                         ]
                     },
+                    tenant: 'uk',
                     timeout: 60000
                 };
 

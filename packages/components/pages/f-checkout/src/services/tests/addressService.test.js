@@ -231,7 +231,10 @@ describe('addressService', () => {
             it('should return the address mapped correctly', () => {
                 // Arrange
                 const expectedAddress = {
-                    lines: ['Fleet Place House', 'Farringdon', 'City of London'],
+                    line1: 'Fleet Place House',
+                    line2: 'Farringdon',
+                    line3: 'City of London',
+                    line4: undefined,
                     locality: 'London',
                     postalCode: 'EC4M 7RF'
                 };

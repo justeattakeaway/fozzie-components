@@ -4,7 +4,8 @@ exports[`addressService getClosestAddress :: when tenant === \`au\` AND last sea
 Object {
   "administrativeArea": "New South Wales",
   "line1": "196 Kurraba Road",
-  "line2": "Unit 5, Neutral Bay",
+  "line2": "Unit 5",
+  "line3": "Neutral Bay",
   "locality": "Sydney",
   "postcode": "2089",
 }
@@ -15,6 +16,7 @@ Object {
   "administrativeArea": "",
   "line1": "",
   "line2": "",
+  "line3": "",
   "locality": "",
   "postcode": "",
 }
@@ -24,7 +26,8 @@ exports[`addressService getClosestAddress :: when tenant === \`au\` AND last sea
 Object {
   "administrativeArea": "New South Wales",
   "line1": "196 Kurraba Road",
-  "line2": "Unit 5, Neutral Bay",
+  "line2": "Unit 5",
+  "line3": "Neutral Bay",
   "locality": "Sydney",
   "postcode": "2089",
 }
@@ -34,7 +37,8 @@ exports[`addressService getClosestAddress :: when tenant === \`au\` AND last sea
 Object {
   "administrativeArea": "New South Wales",
   "line1": "196 Kurraba Road",
-  "line2": "Unit 5, Neutral Bay",
+  "line2": "Unit 5",
+  "line3": "Neutral Bay",
   "locality": "Sydney",
   "postcode": "2089",
 }
@@ -44,7 +48,8 @@ exports[`addressService getClosestAddress :: when tenant === \`au\` AND last sea
 Object {
   "administrativeArea": "Victoria",
   "line1": "94 Shaftesbury Parade",
-  "line2": "Thornbury",
+  "line2": null,
+  "line3": "Thornbury",
   "locality": "Melbourne",
   "postcode": "3071",
 }
@@ -55,6 +60,7 @@ Object {
   "administrativeArea": "",
   "line1": "",
   "line2": "",
+  "line3": "",
   "locality": "",
   "postcode": "4278",
 }
@@ -65,6 +71,7 @@ Object {
   "administrativeArea": "",
   "line1": "",
   "line2": "",
+  "line3": "",
   "locality": "",
   "postcode": "4278",
 }
@@ -73,7 +80,9 @@ Object {
 exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last searched postcode is not present should return default address if default address is present 1`] = `
 Object {
   "line1": "Fleet Place House",
-  "line2": "Farringdon, City of London",
+  "line2": "Farringdon",
+  "line3": "City of London",
+  "line4": undefined,
   "locality": "London",
   "postcode": "EC4M 7RF",
 }
@@ -83,6 +92,8 @@ exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last sea
 Object {
   "line1": "",
   "line2": "",
+  "line3": "",
+  "line4": "",
   "locality": "",
   "postcode": "",
 }
@@ -92,6 +103,8 @@ exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last sea
 Object {
   "line1": "1 Bristol Road",
   "line2": "Flat 1",
+  "line3": null,
+  "line4": undefined,
   "locality": "Bristol",
   "postcode": "BS1 1AA",
 }
@@ -100,7 +113,9 @@ Object {
 exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last searched postcode is present should return address with full postcode match when address has no spaces 1`] = `
 Object {
   "line1": "Fleet Place House",
-  "line2": "Farringdon, City of London",
+  "line2": "Farringdon",
+  "line3": "City of London",
+  "line4": undefined,
   "locality": "London",
   "postcode": "EC4M 7RF",
 }
@@ -109,7 +124,9 @@ Object {
 exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last searched postcode is present should return address with postcode partial match 1`] = `
 Object {
   "line1": "1 Test Road",
-  "line2": "",
+  "line2": null,
+  "line3": null,
+  "line4": undefined,
   "locality": "Area 51",
   "postcode": "AR51 1AA",
 }
@@ -119,6 +136,8 @@ exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last sea
 Object {
   "line1": "",
   "line2": "",
+  "line3": "",
+  "line4": "",
   "locality": "",
   "postcode": "EN1 1AA",
 }
@@ -128,6 +147,8 @@ exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last sea
 Object {
   "line1": "",
   "line2": "",
+  "line3": "",
+  "line4": "",
   "locality": "",
   "postcode": "EN1 1AA",
 }
