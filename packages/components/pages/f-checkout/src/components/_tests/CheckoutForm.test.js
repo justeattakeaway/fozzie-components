@@ -156,7 +156,7 @@ describe('CheckoutForm', () => {
                 expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
             });
 
-            it.only('should return the error summary with the number of invalid fields when there are more than one', () => {
+            it('should return the error summary with the number of invalid fields when there are more than one', () => {
                 // Arrange
                 const mockValidationState = {
                     invalidFields: [
