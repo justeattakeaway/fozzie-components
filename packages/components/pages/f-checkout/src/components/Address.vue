@@ -6,14 +6,11 @@
                 @click="addFocus">
                 {{ $t('labels.addressGroup') }}
             </legend>
-            <checkout-form-field
-                field-name="line1"
-                :field-type="fieldType"
-                :class="$style['c-address-formField']"
-                is-grouped />
 
             <checkout-form-field
-                field-name="line2"
+                v-for="(line, index) in $t('formFields.address.lines')"
+                :key="`${index}`"
+                :field-name="`${index}`"
                 :field-type="fieldType"
                 :class="$style['c-address-formField']"
                 is-grouped />

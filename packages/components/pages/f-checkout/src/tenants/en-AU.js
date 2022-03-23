@@ -46,14 +46,16 @@ const messages = {
             }
         },
         address: {
-            line1: {
-                label: 'Building number and street',
-                validationMessages: {
-                    required: 'Please enter the first line of your address'
+            lines: {
+                line1: {
+                    label: 'Building number and street',
+                    validationMessages: {
+                        required: 'Please enter the first line of your address'
+                    }
+                },
+                line2: {
+                    label: 'Level or unit number (Optional)'
                 }
-            },
-            line2: {
-                label: 'Level or unit number (Optional)'
             },
             locality: {
                 label: 'Town/suburb',

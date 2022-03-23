@@ -77,8 +77,10 @@ export default {
         },
 
         translations () {
+            const isAddressLine = this.fieldName.includes('line');
+
             return {
-                ...this.$t(`formFields.${this.fieldType}.${this.fieldName}`),
+                ...isAddressLine ? this.$t(`formFields.${this.fieldType}.lines.${this.fieldName}`) : this.$t(`formFields.${this.fieldType}.${this.fieldName}`),
                 name: `${this.kebabCase}`,
                 errorName: `${this.kebabCase}-error`,
                 emptyError: `error-${this.kebabCase}-empty`,

@@ -162,6 +162,10 @@ export default {
 
         shouldShowAddressAdministrativeArea () {
             return this.tenant === 'au';
+        },
+
+        shouldValidateLine2 () {
+            return this.tenant === 'it';
         }
     },
 
@@ -252,6 +256,9 @@ export default {
             validationProperties.address = {
                 line1: {
                     required
+                },
+                line2: {
+                    required: requiredIf(() => this.shouldValidateLine2)
                 },
                 locality: {
                     required
