@@ -3,7 +3,7 @@ const defaultId = 17731860;
 const defaultAddress = {
     City: 'Cavacurta',
     ZipCode: '26844',
-    Line1: 'Via Duomo 56',
+    Line1: 'Via Duomo',
     Line2: '56',
     Line3: '',
     Line4: 'Lodi',
@@ -29,9 +29,8 @@ export const itAddresses = { Addresses: [defaultAddress, additionalAddress], Def
 
 export const itAddress = {
     address: {
-        lines: [defaultAddress.Line1, defaultAddress.Line2, defaultAddress.Line3],
+        lines: [defaultAddress.Line1, defaultAddress.Line2, defaultAddress.Line3, defaultAddress.Line4],
         locality: defaultAddress.City,
-        administrativeArea: defaultAddress.Line4,
         postalCode: defaultAddress.ZipCode
     },
     geolocation: defaultGeoLocation
