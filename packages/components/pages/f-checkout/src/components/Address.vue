@@ -8,9 +8,9 @@
             </legend>
 
             <checkout-form-field
-                v-for="(line, index) in $t('formFields.address.lines')"
-                :key="`${index}`"
-                :field-name="`${index}`"
+                v-for="(_, fieldName) in $t('formFields.address.lines')"
+                :key="`${fieldName}`"
+                :field-name="`${fieldName}`"
                 :field-type="fieldType"
                 :class="$style['c-address-formField']"
                 is-grouped />
