@@ -573,9 +573,17 @@ export default {
         },
 
         [UPDATE_ADDRESS_DETAILS]: (state, address) => {
+            const fulfilmentAddress = {};
+
+            Object.entries(address).forEach(([key, value]) => {
+                const addressKey = key === 'postalCode' ? 'postcode' : key;
+
+                fulfilmentAddress[addressKey] = value;
+            });
+
             state.address = {
                 ...state.address,
-                ...address
+                ...fulfilmentAddress
             };
         },
 

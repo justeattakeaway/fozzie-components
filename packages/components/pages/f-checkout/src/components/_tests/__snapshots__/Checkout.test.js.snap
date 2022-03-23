@@ -13,7 +13,6 @@ exports[`Checkout methods :: mapCheckoutUpdateRequest should map the request suc
 Object {
   "location": Object {
     "address": Object {
-      "administrativeArea": undefined,
       "lines": Array [
         "1 Bristol Road",
         "Flat 1",

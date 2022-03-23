@@ -353,14 +353,14 @@ describe('CheckoutModule', () => {
         });
 
         describe(`${UPDATE_ADDRESS_DETAILS} ::`, () => {
-            xit('should update state with received values', () => {
+            it('should update state with received values', () => {
                 // Arrange
                 const addressFromLocalStorage = {
                     line1: 'Fleet Place House',
                     line2: 'Farringdon',
                     line3: null,
                     line4: undefined,
-                    locality: 'locality',
+                    locality: 'London',
                     postalCode: 'EC4M 7RF'
                 };
 
@@ -368,7 +368,7 @@ describe('CheckoutModule', () => {
                 mutations[UPDATE_ADDRESS_DETAILS](state, addressFromLocalStorage);
 
                 // Assert
-                expect(state.address).toEqual(address);
+                expect(state.address).toMatchSnapshot();
             });
         });
 

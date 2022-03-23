@@ -44,7 +44,7 @@ const mapUpdateCheckoutRequest = ({
                             ...(address.line3 ? [address.line3] : []),
                             ...(address.line4 ? [address.line4] : [])
                         ],
-                        administrativeArea: address.administrativeArea,
+                        ...(address.administrativeArea ? { administrativeArea: address.administrativeArea } : {}),
                         locality: address.locality || null,
                         postalCode: address.postcode?.trim() || null
                     }
