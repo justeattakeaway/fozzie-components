@@ -77,10 +77,8 @@ export default {
         },
 
         translations () {
-            const isAddressLine = this.fieldName.includes('line');
-
             return {
-                ...isAddressLine ? this.$t(`formFields.${this.fieldType}.lines.${this.fieldName}`) : this.$t(`formFields.${this.fieldType}.${this.fieldName}`),
+                ...this.$t(`formFields.${this.fieldType}.${this.fieldName}`),
                 name: `${this.kebabCase}`,
                 errorName: `${this.kebabCase}-error`,
                 emptyError: `error-${this.kebabCase}-empty`,
@@ -130,7 +128,7 @@ export default {
         },
 
         hasInvalidError () {
-            return !!this.hasInvalidErrorMessage && this.isEmpty && !this.validations[this.fieldName];
+            return this.hasInvalidErrorMessage && this.isEmpty && !this.validations.isValid;
         },
 
         hasError () {

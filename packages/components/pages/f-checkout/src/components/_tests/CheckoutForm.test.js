@@ -21,7 +21,7 @@ const $v = {
     customer: {
         mobileNumber: {
             $dirty: false,
-            isValidPhoneNumber: false
+            isValid: false
         },
         firstName: {
             $dirty: false
@@ -31,7 +31,7 @@ const $v = {
         },
         email: {
             $dirty: false,
-            email: false
+            isValid: false
         }
     },
     address: {
@@ -50,7 +50,7 @@ const $v = {
         postcode: {
             $dirty: false,
             required: true,
-            isValidPostcode: false
+            isValid: false
         }
     },
     dineIn: {
@@ -156,7 +156,7 @@ describe('CheckoutForm', () => {
                 expect(wrapper.vm.invalidFieldsSummary).toEqual(null);
             });
 
-            it('should return the error summary with the number of invalid fields when there are more than one', () => {
+            it.only('should return the error summary with the number of invalid fields when there are more than one', () => {
                 // Arrange
                 const mockValidationState = {
                     invalidFields: [

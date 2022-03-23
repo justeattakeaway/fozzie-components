@@ -8,9 +8,9 @@
             </legend>
 
             <checkout-form-field
-                v-for="(_, fieldName) in $t('formFields.address.lines')"
-                :key="`${fieldName}`"
-                :field-name="`${fieldName}`"
+                v-for="field in groupedAddressFields"
+                :key="field"
+                :field-name="field"
                 :field-type="fieldType"
                 :class="$style['c-address-formField']"
                 is-grouped />
@@ -53,6 +53,15 @@ export default {
             fieldType: 'address',
             fieldLength: '50'
         };
+    },
+
+    computed: {
+        groupedAddressFields () {
+            const addressFields = this.$t('formFields.address');
+
+            return Object.keys(addressFields).filter(field => addressFields[field].isGrouped);
+        }
+
     },
 
     methods: {

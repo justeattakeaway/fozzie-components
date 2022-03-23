@@ -46,16 +46,16 @@ const messages = {
             }
         },
         address: {
-            lines: {
-                line1: {
-                    label: 'Address line 1',
-                    validationMessages: {
-                        required: 'Please enter the first line of your address'
-                    }
-                },
-                line2: {
-                    label: 'Address line 2 (optional)'
+            line1: {
+                label: 'Address line 1',
+                isGrouped: true,
+                validationMessages: {
+                    required: 'Please enter the first line of your address'
                 }
+            },
+            line2: {
+                label: 'Address line 2 (optional)',
+                isGrouped: true
             },
             locality: {
                 label: 'City',
