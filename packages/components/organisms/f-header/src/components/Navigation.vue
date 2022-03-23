@@ -459,8 +459,7 @@ export default {
             if (this.showCountrySelector) {
                 this.closeCountrySelector();
             }
-
-            if (this.isBelowMid && this.navIsOpen) {
+            if (this.isBelowMid) {
                 // This is added to remove the ability to scroll the page content when the mobile navigation is open
                 this.handleMobileNavState();
 
@@ -566,13 +565,11 @@ export default {
         },
 
         handleMobileNavState () {
-            if (this.isBelowMid) {
-                this.$emit('onMobileNavToggle', this.navIsOpen);
+            this.$emit('onMobileNavToggle', this.navIsOpen);
 
-                if (typeof document !== 'undefined') {
-                    document.documentElement.classList.toggle('is-navInView', this.navIsOpen);
-                    document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.headerBackgroundTheme === 'transparent');
-                }
+            if (typeof document !== 'undefined') {
+                document.documentElement.classList.toggle('is-navInView', this.navIsOpen);
+                document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.headerBackgroundTheme === 'transparent');
             }
         },
 
@@ -668,7 +665,13 @@ export default {
 .c-nav-list-item--horizontallyAlignedAboveMid {
     @include media('>mid') {
         float: left;
-        padding: 28px 16px;
+        padding: spacing(c) spacing(c);
+        margin-top: spacing(d);
+        margin-bottom: spacing(d);
+    }
+
+    @include media('>wide') {
+        margin-left: spacing(c);
     }
 }
 

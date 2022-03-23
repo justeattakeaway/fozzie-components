@@ -141,7 +141,7 @@ $nav-toggleIcon-space              : 5px;
 
     &:focus ~ .c-nav-toggle {
         background-color: $nav-trigger-focus-bg;
-        box-shadow: 0 0 6px 0 $nav-trigger-focus-color;
+        box-shadow: 0 3px 6px 0 $nav-trigger-focus-color;
 
         .c-header--transparent & {
             background-color: transparent;
@@ -204,10 +204,10 @@ $nav-toggleIcon-space              : 5px;
 
 .c-nav-popover.c-nav-popover--countrySelector {
     @include media('>mid') {
-        margin-top: spacing(e);
-        // tooltip arrow
-        &:before {
-            right: 4%;
-        }
+        margin-top: spacing(c);
+    }
+    // tooltip arrow
+    &:before {
+        right: 4%;
     }
 }
