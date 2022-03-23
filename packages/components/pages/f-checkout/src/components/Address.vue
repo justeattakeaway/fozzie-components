@@ -17,20 +17,11 @@
         </fieldset>
 
         <checkout-form-field
-            field-name="locality"
+            v-for="field in unGroupedAddressFields"
+            :key="field"
+            :field-name="field"
             :field-type="fieldType"
-            :max-length="fieldLength" />
-
-        <checkout-form-field
-            v-if="shouldShowAdministrativeArea"
-            field-name="administrativeArea"
-            :field-type="fieldType"
-            :max-length="fieldLength" />
-
-        <checkout-form-field
-            field-name="postcode"
-            :field-type="fieldType"
-            :max-length="fieldLength" />
+            :class="$style['c-address-formField']" />
     </div>
 </template>
 
@@ -39,14 +30,8 @@ import CheckoutFormField from './CheckoutFormField.vue';
 
 export default {
     name: 'CheckoutAddress',
-    components: { CheckoutFormField },
 
-    props: {
-        shouldShowAdministrativeArea: {
-            type: Boolean,
-            default: false
-        }
-    },
+    components: { CheckoutFormField },
 
     data () {
         return {
@@ -60,8 +45,13 @@ export default {
             const addressFields = this.$t('formFields.address');
 
             return Object.keys(addressFields).filter(field => addressFields[field].isGrouped);
-        }
+        },
 
+        unGroupedAddressFields () {
+            const addressFields = this.$t('formFields.address');
+
+            return Object.keys(addressFields).filter(field => !addressFields[field].isGrouped);
+        }
     },
 
     methods: {

@@ -26,8 +26,7 @@
 
         <address-block
             v-if="isCheckoutMethodDelivery"
-            data-test-id="address-block"
-            :should-show-administrative-area="shouldShowAddressAdministrativeArea" />
+            data-test-id="address-block" />
 
         <form-selector :key="availableFulfilmentTimesKey" />
 
@@ -158,10 +157,6 @@ export default {
             return invalidFieldCount === 1 ?
                 this.$t('errorMessages.singleFieldError') :
                 this.$t('errorMessages.multipleFieldErrors', { errorCount: invalidFieldCount });
-        },
-
-        shouldShowAddressAdministrativeArea () {
-            return this.tenant === 'au';
         },
 
         fieldTranslations () {
