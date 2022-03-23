@@ -669,6 +669,10 @@ export default {
         margin-top: spacing(d);
         margin-bottom: spacing(d);
     }
+
+    @include media('>wide') {
+        margin-left: spacing(c);
+    }
 }
 
 .c-nav-list-btn {
