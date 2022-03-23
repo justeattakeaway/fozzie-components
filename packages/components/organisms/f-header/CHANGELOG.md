@@ -6,12 +6,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v9.8.0
 ------------------------------
-*March 22, 2022*
+*March 23, 2022*
 
 ### Changed
 - corner radius when navigation is closed on mobile view
 - horizontal navigation when using a tablet
 - padding and bottom-border in account popover
+- padding of header container above mid
 
 
 v9.7.0

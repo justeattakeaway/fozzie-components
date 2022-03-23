@@ -92,7 +92,6 @@ export default {
 .c-user-list {
     @include media('>mid') {
         margin: spacing(b) 0;
-        padding: 0 !important;
     }
 }
 
