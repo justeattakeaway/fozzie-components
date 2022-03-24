@@ -65,6 +65,10 @@ export default {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    &.c-restaurantTag--isLarge.c-restaurantTag--isUppercase.c-restaurantTag--positive {
+        margin-bottom: 0;
+    }
 }
 
 .c-restaurantTag--isLarge {
