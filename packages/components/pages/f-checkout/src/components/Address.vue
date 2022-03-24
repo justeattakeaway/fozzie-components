@@ -6,32 +6,20 @@
                 @click="addFocus">
                 {{ $t('labels.addressGroup') }}
             </legend>
-            <checkout-form-field
-                field-name="line1"
-                :field-type="fieldType"
-                :class="$style['c-address-formField']"
-                is-grouped />
 
             <checkout-form-field
-                field-name="line2"
+                v-for="field in groupedAddressFields"
+                :key="field"
+                :field-name="field"
                 :field-type="fieldType"
                 :class="$style['c-address-formField']"
                 is-grouped />
         </fieldset>
 
         <checkout-form-field
-            field-name="locality"
-            :field-type="fieldType"
-            :max-length="fieldLength" />
-
-        <checkout-form-field
-            v-if="shouldShowAdministrativeArea"
-            field-name="administrativeArea"
-            :field-type="fieldType"
-            :max-length="fieldLength" />
-
-        <checkout-form-field
-            field-name="postcode"
+            v-for="field in unGroupedAddressFields"
+            :key="field"
+            :field-name="field"
             :field-type="fieldType"
             :max-length="fieldLength" />
     </div>
@@ -42,20 +30,28 @@ import CheckoutFormField from './CheckoutFormField.vue';
 
 export default {
     name: 'CheckoutAddress',
-    components: { CheckoutFormField },
 
-    props: {
-        shouldShowAdministrativeArea: {
-            type: Boolean,
-            default: false
-        }
-    },
+    components: { CheckoutFormField },
 
     data () {
         return {
             fieldType: 'address',
             fieldLength: '50'
         };
+    },
+
+    computed: {
+        groupedAddressFields () {
+            const addressFields = this.$t('formFields.address');
+
+            return Object.keys(addressFields).filter(field => addressFields[field].isGrouped);
+        },
+
+        unGroupedAddressFields () {
+            const addressFields = this.$t('formFields.address');
+
+            return Object.keys(addressFields).filter(field => !addressFields[field].isGrouped);
+        }
     },
 
     methods: {
