@@ -120,6 +120,24 @@ describe('FilterPill', () => {
                 expect(element.text()).toBe(propsData.displayNumber.toString());
             });
         });
+
+        describe('screenReaderMessage :: ', () => {
+            it('Should render the screen reader message in a visually hidden element', () => {
+                // Arrange
+                const propsData = { screenReaderMessage: 'A screen reader message' };
+
+                // Act
+                const wrapper = shallowMount(FilterPill, {
+                    propsData
+                });
+
+                const element = wrapper.find('[data-test-id="filter-pill-sr-msg"]');
+
+                // Assert
+                expect(element.text()).toBe(propsData.screenReaderMessage);
+                expect(element.classes().includes('is-visuallyHidden')).toBe(true);
+            });
+        });
     });
 
     describe('methods :: ', () => {
