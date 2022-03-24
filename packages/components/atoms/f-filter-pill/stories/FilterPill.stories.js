@@ -52,6 +52,11 @@ FilterPillComponent.argTypes = {
         control: { type: 'boolean' },
         description: 'Indicates whether or not to display a loading state',
         defaultValue: false
+    },
+    screenReaderMessage: {
+        control: { type: 'text' },
+        description: 'An optional message to read on screen readers',
+        defaultValue: 'Low Delivery Fee, 15 restaurants'
     }
 };
 

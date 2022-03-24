@@ -36,14 +36,22 @@
                 data-test-id="filter-pill-label"
                 :tabindex="-1">
                 <tick-icon :class="$style['c-filterPill-icon']" />
+                <p
+                    v-if="screenReaderMessage"
+                    data-test-id="filter-pill-sr-msg"
+                    class="is-visuallyHidden">
+                    {{ screenReaderMessage }}
+                </p>
                 <span
                     :class="$style['c-filterPill-text']"
-                    data-test-id="filter-pill-text">
+                    data-test-id="filter-pill-text"
+                    :aria-hidden="!!screenReaderMessage">
                     {{ displayText }}
                 </span>
                 <span
                     :class="$style['c-filterPill-number']"
-                    data-test-id="filter-pill-number">
+                    data-test-id="filter-pill-number"
+                    :aria-hidden="!!screenReaderMessage">
                     {{ displayNumber }}
                 </span>
             </label>
@@ -91,6 +99,10 @@ export default {
         isLoading: {
             type: Boolean,
             default: false
+        },
+        screenReaderMessage: {
+            type: String,
+            default: null
         }
     },
     data () {
