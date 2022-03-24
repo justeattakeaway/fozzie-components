@@ -14,7 +14,7 @@ const $v = {
     [VALIDATIONS.customer]: {
         mobileNumber: {
             $dirty: false,
-            mobileNumber: false
+            isValid: false
         },
         firstName: {
             $dirty: false
@@ -24,7 +24,7 @@ const $v = {
         },
         email: {
             $dirty: false,
-            email: false,
+            isValid: false,
             $touch: jest.fn()
         }
     },
@@ -48,7 +48,7 @@ const $v = {
         postcode: {
             $dirty: false,
             required: true,
-            isValidPostcode: false
+            isValid: false
         }
     },
     [VALIDATIONS.dineIn]: {
@@ -163,7 +163,7 @@ describe('CheckoutFormField', () => {
                 });
 
                 it.each([
-                    [true, true, false],
+                    [true, true, true],
                     [true, false, false],
                     [false, true, false],
                     [false, false, false]

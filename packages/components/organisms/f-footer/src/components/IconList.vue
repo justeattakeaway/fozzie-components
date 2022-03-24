@@ -110,6 +110,7 @@ export default {
 
     a,
     svg {
+        outline-offset: spacing(a);
         display: block;
     }
 
@@ -128,7 +129,6 @@ export default {
 }
 
 .c-iconList--apps {
-
     .c-iconList-listItem {
         margin-right: spacing(d);
         margin-bottom: spacing(d);
