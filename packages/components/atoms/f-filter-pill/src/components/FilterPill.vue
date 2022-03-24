@@ -6,9 +6,9 @@
                 [$style['c-filterPill--disabled']]: isDisabled
             }]"
         data-test-id="filter-item">
-        <div v-if="isLoading">
-            Loading
-        </div>
+        <filter-pill-skeleton
+            v-if="isLoading"
+            aria-hidden="true" />
         <template v-else>
             <a
                 :class="$style['c-filterPill-link']"
@@ -61,11 +61,13 @@
 
 <script>
 import { TickIcon } from '@justeat/f-vue-icons';
+import FilterPillSkeleton from './subcomponents/FilterPillSkeleton.vue';
 
 export default {
     name: 'FilterPill',
     components: {
-        TickIcon
+        TickIcon,
+        FilterPillSkeleton
     },
     props: {
         inputId: {
