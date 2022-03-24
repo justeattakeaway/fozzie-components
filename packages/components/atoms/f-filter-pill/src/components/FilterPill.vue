@@ -61,7 +61,7 @@
 
 <script>
 import { TickIcon } from '@justeat/f-vue-icons';
-import FilterPillSkeleton from './subcomponents/FilterPillSkeleton.vue';
+import FilterPillSkeleton from './FilterPillSkeleton.vue';
 
 export default {
     name: 'FilterPill',
@@ -151,7 +151,7 @@ $filter-pill-ease: ease-in-out;
     box-shadow: 0 0 0 1px $color-border-default;
     border-radius: $radius-rounded-e;
     background: $color-white;
-    transition: .1s;
+    transition: 0.1s;
 
     &:focus-within:not(.c-filterPill--disabled) {
         box-shadow: 0 0 0 2px $color-focus;
