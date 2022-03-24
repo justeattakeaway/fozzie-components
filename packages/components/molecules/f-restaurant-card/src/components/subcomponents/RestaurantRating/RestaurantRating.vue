@@ -165,7 +165,7 @@ export default {
 
 <style lang="scss" module>
 .c-restaurantCard-rating {
-    @include font-size($font-body-s-paragraph);
+    @include font-size(body-s);
     display: flex;
     align-items: center;
     padding: 0;
