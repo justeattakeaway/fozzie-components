@@ -501,10 +501,6 @@ export default {
             grid-column: 1;
         }
 
-        .c-restaurantCard-cuisines {
-            align-self: start;
-        }
-
         .c-restaurantCard-name,
         .c-restaurantCard-tags {
             grid-column: 1 / 3;
