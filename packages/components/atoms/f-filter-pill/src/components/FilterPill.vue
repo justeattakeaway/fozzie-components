@@ -45,13 +45,13 @@
                 <span
                     :class="$style['c-filterPill-text']"
                     data-test-id="filter-pill-text"
-                    :aria-hidden="screenReaderMessage ? true : null">
+                    :aria-hidden="!!screenReaderMessage">
                     {{ displayText }}
                 </span>
                 <span
                     :class="$style['c-filterPill-number']"
                     data-test-id="filter-pill-number"
-                    :aria-hidden="screenReaderMessage ? true : null">
+                    :aria-hidden="!!screenReaderMessage">
                     {{ displayNumber }}
                 </span>
             </label>
