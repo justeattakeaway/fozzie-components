@@ -3,16 +3,15 @@
 /**
  * Component Variables
  */
-$header-logo-color                 : $color-interactive-brand;
+$header-logo-color                 : $color-support-brand-01;
 $header-logo-color--alt            : $color-interactive-inverse;
 
-$header-height--narrow              : 48px;
+$header-height--narrow              : 56px;
 $header-button--height              : $header-height--narrow;
 $header-button--width               : 56px;
-$header-height                      : 76px;
+$header-height                      : 80px;
 $header-bg                          : $color-container-default;
 $header-separator                   : 1px;
-$header-separator                   : 4px;
 $header-border-color                : $color-border-subtle;
 $header-box-shadow                  : $elevation-04;
 $header-buttonIcon-color            : $color-interactive-primary;

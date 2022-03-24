@@ -10,6 +10,7 @@
             <header :class="$style['c-countrySelector-header']">
                 <f-button
                     button-type="ghost"
+                    button-size="small"
                     is-icon
                     :class="$style['c-countrySelector-header-button']"
                     :aria-label="copy.goBackToMainMenu"
@@ -17,7 +18,9 @@
                     <arrow-icon :class="$style['c-countrySelector-goBackIcon']" />
                 </f-button>
 
-                <h3 id="selectYourCountry">
+                <h3
+                    id="selectYourCountry"
+                    :class="$style['c-countrySelector-title']">
                     {{ copy.selectYourCountryText }}
                 </h3>
             </header>
@@ -34,23 +37,26 @@
                     :key="country.key"
                     :class="$style['c-countrySelector-country']"
                     :data-test-id="[`countrySelector-countryList-${country.dataTestKey}`]">
-                    <a
-                        :data-trak='`{
-                            "trakEvent": "click",
-                            "category": "engagement",
-                            "action": "header",
-                            "label": "${country.gtm}"
-                        }`'
+                    <nav-link
+                        :data-trak="{
+                            trakEvent: 'click',
+                            category: 'engagement',
+                            action: 'header',
+                            label: `${country.gtm}`
+                        }"
                         :tabindex="isOpen ? 0 : -1"
+                        :text="country.localisedName"
+                        :class="$style['c-countrySelector-country-link']"
+                        :has-border-bottom="false"
+                        :is-country-link="true"
                         :href="country.siteUrl"
-                        :class="$style['c-countrySelector-link']">
-                        <flag-icon
-                            :country-code="country.flagKey"
-                            :class="$style['c-nav-list-icon--flag']" />
-                        <span>
-                            {{ country.localisedName }}
-                        </span>
-                    </a>
+                        :lang="country.lang">
+                        <template #icon>
+                            <flag-icon
+                                :country-code="country.flagKey"
+                                :class="[$style['c-countrySelector-country-flag']]" />
+                        </template>
+                    </nav-link>
                 </li>
             </ul>
         </div>
@@ -61,13 +67,15 @@
 import FButton from '@justeat/f-button';
 import { ArrowIcon } from '@justeat/f-vue-icons';
 import FlagIcon from './FlagIcon.vue';
+import NavLink from './NavLink.vue';
 import { countries } from '../tenants';
 
 export default {
     components: {
         FButton,
         ArrowIcon,
-        FlagIcon
+        FlagIcon,
+        NavLink
     },
     props: {
         copy: {
@@ -114,9 +122,17 @@ export default {
 $countrySelector-text-color    : $color-content-default;
 $countrySelector-text-bg-hover : $color-container-subtle;
 
+.c-countrySelector-title {
+    @include media('<=mid') {
+        padding-top: spacing(d);
+        padding-bottom: spacing(c);
+    }
+}
+
 .c-countrySelector {
     @include media('>mid') {
-        padding: spacing(e) 0;
+        padding-top: spacing(e);
+        padding-bottom: spacing(c);
     }
 }
 
@@ -142,33 +158,37 @@ $countrySelector-text-bg-hover : $color-container-subtle;
     }
 
     .c-countrySelector-header-button {
-        margin: spacing(d);
+        margin-top: spacing(b);
+        margin-left: spacing(b);
         @include media('>mid') {
             display: none;
         }
 
         svg.c-countrySelector-goBackIcon {
             transform: rotate(180deg);
+            width: $countrySelector-arrowIcon-width;
+            height: $countrySelector-arrowIcon-height;
         }
     }
 }
 
 .c-countrySelector-country {
-    padding: 0;
-    white-space: nowrap;
-    margin-bottom: 0;
+    @include media('>mid') {
+        // container for country link so countries are all 120h * 24w
+        min-width: 192px;
+    }
 
     &:hover {
         background: $countrySelector-text-bg-hover;
+        text-decoration: none;
     }
 }
 
-.c-countrySelector-link {
-    display: block;
-    text-decoration: none;
-    color: $countrySelector-text-color;
-    @include font-size(body-l);
-    padding: spacing(c) spacing(e);
-    width: 100%;
+.c-countrySelector-country-flag {
+    height: $countrySelector-flag-height;
+    width: $countrySelector-flag-width;
+    display: flex;
+    float: left;
+    margin: spacing(c) spacing(d);
 }
 </style>

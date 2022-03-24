@@ -2251,6 +2251,13 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
+"@justeat/f-breadcrumbs@3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-breadcrumbs/-/f-breadcrumbs-3.1.0.tgz#781a42a3bc751843f0a5fe044f99e870051ec6ce"
+  integrity sha512-huuArWprswwQUaU6fdvxnx2X/VYU7Vp7HcjUANKjH/nY+UAJI5W6h/V5caABx/KcWgdKE7jZlgzlQ1cTZOpcLA==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+
 "@justeat/f-button@3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.0.2.tgz#9560d0caf56ae0801208ddd0c27cb50d670d54a8"
@@ -2379,11 +2386,6 @@
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-4.1.0.tgz#43300dd377b6293157bd59378165cc64ace4ade1"
   integrity sha512-4xwep9kagPo+L6YeFIiU8A65BPhic1CUOzvfv2fzYYdGtYuGi2XVbu2xreYuvlQ/v7pitdW0MUqTZGsoJr+ZTg==
-
-"@justeat/f-navigation-links@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-navigation-links/-/f-navigation-links-0.3.0.tgz#73475aec7110f8be32b58e2d5250f62ba92295a8"
-  integrity sha512-qcImxIiXRY57/54Piu/i9zZ6k7mRsnxHHcdnuPJvGAxbWDPNJIcWgJL07tMEedLVeZ+OM3Pg9KEkC983Hrc8vg==
 
 "@justeat/f-searchbox@6.0.0":
   version "6.0.0"

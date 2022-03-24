@@ -13,23 +13,18 @@
             data-test-id="action-button-component"
             :tabindex="tabindex"
             :class="[
-                $style['c-nav-list-text'],
-                $style['c-nav-list-btn']
+                $style['c-countrySelector-btn']
             ]"
             :aria-expanded="(!isBelowMid && isCountrySelectorOpen) ? 'true' : 'false'"
             :aria-haspopup="!isBelowMid"
             :aria-label="copy.changeCurrentCountry"
             @click="toggleCountrySelector">
-            <span :class="$style['c-nav-list-iconWrapper']">
-                <flag-icon
-                    data-test-id="current-flag-icon"
-                    :country-code="copy.currentCountryKey"
-                    :class="[
-                        $style['c-nav-list-icon--flag'],
-                        $style['c-nav-list-icon--flagCurrent']
-                    ]" />
-            </span>
-            <span :class="$style['c-nav-list-title']">
+            <flag-icon
+                data-test-id="current-flag-icon"
+                :country-code="copy.currentCountryKey"
+                :class="$style['c-countrySelector-current-flag']" />
+            <span
+                :class="$style['c-countrySelector-text']">
                 {{ copy.selectYourCountryText }}
             </span>
         </button>
@@ -111,36 +106,37 @@ export default {
 <style lang="scss" module>
 @import '../assets/scss/navigation.scss';
 
-.c-nav-list-iconWrapper {
+.c-countrySelector-text {
+    @include media('>mid') {
+        display: none;
+    }
+}
+
+.c-countrySelector-btn {
+    background: transparent;
+    border: 0;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+
+    @include media('<=mid') {
+        width: 100%;
+        text-align: left;
+        padding: spacing(c) spacing(a);
+    }
+
+     &:hover {
+        font-weight: $font-weight-bold;
+    }
+}
+
+.c-countrySelector-current-flag {
     height: $countrySelector-flag-height;
     width: $countrySelector-flag-width;
 
     @include media('<=mid') {
-        margin-right: spacing();
-    }
-
-    @include media('>mid') {
-        background-color: $color-container-default;
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-}
-
-.c-nav-list-icon--flagCurrent {
-    margin-right: 0;
-}
-
-.c-nav-list-title {
-    width: 0;
-    overflow: hidden;
-    @include font-size(heading-s, true, narrow);
-
-    @include media('<=mid') {
-        width: auto;
+        margin: 0 spacing(d);
+        float: left;
     }
 }
 </style>

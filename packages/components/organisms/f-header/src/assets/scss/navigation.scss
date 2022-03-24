@@ -8,18 +8,15 @@
 */
 
 $nav-text-size                     : 'body-l';
-$nav-text-size--narrow             : 'body-s';
 $nav-text-weight                   : $font-weight-bold;
 $nav-text-color                    : $color-content-link;
 $nav-text-color--hover             : darken($color-content-link, $color-hover-01);
-$nav-text-color--narrow            : $color-content-subdued;
 $nav-text-color--transparent       : $color-content-link-inverse;
-$nav-text-subFont                  : $font-family-base;
 
 $nav-transition-duration           : 250ms;
 
 $nav-trigger-width                 : 56px;
-$nav-trigger-height                : 48px;
+$nav-trigger-height                : 56px;
 $nav-trigger-focus-color           : $color-content-interactive-secondary;
 $nav-trigger-focus-bg              : $color-interactive-secondary;
 
@@ -27,11 +24,13 @@ $nav-popover-width                 : 300px;
 $nav-popover-transition-delay      : 200ms;
 $nav-popover-transition-duration   : 200ms;
 
-$countrySelector-flag-width        : 16px;
-$countrySelector-flag-height       : 16px;
+$countrySelector-flag-width        : 21px;
+$countrySelector-flag-height       : 21px;
+$countrySelector-arrowIcon-height  : 10px;
+$countrySelector-arrowIcon-width   : 10px;
 
-$nav-featureLinkIcon-width         : 28px;
-$nav-featureLinkIcon-height        : 28px;
+$nav-featureLinkIcon-width         : 24px;
+$nav-featureLinkIcon-height        : 24px;
 
 $nav-icon-color                    : $color-interactive-primary;
 $nav-icon-color--transparent       : $color-interactive-inverse;
@@ -115,42 +114,6 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
-.c-nav-list-link {
-    &:hover,
-    &:focus,
-    &:active {
-        text-decoration: none;
-
-        @include media('>mid') {
-            color: $nav-text-color--hover;
-            text-decoration: underline;
-
-            .c-header--transparent .c-nav-popoverList & {
-                color: inherit;
-            }
-        }
-    }
-}
-
-.c-nav-list-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 0;
-    background: transparent;
-
-    @include media('<=mid') {
-        width: 100%;
-        text-align: left;
-    }
-}
-
-.c-nav-list-icon--flag {
-    height: $countrySelector-flag-height;
-    width: $countrySelector-flag-width;
-    margin-right: spacing();
-}
-
 .c-nav-popoverList--twoColumns {
     @include media('>mid') {
         column-count: 2;
@@ -178,7 +141,7 @@ $nav-toggleIcon-space              : 5px;
 
     &:focus ~ .c-nav-toggle {
         background-color: $nav-trigger-focus-bg;
-        box-shadow: 0 0 6px 0 $nav-trigger-focus-color;
+        box-shadow: 0 3px 6px 0 $nav-trigger-focus-color;
 
         .c-header--transparent & {
             background-color: transparent;
@@ -186,31 +149,9 @@ $nav-toggleIcon-space              : 5px;
     }
 }
 
-.c-nav-list-link,
-.c-nav-list-text {
-    display: flex;
-    align-items: center;
-    padding: spacing(c) spacing(d);
-    margin: 0;
-    font-family: $nav-text-subFont;
-    color: $nav-text-color--narrow;
-    @include font-size($nav-text-size--narrow);
-    font-weight: 300;
-    text-decoration: none;
-    border-bottom: 1px solid $color-border-default;
-
-    @include media('>mid') {
-        @include font-size($nav-text-size);
-        font-weight: $nav-text-weight;
-        color: $nav-text-color;
-        border-bottom: none;
-        height: $header-height;
-    }
-}
-
 .c-nav-list-link--alt {
     @include media('>mid') {
-        color: $nav-text-color--transparent;
+        color: $nav-text-color--transparent !important;
     }
 }
 
@@ -219,20 +160,8 @@ $nav-toggleIcon-space              : 5px;
     @include media('>mid') {
         &:hover,
         &:focus {
-            color: $nav-text-color--transparent;
+            color: $nav-text-color--transparent !important;
         }
-    }
-}
-
-.c-nav-list-text {
-    @include media('<=mid') {
-        display: block;
-    }
-}
-
-.c-nav-list-link--leftPaddingBelowMid {
-    @include media('<=mid') {
-        padding-left: spacing(h);
     }
 }
 
@@ -275,9 +204,10 @@ $nav-toggleIcon-space              : 5px;
 
 .c-nav-popover.c-nav-popover--countrySelector {
     @include media('>mid') {
-        // tooltip arrow
-        &:before {
-            right: 4%;
-        }
+        margin-top: spacing(c);
+    }
+    // tooltip arrow
+    &:before {
+        right: 4%;
     }
 }

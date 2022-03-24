@@ -21,6 +21,7 @@
                 :is-logo-disabled="isLogoLinkDisabled"
                 :logo-gtm-label="copy.logo.gtm"
                 :header-background-theme="headerBackgroundTheme"
+                :should-resize-logo="showDeliveryEnquiryWithContent && showCountrySelector"
                 :is-open="mobileNavIsOpen" />
 
             <navigation
@@ -204,6 +205,7 @@ html:global(.is-navInView) {
             left: 0;
             width: 100%;
             z-index: zIndex(high);
+            border-radius: 0;
         }
     }
 }
@@ -214,6 +216,7 @@ html:global(.is-navInView) {
     position: relative;
     z-index: zIndex(mid);
     box-shadow: $header-box-shadow;
+    border-radius: 0 0 $radius-rounded-d $radius-rounded-d;
 
     // Styles for a sticky header on mobile
     @include media('<=mid') {
@@ -226,10 +229,6 @@ html:global(.is-navInView) {
         &.is-sticky-scrollingUp {
             top: 0;
         }
-    }
-
-    @include media('>mid') {
-        border-radius: 0 0 $radius-rounded-d $radius-rounded-d;
     }
 }
 
@@ -264,13 +263,13 @@ html:global(.is-navInView) {
         background-color: $color-support-brand-01;
 
         @include media('>mid') {
-            min-height: 88px;
+            min-height: $header-height;
         }
     }
 
     .c-header--tallBelowMid {
         @include media('<=mid') {
-            min-height: 88px;
+            min-height: $header-height;
         }
     }
 
@@ -282,6 +281,11 @@ html:global(.is-navInView) {
         padding-right: #{$layout-margin}px;
         position: relative;
         min-height: $header-height--narrow;
+
+        @include media('>mid') {
+            padding-left: #{$layout-margin}px;
+            padding-right: #{$layout-margin}px;
+        }
 
         @include media('<wide') {
             padding-left: #{$layout-margin--mid}px;

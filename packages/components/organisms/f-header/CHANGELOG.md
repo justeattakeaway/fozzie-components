@@ -4,8 +4,32 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest – to be added to the next release
+v9.9.0
 ------------------------------
+*March 23, 2022*
+
+### Added
+- `lang` attribute to country selector links.
+
+
+v9.8.0
+------------------------------
+*March 23, 2022*
+
+### Changed
+- corner radius when navigation is closed on mobile view
+- horizontal navigation when using a tablet
+- padding and bottom-border in account popover
+- padding of header container above mid
+
+
+v9.7.0
+------------------------------
+*March 16, 2022*
+
+### Changed
+- component to match latest designs
+
 *February 23, 2022*
 
 ### Changed

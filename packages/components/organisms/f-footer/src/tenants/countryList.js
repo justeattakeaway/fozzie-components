@@ -2,6 +2,7 @@ export default [
     {
         key: 'gb',
         dataTestKey: 'gb',
+        lang: 'en',
         localisedName: 'United Kingdom',
         siteUrl: 'https://www.just-eat.co.uk',
         gtm: 'click_country_gb'
@@ -9,6 +10,7 @@ export default [
     {
         key: 'au',
         dataTestKey: 'au',
+        lang: 'en',
         localisedName: 'Australia',
         siteUrl: 'https://www.menulog.com.au',
         gtm: 'click_country_au'
@@ -16,6 +18,7 @@ export default [
     {
         key: 'at',
         dataTestKey: 'at',
+        lang: 'de-AT',
         localisedName: 'Österreich',
         siteUrl: 'https://www.lieferando.at',
         gtm: 'click_country_at'
@@ -23,6 +26,7 @@ export default [
     {
         key: 'be',
         dataTestKey: 'be',
+        lang: 'nl-BE',
         localisedName: 'België',
         siteUrl: 'https://www.takeaway.com/be',
         gtm: 'click_country_be'
@@ -30,6 +34,7 @@ export default [
     {
         key: 'bg',
         dataTestKey: 'bg',
+        lang: 'en',
         localisedName: 'Bulgaria',
         siteUrl: 'https://www.takeaway.com/bg',
         gtm: 'click_country_bg'
@@ -37,6 +42,7 @@ export default [
     {
         key: 'ca',
         dataTestKey: 'ca_en',
+        lang: 'en',
         localisedName: 'Canada',
         siteUrl: 'https://www.skipthedishes.com',
         gtm: 'click_country_ca_en'
@@ -44,6 +50,7 @@ export default [
     {
         key: 'ca',
         dataTestKey: 'ca_fr',
+        lang: 'fr-CA',
         localisedName: 'Canada (FR)',
         siteUrl: 'https://www.skipthedishes.com/fr',
         gtm: 'click_country_ca_fr'
@@ -51,6 +58,7 @@ export default [
     {
         key: 'dk',
         dataTestKey: 'dk',
+        lang: 'da',
         localisedName: 'Danmark',
         siteUrl: 'https://www.just-eat.dk',
         gtm: 'click_country_dk'
@@ -58,6 +66,7 @@ export default [
     {
         key: 'fr',
         dataTestKey: 'jet_fr',
+        lang: 'fr',
         localisedName: 'France',
         siteUrl: 'https://www.just-eat.fr/',
         gtm: 'click_country_fr'
@@ -65,6 +74,7 @@ export default [
     {
         key: 'de',
         dataTestKey: 'de',
+        lang: 'de',
         localisedName: 'Deutschland',
         siteUrl: 'https://www.lieferando.de',
         gtm: 'click_country_de'
@@ -72,6 +82,7 @@ export default [
     {
         key: 'ie',
         dataTestKey: 'ie',
+        lang: 'en',
         localisedName: 'Ireland',
         siteUrl: 'https://www.just-eat.ie',
         gtm: 'click_country_ie'
@@ -79,6 +90,7 @@ export default [
     {
         key: 'il',
         dataTestKey: 'il',
+        lang: 'en',
         localisedName: 'Israel',
         siteUrl: 'https://www.10bis.co.il/next',
         gtm: 'click_country_il'
@@ -86,6 +98,7 @@ export default [
     {
         key: 'it',
         dataTestKey: 'it',
+        lang: 'it',
         localisedName: 'Italia',
         siteUrl: 'https://www.justeat.it',
         gtm: 'click_country_it'
@@ -93,6 +106,7 @@ export default [
     {
         key: 'lu',
         dataTestKey: 'lu',
+        lang: 'en',
         localisedName: 'Luxembourg',
         siteUrl: 'https://www.takeaway.com/lu',
         gtm: 'click_country_lu'
@@ -100,6 +114,7 @@ export default [
     {
         key: 'nl',
         dataTestKey: 'nl',
+        lang: 'nl',
         localisedName: 'Nederland',
         siteUrl: 'https://www.thuisbezorgd.nl',
         gtm: 'click_country_nl'
@@ -107,6 +122,7 @@ export default [
     {
         key: 'nz',
         dataTestKey: 'nz',
+        lang: 'en',
         localisedName: 'New Zealand',
         siteUrl: 'https://www.menulog.co.nz',
         gtm: 'click_country_nz'
@@ -114,6 +130,7 @@ export default [
     {
         key: 'no',
         dataTestKey: 'no',
+        lang: 'no',
         localisedName: 'Norge',
         siteUrl: 'https://www.just-eat.no',
         gtm: 'click_country_no'
@@ -121,6 +138,7 @@ export default [
     {
         key: 'pl',
         dataTestKey: 'pl',
+        lang: 'pl',
         localisedName: 'Polska',
         siteUrl: 'https://www.pyszne.pl',
         gtm: 'click_country_pl'
@@ -128,6 +146,7 @@ export default [
     {
         key: 'pt',
         dataTestKey: 'pt',
+        lang: 'pt',
         localisedName: 'Portugal',
         siteUrl: 'https://www.takeaway.com/pt',
         gtm: 'click_country_pt'
@@ -135,13 +154,15 @@ export default [
     {
         key: 'ro',
         dataTestKey: 'ro',
-        localisedName: 'Romania',
+        lang: 'ro',
+        localisedName: 'România',
         siteUrl: 'https://www.takeaway.com/ro',
         gtm: 'click_country_ro'
     },
     {
         key: 'es',
         dataTestKey: 'es',
+        lang: 'es',
         localisedName: 'España',
         siteUrl: 'https://www.just-eat.es',
         gtm: 'click_country_es'
@@ -149,6 +170,7 @@ export default [
     {
         key: 'ch',
         dataTestKey: 'ch_ch',
+        lang: 'de-CH',
         localisedName: 'Schweiz',
         siteUrl: 'https://www.eat.ch',
         gtm: 'click_country_ch'
@@ -156,6 +178,7 @@ export default [
     {
         key: 'ch',
         dataTestKey: 'ch_en',
+        lang: 'en',
         localisedName: 'Switzerland',
         siteUrl: 'https://www.eat.ch/en',
         gtm: 'click_country_ch_en'
@@ -163,6 +186,7 @@ export default [
     {
         key: 'ch',
         dataTestKey: 'ch_fr',
+        lang: 'fr-CH',
         localisedName: 'Suisse',
         siteUrl: 'https://www.eat.ch/fr',
         gtm: 'click_country_ch_fr'

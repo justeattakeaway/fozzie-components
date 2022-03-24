@@ -62,11 +62,7 @@
                 $style['c-nav-featureLink--hideAboveMid']
             ]">
             <gift-icon
-                :class="[
-                    $style['c-nav-icon'],
-                    $style['c-nav-icon--offers'],
-                    { [$style['c-nav-icon--alt']]: isAltColour }
-                ]" />
+                :class="{ [$style['c-nav-icon--alt']]: isAltColour }" />
             <span class="is-visuallyHidden">
                 {{ copy.offers.text }}
             </span>
@@ -95,9 +91,9 @@
                 </li>
 
                 <li
+                    v-if="showOffersLink"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
-                        v-if="showOffersLink"
                         :text="copy.offers.text"
                         :tabindex="tabIndex"
                         :href="copy.offers.url"
@@ -117,9 +113,9 @@
                 </li>
 
                 <li
+                    v-if="showDeliveryEnquiry"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
-                        v-if="showDeliveryEnquiry"
                         :text="copy.deliveryEnquiry.text"
                         :tabindex="tabIndex"
                         :href="copy.deliveryEnquiry.url"
@@ -202,9 +198,9 @@
                 </li>
 
                 <li
+                    v-if="!userInfo && showLoginInfo"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
-                        v-if="!userInfo && showLoginInfo"
                         :text="copy.accountLogin.text"
                         :tabindex="tabIndex"
                         :href="returnLoginUrl"
@@ -213,15 +209,31 @@
                         })"
                         :is-alt-colour="isAltColour"
                         :background-theme="headerBackgroundTheme"
-                        :left-padding-below-mid="Boolean(userInfo)"
                         rel="nofollow"
                         data-test-id="login-link" />
                 </li>
 
                 <li
+                    v-if="userInfo && isBelowMid && showLoginInfo"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
-                        v-if="showHelpLink"
+                        v-if="userInfo && isBelowMid && showLoginInfo"
+                        :text="copy.accountLogout.text"
+                        :tabindex="tabIndex"
+                        :has-border-top="true"
+                        :href="copy.accountLogout.url"
+                        :data-trak="analyticsObjects.navigation.clickHeaderLink({
+                            label: copy.accountLogout.gtm
+                        })"
+                        :is-alt-colour="isAltColour"
+                        :background-theme="headerBackgroundTheme"
+                        data-test-id="logout-link" />
+                </li>
+
+                <li
+                    v-if="showHelpLink"
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    <nav-link
                         :text="copy.help.text"
                         :tabindex="tabIndex"
                         :href="copy.help.url"
@@ -229,31 +241,14 @@
                             label: copy.help.gtm
                         })"
                         :is-alt-colour="isAltColour"
-                        :left-padding-below-mid="Boolean(userInfo)"
                         :background-theme="headerBackgroundTheme"
                         data-test-id="help-link" />
                 </li>
 
                 <li
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
-                    <nav-link
-                        v-if="userInfo && isBelowMid && showLoginInfo"
-                        :text="copy.accountLogout.text"
-                        :tabindex="tabIndex"
-                        :href="copy.accountLogout.url"
-                        :data-trak="analyticsObjects.navigation.clickHeaderLink({
-                            label: copy.accountLogout.gtm
-                        })"
-                        :is-alt-colour="isAltColour"
-                        :left-padding-below-mid="Boolean(userInfo)"
-                        :background-theme="headerBackgroundTheme"
-                        data-test-id="logout-link" />
-                </li>
-
-                <li
+                    v-if="showCountrySelector"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <country-selector
-                        v-if="showCountrySelector"
                         :is-below-mid="isBelowMid"
                         :copy="copy.countrySelector"
                         :tabindex="tabIndex"
@@ -464,8 +459,7 @@ export default {
             if (this.showCountrySelector) {
                 this.closeCountrySelector();
             }
-
-            if (this.isBelowMid && this.navIsOpen) {
+            if (this.isBelowMid) {
                 // This is added to remove the ability to scroll the page content when the mobile navigation is open
                 this.handleMobileNavState();
 
@@ -571,13 +565,11 @@ export default {
         },
 
         handleMobileNavState () {
-            if (this.isBelowMid) {
-                this.$emit('onMobileNavToggle', this.navIsOpen);
+            this.$emit('onMobileNavToggle', this.navIsOpen);
 
-                if (typeof document !== 'undefined') {
-                    document.documentElement.classList.toggle('is-navInView', this.navIsOpen);
-                    document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.headerBackgroundTheme === 'transparent');
-                }
+            if (typeof document !== 'undefined') {
+                document.documentElement.classList.toggle('is-navInView', this.navIsOpen);
+                document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.headerBackgroundTheme === 'transparent');
             }
         },
 
@@ -663,27 +655,42 @@ export default {
     display: none;
     @include media('>mid') {
         display: block;
+        height: $header-height;
     }
     &.is-visible {
         display: block;
     }
 }
 
-// TODO: MAKE THIS NOT USE FLOATS
-// global modifier for list items horizontally aligned
 .c-nav-list-item--horizontallyAlignedAboveMid {
     @include media('>mid') {
         float: left;
+        padding: spacing(c) spacing(c);
+        margin-top: spacing(d);
+        margin-bottom: spacing(d);
+    }
+
+    @include media('>wide') {
+        margin-left: spacing(c);
+    }
+}
+
+.c-nav-list-btn {
+    background: transparent;
+    border: 0;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+
+    @include media('<=mid') {
+        width: 100%;
+        text-align: left;
     }
 }
 
 .c-nav-list-text-sub {
     display: block;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 300px;
-
     &.u-showBelowMid {
         @include media('>mid') {
             display: none !important;
@@ -692,9 +699,12 @@ export default {
 }
 
 .c-nav-featureLink {
-    display: block;
     width: $nav-featureLinkIcon-width;
     height: $nav-featureLinkIcon-height;
+
+    & path {
+        fill: $nav-icon-color;
+    }
 
     @include media('<=mid') {
         position: absolute;
@@ -709,6 +719,14 @@ export default {
 .c-nav-featureLink--hideAboveMid {
     @include media('>mid') {
         display: none;
+    }
+}
+
+.c-nav-list-text {
+    font-weight: $nav-text-weight;
+    @include media('<=mid') {
+        padding: spacing(c) spacing(a);
+        font-weight: $font-weight-regular;
     }
 }
 
@@ -727,9 +745,20 @@ export default {
 }
 
 .c-nav-icon--delivery,
-.c-nav-icon--offers,
+.c-nav-icon--offers {
+    @include media('<=mid') {
+        margin-left: spacing(d);
+        margin-top: spacing(c);
+        & path {
+            fill: $nav-icon-color--mobileWhiteBg;
+        }
+    }
+}
+
 .c-nav-icon--profile {
     @include media('<=mid') {
+        margin-left: spacing(c);
+        margin-right: spacing(d);
         & path {
             fill: $nav-icon-color--mobileWhiteBg;
         }
