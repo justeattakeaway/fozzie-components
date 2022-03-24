@@ -74,7 +74,7 @@ export default {
 }
 
 .c-restaurantCard-iconText {
-    @include font-size($font-body-s-paragraph);
+    @include font-size(body-s);
     margin: 0;
     display: flex;
     align-items: center;
