@@ -50,10 +50,12 @@ const messages = {
                 label: 'Building number and street name',
                 validationMessages: {
                     required: 'Please enter the first line of your address'
-                }
+                },
+                isGrouped: true
             },
             line2: {
-                label: 'Level or unit number (Optional)'
+                label: 'Level or unit number (Optional)',
+                isGrouped: true
             },
             locality: {
                 label: 'Town or city',

@@ -50,19 +50,23 @@ const messages = {
                 label: 'Indirizzo riga 1. ad es. "Via Rizzoli"',
                 validationMessages: {
                     required: 'Aggiungi la riga 1 all’indirizzo di consegna'
-                }
+                },
+                isGrouped: true
             },
             line2: {
                 label: 'Indirizzo riga 2 ad es. "7"',
                 validationMessages: {
                     required: 'Inserisci la seconda riga del tuo indirizzo'
-                }
+                },
+                isGrouped: true
             },
             line3: {
-                label: 'Indirizzo riga 3 ad es. "Citofono"'
+                label: 'Indirizzo riga 3 ad es. "Citofono"',
+                isGrouped: true
             },
             line4: {
-                label: 'Indirizzo riga 4 ad es. "Interno e Scala"'
+                label: 'Indirizzo riga 4 ad es. "Interno e Scala"',
+                isGrouped: true
             },
             locality: {
                 label: 'Città',
