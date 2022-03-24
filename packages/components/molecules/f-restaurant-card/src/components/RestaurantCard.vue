@@ -74,9 +74,8 @@
                 <!-- Premier Icon -->
                 <span
                     v-if="isPremier"
-                    :class="[$style['c-restaurantCard-premier-iconWrapper']]">
+                    :class="[$style['c-restaurantCard-premier']]">
                     <legend-icon
-                        :class="[$style['c-restaurantCard-premier']]"
                         data-test-id="restaurant-premier" />
                 </span>
             </div>
@@ -426,7 +425,7 @@ export default {
     margin-bottom: 0;
 }
 
-.c-restaurantCard-premier-iconWrapper {
+.c-restaurantCard-premier {
     width: 41px;
     height: auto;
 
