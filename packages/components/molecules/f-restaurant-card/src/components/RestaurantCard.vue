@@ -420,7 +420,7 @@ export default {
 }
 
 .c-restaurantCard-imageTags {
-    bottom: spacing(d);
+    bottom: spacing(b);
     left: spacing(d);
     position: absolute;
     margin-bottom: 0;
@@ -483,7 +483,8 @@ export default {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-auto-flow: dense;
-            gap: 0 spacing(d);
+            gap: 0 spacing(c);
+            overflow-wrap: break-word;
 
             > * {
                 grid-column: 2;

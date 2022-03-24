@@ -72,17 +72,6 @@ export default {
 
 <style lang="scss" module>
 .c-deliveryTimeMeta-iconText {
-    &:after {
-        content: '\2022'; // round bullet character
-        color: $color-content-subdued;
-        font-weight: $font-weight-regular;
-        margin: 0 spacing(a);
-    }
-
-    @include media('>mid') {
-        &:after {
-            display: none;
-        }
-    }
+    margin-right: spacing(b);
 }
 </style>
