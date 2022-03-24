@@ -137,6 +137,40 @@ describe('FilterPill', () => {
                 expect(element.text()).toBe(propsData.screenReaderMessage);
                 expect(element.classes().includes('is-visuallyHidden')).toBe(true);
             });
+
+            it('should apply `aria-hidden` attributes to the `displayText` and `displayNumber` if provided', () => {
+                // Arrange
+                const propsData = { screenReaderMessage: 'A screen reader message' };
+
+                // Act
+                const wrapper = shallowMount(FilterPill, {
+                    propsData
+                });
+
+                const displayTextElement = wrapper.find('[data-test-id="filter-pill-text"]');
+                const displayNumberElement = wrapper.find('[data-test-id="filter-pill-number"]');
+
+                // Assert
+                expect(displayTextElement.attributes()['aria-hidden']).toStrictEqual('true');
+                expect(displayNumberElement.attributes()['aria-hidden']).toStrictEqual('true');
+            });
+
+            it('should not apply `aria-hidden` attributes to the `displayText` and `displayNumber` if not provided', () => {
+                // Arrange
+                const propsData = { screenReaderMessage: null };
+
+                // Act
+                const wrapper = shallowMount(FilterPill, {
+                    propsData
+                });
+
+                const displayTextElement = wrapper.find('[data-test-id="filter-pill-text"]');
+                const displayNumberElement = wrapper.find('[data-test-id="filter-pill-number"]');
+
+                // Assert
+                expect(displayTextElement.attributes()['aria-hidden']).toBe(undefined);
+                expect(displayNumberElement.attributes()['aria-hidden']).toBe(undefined);
+            });
         });
     });
 
