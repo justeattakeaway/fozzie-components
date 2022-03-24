@@ -42,7 +42,7 @@ export default {
     padding-right: spacing();
     margin: 0 spacing(a) 0 0;
     white-space: nowrap;
-    @include font-size($font-body-s-paragraph);
+    @include font-size(body-s);
 
     &:before {
         display: none;
