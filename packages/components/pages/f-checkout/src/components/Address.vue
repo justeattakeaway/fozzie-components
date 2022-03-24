@@ -21,7 +21,7 @@
             :key="field"
             :field-name="field"
             :field-type="fieldType"
-            :class="$style['c-address-formField']" />
+            :max-length="fieldLength" />
     </div>
 </template>
 
