@@ -26,8 +26,7 @@
 
         <address-block
             v-if="isCheckoutMethodDelivery"
-            data-test-id="address-block"
-            :should-show-administrative-area="shouldShowAddressAdministrativeArea" />
+            data-test-id="address-block" />
 
         <form-selector :key="availableFulfilmentTimesKey" />
 
@@ -52,7 +51,7 @@
 <script>
 import { validationMixin } from 'vuelidate';
 import {
-    required, email, requiredIf
+    required, email
 } from 'vuelidate/lib/validators';
 import { mapState } from 'vuex';
 import FButton from '@justeat/f-button';
@@ -160,8 +159,8 @@ export default {
                 this.$t('errorMessages.multipleFieldErrors', { errorCount: invalidFieldCount });
         },
 
-        shouldShowAddressAdministrativeArea () {
-            return this.tenant === 'au';
+        fieldTranslations () {
+            return this.$t('formFields');
         }
     },
 
@@ -219,62 +218,46 @@ export default {
          */
         isValidPostcode () {
             return validations.isValidPostcode(this.address.postcode, this.$i18n.locale);
+        },
+
+        buildValidations (fieldType) {
+            const invalidValidations = {
+                email,
+                mobileNumber: this.isValidPhoneNumber,
+                postcode: this.isValidPostcode
+            };
+
+            const validationProperties = {};
+
+            Object.entries(this.fieldTranslations[fieldType]).forEach(([fieldName, fieldProperties]) => {
+                const { validationMessages } = fieldProperties;
+
+                if (validationMessages) {
+                    validationProperties[fieldName] = {
+                        required,
+                        ...(validationMessages.invalid ? {
+                            isValid: invalidValidations[fieldName]
+                        } : {})
+                    };
+                }
+            });
+
+            return validationProperties;
         }
     },
 
     validations () {
-        const validationProperties = {
+        return {
             customer: {
                 mobileNumber: {
                     required,
-                    mobileNumber: this.isValidPhoneNumber
-                }
-            }
+                    isValid: this.isValidPhoneNumber
+                },
+                ...(!this.isLoggedIn ? this.buildValidations('customer') : {})
+            },
+            ...(this.isCheckoutMethodDelivery ? { address: this.buildValidations('address') } : {}),
+            ...(this.isCheckoutMethodDineIn ? { dineIn: this.buildValidations('dineIn') } : {})
         };
-
-        if (!this.isLoggedIn) {
-            validationProperties.customer = {
-                ...validationProperties.customer,
-                firstName: {
-                    required
-                },
-                lastName: {
-                    required
-                },
-                email: {
-                    required,
-                    email
-                }
-            };
-        }
-
-        if (this.isCheckoutMethodDelivery) {
-            validationProperties.address = {
-                line1: {
-                    required
-                },
-                locality: {
-                    required
-                },
-                administrativeArea: {
-                    required: requiredIf(() => this.shouldShowAddressAdministrativeArea)
-                },
-                postcode: {
-                    required,
-                    postcode: this.isValidPostcode
-                }
-            };
-        }
-
-        if (this.isCheckoutMethodDineIn) {
-            validationProperties.dineIn = {
-                tableIdentifier: {
-                    required
-                }
-            };
-        }
-
-        return validationProperties;
     }
 };
 </script>
