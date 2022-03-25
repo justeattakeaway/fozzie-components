@@ -184,7 +184,7 @@ export default {
     display: block;
 
     & path {
-        fill: $color-dark-content-brand;
+        fill: $color-support-brand-01;
     }
 }
 
