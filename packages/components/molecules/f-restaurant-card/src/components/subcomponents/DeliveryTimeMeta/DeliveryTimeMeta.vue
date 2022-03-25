@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-.c-deliveryTimeMeta-iconText {
+.c-deliveryTimeMeta {
     margin-right: spacing(b);
 }
 </style>
