@@ -53,6 +53,15 @@
                 :class="[
                     $style['c-restaurantCard-content--left-col'],
                     $style['c-restaurantCard-ratingContainer']]">
+                <!-- 'New' label -->
+                <restaurant-tag
+                    v-if="newTagText"
+                    :is-large="true"
+                    :is-uppercase="true"
+                    :text="newTagText"
+                    data-test-id="restaurant-new-badge"
+                    color-scheme="positive" />
+
                 <!-- Ratings -->
                 <component
                     :is="errorBoundary"
@@ -63,19 +72,12 @@
                 </component>
 
                 <!-- Premier Icon -->
-                <legend-icon
+                <span
                     v-if="isPremier"
-                    :class="[$style['c-restaurantCard-premier']]"
-                    data-test-id="restaurant-premier" />
-
-                <!-- 'New' label -->
-                <restaurant-tag
-                    v-if="newTagText"
-                    :is-large="true"
-                    :is-uppercase="true"
-                    :text="newTagText"
-                    data-test-id="restaurant-new-badge"
-                    color-scheme="positive" />
+                    :class="[$style['c-restaurantCard-premier']]">
+                    <legend-icon
+                        data-test-id="restaurant-premier" />
+                </span>
             </div>
 
             <template v-if="isLoading">
@@ -360,77 +362,85 @@ export default {
 
 <style lang="scss" module>
 .c-restaurantCard {
-  text-decoration: none;
-  display: grid;
-  grid-gap: spacing(d);
-  grid-template-columns: 1fr;
-  position: relative;
-  outline-color: $color-focus;
+    text-decoration: none;
+    display: grid;
+    grid-gap: spacing(c);
+    grid-template-columns: 1fr;
+    position: relative;
+    outline-color: $color-focus;
 
-  &.c-restaurantCard--listItem {
-      @include media('>mid') {
+    &.c-restaurantCard--listItem {
+        @include media('>mid') {
         grid-gap: spacing() spacing(d);
         grid-template-columns: minmax(180px, 30%) 1fr;
-      }
-  }
+        }
+    }
 
-  &:hover {
-      .c-restaurantCard-name {
-          text-decoration: underline;
-      }
-  }
+    &:hover {
+        .c-restaurantCard-name {
+            text-decoration: underline;
+        }
+    }
 }
 
 .c-restaurantCard-img {
-  width: 100%;
-  height: 144px;
+    width: 100%;
+    height: 144px;
 
-  .c-restaurantCard--listItem & {
-      @include media('>mid') {
-        min-height: 125px;
-        height: 100%;
-      }
-  }
+    .c-restaurantCard--listItem & {
+        @include media('>mid') {
+            min-height: 125px;
+            height: 100%;
+        }
+    }
 }
 
 .c-restaurantCard-logo {
-  top: spacing(d);
-  left: spacing(d);
-  position: absolute;
+    top: spacing(d);
+    left: spacing(d);
+    position: absolute;
 }
 
 .c-restaurantCard-content {
-  .c-restaurantCard--listItem & {
-    @include media('>mid') {
-      padding: spacing() 0;
-      grid-column: 2/3;
+    .c-restaurantCard--listItem & {
+        @include media('>mid') {
+            padding: spacing() 0;
+            grid-column: 2/3;
+        }
     }
-  }
 }
 
 .c-restaurantCard-dishes {
-  .c-restaurantCard--listItem & {
-      @include media('>mid') {
-        grid-column: 1/3;
-      }
-  }
+    .c-restaurantCard--listItem & {
+        @include media('>mid') {
+            grid-column: 1/3;
+        }
+    }
 }
 
 .c-restaurantCard-imageTags {
-    bottom: spacing(d);
+    bottom: spacing(b);
     left: spacing(d);
     position: absolute;
     margin-bottom: 0;
 }
 
 .c-restaurantCard-premier {
-    height: 21px;
+    width: 41px;
+    height: auto;
+
+    svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
 }
 
 .c-restaurantCard-ratingContainer {
     display: flex;
-    gap: spacing(c);
+    gap: spacing(b);
     align-items: center;
+    margin-right: spacing(b);
 }
 
 // Regular inner-content positioning
@@ -438,7 +448,6 @@ export default {
     display: flex;
     align-items: center;
     flex-flow: row wrap;
-    gap: 0 spacing(c);
 
     // an alternative to using bottom gap so that none is applied to the clearfix
     > * {
@@ -452,6 +461,15 @@ export default {
     flex: 0 0 100%;
 }
 
+.c-restaurantCard-name {
+    margin-bottom: spacing(a);
+    width: 100%;
+
+    @include media('>mid') {
+        margin-bottom: spacing(b);
+    }
+}
+
 .c-restaurantCard-offer {
     order: 1;
     margin-top: spacing(a);
@@ -463,15 +481,13 @@ export default {
         .c-restaurantCard--listItem & {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-auto-rows: min-content;
-            place-content: center;
             grid-auto-flow: dense;
-            align-items: baseline;
-            gap: spacing(a) spacing(d);
+            gap: 0 spacing(c);
+            overflow-wrap: break-word;
 
             > * {
                 grid-column: 2;
-                margin-bottom: 0;
+                margin: 0;
             }
         }
 
@@ -483,10 +499,6 @@ export default {
     .c-restaurantCard--listItem .c-restaurantCard-content {
         .c-restaurantCard-content--left-col {
             grid-column: 1;
-        }
-
-        .c-restaurantCard-cuisines {
-            align-self: start;
         }
 
         .c-restaurantCard-name,

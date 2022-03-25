@@ -28,10 +28,9 @@ export default {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin: 0;
+    margin: 0 0 spacing(a) 0;
     padding: 0;
     list-style: none;
-    list-style-image: none;
 
     & + & {
         margin-top: 0;
@@ -43,7 +42,7 @@ export default {
     padding-right: spacing();
     margin: 0 spacing(a) 0 0;
     white-space: nowrap;
-    font-size: $font-body-s-paragraph * 1px;
+    @include font-size(body-s);
 
     &:before {
         display: none;

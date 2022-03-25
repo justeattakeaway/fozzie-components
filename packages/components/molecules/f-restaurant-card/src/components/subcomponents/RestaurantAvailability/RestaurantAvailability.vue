@@ -81,10 +81,7 @@ export default {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-
-    svg {
-        height: 16px;
-    }
+    margin-right: spacing(b);
 }
 
 .c-restaurantCard-availability-iconText,
@@ -97,7 +94,6 @@ export default {
     &:after {
         content: '\2022'; // round bullet character
         color: $color-content-subdued;
-        line-height: 1;
         margin: 0 spacing(a);
     }
 }
