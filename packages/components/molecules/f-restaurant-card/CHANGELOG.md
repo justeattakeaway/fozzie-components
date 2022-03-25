@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.29.0
+------------------------------
+*March 24, 2022*
+### Added
+- new prop `inlineTileData` which, when enabled, prevents the ETA clearfix from being rendered (this is to assist with an experiment)
+
 v0.28.0
 ------------------------------
 *March 24, 2022*

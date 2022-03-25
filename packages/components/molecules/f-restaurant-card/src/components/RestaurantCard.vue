@@ -112,7 +112,9 @@
                 </component>
 
                 <!-- This is a clearfix to force anything after cuisines to a new line (won't affect list-item mode) -->
-                <div :class="[$style['c-restaurantCard-clearfix']]" />
+                <div
+                    v-if="!inlineTileData"
+                    :class="[$style['c-restaurantCard-clearfix']]" />
 
                 <!-- Delivery Meta (etas, distance etc) -->
                 <component
@@ -315,6 +317,11 @@ export default {
         performanceTracker: {
             type: Object,
             default: null
+        },
+        // temporary prop to assist with an experiment
+        inlineTileData: {
+            type: Boolean,
+            default: false
         }
     },
     computed: {

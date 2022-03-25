@@ -72,7 +72,8 @@ RestaurantCardComponent.args = {
         availabilityMessage: 'Opening at 13:20'
     },
     disabledMessage: 'Not taking orders at the moment',
-    isLoading: false
+    isLoading: false,
+    inlineTileData: false
 };
 
 RestaurantCardComponent.storyName = 'f-restaurant-card';
