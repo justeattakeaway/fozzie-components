@@ -56,12 +56,12 @@ export default {
 <style lang="scss" module>
 $scrollOffset: spacing(d);
 
- .c-restaurantCard-dishes {
+.c-restaurantCard-dishes {
     padding: 0;
     margin: 0;
- }
+}
 
- .c-restaurantCard-dishes--isScrollable {
+.c-restaurantCard-dishes--isScrollable {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
