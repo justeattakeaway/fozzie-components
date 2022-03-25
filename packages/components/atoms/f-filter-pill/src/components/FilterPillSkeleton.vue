@@ -33,6 +33,12 @@ export default {
     }
 }
 
+@keyframes skeletonLoadingShimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
 .c-filterPill-skeleton {
     padding: spacing(c) spacing(d);
 }
