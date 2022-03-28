@@ -21,7 +21,7 @@
                 <template v-if="description">
                     <p
                         v-for="(text, index) in description"
-                        :key="index"
+                        :key="`description-${index}`"
                         data-test-id="content-card-description-item"
                         :class="$style['c-content-card-description']">
                         {{ text }}
