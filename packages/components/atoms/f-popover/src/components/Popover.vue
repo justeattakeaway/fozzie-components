@@ -17,7 +17,6 @@ export default {
 
 <style lang="scss" module>
 $popover-padding               : spacing(d);
-$tooltip-width                 : 10px;
 
 .c-popover {
     @include media('>mid') {
