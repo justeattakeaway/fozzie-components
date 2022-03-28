@@ -128,7 +128,7 @@ export default {
         },
 
         hasInvalidError () {
-            return !!this.hasInvalidErrorMessage && this.isEmpty && !this.validations[this.fieldName];
+            return this.hasInvalidErrorMessage && this.isEmpty && !this.validations.isValid;
         },
 
         hasError () {

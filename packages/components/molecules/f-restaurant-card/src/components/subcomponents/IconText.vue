@@ -67,16 +67,17 @@ export default {
 <style lang="scss" module>
 @mixin themedColor($color) {
     color: $color;
+
     path {
         fill: $color;
     }
 }
 
 .c-restaurantCard-iconText {
-    @include font-size();
+    @include font-size(body-s);
     margin: 0;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .c-restaurantCard-iconText--bold {
@@ -85,13 +86,18 @@ export default {
 
 .c-restaurantCard-iconText-content {
     flex: 1;
-    line-height: spacing(d);
 }
 
 .c-restaurantCard-iconText-icon {
-    width: spacing(d);
-    height: spacing(d);
+    width: 14px;
+    height: 100%;
     margin-right: spacing(a);
+
+    svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
 }
 
 .c-restaurantCard-iconText-icon--hideOnMidBelow {

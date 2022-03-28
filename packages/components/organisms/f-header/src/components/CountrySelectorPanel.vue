@@ -49,7 +49,8 @@
                         :class="$style['c-countrySelector-country-link']"
                         :has-border-bottom="false"
                         :is-country-link="true"
-                        :href="country.siteUrl">
+                        :href="country.siteUrl"
+                        :lang="country.lang">
                         <template #icon>
                             <flag-icon
                                 :country-code="country.flagKey"

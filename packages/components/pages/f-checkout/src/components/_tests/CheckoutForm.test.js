@@ -21,7 +21,7 @@ const $v = {
     customer: {
         mobileNumber: {
             $dirty: false,
-            isValidPhoneNumber: false
+            isValid: false
         },
         firstName: {
             $dirty: false
@@ -31,7 +31,7 @@ const $v = {
         },
         email: {
             $dirty: false,
-            email: false
+            isValid: false
         }
     },
     address: {
@@ -50,7 +50,7 @@ const $v = {
         postcode: {
             $dirty: false,
             required: true,
-            isValidPostcode: false
+            isValid: false
         }
     },
     dineIn: {
