@@ -11,6 +11,14 @@ v8.2.0
  - Node 16 support.
 
 
+v8.0.0-alpha.2
+------------------------------
+*March 23, 2022*
+
+### Added
+- Body component for new content cards template system.
+
+
 v8.1.0
 ------------------------------
 *July 7, 2022*

@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import Image from '../Image.vue';
+import Image from '../ContentCardImage.vue';
 
 const MOCK_BACKGROUND_IMG = 'https://example.com/image.jpg';
 const MOCK_LOGO_IMG = 'https://example.com/logo.jpg';
