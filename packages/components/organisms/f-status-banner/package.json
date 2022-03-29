@@ -35,7 +35,8 @@
     "build": "vue-cli-service build --target lib --name f-status-banner ./src/index.js",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
-    "lint:style": "vue-cli-service lint:style",
+    "lint:style": "stylelint ./src/**/*.{vue,htm,html,css,sss,less,scss}",
+    "lint:style:fix": "yarn lint:style --fix",
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_STATUS_BANNER} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
@@ -57,7 +58,6 @@
   },
   "devDependencies": {
     "@justeat/f-searchbox": "6.0.0",
-    "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3",

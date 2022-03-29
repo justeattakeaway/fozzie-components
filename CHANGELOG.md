@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v7.2.0
+v7.4.0
 ------------------------------
 *March 21, 2022*
 
@@ -11,10 +11,25 @@ v7.2.0
 - Upgrade several Vue CLI packages to avoid a node-ipc issue
 
 
+v7.3.0
+------------------------------
+*March 29, 2022*
+
+### Changed
+- Stylelint called directly now rather than through vue-cli in NPM scripts.
+
+
+v7.2.0
+------------------------------
+*March 28, 2022*
+
+### Removed
+- f-development-context service removed.
+
+
 v7.1.0
 ------------------------------
 *March 9, 2022*
-
 ### Added
 - `f-wido-utils` version bump.
 
