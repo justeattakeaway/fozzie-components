@@ -425,7 +425,6 @@ describe('CheckoutModule', () => {
         });
 
         it.each([
-            // [UPDATE_ADDRESS_DETAILS, 'address', address], // TODO: NEED TO MOVE TEST
             [UPDATE_FULFILMENT_TIME, 'time', time],
             [UPDATE_IS_FULFILLABLE, 'isFulfillable', isFulfillable],
             [UPDATE_ERRORS, 'errors', issues],
@@ -490,7 +489,7 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(checkoutApi.getCheckout).toHaveBeenCalledWith(payload.url, state, payload.timeout);
-                expect(commit).toHaveBeenCalledWith(UPDATE_STATE, { ...checkoutDeliveryCopy });
+                expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDeliveryCopy);
             });
 
             it(`should update 'hasUpdatedAsap' value with ${UPDATE_HAS_ASAP_SELECTED} mutation.`, async () => {
@@ -523,7 +522,7 @@ describe('CheckoutModule', () => {
                     // Assert
                     expect(checkoutDeliveryCopy.customer).toBe(null);
                     expect(checkoutApi.getCheckout).toHaveBeenCalledWith(payload.url, state, payload.timeout);
-                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, { ...checkoutDeliveryCopy });
+                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDeliveryCopy);
                 });
             });
 
