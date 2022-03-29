@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.9.0
+------------------------------
+*March 29, 2022*
+
+### Changed
+- Stylelint called directly now rather than through vue-cli in NPM scripts.
+
+### Removed
+- Dependency on `@samhammer/vue-cli-plugin-stylelint` as now call stylelint directly rather than through vue-cli.
+
+
 v2.8.0
 ------------------------------
 *February 4, 2022*
