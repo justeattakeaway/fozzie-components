@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "7.1.0",
+  "version": "7.2.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
