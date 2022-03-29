@@ -34,7 +34,8 @@
     "build": "vue-cli-service build --target lib --name f-header ./src/index.js",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
-    "lint:style": "vue-cli-service lint:style",
+    "lint:style": "stylelint ./src/**/*.{vue,htm,html,css,sss,less,scss}",
+    "lint:style:fix": "yarn lint:style --fix",
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_HEADER} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
@@ -62,7 +63,6 @@
     "@justeat/f-popover": "2.2.0",
     "@justeat/f-vue-icons": "3.4.0",
     "@justeat/f-wdio-utils": "0.5.0",
-    "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
     "@vue/cli-plugin-babel": "4.4.6",
     "@vue/cli-plugin-unit-jest": "4.4.6",
     "@vue/test-utils": "1.0.3"
