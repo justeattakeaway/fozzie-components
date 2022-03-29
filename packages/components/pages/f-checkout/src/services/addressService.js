@@ -30,15 +30,17 @@ function toFormattedPostcode (postcode, tenant) {
 }
 
 function getAddress (postcode, tenant, address) {
+    const isInternationalAddress = tenant !== 'uk';
     const shouldShowAdministrativeArea = tenant === 'au';
 
     if (!address) {
         return {
             line1: '',
             line2: '',
-            line3: '',
+            ...(isInternationalAddress ? { line3: '' } : {}),
+            ...(isInternationalAddress && !shouldShowAdministrativeArea ? { line4: '' } : {}),
             locality: '',
-            ...(shouldShowAdministrativeArea ? { administrativeArea: '' } : { line4: '' }),
+            ...(shouldShowAdministrativeArea ? { administrativeArea: '' } : {}),
             postcode: toFormattedPostcode(postcode, tenant)
         };
     }
@@ -46,9 +48,10 @@ function getAddress (postcode, tenant, address) {
     return {
         line1: address.Line1,
         line2: address.Line2,
-        line3: address.Line3,
-        locality: address.City,
-        ...(shouldShowAdministrativeArea ? { administrativeArea: address.Line4 } : { line4: address.Line4 }),
+        ...(isInternationalAddress ? { line3: address.Line3 } : {}),
+        ...(isInternationalAddress && !shouldShowAdministrativeArea ? { line4: address.Line4 } : {}),
+        locality: address.City || address.Line3,
+        ...(shouldShowAdministrativeArea ? { administrativeArea: address.administrativeArea || address.Line4 } : {}),
         postcode: address.ZipCode
     };
 }
@@ -105,13 +108,12 @@ const isAddressInLocalStorage = () => {
  * @param address - The address from local storage
  * @returns The address but mapped to how the API shapes it
  */
-function getMappedLocalStorageAddress (address, administrativeAreaRequired) {
+function getMappedLocalStorageAddress (address) {
     return {
         line1: address.Line1,
         line2: address.Line2,
-        line3: address.Line3,
-        ...(administrativeAreaRequired ? { administrativeArea: address.Line4 } : { line4: address.Line4 }),
-        locality: address.City,
+        administrativeArea: address.administrativeArea,
+        locality: address.City || address.Line3,
         postalCode: address.PostalCode || address.ZipCode
     };
 }
@@ -121,12 +123,12 @@ function getMappedLocalStorageAddress (address, administrativeAreaRequired) {
  * @param mapped - boolean deciding whether to return the address in a mapped state
  * @returns address - The address from local storage
  */
-function getAddressFromLocalStorage (tenant, mapped = true) {
+function getAddressFromLocalStorage (mapped = true) {
     if (window.localStorage) {
         const storedLocation = window.localStorage.getItem(storedLocationKey);
 
         if (storedLocation) {
-            return mapped ? getMappedLocalStorageAddress(JSON.parse(storedLocation), tenant === 'au') : JSON.parse(storedLocation);
+            return mapped ? getMappedLocalStorageAddress(JSON.parse(storedLocation)) : JSON.parse(storedLocation);
         }
     }
 

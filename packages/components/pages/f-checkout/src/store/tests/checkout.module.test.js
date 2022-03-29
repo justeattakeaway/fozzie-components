@@ -469,8 +469,6 @@ describe('CheckoutModule', () => {
             let config;
             let checkoutDeliveryCopy;
 
-            const tenant = 'uk';
-
             beforeEach(() => {
                 config = {
                     headers: {
@@ -492,7 +490,7 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(checkoutApi.getCheckout).toHaveBeenCalledWith(payload.url, state, payload.timeout);
-                expect(commit).toHaveBeenCalledWith(UPDATE_STATE, { ...checkoutDeliveryCopy, tenant });
+                expect(commit).toHaveBeenCalledWith(UPDATE_STATE, { ...checkoutDeliveryCopy });
             });
 
             it(`should update 'hasUpdatedAsap' value with ${UPDATE_HAS_ASAP_SELECTED} mutation.`, async () => {
@@ -525,7 +523,7 @@ describe('CheckoutModule', () => {
                     // Assert
                     expect(checkoutDeliveryCopy.customer).toBe(null);
                     expect(checkoutApi.getCheckout).toHaveBeenCalledWith(payload.url, state, payload.timeout);
-                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, { ...checkoutDeliveryCopy, tenant });
+                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, { ...checkoutDeliveryCopy });
                 });
             });
 

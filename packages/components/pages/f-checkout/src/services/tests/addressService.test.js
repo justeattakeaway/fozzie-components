@@ -55,8 +55,6 @@ describe('addressService', () => {
     describe('getClosestAddress ::', () => {
         const ukAddressesData = { Addresses: [area511Line, bristol2Lines, london3LinesDefault] };
         const auAddressesData = { Addresses: [australiaAddressDefault, australiaAddressAdditional], DefaultAddress: defaultAustraliaId };
-        // const ukAddressesData = Addresses.uk;
-        // const auAddressesData = Addresses.au;
         const itAddressesData = Addresses.it;
 
         describe.each([
@@ -245,8 +243,6 @@ describe('addressService', () => {
                 const expectedAddress = {
                     line1: 'Fleet Place House',
                     line2: 'Farringdon',
-                    line3: 'City of London',
-                    line4: undefined,
                     locality: 'London',
                     postalCode: 'EC4M 7RF'
                 };
