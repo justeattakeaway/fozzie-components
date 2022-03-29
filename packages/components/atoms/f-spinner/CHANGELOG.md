@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.4.0
+------------------------------
+*March 22, 2022*
+
+### Changed
+- Put spinner content inside `div` instead of `span` for accessibility.
+- Add storybook control to make spinner duration configurable.
+
+
 Latest (to be added to next release)
 ------------------------------
 *February 4, 2022*

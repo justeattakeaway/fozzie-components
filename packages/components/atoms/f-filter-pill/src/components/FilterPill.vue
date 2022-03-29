@@ -6,9 +6,9 @@
                 [$style['c-filterPill--disabled']]: isDisabled
             }]"
         data-test-id="filter-item">
-        <div v-if="isLoading">
-            Loading
-        </div>
+        <filter-pill-skeleton
+            v-if="isLoading"
+            aria-hidden="true" />
         <template v-else>
             <a
                 :class="$style['c-filterPill-link']"
@@ -36,14 +36,22 @@
                 data-test-id="filter-pill-label"
                 :tabindex="-1">
                 <tick-icon :class="$style['c-filterPill-icon']" />
+                <p
+                    v-if="screenReaderMessage"
+                    data-test-id="filter-pill-sr-msg"
+                    class="is-visuallyHidden">
+                    {{ screenReaderMessage }}
+                </p>
                 <span
                     :class="$style['c-filterPill-text']"
-                    data-test-id="filter-pill-text">
+                    data-test-id="filter-pill-text"
+                    :aria-hidden="!!screenReaderMessage">
                     {{ displayText }}
                 </span>
                 <span
                     :class="$style['c-filterPill-number']"
-                    data-test-id="filter-pill-number">
+                    data-test-id="filter-pill-number"
+                    :aria-hidden="!!screenReaderMessage">
                     {{ displayNumber }}
                 </span>
             </label>
@@ -53,11 +61,13 @@
 
 <script>
 import { TickIcon } from '@justeat/f-vue-icons';
+import FilterPillSkeleton from './FilterPillSkeleton.vue';
 
 export default {
     name: 'FilterPill',
     components: {
-        TickIcon
+        TickIcon,
+        FilterPillSkeleton
     },
     props: {
         inputId: {
@@ -91,6 +101,10 @@ export default {
         isLoading: {
             type: Boolean,
             default: false
+        },
+        screenReaderMessage: {
+            type: String,
+            default: null
         }
     },
     data () {
@@ -137,7 +151,7 @@ $filter-pill-ease: ease-in-out;
     box-shadow: 0 0 0 1px $color-border-default;
     border-radius: $radius-rounded-e;
     background: $color-white;
-    transition: .1s;
+    transition: 0.1s;
 
     &:focus-within:not(.c-filterPill--disabled) {
         box-shadow: 0 0 0 2px $color-focus;

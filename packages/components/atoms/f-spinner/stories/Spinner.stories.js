@@ -7,10 +7,26 @@ export default {
     decorators: [withA11y]
 };
 
-export const VSpinnerComponent = () => ({
+export const VSpinnerComponent = (args, { argTypes }) => ({
     components: { VSpinner, TestComponent },
 
-    template: '<v-spinner><TestComponent /></v-spinner>'
+    props: Object.keys(argTypes),
+
+    template: `<v-spinner>
+        <TestComponent :duration="duration" />
+    </v-spinner>`
 });
 
 VSpinnerComponent.storyName = 'f-spinner';
+
+VSpinnerComponent.args = {
+    duration: 2000
+};
+
+VSpinnerComponent.argTypes = {
+    duration: {
+        control: { type: 'select' },
+        description: 'How long to show the spinner for before the test component loads. You can change this to restart the spinner.',
+        options: [1000, 2000, 5000, 10000, 30000, 60000]
+    }
+};

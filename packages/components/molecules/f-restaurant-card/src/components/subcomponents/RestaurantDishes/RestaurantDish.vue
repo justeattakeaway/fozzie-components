@@ -68,7 +68,7 @@ export default {
 
 <style lang="scss" module>
 .c-restaurantCard-dish {
-    background-color: $color-orange-10;
+    background-color: $color-support-brand-02;
     padding: spacing(c);
     border-radius: $radius-rounded-b;
     margin: 0;
