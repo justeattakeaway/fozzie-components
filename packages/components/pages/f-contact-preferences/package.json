@@ -65,8 +65,8 @@
     "@justeat/f-card-with-content": "1.0.0",
     "@justeat/f-alert": "4.3.0",
     "@justeat/f-form-field": "4.5.0",
-    "@vue/cli-plugin-babel": "4.4.6",
-    "@vue/cli-plugin-unit-jest": "4.4.6",
+    "@vue/cli-plugin-babel": "4.5.16",
+    "@vue/cli-plugin-unit-jest": "4.5.16",
     "@justeat/f-wdio-utils": "0.5.0",
     "@vue/test-utils": "1.0.3"
   }

@@ -63,8 +63,8 @@
     "@justeat/f-popover": "2.2.0",
     "@justeat/f-vue-icons": "3.4.0",
     "@justeat/f-wdio-utils": "0.5.0",
-    "@vue/cli-plugin-babel": "4.4.6",
-    "@vue/cli-plugin-unit-jest": "4.4.6",
+    "@vue/cli-plugin-babel": "4.5.16",
+    "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3"
   }
 }
