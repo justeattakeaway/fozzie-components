@@ -17,7 +17,6 @@ export default {
 
 <style lang="scss" module>
 $popover-padding               : spacing(d);
-$tooltip-width                 : 10px;
 
 .c-popover {
     @include media('>mid') {
@@ -26,18 +25,6 @@ $tooltip-width                 : 10px;
         border-radius: $radius-rounded-c;
         padding: 0 $popover-padding;
         width: auto;
-
-        // tooltip arrow
-        &:before {
-            bottom: 100%;
-            border: $tooltip-width solid transparent;
-            border-bottom: $tooltip-width solid $color-container-default;
-            content: '';
-            height: 0;
-            width: 0;
-            position: absolute;
-            pointer-events: none;
-        }
     }
 }
 </style>
