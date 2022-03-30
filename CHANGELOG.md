@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.4.0
+------------------------------
+*March 21, 2022*
+
+### Changed
+- Upgrade several Vue CLI packages to avoid a node-ipc issue
+
+
 v7.3.0
 ------------------------------
 *March 29, 2022*
