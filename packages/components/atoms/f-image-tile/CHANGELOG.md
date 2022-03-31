@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.11.1
+------------------------------
+*March 31, 2022*
+
+### Added
+- A pointer cursor to image tile
+
 v0.11.0
 ------------------------------
 *March 11, 2022*
