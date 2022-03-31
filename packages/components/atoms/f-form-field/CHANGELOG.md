@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.8.0
+------------------------------
+*March 28, 2022*
+
+### Fixed
+- Assistive text styles.
+
 
 v4.7.2
 ------------------------------
