@@ -223,6 +223,7 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
 .c-imageTile-label {
     display: flex;
     flex-flow: column wrap;
+    cursor: pointer;
 
     &:focus {
         outline: none; // Prevents Safari doubling focus styles.
