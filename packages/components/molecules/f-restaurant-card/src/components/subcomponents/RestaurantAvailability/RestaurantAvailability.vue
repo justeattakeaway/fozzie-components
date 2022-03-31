@@ -84,17 +84,15 @@ export default {
     margin-right: spacing(b);
 }
 
+.c-restaurantCard-availability > p + span:before {
+    content: '\2022'; // round bullet character
+    color: $color-content-subdued;
+    margin: 0 spacing(a);
+}
+
 .c-restaurantCard-availability-iconText,
 .c-restaurantCard-availability-message {
     overflow-wrap: break-word;
     @include font-size($font-paragraph-02);
-}
-
-.c-restaurantCard-availability-iconText {
-    &:after {
-        content: '\2022'; // round bullet character
-        color: $color-content-subdued;
-        margin: 0 spacing(a);
-    }
 }
 </style>
