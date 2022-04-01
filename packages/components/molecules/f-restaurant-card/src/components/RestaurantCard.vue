@@ -489,12 +489,13 @@ export default {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-auto-flow: dense;
+            grid-auto-rows: min-content;
             gap: 0 spacing(c);
             overflow-wrap: break-word;
+            align-items: flex-start;
 
             > * {
                 grid-column: 2;
-                margin: 0;
             }
         }
 
@@ -514,7 +515,7 @@ export default {
         }
 
         .c-restaurantCard-name {
-            margin-bottom: spacing(a);
+            margin-bottom: spacing(b);
         }
 
         .c-restaurantCard-tags {
