@@ -84,8 +84,8 @@ export default {
     margin-right: spacing(b);
 }
 
-.c-restaurantCard-availability > p + span:before {
-   @include dotSeparator;
+.c-restaurantCard-availability > .c-restaurantCard-availability-iconText + .c-restaurantCard-availability-message:before {
+    @include dotSeparator;
 }
 
 .c-restaurantCard-availability-iconText,
