@@ -61,7 +61,7 @@ $feedback-btn-font-size: 'body-s';
 
 .c-feedback {
     @include media('<wide') {
-        order: 1;
+        margin-bottom: spacing(d);
     }
 }
 
