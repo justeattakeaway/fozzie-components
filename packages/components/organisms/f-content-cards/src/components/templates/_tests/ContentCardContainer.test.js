@@ -30,7 +30,7 @@ describe('ContentCardContainer.vue', () => {
         await wrapper.vm.$nextTick();
 
         // Assert
-        expect(wrapper.vm.emitCardView).toHaveBeenCalled();
+        expect(wrapper.vm.emitCardView).toHaveBeenCalledWith(MOCK_CARD);
     });
 
     it('should emit click event on click', async () => {
@@ -39,7 +39,7 @@ describe('ContentCardContainer.vue', () => {
         await wrapper.vm.$nextTick();
 
         // Assert
-        expect(wrapper.vm.emitCardView).toHaveBeenCalled();
+        expect(wrapper.vm.emitCardClick).toHaveBeenCalledWith(MOCK_CARD);
     });
 
     it('should set container as an `a` tag when `isClickable` is true and card has a url', async () => {
