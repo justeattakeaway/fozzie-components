@@ -75,10 +75,7 @@ export default {
     display: flex;
 
     &:after {
-        content: '\2022'; // round bullet character
-        color: $color-content-subdued;
-        margin: 0 spacing(a);
-        font-weight: $font-weight-regular;
+        @include dotSeparator;
 
         @include media('>mid') {
             display: none;

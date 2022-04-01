@@ -54,8 +54,6 @@ export default {
 }
 
 .c-restaurantCard-fees-item + .c-restaurantCard-fees-item:before {
-    content: '\2022'; // round bullet character
-    color: $color-content-subdued;
-    margin: 0 spacing(a);
+   @include dotSeparator;
 }
 </style>

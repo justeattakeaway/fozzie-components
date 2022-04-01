@@ -85,9 +85,7 @@ export default {
 }
 
 .c-restaurantCard-availability > p + span:before {
-    content: '\2022'; // round bullet character
-    color: $color-content-subdued;
-    margin: 0 spacing(a);
+   @include dotSeparator;
 }
 
 .c-restaurantCard-availability-iconText,
