@@ -72,6 +72,14 @@ export default {
 
 <style lang="scss" module>
 .c-deliveryTimeMeta {
-    margin-right: spacing(b);
+    display: flex;
+
+    &:after {
+        @include dotSeparator;
+
+        @include media('>mid') {
+            display: none;
+        }
+    }
 }
 </style>
