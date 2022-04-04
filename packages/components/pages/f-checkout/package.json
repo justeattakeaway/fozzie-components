@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout – Fozzie Checkout Component",
-  "version": "3.22.3",
+  "version": "3.23.0",
   "main": "dist/f-checkout.umd.min.js",
   "maxBundleSize": "120kB",
   "files": [
@@ -36,7 +36,8 @@
     "build": "vue-cli-service build --target lib --name f-checkout ./src/index.js",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
-    "lint:style": "vue-cli-service lint:style",
+    "lint:style": "stylelint ./src/**/*.{vue,htm,html,css,sss,less,scss}",
+    "lint:style:fix": "yarn lint:style --fix",
     "test": "vue-cli-service test:unit",
     "test:watch": "vue-cli-service test:unit --watch",
     "test:coverage": "yarn test --coverage",
@@ -53,7 +54,7 @@
   ],
   "dependencies": {
     "@justeat/f-globalisation": "1.0.0",
-    "@justeat/f-services": "1.13.0",
+    "@justeat/f-services": "1.14.0",
     "axios": "0.21.1",
     "jwt-decode": "3.1.2",
     "vue-scrollto": "2.20.0",
@@ -75,9 +76,8 @@
     "@justeat/f-mega-modal": "4.1.0",
     "@justeat/f-vue-icons": "3.0.0",
     "@justeat/f-wdio-utils": "0.6.0",
-    "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
-    "@vue/cli-plugin-babel": "4.4.6",
-    "@vue/cli-plugin-unit-jest": "4.4.6",
+    "@vue/cli-plugin-babel": "4.5.16",
+    "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3",
     "flush-promises": "1.0.2",
     "vuex": "3.5.1"

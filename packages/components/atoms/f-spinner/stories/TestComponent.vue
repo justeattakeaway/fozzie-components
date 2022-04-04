@@ -8,10 +8,30 @@
 export default {
     name: 'TestComponent',
 
+    props: {
+        duration: {
+            type: Number,
+            required: true
+        }
+    },
+
+    watch: {
+        duration () {
+            this.$parent.$emit('start-spinner');
+            this.setSpinnerTimeout();
+        }
+    },
+
     mounted () {
-        setTimeout(() => {
-            this.$parent.$emit('stop-spinner');
-        }, 2000);
+        this.setSpinnerTimeout();
+    },
+
+    methods: {
+        setSpinnerTimeout () {
+            setTimeout(() => {
+                this.$parent.$emit('stop-spinner');
+            }, this.duration);
+        }
     }
 };
 </script>

@@ -81,24 +81,16 @@ export default {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    margin-right: spacing(b);
+}
 
-    svg {
-        height: 16px;
-    }
+.c-restaurantCard-availability > .c-restaurantCard-availability-iconText + .c-restaurantCard-availability-message:before {
+    @include dotSeparator;
 }
 
 .c-restaurantCard-availability-iconText,
 .c-restaurantCard-availability-message {
     overflow-wrap: break-word;
     @include font-size($font-paragraph-02);
-}
-
-.c-restaurantCard-availability-iconText {
-    &:after {
-        content: '\2022'; // round bullet character
-        color: $color-content-subdued;
-        line-height: 1;
-        margin: 0 spacing(a);
-    }
 }
 </style>

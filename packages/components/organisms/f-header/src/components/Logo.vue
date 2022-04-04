@@ -7,6 +7,7 @@
             :is="iconComponent"
             :class="[
                 $style['c-logo-img'],
+                { [$style['c-logo-img--jet']]: theme === 'jet' && shouldResizeLogo },
                 { [$style['c-logo-img--alt']]: isAltLogo }
             ]"
             :data-theme-logo="iconComponent"
@@ -50,6 +51,10 @@ export default {
             default: 'white'
         },
         isOpen: {
+            type: Boolean,
+            default: false
+        },
+        shouldResizeLogo: {
             type: Boolean,
             default: false
         }
@@ -112,8 +117,27 @@ export default {
         margin-left: -10.5px; //half of hamburger menu width
 
         @include media('>mid') {
-            height: 40px;
             margin-left: 0;
+            height: 40px;
+        }
+    }
+
+    // resizes takeaway logo for tablets if delivery link and country selector are also visible
+    .c-logo-img--jet {
+        @include media('>mid') {
+            @include media('<wide') {
+                height: 35px;
+            }
+
+            // tablet
+            @media screen and (max-width: 833px) {
+                height: 25px;
+                margin-top: spacing(b);
+            }
+
+            @include media('>wide') {
+                height: 40px;
+            }
         }
     }
 

@@ -54,18 +54,20 @@ export default {
 
 <style lang="scss" module>
 .c-restaurantTag {
-    display: inline-block;
-    padding: spacing(a);
+    display: block;
+    padding: 0 spacing(a);
+    margin-bottom: spacing(a);
     border-radius: $radius-rounded-a;
-    font-size: $font-paragraph-03 * 1px;
+    @include font-size($font-paragraph-03);
     color: $color-content-default;
     background-color: $color-container-strong;
+    max-width: 30ch;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
-    @include media('<mid') {
-         max-width: 30ch;
-         white-space: nowrap;
-         overflow: hidden;
-         text-overflow: ellipsis;
+    &.c-restaurantTag--isLarge.c-restaurantTag--isUppercase.c-restaurantTag--positive {
+        margin-bottom: 0;
     }
 }
 

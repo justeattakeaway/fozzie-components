@@ -34,7 +34,8 @@
     "build": "vue-cli-service build --target lib --name f-template-subnav ./src/index.js",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
-    "lint:style": "vue-cli-service lint:style",
+    "lint:style": "stylelint ./src/**/*.{vue,htm,html,css,sss,less,scss}",
+    "lint:style:fix": "yarn lint:style --fix",
     "test": "vue-cli-service test:unit",
     "ci:test:templates": "yarn test"
   },
@@ -49,9 +50,8 @@
     "@justeat/f-breadcrumbs": "3.2.1",
     "@justeat/f-navigation-links": "1.1.0",
     "@justeat/f-wdio-utils": "0.4.0",
-    "@samhammer/vue-cli-plugin-stylelint": "2.0.1",
-    "@vue/cli-plugin-babel": "4.4.6",
-    "@vue/cli-plugin-unit-jest": "4.4.6",
+    "@vue/cli-plugin-babel": "4.5.16",
+    "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3"
   }
 }

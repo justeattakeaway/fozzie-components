@@ -4,8 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (to be added to next release)
+v3.23.0
 ------------------------------
+*March 13, 2022*
+
+### Changed
+- Address lines to render based on translations.
+- `f-services` version to `1.14.0`.
+
+### Added
+- Italian Addresses.
+
+
 *March 18, 2022*
 
 ### Added

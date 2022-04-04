@@ -3,6 +3,7 @@
         <div
             v-click-outside="hideCountryList"
             :class="$style['c-countrySelector']"
+            role="region"
             @keyup.esc="hideCountryList">
             <button
                 id="countrySelector-button"
@@ -48,8 +49,7 @@
                 v-show="showCountryList"
                 id="countrySelector-countries"
                 :class="$style['c-countrySelector-list']"
-                data-test-id="countrySelector-list"
-                role="region">
+                data-test-id="countrySelector-list">
                 <li
                     v-for="(country, i) in countries"
                     :key="`${i}_Country`"
@@ -67,7 +67,9 @@
                         <flag-icon
                             :country-code="country.key"
                             :class="$style['c-countrySelector-flag']" />
-                        <p data-test-id="countrySelector-list">
+                        <p
+                            data-test-id="countrySelector-list"
+                            :lang="country.lang">
                             {{ country.localisedName }}
                         </p>
                     </a>

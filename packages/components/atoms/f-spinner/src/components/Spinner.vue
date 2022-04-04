@@ -7,9 +7,9 @@
             role="alert"
             aria-live="polite" />
 
-        <span :class="{ ['is-hidden']: shouldShowSpinner }">
+        <div :class="{ ['is-hidden']: shouldShowSpinner }">
             <slot />
-        </span>
+        </div>
     </div>
 </template>
 

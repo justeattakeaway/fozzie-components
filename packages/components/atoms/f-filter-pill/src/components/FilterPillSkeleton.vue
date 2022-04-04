@@ -1,3 +1,16 @@
+<template>
+    <div :class="$style['c-filterPill-skeleton']">
+        <span :class="$style['c-filterPill-skeleton-content']" />
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'FilterPillSkeleton'
+};
+</script>
+
+<style lang="scss" module>
 @mixin skeletonLoader () {
     min-height: 1em;
     border-radius: 100px;
@@ -20,9 +33,21 @@
     }
 }
 
-@mixin dotSeparator () {
-    content: '\2022'; // round bullet character
-    color: $color-content-subdued;
-    margin: 0 spacing(a);
-    font-weight: $font-weight-regular;
+@keyframes skeletonLoadingShimmer {
+    100% {
+        transform: translateX(100%);
+    }
 }
+
+.c-filterPill-skeleton {
+    padding: spacing(c) spacing(d);
+}
+
+.c-filterPill-skeleton-content {
+    display: block;
+    width: 50%;
+    height: spacing(d);
+    background-color: $color-skeleton-02;
+    @include skeletonLoader();
+}
+</style>

@@ -69,6 +69,24 @@ commands:
               yarn << parameters.command_name >> --since master...HEAD
             fi
 
+  run_command_plus_dependencies:
+    parameters:
+      command_description:
+        type: string
+      command_name:
+        type: string
+    description: Runs commands based on passed parameters
+    steps:
+      - run:
+          name: << parameters.command_description >>
+          command: |
+            if [ "${RUN_ALL}" == "true" ];
+            then
+              yarn << parameters.command_name >>
+            else
+              yarn << parameters.command_name >> --since master...HEAD --include-dependencies
+            fi
+
   save_cache_dist_directories:
     description: Saves cache for dist directories
     steps:
@@ -142,7 +160,6 @@ commands:
             - packages/services/f-braze-adapter/dist
             - packages/services/f-compatibility/dist
             - packages/services/f-consumer-oidc/dist
-            - packages/services/f-development-context/dist
             - packages/services/f-feature-management/dist
             - packages/services/f-globalisation/dist
             - packages/services/f-http/dist
@@ -181,7 +198,7 @@ commands:
   build_packages:
     description: Locally builds all packages in the monorepo
     steps:
-      - run_command:
+      - run_command_plus_dependencies:
           command_description: Build packages
           command_name: build
 
@@ -367,7 +384,7 @@ executors:
     docker:
       # specify the version you desire here
       - image: circleci/node:14.18.1-browsers # For latest available images check – https://circleci.com/docs/2.0/docker-image-tags.json
-    
+
     resource_class: large
 
 jobs:
