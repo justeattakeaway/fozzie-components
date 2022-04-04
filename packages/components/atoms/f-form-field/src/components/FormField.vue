@@ -4,7 +4,8 @@
         :class="[
             $style['c-formField'], {
                 [$style['c-formField--invalid']]: hasError,
-                [$style['c-formField--grouped']]: isFieldGrouped
+                [$style['c-formField--grouped']]: isFieldGrouped,
+                [$style['c-formField--hasAssistiveText']]: assistiveText
             }
         ]"
         :data-test-id="testId.container">
@@ -81,8 +82,8 @@
                 :class="[
                     $style['c-formField-icon'],
                     $style[`c-formField-icon--${fieldSize}`],
-                    $style[`c-formField-icon--leading`],
-                    { [$style[`c-formField-icon--disabled`]]: isDisabled }
+                    $style['c-formField-icon--leading'],
+                    { [$style['c-formField-icon--disabled']]: isDisabled }
                 ]">
                 <slot
                     name="icon-leading"
@@ -94,19 +95,19 @@
                 :class="[
                     $style['c-formField-icon'],
                     $style[`c-formField-icon--${fieldSize}`],
-                    $style[`c-formField-icon--trailing`],
-                    { [$style[`c-formField-icon--disabled`]]: isDisabled }
+                    $style['c-formField-icon--trailing'],
+                    { [$style['c-formField-icon--disabled']]: isDisabled }
                 ]">
                 <slot
                     name="icon-trailing"
                 />
             </span>
 
-            <div
+            <p
                 v-if="assistiveText"
-                :class="$style['c-formField-assitiveText']">
+                :class="$style['c-formField-assistiveText']">
                 {{ assistiveText }}
-            </div>
+            </p>
         </div>
 
         <slot name="error" />
@@ -473,9 +474,16 @@ $form-input-iconSize                           : 18px;
         padding-right: $form-input-iconPadding;
     }
 
-    .c-formField-assitiveText {
+    .c-formField-assistiveText {
+        position: absolute;
         font-weight: $font-weight-regular;
         color: $form-input-secondaryTextColour;
         margin-top: spacing(a);
+    }
+
+    .c-formField--hasAssistiveText {
+        & + & {
+            margin-top: spacing(g);
+        }
     }
 </style>

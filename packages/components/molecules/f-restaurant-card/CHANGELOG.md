@@ -3,6 +3,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.29.3
+------------------------------
+*April 1, 2022*
+### Fixed
+- Alignment of restaurant card content
+
+v0.29.2
+------------------------------
+*March 31, 2022*
+### Fixed
+- Dot separators for eta, availability and fees
+
+
 v0.29.1
 ------------------------------
 *March 25, 2022*
