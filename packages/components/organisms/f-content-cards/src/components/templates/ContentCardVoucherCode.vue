@@ -98,12 +98,8 @@ export default {
         voucherCopyClasses () {
             return [
                 this.$style['c-contentCard-voucher-copy'],
-                ...(this.copyState === COPY_STATE_COOLDOWN ? [
-                    this.$style['c-contentCard-voucher-copy--copied']
-                ] : []),
-                ...(this.copyState === COPY_STATE_TRANSITIONOUT ? [
-                    this.$style['c-contentCard-voucher-copy--transition-out']
-                ] : [])
+                { [this.$style['c-contentCard-voucher-copy--copied']]: this.copyState === COPY_STATE_COOLDOWN },
+                { [this.$style['c-contentCard-voucher-copy--transition-out']]: this.copyState === COPY_STATE_TRANSITIONOUT }
             ];
         },
 
