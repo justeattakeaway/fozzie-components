@@ -99,10 +99,10 @@ export default {
             return [
                 this.$style['c-contentCard-voucher-copy'],
                 ...(this.copyState === COPY_STATE_COOLDOWN ? [
-                    this.$style['c-contentCard-voucher-copy-copied']
+                    this.$style['c-contentCard-voucher-copy--copied']
                 ] : []),
                 ...(this.copyState === COPY_STATE_TRANSITIONOUT ? [
-                    this.$style['c-contentCard-voucher-copy-transition-out']
+                    this.$style['c-contentCard-voucher-copy--transition-out']
                 ] : [])
             ];
         },
@@ -175,11 +175,11 @@ export default {
     text-align: right;
 }
 
-.c-contentCard-voucher-copy-copied {
+.c-contentCard-voucher-copy--copied {
     color: $color-content-default;
 }
 
-.c-contentCard-voucher-copy-transition-out {
+.c-contentCard-voucher-copy--transition-out {
     transition: color 1s;
 }
 
