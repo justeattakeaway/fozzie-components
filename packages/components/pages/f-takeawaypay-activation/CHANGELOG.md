@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.11.0
 ------------------------------
-*March 21, 2022*
+*April 04, 2022*
 
 ### Changed
 - Added NZ localization
