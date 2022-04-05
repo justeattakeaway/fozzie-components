@@ -23,9 +23,7 @@ const resolveGlobalUserID = (authToken, logger) => {
             error,
             'loyalty',
             {
-                ...{
-                    authToken
-                },
+                authToken,
                 exception: error.name,
                 exceptionMessage: error.message,
                 exceptionStackTrace: error.stack,
