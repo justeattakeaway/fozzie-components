@@ -17,13 +17,13 @@
                 :class="$style['c-contentCard-voucher-code-cooldown']"
                 role="status">
                 <transition
-                    :leave-to-class="$style['c-contentCard-voucher-copy-cooldownTick-leave-to']"
-                    :leave-active-class="$style['c-contentCard-voucher-copy-cooldownTick-leave-active']">
+                    :leave-to-class="$style['c-contentCard-voucher-copy-cooldownTickLeaveTo']"
+                    :leave-active-class="$style['c-contentCard-voucher-copy-cooldownTickLeaveActive']">
                     <tick-icon
                         v-if="inCooldown"
                         :class="[
                             $style.zeta,
-                            $style['c-contentCard-voucher-code-cooldown-tick']
+                            $style['c-contentCard-voucher-code-cooldownTick']
                         ]" />
                 </transition>
                 {{ voucherCodeCopiedLabel }}
@@ -99,7 +99,7 @@ export default {
             return [
                 this.$style['c-contentCard-voucher-copy'],
                 { [this.$style['c-contentCard-voucher-copy--copied']]: this.copyState === COPY_STATE_COOLDOWN },
-                { [this.$style['c-contentCard-voucher-copy--transition-out']]: this.copyState === COPY_STATE_TRANSITIONOUT }
+                { [this.$style['c-contentCard-voucher-copy--transitionOut']]: this.copyState === COPY_STATE_TRANSITIONOUT }
             ];
         },
 
@@ -175,19 +175,19 @@ export default {
     color: $color-content-default;
 }
 
-.c-contentCard-voucher-copy--transition-out {
+.c-contentCard-voucher-copy--transitionOut {
     transition: color 1s;
 }
 
-.c-contentCard-voucher-copy-cooldownTick-leave-to {
+.c-contentCard-voucher-copy-cooldownTickLeaveTo {
     opacity: 0;
 }
 
-.c-contentCard-voucher-copy-cooldownTick-leave-active {
+.c-contentCard-voucher-copy-cooldownTickLeaveActive {
     transition: opacity 1s;
 }
 
-.c-contentCard-voucher-code-cooldown-tick {
+.c-contentCard-voucher-code-cooldownTick {
     fill: $color-content-default;
     width: spacing(d);
     height: spacing(d);
