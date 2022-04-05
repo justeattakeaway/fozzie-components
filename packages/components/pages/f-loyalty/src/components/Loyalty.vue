@@ -123,7 +123,8 @@ export default {
     async mounted () {
         await this.init({
             brazeApiKey: this.brazeApiKey,
-            authToken: this.authToken
+            authToken: this.authToken,
+            log: this.$log
         });
     },
 

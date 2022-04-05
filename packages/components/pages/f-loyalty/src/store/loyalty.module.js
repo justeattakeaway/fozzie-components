@@ -10,10 +10,31 @@ import {
 /**
  * @function resolveGlobalUserID
  * @param  {string} authToken - auth token.
+ * @param logger
  */
-const resolveGlobalUserID = authToken => {
-    const tokenData = jwtDecode(authToken);
-    return tokenData?.global_user_id;
+const resolveGlobalUserID = (authToken, logger) => {
+    // eslint-disable-next-line no-useless-catch
+    try {
+        const tokenData = jwtDecode(authToken);
+        return tokenData?.global_user_id;
+    } catch (error) {
+        logger.error(
+            'Error Decoding JWT token',
+            error,
+            'loyalty',
+            {
+                ...{
+                    authToken
+                },
+                exception: error.name,
+                exceptionMessage: error.message,
+                exceptionStackTrace: error.stack,
+                traceId: error.traceId || (error.response && error.response.data.traceId),
+                errorCode: error.errorCode
+            }
+        );
+        throw error;
+    }
 };
 
 export default {
@@ -47,16 +68,16 @@ export default {
      * @returns {void}
      */
     actions: {
-        [ACTION_SET_GLOBAL_USER_ID]: ({ commit }, authToken) => {
-            commit(ACTION_SET_GLOBAL_USER_ID, resolveGlobalUserID(authToken));
+        [ACTION_SET_GLOBAL_USER_ID]: ({ commit }, { authToken, logger }) => {
+            commit(ACTION_SET_GLOBAL_USER_ID, resolveGlobalUserID(authToken, logger));
         },
 
         [ACTION_INITIALISE_LOYALTY]: ({ commit, dispatch }, {
-            brazeApiKey, authToken
+            brazeApiKey, authToken, log
         }) => {
             commit(MUTATION_SET_AUTH_TOKEN, authToken);
             commit(MUTATION_SET_BRAZE_KEY, brazeApiKey);
-            dispatch(ACTION_SET_GLOBAL_USER_ID, authToken);
+            dispatch(ACTION_SET_GLOBAL_USER_ID, { authToken, log });
         }
     },
 
