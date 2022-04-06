@@ -7,6 +7,7 @@
             { [$style['c-navLink']]: !isCountryLink },
             { [$style['c-navLink--countryLink']]: isCountryLink },
             { [$style['c-nav-list-link--alt']]: isAltColour },
+            { [$style['c-navLink--whiteBackground']]: backgroundTheme === 'white' },
             { [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent' },
             { [$style['c-navLink--countryLink']]: isCountryLink }
         ]">
@@ -67,6 +68,7 @@ export default {
         }
     },
     computed: {
+        // adds extra margin where icon is not passed
         slotPassed () {
             return this.$slots.icon && this.$slots.icon.length;
         }
@@ -82,16 +84,13 @@ export default {
     color: $nav-text-color;
     font-size: $nav-text-size;
 
-    @include media('<=mid') {
+    @include media('<=mid'){
         display: flex;
         width: 100%;
 
-        &:hover {
-            background: $color-container-subtle;
-        }
-
-        &:active {
-            background: $color-container-strong;
+        &:focus {
+            outline-color: $color-focus;
+            border-radius: 0;
         }
     }
 
@@ -102,6 +101,25 @@ export default {
         padding: spacing(c) spacing(c);
         display: flex;
 
+        &:focus {
+            outline-color: $color-focus;
+            border-radius: 800px;
+        }
+    }
+}
+
+.c-navLink--whiteBackground {
+    @include media('<=mid') {
+        &:hover {
+            background: $color-container-subtle;
+        }
+
+        &:active {
+            background: $color-container-strong;
+        }
+    }
+
+    @include media('>mid') {
         &:hover {
             background: $color-container-subtle;
             border-radius: 800px;
@@ -110,10 +128,6 @@ export default {
 
         &:active {
             background: $color-container-strong;
-        }
-
-        &:focus {
-            outline-color: #4996FD;
             border-radius: 800px;
             text-decoration: none;
         }
@@ -154,7 +168,6 @@ export default {
 
     &:hover {
             background: $color-container-subtle;
-            text-decoration: none;
         }
 
         &:active {
@@ -162,8 +175,8 @@ export default {
         }
 
         &:focus {
-            outline-color: #4996FD;
-            text-decoration: none;
+            outline-color: $color-focus;
+            border-radius: 0;
         }
 }
 

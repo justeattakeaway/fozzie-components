@@ -158,9 +158,9 @@ $nav-toggleIcon-space              : 5px;
 .c-nav-list-link--transparent,
 .c-nav-list-link--alt {
     @include media('>mid') {
-        &:hover,
-        &:focus {
+        &:hover {
             color: $nav-text-color--transparent !important;
+            text-decoration: underline;
         }
     }
 }

@@ -129,14 +129,11 @@ export default {
     }
 
     &:focus {
-        outline-color: #4996FD;
+        outline-color: $color-focus;
+        text-decoration: none;
 
         @include media('>mid') {
             border-radius: 800px;
-        }
-
-        @include media('<=mid') {
-            border-radius: 0;
         }
     }
 

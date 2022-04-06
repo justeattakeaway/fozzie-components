@@ -80,7 +80,7 @@
                 <li
                     v-for="(customNavLink, index) in customNavLinks"
                     :key="`custom-nav-link-${index}`"
-                    :class="[$style['c-nav-list-item--horizontallyAlignedAboveMid'], $style['c-nav-list--hasActiveState']]">
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
                         :tabindex="tabIndex"
                         :text="customNavLink.text"
@@ -92,7 +92,7 @@
 
                 <li
                     v-if="showOffersLink"
-                    :class="[$style['c-nav-list-item--horizontallyAlignedAboveMid'], $style['c-nav-list--hasActiveState']]">
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
                         :text="copy.offers.text"
                         :tabindex="tabIndex"
@@ -114,7 +114,7 @@
 
                 <li
                     v-if="showDeliveryEnquiry"
-                    :class="[$style['c-nav-list-item--horizontallyAlignedAboveMid'], $style['c-nav-list--hasActiveState']]">
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
                         :text="copy.deliveryEnquiry.text"
                         :tabindex="tabIndex"
@@ -157,7 +157,8 @@
                         :aria-label="copy.userMenu.buttonLabel(userInfo.friendlyName)"
                         :class="[
                             $style['c-nav-list-text'],
-                            $style['c-nav-list-btn']
+                            $style['c-nav-list-btn'],
+                            { [$style['c-nav-list-btn-states']]: headerBackgroundTheme === 'white' }
                         ]"
                         @click.prevent="toggleUserMenu"
                         @keydown.space.prevent="toggleUserMenu">
@@ -170,6 +171,7 @@
                         <span
                             :class="[
                                 $style['c-nav-list-text-sub'],
+                                { [$style['c-nav-list-link']]: headerBackgroundTheme === 'white' },
                                 { [$style['c-nav-list-link--alt']]: isAltColour },
                                 { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
                             ]">
@@ -199,7 +201,7 @@
 
                 <li
                     v-if="!userInfo && showLoginInfo"
-                    :class="[$style['c-nav-list-item--horizontallyAlignedAboveMid'], $style['c-nav-list--hasActiveState']]">
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
                         :text="copy.accountLogin.text"
                         :tabindex="tabIndex"
@@ -232,7 +234,7 @@
 
                 <li
                     v-if="showHelpLink"
-                    :class="[$style['c-nav-list-item--horizontallyAlignedAboveMid'], $style['c-nav-list--hasActiveState']]">
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
                         :text="copy.help.text"
                         :tabindex="tabIndex"
@@ -672,18 +674,6 @@ export default {
     }
 }
 
-
-// for links that do not open popovers
-.c-nav-list--hasActiveState {
-    @include media('>mid') {
-        &:active {
-            background: $color-container-strong;
-            border-radius: 800px;
-            text-decoration: none;
-        }
-    }
-}
-
 .c-nav-list-btn {
     background: transparent;
     border: 0;
@@ -693,24 +683,11 @@ export default {
     display: flex;
 
     &:focus {
-        outline-color: #4996FD;
+        outline-color: $color-focus;
         border-radius: 800px;
-        text-decoration: none;
     }
 
-    &:hover {
-        background: $color-container-subtle;
-        text-decoration: none;
-        @include media('>mid') {
-            border-radius: 800px;
-        }
-
-         @include media('<=mid') {
-            border-radius: 0;
-        }
-    }
-
-     @include media('>mid') {
+    @include media('>mid') {
         margin-top: spacing(d);
         margin-bottom: spacing(d);
     }
@@ -720,9 +697,21 @@ export default {
         text-align: left;
         display: block;
 
+        &:focus {
+            border-radius: 0;
+        }
+    }
+}
+
+.c-nav-list-btn-states {
+    &:hover {
+        background: $color-container-subtle;
+        text-decoration: none;
+        border-radius: 800px;
+    }
+    @include media('<=mid') {
         &:hover {
-            background: $color-container-subtle;
-            text-decoration: none;
+            border-radius: 0;
         }
     }
 }
@@ -752,6 +741,10 @@ export default {
         width: spacing(d) + $nav-featureLinkIcon-width + spacing(d); // includes padding on both sides
         height: spacing(d) + $nav-featureLinkIcon-height + spacing(d);
         padding: spacing(d);
+
+        &:focus {
+            outline-color: $color-focus;
+        }
     }
 }
 
@@ -825,6 +818,10 @@ export default {
     cursor: pointer;
     background-color: $nav-toggleIcon-bg;
     border: none;
+
+    &:focus {
+        outline-color: $color-focus;
+    }
 
     // hide on wider views
     @include media('>mid') {

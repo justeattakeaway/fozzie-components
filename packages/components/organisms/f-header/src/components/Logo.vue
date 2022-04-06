@@ -103,13 +103,17 @@ export default {
         height: $header-height--narrow;
         padding: spacing(d) 0;
 
+        &:focus {
+            outline-color: $color-focus;
+        }
+
         @include media('>mid') {
             justify-content: left;
             height: $header-height;
             padding: 20px 0;
 
             &:focus {
-               outline-color: #4996FD;
+               outline-color: $color-focus;
                 border-radius: 800px;
                 text-decoration: none;
             }

@@ -189,7 +189,7 @@ $countrySelector-text-bg-hover : $color-container-subtle;
     }
 
     &:focus {
-           outline-color: #4996FD;
+           outline-color: $color-focus;
     }
 }
 

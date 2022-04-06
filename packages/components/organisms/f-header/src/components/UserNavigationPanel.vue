@@ -112,6 +112,10 @@ export default {
 .list-link {
     text-decoration: none;
 
+    &:focus {
+        outline-color: $color-focus;
+    }
+
     @include media('>mid') {
         display: block;
         padding: spacing(c) spacing(d);
@@ -123,10 +127,6 @@ export default {
         margin-left: spacing(h);
         padding: spacing(c) spacing(d) spacing(c) 0;
         border-top: 1px solid $color-border-default;
-    }
-
-    &:focus {
-        outline-color: #4996FD;
     }
 }
 </style>
