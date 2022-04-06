@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v8.0.0-alpha.4
+------------------------------
+*April 04, 2022*
+
+### Added
+- Voucher code component for new content cards template system.
+
+
 v8.0.0-alpha.3
 ------------------------------
 *March 29, 2022*
