@@ -11,8 +11,9 @@ import {
  * @function resolveGlobalUserID
  * @param  {string} authToken - auth token.
  * @param logger
+ * @param errorHandler
  */
-const resolveGlobalUserID = (authToken, logger) => {
+const resolveGlobalUserID = (authToken, logger, errorHandler) => {
     // eslint-disable-next-line no-useless-catch
     try {
         const tokenData = jwtDecode(authToken);
@@ -31,7 +32,10 @@ const resolveGlobalUserID = (authToken, logger) => {
                 errorCode: error.errorCode
             }
         );
-        throw error;
+        // return null and emit error to allow component to emit on error event to
+        // prevent error being handled by general catch all error handler
+        errorHandler(error);
+        return null;
     }
 };
 
@@ -66,16 +70,16 @@ export default {
      * @returns {void}
      */
     actions: {
-        [ACTION_SET_GLOBAL_USER_ID]: ({ commit }, { authToken, logger }) => {
-            commit(ACTION_SET_GLOBAL_USER_ID, resolveGlobalUserID(authToken, logger));
+        [ACTION_SET_GLOBAL_USER_ID]: ({ commit }, { authToken, logger, errorHandler }) => {
+            commit(ACTION_SET_GLOBAL_USER_ID, resolveGlobalUserID(authToken, logger, errorHandler));
         },
 
         [ACTION_INITIALISE_LOYALTY]: ({ commit, dispatch }, {
-            brazeApiKey, authToken, log
+            brazeApiKey, authToken, logger, errorHandler
         }) => {
             commit(MUTATION_SET_AUTH_TOKEN, authToken);
             commit(MUTATION_SET_BRAZE_KEY, brazeApiKey);
-            dispatch(ACTION_SET_GLOBAL_USER_ID, { authToken, log });
+            dispatch(ACTION_SET_GLOBAL_USER_ID, { authToken, logger, errorHandler });
         }
     },
 

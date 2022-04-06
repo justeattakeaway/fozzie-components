@@ -124,14 +124,18 @@ export default {
         await this.init({
             brazeApiKey: this.brazeApiKey,
             authToken: this.authToken,
-            log: this.$log
+            errorHandler: this.handleErrors
         });
     },
 
     methods: {
         ...mapActions(VUEX_MODULE_NAMESPACE_LOYALTY, {
             init: ACTION_INITIALISE_LOYALTY
-        })
+        }),
+
+        handleErrors (error) {
+            this.$emit('onError', error);
+        }
     }
 };
 </script>
