@@ -116,6 +116,7 @@ export default {
 
         &:active {
             background: $color-container-strong;
+            color: black;
         }
     }
 
