@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.2.0
+------------------------------
+*April 01, 2022*
+
+### Removed
+- css `order` property so tabbing reads correctly on small screens via extended keyboard devices, mobile devices in particular.
+
 
 v7.1.0
 ------------------------------
