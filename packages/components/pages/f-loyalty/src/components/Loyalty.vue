@@ -41,7 +41,7 @@
 <script>
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import { mapActions, mapGetters } from 'vuex';
-import { Tab, Tabs } from '@justeat/f-tabs';
+import { FTab as Tab, FTabs as Tabs } from '@justeat/f-tabs';
 import '@justeat/f-tabs/dist/f-tabs.css';
 import tenantConfigs from '../tenants';
 import loyalty from '../store/loyalty.module';
