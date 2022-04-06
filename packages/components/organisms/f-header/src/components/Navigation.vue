@@ -80,7 +80,7 @@
                 <li
                     v-for="(customNavLink, index) in customNavLinks"
                     :key="`custom-nav-link-${index}`"
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    :class="[$style['c-nav-list-item--horizontallyAlignedAboveMid'], $style['c-nav-list--hasActiveState']]">
                     <nav-link
                         :tabindex="tabIndex"
                         :text="customNavLink.text"
@@ -92,7 +92,7 @@
 
                 <li
                     v-if="showOffersLink"
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    :class="[$style['c-nav-list-item--horizontallyAlignedAboveMid'], $style['c-nav-list--hasActiveState']]">
                     <nav-link
                         :text="copy.offers.text"
                         :tabindex="tabIndex"
@@ -114,7 +114,7 @@
 
                 <li
                     v-if="showDeliveryEnquiry"
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    :class="[$style['c-nav-list-item--horizontallyAlignedAboveMid'], $style['c-nav-list--hasActiveState']]">
                     <nav-link
                         :text="copy.deliveryEnquiry.text"
                         :tabindex="tabIndex"
@@ -199,7 +199,7 @@
 
                 <li
                     v-if="!userInfo && showLoginInfo"
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    :class="[$style['c-nav-list-item--horizontallyAlignedAboveMid'], $style['c-nav-list--hasActiveState']]">
                     <nav-link
                         :text="copy.accountLogin.text"
                         :tabindex="tabIndex"
@@ -232,7 +232,7 @@
 
                 <li
                     v-if="showHelpLink"
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    :class="[$style['c-nav-list-item--horizontallyAlignedAboveMid'], $style['c-nav-list--hasActiveState']]">
                     <nav-link
                         :text="copy.help.text"
                         :tabindex="tabIndex"
@@ -665,9 +665,6 @@ export default {
 .c-nav-list-item--horizontallyAlignedAboveMid {
     @include media('>mid') {
         float: left;
-        padding: spacing(c) spacing(c);
-        margin-top: spacing(d);
-        margin-bottom: spacing(d);
     }
 
     @include media('>wide') {
@@ -675,16 +672,58 @@ export default {
     }
 }
 
+
+// for links that do not open popovers
+.c-nav-list--hasActiveState {
+    @include media('>mid') {
+        &:active {
+            background: $color-container-strong;
+            border-radius: 800px;
+            text-decoration: none;
+        }
+    }
+}
+
 .c-nav-list-btn {
     background: transparent;
     border: 0;
     font-size: 1rem;
-    margin: 0;
-    padding: 0;
+    padding: spacing(c) spacing(c);
+    color: $nav-text-color;
+    display: flex;
+
+    &:focus {
+        outline-color: #4996FD;
+        border-radius: 800px;
+        text-decoration: none;
+    }
+
+    &:hover {
+        background: $color-container-subtle;
+        text-decoration: none;
+        @include media('>mid') {
+            border-radius: 800px;
+        }
+
+         @include media('<=mid') {
+            border-radius: 0;
+        }
+    }
+
+     @include media('>mid') {
+        margin-top: spacing(d);
+        margin-bottom: spacing(d);
+    }
 
     @include media('<=mid') {
         width: 100%;
         text-align: left;
+        display: block;
+
+        &:hover {
+            background: $color-container-subtle;
+            text-decoration: none;
+        }
     }
 }
 
@@ -732,15 +771,19 @@ export default {
 
 // Icons, such as the profile icon
 .c-nav-icon {
-    float: left;
-    margin-right: spacing();
     width: $nav-icon-size;
     height: $nav-icon-size;
+    margin: 0 spacing(a);
 
     @include media('>mid') {
         & path {
             fill: $nav-icon-color;
         }
+    }
+
+    @include media('<=mid') {
+        float: left;
+        margin-right: spacing();
     }
 }
 

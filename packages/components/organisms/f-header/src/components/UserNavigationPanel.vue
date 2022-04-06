@@ -6,7 +6,8 @@
         <li
             v-for="(link, index) in copy.navLinks"
             :key="index"
-            data-test-id="nav-links">
+            data-test-id="nav-links"
+            :class="$style['outer-link']">
             <a
                 :class="$style['list-link']"
                 :tabindex="tabIndex"
@@ -24,7 +25,8 @@
         </li>
 
         <li
-            v-if="!isBelowMid">
+            v-if="!isBelowMid"
+            :class="$style['outer-link']">
             <a
                 :tabindex="isUserMenuOpen ? 0 : -1"
                 :href="returnLogoutUrl"
@@ -95,12 +97,24 @@ export default {
     }
 }
 
+.outer-link {
+    &:hover {
+        background: $color-container-subtle;
+        text-decoration: none;
+    }
+
+     &:active {
+        background: $color-container-strong;
+        text-decoration: none;
+    }
+}
+
 .list-link {
     text-decoration: none;
 
     @include media('>mid') {
         display: block;
-        padding: spacing(c) 0;
+        padding: spacing(c) spacing(d);
         height: auto;
     }
 
@@ -111,10 +125,8 @@ export default {
         border-top: 1px solid $color-border-default;
     }
 
-    &:hover,
     &:focus {
-        font-weight: $font-weight-bold;
-        text-decoration: none;
+        outline-color: #4996FD;
     }
 }
 </style>

@@ -1,22 +1,24 @@
 <template>
-    <div>
+    <a
+        v-bind="$attrs"
+        :data-trak="JSON.stringify(dataTrak)"
+        :href="href"
+        :class="[
+            { [$style['c-navLink']]: !isCountryLink },
+            { [$style['c-navLink--countryLink']]: isCountryLink },
+            { [$style['c-nav-list-link--alt']]: isAltColour },
+            { [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent' },
+            { [$style['c-navLink--countryLink']]: isCountryLink }
+        ]">
         <slot name="icon" />
-        <a
-            v-bind="$attrs"
-            :data-trak="JSON.stringify(dataTrak)"
-            :href="href"
+        <span
             :class="[
-                $style['c-navLink'],
+                { [$style['c-navLink--textWithIcon']]: slotPassed & !isCountryLink },
+                { [$style['c-navLink--textWithoutIcon']]: !slotPassed },
                 { [$style['c-navLink--borderBottomBelowMid']]: hasBorderBottom },
-                { [$style['c-navLink--borderTopBelowMid']]: hasBorderTop },
-                { [$style['c-navLink--countryLink']]: isCountryLink },
-                { [$style['c-nav-list-link--alt']]: isAltColour },
-                { [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent' }
-            ]">
-
-            {{ text }}
-        </a>
-    </div>
+                { [$style['c-navLink--borderTopBelowMid']]: hasBorderTop }]">
+            {{ text }}</span>
+    </a>
 </template>
 
 <script>
@@ -63,6 +65,11 @@ export default {
             type: String,
             default: 'white'
         }
+    },
+    computed: {
+        slotPassed () {
+            return this.$slots.icon && this.$slots.icon.length;
+        }
     }
 };
 </script>
@@ -77,34 +84,87 @@ export default {
 
     @include media('<=mid') {
         display: flex;
-        margin-left: spacing(h);
-        padding: spacing(c) spacing(d) spacing(c) 0;
+        width: 100%;
+
+        &:hover {
+            background: $color-container-subtle;
+        }
+
+        &:active {
+            background: $color-container-strong;
+        }
     }
 
     @include media('>mid') {
         font-weight: $nav-text-weight;
-        margin: 0;
-        padding: 0;
+        margin-top: spacing(d);
+        margin-bottom: spacing(d);
+        padding: spacing(c) spacing(c);
+        display: flex;
+
+        &:hover {
+            background: $color-container-subtle;
+            border-radius: 800px;
+            text-decoration: none;
+        }
+
+        &:active {
+            background: $color-container-strong;
+        }
+
+        &:focus {
+            outline-color: #4996FD;
+            border-radius: 800px;
+            text-decoration: none;
+        }
     }
+}
 
-    &:hover,
-    &:focus,
-    &:active {
-        text-decoration: none;
-
+.c-navLink--textWithIcon, .c-navLink--textWithoutIcon {
         @include media('<=mid') {
-            font-weight: $font-weight-bold;
+            width: 100vw;
+            padding: spacing(c) spacing(d) spacing(c) 0;
         }
+}
 
-        @include media('>mid') {
-            color: $nav-text-color--hover;
-            text-decoration: underline;
-
-            .c-header--transparent .c-nav-popoverList & {
-                color: inherit;
-            }
-        }
+.c-navLink--textWithoutIcon {
+    @include media('<=mid') {
+        margin-left: spacing(h);
     }
+}
+
+.c-navLink--textWithIcon {
+    @include media('<=mid') {
+        margin-left: spacing(c);
+    }
+}
+
+.c-navLink--countryLink {
+    display: block;
+    text-decoration: none;
+    padding: spacing(c) spacing(d) spacing(c) 0;
+
+    @include media('<=mid') {
+        margin-left: 0;
+    }
+    @include media('>mid') {
+        float: center;
+        font-weight: $font-weight-regular;
+    }
+
+    &:hover {
+            background: $color-container-subtle;
+            text-decoration: none;
+        }
+
+        &:active {
+            background: $color-container-strong;
+        }
+
+        &:focus {
+            outline-color: #4996FD;
+            text-decoration: none;
+        }
 }
 
 .c-navLink--borderTopBelowMid {
@@ -116,22 +176,6 @@ export default {
 .c-navLink--borderBottomBelowMid {
     @include media('<=mid') {
         border-bottom: 1px solid $color-border-default;
-    }
-}
-
-.c-navLink--countryLink {
-    @include media('>mid') {
-        text-decoration: none;
-        display: flex;
-        float: center;
-        margin-left: spacing(h);
-        padding: spacing(c) spacing(d) spacing(c) 0;
-        @include font-size($nav-text-size);
-        font-weight: $font-weight-regular;
-    }
-    &:hover {
-        text-decoration: none;
-        font-weight: $font-weight-regular;
     }
 }
 </style>

@@ -107,6 +107,12 @@ export default {
             justify-content: left;
             height: $header-height;
             padding: 20px 0;
+
+            &:focus {
+               outline-color: #4996FD;
+                border-radius: 800px;
+                text-decoration: none;
+            }
         }
     }
 
