@@ -773,7 +773,7 @@ export default {
 .c-nav-icon {
     width: $nav-icon-size;
     height: $nav-icon-size;
-    margin: 0 spacing(a);
+    margin-right: spacing(a);
 
     @include media('>mid') {
         & path {
