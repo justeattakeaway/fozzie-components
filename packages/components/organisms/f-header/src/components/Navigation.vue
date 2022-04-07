@@ -684,8 +684,8 @@ export default {
     display: flex;
 
     &:focus {
-        outline-color: $color-focus;
-        border-radius: 800px;
+        outline-color: $nav-link-focus-color;
+        border-radius: $nav-focus-borderRadius;
     }
 
     @include media('>mid') {
@@ -713,8 +713,7 @@ export default {
 .c-nav-list-btn-states {
     &:hover {
         background: $color-container-subtle;
-        text-decoration: none;
-        border-radius: 800px;
+        border-radius: $nav-focus-borderRadius;
     }
     @include media('<=mid') {
         &:hover {
@@ -827,8 +826,8 @@ export default {
     border: none;
 
     &:focus {
-        outline-color: $color-focus;
-        border-radius: 800px;
+        outline-color: $nav-link-focus-color;
+        border-radius: $nav-focus-borderRadius;
     }
 
     // hide on wider views
