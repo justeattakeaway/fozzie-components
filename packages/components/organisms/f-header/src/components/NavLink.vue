@@ -89,7 +89,7 @@ export default {
         width: 100%;
 
         &:focus {
-            outline-color: $color-focus;
+            outline-color: $nav-link-focus-color;
             border-radius: 0;
         }
     }
@@ -102,8 +102,8 @@ export default {
         display: flex;
 
         &:focus {
-            outline-color: $color-focus;
-            border-radius: 800px;
+            outline-color: $nav-link-focus-color;
+            border-radius: $nav-focus-borderRadius;
         }
     }
 }
@@ -116,21 +116,18 @@ export default {
 
         &:active {
             background: $color-container-strong;
-            color: black;
         }
     }
 
     @include media('>mid') {
         &:hover {
             background: $color-container-subtle;
-            border-radius: 800px;
-            text-decoration: none;
+            border-radius: $nav-focus-borderRadius;
         }
 
         &:active {
             background: $color-container-strong;
-            border-radius: 800px;
-            text-decoration: none;
+            border-radius: $nav-focus-borderRadius;
         }
     }
 }
