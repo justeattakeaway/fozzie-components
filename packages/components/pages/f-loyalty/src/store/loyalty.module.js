@@ -14,7 +14,6 @@ import {
  * @param errorHandler
  */
 const resolveGlobalUserID = (authToken, logger, errorHandler) => {
-    // eslint-disable-next-line no-useless-catch
     try {
         const tokenData = jwtDecode(authToken);
         return tokenData?.global_user_id;
