@@ -137,6 +137,7 @@ describe('Navigation', () => {
                 'showOffersLink',
                 'showHelpLink',
                 'showDeliveryEnquiry',
+                'showCountrySelector',
                 'showLoginLink'
             ])('should return true if `%s` is true', navLink => {
                 // Arrange & Act
@@ -185,6 +186,7 @@ describe('Navigation', () => {
                         showOffersLink: false,
                         showHelpLink: false,
                         showDeliveryEnquiry: false,
+                        showCountrySelector: false,
                         customNavLinks: []
                     }
                 });
@@ -781,7 +783,36 @@ describe('Navigation', () => {
                 });
 
                 // Assert
-                expect(wrapper.find('[data-test-id="user-info-icon"]').classes()).toContain('is-hidden');
+                expect(wrapper.find('[data-test-id="user-info-icon"]').exists()).toBe(false);
+            });
+
+            it('should show "user-info-icon" if `showLoginInfo: true` and the user is logged in and has nav link data', async () => {
+                // Arrange
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        showLoginInfo: true
+                    },
+                    computed: {
+                        hasNavigationLinks () {
+                            return true;
+                        }
+                    },
+                    mocks: {
+                        $style
+                    }
+                });
+
+                // Act
+                await wrapper.setData({
+                    ...defaultData,
+                    userInfo: {
+                        isAuthenticated: true
+                    }
+                });
+
+                // Assert
+                expect(wrapper.find('[data-test-id="user-info-icon"]').exists()).toBe(true);
             });
         });
 
