@@ -46,6 +46,9 @@ $nav-toggleIcon-color--transparent : $nav-icon-color--transparent;
 $nav-toggleIcon-bg                 : transparent;
 $nav-toggleIcon-space              : 5px;
 
+$nav-focus-borderRadius            : 800px;
+$nav-link-focus-color              : $color-focus;
+
 @mixin nav-container-visible () {
     overflow-y: auto;
     left: 0;

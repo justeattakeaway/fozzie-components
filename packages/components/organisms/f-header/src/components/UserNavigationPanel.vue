@@ -100,12 +100,10 @@ export default {
 .outer-link {
     &:hover {
         background: $color-container-subtle;
-        text-decoration: none;
     }
 
      &:active {
         background: $color-container-strong;
-        text-decoration: none;
     }
 }
 
@@ -113,7 +111,7 @@ export default {
     text-decoration: none;
 
     &:focus {
-        outline-color: $color-focus;
+        outline-color: $nav-link-focus-color;
     }
 
     @include media('>mid') {

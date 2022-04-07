@@ -129,24 +129,18 @@ export default {
     }
 
     &:focus {
-        outline-color: $color-focus;
-        text-decoration: none;
+        outline-color: $nav-link-focus-color;
 
         @include media('>mid') {
-            border-radius: 800px;
+            border-radius: $nav-focus-borderRadius;
         }
     }
 
     &:hover {
         background: $color-container-subtle;
-        text-decoration: none;
 
         @include media('>mid') {
-            border-radius: 800px;
-        }
-
-        @include media('<=mid') {
-            border-radius: 0;
+            border-radius: $nav-focus-borderRadius;
         }
     }
 }

@@ -44,6 +44,10 @@ export default {
             padding: 4px;
             color: $color-content-link;
             outline-color: $color-focus;
+
+            @include media('>mid') {
+                border-radius: $header-buttonFocus-borderRadius;
+            }
         }
     }
 }

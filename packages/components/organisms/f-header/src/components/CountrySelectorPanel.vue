@@ -180,16 +180,14 @@ $countrySelector-text-bg-hover : $color-container-subtle;
 
     &:hover {
         background: $countrySelector-text-bg-hover;
-        text-decoration: none;
     }
 
     &:active {
         background: $color-container-strong;
-        text-decoration: none;
     }
 
     &:focus {
-           outline-color: $color-focus;
+        outline-color: $nav-link-focus-color;
     }
 }
 

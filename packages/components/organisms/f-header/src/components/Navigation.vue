@@ -170,11 +170,12 @@
                             ]" />
                         <span
                             :class="[
-                                $style['c-nav-list-text-sub'],
-                                { [$style['c-nav-list-link']]: headerBackgroundTheme === 'white' },
-                                { [$style['c-nav-list-link--alt']]: isAltColour },
-                                { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
-                            ]">
+                                $style['c-nav-list-btn-text'],
+                                {
+                                    [$style['c-nav-list-link']]: headerBackgroundTheme === 'white',
+                                    [$style['c-nav-list-link--alt']]: isAltColour,
+                                    [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent'
+                                }]">
                             {{ userInfo.friendlyName }}
                         </span>
                         <span
@@ -681,6 +682,7 @@ export default {
     padding: spacing(c) spacing(c);
     color: $nav-text-color;
     display: flex;
+    margin-top: spacing(a);
 
     &:focus {
         outline-color: $color-focus;
@@ -700,6 +702,12 @@ export default {
         &:focus {
             border-radius: 0;
         }
+    }
+}
+
+.c-nav-list-btn-text {
+    @include media('>mid') {
+        margin-top: 2px;
     }
 }
 
@@ -821,6 +829,7 @@ export default {
 
     &:focus {
         outline-color: $color-focus;
+        border-radius: 800px;
     }
 
     // hide on wider views

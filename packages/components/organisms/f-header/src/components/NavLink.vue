@@ -3,21 +3,21 @@
         v-bind="$attrs"
         :data-trak="JSON.stringify(dataTrak)"
         :href="href"
-        :class="[
-            { [$style['c-navLink']]: !isCountryLink },
-            { [$style['c-navLink--countryLink']]: isCountryLink },
-            { [$style['c-nav-list-link--alt']]: isAltColour },
-            { [$style['c-navLink--whiteBackground']]: backgroundTheme === 'white' },
-            { [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent' },
-            { [$style['c-navLink--countryLink']]: isCountryLink }
-        ]">
+        :class="[{
+            [$style['c-navLink']]: !isCountryLink,
+            [$style['c-navLink--countryLink']]: isCountryLink,
+            [$style['c-nav-list-link--alt']]: isAltColour,
+            [$style['c-navLink--whiteBackground']]: backgroundTheme === 'white',
+            [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent'
+        }]">
         <slot name="icon" />
         <span
-            :class="[
-                { [$style['c-navLink--textWithIcon']]: slotPassed & !isCountryLink },
-                { [$style['c-navLink--textWithoutIcon']]: !slotPassed },
-                { [$style['c-navLink--borderBottomBelowMid']]: hasBorderBottom },
-                { [$style['c-navLink--borderTopBelowMid']]: hasBorderTop }]">
+            :class="[{
+                [$style['c-navLink--textWithIcon']]: slotPassed & !isCountryLink,
+                [$style['c-navLink--textWithoutIcon']]: !slotPassed,
+                [$style['c-navLink--borderBottomBelowMid']]: hasBorderBottom,
+                [$style['c-navLink--borderTopBelowMid']]: hasBorderTop
+            }]">
             {{ text }}</span>
     </a>
 </template>

@@ -113,9 +113,7 @@ export default {
             padding: 20px 0;
 
             &:focus {
-               outline-color: $color-focus;
-                border-radius: 800px;
-                text-decoration: none;
+               border-radius: $header-buttonFocus-borderRadius;
             }
         }
     }
