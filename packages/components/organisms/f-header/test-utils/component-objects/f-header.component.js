@@ -90,4 +90,8 @@ module.exports = class Header extends Page {
 
         $('.is-navInView').waitForExist();
     }
+
+    hoverOverLink (item) {
+        this.navigation[item].link.moveTo();
+    }
 };

@@ -682,7 +682,6 @@ export default {
     padding: spacing(c) spacing(c);
     color: $nav-text-color;
     display: flex;
-    margin-top: spacing(a);
 
     &:focus {
         outline-color: $color-focus;

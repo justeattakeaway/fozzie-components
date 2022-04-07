@@ -183,4 +183,28 @@ describe('Shared - f-header component tests', () => {
         // Assert
         browser.percyScreenshot(`f-header - tallBelowMid - ${theme}`, 'mobile');
     });
+
+    it('should display link in hover state', () => {
+        header = new Header();
+
+        // Act
+        header.load();
+        header.openMobileNavigationBar();
+        header.hoverOverLink('help');
+
+        // Assert
+        browser.percyScreenshot('f-header - hover state', 'mobile');
+    });
+
+    it('should display link in focus state', () => {
+        header = new Header();
+
+        // Act
+        header.load();
+        header.openMobileNavigationBar();
+        browser.keys('\uE004');
+
+        // Assert
+        browser.percyScreenshot('f-header - focus state', 'mobile');
+    });
 });

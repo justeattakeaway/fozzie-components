@@ -140,4 +140,28 @@ describe('Shared - f-header component tests', () => {
         // Assert
         browser.percyScreenshot('f-header - custom nav links only', 'desktop');
     });
+
+    it('should display link in hover state', () => {
+        header = new Header();
+
+        // Act
+        header.load();
+        header.hoverOverLink('help');
+
+        // Assert
+        browser.percyScreenshot('f-header - hover state', 'desktop');
+    });
+
+    it('should display link in focus state', () => {
+        header = new Header();
+
+        // Act
+        header.load();
+        browser.keys('\uE004');
+        browser.keys('\uE004');
+        browser.keys('\uE004');
+
+        // Assert
+        browser.percyScreenshot('f-header - focus state', 'desktop');
+    });
 });
