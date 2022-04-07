@@ -41,7 +41,7 @@
 <script>
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import { mapActions, mapGetters } from 'vuex';
-import { Tab, Tabs } from '@justeat/f-tabs';
+import { FTab as Tab, FTabs as Tabs } from '@justeat/f-tabs';
 import '@justeat/f-tabs/dist/f-tabs.css';
 import tenantConfigs from '../tenants';
 import loyalty from '../store/loyalty.module';
@@ -123,14 +123,20 @@ export default {
     async mounted () {
         await this.init({
             brazeApiKey: this.brazeApiKey,
-            authToken: this.authToken
+            authToken: this.authToken,
+            logger: this.$log,
+            errorHandler: this.handleErrors
         });
     },
 
     methods: {
         ...mapActions(VUEX_MODULE_NAMESPACE_LOYALTY, {
             init: ACTION_INITIALISE_LOYALTY
-        })
+        }),
+
+        handleErrors (error) {
+            this.$emit('onError', error);
+        }
     }
 };
 </script>
