@@ -16,7 +16,8 @@
                 [$style['c-megaModal-content--wide']]: isWide,
                 [$style['c-megaModal-content--flush']]: isFlush,
                 [$style['is-fullHeight']]: isFullHeight,
-                [$style['is-positioned-bottom']]: isPositionedBottom
+                [$style['is-positioned-bottom']]: isPositionedBottom,
+                [$style['is-text-aligned-center']]: isTextAlignedCenter
             }]"
             role="dialog"
             :aria-labelledby="showAriaLabel">
@@ -27,35 +28,37 @@
                     [$style['c-megaModal-document--scrollable']]: isScrollable
                 }]"
                 role="document">
-                <slot
-                    v-if="hasCloseButton"
-                    name="close-button">
-                    <f-button
-                        is-icon
-                        :class="[$style['c-megaModal-closeBtn'], {
-                            [$style['c-megaModal-closeBtn--fixed']]: isCloseFixed || isFullHeight
-                        }]"
-                        button-type="inverse"
-                        button-size="xsmall"
-                        data-test-id="close-modal"
-                        @click.native="close">
-                        <cross-icon
-                            :class="[$style['c-megaModal-closeIcon']]" />
+                <header>
+                    <slot
+                        v-if="hasCloseButton"
+                        name="close-button">
+                        <f-button
+                            is-icon
+                            :class="[$style['c-megaModal-closeBtn'], {
+                                [$style['c-megaModal-closeBtn--fixed']]: isCloseFixed || isFullHeight
+                            }]"
+                            button-type="inverse"
+                            button-size="xsmall"
+                            data-test-id="close-modal"
+                            @click.native="close">
+                            <cross-icon
+                                :class="[$style['c-megaModal-closeIcon']]" />
 
-                        <span class="is-visuallyHidden">
-                            {{ closeButtonCopy }}
-                        </span>
-                    </f-button>
-                </slot>
+                            <span class="is-visuallyHidden">
+                                {{ closeButtonCopy }}
+                            </span>
+                        </f-button>
+                    </slot>
 
-                <component
-                    :is="titleHtmlTag"
-                    v-if="title"
-                    :id="uid"
-                    :class="['c-megaModal-title', $style['c-megaModal-title']]"
-                    data-test-id="mega-modal-title">
-                    {{ title }}
-                </component>
+                    <component
+                        :is="titleHtmlTag"
+                        v-if="title"
+                        :id="uid"
+                        :class="['c-megaModal-title', $style['c-megaModal-title']]"
+                        data-test-id="mega-modal-title">
+                        {{ title }}
+                    </component>
+                </header>
 
                 <slot />
             </div>
@@ -112,6 +115,11 @@ export default {
         },
 
         isPositionedBottom: {
+            type: Boolean,
+            default: false
+        },
+
+        isTextAlignedCenter: {
             type: Boolean,
             default: false
         },
@@ -328,10 +336,10 @@ export default {
     padding: spacing(e);
     position: fixed;
     right: 50%;
-    text-align: center;
+    text-align: start;
     top: 50%;
     transform: translate(50%, -50%);
-    width: 85%;
+    width: 95%;
 
     &.is-positioned-bottom {
         border-radius: 0;
@@ -349,8 +357,12 @@ export default {
         }
     }
 
+    &.is-text-aligned-center {
+        text-align: center;
+    }
+
     @include media('>=narrow') {
-        width: 75%;
+        width: 85%;
     }
 
     @include media('<mid') {
@@ -367,32 +379,39 @@ export default {
     }
 }
 
-    .c-megaModal-content--visible {
-        display: block;
+.c-megaModal-content--visible {
+    display: block;
+}
+
+.c-megaModal-content--narrow {
+    @include media('>=narrowMid') {
+        max-width: 450px;
+    }
+}
+
+.c-megaModal-content--wide {
+    max-width: 1080px;
+
+    @include media('<huge') {
+        max-width: 75%;
     }
 
-    .c-megaModal-content--narrow {
-        @include media('>=narrowMid') {
-            max-width: 450px;
-        }
+    @include media('<mid') {
+        width: 100%;
+        max-width: 100%;
     }
+}
 
-    .c-megaModal-content--wide {
-        max-width: 1080px;
+.c-megaModal-content--flush {
+    padding-top: 0;
+    padding-bottom: 0;
+}
 
-        @include media('<huge') {
-            max-width: 75%;
-        }
-
-        @include media('<mid') {
-            width: 100%;
-            max-width: 100%;
-        }
+.c-megaModal-content.c-megaModal-content--flush {
+    .c-megaModal-closeBtn {
+        top: spacing(d);
     }
-
-    .c-megaModal-content--flush {
-        padding: 0;
-    }
+}
 
 .c-megaModal-document--scrollable {
     height: 100%;
@@ -415,11 +434,15 @@ export default {
         opacity: 0.9;
         position: absolute;
         right: spacing(d);
-        top: spacing(d);
+        top: 22px;
         z-index: zIndex(high);
 
         @include media('>=mid') {
             position: fixed;
+        }
+
+        svg path {
+            fill: $color-interactive-primary;
         }
     }
 
@@ -429,6 +452,11 @@ export default {
 }
 
 .c-megaModal-title {
-    margin: 0 spacing(e);
+    margin: 0 spacing(f) 0 0;
+
+    .is-text-aligned-center & {
+        margin-left: spacing(e);
+        margin-right: spacing(e);
+    }
 }
 </style>
