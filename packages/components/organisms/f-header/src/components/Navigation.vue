@@ -706,7 +706,7 @@ export default {
 
 .c-nav-list-btn-text {
     @include media('>mid') {
-        margin-top: 2px;
+        margin-top: 1px;
     }
 }
 
