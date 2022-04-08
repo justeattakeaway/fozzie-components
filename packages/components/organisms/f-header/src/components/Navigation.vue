@@ -139,10 +139,10 @@
                 </li>
 
                 <li
+                    v-if="userInfo && showLoginInfo"
                     :class="[
                         $style['c-nav-list-item--horizontallyAlignedAboveMid'],
                         $style['has-sublist'], {
-                            'is-hidden': !userInfo || !showLoginInfo,
                             [$style['is-open']]: userMenuIsOpen
                         }]"
                     data-test-id="user-info-icon"
@@ -424,6 +424,7 @@ export default {
                 this.showHelpLink ||
                 this.showDeliveryEnquiry ||
                 this.showLoginInfo ||
+                this.showCountrySelector ||
                 this.customNavLinks.length > 0;
         },
 
