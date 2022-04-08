@@ -14,7 +14,7 @@
         <span
             :class="[{
                 [$style['c-navLink-text']]: !isCountryLink,
-                [$style['c-navLink-text--withoutIcon']]: !hasIcon,
+                [$style['c-navLink-text--noIcon']]: !hasIcon,
                 [$style['c-navLink-text--borderBottomBelowMid']]: hasBorderBottom,
                 [$style['c-navLink-text--borderTopBelowMid']]: hasBorderTop
             }]">
@@ -133,7 +133,7 @@ export default {
     }
 }
 
-.c-navLink-text--withoutIcon {
+.c-navLink-text--noIcon {
     @include media('<=mid') {
         margin-left: spacing(h);
     }

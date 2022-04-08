@@ -172,7 +172,7 @@
                             :class="[
                                 $style['c-nav-list-btn-text'],
                                 {
-                                    [$style['c-nav-list-link']]: headerBackgroundTheme === 'white',
+                                    [$style['c-nav-list-link']]: isBackgroundThemeWhite,
                                     [$style['c-nav-list-link--alt']]: isAltColour,
                                     [$style['c-nav-list-link--transparent']]: isBackgroundThemeTransparent
                                 }]">
