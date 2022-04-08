@@ -43,6 +43,11 @@ export default {
             margin: 4px;
             padding: 4px;
             color: $color-content-link;
+            outline-color: $color-focus;
+
+            @include media('>mid') {
+                border-radius: $header-buttonFocus-borderRadius;
+            }
         }
     }
 }
