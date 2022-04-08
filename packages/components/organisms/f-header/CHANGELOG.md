@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v9.10.1
+------------------------------
+*April 7, 2022*
+
+### Fixed
+- User Profile Icon changed to using v-if rather than `is-hidden` class to hide it.
+- `showCountrySelector` added to `hasNavigationLinks` property so that it appears if only that prop is set to `true`.
+
+
 v9.10.0
 ------------------------------
 *March 30, 2022*
