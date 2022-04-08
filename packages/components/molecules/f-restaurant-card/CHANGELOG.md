@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.29.4
 ------------------------------
-*April 1, 2022*
+*April 8, 2022*
 ### Fixed
 - Margin Spacing on Restaurant Dishes
 - Image tag spacing to match logo spacing
