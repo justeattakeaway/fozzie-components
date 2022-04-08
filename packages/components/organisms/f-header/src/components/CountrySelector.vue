@@ -116,23 +116,39 @@ export default {
     background: transparent;
     border: 0;
     font-size: 1rem;
-    margin: 0;
-    padding: 0;
+    display: block;
+    padding: spacing(c) spacing(c);
+    margin-top: spacing(d);
+    margin-bottom: spacing(d);
 
     @include media('<=mid') {
         width: 100%;
         text-align: left;
-        padding: spacing(c) spacing(a);
+        padding: spacing(d) spacing(a);
+        margin: 0;
     }
 
-     &:hover {
-        font-weight: $font-weight-bold;
+    &:focus {
+        outline-color: $nav-link-focus-color;
+
+        @include media('>mid') {
+            border-radius: $nav-focus-borderRadius;
+        }
+    }
+
+    &:hover {
+        background: $color-container-subtle;
+
+        @include media('>mid') {
+            border-radius: $nav-focus-borderRadius;
+        }
     }
 }
 
 .c-countrySelector-current-flag {
     height: $countrySelector-flag-height;
     width: $countrySelector-flag-width;
+    display: block;
 
     @include media('<=mid') {
         margin: 0 spacing(d);
