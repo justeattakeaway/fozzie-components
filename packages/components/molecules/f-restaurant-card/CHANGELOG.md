@@ -7,8 +7,9 @@ v0.29.4
 ------------------------------
 *April 8, 2022*
 ### Fixed
-- Margin Spacing on Restaurant Dishes
+- Text vertical alignment on restaurant dishes
 - Image tag spacing to match logo spacing
+- Gap between restaurant tags
 - Prevent ratings count from wrapping
 
 v0.29.3
