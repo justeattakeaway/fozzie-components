@@ -157,7 +157,8 @@
                         :aria-label="copy.userMenu.buttonLabel(userInfo.friendlyName)"
                         :class="[
                             $style['c-nav-list-text'],
-                            $style['c-nav-list-btn']
+                            $style['c-nav-list-btn'],
+                            { [$style['c-nav-list-btn--hover']]: headerBackgroundTheme === 'white' }
                         ]"
                         @click.prevent="toggleUserMenu"
                         @keydown.space.prevent="toggleUserMenu">
@@ -169,10 +170,12 @@
                             ]" />
                         <span
                             :class="[
-                                $style['c-nav-list-text-sub'],
-                                { [$style['c-nav-list-link--alt']]: isAltColour },
-                                { [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent' }
-                            ]">
+                                $style['c-nav-list-btn-text'],
+                                {
+                                    [$style['c-nav-list-link']]: headerBackgroundTheme === 'white',
+                                    [$style['c-nav-list-link--alt']]: isAltColour,
+                                    [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent'
+                                }]">
                             {{ userInfo.friendlyName }}
                         </span>
                         <span
@@ -666,9 +669,6 @@ export default {
 .c-nav-list-item--horizontallyAlignedAboveMid {
     @include media('>mid') {
         float: left;
-        padding: spacing(c) spacing(c);
-        margin-top: spacing(d);
-        margin-bottom: spacing(d);
     }
 
     @include media('>wide') {
@@ -680,12 +680,46 @@ export default {
     background: transparent;
     border: 0;
     font-size: 1rem;
-    margin: 0;
-    padding: 0;
+    padding: spacing(c) spacing(c);
+    color: $nav-text-color;
+    display: flex;
+
+    &:focus {
+        outline-color: $nav-link-focus-color;
+        border-radius: $nav-focus-borderRadius;
+    }
+
+    @include media('>mid') {
+        margin-top: spacing(d);
+        margin-bottom: spacing(d);
+    }
 
     @include media('<=mid') {
         width: 100%;
         text-align: left;
+        display: block;
+
+        &:focus {
+            border-radius: 0;
+        }
+    }
+}
+
+.c-nav-list-btn-text {
+    @include media('>mid') {
+        margin-top: 2px;
+    }
+}
+
+.c-nav-list-btn--hover {
+    &:hover {
+        background: $color-container-subtle;
+        border-radius: $nav-focus-borderRadius;
+    }
+    @include media('<=mid') {
+        &:hover {
+            border-radius: 0;
+        }
     }
 }
 
@@ -714,6 +748,10 @@ export default {
         width: spacing(d) + $nav-featureLinkIcon-width + spacing(d); // includes padding on both sides
         height: spacing(d) + $nav-featureLinkIcon-height + spacing(d);
         padding: spacing(d);
+
+        &:focus {
+            outline-color: $color-focus;
+        }
     }
 }
 
@@ -733,15 +771,19 @@ export default {
 
 // Icons, such as the profile icon
 .c-nav-icon {
-    float: left;
-    margin-right: spacing();
     width: $nav-icon-size;
     height: $nav-icon-size;
+    margin-right: spacing(a);
 
     @include media('>mid') {
         & path {
             fill: $nav-icon-color;
         }
+    }
+
+    @include media('<=mid') {
+        float: left;
+        margin-right: spacing();
     }
 }
 
@@ -783,6 +825,11 @@ export default {
     cursor: pointer;
     background-color: $nav-toggleIcon-bg;
     border: none;
+
+    &:focus {
+        outline-color: $nav-link-focus-color;
+        border-radius: $nav-focus-borderRadius;
+    }
 
     // hide on wider views
     @include media('>mid') {

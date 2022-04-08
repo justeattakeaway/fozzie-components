@@ -103,10 +103,18 @@ export default {
         height: $header-height--narrow;
         padding: spacing(d) 0;
 
+        &:focus {
+            outline-color: $color-focus;
+        }
+
         @include media('>mid') {
             justify-content: left;
             height: $header-height;
             padding: 20px 0;
+
+            &:focus {
+               border-radius: $header-buttonFocus-borderRadius;
+            }
         }
     }
 

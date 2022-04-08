@@ -90,4 +90,12 @@ module.exports = class Header extends Page {
 
         $('.is-navInView').waitForExist();
     }
+
+    hoverOverLink (item) {
+        this.navigation[item].link.moveTo();
+    }
+
+    pressDownTabKey (times = 1) {
+        Array.from({ length: times }, () => browser.keys('\uE004'));
+    }
 };
