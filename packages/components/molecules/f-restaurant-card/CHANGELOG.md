@@ -9,6 +9,7 @@ v0.29.4
 ### Fixed
 - Margin Spacing on Restaurant Dishes
 - Image tag spacing to match logo spacing
+- Prevent ratings count from wrapping
 
 v0.29.3
 ------------------------------
