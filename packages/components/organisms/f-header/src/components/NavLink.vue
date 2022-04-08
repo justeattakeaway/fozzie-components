@@ -7,8 +7,8 @@
             [$style['c-navLink']]: !isCountryLink,
             [$style['c-navLink--countryLink']]: isCountryLink,
             [$style['c-nav-list-link--alt']]: isAltColour,
-            [$style['c-navLink--hoverWithWhiteBackground']]: isBackgroundThemeWhite,
-            [$style['c-nav-list-link--transparent']]: isBackgroundThemeTransparent
+            [$style['c-navLink--hoverWithWhiteBackground']]: backgroundTheme === 'white',
+            [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent'
         }]">
         <slot name="icon" />
         <span
@@ -72,14 +72,6 @@ export default {
         // adds extra margin when link does not have an icon
         hasIcon () {
             return this.$slots.icon && this.$slots.icon.length;
-        },
-
-        isBackgroundThemeTransparent () {
-            return this.backgroundTheme === 'transparent';
-        },
-
-        isBackgroundThemeWhite () {
-            return this.backgroundTheme === 'white';
         }
     }
 };

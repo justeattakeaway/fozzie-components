@@ -13,7 +13,7 @@
                 'is-hidden--noJS',
                 $style['c-nav-trigger'],
                 $style['c-nav-toggle'],
-                { [$style['c-nav-toggle--altColour']]: isAltColour || (isBackgroundThemeHighlight && navIsOpen) },
+                { [$style['c-nav-toggle--altColour']]: isAltColour || (headerBackgroundTheme === 'highlight' && navIsOpen) },
                 { [$style['is-open']]: navIsOpen }
             ]"
             :aria-expanded="navIsOpen ? 'true' : 'false'"
@@ -158,7 +158,7 @@
                         :class="[
                             $style['c-nav-list-text'],
                             $style['c-nav-list-btn'],
-                            { [$style['c-nav-list-btn--hover']]: isBackgroundThemeWhite }
+                            { [$style['c-nav-list-btn--hover']]: headerBackgroundTheme === 'white' }
                         ]"
                         @click.prevent="toggleUserMenu"
                         @keydown.space.prevent="toggleUserMenu">
@@ -172,9 +172,9 @@
                             :class="[
                                 $style['c-nav-list-btn-text'],
                                 {
-                                    [$style['c-nav-list-link']]: isBackgroundThemeWhite,
+                                    [$style['c-nav-list-link']]: headerBackgroundTheme === 'white',
                                     [$style['c-nav-list-link--alt']]: isAltColour,
-                                    [$style['c-nav-list-link--transparent']]: isBackgroundThemeTransparent
+                                    [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent'
                                 }]">
                             {{ userInfo.friendlyName }}
                         </span>
@@ -413,18 +413,6 @@ export default {
             return ['transparent', 'highlight'].includes(this.headerBackgroundTheme) && !isMobileNavOpen;
         },
 
-        isBackgroundThemeTransparent () {
-            return this.headerBackgroundTheme === 'transparent';
-        },
-
-        isBackgroundThemeWhite () {
-            return this.headerBackgroundTheme === 'white';
-        },
-
-        isBackgroundThemeHighlight () {
-            return this.headerBackgroundTheme === 'highlight';
-        },
-
         /**
          * Gets the analytic blob for order count.
          *
@@ -585,7 +573,7 @@ export default {
 
             if (typeof document !== 'undefined') {
                 document.documentElement.classList.toggle('is-navInView', this.navIsOpen);
-                document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.isBackgroundThemeTransparent);
+                document.documentElement.classList.toggle('is-navInView--noPad', this.navIsOpen && this.headerBackgroundTheme === 'transparent');
             }
         },
 
