@@ -50,8 +50,7 @@
                         :is-country-link="true"
                         :href="country.siteUrl"
                         :lang="country.lang">
-                        <template
-                            #icon>
+                        <template #icon>
                             <flag-icon
                                 :country-code="country.flagKey"
                                 :class="$style['c-countrySelector-country-flag']" />

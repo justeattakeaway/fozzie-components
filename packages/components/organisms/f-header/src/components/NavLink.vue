@@ -93,7 +93,7 @@ export default {
     color: $nav-text-color;
     font-size: $nav-text-size;
 
-    @include media('<=mid'){
+    @include media('<=mid') {
         display: flex;
         width: 100%;
 
@@ -159,6 +159,7 @@ export default {
     @include media('<=mid') {
         margin-left: 0;
     }
+
     @include media('>mid') {
         float: center;
         font-weight: $font-weight-regular;
