@@ -7,18 +7,19 @@
             [$style['c-navLink']]: !isCountryLink,
             [$style['c-navLink--countryLink']]: isCountryLink,
             [$style['c-nav-list-link--alt']]: isAltColour,
-            [$style['c-navLink--whiteBackground']]: backgroundTheme === 'white',
-            [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent'
+            [$style['c-navLink--hoverWithWhiteBackground']]: isBackgroundThemeWhite,
+            [$style['c-nav-list-link--transparent']]: isBackgroundThemeTransparent
         }]">
         <slot name="icon" />
         <span
             :class="[{
-                [$style['c-navLink--textWithIcon']]: slotPassed & !isCountryLink,
-                [$style['c-navLink--textWithoutIcon']]: !slotPassed,
-                [$style['c-navLink--borderBottomBelowMid']]: hasBorderBottom,
-                [$style['c-navLink--borderTopBelowMid']]: hasBorderTop
+                [$style['c-navLink-text']]: !isCountryLink,
+                [$style['c-navLink-text--withoutIcon']]: !hasIcon,
+                [$style['c-navLink-text--borderBottomBelowMid']]: hasBorderBottom,
+                [$style['c-navLink-text--borderTopBelowMid']]: hasBorderTop
             }]">
-            {{ text }}</span>
+            {{ text }}
+        </span>
     </a>
 </template>
 
@@ -68,9 +69,17 @@ export default {
         }
     },
     computed: {
-        // adds extra margin where icon is not passed
-        slotPassed () {
+        // adds extra margin when link does not have an icon
+        hasIcon () {
             return this.$slots.icon && this.$slots.icon.length;
+        },
+
+        isBackgroundThemeTransparent () {
+            return this.backgroundTheme === 'transparent';
+        },
+
+        isBackgroundThemeWhite () {
+            return this.backgroundTheme === 'white';
         }
     }
 };
@@ -92,6 +101,14 @@ export default {
             outline-color: $nav-link-focus-color;
             border-radius: 0;
         }
+
+        &:hover {
+            background: $color-container-subtle;
+        }
+
+        &:active {
+            background: $color-container-strong;
+        }
     }
 
     @include media('>mid') {
@@ -108,46 +125,29 @@ export default {
     }
 }
 
-.c-navLink--whiteBackground {
+.c-navLink-text {
     @include media('<=mid') {
-        &:hover {
-            background: $color-container-subtle;
-        }
-
-        &:active {
-            background: $color-container-strong;
-        }
-    }
-
-    @include media('>mid') {
-        &:hover {
-            background: $color-container-subtle;
-            border-radius: $nav-focus-borderRadius;
-        }
-
-        &:active {
-            background: $color-container-strong;
-            border-radius: $nav-focus-borderRadius;
-        }
+        width: 100vw;
+        padding: spacing(c) spacing(d) spacing(c) 0;
+        margin-left: spacing(c);
     }
 }
 
-.c-navLink--textWithIcon, .c-navLink--textWithoutIcon {
-        @include media('<=mid') {
-            width: 100vw;
-            padding: spacing(c) spacing(d) spacing(c) 0;
-        }
-}
-
-.c-navLink--textWithoutIcon {
+.c-navLink-text--withoutIcon {
     @include media('<=mid') {
         margin-left: spacing(h);
     }
 }
 
-.c-navLink--textWithIcon {
+.c-navLink-text--borderTopBelowMid {
     @include media('<=mid') {
-        margin-left: spacing(c);
+        border-top: 1px solid $color-border-default;
+    }
+}
+
+.c-navLink-text--borderBottomBelowMid {
+    @include media('<=mid') {
+        border-bottom: 1px solid $color-border-default;
     }
 }
 
@@ -165,28 +165,30 @@ export default {
     }
 
     &:hover {
+        background: $color-container-subtle;
+    }
+
+    &:active {
+        background: $color-container-strong;
+    }
+
+    &:focus {
+        outline-color: $color-focus;
+        border-radius: 0;
+    }
+}
+
+.c-navLink--hoverWithWhiteBackground {
+    @include media('>mid') {
+        &:hover {
             background: $color-container-subtle;
+            border-radius: $nav-focus-borderRadius;
         }
 
         &:active {
             background: $color-container-strong;
+            border-radius: $nav-focus-borderRadius;
         }
-
-        &:focus {
-            outline-color: $color-focus;
-            border-radius: 0;
-        }
-}
-
-.c-navLink--borderTopBelowMid {
-    @include media('<=mid') {
-        border-top: 1px solid $color-border-default;
-    }
-}
-
-.c-navLink--borderBottomBelowMid {
-    @include media('<=mid') {
-        border-bottom: 1px solid $color-border-default;
     }
 }
 </style>

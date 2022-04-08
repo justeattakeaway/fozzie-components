@@ -7,7 +7,7 @@
             v-for="(link, index) in copy.navLinks"
             :key="index"
             data-test-id="nav-links"
-            :class="$style['outer-link']">
+            :class="$style['c-user-list-item']">
             <a
                 :class="$style['list-link']"
                 :tabindex="tabIndex"
@@ -26,7 +26,7 @@
 
         <li
             v-if="!isBelowMid"
-            :class="$style['outer-link']">
+            :class="$style['c-user-list-item']">
             <a
                 :tabindex="isUserMenuOpen ? 0 : -1"
                 :href="returnLogoutUrl"
@@ -97,7 +97,7 @@ export default {
     }
 }
 
-.outer-link {
+.c-user-list-item {
     &:hover {
         background: $color-container-subtle;
     }

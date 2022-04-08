@@ -202,7 +202,7 @@ describe('Shared - f-header component tests', () => {
         // Act
         header.load();
         header.openMobileNavigationBar();
-        browser.keys('\uE004');
+        header.pressDownTabKey(3);
 
         // Assert
         browser.percyScreenshot('f-header - focus state', 'mobile');

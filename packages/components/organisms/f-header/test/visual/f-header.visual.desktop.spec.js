@@ -157,9 +157,7 @@ describe('Shared - f-header component tests', () => {
 
         // Act
         header.load();
-        browser.keys('\uE004');
-        browser.keys('\uE004');
-        browser.keys('\uE004');
+        header.pressDownTabKey(3);
 
         // Assert
         browser.percyScreenshot('f-header - focus state', 'desktop');
