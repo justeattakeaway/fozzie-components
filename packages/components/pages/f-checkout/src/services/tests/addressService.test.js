@@ -244,12 +244,12 @@ describe('addressService', () => {
                     line1: 'Fleet Place House',
                     line2: 'Farringdon',
                     locality: 'London',
-                    postalCode: 'EC4M 7RF'
+                    postcode: 'EC4M 7RF'
                 };
                 window.localStorage.setItem('je-full-address-details', JSON.stringify(london3LinesDefault));
 
                 // Act & Assert
-                expect(addressService.getAddressFromLocalStorage()).toEqual(expectedAddress);
+                expect(addressService.getAddressFromLocalStorage('uk')).toEqual(expectedAddress);
             });
         });
     });

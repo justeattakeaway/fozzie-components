@@ -465,6 +465,7 @@ describe('CheckoutModule', () => {
         });
 
         describe('getCheckout ::', () => {
+            const tenant = 'uk';
             let config;
             let checkoutDeliveryCopy;
 
@@ -476,6 +477,7 @@ describe('CheckoutModule', () => {
                     },
                     timeout: payload.timeout
                 };
+
 
                 // Use a new copy per test so any mutations do not affect subsequent tests
                 checkoutDeliveryCopy = Object.assign(checkoutDelivery);
@@ -489,7 +491,7 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(checkoutApi.getCheckout).toHaveBeenCalledWith(payload.url, state, payload.timeout);
-                expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDeliveryCopy);
+                expect(commit).toHaveBeenCalledWith(UPDATE_STATE, { ...checkoutDeliveryCopy, tenant });
             });
 
             it(`should update 'hasUpdatedAsap' value with ${UPDATE_HAS_ASAP_SELECTED} mutation.`, async () => {
@@ -522,7 +524,7 @@ describe('CheckoutModule', () => {
                     // Assert
                     expect(checkoutDeliveryCopy.customer).toBe(null);
                     expect(checkoutApi.getCheckout).toHaveBeenCalledWith(payload.url, state, payload.timeout);
-                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDeliveryCopy);
+                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, { ...checkoutDeliveryCopy, tenant });
                 });
             });
 

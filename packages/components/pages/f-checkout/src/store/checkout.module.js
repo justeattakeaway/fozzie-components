@@ -152,12 +152,12 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getCheckout: async ({ commit, state, dispatch }, { url, timeout }) => {
+        getCheckout: async ({ commit, state, dispatch }, { url, timeout, tenant }) => {
             const { data } = await checkoutApi.getCheckout(url, state, timeout);
 
             resolveCustomerDetails(data, state);
 
-            commit(UPDATE_STATE, data);
+            commit(UPDATE_STATE, { ...data, tenant });
 
             commit(UPDATE_HAS_ASAP_SELECTED, data.fulfilment.time.asap);
 
@@ -409,14 +409,14 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getGeoLocation: async ({ commit, state }, {
-            url, postData, timeout
+            url, postData, timeout, tenant
         }) => {
             let addressCoords;
 
             const isAddressInLocalStorage = addressService.isAddressInLocalStorage();
 
             if (isAddressInLocalStorage) {
-                const storedAddress = addressService.getAddressFromLocalStorage(false);
+                const storedAddress = addressService.getAddressFromLocalStorage(tenant, false);
 
                 if (addressService.doesAddressInStorageAndFormMatch(storedAddress, state.address)) {
                     addressCoords = storedAddress.Field1 && storedAddress.Field2 ? [storedAddress.Field2, storedAddress.Field1] : null;
@@ -491,7 +491,7 @@ export default {
             isFulfillable,
             notices,
             messages,
-            notes
+            notes, tenant
         }) => {
             state.id = id;
             state.serviceType = serviceType;
@@ -506,7 +506,7 @@ export default {
 
             let address = null;
             if (addressService.isAddressInLocalStorage()) {
-                address = addressService.getAddressFromLocalStorage();
+                address = addressService.getAddressFromLocalStorage(tenant);
             } else if (fulfilment?.location?.address?.lines) {
                 /* eslint-disable prefer-destructuring */
                 address = fulfilment.location.address;
