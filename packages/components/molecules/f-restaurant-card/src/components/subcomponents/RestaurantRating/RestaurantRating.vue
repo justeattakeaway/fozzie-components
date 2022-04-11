@@ -170,6 +170,7 @@ export default {
     align-items: center;
     padding: 0;
     margin: 0;
+    white-space: nowrap;
 }
 
 .c-restaurantCard-rating-iconWrapper {
