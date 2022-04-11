@@ -352,26 +352,6 @@ describe('CheckoutModule', () => {
             });
         });
 
-        describe(`${UPDATE_ADDRESS_DETAILS} ::`, () => {
-            it('should update state with received values', () => {
-                // Arrange
-                const addressFromLocalStorage = {
-                    line1: 'Fleet Place House',
-                    line2: 'Farringdon',
-                    line3: null,
-                    line4: undefined,
-                    locality: 'London',
-                    postalCode: 'EC4M 7RF'
-                };
-
-                // Act
-                mutations[UPDATE_ADDRESS_DETAILS](state, addressFromLocalStorage);
-
-                // Assert
-                expect(state.address).toMatchSnapshot();
-            });
-        });
-
         describe(`${UPDATE_PHONE_NUMBER} ::`, () => {
             it('should update state with received values', () => {
                 // Arrange
@@ -477,7 +457,6 @@ describe('CheckoutModule', () => {
                     },
                     timeout: payload.timeout
                 };
-
 
                 // Use a new copy per test so any mutations do not affect subsequent tests
                 checkoutDeliveryCopy = Object.assign(checkoutDelivery);

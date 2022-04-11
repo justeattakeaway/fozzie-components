@@ -1,11 +1,11 @@
+import uk from './uk';
 import au from './au';
 import it from './it';
 import nz from './nz';
-import uk from './uk';
 
 export default {
     au,
+    uk,
     it,
-    nz,
-    uk
+    nz
 };

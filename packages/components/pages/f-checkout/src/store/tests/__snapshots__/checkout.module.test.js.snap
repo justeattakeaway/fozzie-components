@@ -1,17 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CheckoutModule mutations :: UPDATE_ADDRESS_DETAILS :: should update state with received values 1`] = `
-Object {
-  "administrativeArea": undefined,
-  "line1": "Fleet Place House",
-  "line2": "Farringdon",
-  "line3": null,
-  "line4": undefined,
-  "locality": "London",
-  "postcode": "EC4M 7RF",
-}
-`;
-
 exports[`CheckoutModule mutations :: UPDATE_STATE :: should update state with delivery response. 1`] = `
 Object {
   "address": Object {
