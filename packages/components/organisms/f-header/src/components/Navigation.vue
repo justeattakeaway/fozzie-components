@@ -158,7 +158,7 @@
                         :class="[
                             $style['c-nav-list-text'],
                             $style['c-nav-list-btn'],
-                            { [$style['c-nav-list-btn--hover']]: headerBackgroundTheme === 'white' }
+                            { [$style['c-nav-list-btn--hoverAboveMid']]: headerBackgroundTheme === 'white' }
                         ]"
                         @click.prevent="toggleUserMenu"
                         @keydown.space.prevent="toggleUserMenu">
@@ -702,6 +702,11 @@ export default {
         &:focus {
             border-radius: 0;
         }
+
+        &:hover {
+            background: $color-container-subtle;
+            border-radius: 0;
+        }
     }
 }
 
@@ -711,7 +716,7 @@ export default {
     }
 }
 
-.c-nav-list-btn--hover {
+.c-nav-list-btn--hoverAboveMid {
     &:hover {
         background: $color-container-subtle;
         border-radius: $nav-focus-borderRadius;
