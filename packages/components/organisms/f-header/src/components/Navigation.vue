@@ -717,13 +717,10 @@ export default {
 }
 
 .c-nav-list-btn--hoverAboveMid {
-    &:hover {
-        background: $color-container-subtle;
-        border-radius: $nav-focus-borderRadius;
-    }
-    @include media('<=mid') {
+    @include media('>mid') {
         &:hover {
-            border-radius: 0;
+            background: $color-container-subtle;
+            border-radius: $nav-focus-borderRadius;
         }
     }
 }
