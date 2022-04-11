@@ -19,6 +19,7 @@ export const MegaModalComponent = (args, { argTypes }) => ({
             :is-scrollable="isScrollable"
             :is-close-fixed="isCloseFixed"
             :is-close-rounded="isCloseRounded"
+            :is-text-aligned-center="isTextAlignedCenter"
             :has-overlay="hasOverlay"
             :has-close-button="hasCloseButton"
             :close-on-blur="closeOnBlur"
@@ -42,6 +43,7 @@ MegaModalComponent.args = {
     isScrollable: false,
     isCloseFixed: false,
     isCloseRounded: false,
+    isTextAlignedCenter: false,
     hasOverlay: true,
     hasCloseButton: true,
     closeOnBlur: true,

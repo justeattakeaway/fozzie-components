@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v5.0.0
+------------------------------
+*April 11, 2022*
+
+### Added
+- `isTextAlignedCenter` prop - this allows modal content to be center aligned (previously aligned center by default)
+### Changed
+- Modal content is now left aligned by default
+- Modal title and close button now sit on the same line, and the close button sites on the baseline when the title breaks to multiple lines
+- Close button inset positioning changed to stay in-line with the first line of title
+- Increased modal widths by 10%
+- Changed close button icon color to `$color-interactive-primary`
 
 v4.2.0
 ------------------------------
