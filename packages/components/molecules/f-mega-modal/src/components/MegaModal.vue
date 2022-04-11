@@ -29,6 +29,14 @@
                 }]"
                 role="document">
                 <header>
+                    <component
+                        :is="titleHtmlTag"
+                        v-if="title"
+                        :id="uid"
+                        :class="['c-megaModal-title', $style['c-megaModal-title']]"
+                        data-test-id="mega-modal-title">
+                        {{ title }}
+                    </component>
                     <slot
                         v-if="hasCloseButton"
                         name="close-button">
@@ -49,15 +57,6 @@
                             </span>
                         </f-button>
                     </slot>
-
-                    <component
-                        :is="titleHtmlTag"
-                        v-if="title"
-                        :id="uid"
-                        :class="['c-megaModal-title', $style['c-megaModal-title']]"
-                        data-test-id="mega-modal-title">
-                        {{ title }}
-                    </component>
                 </header>
 
                 <slot />
