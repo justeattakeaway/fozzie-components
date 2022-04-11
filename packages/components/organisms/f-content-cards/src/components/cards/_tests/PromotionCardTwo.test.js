@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import PromotionCard from '../PromotionCard.vue';
+import PromotionCardTwo from '../PromotionCardTwo.vue';
 
 const MOCK_CARD = {
     image: 'https://example.com/image.jpg',
@@ -11,12 +11,12 @@ const MOCK_CARD = {
     url: 'https://example.com'
 };
 
-describe('PromotionCard.vue', () => {
+describe('PromotionCardTwo.vue', () => {
     let wrapper;
 
     beforeEach(() => {
         // Arrange
-        wrapper = mount(PromotionCard, {
+        wrapper = mount(PromotionCardTwo, {
             provide: {
                 emitCardView: jest.fn(),
                 emitCardClick: jest.fn()

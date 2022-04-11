@@ -34,7 +34,6 @@ import ContentCardImage from '../templates/ContentCardImage.vue';
 import ContentCardBody from '../templates/ContentCardBody.vue';
 
 export default {
-    name: 'PromotionCard',
     components: {
         ContentCardContainer,
         ContentCardImage,
