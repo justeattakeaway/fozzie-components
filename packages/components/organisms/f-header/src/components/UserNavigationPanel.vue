@@ -6,7 +6,8 @@
         <li
             v-for="(link, index) in copy.navLinks"
             :key="index"
-            data-test-id="nav-links">
+            data-test-id="nav-links"
+            :class="$style['c-user-list-item']">
             <a
                 :class="$style['list-link']"
                 :tabindex="tabIndex"
@@ -24,7 +25,8 @@
         </li>
 
         <li
-            v-if="!isBelowMid">
+            v-if="!isBelowMid"
+            :class="$style['c-user-list-item']">
             <a
                 :tabindex="isUserMenuOpen ? 0 : -1"
                 :href="returnLogoutUrl"
@@ -95,12 +97,26 @@ export default {
     }
 }
 
+.c-user-list-item {
+    &:hover {
+        background: $color-container-subtle;
+    }
+
+     &:active {
+        background: $color-container-strong;
+    }
+}
+
 .list-link {
     text-decoration: none;
 
+    &:focus {
+        outline-color: $nav-link-focus-color;
+    }
+
     @include media('>mid') {
         display: block;
-        padding: spacing(c) 0;
+        padding: spacing(c) spacing(d);
         height: auto;
     }
 
@@ -109,12 +125,6 @@ export default {
         margin-left: spacing(h);
         padding: spacing(c) spacing(d) spacing(c) 0;
         border-top: 1px solid $color-border-default;
-    }
-
-    &:hover,
-    &:focus {
-        font-weight: $font-weight-bold;
-        text-decoration: none;
     }
 }
 </style>

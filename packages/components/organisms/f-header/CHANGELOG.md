@@ -3,6 +3,32 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v9.12.0
+------------------------------
+*April 11, 2022*
+
+### Changed
+- CSS change to add hover to button
+
+
+v9.11.0
+------------------------------
+*April 8, 2022*
+
+### Changed
+- Interactive states of component (focus, active and hover)
+
+
+v9.10.1
+------------------------------
+*April 7, 2022*
+
+### Fixed
+- User Profile Icon changed to using v-if rather than `is-hidden` class to hide it.
+- `showCountrySelector` added to `hasNavigationLinks` property so that it appears if only that prop is set to `true`.
+
+
 v9.10.0
 ------------------------------
 *March 30, 2022*

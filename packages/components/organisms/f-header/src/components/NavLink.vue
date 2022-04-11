@@ -1,22 +1,26 @@
 <template>
-    <div>
+    <a
+        v-bind="$attrs"
+        :data-trak="JSON.stringify(dataTrak)"
+        :href="href"
+        :class="[{
+            [$style['c-navLink']]: !isCountryLink,
+            [$style['c-navLink--countryLink']]: isCountryLink,
+            [$style['c-nav-list-link--alt']]: isAltColour,
+            [$style['c-navLink--hoverWithWhiteBackground']]: backgroundTheme === 'white',
+            [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent'
+        }]">
         <slot name="icon" />
-        <a
-            v-bind="$attrs"
-            :data-trak="JSON.stringify(dataTrak)"
-            :href="href"
-            :class="[
-                $style['c-navLink'],
-                { [$style['c-navLink--borderBottomBelowMid']]: hasBorderBottom },
-                { [$style['c-navLink--borderTopBelowMid']]: hasBorderTop },
-                { [$style['c-navLink--countryLink']]: isCountryLink },
-                { [$style['c-nav-list-link--alt']]: isAltColour },
-                { [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent' }
-            ]">
-
+        <span
+            :class="[{
+                [$style['c-navLink-text']]: !isCountryLink,
+                [$style['c-navLink-text--noIcon']]: !hasIcon,
+                [$style['c-navLink-text--borderBottomBelowMid']]: hasBorderBottom,
+                [$style['c-navLink-text--borderTopBelowMid']]: hasBorderTop
+            }]">
             {{ text }}
-        </a>
-    </div>
+        </span>
+    </a>
 </template>
 
 <script>
@@ -63,6 +67,12 @@ export default {
             type: String,
             default: 'white'
         }
+    },
+    computed: {
+        // adds extra margin when link does not have an icon
+        hasIcon () {
+            return this.$slots.icon && this.$slots.icon.length;
+        }
     }
 };
 </script>
@@ -77,61 +87,101 @@ export default {
 
     @include media('<=mid') {
         display: flex;
-        margin-left: spacing(h);
-        padding: spacing(c) spacing(d) spacing(c) 0;
+        width: 100%;
+
+        &:focus {
+            outline-color: $nav-link-focus-color;
+            border-radius: 0;
+        }
+
+        &:hover {
+            background: $color-container-subtle;
+        }
+
+        &:active {
+            background: $color-container-strong;
+        }
     }
 
     @include media('>mid') {
         font-weight: $nav-text-weight;
-        margin: 0;
-        padding: 0;
-    }
+        margin-top: spacing(d);
+        margin-bottom: spacing(d);
+        padding: spacing(c) spacing(c);
+        display: flex;
 
-    &:hover,
-    &:focus,
-    &:active {
-        text-decoration: none;
-
-        @include media('<=mid') {
-            font-weight: $font-weight-bold;
-        }
-
-        @include media('>mid') {
-            color: $nav-text-color--hover;
-            text-decoration: underline;
-
-            .c-header--transparent .c-nav-popoverList & {
-                color: inherit;
-            }
+        &:focus {
+            outline-color: $nav-link-focus-color;
+            border-radius: $nav-focus-borderRadius;
         }
     }
 }
 
-.c-navLink--borderTopBelowMid {
+.c-navLink-text {
+    @include media('<=mid') {
+        width: 100vw;
+        padding: spacing(c) spacing(d) spacing(c) 0;
+        margin-left: spacing(c);
+    }
+}
+
+.c-navLink-text--noIcon {
+    @include media('<=mid') {
+        margin-left: spacing(h);
+    }
+}
+
+.c-navLink-text--borderTopBelowMid {
     @include media('<=mid') {
         border-top: 1px solid $color-border-default;
     }
 }
 
-.c-navLink--borderBottomBelowMid {
+.c-navLink-text--borderBottomBelowMid {
     @include media('<=mid') {
         border-bottom: 1px solid $color-border-default;
     }
 }
 
 .c-navLink--countryLink {
+    display: block;
+    text-decoration: none;
+    padding: spacing(c) spacing(d) spacing(c) 0;
+
+    @include media('<=mid') {
+        margin-left: 0;
+    }
+
     @include media('>mid') {
-        text-decoration: none;
-        display: flex;
         float: center;
-        margin-left: spacing(h);
-        padding: spacing(c) spacing(d) spacing(c) 0;
-        @include font-size($nav-text-size);
         font-weight: $font-weight-regular;
     }
+
     &:hover {
-        text-decoration: none;
-        font-weight: $font-weight-regular;
+        background: $color-container-subtle;
+    }
+
+    &:active {
+        background: $color-container-strong;
+    }
+
+    &:focus {
+        outline-color: $color-focus;
+        border-radius: 0;
+    }
+}
+
+.c-navLink--hoverWithWhiteBackground {
+    @include media('>mid') {
+        &:hover {
+            background: $color-container-subtle;
+            border-radius: $nav-focus-borderRadius;
+        }
+
+        &:active {
+            background: $color-container-strong;
+            border-radius: $nav-focus-borderRadius;
+        }
     }
 }
 </style>
