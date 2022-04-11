@@ -41,7 +41,7 @@ export default {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
-    gap: 0 spacing(a);
+    gap: spacing(a);
 }
 
 .c-restaurantTags-tag {

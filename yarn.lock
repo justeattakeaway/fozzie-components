@@ -2387,13 +2387,6 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-4.1.0.tgz#43300dd377b6293157bd59378165cc64ace4ade1"
   integrity sha512-4xwep9kagPo+L6YeFIiU8A65BPhic1CUOzvfv2fzYYdGtYuGi2XVbu2xreYuvlQ/v7pitdW0MUqTZGsoJr+ZTg==
 
-"@justeat/f-popover@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-popover/-/f-popover-2.2.0.tgz#d53778f28bd880ced4917afb0cc5625b72080298"
-  integrity sha512-o4LHw7ax4YXoLpNh44MV/RSGZOZ9tEgC/NbJkulgTCQ4Kvd685Ekky3/IHEbdS0b5Eq0VnNTnPszmZ9ukxSkuQ==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
 "@justeat/f-searchbox@6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-6.0.0.tgz#fa6ea41ca3ccde26d5ed65511a96f1a728a9fc88"
@@ -2403,10 +2396,10 @@
     lodash.debounce "4.0.8"
     mitt "3.0.0"
 
-"@justeat/f-searchbox@6.3.0":
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-6.3.0.tgz#927a567ad0f34ac19a83a8cad90003c0db68040e"
-  integrity sha512-ac59+8MBa4i5iXDoqbU5rOUSqkvahU6yLlBGBVL0ttaUyPdDe69Hw52A9BdTFKuYkgG0esI6GQajfAToK9t90A==
+"@justeat/f-searchbox@6.7.0":
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-6.7.0.tgz#b66e3078e376de0c340ac34df7556309f31aea5c"
+  integrity sha512-5cyn9dAc0XfS7hfjkLzRLgqvwiMAK+UO0Hc5MdsjT/lGUM/oSKEZqfWpNWqtPBLpk+LI2dBBu3fIm4fwDzXhOQ==
   dependencies:
     caniuse-lite "1.0.30001251"
     lodash.debounce "4.0.8"

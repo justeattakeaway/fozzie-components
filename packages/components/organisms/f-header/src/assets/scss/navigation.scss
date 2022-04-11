@@ -46,6 +46,9 @@ $nav-toggleIcon-color--transparent : $nav-icon-color--transparent;
 $nav-toggleIcon-bg                 : transparent;
 $nav-toggleIcon-space              : 5px;
 
+$nav-focus-borderRadius            : 800px;
+$nav-link-focus-color              : $color-focus;
+
 @mixin nav-container-visible () {
     overflow-y: auto;
     left: 0;
@@ -158,9 +161,9 @@ $nav-toggleIcon-space              : 5px;
 .c-nav-list-link--transparent,
 .c-nav-list-link--alt {
     @include media('>mid') {
-        &:hover,
-        &:focus {
+        &:hover {
             color: $nav-text-color--transparent !important;
+            text-decoration: underline;
         }
     }
 }
@@ -204,7 +207,7 @@ $nav-toggleIcon-space              : 5px;
 
 .c-nav-popover.c-nav-popover--countrySelector {
     @include media('>mid') {
-        margin-top: spacing(c);
+        margin-top: spacing(d);
     }
     // tooltip arrow
     &:before {

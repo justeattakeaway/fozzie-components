@@ -9,6 +9,7 @@
                 {{ name }}
             </span>
             <span
+                v-if="calories || portion"
                 :class="[$style['c-restaurantCard-dish-nutritionalInfo']]">
                 <span
                     v-if="calories"

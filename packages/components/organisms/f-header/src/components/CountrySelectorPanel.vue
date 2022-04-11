@@ -46,7 +46,6 @@
                         }"
                         :tabindex="isOpen ? 0 : -1"
                         :text="country.localisedName"
-                        :class="$style['c-countrySelector-country-link']"
                         :has-border-bottom="false"
                         :is-country-link="true"
                         :href="country.siteUrl"
@@ -54,7 +53,7 @@
                         <template #icon>
                             <flag-icon
                                 :country-code="country.flagKey"
-                                :class="[$style['c-countrySelector-country-flag']]" />
+                                :class="$style['c-countrySelector-country-flag']" />
                         </template>
                     </nav-link>
                 </li>
@@ -180,15 +179,21 @@ $countrySelector-text-bg-hover : $color-container-subtle;
 
     &:hover {
         background: $countrySelector-text-bg-hover;
-        text-decoration: none;
+    }
+
+    &:active {
+        background: $color-container-strong;
+    }
+
+    &:focus {
+        outline-color: $nav-link-focus-color;
     }
 }
 
 .c-countrySelector-country-flag {
     height: $countrySelector-flag-height;
     width: $countrySelector-flag-width;
-    display: flex;
-    float: left;
-    margin: spacing(c) spacing(d);
+    margin-left: spacing(d);
+    margin-right: spacing(d);
 }
 </style>
