@@ -12,6 +12,19 @@ const tenants = {
 
 const storedLocationKey = 'je-full-address-details';
 
+function toFormattedPostcode (postcode, tenant) {
+    const shouldFormatPostCode = tenant === 'uk';
+
+    if (!shouldFormatPostCode) {
+        return postcode;
+    }
+
+    if (!postcode) {
+        return '';
+    }
+
+    return tenants[tenant].toFormattedPostcode(postcode);
+}
 
 function formatAddressLines (address) {
     let addressLines;
@@ -55,12 +68,12 @@ function getDefaultAddress (addressData, tenant) {
 function getAddressClosestToPostcode (currentPostcode, addressData, tenant) {
     const addresses = addressData.Addresses;
 
-    let postcode = tenant === 'uk' ? tenants.uk.toFormattedPostcode(currentPostcode) : currentPostcode;
+    let postcode = toFormattedPostcode(currentPostcode, tenant);
     let address;
 
     if (addresses) {
         address = addresses.find(a => {
-            const addressPostcode = tenant === 'uk' ? tenants.uk.toFormattedPostcode(a.ZipCode) : a.ZipCode;
+            const addressPostcode = toFormattedPostcode(a.ZipCode, tenant);
 
             return addressPostcode === postcode;
         });
@@ -146,7 +159,6 @@ function getClosestAddress (addressData, tenant, currentPostcode) {
     } else {
         address = getAddressClosestToPostcode(postcode, addressData, tenant);
     }
-
 
     if (!address) {
         return tenants[tenant].getEmptyAddress(postcode);

@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.24.0
 ------------------------------
-*March 30, 2022*
+*April 11, 2022*
 
 ### Changed
 - Address service to correctly map international address lines.
