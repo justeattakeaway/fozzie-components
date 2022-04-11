@@ -56,7 +56,7 @@ export const PromotionCardTwoComponent = (args, { argTypes }) => ({
     computed: {
         card () {
             return cardGenerator(
-                'Promotion_Card_1',
+                'Promotion_Card_2',
                 this.title,
                 this.image,
                 this.icon,
