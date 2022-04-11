@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v9.12.0
+------------------------------
+*April 11, 2022*
+
+### Changed
+- CSS change to add hover to button
+
+
 v9.11.0
 ------------------------------
 *April 8, 2022*
