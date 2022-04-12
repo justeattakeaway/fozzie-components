@@ -11,12 +11,12 @@
                 :tabindex="tabIndex"
                 :href="link.url"
                 :is-popover-link="!isBelowMid"
-                :data-trak='`{
-                    "trakEvent": "click",
-                    "category": "engagement",
-                    "action": "header",
-                    "label": "${link.gtm}"
-                }`'
+                :data-trak="{
+                    trakEvent: 'click',
+                    category: 'engagement',
+                    action: 'header',
+                    label: `${link.gtm}`
+                }"
                 :text="link.text"
                 :has-border-top="true"
                 :has-border-bottom="false"
