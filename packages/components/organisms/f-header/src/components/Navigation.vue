@@ -681,14 +681,14 @@ export default {
     padding: spacing(c) spacing(c);
     display: flex;
 
-    &:focus {
-        outline-color: $nav-link-focus-color;
-        border-radius: $nav-focus-borderRadius;
-    }
-
     @include media('>mid') {
         margin-top: spacing(d);
         margin-bottom: spacing(d);
+
+        &:focus {
+            outline-color: $nav-link-focus-color;
+            border-radius: $nav-focus-borderRadius;
+        }
     }
 
     @include media('<=mid') {
@@ -698,6 +698,7 @@ export default {
         padding: spacing(c) 0;
 
         &:focus {
+            outline-color: $nav-link-focus-color;
             border-radius: 0;
         }
 
@@ -781,12 +782,6 @@ export default {
     @include media('<=mid') {
         float: left;
         margin: spacing(c) spacing(d);
-        width: $nav-icon-size !important;
-
-        svg {
-            width: $nav-icon-size !important;
-            height: auto;
-        }
     }
 }
 
