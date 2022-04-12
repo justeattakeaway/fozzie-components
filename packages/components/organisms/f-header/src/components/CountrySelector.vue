@@ -115,6 +115,7 @@ export default {
 }
 
 .c-countrySelector-btn {
+    text-decoration: none;
     background: transparent;
     border: 0;
     display: block;

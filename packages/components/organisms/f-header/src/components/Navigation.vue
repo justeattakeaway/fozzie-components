@@ -676,6 +676,7 @@ export default {
 
 .c-nav-list-btn {
     background: transparent;
+    text-decoration: none;
     border: 0;
     padding: spacing(c) spacing(c);
     display: flex;
@@ -710,12 +711,9 @@ export default {
 .c-nav-list-btn-text {
     @include font-size($nav-text-size);
     color: $nav-text-color;
+    font-weight: $font-weight-regular;
     @include media('>mid') {
         font-weight: $nav-text-weight;
-    }
-
-    @include media('<=mid') {
-        font-weight: $font-weight-regular;
     }
 }
 
@@ -771,7 +769,8 @@ export default {
 
 // Icons, such as the profile icon
 .c-nav-icon {
-    width: $nav-icon-size !important;
+    width: $nav-icon-size;
+    height: $nav-icon-size;
     @include media('>mid') {
         margin-right: spacing(a);
         & path {
