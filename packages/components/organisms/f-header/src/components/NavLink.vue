@@ -148,7 +148,7 @@ export default {
     padding: spacing(c) spacing(d) spacing(c) 0;
 
     @include media('<=mid') {
-        margin-left: 0 !important;
+        margin-left: 0;
     }
 
     @include media('>mid') {
@@ -168,7 +168,7 @@ export default {
 
     &:focus {
         outline-color: $color-focus;
-        border-radius: 0 !important;
+        border-radius: 0;
     }
 }
 
