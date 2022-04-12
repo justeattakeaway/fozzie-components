@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v8.0.0-alpha.5
+------------------------------
+*April 11, 2022*
+
+### Added
+- New Promotion card two card.
+
+
 v8.0.0-alpha.4
 ------------------------------
 *April 04, 2022*
