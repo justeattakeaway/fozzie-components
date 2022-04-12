@@ -1,5 +1,6 @@
 import addressService from '../addressService';
 import localStorageMock from '../../../test-utils/local-storage/local-storage-mock';
+import { Addresses } from '../../../stories/helpers/addresses';
 
 const area511Line = {
     City: 'Area 51',
@@ -54,10 +55,12 @@ describe('addressService', () => {
     describe('getClosestAddress ::', () => {
         const ukAddressesData = { Addresses: [area511Line, bristol2Lines, london3LinesDefault] };
         const auAddressesData = { Addresses: [australiaAddressDefault, australiaAddressAdditional], DefaultAddress: defaultAustraliaId };
+        const itAddressesData = Addresses.it;
 
         describe.each([
             ['uk', ukAddressesData],
-            ['au', auAddressesData]
+            ['au', auAddressesData],
+            ['it', itAddressesData]
         ])('when tenant === `%s` AND last searched postcode is not present', (tenant, addressData) => {
             const postcode = '';
 
@@ -80,30 +83,37 @@ describe('addressService', () => {
 
         describe.each([
             ['uk', ukAddressesData],
-            ['au', auAddressesData]
+            ['au', auAddressesData],
+            ['it', itAddressesData]
         ])('when tenant === `%s` AND last searched postcode is present', (tenant, addressData) => {
             const postcodeTypes = {
                 noMatch: {
                     au: '4278',
+                    it: '35674',
                     uk: 'EN1 1AA'
                 },
                 noMatchOrSpaces: {
                     au: '4278',
+                    it: '35674',
                     uk: 'EN11AA'
                 },
                 match: {
                     au: '2089',
+                    it: '26844',
                     uk: 'BS1 1AA'
                 },
                 matchNoSpaces: {
                     au: '2089',
+                    it: '26844',
                     uk: 'EC4M7RF'
                 },
                 partial: {
                     au: '30',
+                    it: '20',
                     uk: 'AR51'
                 }
             };
+
             it('should return empty address with postcode set, when postcode does not match', () => {
                 // Act
                 const actual = addressService.getClosestAddress(addressData, tenant, postcodeTypes.noMatch[tenant]);
@@ -231,14 +241,15 @@ describe('addressService', () => {
             it('should return the address mapped correctly', () => {
                 // Arrange
                 const expectedAddress = {
-                    lines: ['Fleet Place House', 'Farringdon', 'City of London'],
+                    line1: 'Fleet Place House',
+                    line2: 'Farringdon',
                     locality: 'London',
-                    postalCode: 'EC4M 7RF'
+                    postcode: 'EC4M 7RF'
                 };
                 window.localStorage.setItem('je-full-address-details', JSON.stringify(london3LinesDefault));
 
                 // Act & Assert
-                expect(addressService.getAddressFromLocalStorage()).toEqual(expectedAddress);
+                expect(addressService.getAddressFromLocalStorage('uk')).toEqual(expectedAddress);
             });
         });
     });

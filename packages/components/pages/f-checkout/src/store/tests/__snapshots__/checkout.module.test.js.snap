@@ -6,6 +6,8 @@ Object {
     "administrativeArea": undefined,
     "line1": "Fleet Place House",
     "line2": "Farringdon",
+    "line3": null,
+    "line4": undefined,
     "locality": "London",
     "postcode": "EC4M 7RF",
   },
