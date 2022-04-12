@@ -56,7 +56,6 @@ export default {
 .c-restaurantTag {
     display: block;
     padding: 0 spacing(a);
-    margin-bottom: spacing(a);
     border-radius: $radius-rounded-a;
     @include font-size($font-paragraph-03);
     color: $color-content-default;

@@ -426,7 +426,7 @@ export default {
 }
 
 .c-restaurantCard-imageTags {
-    bottom: spacing(b);
+    bottom: spacing(d);
     left: spacing(d);
     position: absolute;
     margin-bottom: 0;
