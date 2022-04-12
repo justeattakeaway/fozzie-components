@@ -107,6 +107,7 @@ export default {
 @import '../assets/scss/navigation.scss';
 
 .c-countrySelector-text {
+    color: $nav-text-color;
     @include media('>mid') {
         display: none;
     }

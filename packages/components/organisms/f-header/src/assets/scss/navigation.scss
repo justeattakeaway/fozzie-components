@@ -166,6 +166,10 @@ $nav-link-focus-color              : $color-focus;
             text-decoration: underline;
         }
     }
+
+    @include media('<=mid') {
+        color: $nav-text-color;
+    }
 }
 
 .has-sublist {
