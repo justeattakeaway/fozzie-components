@@ -2357,15 +2357,21 @@
     "@justeat/f-services" "0.13.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@justeat/f-content-cards@8.0.0-beta.1":
   version "8.0.0-beta.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-8.0.0-beta.1.tgz#4cc67b07314f9a786440fbbaa3e6acf76c5363dd"
   integrity sha512-qQu4n83K0clBld0fH6dOgLBqc+PpvPziOjjbnwGeaeEblKqg4hi9rm/YzVsb89ohzm+XAaQOf5/TCqs7SOS2jw==
 =======
+=======
+>>>>>>> 75db9ed5 (f-content-cards@v8.0.0-alpha.5 - Promotion Card Two (#1796))
 "@justeat/f-content-cards@7.4.0":
   version "7.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-7.4.0.tgz#a3ee8e3dddc28f0fe8305546b1b7666787518735"
   integrity sha512-kzNub50NlpHb/F1xLzlV9J2Unn8yu4opv4JlyPBih08CBSaYKAvIfyGhcFzAPq22pPMlqjXrdVpYU4cP6wLtSA==
+<<<<<<< HEAD
+>>>>>>> 75db9ed5 (f-content-cards@v8.0.0-alpha.5 - Promotion Card Two (#1796))
+=======
 >>>>>>> 75db9ed5 (f-content-cards@v8.0.0-alpha.5 - Promotion Card Two (#1796))
   dependencies:
     "@babel/plugin-proposal-class-properties" "7.12.13"
