@@ -156,7 +156,6 @@
                         :aria-haspopup="isBelowMid ? false : true"
                         :aria-label="copy.userMenu.buttonLabel(userInfo.friendlyName)"
                         :class="[
-                            $style['c-nav-list-text'],
                             $style['c-nav-list-btn'],
                             { [$style['c-nav-list-btn--hoverAboveMid']]: headerBackgroundTheme === 'white' }
                         ]"
@@ -697,6 +696,7 @@ export default {
         width: 100%;
         text-align: left;
         display: block;
+        padding: spacing(c) spacing(a);
 
         &:focus {
             border-radius: 0;
@@ -712,7 +712,12 @@ export default {
 .c-nav-list-btn-text {
     color: $nav-text-color;
     @include media('>mid') {
-        margin-top: 2px;
+        margin-top: 1px;
+        font-weight: $nav-text-weight;
+    }
+
+    @include media('<=mid') {
+        font-weight: $font-weight-regular;
     }
 }
 
@@ -760,14 +765,6 @@ export default {
 .c-nav-featureLink--hideAboveMid {
     @include media('>mid') {
         display: none;
-    }
-}
-
-.c-nav-list-text {
-    font-weight: $nav-text-weight;
-    @include media('<=mid') {
-        padding: spacing(c) spacing(a);
-        font-weight: $font-weight-regular;
     }
 }
 
