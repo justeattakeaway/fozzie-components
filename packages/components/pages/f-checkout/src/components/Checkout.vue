@@ -453,7 +453,7 @@ export default {
          *
          * */
         loadAddressFromLocalStorage () {
-            const address = addressService.getAddressFromLocalStorage();
+            const address = addressService.getAddressFromLocalStorage(this.tenant);
 
             if (address) {
                 this.updateAddress(address);
@@ -666,7 +666,8 @@ export default {
             try {
                 await this.getCheckout({
                     url: this.getCheckoutUrl,
-                    timeout: this.checkoutTimeout
+                    timeout: this.checkoutTimeout,
+                    tenant: this.tenant
                 });
 
                 this.handleEventLogging('CheckoutGetSuccess');
@@ -771,7 +772,8 @@ export default {
                         await this.getGeoLocation({
                             url: this.getGeoLocationUrl,
                             postData: locationData,
-                            timeout: this.checkoutTimeout
+                            timeout: this.checkoutTimeout,
+                            tenant: this.tenant
                         });
                     }
                 } catch (error) {
