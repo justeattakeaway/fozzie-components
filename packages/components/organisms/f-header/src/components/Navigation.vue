@@ -681,14 +681,14 @@ export default {
     padding: spacing(c) spacing(c);
     display: flex;
 
+    &:focus {
+        outline-color: $nav-link-focus-color;
+        border-radius: $nav-focus-borderRadius;
+    }
+
     @include media('>mid') {
         margin-top: spacing(d);
         margin-bottom: spacing(d);
-
-        &:focus {
-            outline-color: $nav-link-focus-color;
-            border-radius: $nav-focus-borderRadius;
-        }
     }
 
     @include media('<=mid') {
