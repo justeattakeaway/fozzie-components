@@ -15,12 +15,12 @@ const storedLocationKey = 'je-full-address-details';
 function toFormattedPostcode (postcode, tenant) {
     const shouldFormatPostCode = tenant === 'uk';
 
-    if (!shouldFormatPostCode) {
-        return postcode;
-    }
-
     if (!postcode) {
         return '';
+    }
+
+    if (!shouldFormatPostCode) {
+        return postcode;
     }
 
     return tenants[tenant].toFormattedPostcode(postcode);
