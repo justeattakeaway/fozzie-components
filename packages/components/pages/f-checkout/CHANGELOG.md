@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 v3.24.1
 ------------------------------
 *April 12, 2022*
- - Add Italy to storybook.
+
+### Added
+ - Italy to storybook.
 
 
 v3.24.0
