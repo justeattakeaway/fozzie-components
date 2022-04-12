@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-loyalty",
   "description": "Fozzie Loyalty - provides a way for customers to collect loyalty stamps for restaurants",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "main": "dist/f-loyalty.umd.min.js",
   "maxBundleSize": "101kB",
   "files": [
