@@ -108,6 +108,7 @@ export default {
 
 .c-countrySelector-text {
     color: $nav-text-color;
+    @include font-size($nav-text-size);
     @include media('>mid') {
         display: none;
     }
@@ -116,7 +117,6 @@ export default {
 .c-countrySelector-btn {
     background: transparent;
     border: 0;
-    font-size: 1rem;
     display: block;
     padding: spacing(c) spacing(c);
     margin-top: spacing(d);

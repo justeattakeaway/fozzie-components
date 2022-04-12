@@ -677,9 +677,7 @@ export default {
 .c-nav-list-btn {
     background: transparent;
     border: 0;
-    font-size: 1rem;
     padding: spacing(c) spacing(c);
-    color: $nav-text-color;
     display: flex;
 
     &:focus {
@@ -696,7 +694,7 @@ export default {
         width: 100%;
         text-align: left;
         display: block;
-        padding: spacing(c) spacing(a);
+        padding: spacing(c) 0;
 
         &:focus {
             border-radius: 0;
@@ -710,9 +708,9 @@ export default {
 }
 
 .c-nav-list-btn-text {
+    @include font-size($nav-text-size);
     color: $nav-text-color;
     @include media('>mid') {
-        margin-top: 1px;
         font-weight: $nav-text-weight;
     }
 
@@ -733,6 +731,9 @@ export default {
 .c-nav-list-text-sub {
     display: block;
     overflow: hidden;
+    @include font-size($nav-text-size);
+    margin-left: spacing(h);
+    color: $nav-text-color;
     &.u-showBelowMid {
         @include media('>mid') {
             display: none !important;
@@ -770,11 +771,9 @@ export default {
 
 // Icons, such as the profile icon
 .c-nav-icon {
-    width: $nav-icon-size;
-    height: $nav-icon-size;
-    margin-right: spacing(a);
-
+    width: $nav-icon-size !important;
     @include media('>mid') {
+        margin-right: spacing(a);
         & path {
             fill: $nav-icon-color;
         }
@@ -782,25 +781,20 @@ export default {
 
     @include media('<=mid') {
         float: left;
-        margin-right: spacing();
-    }
-}
+        margin: spacing(c) spacing(d);
+        width: $nav-icon-size !important;
 
-.c-nav-icon--delivery,
-.c-nav-icon--offers {
-    @include media('<=mid') {
-        margin-left: spacing(d);
-        margin-top: spacing(c);
-        & path {
-            fill: $nav-icon-color--mobileWhiteBg;
+        svg {
+            width: $nav-icon-size !important;
+            height: auto;
         }
     }
 }
 
-.c-nav-icon--profile {
+.c-nav-icon--profile,
+.c-nav-icon--delivery,
+.c-nav-icon--offers {
     @include media('<=mid') {
-        margin-left: spacing(c);
-        margin-right: spacing(d);
         & path {
             fill: $nav-icon-color--mobileWhiteBg;
         }

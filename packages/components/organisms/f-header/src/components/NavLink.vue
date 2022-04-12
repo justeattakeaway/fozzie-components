@@ -105,8 +105,7 @@ export default {
 
     @include media('>mid') {
         font-weight: $nav-text-weight;
-        margin-top: spacing(d);
-        margin-bottom: spacing(d);
+        margin: spacing(d) 0;
         padding: spacing(c) spacing(c);
         display: flex;
 
@@ -121,7 +120,7 @@ export default {
     @include media('<=mid') {
         width: 100vw;
         padding: spacing(c) spacing(d) spacing(c) 0;
-        margin-left: spacing(c);
+        margin-left: spacing(a);
     }
 }
 
