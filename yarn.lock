@@ -2299,6 +2299,15 @@
   dependencies:
     "@justeat/f-services" "0.13.0"
 
+"@justeat/f-content-cards@7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-7.4.0.tgz#a3ee8e3dddc28f0fe8305546b1b7666787518735"
+  integrity sha512-kzNub50NlpHb/F1xLzlV9J2Unn8yu4opv4JlyPBih08CBSaYKAvIfyGhcFzAPq22pPMlqjXrdVpYU4cP6wLtSA==
+  dependencies:
+    "@babel/plugin-proposal-class-properties" "7.12.13"
+    "@justeat/f-services" "1.0.1"
+    core-js "3.6.5"
+
 "@justeat/f-dom@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-0.4.0.tgz#3e838a2dd06d4d5281c17f5fb9f66d7485fd759a"
