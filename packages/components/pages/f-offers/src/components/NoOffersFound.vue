@@ -10,7 +10,10 @@
             :text-size="textSize"
             :flex="flexLayout"
         >
-            <search-box :class="$style['c-noOffersFound-searchBox']" />
+            <div :class="$style['c-noOffersFound-searchBox--wrapper']">
+                <div :class="$style['c-noOffersFound-searchBox--background']" />
+                <search-box :class="$style['c-noOffersFound-searchBox']" />
+            </div>
             <f-button
                 :class="$style['c-noOffersFound-link']"
                 button-type="link"
@@ -76,6 +79,8 @@ export default {
     width: 100%;
     background: $color-grey-20;
     padding: spacing(f) spacing(g);
+    border-radius: $radius-rounded-c;
+    position: relative;
 
     & .c-noOffersFound-link {
         padding: 0;
@@ -88,17 +93,35 @@ export default {
     & .c-noOffersFound-searchBox {
         padding-top: spacing(d);
 
+        & input {
+            background-color: $color-white;
+            height: 61px;
+        }
+
         @include media('<=mid') {
             width: 300px;
         }
 
         @include media('<=narrowMid') {
             width: 100%;
+            & input {
+                height: 58px;
+            }
         }
+    }
 
-        & input {
-            background-color: $color-white;
-        }
+    .c-noOffersFound-searchBox--wrapper {
+        position: relative;
+    }
+
+    .c-noOffersFound-searchBox--background {
+        position: absolute;
+        top: spacing(d);
+        left:0;
+        height: 64px;
+        background-color: $color-white;
+        width: 100%;
+        border-radius: $radius-rounded-e;
     }
 
 }
