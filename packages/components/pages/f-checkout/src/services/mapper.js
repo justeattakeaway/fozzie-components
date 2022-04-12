@@ -40,9 +40,11 @@ const mapUpdateCheckoutRequest = ({
                     address: {
                         lines: [
                             address.line1,
-                            ...(address.line2 ? [address.line2] : [])
+                            ...(address.line2 ? [address.line2] : []),
+                            ...(address.line3 ? [address.line3] : []),
+                            ...(address.line4 ? [address.line4] : [])
                         ],
-                        administrativeArea: address.administrativeArea,
+                        ...(address.administrativeArea ? { administrativeArea: address.administrativeArea } : {}),
                         locality: address.locality || null,
                         postalCode: address.postcode?.trim() || null
                     }
@@ -74,6 +76,11 @@ const analyticFieldNameMapper = {
     line1: 'addressLine1',
     'address.line2': 'addressLine2',
     line2: 'addressLine2',
+    'address.line3': 'addressLine3',
+    line3: 'addressLine3',
+    'address.line4': 'addressLine4',
+    line4: 'addressLine4',
+    administrativeArea: 'addressAdministrativeArea',
     'address.locality': 'addressLocality',
     locality: 'addressLocality',
     'address.postcode': 'addressPostcode',
