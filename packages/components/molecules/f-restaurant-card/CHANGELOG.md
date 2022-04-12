@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.29.4
+------------------------------
+*April 8, 2022*
+### Fixed
+- Text vertical alignment on restaurant dishes
+- Image tag spacing to match logo spacing
+- Gap between restaurant tags
+- Prevent ratings count from wrapping
+
 v0.29.3
 ------------------------------
 *April 1, 2022*

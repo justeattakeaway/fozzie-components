@@ -26,7 +26,6 @@ import {
     UPDATE_BASKET_DETAILS,
     UPDATE_CUSTOMER_DETAILS,
     UPDATE_ERRORS,
-    UPDATE_ADDRESS_DETAILS,
     UPDATE_FULFILMENT_TIME,
     UPDATE_HAS_ASAP_SELECTED,
     UPDATE_IS_FULFILLABLE,
@@ -34,7 +33,7 @@ import {
     UPDATE_USER_NOTES,
     UPDATE_GEO_LOCATION,
     UPDATE_CHECKOUT_ERROR_MESSAGE,
-    UPDATE_ADDRESS,
+    UPDATE_ADDRESS_DETAILS,
     UPDATE_PHONE_NUMBER,
     UPDATE_DATE_OF_BIRTH,
     CLEAR_DOB_ERROR,
@@ -144,6 +143,9 @@ const defaultState = {
     address: {
         line1: '',
         line2: '',
+        line3: '',
+        line4: '',
+        administrativeArea: '',
         locality: '',
         postcode: ''
     },
@@ -350,23 +352,6 @@ describe('CheckoutModule', () => {
             });
         });
 
-        describe(`${UPDATE_ADDRESS} ::`, () => {
-            it('should update state with received values', () => {
-                // Arrange
-                const addressFromLocalStorage = {
-                    lines: ['line 1', 'line 2'],
-                    locality: 'locality',
-                    postalCode: 'postcode'
-                };
-
-                // Act
-                mutations[UPDATE_ADDRESS](state, addressFromLocalStorage);
-
-                // Assert
-                expect(state.address).toEqual(address);
-            });
-        });
-
         describe(`${UPDATE_PHONE_NUMBER} ::`, () => {
             it('should update state with received values', () => {
                 // Arrange
@@ -420,7 +405,6 @@ describe('CheckoutModule', () => {
         });
 
         it.each([
-            [UPDATE_ADDRESS_DETAILS, 'address', address],
             [UPDATE_FULFILMENT_TIME, 'time', time],
             [UPDATE_IS_FULFILLABLE, 'isFulfillable', isFulfillable],
             [UPDATE_ERRORS, 'errors', issues],
@@ -461,6 +445,7 @@ describe('CheckoutModule', () => {
         });
 
         describe('getCheckout ::', () => {
+            const tenant = 'uk';
             let config;
             let checkoutDeliveryCopy;
 
@@ -485,7 +470,7 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(checkoutApi.getCheckout).toHaveBeenCalledWith(payload.url, state, payload.timeout);
-                expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDeliveryCopy);
+                expect(commit).toHaveBeenCalledWith(UPDATE_STATE, { ...checkoutDeliveryCopy, tenant });
             });
 
             it(`should update 'hasUpdatedAsap' value with ${UPDATE_HAS_ASAP_SELECTED} mutation.`, async () => {
@@ -518,7 +503,7 @@ describe('CheckoutModule', () => {
                     // Assert
                     expect(checkoutDeliveryCopy.customer).toBe(null);
                     expect(checkoutApi.getCheckout).toHaveBeenCalledWith(payload.url, state, payload.timeout);
-                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, checkoutDeliveryCopy);
+                    expect(commit).toHaveBeenCalledWith(UPDATE_STATE, { ...checkoutDeliveryCopy, tenant });
                 });
             });
 
@@ -1261,7 +1246,7 @@ describe('CheckoutModule', () => {
                         // Assert
                         expect(setItemSpy).toHaveBeenCalledWith(
                             'je-full-address-details',
-                            '{"PostalCode":"postcode","Line1":"line 1","Line2":"line 2","City":"locality"}'
+                            '{"PostalCode":"EC4M 7RF","Line1":"Fleet Place House","Line2":"Farringdon","Line3":null,"City":"London"}'
                         );
                     });
                 });
