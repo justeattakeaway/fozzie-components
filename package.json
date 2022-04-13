@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "7.5.0",
+  "version": "7.6.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell \"lerna run $LERNA_ARGS build --stream\"",
@@ -119,7 +119,7 @@
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
   "engines": {
-    "node": ">=12.0.0"
+    "node": "^12 || ^14"
   },
   "homepage": "https://github.com/justeat/fozzie-components",
   "keywords": [
