@@ -31,12 +31,7 @@ export const CheckoutComponent = (args, { argTypes }) => ({
             loginUrl: '/login',
             paymentPageUrlPrefix: '#/pay',
             getGeoLocationUrl: '/get-geo-location',
-            getCustomerUrl: '/get-customer',
-
-            // default values are lost when opening storybook canvas in new tab
-            tenant: this.locale || locales.gb,
-            service: this.serviceType || 'delivery',
-            notes: this.noteType || propOptions.noteTypeOptions['Legacy notes']
+            getCustomerUrl: '/get-customer'
         };
     },
 
@@ -91,6 +86,19 @@ export const CheckoutComponent = (args, { argTypes }) => ({
             return {
                 isSplitNotesEnabled: this.noteType !== null
             };
+        },
+
+        // default values are lost when opening storybook canvas in new tab
+        tenant () {
+            return this.locale || locales.gb;
+        },
+
+        service () {
+            return this.serviceType || 'delivery';
+        },
+
+        notes () {
+            return this.noteType || propOptions.noteTypeOptions['Legacy notes'];
         }
     },
 
@@ -158,7 +166,7 @@ CheckoutComponent.argTypes = {
 
     locale: {
         control: { type: 'select' },
-        options: [locales.gb, locales.au, locales.nz],
+        options: [locales.gb, locales.au, locales.nz, locales.it],
         description: 'Locale'
     },
 
