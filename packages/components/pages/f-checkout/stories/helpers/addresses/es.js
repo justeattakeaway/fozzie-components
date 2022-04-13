@@ -23,9 +23,9 @@ const defaultGeoLocation = {
     longitude: 152.9788
 };
 
-export const itAddresses = { Addresses: [defaultAddress, additionalAddress], DefaultAddress: defaultId };
+export const esAddresses = { Addresses: [defaultAddress, additionalAddress], DefaultAddress: defaultId };
 
-export const itAddress = {
+export const esAddress = {
     address: {
         lines: [defaultAddress.Line1, defaultAddress.Line2, defaultAddress.Line3],
         locality: defaultAddress.City,
