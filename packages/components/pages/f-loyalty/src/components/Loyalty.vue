@@ -130,7 +130,7 @@ export default {
     methods: {
         ...mapActions(VUEX_MODULE_NAMESPACE_LOYALTY, {
             init: ACTION_INITIALISE_LOYALTY
-        }),
+        })
     }
 };
 </script>
