@@ -131,10 +131,6 @@ export default {
         ...mapActions(VUEX_MODULE_NAMESPACE_LOYALTY, {
             init: ACTION_INITIALISE_LOYALTY
         }),
-
-        handleErrors (error) {
-            this.$emit('onError', error);
-        }
     }
 };
 </script>

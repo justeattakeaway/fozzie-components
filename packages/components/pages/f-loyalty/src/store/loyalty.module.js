@@ -51,7 +51,7 @@ export default {
             commit(ACTION_SET_GLOBAL_USER_ID, resolveGlobalUserID(authToken, logger, errorHandler));
         },
 
-        [ACTION_INITIALISE_LOYALTY]: ({ commit, dispatch, getters}, {
+        [ACTION_INITIALISE_LOYALTY]: ({ commit, dispatch, getters }, {
             brazeApiKey, authToken
         }) => {
             commit(MUTATION_SET_AUTH_TOKEN, authToken);
