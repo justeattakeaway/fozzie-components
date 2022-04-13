@@ -119,7 +119,7 @@
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
   "engines": {
-    "node": "^14"
+    "node": "^12 || ^14"
   },
   "homepage": "https://github.com/justeat/fozzie-components",
   "keywords": [

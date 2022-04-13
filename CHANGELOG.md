@@ -5,10 +5,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.6.0
 ------------------------------
-*April 12, 2022*
+*April 13, 2022*
 
 ### Changed
-- Node 14 now required in order to match CI.
+- Node 12 / 14 now required in order to match CI.
 
 
 v7.5.0
