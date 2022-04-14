@@ -2,11 +2,13 @@ import uk from './tenants/uk';
 import au from './tenants/au';
 import nz from './tenants/nz';
 import it from './tenants/it';
+import es from './tenants/es';
 
 const tenants = {
     uk,
     au,
     nz,
+    es,
     it
 };
 

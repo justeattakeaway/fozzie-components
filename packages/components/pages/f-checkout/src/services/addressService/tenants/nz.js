@@ -1,5 +1,5 @@
 function isFullPostCode (postcode) {
-    return !postcode ? false : postcode.length === 4;
+    return postcode?.length === 4;
 }
 
 function getEmptyAddress (postcode) {
