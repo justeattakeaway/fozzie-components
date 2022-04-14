@@ -156,7 +156,6 @@
                         :aria-haspopup="isBelowMid ? false : true"
                         :aria-label="copy.userMenu.buttonLabel(userInfo.friendlyName)"
                         :class="[
-                            $style['c-nav-list-text'],
                             $style['c-nav-list-btn'],
                             { [$style['c-nav-list-btn--hoverAboveMid']]: headerBackgroundTheme === 'white' }
                         ]"
@@ -172,7 +171,6 @@
                             :class="[
                                 $style['c-nav-list-btn-text'],
                                 {
-                                    [$style['c-nav-list-link']]: headerBackgroundTheme === 'white',
                                     [$style['c-nav-list-link--alt']]: isAltColour,
                                     [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent'
                                 }]">
@@ -678,10 +676,9 @@ export default {
 
 .c-nav-list-btn {
     background: transparent;
+    text-decoration: none;
     border: 0;
-    font-size: 1rem;
     padding: spacing(c) spacing(c);
-    color: $nav-text-color;
     display: flex;
 
     &:focus {
@@ -698,8 +695,10 @@ export default {
         width: 100%;
         text-align: left;
         display: block;
+        padding: spacing(c) 0;
 
         &:focus {
+            outline-color: $nav-link-focus-color;
             border-radius: 0;
         }
 
@@ -711,8 +710,11 @@ export default {
 }
 
 .c-nav-list-btn-text {
+    @include font-size($nav-text-size);
+    color: $nav-text-color;
+    font-weight: $font-weight-regular;
     @include media('>mid') {
-        margin-top: 2px;
+        font-weight: $nav-text-weight;
     }
 }
 
@@ -728,6 +730,9 @@ export default {
 .c-nav-list-text-sub {
     display: block;
     overflow: hidden;
+    @include font-size($nav-text-size);
+    margin-left: spacing(h);
+    color: $nav-text-color;
     &.u-showBelowMid {
         @include media('>mid') {
             display: none !important;
@@ -763,21 +768,12 @@ export default {
     }
 }
 
-.c-nav-list-text {
-    font-weight: $nav-text-weight;
-    @include media('<=mid') {
-        padding: spacing(c) spacing(a);
-        font-weight: $font-weight-regular;
-    }
-}
-
 // Icons, such as the profile icon
 .c-nav-icon {
     width: $nav-icon-size;
     height: $nav-icon-size;
-    margin-right: spacing(a);
-
     @include media('>mid') {
+        margin-right: spacing(a);
         & path {
             fill: $nav-icon-color;
         }
@@ -785,25 +781,14 @@ export default {
 
     @include media('<=mid') {
         float: left;
-        margin-right: spacing();
+        margin: spacing(c) spacing(d);
     }
 }
 
+.c-nav-icon--profile,
 .c-nav-icon--delivery,
 .c-nav-icon--offers {
     @include media('<=mid') {
-        margin-left: spacing(d);
-        margin-top: spacing(c);
-        & path {
-            fill: $nav-icon-color--mobileWhiteBg;
-        }
-    }
-}
-
-.c-nav-icon--profile {
-    @include media('<=mid') {
-        margin-left: spacing(c);
-        margin-right: spacing(d);
         & path {
             fill: $nav-icon-color--mobileWhiteBg;
         }
