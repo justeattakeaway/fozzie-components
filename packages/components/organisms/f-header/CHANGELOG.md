@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v9.13.1
 ------------------------------
-*April 12, 2022*
+*April 14, 2022*
 
 ### Changed
 - small CSS refactor
