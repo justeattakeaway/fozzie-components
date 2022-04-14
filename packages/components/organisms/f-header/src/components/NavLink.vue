@@ -4,8 +4,8 @@
         :data-trak="JSON.stringify(dataTrak)"
         :href="href"
         :class="[{
-            [$style['c-navLink']]: !isCountryLink,
-            [$style['c-navLink--countryLink']]: isCountryLink,
+            [$style['c-navLink']]: !isPopoverLink,
+            [$style['c-navLink--popoverLink']]: isPopoverLink,
             [$style['c-nav-list-link--alt']]: isAltColour,
             [$style['c-navLink--hoverWithWhiteBackground']]: backgroundTheme === 'white',
             [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent'
@@ -13,7 +13,7 @@
         <slot name="icon" />
         <span
             :class="[{
-                [$style['c-navLink-text']]: !isCountryLink,
+                [$style['c-navLink-text']]: !isPopoverLink,
                 [$style['c-navLink-text--noIcon']]: !hasIcon,
                 [$style['c-navLink-text--borderBottomBelowMid']]: hasBorderBottom,
                 [$style['c-navLink-text--borderTopBelowMid']]: hasBorderTop
@@ -58,7 +58,7 @@ export default {
             default: false
         },
 
-        isCountryLink: {
+        isPopoverLink: {
             type: Boolean,
             default: false
         },
@@ -83,7 +83,7 @@ export default {
 .c-navLink {
     text-decoration: none;
     color: $nav-text-color;
-    font-size: $nav-text-size;
+    @include font-size($nav-text-size);
 
     @include media('<=mid') {
         display: flex;
@@ -105,8 +105,7 @@ export default {
 
     @include media('>mid') {
         font-weight: $nav-text-weight;
-        margin-top: spacing(d);
-        margin-bottom: spacing(d);
+        margin: spacing(d) 0;
         padding: spacing(c) spacing(c);
         display: flex;
 
@@ -121,7 +120,7 @@ export default {
     @include media('<=mid') {
         width: 100vw;
         padding: spacing(c) spacing(d) spacing(c) 0;
-        margin-left: spacing(c);
+        margin-left: spacing(a);
     }
 }
 
@@ -143,7 +142,7 @@ export default {
     }
 }
 
-.c-navLink--countryLink {
+.c-navLink--popoverLink {
     display: block;
     text-decoration: none;
     padding: spacing(c) spacing(d) spacing(c) 0;
@@ -159,10 +158,12 @@ export default {
 
     &:hover {
         background: $color-container-subtle;
+        border-radius: 0 !important;
     }
 
     &:active {
         background: $color-container-strong;
+        border-radius: 0 !important;
     }
 
     &:focus {

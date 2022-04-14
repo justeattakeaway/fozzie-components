@@ -107,15 +107,17 @@ export default {
 @import '../assets/scss/navigation.scss';
 
 .c-countrySelector-text {
+    color: $nav-text-color;
+    @include font-size($nav-text-size);
     @include media('>mid') {
         display: none;
     }
 }
 
 .c-countrySelector-btn {
+    text-decoration: none;
     background: transparent;
     border: 0;
-    font-size: 1rem;
     display: block;
     padding: spacing(c) spacing(c);
     margin-top: spacing(d);
