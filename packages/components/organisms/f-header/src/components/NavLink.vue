@@ -142,6 +142,20 @@ export default {
     }
 }
 
+.c-navLink--hoverWithWhiteBackground {
+    @include media('>mid') {
+        &:hover {
+            background: $color-container-subtle;
+            border-radius: $nav-focus-borderRadius;
+        }
+
+        &:active {
+            background: $color-container-strong;
+            border-radius: $nav-focus-borderRadius;
+        }
+    }
+}
+
 .c-navLink--popoverLink {
     display: block;
     text-decoration: none;
@@ -158,31 +172,17 @@ export default {
 
     &:hover {
         background: $color-container-subtle;
-        border-radius: 0 !important;
+        border-radius: 0;
     }
 
     &:active {
         background: $color-container-strong;
-        border-radius: 0 !important;
+        border-radius: 0;
     }
 
     &:focus {
         outline-color: $color-focus;
         border-radius: 0;
-    }
-}
-
-.c-navLink--hoverWithWhiteBackground {
-    @include media('>mid') {
-        &:hover {
-            background: $color-container-subtle;
-            border-radius: $nav-focus-borderRadius;
-        }
-
-        &:active {
-            background: $color-container-strong;
-            border-radius: $nav-focus-borderRadius;
-        }
     }
 }
 </style>
