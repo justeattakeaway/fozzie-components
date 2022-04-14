@@ -12,7 +12,8 @@ export const TENANTS = {
     uk: 'uk',
     au: 'au',
     nz: 'nz',
-    it: 'it'
+    it: 'it',
+    es: 'es'
 };
 
 export const DELIVERY_TIMES = {
