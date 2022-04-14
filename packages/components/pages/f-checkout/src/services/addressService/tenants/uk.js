@@ -1,5 +1,5 @@
 function isFullPostCode (postcode) {
-    return !postcode ? false : postcode.length >= 5;
+    return postcode?.length >= 5;
 }
 
 function toFormattedPostcode (postcode) {

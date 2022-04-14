@@ -13,7 +13,7 @@ const messages = {
             tableIdentifier: {
                 label: 'Número de mesa o nombre',
                 validationMessages: {
-                    required: 'Incluye tu nombre/número de escritorio'
+                    required: 'Incluye tu nombre/número de mesa'
                 }
             }
         },
@@ -41,7 +41,7 @@ const messages = {
                 label: 'E-mail',
                 validationMessages: {
                     required: 'Introduce tu correo electrónico',
-                    invalid: 'Introduce una dirección de correo electrónico válida.'
+                    invalid: 'Introduce una dirección de correo electrónico válida'
                 }
             }
         },
@@ -213,7 +213,7 @@ const messages = {
             delivery: {
                 title: 'Dejar una nota para el repartidor',
                 text: 'Deje una nota para el repartidor con cualquier cosa que necesite saber (por ejemplo, que el timbre no funciona).',
-                placeholder: 'por ejemplo, que el timbre no funciona'
+                placeholder: 'Por ejemplo, que el timbre no funciona'
             },
             collection: {
                 title: 'Dejar una nota',
@@ -230,7 +230,7 @@ const messages = {
             delivery: {
                 title: 'Dejar una nota',
                 text: 'Dejar una nota for the restaurant with anything they need to know (e.g. the doorbell doesn\'t work). Do not include details about any allergies here.',
-                placeholder: 'por ejemplo, que el timbre no funciona. No incluya aquí detalles sobre cualquier alergia. \n\nEstamos trabajando con los restaurantes para reducir los residuos. Por favor, no pida cubiertos de plástico.'
+                placeholder: 'Por ejemplo, que el timbre no funciona. No incluya aquí detalles sobre cualquier alergia. \n\nEstamos trabajando con los restaurantes para reducir los residuos. Por favor, no pida cubiertos de plástico.'
             },
             collection: {
                 title: 'Dejar una nota',
