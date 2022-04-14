@@ -160,15 +160,12 @@ $nav-link-focus-color              : $color-focus;
 
 .c-nav-list-link--transparent,
 .c-nav-list-link--alt {
+    color: $nav-text-color;
     @include media('>mid') {
         &:hover {
             color: $nav-text-color--transparent !important;
             text-decoration: underline;
         }
-    }
-
-    @include media('<=mid') {
-        color: $nav-text-color;
     }
 }
 

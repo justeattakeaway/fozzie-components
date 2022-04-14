@@ -8,6 +8,7 @@
             :key="index"
             data-test-id="nav-links">
             <nav-link
+                :class="$style['c-user-list-link']"
                 :tabindex="tabIndex"
                 :href="link.url"
                 :is-popover-link="!isBelowMid"
@@ -123,5 +124,9 @@ export default {
     text-decoration: none;
     color: $nav-text-color;
     @include font-size($nav-text-size);
+
+    @include media('>mid') {
+        padding-left: spacing(a);
+    }
 }
 </style>
