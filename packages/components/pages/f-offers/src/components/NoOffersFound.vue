@@ -108,6 +108,13 @@ export default {
                 height: 58px;
             }
         }
+
+        @include media('<=narrow') {
+            width: 100%;
+            & input {
+                height: 48px;
+            }
+        }
     }
 
     .c-noOffersFound-searchBox--wrapper {
@@ -122,6 +129,10 @@ export default {
         background-color: $color-white;
         width: 100%;
         border-radius: $radius-rounded-e;
+
+        @include media('<=narrow') {
+            height: 56px;
+        }
     }
 
 }
