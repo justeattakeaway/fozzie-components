@@ -70,6 +70,8 @@ const checkoutAlertMessage = {
     errorType: ERROR_TYPES.alert
 };
 
+const ukTenant = 'uk';
+
 describe('Checkout', () => {
     const updateCheckoutUrl = 'http://localhost/updatecheckout';
     const getCheckoutUrl = 'http://localhost/checkout';
@@ -956,7 +958,7 @@ describe('Checkout', () => {
                 wrapper.vm.loadAddressFromLocalStorage();
 
                 // Assert
-                expect(addressServiceSpy).toHaveBeenCalled();
+                expect(addressServiceSpy).toHaveBeenCalledWith(ukTenant);
             });
         });
 
@@ -2191,7 +2193,8 @@ describe('Checkout', () => {
                             'BS1 1AA'
                         ]
                     },
-                    timeout: 60000
+                    timeout: 60000,
+                    tenant: ukTenant
                 };
 
                 beforeEach(async () => {

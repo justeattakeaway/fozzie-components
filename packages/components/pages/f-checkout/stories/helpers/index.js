@@ -11,7 +11,9 @@ export const NOTE_TYPES = {
 export const TENANTS = {
     uk: 'uk',
     au: 'au',
-    nz: 'nz'
+    nz: 'nz',
+    it: 'it',
+    es: 'es'
 };
 
 export const DELIVERY_TIMES = {

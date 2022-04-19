@@ -6,22 +6,23 @@
         <li
             v-for="(link, index) in copy.navLinks"
             :key="index"
-            data-test-id="nav-links"
-            :class="$style['c-user-list-item']">
-            <a
-                :class="$style['list-link']"
+            data-test-id="nav-links">
+            <nav-link
+                :class="$style['c-user-list-link']"
                 :tabindex="tabIndex"
                 :href="link.url"
-                :data-trak='`{
-                    "trakEvent": "click",
-                    "category": "engagement",
-                    "action": "header",
-                    "label": "${link.gtm}"
-                }`'
+                :is-popover-link="!isBelowMid"
+                :data-trak="{
+                    trakEvent: 'click',
+                    category: 'engagement',
+                    action: 'header',
+                    label: `${link.gtm}`
+                }"
+                :text="link.text"
+                :has-border-top="true"
+                :has-border-bottom="false"
                 @blur="$emit('deactivateNav')"
-                @focus="$emit('activateNav')">
-                {{ link.text }}
-            </a>
+                @focus="$emit('activateNav')" />
         </li>
 
         <li
@@ -37,7 +38,7 @@
                     "label": "${copy.accountLogout.gtm}"
                 }`'
                 data-test-id="logout-link"
-                :class="$style['list-link']"
+                :class="$style['c-user-list-link']"
                 @blur="$emit('deactivateNav')"
                 @focus="$emit('activateNav')">
                 {{ copy.accountLogout.text }}
@@ -47,7 +48,12 @@
 </template>
 
 <script>
+import NavLink from './NavLink.vue';
+
 export default {
+    components: {
+        NavLink
+    },
     props: {
         isUserMenuOpen: {
             type: Boolean,
@@ -98,33 +104,29 @@ export default {
 }
 
 .c-user-list-item {
+    padding: spacing(c) spacing(d) spacing(c) 0;
+
+    &:focus {
+            outline-color: $nav-link-focus-color;
+            border-radius: 0;
+    }
+
     &:hover {
         background: $color-container-subtle;
     }
 
-     &:active {
+    &:active {
         background: $color-container-strong;
     }
 }
 
-.list-link {
+.c-user-list-link {
     text-decoration: none;
-
-    &:focus {
-        outline-color: $nav-link-focus-color;
-    }
+    color: $nav-text-color;
+    @include font-size($nav-text-size);
 
     @include media('>mid') {
-        display: block;
-        padding: spacing(c) spacing(d);
-        height: auto;
-    }
-
-    @include media('<=mid') {
-        display: flex;
-        margin-left: spacing(h);
-        padding: spacing(c) spacing(d) spacing(c) 0;
-        border-top: 1px solid $color-border-default;
+        padding-left: spacing(a);
     }
 }
 </style>

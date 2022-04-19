@@ -160,6 +160,7 @@ $nav-link-focus-color              : $color-focus;
 
 .c-nav-list-link--transparent,
 .c-nav-list-link--alt {
+    color: $nav-text-color;
     @include media('>mid') {
         &:hover {
             color: $nav-text-color--transparent !important;
@@ -178,7 +179,7 @@ $nav-link-focus-color              : $color-focus;
 
 .c-nav-popover {
     @include media('>mid') {
-        min-width: 300px;
+        min-width: $nav-popover-width;
         position: absolute;
         top: 100%;
         right: 99999px; // offscreen, so can’t ever be hovered over by default
