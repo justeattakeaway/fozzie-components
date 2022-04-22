@@ -217,6 +217,7 @@ $countrySelector-btn-font-size: 'body-s';
     background-color: $footer-bgLight;
     box-shadow: $elevation-02;
     list-style: none;
+    z-index: zIndex(high);
 
     & > li:before {
         content: none;
