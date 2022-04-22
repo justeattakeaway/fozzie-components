@@ -445,7 +445,6 @@ export default {
 
 .c-restaurantCard-ratingContainer {
     display: flex;
-    gap: spacing(b);
     align-items: center;
     margin-right: spacing(b);
 }
