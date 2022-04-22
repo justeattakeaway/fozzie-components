@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.2.1
+------------------------------
+*April 14, 2022*
+
+### Removed
+- Set `.c-countrySelector-list` z-index set to high, due to it appearing under page header on certain smaller screens.
+
+
 v7.2.0
 ------------------------------
 *April 01, 2022*
