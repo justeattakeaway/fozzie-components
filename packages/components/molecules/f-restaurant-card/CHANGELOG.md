@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.29.5
+------------------------------
+*April 22, 2022*
+### Fixed
+- Removed `gap` property and replaced with margin for Safari support
+
 v0.29.4
 ------------------------------
 *April 8, 2022*
