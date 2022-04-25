@@ -15,7 +15,7 @@
             :class="[
                 $style['c-countrySelector-btn']
             ]"
-            :aria-expanded="(!isBelowMid && isCountrySelectorOpen) ? 'true' : 'false'"
+            :aria-expanded="isCountrySelectorOpen || 'false'"
             :aria-haspopup="!isBelowMid"
             :aria-label="copy.changeCurrentCountry"
             @click="toggleCountrySelector">
