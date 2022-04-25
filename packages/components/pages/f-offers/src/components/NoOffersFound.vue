@@ -10,8 +10,8 @@
             :text-size="textSize"
             :flex="flexLayout"
         >
-            <div :class="$style['c-noOffersFound-searchBox--wrapper']">
-                <div :class="$style['c-noOffersFound-searchBox--background']" />
+            <div :class="$style['c-noOffersFound-searchBox-wrapper']">
+                <div :class="$style['c-noOffersFound-searchBox-background']" />
                 <search-box :class="$style['c-noOffersFound-searchBox']" />
             </div>
             <f-button
@@ -117,11 +117,11 @@ export default {
         }
     }
 
-    .c-noOffersFound-searchBox--wrapper {
+    .c-noOffersFound-searchBox-wrapper {
         position: relative;
     }
 
-    .c-noOffersFound-searchBox--background {
+    .c-noOffersFound-searchBox-background {
         position: absolute;
         top: spacing(d);
         left:0;
