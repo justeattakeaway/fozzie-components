@@ -171,6 +171,7 @@ export default {
     padding: 0;
     margin: 0;
     white-space: nowrap;
+    margin-right: spacing(b);
 }
 
 .c-restaurantCard-rating-iconWrapper {
