@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v9.14.0
+------------------------------
+*April 25, 2022*
+
+### Fixed
+- Accessibility country selector announcement on small screens.
+
+
 v9.13.1
 ------------------------------
 *April 14, 2022*
