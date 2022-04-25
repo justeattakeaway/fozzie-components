@@ -67,6 +67,7 @@ export default {
 
     &.c-restaurantTag--isLarge.c-restaurantTag--isUppercase.c-restaurantTag--positive {
         margin-bottom: 0;
+        margin-right: spacing(b);
     }
 }
 
