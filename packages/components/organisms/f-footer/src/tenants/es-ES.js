@@ -4,7 +4,7 @@ export default {
     downloadOurApps: 'Descárgate la app',
     appStoreIcons: [
         {
-            url: 'https://app.adjust.com/gxu4mb?utm_medium=internal&campaign=footer',
+            url: 'https://app.adjust.com/oc511o?utm_medium=internal&campaign=footer-es',
             name: 'ios',
             alt: 'Consíguelo en el App Store',
             gtm: 'click_download_ios_app'
