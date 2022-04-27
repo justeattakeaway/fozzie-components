@@ -2,7 +2,8 @@
     <div
         :class="[
             $style['c-imageTile'], {
-                [$style['c-imageTile--selected']]: isToggleSelected
+                [$style['c-imageTile--selected']]: isToggleSelected,
+                [$style['c-imageTile--breakout']]: isBreakoutImage
             }]"
         data-test-id="image-tile-component">
         <a
@@ -30,23 +31,40 @@
         <label
             :class="[
                 $style['c-imageTile-label'], {
-                    [$style['c-imageTile-label--link']]: isLink
+                    [$style['c-imageTile-label--link']]: isLink,
+                    [$style['c-imageTile-label--breakout']]: isBreakoutImage
                 }]"
             :for="`imageTileToggle-${tileId}`"
             data-test-id="image-tile-label"
             :tabindex="!isLink ? -1 : false">
-            <span
-                :class="$style['c-imageTile-imageContainer']"
-                :style="cssVars">
-                <img
-                    v-if="imgSrc && !imgError"
-                    :class="$style['c-imageTile-image']"
-                    :src="imgSrc"
-                    data-test-id="image-tile-image"
-                    :alt="altText"
-                    :role="isPresentationRole ? 'presentation' : false"
-                    @error="handleImgError">
-            </span>
+            <template v-if="isBreakoutImage">
+                <span :class="$style['c-imageTile-inner']">
+                    <span
+                        :class="$style['c-imageTile-backgroundContainer']" />
+                    <img
+                        v-if="imgSrc && !imgError"
+                        :class="$style['c-imageTile-image']"
+                        :src="imgSrc"
+                        data-test-id="image-tile-image"
+                        :alt="altText"
+                        :role="isPresentationRole ? 'presentation' : false"
+                        @error="handleImgError">
+                </span>
+            </template>
+            <template v-else>
+                <span
+                    :class="$style['c-imageTile-backgroundContainer']"
+                    :style="cssVars">
+                    <img
+                        v-if="imgSrc && !imgError"
+                        :class="$style['c-imageTile-image']"
+                        :src="imgSrc"
+                        data-test-id="image-tile-image"
+                        :alt="altText"
+                        :role="isPresentationRole ? 'presentation' : false"
+                        @error="handleImgError">
+                </span>
+            </template>
             <span
                 :class="$style['c-imageTile-textContainer']"
                 :aria-hidden="isLink">
@@ -101,6 +119,10 @@ export default {
         fallbackImage: {
             type: String,
             default: ''
+        },
+        isBreakoutImage: {
+            type: Boolean,
+            default: true
         }
     },
     data () {
@@ -228,19 +250,35 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
     &:focus {
         outline: none; // Prevents Safari doubling focus styles.
     }
+
+    &.c-imageTile-label--breakout {
+        display: block;
+    }
 }
 
 .c-imageTile-label--link {
     pointer-events: none;
 }
 
-.c-imageTile-imageContainer {
+.c-imageTile-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 100%;
+}
+
+.c-imageTile-backgroundContainer {
     background-color: rgba($image-tile-background-color, $image-tile-background-opacity);
     border-radius: $radius-rounded-b;
     background-image: var(--bg-image);
     display: block;
     padding-top: math.div(3, 5) * 100%; // 5:3 aspect ratio
     position: relative;
+
+    .c-imageTile--breakout & {
+        background-image: none;
+    }
 }
 
 .c-imageTile-image {
@@ -259,6 +297,10 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
 
     .c-imageTile--selected & {
         color: $image-tile-selected;
+    }
+
+    .c-imageTile--breakout & {
+        margin-top: 0;
     }
 }
 

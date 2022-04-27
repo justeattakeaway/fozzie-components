@@ -28,6 +28,7 @@ export const ImageTileComponent = (args, { argTypes }) => ({
                         :img-src='imgSrc'
                         :alt-text='altText'
                         :fallback-image='fallbackImage'
+                        :is-breakout-image='isBreakoutImage'
                         @toggle="toggleCuisine" 
                         slot-scope="{ toggleCuisine }"
                     >
@@ -44,7 +45,8 @@ ImageTileComponent.args = {
     isSelected: false,
     isLink: false,
     altText: '',
-    fallbackImage: ImageTileWallpaper
+    fallbackImage: ImageTileWallpaper,
+    isBreakoutImage: true
 };
 
 ImageTileComponent.argTypes = {
@@ -80,6 +82,10 @@ ImageTileComponent.argTypes = {
     fallbackImage: {
         control: { type: 'text' },
         description: 'Fallback image url'
+    },
+    isBreakoutImage: {
+        control: { type: 'boolean' },
+        description: 'Images are displayed in breakout style'
     }
 };
 
