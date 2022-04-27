@@ -41,11 +41,10 @@ export default {
     display: flex;
     flex-flow: row wrap;
     align-items: center;
-    gap: spacing(a);
 }
 
 .c-restaurantTags-tag {
     list-style-type: none;
-    margin: 0;
+    margin: 0 spacing(a) spacing(a) 0;
 }
 </style>

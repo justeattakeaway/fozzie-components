@@ -35,7 +35,7 @@ export default {
     downloadOurApps: 'Download our apps',
     appStoreIcons: [
         {
-            url: 'https://itunes.apple.com/nz/app/menulog-order-takeaway-food/id485249021?mt=8&&referrer=click%3D69811f6e-2144-4706-bafc-3d9ae07efd62',
+            url: 'https://apps.apple.com/nz/app/menulog-food-delivery/id327982905?mt=8&&referrer=click%3D69811f6e-2144-4706-bafc-3d9ae07efd62',
             name: 'ios',
             alt: 'Download on the App Store',
             gtm: 'click_download_ios_app'
