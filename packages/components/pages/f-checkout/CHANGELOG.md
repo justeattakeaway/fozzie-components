@@ -11,7 +11,7 @@ v3.26.0
 ### Changed
  - Invalid field error summary to be read with error messages.
 
- ### Added
+### Added
  - Focus to first inline error.
 
 
