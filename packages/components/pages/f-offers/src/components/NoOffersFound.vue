@@ -75,6 +75,12 @@ export default {
 </script>
 
 <style lang="scss" module>
+$height-adjustment-for-background-desktop: 64px;
+$height-adjustment-for-background-mobile: 56px;
+$height-adjustment-for-input-desktop: 61px;
+$height-adjustment-for-input-tablet: 58px;
+$height-adjustment-for-input-mobile: 48px;
+
 .c-noOffersFound-wrapper {
     width: 100%;
     background: $color-grey-20;
@@ -95,7 +101,7 @@ export default {
 
         & input {
             background-color: $color-white;
-            height: 61px;
+            height: $height-adjustment-for-input-mobile;
         }
 
         @include media('<=mid') {
@@ -105,14 +111,14 @@ export default {
         @include media('<=narrowMid') {
             width: 100%;
             & input {
-                height: 58px;
+                height: $height-adjustment-for-input-tablet;
             }
         }
 
         @include media('<=narrow') {
             width: 100%;
             & input {
-                height: 48px;
+                height: $height-adjustment-for-input-mobile;
             }
         }
     }
@@ -125,13 +131,13 @@ export default {
         position: absolute;
         top: spacing(d);
         left:0;
-        height: 64px;
+        height: $height-adjustment-for-background-desktop;
         background-color: $color-white;
         width: 100%;
         border-radius: $radius-rounded-e;
 
         @include media('<=narrow') {
-            height: 56px;
+            height: $height-adjustment-for-background-mobile;
         }
     }
 
