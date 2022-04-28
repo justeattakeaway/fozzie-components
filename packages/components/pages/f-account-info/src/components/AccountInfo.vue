@@ -191,7 +191,7 @@
                 :class="[$style['c-accountInfo-changePasswordButton']]"
                 data-test-id="account-info-change-password-button"
                 button-type="secondary"
-                href="/change-password?returnurl=/account/info"
+                href="/account/change-password?returnurl=/account/info"
                 button-size="large"
                 is-full-width
                 action-type="submit">
