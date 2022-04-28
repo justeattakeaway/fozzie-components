@@ -5,8 +5,8 @@
         @submit.prevent="onFormSubmit">
         <section
             v-if="invalidFieldsSummary"
+            id="error-summary-container"
             class="is-visuallyHidden"
-            role="alert"
             data-test-id="error-summary-container">
             {{ invalidFieldsSummary }}
         </section>
@@ -154,9 +154,11 @@ export default {
 
             if (!invalidFieldCount) return null;
 
-            return invalidFieldCount === 1 ?
+            const invalidStatusMessage = invalidFieldCount === 1 ?
                 this.$t('errorMessages.singleFieldError') :
                 this.$t('errorMessages.multipleFieldErrors', { errorCount: invalidFieldCount });
+
+            return `${invalidStatusMessage}.`;
         },
 
         fieldTranslations () {
@@ -171,9 +173,13 @@ export default {
          */
         scrollToFirstInlineError () {
             this.$nextTick(() => {
-                const firstInlineError = document.querySelector('[data-js-error-message]');
+                const firstInlineError = document.querySelector('[aria-invalid="true"]');
 
                 this.scrollToElement(firstInlineError, { offset: -100 });
+
+                firstInlineError?.focus({
+                    preventScroll: true
+                });
             });
         },
 

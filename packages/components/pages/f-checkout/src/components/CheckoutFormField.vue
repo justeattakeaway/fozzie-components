@@ -8,7 +8,7 @@
         v-bind="isGrouped && groupedProps"
         :has-error="hasError"
         :aria-invalid="hasError"
-        :aria-describedby="hasError && translations.errorName"
+        :aria-describedby="hasError && `error-summary-container ${translations.errorName}`"
         :aria-label="isPhoneNumber && formattedMobileNumberForScreenReader"
         @blur="hasInvalidErrorMessage && formFieldBlur()"
         @input="updateUserDetails({ fieldType, fieldName, value: $event })">

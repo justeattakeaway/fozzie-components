@@ -288,7 +288,7 @@ describe('CheckoutForm', () => {
 
                 const scrollToElementSpy = jest.spyOn(wrapper.vm, 'scrollToElement');
 
-                const firstErrorElement = document.querySelector('[data-js-error-message]');
+                const firstErrorElement = document.querySelector('[aria-invalid="true"]');
 
                 // Act
                 wrapper.vm.scrollToFirstInlineError(firstErrorElement);
