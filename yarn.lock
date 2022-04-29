@@ -2360,10 +2360,10 @@
     axios "0.21.1"
     axios-mock-adapter "1.19.0"
 
-"@justeat/f-icons@4.8.1":
-  version "4.8.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.8.1.tgz#7bfbf725abece12fc469ee134fe6e7cb871f9594"
-  integrity sha512-Je6V1XsO2AZ2xZXq53/NdeZa83xDqHuntX22EcxmGul5OOQH4+DfQhe7cOa4AVWCW2tH4cBamVvYNBTGpYawpg==
+"@justeat/f-icons@4.9.0":
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.9.0.tgz#c0a901996311ad97300498885233f0ed6f47fdc4"
+  integrity sha512-8elkZrUaVygcvOxep+6qxlJP+jabXAFOrAw6k09z4Xkd9ABbpPZLZeI2sBHItCZb6OUTrBu3c5pV2V4iw0Q24A==
 
 "@justeat/f-link@2.0.0":
   version "2.0.0"
@@ -25904,7 +25904,7 @@ webpack-virtual-modules@^0.2.2:
   dependencies:
     debug "^3.0.0"
 
-webpack@4, webpack@4.46.0, webpack@^4.0.0, webpack@^4.26.0:
+webpack@4, webpack@^4.0.0, webpack@^4.26.0:
   version "4.46.0"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.46.0.tgz#bf9b4404ea20a073605e0a011d188d77cb6ad542"
   integrity sha512-6jJuJjg8znb/xRItk7bkT0+Q7AHCYjjFnvKIWQPkNIOyRqoCGvkOs0ipeQzrqz4l5FtN5ZI/ukEHroeX/o1/5Q==
