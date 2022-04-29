@@ -214,6 +214,7 @@
 </template>
 
 <script>
+import jwtDecode from 'jwt-decode';
 import { mapActions, mapState } from 'vuex';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import FErrorMessage from '@justeat/f-error-message';
@@ -366,7 +367,20 @@ export default {
                 await this.loadConsumerDetails({ api: this.consumerApi, authToken: this.authToken });
                 this.$log.info('Consumer details fetched successfully', standardLogTags);
             } catch (error) {
-                this.$log.error('Error fetching consumer details', error, standardLogTags);
+                let endpointAuthTokenExpired = false;
+                try {
+                    if (this.authToken) {
+                        const { exp } = jwtDecode(this.authToken);
+                        if (Date.now() >= exp * 1000) {
+                            endpointAuthTokenExpired = true;
+                        }
+                    } else {
+                        endpointAuthTokenExpired = true;
+                    }
+                } catch {
+                    // noop
+                }
+                this.$log.error('Error fetching consumer details', error, standardLogTags, { endpointAuthTokenExpired });
                 this.handleLoadErrorState(error);
             } finally {
                 this.$nextTick(() => {
