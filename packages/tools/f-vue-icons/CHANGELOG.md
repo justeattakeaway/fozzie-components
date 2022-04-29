@@ -8,7 +8,7 @@ v3.9.0
 *April 29 2022*
 
 ### Changed
-- `PaymentPaypalIcon` icon updated (latest brand guidelines)
+- `PaymentVisaIcon` icon updated (latest brand guidelines)
 
 ### Added
 - `PaymentVisaTransparentIcon` icon
