@@ -367,18 +367,19 @@ export default {
                 await this.loadConsumerDetails({ api: this.consumerApi, authToken: this.authToken });
                 this.$log.info('Consumer details fetched successfully', standardLogTags);
             } catch (error) {
-                let endpointAuthTokenExpired = false;
+                let endpointAuthTokenExpired = 0;
                 try {
                     if (this.authToken) {
                         const { exp } = jwtDecode(this.authToken);
                         if (Date.now() >= exp * 1000) {
-                            endpointAuthTokenExpired = true;
+                            endpointAuthTokenExpired = 1;
                         }
                     } else {
-                        endpointAuthTokenExpired = true;
+                        endpointAuthTokenExpired = 1;
                     }
                 } catch {
                     // noop
+                    endpointAuthTokenExpired = -1;
                 }
                 this.$log.error('Error fetching consumer details', error, standardLogTags, { endpointAuthTokenExpired });
                 this.handleLoadErrorState(error);
