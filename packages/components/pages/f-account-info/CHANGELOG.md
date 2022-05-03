@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.21.1
+------------------------------
+*May 3, 2022*
+
+### Added
+- Component test to cover urls.
+
+
 v0.21.0
 ------------------------------
 *April 27, 2022*

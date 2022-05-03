@@ -35,6 +35,44 @@ describe('f-account-info component tests', () => {
         expect(accountInfo.canBeClicked(cta)).toBe(true);
     });
 
+    it('should redirect to the correct URL when `change password` has been clicked', () => {
+        // Act
+        accountInfo.load();
+
+        accountInfo.clickChangePassword();
+
+        // Assert
+        expect(browser.getUrl()).toContain('/account/change-password');
+    });
+
+    it('should redirect to the correct URL when `delete account` has been clicked', () => {
+        // Arrange
+        const expectedUrl = '/account/deactivate';
+
+        // Act
+        accountInfo.load();
+
+        accountInfo.clickDeleteAccountLink();
+        browser.switchWindow(new RegExp(`^.*${expectedUrl}.*$`));
+
+        // Assert
+        expect(browser.getUrl()).toContain(expectedUrl);
+    });
+
+    it('should redirect to the correct URL when `change email address link` has been clicked', () => {
+        // Arrange
+        const expectedUrl = '/help/article/203097431/how-do-i-manage-my-account';
+
+        // Act
+        accountInfo.load();
+
+        accountInfo.clickChangeEmailAddressLink();
+        browser.switchWindow(new RegExp(`^.*${expectedUrl}.*$`));
+
+        // Assert
+        expect(browser.getUrl()).toContain(expectedUrl);
+    });
+
     forEach(['firstName', 'lastName', 'phoneNumber', 'addressLine1', 'city', 'postcode'])
     .it('should display an error message immediately when %s input has been deleted', field => {
         // Act
