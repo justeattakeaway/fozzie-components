@@ -367,8 +367,8 @@ export default {
                 await this.loadConsumerDetails({ api: this.consumerApi, authToken: this.authToken });
                 this.$log.info('Consumer details fetched successfully', standardLogTags);
             } catch (error) {
-                let endpointAuthTokenExpired = 0;
                 // Debug - Temp logging - Check auth token state when GET fails
+                let endpointAuthTokenExpired = 0;                
                 try {
                     if (this.authToken) {
                         const { exp } = jwtDecode(this.authToken);
