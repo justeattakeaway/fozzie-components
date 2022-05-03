@@ -114,6 +114,18 @@ module.exports = class AccountInfo extends Page {
         return this.LinksAndButtons.saveChangesButton.cta.click();
     }
 
+    clickChangePassword () {
+        return this.LinksAndButtons.changePasswordButton.cta.click();
+    }
+
+    clickDeleteAccountLink () {
+        return this.LinksAndButtons.deleteAccountLink.cta.click();
+    }
+
+    clickChangeEmailAddressLink () {
+        return this.LinksAndButtons.changeEmailAddressLink.cta.click();
+    }
+
     isEmptyErrorMessageDisplayed (fieldName) {
         return this.fields[fieldName].emptyError.isDisplayed();
     }
