@@ -368,7 +368,7 @@ export default {
                 this.$log.info('Consumer details fetched successfully', standardLogTags);
             } catch (error) {
                 // Debug - Temp logging - Check auth token state when GET fails
-                let endpointAuthTokenExpired = 0;                
+                let endpointAuthTokenExpired = 0;
                 try {
                     if (this.authToken) {
                         const { exp } = jwtDecode(this.authToken);
