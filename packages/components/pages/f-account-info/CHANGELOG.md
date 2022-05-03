@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.21.2
 ------------------------------
-*May 5, 2022*
+*May 3, 2022*
 
 ### Changed
 - Added temp logging to record if auth expired or not
