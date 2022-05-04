@@ -4,27 +4,13 @@
       "build": {
         "dependsOn": ["^build"]
       },
-      "lint": {
-        "dependsOn": ["build"]
-      },
-      "lint:style": {
-        "dependsOn": ["build"]
-      },
-      "storybook:build": {
-        "dependsOn": ["build"]
-      },
-      "storybook:build-changed": {
-        "dependsOn": ["build"]
-      },
-      "storybook:serve": {
-        "dependsOn": ["build"]
-      },
-      "storybook:serve-changed": {
-        "dependsOn": ["build"]
-      },
-      "storybook:serve-static": {
-        "dependsOn": ["storybook:build"]
-      },
+      "lint": {},
+      "lint:style": {},
+      "storybook:build": {},
+      "storybook:build-changed": {},
+      "storybook:serve": {},
+      "storybook:serve-changed": {},
+      "storybook:serve-static": {},
       "storybook:deploy": {},
       "test": {},
       "test:consumer": {},
