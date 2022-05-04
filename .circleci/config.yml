@@ -66,7 +66,7 @@ commands:
             then
               yarn << parameters.command_name >>
             else
-              yarn << parameters.command_name >> --since master...HEAD
+              yarn << parameters.command_name >> --since=master...HEAD
             fi
 
   run_command_plus_dependencies:
@@ -84,7 +84,7 @@ commands:
             then
               yarn << parameters.command_name >>
             else
-              yarn << parameters.command_name >> --since master...HEAD --include-dependencies
+              yarn << parameters.command_name >> --since=master...HEAD --include-dependencies
             fi
 
   save_cache_dist_directories:
@@ -269,7 +269,7 @@ commands:
               then
                 yarn ci:test:visual:<< parameters.component_type >>
               else
-                yarn ci:test:visual:<< parameters.component_type >> --since master...HEAD
+                yarn ci:test:visual:<< parameters.component_type >> --since=master...HEAD
               fi
             else
               echo Skipping visual regression tests because PR is either in draft mode or has wip label applied
@@ -395,7 +395,7 @@ jobs:
     executor: node
     environment:
       # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
+      LERNA_ARGS: --concurrency=1
     steps:
       - checkout
       - restore_cache_dist_directories
@@ -422,7 +422,7 @@ jobs:
     executor: node
     environment:
       # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
+      LERNA_ARGS: --concurrency=1
     steps:
       - attach_workspace:
           at: .
@@ -443,7 +443,7 @@ jobs:
     executor: node
     environment:
       # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
+      LERNA_ARGS: --concurrency=1
     steps:
       - attach_workspace:
           at: .
@@ -459,7 +459,7 @@ jobs:
       component_type:
         type: string
     environment:
-      LERNA_ARGS: --concurrency 1
+      LERNA_ARGS: --concurrency=1
     steps:
       - attach_workspace:
           at: .
@@ -503,7 +503,7 @@ jobs:
     executor: node
     environment:
       # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
+      LERNA_ARGS: --concurrency=1
       RUN_ALL: true
     steps:
       - checkout
