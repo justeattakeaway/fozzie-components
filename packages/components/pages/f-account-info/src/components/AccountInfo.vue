@@ -368,19 +368,24 @@ export default {
                 this.$log.info('Consumer details fetched successfully', standardLogTags);
             } catch (error) {
                 // Debug - Temp logging - Check auth token state when GET fails
-                let endpointAuthTokenExpired = 0;
+                const expireEnum = {
+                    Unknown: -1,
+                    True: 1,
+                    False: 0
+                };
+                let endpointAuthTokenExpired = expireEnum.False;
                 try {
                     if (this.authToken) {
                         const { exp } = jwtDecode(this.authToken);
                         if (Date.now() >= exp * 1000) {
-                            endpointAuthTokenExpired = 1;
+                            endpointAuthTokenExpired = expireEnum.True;
                         }
                     } else {
-                        endpointAuthTokenExpired = 1;
+                        endpointAuthTokenExpired = expireEnum.True;
                     }
                 } catch {
                     // noop
-                    endpointAuthTokenExpired = -1;
+                    endpointAuthTokenExpired = expireEnum.Unknown;
                 }
                 // Debug ^
                 this.$log.error('Error fetching consumer details', error, standardLogTags, { endpointAuthTokenExpired });
