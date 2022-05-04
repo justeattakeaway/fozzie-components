@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.27.0
+------------------------------
+*May 3, 2022*
+
+### Changed
+ - Logic for retrieving note types as backend key is wrong and can't be changed
+
 
 v3.26.0
 ------------------------------
