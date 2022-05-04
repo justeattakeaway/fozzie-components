@@ -2,7 +2,7 @@
     <content-card-container
         #default="{
             card: {
-                title, subtitle, image, icon, description, code, url
+                title, subtitle, image, icon, description, voucherCode, url
             }
         }"
         :is-clickable="false"
@@ -19,7 +19,7 @@
             <template #footer>
                 <content-card-voucher-code
                     card-type="voucher-card"
-                    :code="code"
+                    :code="voucherCode"
                     :url="url" />
             </template>
         </content-card-body>
