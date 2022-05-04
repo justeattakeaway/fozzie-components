@@ -1,0 +1,54 @@
+{
+    "$schema": "https://turborepo.org/schema.json",
+    "pipeline": {
+      "build": {
+        "dependsOn": ["^build"]
+      },
+      "lint": {
+        "dependsOn": ["build"]
+      },
+      "lint:style": {
+        "dependsOn": ["build"]
+      },
+      "storybook:build": {
+        "dependsOn": ["build"]
+      },
+      "storybook:build-changed": {
+        "dependsOn": ["build"]
+      },
+      "storybook:serve": {
+        "dependsOn": ["build"]
+      },
+      "storybook:serve-changed": {
+        "dependsOn": ["build"]
+      },
+      "storybook:serve-static": {
+        "dependsOn": ["storybook:build"]
+      },
+      "storybook:deploy": {},
+      "test": {},
+      "test:consumer": {},
+      "ci:test:tools": {},
+      "ci:test:services": {},
+      "ci:test:atoms": {},
+      "ci:test:molecules": {},
+      "ci:test:organisms": {},
+      "ci:test:pages": {},
+      "ci:test:templates": {},
+      "test-component:chrome": {},
+      "ci:test-component:chrome:atoms": {},
+      "ci:test-component:chrome:molecules": {},
+      "ci:test-component:chrome:organisms": {},
+      "ci:test-component:chrome:pages": {},
+      "test-a11y:chrome": {},
+      "ci:test-a11y:chrome:atoms": {},
+      "ci:test-a11y:chrome:molecules": {},
+      "ci:test-a11y:chrome:organisms": {},
+      "ci:test-a11y:chrome:pages": {},
+      "test:visual": {},
+      "ci:test:visual:atoms": {},
+      "ci:test:visual:molecules": {},
+      "ci:test:visual:organisms": {},
+      "ci:test:visual:pages": {}
+    }
+  }

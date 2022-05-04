@@ -130,7 +130,7 @@ $height-adjustment-for-input-mobile: 48px;
     .c-noOffersFound-searchBox-background {
         position: absolute;
         top: spacing(d);
-        left:0;
+        left: 0;
         height: $height-adjustment-for-background-desktop;
         background-color: $color-white;
         width: 100%;
