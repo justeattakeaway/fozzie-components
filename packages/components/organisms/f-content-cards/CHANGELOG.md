@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v8.0.0-alpha.8
+------------------------------
+*May 4, 2022*
+
+### Changed
+- Updated export to use new cards
+- Adjusted card body component
+
+
 v8.0.0-alpha.7
 ------------------------------
 *April 20, 2022*

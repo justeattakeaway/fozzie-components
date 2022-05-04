@@ -9,7 +9,7 @@ const MOCK_CARD = {
     description: ['__TEST_DESCRIPTION__'],
     ctaText: '__TEST_CTA_TEXT__',
     url: 'https://example.com',
-    code: 'SPECIALVOUCHER'
+    voucherCode: 'SPECIALVOUCHER'
 };
 const MOCK_COPY_LABEL = 'Copy Code';
 const MOCK_COPY_LABEL_COPIED = 'Offer code copied';
@@ -80,7 +80,7 @@ describe('VoucherCard.vue', () => {
         const code = wrapper.find('[data-test-id="contentCard-voucher-card-code"]');
 
         // Assert
-        expect(code.text()).toEqual(MOCK_CARD.code);
+        expect(code.text()).toEqual(MOCK_CARD.voucherCode);
     });
 
     it('should copy code label when card is passed to the prop', () => {
