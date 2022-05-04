@@ -64,9 +64,9 @@ commands:
           command: |
             if [ "${RUN_ALL}" == "true" ];
             then
-              yarn << parameters.command_name >> --force
+              yarn << parameters.command_name >>
             else
-              yarn << parameters.command_name >> --since=master...HEAD --force
+              yarn << parameters.command_name >> --since=master...HEAD
             fi
 
   run_command_plus_dependencies:
@@ -82,9 +82,9 @@ commands:
           command: |
             if [ "${RUN_ALL}" == "true" ];
             then
-              yarn << parameters.command_name >> --force
+              yarn << parameters.command_name >>
             else
-              yarn << parameters.command_name >> --since=master...HEAD --include-dependencies --force
+              yarn << parameters.command_name >> --since=master...HEAD --include-dependencies
             fi
 
   save_cache_dist_directories:
@@ -227,9 +227,9 @@ commands:
           command: |
             if [ "${RUN_ALL}" == "true" ];
             then
-              yarn storybook:build --force
+              yarn storybook:build
             else
-              yarn storybook:build-changed --force
+              yarn storybook:build-changed
             fi
 
   component_tests:
@@ -240,7 +240,7 @@ commands:
     steps:
       - run_command:
           command_description: Run component tests for packages
-          command_name: "ci:test-component:chrome:<< parameters.component_type >> --force"
+          command_name: "ci:test-component:chrome:<< parameters.component_type >>"
 
   accessibility_tests:
     description: Run Accessibility Tests
@@ -250,7 +250,7 @@ commands:
     steps:
       - run_command:
           command_description: Run accessibility tests for packages
-          command_name: "ci:test-a11y:chrome:<< parameters.component_type >> --force"
+          command_name: "ci:test-a11y:chrome:<< parameters.component_type >>"
 
   visual_regression_tests:
     description: Run Percy Visual Regression Tests
@@ -267,9 +267,9 @@ commands:
             then
               if [ "${RUN_ALL}" == "true" ];
               then
-                yarn ci:test:visual:<< parameters.component_type >> --force
+                yarn ci:test:visual:<< parameters.component_type >>
               else
-                yarn ci:test:visual:<< parameters.component_type >> --since=master...HEAD --force
+                yarn ci:test:visual:<< parameters.component_type >> --since=master...HEAD
               fi
             else
               echo Skipping visual regression tests because PR is either in draft mode or has wip label applied
@@ -422,7 +422,7 @@ jobs:
     executor: node
     environment:
       # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency=1
+      LERNA_ARGS: --concurrency=1 --force
     steps:
       - attach_workspace:
           at: .
@@ -459,7 +459,7 @@ jobs:
       component_type:
         type: string
     environment:
-      LERNA_ARGS: --concurrency=1
+      LERNA_ARGS: --concurrency=1 --force
     steps:
       - attach_workspace:
           at: .
@@ -468,6 +468,8 @@ jobs:
 
   browser-tests:
     executor: node
+    environment:
+      LERNA_ARGS: --concurrency=1 --force
     parameters:
       component_type:
         type: string
@@ -503,7 +505,7 @@ jobs:
     executor: node
     environment:
       # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency=1
+      LERNA_ARGS: --concurrency=1 --force
       RUN_ALL: true
     steps:
       - checkout
