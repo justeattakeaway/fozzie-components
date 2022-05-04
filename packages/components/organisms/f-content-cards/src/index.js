@@ -11,7 +11,6 @@ import {
     PostOrderCard,
     SkeletonLoader,
     TermsAndConditionsCard,
-    VoucherCard,
     HomePromotionCard1,
     HomePromotionCard2,
     GroupHeaderCard,
@@ -19,12 +18,18 @@ import {
     StampCardPromotionCard
 } from './components/cardTemplates';
 
+import PromotionCardOne from './components/cards/PromotionCardOne.vue';
+import PromotionCardTwo from './components/cards/PromotionCardTwo.vue';
+import VoucherCard from './components/cards/VoucherCard.vue';
+
 export {
     CARDSOURCE_METADATA,
     CARDSOURCE_CUSTOM,
     ContentCards,
     FirstTimeCustomerCard,
     PromotionCard,
+    PromotionCardOne,
+    PromotionCardTwo,
     PostOrderCard,
     SkeletonLoader,
     TermsAndConditionsCard,
