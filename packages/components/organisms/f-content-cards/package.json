@@ -3,7 +3,7 @@
   "description": "Fozzie Content Cards",
   "version": "8.0.0-alpha.8",
   "main": "dist/f-content-cards.umd.min.js",
-  "maxBundleSize": "75kB",
+  "maxBundleSize": "80kB",
   "files": [
     "dist",
     "docs"
