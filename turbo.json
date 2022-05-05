@@ -1,40 +1,104 @@
 {
     "$schema": "https://turborepo.org/schema.json",
+    "remoteCache": {
+      "signature": true
+    },
     "pipeline": {
       "build": {
         "dependsOn": ["^build"]
       },
-      "lint": {},
-      "lint:style": {},
-      "storybook:build": {},
-      "storybook:build-changed": {},
-      "storybook:serve": {},
-      "storybook:serve-changed": {},
-      "storybook:serve-static": {},
-      "storybook:deploy": {},
-      "test": {},
-      "test:consumer": {},
-      "ci:test:tools": {},
-      "ci:test:services": {},
-      "ci:test:atoms": {},
-      "ci:test:molecules": {},
-      "ci:test:organisms": {},
-      "ci:test:pages": {},
-      "ci:test:templates": {},
-      "test-component:chrome": {},
-      "ci:test-component:chrome:atoms": {},
-      "ci:test-component:chrome:molecules": {},
-      "ci:test-component:chrome:organisms": {},
-      "ci:test-component:chrome:pages": {},
-      "test-a11y:chrome": {},
-      "ci:test-a11y:chrome:atoms": {},
-      "ci:test-a11y:chrome:molecules": {},
-      "ci:test-a11y:chrome:organisms": {},
-      "ci:test-a11y:chrome:pages": {},
-      "test:visual": {},
-      "ci:test:visual:atoms": {},
-      "ci:test:visual:molecules": {},
-      "ci:test:visual:organisms": {},
-      "ci:test:visual:pages": {}
+      "lint": {
+        "cache": false
+      },
+      "lint:style": {
+        "cache": false
+      },
+      "storybook:build": {
+        "cache": false
+      },
+      "storybook:build-changed": {
+        "cache": false
+      },
+      "storybook:serve": {
+        "cache": false
+      },
+      "storybook:serve-changed": {
+        "cache": false
+      },
+      "storybook:serve-static": {
+        "cache": false
+      },
+      "storybook:deploy": {
+        "cache": false
+      },
+      "test": {
+        "cache": false
+      },
+      "ci:test:tools": {
+        "cache": false
+      },
+      "ci:test:services": {
+        "cache": false
+      },
+      "ci:test:atoms": {
+        "cache": false
+      },
+      "ci:test:molecules": {
+        "cache": false
+      },
+      "ci:test:organisms": {
+        "cache": false
+      },
+      "ci:test:pages": {
+        "cache": false
+      },
+      "ci:test:templates": {
+        "cache": false
+      },
+      "test-component:chrome": {
+        "cache": false
+      },
+      "ci:test-component:chrome:atoms": {
+        "cache": false
+      },
+      "ci:test-component:chrome:molecules": {
+        "cache": false
+      },
+      "ci:test-component:chrome:organisms": {
+        "cache": false
+      },
+      "ci:test-component:chrome:pages": {
+        "cache": false
+      },
+      "test-a11y:chrome": {
+        "cache": false
+      },
+      "ci:test-a11y:chrome:atoms": {
+        "cache": false
+      },
+      "ci:test-a11y:chrome:molecules": {
+        "cache": false
+      },
+      "ci:test-a11y:chrome:organisms": {
+        "cache": false
+      },
+      "ci:test-a11y:chrome:pages": {
+        "cache": false
+      },
+      "test:visual": {
+        "cache": false
+      },
+      "ci:test:visual:atoms": {
+        "cache": false
+      },
+      "ci:test:visual:molecules": {
+        "cache": false
+      },
+      "ci:test:visual:organisms": {
+        "cache": false
+      },
+      "ci:test:visual:pages": {
+        "cache": false
+      }
     }
   }
