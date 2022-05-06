@@ -27,6 +27,9 @@
                 :class="$style['c-countrySelector-text']">
                 {{ copy.selectYourCountryText }}
             </span>
+            <chevron-right-icon
+                v-if="isBelowMid"
+                :class="$style['c-countrySelector-back-arrow']" />
         </button>
 
         <v-popover
@@ -48,11 +51,13 @@
 
 <script>
 import VPopover from '@justeat/f-popover';
+import { ChevronRightIcon } from '@justeattakeaway/pie-icons-vue';
 import CountrySelectorPanel from './CountrySelectorPanel.vue';
 import FlagIcon from './FlagIcon.vue';
 
 export default {
     components: {
+        ChevronRightIcon,
         CountrySelectorPanel,
         FlagIcon,
         VPopover
@@ -156,5 +161,10 @@ export default {
         margin: 0 spacing(d);
         float: left;
     }
+}
+
+.c-countrySelector-back-arrow {
+    float: right;
+    height: 26px;
 }
 </style>

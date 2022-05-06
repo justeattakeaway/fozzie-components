@@ -62,7 +62,7 @@
                 $style['c-nav-featureLink--hideAboveMid']
             ]">
             <gift-icon
-                :class="{ [$style['c-nav-icon--alt']]: isAltColour }" />
+                :class="[isAltColour ? [$style['c-nav-icon--alt']] : $style['c-nav-icon--gift']]" />
             <span class="is-visuallyHidden">
                 {{ copy.offers.text }}
             </span>
@@ -161,7 +161,7 @@
                         ]"
                         @click.prevent="toggleUserMenu"
                         @keydown.space.prevent="toggleUserMenu">
-                        <profile-icon
+                        <user-circle-outline-icon
                             :class="[
                                 $style['c-nav-icon'],
                                 $style['c-nav-icon--profile'],
@@ -243,7 +243,16 @@
                         })"
                         :is-alt-colour="isAltColour"
                         :background-theme="headerBackgroundTheme"
-                        data-test-id="help-link" />
+                        data-test-id="help-link">
+                        <template #icon>
+                            <help-circle-outline-icon
+                                :class="[
+                                    $style['c-nav-icon'],
+                                    $style['c-nav-icon--help'],
+                                    { [$style['c-nav-icon--alt']]: isAltColour }
+                                ]" />
+                        </template>
+                    </nav-link>
                 </li>
 
                 <li
@@ -265,11 +274,16 @@
 
 <script>
 // Fozzie imports
-import { MopedIcon, GiftIcon, ProfileIcon } from '@justeat/f-vue-icons';
 import { axiosServices, windowServices } from '@justeat/f-services';
 import VPopover from '@justeat/f-popover';
 
 // Internal
+import {
+    GiftIcon,
+    HelpCircleOutlineIcon,
+    MopedIcon,
+    UserCircleOutlineIcon
+} from '@justeattakeaway/pie-icons-vue';
 import CountrySelector from './CountrySelector.vue';
 import NavLink from './NavLink.vue';
 import UserNavigationPanel from './UserNavigationPanel.vue';
@@ -281,9 +295,10 @@ export default {
     components: {
         CountrySelector,
         GiftIcon,
+        HelpCircleOutlineIcon,
         MopedIcon,
         NavLink,
-        ProfileIcon,
+        UserCircleOutlineIcon,
         UserNavigationPanel,
         VPopover
     },
@@ -787,10 +802,26 @@ export default {
 
 .c-nav-icon--profile,
 .c-nav-icon--delivery,
+.c-nav-icon--help,
 .c-nav-icon--offers {
     @include media('<=mid') {
         & path {
             fill: $nav-icon-color--mobileWhiteBg;
+        }
+    }
+}
+
+.c-nav-icon--help {
+    @include media('<=mid') {
+        margin-left: 20px;
+        margin-right: spacing(c);
+    }
+}
+
+.c-nav-icon--gift {
+    @include media('<=mid') {
+        & path {
+            fill: $color-interactive-brand;
         }
     }
 }
@@ -840,7 +871,7 @@ export default {
     &:after {
         position: absolute;
         height: $nav-toggleIcon-height;
-        background-color: $nav-toggleIcon-color;
+        background-color: $color-interactive-brand;
         border-radius: $nav-toggleIcon-borderRadius;
 
         .c-header--transparent & {
@@ -877,6 +908,7 @@ export default {
         &:before,
         &:after {
             top: 0;
+            background-color: $nav-toggleIcon-color;
         }
         &:before {
             transform: rotate(45deg);
