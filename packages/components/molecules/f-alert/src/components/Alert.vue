@@ -107,8 +107,6 @@ export default {
                 danger: 'AlertCircleFilledIcon'
             };
 
-            console.log(icon);
-
             return icon[this.type];
         }
     },
