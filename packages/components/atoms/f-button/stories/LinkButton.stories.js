@@ -1,5 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
-import { CollectionIcon } from '@justeat/f-vue-icons';
+import { WalkingIcon } from '@justeattakeaway/pie-icons-vue';
 import SharedButtonArgTypes from './sharedButtonArgTypes';
 import FButton from '../src/components/Button.vue';
 
@@ -11,7 +11,7 @@ export default {
 export const LinkButtonComponent = (args, { argTypes }) => ({
     components: {
         FButton,
-        CollectionIcon
+        WalkingIcon
     },
     props: Object.keys(argTypes),
     template: `
@@ -30,11 +30,11 @@ export const LinkButtonComponent = (args, { argTypes }) => ({
                 :href="href"
                 :hasIcon="hasIcon">
                 <template #leading-icon>
-                    <collection-icon />
+                    <walking-icon />
                 </template>
                 {{ button.text }}
                 <template #trailing-icon>
-                    <collection-icon />
+                    <walking-icon />
                 </template>
             </f-button>
         </div>

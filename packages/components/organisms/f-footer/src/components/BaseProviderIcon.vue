@@ -3,14 +3,8 @@
 </template>
 
 <script>
-// Social and Payment icons
+// Payment icons
 import {
-    SocialFacebookIcon as FacebookIcon,
-    SocialTwitterIcon as TwitterIcon,
-    SocialYoutubeIcon as YoutubeIcon,
-    SocialPinterestIcon as PinterestIcon,
-    SocialInstagramIcon as InstagramIcon,
-    SocialRssIcon as RssIcon,
     PaymentAmexIcon as AmexIcon,
     PaymentAmexSafekeyIcon as AmexSafekeyIcon,
     PaymentDankortIcon as DankortIcon,
@@ -22,6 +16,17 @@ import {
     PaymentVisaIcon as VisaIcon,
     PaymentVisaVerifiedIcon as VisaVerifiedIcon
 } from '@justeat/f-vue-icons';
+
+// Social icons
+import {
+    SocialFacebookIcon as FacebookIcon,
+    SocialTwitterIcon as TwitterIcon,
+    SocialYoutubeIcon as YoutubeIcon,
+    SocialPinterestIcon as PinterestIcon,
+    SocialInstagramIcon as InstagramIcon,
+    RssIcon
+} from '@justeattakeaway/pie-icons-vue';
+
 import iconPropsMixin from '../mixins/iconProps.mixin';
 
 export default {

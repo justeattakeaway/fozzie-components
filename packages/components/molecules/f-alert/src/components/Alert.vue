@@ -27,7 +27,7 @@
                 button-type="ghostTertiary"
                 data-test-id="alert-dismiss"
                 @click.native="dismiss">
-                <cross-icon
+                <close-small-icon
                     :class="[$style['c-alert-dismiss-icon']]"
                 />
                 <span class="is-visuallyHidden">
@@ -44,12 +44,12 @@
 
 <script>
 import {
-    CrossIcon,
-    DangerIcon,
-    InfoIcon,
-    SuccessIcon,
-    WarningIcon
-} from '@justeat/f-vue-icons';
+    CloseSmallIcon,
+    AlertCircleFilledIcon,
+    InfoCircleFilledIcon,
+    CheckCircleFilledIcon,
+    AlertTriangleFilledIcon
+} from '@justeattakeaway/pie-icons-vue';
 
 import {
     globalisationServices
@@ -61,11 +61,11 @@ import tenantConfigs from '../tenants';
 export default {
     name: 'FAlert',
     components: {
-        CrossIcon,
-        DangerIcon,
-        InfoIcon,
-        SuccessIcon,
-        WarningIcon,
+        CloseSmallIcon,
+        AlertCircleFilledIcon,
+        InfoCircleFilledIcon,
+        CheckCircleFilledIcon,
+        AlertTriangleFilledIcon,
         FButton
     },
     props: {
@@ -100,7 +100,16 @@ export default {
     },
     computed: {
         icon () {
-            return `${this.type}Icon`;
+            const icon = {
+                success: 'CheckCircleFilledIcon',
+                warning: 'AlertTriangleFilledIcon',
+                info: 'infoCircleFilledIcon',
+                danger: 'AlertCircleFilledIcon'
+            };
+
+            console.log(icon);
+
+            return icon[this.type];
         }
     },
     methods: {
