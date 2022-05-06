@@ -160,7 +160,7 @@ describe('Alert', () => {
                 const result = wrapper.vm.icon;
 
                 // Assert
-                expect(result).toBe('infoIcon');
+                expect(result).toBe('infoCircleFilledIcon');
             });
         });
     });
