@@ -29,7 +29,7 @@
             </span>
             <chevron-right-icon
                 v-if="isBelowMid"
-                :class="$style['c-countrySelector-openCountryListIcon']" />
+                :class="$style['c-countrySelector-openPanelIcon']" />
         </button>
 
         <v-popover
@@ -163,7 +163,7 @@ export default {
     }
 }
 
-.c-countrySelector-openCountryListIcon {
+.c-countrySelector-openPanelIcon {
     float: right;
     height: 26px;
 }

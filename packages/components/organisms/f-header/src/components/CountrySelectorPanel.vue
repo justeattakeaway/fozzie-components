@@ -16,7 +16,7 @@
                     :aria-label="copy.goBackToMainMenu"
                     @click="$emit('closeCountrySelector')">
                     <arrow-long-left-small-icon
-                        :class="$style['c-countrySelector-goBackIcon']" />
+                        :class="$style['c-countrySelector-closePanelIcon']" />
                 </f-button>
 
                 <h3
@@ -164,7 +164,7 @@ $countrySelector-text-bg-hover : $color-container-subtle;
             display: none;
         }
 
-        .c-countrySelector-goBackIcon {
+        .c-countrySelector-closePanelIcon {
             width: $countrySelector-arrowIcon-width;
             height: $countrySelector-arrowIcon-height;
         }
