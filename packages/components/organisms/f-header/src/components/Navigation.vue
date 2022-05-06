@@ -61,8 +61,13 @@
                 $style['c-nav-featureLink'],
                 $style['c-nav-featureLink--hideAboveMid']
             ]">
+
             <gift-icon
-                :class="[isAltColour ? [$style['c-nav-icon--alt']] : $style['c-nav-icon--gift']]" />
+                :class="[
+                    $style['c-nav-icon--mobileHeaderIcon'],
+                    { [$style['c-nav-icon--alt']]: isAltColour }
+                ]" />
+
             <span class="is-visuallyHidden">
                 {{ copy.offers.text }}
             </span>
@@ -787,6 +792,7 @@ export default {
 .c-nav-icon {
     width: $nav-icon-size;
     height: $nav-icon-size;
+
     @include media('>mid') {
         margin-right: spacing(a);
         & path {
@@ -818,11 +824,11 @@ export default {
     }
 }
 
-.c-nav-icon--gift {
-    @include media('<=mid') {
-        & path {
-            fill: $color-interactive-brand;
-        }
+.c-nav-icon--mobileHeaderIcon {
+    margin: 0;
+
+    & path {
+        fill: $color-interactive-brand;
     }
 }
 
@@ -831,6 +837,7 @@ export default {
         fill: $nav-icon-color--transparent;
     }
 }
+
 
 // Navigation Toggle
 // Only shown at narrow widths (Hamburger Menu icon)

@@ -10,10 +10,12 @@ v9.15.0
 
 ### Added
 - `@justeattakeaway/pie-icons-vue` icons.
+- `Help` icon.
+- `Chevron` icon to country selector.
 
 ### Changed
-- Hamburger and give icon colours.
-- Small css changes.
+- Hamburger and `Gift` icon colours in mobile view.
+- Padding and margin changes to accommodate new icons.
 
 
 v9.14.0
