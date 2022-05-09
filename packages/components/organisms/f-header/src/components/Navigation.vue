@@ -927,11 +927,9 @@ export default {
 
     &.c-nav-toggle--altColour {
         & > .c-nav-toggle-icon {
-            background-color: $nav-toggleIcon-bg;
-
             &:before,
             &:after {
-                background-color: white;
+                background-color: $nav-icon-color--transparent;
             }
         }
     }
