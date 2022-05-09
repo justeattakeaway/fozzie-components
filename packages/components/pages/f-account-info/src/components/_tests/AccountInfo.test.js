@@ -223,7 +223,8 @@ describe('AccountInfo', () => {
             expect(logMocks.error).toHaveBeenCalledWith(
                 expect.any(String),
                 expect.any(Error),
-                expect.arrayContaining(['account-pages', 'account-info'])
+                expect.arrayContaining(['account-pages', 'account-info']),
+                expect.any(Object)
             );
         });
 
