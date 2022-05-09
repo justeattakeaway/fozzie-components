@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.7.0
 ------------------------------
-*April 29, 2022*
+*May 9, 2022*
 
 ### Changed
 - CircleCI docker image to use latest Node 14 + Chrome
