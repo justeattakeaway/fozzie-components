@@ -223,8 +223,18 @@ describe('AccountInfo', () => {
             expect(logMocks.error).toHaveBeenCalledWith(
                 expect.any(String),
                 expect.any(Error),
-                expect.arrayContaining(['account-pages', 'account-info'])
+                expect.arrayContaining(['account-pages', 'account-info']),
+                expect.any(Object)
             );
+        });
+
+        it('should contain the correct url to change password', async () => {
+            // Arrange & Act
+            wrapper = await mountAccountInfo();
+            const element = wrapper.find('[data-test-id="account-info-change-password-button"]');
+
+            // Assert
+            expect(element.attributes('href')).toBe('/account/change-password?returnurl=/account/info');
         });
     });
 

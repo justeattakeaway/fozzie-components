@@ -1,5 +1,6 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import retryWrapper from '../axios-retry-wrapper';
 import addressService from '../services/addressService';
 import {
     VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, DOB_REQUIRED_ISSUE, AGE_VERIFICATION_ISSUE, ERROR_TYPES,
@@ -249,8 +250,12 @@ export default {
          */
         getNotesConfiguration: async ({ commit, state }, { url, timeout }) => {
             const { data } = await checkoutApi.getNoteConfiguration(url, timeout);
-            const isSplitNotesEnabled = !data?.customerNotes?.serviceTypes[state.serviceType].orderNoteAccepted;
-            commit(UPDATE_NOTES_CONFIGURATION, { ...data?.customerNotes?.serviceTypes, isSplitNotesEnabled });
+            if (data?.customerNotes.serviceTypes) {
+                // This has to be done because the dinein key is sent to us as 'dineIn` ....
+                const notesByServiceType = Object.fromEntries(Object.entries(data.customerNotes.serviceTypes).map(([k, v]) => [k.toLowerCase(), v]));
+                const isSplitNotesEnabled = !notesByServiceType[state.serviceType].orderNoteAccepted;
+                commit(UPDATE_NOTES_CONFIGURATION, { ...notesByServiceType, isSplitNotesEnabled });
+            }
         },
 
 
@@ -323,7 +328,7 @@ export default {
                 },
                 timeout
             };
-
+            retryWrapper(axios, { retryAmount: 3 });
             const { data } = await axios.get(url, config);
 
             const addressDetails = addressService.getClosestAddress(data, tenant, currentPostcode);

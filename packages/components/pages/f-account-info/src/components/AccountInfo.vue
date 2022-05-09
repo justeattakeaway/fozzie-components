@@ -191,7 +191,7 @@
                 :class="[$style['c-accountInfo-changePasswordButton']]"
                 data-test-id="account-info-change-password-button"
                 button-type="secondary"
-                href="/change-password?returnurl=/account/info"
+                href="/account/change-password?returnurl=/account/info"
                 button-size="large"
                 is-full-width
                 action-type="submit">
@@ -214,6 +214,7 @@
 </template>
 
 <script>
+import jwtDecode from 'jwt-decode';
 import { mapActions, mapState } from 'vuex';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import FErrorMessage from '@justeat/f-error-message';
@@ -366,7 +367,28 @@ export default {
                 await this.loadConsumerDetails({ api: this.consumerApi, authToken: this.authToken });
                 this.$log.info('Consumer details fetched successfully', standardLogTags);
             } catch (error) {
-                this.$log.error('Error fetching consumer details', error, standardLogTags);
+                // Debug - Temp logging - Check auth token state when GET fails
+                const expireEnum = {
+                    Unknown: -1,
+                    True: 1,
+                    False: 0
+                };
+                let endpointAuthTokenExpired = expireEnum.False;
+                try {
+                    if (this.authToken) {
+                        const { exp } = jwtDecode(this.authToken);
+                        if (Date.now() >= exp * 1000) {
+                            endpointAuthTokenExpired = expireEnum.True;
+                        }
+                    } else {
+                        endpointAuthTokenExpired = expireEnum.True;
+                    }
+                } catch {
+                    // noop
+                    endpointAuthTokenExpired = expireEnum.Unknown;
+                }
+                // Debug ^
+                this.$log.error('Error fetching consumer details', error, standardLogTags, { endpointAuthTokenExpired });
                 this.handleLoadErrorState(error);
             } finally {
                 this.$nextTick(() => {
