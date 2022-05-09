@@ -924,5 +924,16 @@ export default {
             transform: rotate(-45deg);
         }
     }
+
+    &.c-nav-toggle--altColour {
+        & > .c-nav-toggle-icon {
+            background-color: $nav-toggleIcon-bg;
+
+            &:before,
+            &:after {
+                background-color: white;
+            }
+        }
+    }
 }
 </style>
