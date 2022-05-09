@@ -101,6 +101,11 @@ export default {
         fallbackImage: {
             type: String,
             default: ''
+        },
+        // An optional library for tracking rendering performance
+        performanceTracker: {
+            type: Object,
+            default: null
         }
     },
     data () {
@@ -134,6 +139,13 @@ export default {
     },
     created () {
         this.isToggleSelected = this.isSelected;
+    },
+    mounted () {
+        if (this.performanceTracker) {
+            this.$nextTick(() => {
+                this.performanceTracker.time('carouselImageTile');
+            });
+        }
     },
     methods: {
         /**
