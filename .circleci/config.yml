@@ -51,8 +51,7 @@ commands:
       - run:
           name: Install node dependencies
           command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
-      - browser-tools/install-browser-tools:
-          chrome-version: 100.0.4896
+      - browser-tools/install-browser-tools
 
   run_command:
     parameters:
