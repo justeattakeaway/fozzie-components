@@ -6,6 +6,7 @@ version: 2.1
 
 orbs:
   slack: circleci/slack@4.1.3
+  browser-tools: circleci/browser-tools@1.3.0
 
 commands:
   set_deploy_key:
@@ -50,6 +51,8 @@ commands:
       - run:
           name: Install node dependencies
           command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+      - browser-tools/install-browser-tools:
+          chrome-version: 101.0.4951
 
   run_command:
     parameters:
