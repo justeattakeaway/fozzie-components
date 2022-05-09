@@ -7,14 +7,14 @@ v7.7.0
 ------------------------------
 *May 9, 2022*
 
+### Updated
+- Icons in `f-footer`, `f-alert`, `f-button`, `f-error-message`, `f-form-field` and `f-user-message`
+
 ### Removed
-- `f-vue-icons`
+- `@justeat/f-vue-icons` from the above components
 
 ### Added
--` @justeattakeaway/pie-icons-vue`
-
-### Updated
-- Icons in `f-footer`, `f-alert`, `f-button`, `f-error-message`, `f-form-field`, `f-user-message`
+- `@justeattakeaway/pie-icons-vue` to the above components
 
 
 v7.6.0
