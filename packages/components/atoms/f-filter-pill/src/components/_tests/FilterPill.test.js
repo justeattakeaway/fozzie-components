@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import FilterPill from '../FilterPill.vue';
 
 describe('FilterPill', () => {
@@ -170,6 +170,26 @@ describe('FilterPill', () => {
                 // Assert
                 expect(displayTextElement.attributes()['aria-hidden']).toBe(undefined);
                 expect(displayNumberElement.attributes()['aria-hidden']).toBe(undefined);
+            });
+        });
+
+        describe('performance tracking', () => {
+            it('calls the performance tracker with `sidebarFilterPill` after rendering if prop value exists', async () => {
+                // Arrange
+                const performanceTrackerMock = {
+                    time: jest.fn()
+                };
+
+                const propsData = {
+                    performanceTracker: performanceTrackerMock
+                };
+
+                // Act
+                await mount(FilterPill, { propsData });
+
+                // Assert
+                expect(performanceTrackerMock.time).toHaveBeenCalledTimes(1);
+                expect(performanceTrackerMock.time).toHaveBeenCalledWith('sidebarFilterPill');
             });
         });
     });

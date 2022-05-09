@@ -105,6 +105,11 @@ export default {
         screenReaderMessage: {
             type: String,
             default: null
+        },
+        // An optional library for tracking rendering performance
+        performanceTracker: {
+            type: Object,
+            default: null
         }
     },
     data () {
@@ -122,6 +127,13 @@ export default {
     },
     created () {
         this.isToggleSelected = this.isSelected;
+    },
+    mounted () {
+        if (this.performanceTracker) {
+            this.$nextTick(() => {
+                this.performanceTracker.time('sidebarFilterPill');
+            });
+        }
     },
     methods: {
         toggleFilter () {
