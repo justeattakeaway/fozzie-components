@@ -2,9 +2,10 @@
     "extends": [
       "config:base",
       ":automergeMinor",
-      ":automergeRequireAllStatusChecks"
+      ":automergeRequireAllStatusChecks",
+      "schedule:earlyMondays"
     ],
-    "commitMessagePrefix": "renovate -",
+    "commitMessagePrefix": "renovate - #trivial -",
     "packageRules": [
       {
         "packagePatterns": [
@@ -15,8 +16,5 @@
           "groupSlug": "all-minor-patch"
         }
       }
-    ],
-    "schedule": [
-        "every weekday"
     ]
   }
