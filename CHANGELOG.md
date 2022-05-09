@@ -3,6 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.7.0
+------------------------------
+*May 9, 2022*
+
+### Removed
+- `f-vue-icons`
+
+### Added
+-` @justeattakeaway/pie-icons-vue`
+
+### Updated
+- Icons in `f-footer`, `f-alert`, `f-button`, `f-error-message`, `f-form-field`, `f-user-message`
+
+
 v7.6.0
 ------------------------------
 *April 13, 2022*
