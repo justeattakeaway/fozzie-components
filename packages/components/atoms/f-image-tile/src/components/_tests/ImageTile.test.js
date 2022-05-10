@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, mount } from '@vue/test-utils';
 import ImageTile from '../ImageTile.vue';
 
 describe('ImageTile', () => {
@@ -166,6 +166,29 @@ describe('ImageTile', () => {
 
                 // Assert
                 expect(wrapper.vm.isToggleSelected).toBe(expectedValue);
+            });
+        });
+
+        describe('performanceTracker', () => {
+            it('calls the performance tracker with `performanceTrackerLabel` after rendering if prop value exists', async () => {
+                // Arrange
+                const performanceTrackerMock = {
+                    time: jest.fn()
+                };
+
+                const propsData = {
+                    performanceTracker: performanceTrackerMock,
+                    performanceTrackerLabel: 'carouselImageTile'
+                };
+
+                // Act
+                await mount(ImageTile, {
+                    propsData
+                });
+
+                // Assert
+                expect(performanceTrackerMock.time).toHaveBeenCalledTimes(1);
+                expect(performanceTrackerMock.time).toHaveBeenCalledWith(propsData.performanceTrackerLabel);
             });
         });
     });
