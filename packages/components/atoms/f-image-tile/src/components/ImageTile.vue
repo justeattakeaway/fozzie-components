@@ -106,6 +106,10 @@ export default {
         performanceTracker: {
             type: Object,
             default: null
+        },
+        performanceTrackerLabel: {
+            type: String,
+            default: null
         }
     },
     data () {
@@ -143,7 +147,7 @@ export default {
     mounted () {
         if (this.performanceTracker) {
             this.$nextTick(() => {
-                this.performanceTracker.time('carouselImageTile');
+                this.performanceTracker.time(this.performanceTrackerLabel);
             });
         }
     },

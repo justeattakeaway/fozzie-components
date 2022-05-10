@@ -8,7 +8,7 @@ v0.12.0
 *May 9, 2022*
 
 ### Added
-- Optional performance tracker prop
+- Optional `performanceTracker` prop & `performanceTrackerLabel` prop
 
 v0.11.1
 ------------------------------
