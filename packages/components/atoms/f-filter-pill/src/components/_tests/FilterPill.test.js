@@ -173,15 +173,16 @@ describe('FilterPill', () => {
             });
         });
 
-        describe('performance tracking', () => {
-            it('calls the performance tracker with `sidebarFilterPill` after rendering if prop value exists', async () => {
+        describe('performanceTracker', () => {
+            it('calls the performance tracker with `performanceTrackerLabel` after rendering if prop value exists', async () => {
                 // Arrange
                 const performanceTrackerMock = {
                     time: jest.fn()
                 };
 
                 const propsData = {
-                    performanceTracker: performanceTrackerMock
+                    performanceTracker: performanceTrackerMock,
+                    performanceTrackerLabel: 'sidebarFilterPill'
                 };
 
                 // Act
@@ -189,7 +190,7 @@ describe('FilterPill', () => {
 
                 // Assert
                 expect(performanceTrackerMock.time).toHaveBeenCalledTimes(1);
-                expect(performanceTrackerMock.time).toHaveBeenCalledWith('sidebarFilterPill');
+                expect(performanceTrackerMock.time).toHaveBeenCalledWith(propsData.performanceTrackerLabel);
             });
         });
     });
