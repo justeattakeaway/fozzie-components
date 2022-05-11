@@ -63,6 +63,7 @@ import ModalCopiedVoucherCode from './ModalCopiedVoucherCode.vue';
 
 export default {
     name: 'OffersResults',
+
     components: {
         ContentCards,
         PromotionCard,
@@ -74,6 +75,7 @@ export default {
         SkeletonLoader,
         ModalCopiedVoucherCode
     },
+
     data: () => ({
         enabledCardTypes: [
             'Header_Card',
@@ -94,11 +96,13 @@ export default {
         pushToDataLayer: () => {},
         tags: 'offers'
     }),
+
     computed: {
         ...mapState(VUEX_MODULE_NAMESPACE_OFFERS, [
             'brazeApiKey',
             'globalUserId'
         ]),
+
         /**
          * Determines the tenant based on the currently selected locale in order to choose correct translations
          * @return {String}
@@ -116,6 +120,7 @@ export default {
             }[this.locale] || 'uk';
         }
     },
+
     /**
      * Handles the setting of appboy on the window in order to prevent a race condition between internally
      * and externally loaded versions of the braze sdk
@@ -130,6 +135,7 @@ export default {
             }
         };
     },
+
     methods: {
         /**
          * Maps given card type to component name
@@ -153,6 +159,7 @@ export default {
             }
             return false;
         },
+
         /**
          * Consumes the number of cards received from braze by the content cards component
          * @param {number} cards
@@ -169,6 +176,7 @@ export default {
                 );
             }
         },
+
         /**
          * Handles a successful load of the content cards component
          */
@@ -182,6 +190,7 @@ export default {
                 }
             );
         },
+
         /**
          * Handles errors emitted by the content cards component
          * @param {Error} error
@@ -205,6 +214,7 @@ export default {
                 }
             );
         },
+
         /**
          * Generates a unique test id on a per-card basis if testId prop provided
          * @param index
@@ -215,6 +225,7 @@ export default {
                 this.testId && `ContentCard-${this.testId}-${index}-${groupIndex}` :
                 this.testId && `ContentCard-${this.testId}-${index}`;
         },
+
         /**
          * Surfaces a message indicating a voucher code has been copied, with an optional url for an ongoing journey
          */
@@ -222,6 +233,7 @@ export default {
             this.modalOngoingUrl = url;
             this.isModalOpen = true;
         },
+
         /**
          * Closes the voucher modal and clears the ongoing url for reuse
          */
