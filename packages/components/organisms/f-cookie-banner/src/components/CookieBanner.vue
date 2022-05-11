@@ -466,7 +466,7 @@ export default {
 
 <style lang="scss" module>
 [data-cookie-consent-overlay] {
-    position: absolute;
+    position: fixed;
     color: $color-content-default;
 }
 
