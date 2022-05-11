@@ -1,3 +1,5 @@
+
+
 <template>
     <div>
         <content-cards
@@ -14,6 +16,7 @@
                 <div :class="$style['c-offersResults-contentCards']">
                     <template v-for="(card, i) in cards">
                         <group-header-card
+                            :class="$style['c-offersResults-contentCards-groupHeader']"
                             v-if="card.type === 'Header_Card'"
                             :key="i"
                             :title="card.title" />
@@ -46,6 +49,8 @@
 import {
     ContentCards,
     PromotionCard,
+    PromotionCardOne,
+    PromotionCardTwo,
     VoucherCard,
     GroupHeaderCard,
     FirstTimeCustomerCard,
@@ -58,17 +63,17 @@ import ModalCopiedVoucherCode from './ModalCopiedVoucherCode.vue';
 
 export default {
     name: 'OffersResults',
-
     components: {
         ContentCards,
         PromotionCard,
+        PromotionCardOne,
+        PromotionCardTwo,
         VoucherCard,
         GroupHeaderCard,
         FirstTimeCustomerCard,
         SkeletonLoader,
         ModalCopiedVoucherCode
     },
-
     data: () => ({
         enabledCardTypes: [
             'Header_Card',
@@ -89,13 +94,11 @@ export default {
         pushToDataLayer: () => {},
         tags: 'offers'
     }),
-
     computed: {
         ...mapState(VUEX_MODULE_NAMESPACE_OFFERS, [
             'brazeApiKey',
             'globalUserId'
         ]),
-
         /**
          * Determines the tenant based on the currently selected locale in order to choose correct translations
          * @return {String}
@@ -113,7 +116,6 @@ export default {
             }[this.locale] || 'uk';
         }
     },
-
     /**
      * Handles the setting of appboy on the window in order to prevent a race condition between internally
      * and externally loaded versions of the braze sdk
@@ -128,7 +130,6 @@ export default {
             }
         };
     },
-
     methods: {
         /**
          * Maps given card type to component name
@@ -144,14 +145,14 @@ export default {
                 case 'Restaurant_FTC_Offer_Card':
                     return 'FirstTimeCustomerCard';
                 case 'Promotion_Card_1':
+                    return 'PromotionCardOne';
                 case 'Promotion_Card_2':
-                    return 'PromotionCard';
+                    return 'PromotionCardTwo';
                 default:
                     break;
             }
             return false;
         },
-
         /**
          * Consumes the number of cards received from braze by the content cards component
          * @param {number} cards
@@ -168,7 +169,6 @@ export default {
                 );
             }
         },
-
         /**
          * Handles a successful load of the content cards component
          */
@@ -182,7 +182,6 @@ export default {
                 }
             );
         },
-
         /**
          * Handles errors emitted by the content cards component
          * @param {Error} error
@@ -206,7 +205,6 @@ export default {
                 }
             );
         },
-
         /**
          * Generates a unique test id on a per-card basis if testId prop provided
          * @param index
@@ -217,7 +215,6 @@ export default {
                 this.testId && `ContentCard-${this.testId}-${index}-${groupIndex}` :
                 this.testId && `ContentCard-${this.testId}-${index}`;
         },
-
         /**
          * Surfaces a message indicating a voucher code has been copied, with an optional url for an ongoing journey
          */
@@ -225,7 +222,6 @@ export default {
             this.modalOngoingUrl = url;
             this.isModalOpen = true;
         },
-
         /**
          * Closes the voucher modal and clears the ongoing url for reuse
          */
@@ -239,7 +235,18 @@ export default {
 
 <style lang="scss" module>
 .c-offersResults-contentCards {
-    display: flex;
-    flex-flow: row wrap;
+    display: grid;
+    gap: spacing(d);
+    justify-items: center;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    @include media('>=narrowMid') {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    @include media('>=wide') {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+.c-offersResults-contentCards-groupHeader {
+    grid-column: 1 / -1;
 }
 </style>
