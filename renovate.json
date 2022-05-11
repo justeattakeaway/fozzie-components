@@ -5,7 +5,7 @@
       ":automergeRequireAllStatusChecks",
       "schedule:earlyMondays"
     ],
-    "commitMessagePrefix": "renovate -",
+    "commitMessagePrefix": "renovate - #trivial #globalconfig -",
     "packageRules": [
       {
         "packagePatterns": [
