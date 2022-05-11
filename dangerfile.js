@@ -1,12 +1,10 @@
 /* global danger, fail, message */
 const { pr } = danger.github;
 const bodyAndTitle = (pr.body + pr.title).toLowerCase();
-const prAuthor = pr.user.login.toLowerCase();
 const isTrivial = bodyAndTitle.includes('#trivial'); // turns off all danger checks
-const isRenovateBot = prAuthor === 'renovate'; // turns off all danger checks
 const isGlobalConfigUpdate = bodyAndTitle.includes('#globalconfig'); // turns off danger checks for packages outside the root
 
-if (!isTrivial || !isRenovateBot) {
+if (!isTrivial) {
     const failedChangelogs = [];
     const failedVersionBumps = [];
     const packageDirectories = [
