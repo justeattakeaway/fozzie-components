@@ -8,7 +8,7 @@ Latest – to be added to the next release
 *May 11, 2022*
 
 ### Removed
-- Use of `New` from visual, component & acessibility test naming conventions.
+- Use of `New` from visual, component & accessibility test naming conventions.
 
 
 v3.8.4
