@@ -1,0 +1,20 @@
+{
+    "extends": [
+      "config:base",
+      ":automergeMinor",
+      ":automergeRequireAllStatusChecks",
+      "schedule:earlyMondays"
+    ],
+    "commitMessagePrefix": "renovate -",
+    "packageRules": [
+      {
+        "packagePatterns": [
+          "*"
+        ],
+        "minor": {
+          "groupName": "all non-major dependencies",
+          "groupSlug": "all-minor-patch"
+        }
+      }
+    ]
+  }
