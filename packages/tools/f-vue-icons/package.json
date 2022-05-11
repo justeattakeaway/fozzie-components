@@ -59,7 +59,7 @@
     "bili": "3.4.2",
     "fs-extra": "9.0.1",
     "lodash.kebabcase": "4.1.1",
-    "marked": "1.2.5",
+    "marked": "4.0.10",
     "pascal-case": "3.1.2",
     "poi": "12.10.3",
     "prismjs": "1.22.0"
