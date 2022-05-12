@@ -4,7 +4,7 @@ const CookieBanner = require('../../test-utils/component-objects/f-cookie-consen
 
 let cookieBanner;
 
-describe('New - f-cookie-banner component tests', () => {
+describe('f-cookie-banner component tests', () => {
     beforeEach(() => {
         cookieBanner = new CookieBanner();
     });
