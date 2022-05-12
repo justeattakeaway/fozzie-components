@@ -5,6 +5,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.3.0
 ------------------------------
+*May 12, 2022*
+
+### Update
+- `@justeat/f-vue-icons` package to update visa icons.
+
+
+v7.3.0
+------------------------------
 *April 25, 2022*
 
 ### Changed
