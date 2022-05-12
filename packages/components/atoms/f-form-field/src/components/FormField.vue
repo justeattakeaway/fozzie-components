@@ -109,7 +109,7 @@
                 {{ assistiveText }}
             </p>
             <slot
-                v-else
+                v-else-if="hasAssistiveTextSlot"
                 name="assistive-text-slot" />
         </div>
 
@@ -319,6 +319,10 @@ export default {
 
         hasTrailingIcon () {
             return Boolean(this.$slots['icon-trailing']);
+        },
+
+        hasAssistiveTextSlot () {
+            return Boolean(this.$slots['assistive-text-slot']);
         },
 
         isAffixedField () {
