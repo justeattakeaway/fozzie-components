@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "3.9.0",
+  "version": "3.10.0",
   "main": "dist/f-vue-icons.cjs.js",
   "maxBundleSize": "150kB",
   "cdn": "dist/f-vue-icons.min.js",
@@ -52,7 +52,7 @@
     "babel-helper-vue-jsx-merge-props": "2.0.3"
   },
   "devDependencies": {
-    "@justeat/f-icons": "4.9.0",
+    "@justeat/f-icons": "4.10.0",
     "@vue/cli-plugin-babel": "4.5.8",
     "@vue/cli-plugin-unit-jest": "4.5.8",
     "@vue/test-utils": "1.0.3",
@@ -62,7 +62,7 @@
     "marked": "1.2.5",
     "pascal-case": "3.1.2",
     "poi": "12.10.3",
-    "prismjs": "1.22.0"
+    "prismjs": "1.27.0"
   },
   "babel": {
     "presets": [
