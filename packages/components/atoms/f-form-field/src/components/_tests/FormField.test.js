@@ -920,6 +920,7 @@ describe('FormField', () => {
                     inputType: 'text'
                 };
 
+                // Act
                 const wrapper = mount(FormField, {
                     propsData,
                     slots: {
@@ -938,6 +939,7 @@ describe('FormField', () => {
                     assistiveText: 'Spell your name correctly'
                 };
 
+                // Act
                 const wrapper = mount(FormField, {
                     propsData,
                     slots: {
