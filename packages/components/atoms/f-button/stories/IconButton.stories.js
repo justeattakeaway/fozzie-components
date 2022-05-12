@@ -1,6 +1,8 @@
 import { withA11y } from '@storybook/addon-a11y';
 import {
-    CloseSmallIcon, PlusSmallIcon, MoreVerticalSmallIcon
+    CloseSmallIcon,
+    PlusSmallIcon,
+    MoreVerticalSmallIcon
 } from '@justeattakeaway/pie-icons-vue';
 import SharedButtonArgTypes from './sharedButtonArgTypes';
 import FButton from '../src/components/Button.vue';

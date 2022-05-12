@@ -176,6 +176,7 @@ $alert-borderRadius: $radius-rounded-c;
 .c-alert-dismiss {
     margin-left: auto;
     z-index: zIndex(high);
+
     &:hover {
         cursor: pointer;
     }

@@ -7,7 +7,7 @@ v7.8.0
 ------------------------------
 *May 12, 2022*
 
-### Updated
+### Changed
 - Icons in `f-footer`, `f-alert`, `f-button`, `f-error-message`, `f-form-field` and `f-user-message`
 
 ### Removed
@@ -19,7 +19,6 @@ v7.8.0
 
 v7.7.0
 ------------------------------
-
 *May 10, 2022*
 
 ### Added
