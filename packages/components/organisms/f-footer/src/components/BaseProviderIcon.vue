@@ -14,7 +14,7 @@ import {
     PaymentMastercardSecurecodeIcon as MastercardSecurecodeIcon,
     PaymentPaypalIcon as PaypalIcon,
     PaymentVisaIcon as VisaIcon,
-    PaymentVisaVerifiedIcon as VisaVerifiedIcon
+    PaymentVisaTransparentNarrowIcon as VisaVerifiedIcon
 } from '@justeat/f-vue-icons';
 
 // Social icons
