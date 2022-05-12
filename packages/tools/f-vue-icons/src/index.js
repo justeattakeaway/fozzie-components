@@ -112,6 +112,7 @@ export { default as PaymentMaestroIcon } from '../icons/PaymentMaestroIcon';
 export { default as PaymentMastercardSecurecodeIcon } from '../icons/PaymentMastercardSecurecodeIcon';
 export { default as PaymentMastercardIcon } from '../icons/PaymentMastercardIcon';
 export { default as PaymentPaypalIcon } from '../icons/PaymentPaypalIcon';
+export { default as PaymentVisaTransparentNarrowIcon } from '../icons/PaymentVisaTransparentNarrowIcon';
 export { default as PaymentVisaTransparentIcon } from '../icons/PaymentVisaTransparentIcon';
 export { default as PaymentVisaVerifiedIcon } from '../icons/PaymentVisaVerifiedIcon';
 export { default as PaymentVisaIcon } from '../icons/PaymentVisaIcon';
