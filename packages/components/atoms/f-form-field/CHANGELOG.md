@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.9.0
 ------------------------------
-*March 28, 2022*
+*May 12, 2022*
 
 ### Added
 - Slot for assistive text to be more flexible
