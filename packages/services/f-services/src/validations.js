@@ -31,6 +31,7 @@ const getFormValidationState = $v => {
 
 const POSTCODE_REGEX = {
     'en-GB': /^\s*[A-z]{1,2}[ ]?[0-9]{1,2}[A-z]?[ ]*[0-9][A-z]{2}\s*$/,
+    'en-IE': /(?:^[AC-FHKNPRTV-Y][0-9]{2}|D6W)[ -]?[0-9AC-FHKNPRTV-Y]{4}$/,
     'es-ES': /^\d{5}$/,
     'it-IT': /^\d{5}$/,
     'en-AU': /^\d{4}$/,
