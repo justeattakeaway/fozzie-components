@@ -56,7 +56,7 @@
   ],
   "dependencies": {
     "@justeat/f-services": "1.0.0",
-    "axios": "0.21.1",
+    "axios": "0.21.2",
     "lodash.debounce": "4.0.8"
   },
   "peerDependencies": {
