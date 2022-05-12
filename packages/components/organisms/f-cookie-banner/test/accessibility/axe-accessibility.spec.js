@@ -23,7 +23,7 @@ describe('Legacy Accessibility tests', () => {
         expect(axeResults.violations.length).toBe(0);
     });
 
-    it('a11y - should test new f-cookie-banner component WCAG compliance', () => {
+    it('a11y - should test the f-cookie-banner component WCAG compliance', () => {
         // Arrange
         cookieConsentBanner = new CookieConsentBanner();
         cookieConsentBanner.withQuery('args', 'locale:en-GB');
