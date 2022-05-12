@@ -9,27 +9,27 @@
     "storybook:serve-static": "http-server ./storybook-static"
   },
   "dependencies": {
-    "http-server": "0.12.3",
-    "vue": "2.6.10",
-    "vue-i18n": "8.22.1",
-    "vue-router": "3.5.2"
+    "http-server": "0.13.0",
+    "vue": "2.6.14",
+    "vue-i18n": "8.27.1",
+    "vue-router": "3.5.3"
   },
   "devDependencies": {
     "@justeat/f-http": "0.8.0",
     "@kazupon/vue-i18n-loader": "0.5.0",
-    "@storybook/addon-a11y": "6.4.9",
-    "@storybook/addon-essentials": "6.4.9",
+    "@storybook/addon-a11y": "6.4.22",
+    "@storybook/addon-essentials": "6.4.22",
     "@storybook/addon-knobs": "6.4.0",
-    "@storybook/addon-links": "6.4.9",
-    "@storybook/storybook-deployer": "2.8.6",
-    "@storybook/theming": "6.4.9",
-    "@storybook/vue": "6.4.9",
-    "cookie-universal": "2.1.4",
+    "@storybook/addon-links": "6.4.22",
+    "@storybook/storybook-deployer": "2.8.11",
+    "@storybook/theming": "6.4.22",
+    "@storybook/vue": "6.4.22",
+    "cookie-universal": "2.1.5",
     "npm-run-all": "4.1.5",
     "path": "0.12.7",
     "postcss-assets": "5.0.0",
     "storybook-vue-router": "1.0.7",
-    "vue-cli-plugin-storybook": "2.0.0"
+    "vue-cli-plugin-storybook": "2.1.0"
   },
   "bugs": {
     "url": "https://github.com/justeat/fozzie-components/issues"

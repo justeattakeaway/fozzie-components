@@ -45,8 +45,8 @@
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-    "core-js": "3.19.1",
-    "vite": "2.6.13",
-    "vite-plugin-vue2": "1.9.0"
+    "core-js": "3.22.5",
+    "vite": "2.9.9",
+    "vite-plugin-vue2": "1.9.3"
   }
 }
