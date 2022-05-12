@@ -108,6 +108,9 @@
                 :class="$style['c-formField-assistiveText']">
                 {{ assistiveText }}
             </p>
+            <slot
+                v-else-if="hasAssistiveTextSlot"
+                name="assistive-text-slot" />
         </div>
 
         <slot name="error" />
@@ -316,6 +319,10 @@ export default {
 
         hasTrailingIcon () {
             return Boolean(this.$slots['icon-trailing']);
+        },
+
+        hasAssistiveTextSlot () {
+            return Boolean(this.$slots['assistive-text-slot']);
         },
 
         isAffixedField () {

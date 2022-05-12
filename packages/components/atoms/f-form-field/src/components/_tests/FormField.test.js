@@ -616,6 +616,62 @@ describe('FormField', () => {
                 expect(wrapper.vm.uniqueId).toContain(name);
             });
         });
+
+        describe('hasAssistiveTextSlot ::', () => {
+            it('should return true and display the assistive-text-slot when it exists', () => {
+                // Arrange
+                const propsData = {
+                    inputType: 'text'
+                };
+
+                // Act
+                const wrapper = mount(FormField, {
+                    propsData,
+                    slots: {
+                        'assistive-text-slot': '<p>Click this <a>link</a></p>'
+                    }
+                });
+
+                // Assert
+                expect(wrapper.vm.hasAssistiveTextSlot).toBe(true);
+                expect(wrapper.html()).toContain('<p>Click this <a>link</a></p>');
+            });
+
+            it('should return false', () => {
+                // Arrange
+                const propsData = {
+                    inputType: 'text'
+                };
+
+                // Act
+                const wrapper = mount(FormField, {
+                    propsData
+                });
+
+                // Assert
+                expect(wrapper.vm.hasAssistiveTextSlot).toBe(false);
+            });
+
+            it('should return true but not display assistive-text-slot when the `assistiveText` prop is used', () => {
+                // Arrange
+                const propsData = {
+                    inputType: 'text',
+                    assistiveText: 'Spell your name correctly'
+                };
+
+                // Act
+                const wrapper = mount(FormField, {
+                    propsData,
+                    slots: {
+                        'assistive-text-slot': '<p>Click this <a>link</a></p>'
+                    }
+                });
+
+                // Assert
+                expect(wrapper.vm.hasAssistiveTextSlot).toBe(true);
+                expect(wrapper.html()).not.toContain('<p>Click this <a>link</a></p>');
+            });
+        });
     });
 
     describe('attrs ::', () => {
