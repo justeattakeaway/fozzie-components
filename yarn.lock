@@ -2642,10 +2642,10 @@
   resolved "https://registry.yarnpkg.com/@justeat/stylelint-config-fozzie/-/stylelint-config-fozzie-2.2.0.tgz#7cdab9fd0b341723eb52c93e88381130245438a2"
   integrity sha512-EPg/T/223kWeCG7MyrjKzBP6swaA2Y1R0WjltN2gVOR5bHjBc7yaDE0tK3O7pZriAKvNvH/YvFoB9MZsgkB8UA==
 
-"@justeattakeaway/pie-icons-vue@^1.0.0-beta.0":
-  version "1.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@justeattakeaway/pie-icons-vue/-/pie-icons-vue-1.0.0-beta.0.tgz#4cbaebec4cf49a6db57e5604b471d95702cb7903"
-  integrity sha512-bNSRQruSgmLVaagXlqrz29FJ7r9QAqAy45brdk5bF1L2k3rA+PzBBaW7cdh0SWLh+2UhHT1VWqKnqYuyDZw0Cg==
+"@justeattakeaway/pie-icons-vue@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@justeattakeaway/pie-icons-vue/-/pie-icons-vue-1.0.0.tgz#62f86c4fedb449c072e4d37955ad619d10baa9a2"
+  integrity sha512-4HoFiGCB4wz3v9m70n8Box4k3dRFJAf7h4Gxg8zL/22YBchFl27owk0WaJuY3EP3t15LoGRFX1grFHWRD7vGdA==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
@@ -17490,12 +17490,7 @@ lodash.zip@^4.2.0:
   resolved "https://registry.yarnpkg.com/lodash.zip/-/lodash.zip-4.2.0.tgz#ec6662e4896408ed4ab6c542a3990b72cc080020"
   integrity sha1-7GZi5IlkCO1KtsVCo5kLcswIACA=
 
-lodash@4.17.19:
-  version "4.17.19"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
-  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
-
-lodash@^4.0.0, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.1, lodash@^4.7.0, lodash@~4.17.10:
+lodash@4.17.21, lodash@^4.0.0, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.21, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.1, lodash@^4.7.0, lodash@~4.17.10:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==

@@ -46,7 +46,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeattakeaway/pie-icons-vue": "^1.0.0-beta.0"
+    "@justeattakeaway/pie-icons-vue": "1.0.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"

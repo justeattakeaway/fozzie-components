@@ -45,10 +45,10 @@
 <script>
 import {
     CloseSmallIcon,
-    AlertCircleFilledIcon,
-    InfoCircleFilledIcon,
-    CheckCircleFilledIcon,
-    AlertTriangleFilledIcon
+    AlertCircleSmallIcon,
+    InfoCircleOutlineSmallIcon,
+    CheckCircleOutlineSmallIcon,
+    AlertTriangleSmallIcon
 } from '@justeattakeaway/pie-icons-vue';
 
 import {
@@ -62,10 +62,10 @@ export default {
     name: 'FAlert',
     components: {
         CloseSmallIcon,
-        AlertCircleFilledIcon,
-        InfoCircleFilledIcon,
-        CheckCircleFilledIcon,
-        AlertTriangleFilledIcon,
+        AlertCircleSmallIcon,
+        InfoCircleOutlineSmallIcon,
+        CheckCircleOutlineSmallIcon,
+        AlertTriangleSmallIcon,
         FButton
     },
     props: {
@@ -101,10 +101,10 @@ export default {
     computed: {
         icon () {
             const icon = {
-                success: 'CheckCircleFilledIcon',
-                warning: 'AlertTriangleFilledIcon',
-                info: 'infoCircleFilledIcon',
-                danger: 'AlertCircleFilledIcon'
+                success: 'CheckCircleOutlineSmallIcon',
+                warning: 'AlertTriangleSmallIcon',
+                info: 'InfoCircleOutlineSmallIcon',
+                danger: 'AlertCircleSmallIcon'
             };
 
             return icon[this.type];
@@ -183,13 +183,14 @@ $alert-borderRadius: $radius-rounded-c;
 .c-alert-dismiss {
     margin-left: auto;
     z-index: zIndex(high);
-
     &:hover {
         cursor: pointer;
     }
 }
 
 .c-alert-dismiss-icon {
+    width: 20px !important;
+    height: 20px !important;
     path {
         fill: $color-content-subdued;
     }

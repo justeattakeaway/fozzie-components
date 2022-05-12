@@ -3,6 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+Latest – to be added to the next release
+------------------------------
+*May 11, 2022*
+
+### Removed
+- Use of `New` from visual, component & accessibility test naming conventions.
+
+
+v3.8.4
+------------------------------
+*May 11, 2022*
+
+### Changed
+- Resolve overlay issue on scrolling pages
+
 
 v3.8.3
 ------------------------------
