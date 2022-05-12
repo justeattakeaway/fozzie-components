@@ -1,11 +1,13 @@
 .c-takeawaypayActivation-icon {
     transform: translate(10%);
-    width: 125px;
+    margin-top: - spacing(f);
+    width: 150px;
 }
 
 .c-takeawaypayActivation-title {
     @include font-size(subheading-s);
-    padding-top: spacing(d);
+    margin-top: 0;
+    padding-top: 0;
 }
 
 .c-takeawaypayActivation-description {
