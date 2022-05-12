@@ -7,6 +7,14 @@ v4.8.0
 ------------------------------
 *March 28, 2022*
 
+### Added
+- Slot for assistive text to be more flexible
+
+
+v4.8.0
+------------------------------
+*March 28, 2022*
+
 ### Fixed
 - Assistive text styles.
 

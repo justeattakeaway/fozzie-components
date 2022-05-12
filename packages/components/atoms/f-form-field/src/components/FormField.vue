@@ -108,6 +108,9 @@
                 :class="$style['c-formField-assistiveText']">
                 {{ assistiveText }}
             </p>
+            <slot
+                v-else
+                name="assistive-text-slot" />
         </div>
 
         <slot name="error" />

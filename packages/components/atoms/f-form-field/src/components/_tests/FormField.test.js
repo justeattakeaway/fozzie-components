@@ -911,4 +911,43 @@ describe('FormField', () => {
             });
         });
     });
+
+    describe('slots ::', () => {
+        describe('assistive-text-slot', () => {
+            it('should display the assistive-text-slot when it exists', () => {
+                // Arrange
+                const propsData = {
+                    inputType: 'text'
+                };
+
+                const wrapper = mount(FormField, {
+                    propsData,
+                    slots: {
+                        'assistive-text-slot': '<p>Click this <a>link</a></p>'
+                    }
+                });
+
+                // Assert
+                expect(wrapper.html()).toContain('<p>Click this <a>link</a></p>');
+            });
+
+            it('should not display assistive-text-slot when the `assistiveText` prop is used', () => {
+                // Arrange
+                const propsData = {
+                    inputType: 'text',
+                    assistiveText: 'Spell your name correctly'
+                };
+
+                const wrapper = mount(FormField, {
+                    propsData,
+                    slots: {
+                        'assistive-text-slot': '<p>Click this <a>link</a></p>'
+                    }
+                });
+
+                // Assert
+                expect(wrapper.html()).not.toContain('<p>Click this <a>link</a></p>');
+            });
+        });
+    });
 });
