@@ -160,7 +160,7 @@ describe('Alert', () => {
                 const result = wrapper.vm.icon;
 
                 // Assert
-                expect(result).toBe('InfoCircleOutlineSmallIcon');
+                expect(result).toBe('infoIcon');
             });
         });
     });
