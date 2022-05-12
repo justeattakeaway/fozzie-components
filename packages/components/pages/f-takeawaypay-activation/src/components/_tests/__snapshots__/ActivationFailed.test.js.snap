@@ -2,7 +2,7 @@
 
 exports[`ActivationFailed should be rendered correctly 1`] = `
 <div data-test-id="activation-failed-component" locale="en-GB">
-  <bag-sad-bg-icon-stub></bag-sad-bg-icon-stub>
+  <bag-sorry-bg-icon-stub></bag-sorry-bg-icon-stub>
   <h1>
     We can’t activate Just Eat Pay on your account right now, sorry.
   </h1>
