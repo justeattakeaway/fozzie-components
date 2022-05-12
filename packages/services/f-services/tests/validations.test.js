@@ -233,6 +233,25 @@ describe('isValidPostcode', () => {
         // Assert
         expect(actual).toBe(expected);
     });
+
+    it.each([
+        ['D24 FT12', true],
+        ['D22 TF12', true],
+        ['B32 AC21', false],
+        ['0123456', false],
+        ['AR51 1AA', false],
+        ['1 2 3 4 5', false],
+        ['not even trying', false],
+        ['01!23', false],
+        ['', false],
+        [null, false]
+    ])('should validate %s as %s with `en-IE` locale', (postcode, expected) => {
+        // Act
+        const actual = isValidPostcode(postcode, 'en-IE');
+
+        // Assert
+        expect(actual).toBe(expected);
+    });
 });
 
 describe('isValidPhoneNumber', () => {
