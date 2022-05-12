@@ -8,7 +8,7 @@ v7.4.0
 *May 12, 2022*
 
 ### Update
-- `@justeat/f-vue-icons` package to update visa icons.
+- `@justeat/f-vue-icons` package to `3.10.0` to update visa icons.
 
 
 v7.3.0
