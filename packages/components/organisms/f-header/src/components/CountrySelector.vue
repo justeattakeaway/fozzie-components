@@ -165,6 +165,7 @@ export default {
 
 .c-countrySelector-openPanelIcon {
     float: right;
-    height: 26px;
+
+    height: 18px;
 }
 </style>
