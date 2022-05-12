@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v9.15.0
 ------------------------------
-*May 9, 2022*
+*May 12, 2022*
 
 ### Added
 - `@justeattakeaway/pie-icons-vue` icons.

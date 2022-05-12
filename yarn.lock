@@ -2656,10 +2656,10 @@
   resolved "https://registry.yarnpkg.com/@justeat/stylelint-config-fozzie/-/stylelint-config-fozzie-2.2.0.tgz#7cdab9fd0b341723eb52c93e88381130245438a2"
   integrity sha512-EPg/T/223kWeCG7MyrjKzBP6swaA2Y1R0WjltN2gVOR5bHjBc7yaDE0tK3O7pZriAKvNvH/YvFoB9MZsgkB8UA==
 
-"@justeattakeaway/pie-icons-vue@^1.0.0-beta.0":
-  version "1.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@justeattakeaway/pie-icons-vue/-/pie-icons-vue-1.0.0-beta.0.tgz#4cbaebec4cf49a6db57e5604b471d95702cb7903"
-  integrity sha512-bNSRQruSgmLVaagXlqrz29FJ7r9QAqAy45brdk5bF1L2k3rA+PzBBaW7cdh0SWLh+2UhHT1VWqKnqYuyDZw0Cg==
+"@justeattakeaway/pie-icons-vue@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/@justeattakeaway/pie-icons-vue/-/pie-icons-vue-1.0.0.tgz#62f86c4fedb449c072e4d37955ad619d10baa9a2"
+  integrity sha512-4HoFiGCB4wz3v9m70n8Box4k3dRFJAf7h4Gxg8zL/22YBchFl27owk0WaJuY3EP3t15LoGRFX1grFHWRD7vGdA==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 

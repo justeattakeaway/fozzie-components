@@ -166,7 +166,7 @@
                         ]"
                         @click.prevent="toggleUserMenu"
                         @keydown.space.prevent="toggleUserMenu">
-                        <user-circle-outline-icon
+                        <user-circle-icon
                             :class="[
                                 $style['c-nav-icon'],
                                 $style['c-nav-icon--profile'],
@@ -287,7 +287,7 @@ import {
     GiftIcon,
     HelpCircleOutlineIcon,
     MopedIcon,
-    UserCircleOutlineIcon
+    UserCircleIcon
 } from '@justeattakeaway/pie-icons-vue';
 import CountrySelector from './CountrySelector.vue';
 import NavLink from './NavLink.vue';
@@ -303,7 +303,7 @@ export default {
         HelpCircleOutlineIcon,
         MopedIcon,
         NavLink,
-        UserCircleOutlineIcon,
+        UserCircleIcon,
         UserNavigationPanel,
         VPopover
     },
