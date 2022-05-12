@@ -2376,10 +2376,10 @@
     axios "0.21.1"
     axios-mock-adapter "1.19.0"
 
-"@justeat/f-icons@4.9.0":
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.9.0.tgz#c0a901996311ad97300498885233f0ed6f47fdc4"
-  integrity sha512-8elkZrUaVygcvOxep+6qxlJP+jabXAFOrAw6k09z4Xkd9ABbpPZLZeI2sBHItCZb6OUTrBu3c5pV2V4iw0Q24A==
+"@justeat/f-icons@4.10.0":
+  version "4.10.0"
+  resolved "https://registry.npmjs.org/@justeat/f-icons/-/f-icons-4.10.0.tgz#59738afbb1bec54388270521ae8f6de0412d74fb"
+  integrity sha512-Sz6A8xdkIdpA2jBfx4XJqCNIJt94FraYfF56wxEs0i9pJLBmgun5As2HPaPpg6sWrbmXA//b2L9bN7uNsZLdLw==
 
 "@justeat/f-link@2.0.0":
   version "2.0.0"
