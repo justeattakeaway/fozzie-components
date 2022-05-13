@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-user-message",
   "description": "Fozzie User Message – Globalised User Message Component",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "main": "dist/f-user-message.umd.min.js",
   "maxBundleSize": "15kB",
   "files": [
