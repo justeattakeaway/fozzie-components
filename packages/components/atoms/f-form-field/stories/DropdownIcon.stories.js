@@ -1,7 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
-import {
-    AllergyNutIcon
-} from '@justeat/f-vue-icons';
+import { NutsIcon } from '@justeattakeaway/pie-icons-vue';
 import FormField from '../src/components/FormField.vue';
 import SharedArgTypes from './SharedArgTypes';
 import {
@@ -17,7 +15,7 @@ export default {
 export const DropdownIconComponent = (args, { argTypes }) => ({
     components: {
         FormField,
-        AllergyNutIcon
+        NutsIcon
     },
     props: Object.keys(argTypes),
     template:
@@ -37,7 +35,7 @@ export const DropdownIconComponent = (args, { argTypes }) => ({
             :assistive-text="assistiveText"
             :dropdown-options="dropdownOptions">
             <template v-slot:icon-leading>
-                <AllergyNutIcon />
+                <NutsIcon />
             </template>
         </form-field>`
 });
