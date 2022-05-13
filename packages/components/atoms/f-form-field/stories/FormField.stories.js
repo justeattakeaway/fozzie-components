@@ -1,8 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
-import {
-    AllergyNutIcon,
-    DriverIcon
-} from '@justeat/f-vue-icons';
+import { NutsIcon, DriverCarIcon } from '@justeattakeaway/pie-icons-vue';
 import FormField from '../src/components/FormField.vue';
 import SharedArgTypes from './SharedArgTypes';
 
@@ -14,8 +11,8 @@ export default {
 export const FormFieldComponent = (args, { argTypes }) => ({
     components: {
         FormField,
-        AllergyNutIcon,
-        DriverIcon
+        NutsIcon,
+        DriverCarIcon
     },
     props: Object.keys(argTypes),
     template: `
@@ -78,7 +75,7 @@ export const FormFieldComponent = (args, { argTypes }) => ({
                 :dropdown-options="dropdownOptions"
                 maxlength="200">
                 <template v-slot:icon-leading>
-                    <AllergyNutIcon />
+                    <NutsIcon />
                 </template>
             </form-field>
             <form-field
@@ -123,7 +120,7 @@ export const FormFieldComponent = (args, { argTypes }) => ({
                 :should-show-label-text="shouldShowLabelText"
                 field-size="small">
                     <template v-slot:icon-leading>
-                        <AllergyNutIcon />
+                        <NutsIcon />
                     </template>
             </form-field>
         <form-field
@@ -136,7 +133,7 @@ export const FormFieldComponent = (args, { argTypes }) => ({
             :should-show-label-text="shouldShowLabelText"
             field-size="medium">
             <template v-slot:icon-trailing>
-                <DriverIcon />
+                <DriverCarIcon />
             </template>
         </form-field>
         <form-field
@@ -148,10 +145,10 @@ export const FormFieldComponent = (args, { argTypes }) => ({
             input-type="text"
             field-size="large">
             <template v-slot:icon-leading>
-                <AllergyNutIcon />
+                <NutsIcon />
             </template>
             <template v-slot:icon-trailing>
-                <DriverIcon />
+                <DriverCarIcon />
             </template>
         </form-field>
     </div>`

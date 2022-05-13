@@ -3,7 +3,7 @@
         v-if="hasSlotData"
         :class="$style['c-errorMessage']"
         :data-test-id="dataTestId">
-        <danger-icon :class="$style['c-errorMessage-icon']" />
+        <alert-circle-filled-icon :class="$style['c-errorMessage-icon']" />
         <span
             data-test-id="content"
             role="alert"
@@ -14,12 +14,12 @@
 </template>
 
 <script>
-import { DangerIcon } from '@justeat/f-vue-icons';
+import { AlertCircleFilledIcon } from '@justeattakeaway/pie-icons-vue';
 
 export default {
     name: 'ErrorMessage',
     components: {
-        DangerIcon
+        AlertCircleFilledIcon
     },
     props: {
         dataTestId: {
@@ -53,5 +53,9 @@ export default {
     position: absolute;
     width: 16px;
     margin-top: 2px;
+
+    path {
+        fill: $color-support-error;
+    }
 }
 </style>

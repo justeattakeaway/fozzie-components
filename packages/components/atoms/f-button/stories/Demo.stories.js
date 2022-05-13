@@ -1,5 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
-import { CollectionIcon } from '@justeat/f-vue-icons';
+import { WalkingIcon } from '@justeattakeaway/pie-icons-vue';
 import {
     VALID_BUTTON_TYPES,
     VALID_BUTTON_SIZES
@@ -15,7 +15,7 @@ export default {
 export const DemoButtonComponent = (args, { argTypes }) => ({
     components: {
         FButton,
-        CollectionIcon
+        WalkingIcon
     },
     props: Object.keys(argTypes),
     template: `
@@ -30,11 +30,11 @@ export const DemoButtonComponent = (args, { argTypes }) => ({
             :isLoading="isLoading"
             :hasIcon="hasIcon">
             <template #leading-icon>
-                <collection-icon />
+                <walking-icon />
             </template>
             Label
             <template #trailing-icon>
-                <collection-icon />
+                <walking-icon />
             </template>
         </f-button>`
 });

@@ -22,7 +22,7 @@
 
 <script>
 import sharedServices from '@justeat/f-services';
-import { ClockIcon } from '@justeat/f-vue-icons';
+import { ClockIcon } from '@justeattakeaway/pie-icons-vue';
 import tenantConfigs from '../tenants';
 import UserMessageApi from '../services/UserMessageApi';
 

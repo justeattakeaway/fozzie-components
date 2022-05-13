@@ -49,7 +49,7 @@
                             button-size="xsmall"
                             data-test-id="close-modal"
                             @click.native="close">
-                            <cross-icon
+                            <close-small-icon
                                 :class="[$style['c-megaModal-closeIcon']]" />
 
                             <span class="is-visuallyHidden">
@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { CrossIcon } from '@justeat/f-vue-icons';
+import { CloseSmallIcon } from '@justeattakeaway/pie-icons-vue';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import FButton from '@justeat/f-button';
 
@@ -74,7 +74,7 @@ let uid = 0;
 
 export default {
     components: {
-        CrossIcon,
+        CloseSmallIcon,
         FButton
     },
     props: {
@@ -442,6 +442,8 @@ export default {
 
         svg path {
             fill: $color-interactive-primary;
+            width: 17px;
+            height: 17px;
         }
     }
 
