@@ -38,11 +38,7 @@ const POSTCODE_REGEX = {
     'en-NZ': /^\d{4}$/
 };
 
-const isValidPostcode = (postcode, locale) => {
-    console.log('POSTCODE_REGEX[locale]', POSTCODE_REGEX[locale]);
-    return POSTCODE_REGEX[locale].test(postcode);
-};
-
+const isValidPostcode = (postcode, locale) => POSTCODE_REGEX[locale].test(postcode);
 /**
  * Tests for existence of valid chars only in a string.
  *
