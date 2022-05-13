@@ -13,6 +13,16 @@
         @blur="hasInvalidErrorMessage && formFieldBlur()"
         @input="updateUserDetails({ fieldType, fieldName, value: $event })">
         <template
+            v-if="shouldShowEircodeHelper"
+            #assistive-text-slot>
+            <p :class="$style['c-checkoutFormField-assistiveText']">
+                {{ translations.assistiveText }}
+                <a :href="translations.assistiveTextUrl">
+                    {{ translations.assistiveTextLink }}
+                </a>
+            </p>
+        </template>
+        <template
             v-if="hasError"
             #error>
             <error-message
@@ -57,6 +67,11 @@ export default {
         maxLength: {
             type: String,
             default: '100'
+        },
+
+        tenant: {
+            type: String,
+            required: true
         },
 
         isGrouped: {
@@ -143,6 +158,10 @@ export default {
             return this.customer.mobileNumber ? [...this.customer.mobileNumber].join(' ') : '';
         },
 
+        shouldShowEircodeHelper () {
+            return this.tenant === 'ie' && this.fieldName === 'postcode';
+        },
+
         groupedProps () {
             return {
                 placeholder: this.translations.label,
@@ -169,5 +188,12 @@ export default {
 <style lang="scss" module>
 .c-checkoutFormField-error--grouped {
     margin-bottom: spacing(d);
+}
+
+.c-checkoutFormField-assistiveText {
+    @include font-size('body-s');
+    font-weight: $font-weight-regular;
+    color: $color-content-subdued;
+    margin-top: 0;
 }
 </style>

@@ -13,7 +13,8 @@
                 :field-name="field"
                 :field-type="fieldType"
                 :class="$style['c-address-formField']"
-                is-grouped />
+                is-grouped
+                :tenant="tenant" />
         </fieldset>
 
         <checkout-form-field
@@ -21,7 +22,8 @@
             :key="field"
             :field-name="field"
             :field-type="fieldType"
-            :max-length="fieldLength" />
+            :max-length="fieldLength"
+            :tenant="tenant" />
     </div>
 </template>
 
@@ -32,6 +34,13 @@ export default {
     name: 'CheckoutAddress',
 
     components: { CheckoutFormField },
+
+    props: {
+        tenant: {
+            type: String,
+            required: true
+        }
+    },
 
     data () {
         return {

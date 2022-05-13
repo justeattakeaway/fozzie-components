@@ -26,6 +26,7 @@
 
         <address-block
             v-if="isCheckoutMethodDelivery"
+            :tenant="tenant"
             data-test-id="address-block" />
 
         <form-selector :key="availableFulfilmentTimesKey" />

@@ -2353,14 +2353,6 @@
     "@justeat/f-services" "1.0.0"
     "@justeat/f-vue-icons" "2.5.0"
 
-"@justeat/f-form-field@4.7.1":
-  version "4.7.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.7.1.tgz#86a82f2a3d443fffe28fdf45ac333b625d6eb650"
-  integrity sha512-ORrSg/YMxycCpySmpjGh+mt8R/zceGWpUoW5qgCglzZxsk77/7TDW4zBY/h/S78e6FHvBPSjj460GLI7XDdZDQ==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeat/f-vue-icons" "2.5.0"
-
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-0.2.0.tgz#90ec559642c165b6325669c506c417abe09fa5dd"
@@ -2470,6 +2462,14 @@
     lodash-es "4.17.21"
     window-or-global "1.0.1"
 
+"@justeat/f-services@1.14.0":
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.14.0.tgz#03f97c8a755961a548ca9c41b36481ea76fd82d9"
+  integrity sha512-sikaKt2j+LviicXThvBSCMnn9GDIzNB6ItD1Yw053ck1e8HIwMyzDu6BHsWSXL1IRg4016+N5nxIp+Npe9qfoA==
+  dependencies:
+    lodash-es "4.17.21"
+    window-or-global "1.0.1"
+
 "@justeat/f-services@1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.3.0.tgz#0165f7fe3f69e0b6e6388bce7194e080bbfc9445"
@@ -2492,6 +2492,12 @@
   integrity sha512-l9xnDEmq4MyouUdBOi2Y3VkT4LQ/FHTbOHz1e0GW+r3xVDzNF0Jzzkybafy3YN+YBU31KPFKYE2wvs4sVl2kNA==
   dependencies:
     lodash-es "4.17.15"
+    window-or-global "1.0.1"
+
+"@justeat/f-services@4.9.0":
+  version "1.15.0"
+  dependencies:
+    lodash-es "4.17.21"
     window-or-global "1.0.1"
 
 "@justeat/f-trak@0.7.1":
