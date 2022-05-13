@@ -38,7 +38,10 @@ const POSTCODE_REGEX = {
     'en-NZ': /^\d{4}$/
 };
 
-const isValidPostcode = (postcode, locale) => POSTCODE_REGEX[locale].test(postcode);
+const isValidPostcode = (postcode, locale) => {
+    console.log('POSTCODE_REGEX[locale]', POSTCODE_REGEX[locale]);
+    return POSTCODE_REGEX[locale].test(postcode);
+};
 
 /**
  * Tests for existence of valid chars only in a string.
@@ -50,6 +53,7 @@ const meetsCharacterValidationRules = value => /^[\u0060\u00C0-\u00F6\u00F8-\u01
 
 const PHONE_REGEX = {
     'en-GB': /^(\+(44))?[0-9]{10,11}$/,
+    'en-IE': /^(\+(353))?[0-9]{9,11}$/,
     'es-ES': /^\d{9,}$/,
     'it-IT': /^(\+39)?[ ]?([0-9]{2,3}(\/|-| )?[0-9]{6,8})$/, // https://www.drupal.org/project/phone/issues/1803126
     'en-AU': /^((?!1|13|18))(((0|\+61|61|0061)(2|4|3|7|8))\){0,1}( |-){0,1}[0-9]{2}( |-){0,1}[0-9]{2}( |-){0,1}[0-9]{1}( |-){0,1}[0-9]{3})$/,
