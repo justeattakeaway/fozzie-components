@@ -49,6 +49,7 @@
   ],
   "dependencies": {
     "@justeat/f-services": "1.3.0",
+    "@justeattakeaway/pie-icons-vue": "1.0.0",
     "@justeat/f-vue-icons": "3.10.0",
     "v-click-outside": "3.1.2"
   },
