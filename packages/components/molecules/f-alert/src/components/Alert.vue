@@ -44,12 +44,12 @@
 
 <script>
 import {
-    CrossIcon,
-    DangerIcon,
-    InfoIcon,
-    SuccessIcon,
-    WarningIcon
-} from '@justeat/f-vue-icons';
+    CloseSmallIcon as CrossIcon,
+    AlertCircleSmallIcon as DangerIcon,
+    InfoCircleOutlineSmallIcon as InfoIcon,
+    CheckCircleOutlineSmallIcon as SuccessIcon,
+    AlertTriangleSmallIcon as WarningIcon
+} from '@justeattakeaway/pie-icons-vue';
 
 import {
     globalisationServices
@@ -183,6 +183,8 @@ $alert-borderRadius: $radius-rounded-c;
 }
 
 .c-alert-dismiss-icon {
+    width: 20px !important;
+    height: 20px !important;
     path {
         fill: $color-content-subdued;
     }

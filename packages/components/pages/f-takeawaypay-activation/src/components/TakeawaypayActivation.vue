@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style['c-takeawaypayActivation']">
+    <main :class="$style['c-takeawaypayActivation']">
         <card-component
             is-page-content-wrapper
             card-heading-position="center"
@@ -19,7 +19,7 @@
                 v-bind="activationStateComponent.props"
                 @activation-result="handleActivationResult" />
         </card-component>
-    </div>
+    </main>
 </template>
 
 <script>

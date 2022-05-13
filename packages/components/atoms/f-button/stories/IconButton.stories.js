@@ -1,7 +1,9 @@
 import { withA11y } from '@storybook/addon-a11y';
 import {
-    CrossIcon, PlusIcon, MoreVerticalIcon
-} from '@justeat/f-vue-icons';
+    CloseSmallIcon,
+    PlusSmallIcon,
+    MoreVerticalSmallIcon
+} from '@justeattakeaway/pie-icons-vue';
 import SharedButtonArgTypes from './sharedButtonArgTypes';
 import FButton from '../src/components/Button.vue';
 
@@ -23,9 +25,9 @@ export default {
 export const IconButtonComponent = (args, { argTypes }) => ({
     components: {
         FButton,
-        CrossIcon,
-        PlusIcon,
-        MoreVerticalIcon
+        CloseSmallIcon,
+        PlusSmallIcon,
+        MoreVerticalSmallIcon
     },
     props: Object.keys(argTypes),
     template: `
@@ -41,7 +43,7 @@ export const IconButtonComponent = (args, { argTypes }) => ({
                 :href="href"
                 :isIcon="true"
                 :isLoading="isLoading">
-                <CrossIcon />
+                <CloseSmallIcon />
             </f-button>
             <div class="u-spacingBottom--large u-spacingTop" v-if="showIconButtonName">
                 {{ icon.text }}
@@ -55,7 +57,7 @@ export const IconButtonComponent = (args, { argTypes }) => ({
                 :href="href"
                 :isIcon="true"
                 :isLoading="isLoading">
-                <PlusIcon />
+                <PlusSmallIcon />
                 <span class="is-visuallyHidden">
                     {{ icon.text }}
                 </span>
@@ -72,7 +74,7 @@ export const IconButtonComponent = (args, { argTypes }) => ({
                 :href="href"
                 :isIcon="true"
                 :isLoading="isLoading">
-                <MoreVerticalIcon />
+                <MoreVerticalSmallIcon />
                 <span class="is-visuallyHidden">
                     {{ icon.text }}
                 </span>
