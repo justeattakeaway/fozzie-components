@@ -3,6 +3,28 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.10.0
+------------------------------
+*May 13, 2022*
+
+### Changed
+- Icons in component and storybook files
+
+### Removed
+- `@justeat/f-vue-icons`
+
+### Added
+- `@justeattakeaway/pie-icons-vue`
+
+
+v4.9.0
+------------------------------
+*May 12, 2022*
+
+### Added
+- Slot for assistive text to be more flexible
+
+
 v4.8.0
 ------------------------------
 *March 28, 2022*

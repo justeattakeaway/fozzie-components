@@ -126,7 +126,7 @@ export default {
     @include font-size($nav-text-size);
 
     @include media('>mid') {
-        padding-left: spacing(a);
+        padding-left: spacing(d);
     }
 }
 </style>
