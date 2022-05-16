@@ -87,6 +87,7 @@ $height-adjustment-for-input-mobile: 48px;
     padding: spacing(f) spacing(g);
     border-radius: $radius-rounded-c;
     position: relative;
+    margin-top: spacing(d);
 
     & .c-noOffersFound-link {
         padding: 0;
