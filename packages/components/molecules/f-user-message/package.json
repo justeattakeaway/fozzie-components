@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-user-message",
   "description": "Fozzie User Message – Globalised User Message Component",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "main": "dist/f-user-message.umd.min.js",
   "maxBundleSize": "15kB",
   "files": [
@@ -47,9 +47,9 @@
   ],
   "dependencies": {
     "@justeat/f-services": "0.13.2",
-    "@justeat/f-vue-icons": "1.2.0",
-    "axios": "0.21.1",
-    "lodash-es": "4.17.15"
+    "@justeattakeaway/pie-icons-vue": "1.0.0",
+    "axios": "0.21.2",
+    "lodash-es": "4.17.21"
   },
   "peerDependencies": {
     "@justeat/eslint-config-fozzie": ">=3.3.1",

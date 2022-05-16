@@ -273,6 +273,24 @@ describe('isValidPhoneNumber', () => {
     });
 
     it.each([
+        ['0711111111', true],
+        ['+3537111111111', true],
+        ['+447111111111', false],
+        ['0711 1111 111', false],
+        ['07111', false],
+        ['07!!!!', false],
+        ['not even trying', false],
+        ['', false],
+        [null, false]
+    ])('should validate %s as %s with `en-IE` locale', (number, expected) => {
+        // Act
+        const actual = isValidPhoneNumber(number, 'en-IE');
+
+        // Assert
+        expect(actual).toBe(expected);
+    });
+
+    it.each([
         ['111111111', true],
         ['11111111', false],
         ['!askfjt%$', false],

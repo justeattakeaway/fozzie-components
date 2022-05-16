@@ -74,7 +74,7 @@ export const TakeawaypayActivationComponent = () => ({
     components: { TakeawaypayActivation },
     props: {
         locale: {
-            default: select('Locale', [locales.gb, locales.au], locales.gb)
+            default: select('Locale', [locales.gb, locales.au, locales.nz], locales.gb)
         },
         authentication: {
             default: select('Authentication', authenticationOptions)
