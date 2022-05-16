@@ -2267,6 +2267,13 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
+"@justeat/f-alert@4.3.0":
+  version "4.3.0"
+  resolved "https://registry.npmjs.org/@justeat/f-alert/-/f-alert-4.3.0.tgz#f37e940fab6ceba9883d1968fcc36c2aa5a83765"
+  integrity sha512-QiqFSoTVarQ5rq5K8DCZ4OCwx6IGBhwA8RKgi2H5o8o0ZnOgddvLIkPZy5jDqiLbJQ6mlUzpZW75UGm2j42KAA==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+
 "@justeat/f-breadcrumbs@3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-breadcrumbs/-/f-breadcrumbs-3.1.0.tgz#781a42a3bc751843f0a5fe044f99e870051ec6ce"
@@ -2326,6 +2333,13 @@
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-1.0.0.tgz#f68da2b9e47ef902ac4b721b038360450d10c005"
   integrity sha512-VaD5384grwCsyLFENrJrM7ePOuLeRTcnvYF/ar5UK8tQTg1ixX7nxhfhjQ7ONCClWaRmaZ7NY4dzFKjoz/XrTA==
+  dependencies:
+    "@justeat/f-vue-icons" "1.10.0"
+
+"@justeat/f-error-message@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/@justeat/f-error-message/-/f-error-message-1.1.0.tgz#858d423dae20029660976d11a8c5d360f4484991"
+  integrity sha512-tnXNGvSJWlHaq2RwAOJAEna5cfEvWa9ruZV6JSnIzJDlOj1J13nDDcNRGVlBgcAAOD8UWkRf3qunwxZf6OOXlQ==
   dependencies:
     "@justeat/f-vue-icons" "1.10.0"
 
@@ -2509,11 +2523,6 @@
   dependencies:
     "@justeat/f-dom" "0.4.0"
 
-"@justeat/f-utils@3.5.0":
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-utils/-/f-utils-3.5.0.tgz#7534c48dfdad30b25b76449a556fd023ab32f64b"
-  integrity sha512-f1bFB8K/yAWGlNJRfODykWt7omkesMAiz8CqwSmHnLA04FyS8BpGZedVdxKbAxZ6n8rrITAjwWBG076uzBe2+w==
-
 "@justeat/f-vue-icons@1.10.0":
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.10.0.tgz#1ae551701ec73b4f6e39651d2a0fab5e105e75c5"
@@ -2563,13 +2572,6 @@
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
-"@justeat/f-vue-icons@3.10.0":
-  version "3.10.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-3.10.0.tgz#99c049918160b7a028b2fbb935ebde43181dffa0"
-  integrity sha512-AvDJzcTMUsESxXGfVBtXyvdxbtJk5pBYiYp/lK4wHpj3Y7iig/Ysp3ei1LSOBdsi+tGgWlFPMxjLPbdiECkaOg==
-  dependencies:
-    babel-helper-vue-jsx-merge-props "2.0.3"
-
 "@justeat/f-vue-icons@3.3.0":
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-3.3.0.tgz#1794f32c78b78394d267fc6090310e02a0227bfb"
@@ -2595,6 +2597,13 @@
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-3.8.0.tgz#1d4ff74158a8ca63ec5fea429e772f087c365547"
   integrity sha512-6dEkYZevqi+Do2AiC0EoseGAxoqLRWwz/VJ57owa2IYd1ubJexaRYR4H6tGCqP7Bsn7B/cQgRdbGXQubRMLeeQ==
+  dependencies:
+    babel-helper-vue-jsx-merge-props "2.0.3"
+
+"@justeat/f-vue-icons@3.9.0":
+  version "3.9.0"
+  resolved "https://registry.npmjs.org/@justeat/f-vue-icons/-/f-vue-icons-3.9.0.tgz#32f98bd90879e515e1af71af66b9e1d1995c1300"
+  integrity sha512-yoi/77e5xInaOMeLaRWe6v/nsshcwPIwqb7h3LmJtnFWQ/oTAqu97c6zsn11wi2g4QzLDe9mJzHzm4SJesRfJA==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
@@ -2627,12 +2636,11 @@
     axios "0.25.0"
     crypto-js "4.1.1"
 
-"@justeat/fozzie@8.0.0":
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-8.0.0.tgz#3b043f3dfc0bda1f04c20e6b23f3a60db7b233f3"
-  integrity sha512-oS2GySWMhKT3srCvkfIh2ZYy8h6024Vakf8Hf99sDsYEVIrpwBxwGFx5Eun1H4Ds+rMhPQEjcW86A+f7IiTdrA==
+"@justeat/fozzie@8.1.0":
+  version "8.1.0"
+  resolved "https://registry.npmjs.org/@justeat/fozzie/-/fozzie-8.1.0.tgz#f0fb1a98ca0d181807d755e6f14154f42e1fed4b"
+  integrity sha512-tktsjBqynF6qJr30nZP1sqG04odKY3J02+qalRSZfVBasIX1ov9cJeKW+aAT0St0egWnd6Jbndd6tNbt7x2Eew==
   dependencies:
-    "@justeat/f-utils" "3.5.0"
     "@justeat/pie-design-tokens" "1.4.0"
     include-media "1.4.10"
 
