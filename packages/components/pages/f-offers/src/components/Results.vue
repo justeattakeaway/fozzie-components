@@ -14,6 +14,7 @@
                 <div :class="$style['c-offersResults-contentCards']">
                     <template v-for="(card, i) in cards">
                         <group-header-card
+                            :class="$style['c-offersResults-contentCards-groupHeader']"
                             v-if="card.type === 'Header_Card'"
                             :key="i"
                             :title="card.title" />
@@ -46,6 +47,8 @@
 import {
     ContentCards,
     PromotionCard,
+    PromotionCardOne,
+    PromotionCardTwo,
     VoucherCard,
     GroupHeaderCard,
     FirstTimeCustomerCard,
@@ -62,6 +65,8 @@ export default {
     components: {
         ContentCards,
         PromotionCard,
+        PromotionCardOne,
+        PromotionCardTwo,
         VoucherCard,
         GroupHeaderCard,
         FirstTimeCustomerCard,
@@ -144,8 +149,9 @@ export default {
                 case 'Restaurant_FTC_Offer_Card':
                     return 'FirstTimeCustomerCard';
                 case 'Promotion_Card_1':
+                    return 'PromotionCardOne';
                 case 'Promotion_Card_2':
-                    return 'PromotionCard';
+                    return 'PromotionCardTwo';
                 default:
                     break;
             }
@@ -239,7 +245,18 @@ export default {
 
 <style lang="scss" module>
 .c-offersResults-contentCards {
-    display: flex;
-    flex-flow: row wrap;
+    display: grid;
+    gap: spacing(d);
+    justify-items: center;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    @include media('>=narrowMid') {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    @include media('>=wide') {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+.c-offersResults-contentCards-groupHeader {
+    grid-column: 1 / -1;
 }
 </style>

@@ -69,24 +69,6 @@ commands:
               yarn << parameters.command_name >> --since master...HEAD
             fi
 
-  run_command_plus_dependencies:
-    parameters:
-      command_description:
-        type: string
-      command_name:
-        type: string
-    description: Runs commands based on passed parameters
-    steps:
-      - run:
-          name: << parameters.command_description >>
-          command: |
-            if [ "${RUN_ALL}" == "true" ];
-            then
-              yarn << parameters.command_name >>
-            else
-              yarn << parameters.command_name >> --since master...HEAD --include-dependencies
-            fi
-
   save_cache_dist_directories:
     description: Saves cache for dist directories
     steps:
@@ -198,7 +180,7 @@ commands:
   build_packages:
     description: Locally builds all packages in the monorepo
     steps:
-      - run_command_plus_dependencies:
+      - run_command:
           command_description: Build packages
           command_name: build
 
