@@ -18,6 +18,7 @@ function getEmptyAddress (postcode) {
     return {
         line1: '',
         line2: '',
+        line3: '',
         locality: '',
         postcode: toFormattedPostcode(postcode) || ''
     };
@@ -27,6 +28,7 @@ function formatAddress (address) {
     return {
         line1: address.line1 || '',
         line2: address.line2 || '',
+        line3: address.line3 || '',
         locality: address.City || address.locality || '',
         postcode: address.PostalCode || address.ZipCode || address.postalCode || ''
     };
