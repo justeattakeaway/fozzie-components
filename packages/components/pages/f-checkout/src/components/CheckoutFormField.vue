@@ -42,7 +42,7 @@ import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import { mapState, mapActions } from 'vuex';
-import { VALIDATIONS, VUEX_CHECKOUT_MODULE } from '../constants';
+import { TENANT_MAP, VALIDATIONS, VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
     components: { FormField, ErrorMessage },
@@ -67,11 +67,6 @@ export default {
         maxLength: {
             type: String,
             default: '100'
-        },
-
-        tenant: {
-            type: String,
-            required: true
         },
 
         isGrouped: {
@@ -159,7 +154,7 @@ export default {
         },
 
         shouldShowEircodeHelper () {
-            return this.tenant === 'ie' && this.fieldName === 'postcode';
+            return TENANT_MAP[this.$i18n.locale] === 'ie' && this.fieldName === 'postcode';
         },
 
         groupedProps () {
