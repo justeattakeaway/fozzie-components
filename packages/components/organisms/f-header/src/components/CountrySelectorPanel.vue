@@ -131,9 +131,7 @@ $countrySelector-text-bg-hover : $color-container-subtle;
 
 .c-countrySelector {
     @include media('>mid') {
-        padding-top: spacing(e);
-        padding-bottom: spacing(c);
-        padding-left: spacing(d);
+        padding: spacing(e) spacing(c) spacing(c);
     }
 }
 
