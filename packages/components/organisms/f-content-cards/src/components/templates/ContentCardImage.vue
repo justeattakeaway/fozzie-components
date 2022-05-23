@@ -32,7 +32,6 @@ export default {
 $image-borderRadius: $radius-rounded-c;
 
 .c-content-cardImage--wrapper {
-    height: 160px;
     overflow: hidden;
     position: relative;
 }
