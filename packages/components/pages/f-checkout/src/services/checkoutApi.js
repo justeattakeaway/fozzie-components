@@ -1,5 +1,4 @@
 import axios from 'axios';
-import retryWrapper from '../axios-retry-wrapper';
 import { VUEX_CHECKOUT_EXPERIMENTATION_MODULE } from '../constants';
 
 export default {
@@ -51,7 +50,6 @@ export default {
     },
 
     async getNoteConfiguration (url, timeout) {
-        retryWrapper(axios, { retryAmount: 3 });
         const config = {
             headers: {
                 'Content-Type': 'application/json'
