@@ -36,11 +36,14 @@
                 ]">{{ linkList.name }}</span>
         </h2>
 
+        <!-- eslint-disable vuejs-accessibility/no-redundant-roles */ -->
         <ul
             :id="listId"
+            role="list"
             :aria-labelledby="listHeadingId"
             :class="$style['c-footer-list']"
             data-test-id="footer-link-list">
+            <!-- eslint-enable vuejs-accessibility/no-redundant-roles */ -->
             <li
                 v-for="(link, i) in linkList.links"
                 :key="`${i}_Link`">
@@ -48,6 +51,7 @@
                     :href="link.href"
                     :rel="link.rel"
                     :target="link.target"
+                    role="listitem"
                     :class="$style['c-footer-list-link']"
                     :data-trak='`{
                         "trakEvent": "click",
