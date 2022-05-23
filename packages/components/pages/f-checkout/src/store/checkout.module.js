@@ -1,6 +1,5 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import retryWrapper from '../axios-retry-wrapper';
 import addressService from '../services/addressService';
 import {
     VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, DOB_REQUIRED_ISSUE, AGE_VERIFICATION_ISSUE, ERROR_TYPES,
@@ -328,7 +327,6 @@ export default {
                 },
                 timeout
             };
-            retryWrapper(axios, { retryAmount: 3 });
             const { data } = await axios.get(url, config);
 
             const addressDetails = addressService.getClosestAddress(data, tenant, currentPostcode);
