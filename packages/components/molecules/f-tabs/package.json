@@ -57,6 +57,6 @@
     "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3",
     "@justeat/f-wdio-utils": "0.5.0",
-    "node-sass": "4.14.1"
+    "node-sass": "7.0.1"
   }
 }
