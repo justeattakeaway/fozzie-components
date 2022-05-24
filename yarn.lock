@@ -2452,6 +2452,11 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-4.1.0.tgz#43300dd377b6293157bd59378165cc64ace4ade1"
   integrity sha512-4xwep9kagPo+L6YeFIiU8A65BPhic1CUOzvfv2fzYYdGtYuGi2XVbu2xreYuvlQ/v7pitdW0MUqTZGsoJr+ZTg==
 
+"@justeat/f-navigation-links@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-navigation-links/-/f-navigation-links-1.1.0.tgz#ad3f0ae6eff67e625c9878bbd6a050a236c663d8"
+  integrity sha512-4aPChcvInn0sGVJkERS9VecU9Hq5K6l7ALK7Qvy/qu9NuPPbm7nWvOytsCPez8d6i2W/zkkb1UTyMzAg/momew==
+
 "@justeat/f-searchbox@6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-6.0.0.tgz#fa6ea41ca3ccde26d5ed65511a96f1a728a9fc88"
@@ -2556,6 +2561,12 @@
   dependencies:
     lodash-es "4.17.21"
     window-or-global "1.0.1"
+"@justeat/f-tabs@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-tabs/-/f-tabs-2.0.0.tgz#6fc0b67edb2fee754c8d35a8c683989b0239adad"
+  integrity sha512-m8bd7HgrrwL2iS7Gb6pVcZacz9ESrfNKOjytQSFPtV/j0p//Siai2ICp06CW7KFdjkh5z06q8mLmcEKXZh6l0A==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
 
 "@justeat/f-trak@0.7.1":
   version "0.7.1"
@@ -2666,6 +2677,13 @@
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.6.0.tgz#0d5ea0ca9cc5b6bc9cd74b350e74cc62379d88f0"
   integrity sha512-/yI/Nq3IZ8X0k+V0RBB4dNWFPOomSIt67FxBqgvI1Ig0HKd9tqTCxzTaDiKP3Bu9GlxLDHhdpS9HLNawTLsLgQ==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
+
+"@justeat/f-wdio-utils@0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.8.1.tgz#2c9715657176e85ed1388d6bc3ea9256c776d504"
+  integrity sha512-Y+XIbQA+WkCkQmq6eAN+3Vk39J6MOKT5Dg1o2rnzdf52jYvashCc2kSChwzgdmsKJqsiWzD3ZNH4jKqq7i6bsg==
   dependencies:
     "@justeat/f-services" "1.7.0"
 
