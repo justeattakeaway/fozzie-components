@@ -51,7 +51,6 @@
                     :href="link.href"
                     :rel="link.rel"
                     :target="link.target"
-                    role="listitem"
                     :class="$style['c-footer-list-link']"
                     :data-trak='`{
                         "trakEvent": "click",

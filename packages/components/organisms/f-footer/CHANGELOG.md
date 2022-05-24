@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.6.0
 ------------------------------
-*May 23, 2022*
+*May 24, 2022*
 
 ### Added
 - Aria list roles for `LinkList` component.
