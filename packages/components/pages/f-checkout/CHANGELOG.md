@@ -3,13 +3,28 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v3.28.0
+v3.30.0
 ------------------------------
-*May 16, 2022*
+*May 24, 2022*
 
 ### Added
  - Address handling for Ireland
  - Assistive text slot to find Eircode
+
+
+v3.29.0
+------------------------------
+*May 23, 2022*
+
+### Changed
+ - `maxBundleSize` to `125kb`
+
+v3.28.0
+------------------------------
+*May 3, 2022*
+
+### Removed
+ - Retry wrapper for Axios
 
 
 v3.27.0
