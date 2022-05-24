@@ -214,7 +214,6 @@
 </template>
 
 <script>
-import jwtDecode from 'jwt-decode';
 import { mapActions, mapState } from 'vuex';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import FErrorMessage from '@justeat/f-error-message';
@@ -274,6 +273,10 @@ export default {
         smartGatewayBaseUrl: {
             type: String,
             required: true
+        },
+        loginPath: {
+            type: String,
+            default: null
         }
     },
 
@@ -367,29 +370,14 @@ export default {
                 await this.loadConsumerDetails({ api: this.consumerApi, authToken: this.authToken });
                 this.$log.info('Consumer details fetched successfully', standardLogTags);
             } catch (error) {
-                // Debug - Temp logging - Check auth token state when GET fails
-                const expireEnum = {
-                    Unknown: -1,
-                    True: 1,
-                    False: 0
-                };
-                let endpointAuthTokenExpired = expireEnum.False;
-                try {
-                    if (this.authToken) {
-                        const { exp } = jwtDecode(this.authToken);
-                        if (Date.now() >= exp * 1000) {
-                            endpointAuthTokenExpired = expireEnum.True;
-                        }
-                    } else {
-                        endpointAuthTokenExpired = expireEnum.True;
-                    }
-                } catch {
-                    // noop
-                    endpointAuthTokenExpired = expireEnum.Unknown;
+                if (error && error.response && this.loginPath && error.response.status === 403) {
+                    // Redirect to login page if the user is not authenticated then return here once logged in.
+                    this.$log.warn('Unauthenticated fetching consumer details', error, standardLogTags);
+                    this.$router.push(`${this.loginPath}?returnurl=${window.location.pathname}`);
+                } else {
+                    this.$log.error('Error fetching consumer details', error, standardLogTags);
+                    this.handleLoadErrorState(error);
                 }
-                // Debug ^
-                this.$log.error('Error fetching consumer details', error, standardLogTags, { endpointAuthTokenExpired });
-                this.handleLoadErrorState(error);
             } finally {
                 this.$nextTick(() => {
                     this.$parent.$emit(EVENT_SPINNER_STOP_LOADING);
