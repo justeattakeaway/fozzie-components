@@ -13,6 +13,16 @@
         @blur="hasInvalidErrorMessage && formFieldBlur()"
         @input="updateUserDetails({ fieldType, fieldName, value: $event })">
         <template
+            v-if="shouldShowEircodeHelper"
+            #assistive-text-slot>
+            <p :class="$style['c-checkoutFormField-assistiveText']">
+                {{ translations.assistiveText }}
+                <a :href="translations.assistiveTextUrl">
+                    {{ translations.assistiveTextLink }}
+                </a>
+            </p>
+        </template>
+        <template
             v-if="hasError"
             #error>
             <error-message
@@ -32,7 +42,7 @@ import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import { mapState, mapActions } from 'vuex';
-import { VALIDATIONS, VUEX_CHECKOUT_MODULE } from '../constants';
+import { TENANT_MAP, VALIDATIONS, VUEX_CHECKOUT_MODULE } from '../constants';
 
 export default {
     components: { FormField, ErrorMessage },
@@ -143,6 +153,10 @@ export default {
             return this.customer.mobileNumber ? [...this.customer.mobileNumber].join(' ') : '';
         },
 
+        shouldShowEircodeHelper () {
+            return TENANT_MAP[this.$i18n.locale] === 'ie' && this.fieldName === 'postcode';
+        },
+
         groupedProps () {
             return {
                 placeholder: this.translations.label,
@@ -169,5 +183,12 @@ export default {
 <style lang="scss" module>
 .c-checkoutFormField-error--grouped {
     margin-bottom: spacing(d);
+}
+
+.c-checkoutFormField-assistiveText {
+    @include font-size('body-s');
+    font-weight: $font-weight-regular;
+    color: $color-content-subdued;
+    margin-top: 0;
 }
 </style>
