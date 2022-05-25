@@ -252,15 +252,13 @@ describe('AccountInfo', () => {
 
         it('should log warning and redirect if 403', async () => {
             // Arrange
-            const error = {
-                response: {
-                    status: 403,
-                    statusText: 'Request failed with status code 403'
-                }
+            const err = new Error('TEST - 403 error');
+            err.response = {
+                status: 403
             };
             const errorActions = {
                 ...storeActions,
-                loadConsumerDetails: jest.fn().mockImplementationOnce(() => { throw error; })
+                loadConsumerDetails: jest.fn().mockImplementationOnce(() => { throw err; })
             };
 
             // Act
@@ -270,7 +268,7 @@ describe('AccountInfo', () => {
             expect(logMocks.warn).toHaveBeenCalledTimes(1);
             expect(logMocks.warn).toHaveBeenCalledWith(
                 'Unauthenticated fetching consumer details',
-                error,
+                err,
                 expect.arrayContaining(['account-pages', 'account-info'])
             );
             expect(pushRouteSpy).toHaveBeenCalledWith('/account/login?returnurl=/account/info');
@@ -282,15 +280,13 @@ describe('AccountInfo', () => {
                 ...sutProps,
                 loginPath: null
             };
-            const error = {
-                response: {
-                    status: 403,
-                    statusText: 'Request failed with status code 403'
-                }
+            const err = new Error('TEST - 403 error');
+            err.response = {
+                status: 403
             };
             const errorActions = {
                 ...storeActions,
-                loadConsumerDetails: jest.fn().mockImplementationOnce(() => { throw error; })
+                loadConsumerDetails: jest.fn().mockImplementationOnce(() => { throw err; })
             };
 
             // Act
@@ -300,7 +296,7 @@ describe('AccountInfo', () => {
             expect(logMocks.error).toHaveBeenCalledTimes(1);
             expect(logMocks.error).toHaveBeenCalledWith(
                 'Error fetching consumer details',
-                error,
+                err,
                 expect.arrayContaining(['account-pages', 'account-info'])
             );
             expect(pushRouteSpy).not.toHaveBeenCalled();

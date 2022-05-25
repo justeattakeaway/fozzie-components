@@ -369,6 +369,16 @@ export default {
             try {
                 await this.loadConsumerDetails({ api: this.consumerApi, authToken: this.authToken });
                 this.$log.info('Consumer details fetched successfully', standardLogTags);
+                // debug
+                let err;
+                if (window.location.search === '?debug') {
+                    err = new Error('DEBUG - 403 error');
+                    err.response = {
+                        status: 403
+                    };
+                    throw err;
+                }
+                // debug
             } catch (error) {
                 if (error && error.response && this.loginPath && error.response.status === 403) {
                     // Redirect to login page if the user is not authenticated then return here once logged in.
