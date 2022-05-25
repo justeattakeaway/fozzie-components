@@ -3,12 +3,12 @@ const FilterPill = require('../../test-utils/component-objects/f-filter-pill.com
 const filterPill = new FilterPill();
 
 describe('f-filter-pill component tests', () => {
-    beforeEach(() => {
-        filterPill.load();
+    beforeEach(async () => {
+        await filterPill.load();
     });
 
-    it('should display the f-filter-pill component', () => {
+    it('should display the f-filter-pill component', async () => {
         // Assert
-        expect(filterPill.isComponentDisplayed()).toBe(true);
+        await expect(await filterPill.isComponentDisplayed()).toBe(true);
     });
 });
