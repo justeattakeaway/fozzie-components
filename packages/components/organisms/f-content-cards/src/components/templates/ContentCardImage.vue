@@ -30,6 +30,8 @@ export default {
 
 <style lang="scss" module>
 $image-borderRadius: $radius-rounded-c;
+$image-minHeight: 160px;
+$image-logoWidth: 48px;
 
 .c-content-cardImage--wrapper {
     overflow: hidden;
@@ -41,12 +43,14 @@ $image-borderRadius: $radius-rounded-c;
     left: spacing(d);
     top: spacing(d);
     border-radius: $image-borderRadius;
-    width: 48px;
+    width: $image-logoWidth;
 }
 
 .c-content-cardImage {
     width: 100%;
     border-radius: $image-borderRadius;
+    object-fit: cover;
+    min-height: $image-minHeight;
 
     @include media('<=narrow') {
         border-radius: 0;

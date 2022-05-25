@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v8.0.0-beta.4 (beta 3 excluded due to error)
+------------------------------
+*May 24, 2022*
+
+### Changed
+- updated image to have minimum height and object fit properties
+
 
 v8.0.0-beta.2
 ------------------------------
