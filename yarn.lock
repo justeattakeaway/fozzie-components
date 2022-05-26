@@ -2322,10 +2322,10 @@
   dependencies:
     "@justeat/f-services" "0.13.0"
 
-"@justeat/f-content-cards@8.0.0-beta.3":
-  version "8.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-8.0.0-beta.3.tgz#6f986f217e52dece9db6a532b5ba85812842d6b1"
-  integrity sha512-Mi4Dvt+dKzlFu785nOsDx6Tpp1PdCZHxACHQ9wYbaVJ2n6TerdUe+eo97fwUF8s4B3f41ZV6fc0K+rvZD/wqXA==
+"@justeat/f-content-cards@8.0.0-beta.4":
+  version "8.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-8.0.0-beta.4.tgz#ff7690532e6743ff4f2b83dd4d7aad04e1485c0a"
+  integrity sha512-cLUbPemnxsaQ8Ljxm5Kyu4uOEBWFNi3QEC89c1QtBbmwZ2/kc1Sz2V51zMdilBHCLG93/Cn8bQYl+bOODJskrw==
   dependencies:
     "@babel/plugin-proposal-class-properties" "7.12.13"
     "@justeat/f-services" "1.0.1"
