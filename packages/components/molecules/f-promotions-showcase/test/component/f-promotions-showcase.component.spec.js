@@ -3,12 +3,12 @@ const PromotionsShowcase = require('../../test-utils/component-objects/f-promoti
 const promotionsShowcase = new PromotionsShowcase();
 
 describe('f-promotions-showcase component tests', () => {
-    beforeEach(() => {
-        promotionsShowcase.load();
+    beforeEach(async () => {
+        await promotionsShowcase.load();
     });
 
-    it('should display the f-promotions-showcase component', () => {
+    it('should display the f-promotions-showcase component', async () => {
         // Assert
-        expect(promotionsShowcase.isComponentDisplayed()).toBe(true);
+        await expect(await promotionsShowcase.isComponentDisplayed()).toBe(true);
     });
 });

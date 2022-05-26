@@ -2410,6 +2410,14 @@
     "@justeat/f-services" "1.0.0"
     "@justeat/f-vue-icons" "2.5.0"
 
+"@justeat/f-form-field@4.9.0":
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.9.0.tgz#831d206f658ee22f22c52d71dabff4b6bc55de70"
+  integrity sha512-KJFdSUAXlJWCahqjE4cZDYm78xiU41mbED29yU4OVDCOF8coWPLfp8GbXmarRsO3zBa5To7Q26WRGEzxaHCn+g==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+    "@justeat/f-vue-icons" "2.5.0"
+
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-0.2.0.tgz#90ec559642c165b6325669c506c417abe09fa5dd"
@@ -2556,11 +2564,6 @@
     lodash-es "4.17.15"
     window-or-global "1.0.1"
 
-"@justeat/f-services@4.9.0":
-  version "1.15.0"
-  dependencies:
-    lodash-es "4.17.21"
-    window-or-global "1.0.1"
 "@justeat/f-tabs@2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-tabs/-/f-tabs-2.0.0.tgz#6fc0b67edb2fee754c8d35a8c683989b0239adad"
