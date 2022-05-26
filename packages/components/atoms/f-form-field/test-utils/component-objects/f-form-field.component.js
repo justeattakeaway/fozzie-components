@@ -11,19 +11,19 @@ module.exports = class FormField extends Page {
 
     get input () { return $('[data-test-id="formfield-input"]'); }
 
-    load () {
-        super.load(this.component);
+    async load () {
+        await super.load(this.component);
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component);
+    async waitForComponent () {
+        await super.waitForComponent(this.component);
     }
 
-    isComponentDisplayed () {
+    async isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 
-    isLabelDisplayed () {
+    async isLabelDisplayed () {
         return this.label.isDisplayed();
     }
 
@@ -33,11 +33,11 @@ module.exports = class FormField extends Page {
     * @description
     * The below function adds and displays the user's first name into the form-field component.
     */
-    addUserInput (userInput) {
-        this.input.setValue(userInput.firstName);
+    async addUserInput (userInput) {
+        await this.input.setValue(userInput.firstName);
     }
 
-    getUserInput () {
+    async getUserInput () {
         return this.input.getValue();
     }
 };

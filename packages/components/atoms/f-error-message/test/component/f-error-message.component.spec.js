@@ -3,12 +3,12 @@ const ErrorMessage = require('../../test-utils/component-objects/f-error-message
 const errorMessage = new ErrorMessage();
 
 describe('f-error-message component tests', () => {
-    beforeEach(() => {
-        errorMessage.load();
+    beforeEach(async () => {
+        await errorMessage.load();
     });
 
-    it('should display the f-error-message component', () => {
+    it('should display the f-error-message component', async () => {
         // Assert
-        expect(errorMessage.isComponentDisplayed()).toBe(true);
+        await expect(await errorMessage.isComponentDisplayed()).toBe(true);
     });
 });

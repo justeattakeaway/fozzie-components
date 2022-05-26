@@ -5,69 +5,69 @@ const IconButton = require('../../test-utils/component-objects/f-button--icon.co
 let button;
 
 describe('f-button component tests', () => {
-    it('should display the f-button action component', () => {
+    it('should display the f-button action component', async () => {
         // Arrange
         button = new ActionButton();
 
         // Act
-        button.load();
+        await button.load();
 
         // Assert
-        expect(button.isComponentDisplayed()).toBe(true);
+        await expect(await button.isComponentDisplayed()).toBe(true);
     });
 
-    it('should check that the f-button action component is clickable', () => {
+    it('should check that the f-button action component is clickable', async () => {
         // Arrange
         button = new ActionButton();
 
         // Act
-        button.load();
+        await button.load();
 
         // Assert
-        expect(button.isComponentClickable()).toBe(true);
+        await expect(await button.isComponentClickable()).toBe(true);
     });
 
-    it('should display the f-button link component', () => {
+    it('should display the f-button link component', async () => {
         // Arrange
         button = new LinkButton();
 
         // Act
-        button.load();
+        await button.load();
 
         // Assert
-        expect(button.isComponentDisplayed()).toBe(true);
+        await expect(await button.isComponentDisplayed()).toBe(true);
     });
 
-    it('should check that the f-button link component is clickable', () => {
+    it('should check that the f-button link component is clickable', async () => {
         // Arrange
         button = new LinkButton();
 
         // Act
-        button.load();
+        await button.load();
 
         // Assert
-        expect(button.isComponentClickable()).toBe(true);
+        await expect(await button.isComponentClickable()).toBe(true);
     });
 
-    it('should display the f-button icon component', () => {
+    it('should display the f-button icon component', async () => {
         // Arrange
         button = new IconButton();
 
         // Act
-        button.load();
+        await button.load();
 
         // Assert
-        expect(button.isComponentDisplayed()).toBe(true);
+        await expect(await button.isComponentDisplayed()).toBe(true);
     });
 
-    it('should check that the f-button icon component is clickable', () => {
+    it('should check that the f-button icon component is clickable', async () => {
         // Arrange
         button = new IconButton();
 
         // Act
-        button.load();
+        await button.load();
 
         // Assert
-        expect(button.isComponentClickable()).toBe(true);
+        await expect(await button.isComponentClickable()).toBe(true);
     });
 });
