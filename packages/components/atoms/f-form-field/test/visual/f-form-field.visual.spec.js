@@ -4,43 +4,43 @@ describe('f-form-field visual tests', () => {
     let formField;
 
     describe('default state', () => {
-        it('should display all fields in the default state', () => {
+        it('should display all fields in the default state', async () => {
             // Arrange
             formField = new FormField();
 
             // Act
-            formField.load();
+            await formField.load();
 
             // Assert
-            browser.percyScreenshot('f-form-field - Base State', 'desktop');
+            await browser.percyScreenshot('f-form-field - Base State', 'desktop');
         });
     });
 
     describe('disabled state', () => {
-        it('should display all fields in a disabled state', () => {
+        it('should display all fields in a disabled state', async () => {
             // Arrange
-            formField = new FormField()
+            formField = await new FormField()
             .withQuery('args', 'isDisabled:disabled');
 
             // Act
-            formField.load();
+            await formField.load();
 
             // Assert
-            browser.percyScreenshot('f-form-field - Disabled State', 'desktop');
+            await browser.percyScreenshot('f-form-field - Disabled State', 'desktop');
         });
     });
 
     describe('errored state', () => {
-        it('should display all fields in an errored state', () => {
+        it('should display all fields in an errored state', async () => {
             // Arrange
-            formField = new FormField()
+            formField = await new FormField()
             .withQuery('args', 'hasError:true');
 
             // Act
-            formField.load();
+            await formField.load();
 
             // Assert
-            browser.percyScreenshot('f-form-field - Errored State', 'desktop');
+            await browser.percyScreenshot('f-form-field - Errored State', 'desktop');
         });
     });
 });

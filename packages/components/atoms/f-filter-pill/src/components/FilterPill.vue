@@ -5,7 +5,7 @@
                 [$style['c-filterPill--selected']]: isToggleSelected,
                 [$style['c-filterPill--disabled']]: isDisabled
             }]"
-        data-test-id="filter-item">
+        data-test-id="filter-pill-component">
         <filter-pill-skeleton
             v-if="isLoading"
             aria-hidden="true" />
