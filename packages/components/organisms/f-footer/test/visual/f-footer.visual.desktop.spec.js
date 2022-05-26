@@ -33,6 +33,18 @@ describe('f-footer - Desktop Visual Tests', () => {
             browser.percyScreenshot(`f-footer - Country Selector - ${tenant}`, 'desktop');
         });
 
+    forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'es-ES', 'it-IT'])
+        .it('should display slim footer when no content links are provided for tenant: "%s"', tenant => {
+            // Arrange
+            footer.withQuery('args', `locale:${tenant};showLinksContent:false`);
+
+            // Act
+            footer.load();
+
+            // Assert
+            browser.percyScreenshot(`f-footer - Slim Footer - ${tenant}`, 'desktop');
+        });
+
     forEach(['en-AU', 'en-NZ'])
         .it('should display the footer with courier links for tenant: "%s"', tenant => {
             // Arrange
