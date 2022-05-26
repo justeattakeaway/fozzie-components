@@ -3,11 +3,11 @@ const Breadcrumbs = require('../../test-utils/component-objects/f-breadcrumbs.co
 const breadcrumbs = new Breadcrumbs();
 
 describe('f-breadcrumbs component tests', () => {
-    beforeEach(() => {
-        breadcrumbs.load();
+    beforeEach(async () => {
+        await breadcrumbs.load();
     });
-    it('should display the f-breadcrumbs component', () => {
+    it('should display the f-breadcrumbs component', async () => {
         // Assert
-        expect(breadcrumbs.isComponentDisplayed()).toBe(true);
+        await expect(await breadcrumbs.isComponentDisplayed()).toBe(true);
     });
 });

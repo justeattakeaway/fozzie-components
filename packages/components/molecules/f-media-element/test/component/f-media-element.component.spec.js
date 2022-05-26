@@ -3,12 +3,12 @@ const MediaElement = require('../../test-utils/component-objects/f-media-element
 const mediaElement = new MediaElement();
 
 describe('f-media-element component tests', () => {
-    beforeEach(() => {
-        mediaElement.load();
+    beforeEach(async () => {
+        await mediaElement.load();
     });
 
-    it('should display the f-media-element component', () => {
+    it('should display the f-media-element component', async () => {
         // Assert
-        expect(mediaElement.isComponentDisplayed()).toBe(true);
+        await expect(await mediaElement.isComponentDisplayed()).toBe(true);
     });
 });
