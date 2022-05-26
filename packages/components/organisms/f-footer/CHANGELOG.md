@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.7.0
+------------------------------
+*May 26, 2022*
+
+### Added
+- Render the static parts of the footer when dynamic content is not provided
+
+
 v7.6.0
 ------------------------------
 *May 24, 2022*
