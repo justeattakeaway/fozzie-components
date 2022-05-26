@@ -6,166 +6,166 @@ let button;
 
 describe('f-button Desktop visual tests', () => {
     describe('primary, secondary, outline and ghost buttons in all 4 sizes', () => {
-        it('should be displayed', () => {
+        it('should be displayed', async () => {
             // Arrange
             button = new ActionButton();
 
             // Act
-            button.load();
+            await button.load();
 
             // Assert
-            browser.percyScreenshot('f-button - Action', 'desktop');
+            await browser.percyScreenshot('f-button - Action', 'desktop');
         });
 
         describe('in isLoading state', () => {
-            it('should be displayed', () => {
+            it('should be displayed', async () => {
                 // Arrange
                 button = new ActionButton();
-                button.withQuery('args', 'isLoading');
+                await button.withQuery('args', 'isLoading');
 
                 // Act
-                button.load();
+                await button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Action - Loading', 'desktop');
+                await browser.percyScreenshot('f-button - Action - Loading', 'desktop');
             });
         });
 
         describe('in disabled state', () => {
-            it('should be displayed', () => {
+            it('should be displayed', async () => {
                 // Arrange
                 button = new ActionButton();
-                button.withQuery('args', 'disabled');
+                await button.withQuery('args', 'disabled');
 
                 // Act
-                button.load();
+                await button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Action - Disabled', 'desktop');
+                await browser.percyScreenshot('f-button - Action - Disabled', 'desktop');
             });
         });
 
         describe('in state with leading icon', () => {
-            it('should be displayed', () => {
+            it('should be displayed', async () => {
                 // Arrange
                 button = new ActionButton();
-                button.withQuery('args', 'hasIcon:leading');
+                await button.withQuery('args', 'hasIcon:leading');
 
                 // Act
-                button.load();
+                await button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Action - With Leading Icon', 'desktop');
+                await browser.percyScreenshot('f-button - Action - With Leading Icon', 'desktop');
             });
         });
 
         describe('in state with trailing icon', () => {
-            it('should be displayed', () => {
+            it('should be displayed', async () => {
                 // Arrange
                 button = new ActionButton();
-                button.withQuery('args', 'hasIcon:trailing');
+                await button.withQuery('args', 'hasIcon:trailing');
 
                 // Act
-                button.load();
+                await button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Action - With Trailing Icon', 'desktop');
+                await browser.percyScreenshot('f-button - Action - With Trailing Icon', 'desktop');
             });
         });
     });
 
     describe('link button', () => {
-        it('should be displayed in all 4 sizes', () => {
+        it('should be displayed in all 4 sizes', async () => {
             // Arrange
             button = new LinkButton();
 
             // Act
-            button.load();
+            await button.load();
 
             // Assert
-            browser.percyScreenshot('f-button - Link', 'desktop');
+            await browser.percyScreenshot('f-button - Link', 'desktop');
         });
 
         describe('in isLoading state', () => {
-            it('should be displayed in all 4 sizes', () => {
+            it('should be displayed in all 4 sizes', async () => {
                 // Arrange
                 button = new LinkButton();
-                button.withQuery('args', 'isLoading');
+                await button.withQuery('args', 'isLoading');
 
                 // Act
-                button.load();
+                await button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Link - Loading', 'desktop');
+                await browser.percyScreenshot('f-button - Link - Loading', 'desktop');
             });
         });
 
         describe('in disabled state', () => {
-            it('should be displayed', () => {
+            it('should be displayed', async () => {
                 // Arrange
                 button = new LinkButton();
-                button.withQuery('args', 'disabled');
+                await button.withQuery('args', 'disabled');
 
                 // Act
-                button.load();
+                await button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Link - Disabled', 'desktop');
+                await browser.percyScreenshot('f-button - Link - Disabled', 'desktop');
             });
         });
 
         describe('in state with leading icon', () => {
-            it('should be displayed', () => {
+            it('should be displayed', async () => {
                 // Arrange
                 button = new LinkButton();
-                button.withQuery('args', 'hasIcon:leading');
+                await button.withQuery('args', 'hasIcon:leading');
 
                 // Act
-                button.load();
+                await button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Link - With Leading Icon', 'desktop');
+                await browser.percyScreenshot('f-button - Link - With Leading Icon', 'desktop');
             });
         });
 
         describe('in state with trailing icon', () => {
-            it('should be displayed', () => {
+            it('should be displayed', async () => {
                 // Arrange
                 button = new LinkButton();
-                button.withQuery('args', 'hasIcon:trailing');
+                await button.withQuery('args', 'hasIcon:trailing');
 
                 // Act
-                button.load();
+                await button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Link - With Trailing Icon', 'desktop');
+                await browser.percyScreenshot('f-button - Link - With Trailing Icon', 'desktop');
             });
         });
     });
 
     describe('all valid iconButton types in all sizes', () => {
-        it('should be displayed', () => {
+        it('should be displayed', async () => {
             // Arrange
             button = new IconButton();
 
             // Act
-            button.load();
+            await button.load();
 
             // Assert
-            browser.percyScreenshot('f-button - Icon', 'desktop');
+            await browser.percyScreenshot('f-button - Icon', 'desktop');
         });
 
         describe('in isLoading state', () => {
-            it('should be displayed', () => {
+            it('should be displayed', async () => {
                 // Arrange
                 button = new IconButton();
-                button.withQuery('args', 'isLoading');
+                await button.withQuery('args', 'isLoading');
 
                 // Act
-                button.load();
+                await button.load();
 
                 // Assert
-                browser.percyScreenshot('f-button - Icon - Loading', 'desktop');
+                await browser.percyScreenshot('f-button - Icon - Loading', 'desktop');
             });
         });
     });
