@@ -9,23 +9,23 @@ module.exports = class MegaModal extends Page {
     get megaModalTitle () { return $('[data-test-id="mega-modal-title"]'); }
     get megaModalContent () { return $('[data-test-id="mega-modal-content"]'); }
 
-    load () {
-        super.load(this.component);
+    async load () {
+        await super.load(this.component);
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component);
+    async waitForComponent () {
+        await super.waitForComponent(this.component);
     }
 
-    isComponentDisplayed () {
+    async isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 
-    isTitleDisplayed () {
+    async isTitleDisplayed () {
         return this.megaModalTitle.isDisplayed();
     }
 
-    isContentDisplayed () {
+    async isContentDisplayed () {
         return this.megaModalTitle.isDisplayed();
     }
 };

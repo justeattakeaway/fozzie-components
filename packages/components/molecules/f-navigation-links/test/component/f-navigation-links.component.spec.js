@@ -3,14 +3,14 @@ const NavigationLinks = require('../../test-utils/component-objects/f-navigation
 let navigationLinks;
 
 describe('f-navigation-links component tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         navigationLinks = new NavigationLinks();
 
-        navigationLinks.load();
+        await navigationLinks.load();
     });
 
-    it('should display the f-navigation-links component', () => {
+    it('should display the f-navigation-links component', async () => {
         // Assert
-        expect(navigationLinks.isComponentDisplayed()).toBe(true);
+        await expect(await navigationLinks.isComponentDisplayed()).toBe(true);
     });
 });
