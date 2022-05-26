@@ -7,19 +7,19 @@ module.exports = class ActionButton extends Page {
 
     get component () { return $('[data-test-id="action-button-component"]'); }
 
-    load () {
-        super.load(this.component);
+    async load () {
+        await super.load(this.component);
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component);
+    async waitForComponent () {
+        await super.waitForComponent(this.component);
     }
 
-    isComponentDisplayed () {
+    async isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 
-    isComponentClickable () {
+    async isComponentClickable () {
         return this.component.isClickable();
     }
 };
