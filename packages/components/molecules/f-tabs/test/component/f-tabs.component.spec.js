@@ -5,21 +5,21 @@ const Tabs = require('../../test-utils/component-objects/f-tabs.component');
 const tabs = new Tabs();
 
 describe('f-tabs component tests', () => {
-    beforeEach(() => {
-        tabs.load();
+    beforeEach(async () => {
+        await tabs.load();
     });
 
-    it('should display the f-tabs component', () => {
+    it('should display the f-tabs component', async () => {
         // Assert
-        expect(tabs.isComponentDisplayed()).toBe(true);
+        await expect(await tabs.isComponentDisplayed()).toBe(true);
     });
 
     forEach(['Your Stampcards', 'How it works'])
-        .it('should display individual tabs', tab => {
+        .it('should display individual tabs', async tab => {
             // Arrange
             tabs.expectedTabButton = tab;
 
             // Assert
-            expect(tabs.isTabButtonDisplayed(tab)).toBe(true);
+            await expect(await tabs.isTabButtonDisplayed(tab)).toBe(true);
         });
 });
