@@ -1,6 +1,7 @@
 import uk from './tenants/uk';
 import au from './tenants/au';
 import nz from './tenants/nz';
+import ie from './tenants/ie';
 import it from './tenants/it';
 import es from './tenants/es';
 
@@ -9,7 +10,8 @@ const tenants = {
     au,
     nz,
     es,
-    it
+    it,
+    ie
 };
 
 const storedLocationKey = 'je-full-address-details';
