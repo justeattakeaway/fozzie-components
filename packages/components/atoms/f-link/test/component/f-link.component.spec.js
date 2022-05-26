@@ -3,12 +3,12 @@ const Link = require('../../test-utils/component-objects/f-link.component');
 const link = new Link();
 
 describe('f-link component tests', () => {
-    beforeEach(() => {
-        link.load();
+    beforeEach(async () => {
+        await link.load();
     });
 
-    it('should display the f-link component', () => {
+    it('should display the f-link component', async () => {
         // Assert
-        expect(link.isComponentDisplayed()).toBe(true);
+        await expect(await link.isComponentDisplayed()).toBe(true);
     });
 });

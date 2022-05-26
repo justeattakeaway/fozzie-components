@@ -9,19 +9,19 @@ module.exports = class Tabs extends Page {
 
     get tabButtons () { return $$('[data-test-id*="tab-button"]'); }
 
-    load () {
-        super.load(this.component);
+    async load () {
+        await super.load(this.component);
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component);
+    async waitForComponent () {
+        await super.waitForComponent(this.component);
     }
 
-    isComponentDisplayed () {
+    async isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 
-    isTabButtonDisplayed () {
+    async isTabButtonDisplayed () {
         return this.tabButton.isDisplayed();
     }
 

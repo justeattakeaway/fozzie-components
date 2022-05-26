@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+Latest (add to next release)
+------------------------------
+*May 26, 2021*
+
+### Changed
+- Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
+
+
 v0.12.0
 ------------------------------
 *May 9, 2022*
@@ -33,7 +41,7 @@ v0.10.3
 *March 10, 2022*
 
 ### Added
-- checked attribute 
+- checked attribute
 
 ### Changed
 - `href` always added to link
@@ -58,7 +66,7 @@ v0.10.0
 *February 25, 2022*
 
 ### Changed
-        
+
 - Moved `isToggleSelected` assignment into created lifecycle method for SSR
 - Updated stories to use args instead of default value
 - Added label style for `isLink`

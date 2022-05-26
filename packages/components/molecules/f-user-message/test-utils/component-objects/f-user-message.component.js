@@ -8,19 +8,19 @@ module.exports = class UserMessage extends Page {
     get component () { return $('[data-test-id="user-message-component"]'); }
     get content () { return this.component.$('[data-test-id="user-message-content"]'); }
 
-    load () {
-        super.load(this.component);
+    async load () {
+        await super.load(this.component);
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component);
+    async waitForComponent () {
+        await super.waitForComponent(this.component);
     }
 
-    isComponentDisplayed () {
+    async isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 
-    isContentDisplayed () {
+    async isContentDisplayed () {
         const messageContent = this.content.getText();
 
         return this.content.isDisplayed() && messageContent.length > 0;

@@ -3,12 +3,12 @@ const SkeletonLoader = require('../../test-utils/component-objects/f-skeleton-lo
 const skeletonLoader = new SkeletonLoader();
 
 describe('f-skeleton-loader component tests', () => {
-    beforeEach(() => {
-        skeletonLoader.load();
+    beforeEach(async () => {
+        await skeletonLoader.load();
     });
 
-    it('should display the f-skeleton-loader component', () => {
+    it('should display the f-skeleton-loader component', async () => {
         // Assert
-        expect(skeletonLoader.isComponentDisplayed()).toBe(true);
+        await expect(await skeletonLoader.isComponentDisplayed()).toBe(true);
     });
 });
