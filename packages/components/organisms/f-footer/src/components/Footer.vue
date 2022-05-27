@@ -4,6 +4,7 @@
         :class="$style['c-footer']"
         data-test-id="footer-component">
         <div
+            v-if="content"
             :class="[
                 'c-footer-row-linkLists',
                 $style['c-footer-container'],
@@ -121,7 +122,6 @@ export default {
         },
         content: {
             type: Object,
-            required: true,
             default: () => {}
         }
     },
