@@ -6,8 +6,4 @@ module.exports = class FormField extends Page {
     }
 
     get component () { return $('[data-test-id="formfield-container"]'); }
-
-    async load () {
-        await super.load(this.component);
-    }
 };

@@ -6,7 +6,7 @@ const popover = new Popover();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        popover.load();
+        popover.load(popover.component);
     });
     it('a11y - should test f-popover component WCAG compliance', () => {
         // Act
