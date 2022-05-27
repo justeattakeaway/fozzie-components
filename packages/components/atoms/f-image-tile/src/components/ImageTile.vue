@@ -41,7 +41,11 @@
                 <span :class="$style['c-imageTile-innerWrapper']">
                     <span :class="$style['c-imageTile-inner']">
                         <span
-                            :class="$style['c-imageTile-backgroundContainer']" />
+                            :class="[
+                                $style['c-imageTile-backgroundContainer'], {
+                                    [$style['c-imageTile-backgroundContainer--fallback']]: imgError
+                                }]"
+                            :style="cssVars" />
                         <img
                             v-if="imgSrc && !imgError"
                             :class="$style['c-imageTile-image']"
@@ -301,6 +305,10 @@ $image-tile-text-transform: translate3d(spacing(b), 0, 0);
     .c-imageTile--breakout & {
         background-image: none;
         width: 92%;
+    }
+
+    &.c-imageTile-backgroundContainer--fallback {
+        background-image: var(--bg-image);
     }
 }
 
