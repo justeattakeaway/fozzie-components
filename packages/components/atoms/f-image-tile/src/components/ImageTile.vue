@@ -38,17 +38,19 @@
             data-test-id="image-tile-label"
             :tabindex="!isLink ? -1 : false">
             <template v-if="isBreakoutImage">
-                <span :class="$style['c-imageTile-inner']">
-                    <span
-                        :class="$style['c-imageTile-backgroundContainer']" />
-                    <img
-                        v-if="imgSrc && !imgError"
-                        :class="$style['c-imageTile-image']"
-                        :src="imgSrc"
-                        data-test-id="image-tile-image"
-                        :alt="altText"
-                        :role="isPresentationRole ? 'presentation' : false"
-                        @error="handleImgError">
+                <span :class="$style['c-imageTile-innerWrapper']">
+                    <span :class="$style['c-imageTile-inner']">
+                        <span
+                            :class="$style['c-imageTile-backgroundContainer']" />
+                        <img
+                            v-if="imgSrc && !imgError"
+                            :class="$style['c-imageTile-image']"
+                            :src="imgSrc"
+                            data-test-id="image-tile-image"
+                            :alt="altText"
+                            :role="isPresentationRole ? 'presentation' : false"
+                            @error="handleImgError">
+                    </span>
                 </span>
             </template>
             <template v-else>
@@ -198,11 +200,11 @@ $image-tile-background-color: $color-interactive-brand;
 $image-tile-selected: $color-content-positive;
 $image-tile-transition-duration: 0.2s;
 $image-tile-ease: ease-in-out;
-$image-tile-text-transform: translate3d(5px, 0, 0);
+$image-tile-text-transform: translate3d(spacing(b), 0, 0);
 
 @mixin image-tile-icon-selected-transform() {
     opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1) rotate(0);
+    transform: translate3d(spacing(a), 0, 0) scale(1) rotate(0);
     width: 15px;
 }
 
@@ -260,12 +262,32 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
     pointer-events: none;
 }
 
+.c-imageTile-innerWrapper {
+    position: relative;
+    display: block;
+
+    &:before {
+        display: block;
+        content: '';
+        width: 100%;
+        padding-top: math.div(3, 4) * 100%; // 4:3 aspect ratio
+    }
+}
+
 .c-imageTile-inner {
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     height: 100%;
+
+    .c-imageTile--breakout & {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
 }
 
 .c-imageTile-backgroundContainer {
@@ -278,6 +300,7 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
 
     .c-imageTile--breakout & {
         background-image: none;
+        width: 92%;
     }
 }
 
@@ -307,7 +330,7 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
 .c-imageTile-icon {
     align-self: center;
     opacity: 0;
-    transform: translate3d(-10px, 0, 0) scale(0.5) rotate(-60deg);
+    transform: translate3d(-8px, 0, 0) scale(0.5) rotate(-60deg);
     width: 0;
     will-change: transform, opacity;
 
@@ -340,7 +363,7 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
     margin-right: spacing(d);
     overflow: hidden;
     text-overflow: ellipsis;
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(spacing(a), 0, 0);
     white-space: nowrap;
     width: 100%;
     will-change: transform;

@@ -3,6 +3,7 @@ import ImageTile from '../src/components/ImageTile.vue';
 import TestContainer from './TestContainer.vue';
 import ImageTileWallpaper from './images/wallpaper.png';
 import ImageTileCuisine from './images/burgers.jpg';
+import ImageTileBreakout from './images/burgers.png';
 
 const fakeImage = 'This creates a broken image';
 
@@ -41,7 +42,7 @@ ImageTileComponent.args = {
     href: '/Chicken',
     tileId: 'Chicken',
     displayText: 'Chicken',
-    imgSrc: ImageTileCuisine,
+    imgSrc: ImageTileBreakout,
     isSelected: false,
     isLink: false,
     altText: '',
@@ -64,7 +65,7 @@ ImageTileComponent.argTypes = {
     },
     imgSrc: {
         control: { type: 'select' },
-        options: [ImageTileCuisine, null, fakeImage],
+        options: [ImageTileCuisine, null, fakeImage, ImageTileBreakout],
         description: 'Cuisine image link'
     },
     isSelected: {
