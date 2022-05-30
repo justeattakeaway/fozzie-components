@@ -3,12 +3,12 @@ const Card = require('../../test-utils/component-objects/f-card.component');
 const card = new Card();
 
 describe('f-card component tests', () => {
-    beforeEach(() => {
-        card.load();
+    beforeEach(async () => {
+        await card.load();
     });
 
-    it('should display the f-card component', () => {
+    it('should display the f-card component', async () => {
         // Assert
-        expect(card.isComponentDisplayed()).toBe(true);
+        await expect(await card.isComponentDisplayed()).toBe(true);
     });
 });

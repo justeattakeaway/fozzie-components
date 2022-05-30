@@ -8,6 +8,7 @@
     ],
     "commitMessagePrefix": "renovate - #trivial -",
     "ignoreDeps": ["chromedriver"],
+    "ignorePaths": ["./packages/components/organisms/f-cookie-banner/f-cookie-banner-static"],
     "prConcurrentLimit": 3,
     "packageRules": [
       {

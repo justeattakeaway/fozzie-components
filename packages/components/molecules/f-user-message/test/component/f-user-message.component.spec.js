@@ -3,17 +3,17 @@ const UserMessage = require('../../test-utils/component-objects/f-user-message.c
 const userMessage = new UserMessage();
 
 describe('f-user-message component tests', () => {
-    beforeEach(() => {
-        userMessage.load();
+    beforeEach(async () => {
+        await userMessage.load();
     });
 
-    it('should display the user message component', () => {
+    it('should display the user message component', async () => {
         // Assert
-        expect(userMessage.isComponentDisplayed()).toBe(true);
+        await expect(await userMessage.isComponentDisplayed()).toBe(true);
     });
 
-    it('should display the user message content', () => {
+    it('should display the user message content', async () => {
         // Assert
-        expect(userMessage.isContentDisplayed()).toBe(true);
+        await expect(await userMessage.isContentDisplayed()).toBe(true);
     });
 });

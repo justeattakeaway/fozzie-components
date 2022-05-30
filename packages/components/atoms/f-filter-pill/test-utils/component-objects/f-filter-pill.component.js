@@ -11,11 +11,15 @@ module.exports = class FilterPill extends Page {
         return $(COMPONENT);
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component);
+    async load () {
+        await super.load(this.component);
     }
 
-    isComponentDisplayed () {
+    async waitForComponent () {
+        await super.waitForComponent(this.component);
+    }
+
+    async isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 };

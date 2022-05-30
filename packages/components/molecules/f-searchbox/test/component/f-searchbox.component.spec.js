@@ -3,12 +3,12 @@ const Searchbox = require('../../test-utils/component-objects/f-searchbox.compon
 const searchbox = new Searchbox();
 
 describe('f-searchbox component tests', () => {
-    beforeEach(() => {
-        searchbox.load();
+    beforeEach(async () => {
+        await searchbox.load();
     });
 
-    it('should display the f-searchbox component', () => {
+    it('should display the f-searchbox component', async () => {
         // Assert
-        expect(searchbox.isComponentDisplayed()).toBe(true);
+        await expect(await searchbox.isComponentDisplayed()).toBe(true);
     });
 });
