@@ -3,26 +3,26 @@ const HomePromotionCard2 = require('../../test-utils/component-objects/f-content
 let card;
 
 describe('home promotion card 2 component tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         card = new HomePromotionCard2();
-        card.load();
+        await card.load();
     });
 
-    it('should display the card', () => {
+    it('should display the card', async () => {
         // Assert
-        expect(card.isComponentDisplayed()).toBe(true);
+        await expect(await card.isComponentDisplayed()).toBe(true);
     });
 
-    it('should display the elements of the card', () => {
+    it('should display the elements of the card', async () => {
         // Assert
-        expect(card.isCallToActionDisplayed()).toBe(true);
-        expect(card.isTextDisplayed()).toBe(true);
-        expect(card.isTitleDisplayed()).toBe(true);
-        expect(card.isBackgroundImageDisplayed()).toBe(true);
+        await expect(await card.isCallToActionDisplayed()).toBe(true);
+        await expect(await card.isTextDisplayed()).toBe(true);
+        await expect(await card.isTitleDisplayed()).toBe(true);
+        await expect(await card.isBackgroundImageDisplayed()).toBe(true);
     });
 
-    it('should check that the card is clickable', () => {
+    it('should check that the card is clickable', async () => {
         // Assert
-        expect(card.isComponentClickable()).toBe(true);
+        await expect(await card.isComponentClickable()).toBe(true);
     });
 });
