@@ -4,7 +4,7 @@ const filterPill = new FilterPill();
 
 describe('f-filter-pill component tests', () => {
     beforeEach(async () => {
-        await filterPill.load();
+        await filterPill.load(filterPill.component);
     });
 
     it('should display the f-filter-pill component', async () => {

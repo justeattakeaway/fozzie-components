@@ -4,7 +4,7 @@ const card = new Card();
 
 describe('f-card component tests', () => {
     beforeEach(async () => {
-        await card.load();
+        await card.load(card.component);
     });
 
     it('should display the f-card component', async () => {
