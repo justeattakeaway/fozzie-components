@@ -38,7 +38,9 @@
             data-test-id="image-tile-label"
             :tabindex="!isLink ? -1 : false">
             <template v-if="isBreakoutImage">
-                <span :class="$style['c-imageTile-innerWrapper']">
+                <span
+                    :class="$style['c-imageTile-innerWrapper']"
+                    data-test-id="image-tile-inner-wrapper">
                     <span :class="$style['c-imageTile-inner']">
                         <span
                             :class="[

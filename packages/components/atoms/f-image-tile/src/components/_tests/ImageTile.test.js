@@ -168,6 +168,23 @@ describe('ImageTile', () => {
                 expect(wrapper.vm.isToggleSelected).toBe(expectedValue);
             });
         });
+
+        describe('isBreakoutImage :: ', () => {
+            it('should apply class to the label when true', () => {
+                // Arrange
+                const propsData = { isBreakoutImage: true };
+
+                // Act
+                const wrapper = shallowMount(ImageTile, {
+                    propsData
+                });
+
+                const imageTileInnerWrapper = wrapper.find('[data-test-id="image-tile-inner-wrapper"]');
+
+                // Assert
+                expect(imageTileInnerWrapper.exists()).toBe(true);
+            });
+        });
     });
 
     describe('computed :: ', () => {
