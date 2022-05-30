@@ -31,8 +31,7 @@
         <label
             :class="[
                 $style['c-imageTile-label'], {
-                    [$style['c-imageTile-label--link']]: isLink,
-                    [$style['c-imageTile-label--breakout']]: isBreakoutImage
+                    [$style['c-imageTile-label--link']]: isLink
                 }]"
             :for="`imageTileToggle-${tileId}`"
             data-test-id="image-tile-label"
@@ -283,7 +282,7 @@ $image-tile-text-transform-breakout: translate3d(spacing(b), 0, 0);
         outline: none; // Prevents Safari doubling focus styles.
     }
 
-    &.c-imageTile-label--breakout {
+    .c-imageTile--breakout & {
         display: block;
     }
 }
