@@ -6,7 +6,7 @@ const link = new Link();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        link.load();
+        link.load(link.component);
     });
     it('a11y - should test f-link component WCAG compliance', () => {
         // Act
