@@ -9,6 +9,10 @@ v4.11.0
 
 ### Changed
 - colour of text when disabled to `color-content-default` to improve colour-contrast
+- border-radius of field when disabled in `FormFieldAffixed.vue`
+
+### Added
+- `isDisabled` and `hasError` props to `Radio.stories` and `TextInputIcon.stories`
 
 *May 27, 2021*
 
