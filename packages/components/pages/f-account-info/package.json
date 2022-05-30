@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-account-info",
   "description": "Fozzie Account Info - The account information page",
-  "version": "0.21.2",
+  "version": "0.22.0",
   "main": "dist/f-account-info.umd.min.js",
   "maxBundleSize": "100kB",
   "files": [
@@ -54,8 +54,7 @@
     "@justeat/f-globalisation": "1.0.0",
     "@justeat/f-services": "1.13.0",
     "@justeat/f-vue-icons": "3.3.0",
-    "vuelidate": "0.7.6",
-    "jwt-decode": "3.1.2"
+    "vuelidate": "0.7.6"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",

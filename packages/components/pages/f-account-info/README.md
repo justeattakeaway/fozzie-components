@@ -69,15 +69,12 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
-| Prop  | Type  | Default | Description |
-| ----- | ----- | ------- | ----------- |
-
-### Events
-
-The events that can be subscribed to are as follows (if any):
-
-| Event | Description |
-| ----- | ----------- |
+| Prop  | Type  |  Required | Description |
+| ----- | ----- |  ------- | ----------- |
+| authToken | string | false | the users authorisation token |
+| isAuthFinished | boolean | true | a flag indicating if the authorisation process has completed |
+| smartGatewayBaseUrl | string | true | the smartgateway host |
+| loginPath | string | false | the redirect path if the GET fails with a 403, if not supplied then will not redirect |
 
 ## Development
 
