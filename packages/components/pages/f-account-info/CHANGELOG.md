@@ -13,6 +13,17 @@ v0.21.0
 ### Added
 - Test to cover url change.
 
+v0.22.0
+------------------------------
+*May 24 2022*
+
+### Removed
+- Temp logging to record if auth expired or not
+
+### Added
+- Prop for 'login path' which is now used for 403 responses when getting data.
+
+
 v0.21.2
 ------------------------------
 *May 3, 2022*

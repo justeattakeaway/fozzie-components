@@ -15,13 +15,27 @@ let wrapper;
 let cookiesSpy;
 let httpSpy;
 let pushEventSpy;
+let pushRouteSpy;
 let sutMocks;
 let sutProps;
 let dataDefaults;
 let initialiseSpy;
+let windowSpy;
+let windowCopy;
+
+const GetWindowMock = () => {
+    windowCopy = { ...global.window };
+    const windowMock = ({
+        ...windowCopy,
+        location: { pathname: '/account/info' }
+    });
+    windowSpy = jest.spyOn(global, 'window', 'get');
+    windowSpy.mockImplementation(() => windowMock);
+};
 
 const logMocks = {
     info: jest.fn(),
+    warn: jest.fn(),
     error: jest.fn()
 };
 
@@ -79,6 +93,10 @@ describe('AccountInfo', () => {
         cookiesSpy = jest.fn();
         httpSpy = jest.fn();
         pushEventSpy = jest.fn();
+        pushRouteSpy = jest.fn();
+
+
+
         sutMocks = {
             $parent: {
                 $emit: jest.fn()
@@ -87,13 +105,18 @@ describe('AccountInfo', () => {
             $cookies: cookiesSpy,
             $log: logMocks,
             $gtm: {
-                pushEvent:  pushEventSpy
-            }
+                pushEvent: pushEventSpy
+            },
+            $router: {
+                push: pushRouteSpy
+            },
+            window: GetWindowMock()
         };
         sutProps = {
             authToken: token,
             isAuthFinished: true,
-            smartGatewayBaseUrl: baseUrl
+            smartGatewayBaseUrl: baseUrl,
+            loginPath: '/account/login'
         };
     });
 
@@ -206,7 +229,7 @@ describe('AccountInfo', () => {
             expect(element.exists()).toEqual(true);
         });
 
-        it('should log an error if loading preferences throws an error', async () => {
+        it('should log an error if loading user data throws an error', async () => {
             // Arrange
             const errorActions = {
                 ...storeActions,
@@ -223,9 +246,60 @@ describe('AccountInfo', () => {
             expect(logMocks.error).toHaveBeenCalledWith(
                 expect.any(String),
                 expect.any(Error),
-                expect.arrayContaining(['account-pages', 'account-info']),
-                expect.any(Object)
+                expect.arrayContaining(['account-pages', 'account-info'])
             );
+        });
+
+        it('should log warning and redirect if 403', async () => {
+            // Arrange
+            const err = new Error('TEST - 403 error');
+            err.response = {
+                status: 403
+            };
+            const errorActions = {
+                ...storeActions,
+                loadConsumerDetails: jest.fn().mockImplementationOnce(() => { throw err; })
+            };
+
+            // Act
+            wrapper = await mountAccountInfo({ actions: errorActions });
+
+            // Assert
+            expect(logMocks.warn).toHaveBeenCalledTimes(1);
+            expect(logMocks.warn).toHaveBeenCalledWith(
+                'Unauthenticated fetching consumer details',
+                err,
+                expect.arrayContaining(['account-pages', 'account-info'])
+            );
+            expect(pushRouteSpy).toHaveBeenCalledWith('/account/login?returnurl=/account/info');
+        });
+
+        it('should log error and not redirect if 403 and no loginPath supplied', async () => {
+            // Arrange
+            const propsData = {
+                ...sutProps,
+                loginPath: null
+            };
+            const err = new Error('TEST - 403 error');
+            err.response = {
+                status: 403
+            };
+            const errorActions = {
+                ...storeActions,
+                loadConsumerDetails: jest.fn().mockImplementationOnce(() => { throw err; })
+            };
+
+            // Act
+            wrapper = await mountAccountInfo({ actions: errorActions, propsData });
+
+            // Assert
+            expect(logMocks.error).toHaveBeenCalledTimes(1);
+            expect(logMocks.error).toHaveBeenCalledWith(
+                'Error fetching consumer details',
+                err,
+                expect.arrayContaining(['account-pages', 'account-info'])
+            );
+            expect(pushRouteSpy).not.toHaveBeenCalled();
         });
 
         it('should contain the correct url to change password', async () => {
