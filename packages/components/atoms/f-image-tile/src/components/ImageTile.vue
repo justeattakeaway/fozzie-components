@@ -222,11 +222,19 @@ $image-tile-background-color: $color-interactive-brand;
 $image-tile-selected: $color-content-positive;
 $image-tile-transition-duration: 0.2s;
 $image-tile-ease: ease-in-out;
-$image-tile-text-transform: translate3d(spacing(b), 0, 0);
+$image-tile-reset-translate: translate3d(0, 0, 0);
+$image-tile-text-transform: translate3d(spacing(a), 0, 0);
+$image-tile-text-transform-breakout: translate3d(spacing(b), 0, 0);
 
 @mixin image-tile-icon-selected-transform() {
     opacity: 1;
-    transform: translate3d(spacing(a), 0, 0) scale(1) rotate(0);
+    transform: $image-tile-reset-translate scale(1) rotate(0);
+    width: 15px;
+}
+
+@mixin image-tile-icon-selected-transform-breakout() {
+    opacity: 1;
+    transform: $image-tile-text-transform scale(1) rotate(0);
     width: 15px;
 }
 
@@ -356,7 +364,7 @@ $image-tile-text-transform: translate3d(spacing(b), 0, 0);
 .c-imageTile-icon {
     align-self: center;
     opacity: 0;
-    transform: translate3d(-8px, 0, 0) scale(0.5) rotate(-60deg);
+    transform: translate3d(-spacing(c), 0, 0) scale(0.5) rotate(-60deg);
     width: 0;
     will-change: transform, opacity;
 
@@ -366,8 +374,16 @@ $image-tile-text-transform: translate3d(spacing(b), 0, 0);
                     width $image-tile-transition-duration $image-tile-ease;
     }
 
+    .c-imageTile--breakout & {
+        transform: translate3d(-spacing(b), 0, 0) scale(0.5) rotate(-60deg);
+    }
+
     .c-imageTile--selected & {
         @include image-tile-icon-selected-transform();
+    }
+
+    .c-imageTile--selected.c-imageTile--breakout & {
+        @include image-tile-icon-selected-transform-breakout()
     }
 
     .c-imageTile--selected & path {
@@ -377,6 +393,10 @@ $image-tile-text-transform: translate3d(spacing(b), 0, 0);
     @include media('>=mid') {
         .c-imageTile:hover & {
             @include image-tile-icon-selected-transform();
+        }
+
+        .c-imageTile.c-imageTile--breakout:hover & {
+            @include image-tile-icon-selected-transform-breakout()
         }
     }
 }
@@ -389,7 +409,7 @@ $image-tile-text-transform: translate3d(spacing(b), 0, 0);
     margin-right: spacing(d);
     overflow: hidden;
     text-overflow: ellipsis;
-    transform: translate3d(spacing(a), 0, 0);
+    transform: $image-tile-reset-translate;
     white-space: nowrap;
     width: 100%;
     will-change: transform;
@@ -398,13 +418,22 @@ $image-tile-text-transform: translate3d(spacing(b), 0, 0);
         transition: transform $image-tile-transition-duration $image-tile-ease;
     }
 
+    .c-imageTile--breakout &,
     .c-imageTile--selected & {
         transform: $image-tile-text-transform;
+    }
+
+    .c-imageTile--selected.c-imageTile--breakout & {
+        transform: $image-tile-text-transform-breakout;
     }
 
     @include media('>=mid') {
         .c-imageTile:hover & {
             transform: $image-tile-text-transform;
+        }
+
+        .c-imageTile.c-imageTile--breakout:hover & {
+            transform: $image-tile-text-transform-breakout;
         }
     }
 }
