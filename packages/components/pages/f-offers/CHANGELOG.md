@@ -3,6 +3,32 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v1.12.0-beta.2
+------------------------------
+*May 24, 2022*
+
+### Changed
+- Updated content cards to get fix to small style issue
+
+
+v1.12.0-beta.1
+------------------------------
+*May 11, 2022*
+
+### Changed
+- Updated version of content cards to v8.
+- updated to use css grid instead of flex so we can get better spacing across multiple devices.
+
+
+v1.11.0
+------------------------------
+*April 12, 2022*
+
+### Changed
+- Modified some styles to get offers inline with latest design file, plus fixing an issue with background on search box.
+
+
 v1.10.0
 ------------------------------
 *April 07, 2022*

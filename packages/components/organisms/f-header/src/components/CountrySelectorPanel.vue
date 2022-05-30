@@ -15,7 +15,8 @@
                     :class="$style['c-countrySelector-header-button']"
                     :aria-label="copy.goBackToMainMenu"
                     @click="$emit('closeCountrySelector')">
-                    <arrow-icon :class="$style['c-countrySelector-goBackIcon']" />
+                    <arrow-long-left-small-icon
+                        :class="$style['c-countrySelector-closePanelIcon']" />
                 </f-button>
 
                 <h3
@@ -64,7 +65,7 @@
 
 <script>
 import FButton from '@justeat/f-button';
-import { ArrowIcon } from '@justeat/f-vue-icons';
+import { ArrowLongLeftSmallIcon } from '@justeattakeaway/pie-icons-vue';
 import FlagIcon from './FlagIcon.vue';
 import NavLink from './NavLink.vue';
 import { countries } from '../tenants';
@@ -72,7 +73,7 @@ import { countries } from '../tenants';
 export default {
     components: {
         FButton,
-        ArrowIcon,
+        ArrowLongLeftSmallIcon,
         FlagIcon,
         NavLink
     },
@@ -130,8 +131,7 @@ $countrySelector-text-bg-hover : $color-container-subtle;
 
 .c-countrySelector {
     @include media('>mid') {
-        padding-top: spacing(e);
-        padding-bottom: spacing(c);
+        padding: spacing(e) spacing(c) spacing(c);
     }
 }
 
@@ -148,7 +148,6 @@ $countrySelector-text-bg-hover : $color-container-subtle;
         @include font-size(heading-s, true, narrow);
         font-weight: $font-weight-headings;
         margin: 0;
-        margin-left: spacing();
 
         @include media('>mid') {
             @include font-size(heading-s);
@@ -157,14 +156,13 @@ $countrySelector-text-bg-hover : $color-container-subtle;
     }
 
     .c-countrySelector-header-button {
-        margin-top: spacing(b);
-        margin-left: spacing(b);
+        margin: spacing(b) spacing() 0;
+
         @include media('>mid') {
             display: none;
         }
 
-        svg.c-countrySelector-goBackIcon {
-            transform: rotate(180deg);
+        .c-countrySelector-closePanelIcon {
             width: $countrySelector-arrowIcon-width;
             height: $countrySelector-arrowIcon-height;
         }

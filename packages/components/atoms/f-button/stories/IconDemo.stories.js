@@ -1,9 +1,9 @@
 import { withA11y } from '@storybook/addon-a11y';
 import {
-    CrossIcon,
+    CloseIcon,
     PlusIcon,
     MoreVerticalIcon
-} from '@justeat/f-vue-icons';
+} from '@justeattakeaway/pie-icons-vue';
 import SharedButtonArgTypes from './sharedButtonArgTypes';
 import FButton from '../src/components/Button.vue';
 import { VALID_BUTTON_TYPES, VALID_BUTTON_SIZES } from '../src/constants';
@@ -16,7 +16,7 @@ export default {
 export const DemoIconButtonComponent = (args, { argTypes }) => ({
     components: {
         FButton,
-        CrossIcon,
+        CloseIcon,
         PlusIcon,
         MoreVerticalIcon
     },
@@ -31,7 +31,7 @@ export const DemoIconButtonComponent = (args, { argTypes }) => ({
             :href="href"
             :isIcon="true"
             :isLoading="isLoading">
-            <CrossIcon />
+            <CloseIcon />
         </f-button>
         <f-button
             class="u-spacingRight u-spacingBottom--large"

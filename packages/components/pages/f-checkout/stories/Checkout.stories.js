@@ -166,7 +166,7 @@ CheckoutComponent.argTypes = {
 
     locale: {
         control: { type: 'select' },
-        options: [locales.gb, locales.au, locales.nz, locales.it, locales.es],
+        options: [locales.gb, locales.au, locales.nz, locales.it, locales.es, locales.ie],
         description: 'Locale'
     },
 

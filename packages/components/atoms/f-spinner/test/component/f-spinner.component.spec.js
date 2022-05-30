@@ -4,14 +4,14 @@ const Spinner = require('../../test-utils/component-objects/f-spinner.component'
 let spinner;
 
 describe('f-spinner component tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         spinner = new Spinner();
 
-        spinner.load();
+        await spinner.load();
     });
 
-    it('should display the f-spinner component', () => {
+    it('should display the f-spinner component', async () => {
         // Assert
-        expect(spinner.isComponentDisplayed()).toBe(true);
+        await expect(await spinner.isComponentDisplayed()).toBe(true);
     });
 });

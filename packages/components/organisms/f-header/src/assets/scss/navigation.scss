@@ -26,8 +26,8 @@ $nav-popover-transition-duration   : 200ms;
 
 $countrySelector-flag-width        : 21px;
 $countrySelector-flag-height       : 21px;
-$countrySelector-arrowIcon-height  : 10px;
-$countrySelector-arrowIcon-width   : 10px;
+$countrySelector-arrowIcon-height  : 18px;
+$countrySelector-arrowIcon-width   : 18px;
 
 $nav-featureLinkIcon-width         : 24px;
 $nav-featureLinkIcon-height        : 24px;
@@ -185,6 +185,8 @@ $nav-link-focus-color              : $color-focus;
         right: 99999px; // offscreen, so can’t ever be hovered over by default
         opacity: 0;
         z-index: -1;
+        padding: 0;
+
         transition: opacity $nav-popover-transition-duration ease-in-out $nav-popover-transition-delay,
                     z-index 0s linear ($nav-popover-transition-delay + $nav-popover-transition-duration),
                     right 0s linear ($nav-popover-transition-delay + $nav-popover-transition-duration);

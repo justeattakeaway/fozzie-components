@@ -108,7 +108,8 @@ class Page {
                 rules: {
                     'duplicate-id': { enabled: false },
                     // Ignoring as lang attribute is provided via a mixin, however Axe still fails.
-                    'html-has-lang': { enabled: false }
+                    'html-has-lang': { enabled: false },
+                    'aria-allowed-role': { enabled: false }
                 }
             };
 

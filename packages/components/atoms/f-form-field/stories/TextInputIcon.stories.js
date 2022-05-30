@@ -1,8 +1,5 @@
 import { withA11y } from '@storybook/addon-a11y';
-import {
-    AllergyNutIcon,
-    DriverIcon
-} from '@justeat/f-vue-icons';
+import { NutsIcon, DriverCarIcon } from '@justeattakeaway/pie-icons-vue';
 import FormField from '../src/components/FormField.vue';
 import SharedArgTypes from './SharedArgTypes';
 
@@ -14,8 +11,8 @@ export default {
 export const TextInputIconComponent = (args, { argTypes }) => ({
     components: {
         FormField,
-        AllergyNutIcon,
-        DriverIcon
+        NutsIcon,
+        DriverCarIcon
     },
     props: Object.keys(argTypes),
     template: `
@@ -28,7 +25,7 @@ export const TextInputIconComponent = (args, { argTypes }) => ({
             field-size="small"
             :has-error="hasError">
                 <template v-slot:icon-leading>
-                    <AllergyNutIcon />
+                    <NutsIcon />
                 </template>
         </form-field>
 
@@ -40,7 +37,7 @@ export const TextInputIconComponent = (args, { argTypes }) => ({
             field-size="medium"
             :has-error="hasError">
                 <template v-slot:icon-trailing>
-                    <DriverIcon />
+                    <DriverCarIcon />
                 </template>
         </form-field>
 
@@ -52,10 +49,10 @@ export const TextInputIconComponent = (args, { argTypes }) => ({
             field-size="large"
             :has-error="hasError">
                 <template v-slot:icon-leading>
-                    <AllergyNutIcon />
+                    <NutsIcon />
                 </template>
                 <template v-slot:icon-trailing>
-                    <DriverIcon />
+                    <DriverCarIcon />
                 </template>
         </form-field>
     </div>`

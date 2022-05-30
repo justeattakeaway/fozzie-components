@@ -3,6 +3,30 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v9.16.0
+------------------------------
+*May 19, 2022*
+
+### Removed
+- `border-radius` in `Header.vue`
+
+### Changed
+- padding in `countrySelectorPanel.vue`
+
+
+v9.15.0
+------------------------------
+*May 12, 2022*
+
+### Added
+- `@justeattakeaway/pie-icons-vue` icons.
+- `Help` icon.
+- `Chevron` icon to country selector.
+
+### Changed
+- Hamburger and `Gift` icon colours in mobile view.
+- Padding and margin changes to accommodate new icons.
+
 
 v9.14.0
 ------------------------------

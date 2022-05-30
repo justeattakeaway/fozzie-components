@@ -3,12 +3,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v0.12.0
+v0.13.0
 ------------------------------
 *May 30, 2022*
 
 ### Added
 - Breakout image option and styles
+
+### Changed
+- Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
+
+
+v0.12.0
+------------------------------
+*May 9, 2022*
+
+### Added
+- Optional `performanceTracker` prop & `performanceTrackerLabel` prop
 
 v0.11.1
 ------------------------------
@@ -33,7 +44,7 @@ v0.10.3
 *March 10, 2022*
 
 ### Added
-- checked attribute 
+- checked attribute
 
 ### Changed
 - `href` always added to link
@@ -58,7 +69,7 @@ v0.10.0
 *February 25, 2022*
 
 ### Changed
-        
+
 - Moved `isToggleSelected` assignment into created lifecycle method for SSR
 - Updated stories to use args instead of default value
 - Added label style for `isLink`

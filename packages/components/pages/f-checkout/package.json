@@ -1,9 +1,9 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout – Fozzie Checkout Component",
-  "version": "3.25.0",
+  "version": "3.30.0",
   "main": "dist/f-checkout.umd.min.js",
-  "maxBundleSize": "120kB",
+  "maxBundleSize": "125kB",
   "files": [
     "dist",
     "test-utils",
@@ -54,8 +54,8 @@
   ],
   "dependencies": {
     "@justeat/f-globalisation": "1.0.0",
-    "@justeat/f-services": "1.14.0",
-    "axios": "0.21.1",
+    "@justeat/f-services": "1.16.0",
+    "axios": "0.21.2",
     "jwt-decode": "3.1.2",
     "vue-scrollto": "2.20.0",
     "vuelidate": "0.7.6"
@@ -71,7 +71,7 @@
     "@justeat/f-card": "3.6.0",
     "@justeat/f-card-with-content": "1.1.0",
     "@justeat/f-error-message": "1.1.0",
-    "@justeat/f-form-field": "4.7.1",
+    "@justeat/f-form-field": "4.9.0",
     "@justeat/f-link": "2.3.0",
     "@justeat/f-mega-modal": "4.1.0",
     "@justeat/f-vue-icons": "3.0.0",

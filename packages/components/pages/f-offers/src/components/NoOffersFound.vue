@@ -10,7 +10,10 @@
             :text-size="textSize"
             :flex="flexLayout"
         >
-            <search-box :class="$style['c-noOffersFound-searchBox']" />
+            <div :class="$style['c-noOffersFound-searchBox-wrapper']">
+                <div :class="$style['c-noOffersFound-searchBox-background']" />
+                <search-box :class="$style['c-noOffersFound-searchBox']" />
+            </div>
             <f-button
                 :class="$style['c-noOffersFound-link']"
                 button-type="link"
@@ -72,10 +75,19 @@ export default {
 </script>
 
 <style lang="scss" module>
+$height-adjustment-for-background-desktop: 64px;
+$height-adjustment-for-background-mobile: 56px;
+$height-adjustment-for-input-desktop: 61px;
+$height-adjustment-for-input-tablet: 58px;
+$height-adjustment-for-input-mobile: 48px;
+
 .c-noOffersFound-wrapper {
     width: 100%;
     background: $color-grey-20;
     padding: spacing(f) spacing(g);
+    border-radius: $radius-rounded-c;
+    position: relative;
+    margin-top: spacing(d);
 
     & .c-noOffersFound-link {
         padding: 0;
@@ -88,16 +100,45 @@ export default {
     & .c-noOffersFound-searchBox {
         padding-top: spacing(d);
 
+        & input {
+            background-color: $color-white;
+            height: $height-adjustment-for-input-mobile;
+        }
+
         @include media('<=mid') {
             width: 300px;
         }
 
         @include media('<=narrowMid') {
             width: 100%;
+            & input {
+                height: $height-adjustment-for-input-tablet;
+            }
         }
 
-        & input {
-            background-color: $color-white;
+        @include media('<=narrow') {
+            width: 100%;
+            & input {
+                height: $height-adjustment-for-input-mobile;
+            }
+        }
+    }
+
+    .c-noOffersFound-searchBox-wrapper {
+        position: relative;
+    }
+
+    .c-noOffersFound-searchBox-background {
+        position: absolute;
+        top: spacing(d);
+        left:0;
+        height: $height-adjustment-for-background-desktop;
+        background-color: $color-white;
+        width: 100%;
+        border-radius: $radius-rounded-e;
+
+        @include media('<=narrow') {
+            height: $height-adjustment-for-background-mobile;
         }
     }
 

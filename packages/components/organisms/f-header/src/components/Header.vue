@@ -205,7 +205,6 @@ html:global(.is-navInView) {
             left: 0;
             width: 100%;
             z-index: zIndex(high);
-            border-radius: 0;
         }
     }
 }
@@ -216,7 +215,6 @@ html:global(.is-navInView) {
     position: relative;
     z-index: zIndex(mid);
     box-shadow: $header-box-shadow;
-    border-radius: 0 0 $radius-rounded-d $radius-rounded-d;
 
     // Styles for a sticky header on mobile
     @include media('<=mid') {

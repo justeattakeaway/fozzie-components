@@ -4,9 +4,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (to be added to next release)
+Latest (add to next release)
 ------------------------------
-*February 4, 2022*
+*May 26, 2021*
+
+### Changed
+- Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
+
+
+v2.1.0
+------------------------------
+*May 22, 2022*
+
+### Added
+- Version of `node-sass` that's compatible with Node 16.
 
 ### Changed
 - Upgraded to ESLint v8

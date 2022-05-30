@@ -3,6 +3,41 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.7.0
+------------------------------
+*May 26, 2022*
+
+### Added
+- Render the static parts of the footer when dynamic content is not provided
+
+
+v7.6.0
+------------------------------
+*May 24, 2022*
+
+### Added
+- Aria list roles for `LinkList` component.
+
+
+v7.5.0
+------------------------------
+*May 13, 2022*
+
+### Changed
+- Icons in component
+
+### Added
+- `@justeattakeaway/pie-icons-vue`
+
+
+v7.4.0
+------------------------------
+*May 12, 2022*
+
+### Changed
+- `@justeat/f-vue-icons` package to `3.10.0` to update visa icons.
+
+
 v7.3.0
 ------------------------------
 *April 25, 2022*

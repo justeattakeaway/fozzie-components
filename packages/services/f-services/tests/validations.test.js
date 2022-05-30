@@ -233,6 +233,25 @@ describe('isValidPostcode', () => {
         // Assert
         expect(actual).toBe(expected);
     });
+
+    it.each([
+        ['D24 FT12', true],
+        ['D22 TF12', true],
+        ['B32 AC21', false],
+        ['0123456', false],
+        ['AR51 1AA', false],
+        ['1 2 3 4 5', false],
+        ['not even trying', false],
+        ['01!23', false],
+        ['', false],
+        [null, false]
+    ])('should validate %s as %s with `en-IE` locale', (postcode, expected) => {
+        // Act
+        const actual = isValidPostcode(postcode, 'en-IE');
+
+        // Assert
+        expect(actual).toBe(expected);
+    });
 });
 
 describe('isValidPhoneNumber', () => {
@@ -248,6 +267,24 @@ describe('isValidPhoneNumber', () => {
     ])('should validate %s as %s with `en-GB` locale', (number, expected) => {
         // Act
         const actual = isValidPhoneNumber(number, 'en-GB');
+
+        // Assert
+        expect(actual).toBe(expected);
+    });
+
+    it.each([
+        ['0711111111', true],
+        ['+3537111111111', true],
+        ['+447111111111', false],
+        ['0711 1111 111', false],
+        ['07111', false],
+        ['07!!!!', false],
+        ['not even trying', false],
+        ['', false],
+        [null, false]
+    ])('should validate %s as %s with `en-IE` locale', (number, expected) => {
+        // Act
+        const actual = isValidPhoneNumber(number, 'en-IE');
 
         // Assert
         expect(actual).toBe(expected);

@@ -1,0 +1,26 @@
+{
+    "extends": [
+      "config:base",
+      "schedule:weekly",
+      ":rebaseStalePrs",
+      ":disableMajorUpdates",
+      ":dependencyDashboard"
+    ],
+    "commitMessagePrefix": "renovate - #trivial -",
+    "ignoreDeps": ["chromedriver"],
+    "ignorePaths": ["./packages/components/organisms/f-cookie-banner/f-cookie-banner-static"],
+    "prConcurrentLimit": 3,
+    "packageRules": [
+      {
+        "matchPackagePatterns": [
+          "*"
+        ],
+        "matchUpdateTypes": [
+          "minor",
+          "patch"
+        ],
+        "groupName": "all non-major dependencies",
+        "groupSlug": "all-minor-patch"
+      }
+    ]
+  }

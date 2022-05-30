@@ -13,6 +13,33 @@ v0.21.0
 ### Added
 - Test to cover url change.
 
+v0.21.2
+------------------------------
+*May 3, 2022*
+
+### Changed
+- Added temp logging to record if auth expired or not
+
+
+v0.21.1
+------------------------------
+*May 3, 2022*
+
+### Added
+- Component test to cover urls.
+
+
+v0.21.0
+------------------------------
+*April 27, 2022*
+
+### Fixed
+- Incorrect url when changing password.
+
+### Added
+- Test to cover url change.
+
+
 v0.20.1
 ------------------------------
 *March 17, 2022*

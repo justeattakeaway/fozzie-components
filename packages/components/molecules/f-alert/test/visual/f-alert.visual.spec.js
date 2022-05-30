@@ -11,23 +11,23 @@ forEach(['success', 'warning', 'info', 'danger'])
         alert.path = `&args=type:${type};`;
     });
 
-    it('should display the f-alert (%s) component as dismissible', () => {
+    it('should display the f-alert (%s) component as dismissible', async () => {
         // Act
-        alert.load();
+        await alert.load();
 
         // Assert
-        browser.percyScreenshot(`f-alert - ${type} - dismissible`, 'desktop');
+        await browser.percyScreenshot(`f-alert - ${type} - dismissible`, 'desktop');
     });
 
-    it('should display the f-alert (%s) component as undismissible', () => {
+    it('should display the f-alert (%s) component as undismissible', async () => {
         // Arrange
         alert.path += 'isDismissible:false';
 
         // Act
-        alert.load();
-        alert.waitForComponent();
+        await alert.load();
+        await alert.waitForComponent();
 
         // Assert
-        browser.percyScreenshot(`f-alert - ${type} - undismissible`, 'desktop');
+        await browser.percyScreenshot(`f-alert - ${type} - undismissible`, 'desktop');
     });
 });

@@ -5,7 +5,7 @@
                 [$style['c-filterPill--selected']]: isToggleSelected,
                 [$style['c-filterPill--disabled']]: isDisabled
             }]"
-        data-test-id="filter-item">
+        data-test-id="filter-pill-component">
         <filter-pill-skeleton
             v-if="isLoading"
             aria-hidden="true" />
@@ -105,6 +105,15 @@ export default {
         screenReaderMessage: {
             type: String,
             default: null
+        },
+        // An optional library for tracking rendering performance
+        performanceTracker: {
+            type: Object,
+            default: null
+        },
+        performanceTrackerLabel: {
+            type: String,
+            default: null
         }
     },
     data () {
@@ -122,6 +131,13 @@ export default {
     },
     created () {
         this.isToggleSelected = this.isSelected;
+    },
+    mounted () {
+        if (this.performanceTracker) {
+            this.$nextTick(() => {
+                this.performanceTracker.time(this.performanceTrackerLabel);
+            });
+        }
     },
     methods: {
         toggleFilter () {
