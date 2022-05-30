@@ -7,15 +7,15 @@ module.exports = class Spinner extends Page {
 
     get component () { return $('[data-test-id="spinner-component"]'); }
 
-    load () {
-        super.load(this.component);
+    async load () {
+        await super.load(this.component);
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component);
+    async waitForComponent () {
+        await super.waitForComponent(this.component);
     }
 
-    isComponentDisplayed () {
+    async isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 };

@@ -3,17 +3,17 @@ const ImageTile = require('../../test-utils/component-objects/f-image-tile.compo
 const imageTile = new ImageTile();
 
 describe('f-image-tile component tests', () => {
-    beforeEach(() => {
-        imageTile.load();
+    beforeEach(async () => {
+        await imageTile.load();
     });
 
-    it('should display the f-image-tile component', () => {
+    it('should display the f-image-tile component', async () => {
         // Assert
-        expect(imageTile.isComponentDisplayed()).toBe(true);
+        await expect(await imageTile.isComponentDisplayed()).toBe(true);
     });
 
-    it('should check that the f-image-tile component is clickable', () => {
+    it('should check that the f-image-tile component is clickable', async () => {
         // Assert
-        expect(imageTile.isComponentClickable()).toBe(true);
+        await expect(await imageTile.isComponentClickable()).toBe(true);
     });
 });

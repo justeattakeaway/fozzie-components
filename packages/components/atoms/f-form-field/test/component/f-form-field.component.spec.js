@@ -3,30 +3,30 @@ const FormField = require('../../test-utils/component-objects/f-form-field.compo
 const formfield = new FormField();
 
 describe('f-form-field component tests', () => {
-    beforeEach(() => {
-        formfield.load();
+    beforeEach(async () => {
+        await formfield.load();
     });
 
-    it('should display f-form-field', () => {
+    it('should display f-form-field', async () => {
         // Assert
-        expect(formfield.isComponentDisplayed()).toBe(true);
+        await expect(await formfield.isComponentDisplayed()).toBe(true);
     });
 
-    it('should display Label', () => {
+    it('should display Label', async () => {
         // Assert
-        expect(formfield.isLabelDisplayed()).toBe(true);
+        await expect(await formfield.isLabelDisplayed()).toBe(true);
     });
 
-    it('should display user input', () => {
+    it('should display user input', async () => {
         // Arrange
         const userInput = {
             firstName: 'abcd'
         };
 
         // Act
-        formfield.addUserInput(userInput);
+        await formfield.addUserInput(userInput);
 
         // Assert
-        expect(formfield.getUserInput()).toEqual('abcd');
+        await expect(await formfield.getUserInput()).toEqual('abcd');
     });
 });

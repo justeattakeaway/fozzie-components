@@ -44,7 +44,7 @@ export const FooterComponent = (args, { argTypes }) => ({
 
     computed: {
         contentByLocale () {
-            return contents[this.locale];
+            return this.showLinksContent ? contents[this.locale] : null;
         }
     },
 
@@ -63,6 +63,7 @@ FooterComponent.args = {
     locale: 'en-GB',
     showCourierLinks: false,
     showCountrySelector: false,
+    showLinksContent: true,
     content: contents['en-GB']
 };
 
@@ -81,6 +82,11 @@ FooterComponent.argTypes = {
     showCountrySelector: {
         control: { type: 'boolean' },
         description: 'If set to true, country selector is displayed'
+    },
+
+    showLinksContent: {
+        control: { type: 'boolean' },
+        description: 'If set to true, content links are displayed'
     },
 
     content: {

@@ -9,19 +9,19 @@ module.exports = class Alert extends Page {
 
     get exitButton () { return $('[data-test-id="alert-dismiss"]'); }
 
-    load () {
-        super.load(this.component);
+    async load () {
+        await super.load(this.component);
     }
 
-    isComponentDisplayed () {
+    async isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component, 1000);
+    async waitForComponent () {
+        await super.waitForComponent(this.component, 1000);
     }
 
-    clickExitButton () {
-        this.exitButton.click();
+    async clickExitButton () {
+        await this.exitButton.click();
     }
 };
