@@ -6,7 +6,7 @@ const card = new Card();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        card.load();
+        card.load(card.component);
     });
 
     it('a11y - should test f-card component WCAG compliance', () => {

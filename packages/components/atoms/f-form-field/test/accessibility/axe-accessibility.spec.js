@@ -6,7 +6,7 @@ const formfield = new FormField();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        formfield.load();
+        formfield.load(formfield.component);
     });
 
     it('a11y - should test f-formField component WCAG compliance', () => {
