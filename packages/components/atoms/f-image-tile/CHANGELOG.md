@@ -8,7 +8,7 @@ v0.13.0
 *May 30, 2022*
 
 ### Added
-- Breakout image option and styles
+- Breakout image option and tests
 
 ### Changed
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
