@@ -15,10 +15,6 @@ Latest (add to next release)
 
 ### Changed
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
-*May 26, 2021*
-
-### Changed
-- Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
 
 v0.4.0
