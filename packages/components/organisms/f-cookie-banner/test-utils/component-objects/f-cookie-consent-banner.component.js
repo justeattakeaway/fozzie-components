@@ -24,43 +24,46 @@ module.exports = class CookieBanner extends Page {
 
     get cookieAcceptNecessaryButton () { return $(COOKIE_ACCEPT_NECESSARY_BUTTON); }
 
-    load () {
-        this.open('/');
-        browser.deleteCookies();
-        super.load(this.component);
+    async load () {
+        await this.open('/');
+        await browser.deleteCookies();
+        await super.load(this.component);
     }
 
-    open (url) {
-        super.open(url);
+    async open (url) {
+        await super.open(url);
     }
 
-    waitForComponent () {
-        this.component.waitForExist();
+    async waitForComponent () {
+        await this.component.waitForExist();
     }
 
-    isCookieBannerComponentDisplayed () {
-        return this.component.isDisplayed();
+    async isCookieBannerComponentDisplayed () {
+        const component = await this.component;
+        const isDisplayed = await component.isDisplayed();
+        return isDisplayed;
     }
 
-    clickCookiePolicyLink () {
-        this.cookiePolicyLink.click();
+    async clickCookiePolicyLink () {
+        const cookiePolicyLink = await this.cookiePolicyLink;
+        await cookiePolicyLink.click();
     }
 
-    acceptCookies (value) {
+    async acceptCookies (value) {
         const cookieType = {
-            full: this.cookieAcceptAllButton,
-            necessary: this.cookieAcceptNecessaryButton
+            full: await this.cookieAcceptAllButton,
+            necessary: await this.cookieAcceptNecessaryButton
         };
 
         return cookieType[value].click();
     }
 
-    testTabOrder (tabOrder) {
-        const tabOrderResult = super.testTabOrder(tabOrder);
-        const expectedTabOrder = tabOrder.map(el => ({
-            selector: el.getAttribute('data-test-id'),
+    async testTabOrder (tabOrder) {
+        const tabOrderResult = await super.testTabOrder(tabOrder);
+        const expectedTabOrder = await Promise.all(tabOrder.map(async el => ({
+            selector: await el.getAttribute('data-test-id'),
             isFocused: true
-        }));
+        })));
         return {
             actual: tabOrderResult,
             expected: expectedTabOrder.concat(expectedTabOrder[0])
