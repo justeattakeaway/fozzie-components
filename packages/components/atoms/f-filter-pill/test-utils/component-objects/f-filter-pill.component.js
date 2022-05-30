@@ -6,18 +6,7 @@ module.exports = class FilterPill extends Page {
         super('atom', 'filter-pill-component');
     }
 
-    get component () {
-        // eslint-disable-next-line no-undef
-        return $(COMPONENT);
-    }
-
-    async load () {
-        await super.load(this.component);
-    }
-
-    async waitForComponent () {
-        await super.waitForComponent(this.component);
-    }
+    get component () { return $(COMPONENT); }
 
     async isComponentDisplayed () {
         return this.component.isDisplayed();
