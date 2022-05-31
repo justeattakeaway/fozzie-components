@@ -14,6 +14,9 @@ v4.11.0
 ### Added
 - `isDisabled` and `hasError` props to `Radio.stories` and `TextInputIcon.stories`
 
+### Removed
+- hover state in `FormFieldAffixed` (goes to a lighter grey)
+
 *May 27, 2021*
 
 ### Removed

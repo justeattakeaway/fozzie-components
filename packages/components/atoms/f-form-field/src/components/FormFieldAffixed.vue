@@ -167,5 +167,9 @@ $affixed-field-sizes: (
 
 .c-formField--disabled {
     @include disabled-field();
+
+    .c-formField-affix {
+        color: $form-input-textColour--disabled;
+    }
 }
 </style>
