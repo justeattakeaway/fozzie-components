@@ -55,11 +55,6 @@ describe('Desktop - f-header component tests', () => {
         .it('should display link for country code "%s" and redirect to correct URL ("%s")', async (expectedLocale, expectedUrl) => {
             // Act
             await header.moveToNavigationLink('countrySelector');
-
-            // Assert
-            await expect(await header.isCountryLinkDisplayed(expectedLocale)).toBe(true);
-
-            // Act
             await header.clickCountryListItem(expectedLocale);
 
             // Assert
