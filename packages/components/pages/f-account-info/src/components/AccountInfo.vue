@@ -383,7 +383,7 @@ export default {
                 if (error && error.response && this.loginPath && error.response.status === 403) {
                     // Redirect to login page if the user is not authenticated then return here once logged in.
                     this.$log.warn('Unauthenticated fetching consumer details', error, standardLogTags);
-                    this.$router.push(`${this.loginPath}?returnurl=${window.location.pathname}`);
+                    this.redirectToLogin();
                 } else {
                     this.$log.error('Error fetching consumer details', error, standardLogTags);
                     this.handleLoadErrorState(error);
@@ -468,6 +468,16 @@ export default {
                     label: 'address change intent'
                 });
             }
+        },
+
+        /**
+        * Redirect to an external login page
+        * (check/tidy up the login path due to unknown source)
+        */
+        redirectToLogin () {
+            const login = this.loginPath.trim();
+            const path = `${login.charAt(0) === '/' ? login : `/${login}`}`;
+            window.location.href = `${path}?returnurl=${window.location.pathname}`;
         }
     }
 };

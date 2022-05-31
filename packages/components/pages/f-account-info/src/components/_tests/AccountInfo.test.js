@@ -15,19 +15,21 @@ let wrapper;
 let cookiesSpy;
 let httpSpy;
 let pushEventSpy;
-let pushRouteSpy;
 let sutMocks;
 let sutProps;
 let dataDefaults;
 let initialiseSpy;
 let windowSpy;
 let windowCopy;
+let windowMock;
 
 const GetWindowMock = () => {
     windowCopy = { ...global.window };
-    const windowMock = ({
+    windowMock = ({
         ...windowCopy,
-        location: { pathname: '/account/info' }
+        location: {
+            pathname: '/account/info'
+        }
     });
     windowSpy = jest.spyOn(global, 'window', 'get');
     windowSpy.mockImplementation(() => windowMock);
@@ -93,9 +95,6 @@ describe('AccountInfo', () => {
         cookiesSpy = jest.fn();
         httpSpy = jest.fn();
         pushEventSpy = jest.fn();
-        pushRouteSpy = jest.fn();
-
-
 
         sutMocks = {
             $parent: {
@@ -106,9 +105,6 @@ describe('AccountInfo', () => {
             $log: logMocks,
             $gtm: {
                 pushEvent: pushEventSpy
-            },
-            $router: {
-                push: pushRouteSpy
             },
             window: GetWindowMock()
         };
@@ -271,7 +267,7 @@ describe('AccountInfo', () => {
                 err,
                 expect.arrayContaining(['account-pages', 'account-info'])
             );
-            expect(pushRouteSpy).toHaveBeenCalledWith('/account/login?returnurl=/account/info');
+            expect(windowMock.location.href).toBe('/account/login?returnurl=/account/info');
         });
 
         it('should log error and not redirect if 403 and no loginPath supplied', async () => {
@@ -299,7 +295,7 @@ describe('AccountInfo', () => {
                 err,
                 expect.arrayContaining(['account-pages', 'account-info'])
             );
-            expect(pushRouteSpy).not.toHaveBeenCalled();
+            expect(windowMock.location.href).toBeUndefined();
         });
 
         it('should contain the correct url to change password', async () => {
