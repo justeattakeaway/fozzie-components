@@ -24,6 +24,7 @@ export const RadioComponent = (args, { argTypes }) => ({
 
                 <form-field
                 :disabled="isDisabled"
+                :has-error="hasError"
                 :is-grouped="isGrouped"
                 id="radio-2"
                 input-type="radio"
