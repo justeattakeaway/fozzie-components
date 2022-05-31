@@ -11,10 +11,14 @@ Latest (add to next release)
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
 
-Latest – to be added to the next release
+v3.9.0
 ------------------------------
-*May 11, 2022*
+*May 24, 2022*
 
+
+### Changed
+- `Moved `f-cookie-banner-static` into it's own package.
+- Refactored build script in `package.json` 
 ### Removed
 - Use of `New` from visual, component & accessibility test naming conventions.
 

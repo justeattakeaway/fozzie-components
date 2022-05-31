@@ -3,6 +3,7 @@ import ImageTile from '../src/components/ImageTile.vue';
 import TestContainer from './TestContainer.vue';
 import ImageTileWallpaper from './images/wallpaper.png';
 import ImageTileCuisine from './images/burgers.jpg';
+import ImageTileBreakout from './images/burgers.png';
 
 const fakeImage = 'This creates a broken image';
 
@@ -28,6 +29,7 @@ export const ImageTileComponent = (args, { argTypes }) => ({
                         :img-src='imgSrc'
                         :alt-text='altText'
                         :fallback-image='fallbackImage'
+                        :is-breakout-image='isBreakoutImage'
                         @toggle="toggleCuisine" 
                         slot-scope="{ toggleCuisine }"
                     >
@@ -40,11 +42,12 @@ ImageTileComponent.args = {
     href: '/Chicken',
     tileId: 'Chicken',
     displayText: 'Chicken',
-    imgSrc: ImageTileCuisine,
+    imgSrc: ImageTileBreakout,
     isSelected: false,
     isLink: false,
     altText: '',
-    fallbackImage: ImageTileWallpaper
+    fallbackImage: ImageTileWallpaper,
+    isBreakoutImage: true
 };
 
 ImageTileComponent.argTypes = {
@@ -62,7 +65,7 @@ ImageTileComponent.argTypes = {
     },
     imgSrc: {
         control: { type: 'select' },
-        options: [ImageTileCuisine, null, fakeImage],
+        options: [ImageTileCuisine, null, fakeImage, ImageTileBreakout],
         description: 'Cuisine image link'
     },
     isSelected: {
@@ -80,6 +83,10 @@ ImageTileComponent.argTypes = {
     fallbackImage: {
         control: { type: 'text' },
         description: 'Fallback image url'
+    },
+    isBreakoutImage: {
+        control: { type: 'boolean' },
+        description: 'Images are displayed in breakout style'
     }
 };
 
