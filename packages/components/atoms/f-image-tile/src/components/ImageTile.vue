@@ -2,7 +2,8 @@
     <div
         :class="[
             $style['c-imageTile'], {
-                [$style['c-imageTile--selected']]: isToggleSelected
+                [$style['c-imageTile--selected']]: isToggleSelected,
+                [$style['c-imageTile--breakout']]: isBreakoutImage
             }]"
         data-test-id="image-tile-component">
         <a
@@ -35,18 +36,42 @@
             :for="`imageTileToggle-${tileId}`"
             data-test-id="image-tile-label"
             :tabindex="!isLink ? -1 : false">
-            <span
-                :class="$style['c-imageTile-imageContainer']"
-                :style="cssVars">
-                <img
-                    v-if="imgSrc && !imgError"
-                    :class="$style['c-imageTile-image']"
-                    :src="imgSrc"
-                    data-test-id="image-tile-image"
-                    :alt="altText"
-                    :role="isPresentationRole ? 'presentation' : false"
-                    @error="handleImgError">
-            </span>
+            <template v-if="isBreakoutImage">
+                <span
+                    :class="$style['c-imageTile-innerWrapper']"
+                    data-test-id="image-tile-inner-wrapper">
+                    <span :class="$style['c-imageTile-inner']">
+                        <span
+                            :class="[
+                                $style['c-imageTile-backgroundContainer'], {
+                                    [$style['c-imageTile-backgroundContainer--fallback']]: imgError
+                                }]"
+                            :style="cssVars" />
+                        <img
+                            v-if="imgSrc && !imgError"
+                            :class="$style['c-imageTile-image']"
+                            :src="imgSrc"
+                            data-test-id="image-tile-image"
+                            :alt="altText"
+                            :role="isPresentationRole ? 'presentation' : false"
+                            @error="handleImgError">
+                    </span>
+                </span>
+            </template>
+            <template v-else>
+                <span
+                    :class="$style['c-imageTile-backgroundContainer']"
+                    :style="cssVars">
+                    <img
+                        v-if="imgSrc && !imgError"
+                        :class="$style['c-imageTile-image']"
+                        :src="imgSrc"
+                        data-test-id="image-tile-image"
+                        :alt="altText"
+                        :role="isPresentationRole ? 'presentation' : false"
+                        @error="handleImgError">
+                </span>
+            </template>
             <span
                 :class="$style['c-imageTile-textContainer']"
                 :aria-hidden="isLink">
@@ -101,6 +126,10 @@ export default {
         fallbackImage: {
             type: String,
             default: ''
+        },
+        isBreakoutImage: {
+            type: Boolean,
+            default: true
         },
         // An optional library for tracking rendering performance
         performanceTracker: {
@@ -192,11 +221,19 @@ $image-tile-background-color: $color-interactive-brand;
 $image-tile-selected: $color-content-positive;
 $image-tile-transition-duration: 0.2s;
 $image-tile-ease: ease-in-out;
-$image-tile-text-transform: translate3d(5px, 0, 0);
+$image-tile-reset-translate: translate3d(0, 0, 0);
+$image-tile-text-transform: translate3d(spacing(a), 0, 0);
+$image-tile-text-transform-breakout: translate3d(spacing(b), 0, 0);
 
 @mixin image-tile-icon-selected-transform() {
     opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1) rotate(0);
+    transform: $image-tile-reset-translate scale(1) rotate(0);
+    width: 15px;
+}
+
+@mixin image-tile-icon-selected-transform-breakout() {
+    opacity: 1;
+    transform: $image-tile-text-transform scale(1) rotate(0);
     width: 15px;
 }
 
@@ -244,19 +281,60 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
     &:focus {
         outline: none; // Prevents Safari doubling focus styles.
     }
+
+    .c-imageTile--breakout & {
+        display: block;
+    }
 }
 
 .c-imageTile-label--link {
     pointer-events: none;
 }
 
-.c-imageTile-imageContainer {
+.c-imageTile-innerWrapper {
+    position: relative;
+    display: block;
+
+    &:before {
+        display: block;
+        content: '';
+        width: 100%;
+        padding-top: math.div(3, 4) * 100%; // 4:3 aspect ratio
+    }
+}
+
+.c-imageTile-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 100%;
+
+    .c-imageTile--breakout & {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+}
+
+.c-imageTile-backgroundContainer {
     background-color: rgba($image-tile-background-color, $image-tile-background-opacity);
     border-radius: $radius-rounded-b;
     background-image: var(--bg-image);
     display: block;
     padding-top: math.div(3, 5) * 100%; // 5:3 aspect ratio
     position: relative;
+
+    .c-imageTile--breakout & {
+        background-image: none;
+        width: 92%;
+    }
+
+    &.c-imageTile-backgroundContainer--fallback {
+        background-image: var(--bg-image);
+    }
 }
 
 .c-imageTile-image {
@@ -276,12 +354,16 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
     .c-imageTile--selected & {
         color: $image-tile-selected;
     }
+
+    .c-imageTile--breakout & {
+        margin-top: 0;
+    }
 }
 
 .c-imageTile-icon {
     align-self: center;
     opacity: 0;
-    transform: translate3d(-10px, 0, 0) scale(0.5) rotate(-60deg);
+    transform: translate3d(-spacing(c), 0, 0) scale(0.5) rotate(-60deg);
     width: 0;
     will-change: transform, opacity;
 
@@ -291,8 +373,16 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
                     width $image-tile-transition-duration $image-tile-ease;
     }
 
+    .c-imageTile--breakout & {
+        transform: translate3d(-spacing(b), 0, 0) scale(0.5) rotate(-60deg);
+    }
+
     .c-imageTile--selected & {
         @include image-tile-icon-selected-transform();
+    }
+
+    .c-imageTile--selected.c-imageTile--breakout & {
+        @include image-tile-icon-selected-transform-breakout();
     }
 
     .c-imageTile--selected & path {
@@ -302,6 +392,10 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
     @include media('>=mid') {
         .c-imageTile:hover & {
             @include image-tile-icon-selected-transform();
+        }
+
+        .c-imageTile.c-imageTile--breakout:hover & {
+            @include image-tile-icon-selected-transform-breakout();
         }
     }
 }
@@ -314,7 +408,7 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
     margin-right: spacing(d);
     overflow: hidden;
     text-overflow: ellipsis;
-    transform: translate3d(0, 0, 0);
+    transform: $image-tile-reset-translate;
     white-space: nowrap;
     width: 100%;
     will-change: transform;
@@ -323,13 +417,22 @@ $image-tile-text-transform: translate3d(5px, 0, 0);
         transition: transform $image-tile-transition-duration $image-tile-ease;
     }
 
+    .c-imageTile--breakout &,
     .c-imageTile--selected & {
         transform: $image-tile-text-transform;
+    }
+
+    .c-imageTile--selected.c-imageTile--breakout & {
+        transform: $image-tile-text-transform-breakout;
     }
 
     @include media('>=mid') {
         .c-imageTile:hover & {
             transform: $image-tile-text-transform;
+        }
+
+        .c-imageTile.c-imageTile--breakout:hover & {
+            transform: $image-tile-text-transform-breakout;
         }
     }
 }

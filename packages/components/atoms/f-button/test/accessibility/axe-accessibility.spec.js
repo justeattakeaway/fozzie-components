@@ -12,7 +12,7 @@ describe('Accessibility tests', () => {
         button = new ActionButton();
 
         // Act
-        button.load();
+        button.load(button.component);
         const axeResults = getAxeResults('f-button - action');
 
         // Assert
@@ -24,7 +24,7 @@ describe('Accessibility tests', () => {
         button = new LinkButton();
 
         // Act
-        button.load();
+        button.load(button.component);
         const axeResults = getAxeResults('f-button - link');
 
         // Assert
@@ -36,7 +36,7 @@ describe('Accessibility tests', () => {
         button = new IconButton();
 
         // Act
-        button.load();
+        button.load(button.component);
         const axeResults = getAxeResults('f-button - icon');
 
         // Assert

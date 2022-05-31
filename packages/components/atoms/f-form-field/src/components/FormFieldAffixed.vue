@@ -137,11 +137,6 @@ $affixed-field-sizes: (
         &:focus-within {
             box-shadow: none;
         }
-
-        &:hover,
-        &:hover ~ .c-formField-affix {
-            background-color: $form-input-bg--hover;
-        }
     }
 }
 
@@ -174,7 +169,7 @@ $affixed-field-sizes: (
     @include disabled-field();
 
     .c-formField-affix {
-        @include disabled-field();
+        color: $form-input-textColour--disabled;
     }
 }
 </style>
