@@ -1,0 +1,46 @@
+<Meta title="Documentation/Guides/Fozzie/What-is-Fozzie"/>
+
+# What is Fozzie
+
+Fozzie is Just Eat's UI Component Framework, built to help modularise and share the UI code we write across all of our teams at Just Eat.
+
+Fozzie encompasses a number of modules developed by our UI team, which can be split roughly into four categories:
+
+- **The Base [Fozzie Module](https://github.com/justeat/fozzie)**
+    The shared base Fozzie module gives a base set of styling and helper functions to any Just Eat project.
+- **Shared Components**
+    A component made up of HTML, Sass and JS that can be reused across projects. e.g. site navigation, footer and modal components.
+- **Shared JavaScript Modules**
+    Modules that just contain JS (much like any reusable NPM module). e.g. Common shared JS for features such as form validation, analytics or logging.
+- **Tooling**
+    Modules that help share our tooling across projects. e.g. build modules (gulp/webpack), linting configurations, JS test helpers etc.
+
+
+<a name="aim"></a><h2 class="sg-sectionHeading">Core Aim</h2>
+
+Fozzie was created to facilitate developers at Just Eat to build and share a common set of UI components across all of our projects.
+
+Previously, there was a lot of wasted development effort going on across the company. For instance, the Just Eat main site header could be found duplicated by a number of different projects.  This work to create these components had been done multiple times by different developers working independently. This meant that when a design update or performance improvement was made to one of these separate components, there was no way to roll this out across all of our sites without copying and pasting the new code.
+
+Fozzie components fix this issue by providing shared SCSS and JS that can be consumed by any project.  Components are versioned and released using NPM, meaning that projects consuming the components can upgrade at their own pace in line with their own release schedule.
+
+
+<a name="techstack"></a><h2 class="sg-sectionHeading">Technology Stack</h2>
+
+Fozzie itself has been created to be fairly technology agnostic.  At its core, it's simply a UI framework built on Sass and Vanilla JS.
+
+Therefore teams at Just Eat are using Fozzie on projects built in React, Vue.js and Vanilla JS, using WebPack and Gulp as their task runner. Fozzie components can be used on any stack using Sass and Vanilla JS (including CMS platforms such as WordPress).
+
+As a first iteration to provide HTML sharing, we have been using Handlebars for defining markup. We are currently looking at moving away from this, investigating how we can move our components over to using a framework such as Vue.js or React.
+
+
+
+<a name="modules"></a><h2 class="sg-sectionHeading">Modules</h2>
+
+To see the current list of public Fozzie modules, take a look on [our public Github account](https://github.com/search?q=topic%3Afozzie+org%3Ajusteat&type=Repositories).
+
+
+<a name="scss"></a><h2 class="sg-sectionHeading">Fozzie & Sass</h2>
+
+To find out more information on how to import Fozzie's SCSS, check out the ['Fozzie &amp; Sass']({{ ../baseUrl }}/documentation/css/fozzie) section of the documentation.
+
