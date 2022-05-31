@@ -3,10 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest – to be added to the next release
+v3.9.0
 ------------------------------
-*May 11, 2022*
+*May 24, 2022*
 
+
+### Changed
+- `Moved `f-cookie-banner-static` into it's own package.
+- Refactored build script in `package.json` 
 ### Removed
 - Use of `New` from visual, component & accessibility test naming conventions.
 
