@@ -169,6 +169,26 @@ describe('ImageTile', () => {
             });
         });
 
+        describe('isBreakoutImage :: ', () => {
+            it.each([
+                [true, true],
+                [false, false]
+            ])('should update image exists to be %s when `isBreakoutImage` set to  %s', (expectedValue, isBreakoutImage) => {
+                // Arrange
+                const propsData = { isBreakoutImage };
+
+                // Act
+                const wrapper = shallowMount(ImageTile, {
+                    propsData
+                });
+
+                const imageTileInnerWrapper = wrapper.find('[data-test-id="image-tile-inner-wrapper"]');
+
+                // Assert
+                expect(imageTileInnerWrapper.exists()).toBe(expectedValue);
+            });
+        });
+
         describe('performanceTracker', () => {
             it('calls the performance tracker with `performanceTrackerLabel` after rendering if prop value exists', async () => {
                 // Arrange
