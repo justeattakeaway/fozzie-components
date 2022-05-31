@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.11.0
 ------------------------------
-*May 30, 2021*
+*May 30, 2022*
 
 ### Changed
 - colour of text when disabled to `color-content-default` to improve colour-contrast
@@ -17,7 +17,7 @@ v4.11.0
 ### Removed
 - hover state in `FormFieldAffixed` (goes to a lighter grey)
 
-*May 27, 2021*
+*May 27, 2022*
 
 ### Removed
 - unneeded `load` and `waitForComponent` functions from component object
