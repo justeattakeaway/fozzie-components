@@ -9,7 +9,7 @@ v3.30.1
 *May 27, 2022*
 
 ### Added
- - Visual tests for invalid basked
+ - Visual tests for invalid basket
   
 
 v3.30.0

@@ -6,6 +6,7 @@ let checkout;
 
 describe('f-checkout - Invalid - Desktop Visual Tests', () => {
     it('should display the error page component if the url is invalid', () => {
+        // Arrange
         checkout = new Checkout();
 
         const args = argumentStringBuilder({ serviceType: 'invalid-url' });
@@ -18,6 +19,7 @@ describe('f-checkout - Invalid - Desktop Visual Tests', () => {
     });
 
     it('should display an error dialog if the basket has invalid products', () => {
+        // Arrange
         checkout = new Checkout();
 
         const args = argumentStringBuilder({ getBasketError: 'invalid-products' });
@@ -31,6 +33,7 @@ describe('f-checkout - Invalid - Desktop Visual Tests', () => {
     });
 
     it('should display an error dialog if the basket has offline products', () => {
+        // Arrange
         checkout = new Checkout();
 
         const args = argumentStringBuilder({ getBasketError: 'offline-products' });
@@ -44,6 +47,7 @@ describe('f-checkout - Invalid - Desktop Visual Tests', () => {
     });
 
     it('should display an error dialog if age verification is required', () => {
+        // Arrange
         checkout = new Checkout();
 
         const args = argumentStringBuilder({ getBasketError: 'age-restriction' });
