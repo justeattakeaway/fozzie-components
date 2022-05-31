@@ -7,14 +7,6 @@ module.exports = class Popover extends Page {
 
     get component () { return $('[data-test-id="popover"]'); }
 
-    async load () {
-        await super.load(this.component);
-    }
-
-    async waitForComponent () {
-        await super.waitForComponent(this.component);
-    }
-
     async isComponentDisplayed () {
         return this.component.isDisplayed();
     }

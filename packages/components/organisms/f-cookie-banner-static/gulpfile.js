@@ -12,7 +12,7 @@ const PATHS = {
     vueSrcFolder: './src',
     tempDistFolder: './.tmp-dist',
     tempVueFolder: './.tmp-vue',
-    rootDistFolder: '../dist/static'
+    rootDistFolder: '../f-cookie-banner/dist/static'
 };
 
 /**

@@ -3,8 +3,25 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (add to next release)
+v4.11.0
 ------------------------------
+*May 30, 2022*
+
+### Changed
+- colour of text when disabled to `color-content-default` to improve colour-contrast
+- border-radius of field when disabled in `FormFieldAffixed.vue`
+
+### Added
+- `isDisabled` and `hasError` props to `Radio.stories` and `TextInputIcon.stories`
+
+### Removed
+- hover state in `FormFieldAffixed` (goes to a lighter grey)
+
+*May 27, 2022*
+
+### Removed
+- unneeded `load` and `waitForComponent` functions from component object
+
 *May 26, 2021*
 
 ### Changed

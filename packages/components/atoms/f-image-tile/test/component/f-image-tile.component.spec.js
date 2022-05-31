@@ -4,7 +4,7 @@ const imageTile = new ImageTile();
 
 describe('f-image-tile component tests', () => {
     beforeEach(async () => {
-        await imageTile.load();
+        await imageTile.load(imageTile.component);
     });
 
     it('should display the f-image-tile component', async () => {

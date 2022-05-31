@@ -11,7 +11,7 @@ describe('f-button Desktop visual tests', () => {
             button = new ActionButton();
 
             // Act
-            await button.load();
+            await button.load(button.component);
 
             // Assert
             await browser.percyScreenshot('f-button - Action', 'desktop');
@@ -24,7 +24,7 @@ describe('f-button Desktop visual tests', () => {
                 await button.withQuery('args', 'isLoading');
 
                 // Act
-                await button.load();
+                await button.load(button.component);
 
                 // Assert
                 await browser.percyScreenshot('f-button - Action - Loading', 'desktop');
@@ -38,7 +38,7 @@ describe('f-button Desktop visual tests', () => {
                 await button.withQuery('args', 'disabled');
 
                 // Act
-                await button.load();
+                await button.load(button.component);
 
                 // Assert
                 await browser.percyScreenshot('f-button - Action - Disabled', 'desktop');
@@ -52,7 +52,7 @@ describe('f-button Desktop visual tests', () => {
                 await button.withQuery('args', 'hasIcon:leading');
 
                 // Act
-                await button.load();
+                await button.load(button.component);
 
                 // Assert
                 await browser.percyScreenshot('f-button - Action - With Leading Icon', 'desktop');
@@ -66,7 +66,7 @@ describe('f-button Desktop visual tests', () => {
                 await button.withQuery('args', 'hasIcon:trailing');
 
                 // Act
-                await button.load();
+                await button.load(button.component);
 
                 // Assert
                 await browser.percyScreenshot('f-button - Action - With Trailing Icon', 'desktop');
@@ -80,7 +80,7 @@ describe('f-button Desktop visual tests', () => {
             button = new LinkButton();
 
             // Act
-            await button.load();
+            await button.load(button.component);
 
             // Assert
             await browser.percyScreenshot('f-button - Link', 'desktop');
@@ -93,7 +93,7 @@ describe('f-button Desktop visual tests', () => {
                 await button.withQuery('args', 'isLoading');
 
                 // Act
-                await button.load();
+                await button.load(button.component);
 
                 // Assert
                 await browser.percyScreenshot('f-button - Link - Loading', 'desktop');
@@ -107,7 +107,7 @@ describe('f-button Desktop visual tests', () => {
                 await button.withQuery('args', 'disabled');
 
                 // Act
-                await button.load();
+                await button.load(button.component);
 
                 // Assert
                 await browser.percyScreenshot('f-button - Link - Disabled', 'desktop');
@@ -121,7 +121,7 @@ describe('f-button Desktop visual tests', () => {
                 await button.withQuery('args', 'hasIcon:leading');
 
                 // Act
-                await button.load();
+                await button.load(button.component);
 
                 // Assert
                 await browser.percyScreenshot('f-button - Link - With Leading Icon', 'desktop');
@@ -135,7 +135,7 @@ describe('f-button Desktop visual tests', () => {
                 await button.withQuery('args', 'hasIcon:trailing');
 
                 // Act
-                await button.load();
+                await button.load(button.component);
 
                 // Assert
                 await browser.percyScreenshot('f-button - Link - With Trailing Icon', 'desktop');
@@ -149,7 +149,7 @@ describe('f-button Desktop visual tests', () => {
             button = new IconButton();
 
             // Act
-            await button.load();
+            await button.load(button.component);
 
             // Assert
             await browser.percyScreenshot('f-button - Icon', 'desktop');
@@ -162,7 +162,7 @@ describe('f-button Desktop visual tests', () => {
                 await button.withQuery('args', 'isLoading');
 
                 // Act
-                await button.load();
+                await button.load(button.component);
 
                 // Assert
                 await browser.percyScreenshot('f-button - Icon - Loading', 'desktop');
