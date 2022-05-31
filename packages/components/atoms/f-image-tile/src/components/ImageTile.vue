@@ -382,7 +382,7 @@ $image-tile-text-transform-breakout: translate3d(spacing(b), 0, 0);
     }
 
     .c-imageTile--selected.c-imageTile--breakout & {
-        @include image-tile-icon-selected-transform-breakout()
+        @include image-tile-icon-selected-transform-breakout();
     }
 
     .c-imageTile--selected & path {
@@ -395,7 +395,7 @@ $image-tile-text-transform-breakout: translate3d(spacing(b), 0, 0);
         }
 
         .c-imageTile.c-imageTile--breakout:hover & {
-            @include image-tile-icon-selected-transform-breakout()
+            @include image-tile-icon-selected-transform-breakout();
         }
     }
 }

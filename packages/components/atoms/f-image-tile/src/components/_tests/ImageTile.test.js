@@ -170,9 +170,12 @@ describe('ImageTile', () => {
         });
 
         describe('isBreakoutImage :: ', () => {
-            it('should apply class to the label when true', () => {
+            it.each([
+                [true, true],
+                [false, false]
+            ])('should update image exists to be %s when `isBreakoutImage` set to  %s', (expectedValue, isBreakoutImage) => {
                 // Arrange
-                const propsData = { isBreakoutImage: true };
+                const propsData = { isBreakoutImage };
 
                 // Act
                 const wrapper = shallowMount(ImageTile, {
@@ -182,7 +185,7 @@ describe('ImageTile', () => {
                 const imageTileInnerWrapper = wrapper.find('[data-test-id="image-tile-inner-wrapper"]');
 
                 // Assert
-                expect(imageTileInnerWrapper.exists()).toBe(true);
+                expect(imageTileInnerWrapper.exists()).toBe(expectedValue);
             });
         });
 
