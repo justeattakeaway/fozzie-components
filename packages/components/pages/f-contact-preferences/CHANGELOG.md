@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.19.0
+------------------------------
+*May 31, 2022*
+
+### Updated
+- Version of `f-form-field`
+
+
 v0.18.0
 ------------------------------
 *February 18, 2022*
