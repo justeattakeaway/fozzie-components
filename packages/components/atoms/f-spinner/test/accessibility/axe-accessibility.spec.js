@@ -8,7 +8,7 @@ describe('Accessibility tests', () => {
     beforeEach(() => {
         spinner = new Spinner();
 
-        spinner.load();
+        spinner.load(spinner.component);
     });
 
     it('a11y - should test f-spinner component WCAG compliance', () => {

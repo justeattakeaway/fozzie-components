@@ -22,6 +22,7 @@ export const TextInputIconComponent = (args, { argTypes }) => ({
             label-text="Text input - Left Icon"
             :should-show-label-text="shouldShowLabelText"
             input-type="text"
+            :disabled="isDisabled"
             field-size="small"
             :has-error="hasError">
                 <template v-slot:icon-leading>
@@ -35,6 +36,7 @@ export const TextInputIconComponent = (args, { argTypes }) => ({
             :should-show-label-text="shouldShowLabelText"
             input-type="text"
             field-size="medium"
+            :disabled="isDisabled"
             :has-error="hasError">
                 <template v-slot:icon-trailing>
                     <DriverCarIcon />
@@ -46,6 +48,7 @@ export const TextInputIconComponent = (args, { argTypes }) => ({
             label-text="Text input - Both Icons"
             :should-show-label-text="shouldShowLabelText"
             input-type="text"
+            :disabled="isDisabled"
             field-size="large"
             :has-error="hasError">
                 <template v-slot:icon-leading>

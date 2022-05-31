@@ -9,7 +9,7 @@ describe('f-form-field visual tests', () => {
             formField = new FormField();
 
             // Act
-            await formField.load();
+            await formField.load(formField.component);
 
             // Assert
             await browser.percyScreenshot('f-form-field - Base State', 'desktop');
@@ -23,7 +23,7 @@ describe('f-form-field visual tests', () => {
             .withQuery('args', 'isDisabled:disabled');
 
             // Act
-            await formField.load();
+            await formField.load(formField.component);
 
             // Assert
             await browser.percyScreenshot('f-form-field - Disabled State', 'desktop');
@@ -37,7 +37,7 @@ describe('f-form-field visual tests', () => {
             .withQuery('args', 'hasError:true');
 
             // Act
-            await formField.load();
+            await formField.load(formField.component);
 
             // Assert
             await browser.percyScreenshot('f-form-field - Errored State', 'desktop');

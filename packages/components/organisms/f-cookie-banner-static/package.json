@@ -1,4 +1,7 @@
 {
+  "name": "@justeat/f-cookie-banner-static",
+  "private": true,
+  "version": "1.0.0",
   "description": "Fozzie Cookie Banner configuration to compile via vue cli prerender to vanilla js/css",
   "license": "Apache-2.0",
   "scripts": {
@@ -8,7 +11,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-cookie-banner": "file:../dist"
+    "@justeat/f-cookie-banner": "3.9.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
