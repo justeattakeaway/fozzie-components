@@ -6,13 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (add to next release)
 ------------------------------
+*May 27, 2021*
+
+### Removed
+- unneeded `load` and `waitForComponent` functions from component object
+
 *May 26, 2021*
 
 ### Changed
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
-
-------------------------------
 *February 4, 2022*
 
 ### Changed
