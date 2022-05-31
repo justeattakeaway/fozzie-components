@@ -41,6 +41,7 @@ module.exports = class CookieBanner extends Page {
     async isCookieBannerComponentDisplayed () {
         const component = await this.component;
         const isDisplayed = await component.isDisplayed();
+
         return isDisplayed;
     }
 

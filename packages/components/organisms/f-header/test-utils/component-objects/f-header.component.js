@@ -1,6 +1,8 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 const {
+    COUNTRY_LINK,
     HEADER_COMPONENT,
+    IS_NAV_IN_VIEW,
     MOBILE_NAVIGATION_BAR,
     NAVIGATION
 } = require('./f-header.selectors');
@@ -49,7 +51,7 @@ module.exports = class Header extends Page {
     }
 
     async isCountryLinkDisplayed (country) {
-        const countryLink = await $(`[data-test-id="countrySelector-countryList-${country}"]`);
+        const countryLink = await $(`[${COUNTRY_LINK}${country}"]`);
 
         return countryLink.isDisplayed();
     }
@@ -65,7 +67,7 @@ module.exports = class Header extends Page {
     }
 
     async clickCountryListItem (country) {
-        const countryLink = await $(`[data-test-id="countrySelector-countryList-${country}"]`);
+        const countryLink = await $(`[${COUNTRY_LINK}${country}"]`);
 
         return countryLink.click();
     }
@@ -81,7 +83,7 @@ module.exports = class Header extends Page {
         const mobileNavigationBar = await $(MOBILE_NAVIGATION_BAR);
 
         await mobileNavigationBar.click();
-        const inNavView = await $('.is-navInView');
+        const inNavView = await $(IS_NAV_IN_VIEW);
 
         await inNavView.waitForExist();
     }
