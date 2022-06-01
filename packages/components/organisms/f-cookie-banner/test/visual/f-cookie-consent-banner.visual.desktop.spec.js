@@ -5,26 +5,26 @@ const CookieBanner = require('../../test-utils/component-objects/f-cookie-consen
 let cookieBanner;
 
 describe('f-cookie-banner Desktop Visual Tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         cookieBanner = new CookieBanner();
-        cookieBanner.withQuery('args', 'locale:en-IE');
+        await cookieBanner.withQuery('args', 'locale:en-IE');
 
         // Act
-        cookieBanner.load();
+        await cookieBanner.load();
     });
 
     // 'dk' and 'no' disabled for now
     forEach(['es-ES', 'en-IE', 'it-IT'])
-    .it('should display the f-cookie-banner component for "%s"', tenant => {
+    .it('should display the f-cookie-banner component for "%s"', async tenant => {
         // Arrange
         cookieBanner = new CookieBanner();
-        cookieBanner.withQuery('args', `locale:${tenant}`);
+        await cookieBanner.withQuery('args', `locale:${tenant}`);
 
         // Act
-        cookieBanner.load();
+        await cookieBanner.load();
 
         // Assert
-        browser.percyScreenshot(`f-cookie-banner - cookie-consent - ${tenant}`, 'desktop');
+        await browser.percyScreenshot(`f-cookie-banner - cookie-consent - ${tenant}`, 'desktop');
     });
 });

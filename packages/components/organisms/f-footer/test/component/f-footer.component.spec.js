@@ -5,39 +5,30 @@ const Footer = require('../../test-utils/component-objects/f-footer.component');
 let footer;
 
 describe('Desktop - f-footer component tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         footer = new Footer();
-        footer.withQuery('args', 'locale:en-GB;showCountrySelector:true');
+        await footer.withQuery('args', 'locale:en-GB;showCountrySelector:true');
 
         // Act
-        footer.load();
+        await footer.load();
     });
 
-    forEach([['ios', 'apple'], ['android', 'google'], ['huawei', 'appgallery']])
-        .it('should redirect to correct URL ("%s")', (icon, expectedUrl) => {
-            // Arrange
-            footer.expectedDownloadIcon = icon;
+    forEach([
+        ['ios', 'apple'],
+        ['android', 'google'],
+        ['huawei', 'appgallery'],
+        ['twitter', 'twitter.com'],
+        ['facebook', 'facebook.com'],
+        ['youtube', 'youtube.com']
+    ])
+    .it('should redirect to correct URL ("%s")', async (icon, expectedUrl) => {
+        // Act
+        await footer.clickIcon(icon);
 
-            // Act
-            footer.clickDownloadIcon();
-
-            // Assert
-            expect(browser.getUrl()).toContain(expectedUrl);
-        });
-
-    forEach([['twitter', 'twitter.com'], ['facebook', 'facebook.com'], ['youtube', 'youtube.com']])
-        .it('should redirect to correct URL ("%s")', (icon, expectedUrl) => {
-            // Arrange
-            footer.expectedSocialIcon = icon;
-
-            // Act
-            footer.clickSocialIcon();
-
-            // Assert
-            expect(browser.getUrl()).toContain(expectedUrl);
-        });
-
+        // Assert
+        await expect(await browser.getUrl()).toContain(expectedUrl);
+    });
 
     forEach([
         ['au', 'menulog.com.au'],
@@ -62,18 +53,17 @@ describe('Desktop - f-footer component tests', () => {
         ['ch_ch', 'eat.ch'],
         ['ch_en', 'eat.ch/en'],
         ['ch_fr', 'eat.ch/fr']
-    ]).it('should click on link for country code "%s" and redirect to correct URL ("%s")', (country, expectedUrl) => {
+    ]).it('should click on link for country code "%s" and redirect to correct URL ("%s")', async (country, expectedUrl) => {
         // Act
-        footer.clickCountrySelectorButton();
-        footer.expectedCountry = country;
-        footer.clickCountryLinkItem();
+        await footer.clickCountrySelectorButton();
+        await footer.clickCountryLinkItem(country);
 
         // Assert
-        expect(browser.getUrl()).toContain(expectedUrl);
+        await expect(await browser.getUrl()).toContain(expectedUrl);
     });
 
-    it('should check to see if the feedback button is clickable', () => {
+    it('should check to see if the feedback button is clickable', async () => {
         // Assert
-        expect(footer.isFeedbackButtonClickable()).toBe(true);
+        await expect(await footer.isFeedbackButtonClickable()).toBe(true);
     });
 });

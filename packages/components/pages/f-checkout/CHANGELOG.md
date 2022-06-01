@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.30.1
+------------------------------
+*May 27, 2022*
+
+### Added
+ - Visual tests for invalid basket
+  
+
 v3.30.0
 ------------------------------
 *May 24, 2022*

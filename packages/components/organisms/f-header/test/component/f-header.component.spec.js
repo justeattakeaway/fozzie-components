@@ -5,7 +5,7 @@ const Header = require('../../test-utils/component-objects/f-header.component');
 let header;
 
 describe('Desktop - f-header component tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         const controls = [
             'showOffersLink:true',
@@ -16,14 +16,14 @@ describe('Desktop - f-header component tests', () => {
         header.path += `&args=${controls}`;
 
         // Act
-        header.load();
-        browser.maximizeWindow();
+        await header.load();
+        await browser.maximizeWindow();
     });
 
     forEach(['help', 'userAccount', 'countrySelector', 'offersLink', 'delivery'])
-    .it('should test that %s navigation link is clickable', link => {
+    .it('should test that %s navigation link is clickable', async link => {
         // Assert
-        expect(header.isNavigationItemClickable(link)).toBe(true);
+        await expect(await header.isNavigationItemClickable(link)).toBe(true);
     });
 
     forEach([
@@ -52,18 +52,12 @@ describe('Desktop - f-header component tests', () => {
         ['ch_en', 'eat.ch/en'],
         ['ch_fr', 'eat.ch/fr']
     ])
-        .it('should display link for country code "%s" and redirect to correct URL ("%s")', (expectedLocale, expectedUrl) => {
+        .it('should display link for country code "%s" and redirect to correct URL ("%s")', async (expectedLocale, expectedUrl) => {
             // Act
-            header.moveToNavigationLink('countrySelector');
-            header.expectedCountry = expectedLocale;
+            await header.moveToNavigationLink('countrySelector');
+            await header.clickCountryListItem(expectedLocale);
 
             // Assert
-            expect(header.isCountryLinkDisplayed()).toBe(true);
-
-            // Act
-            header.clickCountryListItem();
-
-            // Assert
-            expect(browser.getUrl()).toContain(expectedUrl);
+            await expect(await browser.getUrl()).toContain(expectedUrl);
         });
 });
