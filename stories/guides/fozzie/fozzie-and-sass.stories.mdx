@@ -2,3 +2,68 @@
 
 # Fozzie & Sass
 
+Fozzie is Just Eat's UI Component Framework, built to help modularise and share the UI code we write across all of our teams at Just Eat.
+
+<a name="scheme"></a><h2 class="sg-sectionHeading">Prerequisites</h2>
+
+Before you get started with fozzie there's a few things you need to know to get up and running. If you are coming to fozzie from an older version of fozzie i.e v8 and older then this migration [guide](www.google.co.uk) will help you migrate to the latest version. Once you have migrated you can come back here and read what's new.
+
+Consuming application must have the following in-order to run fozzie version 9 and above:
+
+1. [webpack](https://webpack.js.org/)
+    - For file resolution paths. If you aren't using webpack then you can use something like [ParcelJs](https://parceljs.org/) instead.
+2. [dart-sass](https://sass-lang.com/dart-sass):
+    - To compile your Sass, required for the new syntax (`@use` & `@forward`) used in version 9 of fozzie. The [sass](https://www.npmjs.com/package/sass) module uses dart-sass by default now, so if you use the latest version of this module, you'll be fine.
+
+<a name="scheme"></a><h2 class="sg-sectionHeading">Importing Fozzie</h2>
+
+Fozzie SCSS styles uses webpack to resolve file path names, rather than having to provide absolute paths into the node_modules folder. If you don't have webpack running you can use other tools like [ParcelJs](https://parceljs.org/) see migration [guide](www.google.co.uk) for more information.
+
+### How to add and use fozzie within your project
+
+For example, say you have a project and want to include the base fozzie module in your Sass build, you can do the following:
+
+1. Install the base module using NPM or Yarn.
+
+```
+// Yarn example
+
+yarn add @justeat/fozzie
+```
+
+2. Within your project Sass files, you will then be able to import and use the base fozzie module like so:
+
+```
+// Basic usage
+
+@use 'fozzie';
+
+.c-breadcrumbs {
+  @include fozzie.breadcrumbs();
+  background-color: fozzie.$color-blue;
+}
+```
+
+3. A module’s namespace is just the last component of its URL without a file extension. So in the previous example you can see that `@use 'fozzie'` will be namespaced to `fozzie`, this happens by default. You can however choose to give a custom namespace with `@use` statements like so:
+
+```
+// Namespacing usage
+
+@use 'fozzie' as f;
+
+.c-breadcrumbs {
+  @include f.breadcrumbs();
+  background-color: f.$color-blue;
+}
+```
+
+### Once set up and running
+
+When your Sass is compiled, it will include the Sass from the fozzie module as well.
+
+<a name="scheme"></a><h2 class="sg-sectionHeading">Referencing fozzie helpers</h2>
+
+This section will demonstrate how to use useful features within fozzie inside your consuming application.
+
+### How to use Pie Design Tokens
+
