@@ -6,7 +6,7 @@ const errorMessage = new ErrorMessage();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        errorMessage.load();
+        errorMessage.load(errorMessage.component);
     });
 
     it('a11y - should test f-error-message component WCAG compliance', () => {

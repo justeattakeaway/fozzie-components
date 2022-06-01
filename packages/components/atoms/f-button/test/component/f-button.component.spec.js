@@ -10,7 +10,7 @@ describe('f-button component tests', () => {
         button = new ActionButton();
 
         // Act
-        await button.load();
+        await button.load(button.component);
 
         // Assert
         await expect(await button.isComponentDisplayed()).toBe(true);
@@ -21,7 +21,7 @@ describe('f-button component tests', () => {
         button = new ActionButton();
 
         // Act
-        await button.load();
+        await button.load(button.component);
 
         // Assert
         await expect(await button.isComponentClickable()).toBe(true);
@@ -32,7 +32,7 @@ describe('f-button component tests', () => {
         button = new LinkButton();
 
         // Act
-        await button.load();
+        await button.load(button.component);
 
         // Assert
         await expect(await button.isComponentDisplayed()).toBe(true);
@@ -43,7 +43,7 @@ describe('f-button component tests', () => {
         button = new LinkButton();
 
         // Act
-        await button.load();
+        await button.load(button.component);
 
         // Assert
         await expect(await button.isComponentClickable()).toBe(true);
@@ -54,7 +54,7 @@ describe('f-button component tests', () => {
         button = new IconButton();
 
         // Act
-        await button.load();
+        await button.load(button.component);
 
         // Assert
         await expect(await button.isComponentDisplayed()).toBe(true);
@@ -65,7 +65,7 @@ describe('f-button component tests', () => {
         button = new IconButton();
 
         // Act
-        await button.load();
+        await button.load(button.component);
 
         // Assert
         await expect(await button.isComponentClickable()).toBe(true);

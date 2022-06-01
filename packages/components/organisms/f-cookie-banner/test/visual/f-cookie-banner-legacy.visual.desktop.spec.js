@@ -3,14 +3,14 @@ const CookieBanner = require('../../test-utils/component-objects/f-cookie-banner
 const cookieBanner = new CookieBanner();
 
 describe('Legacy - f-cookie-banner Desktop Visual Tests', () => {
-    it('should display the f-cookie-banner component', () => {
+    it('should display the f-cookie-banner component', async () => {
         // Arrange
-        cookieBanner.withQuery('args', 'locale:en-AU');
+        await cookieBanner.withQuery('args', 'locale:en-AU');
 
         // Act
-        cookieBanner.load();
+        await cookieBanner.load();
 
         // Assert
-        browser.percyScreenshot('f-cookie-banner - Legacy', 'desktop');
+        await browser.percyScreenshot('f-cookie-banner - Legacy', 'desktop');
     });
 });

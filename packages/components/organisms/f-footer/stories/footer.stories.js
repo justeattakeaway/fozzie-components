@@ -1,4 +1,3 @@
-import { withA11y } from '@storybook/addon-a11y';
 import VueFooter from '../src/components/Footer.vue';
 import gbContent from '../data/en-GB.json';
 import esContent from '../data/es-ES.json';
@@ -22,10 +21,9 @@ const contents = {
 
 export default {
     title: 'Components/Organisms',
-    decorators: [withA11y],
     parameters: {
         a11y: {
-            element: '.c-footer', // root element
+            element: '[data-test-id="footer-component"]', // root element
             config: {},
             options: {
                 rules: {
@@ -76,20 +74,20 @@ FooterComponent.argTypes = {
 
     showCourierLinks: {
         control: { type: 'boolean' },
-        description: 'If set to true, courier links are displayed'
+        description: 'If true, courier links are displayed (if defined).'
     },
 
     showCountrySelector: {
         control: { type: 'boolean' },
-        description: 'If set to true, country selector is displayed'
+        description: 'If true, the country selector is displayed.'
     },
 
     showLinksContent: {
         control: { type: 'boolean' },
-        description: 'If set to true, content links are displayed'
+        description: 'If true, the main body of links is displayed.'
     },
 
     content: {
-        control: false // This is driven by the locale + data file combination.
+        description: 'Consider changing the locale instead, as this determines which data file to read.'
     }
 };

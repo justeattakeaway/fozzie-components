@@ -3,6 +3,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+Latest (add to next release)
+------------------------------
+*May 31, 2021*
+
+### Changed
+- Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
+
+
+v7.7.1
+------------------------------
+*May 31, 2022*
+
+### Fixed
+- Error in storybook accessibility tab.
+
+
 v7.7.0
 ------------------------------
 *May 26, 2022*
@@ -56,7 +73,7 @@ v7.2.1
 
 v7.2.0
 ------------------------------
-*April 01, 2022*
+*April 1, 2022*
 
 ### Removed
 - css `order` property so tabbing reads correctly on small screens via extended keyboard devices, mobile devices in particular.
@@ -83,13 +100,6 @@ v7.0.0
 
 ### Changed
 - Now the links displayed by the footer is driven by its `content` prop, rather than relying on local translation files.
-
-
-Latest – to be added to the next release
-------------------------------
-*February 21, 2022*
-
-### Changed
 - Converted knobs to controls in `footer.stories.js`
 
 
@@ -303,9 +313,6 @@ v4.18.0
 - Tests for footer blocks
 - `mobile` folder to run mobile specific tests in Browserstack
 - `data-test-id`s in `FeedbackBlock.vue`, `Footer.vue` and `LinkList.vue` to test specific blocks and buttons.
-
-
-*April 9, 2021*
 
 ### Changed
 - Refactored large country selector test into two separate tests
@@ -682,7 +689,7 @@ v2.1.1
 
 v2.1.0
 ------------------------------
-*March 06, 2020*
+*March 6, 2020*
 
 ### Fixed
 - Moved v-click-outside handler from button to parent element to prevent the country selector from closing on-click.

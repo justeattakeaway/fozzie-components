@@ -1,6 +1,8 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 const {
+    COUNTRY_LINK,
     HEADER_COMPONENT,
+    IS_NAV_IN_VIEW,
     MOBILE_NAVIGATION_BAR,
     NAVIGATION
 } = require('./f-header.selectors');
@@ -12,8 +14,6 @@ module.exports = class Header extends Page {
     }
 
     get component () { return $(HEADER_COMPONENT); }
-
-    get mobileNavigationBar () { return $(MOBILE_NAVIGATION_BAR); }
 
     navigation = {
         offersIcon: {
@@ -38,64 +38,64 @@ module.exports = class Header extends Page {
         }
     };
 
-    get countryLink () { return this.countryValue != null ? this.countryValue : 'Please set a country value'; }
-
-    set expectedCountry (country) {
-        [this.countryValue] = this.navigation.countrySelector.countries.filter(element => element.getAttribute('data-test-id').includes(country));
+    async load () {
+        await super.load(this.component);
     }
 
-    load () {
-        super.load(this.component);
+    async waitForComponent () {
+        await super.waitForComponent(this.component);
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component);
-    }
-
-    isComponentDisplayed () {
+    async isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 
-    isNavigationLinkDisplayed (linkName) {
-        return this.navigation[linkName].link.isDisplayedInViewport();
+    async isCountryLinkDisplayed (country) {
+        const countryLink = await $(`[${COUNTRY_LINK}${country}"]`);
+
+        return countryLink.isDisplayed();
     }
 
-    isCurrentCountryIconDisplayed (country) {
-        const expectedIcon = this.navigation.countrySelector.currentIcon.getAttribute('class').includes(`c-ficon--flag.${country}.round`);
-        return expectedIcon ? this.navigation.countrySelector.currentIcon.isDisplayed() : false;
-    }
-
-    isCountryLinkDisplayed () {
-        return this.countryLink.isDisplayed();
-    }
-
-    isNavigationItemClickable (item) {
+    async isNavigationItemClickable (item) {
         return this.navigation[item].link.isClickable();
     }
 
-    openCountrySelector () {
-        return this.navigation.countrySelector.link.click();
+    async openCountrySelector () {
+        const countrySelectorLink = await this.navigation.countrySelector.link;
+
+        return countrySelectorLink.click();
     }
 
-    clickCountryListItem () {
-        return this.countryLink.click();
+    async clickCountryListItem (country) {
+        const countryLink = await $(`[${COUNTRY_LINK}${country}"]`);
+
+        return countryLink.click();
     }
 
-    moveToNavigationLink (item) {
-        this.navigation[item].link.moveTo();
+    async moveToNavigationLink (item) {
+        const navigationItem = await this.navigation[item];
+        const navigationItemLink = await navigationItem.link;
+
+        await navigationItemLink.moveTo();
     }
 
-    openMobileNavigationBar () {
-        this.mobileNavigationBar.click();
+    async openMobileNavigationBar () {
+        const mobileNavigationBar = await $(MOBILE_NAVIGATION_BAR);
 
-        $('.is-navInView').waitForExist();
+        await mobileNavigationBar.click();
+        const inNavView = await $(IS_NAV_IN_VIEW);
+
+        await inNavView.waitForExist();
     }
 
-    hoverOverLink (item) {
-        this.navigation[item].link.moveTo();
+    async hoverOverLink (item) {
+        const navItem = await this.navigation[item];
+        const navItemLink = await navItem.link;
+
+        await navItemLink.moveTo();
     }
 
-    pressDownTabKey (times = 1) {
+    async pressDownTabKey (times = 1) {
         Array.from({ length: times }, () => browser.keys('\uE004'));
     }
 };

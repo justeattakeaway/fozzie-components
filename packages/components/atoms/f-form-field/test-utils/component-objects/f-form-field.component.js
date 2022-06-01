@@ -11,14 +11,6 @@ module.exports = class FormField extends Page {
 
     get input () { return $('[data-test-id="formfield-input"]'); }
 
-    async load () {
-        await super.load(this.component);
-    }
-
-    async waitForComponent () {
-        await super.waitForComponent(this.component);
-    }
-
     async isComponentDisplayed () {
         return this.component.isDisplayed();
     }

@@ -10,15 +10,15 @@ module.exports = class Form extends Page {
         return $(COMPONENT);
     }
 
-    load () {
-        super.load(this.component);
+    async load () {
+        await super.load(this.component);
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component);
+    async waitForComponent () {
+        await super.waitForComponent(this.component);
     }
 
-    isComponentDisplayed () {
+    async isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 };
