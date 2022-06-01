@@ -8,7 +8,7 @@ v0.10.0
 *May 24, 2022*
 
 ### Changed
-- Updated load function to take in storybook args as objects
+- load function to take in storybook args as objects
 
 
 v0.9.0
