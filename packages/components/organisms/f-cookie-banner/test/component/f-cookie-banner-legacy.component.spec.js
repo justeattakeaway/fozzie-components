@@ -5,44 +5,44 @@ const CookieBanner = require('../../test-utils/component-objects/f-cookie-banner
 let cookieBanner;
 
 describe('Legacy - f-cookie-banner component tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         cookieBanner = new CookieBanner();
-        cookieBanner.withQuery('args', 'locale:en-AU');
+        await cookieBanner.withQuery('args', 'locale:en-AU');
 
         // Act
-        cookieBanner.load();
+        await cookieBanner.load();
     });
 
-    it('should display the f-cookie-banner component', () => {
+    it('should display the f-cookie-banner component', async () => {
         // Assert
-        expect(cookieBanner.isCookieBannerComponentDisplayed()).toBe(true);
+        await expect(await cookieBanner.isCookieBannerComponentDisplayed()).toBe(true);
     });
 
-    it('should set "je-cookie_banner" cookie when dismissed.', () => {
+    it('should set "je-cookie_banner" cookie when dismissed.', async () => {
         // Act
-        cookieBanner.close();
+        await cookieBanner.close();
 
         // Assert
-        const [bannerCookie] = browser.getCookies().filter(cookie => cookie.name === 'je-banner_cookie');
-        expect(bannerCookie.value).toBe('130315');
-        expect(cookieBanner.isCookieBannerComponentDisplayed()).toBe(false);
+        const [bannerCookie] = (await browser.getCookies()).filter(cookie => cookie.name === 'je-banner_cookie');
+        await expect(bannerCookie.value).toBe('130315');
+        await expect(await cookieBanner.isCookieBannerComponentDisplayed()).toBe(false);
     });
 
     forEach([
         ['en-AU', 'au/info/privacy-policy#cookies_policy'],
         ['en-NZ', 'nz/info/privacy-policy#cookies_policy']
     ])
-    .it('should go to the correct cookie policy page for "%s" - "%s"', (tenant, expectedCookiePolicyUrl) => {
+    .it('should go to the correct cookie policy page for "%s" - "%s"', async (tenant, expectedCookiePolicyUrl) => {
         // Arrange
         cookieBanner = new CookieBanner();
-        cookieBanner.withQuery('args', `locale:${tenant}`);
+        await cookieBanner.withQuery('args', `locale:${tenant}`);
 
         // Act
-        cookieBanner.load();
-        cookieBanner.clickCookiePolicyLink();
+        await cookieBanner.load();
+        await cookieBanner.clickCookiePolicyLink();
 
         // Assert
-        expect(browser.getUrl()).toContain(expectedCookiePolicyUrl);
+        await expect(await browser.getUrl()).toContain(expectedCookiePolicyUrl);
     });
 });

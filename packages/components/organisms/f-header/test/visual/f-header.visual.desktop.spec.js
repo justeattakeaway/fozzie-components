@@ -12,7 +12,7 @@ describe('Shared - f-header component tests', () => {
         ['en-IE', true], ['en-IE', false],
         ['it-IT', true], ['it-IT', false],
         ['es-ES', true], ['es-ES', false]
-    ]).it('should display component', (tenant, isLoggedIn) => {
+    ]).it('should display component', async (tenant, isLoggedIn) => {
         // Arrange
         const controls = [
             `locale:${tenant}`,
@@ -25,17 +25,17 @@ describe('Shared - f-header component tests', () => {
         header.path += `&args=${controls}`;
 
         // Act
-        header.load();
+        await header.load();
 
         // Assert
-        browser.percyScreenshot(`f-header - Base state - isLoggedIn: ${isLoggedIn} - ${tenant}`, 'desktop');
+        await browser.percyScreenshot(`f-header - Base state - isLoggedIn: ${isLoggedIn} - ${tenant}`, 'desktop');
     });
 
     forEach([
         'white',
         'highlight',
         'transparent'
-    ]).it('should display the "%s" header theme', theme => {
+    ]).it('should display the "%s" header theme', async theme => {
         // Arrange
         const controls = [
             'locale:en-GB',
@@ -46,17 +46,17 @@ describe('Shared - f-header component tests', () => {
         header.path += `&args=${controls}`;
 
         // Act
-        header.load();
+        await header.load();
 
         // Assert
-        browser.percyScreenshot(`f-header - Theme colours - ${theme}`, 'desktop');
+        await browser.percyScreenshot(`f-header - Theme colours - ${theme}`, 'desktop');
     });
 
     forEach([
         'showLoginInfo',
         'showHelpLink',
         'showCountrySelector'
-    ]).it('should not display "%s" ', knobName => {
+    ]).it('should not display "%s" ', async knobName => {
         // Arrange
         const controls = [
             'locale:en-GB',
@@ -67,17 +67,17 @@ describe('Shared - f-header component tests', () => {
         header.path += `&args=${controls}`;
 
         // Act
-        header.load();
+        await header.load();
 
         // Assert
-        browser.percyScreenshot(`f-header - ${knobName} - False`, 'desktop');
+        await browser.percyScreenshot(`f-header - ${knobName} - False`, 'desktop');
     });
 
     forEach([
         'userAccount',
         'countrySelector'
     ])
-    .it('should display the %s dropdown lists on hover', link => {
+    .it('should display the %s dropdown lists on hover', async link => {
         // Arrange
         const controls = 'locale:en-GB';
 
@@ -85,17 +85,17 @@ describe('Shared - f-header component tests', () => {
         header.path += `&args=${controls}`;
 
         // Act
-        header.load();
-        header.moveToNavigationLink(link);
+        await header.load();
+        await header.moveToNavigationLink(link);
 
         // Assert
-        browser.percyScreenshot('f-header - %s dropdown', 'desktop');
+        await browser.percyScreenshot('f-header - %s dropdown', 'desktop');
     });
 
     // Not currently possible to set complex values (i.e., arrays) for controls via query strings.
     // https://storybook.js.org/docs/vue/essentials/controls#dealing-with-complex-values
     // https://github.com/storybookjs/storybook/issues/14420
-    it.skip('should display any custom links', () => {
+    it.skip('should display any custom links', async () => {
         // Arrange
         const controls = [
             'locale:en-GB',
@@ -108,17 +108,17 @@ describe('Shared - f-header component tests', () => {
         header.path += `&args=${controls}`;
 
         // Act
-        header.load();
-        header.openMobileNavigationBar();
+        await header.load();
+        await header.openMobileNavigationBar();
 
         // Assert
-        browser.percyScreenshot('f-header - with custom nav links', 'desktop');
+        await browser.percyScreenshot('f-header - with custom nav links', 'desktop');
     });
 
     // Not currently possible to set complex values (i.e., arrays) for controls via query strings.
     // https://storybook.js.org/docs/vue/essentials/controls#dealing-with-complex-values
     // https://github.com/storybookjs/storybook/issues/14420
-    it.skip('should be able to show only custom links', () => {
+    it.skip('should be able to show only custom links', async () => {
         // Arrange
         const controls = [
             'locale:en-GB',
@@ -134,32 +134,32 @@ describe('Shared - f-header component tests', () => {
         header.path += `&args=${controls}`;
 
         // Act
-        header.load();
-        header.openMobileNavigationBar();
+        await header.load();
+        await header.openMobileNavigationBar();
 
         // Assert
-        browser.percyScreenshot('f-header - custom nav links only', 'desktop');
+        await browser.percyScreenshot('f-header - custom nav links only', 'desktop');
     });
 
-    it('should display link in hover state', () => {
+    it('should display link in hover state', async () => {
         header = new Header();
 
         // Act
-        header.load();
-        header.hoverOverLink('help');
+        await header.load();
+        await header.hoverOverLink('help');
 
         // Assert
-        browser.percyScreenshot('f-header - hover state', 'desktop');
+        await browser.percyScreenshot('f-header - hover state', 'desktop');
     });
 
-    it('should display link in focus state', () => {
+    it('should display link in focus state', async () => {
         header = new Header();
 
         // Act
-        header.load();
-        header.pressDownTabKey(3);
+        await header.load();
+        await header.pressDownTabKey(3);
 
         // Assert
-        browser.percyScreenshot('f-header - focus state', 'desktop');
+        await browser.percyScreenshot('f-header - focus state', 'desktop');
     });
 });

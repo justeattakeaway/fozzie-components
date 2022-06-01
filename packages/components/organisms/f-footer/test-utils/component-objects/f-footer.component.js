@@ -1,11 +1,10 @@
 const Page = require('@justeat/f-wdio-utils/src/page.object');
 const {
     FOOTER_COMPONENT,
-    DOWNLOAD_ICONS,
-    SOCIAL_ICONS,
     COUNTRY_SELECTOR_BUTTON,
-    COUNTRY_LIST,
+    COUNTRY_LINK,
     FEEDBACK_BUTTON,
+    FOOTER_ICON,
     FOOTER_LINK_LIST
 } = require('./f-footer.selectors');
 
@@ -16,65 +15,42 @@ module.exports = class Footer extends Page {
 
     get component () { return $(FOOTER_COMPONENT); }
 
-    get downloadIcons () { return $$(DOWNLOAD_ICONS); }
-
-    get socialIcons () { return $$(SOCIAL_ICONS); }
-
-    get downloadIcon () { return this.downloadIconValue; }
-
-    get socialIcon () { return this.socialIconValue; }
-
     get feedbackButton () { return $(FEEDBACK_BUTTON); }
 
     get countrySelectorButton () { return $(COUNTRY_SELECTOR_BUTTON); }
 
-    get countries () { return $$(COUNTRY_LIST); }
-
     get footerLinkList () { return $(FOOTER_LINK_LIST); }
 
-    get countryLink () { return this.countryValue != null ? this.countryValue : 'Please set a country value'; }
-
-    set expectedDownloadIcon (icon) {
-        [this.downloadIconValue] = this.downloadIcons.filter(element => element.getAttribute('data-test-id').includes(icon));
+    async load () {
+        await super.load(this.component);
     }
 
-    set expectedSocialIcon (icon) {
-        [this.socialIconValue] = this.socialIcons.filter(element => element.getAttribute('data-test-id').includes(icon));
+    async waitForComponent () {
+        await super.waitForComponent(this.component);
     }
 
-    set expectedCountry (country) {
-        [this.countryValue] = this.countries.filter(element => element.getAttribute('data-test-id').includes(country));
-    }
-
-    load () {
-        super.load(this.component);
-    }
-
-    waitForComponent () {
-        super.waitForComponent(this.component);
-    }
-
-    isComponentDisplayed () {
+    async isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 
-    clickDownloadIcon () {
-        return this.downloadIcon.click();
+    async clickIcon (icon) {
+        const footerIcon = await $(`[${FOOTER_ICON}${icon}"]`);
+
+        return footerIcon.click();
     }
 
-    clickSocialIcon () {
-        return this.socialIcon.click();
-    }
-
-    isFeedbackButtonClickable () {
+    async isFeedbackButtonClickable () {
         return this.feedbackButton.isClickable();
     }
 
-    clickCountrySelectorButton () {
-        return this.countrySelectorButton.click();
+    async clickCountrySelectorButton () {
+        const countrySelectorButton = await this.countrySelectorButton;
+        return countrySelectorButton.click();
     }
 
-    clickCountryLinkItem () {
-        return this.countryLink.click();
+    async clickCountryLinkItem (country) {
+        const countryLink = await $(`[${COUNTRY_LINK}${country}"]`);
+
+        return countryLink.click();
     }
 };
