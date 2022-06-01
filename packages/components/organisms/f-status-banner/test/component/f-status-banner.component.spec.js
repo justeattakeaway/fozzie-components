@@ -3,14 +3,14 @@ const StatusBanner = require('../../test-utils/component-objects/f-status-banner
 let statusBanner;
 
 describe('f-status-banner component tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         statusBanner = new StatusBanner();
 
-        statusBanner.load();
+        await statusBanner.load();
     });
 
-    it('should display the f-statusBanner component', () => {
+    it('should display the f-statusBanner component', async () => {
         // Assert
-        expect(statusBanner.isStatusBannerComponentDisplayed()).toBe(true);
+        await expect(await statusBanner.isStatusBannerComponentDisplayed()).toBe(true);
     });
 });

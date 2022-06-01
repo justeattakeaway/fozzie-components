@@ -23,35 +23,35 @@ module.exports = class HomePromotionCard1 extends Page {
 
     get subtitle () { return $(SUBTITLE); }
 
-    load () {
-        super.load(this.component);
+    async load () {
+        await super.load(this.component);
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component);
+    async waitForComponent () {
+        await super.waitForComponent(this.component);
     }
 
-    isComponentDisplayed () {
+    async isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 
-    isInnerContainerDisplayed () {
+    async isInnerContainerDisplayed () {
         return this.innerContainer.isDisplayed();
     }
 
-    isHeaderDisplayed () {
+    async isHeaderDisplayed () {
         return this.header.isDisplayed();
     }
 
-    isImageDisplayed () {
+    async isImageDisplayed () {
         return this.image.isDisplayed();
     }
 
-    isSubtitleDisplayed () {
+    async isSubtitleDisplayed () {
         return this.subtitle.isDisplayed();
     }
 
-    isComponentClickable () {
+    async isComponentClickable () {
         return this.component.isClickable();
     }
 };

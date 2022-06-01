@@ -3,55 +3,55 @@ const StatusBanner = require('../../test-utils/component-objects/f-status-banner
 let statusBanner;
 
 describe('f-status-banner component tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         statusBanner = new StatusBanner();
 
-        statusBanner.load();
+        await statusBanner.load();
     });
 
-    it('should display the f-status-banner component', () => {
+    it('should display the f-status-banner component', async () => {
         // Assert
-        browser.percyScreenshot('f-status-banner - Base state', 'mobile');
+        await browser.percyScreenshot('f-status-banner - Base state', 'mobile');
     });
 
-    it('should not display an error when user address is correct', () => {
+    it('should not display an error when user address is correct', async () => {
         // Arrange
         const userInput = {
             address: 'AR511AR'
         };
 
         // Act
-        statusBanner.addAddress(userInput);
+        await statusBanner.addAddress(userInput);
 
         // Assert
-        browser.percyScreenshot('f-status-banner - Valid State', 'mobile');
+        await browser.percyScreenshot('f-status-banner - Valid State', 'mobile');
     });
 
-    it('should display "empty" error when user does not input address', () => {
+    it('should display "empty" error when user does not input address', async () => {
         // Arrange
         const userInput = {
             address: ''
         };
 
         // Act
-        statusBanner.addAddress(userInput);
-        statusBanner.clickSearchButton();
+        await statusBanner.addAddress(userInput);
+        await statusBanner.clickSearchButton();
 
         // Assert
-        browser.percyScreenshot('f-status-banner - Empty State - Empty postcode error', 'mobile');
+        await browser.percyScreenshot('f-status-banner - Empty State - Empty postcode error', 'mobile');
     });
 
-    it('should display "invalid" error when user does not input address correctly', () => {
+    it('should display "invalid" error when user does not input address correctly', async () => {
         // Arrange
         const userInput = {
             address: '00'
         };
 
         // Act
-        statusBanner.addAddress(userInput);
-        statusBanner.clickSearchButton();
+        await statusBanner.addAddress(userInput);
+        await statusBanner.clickSearchButton();
 
         // Assert
-        browser.percyScreenshot('f-status-banner - Invalid State - Invalid postcode error', 'mobile');
+        await browser.percyScreenshot('f-status-banner - Invalid State - Invalid postcode error', 'mobile');
     });
 });

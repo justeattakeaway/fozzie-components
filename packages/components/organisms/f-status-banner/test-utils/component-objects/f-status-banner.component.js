@@ -21,15 +21,15 @@ module.exports = class StatusBanner extends Page {
 
     get errorMessage () { return $(ERROR_MESSAGE); }
 
-    load () {
-        super.load(this.component);
+    async load () {
+        await super.load(this.component);
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component);
+    async waitForComponent () {
+        await super.waitForComponent(this.component);
     }
 
-    isStatusBannerComponentDisplayed () {
+    async isStatusBannerComponentDisplayed () {
         return this.component.isDisplayed();
     }
 
@@ -39,19 +39,19 @@ module.exports = class StatusBanner extends Page {
     * @description
     * The below function adds and displays the user's first name into the form-field component.
     */
-    addAddress (userInput) {
-        this.addressBox.setValue(userInput.address);
+    async addAddress (userInput) {
+        await this.addressBox.setValue(userInput.address);
     }
 
-    clickSearchButton () {
-        this.button.click();
+    async clickSearchButton () {
+        await this.button.click();
     }
 
-    getAddress () {
+    async getAddress () {
         return this.addressBox.getValue();
     }
 
-    getErrorMessage () {
+    async getErrorMessage () {
         return this.errorMessage.getText();
     }
 };

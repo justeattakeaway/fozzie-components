@@ -16,7 +16,10 @@ describe('Legacy Accessibility tests', () => {
         legacyCookieBanner.withQuery('args', 'locale:en-AU');
 
         // Act
-        legacyCookieBanner.load();
+        browser.call(async () => {
+            await legacyCookieBanner.load();
+        });
+
         const axeResults = getAxeResults('f-cookie-banner');
 
         // Assert
@@ -29,7 +32,10 @@ describe('Legacy Accessibility tests', () => {
         cookieConsentBanner.withQuery('args', 'locale:en-GB');
 
         // Act
-        cookieConsentBanner.load();
+        browser.call(async () => {
+            await legacyCookieBanner.load();
+        });
+
         const axeResults = getAxeResults('f-cookie-banner');
 
         // Assert
@@ -48,7 +54,11 @@ describe('Legacy Accessibility tests', () => {
             cookieConsentBanner.withQuery('args', `locale:${tenant}`);
 
             // Act
-            cookieConsentBanner.load();
+
+            browser.call(async () => {
+                await legacyCookieBanner.load();
+            });
+
             const expectedTabOrder = [
                 cookieConsentBanner.cookiePolicyLink,
                 cookieConsentBanner.cookieAcceptAllButton,
