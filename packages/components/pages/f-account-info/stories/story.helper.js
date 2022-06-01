@@ -3,6 +3,7 @@ import getConsumerAddresses from './payloads/get-consumer-addresses.json';
 
 const httpStatusCodes = {
     ok: 200,
+    unauthorized: 403,
     internalServerError: 500
 };
 
@@ -16,7 +17,8 @@ const apiStates = {
     apiGetDetailsFailed: 'get-details-fails',
     apiGetAddressFailed: 'get-address-fails',
     apiPatchDetailsFailed: 'patch-details-fails',
-    apiPatchAddressFailed: 'patch-address-fails'
+    apiPatchAddressFailed: 'patch-address-fails',
+    apiGetDetails403: 'get-details-403'
 };
 
 // Consumer Details
@@ -34,6 +36,15 @@ const consumerDetailsGET500 = {
     url: '/consumer',
     method: httpVerbs.get,
     responseStatus: httpStatusCodes.internalServerError,
+    requestData: null,
+    responseData: null
+};
+
+const consumerDetailsGET403 = {
+    // Failed GET consumer details
+    url: '/consumer',
+    method: httpVerbs.get,
+    responseStatus: httpStatusCodes.unauthorized,
     requestData: null,
     responseData: null
 };
@@ -131,6 +142,15 @@ const apiDefinitions = [
         ]
     },
     {
+        state: apiStates.apiGetDetails403,
+        states: [
+            consumerDetailsGET403, // Unauthorized
+            consumerDetailsPATCH200,
+            consumerAddressGET200,
+            consumerAddressPATCH200
+        ]
+    },
+    {
         state: apiStates.apiGetAddressFailed,
         states: [
             consumerDetailsGET200,
@@ -149,7 +169,8 @@ export const apiStateOptions = {
         apiStates.apiGetDetailsFailed,
         apiStates.apiGetAddressFailed,
         apiStates.apiPatchDetailsFailed,
-        apiStates.apiPatchAddressFailed
+        apiStates.apiPatchAddressFailed,
+        apiStates.apiGetDetails403
     ]
 };
 
