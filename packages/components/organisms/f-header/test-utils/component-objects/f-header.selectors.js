@@ -1,5 +1,7 @@
 exports.HEADER_COMPONENT = '[data-test-id="header-component"]';
 exports.MOBILE_NAVIGATION_BAR = '[data-test-id="nav-toggle"]';
+exports.COUNTRY_LINK = 'data-test-id="countrySelector-countryList-';
+exports.IS_NAV_IN_VIEW = '.is-navInView';
 
 exports.NAVIGATION = {
     offersIcon: {

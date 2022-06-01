@@ -5,38 +5,38 @@ const CookieBanner = require('../../test-utils/component-objects/f-cookie-consen
 let cookieBanner;
 
 describe('f-cookie-banner component tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         cookieBanner = new CookieBanner();
     });
 
     forEach(['full', 'necessary'])
-    .it('should set "je-cookie_banner" and "je-cookieConsent" to expected cookie values for "%s"', expectedCookieValue => {
+    .it('should set "je-cookie_banner" and "je-cookieConsent" to expected cookie values for "%s"', async expectedCookieValue => {
         // Arrange
-        cookieBanner.withQuery('args', 'locale:en-IE');
+        await cookieBanner.withQuery('args', 'locale:en-IE');
 
         // Act
-        cookieBanner.load();
-        cookieBanner.acceptCookies(expectedCookieValue);
+        await cookieBanner.load();
+        await cookieBanner.acceptCookies(expectedCookieValue);
 
         // Arrange
-        const [bannerCookie] = browser.getCookies().filter(cookie => cookie.name === 'je-banner_cookie');
-        const [bannerConsent] = browser.getCookies().filter(cookie => cookie.name === 'je-cookieConsent');
+        const [bannerCookie] = (await browser.getCookies()).filter(cookie => cookie.name === 'je-banner_cookie');
+        const [bannerConsent] = (await browser.getCookies()).filter(cookie => cookie.name === 'je-cookieConsent');
 
         // Assert
-        expect(bannerCookie.value).toBe('130315');
-        expect(bannerConsent.value).toBe(expectedCookieValue);
+        await expect(bannerCookie.value).toBe('130315');
+        await expect(bannerConsent.value).toBe(expectedCookieValue);
     });
 
     forEach(['es-ES', 'en-IE', 'it-IT', 'en-GB'])
-    .it('should display the f-cookie-banner component for "%s"', tenant => {
+    .it('should display the f-cookie-banner component for "%s"', async tenant => {
         // Arrange
-        cookieBanner.withQuery('args', `locale:${tenant}`);
+        await cookieBanner.withQuery('args', `locale:${tenant}`);
 
         // Act
-        cookieBanner.load();
+        await cookieBanner.load();
 
         // Assert
-        expect(cookieBanner.isCookieBannerComponentDisplayed()).toBe(true);
+        await expect(await cookieBanner.isCookieBannerComponentDisplayed()).toBe(true);
     });
 
     forEach([
@@ -45,16 +45,16 @@ describe('f-cookie-banner component tests', () => {
         ['en-IE', 'ie/info/cookies-policy'],
         ['it-IT', 'it/informazioni/politica-dei-cookie']
     ])
-        .it('should go to the correct cookie policy page', (tenant, expectedCookiePolicyUrl) => {
+        .it('should go to the correct cookie policy page', async (tenant, expectedCookiePolicyUrl) => {
             // Arrange
-            cookieBanner.withQuery('args', `locale:${tenant}`);
+            await cookieBanner.withQuery('args', `locale:${tenant}`);
 
             // Act
-            cookieBanner.load();
-            cookieBanner.clickCookiePolicyLink();
-            browser.switchWindow(new RegExp(`^.*${expectedCookiePolicyUrl}.*$`));
+            await cookieBanner.load();
+            await cookieBanner.clickCookiePolicyLink();
+            await browser.switchWindow(new RegExp(`^.*${expectedCookiePolicyUrl}.*$`));
 
             // Assert
-            expect(browser.getUrl()).toContain(expectedCookiePolicyUrl);
+            await expect(await browser.getUrl()).toContain(expectedCookiePolicyUrl);
         });
 });
