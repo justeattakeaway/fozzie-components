@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.10.0
 ------------------------------
-*May 24, 2022*
+*June 1, 2022*
 
 ### Changed
 - load function to take in storybook args as objects
