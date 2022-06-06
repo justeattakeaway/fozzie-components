@@ -36,7 +36,7 @@ describe('f-button Desktop visual tests', () => {
                 button = new ActionButton();
 
                 // Act
-                await button.load(button.component, { disabled: true});
+                await button.load(button.component, { disabled: true });
 
                 // Assert
                 await browser.percyScreenshot('f-button - Action - Disabled', 'desktop');
