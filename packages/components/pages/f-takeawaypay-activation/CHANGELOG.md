@@ -7,7 +7,7 @@ v2.13.0
 ------------------------------
 *June 07, 2022*
 
-### Changed
+### Added
 - Added IE/ES/IT localization
 
 
