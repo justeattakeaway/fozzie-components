@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 Latest (add to next release)
 ------------------------------
+*June 6, 2022*
+
+### Changed
+- version bump of `f-wdio-utils` package
+
 *May 27, 2021*
 
 ### Removed

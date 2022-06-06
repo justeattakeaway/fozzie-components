@@ -19,11 +19,10 @@ describe('f-form-field visual tests', () => {
     describe('disabled state', () => {
         it('should display all fields in a disabled state', async () => {
             // Arrange
-            formField = await new FormField()
-            .withQuery('args', 'isDisabled:disabled');
+            formField = await new FormField();
 
             // Act
-            await formField.load(formField.component);
+            await formField.load(formField.component, { isDisabled: true });
 
             // Assert
             await browser.percyScreenshot('f-form-field - Disabled State', 'desktop');
@@ -33,11 +32,10 @@ describe('f-form-field visual tests', () => {
     describe('errored state', () => {
         it('should display all fields in an errored state', async () => {
             // Arrange
-            formField = await new FormField()
-            .withQuery('args', 'hasError:true');
+            formField = await new FormField();
 
             // Act
-            await formField.load(formField.component);
+            await formField.load(formField.component, { hasError: true });
 
             // Assert
             await browser.percyScreenshot('f-form-field - Errored State', 'desktop');

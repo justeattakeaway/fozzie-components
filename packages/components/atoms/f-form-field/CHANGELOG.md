@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+Latest (add to next release)
+------------------------------
+*June 6, 2022*
+
+### Changed
+- tests to take in new `load` function from `page.object`
+- version bump of `f-wdio-utils` package
+
+
 v4.11.0
 ------------------------------
 *May 30, 2022*
