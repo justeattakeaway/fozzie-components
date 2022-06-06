@@ -10,7 +10,7 @@ describe('Accessibility tests', () => {
         footer = new Footer();
     });
 
-    forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'da-DK', 'es-ES', 'it-IT', 'nb-NO'])
+    forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'es-ES', 'it-IT'])
         .it('a11y - should test f-footer component WCAG compliance for country code "%s" with default options selected', tenant => {
             // Arrange
             footer.withQuery('args', `locale:${tenant}`);
