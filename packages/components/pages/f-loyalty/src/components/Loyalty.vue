@@ -43,6 +43,8 @@ import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import { mapActions, mapGetters } from 'vuex';
 import { FTab as Tab, FTabs as Tabs } from '@justeat/f-tabs';
 import '@justeat/f-tabs/dist/f-tabs.css';
+import '@justeat/f-media-element/dist/f-media-element.css';
+import '@justeat/f-card/dist/f-card.css';
 import tenantConfigs from '../tenants';
 import loyalty from '../store/loyalty.module';
 import { ACTION_INITIALISE_LOYALTY, VUEX_MODULE_NAMESPACE_LOYALTY } from '../store/types';
