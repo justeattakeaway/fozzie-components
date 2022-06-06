@@ -11,8 +11,8 @@ class Page {
         this.path = '';
     }
 
-    load (component) {
-        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+    load (component, queries) {
+        const pageUrl = buildUrl(this.componentType, this.componentName, this.composePath(queries));
         this.open(pageUrl);
         this.waitForComponent(component);
     }
@@ -26,9 +26,12 @@ class Page {
         component.waitForExist({ timeout: timeoutMs });
     }
 
-    withQuery (name, value) {
-        this.path += `&${name}=${value}`;
-        return this;
+    composePath (queries) {
+        if (!queries) { return ''; }
+
+        return `&args=${Object.keys(queries)
+        .map(name => `${name}:${queries[name]}`)
+        .join(';')}`;
     }
 
     /**
