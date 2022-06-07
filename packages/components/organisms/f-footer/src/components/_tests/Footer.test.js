@@ -50,11 +50,11 @@ describe('Footer', () => {
         expect(wrapper.attributes('data-theme')).toBe('ml');
     });
 
-    it('should render je themed component if NO local passed', () => {
+    it('should render je themed component if IE local passed', () => {
         // Arrange & Act
         propsData = {
             ...propsData,
-            locale: 'nb-NO'
+            locale: 'en-IE'
         };
 
         const wrapper = shallowMount(Footer, { propsData });
