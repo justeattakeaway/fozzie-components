@@ -2,28 +2,37 @@
 
 # Fozzie & Sass
 
-Fozzie is Just Eat's UI Component Framework, built to help modularise and share the UI code we write across all of our teams at Just Eat.
+Fozzie is a UI Component Framework used in JET by the legacy Just Eat (L-JE) Web Application teams, built to help modularise and share the UI code we write.
 
-<a name="scheme"></a><h2 class="sg-sectionHeading">Prerequisites</h2>
+Fozzie is made up of two main parts:
 
-Before you get started with fozzie there's a few things you need to know to get up and running. If you are coming to fozzie from an older version of fozzie i.e v8 and older then this migration [guide](www.google.co.uk) will help you migrate to the latest version. Once you have migrated you can come back here and read what's new.
+- An [SCSS Helper Library](https://github.com/justeat/fozzie) that helps ensure web projects across JET have access to a set of baseline SCSS variables, mixins and functions.
+- The [fozzie-components component mono-repo](https://github.com/justeat/fozzie-components) – a component library of shared Vue components, built to adhere to JET's global design language, PIE.
 
-Consuming application must have the following in-order to run fozzie version 9 and above:
+This documentation relates specifically to the Fozzie SCSS Helper Library and how to use it as part of your web project.
 
-1. [webpack](https://webpack.js.org/)
-    - For file resolution paths. If you aren't using webpack then you can use something like [ParcelJs](https://parceljs.org/) instead.
-2. [dart-sass](https://sass-lang.com/dart-sass):
-    - To compile your Sass, required for the new syntax (`@use` & `@forward`) used in version 9 of fozzie. The [sass](https://www.npmjs.com/package/sass) module uses dart-sass by default now, so if you use the latest version of this module, you'll be fine.
+<a name="scheme"></a><h2>Prerequisites</h2>
 
-<a name="scheme"></a><h2 class="sg-sectionHeading">Importing Fozzie</h2>
+Before you get started with the Fozzie SCSS helper library there are a few things you need to know in order to get up and running.
 
-Fozzie SCSS styles uses webpack to resolve file path names, rather than having to provide absolute paths into the node_modules folder. If you don't have webpack running you can use other tools like [ParcelJs](https://parceljs.org/) see migration [guide](www.google.co.uk) for more information.
+From v9 and above, you'll need the following:
+
+1. [dart-sass](https://sass-lang.com/dart-sass):
+    - Fozzie makes use of new SCSS syntax to compile your Sass (namely `@use` & `@forward`). The [sass](https://www.npmjs.com/package/sass) module now uses dart-sass by default, so if you use the latest version of this module, you'll be fine.
+2. [webpack](https://webpack.js.org/) (or a similar file bundler)
+    - For file resolution paths into the `node_modules` folder. If you aren't using Webpack, then you can use something like [ParcelJs](https://parceljs.org/) instead, which also supports this.
+
+If you are upgrading from an older version of fozzie – i.e v8 and older – then this [migration guide](www.google.co.uk) will help you update to the latest version. As this documentation relates to v9+, follow that guide before coming back here and reading what's new.
+
+<a name="scheme"></a><h2>Importing Fozzie</h2>
+
+Fozzie uses webpack to resolve file path names, rather than having to provide absolute paths into the `node_modules` folder. If you don't have webpack running, you can use other tools like [ParcelJs](https://parceljs.org/). See the [migration guide](www.google.co.uk) for more information.
 
 ### How to add and use fozzie within your project
 
-For example, say you have a project and want to include the base fozzie module in your Sass build, you can do the following:
+If you would like to include the base fozzie SCSS module into your project, you can do the following:
 
-1. Install the base module using NPM or Yarn.
+1. Install the fozzie SCSS helper module using NPM or Yarn.
 
 ```
 // Yarn example
@@ -31,7 +40,7 @@ For example, say you have a project and want to include the base fozzie module i
 yarn add @justeat/fozzie
 ```
 
-2. Within your project Sass files, you will then be able to import and use the base fozzie module like so:
+2. Within your project’s Sass files, you will then be able to import and use the base fozzie module like so:
 
 ```
 // Basic usage
@@ -39,12 +48,14 @@ yarn add @justeat/fozzie
 @use 'fozzie';
 
 .c-breadcrumbs {
-  @include fozzie.breadcrumbs();
-  background-color: fozzie.$color-blue;
+  background-color: fozzie.$color-container-subtle;
+  border-radius: fozzie.$radius-rounded-a;
 }
 ```
 
-3. A module’s namespace is just the last component of its URL without a file extension. So in the previous example you can see that `@use 'fozzie'` will be namespaced to `fozzie`, this happens by default. You can however choose to give a custom namespace with `@use` statements like so:
+3. A module’s namespace is just the last section of its URL without a file extension.
+
+   So in the previous example you can see that `@use 'fozzie'` will be namespaced to `fozzie`. You can however choose to define a custom namespace with `@use` statements like so:
 
 ```
 // Namespacing usage
@@ -52,8 +63,8 @@ yarn add @justeat/fozzie
 @use 'fozzie' as f;
 
 .c-breadcrumbs {
-  @include f.breadcrumbs();
-  background-color: f.$color-blue;
+  background-color: f.$color-container-subtle;
+  border-radius: f.$radius-rounded-a;
 }
 ```
 
@@ -61,7 +72,7 @@ yarn add @justeat/fozzie
 
 When your Sass is compiled, it will include the Sass from the fozzie module as well.
 
-<a name="scheme"></a><h2 class="sg-sectionHeading">Referencing fozzie helpers</h2>
+<a name="scheme"></a><h2>Referencing fozzie helpers</h2>
 
 This section will demonstrate how to use useful features within fozzie inside your consuming application.
 

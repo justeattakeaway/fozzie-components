@@ -8,7 +8,7 @@ To ensure our naming is consistent we use a naming scheme based on the [SUIT met
 
 Using a naming scheme helps clarify the intent of the author as well as defining the relationships between classes.  It also makes it much easier to distinguish which classes should be used solely for state, layout or as a utility helper.
 
-<a name="scheme"></a><h2 class="sg-sectionHeading">Our Naming Scheme</h2>
+<a name="scheme"></a><h2>Our Naming Scheme</h2>
 
 ```scss
 /* We use a number of class prefixes to categorise our CSS classnames */
@@ -48,15 +48,7 @@ Using a naming scheme helps clarify the intent of the author as well as defining
     ...
 }
 
-/*
- *  Grid classes prefixed: .g-
- *  Any classes that help define our design grid.  i.e. .g-col
- */
-.g-col {
-    ...
-}
-
-/* Descriptors in a classname use camel-case if more than one word: e.g. mySelectorComponent */
+/* Descriptors in a classname use camel-case if more than one word: e.g. myComponentName */
 .c-myComponentName {
     ...
 }
@@ -77,11 +69,11 @@ Using a naming scheme helps clarify the intent of the author as well as defining
 ```
 
 
-<a name="modifiers"></a><h2 class="sg-sectionHeading">Modifier Classes</h2>
+<a name="modifiers"></a><h2>Modifier Classes</h2>
 
 Modifier classes are used to show when an object or component class is being modified slightly.  Think of them as helping to define one or more extensions to your component.
 
-A typical example is when defining buttons.  Usually all buttons share common styles, that are defined using the `o-btn` class.  However, buttons usually have various design treatments – some may have a different background colour and font-size, others may have rounded corners.
+A typical example is when defining buttons.  Usually all buttons share common styles, that are defined using the `o-btn` class.  However, buttons usually have various design treatments – some may have a different background colour and font-size, others may have different border styles.
 
 To define these different button styles we can use modifiers, allowing us to use the base `o-btn` class alongside a modifier that will extend those base styles.
 
@@ -106,7 +98,7 @@ To define these different button styles we can use modifiers, allowing us to use
 ```
 
 
-<a name="state"></a><h2 class="sg-sectionHeading">State Classes</h2>
+<a name="state"></a><h2>State Classes</h2>
 
 We use the `is-` or `has-` prefixes to indicate state that changes via JavaScript.
 
@@ -120,7 +112,7 @@ Usually this is caused by an action performed by the user, but could also come f
 ```
 
 
-<a name="variables"></a><h2 class="sg-sectionHeading">Sass Variables</h2>
+<a name="variables"></a><h2>Sass Variables</h2>
 
 When defining Sass variables, we use dashes in the same way as in our overall class naming scheme.
 
