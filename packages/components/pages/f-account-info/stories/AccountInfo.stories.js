@@ -32,16 +32,17 @@ export const AccountInfoComponent = (args, { argTypes }) => ({
             fAccountInfoModule
         }
     }),
-    template:
-    `<account-info
-        :locale="locale"
-        authToken="some-auth-token"
-        :isAuthFinished="true"
-        smart-gateway-base-url=""
-    />`
+    template: '<account-info v-bind="$props" />'
 });
 
 AccountInfoComponent.storyName = 'f-account-info';
+
+AccountInfoComponent.args = {
+    loginPath: '/account/login',
+    authToken: 'some-auth-token',
+    isAuthFinished: true,
+    smartGatewayBaseUrl: ''
+};
 
 AccountInfoComponent.argTypes = {
     locale: {

@@ -369,21 +369,11 @@ export default {
             try {
                 await this.loadConsumerDetails({ api: this.consumerApi, authToken: this.authToken });
                 this.$log.info('Consumer details fetched successfully', standardLogTags);
-                // debug
-                let err;
-                if (window.location.search === '?debug') {
-                    err = new Error('DEBUG - 403 error');
-                    err.response = {
-                        status: 403
-                    };
-                    throw err;
-                }
-                // debug
             } catch (error) {
                 if (error && error.response && this.loginPath && error.response.status === 403) {
                     // Redirect to login page if the user is not authenticated then return here once logged in.
                     this.$log.warn('Unauthenticated fetching consumer details', error, standardLogTags);
-                    this.$router.push(`${this.loginPath}?returnurl=${window.location.pathname}`);
+                    this.redirectToLogin();
                 } else {
                     this.$log.error('Error fetching consumer details', error, standardLogTags);
                     this.handleLoadErrorState(error);
@@ -468,6 +458,16 @@ export default {
                     label: 'address change intent'
                 });
             }
+        },
+
+        /**
+        * Redirect to an external login page
+        * (check/tidy up the login path due to unknown source)
+        */
+        redirectToLogin () {
+            const login = this.loginPath.trim();
+            const path = `${login.charAt(0) === '/' ? login : `/${login}`}`;
+            window.location.href = `${path}?returnurl=${window.location.pathname}`;
         }
     }
 };
