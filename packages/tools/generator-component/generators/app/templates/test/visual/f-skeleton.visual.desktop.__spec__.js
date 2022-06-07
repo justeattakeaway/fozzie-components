@@ -3,12 +3,12 @@ const <%= name.filename %> = require('../../test-utils/component-objects/f-<%= n
 const <%= name.class %> = new <%= name.filename %>();
 
 describe('f-<%= name.default %> Desktop visual tests', () => {
-    beforeEach(() => {
-        <%= name.class %>.load();
+    beforeEach(async () => {
+        await <%= name.class %>.load();
     });
 
-    it('should display the f-<%= name.default %> component', () => {
+    it('should display the f-<%= name.default %> component', async () => {
         // Assert
-        expect(<%= name.class %>.isComponentDisplayed()).toBe(true);
+        await expect(await <%= name.class %>.isComponentDisplayed()).toBe(true);
     });
 });
