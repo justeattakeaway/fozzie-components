@@ -9,7 +9,7 @@ v4.12.0
 *Jun 7, 2022*
 
 ### Changed
-- Swapped CaretIcon with Fixed up CaretDownFilledIcon via @justeattakeaway/pie-icons-vue
+- Swapped CaretIcon with CaretDownFilledIcon via @justeattakeaway/pie-icons-vue
 
 
 v4.11.0
