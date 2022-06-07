@@ -78,3 +78,78 @@ This section will demonstrate how to use useful features within fozzie inside yo
 
 ### How to use Pie Design Tokens
 
+### 1. Mixins
+
+If you want to use a mixin from within fozzie you can include them by referencing the namespace you have given the fozzie module followed by the mixin you would like to use. Below are some examples:
+
+#### Default module usage:
+
+```
+// Importing a mixin via the file namespace.
+
+@use 'fozzie';
+
+.c-breadcrumbs {
+  @include fozzie.bordered();
+}
+```
+
+#### Namespaced module usage:
+
+```
+// Importing a mixin via a custom namespace.
+
+@use 'fozzie' as f;
+
+.c-breadcrumbs {
+  @include f.bordered();
+}
+```
+
+### 2. Media Queries
+
+As is considered best practice, we develop with a mobile-first approach to our projects.
+
+We use a Sass library called [@include-media](https://github.com/eduardoboucas/include-media) to write our media queries. This provides an elegant way to define our media queries, hooking into the [breakpoint map](https://github.com/justeat/fozzie/blob/8a1094ae5a467e9e2afd86a4aab62f9ea65b1bee/src/scss/settings/_variables.scss#L65-L72) defined in fozzie's variables.
+
+When using these mixins, the easiest way to write your media queries is to specify the breakpoint name; the @include-media library will then convert this into a media query with a value in ems to provide a more consistent experience for users that use text zoom.
+
+```
+/**
+ * Using @include-media you can specify breakpoints
+ * using the map keys defined in Fozzie's [breakpoint map](https://github.com/justeat/fozzie/blob/8a1094ae5a467e9e2afd86a4aab62f9ea65b1bee/src/scss/settings/_variables.scss#L65-L72)
+ */
+
+@TODO
+```
+
+### 3. Pie Design Tokens
+
+To use our Pie Design Tokens within your project:
+
+```
+@use 'fozzie' as f;
+
+.c-breadcrumbs {
+  background-color: f.$color-blue;
+  padding: f.$spacing-a;
+}
+```
+
+### 3. Font size
+
+```
+@use 'fozzie' as f;
+
+.c-breadcrumbs {
+  @include f.font-size();
+}
+
+/**
+ * Full set of keys defined in Fozzie's [variables](https://github.com/justeat/fozzie/blob/master/src/scss/settings/_variables.scss#L16)
+ */
+.c-breadcrumbs {
+  @include f.font-size('body-l');
+}
+```
+
