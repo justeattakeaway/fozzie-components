@@ -24,20 +24,20 @@
                 :value="option.value">{{ option.text }}</option>
         </select>
 
-        <caret-icon
+        <caret-down-filled-icon
             :class="$style['c-formDropdown-icon']"
             :data-test-id="testId.icon" />
     </div>
 </template>
 
 <script>
-import { CaretIcon } from '@justeat/f-vue-icons';
+import { CaretDownFilledIcon } from '@justeattakeaway/pie-icons-vue';
 
 export default {
     name: 'FormDropdown',
 
     components: {
-        CaretIcon
+        CaretDownFilledIcon
     },
 
     inheritAttrs: false,
@@ -99,7 +99,6 @@ $form-dropdown-iconIndent--large              : 25px;
     width: spacing(c);
     position: absolute;
     right: spacing(e);
-    transform: rotate(180deg);
     pointer-events: none;
 
     path {
