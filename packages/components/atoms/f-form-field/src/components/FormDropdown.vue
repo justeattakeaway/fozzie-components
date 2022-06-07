@@ -99,7 +99,6 @@ $form-dropdown-iconIndent--large              : 25px;
     width: spacing(c);
     position: absolute;
     right: spacing(e);
-    transform: rotate(180deg);
     pointer-events: none;
 
     path {
