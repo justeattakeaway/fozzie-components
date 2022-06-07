@@ -2,21 +2,17 @@ import VueFooter from '../src/components/Footer.vue';
 import gbContent from '../data/en-GB.json';
 import esContent from '../data/es-ES.json';
 import itContent from '../data/it-IT.json';
-import noContent from '../data/nb-NO.json';
-import dkContent from '../data/da-DK.json';
 import auContent from '../data/en-AU.json';
 import nzContent from '../data/en-NZ.json';
 import ieContent from '../data/en-IE.json';
 
 const contents = {
-    'da-DK': dkContent,
     'en-AU': auContent,
     'en-GB': gbContent,
     'en-IE': ieContent,
     'en-NZ': nzContent,
     'es-ES': esContent,
-    'it-IT': itContent,
-    'nb-NO': noContent
+    'it-IT': itContent
 };
 
 export default {
@@ -69,7 +65,7 @@ FooterComponent.argTypes = {
     locale: {
         control: { type: 'select' },
         description: 'Select a tenant',
-        options: ['en-GB', 'en-AU', 'da-DK', 'en-IE', 'en-NZ', 'es-ES', 'it-IT', 'nb-NO']
+        options: ['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'es-ES', 'it-IT']
     },
 
     showCourierLinks: {
