@@ -342,15 +342,6 @@ export default {
 
         shouldShowLabel () {
             return this.shouldShowLabelText && !this.isSelectionControl;
-        },
-
-        formFieldProps () {
-            return {
-                id: this.uniqueId,
-                attributes: this.$attrs,
-                ...(this.isRequired ? { 'aria-required': true } : {}),
-                ...this.$props
-            };
         }
     },
 
@@ -374,7 +365,6 @@ export default {
 
     methods: {
         updateValue (event) {
-            console.log('u', event);
             this.$emit('input', event.target.value);
         },
 

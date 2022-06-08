@@ -16,8 +16,8 @@ export const DropdownDefaultComponent = (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     template:
         `<form-field
-        ${sharedFieldProperties}
-        :label-text="labelText"
+            ${sharedFieldProperties}
+            :label-text="labelText"
             :label-description="labelDescription"
             :label-details="labelDetails"
             :field-size="fieldSize"
