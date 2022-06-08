@@ -10,11 +10,11 @@ module.exports = class <%= name.filename %> extends Page {
         return $(COMPONENT);
     }
 
-    async waitForComponent () {
+    waitForComponent () {
         super.waitForComponent(this.component);
     }
 
-    async isComponentDisplayed () {
+    isComponentDisplayed () {
         return this.component.isDisplayed();
     }
 };
