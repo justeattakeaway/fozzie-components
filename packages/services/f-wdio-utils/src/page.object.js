@@ -2,12 +2,11 @@ const { source } = require('axe-core');
 const { buildUrl } = require('./storybook-extensions');
 
 class Page {
-    #defaultWaitTimeout = 500;
-
-    constructor (componentType, componentName) {
+    constructor (componentType, componentName, componentTag = 'data-test-id') {
         this.title = 'Component URLS';
         this.componentType = componentType;
         this.componentName = componentName;
+        this.componentTag = componentTag;
         this.path = '';
     }
 
@@ -22,7 +21,7 @@ class Page {
         return this;
     }
 
-    waitForComponent (component, timeoutMs = this.#defaultWaitTimeout) {
+    waitForComponent (component, timeoutMs = 500) {
         component.waitForExist({ timeout: timeoutMs });
     }
 
