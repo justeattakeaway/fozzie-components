@@ -2,7 +2,7 @@
     <div
         v-if="items && items.length"
         :class="$style['c-promotionsShowcase']"
-        data-test-id="promotionsShowcase">
+        data-test-id="promotions-showcase-component">
         <div
             :class="$style['c-promotionsShowcase-inner']">
             <component
