@@ -3,8 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (add to next release)
+v5.1.1
 ------------------------------
+*Jun 8, 2022*
+
+### Changed
+- Bumped wdio version and fixed breaking changes.
+
 *May 26, 2021*
 
 ### Changed
