@@ -1,6 +1,6 @@
 <template>
     <div
-        data-test-id="tabs-component"
+        data-test-id="vue-tabs-component"
         :class="$style['c-tabs']">
         <div :class="$style['c-tabs-header']">
             <div :class="$style['c-tabs-buttons']">

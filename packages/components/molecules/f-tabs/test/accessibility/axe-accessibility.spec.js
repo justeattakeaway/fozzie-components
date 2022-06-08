@@ -5,8 +5,8 @@ const Tabs = require('../../test-utils/component-objects/f-tabs.component');
 const tabs = new Tabs();
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        tabs.load();
+    beforeEach(async () => {
+        await tabs.load();
     });
     it('a11y - should test f-tabs component WCAG compliance', () => {
         // Act
