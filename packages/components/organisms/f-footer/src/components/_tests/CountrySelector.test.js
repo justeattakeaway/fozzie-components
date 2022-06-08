@@ -10,16 +10,16 @@ describe('CountrySelector', () => {
         siteUrl;
 
     beforeEach(() => {
-        localisedName = 'Denmark';
-        siteUrl = 'https://www.just-eat.dk';
-        lang = 'da-DK';
+        localisedName = 'Ireland';
+        siteUrl = 'https://www.just-eat.ie';
+        lang = 'en-IE';
 
         const propsData = {
             currentCountryName: 'United Kingdom',
             currentCountryKey: 'gb',
             countries: [
                 {
-                    key: 'dk',
+                    key: 'en',
                     lang,
                     localisedName,
                     siteUrl
