@@ -1,11 +1,10 @@
 const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
 const Alert = require('../../test-utils/component-objects/f-alert.component');
 
-let alert;
+const alert = new Alert();
 
 describe('Accessibility tests', () => {
     beforeEach(async () => {
-        alert = new Alert();
         await alert.load();
     });
 

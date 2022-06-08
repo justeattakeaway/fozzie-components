@@ -1,14 +1,12 @@
 const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
 const Breadcrumbs = require('../../test-utils/component-objects/f-breadcrumbs.component');
 
-let breadcrumbs;
+const breadcrumbs = new Breadcrumbs();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        breadcrumbs = new Breadcrumbs();
         breadcrumbs.load();
     });
-
     it('a11y - should test f-breadcrumbs component WCAG compliance', () => {
         // Act
         const axeResults = getAxeResults('f-breadcrumbs');

@@ -1,19 +1,14 @@
 const CardWithContent = require('../../test-utils/component-objects/f-card-with-content.component');
 
-let cardWithContent;
+const cardWithContent = new CardWithContent();
 
 describe('f-card-with-content component tests', () => {
     beforeEach(async () => {
-        // Arrange
-        cardWithContent = new CardWithContent();
+        await cardWithContent.load();
     });
 
     it('should display the f-card-with-content component', async () => {
-        // Act
-        await cardWithContent.load();
-        const result = await cardWithContent.isComponentDisplayed();
-
         // Assert
-        await expect(result).toBe(true);
+        await expect(await cardWithContent.isComponentDisplayed()).toBe(true);
     });
 });

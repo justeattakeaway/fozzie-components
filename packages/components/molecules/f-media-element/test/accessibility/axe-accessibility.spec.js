@@ -2,16 +2,15 @@ const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
 
 const MediaElement = require('../../test-utils/component-objects/f-media-element.component');
 
-let mediaElement;
+const mediaElement = new MediaElement();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        mediaElement = new MediaElement();
+        mediaElement.load();
     });
 
     it('a11y - should test f-media-element component WCAG compliance', () => {
         // Act
-        mediaElement.load();
         const axeResults = getAxeResults('f-media-element');
 
         // Assert

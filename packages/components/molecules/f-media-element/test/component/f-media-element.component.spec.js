@@ -1,18 +1,14 @@
 const MediaElement = require('../../test-utils/component-objects/f-media-element.component');
 
-let mediaElement;
+const mediaElement = new MediaElement();
 
 describe('f-media-element component tests', () => {
     beforeEach(async () => {
-        mediaElement = new MediaElement();
+        await mediaElement.load();
     });
 
     it('should display the f-media-element component', async () => {
-        // Arrange
-        await mediaElement.load();
-        const result = await mediaElement.isComponentDisplayed();
-
         // Assert
-        await expect(result).toBe(true);
+        await expect(await mediaElement.isComponentDisplayed()).toBe(true);
     });
 });
