@@ -5,8 +5,8 @@ const Searchbox = require('../../test-utils/component-objects/f-searchbox.compon
 const searchbox = new Searchbox();
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        searchbox.load();
+    beforeEach(async () => {
+        await searchbox.load();
     });
     it('a11y - should test f-searchbox component WCAG compliance', () => {
         // Act
