@@ -47,6 +47,7 @@ const propsData = {
         }
     ]
 };
+const componentTag = "[data-test-id='navigation-links-component']";
 
 describe('NavigationLinks', () => {
     it('should be defined', () => {
@@ -70,7 +71,7 @@ describe('NavigationLinks', () => {
         const wrapper = shallowMount(NavigationLinks, { propsData });
 
         // Act
-        const links = wrapper.find('[data-test-id="navigationLinks"]');
+        const links = wrapper.find(componentTag);
 
         // Assert
         expect(links).toMatchSnapshot();
@@ -159,7 +160,7 @@ describe('NavigationLinks', () => {
         });
 
         // Act
-        const links = wrapper.find('[data-test-id="navigationLinks"]');
+        const links = wrapper.find(componentTag);
         const link = wrapper.find('[data-test-id="link1"]');
 
         // Assert
@@ -172,7 +173,7 @@ describe('NavigationLinks', () => {
         const wrapper = shallowMount(NavigationLinks);
 
         // Act
-        const links = wrapper.find('[data-test-id="navigationLinks"]');
+        const links = wrapper.find(componentTag);
 
         // Assert
         expect(links.attributes('aria-label')).toBe('navigation');

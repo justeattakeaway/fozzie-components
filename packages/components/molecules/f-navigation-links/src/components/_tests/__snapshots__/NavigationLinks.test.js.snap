@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NavigationLinks should display the list elements correctly for each \`link\` supplied 1`] = `
-<nav aria-label="navigation" data-test-id="navigationLinks">
+<nav aria-label="navigation" data-test-id="navigation-links-component">
   <ul class="c-navigationLinks">
     <li class="c-navigationLinks-item">
       <v-link-stub data-test-id="link1" link-class="c-navigationLinks-link" to="/account/info">

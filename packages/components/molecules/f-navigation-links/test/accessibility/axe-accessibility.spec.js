@@ -5,10 +5,10 @@ const NavigationLinks = require('../../test-utils/component-objects/f-navigation
 let navigationLinks;
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         navigationLinks = new NavigationLinks();
 
-        navigationLinks.load();
+        await navigationLinks.load();
     });
 
     it('a11y - should test f-navigation-links component WCAG compliance', () => {
