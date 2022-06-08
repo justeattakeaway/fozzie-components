@@ -32,5 +32,18 @@ export default {
         control: { type: 'text' },
         description: 'Enter assistive text',
         defaultValue: ''
+    },
+    isRequired: {
+        control: { type: 'boolean' },
+        description: 'Is field value required',
+        defaultValue: true
     }
 };
+
+export const sharedFieldProperties = `
+    :locale="locale"
+    :should-show-label-text="shouldShowLabelText"
+    :is-required="isRequired"
+    :disabled="isDisabled"
+    :has-error="hasError"
+`;

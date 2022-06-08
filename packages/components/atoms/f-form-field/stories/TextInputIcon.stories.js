@@ -1,7 +1,7 @@
 import { withA11y } from '@storybook/addon-a11y';
 import { NutsIcon, DriverCarIcon } from '@justeattakeaway/pie-icons-vue';
 import FormField from '../src/components/FormField.vue';
-import SharedArgTypes from './SharedArgTypes';
+import SharedArgTypes, { sharedFieldProperties } from './SharedArgTypes';
 
 export default {
     title: 'Components/Atoms/f-form-field',
@@ -18,39 +18,30 @@ export const TextInputIconComponent = (args, { argTypes }) => ({
     template: `
     <div class="wrapper--vertical">
         <form-field
-            :locale="locale"
+            ${sharedFieldProperties}
             label-text="Text input - Left Icon"
-            :should-show-label-text="shouldShowLabelText"
             input-type="text"
-            :disabled="isDisabled"
-            field-size="small"
-            :has-error="hasError">
+            field-size="small">
                 <template v-slot:icon-leading>
                     <NutsIcon />
                 </template>
         </form-field>
 
         <form-field
-        :locale="locale"
+            ${sharedFieldProperties}
             label-text="Text input - Right Icon"
-            :should-show-label-text="shouldShowLabelText"
             input-type="text"
-            field-size="medium"
-            :disabled="isDisabled"
-            :has-error="hasError">
+            field-size="medium">
                 <template v-slot:icon-trailing>
                     <DriverCarIcon />
                 </template>
         </form-field>
 
         <form-field
-            :locale="locale"
+            ${sharedFieldProperties}
             label-text="Text input - Both Icons"
-            :should-show-label-text="shouldShowLabelText"
             input-type="text"
-            :disabled="isDisabled"
-            field-size="large"
-            :has-error="hasError">
+            field-size="large">
                 <template v-slot:icon-leading>
                     <NutsIcon />
                 </template>

@@ -1,6 +1,6 @@
 import { withA11y } from '@storybook/addon-a11y';
 import FormField from '../src/components/FormField.vue';
-import SharedArgTypes from './SharedArgTypes';
+import SharedArgTypes, { sharedFieldProperties } from './SharedArgTypes';
 import {
     DEFAULT_FIELD_SIZE,
     VALID_FIELD_SIZES
@@ -16,17 +16,14 @@ export const DropdownDefaultComponent = (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     template:
         `<form-field
-            :locale="locale"
-            :label-text="labelText"
+        ${sharedFieldProperties}
+        :label-text="labelText"
             :label-description="labelDescription"
             :label-details="labelDetails"
             :field-size="fieldSize"
             input-type="dropdown"
-            :should-show-label-text="shouldShowLabelText"            
-            :has-error="hasError"
             :dropdown-options="dropdownOptions"
             :is-grouped="isGrouped"
-            :disabled="isDisabled"
             :placeholder="placeholder"
             maxlength="200"
             :assistive-text="assistiveText"

@@ -16,6 +16,7 @@
             :disabled="attributes.disabled"
             v-bind="attributes"
             :value="value"
+            :aria-required="isRequired"
             :data-test-id="testId.input"
             @change="updateInput">
 

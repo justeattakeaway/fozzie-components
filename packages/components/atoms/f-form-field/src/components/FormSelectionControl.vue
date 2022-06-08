@@ -8,6 +8,7 @@
             :type="inputType"
             :value="value"
             :data-test-id="testId.input"
+            :aria-required="isRequired"
             :class="[
                 $style['c-formField-field'],
                 $style['c-formField-field--noFocus'],
@@ -22,6 +23,7 @@
             :id="`label-${$attrs.id}`"
             data-test-id="selection-control-form-label"
             :label-for="$attrs.id"
+            :is-required="isRequired"
             :label-description="$attrs.labelDescription"
         >
             {{ labelText }}
@@ -64,6 +66,10 @@ export default {
         hasError: {
             type: Boolean,
             default: false
+        },
+        isRequired: {
+            type: Boolean,
+            default: true
         }
     },
 

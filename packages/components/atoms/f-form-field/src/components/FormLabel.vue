@@ -20,6 +20,10 @@
         <slot />
 
         <span
+            v-if="isRequired"
+            aria-hidden="true">*</span>
+
+        <span
             v-if="labelDescription"
             :data-test-id="testId.description"
             :class="[
@@ -55,6 +59,10 @@ export default {
         labelDescription: {
             type: String,
             default: null
+        },
+        isRequired: {
+            type: Boolean,
+            default: true
         }
     },
     computed: {
