@@ -1,9 +1,7 @@
 <template>
     <div :class="$style['c-loyaltyHeader']">
         <div :class="$style['c-loyaltyHeader-container']">
-            <bread-crumbs
-                :links="links"
-                has-background />
+            <bread-crumbs :links="links" />
             <media-element
                 :class="$style['c-loyaltyHeader-media']"
                 :text-size="getFontSizeBasedOnScreenSize"

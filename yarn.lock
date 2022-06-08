@@ -2308,13 +2308,6 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
-"@justeat/f-breadcrumbs@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-breadcrumbs/-/f-breadcrumbs-3.1.0.tgz#781a42a3bc751843f0a5fe044f99e870051ec6ce"
-  integrity sha512-huuArWprswwQUaU6fdvxnx2X/VYU7Vp7HcjUANKjH/nY+UAJI5W6h/V5caABx/KcWgdKE7jZlgzlQ1cTZOpcLA==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-
 "@justeat/f-button@3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.0.2.tgz#9560d0caf56ae0801208ddd0c27cb50d670d54a8"
@@ -2393,14 +2386,6 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
     "@justeat/f-vue-icons" "2.5.0"
-
-"@justeat/f-form-field@4.11.0":
-  version "4.11.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.11.0.tgz#d70fe29f8338326b8e0a97e106979d76ee60298b"
-  integrity sha512-1WZdIY9SuvOJc5kxhVD/PFLdospeanXwMi9KwS0k5TRQ2iwDKt9K1PQRFxAEuG+PSZ890lKLKXWtCDxO6AobJA==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeattakeaway/pie-icons-vue" "1.0.0"
 
 "@justeat/f-form-field@4.5.0":
   version "4.5.0"
@@ -2571,13 +2556,6 @@
   dependencies:
     lodash-es "4.17.15"
     window-or-global "1.0.1"
-
-"@justeat/f-tabs@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-tabs/-/f-tabs-2.0.0.tgz#6fc0b67edb2fee754c8d35a8c683989b0239adad"
-  integrity sha512-m8bd7HgrrwL2iS7Gb6pVcZacz9ESrfNKOjytQSFPtV/j0p//Siai2ICp06CW7KFdjkh5z06q8mLmcEKXZh6l0A==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
 
 "@justeat/f-trak@0.7.1":
   version "0.7.1"
