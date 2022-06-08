@@ -2,7 +2,7 @@
     <card-component
         has-outline
         is-page-content-wrapper
-        data-test-id="cardWithContent"
+        data-test-id="card-with-content-component"
         :class="$style['c-cardWithContent']">
         <div
             v-if="$slots.icon"

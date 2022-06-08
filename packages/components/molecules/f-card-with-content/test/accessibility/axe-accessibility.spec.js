@@ -2,15 +2,17 @@ import { getAxeResults } from '../../../../../../test/utils/axe-helper'; // esli
 
 const CardWithContent = require('../../test-utils/component-objects/f-card-with-content.component');
 
-const cardWithContent = new CardWithContent();
+let cardWithContent;
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        cardWithContent.load();
+        // Arrange
+        cardWithContent = new CardWithContent();
     });
 
     it('a11y - should test f-card-with-content component WCAG compliance', () => {
         // Act
+        cardWithContent.load();
         const axeResults = getAxeResults('f-card-with-content');
 
         // Assert

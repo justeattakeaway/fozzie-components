@@ -3,9 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (add to next release)
+
+v1.1.1
 ------------------------------
-*May 26, 2021*
+*Jun 8, 2022*
+
+### Changed
+- Bumped wdio version and fixed breaking changes.
+
+*May 26, 2022*
 
 ### Changed
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
@@ -13,7 +19,7 @@ Latest (add to next release)
 
 v1.1.0
 ------------------------------
-*February 2, 2021*
+*February 2, 2022*
 
 ### Changed
 - `f-button` & `f-card` version.

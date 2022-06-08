@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-card-with-content",
   "description": "Fozzie Card With Content - A page content card which can contain an image, heading, text, and (primary and secondary) buttons",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "dist/f-card-with-content.umd.min.js",
   "maxBundleSize": "15kB",
   "files": [
@@ -57,7 +57,7 @@
     "@justeat/f-button": "3.3.0",
     "@justeat/f-card": "3.6.0",
     "@justeat/f-vue-icons": "3.0.0",
-    "@justeat/f-wdio-utils": "0.5.0",
+    "@justeat/f-wdio-utils": "0.11.0",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3"
