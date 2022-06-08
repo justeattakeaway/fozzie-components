@@ -1,7 +1,7 @@
 
 <template>
     <div
-        data-test-id="skeletonLoader"
+        data-test-id="skeleton-loader-component"
         :class="$style['c-skeleton-loader']">
         <component
             :is="skeletonType" />
