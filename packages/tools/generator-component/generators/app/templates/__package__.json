@@ -38,7 +38,7 @@
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix"<% if(config.isComponent) { %>,
     "lint:style": "stylelint ./src/**/*.{vue,htm,html,css,sss,less,scss}",
-    "lint:style:fix": "yarn lint:style --fix",<% } else { %>,
+    "lint:style:fix": "yarn lint:style --fix"<% } else { %>,
     "test:coverage": "jest test:unit --coverage"<% } %>,
     "test": "vue-cli-service test:unit"<% if(config.isComponent) { %><% if(config.needsComponentTests) { %>,
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js"<% } %>,

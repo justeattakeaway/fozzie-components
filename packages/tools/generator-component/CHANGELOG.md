@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.10.0
+------------------------------
+*June 7, 2022*
+
+### Changed
+- Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
+
+
 v2.9.0
 ------------------------------
 *March 29, 2022*
