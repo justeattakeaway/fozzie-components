@@ -16,6 +16,7 @@
         v-bind="$attrs"
         :aria-live="getAriaLive"
         :aria-busy="isLoading"
+        data-test-attr="jamie"
         v-on="!isLoading && $listeners">
         <template v-if="hasNestedContent">
             <span
