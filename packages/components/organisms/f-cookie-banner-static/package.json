@@ -1,11 +1,11 @@
 {
   "name": "@justeat/f-cookie-banner-static",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fozzie Cookie Banner configuration to compile via vue cli prerender to vanilla js/css",
   "license": "Apache-2.0",
   "scripts": {
-    "build": "yarn install && yarn cache clean --all && yarn gulp"
+    "build": "yarn install && yarn cache clean @justeat/f-cookie-banner && yarn gulp"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
