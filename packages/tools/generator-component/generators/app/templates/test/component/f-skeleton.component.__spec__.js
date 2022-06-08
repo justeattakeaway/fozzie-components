@@ -8,7 +8,10 @@ describe('f-<%= name.default %> component tests', () => {
     });
 
     it('should display the f-<%= name.default %> component', async () => {
+        // Arrange
+        const result = await <%= name.class %>.isComponentDisplayed();
+
         // Assert
-        await expect(await <%= name.class %>.isComponentDisplayed()).toBe(true);
+        expect(result).toBe(true);
     });
 });
