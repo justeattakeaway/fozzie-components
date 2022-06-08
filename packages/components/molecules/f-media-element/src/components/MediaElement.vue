@@ -1,6 +1,6 @@
 <template>
     <div
-        data-test-id="mediaElement-component"
+        data-test-id="media-element-component"
         :class="[
             $style['c-mediaElement'],
             ...flexClasses
