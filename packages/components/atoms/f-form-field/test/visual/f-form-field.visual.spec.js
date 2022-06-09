@@ -43,4 +43,18 @@ describe('f-form-field visual tests', () => {
             await browser.percyScreenshot('f-form-field - Errored State', 'desktop');
         });
     });
+
+    describe('none required state', () => {
+        it('should display all fields in an none required state', async () => {
+            // Arrange
+            formField = await new FormField()
+            .withQuery('args', 'isRequired:false');
+
+            // Act
+            await formField.load(formField.component);
+
+            // Assert
+            await browser.percyScreenshot('f-form-field - None required State', 'desktop');
+        });
+    });
 });

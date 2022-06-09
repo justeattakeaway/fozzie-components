@@ -1,7 +1,7 @@
 import { withA11y } from '@storybook/addon-a11y';
 import { NutsIcon, DriverCarIcon } from '@justeattakeaway/pie-icons-vue';
 import FormField from '../src/components/FormField.vue';
-import SharedArgTypes, { sharedFieldProperties } from './SharedArgTypes';
+import SharedArgTypes, { sharedFieldProperties, sharedArgs } from './SharedArgTypes';
 
 export default {
     title: 'Components/Atoms/f-form-field',
@@ -131,6 +131,8 @@ export const FormFieldComponent = (args, { argTypes }) => ({
 FormFieldComponent.storyName = 'Form Fields';
 
 FormFieldComponent.args = {
+    ...sharedArgs,
+    shouldShowLabelText: true,
     dropdownOptions:  [
         {
             disabled: true,
@@ -154,8 +156,7 @@ FormFieldComponent.argTypes = {
     shouldShowLabelText:
     {
         control: { type: 'boolean' },
-        description: 'Select whether to show label text or not',
-        defaultValue: true
+        description: 'Select whether to show label text or not'
     },
     labelText: { description: 'not available in this story' },
     assistiveText: { description: 'not available in this story' }

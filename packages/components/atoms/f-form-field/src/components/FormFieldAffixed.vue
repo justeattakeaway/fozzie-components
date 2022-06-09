@@ -79,6 +79,11 @@ export default {
         value: {
             type: String,
             default: ''
+        },
+
+        isRequired: {
+            type: Boolean,
+            default: true
         }
     },
 

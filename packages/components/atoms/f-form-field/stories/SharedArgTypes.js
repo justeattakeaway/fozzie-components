@@ -2,42 +2,44 @@ export default {
     locale: {
         control: { type: 'select' },
         options: ['en-GB', 'en-AU'],
-        description: 'Choose a locale',
-        defaultValue: 'en-GB'
+        description: 'Choose a locale'
     },
     labelText:
     {
         control: { type: 'text' },
-        description: 'Enter a label text',
-        defaultValue: 'Label Text'
+        description: 'Enter a label text'
     },
     labelDescription:
     {
         control: { type: 'text' },
-        description: 'Enter a label description',
-        defaultValue: ''
+        description: 'Enter a label description'
     },
     hasError:
     {
         control: { type: 'boolean' },
-        description: 'Select whether has error or not',
-        defaultValue: false
+        description: 'Select whether has error or not'
     },
     isDisabled: {
         control: { type: 'boolean' },
-        description: 'Select whether disabled or not',
-        defaultValue: false
+        description: 'Select whether disabled or not'
     },
     assistiveText: {
         control: { type: 'text' },
-        description: 'Enter assistive text',
-        defaultValue: ''
+        description: 'Enter assistive text'
     },
     isRequired: {
         control: { type: 'boolean' },
-        description: 'Is field value required',
-        defaultValue: true
+        description: 'Is field value required'
     }
+};
+export const sharedArgs = {
+    locale:  'en-GB',
+    labelText: 'Label Text',
+    labelDescription: '',
+    hasError: false,
+    isDisabled:  false,
+    assistiveText: '',
+    isRequired:  true
 };
 
 export const sharedFieldProperties = `
