@@ -4,8 +4,8 @@ const Alert = require('../../test-utils/component-objects/f-alert.component');
 const alert = new Alert();
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        alert.load();
+    beforeEach(async () => {
+        await alert.load();
     });
 
     it('a11y - should test f-alert component WCAG compliance', () => {
