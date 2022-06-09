@@ -35,7 +35,7 @@ module.exports = class Footer extends Page {
 
     async clickIcon (icon) {
         const footerIcon = await $(`[${FOOTER_ICON}${icon}"]`);
-
+        await footerIcon.waitForClickable();
         return footerIcon.click();
     }
 

@@ -1,21 +1,20 @@
 // https://bundlewatch.io/#/getting-started/using-a-config-file
 
 const { execSync } = require('child_process');
-let outputPackages;
+
 
 const getMaxSizeForPackage = packageLocation => {
-
+    // eslint-disable-next-line import/no-dynamic-require,global-require
     const { maxBundleSize } = require(`${packageLocation}/package.json`);
 
     return maxBundleSize;
 };
 
 const getPackageLocations = () => {
+    let outputPackages;
+
     try {
-
-        let command = 'npx lerna ls --json';
-
-        outputPackages = execSync(command);
+        outputPackages = execSync('npx lerna ls --json');
     } catch (error) {
         console.info('No changed packages found.');
         process.exit(0);
@@ -23,11 +22,9 @@ const getPackageLocations = () => {
 
     const packagesArray = JSON.parse(outputPackages.toString());
 
-    const packageLocations = packagesArray.map(package => package.location);
+    const packageLocations = packagesArray.map(p => p.location);
 
-    const filteredPackages = packageLocations.filter(packageLocation => getMaxSizeForPackage(packageLocation) !== undefined);
-
-    return filteredPackages;
+    return packageLocations.filter(packageLocation => getMaxSizeForPackage(packageLocation) !== undefined);
 };
 
 const packagesLocations = getPackageLocations();
@@ -40,6 +37,6 @@ const files = packagesLocations.map(packageLocation => ({
 module.exports = {
     files,
     ci: {
-        "trackBranches": ["master", "main"]
+        trackBranches: ['master', 'main']
     }
 };
