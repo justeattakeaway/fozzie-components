@@ -5,8 +5,8 @@ const CardWithContent = require('../../test-utils/component-objects/f-card-with-
 const cardWithContent = new CardWithContent();
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        cardWithContent.load();
+    beforeEach(async () => {
+        await cardWithContent.load();
     });
 
     it('a11y - should test f-card-with-content component WCAG compliance', () => {
