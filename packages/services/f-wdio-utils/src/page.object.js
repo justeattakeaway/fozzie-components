@@ -2,17 +2,16 @@ const { source } = require('axe-core');
 const { buildUrl } = require('./storybook-extensions');
 
 class Page {
-    #defaultWaitTimeout = 500;
-
-    constructor (componentType, componentName) {
+    constructor (componentType, componentName, componentTag = 'data-test-id') {
         this.title = 'Component URLS';
         this.componentType = componentType;
         this.componentName = componentName;
+        this.componentTag = componentTag;
         this.path = '';
     }
 
-    load (component) {
-        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+    load (component, queries) {
+        const pageUrl = buildUrl(this.componentType, this.componentName, this.composePath(queries));
         this.open(pageUrl);
         this.waitForComponent(component);
     }
@@ -22,13 +21,16 @@ class Page {
         return this;
     }
 
-    waitForComponent (component, timeoutMs = this.#defaultWaitTimeout) {
+    waitForComponent (component, timeoutMs = 500) {
         component.waitForExist({ timeout: timeoutMs });
     }
 
-    withQuery (name, value) {
-        this.path += `&${name}=${value}`;
-        return this;
+    composePath (queries) {
+        if (!queries) { return ''; }
+
+        return `&args=${Object.keys(queries)
+        .map(name => `${name}:${queries[name]}`)
+        .join(';')}`;
     }
 
     /**

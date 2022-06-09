@@ -7,36 +7,37 @@ module.exports = class CookieBanner extends Page {
 
     get component () { return $('[data-test-id="legacyCookieBanner-component"]'); }
 
-    get cookiePolicyLink () { return this.component.$('[data-test-id="cookie-policy-link"]'); }
+    get cookiePolicyLink () { return $('[data-test-id="cookie-policy-link"]'); }
 
     get cookiePolicyLinkHref () { return this.cookiePolicyLink.getAttribute('href'); }
 
-    get closeButton () { return this.component.$('[data-test-id="cookieBanner-close-button"]'); }
+    get closeButton () { return $('[data-test-id="cookieBanner-close-button"]'); }
 
-    load () {
-        this.open('/');
-        browser.deleteCookies();
-        super.load(this.component);
+    async load () {
+        await this.open('/');
+        await browser.deleteCookies();
+        await super.load(this.component);
     }
 
-    open (url) {
-        super.open(url);
+    async open (url) {
+        await super.open(url);
     }
 
-    waitForComponent () {
-        this.component.waitForExist();
+    async waitForComponent () {
+        await this.component.waitForExist();
     }
 
-    isCookieBannerComponentDisplayed () {
+    async isCookieBannerComponentDisplayed () {
         return this.component.isDisplayed();
     }
 
-    clickCookiePolicyLink () {
-        this.cookiePolicyLink.click();
+    async clickCookiePolicyLink () {
+        const cookiePolicyLink = await this.cookiePolicyLink;
+        await cookiePolicyLink.click();
     }
 
-    close () {
-        this.closeButton.click();
+    async close () {
+        await this.closeButton.click();
 
         return this;
     }
