@@ -64,9 +64,9 @@ commands:
           command: |
             if [ "${RUN_ALL}" == "true" ];
             then
-              yarn << parameters.command_name >>
+              yarn << parameters.command_name >> --concurrency=1
             else
-              yarn << parameters.command_name >> --since master...HEAD
+              yarn << parameters.command_name >> --filter=[master] --concurrency=1
             fi
 
   save_cache_dist_directories:
@@ -249,16 +249,16 @@ commands:
             then
               if [ "${RUN_ALL}" == "true" ];
               then
-                yarn ci:test:visual:<< parameters.component_type >>
+                yarn ci:test:visual:<< parameters.component_type >> --concurrency=1
               else
-                yarn ci:test:visual:<< parameters.component_type >> --since master...HEAD
+                yarn ci:test:visual:<< parameters.component_type >> --filter=[master] --concurrency=1
               fi
             else
               echo Skipping visual regression tests because PR is either in draft mode or has wip label applied
             fi
 
   slack_notify_fail:
-    description: Sends a slack notifaction on job failure
+    description: Sends a slack notification on job failure
     steps:
       - slack/notify:
           branch_pattern: master
@@ -375,9 +375,6 @@ jobs:
 
   install:
     executor: node
-    environment:
-      # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
     steps:
       - checkout
       - restore_cache_dist_directories
@@ -402,9 +399,6 @@ jobs:
 
   build:
     executor: node
-    environment:
-      # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
     steps:
       - attach_workspace:
           at: .
@@ -423,9 +417,6 @@ jobs:
 
   bundlewatch:
     executor: node
-    environment:
-      # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
     steps:
       - attach_workspace:
           at: .
@@ -440,11 +431,10 @@ jobs:
     parameters:
       component_type:
         type: string
-    environment:
-      LERNA_ARGS: --concurrency 1
     steps:
       - attach_workspace:
           at: .
+      - detect_root_change
       - unit_integration_tests:
           component_type: << parameters.component_type >>
 
@@ -484,8 +474,6 @@ jobs:
   deploy-storybook:
     executor: node
     environment:
-      # required to prevent ENOMEM errors
-      LERNA_ARGS: --concurrency 1
       RUN_ALL: true
     steps:
       - checkout
