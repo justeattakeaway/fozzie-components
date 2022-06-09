@@ -2,12 +2,17 @@ import forEach from 'mocha-each';
 
 const Alert = require('../../test-utils/component-objects/f-alert.component');
 
-const alert = new Alert();
+let alert;
 
-forEach(['success', 'warning', 'info', 'danger'])
-.describe('f-alert - %s - visual tests', type => {
+forEach(['desktop', 'mobile'])
+.forEach(['success', 'warning', 'info', 'danger'])
+.describe('f-alert - %s - %s - visual tests', (type, device) => {
     beforeEach(() => {
         // Arrange
+        if (device === 'mobile') {
+            browser.setWindowSize(414, 731);
+        }
+        alert = new Alert();
         alert.path = `&args=type:${type};`;
     });
 
@@ -16,7 +21,7 @@ forEach(['success', 'warning', 'info', 'danger'])
         await alert.load();
 
         // Assert
-        await browser.percyScreenshot(`f-alert - ${type} - dismissible`, 'desktop');
+        await browser.percyScreenshot(`f-alert - ${type} - dismissible`, device);
     });
 
     it('should display the f-alert (%s) component as undismissible', async () => {
@@ -28,6 +33,6 @@ forEach(['success', 'warning', 'info', 'danger'])
         await alert.waitForComponent();
 
         // Assert
-        await browser.percyScreenshot(`f-alert - ${type} - undismissible`, 'desktop');
+        await browser.percyScreenshot(`f-alert - ${type} - undismissible`, device);
     });
 });
