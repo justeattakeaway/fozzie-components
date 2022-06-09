@@ -1,0 +1,155 @@
+<Meta title="Documentation/Guides/Fozzie/Fozzie-and-Sass"/>
+
+# Fozzie & Sass
+
+Fozzie is a UI Component Framework used in JET by the legacy Just Eat (L-JE) Web Application teams, built to help modularise and share the UI code we write.
+
+Fozzie is made up of two main parts:
+
+- An [SCSS Helper Library](https://github.com/justeat/fozzie) that helps ensure web projects across JET have access to a set of baseline SCSS variables, mixins and functions.
+- The [fozzie-components component mono-repo](https://github.com/justeat/fozzie-components) – a component library of shared Vue components, built to adhere to JET's global design language, PIE.
+
+This documentation relates specifically to the Fozzie SCSS Helper Library and how to use it as part of your web project.
+
+<a name="scheme"></a><h2>Prerequisites</h2>
+
+Before you get started with the Fozzie SCSS helper library there are a few things you need to know in order to get up and running.
+
+From v9 and above, you'll need the following:
+
+1. [dart-sass](https://sass-lang.com/dart-sass):
+    - Fozzie makes use of new SCSS syntax to compile your Sass (namely `@use` & `@forward`). The [sass](https://www.npmjs.com/package/sass) module now uses dart-sass by default, so if you use the latest version of this module, you'll be fine.
+2. [webpack](https://webpack.js.org/) (or a similar file bundler)
+    - For file resolution paths into the `node_modules` folder. If you aren't using Webpack, then you can use something like [ParcelJs](https://parceljs.org/) instead, which also supports this.
+
+If you are upgrading from an older version of fozzie – i.e v8 and older – then this [migration guide](www.google.co.uk) will help you update to the latest version. As this documentation relates to v9+, follow that guide before coming back here and reading what's new.
+
+<a name="scheme"></a><h2>Importing Fozzie</h2>
+
+Fozzie uses webpack to resolve file path names, rather than having to provide absolute paths into the `node_modules` folder. If you don't have webpack running, you can use other tools like [ParcelJs](https://parceljs.org/). See the [migration guide](www.google.co.uk) for more information.
+
+### How to add and use fozzie within your project
+
+If you would like to include the base fozzie SCSS module into your project, you can do the following:
+
+1. Install the fozzie SCSS helper module using NPM or Yarn.
+
+```
+// Yarn example
+
+yarn add @justeat/fozzie
+```
+
+2. Within your project’s Sass files, you will then be able to import and use the base fozzie module like so:
+
+```
+// Basic usage
+
+@use 'fozzie';
+
+.c-breadcrumbs {
+  background-color: fozzie.$color-container-subtle;
+  border-radius: fozzie.$radius-rounded-a;
+}
+```
+
+3. A module’s namespace is just the last section of its URL without a file extension.
+
+   So in the previous example you can see that `@use 'fozzie'` will be namespaced to `fozzie`. You can however choose to define a custom namespace with `@use` statements like so:
+
+```
+// Namespacing usage
+
+@use 'fozzie' as f;
+
+.c-breadcrumbs {
+  background-color: f.$color-container-subtle;
+  border-radius: f.$radius-rounded-a;
+}
+```
+
+### Once set up and running
+
+When your Sass is compiled, it will include the Sass from the fozzie module as well.
+
+<a name="scheme"></a><h2>Referencing fozzie helpers</h2>
+
+This section will demonstrate how to use useful features within fozzie inside your consuming application.
+
+### How to use Pie Design Tokens
+
+### 1. Mixins
+
+If you want to use a mixin from within fozzie you can include them by referencing the namespace you have given the fozzie module followed by the mixin you would like to use. Below are some examples:
+
+#### Default module usage:
+
+```
+// Importing a mixin via the file namespace.
+
+@use 'fozzie';
+
+.c-breadcrumbs {
+  @include fozzie.bordered();
+}
+```
+
+#### Namespaced module usage:
+
+```
+// Importing a mixin via a custom namespace.
+
+@use 'fozzie' as f;
+
+.c-breadcrumbs {
+  @include f.bordered();
+}
+```
+
+### 2. Media Queries
+
+As is considered best practice, we develop with a mobile-first approach to our projects.
+
+We use a Sass library called [@include-media](https://github.com/eduardoboucas/include-media) to write our media queries. This provides an elegant way to define our media queries, hooking into the [breakpoint map](https://github.com/justeat/fozzie/blob/8a1094ae5a467e9e2afd86a4aab62f9ea65b1bee/src/scss/settings/_variables.scss#L65-L72) defined in fozzie's variables.
+
+When using these mixins, the easiest way to write your media queries is to specify the breakpoint name; the @include-media library will then convert this into a media query with a value in ems to provide a more consistent experience for users that use text zoom.
+
+```
+/**
+ * Using @include-media you can specify breakpoints
+ * using the map keys defined in Fozzie's [breakpoint map](https://github.com/justeat/fozzie/blob/8a1094ae5a467e9e2afd86a4aab62f9ea65b1bee/src/scss/settings/_variables.scss#L65-L72)
+ */
+
+@TODO
+```
+
+### 3. Pie Design Tokens
+
+To use our Pie Design Tokens within your project:
+
+```
+@use 'fozzie' as f;
+
+.c-breadcrumbs {
+  background-color: f.$color-blue;
+  padding: f.$spacing-a;
+}
+```
+
+### 3. Font size
+
+```
+@use 'fozzie' as f;
+
+.c-breadcrumbs {
+  @include f.font-size();
+}
+
+/**
+ * A full set of keys are defined in Fozzie's [variables](https://github.com/justeat/fozzie/blob/master/src/scss/settings/_variables.scss#L16)
+ */
+.c-breadcrumbs {
+  @include f.font-size('body-l');
+}
+```
+
