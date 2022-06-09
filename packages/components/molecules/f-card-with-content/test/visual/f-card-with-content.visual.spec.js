@@ -8,6 +8,9 @@ forEach(['desktop', 'mobile'])
 .describe('f-card-with-content - %s Visual Tests', device => {
     beforeEach(() => {
         // Arrange
+        if (device === 'mobile') {
+            browser.setWindowSize(414, 731);
+        }
         cardWithContent = new CardWithContent();
     });
 
