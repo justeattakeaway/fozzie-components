@@ -1,4 +1,96 @@
 <Meta title="Documentation/Guides/Fozzie/Structure"/>
 
-# Structure
+# CSS Structure
 
+Every fozzie module shares the same Sass structure to help keep consistency when moving between working on modules.
+
+The main goals of this structure are to provide clear structure and to define CSS conventions to which the development team should adhere to (such as a consistent naming scheme).
+
+Our Sass files are structured so that it is clear which styles are defined as base styles – intended to be extended upon – and which styles are the components or modules that extend this base styling.
+
+<a name="scheme"></a><h2>SCSS Folder structure</h2>
+
+The scss folder in each module is structured as follows:
+
+```
+scss ┣ base ┃ ┗ [...] ┣ components ┃ ┗ [...] ┣ objects ┃ ┗ [...] ┣ settings ┃ ┗ [...] ┣ tools ┃ ┗ [...] ┣ trumps ┃ ┗ [...]
+```
+To see the structure of the SCSS directory in the base fozzie module, check it out on [github](https://github.com/justeat/fozzie/tree/master/src/scss).
+
+### Base
+
+The [base folder](https://github.com/justeat/fozzie/tree/master/src/scss/base) is where the styles that make up the foundation of the module are defined.
+
+For example, typographic styles can be defined here, as can base layout, reset and print styles.
+
+n.b. We use [Normalise.css](https://github.com/justeat/fozzie/blob/2af7b82242549e5662cb675b813c211b84127d0e/src/scss/_dependencies.scss#L36) over a standard reset stylesheet, but styles that are needed on top of this to 'reset' element styling can be added in a module's reset file here.
+
+### Components
+
+The [components folder](https://github.com/justeat/fozzie/tree/master/src/scss/components) should be used to define custom component styles specific to that module. In the fozzie base module, this includes components such as alerts, breadcrumbs and rating components, among others.
+
+Component filenames should closely relate to their component name. So a component of c-rating should have its styles in a file called _ratings.scss
+
+### Objects
+
+The definition of an object (in our framework) is any component that can be directly linked to a native HTML element.
+
+Therefore the [objects folder](https://github.com/justeat/fozzie/tree/master/src/scss/objects) will include style definitions for buttons, form elements and links among other native element styling.
+
+It's likely that most of the object definitions should be included in the base fozzie module, as components such as buttons and form elements should be consistent across our projects.
+
+### Settings
+
+The [settings directory](https://github.com/justeat/fozzie/tree/master/src/scss/settings) should contain anything that is 'set' across your modules styles.
+
+The most common example of this is CSS variables, such as font-sizes, grid settings and breakpoint definitions.
+
+### Tools
+
+The [tools folder](https://github.com/justeat/fozzie/tree/master/src/scss/tools) is where global mixins and functions are located.
+
+If you pull in styles from a 3rd party library (such as PrismJS which is used for code highlighting) then these should also be located in this folder.
+
+### Trumps
+
+Utilities and helper classes which should have the ability to override anything before it in the cascade. Examples include responsive helper classes (i.e. `u-showBelowNarrow`) or display utility classes (i.e. `is-hidden` or `is-visuallyHidden`).
+
+<a name="scheme"></a><h2>Key files</h2>
+
+Within the base fozzie module, there are a few key files that if you want to contribute back into fozzie, it's worth understanding.
+
+### [fozzie.scss](https://github.com/justeat/fozzie/blob/master/src/scss/fozzie.scss)
+
+This is the base Sass file of the fozzie module.
+
+### [_dependencies.scss](https://github.com/justeat/fozzie/blob/master/src/scss/_dependencies.scss)
+
+This file is where all of the modules Sass dependencies are defined. It imports all of the scss files that will be compiled into the base fozzie module.
+
+If you need to add or remove a dependency, do it here. The order of the imported files is the same order that the CSS will be compiled to, and if this order is particularly important, make sure to include comments saying this.
+
+### [/settings/_variables.scss](https://github.com/justeat/fozzie/blob/master/src/scss/settings/_variables.scss)
+
+Located in the `/settings` folder, this file contains any variables that could be needed across any component.
+
+Examples include the font-size and breakpoint maps, font-family declarations, spacing and z-index helper variables and image paths.
+
+N.b. Any variable that isn't considered useful to multiple components should instead be included at the top of the component file it's used in - not in this variables file.
+
+### [/base/_layout.scss](https://github.com/justeat/fozzie/blob/master/src/scss/base/_layout.scss)
+
+This file contains layout styles which are shared across projects or components (and don't obviously fit within one specific component).
+
+For example, we include the `body` background styles and the default layout container `.l-container` styles in this file.
+
+Layout class helpers should also be included in this file and prefixed with `l-` (e.g. `l-divider` which adds a border to the bottom of elements).
+
+### [/base/_typography.scss](https://github.com/justeat/fozzie/blob/master/src/scss/base/_typography.scss)
+
+This file contains the fozzie default typographic styles.
+
+This includes styles for setting the base font-size of the project and definitions for headings, paragraphs, blockquotes etc.
+
+### [/trumps/_utilities.scss](https://github.com/justeat/fozzie/blob/master/src/scss/trumps/_utilities.scss)
+
+Located in the `/trumps` folder, this file contains a bunch of utility classes such as `.u-unstyled` (to unstyle list elements), `.u-ir` for background image replacement, `.is-hidden` and `is-visuallyHidden` for hiding elements with accessibility in mind etc.
