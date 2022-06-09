@@ -4,9 +4,17 @@ const Alert = require('../../test-utils/component-objects/f-alert.component');
 
 let alert;
 
-forEach(['desktop', 'mobile'])
-.forEach(['success', 'warning', 'info', 'danger'])
-.describe('f-alert - %s - %s - visual tests', (type, device) => {
+forEach([
+    ['desktop', 'success'],
+    ['desktop', 'warning'],
+    ['desktop', 'info'],
+    ['desktop', 'danger'],
+    ['mobile', 'success'],
+    ['mobile', 'warning'],
+    ['mobile', 'info'],
+    ['mobile', 'danger']
+])
+.describe('f-alert - %s - %s - visual tests', (device, type) => {
     beforeEach(() => {
         // Arrange
         if (device === 'mobile') {
