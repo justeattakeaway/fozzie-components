@@ -19,7 +19,7 @@ describe('f-form-field visual tests', () => {
     describe('disabled state', () => {
         it('should display all fields in a disabled state', async () => {
             // Arrange
-            formField = await new FormField()
+            formField = new FormField()
             .withQuery('args', 'isDisabled:disabled');
 
             // Act
@@ -33,7 +33,7 @@ describe('f-form-field visual tests', () => {
     describe('errored state', () => {
         it('should display all fields in an errored state', async () => {
             // Arrange
-            formField = await new FormField()
+            formField = new FormField()
             .withQuery('args', 'hasError:true');
 
             // Act
@@ -47,7 +47,7 @@ describe('f-form-field visual tests', () => {
     describe('none required state', () => {
         it('should display all fields in an none required state', async () => {
             // Arrange
-            formField = await new FormField()
+            formField = new FormField()
             .withQuery('args', 'isRequired:false');
 
             // Act
