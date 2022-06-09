@@ -1,0 +1,169 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "baseBranch": "origin/master",
+  "pipeline": {
+    "build": {
+      "cache": false,
+      "dependsOn": []
+    },
+    "test": {
+      "cache": false,
+      "dependsOn": []
+    },
+    "ci:test": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test:tools": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test:services": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test:atoms": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test:molecules": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test:organisms": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test:pages": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test:templates": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test-component:chrome:atoms": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test:visual:atoms": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test-a11y:chrome:atoms": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test-component:chrome:molecules": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test:visual:molecules": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test-a11y:chrome:molecules": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test-component:chrome:organisms": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test:visual:organisms": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test-a11y:chrome:organisms": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test-component:chrome:pages": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test:visual:pages": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "ci:test-a11y:chrome:pages": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "test-component:chrome": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "test:visual": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "test-a11y:chrome": {
+      "cache": false,
+      "dependsOn": [],
+      "outputs":[]
+    },
+    "prepublishOnly": {
+      "cache": false,
+      "dependsOn": []
+    },
+    "storybook:build":  {
+      "cache": false,
+      "dependsOn": []
+    },
+    "storybook:build-changed":  {
+      "cache": false,
+      "dependsOn": []
+    },
+    "storybook:serve": {
+      "cache": false,
+      "dependsOn": []
+    },
+    "storybook:serve-changed": {
+      "cache": false,
+      "dependsOn": []
+    },
+    "storybook:serve-static": {
+      "cache": false,
+      "dependsOn": []
+    },
+    "storybook:deploy": {
+      "cache": false,
+      "dependsOn": []
+    },
+    "lint": {
+      "cache": false,
+      "dependsOn": []
+    },
+    "lint:fix": {
+      "cache": false,
+      "dependsOn": []
+    },
+    "lint:style": {
+      "cache": false,
+      "dependsOn": []
+    }
+  }
+}

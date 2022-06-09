@@ -41,3 +41,10 @@ coverage/
 **/test/results/axe-violations/*
 !**/test/results/axe-violations/README.md
 test/results/ci
+
+# Build pipeline artifacts
+.turbo
+
+# Tmp build output
+packages/components/organisms/f-cookie-banner-static/.tmp-dist/
+packages/components/organisms/f-cookie-banner-static/.tmp-vue/
