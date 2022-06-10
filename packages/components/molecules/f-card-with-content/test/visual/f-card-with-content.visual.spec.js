@@ -14,9 +14,9 @@ forEach(['desktop', 'mobile'])
         cardWithContent = new CardWithContent();
     });
 
-    it('should display default component state', async () => {
+    it('should display default component state', () => {
         // Act
-        await cardWithContent.load();
+        cardWithContent.load();
 
         // Assert
         browser.percyScreenshot('f-card-with-content - Base State', device);

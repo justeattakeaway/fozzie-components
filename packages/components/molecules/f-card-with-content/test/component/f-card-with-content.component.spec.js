@@ -3,8 +3,8 @@ const CardWithContent = require('../../test-utils/component-objects/f-card-with-
 const cardWithContent = new CardWithContent();
 
 describe('f-card-with-content component tests', () => {
-    beforeEach(async () => {
-        await cardWithContent.load();
+    beforeEach(() => {
+        cardWithContent.load();
     });
 
     it('should display the f-card-with-content component', async () => {
