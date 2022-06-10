@@ -5,8 +5,8 @@ const MediaElement = require('../../test-utils/component-objects/f-media-element
 const mediaElement = new MediaElement();
 
 describe('Accessibility tests', () => {
-    beforeEach(async () => {
-        await mediaElement.load();
+    beforeEach(() => {
+        mediaElement.load();
     });
 
     it('a11y - should test f-media-element component WCAG compliance', () => {
