@@ -5,8 +5,8 @@ const PromotionsShowcase = require('../../test-utils/component-objects/f-promoti
 const promotionsShowcase = new PromotionsShowcase();
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        promotionsShowcase.load();
+    beforeEach(async () => {
+        await promotionsShowcase.load();
     });
     it('a11y - should test f-promotions-showcase component WCAG compliance', () => {
         // Act
