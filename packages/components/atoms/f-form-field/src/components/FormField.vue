@@ -48,6 +48,7 @@
                 :id="`${uniqueId}`"
                 :aria-labelledby="`label-${uniqueId}`"
                 :value="value"
+                :aria-required="isRequired"
                 v-bind="$attrs"
                 :class="[
                     $style['c-formField-field'],
@@ -63,6 +64,7 @@
                 :aria-labelledby="`label-${uniqueId}`"
                 :value="value"
                 v-bind="$attrs"
+                :aria-required="isRequired"
                 :type="normalisedInputType"
                 :min="normalisedInputType === 'number' ? minNumber : false"
                 :max="normalisedInputType === 'number' ? maxNumber : false"
@@ -231,6 +233,11 @@ export default {
             type: String,
             default: '',
             validator: value => (value.length <= 3)
+        },
+
+        isRequired: {
+            type: Boolean,
+            default: true
         }
     },
 
