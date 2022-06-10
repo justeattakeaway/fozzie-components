@@ -21,24 +21,19 @@ forEach([
             browser.setWindowSize(414, 731);
         }
         alert = new Alert();
-        alert.path = `&args=type:${type};`;
     });
 
     it('should display the f-alert (%s) component as dismissible', async () => {
         // Act
-        await alert.load();
+        await alert.load({ type: `${type}` });
 
         // Assert
         await browser.percyScreenshot(`f-alert - ${type} - dismissible`, device);
     });
 
     it('should display the f-alert (%s) component as undismissible', async () => {
-        // Arrange
-        alert.path += 'isDismissible:false';
-
         // Act
-        await alert.load();
-        await alert.waitForComponent();
+        await alert.load({ isDismissible: false, type: `${type}` });
 
         // Assert
         await browser.percyScreenshot(`f-alert - ${type} - undismissible`, device);
