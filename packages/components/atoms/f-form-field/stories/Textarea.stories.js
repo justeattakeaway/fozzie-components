@@ -1,6 +1,6 @@
 import { withA11y } from '@storybook/addon-a11y';
 import FormField from '../src/components/FormField.vue';
-import SharedArgTypes from './SharedArgTypes';
+import SharedArgTypes, { sharedFieldProperties } from './SharedArgTypes';
 import {
     VALID_TEXT_INPUT_TYPES
 } from '../src/constants';
@@ -15,13 +15,10 @@ export const TextareaComponent = (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     template:
         `<form-field
-            :locale="locale"
+            ${sharedFieldProperties}
             :label-text="labelText"
             :input-type="inputType"
-            :should-show-label-text="shouldShowLabelText"
-            :has-error="hasError"
             :is-grouped="isGrouped"
-            :disabled="isDisabled"
             cols="30"
             :placeholder="placeholder"
             rows="7"
