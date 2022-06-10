@@ -85,6 +85,7 @@ The props that can be defined are as follows (if any):
 | `shouldShowLabelText` | `Boolean` | `true` | Hides the label if set to `false` |
 | `suffix` | `String` | `''` | Suffix will display on the right of the input field. |
 | `value` | `String` or `Number` | `''` | The value of the form field. |
+| `isRequired` | `Boolean` | `true` | Adds `*` to form label and `aria-required` attribute to input if `true`. |
 
 
 ### Slots
