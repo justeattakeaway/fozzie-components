@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-user-message",
   "description": "Fozzie User Message – Globalised User Message Component",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "main": "dist/f-user-message.umd.min.js",
   "maxBundleSize": "15kB",
   "files": [
@@ -59,7 +59,7 @@
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3",
-    "@justeat/f-wdio-utils": "0.5.0",
+    "@justeat/f-wdio-utils": "0.11.0",
     "axios-mock-adapter": "1.18.2"
 
   }
