@@ -5,8 +5,8 @@ const SkeletonLoader = require('../../test-utils/component-objects/f-skeleton-lo
 const skeletonLoader = new SkeletonLoader();
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        skeletonLoader.load();
+    beforeEach(async () => {
+        await skeletonLoader.load();
     });
     it('a11y - should test f-skeleton-loader component WCAG compliance', () => {
         // Act
