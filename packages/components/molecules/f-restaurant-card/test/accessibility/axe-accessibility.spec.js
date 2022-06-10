@@ -5,8 +5,8 @@ const RestaurantCard = require('../../test-utils/component-objects/f-restaurant-
 const restaurantCard = new RestaurantCard();
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        restaurantCard.load();
+    beforeEach(async () => {
+        await restaurantCard.load();
     });
     it('a11y - should test f-restaurant-card component WCAG compliance', () => {
         // Act
