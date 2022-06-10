@@ -1,9 +1,10 @@
 const <%= name.filename %> = require('../../test-utils/component-objects/f-<%= name.default %>.component');
 
-const <%= name.class %> = new <%= name.filename %>();
+let <%= name.class %>;
 
 describe('f-<%= name.default %> Desktop visual tests', () => {
     beforeEach(async () => {
+        <%= name.class %> = new <%= name.filename %>();
         await <%= name.class %>.load();
     });
 
@@ -12,6 +13,6 @@ describe('f-<%= name.default %> Desktop visual tests', () => {
         const result = await <%= name.class %>.isComponentDisplayed();
 
         // Assert
-        expect(result).toBe(true);
+        await browser.percyScreenshot('f-<%= name.default %> - Default Visual Test', 'desktop');
     });
 });

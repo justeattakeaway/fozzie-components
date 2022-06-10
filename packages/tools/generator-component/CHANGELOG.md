@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.11.0
+------------------------------
+*June 10, 2022*
+
+### Changed
+- Bumped f-wdio-utils version & fixed up breaking changes.
+
+
 v2.10.0
 ------------------------------
 *June 7, 2022*

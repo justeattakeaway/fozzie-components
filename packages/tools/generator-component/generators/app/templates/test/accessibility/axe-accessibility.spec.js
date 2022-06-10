@@ -2,10 +2,11 @@ import { getAxeResults } from '../../../../../../test/utils/axe-helper'; // esli
 
 const <%= name.filename %> = require('../../test-utils/component-objects/f-<%= name.default %>.component');
 
-const <%= name.class %> = new <%= name.filename %>();
+let <%= name.class %>;
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
+        <%= name.class %> = new <%= name.filename %>();
         <%= name.class %>.load();
     });
 

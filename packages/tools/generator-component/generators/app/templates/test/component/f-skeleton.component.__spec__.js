@@ -1,9 +1,10 @@
 const <%= name.filename %> = require('../../test-utils/component-objects/f-<%= name.default %>.component');
 
-const <%= name.class %> = new <%= name.filename %>();
+let <%= name.class %>;
 
 describe('f-<%= name.default %> component tests', () => {
     beforeEach(async () => {
+        <%= name.class %> = new <%= name.filename %>();
         await <%= name.class %>.load();
     });
 
