@@ -104,7 +104,7 @@ describe('AccountInfo', () => {
             $cookies: cookiesSpy,
             $log: logMocks,
             $route: {
-                path: '/account/info'
+                fullPath: '/account/info'
             },
             $gtm: {
                 pushEvent: pushEventSpy

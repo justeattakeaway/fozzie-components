@@ -304,7 +304,7 @@ export default {
         ]),
 
         changePasswordUrl () {
-            const returnUrlPath = encodeURIComponent(this.$route.path);
+            const returnUrlPath = encodeURIComponent(this.$route.fullPath);
 
             return `/account/change-password?returnUrl=${returnUrlPath}`;
         }
