@@ -6,7 +6,7 @@
                 [$style['c-restaurantCard--listItem']]: isListItem,
                 [$style['c-restaurantCard--isLoading']]: isLoading
             }]"
-        data-test-id="restaurant"
+        data-test-id="f-restaurant-card--restaurant-card-component"
         :data-restaurant-id="id"
         :aria-busy="`${isLoading}`"
         @click="handleClick">
