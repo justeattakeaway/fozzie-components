@@ -11,6 +11,7 @@
                     [$style['c-formField-padding--iconLeading']]: hasIcon
                 }]"
             :disabled="attributes.disabled"
+            :aria-required="isRequired"
             :data-test-id="testId.select"
             v-bind="attributes"
             :value="value"
@@ -66,6 +67,10 @@ export default {
         hasIcon: {
             type: Boolean,
             default: false
+        },
+        isRequired: {
+            type: Boolean,
+            default: true
         }
     },
 

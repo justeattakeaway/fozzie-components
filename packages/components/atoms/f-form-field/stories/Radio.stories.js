@@ -1,6 +1,6 @@
 import { withA11y } from '@storybook/addon-a11y';
 import FormField from '../src/components/FormField.vue';
-import SharedArgTypes from './SharedArgTypes';
+import SharedArgTypes, { sharedFieldProperties } from './SharedArgTypes';
 
 export default {
     title: 'Components/Atoms/f-form-field',
@@ -14,8 +14,7 @@ export const RadioComponent = (args, { argTypes }) => ({
         <div>
             <form-field
                 :assistive-text="assistiveText"
-                :disabled="isDisabled"
-                :has-error="hasError"
+                ${sharedFieldProperties}
                 :is-grouped="isGrouped"
                 :label-text="labelText"
                 id="radio-1"
@@ -23,8 +22,7 @@ export const RadioComponent = (args, { argTypes }) => ({
                 name="group-name" />
 
                 <form-field
-                :disabled="isDisabled"
-                :has-error="hasError"
+                ${sharedFieldProperties}
                 :is-grouped="isGrouped"
                 id="radio-2"
                 input-type="radio"
