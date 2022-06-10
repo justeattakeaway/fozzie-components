@@ -2,7 +2,7 @@ const Page = require('@justeat/f-wdio-utils/src/base.page');
 
 module.exports = class ActionButton extends Page {
     constructor () {
-        super('atom-folder', 'f-button--button-component', '[data-test-id="action-button-component"]');
+        super('atom-folder', 'f-button--button-component');
     }
 
     // Overridding base implementation

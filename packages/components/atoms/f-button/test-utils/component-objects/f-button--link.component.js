@@ -2,7 +2,7 @@ const Page = require('@justeat/f-wdio-utils/src/base.page');
 
 module.exports = class LinkButton extends Page {
     constructor () {
-        super('atom-folder', 'f-button--link-button-component', '[data-test-id="link-button-component"]');
+        super('atom-folder', 'f-button--link-button-component');
     }
 
     // Overridding base implementation
