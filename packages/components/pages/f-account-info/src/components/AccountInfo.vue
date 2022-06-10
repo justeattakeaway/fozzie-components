@@ -191,7 +191,7 @@
                 :class="[$style['c-accountInfo-changePasswordButton']]"
                 data-test-id="account-info-change-password-button"
                 button-type="secondary"
-                href="/account/change-password?returnurl=/account/info"
+                :href="changePasswordUrl"
                 button-size="large"
                 is-full-width
                 action-type="submit">
@@ -301,7 +301,13 @@ export default {
     computed: {
         ...mapState('fAccountInfoModule', [
             'consumer'
-        ])
+        ]),
+
+        changePasswordUrl () {
+            const returnUrlPath = encodeURIComponent(this.$route.path);
+
+            return `/account/change-password?returnUrl=${returnUrlPath}`;
+        }
     },
 
     watch: {

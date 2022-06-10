@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.24.0
+------------------------------
+*June 13 2022*
+
+### Changed
+- Dynamically determine returnUrl for the change password link using $route
+
 
 v0.23.0
 ------------------------------
