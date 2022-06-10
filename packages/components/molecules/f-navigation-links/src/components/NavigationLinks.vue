@@ -1,7 +1,7 @@
 <template>
     <nav
         aria-label="navigation"
-        data-test-id="navigationLinks">
+        data-test-id="navigation-links-component">
         <ul
             v-if="filterLinks.length"
             :class="$style['c-navigationLinks']">
