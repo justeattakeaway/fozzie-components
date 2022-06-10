@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-skeleton-loader",
   "description": "Fozzie Skeleton Loader - Provides a visual indication that another component is loading. ",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "main": "dist/f-skeleton-loader.umd.min.js",
   "maxBundleSize": "10kB",
   "files": [
@@ -56,6 +56,6 @@
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3",
-    "@justeat/f-wdio-utils": "0.5.0"
+    "@justeat/f-wdio-utils": "0.11.0"
   }
 }
