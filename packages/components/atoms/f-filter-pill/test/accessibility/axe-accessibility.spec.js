@@ -6,7 +6,7 @@ const filterPill = new FilterPill();
 
 describe('Accessibility tests', () => {
     beforeEach(() => {
-        filterPill.load(filterPill.component);
+        filterPill.load();
     });
 
     it('a11y - should test f-filter-pill component WCAG compliance', () => {

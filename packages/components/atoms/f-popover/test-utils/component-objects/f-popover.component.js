@@ -1,13 +1,7 @@
-const Page = require('@justeat/f-wdio-utils/src/page.object');
+const Page = require('@justeat/f-wdio-utils/src/base.page');
 
 module.exports = class Popover extends Page {
     constructor () {
         super('atom', 'popover-component');
-    }
-
-    get component () { return $('[data-test-id="popover"]'); }
-
-    async isComponentDisplayed () {
-        return this.component.isDisplayed();
     }
 };
