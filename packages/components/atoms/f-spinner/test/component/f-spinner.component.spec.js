@@ -7,7 +7,7 @@ describe('f-spinner component tests', () => {
     beforeEach(async () => {
         spinner = new Spinner();
 
-        await spinner.load(spinner.component);
+        await spinner.load();
     });
 
     it('should display the f-spinner component', async () => {
