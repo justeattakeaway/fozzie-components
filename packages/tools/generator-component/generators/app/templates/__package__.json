@@ -48,8 +48,8 @@
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],<% if(config.isComponent) { %>
-  "dependencies": {
-    "@justeat/f-services": "1.7.0"
+  "dependencies": {<% if(config.needsComponentTranslations){%>
+    "@justeat/f-services": "1.16.0"<% }%>
   },<% } %>
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
