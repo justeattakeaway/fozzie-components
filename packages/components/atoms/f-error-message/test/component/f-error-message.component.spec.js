@@ -4,7 +4,7 @@ const errorMessage = new ErrorMessage();
 
 describe('f-error-message component tests', () => {
     beforeEach(async () => {
-        await errorMessage.load(errorMessage.component);
+        await errorMessage.load();
     });
 
     it('should display the f-error-message component', async () => {
