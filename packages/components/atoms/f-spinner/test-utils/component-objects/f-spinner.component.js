@@ -1,13 +1,7 @@
-const Page = require('@justeat/f-wdio-utils/src/page.object');
+const Page = require('@justeat/f-wdio-utils/src/base.page');
 
 module.exports = class Spinner extends Page {
     constructor () {
         super('atom', 'v-spinner-component');
-    }
-
-    get component () { return $('[data-test-id="spinner-component"]'); }
-
-    async isComponentDisplayed () {
-        return this.component.isDisplayed();
     }
 };
