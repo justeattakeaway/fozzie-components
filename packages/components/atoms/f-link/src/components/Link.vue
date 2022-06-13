@@ -11,7 +11,7 @@
                     [$style['o-link--noBreak']]: noLineBreak,
                     [$style['o-link--distinct']]: isDistinct
                 }]"
-            data-test-id="link-component"
+            data-test-id="v-link-component"
             :aria-describedby="descriptionId"
             v-bind="bindAttrs()"
         >
