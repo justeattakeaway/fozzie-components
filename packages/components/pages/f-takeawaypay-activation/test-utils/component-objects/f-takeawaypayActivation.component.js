@@ -37,69 +37,69 @@ module.exports = class TakeawaypayActivation extends Page {
 
     get startOrderingButton () { return $(START_ORDERING_BUTTON); }
 
-    load (type = 'default') {
+    async load (type = 'default') {
         const componentType = {
             error: this.errorComponent,
             loggedIn: this.loggedInComponent,
             default: this.component
         };
 
-        super.load(componentType[type]);
+        await super.load(componentType[type]);
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component);
+    async waitForComponent () {
+        await super.waitForComponent(this.component);
     }
 
-    waitForLoggedInComponent () {
-        super.waitForComponent(this.loggedInComponent);
+    async waitForLoggedInComponent () {
+        await super.waitForComponent(this.loggedInComponent);
     }
 
-    waitForActivationSuccessComponent () {
-        super.waitForComponent(this.activationSuccessComponent);
+    async waitForActivationSuccessComponent () {
+        return super.waitForComponent(await this.activationSuccessComponent);
     }
 
-    waitForErrorComponent () {
-        super.waitForComponent(this.errorComponent);
+    async waitForErrorComponent () {
+        await super.waitForComponent(this.errorComponent);
     }
 
-    isComponentDisplayed () {
-        return this.component.isDisplayed();
+    async isComponentDisplayed () {
+        return (await this.component).isDisplayed();
     }
 
-    isLoggedInComponentDisplayed () {
-        return this.loggedInComponent.isDisplayed();
+    async isLoggedInComponentDisplayed () {
+        return (await this.loggedInComponent).isDisplayed();
     }
 
-    isActivationSuccessComponentDisplayed () {
-        return this.activationSuccessComponent.isDisplayed();
+    async isActivationSuccessComponentDisplayed () {
+        return (await this.activationSuccessComponent).isDisplayed();
     }
 
-    isErrorComponentDisplayed () {
-        return this.errorComponent.isDisplayed();
+    async isErrorComponentDisplayed () {
+        return (await this.errorComponent).isDisplayed();
     }
 
-    clickActivateTakeawayPayButton () {
-        return this.activateTakeawayPayButton.click();
+    async clickActivateTakeawayPayButton () {
+        return (await this.activateTakeawayPayButton).click();
     }
 
-    clickUnauthenticatedLoginButton () {
-        return this.unauthenticatedLoginButton.click();
+    async clickUnauthenticatedLoginButton () {
+        return (await this.unauthenticatedLoginButton).click();
     }
 
-    clickUnauthenticatedRegisterButton () {
-        return this.unauthenticatedRegisterButton.click();
+    async clickUnauthenticatedRegisterButton () {
+        return (await this.unauthenticatedRegisterButton).click();
     }
 
-    clickAuthenticatedLoginButton () {
-        return this.authenticatedLoginButton.click();
+    async clickAuthenticatedLoginButton () {
+        return (await this.authenticatedLoginButton).click();
     }
 
-    clickAuthenticatedRegisterButton () {
-        return this.authenticatedRegisterButton.click();
+    async clickAuthenticatedRegisterButton () {
+        return (await this.authenticatedRegisterButton).click();
     }
 
-    clickStartOrderingButton () {
-        return this.startOrderingButton.click();
+    async clickStartOrderingButton () {
+        return (await this.startOrderingButton).click();
     }
 };

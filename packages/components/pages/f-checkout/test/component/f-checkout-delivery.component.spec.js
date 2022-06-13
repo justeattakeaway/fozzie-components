@@ -11,71 +11,71 @@ const checkoutInfo = {
 
 describe('f-checkout "delivery" component tests', () => {
     describe('uk tenant', () => {
-        beforeEach(() => {
+        beforeEach(async () => {
             // Arrange
             checkout = new Checkout();
 
             // Act
-            checkout.load({
+            await checkout.load({
                 ...checkoutInfo
             });
         });
 
-        it('should enable a user to submit a postcode with correct characters', () => {
+        it('should enable a user to submit a postcode with correct characters', async () => {
             // Act
-            checkout.goToPayment();
+            await checkout.goToPayment();
 
             // Assert
-            expect(checkout.isPostcodeTypeErrorDisplayed()).toBe(false);
+            await expect(await checkout.isPostcodeTypeErrorDisplayed()).toBe(false);
         });
     });
 
     describe('au tenant', () => {
         describe('and age verification is not required', () => {
-            beforeEach(() => {
+            beforeEach(async () => {
                 // Arrange
                 checkout = new Checkout();
 
                 // Act
-                checkout.load({
+                await checkout.load({
                     ...checkoutInfo,
                     isLoggedIn: false,
                     locale: 'en-AU'
                 });
             });
 
-            it('should prevent more than 50 characters in state field', () => {
+            it('should prevent more than 50 characters in state field', async () => {
                 // Arrange
                 const field = 'addressAdministrativeArea';
-                const userEntry = 'A'.repeat(50 + 1); // Enter more than allowed
+                const userEntry = await 'A'.repeat(50 + 1); // Enter more than allowed
 
                 // Act
-                checkout.setFieldValue(field, userEntry);
+                await checkout.setFieldValue(field, userEntry);
 
                 // Assert
-                expect(checkout.getFieldValue(field).length).toEqual(50);
+                await expect((await checkout.getFieldValue(field)).length).toEqual(50);
             });
         });
 
         describe('and age verification is required', () => {
-            beforeEach(() => {
+            beforeEach(async () => {
                 // Arrange
                 checkout = new Checkout();
 
                 // Act
-                checkout.load({
+                await checkout.load({
                     ...checkoutInfo,
                     locale: 'en-AU',
                     getBasketError: 'age-restriction'
                 });
             });
 
-            it('should display the age verification', () => {
+            it('should display the age verification', async () => {
                 // Assert
-                expect(checkout.isAgeVerificationDisplayed()).toBe(true);
+                await expect(await checkout.isAgeVerificationDisplayed()).toBe(true);
             });
 
-            it('should display a field error if the age is younger than 18', () => {
+            it('should display a field error if the age is younger than 18', async () => {
                 // Arrange
                 const todaysDate = new Date();
                 const dob = {
@@ -85,30 +85,30 @@ describe('f-checkout "delivery" component tests', () => {
                 };
 
                 // Act
-                checkout.populateAgeVerificationForm(dob);
-                checkout.ageVerificationSubmitButton.click();
+                await checkout.populateAgeVerificationForm(dob);
+                await checkout.ageVerificationSubmitButton.click();
 
                 // Assert
-                expect(checkout.isAgeVerificationErrorDisplayed()).toBe(true);
+                await expect(await checkout.isAgeVerificationErrorDisplayed()).toBe(true);
             });
         });
     });
 });
 
 describe('f-checkout "delivery" - split notes - component tests', () => {
-    it('should open the courier and kitchen notes accordions and populate them', () => {
+    it('should open the courier and kitchen notes accordions and populate them', async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo,
             noteType: 'get-notes-config-split'
         });
 
         // Assert
-        checkout.expandAndPopulateNote('courierAccordionHeader', 'courierNote', 'This is a courier note');
-        checkout.expandAndPopulateNote('kitchenAccordionHeader', 'kitchenNote', 'This is a kitchen note');
-        checkout.goToPayment();
+        await checkout.expandAndPopulateNote('courierAccordionHeader', 'courierNote', 'This is a courier note');
+        await checkout.expandAndPopulateNote('kitchenAccordionHeader', 'kitchenNote', 'This is a kitchen note');
+        await checkout.goToPayment();
     });
 });

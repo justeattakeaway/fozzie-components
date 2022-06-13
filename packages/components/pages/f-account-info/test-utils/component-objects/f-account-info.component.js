@@ -76,8 +76,20 @@ module.exports = class AccountInfo extends Page {
         }
     };
 
-    isErrorCardComponentDisplayed () {
-        return this.errorCardComponent.isDisplayed();
+    async load (component = this.component) {
+        await super.load(component);
+    }
+
+    async loadError () {
+        await super.load(this.errorCardComponent);
+    }
+
+    async isComponentDisplayed () {
+        return this.component.isDisplayed();
+    }
+
+    async isErrorCardComponentDisplayed () {
+        return (await this.errorCardComponent).isDisplayed();
     }
 
     /**
@@ -86,52 +98,60 @@ module.exports = class AccountInfo extends Page {
     *
     * @param {String} fieldName The name of the field to tab out of
     */
-    tabOutOfField (fieldName) {
+    async tabOutOfField (fieldName) {
         const el = this.fields[fieldName].input;
-        el.keys(['Tab']);
+        (await el).keys(['Tab']);
     }
 
-    clickOutOfInputField () {
-        this.component.click();
+    async clickOutOfInputField () {
+        (await this.component).click();
     }
 
-    clickSaveButton () {
-        return this.LinksAndButtons.saveChangesButton.cta.click();
+    async clickSaveButton () {
+        (await this.LinksAndButtons.saveChangesButton.cta).click();
     }
 
-    clickChangePassword () {
-        return this.LinksAndButtons.changePasswordButton.cta.click();
+    async clickChangePassword () {
+        return (await this.LinksAndButtons.changePasswordButton.cta).click();
     }
 
-    clickDeleteAccountLink () {
-        return this.LinksAndButtons.deleteAccountLink.cta.click();
+    async clickDeleteAccountLink () {
+        return (await this.LinksAndButtons.deleteAccountLink.cta).click();
     }
 
-    clickChangeEmailAddressLink () {
-        return this.LinksAndButtons.changeEmailAddressLink.cta.click();
+    async clickChangeEmailAddressLink () {
+        return (await this.LinksAndButtons.changeEmailAddressLink.cta).click();
     }
 
-    isEmptyErrorMessageDisplayed (fieldName) {
-        return this.fields[fieldName].emptyError.isDisplayed();
+    async isEmptyErrorMessageDisplayed (fieldName) {
+        return (await this.fields[fieldName].emptyError).isDisplayed();
     }
 
-    isInvalidErrorMessageDisplayed (fieldName) {
-        return this.fields[fieldName].invalidError.isDisplayed();
+    async isInvalidErrorMessageDisplayed (fieldName) {
+        return (await this.fields[fieldName].invalidError).isDisplayed();
     }
 
-    canBeClicked (callToActionName) {
-        return this.LinksAndButtons[callToActionName].cta.isClickable();
+    async canBeClicked (callToActionName) {
+        return (await this.LinksAndButtons[callToActionName].cta).isClickable();
     }
 
-    isDisabled (field) {
-        return !this.fields[field].input.isEnabled();
+    async isDisabled (field) {
+        return !(await this.fields[field].input.isEnabled());
     }
 
-    isErrorAlertDisplayed () {
-        return this.errorAlert.isDisplayed();
+    async isErrorAlertDisplayed () {
+        return (await this.errorAlert).isDisplayed();
     }
 
-    isSuccessAlertDisplayed () {
-        return this.successAlert.isDisplayed();
+    async waitForErrorAlertDisplayed () {
+        (await this.errorAlert).waitUntil(async () => this.isDisplayed());
+    }
+
+    async isSuccessAlertDisplayed () {
+        return (await this.successAlert).isDisplayed();
+    }
+
+    async waitForSuccessAlertDisplayed () {
+        (await this.successAlert).waitUntil(async () => this.isDisplayed());
     }
 };

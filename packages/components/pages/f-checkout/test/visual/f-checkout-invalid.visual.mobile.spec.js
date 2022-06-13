@@ -14,28 +14,27 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
         checkout = new Checkout();
     });
 
-
-    it('should display the error page component if the url is invalid', () => {
+    it('should display the error page component if the url is invalid', async () => {
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo,
             serviceType: 'invalid-url'
         });
 
         // Assert
-        browser.percyScreenshot('f-checkout - Invalid - Base State', 'mobile');
+        await browser.percyScreenshot('f-checkout - Invalid - Base State', 'mobile');
     });
 
-    it('should display the "Get Checkout 403" error page', () => {
+    it('should display the "Get Checkout 403" error page', async () => {
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo,
             serviceType: 'delivery',
             getCheckoutOptions: '403'
         });
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Get Checkout 403" Error Page', 'mobile');
+        await browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Get Checkout 403" Error Page', 'mobile');
     });
 
     it('should display an error dialog if the basket has invalid products', () => {

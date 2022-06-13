@@ -24,28 +24,43 @@ module.exports = class ContactPreferences extends Page {
 
     get successAlert () { return $(SUCCESS_ALERT); }
 
-
-    isErrorPageDisplayed () {
-        return this.errorPage.isDisplayed();
+    async load () {
+        await super.load(this.component);
     }
 
-    isErrorAlertDisplayed () {
-        return this.errorAlert.isDisplayed();
+    async loadError () {
+        await super.load(this.errorPage);
     }
 
-    isSuccessAlertDisplayed () {
-        return this.successAlert.isDisplayed();
+    async waitForComponent () {
+        await super.waitForComponent(this.component);
     }
 
-    clickSubmitButton () {
-        return this.submitButton.click();
+    async isComponentDisplayed () {
+        return (await this.component).isDisplayed();
     }
 
-    clickNewsEmailCheckbox () {
-        return this.newsEmailPreference.click();
+    async isErrorPageDisplayed () {
+        return (await this.errorPage).isDisplayed();
     }
 
-    clickNewsSmsCheckbox () {
-        return this.newsSmsPreference.click();
+    async isErrorAlertDisplayed () {
+        return (await this.errorAlert).isDisplayed();
+    }
+
+    async isSuccessAlertDisplayed () {
+        return (await this.successAlert).isDisplayed();
+    }
+
+    async clickSubmitButton () {
+        return (await this.submitButton).click();
+    }
+
+    async clickNewsEmailCheckbox () {
+        return (await this.newsEmailPreference).click();
+    }
+
+    async clickNewsSmsCheckbox () {
+        return (await this.newsSmsPreference).click();
     }
 };

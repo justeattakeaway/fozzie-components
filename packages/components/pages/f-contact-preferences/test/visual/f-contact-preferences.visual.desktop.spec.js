@@ -13,65 +13,74 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
 
     forEach([
         ['en-GB']
-    ]).it('should display the %s default component state', locale => {
+    ]).it('should display the %s default component state', async locale => {
+        // Arrange
+        contactPreferences.path += `&args=locale:${locale}`;
+
         // Act
-        contactPreferences.load({ locale });
+        await contactPreferences.load();
 
         // Assert
-        browser.percyScreenshot(`f-contact-preferences - Base State - ${locale}`, deviceType);
+        await browser.percyScreenshot(`f-contact-preferences - Base State - ${locale}`, deviceType);
     });
 
     forEach([
         ['en-GB']
-    ]).it('should display the %s news email & sms checked', locale => {
+    ]).it('should display the %s news email & sms checked', async locale => {
+        // Arrange
+        contactPreferences.path += `&args=locale:${locale}`;
+
         // Act
-        contactPreferences.load({ locale });
-        contactPreferences.clickNewsEmailCheckbox();
-        contactPreferences.clickNewsSmsCheckbox();
+        await contactPreferences.load();
+        await contactPreferences.clickNewsEmailCheckbox();
+        await contactPreferences.clickNewsSmsCheckbox();
 
         // Assert
-        browser.percyScreenshot(`f-contact-preferences - Checked Preferences State - ${locale}`, deviceType);
+        await browser.percyScreenshot(`f-contact-preferences - Checked Preferences State - ${locale}`, deviceType);
     });
 
     forEach([
         ['en-GB']
-    ]).it('should display the %s Submit success alert', locale => {
+    ]).it('should display the %s Submit success alert', async locale => {
+        // Arrange
+        contactPreferences.path += `&args=locale:${locale}`;
+
         // Act
-        contactPreferences.load({ locale });
-        contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
-        contactPreferences.clickSubmitButton();
-        contactPreferences.waitForComponent();
+        await contactPreferences.load();
+        await contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
+        await contactPreferences.clickSubmitButton();
+        await contactPreferences.waitForComponent();
 
         // Assert
-        browser.percyScreenshot(`f-contact-preferences - Submit Success Alert - ${locale}`, deviceType);
+        await browser.percyScreenshot(`f-contact-preferences - Submit Success Alert - ${locale}`, deviceType);
     });
 
     forEach([
         ['en-GB']
-    ]).it('should display the %s Submit error alert', locale => {
+    ]).it('should display the %s Submit error alert', async locale => {
+        // Arrange
+        contactPreferences.path += `&args=locale:${locale};apiState:post-preferences-fails`;
+
         // Act
-        contactPreferences.load({
-            locale,
-            apiState: 'post-preferences-fails'
-        });
-        contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
-        contactPreferences.clickSubmitButton();
-        contactPreferences.waitForComponent();
+        await contactPreferences.load();
+        await contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
+        await contactPreferences.clickSubmitButton();
+        await contactPreferences.waitForComponent();
 
         // Assert
-        browser.percyScreenshot(`f-contact-preferences - Submit Error Alert - ${locale}`, deviceType);
+        await browser.percyScreenshot(`f-contact-preferences - Submit Error Alert - ${locale}`, deviceType);
     });
 
     forEach([
         ['en-GB']
-    ]).it('should display the %s Load error page', locale => {
+    ]).it('should display the %s Load error page', async locale => {
+        // Arrange
+        contactPreferences.path += `&args=locale:${locale};apiState:get-preferences-fails`;
+
         // Act
-        contactPreferences.load({
-            locale,
-            apiState: 'get-preferences-fails'
-        });
+        await contactPreferences.loadError();
 
         // Assert
-        browser.percyScreenshot(`f-contact-preferences - Load Error Page - ${locale}`, deviceType);
+        await browser.percyScreenshot(`f-contact-preferences - Load Error Page - ${locale}`, deviceType);
     });
 });

@@ -3,7 +3,7 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 let checkout;
 
 describe('f-checkout "dinein" component tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
@@ -16,15 +16,15 @@ describe('f-checkout "dinein" component tests', () => {
         });
     });
 
-    it('should prevent a user from entering more than 12 characters in the tableIdentifier field', () => {
+    it('should prevent a user from entering more than 12 characters in the tableIdentifier field', async () => {
         // Arrange
         const maxlength = 12;
-        const tableEntry = 'A'.repeat(maxlength + 1); // Enter more than allowed
+        const tableEntry = await 'A'.repeat(maxlength + 1); // Enter more than allowed
 
         // Act
-        checkout.setFieldValue('tableIdentifier', tableEntry);
+        await checkout.setFieldValue('tableIdentifier', tableEntry);
 
         // Assert
-        expect(checkout.getFieldValue('tableIdentifier').length).toEqual(maxlength);
+        await expect((await checkout.getFieldValue('tableIdentifier')).length).toEqual(maxlength);
     });
 });

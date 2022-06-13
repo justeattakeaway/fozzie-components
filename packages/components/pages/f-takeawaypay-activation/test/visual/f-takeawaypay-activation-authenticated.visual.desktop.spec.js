@@ -6,10 +6,10 @@ const { AUTHENTICATION_JWT } = require('../../test-utils/constants/f-takeawaypay
 let takeawayPayComponent;
 
 describe('f-takeawaypay-activation - Authenticated - Desktop Visual Tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         takeawayPayComponent = new TakeawayPayComponent();
-        takeawayPayComponent
+        await takeawayPayComponent
             .withQuery('knob-Authentication', AUTHENTICATION_JWT)
             .withQuery('knob-Employee Id', '12345')
             .withQuery('knob-Home URL', '/home')
@@ -18,29 +18,29 @@ describe('f-takeawaypay-activation - Authenticated - Desktop Visual Tests', () =
     });
 
     forEach(['en-GB', 'en-AU'])
-    .it('should display user details when the user is logged in and tenant is "%s"', tenant => {
+    .it('should display user details when the user is logged in and tenant is "%s"', async tenant => {
         // Arrange
-        takeawayPayComponent.withQuery('knob-Locale', tenant);
+        await takeawayPayComponent.withQuery('knob-Locale', tenant);
 
         // Act
-        takeawayPayComponent.load('loggedIn');
+        await takeawayPayComponent.load('loggedIn');
 
         // Assert
-        browser.percyScreenshot(`f-takeawaypay-activation - Authenticated - ${tenant}`, 'desktop');
+        await browser.percyScreenshot(`f-takeawaypay-activation - Authenticated - ${tenant}`, 'desktop');
     });
 
     forEach(['en-GB', 'en-AU'])
-    .it('should display a successful message when the activation is successful and tenant is "%s"', tenant => {
+    .it('should display a successful message when the activation is successful and tenant is "%s"', async tenant => {
         // Arrange
-        takeawayPayComponent.withQuery('knob-Locale', tenant);
+        await takeawayPayComponent.withQuery('knob-Locale', tenant);
 
         // Act
-        takeawayPayComponent.load('loggedIn');
-        takeawayPayComponent.clickActivateTakeawayPayButton();
-        takeawayPayComponent.waitForActivationSuccessComponent();
-        browser.pause(500);
+        await takeawayPayComponent.load('loggedIn');
+        await takeawayPayComponent.clickActivateTakeawayPayButton();
+        await takeawayPayComponent.waitForActivationSuccessComponent();
+        await browser.pause(500);
 
         // Assert
-        browser.percyScreenshot(`f-takeawaypay-activation - Successful activation - ${tenant}`, 'desktop');
+        await browser.percyScreenshot(`f-takeawaypay-activation - Successful activation - ${tenant}`, 'desktop');
     });
 });

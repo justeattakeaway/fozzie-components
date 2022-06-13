@@ -5,10 +5,10 @@ const TakeawayPayComponent = require('../../test-utils/component-objects/f-takea
 let takeawayPayComponent;
 
 describe('f-takeawaypay-activation - Error page - Desktop Visual Tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         takeawayPayComponent = new TakeawayPayComponent();
-        takeawayPayComponent
+        await takeawayPayComponent
             .withQuery('knob-Activation Status Response', '400')
             .withQuery('knob-Employee Id', '12345')
             .withQuery('knob-Home URL', '/home')
@@ -17,14 +17,14 @@ describe('f-takeawaypay-activation - Error page - Desktop Visual Tests', () => {
     });
 
     forEach(['en-GB', 'en-AU'])
-    .it('should display the component when there is an error and tenant is "%s"', tenant => {
+    .it('should display the component when there is an error and tenant is "%s"', async tenant => {
         // Arrange
-        takeawayPayComponent.withQuery('knob-Locale', tenant);
+        await takeawayPayComponent.withQuery('knob-Locale', tenant);
 
         // Act
-        takeawayPayComponent.load('error');
+        await takeawayPayComponent.load('error');
 
         // Assert
-        browser.percyScreenshot(`f-takeawaypay-activation - Error - ${tenant}`, 'desktop');
+        await browser.percyScreenshot(`f-takeawaypay-activation - Error - ${tenant}`, 'desktop');
     });
 });

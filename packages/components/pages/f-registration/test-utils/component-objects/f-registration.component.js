@@ -78,35 +78,48 @@ module.exports = class Registration extends Page {
         }
     };
 
-    isInputFieldDisplayed (fieldName) {
+
+    async load () {
+        await super.load(this.component);
+    }
+
+    async waitForComponent () {
+        await super.waitForComponent(this.component);
+    }
+
+    async isComponentDisplayed () {
+        return this.component.isDisplayed();
+    }
+
+    async isInputFieldDisplayed (fieldName) {
         return this.fields[fieldName].input.isDisplayed();
     }
 
-    submit () {
-        this.createAccountButton.click();
+    async submit () {
+        await this.createAccountButton.click();
     }
 
-    isEmptyErrorDisplayed (fieldName) {
+    async isEmptyErrorDisplayed (fieldName) {
         const field = this.fields[fieldName];
         return field.errorMessage === field.missing;
     }
 
-    isMaxLengthErrorDisplayed (fieldName) {
+    async isMaxLengthErrorDisplayed (fieldName) {
         const field = this.fields[fieldName];
         return field.errorMessage === field.maxCharacters;
     }
 
-    isEmailExistsErrorDisplayed () {
+    async isEmailExistsErrorDisplayed () {
         const field = this.fields.email;
         return field.errorMessage === field.exists;
     }
 
-    isInvalidErrorDisplayed (fieldName) {
+    async isInvalidErrorDisplayed (fieldName) {
         const field = this.fields[fieldName];
         return field.innerText === field.invalidFormat;
     }
 
-    canBeClicked (link) {
+    async canBeClicked (link) {
         return this.LinksAndButtons[link].cta.isClickable();
     }
 };

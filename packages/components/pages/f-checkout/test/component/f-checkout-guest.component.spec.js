@@ -5,12 +5,12 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 let checkout;
 
 describe('f-checkout "guest" component tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             serviceType: 'delivery',
             isLoggedIn: false,
             isAsapAvailable: true,
@@ -18,16 +18,16 @@ describe('f-checkout "guest" component tests', () => {
         });
     });
 
-    it('should navigate to correct url when the login link is clicked', () => {
+    it('should navigate to correct url when the login link is clicked', async () => {
         // Arrange
         const loginPath = '/login';
 
         // Act
-        checkout.clickGuestCheckoutLoginButton();
-        const { pathname } = new URL(browser.getUrl());
+        await checkout.clickGuestCheckoutLoginButton();
+        const { pathname } = new URL(await browser.getUrl());
 
         // Assert
-        expect(pathname).toEqual(loginPath);
+        await expect(pathname).toEqual(loginPath);
     });
 
     forEach([
@@ -35,28 +35,29 @@ describe('f-checkout "guest" component tests', () => {
         [100, 'lastName'],
         [50, 'emailAddress']
     ])
-        .it('should prevent a user from entering more than "%s" characters in the "%s" field', (maxlength, field) => {
+        .it('should prevent a user from entering more than "%s" characters in the "%s" field', async (maxlength, field) => {
             // Arrange
-            const userEntry = 'A'.repeat(maxlength + 1); // Enter more than allowed
+            const userEntry = await 'A'.repeat(maxlength + 1); // Enter more than allowed
 
             // Act
-            checkout.setFieldValue(field, userEntry);
+            await checkout.setFieldValue(field, userEntry);
+            await checkout.goToPayment();
 
             // Assert
-            expect(checkout.getFieldValue(field).length).toEqual(maxlength);
+            expect((await checkout.getFieldValue(field)).length).toEqual(maxlength);
         });
 
     forEach([
         ['jazz.man@tunetown.com'],
         ['jazzman@tunetown.com']
     ])
-        .it('should be valid email address: "%s"', email => {
+        .it('should be valid email address: "%s"', async email => {
             // Act
-            checkout.setFieldValue('emailAddress', email);
-            browser.keys('Tab');
+            await checkout.setFieldValue('emailAddress', email);
+            await checkout.goToPayment();
 
             // Assert
-            expect(checkout.isEmailErrorDisplayed()).toBe(false);
+            expect(await checkout.isEmailErrorDisplayed()).toBe(false);
         });
 
     forEach([
@@ -66,12 +67,12 @@ describe('f-checkout "guest" component tests', () => {
         ['jazzman@'],
         ['jazzman']
     ])
-        .it('should be invalid email address: "%s"', email => {
+        .it('should be invalid email address: "%s"', async email => {
             // Act
-            checkout.setFieldValue('emailAddress', email);
-            browser.keys('Tab');
+            await checkout.setFieldValue('emailAddress', email);
+            await checkout.goToPayment();
 
             // Assert
-            expect(checkout.isEmailErrorDisplayed()).toBe(true);
+            expect(await checkout.isEmailErrorDisplayed()).toBe(true);
         });
 });

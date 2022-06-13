@@ -4,20 +4,20 @@ const Registration = require('../../test-utils/component-objects/f-registration.
 let registration;
 
 describe('Shared - f-registration component tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         registration = new Registration();
-        registration.load();
+        await registration.load();
     });
 
-    it('should display component', () => {
+    it('should display component', async () => {
         // Assert
-        expect(registration.isComponentDisplayed()).toBe(true);
+        await expect(await registration.isComponentDisplayed()).toBe(true);
     });
 
     forEach(['termsAndConditionsLink', 'privacyPolicyLink', 'cookiesPolicyLink'])
-    .it('should check if the legal documentation is clickable', link => {
+    .it('should check if the legal documentation is clickable', async link => {
         // Assert
-        expect(registration.canBeClicked(link)).toBe(true);
+        expect(await registration.canBeClicked(link)).toBe(true);
     });
 
     forEach([
