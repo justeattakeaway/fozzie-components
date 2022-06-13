@@ -95,6 +95,8 @@ export default {
 <style lang="scss" module>
     @use '@justeat/fozzie/src/scss/fozzie' as f;
 
+    $icon-path: 'src/assets/img/icons';
+
     .c-formField-field--noFocus {
         &:focus,
         &:active,
@@ -150,7 +152,7 @@ export default {
     }
 
     .c-formField-field--checkbox:checked + label:before {
-        background-image: inline('src/assets/img/icons/check--white.svg'); // tmp explicit path
+        background-image: inline('#{$icon-path}/check--white.svg');
         background-repeat: no-repeat;
         background-position: center;
         background-size: 14px;
@@ -216,7 +218,7 @@ export default {
     }
 
     .c-formField-field--checkbox:disabled:checked + label:before {
-        background-image: inline('src/assets/img/icons/check--grey.svg'); // tmp explicit path
+        background-image: inline('#{$icon-path}/check--grey.svg');
     }
 
     .c-formField-field--radio:disabled:checked + label:before {

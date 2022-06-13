@@ -1,8 +1,5 @@
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
-$img-path: 'src/assets/img'; // Do we need to discard this pattern when using @use and @forward?
-
-
 $form-input-bg                          : f.$color-container-default;
 $form-input-bg--hover                   : darken($form-input-bg, f.$color-hover-01);
 
