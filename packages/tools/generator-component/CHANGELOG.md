@@ -10,6 +10,13 @@ v2.11.0
 
 ### Changed
 - Bumped f-wdio-utils version & fixed up breaking changes.
+- Changed tests to default 'yes'.
+- Increased bundle default to 20kb.
+- Omitted f-service if no translations required.
+- Bumped f-services version.
+- Refactored the storybook story to use controls.
+- Fixed up lint errors.
+- Merged visual test for mobile and desktop devices.
 
 
 v2.10.0
