@@ -5,7 +5,7 @@ module.exports = class ActionButton extends Page {
         super('atom-folder', 'f-button--button-component');
     }
 
-    // Overridding base implementation
+    // Overriding base implementation
     get component () { return $('[data-test-id="action-button-component"]'); }
 
     async isComponentClickable () {
