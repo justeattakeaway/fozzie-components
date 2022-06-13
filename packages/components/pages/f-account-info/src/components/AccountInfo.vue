@@ -20,6 +20,7 @@
                 <form-field
                     :value="consumer.firstName"
                     name="account-info-consumer-firstName"
+                    autocomplete="on"
                     maxlength="50"
                     :label-text="$t('consumer.firstNameLabel')"
                     :placeholder="$t('consumer.firstNamePlaceholder')"
@@ -44,6 +45,7 @@
                 <form-field
                     :value="consumer.lastName"
                     name="account-info-consumer-lastName"
+                    autocomplete="on"
                     maxlength="50"
                     :label-text="$t('consumer.lastNameLabel')"
                     :placeholder="$t('consumer.lastNamePlaceholder')"
@@ -68,6 +70,7 @@
                 <form-field
                     :value="consumer.phoneNumber"
                     name="account-info-consumer-phoneNumber"
+                    autocomplete="on"
                     maxlength="16"
                     :label-text="$t('consumer.phoneNumberLabel')"
                     :placeholder="$t('consumer.phoneNumberPlaceholder')"
@@ -97,6 +100,7 @@
                 <form-field
                     :value="consumer.line1"
                     name="account-info-consumer-line1"
+                    autocomplete="on"
                     maxlength="50"
                     :label-text="$t('consumer.addressLabel')"
                     :placeholder="$t('consumer.line1Placeholder')"
@@ -116,6 +120,7 @@
                 <form-field
                     :value="consumer.line2"
                     name="account-info-consumer-line2"
+                    autocomplete="on"
                     maxlength="50"
                     :placeholder="$t('consumer.line2Placeholder')"
                     @input="onEditConsumer('line2', $event, true)" />
@@ -123,6 +128,7 @@
                 <form-field
                     :value="consumer.line3"
                     name="account-info-consumer-line3"
+                    autocomplete="on"
                     maxlength="50"
                     :placeholder="$t('consumer.line3Placeholder')"
                     @input="onEditConsumer('line3', $event, true)" />
@@ -130,6 +136,7 @@
                 <form-field
                     :value="consumer.locality"
                     name="account-info-consumer-locality"
+                    autocomplete="on"
                     maxlength="50"
                     :label-text="$t('consumer.localityLabel')"
                     :placeholder="$t('consumer.localityPlaceholder')"
@@ -149,6 +156,7 @@
                 <form-field
                     :value="consumer.postcode"
                     name="account-info-consumer-postcode"
+                    autocomplete="postal-code"
                     maxlength="50"
                     :label-text="$t('consumer.postcodeLabel')"
                     :placeholder="$t('consumer.postcodePlaceholder')"
