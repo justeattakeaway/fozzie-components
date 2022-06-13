@@ -2747,6 +2747,14 @@
     "@justeat/pie-design-tokens" "1.4.0"
     include-media "1.4.10"
 
+"@justeat/fozzie@9.0.0-beta.1":
+  version "9.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.1.tgz#e960a47fba991cbbf4f6cc4ad46243b7756e5189"
+  integrity sha512-S9GYwqWXGtx84basRPWzyRTyPWIKlrP3N9X+A/gwVkxKMFvy9dqnPoyF9uoUEUSXknrHpp+drhMNM5BbCZHDww==
+  dependencies:
+    "@justeat/pie-design-tokens" "1.4.0"
+    include-media eduardoboucas/include-media#2.0-release
+
 "@justeat/pie-design-tokens@1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-1.4.0.tgz#adb4b3b7f5ed9ac9691e67e02b02264acd6dcfbf"
@@ -14952,6 +14960,10 @@ include-media@1.4.9:
   version "1.4.9"
   resolved "https://registry.yarnpkg.com/include-media/-/include-media-1.4.9.tgz#d0020b7be3eb2d54868a20943595ce380e0bc43b"
   integrity sha1-0AILe+PrLVSGiiCUNZXOOA4LxDs=
+
+"include-media@github:eduardoboucas/include-media#2.0-release":
+  version "2.0.0"
+  resolved "https://codeload.github.com/eduardoboucas/include-media/tar.gz/5398b556d4bb24186d360c950b19026f577ff8e5"
 
 indent-string@^2.1.0:
   version "2.1.0"

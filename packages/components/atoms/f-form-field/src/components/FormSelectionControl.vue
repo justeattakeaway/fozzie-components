@@ -93,6 +93,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+    @use '@justeat/fozzie/src/scss/fozzie' as f;
+
     .c-formField-field--noFocus {
         &:focus,
         &:active,
@@ -111,26 +113,26 @@ export default {
     .c-formField-field--checkbox + label,
     .c-formField-field--radio + label {
         cursor: pointer;
-        font-weight: $font-weight-regular;
-        @include font-size('body-l');
+        font-weight: f.$font-weight-regular;
+        @include f.font-size('body-l');
     }
 
     .c-formField-field--checkbox:disabled + label,
     .c-formField-field--radio:disabled + label,
     .c-formField-field--checkbox:disabled + label span {
         cursor: default;
-        color: $color-content-default;
+        color: f.$color-content-default;
     }
 
     .c-formField-field--checkbox + label:before,
     .c-formField-field--radio + label:before {
         content: '';
-        border: 1px solid $color-grey-45;
+        border: 1px solid f.$color-grey-45;
         display: inline-block;
         width: 22px;
         height: 22px;
-        margin-right: spacing();
-        margin-top: spacing();
+        margin-right: f.spacing();
+        margin-top: f.spacing();
         vertical-align: -5px;
     }
 
@@ -148,22 +150,22 @@ export default {
     }
 
     .c-formField-field--checkbox:checked + label:before {
-        background-image: inline('#{$icon-path}/check--white.svg');
+        background-image: inline('src/assets/img/icons/check--white.svg'); // tmp explicit path
         background-repeat: no-repeat;
         background-position: center;
         background-size: 14px;
-        border: 1px solid $color-interactive-brand;
-        background-color: $color-interactive-brand;
+        border: 1px solid f.$color-interactive-brand;
+        background-color: f.$color-interactive-brand;
     }
 
     .c-formField-field--radio:checked + label:before {
-        border: 7px solid $color-interactive-brand;
-        background-color: $color-white;
+        border: 7px solid f.$color-interactive-brand;
+        background-color: f.$color-white;
     }
 
     .c-formField-field--checkbox:focus + label:before,
     .c-formField-field--radio:focus + label:before {
-        box-shadow: 0 0 0 1px $color-white, 0 0 0 3px $color-focus;
+        box-shadow: 0 0 0 1px f.$color-white, 0 0 0 3px f.$color-focus;
 
         /*
             https://stackoverflow.com/a/58570835
@@ -177,47 +179,47 @@ export default {
     }
 
     .c-formField-field--checkbox:focus + label:before {
-        border: 1px solid $color-interactive-brand;
+        border: 1px solid f.$color-interactive-brand;
     }
 
     .c-formField-field--checkbox:focus:not(:checked) + label:before,
     .c-formField-field--radio:focus:not(:checked) + label:before {
-        box-shadow: 0 0 0 1px $color-white, 0 0 0 3px $color-focus;
+        box-shadow: 0 0 0 1px f.$color-white, 0 0 0 3px f.$color-focus;
 
-        border: 1px solid $color-grey-45;
+        border: 1px solid f.$color-grey-45;
     }
 
     .c-formField-field--checkbox:not(:disabled):checked + label:hover:before,
     .c-formField-field--radio:not(:disabled):checked + label:hover:before {
-        background-color: darken($color-interactive-brand, $color-hover-01);
+        background-color: darken(f.$color-interactive-brand, f.$color-hover-01);
     }
 
     .c-formField-field--checkbox:not(:disabled):checked + label:hover:before {
-        border: 1px solid darken($color-interactive-brand, $color-hover-01);
+        border: 1px solid darken(f.$color-interactive-brand, f.$color-hover-01);
     }
 
     .c-formField-field--radio:not(:disabled):checked + label:hover:before {
-        border: 7px solid darken($color-interactive-brand, $color-hover-01);
-        background-color: darken($color-white, $color-hover-01);
+        border: 7px solid darken(f.$color-interactive-brand, f.$color-hover-01);
+        background-color: darken(f.$color-white, f.$color-hover-01);
     }
 
     .c-formField-field--checkbox:not(:disabled):not(:checked) + label:hover:before,
     .c-formField-field--radio:not(:disabled):not(:checked) + label:hover:before {
-        background-color: darken($color-white, $color-hover-01);
+        background-color: darken(f.$color-white, f.$color-hover-01);
     }
 
     .c-formField-field--checkbox:disabled + label:before,
     .c-formField-field--radio:disabled + label:before {
-        border-color: $color-grey-30;
-        background-color: $color-grey-30;
+        border-color: f.$color-grey-30;
+        background-color: f.$color-grey-30;
         cursor: default;
     }
 
     .c-formField-field--checkbox:disabled:checked + label:before {
-        background-image: inline('#{$icon-path}/check--grey.svg');
+        background-image: inline('src/assets/img/icons/check--grey.svg'); // tmp explicit path
     }
 
     .c-formField-field--radio:disabled:checked + label:before {
-        background-color: $color-grey-45;
+        background-color: f.$color-grey-45;
     }
 </style>
