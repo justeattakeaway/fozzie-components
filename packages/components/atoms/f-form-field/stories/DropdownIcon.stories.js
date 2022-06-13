@@ -1,7 +1,7 @@
 import { withA11y } from '@storybook/addon-a11y';
 import { NutsIcon } from '@justeattakeaway/pie-icons-vue';
 import FormField from '../src/components/FormField.vue';
-import SharedArgTypes from './SharedArgTypes';
+import SharedArgTypes, { sharedFieldProperties } from './SharedArgTypes';
 import {
     DEFAULT_FIELD_SIZE,
     VALID_FIELD_SIZES
@@ -20,14 +20,11 @@ export const DropdownIconComponent = (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     template:
         `<form-field
-            :locale="locale"
+            ${sharedFieldProperties}
             :label-text="labelText"
             input-type="dropdown"
-            :should-show-label-text="shouldShowLabelText"
             :field-size="fieldSize"
-            :has-error="hasError"
             :is-grouped="isGrouped"
-            :disabled="isDisabled"
             :placeholder="placeholder"
             maxlength="200"
             :label-details="labelDetails"

@@ -1,6 +1,6 @@
 import { withA11y } from '@storybook/addon-a11y';
 import FormField from '../src/components/FormField.vue';
-import SharedArgTypes from './SharedArgTypes';
+import SharedArgTypes, { sharedFieldProperties } from './SharedArgTypes';
 import {
     DEFAULT_INPUT_TYPE,
     DEFAULT_FIELD_SIZE,
@@ -18,14 +18,11 @@ export const TextInputDefaultComponent = (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     template:
         `<form-field
-            :locale="locale"
+            ${sharedFieldProperties}
             :label-text="labelText"
             :input-type="inputType"
-            :should-show-label-text="shouldShowLabelText"
             :field-size="fieldSize"
-            :has-error="hasError"
             :is-grouped="isGrouped"
-            :disabled="isDisabled"
             :placeholder="placeholder"
             maxlength="200"
             :label-details="labelDetails"
