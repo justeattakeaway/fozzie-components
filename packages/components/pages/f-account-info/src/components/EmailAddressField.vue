@@ -3,6 +3,7 @@
         <form-field
             :label-text="$t('consumer.emailAddressLabel')"
             disabled
+            :is-required="false"
             name="account-info-consumer-emailAddress"
             :placeholder="$t('consumer.emailAddressPlaceholder')"
             class="u-spacingBottom--large"
