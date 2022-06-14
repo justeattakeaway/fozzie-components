@@ -158,7 +158,7 @@
                 <form-field
                     :value="consumer.postcode"
                     name="account-info-consumer-postcode"
-                    autocomplete="postal-code"
+                    autocomplete="on"
                     maxlength="50"
                     :label-text="$t('consumer.postcodeLabel')"
                     :placeholder="$t('consumer.postcodePlaceholder')"
