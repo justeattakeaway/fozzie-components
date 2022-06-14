@@ -93,7 +93,7 @@ MegaModalComponent.argTypes = {
         control: { type: 'boolean' }
     },
     closeButtonCopy: {
-        control: { type: 'select' }
+        control: { type: 'boolean' }
     },
     titleCopy: {
         control: { type: 'text' }

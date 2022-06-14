@@ -8,7 +8,7 @@ Latest (to be added to next release)
 *June 14, 2022*
 
 ### Added
-- visual tests for default state.
+- Visual tests for default state.
 
 
 v5.1.1
