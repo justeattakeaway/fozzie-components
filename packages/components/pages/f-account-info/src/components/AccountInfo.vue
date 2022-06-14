@@ -115,6 +115,7 @@
 
                 <form-field
                     :value="consumer.line2"
+                    :is-required="false"
                     name="account-info-consumer-line2"
                     maxlength="50"
                     :placeholder="$t('consumer.line2Placeholder')"
@@ -122,6 +123,7 @@
 
                 <form-field
                     :value="consumer.line3"
+                    :is-required="false"
                     name="account-info-consumer-line3"
                     maxlength="50"
                     :placeholder="$t('consumer.line3Placeholder')"

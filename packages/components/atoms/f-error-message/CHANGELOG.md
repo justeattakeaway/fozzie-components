@@ -3,14 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (add to next release)
-------------------------------
-*May 27, 2021*
+
+v1.2.1
+-----------------------------
+*Jun 10, 2022*
+
+### Changed
+- Bumped wdio version and fixed breaking changes.
+
+*May 27, 2022*
 
 ### Removed
 - unneeded `load` and `waitForComponent` functions from component object
 
-*May 26, 2021*
+*May 26, 2022*
 
 ### Changed
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.

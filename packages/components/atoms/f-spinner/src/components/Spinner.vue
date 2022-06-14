@@ -1,6 +1,6 @@
 <template>
     <div
-        data-test-id="spinner-component">
+        data-test-id="v-spinner-component">
         <span
             v-if="shouldShowSpinner"
             :class=" $style['c-spinner']"

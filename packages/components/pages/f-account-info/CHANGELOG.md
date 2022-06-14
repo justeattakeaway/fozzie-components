@@ -11,6 +11,17 @@ v0.24.0
 - Dynamically determine returnUrl for the change password link using $route
 
 
+v0.24.0
+------------------------------
+*June 13 2022*
+
+### Changed
+- Version of f-form-field (enables asterisks automatically on required fields)
+
+### Removed
+- Manual use of asterisks in `en-GB.js`
+
+
 v0.23.0
 ------------------------------
 *May 31 2022*
