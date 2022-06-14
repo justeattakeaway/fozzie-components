@@ -26,7 +26,6 @@ forEach([
     });
 
     forEach([
-        'isOpen',
         'isNarrow',
         'isWide',
         'isFlush',
@@ -43,6 +42,7 @@ forEach([
     });
 
     forEach([
+        'isOpen',
         'hasOverlay',
         'hasCloseButton'
     ])
