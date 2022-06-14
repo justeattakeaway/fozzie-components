@@ -1,10 +1,17 @@
+import forEach from 'mocha-each';
+
 const <%= name.filename %> = require('../../test-utils/component-objects/f-<%= name.default %>.component');
 
-describe('f-<%= name.default %> - Component tests', () => {
+forEach(['desktop', 'mobile'])
+.describe('f-<%= name.default %> - %s - Visual tests', device => {
     let <%= name.class %>;
 
     beforeEach(() => {
         // Arrange
+        if (device === 'mobile') {
+            browser.setWindowSize(414, 731);
+        }
+
         <%= name.class %> = new <%= name.filename %>();
     });
 
@@ -13,7 +20,6 @@ describe('f-<%= name.default %> - Component tests', () => {
         await <%= name.class %>.load();
 
         // Assert
-        const result = await <%= name.class %>.isComponentDisplayed();
-        expect(result).toBe(true);
+        await browser.percyScreenshot('f-<%= name.default %> - Visual Test', device);
     });
 });
