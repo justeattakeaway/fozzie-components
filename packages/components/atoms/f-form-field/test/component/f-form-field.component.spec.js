@@ -4,7 +4,7 @@ const formfield = new FormField();
 
 describe('f-form-field component tests', () => {
     beforeEach(async () => {
-        await formfield.load(formfield.component);
+        await formfield.load();
     });
 
     it('should display f-form-field', async () => {

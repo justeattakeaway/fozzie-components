@@ -103,6 +103,9 @@ describe('AccountInfo', () => {
             $http: httpSpy,
             $cookies: cookiesSpy,
             $log: logMocks,
+            $route: {
+                fullPath: '/account/info'
+            },
             $gtm: {
                 pushEvent: pushEventSpy
             },
@@ -304,7 +307,7 @@ describe('AccountInfo', () => {
             const element = wrapper.find('[data-test-id="account-info-change-password-button"]');
 
             // Assert
-            expect(element.attributes('href')).toBe('/account/change-password?returnurl=/account/info');
+            expect(element.attributes('href')).toBe('/account/change-password?returnUrl=%2Faccount%2Finfo');
         });
     });
 

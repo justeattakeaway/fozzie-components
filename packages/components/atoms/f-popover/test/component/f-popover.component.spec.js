@@ -4,7 +4,7 @@ const popover = new Popover();
 
 describe('f-popover component tests', () => {
     beforeEach(async () => {
-        await popover.load(popover.component);
+        await popover.load();
     });
 
     it('should display the f-popover component', async () => {

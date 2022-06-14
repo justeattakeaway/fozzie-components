@@ -4,9 +4,36 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.26.0
+------------------------------
+*June 14, 2022*
+
+### Added
+- `autocomplete="on"` to form fields.
+
+
+v0.25.0
+------------------------------
+*June 14 2022*
+
+### Changed
+- Dynamically determine returnUrl for the change password link using $route
+
+
+v0.24.0
+------------------------------
+*June 13 2022*
+
+### Changed
+- Version of f-form-field (enables asterisks automatically on required fields)
+
+### Removed
+- Manual use of asterisks in `en-GB.js`
+
+
 v0.23.0
 ------------------------------
-*May 31 2022*
+*May 31, 2022*
 
 ### Removed
 - Debug code
@@ -17,7 +44,7 @@ v0.23.0
 
 v0.22.0
 ------------------------------
-*May 24 2022*
+*May 24, 2022*
 
 ### Removed
 - Temp logging to record if auth expired or not
