@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.12.0
+------------------------------
+*June 14, 2022*
+
+### Removed
+- CircleCI save / cache steps in favour of building dependencies of changed packages.
+
 v7.11.0
 ------------------------------
 *May 31, 2022*
