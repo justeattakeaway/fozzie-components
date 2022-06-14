@@ -34,7 +34,7 @@ forEach([
         'isFullHeight',
         'isTextAlignedCenter'
     ])
-    .it('should display the f-mega-modal with `%s=true` state', async arg => {
+    .it('should display the f-mega-modal when `%s=true`', async arg => {
         // Act
         await megaModal.load({ [arg]: true });
 
@@ -46,7 +46,7 @@ forEach([
         'hasOverlay',
         'hasCloseButton'
     ])
-    .it('should display the f-mega-modal with `%s=false` state', async arg => {
+    .it('should display the f-mega-modal when `%s=false`', async arg => {
         // Act
         await megaModal.load({ [arg]: false });
 
