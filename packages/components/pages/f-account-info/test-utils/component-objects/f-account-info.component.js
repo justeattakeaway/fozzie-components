@@ -1,4 +1,4 @@
-const Page = require('@justeat/f-wdio-utils/src/page.object');
+const Page = require('@justeat/f-wdio-utils/src/base.page');
 const {
     COMPONENT,
     CHANGE_EMAIL_ADDRESS_LINK,
@@ -78,18 +78,6 @@ module.exports = class AccountInfo extends Page {
             get invalidError () { return $(FIELDS.postcode.invalidError); }
         }
     };
-
-    load (component = this.component) {
-        super.load(component);
-    }
-
-    loadError () {
-        super.load(this.errorCardComponent);
-    }
-
-    isComponentDisplayed () {
-        return this.component.isDisplayed();
-    }
 
     isErrorCardComponentDisplayed () {
         return this.errorCardComponent.isDisplayed();

@@ -52,11 +52,7 @@ forEach(['desktop', 'mobile'])
         ['en-GB']
     ]).it('should display the %s Error page if GET fails', locale => {
         // Arrange
-        accountInfo
-        .withQuery('args', `locale:${locale};apiState:get-details-fails`);
-
-        // Act
-        accountInfo.loadError();
+        accountInfo.load({ locale, apiState: 'get-details-fails' });
 
         // Assert
         browser.percyScreenshot(`f-account-info - Load Error Page - ${locale}`, device);
@@ -66,8 +62,7 @@ forEach(['desktop', 'mobile'])
         ['en-GB']
     ]).it('should display the %s Submit success alert if Submit succeed', locale => {
         // Arrange
-        accountInfo.withQuery('args', `locale:${locale}`);
-        accountInfo.load();
+        accountInfo.load({ locale });
         accountInfo.clearBlurField('firstName');
         accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
 
@@ -82,8 +77,7 @@ forEach(['desktop', 'mobile'])
         ['en-GB']
     ]).it('should display the %s Submit error alert if Submit fails', locale => {
         // Arrange
-        accountInfo.withQuery('args', `locale:${locale};apiState:patch-details-fails`);
-        accountInfo.load();
+        accountInfo.load({ locale, apiState: 'patch-details-fails' });
         accountInfo.clearBlurField('firstName');
         accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
 
