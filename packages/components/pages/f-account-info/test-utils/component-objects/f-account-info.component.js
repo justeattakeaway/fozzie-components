@@ -1,6 +1,5 @@
 const Page = require('@justeat/f-wdio-utils/src/base.page');
 const {
-    COMPONENT,
     CHANGE_EMAIL_ADDRESS_LINK,
     SAVE_CHANGES_BUTTON,
     CHANGE_PASSWORD_BUTTON,
@@ -15,8 +14,6 @@ module.exports = class AccountInfo extends Page {
     constructor () {
         super('page', 'account-info-component');
     }
-
-    get component () { return $(COMPONENT); }
 
     get errorCardComponent () { return $(ERROR_CARD); }
 

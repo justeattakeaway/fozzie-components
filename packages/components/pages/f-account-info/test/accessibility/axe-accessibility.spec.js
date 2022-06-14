@@ -16,7 +16,7 @@ describe('Accessibility tests', () => {
         expect(axeResults.violations.length).toBe(0);
     });
 
-    it('a11y - should test f-account-info component WCAG compliance', () => {
+    it('a11y - should test f-account-info error card WCAG compliance', () => {
         // Arrange
         accountInfo.load({ apiState: 'get-details-fails' });
 
