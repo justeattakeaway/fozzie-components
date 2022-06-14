@@ -1,4 +1,4 @@
-const Page = require('@justeat/f-wdio-utils/src/page.object');
+const Page = require('@justeat/f-wdio-utils/src/base.page');
 
 module.exports = class FormField extends Page {
     constructor () {
@@ -10,10 +10,6 @@ module.exports = class FormField extends Page {
     get label () { return $('[data-test-id="formfield-label"]'); }
 
     get input () { return $('[data-test-id="formfield-input"]'); }
-
-    async isComponentDisplayed () {
-        return this.component.isDisplayed();
-    }
 
     async isLabelDisplayed () {
         return this.label.isDisplayed();
