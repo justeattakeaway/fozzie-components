@@ -2361,6 +2361,13 @@
   dependencies:
     "@justeat/f-services" "0.13.0"
 
+"@justeat/f-card@3.6.0":
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.6.0.tgz#4f740d7f63a27fd159fc65ea58025e2869212335"
+  integrity sha512-BQJs4+oZ/0EWegAjmWnFzfA0Wv2VPEUwoCHwEiLmxBTLTxK/RS7qVahFaTcmhA3hcm/esVnRhTZEKYUGf0yE6A==
+  dependencies:
+    "@justeat/f-services" "0.13.0"
+
 "@justeat/f-content-cards@8.0.0-beta.4":
   version "8.0.0-beta.4"
   resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-8.0.0-beta.4.tgz#ff7690532e6743ff4f2b83dd4d7aad04e1485c0a"
@@ -2450,6 +2457,13 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
+"@justeat/f-link@2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-link/-/f-link-2.3.0.tgz#f1af1b60c282a20db32c22f7db0051fd6d450d41"
+  integrity sha512-EXnTvdfHA3FUfxjP4sGZ/x0dj66WPr7gXWtG4Ro3OMckuyDyRkMLhx+viuGwfKTET77FELmSFAo+21YywGedVA==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
+
 "@justeat/f-media-element@2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-media-element/-/f-media-element-2.0.0.tgz#0995cdbb902252cad6e15c4786c1547d2c6ee083"
@@ -2476,6 +2490,13 @@
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-navigation-links/-/f-navigation-links-1.1.0.tgz#ad3f0ae6eff67e625c9878bbd6a050a236c663d8"
   integrity sha512-4aPChcvInn0sGVJkERS9VecU9Hq5K6l7ALK7Qvy/qu9NuPPbm7nWvOytsCPez8d6i2W/zkkb1UTyMzAg/momew==
+
+"@justeat/f-popover@2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-popover/-/f-popover-2.3.0.tgz#4428d8b324a487a44e9179f357c6552403ab9db7"
+  integrity sha512-7rCAM5P6W8pLSavob0HYE9sA8Mxgay7GVAwkpAnDyADQiubgiLUDoGAhUsR/D8MZ2p/smFOupyDlr1rJung5oQ==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
 
 "@justeat/f-searchbox@6.0.0":
   version "6.0.0"
