@@ -119,6 +119,7 @@
 
                 <form-field
                     :value="consumer.line2"
+                    :is-required="false"
                     name="account-info-consumer-line2"
                     autocomplete="on"
                     maxlength="50"
@@ -127,6 +128,7 @@
 
                 <form-field
                     :value="consumer.line3"
+                    :is-required="false"
                     name="account-info-consumer-line3"
                     autocomplete="on"
                     maxlength="50"
