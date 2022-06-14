@@ -8,16 +8,13 @@
     </div>
 </template>
 
-<script>
-<% if (config.needsComponentTranslations) { %>import { globalisationServices } from '@justeat/f-services';
+<script><% if (config.needsComponentTranslations) { %>
+import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
-<%
-}
-if (config.needsTestingApiMocks) { %>
+<% } if (config.needsTestingApiMocks) { %>
 // eslint-disable-next-line no-unused-vars
 import <%= name.filename%>ServiceApi from '../services/<%= name.filename%>ServiceApi';
-<%
-} %>
+<% } %>
 export default {
     name: '<%= name.component %>',
     components: {},
@@ -39,7 +36,6 @@ export default {
 </script>
 
 <style lang="scss" module>
-
 .c-<%= name.class %> {
     display: flex;
     justify-content: center;
@@ -50,5 +46,4 @@ export default {
     font-family: $font-family-base;
     @include font-size(heading-m);
 }
-
 </style>

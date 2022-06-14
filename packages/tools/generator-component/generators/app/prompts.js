@@ -73,7 +73,7 @@ const prompts = [
         message: "What size limit do you want in place for your bundles (in kB)? e.g. '15'",
         name: 'bundlewatchMaxSize',
         type: 'input',
-        default: '5',
+        default: '20',
         when: function shouldShowThisQuestion (answers) {
             return answers.needsBundlewatch === true;
         }
@@ -82,7 +82,7 @@ const prompts = [
         message: 'Does your component require browser-based Component Tests?',
         name: 'needsComponentTests',
         type: 'confirm',
-        default: false,
+        default: true,
         when: function shouldShowThisQuestion (answers) {
             return answers.componentType === 'uiComponent';
         }
@@ -91,7 +91,7 @@ const prompts = [
         message: 'Does your component require Visual Regression Tests?',
         name: 'needsVisualTests',
         type: 'confirm',
-        default: false,
+        default: true,
         when: function shouldShowThisQuestion (answers) {
             return answers.componentType === 'uiComponent';
         }

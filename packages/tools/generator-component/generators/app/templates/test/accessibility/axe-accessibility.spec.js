@@ -2,18 +2,19 @@ import { getAxeResults } from '../../../../../../test/utils/axe-helper'; // esli
 
 const <%= name.filename %> = require('../../test-utils/component-objects/f-<%= name.default %>.component');
 
-const <%= name.class %> = new <%= name.filename %>();
+describe('f-<%= name.default %> - Accessibility tests', () => {
+    let <%= name.class %>;
 
-describe('Accessibility tests', () => {
     beforeEach(() => {
-        <%= name.class %>.load();
+        <%= name.class %> = new <%= name.filename %>();
     });
 
     it('a11y - should test f-<%= name.default %> component WCAG compliance', () => {
         // Act
-        const axeResults = getAxeResults('f-<%= name.default %>');
+        <%= name.class %>.load();
 
         // Assert
+        const axeResults = getAxeResults('f-<%= name.default %>');
         expect(axeResults.violations.length).toBe(0);
     });
 });
