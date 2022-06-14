@@ -1,7 +1,7 @@
 <template>
     <div
         :class="$style['c-popover']"
-        data-test-id="popover">
+        data-test-id="popover-component">
         <slot />
     </div>
 </template>
