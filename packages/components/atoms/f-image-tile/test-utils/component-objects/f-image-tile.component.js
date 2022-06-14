@@ -1,14 +1,8 @@
-const Page = require('@justeat/f-wdio-utils/src/page.object');
+const Page = require('@justeat/f-wdio-utils/src/base.page');
 
 module.exports = class ImageTile extends Page {
     constructor () {
         super('atom', 'image-tile-component');
-    }
-
-    get component () { return $('[data-test-id="image-tile-component"]'); }
-
-    async isComponentDisplayed () {
-        return this.component.isDisplayed();
     }
 
     async isComponentClickable () {
