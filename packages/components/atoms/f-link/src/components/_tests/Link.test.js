@@ -63,7 +63,7 @@ describe('Link', () => {
             mocks
         });
 
-        const link = wrapper.find('[data-test-id="link-component"]');
+        const link = wrapper.find('[data-test-id="v-link-component"]');
         const routerLink = wrapper.findComponent(RouterLinkStub);
 
         // Assert
@@ -86,7 +86,7 @@ describe('Link', () => {
             mocks
         });
 
-        const link = wrapper.find('[data-test-id="link-component"]');
+        const link = wrapper.find('[data-test-id="v-link-component"]');
         const routerLink = wrapper.findComponent(RouterLinkStub);
 
         // Assert
@@ -106,7 +106,7 @@ describe('Link', () => {
                     mocks
                 });
 
-                const link = wrapper.find('[data-test-id="link-component"]');
+                const link = wrapper.find('[data-test-id="v-link-component"]');
 
                 // Assert
                 expect(link.attributes('class')).toContain('o-link--bold');
@@ -124,7 +124,7 @@ describe('Link', () => {
                     mocks
                 });
 
-                const link = wrapper.find('[data-test-id="link-component"]');
+                const link = wrapper.find('[data-test-id="v-link-component"]');
 
                 // Assert
                 expect(link.attributes('class')).toContain('o-link--noDecoration');
@@ -142,7 +142,7 @@ describe('Link', () => {
                     mocks
                 });
 
-                const link = wrapper.find('[data-test-id="link-component"]');
+                const link = wrapper.find('[data-test-id="v-link-component"]');
 
                 // Assert
                 expect(link.attributes('class')).toContain('o-link--full');
@@ -160,7 +160,7 @@ describe('Link', () => {
                     mocks
                 });
 
-                const link = wrapper.find('[data-test-id="link-component"]');
+                const link = wrapper.find('[data-test-id="v-link-component"]');
 
                 // Assert
                 expect(link.attributes('class')).toContain('o-link--noBreak');
@@ -250,7 +250,7 @@ describe('Link', () => {
                 });
 
                 // Assert
-                expect(wrapper.find('[data-test-id="link-component"]').attributes('link-class')).toBeUndefined();
+                expect(wrapper.find('[data-test-id="v-link-component"]').attributes('link-class')).toBeUndefined();
             });
 
             it('should set any other custom attributes on the wrapper not link-class', () => {
@@ -269,7 +269,7 @@ describe('Link', () => {
                 });
 
                 // Assert
-                expect(wrapper.find('[data-test-id="link-component"]').attributes('test-attribute')).toEqual(expected);
+                expect(wrapper.find('[data-test-id="v-link-component"]').attributes('test-attribute')).toEqual(expected);
             });
 
             it('should set data.linkClass to empty string when link-class attribute is not passed', () => {
