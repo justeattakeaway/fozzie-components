@@ -37,10 +37,18 @@ module.exports = {
                     );
                     const relPath = path.relative(path.dirname(resourcePath), absPath)
                         .replace(new RegExp(path.sep.replace('\\', '\\\\'), 'g'), '/');
-                    return `
+
+                    if (!(absPath.includes('f-form-field') || absPath.includes('f-button'))) {
+                        return `
                     @use "sass:math";
                     @import "${relPath}";
                     ${content}`;
+                    } else {
+                        return `
+                    @use "sass:math";
+                    @use "${relPath}" as *;
+                    ${content}`;
+                    }
                 }
             });
 
