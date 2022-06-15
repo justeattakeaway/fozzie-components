@@ -46,7 +46,6 @@
     "core-js": "3.6.5",
     "eslint": "7.32.0",
     "jest-extended": "0.11.5",
-    "vite": "2.9.12",
     "bowser": "2.11.0"
   }
 }
