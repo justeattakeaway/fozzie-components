@@ -48,7 +48,7 @@
     "lodash.uniq": "4.5.0"
   },
   "devDependencies": {
-    "@braze/web-sdk": "^3.3.0",
+    "@braze/web-sdk": "3.5.1",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",
     "core-js": "3.6.5",

@@ -46,7 +46,7 @@
     "jest": "25.4.0",
     "jest-teamcity": "1.7.0",
     "vite": "2.4.4",
-    "vue": "^3.0.0"
+    "vue": "3.2.36"
   },
   "peerDependencies": {
     "@justeat/f-feature-management": "0.4.0",
