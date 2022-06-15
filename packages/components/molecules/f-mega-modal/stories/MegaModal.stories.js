@@ -18,13 +18,15 @@ export const MegaModalComponent = (args, { argTypes }) => ({
             :is-full-height="isFullHeight"
             :is-scrollable="isScrollable"
             :is-close-fixed="isCloseFixed"
+            :is-positioned-bottom="isPositionedBottom"
             :is-close-rounded="isCloseRounded"
             :is-text-aligned-center="isTextAlignedCenter"
             :has-overlay="hasOverlay"
             :has-close-button="hasCloseButton"
             :close-on-blur="closeOnBlur"
             :close-button-copy="closeButtonCopy"
-            :title="titleCopy">
+            :title="titleCopy"
+            :titleHtmlTag="titleHtmlTag">
 
             <p data-test-id="mega-modal-content">
                 Let's find another restaurant to order from.
@@ -42,13 +44,15 @@ MegaModalComponent.args = {
     isFullHeight: false,
     isScrollable: false,
     isCloseFixed: false,
+    isPositionedBottom: false,
     isCloseRounded: false,
     isTextAlignedCenter: false,
     hasOverlay: true,
     hasCloseButton: true,
     closeOnBlur: true,
     closeButtonCopy: 'Close modal',
-    titleCopy: 'This place isn’t taking orders'
+    titleCopy: 'This place isn’t taking orders',
+    titleHtmlTag: 'h3'
 };
 
 MegaModalComponent.argTypes = {
@@ -73,6 +77,9 @@ MegaModalComponent.argTypes = {
     isCloseFixed: {
         control: { type: 'boolean' }
     },
+    isPositionedBottom: {
+        control: { type: 'boolean' }
+    },
     isCloseRounded: {
         control: { type: 'boolean' }
     },
@@ -90,6 +97,10 @@ MegaModalComponent.argTypes = {
     },
     titleCopy: {
         control: { type: 'text' }
+    },
+    titleHtmlTag: {
+        control: { type: 'text' },
+        options: ['h1', 'h2', 'h3', 'h4']
     }
 };
 
