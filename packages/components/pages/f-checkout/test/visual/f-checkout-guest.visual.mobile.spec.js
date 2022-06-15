@@ -1,5 +1,3 @@
-import argumentStringBuilder from '../../test-utils/component-objects/argumentStringBuilder';
-
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout = new Checkout();
@@ -7,15 +5,21 @@ let checkout = new Checkout();
 const illegalMobileNumber = '123';
 
 describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
+    const checkoutInfo = {
+        serviceType: 'collection',
+        isLoggedIn: false,
+        isAsapAvailable: false,
+        locale: 'en-GB'
+    };
+
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ serviceType: 'collection', isLoggedIn: false });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo
+        });
     });
 
     it('should display the component base state.', () => {
@@ -44,9 +48,6 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ serviceType: 'collection', isLoggedIn: false, placeOrderError: 'duplicate' });
-        checkout.withQuery('args', args);
-
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -57,7 +58,10 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
         checkout.inputFieldValues = customerInfo;
 
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            placeOrderError: 'duplicate'
+        });
         checkout.setFieldValues();
         checkout.goToPayment();
 
@@ -71,11 +75,13 @@ describe('f-checkout - Collection - Guest - isAsapAvailable: false Mobile Visual
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ serviceType: 'collection', isLoggedIn: false, isAsapAvailable: false });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            serviceType: 'collection',
+            isLoggedIn: false,
+            isAsapAvailable: false,
+            locale: 'en-GB'
+        });
     });
 
     it('should display the pre-order warning.', () => {
@@ -86,15 +92,21 @@ describe('f-checkout - Collection - Guest - isAsapAvailable: false Mobile Visual
 
 
 describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
+    const checkoutInfo = {
+        serviceType: 'delivery',
+        isLoggedIn: false,
+        isAsapAvailable: false,
+        locale: 'en-GB'
+    };
+
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ isLoggedIn: false });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo
+        });
     });
 
     it('should display the delivery f-checkout component guest base state.', () => {
@@ -123,11 +135,6 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ isLoggedIn: false, placeOrderError: 'duplicate' });
-        checkout.withQuery('args', args);
-
-        checkout.load();
-
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -141,6 +148,10 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
         checkout.inputFieldValues = customerInfo;
 
         // Act
+        checkout.load({
+            ...checkoutInfo,
+            placeOrderError: 'duplicate'
+        });
         checkout.setFieldValues();
         checkout.goToPayment();
 
@@ -154,11 +165,13 @@ describe('f-checkout - Delivery - Guest - isAsapAvailable: false Mobile Visual T
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ isLoggedIn: false, isAsapAvailable: false });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            serviceType: 'delivery',
+            isLoggedIn: false,
+            isAsapAvailable: false,
+            locale: 'en-GB'
+        });
     });
 
     it('should display the pre-order warning.', () => {
@@ -168,15 +181,21 @@ describe('f-checkout - Delivery - Guest - isAsapAvailable: false Mobile Visual T
 });
 
 describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
+    const checkoutInfo = {
+        serviceType: 'dinein',
+        isLoggedIn: false,
+        isAsapAvailable: false,
+        locale: 'en-GB'
+    };
+
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ serviceType: 'dinein', isLoggedIn: false, isAsapAvailable: false });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo
+        });
     });
 
     it('should display the component base state.', () => {
@@ -206,11 +225,6 @@ describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({
-            serviceType: 'dinein', isLoggedIn: false, isAsapAvailable: false, placeOrderError: 'duplicate'
-        });
-        checkout.withQuery('args', args);
-
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -222,7 +236,10 @@ describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
         checkout.inputFieldValues = customerInfo;
 
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            placeOrderError: 'duplicate'
+        });
         checkout.setFieldValues();
         checkout.goToPayment();
 

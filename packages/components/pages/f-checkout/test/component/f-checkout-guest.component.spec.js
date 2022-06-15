@@ -1,5 +1,4 @@
 import forEach from 'mocha-each';
-import argumentStringBuilder from '../../test-utils/component-objects/argumentStringBuilder';
 
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
@@ -10,11 +9,13 @@ describe('f-checkout "guest" component tests', () => {
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ isLoggedIn: false });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            serviceType: 'delivery',
+            isLoggedIn: false,
+            isAsapAvailable: true,
+            locale: 'en-GB'
+        });
     });
 
     it('should navigate to correct url when the login link is clicked', () => {

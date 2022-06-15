@@ -1,5 +1,3 @@
-import argumentStringBuilder from '../../test-utils/component-objects/argumentStringBuilder';
-
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
@@ -7,15 +5,22 @@ let checkout;
 const illegalMobileNumber = '123';
 
 describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => {
+    const checkoutInfo = {
+        serviceType: 'collection',
+        isLoggedIn: true,
+        isAsapAvailable: true,
+        locale: 'en-GB'
+    };
+
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ serviceType: 'collection' });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            placeOrderError: 'duplicate'
+        });
     });
 
     it('should display the component base state.', () => {
@@ -33,14 +38,11 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
     });
 
     it('should display the "Something went wrong" error.', () => {
-        // Arrange
-        checkout = new Checkout();
-
-        const args = argumentStringBuilder({ serviceType: 'collection', patchCheckoutError: 'SERVER' });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            patchCheckoutError: 'SERVER'
+        });
         checkout.goToPayment();
 
         // Assert
@@ -48,14 +50,11 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
     });
 
     it('should display the "Restaurant not taking orders" modal', () => {
-        // Arrange
-        checkout = new Checkout();
-
-        const args = argumentStringBuilder({ serviceType: 'collection', patchCheckoutError: 'restaurant-not-taking-orders' });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            patchCheckoutError: 'restaurant-not-taking-orders'
+        });
         checkout.goToPayment();
 
         // Assert
@@ -63,14 +62,11 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
     });
 
     it('should display the "Additional Items Required" modal', () => {
-        // Arrange
-        checkout = new Checkout();
-
-        const args = argumentStringBuilder({ serviceType: 'collection', patchCheckoutError: 'additional-items-required' });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            patchCheckoutError: 'additional-items-required'
+        });
         checkout.goToPayment();
 
         // Assert
@@ -88,18 +84,26 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
-        // Arrange
-        checkout = new Checkout();
-
-        const args = argumentStringBuilder({ serviceType: 'collection', placeOrderError: 'duplicate' });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            placeOrderError: 'duplicate'
+        });
         checkout.goToPayment();
 
         // Assert
         browser.percyScreenshot('f-checkout - Collection - Authenticated - "Duplicate Order Warning" Modal', 'mobile');
+    });
+
+    it('should display the two notes fields if there is two noteTypes.', () => {
+        // Act
+        checkout.load({
+            ...checkoutInfo,
+            noteType: 'get-notes-config-split'
+        });
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Collection - Authenticated - Base State - Two Notes Inputs', 'mobile');
     });
 });
 
@@ -108,11 +112,13 @@ describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Mobil
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ isAsapAvailable: false });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            serviceType: 'collection',
+            isLoggedIn: true,
+            isAsapAvailable: false,
+            locale: 'en-GB'
+        });
     });
 
     it('should display the pre-order warning.', () => {
@@ -122,15 +128,21 @@ describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Mobil
 });
 
 describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
+    const checkoutInfo = {
+        serviceType: 'delivery',
+        isLoggedIn: true,
+        isAsapAvailable: true,
+        locale: 'en-GB'
+    };
+
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder();
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo
+        });
     });
 
     it('should display the component base state.', () => {
@@ -144,7 +156,7 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Manadatory Errors', 'mobile');
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Mandatory Errors', 'mobile');
     });
 
     it('should display the illegal postcode error message', () => {
@@ -171,14 +183,11 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {
-        // Arrange
-        checkout = new Checkout();
-
-        const args = argumentStringBuilder({ placeOrderError: 'duplicate' });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            placeOrderError: 'duplicate'
+        });
         checkout.goToPayment();
 
         // Assert
@@ -186,14 +195,11 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
     });
 
     it('should display the "Restaurant not taking orders" modal', () => {
-        // Arrange
-        checkout = new Checkout();
-
-        const args = argumentStringBuilder({ patchCheckoutError: 'restaurant-not-taking-orders' });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            patchCheckoutError: 'restaurant-not-taking-orders'
+        });
         checkout.goToPayment();
 
         // Assert
@@ -201,14 +207,11 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
     });
 
     it('should display the "Additional Items Required" modal', () => {
-        // Arrange
-        checkout = new Checkout();
-
-        const args = argumentStringBuilder({ patchCheckoutError: 'additional-items-required' });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            patchCheckoutError: 'additional-items-required'
+        });
         checkout.goToPayment();
 
         // Assert
@@ -221,11 +224,13 @@ describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Mobile 
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ isAsapAvailable: false });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            serviceType: 'delivery',
+            isLoggedIn: true,
+            isAsapAvailable: false,
+            locale: 'en-GB'
+        });
     });
 
     it('should display the pre-order warning.', () => {
@@ -235,15 +240,21 @@ describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Mobile 
 });
 
 describe('f-checkout - Dine In - Authenticated - Mobile Visual Tests', () => {
+    const checkoutInfo = {
+        serviceType: 'dinein',
+        isLoggedIn: true,
+        isAsapAvailable: true,
+        locale: 'en-GB'
+    };
+
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ serviceType: 'dinein' });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo
+        });
     });
 
     it('should display the component base state.', () => {
@@ -257,7 +268,7 @@ describe('f-checkout - Dine In - Authenticated - Mobile Visual Tests', () => {
         checkout.goToPayment();
 
         // Assert
-        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Manadatory Errors', 'mobile');
+        browser.percyScreenshot('f-checkout - Dine In - Authenticated - Mandatory Errors', 'mobile');
     });
 
     it('should display the illegal mobile number error message', () => {
@@ -274,11 +285,11 @@ describe('f-checkout - Dine In - Authenticated - Mobile Visual Tests', () => {
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ serviceType: 'dinein', placeOrderError: 'duplicate' });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            placeOrderError: 'duplicate'
+        });
         checkout.goToPayment();
 
         // Assert
