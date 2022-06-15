@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-analytics",
   "description": "Fozzie Analytics - A utility that encapsulates the GTM / Google Analytics functionality",
-  "version": "0.17.0",
+  "version": "0.17.1",
   "maxBundleSize": "200kB",
   "main": "dist/f-analytics.umd.js",
   "module": "dist/f-analytics.es.js",
@@ -49,6 +49,6 @@
     "eslint": "7.32.0",
     "jest-extended": "0.11.5",
     "jest-when": "^3.3.1",
-    "vite": "2.4.4"
+    "vite": "2.9.12"
   }
 }
