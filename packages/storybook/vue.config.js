@@ -46,12 +46,12 @@ module.exports = {
                         @use "sass:math";
                         @import "${relPath}";
                         ${content}`;
-                    } else {
-                        return `
+                    }
+
+                    return `
                         @use "sass:math";
                         @use "${relPath}" as *;
                         ${content}`;
-                    }
                 }
             });
 

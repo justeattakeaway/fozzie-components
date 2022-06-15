@@ -2747,10 +2747,10 @@
     "@justeat/pie-design-tokens" "1.4.0"
     include-media "1.4.10"
 
-"@justeat/fozzie@9.0.0-beta.1":
-  version "9.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.1.tgz#e960a47fba991cbbf4f6cc4ad46243b7756e5189"
-  integrity sha512-S9GYwqWXGtx84basRPWzyRTyPWIKlrP3N9X+A/gwVkxKMFvy9dqnPoyF9uoUEUSXknrHpp+drhMNM5BbCZHDww==
+"@justeat/fozzie@9.0.0-beta.2":
+  version "9.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.2.tgz#678404404597eac15b9b45362febae090af5fcaf"
+  integrity sha512-DuiVeJ0EEmVB7YkxrhFGyjxEMVzBI1f+sp2RQlVVM/F7wbTuF4enFBZzN6WtF0PDQB8BxA1g9s/uJS7uCI2l+Q==
   dependencies:
     "@justeat/pie-design-tokens" "1.4.0"
     include-media eduardoboucas/include-media#2.0-release
@@ -14961,7 +14961,7 @@ include-media@1.4.9:
   resolved "https://registry.yarnpkg.com/include-media/-/include-media-1.4.9.tgz#d0020b7be3eb2d54868a20943595ce380e0bc43b"
   integrity sha1-0AILe+PrLVSGiiCUNZXOOA4LxDs=
 
-include-media@eduardoboucas/include-media#2.0-release:
+"include-media@github:eduardoboucas/include-media#2.0-release":
   version "2.0.0"
   resolved "https://codeload.github.com/eduardoboucas/include-media/tar.gz/5398b556d4bb24186d360c950b19026f577ff8e5"
 
