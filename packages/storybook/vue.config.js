@@ -38,16 +38,19 @@ module.exports = {
                     const relPath = path.relative(path.dirname(resourcePath), absPath)
                         .replace(new RegExp(path.sep.replace('\\', '\\\\'), 'g'), '/');
 
-                    if (!(absPath.includes('f-form-field') || absPath.includes('f-button'))) {
+                    const updatedAtoms = ['f-form-field', 'f-button'];
+                    const pathContainsUpdatedAtom = updatedAtoms.some(a => absPath.includes(a));
+
+                    if (!pathContainsUpdatedAtom) {
                         return `
-                    @use "sass:math";
-                    @import "${relPath}";
-                    ${content}`;
+                        @use "sass:math";
+                        @import "${relPath}";
+                        ${content}`;
                     } else {
                         return `
-                    @use "sass:math";
-                    @use "${relPath}" as *;
-                    ${content}`;
+                        @use "sass:math";
+                        @use "${relPath}" as *;
+                        ${content}`;
                     }
                 }
             });
