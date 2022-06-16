@@ -9,11 +9,6 @@ v4.0.0
 
 ### Changed
 - *** Breaking change *** - Implement @use for fozzie where required.
-- Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
-- Upgraded to ESLint v8
-
-### Removed
-- unneeded `load` and `waitForComponent` functions from component object
 
 
 v3.6.1
