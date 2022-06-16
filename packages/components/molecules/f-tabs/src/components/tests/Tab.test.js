@@ -67,7 +67,7 @@ describe('Tab.vue', () => {
 
         it('should show', () => {
             // Assert
-            const tab = activeWrapper.find('.c-tab');
+            const tab = activeWrapper.find(`[data-test-id="tab-content-${REGISTER_DATA.name}"]`);
             expect(tab.isVisible()).toBe(true);
         });
     });
@@ -95,7 +95,7 @@ describe('Tab.vue', () => {
 
         it('should not show', () => {
             // Assert
-            const tab = inactiveWrapper.find('.c-tab');
+            const tab = inactiveWrapper.find(`[data-test-id="tab-content-${REGISTER_DATA.name}"]`);
             expect(tab.isVisible()).toBe(false);
         });
 
