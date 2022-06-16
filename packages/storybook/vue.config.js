@@ -38,7 +38,17 @@ module.exports = {
                     const relPath = path.relative(path.dirname(resourcePath), absPath)
                         .replace(new RegExp(path.sep.replace('\\', '\\\\'), 'g'), '/');
 
-                    const updatedAtoms = ['f-form-field', 'f-button', 'f-card', 'f-error-message', 'f-image-tile', 'f-link', 'f-popover', 'f-spinner'];
+                    const updatedAtoms = [
+                        'f-form-field',
+                        'f-button',
+                        'f-card',
+                        'f-error-message',
+                        'f-image-tile',
+                        'f-link',
+                        'f-popover',
+                        'f-spinner',
+                        'f-filter-pill'
+                    ];
                     const pathContainsUpdatedAtom = updatedAtoms.some(a => absPath.includes(a));
 
                     if (!pathContainsUpdatedAtom) {
