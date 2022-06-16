@@ -38,7 +38,6 @@ describe('f-account-info component tests', () => {
     it('should redirect to the correct URL when `change password` has been clicked', () => {
         // Act
         accountInfo.load();
-
         accountInfo.clickChangePassword();
 
         // Assert
@@ -65,7 +64,6 @@ describe('f-account-info component tests', () => {
 
         // Act
         accountInfo.load();
-
         accountInfo.clickChangeEmailAddressLink();
         browser.switchWindow(new RegExp(`^.*${expectedUrl}.*$`));
 
@@ -131,7 +129,7 @@ describe('f-account-info component tests', () => {
     forEach([
         ['en-GB']
     ]).it('should display the %s Error page if GET fails', locale => {
-        // Arrange
+        // Act
         accountInfo.load({ locale, apiState: 'get-details-fails' });
 
         // Assert
@@ -141,12 +139,10 @@ describe('f-account-info component tests', () => {
     forEach([
         ['en-GB']
     ]).it('should display the %s Submit success alert if Submit succeed', locale => {
-        // Arrange
+        // Act
         accountInfo.load({ locale });
         accountInfo.clearBlurField('firstName');
         accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
-
-        // Act
         accountInfo.clickSaveButton();
 
         // Assert
@@ -157,12 +153,10 @@ describe('f-account-info component tests', () => {
     forEach([
         ['en-GB']
     ]).it('should display the %s Submit error alert if Submit fails', locale => {
-        // Arrange
+        // Act
         accountInfo.load({ locale, apiState: 'patch-details-fails' });
         accountInfo.clearBlurField('firstName');
         accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
-
-        // Act
         accountInfo.clickSaveButton();
 
         // Assert

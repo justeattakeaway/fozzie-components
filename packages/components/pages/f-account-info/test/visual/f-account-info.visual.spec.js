@@ -51,7 +51,7 @@ forEach(['desktop', 'mobile'])
     forEach([
         ['en-GB']
     ]).it('should display the %s Error page if GET fails', locale => {
-        // Arrange
+        // Act
         accountInfo.load({ locale, apiState: 'get-details-fails' });
 
         // Assert
@@ -61,12 +61,10 @@ forEach(['desktop', 'mobile'])
     forEach([
         ['en-GB']
     ]).it('should display the %s Submit success alert if Submit succeed', locale => {
-        // Arrange
+        // Act
         accountInfo.load({ locale });
         accountInfo.clearBlurField('firstName');
         accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
-
-        // Act
         accountInfo.clickSaveButton();
 
         // Assert
@@ -76,12 +74,10 @@ forEach(['desktop', 'mobile'])
     forEach([
         ['en-GB']
     ]).it('should display the %s Submit error alert if Submit fails', locale => {
-        // Arrange
+        // Act
         accountInfo.load({ locale, apiState: 'patch-details-fails' });
         accountInfo.clearBlurField('firstName');
         accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
-
-        // Act
         accountInfo.clickSaveButton();
 
         // Assert

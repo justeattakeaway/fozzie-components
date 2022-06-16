@@ -6,10 +6,8 @@ const accountInfo = new AccountInfo();
 
 describe('Accessibility tests', () => {
     it('a11y - should test f-account-info component WCAG compliance', () => {
-        // Arrange
-        accountInfo.load();
-
         // Act
+        accountInfo.load();
         const axeResults = getAxeResults('f-account-info');
 
         // Assert
@@ -17,10 +15,8 @@ describe('Accessibility tests', () => {
     });
 
     it('a11y - should test f-account-info error card WCAG compliance', () => {
-        // Arrange
-        accountInfo.load({ apiState: 'get-details-fails' });
-
         // Act
+        accountInfo.load({ apiState: 'get-details-fails' });
         const axeResults = getAxeResults('f-account-info-error-card');
 
         // Assert
