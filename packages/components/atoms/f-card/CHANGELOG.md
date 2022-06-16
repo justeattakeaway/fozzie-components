@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0
+------------------------------
+*June 15, 2022*
+
+### Changed
+- *** Breaking change *** - Implement @use for fozzie where required.
+- Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
+- Upgraded to ESLint v8
+-
+### Removed
+- unneeded `load` and `waitForComponent` functions from component object
+
 
 v3.6.1
 -----------------------------
