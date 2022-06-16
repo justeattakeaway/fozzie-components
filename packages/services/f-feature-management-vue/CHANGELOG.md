@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.1.1
+------------------------------
+*June 15, 2022*
+
+### Removed
+- Removed vite as a dependency and moved to monorepo root `package.json` to solve version conflict issue
+
+
 v0.1.0
 ------------------------------
 *September 16, 2021*
