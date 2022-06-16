@@ -6,6 +6,7 @@ describe('f-loyalty component tests', () => {
         loyalty = new Loyalty();
 
         loyalty.load();
+        browser.debug();
     });
 
     it('should display the f-loyalty component', () => {

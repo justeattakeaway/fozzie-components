@@ -3,7 +3,7 @@
         <div
             v-if="showLoyaltyNavigationElements"
             :class="$style['c-loyalty']"
-            data-test-id="loyalty">
+            data-test-id="v-loyalty-component">
             <loyalty-header />
             <div
                 :class="$style['c-loyalty-tabs']">
