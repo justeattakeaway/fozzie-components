@@ -38,20 +38,13 @@ module.exports = {
                     const relPath = path.relative(path.dirname(resourcePath), absPath)
                         .replace(new RegExp(path.sep.replace('\\', '\\\\'), 'g'), '/');
 
-                    const updatedAtoms = [
-                        'f-form-field',
-                        'f-button',
-                        'f-card',
-                        'f-error-message',
-                        'f-image-tile',
-                        'f-link',
-                        'f-popover',
-                        'f-spinner',
-                        'f-filter-pill'
-                    ];
-                    const pathContainsUpdatedAtom = updatedAtoms.some(a => absPath.includes(a));
+                    // so far only Atoms have been updated, add component names 1 by 1 to this array as they're updated
+                    // to the new Sass syntax OR the entire component folder if all completed
+                    // i.e. // [ 'atoms', 'molecules', 'f-checkout' ]
+                    const updateComponentsAndTypes = [ 'atoms' ];
+                    const pathContainsUpdatedComponentOrType = updateComponentsAndTypes.some(a => absPath.includes(a));
 
-                    if (!pathContainsUpdatedAtom) {
+                    if (!pathContainsUpdatedComponentOrType) {
                         return `
                         @use "sass:math";
                         @import "${relPath}";
