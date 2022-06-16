@@ -8,6 +8,7 @@
         data-test-id="image-tile-component">
         <image-tile-skeleton
             v-if="isLoading"
+            data-test-id="image-tile-skeleton"
             aria-hidden="true" />
         <template v-else>
             <a
@@ -149,7 +150,7 @@ export default {
         },
         isLoading: {
             type: Boolean,
-            default: true
+            default: false
         }
     },
     data () {

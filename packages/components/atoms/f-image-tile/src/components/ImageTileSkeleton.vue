@@ -13,7 +13,6 @@ export default {
 
 <style lang="scss" module>
 @mixin skeletonLoader () {
-    min-height: 1em;
     position: relative;
     overflow: hidden;
 
@@ -40,20 +39,21 @@ export default {
 }
 
 .c-imageTile-skeleton {
-     @include skeletonLoader();
+    @include skeletonLoader();
 }
 
 .c-imageTile-skeletonImage {
     background-color: $color-skeleton-02;
     border-radius: spacing(b);
     display: block;
-    padding: 40px 30px;
+    padding: 45px 30px;
+    margin: spacing(a);
     margin-bottom: spacing(c);
 }
 
 .c-imageTile-skeletonText {
     width: 50%;
-    padding: spacing(b);
+    padding: 10px;
     background-color: $color-skeleton-02;
     display: block;
     border-radius: spacing(a);
