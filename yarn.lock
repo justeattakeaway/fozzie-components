@@ -2394,6 +2394,13 @@
     "@justeat/f-services" "1.0.1"
     core-js "3.6.5"
 
+"@justeat/f-cookie-banner@3.9.0":
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-cookie-banner/-/f-cookie-banner-3.9.0.tgz#1d005d448e412dab0f976da19293287c455b5cf8"
+  integrity sha512-Yi93qveb5mSZBF6XKoNMJQVTWxYPZN8HNJsrJcLPJHeuHdHUeLKqJJpp5h2l9oQAsS/bP4qNB3GcQ93egOEXoA==
+  dependencies:
+    "@justeat/f-services" "1.14.0"
+
 "@justeat/f-dom@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-0.4.0.tgz#3e838a2dd06d4d5281c17f5fb9f66d7485fd759a"
@@ -2757,6 +2764,14 @@
   dependencies:
     "@justeat/pie-design-tokens" "1.4.0"
     include-media "1.4.10"
+
+"@justeat/fozzie@9.0.0-beta.2":
+  version "9.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.2.tgz#678404404597eac15b9b45362febae090af5fcaf"
+  integrity sha512-DuiVeJ0EEmVB7YkxrhFGyjxEMVzBI1f+sp2RQlVVM/F7wbTuF4enFBZzN6WtF0PDQB8BxA1g9s/uJS7uCI2l+Q==
+  dependencies:
+    "@justeat/pie-design-tokens" "1.4.0"
+    include-media eduardoboucas/include-media#2.0-release
 
 "@justeat/pie-design-tokens@1.4.0":
   version "1.4.0"
@@ -14965,6 +14980,10 @@ include-media@1.4.9:
   resolved "https://registry.yarnpkg.com/include-media/-/include-media-1.4.9.tgz#d0020b7be3eb2d54868a20943595ce380e0bc43b"
   integrity sha512-IUOcvWDCt6R5V0ktsGk6RbehkW9ks1dODN2ed1p+mhML82TteAl+/ElXy8AJ7ueIuVoKq2NioRVdW9FuwQNOew==
 
+include-media@eduardoboucas/include-media#2.0-release:
+  version "2.0.0"
+  resolved "https://codeload.github.com/eduardoboucas/include-media/tar.gz/5398b556d4bb24186d360c950b19026f577ff8e5"
+
 indent-string@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/indent-string/-/indent-string-2.1.0.tgz#8e2d48348742121b4a8218b7a137e9a52049dc80"
@@ -19303,9 +19322,9 @@ mz@^2.4.0, mz@^2.5.0:
     thenify-all "^1.0.0"
 
 nan@^2.12.1:
-  version "2.15.0"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.15.0.tgz#3f34a473ff18e15c1b5626b62903b5ad6e665fee"
-  integrity sha512-8ZtvEnA2c5aYCZYd1cvgdnU6cqwixRoYg70xPLWUws5ORTa/lnw+u4amixRS/Ac5U5mQVgp9pnlSUnbNWFaWZQ==
+  version "2.16.0"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.16.0.tgz#664f43e45460fb98faf00edca0bb0d7b8dce7916"
+  integrity sha512-UdAqHyFngu7TfQKsCBgAA6pWDkT8MAO7d0jyOecVhN5354xbLqdn8mV9Tat9gepAupm0bt2DbeaSC8vS52MuFA==
 
 nanoid@3.3.3:
   version "3.3.3"
@@ -24091,9 +24110,9 @@ source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.0, source-map@~0.6.1:
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
 source-map@^0.7.3:
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.3.tgz#5302f8169031735226544092e64981f751750383"
-  integrity sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.4.tgz#a9bbe705c9d8846f4e08ff6765acf0f1b0898656"
+  integrity sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==
 
 sourcemap-codec@^1.4.8:
   version "1.4.8"

@@ -1,6 +1,6 @@
 <template>
     <div
-        data-test-id="contact-preferences"
+        data-test-id="contact-preferences-component"
         :class="$style['c-contactPreferences']">
         <card-component
             v-if="!shouldShowLoadErrorCard"
