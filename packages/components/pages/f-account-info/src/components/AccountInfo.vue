@@ -3,7 +3,7 @@
         <f-card
             v-if="!shouldShowLoadErrorCard"
             :card-heading="$t('accountDetails')"
-            data-test-id="account-info"
+            data-test-id="account-info-component"
             has-inner-spacing-large
             card-size-custom="medium"
             has-outline>
