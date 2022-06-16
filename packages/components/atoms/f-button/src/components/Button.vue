@@ -188,79 +188,81 @@ export default {
 </script>
 
 <style lang="scss" module>
-$btn-default-borderRadius              : $radius-rounded-e;
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+$btn-default-borderRadius              : f.$radius-rounded-e;
 $btn-default-font-size                 : 'heading-s';
-$btn-default-weight                    : $font-weight-bold;
-$btn-default-padding                   : 9px spacing(e);
-$btn-default-outline-color             : $color-focus;
+$btn-default-weight                    : f.$font-weight-bold;
+$btn-default-padding                   : 9px f.spacing(e);
+$btn-default-outline-color             : f.$color-focus;
 $btn-default-loading-opacity           : 0.35;
 $btn-default-iconHeight                : 18px;
 $btn-default-iconSpacing               : 3px;
-$btn-default-iconSideSpacing           : $btn-default-iconSpacing + spacing();
+$btn-default-iconSideSpacing           : $btn-default-iconSpacing + f.spacing();
 
-$btn-primary-bgColor                   : $color-interactive-brand;
-$btn-primary-bgColor--hover            : darken($color-interactive-brand, $color-hover-01);
-$btn-primary-bgColor--active           : darken($color-interactive-brand, $color-active-01);
-$btn-primary-textColor                 : $color-content-interactive-light;
-$btn-primary-loading-color             : $color-content-interactive-light;
+$btn-primary-bgColor                   : f.$color-interactive-brand;
+$btn-primary-bgColor--hover            : darken(f.$color-interactive-brand, f.$color-hover-01);
+$btn-primary-bgColor--active           : darken(f.$color-interactive-brand, f.$color-active-01);
+$btn-primary-textColor                 : f.$color-content-interactive-light;
+$btn-primary-loading-color             : f.$color-content-interactive-light;
 $btn-primary-loading-colorOpaque       : rgba($btn-primary-loading-color, $btn-default-loading-opacity);
 
-$btn-secondary-bgColor                 : $color-interactive-secondary;
-$btn-secondary-bgColor--hover          : darken($color-interactive-secondary, $color-hover-01);
-$btn-secondary-bgColor--active         : darken($color-interactive-secondary, $color-active-01);
-$btn-secondary-textColor               : $color-content-interactive-secondary;
-$btn-secondary-loading-color           : $color-content-interactive-secondary;
+$btn-secondary-bgColor                 : f.$color-interactive-secondary;
+$btn-secondary-bgColor--hover          : darken(f.$color-interactive-secondary, f.$color-hover-01);
+$btn-secondary-bgColor--active         : darken(f.$color-interactive-secondary, f.$color-active-01);
+$btn-secondary-textColor               : f.$color-content-interactive-secondary;
+$btn-secondary-loading-color           : f.$color-content-interactive-secondary;
 $btn-secondary-loading-colorOpaque     : rgba($btn-secondary-loading-color, $btn-default-loading-opacity);
 
 $btn-outline-bgColor                   : transparent;
-$btn-outline-bgColor--hover            : darken($color-white, $color-hover-01);
-$btn-outline-bgColor--active           : darken($color-white, $color-active-01);
-$btn-outline-textColor                 : $color-content-interactive-tertiary;
-$btn-outline-border-color              : $color-border-default;
-$btn-outline-loading-color             : $color-content-interactive-tertiary;
+$btn-outline-bgColor--hover            : darken(f.$color-white, f.$color-hover-01);
+$btn-outline-bgColor--active           : darken(f.$color-white, f.$color-active-01);
+$btn-outline-textColor                 : f.$color-content-interactive-tertiary;
+$btn-outline-border-color              : f.$color-border-default;
+$btn-outline-loading-color             : f.$color-content-interactive-tertiary;
 $btn-outline-loading-colorOpaque       : rgba($btn-outline-loading-color, $btn-default-loading-opacity);
 
 $btn-ghost-bgColor                     : transparent;
-$btn-ghost-bgColor--hover              : darken($color-white, $color-hover-01);
-$btn-ghost-bgColor--active             : darken($color-white, $color-active-01);
-$btn-ghost-textColor                   : $color-content-interactive-secondary;
-$btn-ghost-loading-color               : $color-content-interactive-secondary;
+$btn-ghost-bgColor--hover              : darken(f.$color-white, f.$color-hover-01);
+$btn-ghost-bgColor--active             : darken(f.$color-white, f.$color-active-01);
+$btn-ghost-textColor                   : f.$color-content-interactive-secondary;
+$btn-ghost-loading-color               : f.$color-content-interactive-secondary;
 $btn-ghost-loading-colorOpaque         : rgba($btn-ghost-loading-color, $btn-default-loading-opacity);
 
 $btn-ghostTertiary-bgColor             : transparent;
-$btn-ghostTertiary-bgColor--hover      : darken($color-white, $color-hover-01);
-$btn-ghostTertiary-bgColor--active     : darken($color-white, $color-active-01);
-$btn-ghostTertiary-textColor           : $color-content-interactive-tertiary;
-$btn-ghostTertiary-loading-color       : $color-content-interactive-tertiary;
+$btn-ghostTertiary-bgColor--hover      : darken(f.$color-white, f.$color-hover-01);
+$btn-ghostTertiary-bgColor--active     : darken(f.$color-white, f.$color-active-01);
+$btn-ghostTertiary-textColor           : f.$color-content-interactive-tertiary;
+$btn-ghostTertiary-loading-color       : f.$color-content-interactive-tertiary;
 $btn-ghostTertiary-loading-colorOpaque : rgba($btn-ghostTertiary-loading-color, $btn-default-loading-opacity);
 
-$btn-inverse-loading-color             : $color-content-interactive-brand;
+$btn-inverse-loading-color             : f.$color-content-interactive-brand;
 $btn-inverse-loading-colorOpaque       : rgba($btn-inverse-loading-color, $btn-default-loading-opacity);
 
-$btn-ghostInverse-loading-color        : $color-content-interactive-light;
+$btn-ghostInverse-loading-color        : f.$color-content-interactive-light;
 $btn-ghostInverse-loading-colorOpaque  : rgba($btn-ghostInverse-loading-color, $btn-default-loading-opacity);
 
-$btn-link-loading-color                : $color-content-link;
+$btn-link-loading-color                : f.$color-content-link;
 $btn-link-loading-colorOpaque          : rgba($btn-link-loading-color, $btn-default-loading-opacity);
 
-$btn-disabled-bgColor                  : $color-disabled-01;
-$btn-disabled-textColor                : $color-content-disabled;
+$btn-disabled-bgColor                  : f.$color-disabled-01;
+$btn-disabled-textColor                : f.$color-content-disabled;
 
-$btn-sizeLarge-padding                 : 13px spacing(e);
-$btn-sizeLarge-loading-color           : $color-content-interactive-light;
+$btn-sizeLarge-padding                 : 13px f.spacing(e);
+$btn-sizeLarge-loading-color           : f.$color-content-interactive-light;
 $btn-sizeLarge-loading-colorOpaque     : rgba($btn-sizeLarge-loading-color, $btn-default-loading-opacity);
 
 $btn-sizeSmall-font-size               : 'body-l';
-$btn-sizeSmall-padding                 : 7px spacing(d);
+$btn-sizeSmall-padding                 : 7px f.spacing(d);
 $btn-sizeSmall-iconHeight              : 15px;
 $btn-sizeSmall-iconSpacing             : 2.5px;
-$btn-sizeSmall-iconSideSpacing         : $btn-sizeSmall-iconSpacing + spacing();
+$btn-sizeSmall-iconSideSpacing         : $btn-sizeSmall-iconSpacing + f.spacing();
 
 $btn-sizeXSmall-font-size              : 'body-s';
-$btn-sizeXSmall-padding                : 5px spacing();
+$btn-sizeXSmall-padding                : 5px f.spacing();
 $btn-sizeXSmall-iconHeight             : 12px;
 $btn-sizeXSmall-iconSpacing            : 2px;
-$btn-sizeXSmall-iconSideSpacing        : $btn-sizeXSmall-iconSpacing + spacing();
+$btn-sizeXSmall-iconSideSpacing        : $btn-sizeXSmall-iconSpacing + f.spacing();
 
 $btn-icon-iconSize                     : 18px; // at the moment all the icon buttons except large have the same icon size
 $btn-icon-sizeLarge-buttonSize         : 56px; // icon button is a circle so width and height can use one var
@@ -270,7 +272,7 @@ $btn-icon-sizeSmall-buttonSize         : 40px;
 $btn-icon-sizeXSmall-buttonSize        : 32px;
 
 
-@include loadingIndicator('medium');
+@include f.loadingIndicator('medium');
 
 .c-spinner {
     margin: 0 auto;
@@ -283,7 +285,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     position: relative;
     display: inline-block;
     vertical-align: middle;
-    @include font-size($btn-default-font-size);
+    @include f.font-size($btn-default-font-size);
     cursor: pointer;
     padding: $btn-default-padding;
     overflow: visible;
@@ -310,7 +312,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     }
 
     p + & {
-        margin-top: spacing(d);
+        margin-top: f.spacing(d);
     }
 }
     .o-button-content {
@@ -336,7 +338,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 
     .o-btn-icon svg use,
     .o-btn-icon svg path {
-        fill: $color-grey-50;
+        fill: f.$color-grey-50;
     }
 
     .o-btn-icon--leading {
@@ -378,7 +380,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
         @include background-color($btn-primary-bgColor--active);
     }
 
-    @include spinnerColor($btn-primary-loading-color, $btn-primary-loading-colorOpaque);
+    @include f.spinnerColor($btn-primary-loading-color, $btn-primary-loading-colorOpaque);
 
     .o-btn-icon svg use,
     .o-btn-icon svg path {
@@ -387,14 +389,14 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 
     &.o-btn--sizeSmall,
     &.o-btn--sizeXSmall {
-        @include background-color($color-interactive-primary);
+        @include background-color(f.$color-interactive-primary);
 
         &:hover {
-            @include background-color(lighten($color-interactive-primary, $color-hover-02));
+            @include background-color(lighten(f.$color-interactive-primary, f.$color-hover-02));
         }
         &:active,
         &.o-btn--loading {
-            @include background-color(lighten($color-interactive-primary, $color-active-02));
+            @include background-color(lighten(f.$color-interactive-primary, f.$color-active-02));
         }
     }
 }
@@ -439,7 +441,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
         @include background-color($btn-secondary-bgColor--active);
     }
 
-    @include spinnerColor($btn-secondary-loading-color, $btn-secondary-loading-colorOpaque);
+    @include f.spinnerColor($btn-secondary-loading-color, $btn-secondary-loading-colorOpaque);
 
     .o-btn-icon svg use,
     .o-btn-icon svg path {
@@ -473,7 +475,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
         background-color: $btn-outline-bgColor--active;
     }
 
-    @include spinnerColor($btn-outline-loading-color, $btn-outline-loading-colorOpaque);
+    @include f.spinnerColor($btn-outline-loading-color, $btn-outline-loading-colorOpaque);
 
     .o-btn-icon svg use,
     .o-btn-icon svg path {
@@ -506,7 +508,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
         @include background-color($btn-ghost-bgColor--active);
     }
 
-    @include spinnerColor($btn-ghost-loading-color, $btn-ghost-loading-colorOpaque);
+    @include f.spinnerColor($btn-ghost-loading-color, $btn-ghost-loading-colorOpaque);
 
     .o-btn-icon svg use,
     .o-btn-icon svg path {
@@ -540,7 +542,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
         @include background-color($btn-ghostTertiary-bgColor--active);
     }
 
-    @include spinnerColor($btn-ghostTertiary-loading-color, $btn-ghostTertiary-loading-colorOpaque);
+    @include f.spinnerColor($btn-ghostTertiary-loading-color, $btn-ghostTertiary-loading-colorOpaque);
 
     .o-btn-icon svg use,
     .o-btn-icon svg path {
@@ -556,7 +558,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
  */
 
 .o-btn--inverse {
-    @include background-color($color-interactive-inverse); // for icon button to have a white background when it is located on top of images/dark surfaces
+    @include background-color(f.$color-interactive-inverse); // for icon button to have a white background when it is located on top of images/dark surfaces
 
     &:hover {
         @include background-color($btn-ghost-bgColor--hover);
@@ -567,7 +569,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
         @include background-color($btn-ghost-bgColor--active);
     }
 
-    @include spinnerColor($btn-inverse-loading-color, $btn-inverse-loading-colorOpaque);
+    @include f.spinnerColor($btn-inverse-loading-color, $btn-inverse-loading-colorOpaque);
 }
 
 /**
@@ -581,15 +583,15 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     @include background-color($btn-ghost-bgColor);
 
     &:hover {
-        @include background-color(lighten($color-black, $color-hover-02));
+        @include background-color(lighten(f.$color-black, f.$color-hover-02));
     }
 
     &:active,
     &.o-btn--loading {
-        @include background-color(lighten($color-black, $color-active-02));
+        @include background-color(lighten(f.$color-black, f.$color-active-02));
     }
 
-    @include spinnerColor($btn-ghostInverse-loading-color, $btn-ghostInverse-loading-colorOpaque);
+    @include f.spinnerColor($btn-ghostInverse-loading-color, $btn-ghostInverse-loading-colorOpaque);
 }
 
 /**
@@ -605,26 +607,26 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     border: 0;
     background-color: transparent;
     padding: 0 !important; // !important is added to be sure that this style is not overridden by size modifier paddings
-    color: $color-content-link;
-    font-weight: $font-weight-bold;
+    color: f.$color-content-link;
+    font-weight: f.$font-weight-bold;
 
     &:hover {
         cursor: pointer;
-        color: lighten($color-content-link, $color-hover-02);
+        color: lighten(f.$color-content-link, f.$color-hover-02);
         background-color: transparent;
         text-decoration: underline;
     }
     &:active,
     &:focus {
-        color: lighten($color-content-link, $color-active-02);
+        color: lighten(f.$color-content-link, f.$color-active-02);
         background-color: transparent;
     }
 
-    @include spinnerColor($btn-link-loading-color, $btn-link-loading-colorOpaque);
+    @include f.spinnerColor($btn-link-loading-color, $btn-link-loading-colorOpaque);
 
     .o-btn-icon svg use,
     .o-btn-icon svg path {
-        fill: $color-content-link;
+        fill: f.$color-content-link;
     }
 }
 
@@ -657,17 +659,17 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     &.o-btn--ghost,
     &.o-btn--inverse {
         path {
-            fill: $color-content-interactive-brand;
+            fill: f.$color-content-interactive-brand;
         }
     }
 
     &.o-btn--ghost {
-        @include spinnerColor($btn-inverse-loading-color, $btn-inverse-loading-colorOpaque); // spinner colour for the ghost icon button loading state is the same as for inverse button
+        @include f.spinnerColor($btn-inverse-loading-color, $btn-inverse-loading-colorOpaque); // spinner colour for the ghost icon button loading state is the same as for inverse button
     }
 
     &.o-btn--ghostInverse {
         path {
-            fill: $color-content-inverse;
+            fill: f.$color-content-inverse;
         }
     }
 
@@ -720,7 +722,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 }
 
 .o-btn--sizeSmall {
-    @include font-size($btn-sizeSmall-font-size);
+    @include f.font-size($btn-sizeSmall-font-size);
     padding: $btn-sizeSmall-padding;
 
     .o-btn-icon {
@@ -742,7 +744,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 }
 
 .o-btn--sizeXSmall {
-    @include font-size($btn-sizeXSmall-font-size);
+    @include f.font-size($btn-sizeXSmall-font-size);
     padding: $btn-sizeXSmall-padding;
 
     .o-btn-icon {
@@ -782,7 +784,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     // Vertically space out multiple fullWidth buttons
     // same as .o-btn--fullWidth + .o-btn--fullWidth
     & + & {
-        margin-top: spacing(d);
+        margin-top: f.spacing(d);
     }
 }
 
