@@ -8,6 +8,7 @@
         data-test-id="image-tile-component">
         <image-tile-skeleton
             v-if="isLoading"
+            :is-breakout-image='isBreakoutImage'
             data-test-id="image-tile-skeleton"
             aria-hidden="true" />
         <template v-else>

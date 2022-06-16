@@ -1,5 +1,9 @@
 <template>
-    <div :class="$style['c-imageTile-skeleton']">
+    <div
+        :class="[
+            $style['c-imageTile-skeleton'], {
+                [$style['c-imageTile-skeleton--breakout']]: isBreakoutImage
+            }]">
         <span :class="$style['c-imageTile-skeletonImage']" />
         <span :class="$style['c-imageTile-skeletonText']" />
     </div>
@@ -7,7 +11,13 @@
 
 <script>
 export default {
-    name: 'ImageTileSkeleton'
+    name: 'ImageTileSkeleton',
+    props: {
+        isBreakoutImage: {
+            type: Boolean,
+            default: false
+        }
+    }
 };
 </script>
 
@@ -46,9 +56,13 @@ export default {
     background-color: $color-skeleton-02;
     border-radius: spacing(b);
     display: block;
-    padding: 45px 30px;
-    margin: spacing(a);
+    padding: 40px 30px;
     margin-bottom: spacing(c);
+
+    .c-imageTile-skeleton--breakout & {
+        padding: 42px 48px;
+        margin: spacing(c) 6px;
+    }
 }
 
 .c-imageTile-skeletonText {
@@ -57,5 +71,9 @@ export default {
     background-color: $color-skeleton-02;
     display: block;
     border-radius: spacing(a);
+
+    .c-imageTile-skeleton--breakout & {
+        margin-left: 6px;
+    }
 }
 </style>
