@@ -170,9 +170,9 @@ describe('Link', () => {
 
     describe('computed :: ', () => {
         describe('ariaDescription :: ', () => {
-            const newLocationMessage = 'Opens in a new window/screen/tab';
+            const newLocationMessage = 'Opens in a new tab';
             const externalLinkMessage = 'Opens an external site';
-            const externalNewLocationLinkMessage = 'Opens an external site in a new window/screen/tab';
+            const externalNewLocationLinkMessage = 'Opens an external site in a new tab';
 
             describe('when `target="_blank"` is applied to the link', () => {
                 it.each([
