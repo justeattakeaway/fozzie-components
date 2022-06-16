@@ -14,11 +14,8 @@ describe('Accessibility tests', () => {
     forEach([
         ['en-GB']
     ]).it('a11y - should test that the %s f-contact-preferences component is WCAG compliant', locale => {
-        // Arrange
-        contactPreferences.path += `&args=locale:${locale}`;
-
         // Act
-        contactPreferences.load();
+        contactPreferences.load({ locale });
         const axeResults = getAxeResults('f-contact-preferences');
 
         // Assert
@@ -28,11 +25,11 @@ describe('Accessibility tests', () => {
     forEach([
         ['en-GB']
     ]).it('should test that the %s f-contact-preferences (error alert) is WCAG compliant', locale => {
-        // Arrange
-        contactPreferences.path += `&args=locale:${locale};apiState:post-preferences-fails`;
-
         // Act
-        contactPreferences.load();
+        contactPreferences.load({
+            locale,
+            apiState: 'post-preferences-fails'
+        });
         contactPreferences.clickNewsEmailCheckbox();
         contactPreferences.clickSubmitButton();
         const axeResults = getAxeResults('f-contact-preferences - save error alert');
@@ -44,11 +41,11 @@ describe('Accessibility tests', () => {
     forEach([
         ['en-GB']
     ]).it('should test that the %s f-contact-preferences (error page) is WCAG compliant', locale => {
-        // Arrange
-        contactPreferences.path += `&args=locale:${locale};apiState:get-preferences-fails`;
-
         // Act
-        contactPreferences.loadError();
+        contactPreferences.load({
+            locale,
+            apiState: 'get-preferences-fails'
+        });
         const axeResults = getAxeResults('f-contact-preferences - load error page');
 
         // Assert

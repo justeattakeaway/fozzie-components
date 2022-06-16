@@ -13,11 +13,8 @@ describe('f-contact-preferences component tests', () => {
     forEach([
         ['en-GB']
     ]).it('should display the  %s f-contact-preferences component', locale => {
-        // Arrange
-        contactPreferences.path += `&args=locale:${locale}`;
-
         // Act
-        contactPreferences.load();
+        contactPreferences.load({ locale });
 
         // Assert
         expect(contactPreferences.isComponentDisplayed()).toBe(true);
@@ -26,11 +23,8 @@ describe('f-contact-preferences component tests', () => {
     forEach([
         ['en-GB']
     ]).it('should display the %s Submit success alert if Submit succeed', locale => {
-        // Arrange
-        contactPreferences.path += `&args=locale:${locale}`;
-
         // Act
-        contactPreferences.load();
+        contactPreferences.load({ locale });
         contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
         contactPreferences.clickSubmitButton();
         contactPreferences.waitForComponent();
@@ -43,11 +37,11 @@ describe('f-contact-preferences component tests', () => {
     forEach([
         ['en-GB']
     ]).it('should display the %s Submit error alert if Submit fails', locale => {
-        // Arrange
-        contactPreferences.path += `&args=locale:${locale};apiState:post-preferences-fails`;
-
         // Act
-        contactPreferences.load();
+        contactPreferences.load({
+            locale,
+            apiState: 'post-preferences-fails'
+        });
         contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
         contactPreferences.clickSubmitButton();
         contactPreferences.waitForComponent();
@@ -60,11 +54,11 @@ describe('f-contact-preferences component tests', () => {
     forEach([
         ['en-GB']
     ]).it('should display the %s Error page if Load fails', locale => {
-        // Arrange
-        contactPreferences.path += `&args=locale:${locale};apiState:get-preferences-fails`;
-
         // Act
-        contactPreferences.loadError();
+        contactPreferences.load({
+            locale,
+            apiState: 'get-preferences-fails'
+        });
 
         // Assert
         expect(contactPreferences.isErrorPageDisplayed()).toBe(true);
