@@ -11,6 +11,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 @mixin skeletonLoader () {
     min-height: 1em;
     border-radius: 100px;
@@ -27,7 +29,7 @@ export default {
             bottom: 0;
             left: 0;
             transform: translateX(-100%);
-            background-image: linear-gradient(90deg, rgba($color-white, 0) 0, rgba($color-white, 0.2) 20%, rgba($color-white, 0.5) 60%, rgba($color-white, 0));
+            background-image: linear-gradient(90deg, rgba(f.$color-white, 0) 0, rgba(f.$color-white, 0.2) 20%, rgba(f.$color-white, 0.5) 60%, rgba(f.$color-white, 0));
             animation: skeletonLoadingShimmer 2s infinite;
         }
     }
@@ -40,14 +42,14 @@ export default {
 }
 
 .c-filterPill-skeleton {
-    padding: spacing(c) spacing(d);
+    padding: f.spacing(c) f.spacing(d);
 }
 
 .c-filterPill-skeleton-content {
     display: block;
     width: 50%;
-    height: spacing(d);
-    background-color: $color-skeleton-02;
+    height: f.spacing(d);
+    background-color: f.$color-skeleton-02;
     @include skeletonLoader();
 }
 </style>
