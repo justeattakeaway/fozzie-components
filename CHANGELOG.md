@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v7.13.0
+------------------------------
+*June 15, 2022*
+
+### Added
+- Vite as a global monorepo dependency to stop version clashing
+
 v7.12.0
 ------------------------------
 *June 10, 2022*
