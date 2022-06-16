@@ -1,7 +1,7 @@
 <template>
     <transition
         v-if="animateTab"
-        :name="transitionName">
+        :name="$style[transitionName]">
         <div
             v-show="isActive"
             :data-test-id="`tab-content-${name}`"
@@ -63,8 +63,8 @@ export default {
 
         transitionName () {
             return this[TABS_COMPONENT].animationDirection === DIRECTION.LEFT
-                ? this.$style['fade-in-right']
-                : this.$style['fade-in-left'];
+                ? 'fade-in-right'
+                : 'fade-in-left';
         },
 
         animateTab () {
