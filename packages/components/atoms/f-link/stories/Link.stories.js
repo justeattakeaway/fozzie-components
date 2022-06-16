@@ -11,7 +11,7 @@ export const VLinkComponent = () => ({
     components: { VLink },
     data () {
         return {
-            dataTestId: 'link-component'
+            dataTestId: 'v-link-component'
         };
     },
     props: {
