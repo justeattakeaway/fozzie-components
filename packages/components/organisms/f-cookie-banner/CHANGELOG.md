@@ -3,22 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (add to next release)
+
+v3.10.0
 ------------------------------
-*May 31, 2021*
+*June 16, 2021*
 
 ### Changed
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
+- Update `f-link` to v2.4.0.
 
 
 v3.9.0
 ------------------------------
 *May 24, 2022*
 
-
 ### Changed
 - `Moved `f-cookie-banner-static` into it's own package.
-- Refactored build script in `package.json` 
+- Refactored build script in `package.json`.
+
 ### Removed
 - Use of `New` from visual, component & accessibility test naming conventions.
 
