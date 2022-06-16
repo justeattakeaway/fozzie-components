@@ -16,13 +16,15 @@ export default {
 </script>
 
 <style lang="scss" module>
-$popover-padding               : spacing(d);
+@use  '@justeat/fozzie/src/scss/fozzie' as f;
+
+$popover-padding               : f.spacing(d);
 
 .c-popover {
-    @include media('>mid') {
-        background-color: $color-container-default;
-        box-shadow: $elevation-02;
-        border-radius: $radius-rounded-c;
+    @include f.media('>mid') {
+        background-color: f.$color-container-default;
+        box-shadow: f.$elevation-02;
+        border-radius: f.$radius-rounded-c;
         padding: 0 $popover-padding;
         width: auto;
     }
