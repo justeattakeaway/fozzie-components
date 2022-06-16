@@ -1,7 +1,7 @@
 export default {
     ariaDescription: {
-        newLocation: 'Abrir una nueva ventana/pestaña',
-        external: 'Abrir a una web externa',
-        externalNewLocation: 'Abrir a una web externa en una nueva ventana/pestaña'
+        newLocation: 'Abrir en una nueva pestaña',
+        external: 'Abrir en página web externa',
+        externalNewLocation: 'Abrir en página web externa en una nueva pestaña'
     }
 };
