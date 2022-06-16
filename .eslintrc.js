@@ -89,6 +89,8 @@ module.exports = {
         parser: '@babel/eslint-parser',
         ecmaVersion: 2017,
         sourceType: 'module',
+        // Stops linting from failing on components that're built with Vite
+        requireConfigFile: false
     },
     settings: {
         'import/resolver': {
