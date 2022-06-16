@@ -1,4 +1,3 @@
-exports.REGISTRATION_COMPONENT = '[data-test-id="registration-component"]';
 exports.CREATE_ACCOUNT_BUTTON = '[data-test-id="create-account-submit-button"]';
 exports.TERMS_AND_CONDITIONS_LINK = '[data-test-id="ts-and-cs-link"]';
 exports.PRIVACY_POLICY_LINK = '[data-test-id="privacy-policy-link"]';
