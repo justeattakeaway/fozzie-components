@@ -298,7 +298,7 @@ v3.13.2
 
 v3.13.1
 ------------------------------
-*January 04, 2022*
+*January 4, 2022*
 
 ### Fixed
 - Mocked year for age verification tests.
@@ -532,6 +532,7 @@ v2.1.0
 
 ### Changed
 - Increased maxBundleSize to 105Kb.
+
 
 v2.0.0
 ------------------------------

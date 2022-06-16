@@ -138,7 +138,7 @@ v0.61.0
 
 v0.60.0
 ------------------------------
-*August 05, 2021*
+*August 5, 2021*
 
 ### Changed
 - Update the story file API mocking to work with f-http
@@ -146,7 +146,7 @@ v0.60.0
 
 v0.59.0
 ------------------------------
-*August 04, 2021*
+*August 4, 2021*
 
 ### Changed
 - Updated Integration Tests to work with new f-http version
@@ -501,7 +501,7 @@ v0.33.0
 
 v0.32.0
 ------------------------------
-*October 05, 2020*
+*October 5, 2020*
 
 ### Changed
 - Use the latest version of `f-form-field` to display form labels on desktop.

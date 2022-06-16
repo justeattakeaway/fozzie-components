@@ -28,6 +28,7 @@ v1.2.0
 ### Added
 - Version of `node-sass` that's compatible with Node 16.
 
+
 v1.1.0
 ------------------------------
 *March 15, 2022*
