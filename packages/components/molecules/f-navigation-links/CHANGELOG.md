@@ -6,10 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.3.0
 ------------------------------
-*June 16, 2022*
+*June 17, 2022*
 
 ### Changed
-- Update `f-link` to v2.4.0.
+- Update `f-link` to v3.1.0.
 
 
 v1.2.1

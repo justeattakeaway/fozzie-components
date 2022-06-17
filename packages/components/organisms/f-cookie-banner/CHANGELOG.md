@@ -6,11 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.10.0
 ------------------------------
-*June 16, 2021*
+*June 17, 2021*
 
 ### Changed
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
-- Update `f-link` to v2.4.0.
+- Update `f-link` to v3.1.0.
 
 
 v3.9.0

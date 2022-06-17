@@ -49,10 +49,10 @@
   "dependencies": {},
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",
-    "@justeat/f-link": "^2.4.0"
+    "@justeat/f-link": "^3.1.0"
   },
   "devDependencies": {
-    "@justeat/f-link": "2.4.0",
+    "@justeat/f-link": "3.1.0",
     "@justeat/f-wdio-utils": "0.11.0",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",

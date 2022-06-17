@@ -9,7 +9,7 @@ v0.28.0
 *June 17, 2022*
 
 ### Changed
-- Update `f-link` to v2.4.0.
+- Update `f-link` to v3.1.0.
 
 
 v0.27.0
