@@ -1,88 +1,73 @@
-import argumentStringBuilder from '../../test-utils/component-objects/argumentStringBuilder';
-
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
 
 describe('f-checkout - Invalid - Mobile Visual Tests', () => {
-    it('should display the "Get Checkout" error page', () => {
+    const checkoutInfo = {
+        isLoggedIn: true,
+        isAsapAvailable: true,
+        locale: 'en-GB'
+    };
+
+    beforeEach(() => {
         // Arrange
         checkout = new Checkout();
+    });
 
-        const args = argumentStringBuilder({ getCheckoutOptions: '500' });
-        checkout.withQuery('args', args);
 
+    it('should display the error page component if the url is invalid', () => {
         // Act
-        checkout.loadError();
+        checkout.load({
+            ...checkoutInfo,
+            serviceType: 'invalid-url'
+        });
 
         // Assert
-        browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Get Checkout" Error Page', 'mobile');
+        browser.percyScreenshot('f-checkout - Invalid - Base State', 'mobile');
     });
 
     it('should display the "Get Checkout 403" error page', () => {
-        // Arrange
-        checkout = new Checkout();
-
-        const args = argumentStringBuilder({ getCheckoutOptions: '403' });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.loadError();
+        checkout.load({
+            ...checkoutInfo,
+            serviceType: 'delivery',
+            getCheckoutOptions: '403'
+        });
 
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Get Checkout 403" Error Page', 'mobile');
     });
 
-    it('should display the error page component if the url is invalid', () => {
-        // Arrange
-        checkout = new Checkout();
-
-        const args = argumentStringBuilder({ serviceType: 'invalid-url' });
-        checkout.withQuery('args', args);
-
-        // Act
-        checkout.loadError();
-        // Assert
-        browser.percyScreenshot('f-checkout - Invalid - Base State', 'mobile');
-    });
-
     it('should display an error dialog if the basket has invalid products', () => {
-        // Arrange
-        checkout = new Checkout();
-
-        const args = argumentStringBuilder({ getBasketError: 'invalid-products' });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            serviceType: 'delivery',
+            getBasketError: 'invalid-products'
+        });
 
         // Assert
         browser.percyScreenshot('f-checkout - Basket error: Invalid products - Base State', 'mobile');
     });
 
     it('should display an error dialog if the basket has offline products', () => {
-        // Arrange
-        checkout = new Checkout();
-
-        const args = argumentStringBuilder({ getBasketError: 'offline-products' });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            serviceType: 'delivery',
+            getBasketError: 'offline-products'
+        });
 
         // Assert
         browser.percyScreenshot('f-checkout - Basket error: Offline products - Base State', 'mobile');
     });
 
     it('should display an error dialog if age verification is required', () => {
-        // Arrange
-        checkout = new Checkout();
-
-        const args = argumentStringBuilder({ getBasketError: 'age-restriction' });
-        checkout.withQuery('args', args);
-
-        // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            serviceType: 'delivery',
+            getBasketError: 'age-restriction'
+        });
 
         // Assert
         browser.percyScreenshot('f-checkout - Basket error: Age restriction required - Base State', 'mobile');

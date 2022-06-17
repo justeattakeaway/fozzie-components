@@ -40,7 +40,9 @@ export default {
 </script>
 
 <style lang="scss" module>
-@include loadingIndicator('large');
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+@include f.loadingIndicator('large');
 
 .c-spinner {
     margin: 0 auto;
