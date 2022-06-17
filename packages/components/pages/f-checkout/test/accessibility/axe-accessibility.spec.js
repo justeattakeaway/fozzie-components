@@ -1,5 +1,4 @@
 import forEach from 'mocha-each';
-import argumentStringBuilder from '../../test-utils/component-objects/argumentStringBuilder';
 
 const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
 
@@ -8,17 +7,22 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 let checkout;
 
 describe('Accessibility tests', () => {
+    const checkoutInfo = {
+        serviceType: 'delivery',
+        isLoggedIn: true,
+        isAsapAvailable: true,
+        locale: 'en-GB'
+    };
+
     beforeEach(() => {
         checkout = new Checkout();
     });
 
     it('a11y - should test f-checkout component (delivery) WCAG compliance', () => {
-        // Arrange
-        const args = argumentStringBuilder();
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo
+        });
         const axeResults = getAxeResults('f-checkout-delivery');
 
         // Assert
@@ -26,12 +30,11 @@ describe('Accessibility tests', () => {
     });
 
     it('a11y - should test f-checkout component (collection) WCAG compliance', () => {
-        // Arrange
-        const args = argumentStringBuilder({ serviceType: 'collection' });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            serviceType: 'collection'
+        });
         const axeResults = getAxeResults('f-checkout-collection');
 
         // Assert
@@ -39,12 +42,11 @@ describe('Accessibility tests', () => {
     });
 
     it('a11y - should test f-checkout component (guest) WCAG compliance', () => {
-        // Arrange
-        const args = argumentStringBuilder({ isLoggedIn: false });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            isLoggedIn: false
+        });
         const axeResults = getAxeResults('f-checkout-guest');
 
         // Assert
@@ -52,11 +54,12 @@ describe('Accessibility tests', () => {
     });
 
     it('a11y - should test f-checkout component (error) WCAG compliance', () => {
-        // Arrange
-        const args = argumentStringBuilder({ serviceType: 'invalid-url', isLoggedIn: false });
-        checkout.withQuery('args', args);
         // Act
-        checkout.loadError();
+        checkout.load({
+            ...checkoutInfo,
+            serviceType: 'invalid-url',
+            isLoggedIn: false
+        });
         const axeResults = getAxeResults('f-checkout-error-page');
 
         // Assert
@@ -75,11 +78,12 @@ describe('Accessibility tests', () => {
         ['dinein', 'time-unavailable']
     ])
     .it('a11y - Authenticated - "%s" - should have a correct tab order in patch checkout error - "%s"', (serviceType, patchCheckoutError) => {
-        // Arrange
-        const args = argumentStringBuilder({ serviceType, patchCheckoutError });
-        checkout.withQuery('args', args);
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            serviceType,
+            patchCheckoutError
+        });
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.closeMessageModal];
@@ -94,11 +98,12 @@ describe('Accessibility tests', () => {
         ['delivery']
     ])
     .it('a11y - Authenticated - "%s" - should have a correct tab order in duplicate order error', serviceType => {
-        // Arrange
-        const args = argumentStringBuilder({ serviceType, placeOrderError: 'duplicate' });
-        checkout.withQuery('args', args);
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            serviceType,
+            placeOrderError: 'duplicate'
+        });
         checkout.goToPayment();
 
         const expectedTabOrder = [checkout.errorMessageRetry, checkout.errorMessageDupOrderGoToHistory, checkout.closeMessageModal];
@@ -115,9 +120,6 @@ describe('Accessibility tests', () => {
     ])
     .it('a11y - Guest - Collection - should have a correct tab order in patch checkout error - "%s"', patchCheckoutError => {
         // Arrange
-        const args = argumentStringBuilder({ serviceType: 'collection', isLoggedIn: false, patchCheckoutError });
-        checkout.withQuery('args', args);
-
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -128,7 +130,12 @@ describe('Accessibility tests', () => {
         checkout.inputFieldValues = customerInfo;
 
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            serviceType: 'collection',
+            isLoggedIn: false,
+            patchCheckoutError
+        });
         checkout.setFieldValues();
         checkout.goToPayment();
 
@@ -146,9 +153,6 @@ describe('Accessibility tests', () => {
     ])
     .it('a11y - Guest - Delivery - should have a correct tab order in patch checkout error - "%s"', patchCheckoutError => {
         // Arrange
-        const args = argumentStringBuilder({ isLoggedIn: false, patchCheckoutError });
-        checkout.withQuery('args', args);
-
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -162,7 +166,11 @@ describe('Accessibility tests', () => {
         checkout.inputFieldValues = customerInfo;
 
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            isLoggedIn: false,
+            patchCheckoutError
+        });
         checkout.setFieldValues();
         checkout.goToPayment();
 
@@ -180,9 +188,6 @@ describe('Accessibility tests', () => {
     ])
     .it('a11y - Guest - Dine In - should have a correct tab order in patch checkout error - "%s"', patchCheckoutError => {
         // Arrange
-        const args = argumentStringBuilder({ serviceType: 'dinein', isLoggedIn: false, patchCheckoutError });
-        checkout.withQuery('args', args);
-
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -194,7 +199,12 @@ describe('Accessibility tests', () => {
         checkout.inputFieldValues = customerInfo;
 
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            serviceType: 'dinein',
+            isLoggedIn: false,
+            patchCheckoutError
+        });
         checkout.setFieldValues();
         checkout.goToPayment();
 
@@ -207,9 +217,6 @@ describe('Accessibility tests', () => {
 
     it('a11y - Guest - Collection - should have a correct tab order in duplicate order error', () => {
         // Arrange
-        const args = argumentStringBuilder({ serviceType: 'collection', isLoggedIn: false, placeOrderError: 'duplicate' });
-        checkout.withQuery('args', args);
-
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -220,7 +227,12 @@ describe('Accessibility tests', () => {
         checkout.inputFieldValues = customerInfo;
 
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            serviceType: 'collection',
+            isLoggedIn: false,
+            placeOrderError: 'duplicate'
+        });
         checkout.setFieldValues();
         checkout.goToPayment();
 
@@ -233,9 +245,6 @@ describe('Accessibility tests', () => {
 
     it('a11y - Guest - Delivery - should have a correct tab order in duplicate order error', () => {
         // Arrange
-        const args = argumentStringBuilder({ isLoggedIn: false, placeOrderError: 'duplicate' });
-        checkout.withQuery('args', args);
-
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -249,7 +258,11 @@ describe('Accessibility tests', () => {
         checkout.inputFieldValues = customerInfo;
 
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            isLoggedIn: false,
+            placeOrderError: 'duplicate'
+        });
         checkout.setFieldValues();
         checkout.goToPayment();
 
@@ -262,9 +275,6 @@ describe('Accessibility tests', () => {
 
     it('a11y - Guest - Dine In - should have a correct tab order in duplicate order error', () => {
         // Arrange
-        const args = argumentStringBuilder({ serviceType: 'dinein', isLoggedIn: false, placeOrderError: 'duplicate' });
-        checkout.withQuery('args', args);
-
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -276,7 +286,12 @@ describe('Accessibility tests', () => {
         checkout.inputFieldValues = customerInfo;
 
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            serviceType: 'dinein',
+            isLoggedIn: false,
+            placeOrderError: 'duplicate'
+        });
         checkout.setFieldValues();
         checkout.goToPayment();
 

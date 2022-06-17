@@ -1,5 +1,3 @@
-import argumentStringBuilder from '../../test-utils/component-objects/argumentStringBuilder';
-
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
@@ -8,11 +6,14 @@ describe('f-checkout "dinein" component tests', () => {
     beforeEach(() => {
         // Arrange
         checkout = new Checkout();
-        const args = argumentStringBuilder({ serviceType: 'dinein', isLoggedIn: false });
-        checkout.withQuery('args', args);
 
         // Act
-        checkout.load();
+        checkout.load({
+            serviceType: 'dinein',
+            isLoggedIn: true,
+            isAsapAvailable: true,
+            locale: 'en-GB'
+        });
     });
 
     it('should prevent a user from entering more than 12 characters in the tableIdentifier field', () => {

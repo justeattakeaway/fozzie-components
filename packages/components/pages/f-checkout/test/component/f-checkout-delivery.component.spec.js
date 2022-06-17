@@ -1,8 +1,13 @@
-import argumentStringBuilder from '../../test-utils/component-objects/argumentStringBuilder';
-
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
+
+const checkoutInfo = {
+    serviceType: 'delivery',
+    isLoggedIn: true,
+    isAsapAvailable: true,
+    locale: 'en-GB'
+};
 
 describe('f-checkout "delivery" component tests', () => {
     describe('uk tenant', () => {
@@ -10,11 +15,10 @@ describe('f-checkout "delivery" component tests', () => {
             // Arrange
             checkout = new Checkout();
 
-            const args = argumentStringBuilder();
-            checkout.withQuery('args', args);
-
             // Act
-            checkout.load();
+            checkout.load({
+                ...checkoutInfo
+            });
         });
 
         it('should enable a user to submit a postcode with correct characters', () => {
@@ -32,11 +36,12 @@ describe('f-checkout "delivery" component tests', () => {
                 // Arrange
                 checkout = new Checkout();
 
-                const args = argumentStringBuilder({ isLoggedIn: false, locale: 'en-AU' });
-                checkout.withQuery('args', args);
-
                 // Act
-                checkout.load();
+                checkout.load({
+                    ...checkoutInfo,
+                    isLoggedIn: false,
+                    locale: 'en-AU'
+                });
             });
 
             it('should prevent more than 50 characters in state field', () => {
@@ -57,11 +62,12 @@ describe('f-checkout "delivery" component tests', () => {
                 // Arrange
                 checkout = new Checkout();
 
-                const args = argumentStringBuilder({ locale: 'en-AU', getBasketError: 'age-restriction' });
-                checkout.withQuery('args', args);
-
                 // Act
-                checkout.loadAgeVerification();
+                checkout.load({
+                    ...checkoutInfo,
+                    locale: 'en-AU',
+                    getBasketError: 'age-restriction'
+                });
             });
 
             it('should display the age verification', () => {
@@ -94,12 +100,11 @@ describe('f-checkout "delivery" - split notes - component tests', () => {
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ noteType: 'get-notes-config-split' });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
-        checkout.waitForComponent();
+        checkout.load({
+            ...checkoutInfo,
+            noteType: 'get-notes-config-split'
+        });
 
         // Assert
         checkout.expandAndPopulateNote('courierAccordionHeader', 'courierNote', 'This is a courier note');
