@@ -12,6 +12,14 @@ v0.52.2
 - updated vue.config to include f-error-message in components using @use and @forward
 
 
+v0.52.1
+------------------------------
+*June 16, 2022*
+
+### Changed
+- updated vue.config to include f-card in components using @use and @forward
+
+
 v0.52.0
 ------------------------------
 *June 16, 2022*

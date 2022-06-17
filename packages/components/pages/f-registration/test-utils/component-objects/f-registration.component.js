@@ -1,8 +1,7 @@
 /* eslint-disable no-undef */
-const Page = require('@justeat/f-wdio-utils/src/page.object');
+const Page = require('@justeat/f-wdio-utils/src/base.page');
 
 const {
-    REGISTRATION_COMPONENT,
     CREATE_ACCOUNT_BUTTON,
     TERMS_AND_CONDITIONS_LINK,
     PRIVACY_POLICY_LINK,
@@ -21,8 +20,6 @@ module.exports = class Registration extends Page {
     constructor () {
         super('page', 'registration-component');
     }
-
-    get component () { return $(REGISTRATION_COMPONENT); }
 
     get createAccountButton () { return $(CREATE_ACCOUNT_BUTTON); }
 
@@ -80,19 +77,6 @@ module.exports = class Registration extends Page {
             get cta () { return $(COOKIES_POLICY_LINK); }
         }
     };
-
-
-    load () {
-        super.load(this.component);
-    }
-
-    waitForComponent () {
-        super.waitForComponent(this.component);
-    }
-
-    isComponentDisplayed () {
-        return this.component.isDisplayed();
-    }
 
     isInputFieldDisplayed (fieldName) {
         return this.fields[fieldName].input.isDisplayed();

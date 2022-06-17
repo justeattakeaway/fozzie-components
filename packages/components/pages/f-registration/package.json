@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-registration",
   "description": "Fozzie Registration Form Component",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "main": "dist/f-registration.umd.min.js",
   "maxBundleSize": "70kB",
   "files": [
@@ -65,7 +65,7 @@
     "@justeat/f-http": "0.8.0",
     "@justeat/f-link": "2.0.0",
     "@justeat/f-vue-icons": "2.7.0",
-    "@justeat/f-wdio-utils": "0.6.0",
+    "@justeat/f-wdio-utils": "0.11.0",
     "@vue/cli-plugin-babel": "4.5.8",
     "@vue/cli-plugin-unit-jest": "4.5.8",
     "@vue/test-utils": "1.1.1",
