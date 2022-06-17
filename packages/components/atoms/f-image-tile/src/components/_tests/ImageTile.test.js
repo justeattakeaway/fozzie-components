@@ -211,6 +211,26 @@ describe('ImageTile', () => {
                 expect(performanceTrackerMock.time).toHaveBeenCalledWith(propsData.performanceTrackerLabel);
             });
         });
+
+        describe('isLoading :: ', () => {
+            it.each([
+                [true, true],
+                [false, false]
+            ])('should update skeleton to be %s when `isloading` set to  %s', (expectedValue, isLoading) => {
+                // Arrange
+                const propsData = { isLoading };
+
+                // Act
+                const wrapper = shallowMount(ImageTile, {
+                    propsData
+                });
+
+                const imageTileSkeleton = wrapper.find('[data-test-id="image-tile-skeleton"]');
+
+                // Assert
+                expect(imageTileSkeleton.exists()).toBe(expectedValue);
+            });
+        });
     });
 
     describe('computed :: ', () => {

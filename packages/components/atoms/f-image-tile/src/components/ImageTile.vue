@@ -6,47 +6,68 @@
                 [$style['c-imageTile--breakout']]: isBreakoutImage
             }]"
         data-test-id="image-tile-component">
-        <a
-            :class="[
-                $style['c-imageTile-link'], {
-                    [$style['c-imageTile-link--toggle']]: !isLink
-                }]"
-            :href="href"
-            :aria-hidden="!isLink"
-            :tabindex="isLink ? false : -1"
-            data-test-id="image-tile-link">
-            <span class="is-visuallyHidden">
-                {{ displayText }}
-            </span>
-        </a>
-        <input
-            :id="`imageTileToggle-${tileId}`"
-            type="checkbox"
-            :checked="isToggleSelected"
-            class="is-visuallyHidden"
-            :class="$style['c-imageTile-checkbox']"
-            data-test-id="image-tile-input"
-            :tabindex="!isLink ? 0 : -1"
-            @change="toggleFilter">
-        <label
-            :class="[
-                $style['c-imageTile-label'], {
-                    [$style['c-imageTile-label--link']]: isLink
-                }]"
-            :for="`imageTileToggle-${tileId}`"
-            data-test-id="image-tile-label"
-            :tabindex="!isLink ? -1 : false">
-            <template v-if="isBreakoutImage">
-                <span
-                    :class="$style['c-imageTile-innerWrapper']"
-                    data-test-id="image-tile-inner-wrapper">
-                    <span :class="$style['c-imageTile-inner']">
-                        <span
-                            :class="[
-                                $style['c-imageTile-backgroundContainer'], {
-                                    [$style['c-imageTile-backgroundContainer--fallback']]: imgError
-                                }]"
-                            :style="cssVars" />
+        <image-tile-skeleton
+            v-if="isLoading"
+            :is-breakout-image='isBreakoutImage'
+            data-test-id="image-tile-skeleton"
+            aria-hidden="true" />
+        <template v-else>
+            <a
+                :class="[
+                    $style['c-imageTile-link'], {
+                        [$style['c-imageTile-link--toggle']]: !isLink
+                    }]"
+                :href="href"
+                :aria-hidden="!isLink"
+                :tabindex="isLink ? false : -1"
+                data-test-id="image-tile-link">
+                <span class="is-visuallyHidden">
+                    {{ displayText }}
+                </span>
+            </a>
+            <input
+                :id="`imageTileToggle-${tileId}`"
+                type="checkbox"
+                :checked="isToggleSelected"
+                class="is-visuallyHidden"
+                :class="$style['c-imageTile-checkbox']"
+                data-test-id="image-tile-input"
+                :tabindex="!isLink ? 0 : -1"
+                @change="toggleFilter">
+            <label
+                :class="[
+                    $style['c-imageTile-label'], {
+                        [$style['c-imageTile-label--link']]: isLink
+                    }]"
+                :for="`imageTileToggle-${tileId}`"
+                data-test-id="image-tile-label"
+                :tabindex="!isLink ? -1 : false">
+                <template v-if="isBreakoutImage">
+                    <span
+                        :class="$style['c-imageTile-innerWrapper']"
+                        data-test-id="image-tile-inner-wrapper">
+                        <span :class="$style['c-imageTile-inner']">
+                            <span
+                                :class="[
+                                    $style['c-imageTile-backgroundContainer'], {
+                                        [$style['c-imageTile-backgroundContainer--fallback']]: imgError
+                                    }]"
+                                :style="cssVars" />
+                            <img
+                                v-if="imgSrc && !imgError"
+                                :class="$style['c-imageTile-image']"
+                                :src="imgSrc"
+                                data-test-id="image-tile-image"
+                                :alt="altText"
+                                :role="isPresentationRole ? 'presentation' : false"
+                                @error="handleImgError">
+                        </span>
+                    </span>
+                </template>
+                <template v-else>
+                    <span
+                        :class="$style['c-imageTile-backgroundContainer']"
+                        :style="cssVars">
                         <img
                             v-if="imgSrc && !imgError"
                             :class="$style['c-imageTile-image']"
@@ -56,43 +77,31 @@
                             :role="isPresentationRole ? 'presentation' : false"
                             @error="handleImgError">
                     </span>
-                </span>
-            </template>
-            <template v-else>
+                </template>
                 <span
-                    :class="$style['c-imageTile-backgroundContainer']"
-                    :style="cssVars">
-                    <img
-                        v-if="imgSrc && !imgError"
-                        :class="$style['c-imageTile-image']"
-                        :src="imgSrc"
-                        data-test-id="image-tile-image"
-                        :alt="altText"
-                        :role="isPresentationRole ? 'presentation' : false"
-                        @error="handleImgError">
+                    :class="$style['c-imageTile-textContainer']"
+                    :aria-hidden="isLink">
+                    <tick-icon :class="$style['c-imageTile-icon']" />
+                    <span
+                        :class="$style['c-imageTile-text']"
+                        data-test-id="image-tile-text">
+                        {{ displayText }}
+                    </span>
                 </span>
-            </template>
-            <span
-                :class="$style['c-imageTile-textContainer']"
-                :aria-hidden="isLink">
-                <tick-icon :class="$style['c-imageTile-icon']" />
-                <span
-                    :class="$style['c-imageTile-text']"
-                    data-test-id="image-tile-text">
-                    {{ displayText }}
-                </span>
-            </span>
-        </label>
+            </label>
+        </template>
     </div>
 </template>
 
 <script>
 import { TickIcon } from '@justeat/f-vue-icons';
+import ImageTileSkeleton from './ImageTileSkeleton.vue';
 
 export default {
     name: 'ImageTile',
     components: {
-        TickIcon
+        TickIcon,
+        ImageTileSkeleton
     },
     props: {
         href: {
@@ -139,6 +148,10 @@ export default {
         performanceTrackerLabel: {
             type: String,
             default: null
+        },
+        isLoading: {
+            type: Boolean,
+            default: false
         }
     },
     data () {
