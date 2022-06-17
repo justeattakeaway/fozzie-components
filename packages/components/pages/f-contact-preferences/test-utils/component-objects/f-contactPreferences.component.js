@@ -1,6 +1,5 @@
-const Page = require('@justeat/f-wdio-utils/src/page.object');
+const Page = require('@justeat/f-wdio-utils/src/base.page');
 const {
-    COMPONENT,
     ERROR_PAGE,
     SUBMIT_BUTTON,
     CHECKBOXES,
@@ -12,8 +11,6 @@ module.exports = class ContactPreferences extends Page {
     constructor () {
         super('page', 'contact-preferences-component');
     }
-
-    get component () { return $(COMPONENT); }
 
     get errorPage () { return $(ERROR_PAGE); }
 
@@ -27,21 +24,6 @@ module.exports = class ContactPreferences extends Page {
 
     get successAlert () { return $(SUCCESS_ALERT); }
 
-    load () {
-        super.load(this.component);
-    }
-
-    loadError () {
-        super.load(this.errorPage);
-    }
-
-    waitForComponent () {
-        super.waitForComponent(this.component);
-    }
-
-    isComponentDisplayed () {
-        return this.component.isDisplayed();
-    }
 
     isErrorPageDisplayed () {
         return this.errorPage.isDisplayed();
