@@ -9,11 +9,7 @@ export default {
 
 export const VLinkComponent = () => ({
     components: { VLink },
-    data () {
-        return {
-            dataTestId: 'link-component'
-        };
-    },
+
     props: {
         href: {
             default: text('Anchor link path', '/')
@@ -46,8 +42,13 @@ export const VLinkComponent = () => ({
         noLineBreak: {
             default: boolean('noLineBreak', false)
         },
+
         isDistinct: {
             default: boolean('isDistinct', false)
+        },
+
+        dataTestId: {
+            default: text('dataTestId', 'v-link-component')
         }
     },
 

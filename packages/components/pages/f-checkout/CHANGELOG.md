@@ -4,12 +4,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v3.31.0
+v3.32.0
 ------------------------------
-*June 16, 2022*
+*June 17, 2022*
 
 ### Changed
-- Update `f-link` to v2.4.0.
+- Update `f-link` to v3.1.0.
+
+
+v3.31.0
+------------------------------
+*June 15, 2022*
+
+### Changed
+- Bumped wdio version and fixed breaking changes.
 
 
 v3.30.1

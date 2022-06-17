@@ -1,6 +1,5 @@
-const Page = require('@justeat/f-wdio-utils/src/page.object');
+const Page = require('@justeat/f-wdio-utils/src/base.page');
 const {
-    CHECKOUT_COMPONENT,
     ORDER_TIME_DROPDOWN,
     USER_NOTE_INPUT,
     GO_TO_PAYMENT_BUTTON,
@@ -31,7 +30,6 @@ module.exports = class Checkout extends Page {
         super('page', 'checkout-component');
     }
 
-    get component () { return $(CHECKOUT_COMPONENT); }
 
     get orderTimeDropdown () { return $(ORDER_TIME_DROPDOWN); }
 
@@ -150,34 +148,6 @@ module.exports = class Checkout extends Page {
      * @param {String} checkout.isAuthenticated The checkout authentication
      * @param {String} checkout.isValid The checkout validation
      */
-
-    load () {
-        super.load(this.component);
-    }
-
-    loadError () {
-        super.load(this.errorPageComponent);
-    }
-
-    loadAgeVerification () {
-        super.load(this.ageVerificationComponent);
-    }
-
-    waitForComponent (component = this.component) {
-        super.waitForComponent(component);
-    }
-
-    waitForErrorPageComponent () {
-        super.waitForComponent(this.errorPageComponent);
-    }
-
-    waitForAgeVerificationComponent () {
-        super.waitForComponent(this.ageVerificationComponent);
-    }
-
-    isCheckoutPageDisplayed () {
-        return this.component.isDisplayed();
-    }
 
     isPostcodeTypeErrorDisplayed () {
         return this.fields.addressPostcode.typeError.isDisplayed();

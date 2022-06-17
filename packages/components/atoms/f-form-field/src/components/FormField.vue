@@ -406,6 +406,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 $form-input-icon-verticalIndent                : 15px;
 $form-input-icon-verticalIndent--small         : 11px;
 $form-input-icon-verticalIndent--large         : 19px;
@@ -417,7 +419,7 @@ $form-input-iconSize                           : 18px;
 
     .c-formField-field--textarea {
         background-clip: padding-box;
-        padding: spacing(d);
+        padding: f.spacing(d);
         resize: none;
     }
 
@@ -459,7 +461,7 @@ $form-input-iconSize                           : 18px;
     .c-formField-icon--disabled {
         svg {
             path {
-                fill: $color-content-disabled;
+                fill: f.$color-content-disabled;
             }
         }
     }
@@ -490,14 +492,14 @@ $form-input-iconSize                           : 18px;
 
     .c-formField-assistiveText {
         position: absolute;
-        font-weight: $font-weight-regular;
+        font-weight: f.$font-weight-regular;
         color: $form-input-secondaryTextColour;
-        margin-top: spacing(a);
+        margin-top: f.spacing(a);
     }
 
     .c-formField--hasAssistiveText {
         & + & {
-            margin-top: spacing(g);
+            margin-top: f.spacing(g);
         }
     }
 </style>

@@ -1,12 +1,23 @@
 <template>
-    <div :class="$style['c-filterPill-skeleton']">
-        <span :class="$style['c-filterPill-skeleton-content']" />
+    <div
+        :class="[
+            $style['c-imageTile-skeleton'], {
+                [$style['c-imageTile-skeleton--breakout']]: isBreakoutImage
+            }]">
+        <span :class="$style['c-imageTile-skeletonImage']" />
+        <span :class="$style['c-imageTile-skeletonText']" />
     </div>
 </template>
 
 <script>
 export default {
-    name: 'FilterPillSkeleton'
+    name: 'ImageTileSkeleton',
+    props: {
+        isBreakoutImage: {
+            type: Boolean,
+            default: false
+        }
+    }
 };
 </script>
 
@@ -14,8 +25,6 @@ export default {
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
 @mixin skeletonLoader () {
-    min-height: 1em;
-    border-radius: 100px;
     position: relative;
     overflow: hidden;
 
@@ -41,15 +50,32 @@ export default {
     }
 }
 
-.c-filterPill-skeleton {
-    padding: f.spacing(c) f.spacing(d);
+.c-imageTile-skeleton {
+    @include skeletonLoader();
 }
 
-.c-filterPill-skeleton-content {
-    display: block;
-    width: 50%;
-    height: f.spacing(d);
+.c-imageTile-skeletonImage {
     background-color: f.$color-skeleton-02;
-    @include skeletonLoader();
+    border-radius: f.spacing(b);
+    display: block;
+    padding: 40px 30px;
+    margin-bottom: f.spacing(c);
+
+    .c-imageTile-skeleton--breakout & {
+        padding: 42px 48px;
+        margin: f.spacing(c) 6px;
+    }
+}
+
+.c-imageTile-skeletonText {
+    width: 50%;
+    padding: 10px;
+    background-color: f.$color-skeleton-02;
+    display: block;
+    border-radius: f.spacing(a);
+
+    .c-imageTile-skeleton--breakout & {
+        margin-left: 6px;
+    }
 }
 </style>

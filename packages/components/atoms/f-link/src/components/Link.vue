@@ -11,7 +11,7 @@
                     [$style['o-link--noBreak']]: noLineBreak,
                     [$style['o-link--distinct']]: isDistinct
                 }]"
-            data-test-id="v-link-component"
+            :data-test-id="dataTestId"
             :aria-describedby="descriptionId"
             v-bind="bindAttrs()"
         >
@@ -66,6 +66,11 @@ export default {
         isDistinct: {
             type: Boolean,
             default: false
+        },
+
+        dataTestId: {
+            type: String,
+            default: 'v-link-component'
         }
     },
 
@@ -130,18 +135,20 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use  '@justeat/fozzie/src/scss/fozzie' as f;
+
 .o-link {
     & {
-        color: $color-content-link;
+        color: f.$color-content-link;
     }
 
     &:hover,
     &:focus {
-        color: darken($color-content-link, $color-hover-01);
+        color: darken(f.$color-content-link, f.$color-hover-01);
     }
 
     &:active {
-        color: darken($color-content-link, $color-active-01);
+        color: darken(f.$color-content-link, f.$color-active-01);
     }
 }
 
@@ -162,7 +169,7 @@ export default {
 }
 
 .o-link--bold {
-    font-weight: $font-weight-bold;
+    font-weight: f.$font-weight-bold;
 }
 
 .o-link--noBreak {
@@ -170,15 +177,15 @@ export default {
 }
 
 .o-link--distinct {
-    color: $color-content-link-distinct;
+    color: f.$color-content-link-distinct;
 
     &:hover,
     &:focus {
-        color: darken($color-content-link-distinct, $color-hover-01);
+        color: darken(f.$color-content-link-distinct, f.$color-hover-01);
     }
 
     &:active {
-        color: darken($color-content-link-distinct, $color-active-01);
+        color: darken(f.$color-content-link-distinct, f.$color-active-01);
     }
 }
 </style>
