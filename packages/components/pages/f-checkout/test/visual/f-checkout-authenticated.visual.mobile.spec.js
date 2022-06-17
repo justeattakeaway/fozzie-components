@@ -94,17 +94,6 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
         // Assert
         browser.percyScreenshot('f-checkout - Collection - Authenticated - "Duplicate Order Warning" Modal', 'mobile');
     });
-
-    it('should display the two notes fields if there is two noteTypes.', () => {
-        // Act
-        checkout.load({
-            ...checkoutInfo,
-            noteType: 'get-notes-config-split'
-        });
-
-        // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - Base State - Two Notes Inputs', 'mobile');
-    });
 });
 
 describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Mobile Visual Tests', () => {
@@ -180,6 +169,17 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
 
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - Illegal Mobile Number Error State', 'mobile');
+    });
+
+    it('should display the two notes fields if there is two noteTypes.', () => {
+        // Act
+        checkout.load({
+            ...checkoutInfo,
+            noteType: 'get-notes-config-split'
+        });
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Base State - Two Notes Inputs', 'mobile');
     });
 
     it('should display the "Duplicate Order Warning" modal', () => {

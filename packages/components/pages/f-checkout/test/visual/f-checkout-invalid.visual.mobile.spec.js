@@ -19,7 +19,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
         // Act
         checkout.load({
             ...checkoutInfo,
-            serviceType: 'invalidUrl'
+            serviceType: 'invalid-url'
         });
 
         // Assert
@@ -54,7 +54,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
         // Act
         checkout.load({
             ...checkoutInfo,
-            serviceType: 'collection',
+            serviceType: 'delivery',
             getBasketError: 'offline-products'
         });
 

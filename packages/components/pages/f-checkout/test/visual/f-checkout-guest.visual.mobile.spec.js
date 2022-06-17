@@ -8,7 +8,7 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
     const checkoutInfo = {
         serviceType: 'collection',
         isLoggedIn: false,
-        isAsapAvailable: false,
+        isAsapAvailable: true,
         locale: 'en-GB'
     };
 
@@ -95,7 +95,7 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
     const checkoutInfo = {
         serviceType: 'delivery',
         isLoggedIn: false,
-        isAsapAvailable: false,
+        isAsapAvailable: true,
         locale: 'en-GB'
     };
 

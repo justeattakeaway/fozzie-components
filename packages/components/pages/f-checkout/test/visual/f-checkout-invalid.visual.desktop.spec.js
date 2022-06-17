@@ -19,7 +19,7 @@ describe('f-checkout - Invalid - Desktop Visual Tests', () => {
         // Act
         checkout.load({
             ...checkoutInfo,
-            serviceType: 'invalidUrl'
+            serviceType: 'invalid-url'
         });
         // Assert
         browser.percyScreenshot('f-checkout - Invalid - Base State', 'desktop');
@@ -33,6 +33,12 @@ describe('f-checkout - Invalid - Desktop Visual Tests', () => {
             getBasketError: 'invalid-products'
         });
 
+        console.log('heyyy', checkout.load({
+            ...checkoutInfo,
+            serviceType: 'delivery',
+            getBasketError: 'invalid-products'
+        }));
+
         // Assert
         browser.percyScreenshot('f-checkout - Basket error: Invalid products - Base State', 'desktop');
     });
@@ -41,7 +47,7 @@ describe('f-checkout - Invalid - Desktop Visual Tests', () => {
         // Act
         checkout.load({
             ...checkoutInfo,
-            serviceType: 'collection',
+            serviceType: 'delivery',
             getBasketError: 'offline-products'
         });
 

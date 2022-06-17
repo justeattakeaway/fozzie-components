@@ -95,17 +95,6 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
         // Assert
         browser.percyScreenshot('f-checkout - Collection - Authenticated - "Duplicate Order Warning" Modal', 'desktop');
     });
-
-    it('should display the two notes fields if there is two noteTypes.', () => {
-        // Act
-        checkout.load({
-            ...checkoutInfo,
-            noteType: 'get-notes-config-split'
-        });
-
-        // Assert
-        browser.percyScreenshot('f-checkout - Collection - Authenticated - Base State - Two Notes Inputs', 'desktop');
-    });
 });
 
 describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Desktop Visual Tests', () => {
@@ -193,6 +182,17 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
 
         // Assert
         browser.percyScreenshot('f-checkout - Delivery - Authenticated - "Duplicate Order Warning" Modal', 'desktop');
+    });
+
+    it('should display the two notes fields if there is two noteTypes.', () => {
+        // Act
+        checkout.load({
+            ...checkoutInfo,
+            noteType: 'get-notes-config-split'
+        });
+
+        // Assert
+        browser.percyScreenshot('f-checkout - Delivery - Authenticated - Base State - Two Notes Inputs', 'desktop');
     });
 });
 
