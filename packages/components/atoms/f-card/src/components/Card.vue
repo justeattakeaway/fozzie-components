@@ -102,11 +102,13 @@ export default {
 </script>
 
 <style lang="scss" module>
-$card-bgColor                             : $color-container-default;
-$card-borderColor                         : $color-border-default;
-$card-borderRadius                        : $radius-rounded-c;
-$card-padding                             : spacing(d);
-$card-padding-large                       : spacing(f);
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+$card-bgColor                             : f.$color-container-default;
+$card-borderColor                         : f.$color-border-default;
+$card-borderRadius                        : f.$radius-rounded-c;
+$card-padding                             : f.spacing(d);
+$card-padding-large                       : f.spacing(f);
 $card--pageContentWrapper-width           : 472px; // so that it falls on our 8px spacing grid
 
 .c-card {
@@ -120,7 +122,7 @@ $card--pageContentWrapper-width           : 472px; // so that it falls on our 8p
         &.c-card-innerSpacing--large {
             padding: $card-padding-large $card-padding;
 
-            @include media('>=mid') {
+            @include f.media('>=mid') {
                 padding: $card-padding-large;
             }
         }
@@ -137,28 +139,28 @@ $card--pageContentWrapper-width           : 472px; // so that it falls on our 8p
     .c-card--pageContentWrapper {
         width: 100%;
         transition: 250ms padding ease-in-out;
-        margin: spacing(g) 0;
+        margin: f.spacing(g) 0;
 
-        @include media('>=#{$card--pageContentWrapper-width}') {
+        @include f.media('>=#{$card--pageContentWrapper-width}') {
             width: $card--pageContentWrapper-width;
-            margin: spacing(g) auto;
+            margin: f.spacing(g) auto;
         }
 
         & > .c-card-innerSpacing {
-            padding: spacing(e) 6% 0;
+            padding: f.spacing(e) 6% 0;
 
-            @include media('>=narrow') {
-                padding: spacing(h) 10%;
+            @include f.media('>=narrow') {
+                padding: f.spacing(h) 10%;
             }
 
-            @include media('>=#{$card--pageContentWrapper-width}') {
-                padding: spacing(h) spacing(j);
+            @include f.media('>=#{$card--pageContentWrapper-width}') {
+                padding: f.spacing(h) f.spacing(j);
             }
         }
     }
 
     .c-card-heading {
-        margin-bottom: spacing(d);
+        margin-bottom: f.spacing(d);
     }
 
     .c-card-heading--centerAligned {
