@@ -229,21 +229,20 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 $image-tile-background-opacity: 0.7;
-$image-tile-background-color: $color-interactive-brand;
-$image-tile-selected: $color-content-positive;
+$image-tile-background-color: f.$color-interactive-brand;
+$image-tile-selected: f.$color-content-positive;
 $image-tile-transition-duration: 0.2s;
 $image-tile-ease: ease-in-out;
 $image-tile-reset-translate: translate3d(0, 0, 0);
-$image-tile-text-transform: translate3d(spacing(a), 0, 0);
-$image-tile-text-transform-breakout: translate3d(spacing(b), 0, 0);
-
+$image-tile-text-transform: translate3d(f.spacing(a), 0, 0);
+$image-tile-text-transform-breakout: translate3d(f.spacing(b), 0, 0);
 @mixin image-tile-icon-selected-transform() {
     opacity: 1;
     transform: $image-tile-reset-translate scale(1) rotate(0);
     width: 15px;
 }
-
 @mixin image-tile-icon-selected-transform-breakout() {
     opacity: 1;
     transform: $image-tile-text-transform scale(1) rotate(0);
@@ -251,8 +250,8 @@ $image-tile-text-transform-breakout: translate3d(spacing(b), 0, 0);
 }
 
 @mixin image-tile-focus() {
-    border-radius: $radius-rounded-b;
-    box-shadow: 0 0 0 2px $color-focus;
+    border-radius: f.$radius-rounded-b;
+    box-shadow: 0 0 0 2px f.$color-focus;
 }
 
 .c-imageTile {
@@ -334,7 +333,7 @@ $image-tile-text-transform-breakout: translate3d(spacing(b), 0, 0);
 
 .c-imageTile-backgroundContainer {
     background-color: rgba($image-tile-background-color, $image-tile-background-opacity);
-    border-radius: $radius-rounded-b;
+    border-radius: f.$radius-rounded-b;
     background-image: var(--bg-image);
     display: block;
     padding-top: math.div(3, 5) * 100%; // 5:3 aspect ratio
@@ -351,7 +350,7 @@ $image-tile-text-transform-breakout: translate3d(spacing(b), 0, 0);
 }
 
 .c-imageTile-image {
-    border-radius: $radius-rounded-b;
+    border-radius: f.$radius-rounded-b;
     position: absolute;
     top: 0;
     left: 0;
@@ -360,7 +359,7 @@ $image-tile-text-transform-breakout: translate3d(spacing(b), 0, 0);
 }
 
 .c-imageTile-textContainer {
-    margin-top: spacing(b);
+    margin-top: f.spacing(b);
     display: flex;
     max-width: 100%;
 
@@ -376,7 +375,7 @@ $image-tile-text-transform-breakout: translate3d(spacing(b), 0, 0);
 .c-imageTile-icon {
     align-self: center;
     opacity: 0;
-    transform: translate3d(-spacing(c), 0, 0) scale(0.5) rotate(-60deg);
+    transform: translate3d(-#{f.spacing(c)}, 0, 0) scale(0.5) rotate(-60deg);
     width: 0;
     will-change: transform, opacity;
 
@@ -387,7 +386,7 @@ $image-tile-text-transform-breakout: translate3d(spacing(b), 0, 0);
     }
 
     .c-imageTile--breakout & {
-        transform: translate3d(-spacing(b), 0, 0) scale(0.5) rotate(-60deg);
+        transform: translate3d(-#{f.spacing(b)}, 0, 0) scale(0.5) rotate(-60deg);
     }
 
     .c-imageTile--selected & {
@@ -402,7 +401,7 @@ $image-tile-text-transform-breakout: translate3d(spacing(b), 0, 0);
         fill: $image-tile-selected;
     }
 
-    @include media('>=mid') {
+    @include f.media('>=mid') {
         .c-imageTile:hover & {
             @include image-tile-icon-selected-transform();
         }
@@ -414,11 +413,11 @@ $image-tile-text-transform-breakout: translate3d(spacing(b), 0, 0);
 }
 
 .c-imageTile-text {
-    @include font-size(body-s);
+    @include f.font-size(body-s);
     display: block;
-    font-family: $font-family-base;
-    font-weight: $font-weight-regular;
-    margin-right: spacing(d);
+    font-family: f.$font-family-base;
+    font-weight: f.$font-weight-regular;
+    margin-right: f.spacing(d);
     overflow: hidden;
     text-overflow: ellipsis;
     transform: $image-tile-reset-translate;
@@ -438,8 +437,8 @@ $image-tile-text-transform-breakout: translate3d(spacing(b), 0, 0);
     .c-imageTile--selected.c-imageTile--breakout & {
         transform: $image-tile-text-transform-breakout;
     }
+    @include f.media('>=mid') {
 
-    @include media('>=mid') {
         .c-imageTile:hover & {
             transform: $image-tile-text-transform;
         }
@@ -450,4 +449,3 @@ $image-tile-text-transform-breakout: translate3d(spacing(b), 0, 0);
     }
 }
 </style>
-
