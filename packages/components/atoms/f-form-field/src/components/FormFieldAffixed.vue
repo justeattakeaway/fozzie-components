@@ -117,6 +117,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 $affixed-field-sizes: (
     small:  ($form-input-height--small, $form-input-padding--small),
     medium: ($form-input-height, $form-input-padding),
@@ -149,8 +151,8 @@ $affixed-field-sizes: (
 // Styling for either the prefix or suffix
 .c-formField-affix {
     height: 100%;
-    font-family: $font-family-base;
-    @include font-size($form-input-fontSize);
+    font-family: f.$font-family-base;
+    @include f.font-size($form-input-fontSize);
     color: $form-input-secondaryTextColour;
 }
 
