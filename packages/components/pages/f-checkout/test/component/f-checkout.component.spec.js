@@ -1,9 +1,15 @@
 import forEach from 'mocha-each';
-import argumentStringBuilder from '../../test-utils/component-objects/argumentStringBuilder';
 
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
+
+const checkoutInfo = {
+    serviceType: 'delivery',
+    isLoggedIn: true,
+    isAsapAvailable: true,
+    locale: 'en-GB'
+};
 
 const orderTime = 'Wednesday 01:45';
 
@@ -12,11 +18,10 @@ describe('f-checkout component tests', () => {
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder();
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo
+        });
     });
 
     it('should submit the checkout form', () => {
@@ -63,11 +68,12 @@ describe('f-checkout component tests', () => {
         // Arrange
         checkout = new Checkout();
 
-        const args = argumentStringBuilder({ patchCheckoutError: 'restaurant-not-taking-orders' });
-        checkout.withQuery('args', args);
-
         // Act
-        checkout.load();
+        checkout.load({
+            ...checkoutInfo,
+            patchCheckoutError: 'restaurant-not-taking-orders'
+        });
+
         checkout.goToPayment();
         checkout.clickRetryButton();
         browser.pause(2000);
@@ -81,11 +87,12 @@ describe('f-checkout component tests', () => {
             // Arrange
             checkout = new Checkout();
 
-            const args = argumentStringBuilder({ placeOrderError: 'duplicate' });
-            checkout.withQuery('args', args);
-
             // Act
-            checkout.load();
+            checkout.load({
+                ...checkoutInfo,
+                placeOrderError: 'duplicate'
+            });
+
             checkout.goToPayment();
         });
 
@@ -96,7 +103,7 @@ describe('f-checkout component tests', () => {
 
             // Assert
             expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
-            expect(checkout.isCheckoutPageDisplayed()).toBe(true);
+            expect(checkout.isComponentDisplayed()).toBe(true);
         });
 
         it('should attempt to redirect to the "Order History Page" when the "View my orders" button is pressed', () => {
