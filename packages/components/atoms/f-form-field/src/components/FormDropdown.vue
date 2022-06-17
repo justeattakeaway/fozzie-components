@@ -96,18 +96,20 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 $form-dropdown-iconIndent                     : 21px;
 $form-dropdown-iconIndent--small              : 17px;
 $form-dropdown-iconIndent--large              : 25px;
 
 .c-formDropdown-icon {
-    width: spacing(c);
+    width: f.spacing(c);
     position: absolute;
-    right: spacing(e);
+    right: f.spacing(e);
     pointer-events: none;
 
     path {
-        fill: $color-content-subdued;
+        fill: f.$color-content-subdued;
     }
 
     .c-formField-field--small ~ & {
