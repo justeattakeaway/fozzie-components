@@ -36,17 +36,19 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-errorMessage {
     position: relative;
-    color: $color-content-error;
-    @include font-size();
-    margin-top: spacing();
+    color: f.$color-content-error;
+    @include f.font-size();
+    margin-top: f.spacing();
 }
 
 .c-errorMessage-content {
     display: block;
     overflow: hidden;
-    margin-left: spacing(e);
+    margin-left: f.spacing(e);
 }
 
 .c-errorMessage-icon {
@@ -55,7 +57,7 @@ export default {
     margin-top: 2px;
 
     path {
-        fill: $color-support-error;
+        fill: f.$color-support-error;
     }
 }
 </style>
