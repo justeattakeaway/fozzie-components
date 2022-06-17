@@ -152,7 +152,9 @@ export default {
 </script>
 
 <style lang="scss" module>
-$filter-pill-selected-color: $color-content-positive;
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+$filter-pill-selected-color: f.$color-content-positive;
 $filter-pill-checkbox-width: 16px;
 $filter-pill-transition-duration: 0.2s;
 $filter-pill-ease: ease-in-out;
@@ -164,13 +166,13 @@ $filter-pill-ease: ease-in-out;
 }
 
 .c-filterPill {
-    box-shadow: 0 0 0 1px $color-border-default;
-    border-radius: $radius-rounded-e;
-    background: $color-white;
+    box-shadow: 0 0 0 1px f.$color-border-default;
+    border-radius: f.$radius-rounded-e;
+    background: f.$color-white;
     transition: 0.1s;
 
     &:focus-within:not(.c-filterPill--disabled) {
-        box-shadow: 0 0 0 2px $color-focus;
+        box-shadow: 0 0 0 2px f.$color-focus;
     }
 }
 
@@ -184,11 +186,11 @@ $filter-pill-ease: ease-in-out;
 
 .c-filterPill-label {
     display: flex;
-    padding: spacing(b) spacing(d);
+    padding: f.spacing(b) f.spacing(d);
     cursor: pointer;
-    @include font-size(body-m);
-    font-family: $font-family-base;
-    font-weight: $font-weight-regular;
+    @include f.font-size(body-m);
+    font-family: f.$font-family-base;
+    font-weight: f.$font-weight-regular;
 
     &:focus {
         outline: none; // Prevents Safari doubling focus styles.
@@ -200,7 +202,7 @@ $filter-pill-ease: ease-in-out;
     }
 
     .c-filterPill--disabled & {
-        color: #efedea;
+        color: f.$color-grey-30;
         cursor: default;
     }
 }
@@ -226,7 +228,7 @@ $filter-pill-ease: ease-in-out;
         opacity: 1;
         width: $filter-pill-checkbox-width;
         min-width: $filter-pill-checkbox-width;
-        margin-right: spacing(b);
+        margin-right: f.spacing(b);
     }
 
     .c-filterPill--selected & path {
@@ -241,7 +243,7 @@ $filter-pill-ease: ease-in-out;
 
 .c-filterPill-number {
     white-space: nowrap;
-    padding-left: spacing(d);
+    padding-left: f.spacing(d);
 
     .c-filterPill--selected & {
         color: $filter-pill-selected-color;

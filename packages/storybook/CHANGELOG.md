@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.52.3
+------------------------------
+*June 17, 2022*
+### Changed
+- updated vue.config to include f-filter-pill in components using @use and @forward
+
+
 v0.52.2
 ------------------------------
 *June 16, 2022*
