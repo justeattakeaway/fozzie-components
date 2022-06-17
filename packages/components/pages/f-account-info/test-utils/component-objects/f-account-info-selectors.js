@@ -1,4 +1,3 @@
-exports.COMPONENT = '[data-test-id="account-info"]';
 exports.CHANGE_EMAIL_ADDRESS_LINK = '[name="account-info-change-emailAddress-link"]';
 exports.SAVE_CHANGES_BUTTON = '[data-test-id="account-info-save-changes-button"]';
 exports.CHANGE_PASSWORD_BUTTON = '[data-test-id="account-info-change-password-button"]';
