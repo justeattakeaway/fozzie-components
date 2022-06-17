@@ -22,6 +22,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 @mixin skeletonLoader () {
     position: relative;
     overflow: hidden;
@@ -36,7 +38,7 @@ export default {
             bottom: 0;
             left: 0;
             transform: translateX(-100%);
-            background-image: linear-gradient(90deg, rgba($color-white, 0) 0, rgba($color-white, 0.2) 20%, rgba($color-white, 0.5) 60%, rgba($color-white, 0));
+            background-image: linear-gradient(90deg, rgba(f.$color-white, 0) 0, rgba(f.$color-white, 0.2) 20%, rgba(f.$color-white, 0.5) 60%, rgba(f.$color-white, 0));
             animation: skeletonLoadingShimmer 2s infinite;
         }
     }
@@ -53,24 +55,24 @@ export default {
 }
 
 .c-imageTile-skeletonImage {
-    background-color: $color-skeleton-02;
-    border-radius: spacing(b);
+    background-color: f.$color-skeleton-02;
+    border-radius: f.spacing(b);
     display: block;
     padding: 40px 30px;
-    margin-bottom: spacing(c);
+    margin-bottom: f.spacing(c);
 
     .c-imageTile-skeleton--breakout & {
         padding: 42px 48px;
-        margin: spacing(c) 6px;
+        margin: f.spacing(c) 6px;
     }
 }
 
 .c-imageTile-skeletonText {
     width: 50%;
     padding: 10px;
-    background-color: $color-skeleton-02;
+    background-color: f.$color-skeleton-02;
     display: block;
-    border-radius: spacing(a);
+    border-radius: f.spacing(a);
 
     .c-imageTile-skeleton--breakout & {
         margin-left: 6px;

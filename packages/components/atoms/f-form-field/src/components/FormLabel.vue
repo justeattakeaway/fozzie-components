@@ -83,26 +83,28 @@ export default {
 </script>
 
 <style lang="scss" module>
-$form-label-colour              : $color-content-default; // Text colour of form labels
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+$form-label-colour              : f.$color-content-default; // Text colour of form labels
 $form-label-fontSize            : 'body-s';
-$form-label-weight              : $font-weight-bold;
+$form-label-weight              : f.$font-weight-bold;
 
 .c-formField-label {
     display: block;
     color: $form-label-colour;
-    @include font-size($form-label-fontSize);
+    @include f.font-size($form-label-fontSize);
     font-weight: $form-label-weight;
-    margin-bottom: spacing();
+    margin-bottom: f.spacing();
 }
 
 .c-formField-label--disabled {
-    color: $color-content-disabled;
+    color: f.$color-content-disabled;
     pointer-events: none;
 }
 
 .c-formField-label-details,
 .c-formField-label-description {
-    font-weight: $font-weight-regular;
+    font-weight: f.$font-weight-regular;
     color: $form-input-secondaryTextColour;
 }
 
@@ -113,7 +115,7 @@ $form-label-weight              : $font-weight-bold;
 
 .c-formField-label-description {
     display: block;
-    margin-top: spacing();
-    margin-bottom: spacing(d);
+    margin-top: f.spacing();
+    margin-bottom: f.spacing(d);
 }
 </style>
