@@ -9,7 +9,7 @@ v2.5.0
 *June 17, 2022*
 
 ### Added
-- `dataTestId` prop, with a default value of `"v-link-component"` which respects any provided `data-test-id` attribute.
+- `dataTestId` prop, with a default value of `"v-link-component"` to allow custom `data-test-id` attributes.
 
 
 v2.4.0
