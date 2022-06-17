@@ -11,7 +11,7 @@
                     [$style['o-link--noBreak']]: noLineBreak,
                     [$style['o-link--distinct']]: isDistinct
                 }]"
-            data-test-id="v-link-component"
+            :data-test-id="dataTestId"
             :aria-describedby="descriptionId"
             v-bind="bindAttrs()"
         >
@@ -66,6 +66,11 @@ export default {
         isDistinct: {
             type: Boolean,
             default: false
+        },
+
+        dataTestId: {
+            type: String,
+            default: 'v-link-component'
         }
     },
 
