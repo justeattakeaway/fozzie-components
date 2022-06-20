@@ -73,12 +73,14 @@ export default {
 </script>
 
 <style lang="scss" module>
-$breadcrumbs-text-colour-noBackground: $color-content-default;
-$breadcrumbs-text-colour-hasBackground: $color-content-light;
-$breadcrumbs-background-colour: rgba($color-black, 0.6);
-$breadcrumbs-border-radius: $radius-rounded-e;
-$breadcrumbs-not-active-font-weight: $font-weight-bold;
-$breadcrumbs-active-font-weight: $font-weight-regular;
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+$breadcrumbs-text-colour-noBackground: f.$color-content-default;
+$breadcrumbs-text-colour-hasBackground: f.$color-content-light;
+$breadcrumbs-background-colour: rgba(f.$color-black, 0.6);
+$breadcrumbs-border-radius: f.$radius-rounded-e;
+$breadcrumbs-not-active-font-weight: f.$font-weight-bold;
+$breadcrumbs-active-font-weight: f.$font-weight-regular;
 
 .c-breadcrumbs {
     display: flex;
@@ -95,20 +97,20 @@ $breadcrumbs-active-font-weight: $font-weight-regular;
 .c-breadcrumbs-list--hasBackground {
     background-color: $breadcrumbs-background-colour;
     border-radius: $breadcrumbs-border-radius;
-    padding: 0 spacing();
+    padding: 0 f.spacing();
 }
 
 .c-breadcrumbs-item {
-    padding: spacing(a) spacing();
+    padding: f.spacing(a) f.spacing();
 
-    @include media('<narrowMid') {
-        padding: spacing(a) spacing(d) spacing(a) spacing();
+    @include f.media('<narrowMid') {
+        padding: f.spacing(a) f.spacing(d) f.spacing(a) f.spacing();
     }
 }
 
 .c-breadcrumbs-item,
 .c-breadcrumbs-separator {
-    @include media('<narrowMid') {
+    @include f.media('<narrowMid') {
         display: none;
 
         &:nth-last-child(-n+4):not(:nth-last-child(-n+2)) {
@@ -164,8 +166,8 @@ $breadcrumbs-active-font-weight: $font-weight-regular;
         color: $breadcrumbs-text-colour-hasBackground;
     }
 
-    @include media('<narrowMid') {
-        margin-left: spacing(c);
+    @include f.media('<narrowMid') {
+        margin-left: f.spacing(c);
         transform: scale(0.6, 1.2) rotate(180deg);
         margin-top: 2px;
     }
