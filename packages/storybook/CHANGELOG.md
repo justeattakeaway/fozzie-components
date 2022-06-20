@@ -5,6 +5,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 
+v0.52.9
+------------------------------
+*June 20, 2022*
+### Changed
+- updated vue.config to include f-card-with-content in components using @use and @forward
+
+
+v0.52.8
+------------------------------
+*June 20, 2022*
+### Changed
+- updated vue.config to include f-breadcrumbs in components using @use and @forward
+
+
 v0.52.7
 ------------------------------
 *June 17, 2022*

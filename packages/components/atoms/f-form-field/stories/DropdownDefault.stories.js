@@ -17,8 +17,6 @@ export const DropdownDefaultComponent = (args, { argTypes }) => ({
     template:
         `<form-field
             ${sharedFieldProperties}
-            :label-text="labelText"
-            :label-description="labelDescription"
             :label-details="labelDetails"
             :field-size="fieldSize"
             input-type="dropdown"
@@ -26,7 +24,6 @@ export const DropdownDefaultComponent = (args, { argTypes }) => ({
             :is-grouped="isGrouped"
             :placeholder="placeholder"
             maxlength="200"
-            :assistive-text="assistiveText"
         />`
 });
 
@@ -70,12 +67,6 @@ DropdownDefaultComponent.argTypes = {
         options: VALID_FIELD_SIZES,
         description: 'Choose a field size',
         defaultValue: DEFAULT_FIELD_SIZE
-    },
-    shouldShowLabelText:
-    {
-        control: { type: 'boolean' },
-        description: 'Select whether to show label text or not',
-        defaultValue: true
     },
     placeholder:
     {
