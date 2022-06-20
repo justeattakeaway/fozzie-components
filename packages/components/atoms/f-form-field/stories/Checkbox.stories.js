@@ -13,11 +13,8 @@ export const CheckboxComponent = (args, { argTypes }) => ({
     template:
         `<form-field
             ${sharedFieldProperties}
-            :label-text="labelText"
-            :label-description="labelDescription"
             :is-grouped="isGrouped"
             input-type="checkbox"
-            :assistive-text="assistiveText"
         />`
 });
 

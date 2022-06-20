@@ -58,11 +58,5 @@ TextInputIconComponent.argTypes = {
     ...SharedArgTypes,
     labelText: { description: 'not available in this story' },
     labelDescription: { description: 'not available in this story' },
-    assistiveText: { description: 'not available in this story' },
-    shouldShowLabelText:
-    {
-        control: { type: 'boolean' },
-        description: 'Select whether to show label text or not',
-        defaultValue: true
-    }
+    assistiveText: { description: 'not available in this story' }
 };

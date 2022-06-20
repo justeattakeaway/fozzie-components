@@ -13,10 +13,8 @@ export const RadioComponent = (args, { argTypes }) => ({
     template: `
         <div>
             <form-field
-                :assistive-text="assistiveText"
                 ${sharedFieldProperties}
                 :is-grouped="isGrouped"
-                :label-text="labelText"
                 id="radio-1"
                 input-type="radio"
                 name="group-name" />
@@ -36,10 +34,10 @@ RadioComponent.storyName = 'Radio';
 
 RadioComponent.argTypes = {
     ...SharedArgTypes,
-    isGrouped:
-    {
+    isGrouped: {
         control: { type: 'boolean' },
-        description: 'Select whether to remove the margin between all grouped form fields or not.',
+        description:
+            'Select whether to remove the margin between all grouped form fields or not.',
         defaultValue: false
     },
     value: {
