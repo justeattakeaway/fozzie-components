@@ -2742,13 +2742,6 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/f-wdio-utils@0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.6.0.tgz#0d5ea0ca9cc5b6bc9cd74b350e74cc62379d88f0"
-  integrity sha512-/yI/Nq3IZ8X0k+V0RBB4dNWFPOomSIt67FxBqgvI1Ig0HKd9tqTCxzTaDiKP3Bu9GlxLDHhdpS9HLNawTLsLgQ==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
 "@justeat/f-wdio-utils@0.8.1":
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.8.1.tgz#2c9715657176e85ed1388d6bc3ea9256c776d504"
@@ -2776,6 +2769,14 @@
   version "9.0.0-beta.2"
   resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.2.tgz#678404404597eac15b9b45362febae090af5fcaf"
   integrity sha512-DuiVeJ0EEmVB7YkxrhFGyjxEMVzBI1f+sp2RQlVVM/F7wbTuF4enFBZzN6WtF0PDQB8BxA1g9s/uJS7uCI2l+Q==
+  dependencies:
+    "@justeat/pie-design-tokens" "1.4.0"
+    include-media eduardoboucas/include-media#2.0-release
+
+"@justeat/fozzie@9.0.0-beta.3":
+  version "9.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.3.tgz#e97815d3f1fff757b783fc216ad594876b652c1e"
+  integrity sha512-Yqp7ODkSieLbie91zJpemOxwKN8xRraIttXUPS3djp6mkoQDOT7UhF+rz0JaMiJMD0hJLUHqezKsjwPU+A1VJg==
   dependencies:
     "@justeat/pie-design-tokens" "1.4.0"
     include-media eduardoboucas/include-media#2.0-release
@@ -14992,7 +14993,7 @@ include-media@1.4.9:
   resolved "https://registry.yarnpkg.com/include-media/-/include-media-1.4.9.tgz#d0020b7be3eb2d54868a20943595ce380e0bc43b"
   integrity sha512-IUOcvWDCt6R5V0ktsGk6RbehkW9ks1dODN2ed1p+mhML82TteAl+/ElXy8AJ7ueIuVoKq2NioRVdW9FuwQNOew==
 
-include-media@eduardoboucas/include-media#2.0-release:
+include-media@eduardoboucas/include-media#2.0-release, "include-media@github:eduardoboucas/include-media#2.0-release":
   version "2.0.0"
   resolved "https://codeload.github.com/eduardoboucas/include-media/tar.gz/5398b556d4bb24186d360c950b19026f577ff8e5"
 
