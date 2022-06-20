@@ -22,7 +22,7 @@ describe('f-alert component tests', () => {
 
     it('should include aria-live attribute', async () => {
         // Assert
-        const result = await alert.hasAriaLiveAttribute();
+        const result = await alert.alertRootComponent();
         await expect(result).toHaveAttr('aria-live');
     });
 });

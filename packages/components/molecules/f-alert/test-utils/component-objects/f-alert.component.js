@@ -9,7 +9,7 @@ module.exports = class Alert extends Page {
 
     get alertComponent () { return $('[data-test-id="alert-component"]'); }
 
-    async hasAriaLiveAttribute () {
+    async alertRootComponent () {
         return this.alertComponent;
     }
 
