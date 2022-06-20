@@ -112,12 +112,14 @@ export default {
 </script>
 
 <style lang="scss" module>
-$alert-borderRadius: $radius-rounded-c;
+@use  '@justeat/fozzie/src/scss/fozzie' as f;
+
+$alert-borderRadius: f.$radius-rounded-c;
 
 .c-alert {
     position: relative;
-    padding: spacing(d);
-    margin-top: spacing(d);
+    padding: f.spacing(d);
+    margin-top: f.spacing(d);
     border: 0;
     border-radius: $alert-borderRadius;
 }
@@ -128,44 +130,44 @@ $alert-borderRadius: $radius-rounded-c;
 }
 
 .c-alert--success {
-    @include alert-variant($color-support-positive-02, $color-content-default);
+    @include f.alert-variant(f.$color-support-positive-02, f.$color-content-default);
     path {
-        fill: $color-support-positive;
+        fill: f.$color-support-positive;
     }
 }
 
 .c-alert--warning {
-    @include alert-variant($color-support-warning-02, $color-content-default);
+    @include f.alert-variant(f.$color-support-warning-02, f.$color-content-default);
     path {
-        fill: $color-support-warning;
+        fill: f.$color-support-warning;
     }
 }
 
 .c-alert--danger {
-    @include alert-variant($color-support-error-02, $color-content-default);
+    @include f.alert-variant(f.$color-support-error-02, f.$color-content-default);
     path {
-        fill: $color-support-error;
+        fill: f.$color-support-error;
     }
 }
 
 .c-alert--info {
-    @include alert-variant($color-support-info-02, $color-content-default);
+    @include f.alert-variant(f.$color-support-info-02, f.$color-content-default);
     path {
-        fill: $color-support-info;
+        fill: f.$color-support-info;
     }
 }
 
 .c-alert-heading {
-    @include font-size(subheading-s);
+    @include f.font-size(subheading-s);
     vertical-align: middle;
     margin-top: 0;
-    margin-left: spacing(d);
-    margin-bottom: spacing(a);
+    margin-left: f.spacing(d);
+    margin-bottom: f.spacing(a);
 }
 
 .c-alert-content {
-    @include font-size(body-l);
-    margin-left: spacing(g);
+    @include f.font-size(body-l);
+    margin-left: f.spacing(g);
 }
 
 .c-alert-icon {
@@ -175,7 +177,7 @@ $alert-borderRadius: $radius-rounded-c;
 
 .c-alert-dismiss {
     margin-left: auto;
-    z-index: zIndex(high);
+    z-index: f.zIndex(high);
 
     &:hover {
         cursor: pointer;
@@ -186,7 +188,7 @@ $alert-borderRadius: $radius-rounded-c;
     width: 20px !important;
     height: 20px !important;
     path {
-        fill: $color-content-subdued;
+        fill: f.$color-content-subdued;
     }
 }
 </style>
