@@ -149,34 +149,6 @@ module.exports = class Checkout extends Page {
      * @param {String} checkout.isValid The checkout validation
      */
 
-    async load () {
-        await super.load(this.component);
-    }
-
-    async loadError () {
-        await super.load(this.errorPageComponent);
-    }
-
-    async loadAgeVerification () {
-        await super.load(this.ageVerificationComponent);
-    }
-
-    async waitForComponent (component = this.component) {
-        await super.waitForComponent(component);
-    }
-
-    async waitForErrorPageComponent () {
-        await super.waitForComponent(this.errorPageComponent);
-    }
-
-    async waitForAgeVerificationComponent () {
-        await super.waitForComponent(this.ageVerificationComponent);
-    }
-
-    async isCheckoutPageDisplayed () {
-        return (await this.component).isDisplayed();
-    }
-
     async isPostcodeTypeErrorDisplayed () {
         return (await this.fields.addressPostcode.typeError).isDisplayed();
     }

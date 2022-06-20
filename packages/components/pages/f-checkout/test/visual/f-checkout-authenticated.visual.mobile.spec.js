@@ -12,12 +12,12 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
         locale: 'en-GB'
     };
 
-    beforeEach(async () => {
+    beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });
@@ -39,7 +39,7 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
 
     it('should display the "Something went wrong" error.', async () => {
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo,
             patchCheckoutError: 'SERVER'
         });
@@ -51,7 +51,7 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
 
     it('should display the "Restaurant not taking orders" modal', async () => {
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo,
             patchCheckoutError: 'restaurant-not-taking-orders'
         });
@@ -63,7 +63,7 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
 
     it('should display the "Additional Items Required" modal', async () => {
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo,
             patchCheckoutError: 'additional-items-required'
         });
@@ -85,7 +85,7 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
 
     it('should display the "Duplicate Order Warning" modal', async () => {
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });
@@ -97,12 +97,12 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
 });
 
 describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Mobile Visual Tests', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        await checkout.load({
+        checkout.load({
             serviceType: 'collection',
             isLoggedIn: true,
             isAsapAvailable: false,
@@ -124,12 +124,12 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
         locale: 'en-GB'
     };
 
-    beforeEach(async () => {
+    beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo
         });
     });
@@ -173,7 +173,7 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
 
     it('should display the two notes fields if there is two noteTypes.', async () => {
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo,
             noteType: 'get-notes-config-split'
         });
@@ -184,7 +184,7 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', async () => {
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });
@@ -196,7 +196,7 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
 
     it('should display the "Restaurant not taking orders" modal', async () => {
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo,
             patchCheckoutError: 'restaurant-not-taking-orders'
         });
@@ -208,7 +208,7 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
 
     it('should display the "Additional Items Required" modal', async () => {
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo,
             patchCheckoutError: 'additional-items-required'
         });
@@ -220,12 +220,12 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
 });
 
 describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Mobile Visual Tests', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        await checkout.load({
+        checkout.load({
             serviceType: 'delivery',
             isLoggedIn: true,
             isAsapAvailable: false,
@@ -247,12 +247,12 @@ describe('f-checkout - Dine In - Authenticated - Mobile Visual Tests', () => {
         locale: 'en-GB'
     };
 
-    beforeEach(async () => {
+    beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo
         });
     });
@@ -286,7 +286,7 @@ describe('f-checkout - Dine In - Authenticated - Mobile Visual Tests', () => {
         checkout = new Checkout();
 
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });

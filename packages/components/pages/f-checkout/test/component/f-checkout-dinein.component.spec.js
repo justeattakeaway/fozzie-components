@@ -3,7 +3,7 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 let checkout;
 
 describe('f-checkout "dinein" component tests', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 

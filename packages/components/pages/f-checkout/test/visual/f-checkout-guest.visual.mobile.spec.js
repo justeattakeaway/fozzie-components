@@ -12,12 +12,12 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
         locale: 'en-GB'
     };
 
-    beforeEach(async () => {
+    beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo
         });
     });
@@ -48,9 +48,6 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
         // Arrange
         checkout = new Checkout();
 
-        const args = await argumentStringBuilder({ serviceType: 'collection', isLoggedIn: false, placeOrderError: 'duplicate' });
-        await checkout.withQuery('args', args);
-
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -61,7 +58,7 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
         checkout.inputFieldValues = customerInfo;
 
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });
@@ -74,12 +71,12 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
 });
 
 describe('f-checkout - Collection - Guest - isAsapAvailable: false Mobile Visual Tests', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        await checkout.load({
+        checkout.load({
             serviceType: 'collection',
             isLoggedIn: false,
             isAsapAvailable: false,
@@ -102,12 +99,12 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
         locale: 'en-GB'
     };
 
-    beforeEach(async () => {
+    beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo
         });
     });
@@ -138,11 +135,6 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
         // Arrange
         checkout = new Checkout();
 
-        const args = await argumentStringBuilder({ isLoggedIn: false, placeOrderError: 'duplicate' });
-        await checkout.withQuery('args', args);
-
-        await checkout.load();
-
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -156,7 +148,7 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
         checkout.inputFieldValues = customerInfo;
 
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });
@@ -169,12 +161,12 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
 });
 
 describe('f-checkout - Delivery - Guest - isAsapAvailable: false Mobile Visual Tests', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        await checkout.load({
+        checkout.load({
             serviceType: 'delivery',
             isLoggedIn: false,
             isAsapAvailable: false,
@@ -196,12 +188,12 @@ describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
         locale: 'en-GB'
     };
 
-    beforeEach(async () => {
+    beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo
         });
     });
@@ -233,11 +225,6 @@ describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
         // Arrange
         checkout = new Checkout();
 
-        const args = await argumentStringBuilder({
-            serviceType: 'dinein', isLoggedIn: false, isAsapAvailable: false, placeOrderError: 'duplicate'
-        });
-        await checkout.withQuery('args', args);
-
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -249,7 +236,7 @@ describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
         checkout.inputFieldValues = customerInfo;
 
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });

@@ -14,12 +14,12 @@ const checkoutInfo = {
 const orderTime = 'Wednesday 01:45';
 
 describe('f-checkout component tests', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo
         });
     });
@@ -70,7 +70,7 @@ describe('f-checkout component tests', () => {
         checkout = new Checkout();
 
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo,
             patchCheckoutError: 'restaurant-not-taking-orders'
         });
@@ -89,7 +89,7 @@ describe('f-checkout component tests', () => {
             checkout = new Checkout();
 
             // Act
-            await checkout.load({
+            checkout.load({
                 ...checkoutInfo,
                 placeOrderError: 'duplicate'
             });
@@ -104,7 +104,7 @@ describe('f-checkout component tests', () => {
 
             // Assert
             await expect(await checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
-            await expect(await checkout.isCheckoutPageDisplayed()).toBe(true);
+            await expect(await checkout.isComponentDisplayed()).toBe(true);
         });
 
         it('should attempt to redirect to the "Order History Page" when the "View my orders" button is pressed', async () => {

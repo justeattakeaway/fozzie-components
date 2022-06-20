@@ -11,12 +11,12 @@ const checkoutInfo = {
 
 describe('f-checkout "delivery" component tests', () => {
     describe('uk tenant', () => {
-        beforeEach(async () => {
+        beforeEach(() => {
             // Arrange
             checkout = new Checkout();
 
             // Act
-            await checkout.load({
+            checkout.load({
                 ...checkoutInfo
             });
         });
@@ -32,12 +32,12 @@ describe('f-checkout "delivery" component tests', () => {
 
     describe('au tenant', () => {
         describe('and age verification is not required', () => {
-            beforeEach(async () => {
+            beforeEach(() => {
                 // Arrange
                 checkout = new Checkout();
 
                 // Act
-                await checkout.load({
+                checkout.load({
                     ...checkoutInfo,
                     isLoggedIn: false,
                     locale: 'en-AU'
@@ -58,12 +58,12 @@ describe('f-checkout "delivery" component tests', () => {
         });
 
         describe('and age verification is required', () => {
-            beforeEach(async () => {
+            beforeEach(() => {
                 // Arrange
                 checkout = new Checkout();
 
                 // Act
-                await checkout.load({
+                checkout.load({
                     ...checkoutInfo,
                     locale: 'en-AU',
                     getBasketError: 'age-restriction'
@@ -101,7 +101,7 @@ describe('f-checkout "delivery" - split notes - component tests', () => {
         checkout = new Checkout();
 
         // Act
-        await checkout.load({
+        checkout.load({
             ...checkoutInfo,
             noteType: 'get-notes-config-split'
         });

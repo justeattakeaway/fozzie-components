@@ -5,12 +5,12 @@ const Checkout = require('../../test-utils/component-objects/f-checkout.componen
 let checkout;
 
 describe('f-checkout "guest" component tests', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        await checkout.load({
+        checkout.load({
             serviceType: 'delivery',
             isLoggedIn: false,
             isAsapAvailable: true,
