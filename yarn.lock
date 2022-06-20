@@ -2415,14 +2415,6 @@
   dependencies:
     "@justeat/f-vue-icons" "1.10.0"
 
-"@justeat/f-form-field@4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.0.1.tgz#c6a868d39a3d3361af9e29b44f0d8bc21e30da8d"
-  integrity sha512-DSF1NJFKBb/tZDCCUyTGXcnKWC5FvPa9TIcCy0n57OLfQOJ9A53VfxVpRoW8VjlRZu/bl6nYx4kukZq+iHmx5Q==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeat/f-vue-icons" "2.5.0"
-
 "@justeat/f-form-field@4.11.0":
   version "4.11.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.11.0.tgz#d70fe29f8338326b8e0a97e106979d76ee60298b"
