@@ -21,13 +21,11 @@ export const FormFieldComponent = (args, { argTypes }) => ({
             <form-field
                 ${sharedFieldProperties}
                 label-text="Checkbox"
-                :label-description="labelDescription"
                 input-type="checkbox"/>
                 <div>
                     <form-field
                         ${sharedFieldProperties}
                         label-text="Radio Grouped - 1"
-                        :label-description="labelDescription"
                         input-type="radio"
                         :is-grouped="true"
                         id="radio-1"
@@ -35,7 +33,6 @@ export const FormFieldComponent = (args, { argTypes }) => ({
                     <form-field
                         ${sharedFieldProperties}
                         label-text="Radio Grouped - 2"
-                        :label-description="labelDescription"
                         input-type="radio"
                         :is-grouped="true"
                         id="radio-2"
@@ -44,14 +41,12 @@ export const FormFieldComponent = (args, { argTypes }) => ({
             <form-field
                 ${sharedFieldProperties}
                 label-text="Radio"
-                :label-description="labelDescription"
                 input-type="radio"
                 id="radio-3"
                 name="no-group-name" />
             <form-field
                 ${sharedFieldProperties}
                 label-text="Dropdown"
-                :label-description="labelDescription"
                 input-type="dropdown"
                 field-size="medium"
                 :dropdown-options="dropdownOptions"
@@ -59,7 +54,6 @@ export const FormFieldComponent = (args, { argTypes }) => ({
             <form-field
                 ${sharedFieldProperties}
                 label-text="Dropdown - Icon"
-                :label-description="labelDescription"
                 input-type="dropdown"
                 field-size="medium"
                 :dropdown-options="dropdownOptions"
@@ -71,7 +65,6 @@ export const FormFieldComponent = (args, { argTypes }) => ({
             <form-field
                 ${sharedFieldProperties}
                 label-text="Textarea input"
-                :label-description="labelDescription"
                 input-type="textarea"
                 cols="30"
                 rows="7"
@@ -79,7 +72,6 @@ export const FormFieldComponent = (args, { argTypes }) => ({
             <form-field
                 ${sharedFieldProperties}
                 label-text="Text input - Prefix/Suffix"
-                :label-description="labelDescription"
                 input-type="text"
                 field-size="medium"
                 prefix="£"
@@ -87,14 +79,12 @@ export const FormFieldComponent = (args, { argTypes }) => ({
             <form-field
                 ${sharedFieldProperties}
                 label-text="Text input"
-                :label-description="labelDescription"
                 input-type="text"
                 field-size="medium"
                 maxlength="200"/>
             <form-field
                 ${sharedFieldProperties}
                 label-text="Text input - Left Icon"
-                :label-description="labelDescription"
                 input-type="text"
                 field-size="small">
                     <template v-slot:icon-leading>
@@ -104,7 +94,6 @@ export const FormFieldComponent = (args, { argTypes }) => ({
         <form-field
             ${sharedFieldProperties}
             label-text="Text input - Right Icon"
-            :label-description="labelDescription"
             input-type="text"
             field-size="medium">
             <template v-slot:icon-trailing>
@@ -114,7 +103,6 @@ export const FormFieldComponent = (args, { argTypes }) => ({
         <form-field
             ${sharedFieldProperties}
             label-text="Text input - Both Icons"
-            :label-description="labelDescription"
             input-type="text"
             field-size="large">
             <template v-slot:icon-leading>
@@ -132,7 +120,6 @@ FormFieldComponent.storyName = 'Form Fields';
 
 FormFieldComponent.args = {
     ...sharedArgs,
-    shouldShowLabelText: true,
     dropdownOptions:  [
         {
             disabled: true,
@@ -153,11 +140,6 @@ FormFieldComponent.args = {
 
 FormFieldComponent.argTypes = {
     ...SharedArgTypes,
-    shouldShowLabelText:
-    {
-        control: { type: 'boolean' },
-        description: 'Select whether to show label text or not'
-    },
     labelText: { description: 'not available in this story' },
     assistiveText: { description: 'not available in this story' }
 };

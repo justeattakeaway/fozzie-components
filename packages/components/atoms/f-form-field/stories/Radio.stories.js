@@ -13,10 +13,8 @@ export const RadioComponent = (args, { argTypes }) => ({
     template: `
         <div>
             <form-field
-                :assistive-text="assistiveText"
                 ${sharedFieldProperties}
                 :is-grouped="isGrouped"
-                :label-text="labelText"
                 id="radio-1"
                 input-type="radio"
                 name="group-name" />
