@@ -16,7 +16,6 @@ export const TextareaComponent = (args, { argTypes }) => ({
     template:
         `<form-field
             ${sharedFieldProperties}
-            :label-text="labelText"
             :input-type="inputType"
             :is-grouped="isGrouped"
             cols="30"
@@ -24,8 +23,6 @@ export const TextareaComponent = (args, { argTypes }) => ({
             rows="7"
             maxlength="200"
             :label-details="labelDetails"
-            :label-description="labelDescription"
-            :assistive-text="assistiveText"
         />`
 });
 
@@ -50,12 +47,6 @@ TextareaComponent.argTypes = {
         control: { type: 'text' },
         description: 'Enter label details',
         defaultValue: ''
-    },
-    shouldShowLabelText:
-    {
-        control: { type: 'boolean' },
-        description: 'Select whether to show label text or not',
-        defaultValue: true
     },
     placeholder:
     {
