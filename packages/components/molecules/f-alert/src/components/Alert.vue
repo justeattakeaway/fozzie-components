@@ -5,7 +5,7 @@
                  $style[`c-alert--${type}`]]"
         data-test-id="alert-component"
         role="alert"
-        :aria-live="areaLiveAttribute">
+        :aria-live="ariaLiveAttribute">
         <div
             :class="$style['c-alert-headingContainer']">
             <component
@@ -104,7 +104,7 @@ export default {
             return `${this.type}Icon`;
         },
 
-        areaLiveAttribute () {
+        ariaLiveAttribute () {
             return this.type === 'success' || this.type === 'danger'
                 ? 'polite'
                 : 'off';
