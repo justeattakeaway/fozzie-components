@@ -43,7 +43,6 @@
                 <form-field
                     ref="firstName"
                     v-model="firstName"
-                    aria-required="true"
                     aria-describedby="error-message-firstname"
                     :aria-invalid="!!describeFirstnameErrorMessage"
                     name="firstName"
@@ -85,7 +84,6 @@
                 <form-field
                     ref="email"
                     v-model="email"
-                    aria-required="true"
                     name="email"
                     aria-describedby="error-message-email"
                     :aria-invalid="!!describeEmailErrorMessage"
@@ -106,7 +104,6 @@
                 <form-field
                     ref="password"
                     v-model="password"
-                    aria-required="true"
                     aria-describedby="error-message-password"
                     :aria-invalid="!!describePasswordErrorMessage"
                     name="password"
