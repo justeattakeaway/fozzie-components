@@ -85,6 +85,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-cardWithContent {
     display: flex;
     flex-direction: column;
@@ -94,25 +96,25 @@ export default {
 
 .c-cardWithContent-heading {
     margin-bottom: 0;
-    @include font-size('heading-l', true, 'narrow');
+    @include f.font-size('heading-l', true, 'narrow');
 
-    @include media('>=wide') {
-        @include font-size('heading-l', true, 'default');
+    @include f.media('>=wide') {
+        @include f.font-size('heading-l', true, 'default');
     }
 }
 
 .c-cardWithContent-description {
-    @include font-size('body-l');
-    margin-top: spacing();
+    @include f.font-size('body-l');
+    margin-top: f.spacing();
 }
 
 .c-cardWithContent-button {
-    margin: spacing(f) 0 spacing(a);
+    margin: f.spacing(f) 0 f.spacing(a);
 }
 
 .c-cardWithContent-icon {
     margin: auto;
-    margin-bottom: spacing(f);
+    margin-bottom: f.spacing(f);
     width: 200px;
 }
 </style>

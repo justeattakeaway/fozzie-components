@@ -41,7 +41,7 @@ module.exports = {
                     // add component names 1 by 1 to this array as they're updated
                     // to the new Sass syntax OR the entire component folder if all completed
                     // i.e. // [ 'atoms', 'molecules', 'f-checkout' ]
-                    const updateComponentsAndTypes = ['atoms', 'f-alert', 'f-breadcrumbs'];
+                    const updateComponentsAndTypes = ['atoms', 'f-alert', 'f-breadcrumbs', 'f-card-with-content'];
                     const pathContainsUpdatedComponentOrType = updateComponentsAndTypes.some(a => absPath.includes(a));
 
                     if (!pathContainsUpdatedComponentOrType) {
