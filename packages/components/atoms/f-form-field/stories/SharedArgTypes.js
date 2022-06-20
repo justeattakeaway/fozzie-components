@@ -4,17 +4,20 @@ export default {
         options: ['en-GB', 'en-AU'],
         description: 'Choose a locale'
     },
-    labelText: {
+    labelText:
+    {
         control: { type: 'text' },
         description: 'Enter a label text',
         defaultValue: 'Label Text'
     },
-    labelDescription: {
+    labelDescription:
+    {
         control: { type: 'text' },
         description: 'Enter a label description',
         defaultValue: ''
     },
-    hasError: {
+    hasError:
+    {
         control: { type: 'boolean' },
         description: 'Select whether has error or not'
     },

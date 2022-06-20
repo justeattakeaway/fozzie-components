@@ -34,10 +34,10 @@ RadioComponent.storyName = 'Radio';
 
 RadioComponent.argTypes = {
     ...SharedArgTypes,
-    isGrouped: {
+    isGrouped:
+    {
         control: { type: 'boolean' },
-        description:
-            'Select whether to remove the margin between all grouped form fields or not.',
+        description: 'Select whether to remove the margin between all grouped form fields or not.',
         defaultValue: false
     },
     value: {
