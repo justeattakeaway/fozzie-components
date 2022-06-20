@@ -3,12 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (to be added to next release)
-------------------------------
-*June 14, 2022*
+
+v6.0.0
+-----------------------------
+*June 20, 2022*
 
 ### Added
+*June 14, 2022*
 - Visual tests for default state.
+### Changed
+*June 20, 2022*
+- Update to `@use` and `@forward` SASS syntax
 
 
 v5.1.1

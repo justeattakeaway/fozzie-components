@@ -47,7 +47,8 @@ module.exports = {
                         'f-breadcrumbs',
                         'f-card-with-content',
                         'f-media-element',
-                        'f-promotions-showcase'
+                        'f-promotions-showcase',
+                        'f-mega-modal'
                     ];
                     const pathContainsUpdatedComponentOrType = updateComponentsAndTypes.some(a => absPath.includes(a));
 
