@@ -19,4 +19,10 @@ describe('f-alert component tests', () => {
         // Assert
         await expect(await alert.isComponentDisplayed()).toBe(false);
     });
+
+    it('should include aria-live attribute', async () => {
+        // Assert
+        const result = await alert.hasAriaLiveAttribute();
+        await expect(result).toHaveAttr('aria-live');
+    });
 });

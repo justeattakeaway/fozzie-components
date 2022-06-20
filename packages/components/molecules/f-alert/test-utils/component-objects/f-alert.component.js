@@ -7,6 +7,12 @@ module.exports = class Alert extends Page {
 
     get exitButton () { return $('[data-test-id="alert-dismiss"]'); }
 
+    get alertComponent () { return $('[data-test-id="alert-component"]'); }
+
+    async hasAriaLiveAttribute () {
+        return this.alertComponent;
+    }
+
     async clickExitButton () {
         await this.exitButton.click();
     }
