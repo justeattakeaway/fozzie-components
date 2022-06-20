@@ -7,10 +7,10 @@ let statusBanner;
 describe('Accessibility tests', () => {
     beforeEach(() => {
         statusBanner = new StatusBanner();
-        statusBanner.load();
     });
     it('a11y - should test f-status-banner component WCAG compliance', () => {
         // Act
+        statusBanner.load();
         const axeResults = getAxeResults('f-status-banner');
 
         // Assert

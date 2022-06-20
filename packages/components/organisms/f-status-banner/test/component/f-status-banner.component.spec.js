@@ -5,12 +5,13 @@ let statusBanner;
 describe('f-status-banner component tests', () => {
     beforeEach(async () => {
         statusBanner = new StatusBanner();
-
-        await statusBanner.load();
     });
 
     it('should display the f-statusBanner component', async () => {
+        // Act
+        await statusBanner.load();
+
         // Assert
-        await expect(await statusBanner.isStatusBannerComponentDisplayed()).toBe(true);
+        await expect(await statusBanner.isComponentDisplayed()).toBe(true);
     });
 });
