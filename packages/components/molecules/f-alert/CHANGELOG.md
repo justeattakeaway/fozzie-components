@@ -19,6 +19,15 @@ v5.0.0
 - Update to `@use` and `@forward` SASS syntax
 
 
+
+v5.0.0
+------------------------------
+*Jun 17, 2022*
+
+### Changed
+- Update to `@use` and `@forward` SASS syntax
+
+
 v4.4.1
 ------------------------------
 *Jun 9, 2022*
