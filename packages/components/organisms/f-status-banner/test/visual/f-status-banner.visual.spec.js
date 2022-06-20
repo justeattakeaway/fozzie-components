@@ -7,10 +7,6 @@ let statusBanner;
 forEach(['desktop', 'mobile'])
 .describe('f-status-banner - Visual Tests', device => {
     beforeEach(() => {
-        statusBanner = new StatusBanner();
-    });
-
-    beforeEach(() => {
         if (device === 'mobile') {
             browser.setWindowSize(414, 731);
         }
