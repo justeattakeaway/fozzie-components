@@ -2474,13 +2474,6 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.10.0.tgz#59738afbb1bec54388270521ae8f6de0412d74fb"
   integrity sha512-Sz6A8xdkIdpA2jBfx4XJqCNIJt94FraYfF56wxEs0i9pJLBmgun5As2HPaPpg6sWrbmXA//b2L9bN7uNsZLdLw==
 
-"@justeat/f-link@3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-link/-/f-link-3.1.0.tgz#e8ac42d6be25d97a3f230a727d0c299f765f8b30"
-  integrity sha512-kFizdL7MigYAMM/9QR7+VniPP1dr9CDAgUt66BXKUWiRVAhVOLHYtNqM8oYZeYjiv40siacFoqK2Roueu6lkMg==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
 "@justeat/f-media-element@2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-media-element/-/f-media-element-2.0.0.tgz#0995cdbb902252cad6e15c4786c1547d2c6ee083"
