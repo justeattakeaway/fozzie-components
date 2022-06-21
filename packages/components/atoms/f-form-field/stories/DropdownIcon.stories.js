@@ -21,15 +21,12 @@ export const DropdownIconComponent = (args, { argTypes }) => ({
     template:
         `<form-field
             ${sharedFieldProperties}
-            :label-text="labelText"
             input-type="dropdown"
             :field-size="fieldSize"
             :is-grouped="isGrouped"
             :placeholder="placeholder"
             maxlength="200"
             :label-details="labelDetails"
-            :label-description="labelDescription"
-            :assistive-text="assistiveText"
             :dropdown-options="dropdownOptions">
             <template v-slot:icon-leading>
                 <NutsIcon />
@@ -77,12 +74,6 @@ DropdownIconComponent.argTypes = {
         options: VALID_FIELD_SIZES,
         description: 'Choose a field size',
         defaultValue: DEFAULT_FIELD_SIZE
-    },
-    shouldShowLabelText:
-    {
-        control: { type: 'boolean' },
-        description: 'Select whether to show label text or not',
-        defaultValue: true
     },
     placeholder:
     {

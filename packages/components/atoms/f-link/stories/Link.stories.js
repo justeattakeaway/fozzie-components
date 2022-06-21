@@ -48,7 +48,7 @@ export const VLinkComponent = () => ({
         },
 
         dataTestId: {
-            default: text('dataTestId', 'v-link-component')
+            default: text('data-test-id (via attribute, not a prop)', 'v-link-component')
         }
     },
 
@@ -60,7 +60,6 @@ export const VLinkComponent = () => ({
 
     template: `<v-link
                     link-class="myLinkClass"
-                    :data-test-id="dataTestId"
                     v-bind="{
                         ...(href ? { href } : to ? { to } : {})
                     }"
@@ -70,7 +69,8 @@ export const VLinkComponent = () => ({
                     :no-line-break="noLineBreak"
                     :is-external-site="isExternalSite"
                     :target="target"
-                    :isDistinct="isDistinct">
+                    :isDistinct="isDistinct"
+                    :data-test-id="dataTestId">
                     <span>This is a Link</span>
                 </v-link>`
 });

@@ -1,7 +1,7 @@
 {
   "name": "@justeat/storybook",
   "private":true,
-  "version": "0.52.8",
+  "version": "0.52.10",
   "scripts": {
     "storybook:deploy": "storybook-to-ghpages --script storybook:build",
     "storybook:build": "vue-cli-service storybook:build -s public -c config/storybook",

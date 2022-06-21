@@ -78,8 +78,8 @@ The props that can be defined are as follows (if any):
 | `isFullWidth` | `Boolean` | `false` | Link set as full width. |
 | `noLineBreak` | `Boolean` | `false` | Removes white space. |
 | `isDistinct` | `Boolean` | `false` | Changes default link colour (dark grey) to blue. |
-| `dataTestId` | `String` | `"v-link-component"` | Allows you to specify a custom `data-test-id`. |
 | `link-class` | `String` | `n/a` (this is an optional attribute rather than a required prop) |  Allows parent component to add a CSS class to the `<a>` or `<router-link>`  |
+| `data-test-id` | `String` | `"v-link-component"` (this is an optional attribute rather than a required prop) | This allows you to specify a custom `data-test-id` which is applied to the link. |
 
 ## Development
 
