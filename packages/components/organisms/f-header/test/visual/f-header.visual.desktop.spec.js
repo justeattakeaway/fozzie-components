@@ -5,6 +5,11 @@ const Header = require('../../test-utils/component-objects/f-header.component');
 let header;
 
 describe('Shared - f-header component tests', () => {
+    beforeEach(() => {
+        // Arrange
+        header = new Header();
+    });
+
     forEach([
         ['en-GB', true], ['en-GB', false],
         ['en-AU', true], ['en-AU', false],
@@ -14,78 +19,49 @@ describe('Shared - f-header component tests', () => {
         ['es-ES', true], ['es-ES', false]
     ]).it('should display component', async (tenant, isLoggedIn) => {
         // Arrange
-        const controls = [
-            `locale:${tenant}`,
-            'showOffersLink:true', // Should show for AU, IE, NZ and UK only
-            'showDeliveryEnquiry:true', // Should show for AU, IE, NZ and UK only
-            ...(isLoggedIn ? [] : ['userInfoProp:!undefined'])
-        ].join(';');
-
-        header = new Header();
-        header.path += `&args=${controls}`;
+        const querystring = { locale: `${tenant}`, showOffersLink: true, showDeliveryEnquiry: true };
+        if (!isLoggedIn) {
+            querystring.userInfoProp = 'undefined';
+        }
 
         // Act
-        await header.load();
+        await header.load(querystring);
 
         // Assert
         await browser.percyScreenshot(`f-header - Base state - isLoggedIn: ${isLoggedIn} - ${tenant}`, 'desktop');
     });
 
     forEach([
-        'white',
-        'highlight',
-        'transparent'
-    ]).it('should display the "%s" header theme', async theme => {
-        // Arrange
-        const controls = [
-            'locale:en-GB',
-            `headerBackgroundTheme:${theme}`
-        ].join(';');
-
-        header = new Header();
-        header.path += `&args=${controls}`;
-
+        ['en-GB', 'white'],
+        ['en-GB', 'highlight'],
+        ['en-GB', 'transparent']
+    ]).it('should display the "%s - %s" header theme', async (tenant, theme) => {
         // Act
-        await header.load();
+        await header.load({ locale: `${tenant}`, headerBackgroundTheme: `${theme}` });
 
         // Assert
         await browser.percyScreenshot(`f-header - Theme colours - ${theme}`, 'desktop');
     });
 
     forEach([
-        'showLoginInfo',
-        'showHelpLink',
-        'showCountrySelector'
-    ]).it('should not display "%s" ', async knobName => {
-        // Arrange
-        const controls = [
-            'locale:en-GB',
-            `${knobName}:false`
-        ].join(';');
-
-        header = new Header();
-        header.path += `&args=${controls}`;
-
+        ['en-GB', 'showLoginInfo'],
+        ['en-GB', 'showHelpLink'],
+        ['en-GB', 'showCountrySelector']
+    ]).it('should not display "%s" ', async (tenant, control) => {
         // Act
-        await header.load();
+        await header.load({ locale: `${tenant}`, [control]: false });
 
         // Assert
-        await browser.percyScreenshot(`f-header - ${knobName} - False`, 'desktop');
+        await browser.percyScreenshot(`f-header - ${control} - False`, 'desktop');
     });
 
     forEach([
-        'userAccount',
-        'countrySelector'
+        ['en-GB', 'userAccount'],
+        ['en-GB', 'countrySelector']
     ])
-    .it('should display the %s dropdown lists on hover', async link => {
-        // Arrange
-        const controls = 'locale:en-GB';
-
-        header = new Header();
-        header.path += `&args=${controls}`;
-
+    .it('should display the "%s %s" dropdown lists on hover', async (tenant, link) => {
         // Act
-        await header.load();
+        await header.load({ locale: `${tenant}` });
         await header.moveToNavigationLink(link);
 
         // Assert
@@ -96,19 +72,13 @@ describe('Shared - f-header component tests', () => {
     // https://storybook.js.org/docs/vue/essentials/controls#dealing-with-complex-values
     // https://github.com/storybookjs/storybook/issues/14420
     it.skip('should display any custom links', async () => {
-        // Arrange
-        const controls = [
-            'locale:en-GB',
-            'showOffersLink:false',
-            'showDeliveryEnquiry:false'
-            // Set custom links here
-        ].join(';');
-
-        header = new Header();
-        header.path += `&args=${controls}`;
-
         // Act
-        await header.load();
+        await header.load({
+            locale: 'en-GB',
+            showOffersLink: false,
+            showDeliveryEnquiry: false
+            // Set custom links here
+        });
         await header.openMobileNavigationBar();
 
         // Assert
@@ -119,22 +89,16 @@ describe('Shared - f-header component tests', () => {
     // https://storybook.js.org/docs/vue/essentials/controls#dealing-with-complex-values
     // https://github.com/storybookjs/storybook/issues/14420
     it.skip('should be able to show only custom links', async () => {
-        // Arrange
-        const controls = [
-            'locale:en-GB',
-            'showHelpLink:false',
-            'showLoginInfo:false',
-            'showOffersLink:false',
-            'showCountrySelector:false',
-            'showDeliveryEnquiry:false'
-            // Set custom links here
-        ].join(';');
-
-        header = new Header();
-        header.path += `&args=${controls}`;
-
         // Act
-        await header.load();
+        await header.load({
+            locale: 'en-GB',
+            showHelpLink: false,
+            showLoginInfo: false,
+            showOffersLink: false,
+            showCountrySelector: false,
+            showDeliveryEnquiry: false
+            // Set custom links here
+        });
         await header.openMobileNavigationBar();
 
         // Assert
@@ -142,8 +106,6 @@ describe('Shared - f-header component tests', () => {
     });
 
     it('should display link in hover state', async () => {
-        header = new Header();
-
         // Act
         await header.load();
         await header.hoverOverLink('help');
@@ -153,8 +115,6 @@ describe('Shared - f-header component tests', () => {
     });
 
     it('should display link in focus state', async () => {
-        header = new Header();
-
         // Act
         await header.load();
         await header.pressDownTabKey(3);

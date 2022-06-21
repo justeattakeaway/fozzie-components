@@ -5,6 +5,11 @@ const Header = require('../../test-utils/component-objects/f-header.component');
 let header;
 
 describe('Shared - f-header component tests', () => {
+    beforeEach(() => {
+        // Arrange
+        header = new Header();
+    });
+
     forEach([
         ['en-GB', true], ['en-GB', false],
         ['en-AU', true], ['en-AU', false],
@@ -14,18 +19,13 @@ describe('Shared - f-header component tests', () => {
         ['es-ES', true], ['es-ES', false]
     ]).it('should display component', async (tenant, isLoggedIn) => {
         // Arrange
-        const controls = [
-            `locale:${tenant}`,
-            'showOffersLink:true', // Should show for AU, IE, NZ and UK only
-            'showDeliveryEnquiry:true', // Should show for AU, IE, NZ and UK only
-            ...(isLoggedIn ? [] : ['userInfoProp:!undefined'])
-        ].join(';');
-
-        header = new Header();
-        header.path += `&args=${controls}`;
+        const querystring = { locale: `${tenant}`, showOffersLink: true, showDeliveryEnquiry: true };
+        if (!isLoggedIn) {
+            querystring.userInfoProp = 'undefined';
+        }
 
         // Act
-        await header.load();
+        await header.load(querystring);
         await header.openMobileNavigationBar();
 
         // Assert
@@ -33,44 +33,29 @@ describe('Shared - f-header component tests', () => {
     });
 
     forEach([
-        'white',
-        'highlight',
-        'transparent'
-    ]).it('should display the "%s" header theme', async theme => {
-        // Arrange
-        const controls = [
-            'locale:en-GB',
-            `headerBackgroundTheme:${theme}`
-        ].join(';');
-
-        header = new Header();
-        header.path += `&args=${controls}`;
-
+        ['en-GB', 'white'],
+        ['en-GB', 'highlight'],
+        ['en-GB', 'transparent']
+    ]).it('should display the "%s - %s" header theme', async (tenant, theme) => {
         // Act
-        await header.load();
+        await header.load({ locale: `${tenant}`, headerBackgroundTheme: `${theme}` });
 
         // Assert
         await browser.percyScreenshot(`f-header - Theme colours - ${theme}`, 'mobile');
     });
 
     forEach([
-        'white',
-        'highlight',
-        'transparent'
-    ]).it('should display the mobile nav correctly for theme %s', async theme => {
-        // Arrange
-        const controls = [
-            'locale:en-GB',
-            'showOffersLink:true',
-            'showDeliveryEnquiry:true',
-            `headerBackgroundTheme:${theme}`
-        ].join(';');
-
-        header = new Header();
-        header.path += `&args=${controls}`;
-
+        ['en-GB', 'white'],
+        ['en-GB', 'highlight'],
+        ['en-GB', 'transparent']
+    ]).it('should display the mobile nav correctly for theme %s - %s', async (tenant, theme) => {
         // Act
-        await header.load();
+        await header.load({
+            locale: `${tenant}`,
+            showOffersLink: true,
+            showDeliveryEnquiry: true,
+            headerBackgroundTheme: `${theme}`
+        });
         await header.openMobileNavigationBar();
 
         // Assert
@@ -78,14 +63,8 @@ describe('Shared - f-header component tests', () => {
     });
 
     it('should display all available countries', async () => {
-        // Arrange
-        const controls = 'locale:en-GB';
-
-        header = new Header();
-        header.path += `&args=${controls}`;
-
         // Act
-        await header.load();
+        await header.load({ locale: 'en-GB' });
         await header.openMobileNavigationBar();
         await header.openCountrySelector();
 
@@ -94,44 +73,29 @@ describe('Shared - f-header component tests', () => {
     });
 
     forEach([
-        'showLoginInfo',
-        'showHelpLink',
-        'showCountrySelector'
-    ]).it('should not display "%s" ', async knobName => {
-        // Arrange
-        const controls = [
-            'locale:en-GB',
-            `${knobName}:false`
-        ].join(';');
-
-        header = new Header();
-        header.path += `&args=${controls}`;
-
+        ['en-GB', 'showLoginInfo'],
+        ['en-GB', 'showHelpLink'],
+        ['en-GB', 'showCountrySelector']
+    ]).it('should not display "%s" ', async (tenant, control) => {
         // Act
-        await header.load();
+        await header.load({ locale: `${tenant}`, [control]: false });
         await header.openMobileNavigationBar();
 
         // Assert
-        await browser.percyScreenshot(`f-header - ${knobName} - False`, 'mobile');
+        await browser.percyScreenshot(`f-header - ${control} - False`, 'mobile');
     });
 
     // Not currently possible to set complex values (i.e., arrays) for controls via query strings.
     // https://storybook.js.org/docs/vue/essentials/controls#dealing-with-complex-values
     // https://github.com/storybookjs/storybook/issues/14420
     it.skip('should display any custom links', async () => {
-        // Arrange
-        const controls = [
-            'locale:en-GB',
-            'showOffersLink:false',
-            'showDeliveryEnquiry:false'
-            // Set custom links here
-        ].join(';');
-
-        header = new Header();
-        header.path += `&args=${controls}`;
-
         // Act
-        await header.load();
+        await header.load({
+            locale: 'en-GB',
+            showOffersLink: false,
+            showDeliveryEnquiry: false
+            // Set custom links here
+        });
         await header.openMobileNavigationBar();
 
         // Assert
@@ -142,22 +106,16 @@ describe('Shared - f-header component tests', () => {
     // https://storybook.js.org/docs/vue/essentials/controls#dealing-with-complex-values
     // https://github.com/storybookjs/storybook/issues/14420
     it.skip('should be able to show only custom links', async () => {
-        // Arrange
-        const controls = [
-            'locale:en-GB',
-            'showHelpLink:false',
-            'showLoginInfo:false',
-            'showOffersLink:false',
-            'showCountrySelector:false',
-            'showDeliveryEnquiry:false'
-            // Set custom links here
-        ].join(';');
-
-        header = new Header();
-        header.path += `&args=${controls}`;
-
         // Act
-        await header.load();
+        await header.load({
+            locale: 'en-GB',
+            showHelpLink: false,
+            showLoginInfo: false,
+            showOffersLink: false,
+            showCountrySelector: false,
+            showDeliveryEnquiry: false
+            // Set custom links here
+        });
         await header.openMobileNavigationBar();
 
         // Assert
@@ -165,28 +123,20 @@ describe('Shared - f-header component tests', () => {
     });
 
     forEach([
-        'highlight'
-    ]).it('should display correctly with tallBelowMid prop', async theme => {
-        // Arrange
-        const controls = [
-            'locale:en-GB',
-            `headerBackgroundTheme:${theme}`,
-            'tallBelowMid:true'
-        ].join(';');
-
-        header = new Header();
-        header.path += `&args=${controls}`;
-
+        ['en-GB', 'highlight']
+    ]).it('should display correctly with tallBelowMid prop', async (tenant, theme) => {
         // Act
-        await header.load();
+        await header.load({
+            locale: `${tenant}`,
+            headerBackgroundTheme: `${theme}`,
+            tallBelowMid: true
+        });
 
         // Assert
         await browser.percyScreenshot(`f-header - tallBelowMid - ${theme}`, 'mobile');
     });
 
     it('should display link in hover state', async () => {
-        header = new Header();
-
         // Act
         await header.load();
         await header.openMobileNavigationBar();
@@ -197,8 +147,6 @@ describe('Shared - f-header component tests', () => {
     });
 
     it('should display link in focus state', async () => {
-        header = new Header();
-
         // Act
         await header.load();
         await header.openMobileNavigationBar();
