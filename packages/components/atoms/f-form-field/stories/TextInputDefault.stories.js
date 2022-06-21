@@ -19,15 +19,12 @@ export const TextInputDefaultComponent = (args, { argTypes }) => ({
     template:
         `<form-field
             ${sharedFieldProperties}
-            :label-text="labelText"
             :input-type="inputType"
             :field-size="fieldSize"
             :is-grouped="isGrouped"
             :placeholder="placeholder"
             maxlength="200"
-            :label-details="labelDetails"
-            :label-description="labelDescription"
-            :assistive-text="assistiveText"/>`
+            :label-details="labelDetails"/>`
 });
 
 TextInputDefaultComponent.storyName = 'Text Input - Default';
@@ -57,12 +54,6 @@ TextInputDefaultComponent.argTypes = {
         control: { type: 'text' },
         description: 'Enter label details',
         defaultValue: ''
-    },
-    shouldShowLabelText:
-    {
-        control: { type: 'boolean' },
-        description: 'Select whether to show label text or not',
-        defaultValue: true
     },
     placeholder:
     {

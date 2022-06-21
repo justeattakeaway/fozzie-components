@@ -19,12 +19,10 @@ export const TextInputAffixedComponent = (args, { argTypes }) => ({
     template:
     `<form-field
         ${sharedFieldProperties}
-        :label-text="labelText"
         :input-type="inputType"
         :field-size="fieldSize"
         :placeholder="placeholder"
         :label-details="labelDetails"
-        :assistive-text="assistiveText"
         :prefix="prefix"
         :suffix="suffix"
     />`
@@ -51,12 +49,6 @@ TextInputAffixedComponent.argTypes = {
         control: { type: 'text' },
         description: 'Enter label details',
         defaultValue: ''
-    },
-    shouldShowLabelText:
-    {
-        control: { type: 'boolean' },
-        description: 'Select whether to show label text or not',
-        defaultValue: true
     },
     placeholder:
     {
