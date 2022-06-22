@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.4.0
+------------------------------
+*June 22, 2022*
+
+### Changed
+- Update `f-link` to v3.1.1.
+
+
 v2.3.0
 ------------------------------
 *June 20, 2022*
@@ -18,10 +26,6 @@ v2.2.0
 
 ### Changed
 - Bumped wdio version and fixed breaking changes.
-
-*February 4, 2022*
-
-### Changed
 - Upgraded to ESLint v8
 
 
@@ -150,7 +154,7 @@ v0.61.0
 
 v0.60.0
 ------------------------------
-*August 05, 2021*
+*August 5, 2021*
 
 ### Changed
 - Update the story file API mocking to work with f-http
@@ -158,7 +162,7 @@ v0.60.0
 
 v0.59.0
 ------------------------------
-*August 04, 2021*
+*August 4, 2021*
 
 ### Changed
 - Updated Integration Tests to work with new f-http version
@@ -513,7 +517,7 @@ v0.33.0
 
 v0.32.0
 ------------------------------
-*October 05, 2020*
+*October 5, 2020*
 
 ### Changed
 - Use the latest version of `f-form-field` to display form labels on desktop.

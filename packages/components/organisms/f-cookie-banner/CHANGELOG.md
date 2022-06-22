@@ -3,22 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (add to next release)
+
+v3.10.0
 ------------------------------
-*May 31, 2021*
+*June 22, 2021*
 
 ### Changed
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
+- Update `f-link` to v3.1.1.
 
 
 v3.9.0
 ------------------------------
 *May 24, 2022*
 
-
 ### Changed
 - `Moved `f-cookie-banner-static` into it's own package.
-- Refactored build script in `package.json` 
+- Refactored build script in `package.json`.
+
 ### Removed
 - Use of `New` from visual, component & accessibility test naming conventions.
 
@@ -99,7 +101,7 @@ v3.7.0
 
 v3.6.1
 ------------------------------
-*December 01, 2021*
+*December 1, 2021*
 
 ### Fixed
 - Issue with browser test and URL being used.
@@ -107,7 +109,7 @@ v3.6.1
 
 v3.6.0
 ------------------------------
-*November 03, 2021*
+*November 3, 2021*
 
 ### Fixed
 - Mobile button layout.
@@ -175,7 +177,7 @@ v3.3.0
 
 v3.2.1
 ------------------------------
-*October 08, 2021*
+*October 8, 2021*
 
 ### Changed
 - Non Vue version default `shouldAbsolutePositionReopenLink` prop to false in base template. Add object property check when accessing re-open link height.
@@ -183,7 +185,7 @@ v3.2.1
 
 v3.2.0
 ------------------------------
-*October 06, 2021*
+*October 6, 2021*
 
 ### Added
 - New prop `nameSuffix` so teams or 3rd parties using this component can save the user's consent under a different cookie name. This allows the cookie banner to work on multiple sub-domains easily.
@@ -191,7 +193,7 @@ v3.2.0
 
 v3.1.0
 ------------------------------
-*October 05, 2021*
+*October 5, 2021*
 
 ### Fixed
 - Reopen link positioning bug by adding and using a ResizeObserver. This ensures body content changes ouside of f-cookie-banner and recalculates if the link should be absolutely positioned.
@@ -524,12 +526,14 @@ v0.3.2
 ### Fixed
 - Protocol missing from image request (Required for Lighthouse checks).
 
+
 v0.3.1
 ------------------------------
 *March 2, 2021*
 
 ### Fixed
 - `shouldHideBanner` data property defaults to `true` in order to avoid flash of cookie banner after it has been dismissed.
+
 
 v0.3.0
 ------------------------------
@@ -539,6 +543,7 @@ v0.3.0
 - Update tests to use js-cookie.
 - Update legacy cookie value
 - Remove f-globalisation mixin
+
 
 v0.2.0
 ------------------------------
@@ -550,6 +555,7 @@ v0.2.0
 ### Removed
 - Remove Storybook 'knob' for setting legacy banner.
 
+
 v0.1.2
 ------------------------------
 *February 12, 2021*
@@ -558,6 +564,7 @@ v0.1.2
 - Set `isIosBrowser` property on page mount so that we can avoid using `process` check which caused issues with SSR.
 - Minor lint updates.
 - Moved legacy banner check into computed property in order to avoid the flash of the modern cookie banner on page load.
+
 
 v0.1.1
 ------------------------------
@@ -568,6 +575,7 @@ v0.1.1
 - Move legacy banner out of overlay
 - Include hide class for legacy banner
 - Wrap `navigator` call in conditional for `process.browser`
+
 
 v0.1.0
 ------------------------------
