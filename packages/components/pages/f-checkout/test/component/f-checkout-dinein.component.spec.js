@@ -19,7 +19,7 @@ describe('f-checkout "dinein" component tests', () => {
     it('should prevent a user from entering more than 12 characters in the tableIdentifier field', async () => {
         // Arrange
         const maxlength = 12;
-        const tableEntry = await 'A'.repeat(maxlength + 1); // Enter more than allowed
+        const tableEntry = 'A'.repeat(maxlength + 1); // Enter more than allowed
 
         // Act
         await checkout.setFieldValue('tableIdentifier', tableEntry);
