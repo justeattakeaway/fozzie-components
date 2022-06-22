@@ -1,7 +1,6 @@
-const Page = require('@justeat/f-wdio-utils/src/page.object');
+const Page = require('@justeat/f-wdio-utils/src/base.page');
 
 const {
-    COMPONENT,
     ADDRESS_BOX,
     BUTTON,
     ERROR_MESSAGE
@@ -13,25 +12,11 @@ module.exports = class StatusBanner extends Page {
         super('organism', 'status-banner-component');
     }
 
-    get component () { return $(COMPONENT); }
-
     get addressBox () { return $(ADDRESS_BOX); }
 
     get button () { return $(BUTTON); }
 
     get errorMessage () { return $(ERROR_MESSAGE); }
-
-    async load () {
-        await super.load(this.component);
-    }
-
-    async waitForComponent () {
-        await super.waitForComponent(this.component);
-    }
-
-    async isStatusBannerComponentDisplayed () {
-        return this.component.isDisplayed();
-    }
 
     /**
     * @param {Object} userInput
