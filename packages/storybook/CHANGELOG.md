@@ -3,11 +3,26 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.52.11
+------------------------------
+*June 22, 2022*
+
+### Changed
+- updated vue.config to include `f-promotions-showcase` in components using @use and @forward
+
+
+v0.52.10
+------------------------------
+*June 20, 2022*
+
+### Changed
+- updated vue.config to include f-media-element in components using @use and @forward
 
 
 v0.52.9
 ------------------------------
 *June 20, 2022*
+
 ### Changed
 - updated vue.config to include f-card-with-content in components using @use and @forward
 
@@ -15,6 +30,7 @@ v0.52.9
 v0.52.8
 ------------------------------
 *June 20, 2022*
+
 ### Changed
 - updated vue.config to include f-breadcrumbs in components using @use and @forward
 
@@ -22,6 +38,7 @@ v0.52.8
 v0.52.7
 ------------------------------
 *June 17, 2022*
+
 ### Changed
 - updated vue.config to include f-alert in components using @use and @forward
 
@@ -29,6 +46,7 @@ v0.52.7
 v0.52.6
 ------------------------------
 *June 17, 2022*
+
 ### Changed
 - updated vue.config to include all atoms in components using @use and @forward
 
@@ -36,6 +54,7 @@ v0.52.6
 v0.52.5
 ------------------------------
 *June 17, 2022*
+
 ### Changed
 - updated vue.config to include f-image-tile in components using @use and @forward
 
@@ -43,6 +62,7 @@ v0.52.5
 v0.52.4
 ------------------------------
 *June 17, 2022*
+
 ### Changed
 - updated vue.config to include f-form-field in components using @use and @forward
 
@@ -50,6 +70,7 @@ v0.52.4
 v0.52.3
 ------------------------------
 *June 17, 2022*
+
 ### Changed
 - updated vue.config to include f-filter-pill in components using @use and @forward
 

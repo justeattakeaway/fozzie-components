@@ -66,11 +66,6 @@ export default {
         isDistinct: {
             type: Boolean,
             default: false
-        },
-
-        dataTestId: {
-            type: String,
-            default: 'v-link-component'
         }
     },
 
@@ -103,6 +98,10 @@ export default {
             }
 
             return null;
+        },
+
+        dataTestId () {
+            return this.$attrs['data-test-id'] || 'v-link-component';
         },
 
         descriptionId () {

@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.1.1
+------------------------------
+*June 21, 2022*
+
+### Changed
+- Moved `data-test-id` back to an attribute to avoid issues when stubbing with vue-test-utils.
+
+
 v3.1.0
 ------------------------------
 *June 17, 2022*

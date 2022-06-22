@@ -164,4 +164,42 @@ describe('Alert', () => {
             });
         });
     });
+
+    describe('ariaLiveAttribute', () => {
+        it.each(['success', 'danger'])('should return "polite" when alert type is %p', type => {
+            // Arrange
+            const propsData = {
+                heading: 'Alert title',
+                type
+            };
+
+            const wrapper = shallowMount(FAlert, {
+                propsData
+            });
+
+            // Act
+            const result = wrapper.vm.ariaLiveAttribute;
+
+            // Assert
+            expect(result).toBe('polite');
+        });
+
+        it.each(['warning', 'info'])('should return "off" when alert type is %p', type => {
+            // Arrange
+            const propsData = {
+                heading: 'Alert title',
+                type
+            };
+
+            const wrapper = shallowMount(FAlert, {
+                propsData
+            });
+
+            // Act
+            const result = wrapper.vm.ariaLiveAttribute;
+
+            // Assert
+            expect(result).toBe('off');
+        });
+    });
 });

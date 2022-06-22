@@ -129,6 +129,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 $font-sizes: (
     sm: (
         title: heading-s,
@@ -152,7 +154,7 @@ $font-sizes: (
     )
 );
 
-$mediaElement-content-margin: spacing(e);
+$mediaElement-content-margin: f.spacing(e);
 
 .c-mediaElement {
     display: flex;
@@ -181,7 +183,7 @@ $mediaElement-content-margin: spacing(e);
 }
 
 
-@each $name, $value in $breakpoints {
+@each $name, $value in f.$breakpoints {
 
     /**
     * Modifier – .c-mediaElement--gte--$name--col
@@ -191,7 +193,7 @@ $mediaElement-content-margin: spacing(e);
      *
      * Applies flex direction column on $name
      */
-    @include media('>='+$name) {
+    @include f.media('>='+$name) {
         .c-mediaElement--gte--#{$name}--col {
             flex-direction: column;
 
@@ -222,7 +224,7 @@ $mediaElement-content-margin: spacing(e);
     *
     * Applies flex direction column on $name
     */
-    @include media('>'+$name) {
+    @include f.media('>'+$name) {
         .c-mediaElement--gt--#{$name}--col {
             flex-direction: column;
 
@@ -253,7 +255,7 @@ $mediaElement-content-margin: spacing(e);
     *
     * Applies flex direction column on $name
     */
-    @include media('<='+$name) {
+    @include f.media('<='+$name) {
         .c-mediaElement--lte--#{$name}--col {
             flex-direction: column;
 
@@ -284,7 +286,7 @@ $mediaElement-content-margin: spacing(e);
     *
     * Applies flex direction column on $name
     */
-    @include media('<'+$name) {
+    @include f.media('<'+$name) {
         .c-mediaElement--lt--#{$name}--col {
             flex-direction: column;
 
@@ -383,15 +385,15 @@ $mediaElement-content-margin: spacing(e);
 @each $size, $value in $font-sizes {
     .c-mediaElement-contentFontSize--#{$size} {
         & .c-mediaElement-title {
-            @include font-size(map-get($value, 'title'));
+            @include f.font-size(map-get($value, 'title'));
         }
         & .c-mediaElement-text {
-            @include font-size(map-get($value, 'text'));
+            @include f.font-size(map-get($value, 'text'));
             @if $size == sm {
-                margin-top: spacing(a);
+                margin-top: f.spacing(a);
             }
             @else if $size == md {
-                margin-top: spacing();
+                margin-top: f.spacing();
             }
         }
     }
