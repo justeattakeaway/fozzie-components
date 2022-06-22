@@ -24,22 +24,6 @@ module.exports = class ContactPreferences extends Page {
 
     get successAlert () { return $(SUCCESS_ALERT); }
 
-    async load () {
-        await super.load(this.component);
-    }
-
-    async loadError () {
-        await super.load(this.errorPage);
-    }
-
-    async waitForComponent () {
-        await super.waitForComponent(this.component);
-    }
-
-    async isComponentDisplayed () {
-        return (await this.component).isDisplayed();
-    }
-
     async isErrorPageDisplayed () {
         return (await this.errorPage).isDisplayed();
     }

@@ -14,11 +14,8 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
     forEach([
         ['en-GB']
     ]).it('should display the %s default component state', async locale => {
-        // Arrange
-        contactPreferences.path += `&args=locale:${locale}`;
-
         // Act
-        await contactPreferences.load();
+        contactPreferences.load({ locale });
 
         // Assert
         await browser.percyScreenshot(`f-contact-preferences - Base State - ${locale}`, deviceType);
@@ -27,11 +24,8 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
     forEach([
         ['en-GB']
     ]).it('should display the %s news email & sms checked', async locale => {
-        // Arrange
-        contactPreferences.path += `&args=locale:${locale}`;
-
         // Act
-        await contactPreferences.load();
+        contactPreferences.load({ locale });
         await contactPreferences.clickNewsEmailCheckbox();
         await contactPreferences.clickNewsSmsCheckbox();
 
@@ -42,11 +36,8 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
     forEach([
         ['en-GB']
     ]).it('should display the %s Submit success alert', async locale => {
-        // Arrange
-        contactPreferences.path += `&args=locale:${locale}`;
-
         // Act
-        await contactPreferences.load();
+        contactPreferences.load({ locale });
         await contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
         await contactPreferences.clickSubmitButton();
         await contactPreferences.waitForComponent();
@@ -58,11 +49,11 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
     forEach([
         ['en-GB']
     ]).it('should display the %s Submit error alert', async locale => {
-        // Arrange
-        contactPreferences.path += `&args=locale:${locale};apiState:post-preferences-fails`;
-
         // Act
-        await contactPreferences.load();
+        contactPreferences.load({
+            locale,
+            apiState: 'post-preferences-fails'
+        });
         await contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
         await contactPreferences.clickSubmitButton();
         await contactPreferences.waitForComponent();
@@ -74,11 +65,11 @@ describe('f-contact-preferences - Desktop Visual Tests', () => {
     forEach([
         ['en-GB']
     ]).it('should display the %s Load error page', async locale => {
-        // Arrange
-        contactPreferences.path += `&args=locale:${locale};apiState:get-preferences-fails`;
-
         // Act
-        await contactPreferences.loadError();
+        contactPreferences.load({
+            locale,
+            apiState: 'get-preferences-fails'
+        });
 
         // Assert
         await browser.percyScreenshot(`f-contact-preferences - Load Error Page - ${locale}`, deviceType);

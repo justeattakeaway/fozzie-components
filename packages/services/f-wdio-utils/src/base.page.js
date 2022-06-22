@@ -13,7 +13,7 @@ class BasePage extends Page {
     }
 
     async waitForComponent (timeoutMs = 500) {
-        await this.component.waitForExist({ timeout: timeoutMs });
+        return (await this.component).waitForExist({ timeout: timeoutMs });
     }
 
     isComponentDisplayed () {

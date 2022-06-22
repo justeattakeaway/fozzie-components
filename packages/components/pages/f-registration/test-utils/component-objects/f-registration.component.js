@@ -78,19 +78,6 @@ module.exports = class Registration extends Page {
         }
     };
 
-
-    async load () {
-        await super.load(this.component);
-    }
-
-    async waitForComponent () {
-        await super.waitForComponent(this.component);
-    }
-
-    async isComponentDisplayed () {
-        return this.component.isDisplayed();
-    }
-
     async isInputFieldDisplayed (fieldName) {
         return this.fields[fieldName].input.isDisplayed();
     }

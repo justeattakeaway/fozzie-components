@@ -12,7 +12,7 @@ describe('f-account-info component tests', () => {
 
     it('should display the f-account-info component', async () => {
         // Act
-        await accountInfo.load();
+        accountInfo.load();
 
         // Assert
         await expect(await accountInfo.isComponentDisplayed()).toBe(true);
@@ -20,7 +20,7 @@ describe('f-account-info component tests', () => {
 
     it('should show that the email formfield is disabled', async () => {
         // Act
-        await accountInfo.load();
+        accountInfo.load();
 
         // Assert
         await expect(await accountInfo.isDisabled('emailAddress')).toBe(true);
@@ -29,7 +29,7 @@ describe('f-account-info component tests', () => {
     forEach(['changeEmailAddressLink', 'saveChangesButton', 'changePasswordButton', 'deleteAccountLink'])
     .it('should check if all call to actions are clickable', async cta => {
         // Act
-        await accountInfo.load();
+        accountInfo.load();
 
         // Assert
         await expect(await accountInfo.canBeClicked(cta)).toBe(true);
@@ -37,7 +37,7 @@ describe('f-account-info component tests', () => {
 
     it('should redirect to the correct URL when `change password` has been clicked', async () => {
         // Act
-        await accountInfo.load();
+        accountInfo.load();
 
         await accountInfo.clickChangePassword();
 
@@ -64,7 +64,7 @@ describe('f-account-info component tests', () => {
         const expectedUrl = '/help/article/203097431/how-do-i-manage-my-account';
 
         // Act
-        await accountInfo.load();
+        accountInfo.load();
 
         await accountInfo.clickChangeEmailAddressLink();
         await browser.switchWindow(new RegExp(`^.*${expectedUrl}.*$`));
@@ -76,7 +76,8 @@ describe('f-account-info component tests', () => {
     forEach(['firstName', 'lastName', 'phoneNumber', 'addressLine1', 'city', 'postcode'])
     .it('should display an error message immediately when %s input has been deleted', async field => {
         // Act
-        await accountInfo.load();
+        accountInfo.load();
+
         await accountInfo.clearBlurField(field);
         await accountInfo.tabOutOfField(field);
 
@@ -86,7 +87,8 @@ describe('f-account-info component tests', () => {
 
     it('should display the illegal first name error message immediately on click', async () => {
         // Act
-        await accountInfo.load();
+        accountInfo.load();
+
         await accountInfo.clearBlurField('firstName');
         await accountInfo.setFieldValue('firstName', illegalInput);
         await accountInfo.clickOutOfInputField();
@@ -97,7 +99,8 @@ describe('f-account-info component tests', () => {
 
     it('should display the illegal last name error message immediately on click', async () => {
         // Act
-        await accountInfo.load();
+        accountInfo.load();
+
         await accountInfo.clearBlurField('lastName');
         await accountInfo.setFieldValue('lastName', illegalInput);
         await accountInfo.clickOutOfInputField();
@@ -108,7 +111,7 @@ describe('f-account-info component tests', () => {
 
     it('should display the illegal phone number error message immediately on click', async () => {
         // Act
-        await accountInfo.load();
+        accountInfo.load();
         await accountInfo.clearBlurField('phoneNumber');
         await accountInfo.setFieldValue('phoneNumber', illegalInput);
         await accountInfo.tabOutOfField('phoneNumber');
@@ -119,7 +122,8 @@ describe('f-account-info component tests', () => {
 
     it('should display the illegal postcode error message immediately on click', async () => {
         // Act
-        await accountInfo.load();
+        accountInfo.load();
+
         await accountInfo.clearBlurField('postcode');
         await accountInfo.setFieldValue('postcode', illegalInput);
         await accountInfo.clickOutOfInputField();
@@ -131,12 +135,8 @@ describe('f-account-info component tests', () => {
     forEach([
         ['en-GB']
     ]).it('should display the %s Error page if GET fails', async locale => {
-        // Arrange
-        await accountInfo
-        .withQuery('args', `locale:${locale};apiState:get-details-fails`);
-
         // Act
-        await accountInfo.loadError();
+        accountInfo.load({ locale, apiState: 'get-details-fails' });
 
         // Assert
         await expect(await accountInfo.isErrorCardComponentDisplayed()).toBe(true);
@@ -146,8 +146,8 @@ describe('f-account-info component tests', () => {
         ['en-GB']
     ]).it('should display the %s Submit success alert if Submit succeed', async locale => {
         // Arrange
-        await accountInfo.withQuery('args', `locale:${locale}`);
-        await accountInfo.load();
+        accountInfo.load({ locale });
+
         await accountInfo.clearBlurField('firstName');
         await accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
 
@@ -164,8 +164,8 @@ describe('f-account-info component tests', () => {
         ['en-GB']
     ]).it('should display the %s Submit error alert if Submit fails', async locale => {
         // Arrange
-        await accountInfo.withQuery('args', `locale:${locale};apiState:patch-details-fails`);
-        await accountInfo.load();
+        accountInfo.load({ locale, apiState: 'patch-details-fails' });
+
         await accountInfo.clearBlurField('firstName');
         await accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
 

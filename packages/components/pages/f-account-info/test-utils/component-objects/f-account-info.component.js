@@ -76,18 +76,6 @@ module.exports = class AccountInfo extends Page {
         }
     };
 
-    async load (component = this.component) {
-        await super.load(component);
-    }
-
-    async loadError () {
-        await super.load(this.errorCardComponent);
-    }
-
-    async isComponentDisplayed () {
-        return this.component.isDisplayed();
-    }
-
     async isErrorCardComponentDisplayed () {
         return (await this.errorCardComponent).isDisplayed();
     }
