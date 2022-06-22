@@ -54,7 +54,9 @@ export default {
 </script>
 
 <style lang="scss" module>
-$scrollOffset: spacing(d);
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+$scrollOffset: f.spacing(d);
 
 .c-restaurantCard-dishes {
     padding: 0;
@@ -72,7 +74,7 @@ $scrollOffset: spacing(d);
 }
 
 .c-restaurantCard-dishes--isVerticallyStacked {
-    @include media('>mid') {
+    @include f.media('>mid') {
         display: block;
         margin-left: 0;
         margin-right: 0;
@@ -96,7 +98,7 @@ $scrollOffset: spacing(d);
     scroll-snap-align: center;
     flex: 0 0 85%;
     margin-bottom: 0;
-    margin-right: spacing();
+    margin-right: f.spacing();
 
     &:first-of-type {
         margin-left: $scrollOffset;
@@ -118,9 +120,9 @@ $scrollOffset: spacing(d);
 }
 
 .c-restaurantCard-dishes--isVerticallyStacked > .c-restaurantCard-dishes-item {
-    @include media('>mid') {
+    @include f.media('>mid') {
         margin-right: 0;
-        margin-bottom: spacing();
+        margin-bottom: f.spacing();
 
         &:last-of-type {
             padding-right: 0;

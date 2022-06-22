@@ -21,10 +21,12 @@ export default {
 </script>
 
 <style lang="scss" module>
-$img-borderRadius: $radius-rounded-c;
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+$img-borderRadius: f.$radius-rounded-c;
 
 .c-restaurantCard-img {
-    background-color: $color-container-strong;
+    background-color: f.$color-container-strong;
     background-size: cover;
     background-position: center;
     border-radius: $img-borderRadius;
