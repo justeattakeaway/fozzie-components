@@ -1,6 +1,6 @@
 <template>
     <main-banner-container
-        data-test-id="main-banner-container"
+        data-test-id="status-banner-component"
         :base-hero-url="baseHeroUrl"
         :copy="copy"
         :locale="componentLocale" />

@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.32.0
+------------------------------
+*June 22, 2022*
+
+### Changed
+- Update `f-link` to v3.1.1.
+
+
 v3.31.0
 ------------------------------
 *June 15, 2022*
@@ -18,7 +26,7 @@ v3.30.1
 
 ### Added
  - Visual tests for invalid basket
-  
+
 
 v3.30.0
 ------------------------------
@@ -298,7 +306,7 @@ v3.13.2
 
 v3.13.1
 ------------------------------
-*January 04, 2022*
+*January 4, 2022*
 
 ### Fixed
 - Mocked year for age verification tests.
@@ -532,6 +540,7 @@ v2.1.0
 
 ### Changed
 - Increased maxBundleSize to 105Kb.
+
 
 v2.0.0
 ------------------------------

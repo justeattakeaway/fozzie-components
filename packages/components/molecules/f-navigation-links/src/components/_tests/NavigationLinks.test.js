@@ -1,4 +1,5 @@
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, RouterLinkStub } from '@vue/test-utils';
+
 import NavigationLinks from '../NavigationLinks.vue';
 
 const propsData = {
@@ -52,7 +53,12 @@ const componentTag = "[data-test-id='navigation-links-component']";
 describe('NavigationLinks', () => {
     it('should be defined', () => {
         // Arrange & Act
-        const wrapper = shallowMount(NavigationLinks, { propsData });
+        const wrapper = shallowMount(NavigationLinks, {
+            propsData,
+            stubs: {
+                RouterLink: RouterLinkStub
+            }
+        });
 
         // Assert
         expect(wrapper.exists()).toBe(true);
@@ -60,7 +66,11 @@ describe('NavigationLinks', () => {
 
     it('should not fail if no `links` prop supplied', () => {
         // Arrange & Act
-        const wrapper = shallowMount(NavigationLinks);
+        const wrapper = shallowMount(NavigationLinks, {
+            stubs: {
+                RouterLink: RouterLinkStub
+            }
+        });
 
         // Assert
         expect(wrapper.html).toMatchSnapshot();
@@ -68,7 +78,12 @@ describe('NavigationLinks', () => {
 
     it('should display the list elements correctly for each `link` supplied', () => {
         // Arrange
-        const wrapper = shallowMount(NavigationLinks, { propsData });
+        const wrapper = shallowMount(NavigationLinks, {
+            propsData,
+            stubs: {
+                RouterLink: RouterLinkStub
+            }
+        });
 
         // Act
         const links = wrapper.find(componentTag);
@@ -87,7 +102,11 @@ describe('NavigationLinks', () => {
                         id: 'link1',
                         to: expected,
                         name: 'Your account'
-                    }]
+                    }
+                ]
+            },
+            stubs: {
+                RouterLink: RouterLinkStub
             }
         });
 
@@ -108,7 +127,11 @@ describe('NavigationLinks', () => {
                         id: 'link1',
                         href: expected,
                         name: 'Your account'
-                    }]
+                    }
+                ]
+            },
+            stubs: {
+                RouterLink: RouterLinkStub
             }
         });
 
@@ -130,7 +153,11 @@ describe('NavigationLinks', () => {
                         href: expected,
                         to: '/not-used',
                         name: 'Your account'
-                    }]
+                    }
+                ]
+            },
+            stubs: {
+                RouterLink: RouterLinkStub
             }
         });
 
@@ -155,7 +182,11 @@ describe('NavigationLinks', () => {
                         id: 'link2',
                         to: '/account/info',
                         name: 'Your account'
-                    }]
+                    }
+                ]
+            },
+            stubs: {
+                RouterLink: RouterLinkStub
             }
         });
 
@@ -199,7 +230,11 @@ describe('NavigationLinks', () => {
                                 id: 'link3',
                                 name: 'Link 3',
                                 href: '/link-3'
-                            }]
+                            }
+                        ]
+                    },
+                    stubs: {
+                        RouterLink: RouterLinkStub
                     }
                 });
 
