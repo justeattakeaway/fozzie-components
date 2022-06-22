@@ -18,10 +18,10 @@ describe('Accessibility tests', () => {
         'en-IE',
         'it-IT',
         'es-ES'])
-        .it('a11y - should test f-header component WCAG compliance for "%s"', tenant => {
+        .it('a11y - should test f-header component WCAG compliance for "%s"', locale => {
             // Act
             header.load({
-                locale: `${tenant}`,
+                locale,
                 showOffersLink: true,
                 showDeliveryEnquiry: true
             });
