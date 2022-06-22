@@ -11,17 +11,28 @@ describe('Shared - f-header component tests', () => {
     });
 
     forEach([
-        ['en-GB', true], ['en-GB', false],
-        ['en-AU', true], ['en-AU', false],
-        ['en-NZ', true], ['en-NZ', false],
-        ['en-IE', true], ['en-IE', false],
-        ['it-IT', true], ['it-IT', false],
-        ['es-ES', true], ['es-ES', false]
+        ['en-GB', true],
+        ['en-GB', false],
+        ['en-AU', true],
+        ['en-AU', false],
+        ['en-NZ', true],
+        ['en-NZ', false],
+        ['en-IE', true],
+        ['en-IE', false],
+        ['it-IT', true],
+        ['it-IT', false],
+        ['es-ES', true],
+        ['es-ES', false]
     ]).it('should display component', async (tenant, isLoggedIn) => {
         // Arrange
-        const querystring = { locale: `${tenant}`, showOffersLink: true, showDeliveryEnquiry: true };
+        const querystring = {
+            locale: tenant,
+            showOffersLink: true,
+            showDeliveryEnquiry: true
+        };
+
         if (!isLoggedIn) {
-            querystring.userInfoProp = 'undefined';
+            querystring.userInfoProp = '!undefined';
         }
 
         // Act
@@ -37,7 +48,7 @@ describe('Shared - f-header component tests', () => {
         ['en-GB', 'transparent']
     ]).it('should display the "%s - %s" header theme', async (tenant, theme) => {
         // Act
-        await header.load({ locale: `${tenant}`, headerBackgroundTheme: `${theme}` });
+        await header.load({ locale: tenant, headerBackgroundTheme: `${theme}` });
 
         // Assert
         await browser.percyScreenshot(`f-header - Theme colours - ${theme}`, 'desktop');
@@ -49,7 +60,7 @@ describe('Shared - f-header component tests', () => {
         ['en-GB', 'showCountrySelector']
     ]).it('should not display "%s" ', async (tenant, control) => {
         // Act
-        await header.load({ locale: `${tenant}`, [control]: false });
+        await header.load({ locale: tenant, [control]: false });
 
         // Assert
         await browser.percyScreenshot(`f-header - ${control} - False`, 'desktop');
@@ -61,7 +72,7 @@ describe('Shared - f-header component tests', () => {
     ])
     .it('should display the "%s %s" dropdown lists on hover', async (tenant, link) => {
         // Act
-        await header.load({ locale: `${tenant}` });
+        await header.load({ locale: tenant });
         await header.moveToNavigationLink(link);
 
         // Assert

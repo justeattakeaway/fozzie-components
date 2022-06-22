@@ -19,9 +19,14 @@ describe('Shared - f-header component tests', () => {
         ['es-ES', true], ['es-ES', false]
     ]).it('should display component', async (tenant, isLoggedIn) => {
         // Arrange
-        const querystring = { locale: `${tenant}`, showOffersLink: true, showDeliveryEnquiry: true };
+        const querystring = {
+            locale: tenant,
+            showOffersLink: true,
+            showDeliveryEnquiry: true
+        };
+
         if (!isLoggedIn) {
-            querystring.userInfoProp = 'undefined';
+            querystring.userInfoProp = '!undefined';
         }
 
         // Act
@@ -38,7 +43,7 @@ describe('Shared - f-header component tests', () => {
         ['en-GB', 'transparent']
     ]).it('should display the "%s - %s" header theme', async (tenant, theme) => {
         // Act
-        await header.load({ locale: `${tenant}`, headerBackgroundTheme: `${theme}` });
+        await header.load({ locale: tenant, headerBackgroundTheme: theme });
 
         // Assert
         await browser.percyScreenshot(`f-header - Theme colours - ${theme}`, 'mobile');
@@ -51,10 +56,10 @@ describe('Shared - f-header component tests', () => {
     ]).it('should display the mobile nav correctly for theme %s - %s', async (tenant, theme) => {
         // Act
         await header.load({
-            locale: `${tenant}`,
+            locale: tenant,
             showOffersLink: true,
             showDeliveryEnquiry: true,
-            headerBackgroundTheme: `${theme}`
+            headerBackgroundTheme: theme
         });
         await header.openMobileNavigationBar();
 
@@ -78,7 +83,7 @@ describe('Shared - f-header component tests', () => {
         ['en-GB', 'showCountrySelector']
     ]).it('should not display "%s" ', async (tenant, control) => {
         // Act
-        await header.load({ locale: `${tenant}`, [control]: false });
+        await header.load({ locale: tenant, [control]: false });
         await header.openMobileNavigationBar();
 
         // Assert
@@ -127,8 +132,8 @@ describe('Shared - f-header component tests', () => {
     ]).it('should display correctly with tallBelowMid prop', async (tenant, theme) => {
         // Act
         await header.load({
-            locale: `${tenant}`,
-            headerBackgroundTheme: `${theme}`,
+            locale: tenant,
+            headerBackgroundTheme: theme,
             tallBelowMid: true
         });
 
