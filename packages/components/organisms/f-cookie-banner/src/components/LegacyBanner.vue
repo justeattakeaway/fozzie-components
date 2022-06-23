@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div
+        data-test-id="cookie-banner-component">
         <div
             :class="[$style['c-cookieWarning'], { [$style['c-cookieWarning--is-hidden']]: shouldHideLegacyBanner }]"
             :aria-hidden="shouldHideLegacyBanner"

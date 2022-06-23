@@ -1,17 +1,42 @@
-const Page = require('@justeat/f-wdio-utils/src/page.object');
+const Page = require('@justeat/f-wdio-utils/src/base.page');
 
 module.exports = class CookieBanner extends Page {
-    get component () { return $('[data-test-id="cookieBanner-component"]'); }
-
-    async open (url) {
-        await super.open(url);
+    constructor () {
+        super('organism', 'cookie-banner-component');
     }
 
-    async waitForComponent () {
-        await this.component.waitForExist();
+    get cookieBannerTitle () { return $('[data-test-id="cookieConsentTitle"]'); }
+
+    get cookiePolicyLink () { return $('[data-test-id="cookie-policy-link"]'); }
+
+    get cookiePolicyLinkHref () { return this.cookiePolicyLink.getAttribute('href'); }
+
+    get cookieAcceptAllButton () { return $('[data-test-id="accept-all-cookies-button"]'); }
+
+    get cookieAcceptNecessaryButton () { return $('[data-test-id="accept-necessary-cookies-button"]'); }
+
+    async clickCookiePolicyLink () {
+        await this.cookiePolicyLink.click();
     }
 
-    async isCookieBannerComponentDisplayed () {
-        return this.component.isDisplayed();
+    async acceptCookies (value) {
+        const cookieType = {
+            full: await this.cookieAcceptAllButton,
+            necessary: await this.cookieAcceptNecessaryButton
+        };
+
+        return cookieType[value].click();
+    }
+
+    async testTabOrder (tabOrder) {
+        const tabOrderResult = await super.testTabOrder(tabOrder);
+        const expectedTabOrder = await Promise.all(tabOrder.map(async el => ({
+            selector: await el.getAttribute('data-test-id'),
+            isFocused: true
+        })));
+        return {
+            actual: tabOrderResult,
+            expected: expectedTabOrder.concat(expectedTabOrder[0])
+        };
     }
 };
