@@ -38,8 +38,10 @@ export default {
 </script>
 
 <style lang="scss" module>
-$logo-borderRadius: $radius-rounded-b;
-$logo-borderColor: $color-border-default;
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+$logo-borderRadius: f.$radius-rounded-b;
+$logo-borderColor: f.$color-border-default;
 
 .c-restaurantCard-logo {
     border: 1px solid $logo-borderColor;

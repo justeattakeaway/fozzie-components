@@ -65,6 +65,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 @mixin themedColor($color) {
     color: $color;
 
@@ -74,14 +76,14 @@ export default {
 }
 
 .c-restaurantCard-iconText {
-    @include font-size(body-s, false);
+    @include f.font-size(body-s, false);
     margin: 0;
     display: flex;
     align-items: center;
 }
 
 .c-restaurantCard-iconText--bold {
-    font-weight: $font-weight-bold;
+    font-weight: f.$font-weight-bold;
 }
 
 .c-restaurantCard-iconText-content {
@@ -91,7 +93,7 @@ export default {
 .c-restaurantCard-iconText-icon {
     width: 14px;
     height: 100%;
-    margin-right: spacing(a);
+    margin-right: f.spacing(a);
 
     svg {
         width: 100%;
@@ -101,20 +103,20 @@ export default {
 }
 
 .c-restaurantCard-iconText-icon--hideOnMidBelow {
-    @include media('<mid') {
+    @include f.media('<mid') {
         display: none;
     }
 }
 
 .c-restaurantCard-iconText--colorSupportPositive {
-    @include themedColor($color-support-positive);
+    @include themedColor(f.$color-support-positive);
 }
 
 .c-restaurantCard-iconText--colorSupportInfo {
-    @include themedColor($color-support-info);
+    @include themedColor(f.$color-support-info);
 }
 
 .c-restaurantCard-iconText--colorSupportError {
-    @include themedColor($color-support-error);
+    @include themedColor(f.$color-support-error);
 }
 </style>
