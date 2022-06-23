@@ -122,6 +122,9 @@ class Page {
      */
     setFieldValue (fieldName, value) {
         this.fields[fieldName].input.setValue(value);
+        this.fields[fieldName].input.waitUntil(function () {
+            return this.getText() === value
+        });
     }
 
     /**
@@ -133,17 +136,9 @@ class Page {
      */
      async setFieldValue (fieldName, value) {
         (await this.fields[fieldName].input).setValue(value);
-    }
-
-    /**
-     * @description
-     * Sets the value of a form field.
-     *
-     * @param {String} fieldName the name of the field
-     * @param {String} value the value set
-     */
-    async setFieldValue (fieldName, value) {
-        (await this.fields[fieldName].input).setValue(value);
+        (await this.fields[fieldName].input).waitUntil(async function () {
+            return (await this.getText() === value)
+        });
     }
 
     // eslint-disable-next-line class-methods-use-this
