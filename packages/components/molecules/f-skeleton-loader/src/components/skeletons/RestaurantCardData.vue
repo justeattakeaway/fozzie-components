@@ -18,6 +18,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-restaurantData {
     display: flex;
     flex-direction: row;
@@ -25,8 +27,8 @@ export default {
     align-items: center;
     width: 96%;
     margin: auto;
-    padding: spacing();
-    border-radius: 0 0 $radius-rounded-c $radius-rounded-c;
+    padding: f.spacing();
+    border-radius: 0 0 f.$radius-rounded-c f.$radius-rounded-c;
 }
 
 .c-restaurantData-textWrapper {
@@ -35,6 +37,6 @@ export default {
 
 .c-restaurantData-text {
     width: 25%;
-    height: spacing(c);
+    height: f.spacing(c);
 }
 </style>

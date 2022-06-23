@@ -15,11 +15,13 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-skeletonLoader-text:nth-child(2) {
     max-width: 70%;
 }
 
 .c-skeletonLoader-text:not(:last-child) {
-    margin-bottom: spacing();
+    margin-bottom: f.spacing();
 }
 </style>

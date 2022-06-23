@@ -25,21 +25,21 @@ export default {
 </script>
 
 <style lang="scss" module>
-$breakpoints: (medium: 520px, large: 960px);
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .c-restaurantCarousel {
     margin: auto;
-    padding-top: spacing();
-    margin-bottom: spacing(d);
+    padding-top: f.spacing();
+    margin-bottom: f.spacing(d);
 }
 
 .c-restaurantCarousel-heading {
-    margin-bottom: spacing();
+    margin-bottom: f.spacing();
     max-width: 300px;
 }
 
 .c-restaurantCarousel-desc {
-    margin-bottom: spacing(d);
+    margin-bottom: f.spacing(d);
     max-width: 425px;
 }
 
@@ -56,13 +56,13 @@ $breakpoints: (medium: 520px, large: 960px);
     &:nth-child(1) {
         display: block;
     }
-    @include media('>medium') {
-        margin: 0 spacing(d) 0 0;
+    @include f.media('>520px') {
+        margin: 0 f.spacing(d) 0 0;
         &:nth-child(2) {
             display: block;
         }
     }
-    @include media('>large') {
+    @include f.media('>960px') {
         &:nth-child(3) {
             display: block;
         }

@@ -9,10 +9,12 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-text {
     flex: 1 0 auto;
     height: $skeleton-loader-text-height;
-    margin-bottom: spacing();
-    border-radius: $radius-rounded-a;
+    margin-bottom: f.spacing();
+    border-radius: f.$radius-rounded-a;
 }
 </style>

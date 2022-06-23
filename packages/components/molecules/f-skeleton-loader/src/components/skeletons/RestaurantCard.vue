@@ -21,6 +21,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-restaurantCard {
     max-width: 370px;
     text-align: center;
@@ -28,7 +30,7 @@ export default {
 }
 
 .c-restaurantCard-background {
-    margin-bottom: -(spacing(i));
+    margin-bottom: -(f.spacing(i));
     height: 200px;
 }
 

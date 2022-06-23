@@ -11,9 +11,11 @@ export default {
 
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-heading {
     height: $skeleton-loader-heading-height;
     width: 65%;
-    border-radius: $radius-rounded-a;
+    border-radius: f.$radius-rounded-a;
 }
 </style>

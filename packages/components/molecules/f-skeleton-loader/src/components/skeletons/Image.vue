@@ -9,8 +9,10 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-image {
     height: $skeleton-loader-image-height;
-    border-radius: $radius-rounded-c;
+    border-radius: f.$radius-rounded-c;
 }
 </style>
