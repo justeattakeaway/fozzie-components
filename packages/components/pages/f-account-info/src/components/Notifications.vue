@@ -1,7 +1,7 @@
 <template>
     <div>
         <f-alert
-            v-if="showSaveErrorAlert"
+            v-show="showSaveErrorAlert"
             data-test-id="account-info-error-alert"
             :class="[
                 $style['c-accountInfo-alert'],
@@ -13,7 +13,7 @@
         </f-alert>
 
         <f-alert
-            v-if="showSuccessfulAlert"
+            v-show="showSuccessfulAlert"
             data-test-id="account-info-success-alert"
             :class="[
                 $style['c-accountInfo-alert'],

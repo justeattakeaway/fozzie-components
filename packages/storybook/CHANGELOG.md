@@ -10,6 +10,7 @@ v0.52.16
 ### Changed
 - updated vue.config to include `f-tabs` in components using @use and @forward
 
+
 v0.52.15
 ------------------------------
 *June 22, 2022*
