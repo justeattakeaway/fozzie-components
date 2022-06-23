@@ -105,7 +105,7 @@ $form-label-weight              : f.$font-weight-bold;
 .c-formField-label-details,
 .c-formField-label-description {
     font-weight: f.$font-weight-regular;
-    color: $form-input-secondaryTextColour;
+    color: common.$form-input-secondaryTextColour;
 }
 
 .c-formField-label-details {
