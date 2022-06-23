@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-status-banner",
   "description": "Fozzie Status Banner - Global status page",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "main": "dist/f-status-banner.umd.min.js",
   "maxBundleSize": "60kB",
   "files": [
@@ -54,7 +54,7 @@
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",
-    "@justeat/f-searchbox": "6.x.x"
+    "@justeat/f-searchbox": "6.0.0"
   },
   "devDependencies": {
     "@justeat/f-searchbox": "6.0.0",

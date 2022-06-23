@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-form",
   "description": "Fozzie Form - fozzie form",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "main": "dist/f-form.umd.min.js",
   "maxBundleSize": "50kB",
   "files": [
@@ -54,9 +54,9 @@
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",
-    "@justeat/f-button": "3.x",
-    "@justeat/f-form-field": "4.x",
-    "@justeat/f-error-message": "1.x"
+    "@justeat/f-button": "3.3.0",
+    "@justeat/f-form-field": "4.6.0",
+    "@justeat/f-error-message": "1.1.0"
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "0.5.0",

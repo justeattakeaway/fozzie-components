@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-alert",
   "description": "Fozzie Alert – Fozzie Alert Component",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "main": "dist/f-alert.umd.min.js",
   "maxBundleSize": "15kB",
   "files": [
@@ -52,7 +52,7 @@
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
-    "@justeat/f-button": "3.x"
+    "@justeat/f-button": "4.0.0"
   },
   "devDependencies": {
     "@justeat/f-button": "4.0.0",
