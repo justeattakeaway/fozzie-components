@@ -59,6 +59,29 @@ v0.52.15
 - updated vue.config to include `f-user-message` in components using @use and @forward
 
 
+v0.52.17
+------------------------------
+*June 23, 2022*
+### Changed
+- updated vue.config to include f-content-cards in components using @use and @forward
+
+
+v0.52.16
+------------------------------
+*June 22, 2022*
+
+### Changed
+- updated vue.config to include `f-tabs` in components using @use and @forward
+
+
+v0.52.15
+------------------------------
+*June 22, 2022*
+
+### Changed
+- updated vue.config to include `f-user-message` in components using @use and @forward
+
+
 v0.52.14
 ------------------------------
 *June 23, 2022*
