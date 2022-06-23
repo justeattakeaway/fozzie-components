@@ -39,6 +39,28 @@ Note: Importing the optional mixin and using `@include` in the `common.scss` fil
 </style>
 ```
 
+## Reusable styling with common.scss
+You can add reusable styles to the `common.scss` file. This can be useful for components that use sub-components and may wish to share mixins, functions and variables.
+
+Every component comes with a `vue.config.js` file that makes the `common.scss` file available under the namespace `common` like so:
+```
+`@use "../assets/scss/common.scss";`
+```
+To access anything from the common file, simply prefix the value like so:
+
+```
+// Fake values used for demonstation
+.someClass {
+  color: common.$fontColor;
+  line-height: common.line-height();
+  @include common.truncate();
+}
+```
+
+You could remove the need for namespacing by using something like `@use "../assets/scss/common.scss" as *` however utilising the namespace makes it much easier to understand where a value is coming from.
+
+```
+
 ## Testing
 Unit / Integration / Contract
 
