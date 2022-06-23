@@ -5,11 +5,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 
-v0.52.12
+v0.52.13
 ------------------------------
 *June 22, 2022*
 ### Changed
 - updated vue.config to include f-mega-modal in components using @use and @forward
+
+
+v0.52.12
+------------------------------
+*June 22, 2022*
+
+### Changed
+- updated vue.config to include `f-restaurant-card` in components using @use and @forward
 
 
 v0.52.11
