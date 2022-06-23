@@ -2390,13 +2390,6 @@
   dependencies:
     "@justeat/f-services" "0.13.0"
 
-"@justeat/f-card@3.x":
-  version "3.6.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.6.1.tgz#a1dba4482f7f9581c014214f4b796db801347fb9"
-  integrity sha512-h8lZUw88CvWp++2mGNhEjTBUamU1kkZimPMflMkANPKwXUd39BJjHeiy3J+d4yc0wR4P16rQxpemYqkQLZAdSg==
-  dependencies:
-    "@justeat/f-services" "0.13.0"
-
 "@justeat/f-content-cards@8.0.0-beta.4":
   version "8.0.0-beta.4"
   resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-8.0.0-beta.4.tgz#ff7690532e6743ff4f2b83dd4d7aad04e1485c0a"
@@ -14990,7 +14983,7 @@ include-media@1.4.9:
   resolved "https://registry.yarnpkg.com/include-media/-/include-media-1.4.9.tgz#d0020b7be3eb2d54868a20943595ce380e0bc43b"
   integrity sha512-IUOcvWDCt6R5V0ktsGk6RbehkW9ks1dODN2ed1p+mhML82TteAl+/ElXy8AJ7ueIuVoKq2NioRVdW9FuwQNOew==
 
-"include-media@github:eduardoboucas/include-media#2.0-release":
+include-media@eduardoboucas/include-media#2.0-release:
   version "2.0.0"
   resolved "https://codeload.github.com/eduardoboucas/include-media/tar.gz/5398b556d4bb24186d360c950b19026f577ff8e5"
 
