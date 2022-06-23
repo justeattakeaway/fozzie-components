@@ -56,6 +56,6 @@ export default {
 }
 
 .c-restaurantCard-fees-item + .c-restaurantCard-fees-item:before {
-   @include dotSeparator;
+   @include common.dotSeparator;
 }
 </style>

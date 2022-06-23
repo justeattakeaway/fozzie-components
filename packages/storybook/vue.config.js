@@ -30,12 +30,12 @@ module.exports = {
                         return `${content}`;
                     }
 
-                    const absPath = path.join(
+                    const absPathCommonScss = path.join(
                         resourcePath,
                         ...(new Array(levelsUpToSrc).fill('..')),
                         'assets/scss/common.scss'
                     );
-                    const relPath = path.relative(path.dirname(resourcePath), absPath)
+                    const relPathCommonScss = path.relative(path.dirname(resourcePath), absPathCommonScss)
                         .replace(new RegExp(path.sep.replace('\\', '\\\\'), 'g'), '/');
 
                     // add component names 1 by 1 to this array as they're updated
@@ -57,18 +57,18 @@ module.exports = {
                         'f-tabs',
                         'f-navigation-links'
                     ];
-                    const pathContainsUpdatedComponentOrType = updateComponentsAndTypes.some(a => absPath.includes(a));
+                    const pathContainsUpdatedComponentOrType = updateComponentsAndTypes.some(a => absPathCommonScss.includes(a));
 
                     if (!pathContainsUpdatedComponentOrType) {
                         return `
                         @use "sass:math";
-                        @import "${relPath}";
+                        @import "${relPathCommonScss}";
                         ${content}`;
                     }
 
                     return `
                         @use "sass:math";
-                        @use "${relPath}" as *;
+                        @use "${relPathCommonScss}";
                         ${content}`;
                 }
             });
