@@ -48,6 +48,8 @@ module.exports = {
                         'f-card-with-content',
                         'f-media-element',
                         'f-promotions-showcase',
+                        'f-restaurant-card',
+                        'f-user-message',
                         'f-mega-modal',
                         'f-restaurant-card',
                         'f-tabs',
