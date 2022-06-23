@@ -9,10 +9,8 @@ v6.0.0
 *June 20, 2022*
 
 ### Added
-*June 14, 2022*
 - Visual tests for default state.
 ### Changed
-*June 20, 2022*
 - Update to `@use` and `@forward` SASS syntax
 
 
