@@ -115,22 +115,24 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-promotionsShowcase {
-    background-color: $color-support-brand-02;
-    padding: spacing(d);
+    background-color: f.$color-support-brand-02;
+    padding: f.spacing(d);
 }
 
 .c-promotionsShowcase-inner {
     display: grid;
     grid-template-columns: repeat(1, minmax(0, 1fr));
     justify-content: center;
-    background-color: $color-container-default;
+    background-color: f.$color-container-default;
 
-    box-shadow: $elevation-02;
+    box-shadow: f.$elevation-02;
 
-    border-radius: $radius-rounded-c;
+    border-radius: f.$radius-rounded-c;
 
-    @include media('>=wide') {
+    @include f.media('>=wide') {
         grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
     }
 }
@@ -138,7 +140,7 @@ export default {
 .c-promotionsShowcase-item {
     display: flex;
     flex-direction: row;
-    padding: spacing(d);
+    padding: f.spacing(d);
     text-decoration: none;
 
     // Override button styles
@@ -147,37 +149,37 @@ export default {
     font-family: inherit;
     text-align: inherit;
 
-    @include media('>=wide') {
+    @include f.media('>=wide') {
         flex-grow: 1;
     }
 
     & + & {
-        border-top: 1px solid $color-border-default;
+        border-top: 1px solid f.$color-border-default;
 
-        @include media('>=wide') {
+        @include f.media('>=wide') {
             border-top: none;
         }
     }
 }
 
 .c-promotionsShowcase-itemTitle {
-    @include font-size(heading-s, true, 'narrow');
+    @include f.font-size(heading-s, true, 'narrow');
 }
 
 .c-promotionsShowcase-itemElement {
     & + & {
-        margin-left: spacing(b);
+        margin-left: f.spacing(b);
     }
 }
 
 .c-promotionsShowcase-itemElement--styleText,
 .c-promotionsShowcase-itemElement--styleLink,
 .c-promotionsShowcase-itemElement--styleEmphasized {
-    @include font-size(body-s);
-    margin-top: spacing();
+    @include f.font-size(body-s);
+    margin-top: f.spacing();
 
     &:nth-of-type(1) {
-        margin-top: spacing(a);
+        margin-top: f.spacing(a);
     }
 }
 
@@ -186,13 +188,13 @@ export default {
 }
 
 .c-promotionsShowcase-itemElement--styleLink {
-    color: $color-content-link;
+    color: f.$color-content-link;
     text-decoration: underline;
 }
 
 .c-promotionsShowcase-itemElement--styleEmphasized {
     text-decoration: underline;
-    color: $color-content-link;
+    color: f.$color-content-link;
 }
 
 .c-promotionsShowcase-itemIllustrationContainer {

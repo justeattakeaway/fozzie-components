@@ -3,6 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.28.1
+------------------------------
+*June 23, 2022*
+
+### Changed
+- Update `f-alert` to v5.0.1.
+- Switched alert messages to use v-show so that screen readers can detect them.
+
+
+v0.28.0
+------------------------------
+*June 22, 2022*
+
+### Changed
+- Update `f-link` to v3.1.1.
+
 
 v0.27.0
 ------------------------------
@@ -22,7 +38,7 @@ v0.26.0
 
 v0.25.0
 ------------------------------
-*June 14 2022*
+*June 14, 2022*
 
 ### Changed
 - Dynamically determine returnUrl for the change password link using $route
@@ -30,7 +46,7 @@ v0.25.0
 
 v0.24.0
 ------------------------------
-*June 13 2022*
+*June 13, 2022*
 
 ### Changed
 - Version of f-form-field (enables asterisks automatically on required fields)
@@ -237,7 +253,7 @@ v0.10.0
 
 v0.9.0
 ------------------------------
-*December 08, 2021*
+*December 8, 2021*
 
 ### Changed
 - Wired up the new Vuex Store that exposes the State `consumer` to the Template plus wired up the load action
@@ -245,7 +261,7 @@ v0.9.0
 
 v0.8.0
 ------------------------------
-*December 06, 2021*
+*December 6, 2021*
 
 ### Added
 - Vuex store - get, map & store consumer details/address data
@@ -253,7 +269,7 @@ v0.8.0
 
 v0.7.0
 ------------------------------
-*December 02, 2021*
+*December 2, 2021*
 
 ### Added
 - Method to API provider for getting consumer address data
@@ -261,7 +277,7 @@ v0.7.0
 
 v0.6.0
 ------------------------------
-*December 01, 2021*
+*December 1, 2021*
 
 ### Added
 - Validation rules for fields

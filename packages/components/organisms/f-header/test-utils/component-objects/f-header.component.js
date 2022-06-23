@@ -1,7 +1,6 @@
-const Page = require('@justeat/f-wdio-utils/src/page.object');
+const Page = require('@justeat/f-wdio-utils/src/base.page');
 const {
     COUNTRY_LINK,
-    HEADER_COMPONENT,
     IS_NAV_IN_VIEW,
     MOBILE_NAVIGATION_BAR,
     NAVIGATION
@@ -12,8 +11,6 @@ module.exports = class Header extends Page {
     constructor () {
         super('organism', 'header-component');
     }
-
-    get component () { return $(HEADER_COMPONENT); }
 
     navigation = {
         offersIcon: {
@@ -37,18 +34,6 @@ module.exports = class Header extends Page {
             get countries () { return $$(NAVIGATION.countrySelector.countryList); }
         }
     };
-
-    async load () {
-        await super.load(this.component);
-    }
-
-    async waitForComponent () {
-        await super.waitForComponent(this.component);
-    }
-
-    async isComponentDisplayed () {
-        return this.component.isDisplayed();
-    }
 
     async isCountryLinkDisplayed (country) {
         const countryLink = await $(`[${COUNTRY_LINK}${country}"]`);
