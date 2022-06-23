@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.28.1
+------------------------------
+*June 23, 2022*
+
+### Changed
+- Update `f-alert` to v5.0.1.
+- Switched alert messages to use v-show so that screen readers can detect them.
+
 
 v0.28.0
 ------------------------------
