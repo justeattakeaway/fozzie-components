@@ -154,60 +154,62 @@ export default {
 </script>
 
 <style lang="scss" module>
+    @use '@justeat/fozzie/src/scss/fozzie' as f;
+
     .c-contentCards-homePromotionCard2 {
         text-decoration: initial;
         position: relative;
         display: block;
         width: 100%;
-        box-shadow: $elevation-01;
-        border-radius: $radius-rounded-c;
-        padding: spacing(d) calc(35% + #{spacing()}) spacing(d) spacing(d);
+        box-shadow: f.$elevation-01;
+        border-radius: f.$radius-rounded-c;
+        padding: f.spacing(d) calc(35% + #{f.spacing()}) f.spacing(d) f.spacing(d);
         max-width: 800px; //to replicate max-width of searchbox
         margin: auto;
 
-        @include media('>narrow') {
+        @include f.media('>narrow') {
             padding-right: 208px;
             width: 95%; //to replicate width of searchbox
         }
 
         .c-contentCards-homePromotionCard2-link {
-            @include font-size('body-l', false);
+            @include f.font-size('body-l', false);
             text-decoration: none;
-            font-weight: $font-weight-bold;
+            font-weight: f.$font-weight-bold;
 
             & {
-                color: $color-content-link;
+                color: f.$color-content-link;
             }
 
             &:hover, &:focus {
-                color: darken($color-content-link, $color-hover-01);
+                color: darken(f.$color-content-link, f.$color-hover-01);
             }
 
             &:active {
-                color: darken($color-content-link, $color-active-01);
+                color: darken(f.$color-content-link, f.$color-active-01);
             }
         }
 
         .c-contentCards-homePromotionCard2-text {
-            color: $color-content-subdued;
+            color: f.$color-content-subdued;
         }
 
         &.c-contentCards-homePromotionCard2--light {
             .c-contentCards-homePromotionCard2-text {
-                color: $color-content-light;
+                color: f.$color-content-light;
             }
 
             .c-contentCards-homePromotionCard2-title {
-                color: $color-grey-20;
+                color: f.$color-grey-20;
             }
         }
     }
 
     .c-contentCards-homePromotionCard2-title {
-        @include font-size(heading-m);
+        @include f.font-size(heading-m);
 
-        @include media('<=narrow') {
-            @include font-size(heading-m, true, narrow);
+        @include f.media('<=narrow') {
+            @include f.font-size(heading-m, true, narrow);
         }
     }
 
@@ -221,7 +223,7 @@ export default {
         background: right center no-repeat;
         background-size: contain;
 
-        @include media('>narrow') {
+        @include f.media('>narrow') {
             width: 200px;
         }
     }

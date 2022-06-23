@@ -138,28 +138,28 @@ export default {
 </script>
 
 <style lang="scss" module>
-    @import '../../../src/assets/scss/card-styles';
+    @use '@justeat/fozzie/src/scss/fozzie' as f;
 
     .c-content-card-body {
         flex-grow: 1;
     }
 
     .c-contentCard {
-        @include card-container;
+        @include common.card-container;
 
-        margin-right: spacing(d);
-        margin-bottom: spacing(d);
+        margin-right: f.spacing(d);
+        margin-bottom: f.spacing(d);
 
-        @include media('>=narrowMid') {
+        @include f.media('>=narrowMid') {
             max-width: 370px;
         }
 
-        @include media('<=narrowMid') {
+        @include f.media('<=narrowMid') {
             margin-right: 0;
         }
 
         .c-contentCards--wrap & {
-            @include card-container-wrapped;
+            @include common.card-container-wrapped;
         }
 
         /**
@@ -169,17 +169,17 @@ export default {
             position: relative;
 
             .c-contentCard-info {
-                padding-top: spacing(j) + spacing(h);
-                padding-bottom: spacing(d);
-                border-radius: $radius-rounded-c;
+                padding-top: f.spacing(j) + f.spacing(h);
+                padding-bottom: f.spacing(d);
+                border-radius: f.$radius-rounded-c;
             }
 
             .c-contentCard-bgImg {
                 position: absolute;
                 left: 0;
                 right: 0;
-                top: spacing(d);
-                z-index: zIndex(mid);
+                top: f.spacing(d);
+                z-index: f.zIndex(mid);
                 width: 114px; // 1
                 height: 114px; // 1
                 margin: 0 auto;
@@ -192,13 +192,13 @@ export default {
     }
 
     .c-contentCard-bgImg {
-        @include card-bg-image;
+        @include common.card-bg-image;
 
         min-height: 170px;
     }
 
     .c-contentCard-title {
-        margin-top: spacing();
+        margin-top: f.spacing();
         text-align: center;
 
         // This is a super weird way to truncate text to 2 lines
@@ -213,13 +213,13 @@ export default {
     }
 
     .c-contentCard-subTitle {
-        @include font-size(body-l);
-        font-weight: $font-weight-regular;
-        margin-top: spacing();
+        @include f.font-size(body-l);
+        font-weight: f.$font-weight-regular;
+        margin-top: f.spacing();
     }
 
     .c-contentCard-text {
-        margin-top: spacing(a);
+        margin-top: f.spacing(a);
         text-align: center;
     }
 
@@ -230,22 +230,22 @@ export default {
         flex-direction: column;
         align-items: center;
         min-height: 164px; // min-height set to the height of an card with a one-line title
-        background-color: $color-container-default;
-        padding: spacing(d);
-        box-shadow: $elevation-01;
-        border-radius: 0 0 $radius-rounded-c $radius-rounded-c;
+        background-color: f.$color-container-default;
+        padding: f.spacing(d);
+        box-shadow: f.$elevation-01;
+        border-radius: 0 0 f.$radius-rounded-c f.$radius-rounded-c;
     }
 
     .c-contentCard-footer {
         width: 100%;
         flex-shrink: 0;
-        margin-top: spacing();
+        margin-top: f.spacing();
         text-align: center;
     }
 
     .c-contentCard-thumbnail {
-        border: 1px solid $color-border-subtle;
-        margin-top: - (32px + spacing(d)); // This offsets the thumbnail above the top of the info card
+        border: 1px solid f.$color-border-subtle;
+        margin-top: - (32px + f.spacing(d)); // This offsets the thumbnail above the top of the info card
         width: 48px;
         min-height: 48px;
     }
@@ -253,8 +253,8 @@ export default {
     .c-postOrderCardContainer {
         .c-contentCard-thumbnail {
             position: absolute;
-            top: spacing(d);
-            left: spacing(d);
+            top: f.spacing(d);
+            left: f.spacing(d);
             margin: 0;
             border: none;
         }
@@ -266,22 +266,22 @@ export default {
             display: block;
             text-align: left;
             min-height: 0;
-            padding: spacing(e) 0 0 0;
+            padding: f.spacing(e) 0 0 0;
 
-            @include media ('<mid') {
-                border: 1px solid $color-border-strong;
-                padding: spacing(e);
-                border-radius: 0 0 $radius-rounded-c $radius-rounded-c;
+            @include f.media ('<mid') {
+                border: 1px solid f.$color-border-strong;
+                padding: f.spacing(e);
+                border-radius: 0 0 f.$radius-rounded-c f.$radius-rounded-c;
             }
         }
 
         .c-contentCard-title {
             text-align: left;
-            margin: 0 0 spacing(d);
+            margin: 0 0 f.spacing(d);
         }
 
         .c-contentCard-subTitle {
-            @include font-size(body-s);
+            @include f.font-size(body-s);
 
             text-align: left;
             margin: 0;
@@ -296,10 +296,10 @@ export default {
 
         .c-contentCard-bgImg {
             overflow: hidden;
-            border-radius: $radius-rounded-c;
+            border-radius: f.$radius-rounded-c;
 
-            @include media ('<mid') {
-                border-radius: $radius-rounded-c $radius-rounded-c 0 0;
+            @include f.media ('<mid') {
+                border-radius: f.$radius-rounded-c f.$radius-rounded-c 0 0;
             }
         }
 
@@ -318,19 +318,19 @@ export default {
             left: 0;
             top: 0;
 
-            @include media('<mid') {
-                top: spacing(d);
-                left: spacing(d);
+            @include f.media('<mid') {
+                top: f.spacing(d);
+                left: f.spacing(d);
             }
         }
 
         .c-contentCard-info {
-            padding: 0 0 0 spacing(i);
+            padding: 0 0 0 f.spacing(i);
 
-            @include media('<mid') {
+            @include f.media('<mid') {
                 position: relative;
-                padding: spacing(d) spacing(d) spacing(d) spacing(i);
-                border-radius: $radius-rounded-c;
+                padding: f.spacing(d) f.spacing(d) f.spacing(d) f.spacing(i);
+                border-radius: f.$radius-rounded-c;
             }
         }
     }
@@ -340,12 +340,12 @@ export default {
     }
 
     .c-emboldenedText--subtitle {
-        @include font-size(body-l);
-        margin-top: spacing(d);
+        @include f.font-size(body-l);
+        margin-top: f.spacing(d);
     }
 
     .c-emboldenedText--text {
-        @include font-size(body-s);
+        @include f.font-size(body-s);
         font-weight: bold;
         margin-top: 0;
     }

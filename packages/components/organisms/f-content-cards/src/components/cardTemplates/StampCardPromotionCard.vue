@@ -82,23 +82,23 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../../../src/assets/scss/card-styles';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
-$stampCard-promo-shadow: $elevation-01;
+$stampCard-promo-shadow: f.$elevation-01;
 
 .c-stampCardPromotion1 {
-    @include card-container;
+    @include common.card-container;
 
     position: relative;
     border: none;
 
-    @include media('>narrowMid') {
+    @include f.media('>narrowMid') {
         max-width: 344px;
-        border-radius: $radius-rounded-c;
+        border-radius: f.$radius-rounded-c;
         box-shadow: $stampCard-promo-shadow;
     }
 
-    @include media('>mid') {
+    @include f.media('>mid') {
         max-width: 392px;
     }
 }
@@ -108,82 +108,82 @@ $stampCard-promo-shadow: $elevation-01;
 }
 
 .c-stampCardPromotion1-bgImg {
-    @include card-bg-image;
+    @include common.card-bg-image;
 }
 
 .c-stampCardPromotion1-img {
     display: block;
     width: 100%;
-    border-radius: $radius-rounded-c $radius-rounded-c 0 0;
+    border-radius: f.$radius-rounded-c f.$radius-rounded-c 0 0;
 }
 
 .c-stampCardPromotion1-icon {
     position: absolute;
-    top: spacing(d);
-    left: spacing(d);
+    top: f.spacing(d);
+    left: f.spacing(d);
     margin: 0;
-    border-radius: $radius-rounded-c;
-    border: 0.5px solid $color-border-default;
+    border-radius: f.$radius-rounded-c;
+    border: 0.5px solid f.$color-border-default;
 
-    @include media('>narrowMid') {
-        top: spacing(c) - 2px;
+    @include f.media('>narrowMid') {
+        top: f.spacing(c) - 2px;
     }
 }
 
 .c-stampCardPromotion1-info {
-    padding: spacing(d);
-    background-color: $color-container-default;
+    padding: f.spacing(d);
+    background-color: f.$color-container-default;
     position: static;
     display: block;
     text-align: left;
     min-height: 0;
 
-    margin-top: - spacing(e);
-    margin-left: spacing(d);
-    margin-right: spacing(d) - 1px;
-    border-radius: $radius-rounded-c;
+    margin-top: - f.spacing(e);
+    margin-left: f.spacing(d);
+    margin-right: f.spacing(d) - 1px;
+    border-radius: f.$radius-rounded-c;
     box-shadow: $stampCard-promo-shadow;
 
-    @include media ('>narrowMid') {
+    @include f.media ('>narrowMid') {
         margin: 0;
         box-shadow: none;
     }
 }
 
 .c-stampCardPromotion1-title {
-     @include font-size(subheading-s, false, narrow);
+     @include f.font-size(subheading-s, false, narrow);
 
-     @include media ('>narrowMid') {
-         @include font-size(subheading-s, false);
+     @include f.media ('>narrowMid') {
+         @include f.font-size(subheading-s, false);
      }
 }
 
 .c-stampCardPromotion1-statusText {
-    @include font-size(body-s);
+    @include f.font-size(body-s);
 
-    margin-top: spacing(a);
+    margin-top: f.spacing(a);
 
-    @include media ('>narrowMid') {
-        @include font-size('body-l', false);
+    @include f.media ('>narrowMid') {
+        @include f.font-size('body-l', false);
     }
 }
 
 .c-stampCardPromotion1-link {
-    @include font-size('body-l', false);
+    @include f.font-size('body-l', false);
     text-decoration: none;
-    font-weight: $font-weight-bold;
-    margin-top: spacing();
+    font-weight: f.$font-weight-bold;
+    margin-top: f.spacing();
 
     & {
-        color: $color-content-link;
+        color: f.$color-content-link;
     }
 
     &:hover, &:focus {
-        color: darken($color-content-link, $color-hover-01);
+        color: darken(f.$color-content-link, f.$color-hover-01);
     }
 
     &:active {
-        color: darken($color-content-link, $color-active-01);
+        color: darken(f.$color-content-link, f.$color-active-01);
     }
 }
 </style>

@@ -142,14 +142,16 @@ export default {
 </script>
 
 <style lang="scss" module>
+    @use '@justeat/fozzie/src/scss/fozzie' as f;
+
     .c-contentCards-homePromotionCard1 {
         text-decoration: initial;
         display: block;
-        padding: spacing(e) 0 spacing(d);
+        padding: f.spacing(e) 0 f.spacing(d);
         width: 100%;
 
-        @include media('>mid') {
-            padding: spacing(e) 0;
+        @include f.media('>mid') {
+            padding: f.spacing(e) 0;
         }
     }
 
@@ -165,9 +167,9 @@ export default {
         align-items: center;
         justify-content: center;
         width: 100%;
-        margin-bottom: spacing(d);
+        margin-bottom: f.spacing(d);
 
-        @include media('>mid') {
+        @include f.media('>mid') {
             width: 50%;
             margin-bottom: 0;
         }
@@ -181,35 +183,35 @@ export default {
     .c-contentCards-homePromotionCard1-subtitle {
         display: none;
 
-        @include media('>mid') {
+        @include f.media('>mid') {
             display: unset;
-            @include font-size(heading-m);
+            @include f.font-size(heading-m);
         }
     }
 
         .c-contentCards-homePromotionCard1-subtitle--light {
-            color: $color-content-light;
+            color: f.$color-content-light;
         }
 
     .c-contentCards-homePromotionCard1-innerCard {
         width: 100%;
         padding: 0;
 
-        @include media('>mid') {
+        @include f.media('>mid') {
             width: 50%;
 
             :global(.c-contentCards-homePromotionCard2) {
-                padding-left: spacing(g);
+                padding-left: f.spacing(g);
             }
 
             :global(.c-contentCards-homePromotionCard2-title) {
-                @include font-size(heading-m);
-                margin-bottom: spacing();
+                @include f.font-size(heading-m);
+                margin-bottom: f.spacing();
             }
 
             :global(.c-contentCards-homePromotionCard2-text) {
-                @include font-size(subheading-s);
-                margin-top: spacing();
+                @include f.font-size(subheading-s);
+                margin-top: f.spacing();
             }
         }
     }
