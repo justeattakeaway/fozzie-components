@@ -63,24 +63,26 @@ export default {
 </style>
 
 <style lang="scss">
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 /**
 * .c-navigationLinks-link is intentionally not scoped as the consuming router application (Nuxt.js / Vue Router) will add active classes directly to
 * the router-link within <f-link>. CoreWeb Nuxt custom active link classes are: `is-link-active` and `is-link-exactActive`.
 */
 .c-navigationLinks-link {
     display: inline-block;
-    padding: spacing() 0 spacing() spacing(d);
-    border-left: 2px solid $color-border-default;
-    color: $color-content-link;
+    padding: f.spacing() 0 f.spacing() f.spacing(d);
+    border-left: 2px solid f.$color-border-default;
+    color: f.$color-content-link;
 
     &:focus,
     &:hover,
     &.is-link-exactActive {
-        border-left: 2px solid $color-interactive-brand;
+        border-left: 2px solid f.$color-interactive-brand;
         text-decoration: none;
     }
     &.is-link-exactActive {
-        font-weight: $font-weight-bold;
+        font-weight: f.$font-weight-bold;
     }
 }
 </style>

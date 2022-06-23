@@ -10,6 +10,12 @@ v0.52.14
 ### Changed
 - updated vue.config to include `f-user-message` in components using @use and @forward
 
+v0.52.14
+------------------------------
+*June 23, 2022*
+### Changed
+- updated vue.config to include f-navigation-links in components using @use and @forward
+
 
 v0.52.13
 ------------------------------
