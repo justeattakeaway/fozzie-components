@@ -32,10 +32,6 @@ class Page {
         return this;
     }
 
-    waitForComponent (component, timeoutMs = 500) {
-        component.waitForExist({ timeout: timeoutMs });
-    }
-
     composePath (queries) {
         if (!queries) { return ''; }
 
@@ -44,12 +40,12 @@ class Page {
         .join(';')}`;
     }
 
-    waitForComponent (component, timeoutMs = 500) {
-        component.waitForExist({ timeout: timeoutMs });
+    waitForComponent (component, timeoutMs = 1000) {
+        component.waitForDisplayed({ timeout: timeoutMs });
     }
 
-    async waitForComponent (component, timeoutMs = 500) {
-        (await component).waitForExist({ timeout: timeoutMs });
+    async waitForComponent (component, timeoutMs = 1000) {
+        (await component).waitForDisplayed({ timeout: timeoutMs });
     }
 
     withQuery (name, value) {
