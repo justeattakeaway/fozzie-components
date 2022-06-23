@@ -87,7 +87,7 @@ export default {
 }
 
 .c-restaurantCard-availability > .c-restaurantCard-availability-iconText + .c-restaurantCard-availability-message:before {
-    @include dotSeparator;
+    @include common.dotSeparator;
 }
 
 .c-restaurantCard-availability-iconText,

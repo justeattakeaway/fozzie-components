@@ -414,7 +414,7 @@ $form-input-icon-verticalIndent--large         : 19px;
 $form-input-iconSize                           : 18px;
 
     ::placeholder {
-        color: $form-input-secondaryTextColour;
+        color: common.$form-input-secondaryTextColour;
     }
 
     .c-formField-field--textarea {
@@ -428,7 +428,7 @@ $form-input-iconSize                           : 18px;
             margin-top: 0;
 
             .c-formField-field {
-                border-radius: 0 0 $form-input-borderRadius $form-input-borderRadius;
+                border-radius: 0 0 common.$form-input-borderRadius common.$form-input-borderRadius;
                 border-top: 0;
             }
         }
@@ -442,7 +442,7 @@ $form-input-iconSize                           : 18px;
 
     .c-formField--grouped:nth-of-type(1) {
         .c-formField-field {
-            border-radius: $form-input-borderRadius $form-input-borderRadius 0 0;
+            border-radius: common.$form-input-borderRadius common.$form-input-borderRadius 0 0;
         }
     }
 
@@ -453,7 +453,7 @@ $form-input-iconSize                           : 18px;
             width: $form-input-iconSize;
 
             path {
-                fill: $form-input-secondaryTextColour;
+                fill: common.$form-input-secondaryTextColour;
             }
         }
     }
@@ -467,33 +467,33 @@ $form-input-iconSize                           : 18px;
     }
 
     .c-formField-icon--small {
-        @include indent-icon('bottom', $form-input-icon-verticalIndent--small);
+        @include common.indent-icon('bottom', $form-input-icon-verticalIndent--small);
     }
 
     .c-formField-icon--medium {
-        @include indent-icon('bottom', $form-input-icon-verticalIndent);
+        @include common.indent-icon('bottom', $form-input-icon-verticalIndent);
     }
 
     .c-formField-icon--large {
-        @include indent-icon('bottom', $form-input-icon-verticalIndent--large);
+        @include common.indent-icon('bottom', $form-input-icon-verticalIndent--large);
     }
 
     .c-formField-icon--leading {
-        @include indent-icon('leading', $form-input-icon-verticalIndent);
+        @include common.indent-icon('leading', $form-input-icon-verticalIndent);
     }
 
     .c-formField-icon--trailing {
-        @include indent-icon('trailing', $form-input-icon-verticalIndent);
+        @include common.indent-icon('trailing', $form-input-icon-verticalIndent);
     }
 
     .c-formField-padding--iconTrailing {
-        padding-right: $form-input-iconPadding;
+        padding-right: common.$form-input-iconPadding;
     }
 
     .c-formField-assistiveText {
         position: absolute;
         font-weight: f.$font-weight-regular;
-        color: $form-input-secondaryTextColour;
+        color: common.$form-input-secondaryTextColour;
         margin-top: f.spacing(a);
     }
 
