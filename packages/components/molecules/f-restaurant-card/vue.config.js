@@ -27,7 +27,7 @@ module.exports = {
 
                     return `
                         @use "sass:math";
-                        @use "${relPath}" as *;
+                        @use "${relPath}";
                         ${content}`;
                 }
             });

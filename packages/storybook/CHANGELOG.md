@@ -3,6 +3,27 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.52.16
+------------------------------
+*June 22, 2022*
+
+### Changed
+- updated vue.config to include `f-tabs` in components using @use and @forward
+
+
+v0.52.15
+------------------------------
+*June 22, 2022*
+
+### Changed
+- updated vue.config to include `f-user-message` in components using @use and @forward
+
+
+v0.52.14
+------------------------------
+*June 23, 2022*
+### Changed
+- updated vue.config to include f-navigation-links in components using @use and @forward
 
 
 v0.52.13

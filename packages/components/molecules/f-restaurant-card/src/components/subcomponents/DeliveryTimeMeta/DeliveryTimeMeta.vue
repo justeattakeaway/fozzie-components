@@ -77,7 +77,7 @@ export default {
     display: flex;
 
     &:after {
-        @include dotSeparator;
+        @include common.dotSeparator;
 
         @include f.media('>mid') {
             display: none;
