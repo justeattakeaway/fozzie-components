@@ -97,13 +97,14 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 $fade-out-transition-duration: 0.3s;
 $fade-in-transition-duration: 0.7s;
 $fade-in-transition-distance: 40px;
 
-
 .c-tab {
-    padding: spacing() 0;
+    padding: f.spacing() 0;
     left: 0;
     top: 0;
     grid-area: 1/1;
