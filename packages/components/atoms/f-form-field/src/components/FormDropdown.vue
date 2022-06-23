@@ -138,7 +138,7 @@ $form-dropdown-iconIndent--large              : 25px;
 }
 
 .c-formDropdown-select {
-    padding-right: $form-input-iconPadding;
+    padding-right: common.$form-input-iconPadding;
 
     /* Remove default styling */
     outline: none;
