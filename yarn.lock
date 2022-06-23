@@ -2763,7 +2763,7 @@
 
 "@justeat/fozzie@9.0.0-beta.5":
   version "9.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.5.tgz#14d7a2d7c6aba26e885295bc416560ea182736fd"
+  resolved "https://registry.npmjs.org/@justeat/fozzie/-/fozzie-9.0.0-beta.5.tgz#14d7a2d7c6aba26e885295bc416560ea182736fd"
   integrity sha512-ZE3XqqJM1+QJf1qW60yI8dP+9g2+u/PkxMtJh+DtxZILgegnXHfiz8iCBHOEsIPcn67fJjV4FOyqp3KY1J9qtw==
   dependencies:
     "@justeat/pie-design-tokens" "1.4.0"
@@ -23591,10 +23591,10 @@ sass-loader@10.1.0:
     schema-utils "^3.0.0"
     semver "^7.3.2"
 
-sass@1.49.7:
-  version "1.49.7"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.49.7.tgz#22a86a50552b9b11f71404dfad1b9ff44c6b0c49"
-  integrity sha512-13dml55EMIR2rS4d/RDHHP0sXMY3+30e1TKsyXaSz3iLWVoDWEoboY8WzJd5JMnxrRHffKO3wq2mpJ0jxRJiEQ==
+sass@1.53.0:
+  version "1.53.0"
+  resolved "https://registry.npmjs.org/sass/-/sass-1.53.0.tgz#eab73a7baac045cc57ddc1d1ff501ad2659952eb"
+  integrity sha512-zb/oMirbKhUgRQ0/GFz8TSAwRq2IlR29vOUJZOx0l8sV+CkHUfHa4u5nqrG+1VceZp7Jfj59SVW9ogdhTvJDcQ==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"
