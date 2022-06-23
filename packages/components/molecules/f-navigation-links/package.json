@@ -49,7 +49,7 @@
   "dependencies": {},
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",
-    "@justeat/f-link": "^3.1.1"
+    "@justeat/f-link": "3.1.1"
   },
   "devDependencies": {
     "@justeat/f-link": "3.1.1",
