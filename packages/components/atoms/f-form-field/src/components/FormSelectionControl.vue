@@ -148,7 +148,7 @@ export default {
 
     .c-formField-field--checkbox.c-formField--invalid + label:before,
     .c-formField-field--radio.c-formField--invalid + label:before {
-        border-color: $form-input-borderColour--invalid;
+        border-color: common.$form-input-borderColour--invalid;
     }
 
     .c-formField-field--checkbox:checked + label:before {
