@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.7.0
+------------------------------
+*June 23, 2022*
+### Changed
+- Bumped devDependencies to prevent issue with conflicting versions of dependancy peerDeps
+
+### Changed
+- Updated `f-navigation-links` to v1.3.0.
+
 v0.6.0
 ------------------------------
 *June 22, 2022*
