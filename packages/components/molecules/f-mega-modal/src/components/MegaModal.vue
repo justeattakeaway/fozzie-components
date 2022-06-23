@@ -323,16 +323,18 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-megaModal {
-    z-index: zIndex(high);
+    z-index: f.zIndex(high);
 }
 
 .c-megaModal-content {
-    background-color: $color-container-default;
-    border-radius: $radius-rounded-d;
-    box-shadow: $elevation-04;
+    background-color: f.$color-container-default;
+    border-radius: f.$radius-rounded-d;
+    box-shadow: f.$elevation-04;
     display: none;
-    padding: spacing(e);
+    padding: f.spacing(e);
     position: fixed;
     right: 50%;
     text-align: start;
@@ -343,7 +345,7 @@ export default {
     &.is-positioned-bottom {
         border-radius: 0;
         bottom: -100vh;
-        box-shadow: $elevation-05;
+        box-shadow: f.$elevation-05;
         display: block;
         left: 0;
         top: auto;
@@ -360,19 +362,19 @@ export default {
         text-align: center;
     }
 
-    @include media('>=narrow') {
+    @include f.media('>=narrow') {
         width: 85%;
     }
 
-    @include media('<mid') {
-        min-width: em(22);
+    @include f.media('<mid') {
+        min-width: f.em(22);
 
         &.is-fullHeight {
             height: 100%;
         }
     }
 
-    @include media('>=mid') {
+    @include f.media('>=mid') {
         max-height: 90vh;
         max-width: 600px;
     }
@@ -383,7 +385,7 @@ export default {
 }
 
 .c-megaModal-content--narrow {
-    @include media('>=narrowMid') {
+    @include f.media('>=narrowMid') {
         max-width: 450px;
     }
 }
@@ -391,11 +393,11 @@ export default {
 .c-megaModal-content--wide {
     max-width: 1080px;
 
-    @include media('<huge') {
+    @include f.media('<huge') {
         max-width: 75%;
     }
 
-    @include media('<mid') {
+    @include f.media('<mid') {
         width: 100%;
         max-width: 100%;
     }
@@ -408,7 +410,7 @@ export default {
 
 .c-megaModal-content.c-megaModal-content--flush {
     .c-megaModal-closeBtn {
-        top: spacing(d);
+        top: f.spacing(d);
     }
 }
 
@@ -418,11 +420,11 @@ export default {
     overflow-x: hidden;
     overflow-y: auto;
 
-    @include media('>=mid') {
+    @include f.media('>=mid') {
         max-height: 550px;
     }
 
-    @include media('height<=narrowMid', '>=mid') {
+    @include f.media('height<=narrowMid', '>=mid') {
         max-height: 90vh;
     }
 }
@@ -432,16 +434,16 @@ export default {
         display: flex;
         opacity: 0.9;
         position: absolute;
-        right: spacing(d);
+        right: f.spacing(d);
         top: 22px;
-        z-index: zIndex(high);
+        z-index: f.zIndex(high);
 
-        @include media('>=mid') {
+        @include f.media('>=mid') {
             position: fixed;
         }
 
         svg path {
-            fill: $color-interactive-primary;
+            fill: f.$color-interactive-primary;
             width: 17px;
             height: 17px;
         }
@@ -453,11 +455,11 @@ export default {
 }
 
 .c-megaModal-title {
-    margin: 0 spacing(f) 0 0;
+    margin: 0 f.spacing(f) 0 0;
 
     .is-text-aligned-center & {
-        margin-left: spacing(e);
-        margin-right: spacing(e);
+        margin-left: f.spacing(e);
+        margin-right: f.spacing(e);
     }
 }
 </style>
