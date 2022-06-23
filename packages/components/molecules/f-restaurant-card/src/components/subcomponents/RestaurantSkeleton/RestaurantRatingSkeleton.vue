@@ -55,7 +55,7 @@ export default {
 }
 
 .c-restaurantCard-ratingSkeleton-icon {
-    @include skeletonLoader();
+    @include common.skeletonLoader();
     border-radius: 0;
     display: flex;
     align-items: center;
