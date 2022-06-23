@@ -50,7 +50,8 @@ module.exports = {
                         'f-promotions-showcase',
                         'f-mega-modal',
                         'f-restaurant-card',
-                        'f-tabs'
+                        'f-tabs',
+                        'f-navigation-links'
                     ];
                     const pathContainsUpdatedComponentOrType = updateComponentsAndTypes.some(a => absPath.includes(a));
 
