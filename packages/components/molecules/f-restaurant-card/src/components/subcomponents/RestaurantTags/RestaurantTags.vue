@@ -34,6 +34,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-restaurantTags {
     margin-top: 0;
     margin-left: 0;
@@ -45,6 +47,6 @@ export default {
 
 .c-restaurantTags-tag {
     list-style-type: none;
-    margin: 0 spacing(a) spacing(a) 0;
+    margin: 0 f.spacing(a) f.spacing(a) 0;
 }
 </style>

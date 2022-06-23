@@ -164,20 +164,22 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-restaurantCard-rating {
-    @include font-size(body-s);
+    @include f.font-size(body-s);
     display: flex;
     align-items: center;
     padding: 0;
     margin: 0;
     white-space: nowrap;
-    margin-right: spacing(b);
+    margin-right: f.spacing(b);
 }
 
 .c-restaurantCard-rating-iconWrapper {
     width: 14px;
     height: auto;
-    margin-right: spacing(a);
+    margin-right: f.spacing(a);
 }
 
 .c-restaurantCard-rating-star {
@@ -186,27 +188,27 @@ export default {
     display: block;
 
     & path {
-        fill: $color-support-brand-01;
+        fill: f.$color-support-brand-01;
     }
 }
 
 .c-restaurantCard-rating-mean {
-    font-weight: $font-weight-bold;
+    font-weight: f.$font-weight-bold;
 }
 
 .c-restaurantCard-rating-outOf {
-    margin-right: spacing(a);
+    margin-right: f.spacing(a);
 }
 
 .c-restaurantCard-rating-notRatedMsg,
 .c-restaurantCard-rating-divider,
 .c-restaurantCard-rating-outOf,
 .c-restaurantCard-rating-count {
-    color: $color-content-subdued;
+    color: f.$color-content-subdued;
 }
 
 .c-restaurantCard-rating-count {
-    margin: 0 -(spacing(a));
+    margin: 0 -(f.spacing(a));
 }
 </style>
 
