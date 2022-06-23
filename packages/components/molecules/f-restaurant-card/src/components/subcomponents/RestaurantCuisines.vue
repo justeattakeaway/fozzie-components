@@ -24,11 +24,13 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-restaurantCard-cuisines {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin: 0 0 spacing(a) 0;
+    margin: 0 0 f.spacing(a) 0;
     padding: 0;
     list-style: none;
 
@@ -39,10 +41,10 @@ export default {
 
 .c-restaurantCard-cuisines-item {
     position: relative;
-    padding-right: spacing();
-    margin: 0 spacing(a) 0 0;
+    padding-right: f.spacing();
+    margin: 0 f.spacing(a) 0 0;
     white-space: nowrap;
-    @include font-size(body-s);
+    @include f.font-size(body-s);
 
     &:before {
         display: none;
@@ -50,7 +52,7 @@ export default {
 
     &:after {
         content: '\2022';
-        color: $color-content-subdued;
+        color: f.$color-content-subdued;
         position: absolute;
         right: 0;
     }

@@ -77,20 +77,22 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-restaurantCard-availability {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    margin-right: spacing(b);
+    margin-right: f.spacing(b);
 }
 
 .c-restaurantCard-availability > .c-restaurantCard-availability-iconText + .c-restaurantCard-availability-message:before {
-    @include dotSeparator;
+    @include common.dotSeparator;
 }
 
 .c-restaurantCard-availability-iconText,
 .c-restaurantCard-availability-message {
     overflow-wrap: break-word;
-    @include font-size($font-paragraph-02);
+    @include f.font-size(f.$font-paragraph-02);
 }
 </style>
