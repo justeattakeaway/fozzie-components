@@ -2347,6 +2347,11 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.3.0.tgz#b56e48e48d69eed746fe3fb245bb47e915b97252"
   integrity sha512-iFcYy3ou8QkqkfCRHRyVlR9HOcllXJHsdLiRLKSdJNk6nZLP/ecTNmw4uqHWfhj4pJZU5JgmDno0Wdz1jpuZsQ==
 
+"@justeat/f-button@3.x":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.4.1.tgz#1ddbc5c771f053db41308cb4797a3a611f3af393"
+  integrity sha512-3RHIDDC6OjPNCALHIjQvvIw2EsVCZH300SNmLdNip9IJQUtaKBcjfUolalXeP86jlg0UT2qPSMriEUyBs4o+ag==
+
 "@justeat/f-card-with-content@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-card-with-content/-/f-card-with-content-1.0.0.tgz#d2e376e121a1b1c89418000a04cb9d5ef3134019"
@@ -2382,6 +2387,13 @@
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.6.0.tgz#4f740d7f63a27fd159fc65ea58025e2869212335"
   integrity sha512-BQJs4+oZ/0EWegAjmWnFzfA0Wv2VPEUwoCHwEiLmxBTLTxK/RS7qVahFaTcmhA3hcm/esVnRhTZEKYUGf0yE6A==
+  dependencies:
+    "@justeat/f-services" "0.13.0"
+
+"@justeat/f-card@3.x":
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.6.1.tgz#a1dba4482f7f9581c014214f4b796db801347fb9"
+  integrity sha512-h8lZUw88CvWp++2mGNhEjTBUamU1kkZimPMflMkANPKwXUd39BJjHeiy3J+d4yc0wR4P16rQxpemYqkQLZAdSg==
   dependencies:
     "@justeat/f-services" "0.13.0"
 
@@ -2422,6 +2434,13 @@
   dependencies:
     "@justeat/f-vue-icons" "1.10.0"
 
+"@justeat/f-error-message@1.x":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-1.2.1.tgz#a83806fe35e51a9c689e9b1ad6f3569a9ee26149"
+  integrity sha512-gc/TryS9UO+W6shW8dj/pm5B0UH54FsCwRPMn5RaJIvwn/pWIEaKW5dvpOm+JVnVO38kK6Sm6hTnjSnLUXpKCw==
+  dependencies:
+    "@justeattakeaway/pie-icons-vue" "1.0.0"
+
 "@justeat/f-form-field@4.11.0":
   version "4.11.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.11.0.tgz#d70fe29f8338326b8e0a97e106979d76ee60298b"
@@ -2438,14 +2457,6 @@
     "@justeat/f-services" "1.0.0"
     "@justeattakeaway/pie-icons-vue" "1.0.0"
 
-"@justeat/f-form-field@4.6.0":
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.6.0.tgz#eb70e7aebba7fb2bddb80be012e3f7b0dee069f8"
-  integrity sha512-/lj9c1W06hTHX+//qmScJZhHTkkKC2kZrQ4bWQvdF9cB1Ph07kldpDt+uUBtS5FJl/8szE9kSjplK29MtsSDjQ==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeat/f-vue-icons" "2.5.0"
-
 "@justeat/f-form-field@4.9.0":
   version "4.9.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.9.0.tgz#831d206f658ee22f22c52d71dabff4b6bc55de70"
@@ -2453,6 +2464,14 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
     "@justeat/f-vue-icons" "2.5.0"
+
+"@justeat/f-form-field@4.x":
+  version "4.13.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.13.1.tgz#de26d48647332d3791fefab5014bbcd311db9a7e"
+  integrity sha512-Nf4jttNM4u1b1bAx+e8y1wxXiIAOaiyzeurLxEQ6MBDjxjocaYGMuVtSdFwv5YeiiOyo0AcqUGxN9Ix5C6q9Sw==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+    "@justeattakeaway/pie-icons-vue" "1.0.0"
 
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
@@ -2486,7 +2505,7 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.0.tgz#2e635096c2a6a8fd7da308479a2126748716dcbf"
   integrity sha512-ZbAgBrqn3a2furQ5F0FLffbsMZar9aIDsRG/2uWnsv6uY0KIHgJi08kH2XK5NzDzckHih2uMN37JiYpQMw6rNQ==
 
-"@justeat/f-mega-modal@3.0.2":
+"@justeat/f-mega-modal@3.x":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.2.tgz#81f2b5ca8519a6eca93f5643857df2a9c924666d"
   integrity sha512-3M+wpcjOIIw3hKbtZqyRl3mwdi2zz90wFAJc5RtJciJ/VwD73bHNjvABRl/At+JZj2p0Ongjg11ezSayoKMGJg==
@@ -2496,28 +2515,14 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-4.1.0.tgz#43300dd377b6293157bd59378165cc64ace4ade1"
   integrity sha512-4xwep9kagPo+L6YeFIiU8A65BPhic1CUOzvfv2fzYYdGtYuGi2XVbu2xreYuvlQ/v7pitdW0MUqTZGsoJr+ZTg==
 
-"@justeat/f-navigation-links@1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-navigation-links/-/f-navigation-links-1.3.0.tgz#430aa94513f4d451418c39a88b2135e5c5abcf4e"
-  integrity sha512-em/G3aiN/g7Gx5cSPGXDEoRogYjzIvgyoX1ecZ0iB4x6whfg/NmZ8jCbOxTW/9eLvhMuHv0lXv6wL0H5OnB0eA==
-
-"@justeat/f-popover@2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-popover/-/f-popover-2.3.0.tgz#4428d8b324a487a44e9179f357c6552403ab9db7"
-  integrity sha512-7rCAM5P6W8pLSavob0HYE9sA8Mxgay7GVAwkpAnDyADQiubgiLUDoGAhUsR/D8MZ2p/smFOupyDlr1rJung5oQ==
+"@justeat/f-popover@2.x":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-popover/-/f-popover-2.3.1.tgz#e2479ccda23715cca7e446dfeb8c3052450fc3b3"
+  integrity sha512-kRNgKsMYAB6Ta/t9IU0evFeDjVW6AFCtHMeDZWSmJZtEhmaGRuOy03GsLZzliqwmAmOxrOQrboqKO+Nf3AI/7Q==
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/f-searchbox@6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-6.0.0.tgz#fa6ea41ca3ccde26d5ed65511a96f1a728a9fc88"
-  integrity sha512-QdQHt/vr7WYzchm2RZoJ+E7WIcGmU32UB2ZEOYe6Vnt41gzMwpbjqLeZK6aD7kdSPrZr/UCrsT/69x6LV/33ZA==
-  dependencies:
-    caniuse-lite "1.0.30001251"
-    lodash.debounce "4.0.8"
-    mitt "3.0.0"
-
-"@justeat/f-searchbox@6.7.0":
+"@justeat/f-searchbox@6.7.0", "@justeat/f-searchbox@6.x":
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-6.7.0.tgz#b66e3078e376de0c340ac34df7556309f31aea5c"
   integrity sha512-5cyn9dAc0XfS7hfjkLzRLgqvwiMAK+UO0Hc5MdsjT/lGUM/oSKEZqfWpNWqtPBLpk+LI2dBBu3fIm4fwDzXhOQ==
@@ -14690,9 +14695,9 @@ http-errors@~1.6.2:
     statuses ">= 1.4.0 < 2"
 
 http-parser-js@>=0.5.1:
-  version "0.5.6"
-  resolved "https://registry.yarnpkg.com/http-parser-js/-/http-parser-js-0.5.6.tgz#2e02406ab2df8af8a7abfba62e0da01c62b95afd"
-  integrity sha512-vDlkRPDJn93swjcjqMSaGSPABbIarsr1TLAui/gLDXzV5VsJNdXNzMYDyNBLQkjWQCJ1uizu8T2oDMhmGt0PRA==
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/http-parser-js/-/http-parser-js-0.5.7.tgz#39bde369fb8a57235121bb69d05f079fa1b598f4"
+  integrity sha512-8gQM8ZcewlONQLnik2AKzS13euQhaZcu4rK5QBSYOszW0T1upLW9VA2MdWvTvMmRo42HjXp7igFmdROoBCCrfg==
 
 http-proxy-agent@^2.1.0:
   version "2.1.0"
@@ -26030,9 +26035,9 @@ upath@^1.1.1, upath@^1.2.0:
   integrity sha512-aZwGpamFO61g3OlfT7OQCHqhGnW43ieH9WZeP7QxN/G/jS4jfqUkZxoryvJgVPEcrl5NL/ggHsSmLMHuH64Lhg==
 
 update-browserslist-db@^1.0.0:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/update-browserslist-db/-/update-browserslist-db-1.0.3.tgz#6c47cb996f34afb363e924748e2f6e4d983c6fc1"
-  integrity sha512-ufSazemeh9Gty0qiWtoRpJ9F5Q5W3xdIPm1UZQqYQv/q0Nyb9EMHUB2lu+O9x1re9WsorpMAUu4Y6Lxcs5n+XQ==
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/update-browserslist-db/-/update-browserslist-db-1.0.4.tgz#dbfc5a789caa26b1db8990796c2c8ebbce304824"
+  integrity sha512-jnmO2BEGUjsMOe/Fg9u0oczOe/ppIDZPebzccl1yDWGLFP16Pa1/RM5wEoKYPG2zstNcDuAStejyxsOuKINdGA==
   dependencies:
     escalade "^3.1.1"
     picocolors "^1.0.0"

@@ -54,13 +54,13 @@
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
     "@justeat/f-trak": ">=0.6.0",
-    "@justeat/f-button": "3.3.0",
-    "@justeat/f-popover": "2.3.0"
+    "@justeat/f-button": "3.x",
+    "@justeat/f-popover": "2.x"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.12.13",
-    "@justeat/f-button": "3.3.0",
-    "@justeat/f-popover": "2.3.0",
+    "@justeat/f-button": "3.x",
+    "@justeat/f-popover": "2.x",
     "@justeat/f-vue-icons": "3.4.0",
     "@justeattakeaway/pie-icons-vue": "1.0.0",
     "@justeat/f-wdio-utils": "0.5.0",

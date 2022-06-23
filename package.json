@@ -3,7 +3,7 @@
   "version": "7.13.0",
   "private": true,
   "scripts": {
-    "build": "turbo run build --continue --concurrency=1",
+    "build": "turbo run build --continue",
     "bundlewatch": "bundlewatch --config bundlewatch.config.js",
     "lint": "turbo run lint --continue",
     "lint:fix": "turbo run lint -- --fix --continue",

@@ -64,9 +64,9 @@ commands:
           command: |
             if [ "${RUN_ALL}" == "true" ];
             then
-              yarn << parameters.command_name >> --concurrency=1
+              yarn << parameters.command_name >>
             else
-              yarn << parameters.command_name >> --filter=[master] --concurrency=1
+              yarn << parameters.command_name >> --filter=[master] --no-deps
             fi
 
   build_packages:
