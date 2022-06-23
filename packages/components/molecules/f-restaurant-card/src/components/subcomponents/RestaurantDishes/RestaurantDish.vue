@@ -68,10 +68,12 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-restaurantCard-dish {
-    background-color: $color-support-brand-02;
-    padding: spacing(c);
-    border-radius: $radius-rounded-b;
+    background-color: f.$color-support-brand-02;
+    padding: f.spacing(c);
+    border-radius: f.$radius-rounded-b;
     margin: 0;
     display: flex;
     align-items: center;
@@ -80,7 +82,7 @@ export default {
 }
 
 .c-restaurantCard-dish-description {
-    margin-right: spacing(c);
+    margin-right: f.spacing(c);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -88,29 +90,29 @@ export default {
 
 .c-restaurantCard-dish-description,
 .c-restaurantCard-dish-price {
-    @include font-size(body-s);
+    @include f.font-size(body-s);
     margin-top: 0;
     align-self: flex-start;
 }
 
 .c-restaurantCard-dish-name,
 .c-restaurantCard-dish-price {
-    font-weight: $font-weight-bold;
+    font-weight: f.$font-weight-bold;
 }
 
 .c-restaurantCard-dish-nutritionalInfo {
-    margin-top: spacing(a);
-    color: $color-content-subdued;
+    margin-top: f.spacing(a);
+    color: f.$color-content-subdued;
 }
 
 .c-restaurantCard-dish-nutritionalInfo-item {
-    padding-right: math.div(spacing(a), 2) * 3;
-    margin-right: spacing(a);
+    padding-right: math.div(f.spacing(a), 2) * 3;
+    margin-right: f.spacing(a);
     position: relative;
 
     &:after {
         content: '\2022';
-        color: $color-content-subdued;
+        color: f.$color-content-subdued;
         position: absolute;
         right: 0;
     }

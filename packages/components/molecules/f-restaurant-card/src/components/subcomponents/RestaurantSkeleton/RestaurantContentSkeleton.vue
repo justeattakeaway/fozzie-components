@@ -18,8 +18,10 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-restaurantCard-skeleton {
-    background-color: $color-skeleton-02;
+    background-color: f.$color-skeleton-02;
     @include skeletonLoader();
 }
 </style>
