@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.5.0
 ------------------------------
-*Jun 23, 2022*
+*June 23, 2022*
 
 ### Changed
 - devDependency version range to match peerDependencies.
@@ -13,7 +13,7 @@ v0.5.0
 
 v0.4.1
 -----------------------------
-*Jun 21, 2022*
+*June 21, 2022*
 
 ### Changed
 - Bumped wdio version and fixed breaking changes.
