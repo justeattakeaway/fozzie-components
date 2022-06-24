@@ -397,10 +397,6 @@ $image-tile-text-transform-breakout: translate3d(f.spacing(b), 0, 0);
         @include image-tile-icon-selected-transform-breakout();
     }
 
-    .c-imageTile--selected & path {
-        fill: $image-tile-selected;
-    }
-
     @include f.media('>=mid') {
         .c-imageTile:hover & {
             @include image-tile-icon-selected-transform();
