@@ -1,6 +1,6 @@
-const Page = require('@justeat/f-wdio-utils/src/page.object');
+const Page = require('@justeat/f-wdio-utils/src/base.page');
 
-module.exports = class CookieBanner extends Page {
+module.exports = class CookieBannerLegacy extends Page {
     constructor () {
         super('organism', 'cookie-banner-component');
     }
@@ -13,31 +13,10 @@ module.exports = class CookieBanner extends Page {
 
     get closeButton () { return $('[data-test-id="cookieBanner-close-button"]'); }
 
-    async load () {
-        await this.open('/');
-        await browser.deleteCookies();
-        await super.load(this.component);
-    }
+    clickCookiePolicyLink () { this.cookiePolicyLink.click(); }
 
-    async open (url) {
-        await super.open(url);
-    }
-
-    async waitForComponent () {
-        await this.component.waitForExist();
-    }
-
-    async isCookieBannerComponentDisplayed () {
-        return this.component.isDisplayed();
-    }
-
-    async clickCookiePolicyLink () {
-        const cookiePolicyLink = await this.cookiePolicyLink;
-        await cookiePolicyLink.click();
-    }
-
-    async close () {
-        await this.closeButton.click();
+    close () {
+        this.closeButton.click();
 
         return this;
     }

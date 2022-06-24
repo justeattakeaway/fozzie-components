@@ -1,44 +1,41 @@
 import forEach from 'mocha-each';
 
 const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
-
 const LegacyCookieBanner = require('../../test-utils/component-objects/f-cookie-banner-legacy.component');
+const CookieBanner = require('../../test-utils/component-objects/f-cookie-banner.component');
 
-const legacyCookieBanner = new LegacyCookieBanner();
+describe('Legacy Cookie Banner - Accessibility tests', () => {
+    let cookieBanner;
 
-const CookieConsentBanner = require('../../test-utils/component-objects/f-cookie-consent-banner.component');
-
-let cookieConsentBanner;
-
-describe('Legacy Accessibility tests', () => {
-    it('a11y - should test legacy f-cookie-banner component WCAG compliance', () => {
+    beforeEach(async () => {
         // Arrange
-        legacyCookieBanner.withQuery('args', 'locale:en-AU');
+        cookieBanner = new LegacyCookieBanner();
+    });
 
+    it('a11y - should test legacy f-cookie-banner component WCAG compliance', () => {
         // Act
-        browser.call(async () => {
-            await legacyCookieBanner.load();
-        });
-
-        const axeResults = getAxeResults('f-cookie-banner');
+        cookieBanner.load({ locale: 'en-AU' });
 
         // Assert
+        const axeResults = getAxeResults('f-cookie-banner');
         expect(axeResults.violations.length).toBe(0);
+    });
+});
+
+describe('Cookie Banner - Accessibility tests', () => {
+    let cookieBanner;
+
+    beforeEach(async () => {
+        // Arrange
+        cookieBanner = new CookieBanner();
     });
 
     it('a11y - should test the f-cookie-banner component WCAG compliance', () => {
-        // Arrange
-        cookieConsentBanner = new CookieConsentBanner();
-        cookieConsentBanner.withQuery('args', 'locale:en-GB');
-
         // Act
-        browser.call(async () => {
-            await legacyCookieBanner.load();
-        });
-
-        const axeResults = getAxeResults('f-cookie-banner');
+        cookieBanner.load({ locale: 'en-GB' });
 
         // Assert
+        const axeResults = getAxeResults('f-cookie-banner');
         expect(axeResults.violations.length).toBe(0);
     });
 
@@ -48,25 +45,17 @@ describe('Legacy Accessibility tests', () => {
         ['es-ES'],
         ['it-IT']
     ])
-        .it('a11y - should have a correct tab loop order in the cookie banner component', tenant => {
-            // Arrange
-            cookieConsentBanner = new CookieConsentBanner();
-            cookieConsentBanner.withQuery('args', `locale:${tenant}`);
+    .it('a11y - should have a correct tab loop order in the cookie banner component', tenant => {
+        // Act
+        cookieBanner.load({ locale: tenant });
 
-            // Act
-
-            browser.call(async () => {
-                await legacyCookieBanner.load();
-            });
-
-            const expectedTabOrder = [
-                cookieConsentBanner.cookiePolicyLink,
-                cookieConsentBanner.cookieAcceptAllButton,
-                cookieConsentBanner.cookieAcceptNecessaryButton,
-                cookieConsentBanner.cookieBannerTitle];
-            const result = cookieConsentBanner.testTabOrder(expectedTabOrder);
-
-            // Assert
-            expect(result.actual).toEqual(result.expected);
-        });
+        // Assert
+        const expectedTabOrder = [
+            cookieBanner.cookiePolicyLink,
+            cookieBanner.cookieAcceptAllButton,
+            cookieBanner.cookieAcceptNecessaryButton,
+            cookieBanner.cookieBannerTitle];
+        const result = cookieBanner.testTabOrder(expectedTabOrder);
+        expect(result.actual).toEqual(result.expected);
+    });
 });
