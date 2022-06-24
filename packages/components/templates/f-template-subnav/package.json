@@ -47,13 +47,8 @@
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-<<<<<<< HEAD
-    "@justeat/f-breadcrumbs": "3.2.1",
-    "@justeat/f-navigation-links": "2.1.0",
-=======
     "@justeat/f-breadcrumbs": "4.0.0",
-    "@justeat/f-navigation-links": "2.0.0",
->>>>>>> bf13307f6d92e6aee23536f70fb3c685bfe7544a
+    "@justeat/f-navigation-links": "2.1.0",
     "@justeat/f-wdio-utils": "0.4.0",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",

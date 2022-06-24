@@ -2314,6 +2314,13 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
+"@justeat/f-alert@5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-5.0.1.tgz#80fb4a1480fb85cdb2bf94ad2020f9fa2f286d05"
+  integrity sha512-Jx06KGeM0geE9XJrh7vyhQxtSLhIXmiMY4sw31cDcFX9S0N/FrEOLpxiul+oTfNQGWlVrEq4t7NdqOQ1H2zgvA==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+
 "@justeat/f-braze-adapter@5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-5.0.0.tgz#5f38225e6c0f570f9294b47705345b386debac2c"
@@ -2508,17 +2515,10 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-4.1.0.tgz#43300dd377b6293157bd59378165cc64ace4ade1"
   integrity sha512-4xwep9kagPo+L6YeFIiU8A65BPhic1CUOzvfv2fzYYdGtYuGi2XVbu2xreYuvlQ/v7pitdW0MUqTZGsoJr+ZTg==
 
-<<<<<<< HEAD
 "@justeat/f-popover@2.x":
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-popover/-/f-popover-2.3.1.tgz#e2479ccda23715cca7e446dfeb8c3052450fc3b3"
   integrity sha512-kRNgKsMYAB6Ta/t9IU0evFeDjVW6AFCtHMeDZWSmJZtEhmaGRuOy03GsLZzliqwmAmOxrOQrboqKO+Nf3AI/7Q==
-=======
-"@justeat/f-popover@2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-popover/-/f-popover-2.3.0.tgz#4428d8b324a487a44e9179f357c6552403ab9db7"
-  integrity sha512-7rCAM5P6W8pLSavob0HYE9sA8Mxgay7GVAwkpAnDyADQiubgiLUDoGAhUsR/D8MZ2p/smFOupyDlr1rJung5oQ==
->>>>>>> bf13307f6d92e6aee23536f70fb3c685bfe7544a
   dependencies:
     "@justeat/f-services" "1.7.0"
 
