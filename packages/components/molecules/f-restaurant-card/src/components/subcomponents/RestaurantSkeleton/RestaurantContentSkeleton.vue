@@ -22,6 +22,6 @@ export default {
 
 .c-restaurantCard-skeleton {
     background-color: f.$color-skeleton-02;
-    @include skeletonLoader();
+    @include common.skeletonLoader();
 }
 </style>

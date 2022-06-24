@@ -120,9 +120,9 @@ export default {
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
 $affixed-field-sizes: (
-    small:  ($form-input-height--small, $form-input-padding--small),
-    medium: ($form-input-height, $form-input-padding),
-    large: ($form-input-height--large, $form-input-padding--large),
+    small:  (common.$form-input-height--small, common.$form-input-padding--small),
+    medium: (common.$form-input-height, common.$form-input-padding),
+    large: (common.$form-input-height--large, common.$form-input-padding--large),
 );
 
 .c-formField--affixed {
@@ -152,8 +152,8 @@ $affixed-field-sizes: (
 .c-formField-affix {
     height: 100%;
     font-family: f.$font-family-base;
-    @include f.font-size($form-input-fontSize);
-    color: $form-input-secondaryTextColour;
+    @include f.font-size(common.$form-input-fontSize);
+    color: common.$form-input-secondaryTextColour;
 }
 
 .c-formField-prefix {
@@ -174,10 +174,10 @@ $affixed-field-sizes: (
 }
 
 .c-formField--disabled {
-    @include disabled-field();
+    @include common.disabled-field();
 
     .c-formField-affix {
-        color: $form-input-textColour--disabled;
+        color: common.$form-input-textColour--disabled;
     }
 }
 </style>
