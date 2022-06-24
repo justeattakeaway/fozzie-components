@@ -518,6 +518,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-search {
     background-color: transparent;
     display: inline-block;
@@ -525,7 +527,7 @@ export default {
     width: 100%;
     max-width: 610px;
 
-    @include media('>narrow') {
+    @include f.media('>narrow') {
         min-height: 90px;
     }
 }
@@ -535,7 +537,7 @@ export default {
 }
 
 .c-search-error {
-    @include font-size(body-s, false);
+    @include f.font-size(body-s, false);
     position: static;
     text-align: left;
 }
