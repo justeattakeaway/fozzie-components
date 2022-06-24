@@ -6,13 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.14.0
 ------------------------------
-*June 23, 2022*
-
+*June 24, 2022*
 
 ### Changed
 - `turbo.json` to specify that dependencies should be built along with the changed package. 
+
 ### Removed
 - CircleCI Caching to prevent issues with outdated deps.
+
 
 v7.13.0
 ------------------------------
