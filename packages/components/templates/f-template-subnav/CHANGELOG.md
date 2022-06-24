@@ -6,12 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.7.0
 ------------------------------
-*June 23, 2022*
-### Changed
-- Bumped devDependencies to prevent issue with conflicting versions of dependancy peerDeps
+*June 24, 2022*
 
 ### Changed
-- Updated `f-navigation-links` to v1.3.0.
+- Bumped devDependencies to prevent issue with conflicting versions of dependency peerDeps
+
 
 v0.6.0
 ------------------------------
