@@ -1,4 +1,4 @@
-const Page = require('@justeat/f-wdio-utils/src/page.object');
+const Page = require('@justeat/f-wdio-utils/src/base.page');
 
 const {
     PROMOTION_CARD_1_COMPONENT,
@@ -22,18 +22,6 @@ module.exports = class HomePromotionCard1 extends Page {
     get image () { return $(IMAGE); }
 
     get subtitle () { return $(SUBTITLE); }
-
-    async load () {
-        await super.load(this.component);
-    }
-
-    async waitForComponent () {
-        await super.waitForComponent(this.component);
-    }
-
-    async isComponentDisplayed () {
-        return this.component.isDisplayed();
-    }
 
     async isInnerContainerDisplayed () {
         return this.innerContainer.isDisplayed();
