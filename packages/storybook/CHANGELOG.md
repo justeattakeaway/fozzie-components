@@ -3,6 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.52.19
+------------------------------
+*June 24, 2022*
+
+### Changed
+- `vue.config` to include `molecules` in components using `@use` and `@forward`.
+
+
+v0.52.18
+------------------------------
+*June 22, 2022*
+
+### Changed
+- `vue.config` to include `f-status-banner` in components using `@use` and `@forward`.
+
+
 v0.52.16
 ------------------------------
 *June 22, 2022*

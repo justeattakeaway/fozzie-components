@@ -12,11 +12,8 @@ describe('Accessibility tests', () => {
 
     forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'es-ES', 'it-IT'])
         .it('a11y - should test f-footer component WCAG compliance for country code "%s" with default options selected', tenant => {
-            // Arrange
-            footer.withQuery('args', `locale:${tenant}`);
-
             // Act
-            footer.load();
+            footer.load({ locale: tenant });
             const axeResults = getAxeResults('f-footer');
 
             // Assert
@@ -25,11 +22,8 @@ describe('Accessibility tests', () => {
 
     forEach(['en-GB', 'en-AU', 'en-IE', 'en-NZ'])
         .it('a11y - should test f-footer component WCAG compliance for country code "%s" with extra options selected', tenant => {
-            // Arrange
-            footer.withQuery('args', `locale:${tenant};showCountrySelector:true`);
-
             // Act
-            footer.load();
+            footer.load({ locale: tenant, showCountrySelector: true });
             const axeResults = getAxeResults('f-footer');
 
             // Assert
