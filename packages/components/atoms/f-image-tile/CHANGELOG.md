@@ -5,14 +5,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.0.1
 -----------------------------
-*June 23, 2022*
+*Jun 23, 2022*
 
 ### Changed
 - Update icon colour when selected
 
 v1.0.0
 -----------------------------
-*June 17, 2022*
+*Jun 17, 2022*
 
 ### Changed
 - Update to `@use` and `@forward` SASS syntax
