@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-template-subnav",
   "description": "Fozzie Template Sub Nav - SPA template with breadcrumb, lefthand navigation and centre slot",
-  "version": "0.7.0",
+  "version": "1.1.0",
   "main": "dist/f-template-subnav.umd.min.js",
   "maxBundleSize": "20kB",
   "files": [
@@ -47,11 +47,17 @@
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@justeat/f-breadcrumbs": "3.2.1",
     "@justeat/f-navigation-links": "2.1.0",
+=======
+    "@justeat/f-breadcrumbs": "4.0.0",
+    "@justeat/f-navigation-links": "2.0.0",
+>>>>>>> bf13307f6d92e6aee23536f70fb3c685bfe7544a
     "@justeat/f-wdio-utils": "0.4.0",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",
-    "@vue/test-utils": "1.0.3"
+    "@vue/test-utils": "1.0.3",
+    "@justeat/fozzie": "9.0.0-beta.5"
   }
 }
