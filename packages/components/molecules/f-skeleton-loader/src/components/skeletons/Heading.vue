@@ -14,7 +14,7 @@ export default {
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .c-heading {
-    height: $skeleton-loader-heading-height;
+    height: common.$skeleton-loader-heading-height;
     width: 65%;
     border-radius: f.$radius-rounded-a;
 }

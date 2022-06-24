@@ -15,7 +15,7 @@ export default {
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .c-rating {
-     color: $skeleton-loader-bone-background-color;
+     color: common.$skeleton-loader-bone-background-color;
      @include f.font-size(body-l, false);
 }
 </style>

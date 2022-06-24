@@ -36,7 +36,7 @@ export default {
 
 .c-restaurantCard-header,
 .c-restaurantCard-data {
-    border: 1px solid $skeleton-loader-bone-background-color;
+    border: 1px solid common.$skeleton-loader-bone-background-color;
     border-top: 0;
 }
 
