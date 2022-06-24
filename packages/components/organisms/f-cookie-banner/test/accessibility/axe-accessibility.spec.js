@@ -1,23 +1,17 @@
 import forEach from 'mocha-each';
 
 const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
-
 const LegacyCookieBanner = require('../../test-utils/component-objects/f-cookie-banner-legacy.component');
-
-const legacyCookieBanner = new LegacyCookieBanner();
-
-const CookieConsentBanner = require('../../test-utils/component-objects/f-cookie-consent-banner.component');
-
-let cookieConsentBanner;
+const CookieConsentBanner = require('../../test-utils/component-objects/f-cookie-banner.component');
 
 describe('Legacy Accessibility tests', () => {
     it('a11y - should test legacy f-cookie-banner component WCAG compliance', () => {
         // Arrange
-        legacyCookieBanner.withQuery('args', 'locale:en-AU');
+        const legacyCookieBanner = new LegacyCookieBanner();
 
         // Act
         browser.call(async () => {
-            await legacyCookieBanner.load();
+            await legacyCookieBanner.load({ locale: 'en-AU' });
         });
 
         const axeResults = getAxeResults('f-cookie-banner');
@@ -28,12 +22,12 @@ describe('Legacy Accessibility tests', () => {
 
     it('a11y - should test the f-cookie-banner component WCAG compliance', () => {
         // Arrange
-        cookieConsentBanner = new CookieConsentBanner();
+        const cookieConsentBanner = new CookieConsentBanner();
         cookieConsentBanner.withQuery('args', 'locale:en-GB');
 
         // Act
         browser.call(async () => {
-            await legacyCookieBanner.load();
+            await cookieConsentBanner.load({ locale: 'en-GB' });
         });
 
         const axeResults = getAxeResults('f-cookie-banner');
@@ -50,13 +44,13 @@ describe('Legacy Accessibility tests', () => {
     ])
         .it('a11y - should have a correct tab loop order in the cookie banner component', tenant => {
             // Arrange
-            cookieConsentBanner = new CookieConsentBanner();
+            const cookieConsentBanner = new CookieConsentBanner();
             cookieConsentBanner.withQuery('args', `locale:${tenant}`);
 
             // Act
 
             browser.call(async () => {
-                await legacyCookieBanner.load();
+                await cookieConsentBanner.load({ locale: tenant });
             });
 
             const expectedTabOrder = [
