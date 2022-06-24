@@ -5,13 +5,9 @@ const Footer = require('../../test-utils/component-objects/f-footer.component');
 let footer;
 
 describe('Desktop - f-footer component tests', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         // Arrange
         footer = new Footer();
-        await footer.withQuery('args', 'locale:en-GB;showCountrySelector:true');
-
-        // Act
-        await footer.load();
     });
 
     forEach([
@@ -24,6 +20,7 @@ describe('Desktop - f-footer component tests', () => {
     ])
     .it('should redirect to correct URL ("%s")', async (icon, expectedUrl) => {
         // Act
+        await footer.load({ locale: 'en-GB', showCountrySelector: true });
         await footer.clickIcon(icon);
 
         // Assert
@@ -55,6 +52,7 @@ describe('Desktop - f-footer component tests', () => {
         ['ch_fr', 'eat.ch/fr']
     ]).it('should click on link for country code "%s" and redirect to correct URL ("%s")', async (country, expectedUrl) => {
         // Act
+        await footer.load({ locale: 'en-GB', showCountrySelector: true });
         await footer.clickCountrySelectorButton();
         await footer.clickCountryLinkItem(country);
 
@@ -63,6 +61,9 @@ describe('Desktop - f-footer component tests', () => {
     });
 
     it('should check to see if the feedback button is clickable', async () => {
+        // Act
+        await footer.load({ locale: 'en-GB', showCountrySelector: true });
+
         // Assert
         await expect(await footer.isFeedbackButtonClickable()).toBe(true);
     });
