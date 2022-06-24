@@ -35,13 +35,6 @@ v0.52.15
 - updated vue.config to include `f-user-message` in components using @use and @forward
 
 
-v0.52.18
-------------------------------
-*June 23, 2022*
-### Changed
-- updated vue.config to include templates in components using @use and @forward
-
-
 v0.52.14
 ------------------------------
 *June 23, 2022*
