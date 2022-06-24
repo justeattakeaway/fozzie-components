@@ -13,7 +13,7 @@
                     $style['c-cookieBanner-card'],
                     { [$style['c-cookieBanner-ios']]: isIosBrowser }
                 ]"
-                data-test-id="cookieConsentBanner"
+                data-test-id="cookie-banner-component"
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="cookieConsentTitle"
