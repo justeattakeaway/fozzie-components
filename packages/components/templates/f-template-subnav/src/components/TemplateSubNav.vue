@@ -52,6 +52,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-subNavTemplate-breadcrumb {
     padding-top: 10px;
     padding-bottom: 1px;
@@ -61,25 +63,25 @@ export default {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    padding-top: spacing(g);
-    padding-bottom: spacing(g);
+    padding-top: f.spacing(g);
+    padding-bottom: f.spacing(g);
 }
 
 .c-subNavTemplate-breadcrumb,
 .c-subNavTemplate-container {
     margin: auto;
-    max-width: #{$layout-max-width}px;
-    padding-left: #{$layout-margin}px;
-    padding-right: #{$layout-margin}px;
+    max-width: #{f.$layout-max-width}px;
+    padding-left: #{f.$layout-margin}px;
+    padding-right: #{f.$layout-margin}px;
 
-    @include media('<wide') {
-        padding-left: #{$layout-margin--mid}px;
-        padding-right: #{$layout-margin--mid}px;
+    @include f.media('<wide') {
+        padding-left: #{f.$layout-margin--mid}px;
+        padding-right: #{f.$layout-margin--mid}px;
     }
 
-    @include media('<narrow') {
-        padding-left: #{$layout-margin--narrow}px;
-        padding-right: #{$layout-margin--narrow}px;
+    @include f.media('<narrow') {
+        padding-left: #{f.$layout-margin--narrow}px;
+        padding-right: #{f.$layout-margin--narrow}px;
     }
 }
 
@@ -90,7 +92,7 @@ export default {
 
 .c-subNavTemplate-breadcrumb,
 .c-subNavTemplate-subNav {
-    @include media('<mid') {
+    @include f.media('<mid') {
         display: none;
     }
 }
