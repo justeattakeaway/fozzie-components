@@ -125,12 +125,12 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
         locale: 'en-GB'
     };
 
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo
         });
     });
@@ -142,8 +142,9 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the mandatory error messages', async () => {
         // Act
-        ['addressLine1', 'addressLocality', 'mobileNumber', 'addressPostcode'].forEach(field => checkout.clearBlurField(field));
+        await ['addressLine1', 'addressLocality', 'mobileNumber', 'addressPostcode'].forEach(field => checkout.clearBlurField(field));
         await checkout.goToPayment();
+        await browser.pause(5000);
 
         // Assert
         await browser.percyScreenshot('f-checkout - Delivery - Authenticated - Manadatory Errors', 'desktop');

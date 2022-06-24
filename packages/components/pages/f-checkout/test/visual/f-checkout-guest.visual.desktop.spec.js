@@ -56,7 +56,7 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
         checkout.inputFieldValues = customerInfo;
 
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo,
             isAsapAvailable: true,
             placeOrderError: 'duplicate'
@@ -159,7 +159,7 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
         checkout.inputFieldValues = customerInfo;
 
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });
@@ -259,7 +259,7 @@ describe('f-checkout - Dine In - Guest - Desktop Visual Tests', () => {
         checkout.inputFieldValues = customerInfo;
 
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });

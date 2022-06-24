@@ -30,6 +30,7 @@ forEach(['desktop', 'mobile'])
 
         // Act
         Object.keys(userInfo).forEach(field => registration.setFieldValue(field, userInfo[field]));
+        await browser.pause(500);
         await registration.submit();
 
         // Assert

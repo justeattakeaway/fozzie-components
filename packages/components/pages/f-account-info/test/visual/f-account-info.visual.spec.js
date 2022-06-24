@@ -12,11 +12,16 @@ forEach(['desktop', 'mobile'])
         }
 
         accountInfo = new AccountInfo();
+
+        accountInfo.load();
+
+        accountInfo.waitForComponent();
     });
 
     it('should display the default component state', async () => {
         // Act
         accountInfo.load();
+        accountInfo.waitForComponent();
 
         // Assert
         await browser.percyScreenshot('f-account-info - Base State', device);
@@ -52,7 +57,7 @@ forEach(['desktop', 'mobile'])
         ['en-GB']
     ]).it('should display the %s Error page if GET fails', async locale => {
         // Act
-        accountInfo.load({ locale });
+        accountInfo.load({ locale, apiState: 'get-details-fails' });
 
         // Assert
         await browser.percyScreenshot(`f-account-info - Load Error Page - ${locale}`, device);
