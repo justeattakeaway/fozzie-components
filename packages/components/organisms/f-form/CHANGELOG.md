@@ -10,6 +10,14 @@ v0.5.0
 ### Changed
 - devDependency version range to match peerDependencies.
 
+
+v0.4.1
+-----------------------------
+*Jun 21, 2022*
+
+### Changed
+- Bumped wdio version and fixed breaking changes.
+
 ### Changed
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
