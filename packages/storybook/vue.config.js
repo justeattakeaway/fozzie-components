@@ -43,17 +43,7 @@ module.exports = {
                     // i.e. // [ 'atoms', 'molecules', 'f-checkout' ]
                     const updateComponentsAndTypes = [
                         'atoms',
-                        'f-alert',
-                        'f-breadcrumbs',
-                        'f-card-with-content',
-                        'f-media-element',
-                        'f-promotions-showcase',
-                        'f-restaurant-card',
-                        'f-user-message',
-                        'f-mega-modal',
-                        'f-restaurant-card',
-                        'f-tabs',
-                        'f-navigation-links'
+                        'molecules'
                     ];
                     const pathContainsUpdatedComponentOrType = updateComponentsAndTypes.some(a => absPathCommonScss.includes(a));
 
