@@ -2,13 +2,13 @@ import forEach from 'mocha-each';
 
 const CookieBanner = require('../../test-utils/component-objects/f-cookie-banner.component');
 
-let cookieBanner;
-
 forEach([
     'desktop',
     'mobile'
 ])
 .describe('f-cookie-banner - %s - Visual Tests', device => {
+    let cookieBanner;
+
     beforeEach(async () => {
         // Arrange
         if (device === 'mobile') {
