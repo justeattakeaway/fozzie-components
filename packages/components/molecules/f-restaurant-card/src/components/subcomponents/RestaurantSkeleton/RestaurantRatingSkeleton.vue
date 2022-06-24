@@ -30,30 +30,32 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-restaurantCard-ratingSkeleton {
     display: flex;
     align-items: center;
 }
 
 .c-restaurantCard-ratingSkeleton svg {
-    width: spacing(d);
-    height: spacing(d);
-    margin-right: spacing(a);
+    width: f.spacing(d);
+    height: f.spacing(d);
+    margin-right: f.spacing(a);
     position: relative;
     overflow: hidden;
 
     & path,
     & use {
-        fill: $color-skeleton-02;
+        fill: f.$color-skeleton-02;
     }
 }
 
 .c-restaurantCard-ratingSkeleton-content {
-    background-color: $color-skeleton-02;
+    background-color: f.$color-skeleton-02;
 }
 
 .c-restaurantCard-ratingSkeleton-icon {
-    @include skeletonLoader();
+    @include common.skeletonLoader();
     border-radius: 0;
     display: flex;
     align-items: center;

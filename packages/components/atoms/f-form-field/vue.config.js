@@ -15,7 +15,7 @@ module.exports = {
             .options({
                 ...sassOptions,
                 // eslint-disable-next-line quotes
-                additionalData: `@use "../assets/scss/common.scss" as *;`
+                additionalData: `@use "../assets/scss/common.scss";`
             });
     },
 

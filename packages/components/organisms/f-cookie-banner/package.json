@@ -40,7 +40,7 @@
     "lint:style:fix": "yarn lint:style --fix",
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
-    "test:visual": "cross-env-shell PERCY_TOKEN=26ed6f4e041031b3f8e9943011926205a30a6f80435ae47ff9306776fd512675 TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
+    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_COOKIE_BANNER} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
     "ci:test:organisms": "yarn test",
     "ci:test-component:chrome:organisms": "yarn test-component:chrome",

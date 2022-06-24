@@ -71,13 +71,15 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-deliveryTimeMeta {
     display: flex;
 
     &:after {
-        @include dotSeparator;
+        @include common.dotSeparator;
 
-        @include media('>mid') {
+        @include f.media('>mid') {
             display: none;
         }
     }

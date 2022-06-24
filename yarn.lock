@@ -2496,10 +2496,10 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-4.1.0.tgz#43300dd377b6293157bd59378165cc64ace4ade1"
   integrity sha512-4xwep9kagPo+L6YeFIiU8A65BPhic1CUOzvfv2fzYYdGtYuGi2XVbu2xreYuvlQ/v7pitdW0MUqTZGsoJr+ZTg==
 
-"@justeat/f-navigation-links@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-navigation-links/-/f-navigation-links-1.1.0.tgz#ad3f0ae6eff67e625c9878bbd6a050a236c663d8"
-  integrity sha512-4aPChcvInn0sGVJkERS9VecU9Hq5K6l7ALK7Qvy/qu9NuPPbm7nWvOytsCPez8d6i2W/zkkb1UTyMzAg/momew==
+"@justeat/f-navigation-links@1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-navigation-links/-/f-navigation-links-1.3.0.tgz#430aa94513f4d451418c39a88b2135e5c5abcf4e"
+  integrity sha512-em/G3aiN/g7Gx5cSPGXDEoRogYjzIvgyoX1ecZ0iB4x6whfg/NmZ8jCbOxTW/9eLvhMuHv0lXv6wL0H5OnB0eA==
 
 "@justeat/f-popover@2.3.0":
   version "2.3.0"
@@ -2762,6 +2762,14 @@
   version "9.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.3.tgz#e97815d3f1fff757b783fc216ad594876b652c1e"
   integrity sha512-Yqp7ODkSieLbie91zJpemOxwKN8xRraIttXUPS3djp6mkoQDOT7UhF+rz0JaMiJMD0hJLUHqezKsjwPU+A1VJg==
+  dependencies:
+    "@justeat/pie-design-tokens" "1.4.0"
+    include-media eduardoboucas/include-media#2.0-release
+
+"@justeat/fozzie@9.0.0-beta.5":
+  version "9.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.5.tgz#14d7a2d7c6aba26e885295bc416560ea182736fd"
+  integrity sha512-ZE3XqqJM1+QJf1qW60yI8dP+9g2+u/PkxMtJh+DtxZILgegnXHfiz8iCBHOEsIPcn67fJjV4FOyqp3KY1J9qtw==
   dependencies:
     "@justeat/pie-design-tokens" "1.4.0"
     include-media eduardoboucas/include-media#2.0-release

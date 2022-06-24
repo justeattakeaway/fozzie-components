@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-navigation-links",
   "description": "Fozzie Navigation Links - A component to display a collection of supplied links",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "main": "dist/f-navigation-links.umd.min.js",
   "maxBundleSize": "15kB",
   "files": [
@@ -54,6 +54,7 @@
   "devDependencies": {
     "@justeat/f-link": "3.1.1",
     "@justeat/f-wdio-utils": "0.11.0",
+    "@justeat/fozzie": "9.0.0-beta.5",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3"

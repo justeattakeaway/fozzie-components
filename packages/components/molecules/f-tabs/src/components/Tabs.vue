@@ -135,9 +135,11 @@ export default {
 </script>
 
 <style lang="scss" module>
-$tabs-link-colour         : $color-content-default;
-$tabs-link-font-weight    : $font-weight-bold;
-$tabs-link-border-colour  : $color-orange-30;
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+$tabs-link-colour         : f.$color-content-default;
+$tabs-link-font-weight    : f.$font-weight-bold;
+$tabs-link-border-colour  : f.$color-orange-30;
 
 .c-tabs {
     width: 100%;
@@ -155,20 +157,20 @@ $tabs-link-border-colour  : $color-orange-30;
     padding: 0;
     height: 100%;
 
-    @include media('<narrowMid') {
+    @include f.media('<narrowMid') {
         width: 100%;
     }
 
 }
 .c-tabs-button {
-    padding: spacing(c) spacing(d);
+    padding: f.spacing(c) f.spacing(d);
     cursor: pointer;
     color: $tabs-link-colour;
     border: none;
     background-color: transparent;
     outline: none;
 
-    @include media('<narrowMid') {
+    @include f.media('<narrowMid') {
         /* stylelint-disable */
         flex: 1 1 0px;// important px for IE
         /* stylelint-enable */
