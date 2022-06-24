@@ -24,14 +24,6 @@ v0.52.16
 *June 22, 2022*
 
 ### Changed
-- updated vue.config to include `molecules` in components using @use and @forward
-
-
-v0.52.16
-------------------------------
-*June 22, 2022*
-
-### Changed
 - updated vue.config to include `f-tabs` in components using @use and @forward
 
 
