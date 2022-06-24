@@ -2,7 +2,7 @@
     <form
         method="post"
         :class="$style['c-form']"
-        data-test-id="form-component"
+        data-test-id="v-form-component"
         @submit.prevent="onFormSubmit">
         <section
             v-if="invalidFieldsSummary"
