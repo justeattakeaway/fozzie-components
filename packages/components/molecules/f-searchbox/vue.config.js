@@ -32,7 +32,8 @@ module.exports = {
                     const relPath = path.relative(path.dirname(resourcePath), absPath)
                         .replace(new RegExp(path.sep.replace('\\', '\\\\'), 'g'), '/');
 
-                    return `@import "${relPath}";
+                    return `
+                            @use "${relPath}";
                             ${content}`;
                 }
             });

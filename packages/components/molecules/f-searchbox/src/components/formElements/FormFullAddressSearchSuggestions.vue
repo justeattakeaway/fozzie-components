@@ -304,7 +304,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../../assets/scss/common';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .item {
     position: relative;
@@ -327,14 +327,14 @@ export default {
 
     &:hover,
     &.selected {
-        background: $color-grey-10;
+        background: f.$color-grey-10;
     }
 }
 .shell {
     $shell-top-offset: 96;
     $shell-border-radius: 3px;
 
-    background: $color-container-default;
+    background: f.$color-container-default;
     border-bottom-left-radius: $shell-border-radius;
     border-bottom-right-radius: $shell-border-radius;
     box-sizing: border-box;
@@ -343,7 +343,7 @@ export default {
     margin-top: 5px;
     height: calc(100vh - #{$shell-top-offset}px);
 
-    @include media('>=mid') {
+    @include f.media('>=mid') {
         position: absolute;
         left: 0;
         right: 0;
@@ -372,8 +372,8 @@ export default {
 .c-fullAddressSuggestion-postcodeMatch,
 .c-fullAddressSuggestion-streetLevelMatch,
 .c-fullAddressSuggestion-noPostcodeMatch {
-    font-family: $font-family-base;
-    font-weight: $font-weight-regular;
+    font-family: f.$font-family-base;
+    font-weight: f.$font-weight-regular;
     margin: 0 0 4px;
     line-height: 1.4;
 }
@@ -386,7 +386,7 @@ export default {
 .c-fullAddressSuggestion-noPostcodeMatch,
 .c-fullAddressSuggestion-streetLevelMatch {
     font-size: 16px;
-    color: $color-content-default;
+    color: f.$color-content-default;
 }
 
 .c-fullAddressSuggestion-postcodeMatch {
@@ -395,7 +395,7 @@ export default {
 
 .c-fullAddressSuggestion-description {
     font-size: 14px;
-    color: $color-content-subdued;
+    color: f.$color-content-subdued;
     background: transparent;
     text-overflow: ellipsis;
     white-space: nowrap;

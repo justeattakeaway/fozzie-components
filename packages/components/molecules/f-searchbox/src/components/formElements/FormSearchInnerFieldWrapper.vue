@@ -67,9 +67,9 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../../assets/scss/form';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
-$streetInput-width: spacing(h);
+$streetInput-width: f.spacing(h);
 
 .c-search-innerFields {
     position: absolute;
@@ -81,13 +81,13 @@ $streetInput-width: spacing(h);
 }
 
 .c-search-streetInput {
-    border-left: $color-border-subtle 1px solid;
-    margin-right: spacing(a);
+    border-left: f.$color-border-subtle 1px solid;
+    margin-right: f.spacing(a);
     width: $streetInput-width;
-    outline: $color-white 2px auto;
+    outline: f.$color-white 2px auto;
 
     &:focus {
-        outline-color: $color-focus;
+        outline-color: f.$color-focus;
     }
 }
 </style>

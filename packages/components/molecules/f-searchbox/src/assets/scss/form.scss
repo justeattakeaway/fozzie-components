@@ -1,7 +1,6 @@
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
-@import './common';
-
-$search-button-bgColor: $color-interactive-brand;
+$search-button-bgColor: f.$color-interactive-brand;
 $search-height-small: 56px;
 $search-height-mid: 60px;
 
@@ -9,17 +8,17 @@ $search-height-mid: 60px;
 // out most of the styles from here & probably the individual components so we can pull them in instead.
 .c-search-placeholder {
     position: absolute;
-    top: spacing();
-    left: spacing(d);
+    top: f.spacing();
+    left: f.spacing(d);
     text-align: left;
     transition: all 0.3s;
     cursor: text;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    right: spacing(d);
+    right: f.spacing(d);
 
-    @include media('>=narrowMid') {
+    @include f.media('>=narrowMid') {
         top: 50%;
         transform: translateY(-50%);
     }
@@ -27,9 +26,9 @@ $search-height-mid: 60px;
 
 .c-search-input,
 .c-search-placeholder {
-    @include media('<narrowMid') {
+    @include f.media('<narrowMid') {
         .has-geo & {
-            right: spacing(f);
+            right: f.spacing(f);
         }
         .has-geo.has-streetNumber & {
             right: 80px;
@@ -39,42 +38,42 @@ $search-height-mid: 60px;
 
 .c-search-label {
     position: relative;
-    border: 1px solid $color-border-default;
+    border: 1px solid f.$color-border-default;
     display: flex;
     width: 100%;
     align-items: center;
     height: $search-height-small;
-    border-radius: $border-radius 0 0 $border-radius;
-    @include font-size(body-s, false);
-    font-weight: $font-weight-regular;
+    border-radius: f.$border-radius 0 0 f.$border-radius;
+    @include f.font-size(body-s, false);
+    font-weight: f.$font-weight-regular;
     line-height: 1.3;
 
-    @include media('>=narrow') {
-        @include font-size(body-l);
+    @include f.media('>=narrow') {
+        @include f.font-size(body-l);
         height: $search-height-mid;
     }
 
     &.has-error {
-        border-bottom: 1px solid $color-content-error;
+        border-bottom: 1px solid f.$color-content-error;
     }
 }
 
 .c-search-input,
 .c-search-streetInput {
-    @include font-size(body-l);
+    @include f.font-size(body-l);
     line-height: 1.25;
     border: none;
     outline: none;
-    padding: spacing();
-    font-family: $font-family-base;
+    padding: f.spacing();
+    font-family: f.$font-family-base;
     background-color: transparent;
 }
 
 .c-search-input {
     box-sizing: border-box;
-    padding: 28px spacing(d) spacing();
+    padding: 28px f.spacing(d) f.spacing();
     width: 100%;
-    font-weight: $font-weight-bold;
+    font-weight: f.$font-weight-bold;
     height: $search-height-small;
 
     // Hide the shadow dom search clear button.
@@ -91,17 +90,17 @@ $search-height-mid: 60px;
       padding-right: 60px;
     }
 
-    @include media('>=narrow') {
+    @include f.media('>=narrow') {
       height: $search-height-mid;
     }
 
     &:focus + .c-search-placeholder,
     &.is-notEmpty + .c-search-placeholder {
-        @include font-size(caption);
+        @include f.font-size(caption);
         transform: translateY(0);
 
-        @include media('>=narrowMid') {
-            @include font-size(body-s, false);
+        @include f.media('>=narrowMid') {
+            @include f.font-size(body-s, false);
             transform: translateY(-110%);
         }
     }
@@ -132,7 +131,7 @@ $search-height-mid: 60px;
     width: 20px;
     height: 20px;
     margin-right: 20px;
-    border: 3px solid $color-content-brand;
+    border: 3px solid f.$color-content-brand;
     border-top: 3px solid rgba(243, 109, 0, 0.2);
     border-radius: 50%;
     animation: spin 1s linear 0s infinite;
