@@ -2,9 +2,9 @@ import forEach from 'mocha-each';
 
 const CookieBanner = require('../../test-utils/component-objects/f-cookie-banner.component');
 
-let cookieBanner;
-
 describe('f-cookie-banner component tests', () => {
+    let cookieBanner;
+
     beforeEach(async () => {
         cookieBanner = new CookieBanner();
         cookieBanner.open('/');
