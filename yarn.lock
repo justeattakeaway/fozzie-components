@@ -2496,11 +2496,6 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-4.1.0.tgz#43300dd377b6293157bd59378165cc64ace4ade1"
   integrity sha512-4xwep9kagPo+L6YeFIiU8A65BPhic1CUOzvfv2fzYYdGtYuGi2XVbu2xreYuvlQ/v7pitdW0MUqTZGsoJr+ZTg==
 
-"@justeat/f-navigation-links@1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-navigation-links/-/f-navigation-links-1.3.0.tgz#430aa94513f4d451418c39a88b2135e5c5abcf4e"
-  integrity sha512-em/G3aiN/g7Gx5cSPGXDEoRogYjzIvgyoX1ecZ0iB4x6whfg/NmZ8jCbOxTW/9eLvhMuHv0lXv6wL0H5OnB0eA==
-
 "@justeat/f-popover@2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-popover/-/f-popover-2.3.0.tgz#4428d8b324a487a44e9179f357c6552403ab9db7"
