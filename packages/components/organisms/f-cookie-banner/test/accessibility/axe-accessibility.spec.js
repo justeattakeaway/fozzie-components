@@ -10,9 +10,7 @@ describe('Legacy Accessibility tests', () => {
         const legacyCookieBanner = new LegacyCookieBanner();
 
         // Act
-        browser.call(async () => {
-            await legacyCookieBanner.load({ locale: 'en-AU' });
-        });
+        legacyCookieBanner.load({ locale: 'en-AU' });
 
         const axeResults = getAxeResults('f-cookie-banner');
 
@@ -23,12 +21,9 @@ describe('Legacy Accessibility tests', () => {
     it('a11y - should test the f-cookie-banner component WCAG compliance', () => {
         // Arrange
         const cookieConsentBanner = new CookieConsentBanner();
-        cookieConsentBanner.withQuery('args', 'locale:en-GB');
 
         // Act
-        browser.call(async () => {
-            await cookieConsentBanner.load({ locale: 'en-GB' });
-        });
+        cookieConsentBanner.load({ locale: 'en-GB' });
 
         const axeResults = getAxeResults('f-cookie-banner');
 
@@ -42,25 +37,21 @@ describe('Legacy Accessibility tests', () => {
         ['es-ES'],
         ['it-IT']
     ])
-        .it('a11y - should have a correct tab loop order in the cookie banner component', tenant => {
-            // Arrange
-            const cookieConsentBanner = new CookieConsentBanner();
-            cookieConsentBanner.withQuery('args', `locale:${tenant}`);
+    .it('a11y - should have a correct tab loop order in the cookie banner component', tenant => {
+        // Arrange
+        const cookieConsentBanner = new CookieConsentBanner();
 
-            // Act
+        // Act
+        cookieConsentBanner.load({ locale: tenant });
 
-            browser.call(async () => {
-                await cookieConsentBanner.load({ locale: tenant });
-            });
+        const expectedTabOrder = [
+            cookieConsentBanner.cookiePolicyLink,
+            cookieConsentBanner.cookieAcceptAllButton,
+            cookieConsentBanner.cookieAcceptNecessaryButton,
+            cookieConsentBanner.cookieBannerTitle];
+        const result = cookieConsentBanner.testTabOrder(expectedTabOrder);
 
-            const expectedTabOrder = [
-                cookieConsentBanner.cookiePolicyLink,
-                cookieConsentBanner.cookieAcceptAllButton,
-                cookieConsentBanner.cookieAcceptNecessaryButton,
-                cookieConsentBanner.cookieBannerTitle];
-            const result = cookieConsentBanner.testTabOrder(expectedTabOrder);
-
-            // Assert
-            expect(result.actual).toEqual(result.expected);
-        });
+        // Assert
+        expect(result.actual).toEqual(result.expected);
+    });
 });
