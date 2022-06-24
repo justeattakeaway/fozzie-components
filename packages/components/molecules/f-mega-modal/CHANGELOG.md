@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.0.0
 ------------------------------
-*Jun 23, 2022*
+*June 24, 2022*
 
 ### Changed
 - peerDependency versions to use new major version.
