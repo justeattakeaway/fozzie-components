@@ -13,7 +13,7 @@ export default {
 
 .c-text {
     flex: 1 0 auto;
-    height: $skeleton-loader-text-height;
+    height: common.$skeleton-loader-text-height;
     margin-bottom: f.spacing();
     border-radius: f.$radius-rounded-a;
 }
