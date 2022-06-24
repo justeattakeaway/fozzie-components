@@ -16,7 +16,7 @@ module.exports = {
                 // eslint-disable-next-line quotes
                 additionalData: `
                     @use "sass:math";
-                    @use "../assets/scss/common.scss" as *;
+                    @use "../assets/scss/common.scss";
                 `
             });
     },

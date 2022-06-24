@@ -7,20 +7,19 @@ let header;
 describe('Desktop - f-header component tests', () => {
     beforeEach(async () => {
         // Arrange
-        const controls = [
-            'showOffersLink:true',
-            'showDeliveryEnquiry:true'
-        ].join(';');
-
         header = new Header();
-        header.path += `&args=${controls}`;
 
         // Act
-        await header.load();
+        await header.load({ showOffersLink: true, showDeliveryEnquiry: true });
         await browser.maximizeWindow();
     });
 
-    forEach(['help', 'userAccount', 'countrySelector', 'offersLink', 'delivery'])
+    forEach([
+        'help',
+        'userAccount',
+        'countrySelector',
+        'offersLink',
+        'delivery'])
     .it('should test that %s navigation link is clickable', async link => {
         // Assert
         await expect(await header.isNavigationItemClickable(link)).toBe(true);
@@ -52,12 +51,12 @@ describe('Desktop - f-header component tests', () => {
         ['ch_en', 'eat.ch/en'],
         ['ch_fr', 'eat.ch/fr']
     ])
-        .it('should display link for country code "%s" and redirect to correct URL ("%s")', async (expectedLocale, expectedUrl) => {
-            // Act
-            await header.moveToNavigationLink('countrySelector');
-            await header.clickCountryListItem(expectedLocale);
+    .it('should display link for country code "%s" and redirect to correct URL ("%s")', async (expectedLocale, expectedUrl) => {
+        // Act
+        await header.moveToNavigationLink('countrySelector');
+        await header.clickCountryListItem(expectedLocale);
 
-            // Assert
-            await expect(await browser.getUrl()).toContain(expectedUrl);
-        });
+        // Assert
+        await expect(await browser.getUrl()).toContain(expectedUrl);
+    });
 });
