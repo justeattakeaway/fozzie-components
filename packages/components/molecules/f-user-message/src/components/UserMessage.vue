@@ -64,25 +64,27 @@ export default {
 </script>
 
 <style lang="scss" module>
-$userMessage-textColour : $color-content-default;
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+$userMessage-textColour : f.$color-content-default;
 
 .c-userMessage {
     color: $userMessage-textColour;
-    background-color: $color-support-warning-02;
+    background-color: f.$color-support-warning-02;
     max-width: 100%;
 }
 
 .c-userMessage-container {
     max-width: 350px;
     margin: 0 auto;
-    padding: spacing(d) 0;
+    padding: f.spacing(d) 0;
     display: flex;
 
-    @include media('>=narrow') {
+    @include f.media('>=narrow') {
         max-width: 540px;
     }
 
-    @include media('>=mid') {
+    @include f.media('>=mid') {
         max-width: 636px;
         margin: 0 auto;
     }
@@ -99,10 +101,10 @@ $userMessage-textColour : $color-content-default;
 }
 
 .c-userMessage-text {
-    margin: 0 0 0 spacing(d);
-    @include font-size(body-s);
+    margin: 0 0 0 f.spacing(d);
+    @include f.font-size(body-s);
 
-    @include media('>=mid') {
+    @include f.media('>=mid') {
         padding-left: 0;
     }
 }

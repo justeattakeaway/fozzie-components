@@ -368,18 +368,20 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-restaurantCard {
     text-decoration: none;
     display: grid;
-    grid-gap: spacing(c);
+    grid-gap: f.spacing(c);
     grid-template-columns: 1fr;
     position: relative;
-    outline-color: $color-focus;
+    outline-color: f.$color-focus;
 
     &.c-restaurantCard--listItem {
-        @include media('>mid') {
-        grid-gap: spacing() spacing(d);
-        grid-template-columns: minmax(180px, 30%) 1fr;
+        @include f.media('>mid') {
+            grid-gap: f.spacing() f.spacing(d);
+            grid-template-columns: minmax(180px, 30%) 1fr;
         }
     }
 
@@ -395,7 +397,7 @@ export default {
     height: 144px;
 
     .c-restaurantCard--listItem & {
-        @include media('>mid') {
+        @include f.media('>mid') {
             min-height: 125px;
             height: 100%;
         }
@@ -403,15 +405,15 @@ export default {
 }
 
 .c-restaurantCard-logo {
-    top: spacing(d);
-    left: spacing(d);
+    top: f.spacing(d);
+    left: f.spacing(d);
     position: absolute;
 }
 
 .c-restaurantCard-content {
     .c-restaurantCard--listItem & {
-        @include media('>mid') {
-            padding: spacing() 0;
+        @include f.media('>mid') {
+            padding: f.spacing() 0;
             grid-column: 2/3;
         }
     }
@@ -419,15 +421,15 @@ export default {
 
 .c-restaurantCard-dishes {
     .c-restaurantCard--listItem & {
-        @include media('>mid') {
+        @include f.media('>mid') {
             grid-column: 1/3;
         }
     }
 }
 
 .c-restaurantCard-imageTags {
-    bottom: spacing(d);
-    left: spacing(d);
+    bottom: f.spacing(d);
+    left: f.spacing(d);
     position: absolute;
     margin-bottom: 0;
 }
@@ -446,7 +448,7 @@ export default {
 .c-restaurantCard-ratingContainer {
     display: flex;
     align-items: center;
-    margin-right: spacing(b);
+    margin-right: f.spacing(b);
 }
 
 // Regular inner-content positioning
@@ -457,7 +459,7 @@ export default {
 
     // an alternative to using bottom gap so that none is applied to the clearfix
     > * {
-        margin-bottom: spacing(a);
+        margin-bottom: f.spacing(a);
     }
 }
 
@@ -468,28 +470,28 @@ export default {
 }
 
 .c-restaurantCard-name {
-    margin-bottom: spacing(a);
+    margin-bottom: f.spacing(a);
     width: 100%;
 
-    @include media('>mid') {
-        margin-bottom: spacing(b);
+    @include f.media('>mid') {
+        margin-bottom: f.spacing(b);
     }
 }
 
 .c-restaurantCard-offer {
     order: 1;
-    margin-top: spacing(a);
+    margin-top: f.spacing(a);
 }
 
 // List-item inner-content positioning (should only kick in at larger screen sizes when the class is applied)
-@include media('>mid') {
+@include f.media('>mid') {
     .c-restaurantCard-content {
         .c-restaurantCard--listItem & {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-auto-flow: dense;
             grid-auto-rows: min-content;
-            grid-gap: 0 spacing(c);
+            grid-gap: 0 f.spacing(c);
             overflow-wrap: break-word;
             align-items: flex-start;
 
@@ -514,11 +516,11 @@ export default {
         }
 
         .c-restaurantCard-name {
-            margin-bottom: spacing(b);
+            margin-bottom: f.spacing(b);
         }
 
         .c-restaurantCard-tags {
-            margin-top: spacing(a);
+            margin-top: f.spacing(a);
         }
 
         // Prevent the cleafix from working on the list-item styling

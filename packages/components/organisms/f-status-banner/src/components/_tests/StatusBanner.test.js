@@ -18,7 +18,7 @@ describe('`StatusBanner`', () => {
             const wrapper = shallowMount(StatusBanner, { propsData });
 
             // Act & Assert
-            expect(wrapper.find('[data-test-id="main-banner-container"]').exists()).toBeTruthy();
+            expect(wrapper.find('[data-test-id="status-banner-component"]').exists()).toBeTruthy();
         });
     });
 });

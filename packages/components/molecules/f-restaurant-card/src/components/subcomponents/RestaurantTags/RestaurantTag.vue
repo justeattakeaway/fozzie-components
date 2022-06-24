@@ -53,13 +53,15 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-restaurantTag {
     display: block;
-    padding: 0 spacing(a);
-    border-radius: $radius-rounded-a;
-    @include font-size($font-paragraph-03);
-    color: $color-content-default;
-    background-color: $color-container-strong;
+    padding: 0 f.spacing(a);
+    border-radius: f.$radius-rounded-a;
+    @include f.font-size(f.$font-paragraph-03);
+    color: f.$color-content-default;
+    background-color: f.$color-container-strong;
     max-width: 30ch;
     white-space: nowrap;
     overflow: hidden;
@@ -67,12 +69,12 @@ export default {
 
     &.c-restaurantTag--isLarge.c-restaurantTag--isUppercase.c-restaurantTag--positive {
         margin-bottom: 0;
-        margin-right: spacing(b);
+        margin-right: f.spacing(b);
     }
 }
 
 .c-restaurantTag--isLarge {
-    padding: math.div(spacing(), 4) spacing();
+    padding: math.div(f.spacing(), 4) f.spacing();
 }
 
 .c-restaurantTag--isUppercase {
@@ -80,17 +82,17 @@ export default {
 }
 
 .c-restaurantTag--dark {
-    color: $color-content-light;
-    background-color: $color-dark-container-dark;
+    color: f.$color-content-light;
+    background-color: f.$color-dark-container-dark;
 }
 
 .c-restaurantTag--warm {
-    color: $color-content-default;
-    background-color: $color-support-brand-02;
+    color: f.$color-content-default;
+    background-color: f.$color-support-brand-02;
 }
 
 .c-restaurantTag--positive {
-    color: $color-support-positive;
-    background-color: $color-support-positive-02;
+    color: f.$color-support-positive;
+    background-color: f.$color-support-positive-02;
 }
 </style>

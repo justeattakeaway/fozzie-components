@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.6.0
+------------------------------
+*June 22, 2022*
+
+### Changed
+- Updated `f-navigation-links` to v1.3.0.
+
+
 v0.5.1
 ------------------------------
 *March 18, 2022*

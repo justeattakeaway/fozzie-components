@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-account-info",
   "description": "Fozzie Account Info - The account information page",
-  "version": "0.27.0",
+  "version": "0.28.1",
   "main": "dist/f-account-info.umd.min.js",
   "maxBundleSize": "100kB",
   "files": [
@@ -51,6 +51,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
+    "@justeat/f-alert": "5.0.1",
     "@justeat/f-globalisation": "1.0.0",
     "@justeat/f-services": "1.13.0",
     "@justeat/f-vue-icons": "3.3.0",
@@ -64,10 +65,9 @@
     "@justeat/f-button": "3.2.0",
     "@justeat/f-card": "3.4.0",
     "@justeat/f-card-with-content": "1.0.0",
-    "@justeat/f-alert": "4.3.0",
     "@justeat/f-error-message": "1.1.0",
     "@justeat/f-form-field": "4.13.0",
-    "@justeat/f-link": "2.3.0",
+    "@justeat/f-link": "3.1.1",
     "@justeat/f-wdio-utils": "0.11.0",
     "@vue/cli-plugin-babel": "4.5.15",
     "@vue/cli-plugin-unit-jest": "4.5.15",

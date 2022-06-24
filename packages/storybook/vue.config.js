@@ -30,30 +30,43 @@ module.exports = {
                         return `${content}`;
                     }
 
-                    const absPath = path.join(
+                    const absPathCommonScss = path.join(
                         resourcePath,
                         ...(new Array(levelsUpToSrc).fill('..')),
                         'assets/scss/common.scss'
                     );
-                    const relPath = path.relative(path.dirname(resourcePath), absPath)
+                    const relPathCommonScss = path.relative(path.dirname(resourcePath), absPathCommonScss)
                         .replace(new RegExp(path.sep.replace('\\', '\\\\'), 'g'), '/');
 
                     // add component names 1 by 1 to this array as they're updated
                     // to the new Sass syntax OR the entire component folder if all completed
                     // i.e. // [ 'atoms', 'molecules', 'f-checkout' ]
-                    const updateComponentsAndTypes = ['atoms', 'f-alert', 'f-breadcrumbs', 'f-card-with-content', 'f-media-element'];
-                    const pathContainsUpdatedComponentOrType = updateComponentsAndTypes.some(a => absPath.includes(a));
+                    const updateComponentsAndTypes = [
+                        'atoms',
+                        'f-alert',
+                        'f-breadcrumbs',
+                        'f-card-with-content',
+                        'f-media-element',
+                        'f-promotions-showcase',
+                        'f-restaurant-card',
+                        'f-user-message',
+                        'f-mega-modal',
+                        'f-restaurant-card',
+                        'f-tabs',
+                        'f-navigation-links'
+                    ];
+                    const pathContainsUpdatedComponentOrType = updateComponentsAndTypes.some(a => absPathCommonScss.includes(a));
 
                     if (!pathContainsUpdatedComponentOrType) {
                         return `
                         @use "sass:math";
-                        @import "${relPath}";
+                        @import "${relPathCommonScss}";
                         ${content}`;
                     }
 
                     return `
                         @use "sass:math";
-                        @use "${relPath}" as *;
+                        @use "${relPathCommonScss}";
                         ${content}`;
                 }
             });
