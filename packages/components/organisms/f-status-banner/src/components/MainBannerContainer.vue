@@ -54,21 +54,23 @@ export default {
 </script>
 
 <style lang="scss" module>
-@include media-context(('narrow-mid': 620px)) {
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+@include f.media-context(('narrow-mid': 620px)) {
     .l-container--relative {
         position: relative;
         padding-bottom: 195px;
         margin-bottom: 20px;
 
-        @include media('>=tiny') {
+        @include f.media('>=tiny') {
             padding-bottom: 185px;
         }
 
-        @include media('>=narrow') {
+        @include f.media('>=narrow') {
             padding-bottom: 160px;
         }
 
-        @include media('>=mid') {
+        @include f.media('>=mid') {
             padding-bottom: 50px;
         }
     }

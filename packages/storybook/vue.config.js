@@ -55,7 +55,8 @@ module.exports = {
                         'f-mega-modal',
                         'f-restaurant-card',
                         'f-tabs',
-                        'f-navigation-links'
+                        'f-navigation-links',
+                        'f-status-banner'
                     ];
                     const pathContainsUpdatedComponentOrType = updateComponentsAndTypes.some(a => absPathCommonScss.includes(a));
 

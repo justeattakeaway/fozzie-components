@@ -42,5 +42,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-@include pageBanner();
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+@include f.pageBanner();
 </style>
