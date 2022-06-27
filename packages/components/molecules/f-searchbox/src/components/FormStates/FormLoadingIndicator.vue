@@ -30,5 +30,30 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../../assets/scss/form';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+@keyframes spin {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+.c-spinner {
+    position: absolute;
+    right: 0;
+}
+
+.c-spinner-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 20px;
+    border: 3px solid f.$color-content-brand;
+    border-top: 3px solid rgba(243, 109, 0, 0.2);
+    border-radius: 50%;
+    animation: spin 1s linear 0s infinite;
+}
 </style>
