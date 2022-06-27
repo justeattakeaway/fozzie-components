@@ -75,6 +75,7 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
 
         // Act
         await checkout.setFieldValue('emailAddress', emailAddress);
+        await browser.pause(200);
         await browser.keys('Tab');
 
         // Assert
@@ -176,6 +177,7 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 
         // Act
         await checkout.setFieldValue('emailAddress', emailAddress);
+        await browser.pause(200);
         await browser.keys('Tab');
 
         // Assert

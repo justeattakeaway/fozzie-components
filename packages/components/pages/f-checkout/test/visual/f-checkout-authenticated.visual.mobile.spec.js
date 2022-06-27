@@ -85,7 +85,7 @@ describe('f-checkout - Collection - Authenticated - Mobile Visual Tests', () => 
 
     it('should display the "Duplicate Order Warning" modal', async () => {
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });
@@ -184,7 +184,7 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', async () => {
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });
@@ -286,7 +286,7 @@ describe('f-checkout - Dine In - Authenticated - Mobile Visual Tests', () => {
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });

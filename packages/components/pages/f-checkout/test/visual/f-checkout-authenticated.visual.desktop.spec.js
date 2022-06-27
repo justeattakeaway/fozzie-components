@@ -86,7 +86,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
 
     it('should display the "Duplicate Order Warning" modal', async () => {
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });
@@ -144,7 +144,6 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
         // Act
         await ['addressLine1', 'addressLocality', 'mobileNumber', 'addressPostcode'].forEach(field => checkout.clearBlurField(field));
         await checkout.goToPayment();
-        await browser.pause(5000);
 
         // Assert
         await browser.percyScreenshot('f-checkout - Delivery - Authenticated - Manadatory Errors', 'desktop');
@@ -175,7 +174,7 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', async () => {
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });
@@ -261,7 +260,7 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', async () => {
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });
