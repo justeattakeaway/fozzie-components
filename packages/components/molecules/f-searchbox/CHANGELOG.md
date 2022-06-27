@@ -3,13 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v4.0.0-beta.41
+v4.0.0-beta.42
 ------------------------------
 *Jun 24, 2022*
 
 ### Changed
 - Update to `@use` and `@forward` SASS syntax
 
+
+v4.0.0-beta.41
+------------------------------
+*Jun 23, 2022*
+
+### Changed
+- devDependency version range to match peerDependencies.
 
 v4.0.0-beta.40
 ------------------------------
