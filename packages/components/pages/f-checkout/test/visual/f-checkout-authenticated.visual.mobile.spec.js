@@ -124,12 +124,12 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
         locale: 'en-GB'
     };
 
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo
         });
     });
@@ -141,7 +141,8 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
 
     it('should display the mandatory error messages', async () => {
         // Act
-        ['addressLine1', 'addressLocality', 'mobileNumber', 'addressPostcode'].forEach(field => checkout.clearBlurField(field));
+        await ['addressLine1', 'addressLocality', 'mobileNumber', 'addressPostcode'].forEach(field => checkout.clearBlurField(field));
+        await browser.pause(500);
         await checkout.goToPayment();
 
         // Assert
