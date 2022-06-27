@@ -63,6 +63,7 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
         });
 
         await checkout.setFieldValues();
+        await browser.pause(200);
         await checkout.goToPayment();
 
         // Assert
@@ -165,6 +166,7 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
             placeOrderError: 'duplicate'
         });
         await checkout.setFieldValues();
+        await browser.pause(200);
         await checkout.goToPayment();
 
         // Assert
@@ -266,6 +268,7 @@ describe('f-checkout - Dine In - Guest - Desktop Visual Tests', () => {
             placeOrderError: 'duplicate'
         });
         await checkout.setFieldValues();
+        await browser.pause(200);
         await checkout.goToPayment();
 
         // Assert

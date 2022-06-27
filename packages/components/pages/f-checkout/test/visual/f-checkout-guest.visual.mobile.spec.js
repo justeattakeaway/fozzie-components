@@ -63,6 +63,7 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
             placeOrderError: 'duplicate'
         });
         await checkout.setFieldValues();
+        await browser.pause(200);
         await checkout.goToPayment();
 
         // Assert
@@ -153,6 +154,7 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
             placeOrderError: 'duplicate'
         });
         await checkout.setFieldValues();
+        await browser.pause(200);
         await checkout.goToPayment();
 
         // Assert
@@ -241,6 +243,7 @@ describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
             placeOrderError: 'duplicate'
         });
         await checkout.setFieldValues();
+        await browser.pause(200);
         await checkout.goToPayment();
 
         // Assert
