@@ -32,7 +32,7 @@ commands:
             }
 
             echo 'Checking changes'
-            changes=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig' || true; }`
+            changes=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig|.circleci/config.yml' || true; }`
             echo 'Changes detected:'
             echo $changes
 
@@ -41,6 +41,7 @@ commands:
               source $BASH_ENV
             else
             echo 'export RUN_ALL=false' >> $BASH_ENV
+            source $BASH_ENV
               echo 'Root files not changed'
             fi
 
@@ -310,56 +311,59 @@ jobs:
       - attach_workspace:
           at: .
       - detect_root_change
+      - run: # print the name of the branch we're on
+          name: Echo root change
+          command: echo run all ${RUN_ALL}
       - run:
          name: Run Bundlewatch checks
          command: yarn bundlewatch
       - slack_notify_fail
       - slack_notify_success
 
-  unit-tests:
-    executor: node
-    parameters:
-      component_type:
-        type: string
-    steps:
-      - attach_workspace:
-          at: .
-      - detect_root_change
-      - unit_integration_tests:
-          component_type: << parameters.component_type >>
+  # unit-tests:
+  #   executor: node
+  #   parameters:
+  #     component_type:
+  #       type: string
+  #   steps:
+  #     - attach_workspace:
+  #         at: .
+  #     - detect_root_change
+  #     - unit_integration_tests:
+  #         component_type: << parameters.component_type >>
 
-  browser-tests:
-    executor: node
-    parameters:
-      component_type:
-        type: string
-    steps:
-      - attach_workspace:
-          at: .
-      - detect_root_change
-      - run: # Install Component Test Dependencies
-          name: Install Component Test Dependencies
-          command: yarn global add @vue/cli @vue/cli-service-global
-      - run: # Serve Storybook
-          name: Serve Storybook
-          command: yarn storybook:serve-static
-          background: true
-      - component_tests:
-          component_type: << parameters.component_type >>
-      - accessibility_tests:
-          component_type: << parameters.component_type >>
-      - visual_regression_tests:
-          component_type: << parameters.component_type >>
-      - run:
-          name: Allure - Generate Test Results
-          command: yarn allure:generate
-          when: always
-      - store_artifacts:
-          path: allure-report
-      - store_artifacts:
-          path: test/results/axe-violations
-      - slack_notify_fail
-      - slack_notify_success
+  # browser-tests:
+  #   executor: node
+  #   parameters:
+  #     component_type:
+  #       type: string
+  #   steps:
+  #     - attach_workspace:
+  #         at: .
+  #     - detect_root_change
+  #     - run: # Install Component Test Dependencies
+  #         name: Install Component Test Dependencies
+  #         command: yarn global add @vue/cli @vue/cli-service-global
+  #     - run: # Serve Storybook
+  #         name: Serve Storybook
+  #         command: yarn storybook:serve-static
+  #         background: true
+  #     - component_tests:
+  #         component_type: << parameters.component_type >>
+  #     - accessibility_tests:
+  #         component_type: << parameters.component_type >>
+  #     - visual_regression_tests:
+  #         component_type: << parameters.component_type >>
+  #     - run:
+  #         name: Allure - Generate Test Results
+  #         command: yarn allure:generate
+  #         when: always
+  #     - store_artifacts:
+  #         path: allure-report
+  #     - store_artifacts:
+  #         path: test/results/axe-violations
+  #     - slack_notify_fail
+  #     - slack_notify_success
 
   deploy-storybook:
     executor: node
@@ -422,36 +426,36 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - build
-      - unit-tests:
-          matrix:
-            parameters:
-              component_type: ['tools', 'services', 'atoms', 'molecules', 'organisms', 'pages', 'templates']
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-          requires:
-            - build
-      - browser-tests:
-          matrix:
-            parameters:
-              component_type: ['atoms', 'molecules', 'organisms', 'pages']
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-          requires:
-            - unit-tests-<< matrix.component_type >>
-      - publish-to-npm:
-          context: web-core
-          filters:
-            branches:
-              only: master
-          requires:
-            - browser-tests-atoms
-            - browser-tests-molecules
-            - browser-tests-organisms
-            - browser-tests-pages
+      # - unit-tests:
+      #     matrix:
+      #       parameters:
+      #         component_type: ['tools', 'services', 'atoms', 'molecules', 'organisms', 'pages', 'templates']
+      #     context: web-core
+      #     filters:
+      #       branches:
+      #         ignore: ['gh-pages']
+      #     requires:
+      #       - build
+      # - browser-tests:
+      #     matrix:
+      #       parameters:
+      #         component_type: ['atoms', 'molecules', 'organisms', 'pages']
+      #     context: web-core
+      #     filters:
+      #       branches:
+      #         ignore: ['gh-pages']
+      #     requires:
+      #       - unit-tests-<< matrix.component_type >>
+      # - publish-to-npm:
+      #     context: web-core
+      #     filters:
+      #       branches:
+      #         only: master
+      #     requires:
+      #       - browser-tests-atoms
+      #       - browser-tests-molecules
+      #       - browser-tests-organisms
+      #       - browser-tests-pages
 
   deploy-storybook:
     jobs:
