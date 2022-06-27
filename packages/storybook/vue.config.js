@@ -49,6 +49,8 @@ module.exports = {
                         'f-media-element',
                         'f-promotions-showcase',
                         'f-restaurant-card',
+                        'f-skeleton-loader',
+                        'f-restaurant-card',
                         'f-user-message',
                         'f-mega-modal',
                         'f-restaurant-card',

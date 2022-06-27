@@ -18,29 +18,31 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 $restaurant-logo-width: 48px;
 
 .c-restaurantCardHeader {
     text-align: center;
-    background-color: $color-container-default;
+    background-color: f.$color-container-default;
     margin: auto;
     width: 96%;
-    padding-bottom: spacing(d);
+    padding-bottom: f.spacing(d);
     position: relative;
-    border-radius: $radius-rounded-c $radius-rounded-c 0 0;
+    border-radius: f.$radius-rounded-c f.$radius-rounded-c 0 0;
 }
 
 .c-restaurantCardHeader-logo {
     margin: auto;
     width: $restaurant-logo-width;
     height: $restaurant-logo-width;
-    border: 1px solid $color-white;
+    border: 1px solid f.$color-white;
     transform: translateY(-50%);
 }
 
 .c-restaurantCardHeader-heading {
-    height: spacing(e);
-    margin: 0 auto spacing();
+    height: f.spacing(e);
+    margin: 0 auto f.spacing();
 }
 
 .c-restaurantCardHeader-text {
@@ -53,6 +55,6 @@ $restaurant-logo-width: 48px;
 }
 
 .c-restaurantCardHeader-text:not(:last-child) {
-    margin-bottom: spacing();
+    margin-bottom: f.spacing();
 }
 </style>
