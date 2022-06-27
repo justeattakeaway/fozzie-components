@@ -131,11 +131,11 @@
     },
     "storybook:build":  {
       "cache": false,
-      "dependsOn": []
+      "dependsOn": ["^build"]
     },
     "storybook:build-changed":  {
       "cache": false,
-      "dependsOn": []
+      "dependsOn": ["^build"]
     },
     "storybook:serve": {
       "cache": false,

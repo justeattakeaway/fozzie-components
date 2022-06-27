@@ -34,7 +34,6 @@
     "build": "vite build",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
-    "storybook:build": "vite build",
     "test": "jest",
     "ci:test:services": "yarn test",
     "test:coverage": "jest test:unit --coverage"
