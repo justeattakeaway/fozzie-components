@@ -16,7 +16,6 @@ const getChangedPackageLocations = () => {
 
     try {
         outputPackages = execSync(command);
-        console.log(outputPackages);
     } catch (error) {
         console.info('No changed packages found.');
         process.exit(0);
