@@ -3,16 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0-beta.42
+------------------------------
+*June 24, 2022*
+
+### Changed
+- Update to `@use` and `@forward` SASS syntax
+
+
 v4.0.0-beta.41
 ------------------------------
-*Jun 23, 2022*
+*June 23, 2022*
 
 ### Changed
 - devDependency version range to match peerDependencies.
 
 v4.0.0-beta.40
 ------------------------------
-*Jun 8, 2022*
+*June 8, 2022*
 
 ### Changed
 - Bumped wdio version and fixed breaking changes.

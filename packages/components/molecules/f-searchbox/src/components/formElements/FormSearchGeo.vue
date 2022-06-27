@@ -80,20 +80,20 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../../assets/scss/common';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .c-geo-locator {
     width: 35px;
     height: 35px;
     display: inline-block;
     background: transparent;
-    padding: spacing();
+    padding: f.spacing();
     vertical-align: middle;
     border: none;
     position: relative;
     top: -10px;
 
-    @include media('>=narrowMid') {
+    @include f.media('>=narrowMid') {
         display: none;
     }
 
@@ -114,7 +114,7 @@ export default {
 .c-geo-fill-icon,
 .c-geo-outline-icon {
     path {
-        fill: $color-interactive-primary;
+        fill: f.$color-interactive-primary;
     }
 }
 </style>

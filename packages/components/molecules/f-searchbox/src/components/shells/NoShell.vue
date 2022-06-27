@@ -5,8 +5,6 @@
 </template>
 
 <style lang="scss" module>
-@import '../../assets/scss/form';
-
 .c-searchShell {
     text-align: center;
 }
