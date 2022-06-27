@@ -5,10 +5,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.52.21
 ------------------------------
-*June 24, 2022*
+*June 27, 2022*
 
-### Changed
-- `vue.config` to include `molecules` in components using `@use` and `@forward`.
+### Fixed
+- `f-status-banner` storybook failure.
 
 
 v0.52.20
