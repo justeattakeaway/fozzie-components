@@ -12,10 +12,11 @@ const getMaxSizeForPackage = packageLocation => {
 
 const getChangedPackageLocations = () => {
     let outputPackages;
-    let command = process.env.CIRCLE_BRANCH === 'master' ? "npx lerna ls --json" : "npx lerna ls --since origin/master --json" 
+    let command = process.env.CIRCLE_BRANCH === 'master' || process.env.RUN_ALL ? "npx lerna ls --json" : "npx lerna ls --since origin/master --json" 
 
     try {
         outputPackages = execSync(command);
+        console.log(outputPackages);
     } catch (error) {
         console.info('No changed packages found.');
         process.exit(0);

@@ -309,6 +309,7 @@ jobs:
     steps:
       - attach_workspace:
           at: .
+      - detect_root_change
       - run:
          name: Run Bundlewatch checks
          command: yarn bundlewatch
