@@ -19,4 +19,18 @@ describe('Shared - f-registration component tests', () => {
         // Assert
         expect(registration.canBeClicked(link)).toBe(true);
     });
+
+    forEach([
+        ['termsAndConditionsLink', '/info/terms-and-conditions'],
+        ['privacyPolicyLink', '/info/privacy-policy'],
+        ['cookiesPolicyLink', '/info/cookies-policy']
+    ])
+    .it('should check if the legal documentation is clickable', (linkName, expectedUrl) => {
+        // Act
+        registration[linkName].click();
+        browser.switchWindow(new RegExp(`^.*${expectedUrl}.*$`));
+
+        // Assert
+        expect(browser.getUrl()).toContain(expectedUrl);
+    });
 });
