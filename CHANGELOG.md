@@ -8,7 +8,7 @@ v7.14.1
 *June 27, 2022*
 
 ### Changed
-- Ignored bundlewatch step in CircleCI config.
+- Fixed bundlewatch to only run against changed packages.
 
 
 v7.14.0

@@ -66,7 +66,7 @@ commands:
             then
               yarn << parameters.command_name >>
             else
-              yarn << parameters.command_name >> --filter=[master] --no-deps
+              yarn << parameters.command_name >> --filter=[master]
             fi
 
   build_packages:
@@ -304,17 +304,16 @@ jobs:
       - slack_notify_fail
       - slack_notify_success
 
-  # Disabling temporarily whilst we fix Bundlewatch implementation.
-  # bundlewatch:
-  #   executor: node
-  #   steps:
-  #     - attach_workspace:
-  #         at: .
-  #     - run:
-  #        name: Run Bundlewatch checks
-  #        command: yarn bundlewatch
-  #     - slack_notify_fail
-  #     - slack_notify_success
+  bundlewatch:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+         name: Run Bundlewatch checks
+         command: yarn bundlewatch
+      - slack_notify_fail
+      - slack_notify_success
 
   unit-tests:
     executor: node
@@ -414,15 +413,14 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - danger-checks
-      # Disabling temporarily whilst we fix Bundlewatch implementation.
-      # - bundlewatch:
-      #     name: bundlewatch
-      #     context: web-core
-      #     filters:
-      #       branches:
-      #         ignore: ['gh-pages']
-      #     requires:
-      #       - build
+      - bundlewatch:
+          name: bundlewatch
+          context: web-core
+          filters:
+            branches:
+              ignore: ['gh-pages']
+          requires:
+            - build
       - unit-tests:
           matrix:
             parameters:

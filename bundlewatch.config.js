@@ -10,11 +10,12 @@ const getMaxSizeForPackage = packageLocation => {
     return maxBundleSize;
 };
 
-const getPackageLocations = () => {
+const getChangedPackageLocations = () => {
     let outputPackages;
+    let command = process.env.CIRCLE_BRANCH === 'master' ? "npx lerna ls --json" : "npx lerna ls --since origin/master --json" 
 
     try {
-        outputPackages = execSync('npx lerna ls --json');
+        outputPackages = execSync(command);
     } catch (error) {
         console.info('No changed packages found.');
         process.exit(0);
@@ -27,7 +28,7 @@ const getPackageLocations = () => {
     return packageLocations.filter(packageLocation => getMaxSizeForPackage(packageLocation) !== undefined);
 };
 
-const packagesLocations = getPackageLocations();
+const packagesLocations = getChangedPackageLocations();
 
 const files = packagesLocations.map(packageLocation => ({
     path: `${packageLocation}/dist/*+(.min|.min.umd|.es).js`,
