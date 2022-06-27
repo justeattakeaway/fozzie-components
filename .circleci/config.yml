@@ -67,7 +67,7 @@ commands:
             then
               yarn << parameters.command_name >>
             else
-              yarn << parameters.command_name >> --filter=[master]
+              yarn << parameters.command_name >> --filter=...    [master]
             fi
 
   build_packages:
