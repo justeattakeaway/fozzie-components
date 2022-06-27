@@ -25,7 +25,7 @@ describe('Shared - f-registration component tests', () => {
         ['privacyPolicyLink', '/info/privacy-policy'],
         ['cookiesPolicyLink', '/info/cookies-policy']
     ])
-    .it('should check if the legal documentation is clickable', (linkName, expectedUrl) => {
+    .it('should take you to the correct URL when clicking the `%s`', (linkName, expectedUrl) => {
         // Act
         registration[linkName].click();
         browser.switchWindow(new RegExp(`^.*${expectedUrl}.*$`));
