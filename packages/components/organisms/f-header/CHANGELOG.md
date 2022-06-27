@@ -3,12 +3,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+
+v9.17.0
+------------------------------
+*June 24, 2022*
+
+### Changed
+- devDependency version range to match peerDependencies.
+
+
 9.16.1
 -----------------------------
 *Jun 21, 2022*
 
 ### Changed
 - Bumped wdio version and fixed breaking changes.
+
 
 ### Changed
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.

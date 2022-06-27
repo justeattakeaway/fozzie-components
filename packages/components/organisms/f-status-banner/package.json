@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-status-banner",
   "description": "Fozzie Status Banner - Global status page",
-  "version": "6.0.0",
+  "version": "6.1.0",
   "main": "dist/f-status-banner.umd.min.js",
   "maxBundleSize": "60kB",
   "files": [
@@ -54,10 +54,10 @@
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",
-    "@justeat/f-searchbox": "6.x.x"
+    "@justeat/f-searchbox": "6.x"
   },
   "devDependencies": {
-    "@justeat/f-searchbox": "6.0.0",
+    "@justeat/f-searchbox": "6.x",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3",
