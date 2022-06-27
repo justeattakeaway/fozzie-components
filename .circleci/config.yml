@@ -365,8 +365,8 @@ jobs:
     environment:
       RUN_ALL: true
     steps:
-      - checkout
-      - install_node_dependencies
+      - attach_workspace:
+        at: .
       - run:
           name: Deploy
           command: yarn storybook:deploy
@@ -413,6 +413,13 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - danger-checks
+      - deploy-storybook:
+          context: web-core
+          filters:
+            branches:
+              only: master
+          requires:
+            - build
       - bundlewatch:
           name: bundlewatch
           context: web-core
@@ -451,11 +458,3 @@ workflows:
             - browser-tests-molecules
             - browser-tests-organisms
             - browser-tests-pages
-
-  deploy-storybook:
-    jobs:
-      - deploy-storybook:
-          context: web-core
-          filters:
-            branches:
-              only: master
