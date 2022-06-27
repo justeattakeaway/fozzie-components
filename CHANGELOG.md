@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.14.1
+------------------------------
+*June 27, 2022*
+
+### Changed
+- Ignored bundlewatch step in CircleCI config.
+
 
 v7.14.0
 ------------------------------
