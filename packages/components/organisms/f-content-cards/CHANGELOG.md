@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v8.0.0
 -----------------------------
-*June 23, 2022*
+*June 27, 2022*
 
 ### Changed
 - Update to `@use` and `@forward` SASS syntax
