@@ -6,6 +6,10 @@
       "cache": false,
       "dependsOn": ["^build"]
     },
+    "bundlewatch": {
+      "cache": false,
+      "dependsOn": []
+    },
     "test": {
       "cache": false,
       "dependsOn": []

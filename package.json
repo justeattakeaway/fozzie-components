@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "turbo run build --continue",
-    "bundlewatch": "bundlewatch --config bundlewatch.config.js",
+    "bundlewatch": "turbo run bundlewatch --continue",
     "lint": "turbo run lint --continue",
     "lint:fix": "turbo run lint -- --fix --continue",
     "lint:style": "turbo run lint:style --continue",

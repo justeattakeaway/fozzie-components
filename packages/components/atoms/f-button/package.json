@@ -32,6 +32,7 @@
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-button ./src/index.js",
+    "bundlewatch": "bundlewatch --max-size $npm_package_maxBundleSize \"dist/*{.min,.min.umd,.es}.js\"",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "lint:style": "stylelint ./src/**/*.{vue,htm,html,css,sss,less,scss}",
