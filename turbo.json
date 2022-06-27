@@ -4,7 +4,7 @@
   "pipeline": {
     "build": {
       "cache": false,
-      "dependsOn": []
+      "dependsOn": ["^build"]
     },
     "test": {
       "cache": false,
