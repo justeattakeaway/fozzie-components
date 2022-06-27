@@ -54,16 +54,16 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../../assets/scss/common';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
-$suggestions-shadow: $color-grey-45 0 5px 6px -2px;
+$suggestions-shadow: f.$color-grey-45 0 5px 6px -2px;
 
 .c-search-suggestions {
     $border-radius: 2px;
-    background: $color-container-default;
+    background: f.$color-container-default;
     box-shadow: $suggestions-shadow;
-    border-bottom-left-radius: $border-radius;
-    border-bottom-right-radius: $border-radius;
+    border-bottom-left-radius: f.$border-radius;
+    border-bottom-right-radius: f.$border-radius;
     position: absolute;
     left: 0;
     right: 0;
@@ -77,7 +77,7 @@ $suggestions-shadow: $color-grey-45 0 5px 6px -2px;
     display: block;
     width: 100%;
     border: 0;
-    border-top: $color-border-default 1px solid;
+    border-top: f.$color-border-default 1px solid;
     cursor: pointer;
     font-family: Arial, sans-serif;
     font-size: 11px;
@@ -91,14 +91,14 @@ $suggestions-shadow: $color-grey-45 0 5px 6px -2px;
 
     &:hover,
     &.selected {
-        background: $color-container-strong;
+        background: f.$color-container-strong;
     }
 }
 
 .c-search-poweredByGoogle {
     display: flex;
     justify-content: flex-end;
-    padding: spacing();
+    padding: f.spacing();
 
     img {
         width: 100px;

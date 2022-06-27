@@ -132,7 +132,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../../assets/scss/form';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .c-fullAddressFinder-inner {
     width: 100%;
@@ -140,7 +140,7 @@ export default {
     padding-right: 30px;
     box-sizing: border-box;
     display: flex;
-    z-index: zIndex(aboveHighest);
+    z-index: f.zIndex(aboveHighest);
 
     &.has-elevation {
         box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.12);
@@ -149,12 +149,12 @@ export default {
 
 .c-search-input-overlay {
     flex: 1 1 auto;
-    border: 1px solid $color-border-default;
+    border: 1px solid f.$color-border-default;
     border-radius: 4px;
     box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.11);
 
     &:focus {
-        border: solid 2px $color-focus;
+        border: solid 2px f.$color-focus;
     }
 }
 
@@ -164,19 +164,19 @@ export default {
     background-color: transparent;
     padding: 0;
     margin: 0 0 0 25px;
-    color: $color-content-link;
-    font-weight: $font-weight-bold;
-    @include font-size(body-s, false);
-    font-family: $font-family-base;
+    color: f.$color-content-link;
+    font-weight: f.$font-weight-bold;
+    @include f.font-size(body-s, false);
+    font-family: f.$font-family-base;
 
     &:hover {
         cursor: pointer;
-        color: darken($color-content-link, $color-hover-01);
+        color: darken(f.$color-content-link, f.$color-hover-01);
         background-color: transparent;
     }
     &:active,
     &:focus {
-        color: darken($color-content-link, $color-active-01);
+        color: darken(f.$color-content-link, f.$color-active-01);
         background-color: transparent;
     }
 }
