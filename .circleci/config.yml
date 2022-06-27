@@ -362,14 +362,12 @@ jobs:
 
   deploy-storybook:
     executor: node
-    environment:
-      RUN_ALL: true
     steps:
       - attach_workspace:
-        at: .
+          at: .
       - run:
-          name: Deploy
-          command: yarn storybook:deploy
+         name: Deploy Storybook
+         command: yarn storybook:deploy
       - slack_notify_fail
       - slack_notify_success
 
@@ -414,6 +412,7 @@ workflows:
           requires:
             - danger-checks
       - deploy-storybook:
+          name: deploy-storybook
           context: web-core
           filters:
             branches:
