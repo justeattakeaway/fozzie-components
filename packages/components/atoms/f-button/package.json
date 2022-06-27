@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-button",
-  "description": "Fozzie Buttron – The generic button component",
+  "description": "Fozzie Button – The generic button component",
   "version": "4.0.0",
   "main": "dist/f-button.umd.min.js",
   "maxBundleSize": "5kB",
