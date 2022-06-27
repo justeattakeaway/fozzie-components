@@ -299,7 +299,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../../assets/scss/form';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .c-search-inputWrapper {
     position: relative;
@@ -314,7 +314,7 @@ export default {
 }
 
 .c-search-inputWrapper--fullWidth {
-    @include media('>=mid') {
+    @include f.media('>=mid') {
         position: static;
     }
 }
@@ -323,7 +323,7 @@ export default {
     $btn-size: 52px;
     $icon-size: 14px;
 
-    background: $color-interactive-inverse;
+    background: f.$color-interactive-inverse;
     border: none;
     width: $btn-size;
     height: $btn-size;
@@ -340,13 +340,13 @@ export default {
         position: absolute;
 
         g {
-            fill: $color-content-disabled;
+            fill: f.$color-content-disabled;
         }
     }
 
     &:hover,
     &:focus {
-        background-color: darken($color-interactive-inverse, $color-hover-01);
+        background-color: darken(f.$color-interactive-inverse, f.$color-hover-01);
     }
 }
 </style>

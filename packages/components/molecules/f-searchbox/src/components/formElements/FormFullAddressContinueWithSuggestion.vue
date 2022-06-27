@@ -99,7 +99,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../../assets/scss/form.scss';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .c-continueWithSuggestion {
     position: sticky;
@@ -109,8 +109,8 @@ export default {
 
 .c-continueWithSuggestion-btn {
     cursor: pointer;
-    @include font-size('body-s', false);
-    color: $color-content-subdued;
+    @include f.font-size('body-s', false);
+    color: f.$color-content-subdued;
     line-height: 30px;
     overflow: hidden;
     text-align: left;
@@ -120,7 +120,7 @@ export default {
     width: 100%;
     border: 0;
     padding: 15px 20px;
-    background-color: $color-interactive-inverse;
+    background-color: f.$color-interactive-inverse;
 
     &:hover,
     &:focus,
@@ -130,8 +130,8 @@ export default {
 }
 
 .c-continueWithSuggestion-btn {
-    font-weight: $font-weight-bold;
-    font-family: $font-family-base;
+    font-weight: f.$font-weight-bold;
+    font-family: f.$font-family-base;
 
     p {
         margin: 0;
@@ -140,6 +140,6 @@ export default {
 }
 
 .c-continueWithSuggestion-area {
-    color: $color-support-info;
+    color: f.$color-support-info-02;
 }
 </style>

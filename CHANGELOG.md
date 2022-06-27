@@ -3,12 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.14.3
+------------------------------
+*June 27, 2022*
+
+### Fixed
+- Storybook deploy step
+
 v7.14.2
 ------------------------------
 *June 27, 2022*
 
-### Changed
-- Fixed Storybook deploy step.
+### Fixed
+- Bug with BASH_ENV not being updated in CircleCI config.
+- Evaluation in bundlewatch.config.js
 
 v7.14.1
 ------------------------------

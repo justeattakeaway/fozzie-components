@@ -12,7 +12,7 @@ const getMaxSizeForPackage = packageLocation => {
 
 const getChangedPackageLocations = () => {
     let outputPackages;
-    let command = process.env.CIRCLE_BRANCH === 'master' || process.env.RUN_ALL ? "npx lerna ls --json" : "npx lerna ls --since origin/master --json" 
+    let command = process.env.CIRCLE_BRANCH === 'master' || process.env.RUN_ALL === 'true' ? "npx lerna ls --json" : "npx lerna ls --since origin/master --json" 
 
     try {
         outputPackages = execSync(command);
