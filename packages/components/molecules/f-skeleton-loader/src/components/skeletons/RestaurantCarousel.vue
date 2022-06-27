@@ -50,19 +50,22 @@ export default {
 }
 
 .c-restaurantCarousel-item {
+    $breakpoint-carouselWide: '>960px';
+    $breakpoint-carouselMid: '>520px';
+
     flex: 1;
     display: none;
 
     &:nth-child(1) {
         display: block;
     }
-    @include f.media('>520px') {
+    @include f.media($breakpoint-carouselMid) {
         margin: 0 f.spacing(d) 0 0;
         &:nth-child(2) {
             display: block;
         }
     }
-    @include f.media('>960px') {
+    @include f.media($breakpoint-carouselWide) {
         &:nth-child(3) {
             display: block;
         }
