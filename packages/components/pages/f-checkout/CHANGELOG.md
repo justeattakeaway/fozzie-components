@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.32.1
+------------------------------
+*June 28, 2022*
+
+### Added
+- New props to README
+  
+
 v3.32.0
 ------------------------------
 *June 22, 2022*
