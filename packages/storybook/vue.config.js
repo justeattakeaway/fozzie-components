@@ -47,6 +47,7 @@ module.exports = {
                         'f-status-banner',
                         'f-content-cards',
                         'f-cookie-banner',
+                        'f-footer',
                         'templates'
                     ];
                     const pathContainsUpdatedComponentOrType = updateComponentsAndTypes.some(a => absPathCommonScss.includes(a));

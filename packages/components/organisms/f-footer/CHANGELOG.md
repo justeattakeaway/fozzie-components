@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+
+v8.0.0
+-----------------------------
+*June 28, 2022*
+
+### Changed
+- **breaking changes** Update to `@use` and `@forward` SASS syntax
+
+
 v7.7.3
 -----------------------------
 *Jun 22, 2022*
