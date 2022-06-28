@@ -28,15 +28,17 @@ export default {
 </script>
 
 <style module lang="scss">
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .reopen-link {
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
-    padding: 0 spacing() spacing(d);
+    padding: 0 f.spacing() f.spacing(d);
 }
 
 .reopen-link--greyBg {
-    background-color: $color-container-strong;
+    background-color: f.$color-container-strong;
 }
 </style>

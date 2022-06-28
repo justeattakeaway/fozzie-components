@@ -49,16 +49,18 @@ export default {
 </script>
 
 <style lang="scss" module>
-$banner-bgColour : $color-support-brand-02;
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+$banner-bgColour : f.$color-support-brand-02;
 $banner-bgColour-legacy : #cd381f;
 
 .c-restaurantCard-banner {
     position: relative;
     display: inline-block;
     background: $banner-bgColour;
-    padding: 0 spacing();
-    margin: spacing(d) 0 spacing() 0;
-    border-radius: $radius-rounded-c;
+    padding: 0 f.spacing();
+    margin: f.spacing(d) 0 f.spacing() 0;
+    border-radius: f.$radius-rounded-c;
 }
 
 .c-restaurantCard-banner-content {
@@ -67,8 +69,8 @@ $banner-bgColour-legacy : #cd381f;
 }
 
 .c-restaurantCard-footer {
-    @include font-size(caption);
+    @include f.font-size(caption);
     font-weight: bold;
-    margin-top: spacing(a);
+    margin-top: f.spacing(a);
 }
 </style>

@@ -83,28 +83,30 @@ export default {
 </script>
 
 <style lang="scss" module>
+    @use '@justeat/fozzie/src/scss/fozzie' as f;
+
   .c-contentCards-tnc-card-shell {
-    background-color: $color-container-default;
-    padding: spacing(e);
+    background-color: f.$color-container-default;
+    padding: f.spacing(e);
     text-align: center;
   }
 
   .c-contentCards-tnc-card-primaryHeader {
-    @include font-size(heading-s);
-    color: $color-content-default;
+    @include f.font-size(heading-s);
+    color: f.$color-content-default;
 
-    @include media('>=narrow') {
-      @include font-size(heading-xl);
+    @include f.media('>=narrow') {
+      @include f.font-size(heading-xl);
     }
   }
 
   .c-contentCards-tnc-card-secondaryHeader {
-    @include font-size(body-s);
-    color: $color-content-subdued;
-    margin-top: spacing(d);
+    @include f.font-size(body-s);
+    color: f.$color-content-subdued;
+    margin-top: f.spacing(d);
 
-    @include media('>=narrow') {
-      @include font-size(heading-s);
+    @include f.media('>=narrow') {
+      @include f.font-size(heading-s);
     }
   }
 </style>

@@ -19,12 +19,14 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-contentCards--group-title {
     width: 100%;
-    margin-bottom: spacing(d);
+    margin-bottom: f.spacing(d);
 
     &:not(:first-child) {
-        margin-top: spacing(e);
+        margin-top: f.spacing(e);
     }
 
 }
