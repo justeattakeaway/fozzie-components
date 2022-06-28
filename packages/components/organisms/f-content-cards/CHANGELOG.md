@@ -12,9 +12,12 @@ v8.0.0
 - **breaking changes** Update to `@use` and `@forward` SASS syntax
 
 
-Latest (add to next release)
-------------------------------
-*May 31, 2021*
+v7.4.1
+-----------------------------
+*Jun 24, 2022*
+
+### Changed
+- Bumped wdio version and fixed breaking changes.
 
 ### Changed
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
