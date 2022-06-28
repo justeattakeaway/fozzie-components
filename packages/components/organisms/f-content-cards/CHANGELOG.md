@@ -15,14 +15,17 @@ v8.0.0
 v7.4.1
 -----------------------------
 *Jun 24, 2022*
+
 ### Changed
 - Bumped wdio version and fixed breaking changes.
+
 ### Changed
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
 
 ------------------------------
 *February 24, 2022*
+
 ### Changed
 - Storybook knobs to controls
 
