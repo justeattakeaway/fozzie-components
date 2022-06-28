@@ -140,8 +140,12 @@ describe('f-checkout - Delivery - Authenticated - Mobile Visual Tests', () => {
     });
 
     it('should display the mandatory error messages', async () => {
+        // Arrange
+        const fields = await ['addressLine1', 'addressLocality', 'mobileNumber', 'addressPostcode'];
+
         // Act
-        await ['addressLine1', 'addressLocality', 'mobileNumber', 'addressPostcode'].forEach(field => checkout.clearBlurField(field));
+        await fields.forEach(field => checkout.clearBlurField(field));
+
         await browser.pause(500);
         await checkout.goToPayment();
 
