@@ -170,38 +170,40 @@ export default {
 </script>
 
 <style lang="scss" module>
+    @use '@justeat/fozzie/src/scss/fozzie' as f;
+
     .c-contentCard-voucher {
         display: flex;
         width: 100%;
-        font-family: $font-family-base;
-        border: solid $color-border-strong;
+        font-family: f.$font-family-base;
+        border: solid f.$color-border-strong;
         border-width: 1px 0 0;
-        padding-top: spacing(d);
-        margin-top: spacing(d);
+        padding-top: f.spacing(d);
+        margin-top: f.spacing(d);
         cursor: pointer;
         background: transparent;
     }
 
     .c-contentCard-voucher-code,
     .c-contentCard-voucher-copy {
-        @include font-size(16, false);
+        @include f.font-size(16, false);
         width: 50%;
     }
 
     .c-contentCard-voucher-code {
-        font-weight: $font-weight-regular;
-        color: $color-grey-40;
+        font-weight: f.$font-weight-regular;
+        color: f.$color-grey-40;
         text-align: left;
     }
 
     .c-contentCard-voucher-copy {
-        font-weight: $font-weight-bold;
-        color: $color-content-link;
+        font-weight: f.$font-weight-bold;
+        color: f.$color-content-link;
         text-align: right;
     }
 
     .c-contentCard-voucher-copy-copied {
-        color: $color-content-default;
+        color: f.$color-content-default;
     }
 
     .c-contentCard-voucher-copy-transition-out {
@@ -217,10 +219,10 @@ export default {
     }
 
     .c-contentCard-voucher-code-cooldown-tick {
-        fill: $color-content-default;
-        width: spacing(d);
-        height: spacing(d);
+        fill: f.$color-content-default;
+        width: f.spacing(d);
+        height: f.spacing(d);
         padding: 0;
-        margin-top: -#{spacing()};
+        margin-top: -#{f.spacing()};
     }
 </style>

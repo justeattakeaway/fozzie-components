@@ -275,8 +275,10 @@ export default {
 </script>
 
 <style lang="scss" module>
-$stampCard-subStatus-colour: $color-support-positive;
-$stampCard-expiryInfo-colour: $color-content-subdued;
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+$stampCard-subStatus-colour: f.$color-support-positive;
+$stampCard-expiryInfo-colour: f.$color-content-subdued;
 
 $stampCard-iconSize-landscape: 56px;
 $stampCard-iconSize-portrait: 48px;
@@ -289,40 +291,40 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
     max-width: 392px;
     display: flex;
     flex-direction: column;
-    padding: spacing(d);
-    border-radius: $radius-rounded-c;
-    box-shadow: $elevation-01;
+    padding: f.spacing(d);
+    border-radius: f.$radius-rounded-c;
+    box-shadow: f.$elevation-01;
 
     &,
     &:hover,
     &:visited,
     &:focus {
-        color: $color-content-default;
+        color: f.$color-content-default;
     }
 
-    @include media($stampCard-responsive-tabletViewBreakpoint) {
+    @include f.media($stampCard-responsive-tabletViewBreakpoint) {
         max-width: 344px;
     }
 
-    @include media($stampCard-responsive-mobileViewBreakpoint) {
+    @include f.media($stampCard-responsive-mobileViewBreakpoint) {
         width: auto;
         max-width: none;
     }
 }
 
 .c-stampCard1-headerDetails {
-    margin-bottom: spacing();
+    margin-bottom: f.spacing();
 }
 
 .c-stampCard1-icon {
     float: left;
-    margin-right: spacing(d);
-    margin-bottom: spacing();
+    margin-right: f.spacing(d);
+    margin-bottom: f.spacing();
     width: $stampCard-iconSize-landscape;
     height: $stampCard-iconSize-landscape;
-    border-radius: $radius-rounded-c;
+    border-radius: f.$radius-rounded-c;
 
-    @include media($stampCard-responsive-mobileViewBreakpoint) {
+    @include f.media($stampCard-responsive-mobileViewBreakpoint) {
         width: $stampCard-iconSize-portrait;
         height: $stampCard-iconSize-portrait;
     }
@@ -330,20 +332,20 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
 
 .c-stampCard1-title {
     margin-top: 0;
-    margin-bottom: spacing(a);
+    margin-bottom: f.spacing(a);
 
-    @include media($stampCard-responsive-mobileViewBreakpoint) {
-        @include font-size(heading-s, true, narrow);
+    @include f.media($stampCard-responsive-mobileViewBreakpoint) {
+        @include f.font-size(heading-s, true, narrow);
     }
 }
 
 .c-stampCard1-statusText {
-    margin: spacing(a) spacing(d) 0 spacing(d);
+    margin: f.spacing(a) f.spacing(d) 0 f.spacing(d);
 }
 
 .c-stampCard1-subStatusText {
     color: $stampCard-subStatus-colour;
-    margin-bottom: spacing();
+    margin-bottom: f.spacing();
 }
 
 .c-stampCard1-expiryInfo {
@@ -357,7 +359,7 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
     width: 100%;
     padding-top: 10px;
 
-    @include media($stampCard-responsive-mobileViewBreakpoint) {
+    @include f.media($stampCard-responsive-mobileViewBreakpoint) {
         padding-top: 0;
     }
 }
@@ -368,7 +370,7 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
     width: 45px;
     padding: 0 0 100%;
 
-    @include media($stampCard-responsive-mobileViewBreakpoint) {
+    @include f.media($stampCard-responsive-mobileViewBreakpoint) {
         width: 40px;
     }
 }
