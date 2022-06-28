@@ -1,3 +1,5 @@
+import forEach from 'mocha-each';
+
 const Checkout = require('../../test-utils/component-objects/f-checkout.component');
 
 let checkout;
@@ -140,18 +142,14 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
         await browser.percyScreenshot('f-checkout - Delivery - Authenticated - Base State', 'desktop');
     });
 
-    it('should display the mandatory error messages', async () => {
-        // Arrange
-        const fields = await ['addressLine1', 'addressLocality', 'mobileNumber', 'addressPostcode'];
-
+    forEach(['addressLine1', 'addressLocality', 'mobileNumber', 'addressPostcode'])
+    .it('should display the mandatory error messages', async field => {
         // Act
-        await fields.forEach(field => checkout.clearBlurField(field));
-
-        await browser.pause(500);
+        await checkout.clearBlurField(field);
         await checkout.goToPayment();
 
         // Assert
-        await browser.percyScreenshot('f-checkout - Delivery - Authenticated - Manadatory Errors', 'desktop');
+        await browser.percyScreenshot(`f-checkout - Delivery - Authenticated - Manadatory Error - ${field}`, 'desktop');
     });
 
     it('should display the illegal postcode error message', async () => {

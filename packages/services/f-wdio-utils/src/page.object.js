@@ -70,6 +70,9 @@ class Page {
             return (await this.isSelected())
         });
         el.keys(['Backspace']);
+        el.waitUntil(async function () {
+            return (await this.getText()).length === 0
+        });
     }
 
     /**
@@ -89,6 +92,9 @@ class Page {
             return (await this.isSelected())
         });
         (await el).keys(['Backspace']);
+        (await el).waitUntil(async function () {
+            return (await this.getText()).length === 0
+        });
     }
 
     /**
