@@ -45,6 +45,8 @@ module.exports = {
                         'atoms',
                         'molecules',
                         'f-status-banner',
+                        'f-content-cards',
+                        'f-cookie-banner',
                         'templates'
                     ];
                     const pathContainsUpdatedComponentOrType = updateComponentsAndTypes.some(a => absPathCommonScss.includes(a));

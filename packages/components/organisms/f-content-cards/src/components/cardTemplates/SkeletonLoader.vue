@@ -35,10 +35,12 @@ export default {
 </script>
 
 <style lang="scss" module>
+    @use '@justeat/fozzie/src/scss/fozzie' as f;
+
     .c-skeletonLoader {
         margin-top: 40px;
 
-        @include media('>=narrowMid') {
+        @include f.media('>=narrowMid') {
             display: flex;
             flex-flow: wrap;
             flex-direction: row;
@@ -46,23 +48,23 @@ export default {
     }
 
     .c-skeletonLoader-card {
-        border-radius: $radius-rounded-c;
+        border-radius: f.$radius-rounded-c;
         display: flex;
         flex-direction: column;
         flex: 0 0 40%;
-        margin: 0 spacing() spacing(e) 0;
+        margin: 0 f.spacing() f.spacing(e) 0;
         width: 100%;
-        padding: spacing(e) spacing(d);
-        box-shadow: $elevation-01;
+        padding: f.spacing(e) f.spacing(d);
+        box-shadow: f.$elevation-01;
 
-        @include media('>=narrowMid') {
+        @include f.media('>=narrowMid') {
             flex-direction: row;
             max-width: 370px;
             flex: 0 0 40%;
         }
 
         .c-skeletonLoader--fullWidth & {
-            @include media('>=narrowMid') {
+            @include f.media('>=narrowMid') {
                 max-width: 100%;
                 flex: 0 0 100%;
             }
@@ -77,17 +79,17 @@ export default {
     .c-skeletonLoader-card:empty {
         position: relative;
         height: 403px; // 1
-        background-color: $color-container-default;
+        background-color: f.$color-container-default;
         background-repeat: no-repeat;
 
         // 2
-        background-image: radial-gradient(0 at 0 0, $color-grey-40 99%, transparent 0),
+        background-image: radial-gradient(0 at 0 0, f.$color-grey-40 99%, transparent 0),
                           linear-gradient(to right, white 20px, transparent 0), // 2.1 right margin
-                          linear-gradient($color-grey-40 20px, transparent 0), // 2.2 title placeholder
-                          linear-gradient($color-grey-40 220px, transparent 0), // 2.3 main image placeholder
-                          linear-gradient($color-grey-40 20px, transparent 0), // 2.4 line one placeholder
-                          linear-gradient($color-grey-40 20px, transparent 0), // 2.5 line two placeholder
-                          linear-gradient($color-grey-40 20px, transparent 0); // 2.6 line three placeholder
+                          linear-gradient(f.$color-grey-40 20px, transparent 0), // 2.2 title placeholder
+                          linear-gradient(f.$color-grey-40 220px, transparent 0), // 2.3 main image placeholder
+                          linear-gradient(f.$color-grey-40 20px, transparent 0), // 2.4 line one placeholder
+                          linear-gradient(f.$color-grey-40 20px, transparent 0), // 2.5 line two placeholder
+                          linear-gradient(f.$color-grey-40 20px, transparent 0); // 2.6 line three placeholder
         background-size: 100px 457px,
                          20px 100%, // 2.1
                          50% 20px, // 2.2
@@ -116,12 +118,12 @@ export default {
 
         &.c-skeletonLoader-card--promo {
             // 3
-            background-image: radial-gradient(0 at 0 0, $color-grey-40 99%, transparent 0),
-                              linear-gradient(to left, $color-grey-50 46px, transparent 0), // 3.1 icon placeholder
-                              linear-gradient($color-grey-40 170px, transparent 0), // 3.2 main image placeholder
-                              linear-gradient($color-grey-40 20px, transparent 0), //  3.3 line one placeholder
-                              linear-gradient($color-grey-40 20px, transparent 0), // 3.4 line two placeholder
-                              linear-gradient($color-grey-40 20px, transparent 0); // 3.5 line three placeholder
+            background-image: radial-gradient(0 at 0 0, f.$color-grey-40 99%, transparent 0),
+                              linear-gradient(to left, f.$color-grey-50 46px, transparent 0), // 3.1 icon placeholder
+                              linear-gradient(f.$color-grey-40 170px, transparent 0), // 3.2 main image placeholder
+                              linear-gradient(f.$color-grey-40 20px, transparent 0), //  3.3 line one placeholder
+                              linear-gradient(f.$color-grey-40 20px, transparent 0), // 3.4 line two placeholder
+                              linear-gradient(f.$color-grey-40 20px, transparent 0); // 3.5 line three placeholder
 
             background-size: 100px 457px,
                              50% 46px, // 3.1

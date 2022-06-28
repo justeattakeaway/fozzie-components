@@ -58,9 +58,11 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
     .c-cookieWarning {
         box-sizing: border-box;
-        background-color: $color-grey;
+        background-color: f.$color-grey;
         position: fixed;
         left: 0;
         right: 0;
@@ -71,17 +73,17 @@ export default {
 
     .c-cookieWarning-inner {
         margin: 0 auto;
-        padding: spacing() spacing(e) spacing() spacing();
+        padding: f.spacing() f.spacing(e) f.spacing() f.spacing();
         overflow: hidden;
 
             p {
-                @include font-size(caption);
-                color: $color-white;
+                @include f.font-size(caption);
+                color: f.$color-white;
                 text-align: center;
                 margin: 0 auto;
 
                     a {
-                        color: $color-white;
+                        color: f.$color-white;
                     }
             }
 

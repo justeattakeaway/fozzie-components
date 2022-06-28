@@ -1,4 +1,4 @@
-const Page = require('@justeat/f-wdio-utils/src/page.object');
+const Page = require('@justeat/f-wdio-utils/src/base.page');
 const {
     PROMOTION_CARD_2_COMPONENT,
     CTA,
@@ -21,18 +21,6 @@ module.exports = class HomePromotionCard2 extends Page {
     get cardTitle () { return $(TITLE); }
 
     get backgroundImage () { return $(BACKGROUND_IMAGE); }
-
-    load () {
-        super.load(this.component);
-    }
-
-    waitForComponent () {
-        super.waitForComponent(this.component);
-    }
-
-    isComponentDisplayed () {
-        return this.component.isDisplayed();
-    }
 
     isCallToActionDisplayed () {
         return this.callToAction.isDisplayed();
