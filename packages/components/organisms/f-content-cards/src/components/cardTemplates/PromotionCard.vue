@@ -68,18 +68,20 @@ export default {
 </script>
 
 <style lang="scss" module>
-$btn-secondary-bgColor              : $color-interactive-secondary;
-$btn-secondary-bgColor--hover       : darken($color-interactive-secondary, $color-hover-01);
-$btn-secondary-bgColor--active      : darken($color-interactive-secondary, $color-active-01);
-$btn-secondary-textColor            : $color-content-interactive-secondary;
-$btn-secondary-textColor--hover     : $color-content-interactive-secondary;
-$btn-secondary-textColor--active    : $color-content-interactive-secondary;
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+$btn-secondary-bgColor              : f.$color-interactive-secondary;
+$btn-secondary-bgColor--hover       : darken(f.$color-interactive-secondary, f.$color-hover-01);
+$btn-secondary-bgColor--active      : darken(f.$color-interactive-secondary, f.$color-active-01);
+$btn-secondary-textColor            : f.$color-content-interactive-secondary;
+$btn-secondary-textColor--hover     : f.$color-content-interactive-secondary;
+$btn-secondary-textColor--active    : f.$color-content-interactive-secondary;
 
     .c-contentCard-linkPromo2 {
-        font-weight: $font-weight-bold;
+        font-weight: f.$font-weight-bold;
         text-decoration: none;
-        @include font-size(body-l);
-        color: $color-content-link;
+        @include f.font-size(body-l);
+        color: f.$color-content-link;
         display: block;
     }
 
@@ -91,15 +93,15 @@ $btn-secondary-textColor--active    : $color-content-interactive-secondary;
         overflow: visible;
         text-align: center;
         cursor: pointer;
-        margin-right: spacing();
+        margin-right: f.spacing();
         display: inline-block;
         vertical-align: middle;
 
-        padding: spacing() 1.2em;
-        border-radius: $radius-rounded-c;
-        font-weight: $font-weight-bold;
-        font-family: $font-family-base;
-        @include font-size('body-l');
+        padding: f.spacing() 1.2em;
+        border-radius: f.$radius-rounded-c;
+        font-weight: f.$font-weight-bold;
+        font-family: f.$font-family-base;
+        @include f.font-size('body-l');
         text-decoration: none;
 
         &,

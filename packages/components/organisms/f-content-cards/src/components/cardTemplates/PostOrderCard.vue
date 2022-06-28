@@ -103,26 +103,28 @@ export default {
 </script>
 
 <style lang="scss" module>
+    @use '@justeat/fozzie/src/scss/fozzie' as f;
+
     .c-postOrderCard {
-        border: 1px solid $color-border-strong;
-        border-radius: $radius-rounded-c;
-        padding: spacing(e);
+        border: 1px solid f.$color-border-strong;
+        border-radius: f.$radius-rounded-c;
+        padding: f.spacing(e);
         max-width: 100%;
         flex: 1 1 0%; // do not remove unit its intentional for IE11
 
-        @include media ('<mid') {
+        @include f.media ('<mid') {
             border: none;
             padding: 0;
         }
 
         .c-postOrderCard-title {
-            @include font-size(heading-m);
+            @include f.font-size(heading-m);
 
-            margin-bottom: spacing(d);
+            margin-bottom: f.spacing(d);
             text-align: left;
 
-            @include media ('<mid') {
-                margin: spacing(d);
+            @include f.media ('<mid') {
+                margin: f.spacing(d);
             }
         }
     }
