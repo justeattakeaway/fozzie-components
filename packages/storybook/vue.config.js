@@ -46,6 +46,7 @@ module.exports = {
                         'molecules',
                         'f-status-banner',
                         'f-content-cards',
+                        'f-cookie-banner',
                         'f-header',
                         'templates'
                     ];
