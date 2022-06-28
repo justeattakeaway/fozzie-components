@@ -465,9 +465,11 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 [data-cookie-consent-overlay] {
     position: fixed;
-    color: $color-content-default;
+    color: f.$color-content-default;
 }
 
 .c-cookieBanner-card {
@@ -478,21 +480,21 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: $color-container-default;
+    background-color: f.$color-container-default;
     z-index: 99999992;
 }
 
 .c-cookieBanner-text {
     margin: 0;
     padding: 0;
-    @include font-size(body-s);
+    @include f.font-size(body-s);
 }
 
 .c-cookieBanner-title {
-    @include font-size(heading-m);
-    margin: 0 0 spacing();
+    @include f.font-size(heading-m);
+    margin: 0 0 f.spacing();
     padding: 0;
-    color: $color-content-default;
+    color: f.$color-content-default;
     text-align: left;
 
     &:hover,
@@ -505,7 +507,7 @@ export default {
 
 .c-cookieBanner-content {
     margin: 0 auto;
-    padding: spacing(f);
+    padding: f.spacing(f);
     text-align: left;
 }
 
@@ -515,10 +517,10 @@ export default {
     width: 100%;
 }
 
-@include media ('<mid') {
+@include f.media ('<mid') {
     .c-cookieBanner-card {
         flex-direction: column;
-        padding: spacing(d) 0;
+        padding: f.spacing(d) 0;
     }
 
     .c-cookieBanner-ios {
@@ -527,21 +529,21 @@ export default {
 
     .c-cookieBanner-content,
     .c-cookieBanner-cta {
-        padding: spacing(d) spacing(e) spacing(a);
+        padding: f.spacing(d) f.spacing(e) f.spacing(a);
     }
 }
 
-@include media ('>=mid') {
+@include f.media ('>=mid') {
     .c-cookieBanner-cta {
-        padding: spacing(f);
+        padding: f.spacing(f);
         min-width: 352px;
         margin: 0 auto;
     }
 }
 
-@include media('<=narrowMid') {
+@include f.media('<=narrowMid') {
     .c-cookieBanner-title {
-        @include font-size(heading-s);
+        @include f.font-size(heading-s);
     }
 }
 </style>
