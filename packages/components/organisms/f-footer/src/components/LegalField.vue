@@ -39,18 +39,20 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-legalField-certificates {
     display: flex;
     align-items: center;
 
-    @include media('<wide') {
+    @include f.media('<wide') {
         order: 2;
-        padding: spacing(d);
+        padding: f.spacing(d);
     }
 
     p {
         margin: 0;
-        @include font-size(body-s);
+        @include f.font-size(body-s);
     }
 }
 

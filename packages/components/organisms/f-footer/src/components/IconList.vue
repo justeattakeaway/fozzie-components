@@ -95,8 +95,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/headings.scss';
-@import '../assets/scss/lists.scss';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .c-iconList {
     svg {
@@ -105,12 +104,12 @@ export default {
 }
 
 .c-iconList-listItem {
-    margin-bottom: spacing();
-    margin-right: spacing(e);
+    margin-bottom: f.spacing();
+    margin-right: f.spacing(e);
 
     a,
     svg {
-        outline-offset: spacing(a);
+        outline-offset: f.spacing(a);
         display: block;
     }
 
@@ -130,8 +129,8 @@ export default {
 
 .c-iconList--apps {
     .c-iconList-listItem {
-        margin-right: spacing(d);
-        margin-bottom: spacing(d);
+        margin-right: f.spacing(d);
+        margin-bottom: f.spacing(d);
     }
 
     svg {
@@ -144,13 +143,13 @@ export default {
     display: flex;
     align-items: center;
 
-    @include media('<wide') {
-        padding: spacing(d) spacing(d) 0;
+    @include f.media('<wide') {
+        padding: f.spacing(d) f.spacing(d) 0;
     }
 
     .c-iconList-listItem {
-        @include media('>=wide') {
-            margin-right: spacing(h);
+        @include f.media('>=wide') {
+            margin-right: f.spacing(h);
         }
     }
 

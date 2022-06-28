@@ -155,15 +155,14 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/headings.scss';
-@import '../assets/scss/icons.scss';
-@import '../assets/scss/lists.scss';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 
 .c-footer-panel {
     flex: 1 0 auto;
 
-    @include media('<wide') {
-        border-bottom: 1px solid $footer-borderColor;
+    @include f.media('<wide') {
+        border-bottom: 1px solid common.$footer-borderColor;
 
         &:last-of-type {
             border-bottom: none;
@@ -172,15 +171,15 @@ export default {
 }
 
 .c-footer-list-link {
-    color: $footer-textColor;
-    @include font-size(body-s);
+    color: common.$footer-textColor;
+    @include f.font-size(body-s);
     display: inline-block;
-    padding: spacing() spacing(d);
+    padding: f.spacing() f.spacing(d);
     text-decoration: none;
     width: 100%;
 
-    @include media('>=wide') {
-        padding: 0 0 spacing();
+    @include f.media('>=wide') {
+        padding: 0 0 f.spacing();
         width: auto;
     }
 

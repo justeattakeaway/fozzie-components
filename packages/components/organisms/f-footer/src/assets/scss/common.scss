@@ -1,22 +1,14 @@
-// Set $theme variable so that fozzie doesn't complain when vars are pulled in
-// n.b. This isn't used currently (unless there are theme specific vars from fozzie)
-// The theme is handled via a data-attribute on the component
-$theme: 'jet' !default;
-
-@import '@justeat/fozzie/src/scss/fozzie';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+@forward 'headings';
+@forward 'icons';
+@forward 'lists';
 
 /**
  * Component Variables
  */
- $footer-bgColor         : $color-container-strong !default;
- $footer-bgLight         : $color-container-subtle !default;
- $footer-textColor       : $color-content-default !default;
- $footer-borderColor     : $color-border-strong !default;
- $footer-chevronColor    : $color-content-interactive-tertiary !default;
- $footer-socialIconColor : $color-content-interactive-tertiary !default;
-
-@mixin theme($type) {
-    [data-theme-footer="#{$type}"] & {
-        @content;
-    }
-}
+ $footer-bgColor         : f.$color-container-strong !default;
+ $footer-bgLight         : f.$color-container-subtle !default;
+ $footer-textColor       : f.$color-content-default !default;
+ $footer-borderColor     : f.$color-border-strong !default;
+ $footer-chevronColor    : f.$color-content-interactive-tertiary !default;
+ $footer-socialIconColor : f.$color-content-interactive-tertiary !default;
