@@ -364,14 +364,12 @@ jobs:
 
   deploy-storybook:
     executor: node
-    environment:
-      RUN_ALL: true
     steps:
-      - checkout
-      - install_node_dependencies
+      - attach_workspace:
+          at: .
       - run:
-          name: Deploy
-          command: yarn storybook:deploy
+         name: Deploy Storybook
+         command: yarn storybook:deploy
       - slack_notify_fail
       - slack_notify_success
 
@@ -415,6 +413,14 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - danger-checks
+      - deploy-storybook:
+          name: deploy-storybook
+          context: web-core
+          filters:
+            branches:
+              only: master
+          requires:
+            - build
       - bundlewatch:
           name: bundlewatch
           context: web-core
@@ -453,11 +459,3 @@ workflows:
             - browser-tests-molecules
             - browser-tests-organisms
             - browser-tests-pages
-
-  deploy-storybook:
-    jobs:
-      - deploy-storybook:
-          context: web-core
-          filters:
-            branches:
-              only: master
