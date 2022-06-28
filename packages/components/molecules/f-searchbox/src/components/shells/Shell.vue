@@ -27,39 +27,39 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../../assets/scss/common';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
 $midWide: 980px;
 
 .c-searchShell {
     -webkit-font-smoothing: antialiased;
-    background-color: $color-container-default;
-    border-radius: $border-radius;
+    background-color: f.$color-container-default;
+    border-radius: f.$border-radius;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
-    color: $color-grey-50;
-    @include font-size('heading-xl', false);
-    font-family: $font-family-base;
-    font-weight: $font-weight-regular;
-    padding: spacing(d);
+    color: f.$color-grey-50;
+    @include f.font-size('heading-xl', false);
+    font-family: f.$font-family-base;
+    font-weight: f.$font-weight-regular;
+    padding: f.spacing(d);
     text-align: center;
     text-rendering: optimizeLegibility;
     width: 95%;
     z-index: 10;
 
-    @include media('>=narrowMid') {
+    @include f.media('>=narrowMid') {
         max-width: 800px;
-        padding: spacing(d);
+        padding: f.spacing(d);
         min-height: 210px;
     }
 
-    @include media('>=#{$midWide}') {
+    @include f.media('>=#{$midWide}') {
         min-height: 230px;
         padding: 18px spacing(d) 20px;
     }
 }
 .c-searchShell-title,
 .c-searchShell-subtitle {
-    font-family: $font-family-base;
+    font-family: f.$font-family-base;
     margin: 0;
     padding: 0;
     text-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
@@ -67,29 +67,29 @@ $midWide: 980px;
 }
 
 .c-searchShell-title {
-    color: $color-content-brand;
-    @include font-size('heading-xxl', true, 'narrow');
-    font-weight: $font-weight-extrabold;
-    margin-bottom: spacing();
+    color: f.$color-content-brand;
+    @include f.font-size('heading-xxl', true, 'narrow');
+    font-weight: f.$font-weight-extrabold;
+    margin-bottom: f.spacing();
 
-    @include media('>=narrowMid') {
-        @include font-size('heading-xxl');
+    @include f.media('>=narrowMid') {
+        @include f.font-size('heading-xxl');
         margin-bottom: 12px;
     }
 
-    @include media('>=#{$midWide}') {
+    @include f.media('>=#{$midWide}') {
         margin-bottom: 14px;
     }
 }
 
 .c-searchShell-subtitle {
-    color: $color-grey-50;
-    @include font-size('subheading-s', true, 'narrow');
-    font-weight: $font-weight-regular;
-    margin-bottom: spacing(d);
+    color: f.$color-grey-50;
+    @include f.font-size('subheading-s', true, 'narrow');
+    font-weight: f.$font-weight-regular;
+    margin-bottom: f.spacing(d);
 
-    @include media('>=narrowMid') {
-        @include font-size('subheading-s');
+    @include f.media('>=narrowMid') {
+        @include f.font-size('subheading-s');
     }
 }
 </style>

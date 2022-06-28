@@ -3,6 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.14.2
+------------------------------
+*June 27, 2022*
+
+### Fixed
+- Bug with BASH_ENV not being updated in CircleCI config.
+- Evaluation in bundlewatch.config.js
+
+v7.14.1
+------------------------------
+*June 27, 2022*
+
+### Changed
+- Fixed bundlewatch to only run against changed packages.
+
 
 v7.14.0
 ------------------------------

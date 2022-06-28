@@ -41,6 +41,7 @@ commands:
               source $BASH_ENV
             else
             echo 'export RUN_ALL=false' >> $BASH_ENV
+            source $BASH_ENV
               echo 'Root files not changed'
             fi
 
@@ -66,7 +67,7 @@ commands:
             then
               yarn << parameters.command_name >>
             else
-              yarn << parameters.command_name >> --filter=[master] --no-deps
+              yarn << parameters.command_name >> --filter=...[master]
             fi
 
   build_packages:
@@ -309,6 +310,7 @@ jobs:
     steps:
       - attach_workspace:
           at: .
+      - detect_root_change
       - run:
          name: Run Bundlewatch checks
          command: yarn bundlewatch

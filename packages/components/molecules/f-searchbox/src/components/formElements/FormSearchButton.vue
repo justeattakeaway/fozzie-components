@@ -42,22 +42,22 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../../assets/scss/form';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .c-search-btn {
     display: flex;
     align-items: center;
     -webkit-appearance: none;
     -webkit-box-sizing: border-box;
-    background-color: $search-button-bgColor;
+    background-color: common.$search-button-bgColor;
     border: none;
-    border-radius: 0 $border-radius $border-radius 0;
+    border-radius: 0 f.$border-radius f.$border-radius 0;
     box-sizing: border-box;
-    color: $color-content-interactive-light;
+    color: f.$color-content-interactive-light;
     cursor: pointer;
-    font-family: $font-family-base;
-    @include font-size(heading-s);
-    font-weight: $font-weight-bold;
+    font-family: f.$font-family-base;
+    @include f.font-size(heading-s);
+    font-weight: f.$font-weight-bold;
     justify-content: space-around;
     margin: 0;
     outline: none;
@@ -65,28 +65,28 @@ export default {
     text-decoration: none;
     height: 56px;
     min-width: 56px;
-    padding: spacing();
+    padding: f.spacing();
     right: 0;
 
     &:focus,
     &:hover {
-        background-color: darken($color-interactive-brand, $color-hover-01);
+        background-color: darken(f.$color-interactive-brand, f.$color-hover-01);
     }
 
     &:active {
-        background-color: darken($color-interactive-brand, $color-active-01);
+        background-color: darken(f.$color-interactive-brand, f.$color-active-01);
     }
 
-    @include media('>=narrow') {
+    @include f.media('>=narrow') {
         height: 60px;
     }
 
-    @include media('>=narrowMid') {
+    @include f.media('>=narrowMid') {
         min-width: 128px;
     }
 
     .c-search-btn-icon {
-        @include media('>=narrowMid') {
+        @include f.media('>=narrowMid') {
             display: none;
         }
 
@@ -103,7 +103,7 @@ export default {
 .c-search-btn-text {
     display: none;
 
-    @include media('>=narrowMid') {
+    @include f.media('>=narrowMid') {
         display: block;
         margin: 0 auto;
     }
@@ -112,7 +112,7 @@ export default {
 .c-search-btn-clear {
     $btn-size: 52px;
 
-    background: $color-interactive-inverse;
+    background: f.$color-interactive-inverse;
     border: none;
     width: $btn-size;
     height: $btn-size;
@@ -123,13 +123,13 @@ export default {
 
     &:hover,
     &:focus {
-        background-color: darken($color-interactive-inverse, $color-hover-01);
+        background-color: darken(f.$color-interactive-inverse, f.$color-hover-01);
     }
 }
 
 .c-search-btn--compressed {
-    margin: spacing(a);
-    border-radius: $border-radius;
+    margin: f.spacing(a);
+    border-radius: f.$border-radius;
     height: 48px;
     min-width: 48px;
 }
