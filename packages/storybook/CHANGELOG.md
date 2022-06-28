@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.52.23
+------------------------------
+*June 28, 2022*
+### Changed
+- updated vue.config to include f-cookie-banner in components using @use and @forward
+
+
 v0.52.22
 ------------------------------
 *June 27, 2022*
@@ -41,29 +48,6 @@ v0.52.18
 
 ### Changed
 - `vue.config` to include `f-status-banner` in components using `@use` and `@forward`.
-
-
-v0.52.16
-------------------------------
-*June 22, 2022*
-
-### Changed
-- updated vue.config to include `f-tabs` in components using @use and @forward
-
-
-v0.52.15
-------------------------------
-*June 22, 2022*
-
-### Changed
-- updated vue.config to include `f-user-message` in components using @use and @forward
-
-
-v0.52.17
-------------------------------
-*June 23, 2022*
-### Changed
-- updated vue.config to include f-content-cards in components using @use and @forward
 
 
 v0.52.16
