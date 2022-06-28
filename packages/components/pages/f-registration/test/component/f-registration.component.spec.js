@@ -21,16 +21,19 @@ describe('Shared - f-registration component tests', () => {
     });
 
     forEach([
-        ['termsAndConditionsLink', '/info/terms-and-conditions'],
-        ['privacyPolicyLink', '/info/privacy-policy'],
-        ['cookiesPolicyLink', '/info/cookies-policy']
+        ['termsAndConditionsLink', 'info/terms-and-conditions'],
+        ['privacyPolicyLink', 'info/privacy-policy'],
+        ['cookiesPolicyLink', 'info/cookies-policy']
     ])
     .it('should take you to the correct URL when clicking the `%s`', (linkName, expectedUrl) => {
+        // Arrange
+        const expectedUrlRegex = new RegExp(`^http(s?)://localhost:\\d+/${expectedUrl}$`);
+
         // Act
         registration[linkName].click();
-        browser.switchWindow(new RegExp(`^.*${expectedUrl}.*$`));
+        browser.switchWindow(expectedUrlRegex); // Link was opened in a new tab
 
         // Assert
-        expect(browser.getUrl()).toContain(expectedUrl);
+        expect(browser.getUrl()).toMatch(expectedUrlRegex);
     });
 });
