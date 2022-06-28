@@ -671,13 +671,13 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/navigation.scss';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .c-nav-container {
     display: none;
-    @include media('>mid') {
+    @include f.media('>mid') {
         display: block;
-        height: $header-height;
+        height: common.$header-height;
     }
     &.is-visible {
         display: block;
@@ -685,12 +685,12 @@ export default {
 }
 
 .c-nav-list-item--horizontallyAlignedAboveMid {
-    @include media('>mid') {
+    @include f.media('>mid') {
         float: left;
     }
 
-    @include media('>wide') {
-        margin-left: spacing(c);
+    @include f.media('>wide') {
+        margin-left: f.spacing(c);
     }
 }
 
@@ -698,51 +698,51 @@ export default {
     background: transparent;
     text-decoration: none;
     border: 0;
-    padding: spacing(c) spacing(c);
+    padding: f.spacing(c) f.spacing(c);
     display: flex;
 
     &:focus {
-        outline-color: $nav-link-focus-color;
-        border-radius: $nav-focus-borderRadius;
+        outline-color: common.$nav-link-focus-color;
+        border-radius: common.$nav-focus-borderRadius;
     }
 
-    @include media('>mid') {
-        margin-top: spacing(d);
-        margin-bottom: spacing(d);
+    @include f.media('>mid') {
+        margin-top: f.spacing(d);
+        margin-bottom: f.spacing(d);
     }
 
-    @include media('<=mid') {
+    @include f.media('<=mid') {
         width: 100%;
         text-align: left;
         display: block;
-        padding: spacing(c) 0;
+        padding: f.spacing(c) 0;
 
         &:focus {
-            outline-color: $nav-link-focus-color;
+            outline-color: common.$nav-link-focus-color;
             border-radius: 0;
         }
 
         &:hover {
-            background: $color-container-subtle;
+            background: f.$color-container-subtle;
             border-radius: 0;
         }
     }
 }
 
 .c-nav-list-btn-text {
-    @include font-size($nav-text-size);
-    color: $nav-text-color;
-    font-weight: $font-weight-regular;
-    @include media('>mid') {
-        font-weight: $nav-text-weight;
+    @include f.font-size(common.$nav-text-size);
+    color: common.$nav-text-color;
+    font-weight: f.$font-weight-regular;
+    @include f.media('>mid') {
+        font-weight: common.$nav-text-weight;
     }
 }
 
 .c-nav-list-btn--hoverAboveMid {
-    @include media('>mid') {
+    @include f.media('>mid') {
         &:hover {
-            background: $color-container-subtle;
-            border-radius: $nav-focus-borderRadius;
+            background: f.$color-container-subtle;
+            border-radius: common.$nav-focus-borderRadius;
         }
     }
 }
@@ -750,59 +750,59 @@ export default {
 .c-nav-list-text-sub {
     display: block;
     overflow: hidden;
-    @include font-size($nav-text-size);
-    margin-left: spacing(h);
-    color: $nav-text-color;
+    @include f.font-size(common.$nav-text-size);
+    margin-left: f.spacing(h);
+    color: common.$nav-text-color;
     &.u-showBelowMid {
-        @include media('>mid') {
+        @include f.media('>mid') {
             display: none !important;
         }
     }
 }
 
 .c-nav-featureLink {
-    width: $nav-featureLinkIcon-width;
-    height: $nav-featureLinkIcon-height;
+    width: common.$nav-featureLinkIcon-width;
+    height: common.$nav-featureLinkIcon-height;
 
     & path {
-        fill: $nav-icon-color;
+        fill: common.$nav-icon-color;
     }
 
-    @include media('<=mid') {
+    @include f.media('<=mid') {
         position: absolute;
         top: 0;
         right: 0;
-        width: spacing(d) + $nav-featureLinkIcon-width + spacing(d); // includes padding on both sides
-        height: spacing(d) + $nav-featureLinkIcon-height + spacing(d);
-        padding: spacing(d);
+        width: f.spacing(d) + common.$nav-featureLinkIcon-width + f.spacing(d); // includes padding on both sides
+        height: f.spacing(d) + common.$nav-featureLinkIcon-height + f.spacing(d);
+        padding: f.spacing(d);
 
         &:focus {
-            outline-color: $color-focus;
+            outline-color: f.$color-focus;
         }
     }
 }
 
 .c-nav-featureLink--hideAboveMid {
-    @include media('>mid') {
+    @include f.media('>mid') {
         display: none;
     }
 }
 
 // Icons, such as the profile icon
 .c-nav-icon {
-    width: $nav-icon-size;
-    height: $nav-icon-size;
+    width: common.$nav-icon-size;
+    height: common.$nav-icon-size;
 
-    @include media('>mid') {
-        margin-right: spacing(a);
+    @include f.media('>mid') {
+        margin-right: f.spacing(a);
         & path {
-            fill: $nav-icon-color;
+            fill: common.$nav-icon-color;
         }
     }
 
-    @include media('<=mid') {
+    @include f.media('<=mid') {
         float: left;
-        margin: spacing(c) spacing(d);
+        margin: f.spacing(c) f.spacing(d);
     }
 }
 
@@ -810,17 +810,17 @@ export default {
 .c-nav-icon--delivery,
 .c-nav-icon--help,
 .c-nav-icon--offers {
-    @include media('<=mid') {
+    @include f.media('<=mid') {
         & path {
-            fill: $nav-icon-color--mobileWhiteBg;
+            fill: common.$nav-icon-color--mobileWhiteBg;
         }
     }
 }
 
 .c-nav-icon--help {
-    @include media('<=mid') {
+    @include f.media('<=mid') {
         margin-left: 20px;
-        margin-right: spacing(c);
+        margin-right: f.spacing(c);
     }
 }
 
@@ -828,13 +828,13 @@ export default {
     margin: 0;
 
     & path {
-        fill: $color-interactive-brand;
+        fill: f.$color-interactive-brand;
     }
 }
 
 .c-nav-icon--alt {
     & path {
-        fill: $nav-icon-color--transparent;
+        fill: common.$nav-icon-color--transparent;
     }
 }
 
@@ -845,19 +845,19 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    width: $nav-trigger-width;
-    height: $nav-trigger-height;
+    width: common.$nav-trigger-width;
+    height: common.$nav-trigger-height;
     cursor: pointer;
-    background-color: $nav-toggleIcon-bg;
+    background-color: common.$nav-toggleIcon-bg;
     border: none;
 
     &:focus {
-        outline-color: $nav-link-focus-color;
-        border-radius: $nav-focus-borderRadius;
+        outline-color: common.$nav-link-focus-color;
+        border-radius: common.$nav-focus-borderRadius;
     }
 
     // hide on wider views
-    @include media('>mid') {
+    @include f.media('>mid') {
         display: none;
     }
 }
@@ -866,27 +866,27 @@ export default {
 .c-nav-toggle-icon {
     display: block;
     top: 50%;
-    left: $nav-toggleIcon-left;
-    width: $nav-toggleIcon-width;
+    left: common.$nav-toggleIcon-left;
+    width: common.$nav-toggleIcon-width;
     text-indent: -150px;
     white-space: nowrap;
-    transition: background-color $nav-transition-duration ease-in;
+    transition: background-color common.$nav-transition-duration ease-in;
 
     // Apply these styles to the base icon element and its created pseudo elements
     &,
     &:before,
     &:after {
         position: absolute;
-        height: $nav-toggleIcon-height;
-        background-color: $color-interactive-brand;
-        border-radius: $nav-toggleIcon-borderRadius;
+        height: common.$nav-toggleIcon-height;
+        background-color: f.$color-interactive-brand;
+        border-radius: common.$nav-toggleIcon-borderRadius;
 
         .c-header--transparent & {
-            background-color: $nav-toggleIcon-color--transparent;
+            background-color: common.$nav-toggleIcon-color--transparent;
         }
 
         .c-nav-toggle--altColour & {
-            background-color: $color-container-default;
+            background-color: f.$color-container-default;
         }
     }
 
@@ -895,13 +895,13 @@ export default {
         content: '';
         width: 100%;
         left: 0;
-        transition: all $nav-transition-duration ease-in-out;
+        transition: all common.$nav-transition-duration ease-in-out;
     }
     &:before {
-        top: -($nav-toggleIcon-space + $nav-toggleIcon-height);
+        top: -(common.$nav-toggleIcon-space + common.$nav-toggleIcon-height);
     }
     &:after {
-        top: ($nav-toggleIcon-space + $nav-toggleIcon-height);
+        top: (common.$nav-toggleIcon-space + common.$nav-toggleIcon-height);
     }
 }
 
@@ -910,12 +910,12 @@ export default {
 .c-nav-trigger:checked ~ .c-nav-toggle,
 .c-nav-toggle.is-open {
     & > .c-nav-toggle-icon {
-        background-color: $nav-toggleIcon-bg;
+        background-color: common.$nav-toggleIcon-bg;
 
         &:before,
         &:after {
             top: 0;
-            background-color: $nav-toggleIcon-color;
+            background-color: common.$nav-toggleIcon-color;
         }
         &:before {
             transform: rotate(45deg);
@@ -929,7 +929,7 @@ export default {
         & > .c-nav-toggle-icon {
             &:before,
             &:after {
-                background-color: $nav-icon-color--transparent;
+                background-color: common.$nav-icon-color--transparent;
             }
         }
     }

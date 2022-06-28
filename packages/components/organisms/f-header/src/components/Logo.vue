@@ -95,25 +95,27 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 // link with the logo
     .c-logo {
         display: block;
         display: flex;
         justify-content: center;
-        height: $header-height--narrow;
-        padding: spacing(d) 0;
+        height: common.$header-height--narrow;
+        padding: f.spacing(d) 0;
 
         &:focus {
-            outline-color: $color-focus;
+            outline-color: f.$color-focus;
         }
 
-        @include media('>mid') {
+        @include f.media('>mid') {
             justify-content: left;
-            height: $header-height;
+            height: common.$header-height;
             padding: 20px 0;
 
             &:focus {
-               border-radius: $header-buttonFocus-borderRadius;
+               border-radius: common.$header-buttonFocus-borderRadius;
             }
         }
     }
@@ -124,7 +126,7 @@ export default {
         height: 24px;
         margin-left: -10.5px; //half of hamburger menu width
 
-        @include media('>mid') {
+        @include f.media('>mid') {
             margin-left: 0;
             height: 40px;
         }
@@ -132,18 +134,18 @@ export default {
 
     // resizes takeaway logo for tablets if delivery link and country selector are also visible
     .c-logo-img--jet {
-        @include media('>mid') {
-            @include media('<wide') {
+        @include f.media('>mid') {
+            @include f.media('<wide') {
                 height: 35px;
             }
 
             // tablet
             @media screen and (max-width: 833px) {
                 height: 25px;
-                margin-top: spacing(b);
+                margin-top: f.spacing(b);
             }
 
-            @include media('>wide') {
+            @include f.media('>wide') {
                 height: 40px;
             }
         }
@@ -152,7 +154,7 @@ export default {
     .c-logo-img {
         & g,
         & path {
-            fill: $header-logo-color;
+            fill: common.$header-logo-color;
         }
     }
 
@@ -160,7 +162,7 @@ export default {
     .c-logo-img--alt {
             & g,
             & path {
-                fill: $header-logo-color--alt;
+                fill: common.$header-logo-color--alt;
             }
     }
 </style>

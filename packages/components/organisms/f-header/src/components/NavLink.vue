@@ -78,80 +78,80 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/navigation.scss';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .c-navLink {
     text-decoration: none;
-    color: $nav-text-color;
-    @include font-size($nav-text-size);
+    color: common.$nav-text-color;
+    @include f.font-size(common.$nav-text-size);
 
-    @include media('<=mid') {
+    @include f.media('<=mid') {
         display: flex;
         width: 100%;
 
         &:focus {
-            outline-color: $nav-link-focus-color;
+            outline-color: common.$nav-link-focus-color;
             border-radius: 0;
         }
 
         &:hover {
-            background: $color-container-subtle;
+            background: f.$color-container-subtle;
         }
 
         &:active {
-            background: $color-container-strong;
+            background: f.$color-container-strong;
         }
     }
 
-    @include media('>mid') {
-        font-weight: $nav-text-weight;
-        margin: spacing(d) 0;
-        padding: spacing(c) spacing(c);
+    @include f.media('>mid') {
+        font-weight: common.$nav-text-weight;
+        margin: f.spacing(d) 0;
+        padding: f.spacing(c) f.spacing(c);
         display: flex;
 
         &:focus {
-            outline-color: $nav-link-focus-color;
-            border-radius: $nav-focus-borderRadius;
+            outline-color: common.$nav-link-focus-color;
+            border-radius: common.$nav-focus-borderRadius;
         }
     }
 }
 
 .c-navLink-text {
-    @include media('<=mid') {
+    @include f.media('<=mid') {
         width: 100vw;
-        padding: spacing(c) spacing(d) spacing(c) 0;
-        margin-left: spacing(a);
+        padding: f.spacing(c) f.spacing(d) f.spacing(c) 0;
+        margin-left: f.spacing(a);
     }
 }
 
 .c-navLink-text--noIcon {
-    @include media('<=mid') {
-        margin-left: spacing(h);
+    @include f.media('<=mid') {
+        margin-left: f.spacing(h);
     }
 }
 
 .c-navLink-text--borderTopBelowMid {
-    @include media('<=mid') {
-        border-top: 1px solid $color-border-default;
+    @include f.media('<=mid') {
+        border-top: 1px solid f.$color-border-default;
     }
 }
 
 .c-navLink-text--borderBottomBelowMid {
-    @include media('<=mid') {
-        border-bottom: 1px solid $color-border-default;
+    @include f.media('<=mid') {
+        border-bottom: 1px solid f.$color-border-default;
     }
 }
 
 .c-navLink--hoverWithWhiteBackground {
-    @include media('>mid') {
+    @include f.media('>mid') {
         &:hover {
-            background: $color-container-subtle;
-            border-radius: $nav-focus-borderRadius;
+            background: f.$color-container-subtle;
+            border-radius: common.$nav-focus-borderRadius;
         }
 
         &:active {
-            background: $color-container-strong;
-            border-radius: $nav-focus-borderRadius;
+            background: f.$color-container-strong;
+            border-radius: common.$nav-focus-borderRadius;
         }
     }
 }
@@ -159,29 +159,29 @@ export default {
 .c-navLink--popoverLink {
     display: block;
     text-decoration: none;
-    padding: spacing(c) spacing(d) spacing(c) 0;
+    padding: f.spacing(c) f.spacing(d) f.spacing(c) 0;
 
-    @include media('<=mid') {
+    @include f.media('<=mid') {
         margin-left: 0;
     }
 
-    @include media('>mid') {
+    @include f.media('>mid') {
         float: center;
-        font-weight: $font-weight-regular;
+        font-weight: f.$font-weight-regular;
     }
 
     &:hover {
-        background: $color-container-subtle;
+        background: f.$color-container-subtle;
         border-radius: 0;
     }
 
     &:active {
-        background: $color-container-strong;
+        background: f.$color-container-strong;
         border-radius: 0;
     }
 
     &:focus {
-        outline-color: $color-focus;
+        outline-color: f.$color-focus;
         border-radius: 0;
     }
 }

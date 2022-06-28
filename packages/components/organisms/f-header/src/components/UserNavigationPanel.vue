@@ -95,38 +95,38 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/navigation.scss';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .c-user-list {
-    @include media('>mid') {
-        margin: spacing(b) 0;
+    @include f.media('>mid') {
+        margin: f.spacing(b) 0;
     }
 }
 
 .c-user-list-item {
-    padding: spacing(c) spacing(d) spacing(c) 0;
+    padding: f.spacing(c) f.spacing(d) f.spacing(c) 0;
 
     &:focus {
-            outline-color: $nav-link-focus-color;
+            outline-color: common.$nav-link-focus-color;
             border-radius: 0;
     }
 
     &:hover {
-        background: $color-container-subtle;
+        background: f.$color-container-subtle;
     }
 
     &:active {
-        background: $color-container-strong;
+        background: f.$color-container-strong;
     }
 }
 
 .c-user-list-link {
     text-decoration: none;
-    color: $nav-text-color;
-    @include font-size($nav-text-size);
+    color: common.$nav-text-color;
+    @include f.font-size(common.$nav-text-size);
 
-    @include media('>mid') {
-        padding-left: spacing(d);
+    @include f.media('>mid') {
+        padding-left: f.spacing(d);
     }
 }
 </style>

@@ -117,21 +117,21 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/navigation.scss';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
-$countrySelector-text-color    : $color-content-default;
-$countrySelector-text-bg-hover : $color-container-subtle;
+$countrySelector-text-color    : f.$color-content-default;
+$countrySelector-text-bg-hover : f.$color-container-subtle;
 
 .c-countrySelector-title {
-    @include media('<=mid') {
-        padding-top: spacing(d);
-        padding-bottom: spacing(c);
+    @include f.media('<=mid') {
+        padding-top: f.spacing(d);
+        padding-bottom: f.spacing(c);
     }
 }
 
 .c-countrySelector {
-    @include media('>mid') {
-        padding: spacing(e) spacing(c) spacing(c);
+    @include f.media('>mid') {
+        padding: f.spacing(e) f.spacing(c) f.spacing(c);
     }
 }
 
@@ -139,38 +139,38 @@ $countrySelector-text-bg-hover : $color-container-subtle;
     display: flex;
     align-items: center;
 
-    @include media('>mid') {
-        padding-bottom: spacing(d);
-        padding-left: spacing(d);
+    @include f.media('>mid') {
+        padding-bottom: f.spacing(d);
+        padding-left: f.spacing(d);
     }
 
     h3 {
-        @include font-size(heading-s, true, narrow);
-        font-weight: $font-weight-headings;
+        @include f.font-size(heading-s, true, narrow);
+        font-weight: f.$font-weight-headings;
         margin: 0;
 
-        @include media('>mid') {
-            @include font-size(heading-s);
+        @include f.media('>mid') {
+            @include f.font-size(heading-s);
             margin-left: 0;
         }
     }
 
     .c-countrySelector-header-button {
-        margin: spacing(b) spacing() 0;
+        margin: f.spacing(b) f.spacing() 0;
 
-        @include media('>mid') {
+        @include f.media('>mid') {
             display: none;
         }
 
         .c-countrySelector-closePanelIcon {
-            width: $countrySelector-arrowIcon-width;
-            height: $countrySelector-arrowIcon-height;
+            width: common.$countrySelector-arrowIcon-width;
+            height: common.$countrySelector-arrowIcon-height;
         }
     }
 }
 
 .c-countrySelector-country {
-    @include media('>mid') {
+    @include f.media('>mid') {
         // container for country link so countries are all 120h * 24w
         min-width: 192px;
     }
@@ -180,18 +180,18 @@ $countrySelector-text-bg-hover : $color-container-subtle;
     }
 
     &:active {
-        background: $color-container-strong;
+        background: f.$color-container-strong;
     }
 
     &:focus {
-        outline-color: $nav-link-focus-color;
+        outline-color: common.$nav-link-focus-color;
     }
 }
 
 .c-countrySelector-country-flag {
-    height: $countrySelector-flag-height;
-    width: $countrySelector-flag-width;
-    margin-left: spacing(d);
-    margin-right: spacing(d);
+    height: common.$countrySelector-flag-height;
+    width: common.$countrySelector-flag-width;
+    margin-left: f.spacing(d);
+    margin-right: f.spacing(d);
 }
 </style>
