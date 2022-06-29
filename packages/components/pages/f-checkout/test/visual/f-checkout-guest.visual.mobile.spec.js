@@ -12,12 +12,12 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
         locale: 'en-GB'
     };
 
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo
         });
     });
@@ -72,12 +72,12 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
 });
 
 describe('f-checkout - Collection - Guest - isAsapAvailable: false Mobile Visual Tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             serviceType: 'collection',
             isLoggedIn: false,
             isAsapAvailable: false,
@@ -100,12 +100,12 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
         locale: 'en-GB'
     };
 
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo
         });
     });
@@ -163,12 +163,12 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
 });
 
 describe('f-checkout - Delivery - Guest - isAsapAvailable: false Mobile Visual Tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             serviceType: 'delivery',
             isLoggedIn: false,
             isAsapAvailable: false,
@@ -190,12 +190,12 @@ describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
         locale: 'en-GB'
     };
 
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo
         });
     });

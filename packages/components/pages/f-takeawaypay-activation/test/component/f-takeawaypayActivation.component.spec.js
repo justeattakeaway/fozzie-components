@@ -47,11 +47,11 @@ describe('f-takeawaypayActivation component tests - logged in as a guest', () =>
     beforeEach(async () => {
         // Arrange
         takeawayPayComponent = new TakeawaypayActivation();
-        await (await (await (await (await takeawayPayComponent
-            .withQuery('knob-Authentication', GUEST_AUTHENTICATION_JWT))
-            .withQuery('knob-Employee Id', '12345'))
-            .withQuery('knob-Home URL', '/home'))
-            .withQuery('knob-Login URL', '/account/login'))
+        await takeawayPayComponent
+            .withQuery('knob-Authentication', GUEST_AUTHENTICATION_JWT)
+            .withQuery('knob-Employee Id', '12345')
+            .withQuery('knob-Home URL', '/home')
+            .withQuery('knob-Login URL', '/account/login')
             .withQuery('knob-Registration URL', '/account/register');
         await takeawayPayComponent.load();
     });
@@ -90,11 +90,11 @@ describe('f-takeawaypayActivation component tests - authenticated', () => {
     beforeEach(async () => {
         // Arrange
         takeawayPayComponent = new TakeawaypayActivation();
-        await (await (await (await (await takeawayPayComponent
-            .withQuery('knob-Authentication', AUTHENTICATION_JWT))
-            .withQuery('knob-Employee Id', '12345'))
-            .withQuery('knob-Home URL', '/home'))
-            .withQuery('knob-Login URL', '/account/login'))
+        await takeawayPayComponent
+            .withQuery('knob-Authentication', AUTHENTICATION_JWT)
+            .withQuery('knob-Employee Id', '12345')
+            .withQuery('knob-Home URL', '/home')
+            .withQuery('knob-Login URL', '/account/login')
             .withQuery('knob-Registration URL', '/account/register');
         await takeawayPayComponent.load('loggedIn');
     });
@@ -156,12 +156,12 @@ describe('f-takeawaypayActivation component tests - error page', () => {
     beforeEach(async () => {
         // Arrange
         takeawayPayComponent = new TakeawaypayActivation();
-        await (await (await (await (await (await takeawayPayComponent
-            .withQuery('knob-Authentication', AUTHENTICATION_JWT))
-            .withQuery('knob-Employee Id', '12345'))
-            .withQuery('knob-Home URL', '/home'))
-            .withQuery('knob-Login URL', '/account/login'))
-            .withQuery('knob-Registration URL', '/account/register'))
+        await takeawayPayComponent
+            .withQuery('knob-Authentication', AUTHENTICATION_JWT)
+            .withQuery('knob-Employee Id', '12345')
+            .withQuery('knob-Home URL', '/home')
+            .withQuery('knob-Login URL', '/account/login')
+            .withQuery('knob-Registration URL', '/account/register')
             .withQuery('knob-Activation Status Response', '400');
         await takeawayPayComponent.load('error');
     });

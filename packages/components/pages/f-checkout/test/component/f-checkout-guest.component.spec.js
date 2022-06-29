@@ -44,7 +44,7 @@ describe('f-checkout "guest" component tests', () => {
             await checkout.goToPayment();
 
             // Assert
-            expect((await checkout.getFieldValue(field)).length).toEqual(maxlength);
+            await expect((await checkout.getFieldValue(field)).length).toEqual(maxlength);
         });
 
     forEach([
@@ -57,7 +57,7 @@ describe('f-checkout "guest" component tests', () => {
             await checkout.goToPayment();
 
             // Assert
-            expect(await checkout.isEmailErrorDisplayed()).toBe(false);
+            await expect(await checkout.isEmailErrorDisplayed()).toBe(false);
         });
 
     forEach([
@@ -73,6 +73,6 @@ describe('f-checkout "guest" component tests', () => {
             await checkout.goToPayment();
 
             // Assert
-            expect(await checkout.isEmailErrorDisplayed()).toBe(true);
+            await expect(await checkout.isEmailErrorDisplayed()).toBe(true);
         });
 });

@@ -14,7 +14,7 @@ describe('f-contact-preferences component tests', () => {
         ['en-GB']
     ]).it('should display the  %s f-contact-preferences component', async locale => {
         // Act
-        contactPreferences.load({ locale });
+        await contactPreferences.load({ locale });
 
         // Assert
         await expect(await contactPreferences.isComponentDisplayed()).toBe(true);
@@ -24,7 +24,7 @@ describe('f-contact-preferences component tests', () => {
         ['en-GB']
     ]).it('should display the %s Submit success alert if Submit succeed', async locale => {
         // Act
-        contactPreferences.load({ locale });
+        await contactPreferences.load({ locale });
         await contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
         await contactPreferences.clickSubmitButton();
         await contactPreferences.waitForComponent();
@@ -38,7 +38,7 @@ describe('f-contact-preferences component tests', () => {
         ['en-GB']
     ]).it('should display the %s Submit error alert if Submit fails', async locale => {
         // Act
-        contactPreferences.load({
+        await contactPreferences.load({
             locale,
             apiState: 'post-preferences-fails'
         });
@@ -56,7 +56,7 @@ describe('f-contact-preferences component tests', () => {
         ['en-GB']
     ]).it('should display the %s Error page if Load fails', async locale => {
         // Act
-        contactPreferences.load({
+        await contactPreferences.load({
             locale,
             apiState: 'get-preferences-fails'
         });

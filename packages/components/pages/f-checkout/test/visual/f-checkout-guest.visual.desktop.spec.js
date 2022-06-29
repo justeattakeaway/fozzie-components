@@ -12,12 +12,12 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
         locale: 'en-GB'
     };
 
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo
         });
     });
@@ -85,12 +85,12 @@ describe('f-checkout - Collection - Guest - Desktop Visual Tests', () => {
 });
 
 describe('f-checkout - Collection - Guest - isAsapAvailable: false Desktop Visual Tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             serviceType: 'collection',
             isLoggedIn: false,
             isAsapAvailable: false,
@@ -112,12 +112,12 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
         locale: 'en-GB'
     };
 
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo
         });
     });
@@ -188,12 +188,12 @@ describe('f-checkout - Delivery - Guest - Desktop Visual Tests', () => {
 });
 
 describe('f-checkout - Delivery - Guest - isAsapAvailable: false Desktop Visual Tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             serviceType: 'delivery',
             isLoggedIn: false,
             isAsapAvailable: false,
@@ -215,12 +215,12 @@ describe('f-checkout - Dine In - Guest - Desktop Visual Tests', () => {
         locale: 'en-GB'
     };
 
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo
         });
     });

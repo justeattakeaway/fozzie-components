@@ -14,12 +14,12 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
         locale: 'en-GB'
     };
 
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });
@@ -41,7 +41,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
 
     it('should display the "Something went wrong" error.', async () => {
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo,
             patchCheckoutError: 'SERVER'
         });
@@ -54,7 +54,7 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
 
     it('should display the "Restaurant not taking orders" modal', async () => {
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo,
             patchCheckoutError: 'restaurant-not-taking-orders'
         });
@@ -100,12 +100,12 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
 });
 
 describe('f-checkout - Collection - Authenticated - isAsapAvailable: false Desktop Visual Tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             serviceType: 'collection',
             isLoggedIn: true,
             isAsapAvailable: false,
@@ -189,7 +189,7 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the two notes fields if there is two noteTypes.', async () => {
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo,
             noteType: 'get-notes-config-split'
         });
@@ -200,12 +200,12 @@ describe('f-checkout - Delivery - Authenticated - Desktop Visual Tests', () => {
 });
 
 describe('f-checkout - Delivery - Authenticated - isAsapAvailable: false Desktop Visual Tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             serviceType: 'delivery',
             isLoggedIn: true,
             isAsapAvailable: false,
@@ -227,12 +227,12 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
         locale: 'en-GB'
     };
 
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo
         });
     });
@@ -244,7 +244,7 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the mandatory error messages', async () => {
         // Act
-        ['tableIdentifier', 'mobileNumber'].forEach(field => checkout.clearBlurField(field));
+        ['tableIdentifier', 'mobileNumber'].forEach(async field => checkout.clearBlurField(field));
         await checkout.goToPayment();
 
         // Assert
@@ -275,7 +275,7 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
 
     it('should display the two notes fields if there is two noteTypes.', async () => {
         // Arrange
-        checkout.load({
+        await checkout.load({
             ...checkoutInfo,
             noteType: 'get-notes-config-split'
         });
@@ -286,12 +286,12 @@ describe('f-checkout - Dine In - Authenticated - Desktop Visual Tests', () => {
 });
 
 describe('f-checkout - Delivery - AU Tenant - visibile state field - Desktop Visual Tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         checkout = new Checkout();
 
         // Act
-        checkout.load({
+        await checkout.load({
             serviceType: 'delivery',
             isLoggedIn: true,
             isAsapAvailable: false,

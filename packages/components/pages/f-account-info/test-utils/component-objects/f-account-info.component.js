@@ -87,8 +87,8 @@ module.exports = class AccountInfo extends Page {
     * @param {String} fieldName The name of the field to tab out of
     */
     async tabOutOfField (fieldName) {
-        const el = this.fields[fieldName].input;
-        (await el).keys(['Tab']);
+        const el = await this.fields[fieldName].input;
+        await el.keys(['Tab']);
     }
 
     async clickOutOfInputField () {
@@ -124,7 +124,7 @@ module.exports = class AccountInfo extends Page {
     }
 
     async isDisabled (field) {
-        return !(await this.fields[field].input.isEnabled());
+        return !await this.fields[field].input.isEnabled();
     }
 
     async isErrorAlertDisplayed () {

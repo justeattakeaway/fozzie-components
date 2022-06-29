@@ -17,7 +17,7 @@ describe('Shared - f-registration component tests', () => {
     forEach(['termsAndConditionsLink', 'privacyPolicyLink', 'cookiesPolicyLink'])
     .it('should check if the legal documentation is clickable', async link => {
         // Assert
-        expect(await registration.canBeClicked(link)).toBe(true);
+        await expect(await registration.canBeClicked(link)).toBe(true);
     });
 
     forEach([
@@ -25,15 +25,15 @@ describe('Shared - f-registration component tests', () => {
         ['privacyPolicyLink', 'info/privacy-policy'],
         ['cookiesPolicyLink', 'info/cookies-policy']
     ])
-    .it('should take you to the correct URL when clicking the `%s`', (linkName, expectedUrl) => {
+    .it('should take you to the correct URL when clicking the `%s`', async (linkName, expectedUrl) => {
         // Arrange
         const expectedUrlRegex = new RegExp(`^http(s?)://localhost:\\d+/${expectedUrl}$`);
 
         // Act
-        registration[linkName].click();
-        browser.switchWindow(expectedUrlRegex); // Link was opened in a new tab
+        await registration[linkName].click();
+        await browser.switchWindow(expectedUrlRegex); // Link was opened in a new tab
 
         // Assert
-        expect(browser.getUrl()).toMatch(expectedUrlRegex);
+        await expect(browser.getUrl()).toMatch(expectedUrlRegex);
     });
 });

@@ -15,7 +15,7 @@ describe('f-contact-preferences - Mobile Visual Tests', () => {
         ['en-GB']
     ]).it('should display the %s default component state', async locale => {
         // Act
-        contactPreferences.load({ locale });
+        await contactPreferences.load({ locale });
 
         // Assert
         await browser.percyScreenshot(`f-contact-preferences - Base State - ${locale}`, deviceType);
@@ -25,7 +25,7 @@ describe('f-contact-preferences - Mobile Visual Tests', () => {
         ['en-GB']
     ]).it('should display the %s news email & sms checked', async locale => {
         // Act
-        contactPreferences.load({ locale });
+        await contactPreferences.load({ locale });
         await contactPreferences.clickNewsEmailCheckbox();
         await contactPreferences.clickNewsSmsCheckbox();
 
@@ -37,7 +37,7 @@ describe('f-contact-preferences - Mobile Visual Tests', () => {
         ['en-GB']
     ]).it('should display the %s Submit success alert', async locale => {
         // Act
-        contactPreferences.load({ locale });
+        await contactPreferences.load({ locale });
         await contactPreferences.clickNewsEmailCheckbox(); // dirty the form to allow submit
         await contactPreferences.clickSubmitButton();
         await contactPreferences.waitForComponent();
@@ -50,7 +50,7 @@ describe('f-contact-preferences - Mobile Visual Tests', () => {
         ['en-GB']
     ]).it('should display the %s Submit error alert', async locale => {
         // Act
-        contactPreferences.load({
+        await contactPreferences.load({
             locale,
             apiState: 'post-preferences-fails'
         });
@@ -66,7 +66,7 @@ describe('f-contact-preferences - Mobile Visual Tests', () => {
         ['en-GB']
     ]).it('should display the %s Load error page', async locale => {
         // Act
-        contactPreferences.load({
+        await contactPreferences.load({
             locale,
             apiState: 'get-preferences-fails'
         });

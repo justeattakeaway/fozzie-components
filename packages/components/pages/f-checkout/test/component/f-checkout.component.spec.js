@@ -46,7 +46,7 @@ describe('f-checkout component tests', () => {
         .it('should prevent a user from entering more than "%s" characters in the "%s" field', async (maxlength, field) => {
             // Arrange
             await checkout.clearBlurField(field);
-            const userEntry = await 'A'.repeat(maxlength + 1); // Enter more than allowed
+            const userEntry = 'A'.repeat(maxlength + 1); // Enter more than allowed
 
             // Act
             await checkout.setFieldValue(field, userEntry);
@@ -56,7 +56,7 @@ describe('f-checkout component tests', () => {
             await expect((await checkout.getFieldValue(field)).length).toEqual(maxlength);
         });
 
-    it('should enable a user to submit without adding a note', async () => {
+    it.skip('should enable a user to submit without adding a note', async () => {
         // Act
         await checkout.selectOrderTime(orderTime);
         await checkout.goToPayment();

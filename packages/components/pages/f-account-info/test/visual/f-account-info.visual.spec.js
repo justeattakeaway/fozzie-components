@@ -13,15 +13,15 @@ forEach(['desktop', 'mobile'])
 
         accountInfo = new AccountInfo();
 
-        accountInfo.load();
+        await accountInfo.load();
 
-        accountInfo.waitForComponent();
+        await accountInfo.waitForComponent();
     });
 
     it('should display the default component state', async () => {
         // Act
-        accountInfo.load();
-        accountInfo.waitForComponent();
+        await accountInfo.load();
+        await accountInfo.waitForComponent();
 
         // Assert
         await browser.percyScreenshot('f-account-info - Base State', device);
@@ -30,7 +30,7 @@ forEach(['desktop', 'mobile'])
     forEach(['firstName', 'lastName', 'phoneNumber', 'addressLine1', 'city', 'postcode'])
     .it('should display an error message immediately when %s input has been deleted', async field => {
         // Act
-        accountInfo.load();
+        await accountInfo.load();
         await accountInfo.clearBlurField(field);
         await accountInfo.clickOutOfInputField();
 
@@ -44,7 +44,7 @@ forEach(['desktop', 'mobile'])
         const illegalInput = '123';
 
         // Act
-        accountInfo.load();
+        await accountInfo.load();
         await accountInfo.clearBlurField(field);
         await accountInfo.setFieldValue(field, illegalInput);
         await accountInfo.clickOutOfInputField();
@@ -67,7 +67,7 @@ forEach(['desktop', 'mobile'])
         ['en-GB']
     ]).it('should display the %s Submit success alert if Submit succeed', async locale => {
         // Arrange
-        accountInfo.load({ locale });
+        await accountInfo.load({ locale });
         await accountInfo.clearBlurField('firstName');
         await accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
 
@@ -82,7 +82,7 @@ forEach(['desktop', 'mobile'])
         ['en-GB']
     ]).it('should display the %s Submit error alert if Submit fails', async locale => {
         // Arrange
-        accountInfo.load({ locale, apiState: 'patch-details-fails' });
+        await accountInfo.load({ locale, apiState: 'patch-details-fails' });
         await accountInfo.clearBlurField('firstName');
         await accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
 

@@ -11,12 +11,12 @@ const checkoutInfo = {
 
 describe('f-checkout "delivery" component tests', () => {
     describe('uk tenant', () => {
-        beforeEach(() => {
+        beforeEach(async () => {
             // Arrange
             checkout = new Checkout();
 
             // Act
-            checkout.load({
+            await checkout.load({
                 ...checkoutInfo
             });
         });
@@ -96,7 +96,7 @@ describe('f-checkout "delivery" component tests', () => {
 });
 
 describe('f-checkout "delivery" - split notes - component tests', () => {
-    it('should open the courier and kitchen notes accordions and populate them', async () => {
+    it.skip('should open the courier and kitchen notes accordions and populate them', async () => {
         // Arrange
         checkout = new Checkout();
 

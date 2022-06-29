@@ -7,7 +7,6 @@ const { CIRCLECI } = process.env;
 
 exports.config = {
     baseUrl: configuration.baseUrl,
-    sync: false,
     // ==================
     // Specify Test Files
     // ==================
