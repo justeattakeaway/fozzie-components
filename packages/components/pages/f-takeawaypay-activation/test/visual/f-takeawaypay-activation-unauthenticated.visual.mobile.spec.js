@@ -5,20 +5,20 @@ const TakeawayPayComponent = require('../../test-utils/component-objects/f-takea
 let takeawayPayComponent;
 
 describe('f-takeawaypay-activation - Unauthenticated - Mobile Visual Tests', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
         // Arrange
         takeawayPayComponent = new TakeawayPayComponent();
     });
 
     forEach(['en-GB', 'en-AU'])
-    .it('should display the component when the user is not logged in and tenant is "%s"', tenant => {
+    .it('should display the component when the user is not logged in and tenant is "%s"', async tenant => {
         // Arrange
-        takeawayPayComponent.withQuery('knob-Locale', tenant);
+        await takeawayPayComponent.withQuery('knob-Locale', tenant);
 
         // Act
-        takeawayPayComponent.load();
+        await takeawayPayComponent.load();
 
         // Assert
-        browser.percyScreenshot(`f-takeawaypay-activation - Unauthenticated - ${tenant}`, 'mobile');
+        await browser.percyScreenshot(`f-takeawaypay-activation - Unauthenticated - ${tenant}`, 'mobile');
     });
 });

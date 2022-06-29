@@ -14,18 +14,17 @@ describe('f-checkout - Invalid - Desktop Visual Tests', () => {
         checkout = new Checkout();
     });
 
-
-    it('should display the error page component if the url is invalid', () => {
+    it('should display the error page component if the url is invalid', async () => {
         // Act
         checkout.load({
             ...checkoutInfo,
             serviceType: 'invalid-url'
         });
         // Assert
-        browser.percyScreenshot('f-checkout - Invalid - Base State', 'desktop');
+        await browser.percyScreenshot('f-checkout - Invalid - Base State', 'desktop');
     });
 
-    it('should display an error dialog if the basket has invalid products', () => {
+    it('should display an error dialog if the basket has invalid products', async () => {
         // Act
         checkout.load({
             ...checkoutInfo,
@@ -34,10 +33,10 @@ describe('f-checkout - Invalid - Desktop Visual Tests', () => {
         });
 
         // Assert
-        browser.percyScreenshot('f-checkout - Basket error: Invalid products - Base State', 'desktop');
+        await browser.percyScreenshot('f-checkout - Basket error: Invalid products - Base State', 'desktop');
     });
 
-    it('should display an error dialog if the basket has offline products', () => {
+    it('should display an error dialog if the basket has offline products', async () => {
         // Act
         checkout.load({
             ...checkoutInfo,
@@ -46,10 +45,10 @@ describe('f-checkout - Invalid - Desktop Visual Tests', () => {
         });
 
         // Assert
-        browser.percyScreenshot('f-checkout - Basket error: Offline products - Base State', 'desktop');
+        await browser.percyScreenshot('f-checkout - Basket error: Offline products - Base State', 'desktop');
     });
 
-    it('should display an error dialog if age verification is required', () => {
+    it('should display an error dialog if age verification is required', async () => {
         // Act
         checkout.load({
             ...checkoutInfo,
@@ -58,6 +57,11 @@ describe('f-checkout - Invalid - Desktop Visual Tests', () => {
         });
 
         // Assert
-        browser.percyScreenshot('f-checkout - Basket error: Age restriction required - Base State', 'desktop');
+        await browser.percyScreenshot('f-checkout - Basket error: Age restriction required - Base State', 'desktop');
+    });
+
+    it('should display the error page component', async () => {
+        // Assert
+        await browser.percyScreenshot('f-checkout - Invalid - Base State', 'desktop');
     });
 });

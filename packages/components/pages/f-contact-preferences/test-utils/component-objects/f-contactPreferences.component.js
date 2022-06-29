@@ -24,28 +24,27 @@ module.exports = class ContactPreferences extends Page {
 
     get successAlert () { return $(SUCCESS_ALERT); }
 
-
-    isErrorPageDisplayed () {
-        return this.errorPage.isDisplayed();
+    async isErrorPageDisplayed () {
+        return (await this.errorPage).isDisplayed();
     }
 
-    isErrorAlertDisplayed () {
-        return this.errorAlert.isDisplayed();
+    async isErrorAlertDisplayed () {
+        return (await this.errorAlert).isDisplayed();
     }
 
-    isSuccessAlertDisplayed () {
-        return this.successAlert.isDisplayed();
+    async isSuccessAlertDisplayed () {
+        return (await this.successAlert).isDisplayed();
     }
 
-    clickSubmitButton () {
-        return this.submitButton.click();
+    async clickSubmitButton () {
+        return (await this.submitButton).click();
     }
 
-    clickNewsEmailCheckbox () {
-        return this.newsEmailPreference.click();
+    async clickNewsEmailCheckbox () {
+        return (await this.newsEmailPreference).click();
     }
 
-    clickNewsSmsCheckbox () {
-        return this.newsSmsPreference.click();
+    async clickNewsSmsCheckbox () {
+        return (await this.newsSmsPreference).click();
     }
 };

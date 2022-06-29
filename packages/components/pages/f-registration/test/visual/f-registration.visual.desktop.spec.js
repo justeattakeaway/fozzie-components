@@ -5,21 +5,21 @@ let registration;
 
 forEach(['desktop', 'mobile'])
 .describe('f-registration - visual tests', device => {
-    beforeEach(() => {
+    beforeEach(async () => {
         if (device === 'mobile') {
-            browser.setWindowSize(414, 731);
+            await browser.setWindowSize(414, 731);
         }
 
         registration = new Registration();
-        registration.load();
+        await registration.load();
     });
 
-    it('should display component', () => {
+    it('should display component', async () => {
         // Assert
-        browser.percyScreenshot('f-registration - Base', device);
+        await browser.percyScreenshot('f-registration - Base', device);
     });
 
-    it('should display the "Email address is already registered" error', () => {
+    it('should display the "Email address is already registered" error', async () => {
         // Arrange
         const userInfo = {
             firstName: 'Test',
@@ -30,21 +30,22 @@ forEach(['desktop', 'mobile'])
 
         // Act
         Object.keys(userInfo).forEach(field => registration.setFieldValue(field, userInfo[field]));
-        registration.submit();
+        await browser.pause(500);
+        await registration.submit();
 
         // Assert
-        browser.percyScreenshot('f-registration - "Email is already registered error"', device);
+        await browser.percyScreenshot('f-registration - "Email is already registered error"', device);
     });
 
-    it('should display error when form field is empty', () => {
+    it('should display error when form field is empty', async () => {
         // Act
-        registration.submit();
+        await registration.submit();
 
         // Assert
-        browser.percyScreenshot('f-registration - "Mandatory field errors"', device);
+        await browser.percyScreenshot('f-registration - "Mandatory field errors"', device);
     });
 
-    it('should display error when form input is invalid', () => {
+    it('should display error when form input is invalid', async () => {
         // Arrange
         const userInfo = {
             firstName: '123*',
@@ -55,13 +56,13 @@ forEach(['desktop', 'mobile'])
 
         // Act
         Object.keys(userInfo).forEach(field => registration.setFieldValue(field, userInfo[field]));
-        registration.submit();
+        await registration.submit();
 
         // Assert
-        browser.percyScreenshot('f-registration - "Invalid input error"', device);
+        await browser.percyScreenshot('f-registration - "Invalid input error"', device);
     });
 
-    it('should display error when form input is too long', () => {
+    it('should display error when form input is too long', async () => {
         // Arrange
         const userInfo = {
             firstName: 'abcdefghijabcdefghijabcdefghijabcdefghijabcdefghijabcdefghij',
@@ -72,9 +73,9 @@ forEach(['desktop', 'mobile'])
 
         // Act
         Object.keys(userInfo).forEach(field => registration.setFieldValue(field, userInfo[field]));
-        registration.submit();
+        await registration.submit();
 
         // Assert
-        browser.percyScreenshot('f-registration - "Input exceed max length error"', device);
+        await browser.percyScreenshot('f-registration - "Input exceed max length error"', device);
     });
 });
