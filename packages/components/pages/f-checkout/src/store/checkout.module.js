@@ -516,7 +516,14 @@ export default {
             }
 
             if (address) {
-                [state.address.line1, state.address.line2, state.address.line3, state.address.line4] = address.lines;
+                if (address.lines) {
+                    [state.address.line1, state.address.line2, state.address.line3, state.address.line4] = address.lines;
+                } else {
+                    state.address.line1 = address.line1;
+                    state.address.line2 = address.line2;
+                    state.address.line3 = address.line3;
+                    state.address.line4 = address.line4;
+                }
 
                 state.address.locality = address.locality;
                 state.address.postcode = address.postalCode;
