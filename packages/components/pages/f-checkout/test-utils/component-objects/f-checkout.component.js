@@ -149,78 +149,78 @@ module.exports = class Checkout extends Page {
      * @param {String} checkout.isValid The checkout validation
      */
 
-    isPostcodeTypeErrorDisplayed () {
-        return this.fields.addressPostcode.typeError.isDisplayed();
+    async isPostcodeTypeErrorDisplayed () {
+        return (await this.fields.addressPostcode.typeError).isDisplayed();
     }
 
-    isEmailErrorDisplayed () {
-        return this.fields.emailAddress.error.isDisplayed();
+    async isEmailErrorDisplayed () {
+        return (await this.fields.emailAddress.error).isDisplayed();
     }
 
-    isTableIdentifierMaxLengthErrorDisplayed () {
-        return this.fields.tableIdentifier.maxLengthError.isDisplayed();
+    async isTableIdentifierMaxLengthErrorDisplayed () {
+        return (await this.fields.tableIdentifier.maxLengthError).isDisplayed();
     }
 
-    isOrderTimeDropdownDisplayed () {
-        return this.orderTimeDropdown.isDisplayed();
+    async isOrderTimeDropdownDisplayed () {
+        return (await this.orderTimeDropdown).isDisplayed();
     }
 
-    isAgeVerificationDisplayed () {
-        return this.ageVerificationComponent.isDisplayed();
+    async isAgeVerificationDisplayed () {
+        return (await this.ageVerificationComponent).isDisplayed();
     }
 
-    isAgeVerificationErrorDisplayed () {
-        return this.ageVerificationError.isDisplayed();
+    async isAgeVerificationErrorDisplayed () {
+        return (await this.ageVerificationError).isDisplayed();
     }
 
-    userNoteMaxCharacterCount () {
-        return this.userNoteInput.getAttribute('maxlength');
+    async userNoteMaxCharacterCount () {
+        return (await this.userNoteInput).getAttribute('maxlength');
     }
 
-    clickGuestCheckoutLoginButton () {
-        return this.guestCheckoutLoginButton.click();
+    async clickGuestCheckoutLoginButton () {
+        return (await this.guestCheckoutLoginButton).click();
     }
 
-    clickRetryButton () {
-        return this.errorMessageRetry.click();
+    async clickRetryButton () {
+        return (await this.errorMessageRetry).click();
     }
 
-    clickDupOrderGoToHistoryButton () {
-        return this.errorMessageDupOrderGoToHistory.click();
+    async clickDupOrderGoToHistoryButton () {
+        return (await this.errorMessageDupOrderGoToHistory).click();
     }
 
-    setFieldValues () {
+    async setFieldValues () {
         Object.keys(this.inputFieldValues).forEach(field => super.setFieldValue(field, this.inputFieldValues[field]));
     }
 
-    testTabOrder (tabOrder) {
-        const tabOrderResult = super.testTabOrder(tabOrder);
-        const expectedTabOrder = tabOrder.map(el => ({
+    async testTabOrder (tabOrder) {
+        const tabOrderResult = await super.testTabOrder(tabOrder);
+        const expectedTabOrder = await Promise.all(tabOrder.map(el => ({
             selector: el.getAttribute('data-test-id'),
             isFocused: true
-        }));
+        })));
         return {
             actual: tabOrderResult,
             expected: expectedTabOrder.concat(expectedTabOrder[0])
         };
     }
 
-    isCheckoutErrorMessageDisplayed () {
-        return this.checkoutErrorMessage.isDisplayedInViewport();
+    async isCheckoutErrorMessageDisplayed () {
+        return (await this.checkoutErrorMessage).isDisplayedInViewport();
     }
 
-    isCheckoutErrorCloseButtonDisplayed () {
-        return this.errorMessageRetry.isDisplayed();
+    async isCheckoutErrorCloseButtonDisplayed () {
+        return (await this.errorMessageRetry).isDisplayed();
     }
 
-    isCheckoutErrorDupOrderGoToHistoryButtonDisplayed () {
-        return this.errorMessageDupOrderGoToHistory.isDisplayed();
+    async isCheckoutErrorDupOrderGoToHistoryButtonDisplayed () {
+        return (await this.errorMessageDupOrderGoToHistory).isDisplayed();
     }
 
-    populateAgeVerificationForm ({ day, month, year }) {
-        this.ageVerificationDayDropdown.selectByVisibleText(day);
-        this.ageVerificationMonthDropdown.selectByVisibleText(month);
-        this.ageVerificationYearDropdown.selectByVisibleText(year);
+    async populateAgeVerificationForm ({ day, month, year }) {
+        await this.ageVerificationDayDropdown.selectByVisibleText(day);
+        await this.ageVerificationMonthDropdown.selectByVisibleText(month);
+        await this.ageVerificationYearDropdown.selectByVisibleText(year);
     }
 
     /**
@@ -229,8 +229,8 @@ module.exports = class Checkout extends Page {
     *
     * @param {String} orderTime The visible text value of the order time
     */
-    selectOrderTime (orderTime) {
-        this.orderTimeDropdown.selectByVisibleText(orderTime);
+    async selectOrderTime (orderTime) {
+        await this.orderTimeDropdown.selectByVisibleText(orderTime);
     }
 
     /**
@@ -241,21 +241,21 @@ module.exports = class Checkout extends Page {
     *
     * @returns {String} The value of the field
     */
-    getFieldValue (fieldName) {
-        return this.fields[fieldName].input.getValue();
+    async getFieldValue (fieldName) {
+        return (await this.fields[fieldName].input).getValue();
     }
 
     /**
     * @description
     *Submit the checkout form.
     */
-    goToPayment () {
-        this.goToPaymentButton.scrollIntoView();
-        this.goToPaymentButton.click();
+    async goToPayment () {
+        (await this.goToPaymentButton).scrollIntoView();
+        (await this.goToPaymentButton).click();
     }
 
-    submitAgeVerification () {
-        this.ageVerificationSubmitButton.click();
+    async submitAgeVerification () {
+        await this.ageVerificationSubmitButton.click();
     }
 
     /**
@@ -266,8 +266,8 @@ module.exports = class Checkout extends Page {
     * @param {String} noteType The note type to be populated
     * @param {String} note The value of the note
     */
-    expandAndPopulateNote (header, noteType, note) {
-        this[header].click();
-        this.fields[noteType].input.setValue(note);
+    async expandAndPopulateNote (header, noteType, note) {
+        await this[header].click();
+        await this.fields[noteType].input.setValue(note);
     }
 };

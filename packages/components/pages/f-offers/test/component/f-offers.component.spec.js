@@ -2,14 +2,14 @@ const Offers = require('../../test-utils/component-objects/f-offers.component');
 
 describe('f-offers component tests', () => {
     let offers;
-    beforeEach(() => {
+    beforeEach(async () => {
         offers = new Offers();
 
-        offers.load();
+        await offers.load();
     });
 
-    it('should display the f-offers component', () => {
+    it('should display the f-offers component', async () => {
         // Assert
-        expect(offers.isComponentDisplayed()).toBe(true);
+        await expect(await offers.isComponentDisplayed()).toBe(true);
     });
 });

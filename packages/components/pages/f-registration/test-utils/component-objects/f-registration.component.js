@@ -78,12 +78,12 @@ module.exports = class Registration extends Page {
         }
     };
 
-    isInputFieldDisplayed (fieldName) {
-        return this.fields[fieldName].input.isDisplayed();
+    async isInputFieldDisplayed (fieldName) {
+        return (await this.fields[fieldName].input).isDisplayed();
     }
 
-    submit () {
-        this.createAccountButton.click();
+    async submit () {
+        await this.createAccountButton.click();
     }
 
     isEmptyErrorDisplayed (fieldName) {
@@ -106,7 +106,7 @@ module.exports = class Registration extends Page {
         return field.innerText === field.invalidFormat;
     }
 
-    canBeClicked (link) {
-        return this.LinksAndButtons[link].cta.isClickable();
+    async canBeClicked (link) {
+        return (await this.LinksAndButtons[link].cta).isClickable();
     }
 };
