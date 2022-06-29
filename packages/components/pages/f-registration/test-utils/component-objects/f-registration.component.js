@@ -58,7 +58,7 @@ module.exports = class Registration extends Page {
         },
         password: {
             errorMessages: {
-                minLength: 'Password is less than four characters',
+                minLength: 'Password is less than ten characters',
                 missing: 'Please enter a password'
             },
             get input () { return $(PASSWORD_INPUT); },
