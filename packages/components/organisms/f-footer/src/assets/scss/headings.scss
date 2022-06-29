@@ -1,16 +1,18 @@
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 $footer-heading-font-size  : 'heading-s';
 
 .c-footer-heading {
-    @include font-size($footer-heading-font-size);
-    font-family: $font-family-base;
-    font-weight: $font-weight-headings;
-    padding: spacing(d);
+    @include f.font-size($footer-heading-font-size);
+    font-family: f.$font-family-base;
+    font-weight: f.$font-weight-headings;
+    padding: f.spacing(d);
     padding-left: 0;
 }
 
 .c-footer-heading--shortBelowWide {
-    @include media('<wide') {
-        padding: 0 0 spacing();
+    @include f.media('<wide') {
+        padding: 0 0 f.spacing();
     }
 }
 
@@ -18,21 +20,21 @@ $footer-heading-font-size  : 'heading-s';
     align-items: center;
     background: none;
     border-style: none;
-    color: $color-content-default;
+    color: f.$color-content-default;
     display: flex;
-    font-weight: $font-weight-headings;
+    font-weight: f.$font-weight-headings;
     justify-content: space-between;
     margin: 0;
-    padding: spacing(d);
+    padding: f.spacing(d);
     text-align: left;
     width: 100%;
-    @include font-size($footer-heading-font-size);
+    @include f.font-size($footer-heading-font-size);
 
-    @include media('<wide') {
+    @include f.media('<wide') {
         cursor: pointer;
     }
 
-    @include media('>=wide') {
+    @include f.media('>=wide') {
         padding: 0;
     }
 }

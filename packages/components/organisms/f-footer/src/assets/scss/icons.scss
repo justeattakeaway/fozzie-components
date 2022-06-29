@@ -1,9 +1,11 @@
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-icon--chevron {
     display: none;
     height: 9px;
     width: 16px;
 
-    @include media('<wide') {
+    @include f.media('<wide') {
         display: block;
     }
 }

@@ -55,19 +55,19 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/headings.scss';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
 $feedback-btn-font-size: 'body-s';
 
 .c-feedback {
-    @include media('<wide') {
-        margin-bottom: spacing(d);
+    @include f.media('<wide') {
+        margin-bottom: f.spacing(d);
     }
 }
 
 .c-feedback-text {
-    margin: 0 0 spacing(a) 0;
-    @include font-size(body-s);
+    margin: 0 0 f.spacing(a) 0;
+    @include f.font-size(body-s);
 }
 
 .c-feedback-button {
@@ -75,19 +75,19 @@ $feedback-btn-font-size: 'body-s';
     background-color: transparent;
     padding: 0;
     margin: 0;
-    color: $color-content-link;
+    color: f.$color-content-link;
     font-weight: 500;
-    @include font-size($feedback-btn-font-size);
+    @include f.font-size($feedback-btn-font-size);
     text-decoration: underline;
 
     &:hover {
         cursor: pointer;
-        color: darken($color-content-link, $color-hover-01);
+        color: darken(f.$color-content-link, f.$color-hover-01);
         background-color: transparent;
     }
     &:active,
     &:focus {
-        color: darken($color-content-link, $color-active-01);
+        color: darken(f.$color-content-link, f.$color-active-01);
         background-color: transparent;
     }
 }
