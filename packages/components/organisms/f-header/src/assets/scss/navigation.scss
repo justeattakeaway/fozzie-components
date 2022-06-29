@@ -1,5 +1,4 @@
-@import './common.scss';
-
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 /**
 * Global Page Navigation
 * =================================
@@ -8,17 +7,17 @@
 */
 
 $nav-text-size                     : 'body-l';
-$nav-text-weight                   : $font-weight-bold;
-$nav-text-color                    : $color-content-link;
-$nav-text-color--hover             : darken($color-content-link, $color-hover-01);
-$nav-text-color--transparent       : $color-content-link-inverse;
+$nav-text-weight                   : f.$font-weight-bold;
+$nav-text-color                    : f.$color-content-link;
+$nav-text-color--hover             : darken(f.$color-content-link, f.$color-hover-01);
+$nav-text-color--transparent       : f.$color-content-link-inverse;
 
 $nav-transition-duration           : 250ms;
 
 $nav-trigger-width                 : 56px;
 $nav-trigger-height                : 56px;
-$nav-trigger-focus-color           : $color-content-interactive-secondary;
-$nav-trigger-focus-bg              : $color-interactive-secondary;
+$nav-trigger-focus-color           : f.$color-content-interactive-secondary;
+$nav-trigger-focus-bg              : f.$color-interactive-secondary;
 
 $nav-popover-width                 : 300px;
 $nav-popover-transition-delay      : 200ms;
@@ -32,12 +31,12 @@ $countrySelector-arrowIcon-width   : 18px;
 $nav-featureLinkIcon-width         : 24px;
 $nav-featureLinkIcon-height        : 24px;
 
-$nav-icon-color                    : $color-interactive-primary;
-$nav-icon-color--transparent       : $color-interactive-inverse;
-$nav-icon-color--mobileWhiteBg     : $color-content-interactive-secondary;
+$nav-icon-color                    : f.$color-interactive-primary;
+$nav-icon-color--transparent       : f.$color-interactive-inverse;
+$nav-icon-color--mobileWhiteBg     : f.$color-content-interactive-secondary;
 $nav-icon-size                     : 24px;
 
-$nav-toggleIcon-left               : spacing(d);
+$nav-toggleIcon-left               : f.spacing(d);
 $nav-toggleIcon-width              : 21px;
 $nav-toggleIcon-height             : 2px;
 $nav-toggleIcon-borderRadius       : 1px;
@@ -47,20 +46,25 @@ $nav-toggleIcon-bg                 : transparent;
 $nav-toggleIcon-space              : 5px;
 
 $nav-focus-borderRadius            : 800px;
-$nav-link-focus-color              : $color-focus;
+$nav-link-focus-color              : f.$color-focus;
+
+$nav-container-border-color        : f.$color-border-subtle;
+$nav-container-separator           : 1px;
+$nav-container-height--narrow      : 56px;
+
 
 @mixin nav-container-visible () {
     overflow-y: auto;
     left: 0;
     opacity: 1;
-    z-index: zIndex(high);
+    z-index: f.zIndex(high);
     transition: opacity $nav-transition-duration ease-in-out,
         z-index 0s linear;
 }
 
 // Global site-wide navigation
 .c-nav--global {
-    @include media('>mid') {
+    @include f.media('>mid') {
         display: flex;
         justify-content: flex-end;
         flex-grow: 1;
@@ -70,15 +74,15 @@ $nav-link-focus-color              : $color-focus;
 // we have a nav container so that we don’t have to make the inner list 100% height
 // this is so we can position the logout button last on mobile
 .c-nav-container {
-    @include media('<=mid') {
+    @include f.media('<=mid') {
         position: fixed;
-        top: $header-height--narrow;
+        top: $nav-container-height--narrow;
         left: -99999px;
         width: 100%;
         padding: 0;
-        height: calc(100% - (#{$header-height--narrow}));
-        border-top: $header-separator solid $header-border-color;
-        background: $color-container-default;
+        height: calc(100% - (#{$nav-container-height--narrow}));
+        border-top: $nav-container-separator solid $nav-container-border-color;
+        background: f.$color-container-default;
         z-index: -1;
         opacity: 0;
         transition: opacity $nav-transition-duration ease-in-out,
@@ -111,14 +115,14 @@ $nav-link-focus-color              : $color-focus;
         }
     }
 
-    @include media('<=mid') {
+    @include f.media('<=mid') {
         display: flex;
         flex-direction: column;
     }
 }
 
 .c-nav-popoverList--twoColumns {
-    @include media('>mid') {
+    @include f.media('>mid') {
         column-count: 2;
     }
 }
@@ -132,12 +136,12 @@ $nav-link-focus-color              : $color-focus;
     top: -100px;
     left: -100px;
 
-    @include media('>mid') {
+    @include f.media('>mid') {
         display: none;
     }
 
     &:checked ~ .c-nav-container {
-        @include media('<=mid') {
+        @include f.media('<=mid') {
             @include nav-container-visible();
         }
     }
@@ -153,7 +157,7 @@ $nav-link-focus-color              : $color-focus;
 }
 
 .c-nav-list-link--alt {
-    @include media('>mid') {
+    @include f.media('>mid') {
         color: $nav-text-color--transparent !important;
     }
 }
@@ -161,7 +165,7 @@ $nav-link-focus-color              : $color-focus;
 .c-nav-list-link--transparent,
 .c-nav-list-link--alt {
     color: $nav-text-color;
-    @include media('>mid') {
+    @include f.media('>mid') {
         &:hover {
             color: $nav-text-color--transparent !important;
             text-decoration: underline;
@@ -171,14 +175,14 @@ $nav-link-focus-color              : $color-focus;
 
 .has-sublist {
     // ensures the dropdown/popover is relative to the hover element, on wider views
-    @include media('>mid') {
+    @include f.media('>mid') {
         position: relative;
         cursor: pointer;
     }
 }
 
 .c-nav-popover {
-    @include media('>mid') {
+    @include f.media('>mid') {
         min-width: $nav-popover-width;
         position: absolute;
         top: 100%;
@@ -194,7 +198,7 @@ $nav-link-focus-color              : $color-focus;
         // display the popover when our parent item is hovered(recieved class .open)
         .has-sublist.is-open & {
             opacity: 1;
-            z-index: zIndex(high);
+            z-index: f.zIndex(high);
             right: 0;
 
             transition: opacity $nav-popover-transition-duration ease-in-out,
@@ -209,8 +213,8 @@ $nav-link-focus-color              : $color-focus;
 }
 
 .c-nav-popover.c-nav-popover--countrySelector {
-    @include media('>mid') {
-        margin-top: spacing(d);
+    @include f.media('>mid') {
+        margin-top: f.spacing(d);
     }
     // tooltip arrow
     &:before {
