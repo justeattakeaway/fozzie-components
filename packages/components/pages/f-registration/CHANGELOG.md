@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.4.2
+------------------------------
+*June 29, 2022*
+
+### Added
+- Increase password minimum length from 4 to 10 characters.
+
 v2.4.1
 ------------------------------
 *June 27, 2022*
