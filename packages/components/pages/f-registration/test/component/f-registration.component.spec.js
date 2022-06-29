@@ -34,6 +34,6 @@ describe('Shared - f-registration component tests', () => {
         await browser.switchWindow(expectedUrlRegex); // Link was opened in a new tab
 
         // Assert
-        await expect(browser.getUrl()).toMatch(expectedUrlRegex);
+        await expect(await browser.getUrl()).toMatch(expectedUrlRegex);
     });
 });
