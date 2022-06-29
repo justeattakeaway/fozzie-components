@@ -4,7 +4,7 @@ let outputChangedComponentPackages;
 
 const getChangedPackageStories = () => {
     try {
-        outputChangedComponentPackages = execSync('npx lerna ls --since origin/master --json');
+        outputChangedComponentPackages = execSync('npx lerna ls --since origin/master --json --include-dependencies');
     } catch (error) {
         console.info('No changed component packages found.');
         process.exit(0);
