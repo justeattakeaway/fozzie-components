@@ -2415,13 +2415,6 @@
     "@justeat/f-services" "1.0.1"
     core-js "3.6.5"
 
-"@justeat/f-cookie-banner@3.9.0":
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-cookie-banner/-/f-cookie-banner-3.9.0.tgz#1d005d448e412dab0f976da19293287c455b5cf8"
-  integrity sha512-Yi93qveb5mSZBF6XKoNMJQVTWxYPZN8HNJsrJcLPJHeuHdHUeLKqJJpp5h2l9oQAsS/bP4qNB3GcQ93egOEXoA==
-  dependencies:
-    "@justeat/f-services" "1.14.0"
-
 "@justeat/f-dom@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-0.4.0.tgz#3e838a2dd06d4d5281c17f5fb9f66d7485fd759a"
