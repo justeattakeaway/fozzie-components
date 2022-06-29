@@ -109,12 +109,12 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/navigation.scss';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .c-countrySelector-text {
-    color: $nav-text-color;
-    @include font-size($nav-text-size);
-    @include media('>mid') {
+    color: common.$nav-text-color;
+    @include f.font-size(common.$nav-text-size);
+    @include f.media('>mid') {
         display: none;
     }
 }
@@ -124,41 +124,41 @@ export default {
     background: transparent;
     border: 0;
     display: block;
-    padding: spacing(c) spacing(c);
-    margin-top: spacing(d);
-    margin-bottom: spacing(d);
+    padding: f.spacing(c) f.spacing(c);
+    margin-top: f.spacing(d);
+    margin-bottom: f.spacing(d);
 
-    @include media('<=mid') {
+    @include f.media('<=mid') {
         width: 100%;
         text-align: left;
-        padding: spacing(d) spacing(a);
+        padding: f.spacing(d) f.spacing(a);
         margin: 0;
     }
 
     &:focus {
-        outline-color: $nav-link-focus-color;
+        outline-color: common.$nav-link-focus-color;
 
-        @include media('>mid') {
-            border-radius: $nav-focus-borderRadius;
+        @include f.media('>mid') {
+            border-radius: common.$nav-focus-borderRadius;
         }
     }
 
     &:hover {
-        background: $color-container-subtle;
+        background: f.$color-container-subtle;
 
-        @include media('>mid') {
-            border-radius: $nav-focus-borderRadius;
+        @include f.media('>mid') {
+            border-radius: common.$nav-focus-borderRadius;
         }
     }
 }
 
 .c-countrySelector-current-flag {
-    height: $countrySelector-flag-height;
-    width: $countrySelector-flag-width;
+    height: common.$countrySelector-flag-height;
+    width: common.$countrySelector-flag-width;
     display: block;
 
-    @include media('<=mid') {
-        margin: 0 spacing(d);
+    @include f.media('<=mid') {
+        margin: 0 f.spacing(d);
         float: left;
     }
 }

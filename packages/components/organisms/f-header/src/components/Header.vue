@@ -195,29 +195,31 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 // when the off-screen navigation is active (on mobile), it fixes to the top of the screen.
 // this stops the content being forced upwards when this happens (preventing slight visual glitch)
 html:global(.is-navInView) {
     .c-header {
-        @include media('<=mid') {
+        @include f.media('<=mid') {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            z-index: zIndex(high);
+            z-index: f.zIndex(high);
         }
     }
 }
 
 .c-header {
-    background-color: $header-bg;
+    background-color: common.$header-bg;
     min-width : 300px;
     position: relative;
-    z-index: zIndex(mid);
-    box-shadow: $header-box-shadow;
+    z-index: f.zIndex(mid);
+    box-shadow: common.$header-box-shadow;
 
     // Styles for a sticky header on mobile
-    @include media('<=mid') {
+    @include f.media('<=mid') {
         &.is-sticky {
             left: 0;
             top: -60px;
@@ -233,7 +235,7 @@ html:global(.is-navInView) {
     // Adds a border to the header to separate it from the
     // main content at all widths
     .c-header--bordered {
-        box-shadow: $header-box-shadow;
+        box-shadow: common.$header-box-shadow;
     }
 
     .c-header--transparent {
@@ -246,9 +248,9 @@ html:global(.is-navInView) {
     .c-header--gradient {
         &:before {
             content: '';
-            height: $header--transparent-gradient;
-            opacity: $header--transparent-opacity;
-            background-image: linear-gradient(to top, transparent, $header--transparent-gradient-color);
+            height: common.$header--transparent-gradient;
+            opacity: common.$header--transparent-opacity;
+            background-image: linear-gradient(to top, transparent, common.$header--transparent-gradient-color);
             pointer-events: none;
             position: absolute;
             top: 0;
@@ -258,46 +260,46 @@ html:global(.is-navInView) {
     }
 
     .c-header--highlightBg {
-        background-color: $color-support-brand-01;
+        background-color: f.$color-support-brand-01;
 
-        @include media('>mid') {
-            min-height: $header-height;
+        @include f.media('>mid') {
+            min-height: common.$header-height;
         }
     }
 
     .c-header--tallBelowMid {
-        @include media('<=mid') {
-            min-height: $header-height;
+        @include f.media('<=mid') {
+            min-height: common.$header-height;
         }
     }
 
     .c-header-container {
         width: 100%;
-        max-width: #{$layout-max-width}px;
+        max-width: #{f.$layout-max-width}px;
         margin: 0 auto;
-        padding-left: #{$layout-margin}px;
-        padding-right: #{$layout-margin}px;
+        padding-left: #{f.$layout-margin}px;
+        padding-right: #{f.$layout-margin}px;
         position: relative;
-        min-height: $header-height--narrow;
+        min-height: common.$header-height--narrow;
 
-        @include media('>mid') {
-            padding-left: #{$layout-margin}px;
-            padding-right: #{$layout-margin}px;
+        @include f.media('>mid') {
+            padding-left: #{f.$layout-margin}px;
+            padding-right: #{f.$layout-margin}px;
         }
 
-        @include media('<wide') {
-            padding-left: #{$layout-margin--mid}px;
-            padding-right: #{$layout-margin--mid}px;
+        @include f.media('<wide') {
+            padding-left: #{f.$layout-margin--mid}px;
+            padding-right: #{f.$layout-margin--mid}px;
         }
 
-        @include media('>mid') {
+        @include f.media('>mid') {
             display: flex;
-            min-height: $header-height;
+            min-height: common.$header-height;
         }
 
-        @include media('<narrow') {
-            padding-left: #{$layout-margin--narrow}px;
-            padding-right: #{$layout-margin--narrow}px;
+        @include f.media('<narrow') {
+            padding-left: #{f.$layout-margin--narrow}px;
+            padding-right: #{f.$layout-margin--narrow}px;
         }
     }
 
@@ -312,12 +314,12 @@ html:global(.is-navInView) {
         background: none;
         appearance: none;
         position: absolute;
-        width: $header-button--width;
-        height: $header-button--height;
-        z-index: zIndex(belowHighest);
+        width: common.$header-button--width;
+        height: common.$header-button--height;
+        z-index: f.zIndex(belowHighest);
 
         .is-sticky & {
-            top: -#{$header-button--height};
+            top: -#{common.$header-button--height};
         }
     }
 
@@ -327,14 +329,14 @@ html:global(.is-navInView) {
         display: inline-block;
 
         svg {
-            fill: $header-buttonIcon-color;
+            fill: common.$header-buttonIcon-color;
         }
     }
 
     .c-header-button--primary {
         display: block;
         width: 40px;
-        padding-right: spacing();
+        padding-right: f.spacing();
     }
 
     .c-header-button--secondary {
