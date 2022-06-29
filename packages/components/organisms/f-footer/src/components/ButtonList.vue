@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/headings.scss';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
 $buttonList-font-size: 'subheading-s';
 
@@ -47,16 +47,16 @@ $buttonList-font-size: 'subheading-s';
 }
 
 .c-buttonList-button {
-    background-color: $color-interactive-inverse;
+    background-color: f.$color-interactive-inverse;
     border-radius: 4px;
-    color: $color-content-interactive-inverse;
+    color: f.$color-content-interactive-inverse;
     display: inline-block;
-    @include font-size($buttonList-font-size, false);
-    font-weight: $font-weight-headings;
+    @include f.font-size($buttonList-font-size, false);
+    font-weight: f.$font-weight-headings;
     min-width: 226px;
-    margin-right: spacing(d);
-    margin-bottom: spacing();
-    padding: 10px spacing(d);
+    margin-right: f.spacing(d);
+    margin-bottom: f.spacing();
+    padding: 10px f.spacing(d);
     text-align: center;
     text-decoration: none;
     vertical-align: middle;
@@ -67,16 +67,16 @@ $buttonList-font-size: 'subheading-s';
 
     &:hover,
     &:focus {
-        background-color: darken($color-interactive-inverse, $color-hover-01);
+        background-color: darken(f.$color-interactive-inverse, f.$color-hover-01);
     }
 
-    @include media('<narrow') {
-        margin-bottom: spacing(d);
+    @include f.media('<narrow') {
+        margin-bottom: f.spacing(d);
         margin-right: 0;
         width: 100%;
 
         &:last-child {
-            margin-bottom: spacing();
+            margin-bottom: f.spacing();
         }
     }
 }

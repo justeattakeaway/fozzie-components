@@ -139,7 +139,7 @@ export default {
 </script>
 
 <style lang="scss" module>
-@import '../assets/scss/icons.scss';
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
 $countrySelector-btn-font-size: 'body-s';
 
@@ -149,20 +149,20 @@ $countrySelector-btn-font-size: 'body-s';
 }
 .c-countrySelector-link {
     display: flex;
-    padding: spacing() spacing(d);
+    padding: f.spacing() f.spacing(d);
     text-decoration: none;
-    color: $color-content-interactive-tertiary;
+    color: f.$color-content-interactive-tertiary;
 
     &:hover {
-        color: darken($color-content-link, $color-hover-01);
+        color: darken(f.$color-content-link, f.$color-hover-01);
     }
     &:active,
     &:focus {
-        color: darken($color-content-link, $color-active-01);
+        color: darken(f.$color-content-link, f.$color-active-01);
     }
 
     p {
-        margin: 0 0 0 spacing();
+        margin: 0 0 0 f.spacing();
         display: inline-block;
     }
 }
@@ -174,12 +174,12 @@ $countrySelector-btn-font-size: 'body-s';
 }
 
 .c-countrySelector-flag--current {
-    margin-right: spacing();
+    margin-right: f.spacing();
     margin-top: 0;
 }
 
 .c-countrySelector-chevron {
-    margin: 0 0 0 spacing();
+    margin: 0 0 0 f.spacing();
 }
 
 .c-countrySelector-cross {
@@ -187,21 +187,21 @@ $countrySelector-btn-font-size: 'body-s';
 }
 
 .c-countrySelectorContainer {
-    @include media('<wide') {
+    @include f.media('<wide') {
         width: 100%;
-        border-top: 1px solid $footer-borderColor;
+        border-top: 1px solid common.$footer-borderColor;
         order: 3;
     }
 }
 
 .c-countrySelector-button {
     align-items: center;
-    background-color: $footer-bgColor;
+    background-color: common.$footer-bgColor;
     border: none;
     cursor: pointer;
     display: flex;
-    @include font-size($countrySelector-btn-font-size);
-    padding: spacing(d);
+    @include f.font-size($countrySelector-btn-font-size);
+    padding: f.spacing(d);
     width: 100%;
 }
 
@@ -213,11 +213,11 @@ $countrySelector-btn-font-size: 'body-s';
     padding: 0;
     margin-top: 0;
     margin-left: 0;
-    margin-bottom: spacing(h) + 1;
-    background-color: $footer-bgLight;
-    box-shadow: $elevation-02;
+    margin-bottom: f.spacing(h) + 1;
+    background-color: common.$footer-bgLight;
+    box-shadow: f.$elevation-02;
     list-style: none;
-    z-index: zIndex(high);
+    z-index: f.zIndex(high);
 
     & > li:before {
         content: none;
