@@ -469,7 +469,7 @@ describe('Registration', () => {
 
             it('should show error message and emit failure event when the password field is populated with too short an input', async () => {
                 // Arrange
-                wrapper.find('[data-test-id="formfield-password-input"]').setValue('dog');
+                wrapper.find('[data-test-id="formfield-password-input"]').setValue('foobarbaz');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -484,7 +484,7 @@ describe('Registration', () => {
             it('should show error message and emit inline failure event when the password field is populated with too short an input and focus is lost', async () => {
                 // Arrange
                 const passwordInput = wrapper.find('[data-test-id="formfield-password-input"]');
-                passwordInput.setValue('dog');
+                passwordInput.setValue('foobarbaz');
 
                 // Act
                 passwordInput.trigger('blur');
@@ -531,7 +531,7 @@ describe('Registration', () => {
                 wrapper.find('[data-test-id="formfield-firstName-input"]').setValue('Joe');
                 wrapper.find('[data-test-id="formfield-lastName-input"]').setValue('O\'Test');
                 wrapper.find('[data-test-id="formfield-email-input"]').setValue('joe@test.com');
-                wrapper.find('[data-test-id="formfield-password-input"]').setValue('abc123');
+                wrapper.find('[data-test-id="formfield-password-input"]').setValue('foobarbazqux');
 
                 // Act
                 await wrapper.vm.onFormSubmit();
