@@ -29,12 +29,14 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-skipTo {
     position: absolute;
     top: 0;
     left: 0;
     text-align: center;
-    z-index: zIndex(high);
+    z-index: f.zIndex(high);
 
     .c-skipTo-link {
         &:active,
@@ -42,11 +44,11 @@ export default {
             display: block;
             margin: 4px;
             padding: 4px;
-            color: $color-content-link;
-            outline-color: $color-focus;
+            color: f.$color-content-link;
+            outline-color: f.$color-focus;
 
-            @include media('>mid') {
-                border-radius: $header-buttonFocus-borderRadius;
+            @include f.media('>mid') {
+                border-radius: common.$header-buttonFocus-borderRadius;
             }
         }
     }
@@ -56,7 +58,7 @@ export default {
     .c-skipTo-link {
         &:active,
         &:focus {
-            color: $color-content-link-inverse;
+            color: f.$color-content-link-inverse;
         }
     }
 }
