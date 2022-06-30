@@ -1,6 +1,6 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils/src/page.object';
 
-module.exports = class IconButton extends Page {
+export default class IconButton extends Page {
     constructor () {
         super('atom-folder', 'f-button--icon-button-component');
     }

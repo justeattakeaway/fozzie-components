@@ -4,6 +4,8 @@
  * @module f-services
  */
 
-const Page = require('./page.object');
+import Page from './page.object';
 
-module.exports = Page;
+export default {
+    Page
+}

@@ -1,6 +1,6 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils/src/page.object';
 
-module.exports = class LinkButton extends Page {
+class LinkButton extends Page {
     constructor () {
         super('atom-folder', 'f-button--link-button-component');
     }
@@ -12,3 +12,5 @@ module.exports = class LinkButton extends Page {
         return this.component.isClickable();
     }
 };
+
+export default new LinkButton();
