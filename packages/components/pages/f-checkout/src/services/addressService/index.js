@@ -143,8 +143,8 @@ function getAddressCoordsFromLocalStorage () {
  * @returns {boolean} - Whether the form values match
  */
 function doesAddressInStorageAndFormMatch (storedAddress, formAddress) {
-    return storedAddress.Line1 === formAddress.line1 && storedAddress.PostalCode === formAddress.postcode
-        && storedAddress.Line2 === formAddress.line2 && storedAddress.City === formAddress.locality;
+    return storedAddress.line1 === formAddress.line1 && storedAddress.postcode === formAddress.postcode
+        && storedAddress.line2 === formAddress.line2 && storedAddress.locality === formAddress.locality;
 }
 
 /**

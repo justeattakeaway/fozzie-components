@@ -510,23 +510,24 @@ export default {
             let address = null;
             if (addressService.isAddressInLocalStorage()) {
                 address = addressService.getAddressFromLocalStorage(tenant);
+
+                if (address) {
+                    state.address.line1 = address.line1;
+                    if (address.line2) { state.address.line2 = address.line2; }
+                    if (address.line3) { state.address.line3 = address.line3; }
+                    if (address.line4) { state.address.line4 = address.line4; }
+                }
             } else if (fulfilment?.location?.address?.lines) {
                 /* eslint-disable prefer-destructuring */
                 address = fulfilment.location.address;
+                if (address) {
+                    [state.address.line1, state.address.line2, state.address.line3, state.address.line4] = address.lines;
+                }
             }
 
             if (address) {
-                if (address.lines) {
-                    [state.address.line1, state.address.line2, state.address.line3, state.address.line4] = address.lines;
-                } else {
-                    state.address.line1 = address.line1;
-                    state.address.line2 = address.line2;
-                    state.address.line3 = address.line3;
-                    state.address.line4 = address.line4;
-                }
-
                 state.address.locality = address.locality;
-                state.address.postcode = address.postalCode;
+                state.address.postcode = address.postcode || address.postalCode || address.PostalCode;
                 state.address.administrativeArea = address.administrativeArea;
             }
 
