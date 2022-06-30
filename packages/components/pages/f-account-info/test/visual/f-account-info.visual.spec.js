@@ -6,81 +6,90 @@ forEach(['desktop', 'mobile'])
 .describe('f-account-info - Visual Tests', device => {
     let accountInfo;
 
-    beforeEach(() => {
+    beforeEach(async () => {
         if (device === 'mobile') {
-            browser.setWindowSize(414, 731);
+            await browser.setWindowSize(414, 731);
         }
 
         accountInfo = new AccountInfo();
+
+        await accountInfo.load();
+
+        await accountInfo.waitForComponent();
     });
 
-    it('should display the default component state', () => {
+    it('should display the default component state', async () => {
         // Act
-        accountInfo.load();
+        await accountInfo.load();
+        await accountInfo.waitForComponent();
 
         // Assert
-        browser.percyScreenshot('f-account-info - Base State', device);
+        await browser.percyScreenshot('f-account-info - Base State', device);
     });
 
     forEach(['firstName', 'lastName', 'phoneNumber', 'addressLine1', 'city', 'postcode'])
-    .it('should display an error message immediately when %s input has been deleted', field => {
+    .it('should display an error message immediately when %s input has been deleted', async field => {
         // Act
-        accountInfo.load();
-        accountInfo.clearBlurField(field);
-        accountInfo.clickOutOfInputField();
+        await accountInfo.load();
+        await accountInfo.clearBlurField(field);
+        await accountInfo.clickOutOfInputField();
 
         // Assert
-        browser.percyScreenshot(`f-account-info - ${field} Input Error Message`, device);
+        await browser.percyScreenshot(`f-account-info - ${field} Input Error Message`, device);
     });
 
     forEach(['firstName', 'lastName', 'phoneNumber', 'postcode'])
-    .it('should display the illegal %s error message immediately on click', field => {
+    .it('should display the illegal %s error message immediately on click', async field => {
         // Arrange
         const illegalInput = '123';
 
         // Act
-        accountInfo.load();
-        accountInfo.clearBlurField(field);
-        accountInfo.setFieldValue(field, illegalInput);
-        accountInfo.clickOutOfInputField();
+        await accountInfo.load();
+        await accountInfo.clearBlurField(field);
+        await accountInfo.setFieldValue(field, illegalInput);
+        await accountInfo.clickOutOfInputField();
 
         // Assert
-        browser.percyScreenshot(`f-account-info - illegal ${field} error message`, device);
+        await browser.percyScreenshot(`f-account-info - illegal ${field} error message`, device);
     });
 
     forEach([
         ['en-GB']
-    ]).it('should display the %s Error page if GET fails', locale => {
+    ]).it('should display the %s Error page if GET fails', async locale => {
         // Act
         accountInfo.load({ locale, apiState: 'get-details-fails' });
 
         // Assert
-        browser.percyScreenshot(`f-account-info - Load Error Page - ${locale}`, device);
+        await browser.percyScreenshot(`f-account-info - Load Error Page - ${locale}`, device);
     });
 
     forEach([
         ['en-GB']
-    ]).it('should display the %s Submit success alert if Submit succeed', locale => {
+    ]).it('should display the %s Submit success alert if Submit succeed', async locale => {
+        // Arrange
+        await accountInfo.load({ locale });
+        await accountInfo.clearBlurField('firstName');
+        await accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
+
         // Act
-        accountInfo.load({ locale });
-        accountInfo.clearBlurField('firstName');
-        accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
-        accountInfo.clickSaveButton();
+        await accountInfo.clickSaveButton();
 
         // Assert
-        browser.percyScreenshot(`f-account-info - Submit Success Alert - ${locale}`, device);
+        await browser.percyScreenshot(`f-account-info - Submit Success Alert - ${locale}`, device);
     });
 
     forEach([
         ['en-GB']
-    ]).it('should display the %s Submit error alert if Submit fails', locale => {
+    ]).it('should display the %s Submit error alert if Submit fails', async locale => {
+        // Arrange
+        await accountInfo.load({ locale, apiState: 'patch-details-fails' });
+        await accountInfo.clearBlurField('firstName');
+        await accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
+
         // Act
-        accountInfo.load({ locale, apiState: 'patch-details-fails' });
-        accountInfo.clearBlurField('firstName');
-        accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
-        accountInfo.clickSaveButton();
+        await accountInfo.clickSaveButton();
 
         // Assert
-        browser.percyScreenshot(`f-account-info - Submit Error Alert - ${locale}`, device);
+        await browser.percyScreenshot(`f-account-info - Submit Error Alert - ${locale}`, device);
     });
 });

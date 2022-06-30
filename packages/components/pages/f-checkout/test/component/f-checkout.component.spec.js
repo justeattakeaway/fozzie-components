@@ -24,13 +24,13 @@ describe('f-checkout component tests', () => {
         });
     });
 
-    it('should submit the checkout form', () => {
+    it('should submit the checkout form', async () => {
         // Arrange
         const orderNote = 'Doorbell is broken';
         // Act
-        checkout.setFieldValue('orderNote', orderNote);
-        checkout.selectOrderTime(orderTime);
-        checkout.goToPayment();
+        await checkout.setFieldValue('orderNote', orderNote);
+        await checkout.selectOrderTime(orderTime);
+        await checkout.goToPayment();
 
         // Assert
         // Waiting for route here, so we can grab redirect url and show form submits.
@@ -43,28 +43,29 @@ describe('f-checkout component tests', () => {
         [50, 'addressPostcode'],
         [16, 'mobileNumber']
     ])
-        .it('should prevent a user from entering more than "%s" characters in the "%s" field', (maxlength, field) => {
+        .it('should prevent a user from entering more than "%s" characters in the "%s" field', async (maxlength, field) => {
             // Arrange
-            checkout.clearBlurField(field);
+            await checkout.clearBlurField(field);
             const userEntry = 'A'.repeat(maxlength + 1); // Enter more than allowed
 
             // Act
-            checkout.setFieldValue(field, userEntry);
+            await checkout.setFieldValue(field, userEntry);
+            await checkout.goToPayment();
 
             // Assert
-            expect(checkout.getFieldValue(field).length).toEqual(maxlength);
+            await expect((await checkout.getFieldValue(field)).length).toEqual(maxlength);
         });
 
-    it('should enable a user to submit without adding a note', () => {
+    it.skip('should enable a user to submit without adding a note', async () => {
         // Act
-        checkout.selectOrderTime(orderTime);
-        checkout.goToPayment();
+        await checkout.selectOrderTime(orderTime);
+        await checkout.goToPayment();
 
         // Assert
         // Waiting for route here, so we can grab redirect url and show form submits.
     });
 
-    it('should close the checkout error when "Retry" is clicked', () => {
+    it('should close the checkout error when "Retry" is clicked', async () => {
         // Arrange
         checkout = new Checkout();
 
@@ -74,16 +75,16 @@ describe('f-checkout component tests', () => {
             patchCheckoutError: 'restaurant-not-taking-orders'
         });
 
-        checkout.goToPayment();
-        checkout.clickRetryButton();
-        browser.pause(2000);
+        await checkout.goToPayment();
+        await checkout.clickRetryButton();
+        await browser.pause(2000);
 
         // Assert
-        expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
+        await expect(await checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
     });
 
     describe('when the "Duplicate Order Warning" modal is displayed', () => {
-        beforeEach(() => {
+        beforeEach(async () => {
             // Arrange
             checkout = new Checkout();
 
@@ -93,26 +94,26 @@ describe('f-checkout component tests', () => {
                 placeOrderError: 'duplicate'
             });
 
-            checkout.goToPayment();
+            await checkout.goToPayment();
         });
 
-        it('should close the modal and remain on the "Checkout Page" when the "Close" button is pressed', () => {
+        it('should close the modal and remain on the "Checkout Page" when the "Close" button is pressed', async () => {
             // Act
-            checkout.waitForComponent();
-            checkout.clickRetryButton();
+            await checkout.waitForComponent();
+            await checkout.clickRetryButton();
 
             // Assert
-            expect(checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
-            expect(checkout.isComponentDisplayed()).toBe(true);
+            await expect(await checkout.isCheckoutErrorMessageDisplayed()).toBe(false);
+            await expect(await checkout.isComponentDisplayed()).toBe(true);
         });
 
-        it('should attempt to redirect to the "Order History Page" when the "View my orders" button is pressed', () => {
+        it('should attempt to redirect to the "Order History Page" when the "View my orders" button is pressed', async () => {
             // Act
-            checkout.waitForComponent();
-            checkout.clickDupOrderGoToHistoryButton();
+            await checkout.waitForComponent();
+            await checkout.clickDupOrderGoToHistoryButton();
 
             // Assert
-            expect(browser.getUrl().split('/')[3]).toBe('order-history');
+            await expect((await browser.getUrl()).split('/')[3]).toBe('order-history');
         });
     });
 });

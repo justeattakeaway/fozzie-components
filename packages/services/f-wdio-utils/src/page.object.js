@@ -16,13 +16,20 @@ class Page {
         this.waitForComponent(component);
     }
 
+    async load (component) {
+        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+        await this.open(pageUrl);
+        await this.waitForComponent(component);
+    }
+
     open (url) {
         browser.url(url);
         return this;
     }
 
-    waitForComponent (component, timeoutMs = 500) {
-        component.waitForExist({ timeout: timeoutMs });
+    async open (url) {
+        await browser.url(url);
+        return this;
     }
 
     composePath (queries) {
@@ -31,6 +38,19 @@ class Page {
         return `&args=${Object.keys(queries)
         .map(name => `${name}:${queries[name]}`)
         .join(';')}`;
+    }
+
+    waitForComponent (component, timeoutMs = 1000) {
+        component.waitForDisplayed({ timeout: timeoutMs });
+    }
+
+    async waitForComponent (component, timeoutMs = 1000) {
+        (await component).waitForDisplayed({ timeout: timeoutMs });
+    }
+
+    withQuery (name, value) {
+        this.path += `&${name}=${value}`;
+        return this;
     }
 
     /**
@@ -43,9 +63,38 @@ class Page {
         // Determines the OS
         const CONTROL = process.platform === 'darwin' ? 'Command' : '\uE009';
         const el = this.fields[fieldName].input;
+        el.waitForClickable();
         el.click();
         el.keys([CONTROL, 'a']);
+        el.waitUntil(async function () {
+            return (await this.isSelected())
+        });
         el.keys(['Backspace']);
+        el.waitUntil(async function () {
+            return (await this.getText()).length === 0
+        });
+    }
+
+    /**
+    * @description
+    * Selects all the text in the field and then performs a backspace to clear the field.
+    *
+    * @param {String} fieldName The name of the field
+    */
+    async clearBlurField (fieldName) {
+        // Determines the OS
+        const CONTROL = process.platform === 'darwin' ? 'Command' : '\uE009';
+        const el = this.fields[fieldName].input;
+        (await el).waitForClickable();
+        (await el).click();
+        (await el).keys([CONTROL, 'a']);
+        (await el).waitUntil(async function () {
+            return (await this.isSelected())
+        });
+        (await el).keys(['Backspace']);
+        (await el).waitUntil(async function () {
+            return (await this.getText()).length === 0
+        });
     }
 
     /**
@@ -75,6 +124,23 @@ class Page {
      */
     setFieldValue (fieldName, value) {
         this.fields[fieldName].input.setValue(value);
+        this.fields[fieldName].input.waitUntil(function () {
+            return this.getText() === value
+        });
+    }
+
+    /**
+     * @description
+     * Sets the value of a form field.
+     *
+     * @param {String} fieldName the name of the field
+     * @param {String} value the value set
+     */
+     async setFieldValue (fieldName, value) {
+        (await this.fields[fieldName].input).setValue(value);
+        (await this.fields[fieldName].input).waitUntil(async function () {
+            return (await this.getText() === value)
+        });
     }
 
     // eslint-disable-next-line class-methods-use-this

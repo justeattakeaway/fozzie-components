@@ -65,7 +65,7 @@
     "@justeat/f-media-element": "2.0.0",
     "@justeat/f-tabs": "2.1.0",
     "@justeat/f-trak": "0.7.1",
-    "@justeat/f-wdio-utils": "0.4.0",
+    "@justeat/f-wdio-utils": "0.12.0",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3",

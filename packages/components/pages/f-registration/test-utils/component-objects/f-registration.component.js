@@ -58,7 +58,7 @@ module.exports = class Registration extends Page {
         },
         password: {
             errorMessages: {
-                minLength: 'Password is less than four characters',
+                minLength: 'Password is less than ten characters',
                 missing: 'Please enter a password'
             },
             get input () { return $(PASSWORD_INPUT); },
@@ -78,12 +78,12 @@ module.exports = class Registration extends Page {
         }
     };
 
-    isInputFieldDisplayed (fieldName) {
-        return this.fields[fieldName].input.isDisplayed();
+    async isInputFieldDisplayed (fieldName) {
+        return (await this.fields[fieldName].input).isDisplayed();
     }
 
-    submit () {
-        this.createAccountButton.click();
+    async submit () {
+        await this.createAccountButton.click();
     }
 
     isEmptyErrorDisplayed (fieldName) {
@@ -106,7 +106,7 @@ module.exports = class Registration extends Page {
         return field.innerText === field.invalidFormat;
     }
 
-    canBeClicked (link) {
-        return this.LinksAndButtons[link].cta.isClickable();
+    async canBeClicked (link) {
+        return (await this.LinksAndButtons[link].cta).isClickable();
     }
 };

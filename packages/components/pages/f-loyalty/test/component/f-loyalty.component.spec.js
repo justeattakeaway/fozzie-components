@@ -2,14 +2,14 @@ const Loyalty = require('../../test-utils/component-objects/f-loyalty.component'
 
 describe('f-loyalty component tests', () => {
     let loyalty;
-    beforeEach(() => {
+    beforeEach(async () => {
         loyalty = new Loyalty();
 
-        loyalty.load();
+        await loyalty.load();
     });
 
-    it('should display the f-loyalty component', () => {
+    it('should display the f-loyalty component', async () => {
         // Assert
-        expect(loyalty.isComponentDisplayed()).toBe(true);
+        await expect(await loyalty.isComponentDisplayed()).toBe(true);
     });
 });

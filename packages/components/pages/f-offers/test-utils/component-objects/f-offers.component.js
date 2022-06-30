@@ -8,19 +8,19 @@ module.exports = class Offers extends Page {
 
     get component () { return $(COMPONENT); }
 
-    load () {
-        super.load(this.component);
+    async load () {
+        await super.load(this.component);
     }
 
-    open (url) {
-        super.open(url);
+    async open (url) {
+        await super.open(url);
     }
 
-    waitForComponent () {
-        super.waitForComponent(this.component);
+    async waitForComponent () {
+        await super.waitForComponent(this.component);
     }
 
-    isComponentDisplayed () {
-        return this.component.isDisplayed();
+    async isComponentDisplayed () {
+        return (await this.component).isDisplayed();
     }
 };

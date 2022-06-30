@@ -147,18 +147,20 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-footer {
-    background-color: $footer-bgColor;
-    color: $footer-textColor;
+    background-color: common.$footer-bgColor;
+    color: common.$footer-textColor;
 }
 
 .c-footer-light {
-    background-color: $footer-bgLight;
+    background-color: common.$footer-bgLight;
 }
 
 .c-footer-container {
     width: 100%;
-    max-width: #{$layout-max-width}px;
+    max-width: #{f.$layout-max-width}px;
     margin: 0 auto;
 }
 
@@ -166,10 +168,10 @@ export default {
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
-    padding: spacing(d);
+    padding: f.spacing(d);
 
-    @include media('>=wide') {
-        padding: spacing(f);
+    @include f.media('>=wide') {
+        padding: f.spacing(f);
         flex-flow: row nowrap;
     }
 }
@@ -180,7 +182,7 @@ export default {
 .c-footer-row--combined {
     flex-flow: row wrap;
 
-    @include media('>=wide') {
+    @include f.media('>=wide') {
         flex-flow: row nowrap;
     }
 }
@@ -191,7 +193,7 @@ export default {
 }
 
 .c-footer-row--noPadBelowWide {
-    @include media('<wide') {
+    @include f.media('<wide') {
         padding: 0;
     }
 }
@@ -203,13 +205,13 @@ export default {
 .c-footer-row--rightAlignedAboveWide {
     justify-content: flex-end;
 
-    @include media('<wide') {
+    @include f.media('<wide') {
         justify-content: flex-start;
     }
 }
 
 .c-footer-row-item--fullWidthAboveWide {
-    @include media('>=wide') {
+    @include f.media('>=wide') {
         flex: 1;
     }
 }
