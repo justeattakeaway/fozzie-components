@@ -9,14 +9,12 @@ module.exports = class CookieBanner extends Page {
 
     get cookiePolicyLink () { return $('[data-test-id="cookie-policy-link"]'); }
 
-    get cookiePolicyLinkHref () { return this.cookiePolicyLink.getAttribute('href'); }
-
     get cookieAcceptAllButton () { return $('[data-test-id="accept-all-cookies-button"]'); }
 
     get cookieAcceptNecessaryButton () { return $('[data-test-id="accept-necessary-cookies-button"]'); }
 
     async clickCookiePolicyLink () {
-        await this.cookiePolicyLink.click();
+        (await this.cookiePolicyLink).click();
     }
 
     async acceptCookies (value) {
@@ -26,6 +24,10 @@ module.exports = class CookieBanner extends Page {
         };
 
         return cookieType[value].click();
+    }
+
+    async getCookiePolicyUrl () {
+        return (await this.cookiePolicyLink).getAttribute('href');
     }
 
     async testTabOrder (tabOrder) {
