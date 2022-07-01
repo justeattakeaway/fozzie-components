@@ -1,7 +1,7 @@
-const { source } = require('axe-core');
-const { buildUrl } = require('./storybook-extensions');
+import { source } from 'axe-core';
+import { buildUrl } from './storybook-extensions';
 
-class Page {
+export default class Page {
     constructor (componentType, componentName, componentTag = 'data-test-id') {
         this.title = 'Component URLS';
         this.componentType = componentType;
@@ -10,16 +10,29 @@ class Page {
         this.path = '';
     }
 
-    load (component, queries) {
-        const pageUrl = buildUrl(this.componentType, this.componentName, this.composePath(queries));
-        this.open(pageUrl);
-        this.waitForComponent(component);
+    get component () {
+        return $(`[${this.componentTag}='${this.componentName}']`);
     }
 
-    async load (component) {
-        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+    async waitForComponent () {
+        return await this.component.waitForDisplayed();
+    }
+
+    async isComponentDisplayed () {
+        return await this.component.isDisplayed();
+    }
+
+    load (queries) {
+        const pageUrl = buildUrl(this.componentType, this.componentName, this.composePath(queries));
+        this.open(pageUrl);
+        this.waitForComponent();
+    }
+
+    async load (queries) {
+        const pageUrl = buildUrl(this.componentType, this.componentName, this.composePath(queries));
+
         await this.open(pageUrl);
-        await this.waitForComponent(component);
+        await this.waitForComponent();
     }
 
     open (url) {
@@ -40,12 +53,12 @@ class Page {
         .join(';')}`;
     }
 
-    waitForComponent (component, timeoutMs = 1000) {
-        component.waitForDisplayed({ timeout: timeoutMs });
+    waitForComponent (timeoutMs = 1000) {
+        this.component.waitForDisplayed({ timeout: timeoutMs });
     }
 
-    async waitForComponent (component, timeoutMs = 1000) {
-        (await component).waitForDisplayed({ timeout: timeoutMs });
+    async waitForComponent (timeoutMs = 1000) {
+        await this.component.waitForDisplayed({ timeout: timeoutMs });
     }
 
     withQuery (name, value) {
@@ -66,12 +79,12 @@ class Page {
         el.waitForClickable();
         el.click();
         el.keys([CONTROL, 'a']);
-        el.waitUntil(async function () {
-            return (await this.isSelected())
+        el.waitUntil(() => {
+            return this.isSelected()
         });
         el.keys(['Backspace']);
-        el.waitUntil(async function () {
-            return (await this.getText()).length === 0
+        el.waitUntil(() => {
+            return this.getText().length === 0
         });
     }
 
@@ -188,5 +201,3 @@ class Page {
         });
     };
 }
-
-module.exports = Page;
