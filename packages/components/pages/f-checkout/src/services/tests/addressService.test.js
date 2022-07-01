@@ -259,10 +259,10 @@ describe('addressService', () => {
             it('should return true', () => {
                 // Arrange
                 const storageAddress = {
-                    Line1: 'Fleet Place House',
-                    Line2: 'Farringdon',
-                    City: 'London',
-                    PostalCode: 'EC4M 7RF'
+                    line1: 'Fleet Place House',
+                    line2: 'Farringdon',
+                    locality: 'London',
+                    postcode: 'EC4M 7RF'
                 };
 
                 const formAddress = {
@@ -281,10 +281,10 @@ describe('addressService', () => {
             it('should return false', () => {
                 // Arrange
                 const storageAddress = {
-                    Line1: 'Fleet Place House',
-                    Line2: 'Farringdon',
-                    City: 'Newcastle',
-                    PostalCode: 'EC4M 7RF'
+                    line1: 'Fleet Place House',
+                    line2: 'Farringdon',
+                    locality: 'Newcastle',
+                    postcode: 'EC4M 7RF'
                 };
 
                 const formAddress = {
@@ -303,10 +303,10 @@ describe('addressService', () => {
             it('should return false', () => {
                 // Arrange
                 const storageAddress = {
-                    Line1: 'Fleet Place House',
-                    Line2: 'Farringdon',
-                    City: 'London',
-                    PostalCode: 'EC4M 7RF'
+                    line1: 'Fleet Place House',
+                    line2: 'Farringdon',
+                    locality: 'London',
+                    postcode: 'EC4M 7RF'
                 };
 
                 const formAddress = {
