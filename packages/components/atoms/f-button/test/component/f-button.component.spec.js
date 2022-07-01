@@ -2,10 +2,7 @@ import ActionButton from '../../test-utils/component-objects/f-button--action.co
 import LinkButton from '../../test-utils/component-objects/f-button--link.component';
 import IconButton from '../../test-utils/component-objects/f-button--icon.component';
 
-let button;
-
 describe('Action f-button component tests', () => {
-
     it('should display the f-button action component', async () => {
         // Act
         await ActionButton.load();
@@ -24,7 +21,6 @@ describe('Action f-button component tests', () => {
 });
 
 describe('Link f-button component tests', () => {
-
     it('should display the f-button link component', async () => {
         // Act
         await LinkButton.load();
@@ -43,7 +39,6 @@ describe('Link f-button component tests', () => {
 });
 
 describe('Icon f-button component tests', () => {
-
     it('should display the f-button icon component', async () => {
         // Act
         await IconButton.load();

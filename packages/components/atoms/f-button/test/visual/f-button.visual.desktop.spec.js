@@ -4,7 +4,6 @@ import IconButton from '../../test-utils/component-objects/f-button--icon.compon
 
 describe('f-button Desktop visual tests', () => {
     describe('primary, secondary, outline and ghost buttons in all 4 sizes', () => {
-
         it('should be displayed', async () => {
             // Act
             await ActionButton.load();
@@ -35,7 +34,6 @@ describe('f-button Desktop visual tests', () => {
 
         describe('in state with leading icon', () => {
             it('should be displayed', async () => {
-
                 // Act
                 await ActionButton.load({ hasIcon: 'leading' });
 
@@ -46,7 +44,6 @@ describe('f-button Desktop visual tests', () => {
 
         describe('in state with trailing icon', () => {
             it('should be displayed', async () => {
-
                 // Act
                 await ActionButton.load({ hasIcon: 'trailing' });
 
@@ -57,7 +54,6 @@ describe('f-button Desktop visual tests', () => {
     });
 
     describe('link button', () => {
-
         it('should be displayed in all 4 sizes', async () => {
             // Act
             await LinkButton.load();
@@ -108,7 +104,6 @@ describe('f-button Desktop visual tests', () => {
     });
 
     describe('all valid iconButton types in all sizes', () => {
-
         it('should be displayed', async () => {
             // Act
             await IconButton.load();

@@ -11,6 +11,6 @@ class ActionButton extends Page {
     async isComponentClickable () {
         return this.component.isClickable();
     }
-};
+}
 
 export default new ActionButton();
