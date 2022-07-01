@@ -28,8 +28,9 @@ export default class Page {
         this.waitForComponent();
     }
 
-    async load () {
-        const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
+    async load (queries) {
+        const pageUrl = buildUrl(this.componentType, this.componentName, this.composePath(queries));
+
         await this.open(pageUrl);
         await this.waitForComponent();
     }
