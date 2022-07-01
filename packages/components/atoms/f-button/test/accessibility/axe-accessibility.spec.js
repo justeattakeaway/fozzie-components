@@ -1,18 +1,13 @@
+import ActionButton from '../../test-utils/component-objects/f-button--action.component';
+import LinkButton from '../../test-utils/component-objects/f-button--link.component';
+import IconButton from '../../test-utils/component-objects/f-button--icon.component';
+
 const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
-
-const ActionButton = require('../../test-utils/component-objects/f-button--action.component');
-const LinkButton = require('../../test-utils/component-objects/f-button--link.component');
-const IconButton = require('../../test-utils/component-objects/f-button--icon.component');
-
-let button;
 
 describe('Accessibility tests', () => {
     it('a11y - should test f-button action component WCAG compliance', () => {
-        // Arrange
-        button = new ActionButton();
-
         // Act
-        button.load();
+        ActionButton.load();
         const axeResults = getAxeResults('f-button - action');
 
         // Assert
@@ -20,11 +15,8 @@ describe('Accessibility tests', () => {
     });
 
     it('a11y - should test f-button link component WCAG compliance', () => {
-        // Arrange
-        button = new LinkButton();
-
         // Act
-        button.load();
+        LinkButton.load();
         const axeResults = getAxeResults('f-button - link');
 
         // Assert
@@ -32,11 +24,8 @@ describe('Accessibility tests', () => {
     });
 
     it('a11y - should test f-button icon component WCAG compliance', () => {
-        // Arrange
-        button = new IconButton();
-
         // Act
-        button.load();
+        IconButton.load();
         const axeResults = getAxeResults('f-button - icon');
 
         // Assert
