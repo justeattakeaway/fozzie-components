@@ -1,6 +1,6 @@
-import Page from '@justeat/f-wdio-utils/src/page.object';
+import BasePage from '@justeat/f-wdio-utils';
 
-class LinkButton extends Page {
+class LinkButton extends BasePage.Page {
     constructor () {
         super('atom-folder', 'f-button--link-button-component');
     }

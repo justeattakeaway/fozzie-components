@@ -5,10 +5,6 @@ import IconButton from '../../test-utils/component-objects/f-button--icon.compon
 let button;
 
 describe('Action f-button component tests', () => {
-    beforeEach(() => {
-        // Arrange
-        // button = new ActionButton();
-    });
 
     it('should display the f-button action component', async () => {
         // Act
@@ -28,10 +24,6 @@ describe('Action f-button component tests', () => {
 });
 
 describe('Link f-button component tests', () => {
-    beforeEach(() => {
-        // Arrange
-        // button = new LinkButton();
-    });
 
     it('should display the f-button link component', async () => {
         // Act
@@ -51,10 +43,6 @@ describe('Link f-button component tests', () => {
 });
 
 describe('Icon f-button component tests', () => {
-    beforeEach(() => {
-        // Arrange
-        // button = new IconButton();
-    });
 
     it('should display the f-button icon component', async () => {
         // Act

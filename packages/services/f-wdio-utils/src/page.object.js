@@ -1,5 +1,5 @@
-const { source } = require('axe-core');
-const { buildUrl } = require('./storybook-extensions');
+import { source } from 'axe-core';
+import { buildUrl } from './storybook-extensions';
 
 export default class Page {
     constructor (componentType, componentName, componentTag = 'data-test-id') {
@@ -15,23 +15,23 @@ export default class Page {
     }
 
     async waitForComponent () {
-        return (await this.component).waitForDisplayed();
+        return await this.component.waitForDisplayed();
     }
 
     async isComponentDisplayed () {
-        return (await this.component).isDisplayed();
+        return await this.component.isDisplayed();
     }
 
     load (queries) {
         const pageUrl = buildUrl(this.componentType, this.componentName, this.composePath(queries));
         this.open(pageUrl);
-        this.waitForComponent(this.component);
+        this.waitForComponent();
     }
 
     async load () {
         const pageUrl = buildUrl(this.componentType, this.componentName, this.path);
         await this.open(pageUrl);
-        await this.waitForComponent(this.component);
+        await this.waitForComponent();
     }
 
     open (url) {
@@ -57,7 +57,7 @@ export default class Page {
     }
 
     async waitForComponent (timeoutMs = 1000) {
-        (await this.component).waitForDisplayed({ timeout: timeoutMs });
+        await this.component.waitForDisplayed({ timeout: timeoutMs });
     }
 
     withQuery (name, value) {
@@ -78,12 +78,12 @@ export default class Page {
         el.waitForClickable();
         el.click();
         el.keys([CONTROL, 'a']);
-        el.waitUntil(async function () {
-            return (await this.isSelected())
+        el.waitUntil(() => {
+            return this.isSelected()
         });
         el.keys(['Backspace']);
-        el.waitUntil(async function () {
-            return (await this.getText()).length === 0
+        el.waitUntil(() => {
+            return this.getText().length === 0
         });
     }
 

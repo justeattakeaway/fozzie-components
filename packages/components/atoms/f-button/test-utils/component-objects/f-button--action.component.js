@@ -1,6 +1,6 @@
-import Page from '@justeat/f-wdio-utils/src/page.object';
+import BasePage from '@justeat/f-wdio-utils';
 
-export default class ActionButton extends Page {
+class ActionButton extends BasePage.Page {
     constructor () {
         super('atom-folder', 'f-button--button-component');
     }
@@ -12,3 +12,5 @@ export default class ActionButton extends Page {
         return this.component.isClickable();
     }
 };
+
+export default new ActionButton();

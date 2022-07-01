@@ -2546,6 +2546,11 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.4.1.tgz#1ddbc5c771f053db41308cb4797a3a611f3af393"
   integrity sha512-3RHIDDC6OjPNCALHIjQvvIw2EsVCZH300SNmLdNip9IJQUtaKBcjfUolalXeP86jlg0UT2qPSMriEUyBs4o+ag==
 
+"@justeat/f-button@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-4.0.0.tgz#b6fa2d2f9b6313950f3737224b57533d0e0d7458"
+  integrity sha512-ofyIYSVHNo0uyc8Rq9+mqyvPZVyN0JvwK66R473m3jHZbYK74HNzXekrAXMT2WYwEnCM58LumkpQdffKi46AXA==
+
 "@justeat/f-card-with-content@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-card-with-content/-/f-card-with-content-1.0.0.tgz#d2e376e121a1b1c89418000a04cb9d5ef3134019"
@@ -2911,6 +2916,13 @@
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.11.0.tgz#64c4bb9343f2fded2b949ffb32051d1b1d2d1d37"
   integrity sha512-NJtQxJbQ5CAa6PaA6D9SuvKdMsk9yP5twjwhHnetELJgo7XiaVPcG5cvN+73NUl3QTMz0V7R5NjI3qk1RN/4qw==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
+
+"@justeat/f-wdio-utils@0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.12.0.tgz#28cf4295e080e410d2cb41467f804fae641f8687"
+  integrity sha512-LUj+rGxP2MJBNZ4ZTRTqh5lYPJciiDPixNsWDw1IO9UjwEfsu70isc/FssLk4kRs1Hs0M2vprHGLlX7GXj0kfw==
   dependencies:
     "@justeat/f-services" "1.7.0"
 
