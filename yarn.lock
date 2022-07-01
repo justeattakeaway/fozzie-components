@@ -2747,6 +2747,13 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
+"@justeat/f-wdio-utils@0.8.1":
+  version "0.8.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.8.1.tgz#2c9715657176e85ed1388d6bc3ea9256c776d504"
+  integrity sha512-Y+XIbQA+WkCkQmq6eAN+3Vk39J6MOKT5Dg1o2rnzdf52jYvashCc2kSChwzgdmsKJqsiWzD3ZNH4jKqq7i6bsg==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
+
 "@justeat/feature-management@^1.0.0":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@justeat/feature-management/-/feature-management-1.0.1.tgz#1c60864658400def14a9389b10af6c586b3099c7"
