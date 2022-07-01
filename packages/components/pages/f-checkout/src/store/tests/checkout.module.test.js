@@ -184,6 +184,10 @@ describe('CheckoutModule', () => {
             state = defaultState;
         });
 
+        afterEach(() => {
+            jest.resetAllMocks();
+        });
+
         describe(`${UPDATE_STATE} ::`, () => {
             it('should update state with delivery response.', () => {
                 // Act
@@ -245,6 +249,23 @@ describe('CheckoutModule', () => {
 
                 // Assert
                 expect(state.address).toEqual(defaultState.address);
+            });
+
+            it('should update address with stored address if it exists', () => {
+                // Arrange
+                jest.spyOn(addressService, 'isAddressInLocalStorage').mockReturnValue(true);
+                jest.spyOn(addressService, 'getAddressFromLocalStorage').mockReturnValue({
+                    line1: 'Flat 101',
+                    line2: 'Windsor House',
+                    locality: 'London',
+                    postcode: 'NW1 4DE'
+                });
+
+                // Act
+                mutations[UPDATE_STATE](state, { ...checkoutDelivery, tenant: 'uk' });
+
+                // Assert
+                expect(state.address).toMatchSnapshot();
             });
         });
 
@@ -1166,7 +1187,16 @@ describe('CheckoutModule', () => {
                     state.authToken = authToken;
 
                     Object.defineProperty(window, 'localStorage', { value: storageMock });
-                    window.localStorage.setItem('je-full-address-details', JSON.stringify(storedAddress));
+
+                    jest.spyOn(addressService, 'isAddressInLocalStorage').mockReturnValue(true);
+                    jest.spyOn(addressService, 'getAddressFromLocalStorage').mockReturnValue({
+                        line1: storedAddress.Line1,
+                        line2: storedAddress.Line2,
+                        locality: storedAddress.City,
+                        postcode: storedAddress.PostalCode,
+                        Field1: '51.529747',
+                        Field2: '-0.142396'
+                    });
                 });
 
                 afterEach(() => {
@@ -1240,13 +1270,20 @@ describe('CheckoutModule', () => {
                         const setItemSpy = jest.spyOn(window.localStorage, 'setItem');
                         jest.spyOn(addressService, 'doesAddressInStorageAndFormMatch').mockImplementation(() => false);
 
+                        context.state.address = {
+                            line1: 'Fleet Place House',
+                            line2: 'Farringdon',
+                            locality: 'London',
+                            postcode: 'EC4M 7RF'
+                        };
+
                         // Act
                         await getGeoLocation(context, payload);
 
                         // Assert
                         expect(setItemSpy).toHaveBeenCalledWith(
                             'je-full-address-details',
-                            '{"PostalCode":"EC4M 7RF","Line1":"Fleet Place House","Line2":"Farringdon","Line3":null,"City":"London"}'
+                            '{"PostalCode":"EC4M 7RF","Line1":"Fleet Place House","Line2":"Farringdon","City":"London"}'
                         );
                     });
                 });

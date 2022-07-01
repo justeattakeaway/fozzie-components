@@ -18,7 +18,14 @@ function formatAddress (address) {
         line2: address.line2 || '',
         locality: address.City || address.locality || '',
         administrativeArea: address.Line4 || address.administrativeArea || '',
-        postcode: address.PostalCode || address.ZipCode || address.postalCode || ''
+        postcode: address.postcode || address.PostalCode || address.ZipCode || address.postalCode || '',
+        ...(address.geolocation && { geolocation: address.geolocation }),
+        ...((address.Field1 || address.Field2) && {
+            geolocation: {
+                latitude: address.Field1,
+                longitude: address.Field2
+            }
+        })
     };
 }
 

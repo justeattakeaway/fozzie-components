@@ -11,6 +11,14 @@ Latest (add to next release)
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
 
+v3.33.0
+------------------------------
+*June 29, 2022*
+
+### Fixed
+- Address mapping from local storage.
+
+
 v3.32.0
 ------------------------------
 *June 22, 2022*
