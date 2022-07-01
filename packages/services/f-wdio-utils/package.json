@@ -1,9 +1,12 @@
 {
   "name": "@justeat/f-wdio-utils",
   "description": "Fozzie Wdio Utils - webdriverIO page object",
-  "version": "0.12.0",
+  "version": "1.0.0",
+  "main": "dist/f-wdio-utils.umd.js",
+  "module": "dist/f-wdio-utils.es.js",
+  "source": "src/index.js",
   "files": [
-    "src/"
+    "dist"
   ],
   "publishConfig": {
     "access": "public"
@@ -27,6 +30,7 @@
     "fozzie"
   ],
   "scripts": {
+    "build": "vite build",
     "prepublishOnly": "yarn lint",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix"

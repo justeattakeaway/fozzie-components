@@ -1,9 +1,4 @@
-/**
- * @overview Fozzie's collection of shared javascript modules
- *
- * @module f-services
- */
+import Page from './page.object';
 
-const Page = require('./page.object');
+export default Page;
 
-module.exports = Page;

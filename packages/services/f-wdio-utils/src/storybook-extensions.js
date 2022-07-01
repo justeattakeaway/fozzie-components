@@ -1,4 +1,6 @@
-const buildUrl = (componentType, componentName, path) => {
+
+/* eslint-disable import/prefer-default-export */
+export const buildUrl = (componentType, componentName, path) => {
     let url = '/iframe.html?id=components-';
 
     switch (componentType.toLowerCase()) {
@@ -31,8 +33,4 @@ const buildUrl = (componentType, componentName, path) => {
     url += path;
 
     return url;
-};
-
-module.exports = {
-    buildUrl
 };
