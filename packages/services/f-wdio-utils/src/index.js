@@ -5,10 +5,7 @@
  */
 
 import Page from './page.object';
-import { buildUrl } from './storybook-extensions';
 
 
-export default {
-    Page,
-    buildUrl
-}
+export default Page;
+
