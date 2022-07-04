@@ -11,6 +11,14 @@ Latest (add to next release)
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
 
+v3.33.1
+------------------------------
+*July 4, 2022*
+
+### Updated
+- Get checkout failure now error instead of warning
+
+
 v3.33.0
 ------------------------------
 *June 29, 2022*
