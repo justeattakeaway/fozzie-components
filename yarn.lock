@@ -19,6 +19,14 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
+"@axe-core/webdriverio@4.4.3":
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/@axe-core/webdriverio/-/webdriverio-4.4.3.tgz#e264af18b45f838c56b3212dfb60f75a6980e51c"
+  integrity sha512-tQfunlbY+x9LCXKxuZk2lszDc3dZ+gbOKMqF/eOhli2BULPi/IOJ5BirR4i4CQW1GJXDUiSOhTXZKOhYrfldoA==
+  dependencies:
+    axe-core "^4.4.1"
+    cssesc "^3.0.0"
+
 "@babel/cli@7.14.8":
   version "7.14.8"
   resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.14.8.tgz#fac73c0e2328a8af9fd3560c06b096bfa3730933"
@@ -2726,13 +2734,6 @@
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
-"@justeat/f-wdio-utils@0.11.0":
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.11.0.tgz#64c4bb9343f2fded2b949ffb32051d1b1d2d1d37"
-  integrity sha512-NJtQxJbQ5CAa6PaA6D9SuvKdMsk9yP5twjwhHnetELJgo7XiaVPcG5cvN+73NUl3QTMz0V7R5NjI3qk1RN/4qw==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
 "@justeat/f-wdio-utils@0.12.0":
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.12.0.tgz#28cf4295e080e410d2cb41467f804fae641f8687"
@@ -2744,13 +2745,6 @@
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.4.0.tgz#6916a392777c88bc84e0d5a258e7e94c64ff7800"
   integrity sha512-CQ69zuqvPGIAmDAF+EZM9dnBoIizBIMrl4L2tpvk27oRPKycQGgFIjfq1v/wTgVNwVXVJNCEG6zEKNjccSl+Ew==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
-"@justeat/f-wdio-utils@0.8.1":
-  version "0.8.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.8.1.tgz#2c9715657176e85ed1388d6bc3ea9256c776d504"
-  integrity sha512-Y+XIbQA+WkCkQmq6eAN+3Vk39J6MOKT5Dg1o2rnzdf52jYvashCc2kSChwzgdmsKJqsiWzD3ZNH4jKqq7i6bsg==
   dependencies:
     "@justeat/f-services" "1.7.0"
 
@@ -7389,17 +7383,12 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
 
-axe-core@4.3.3:
-  version "4.3.3"
-  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.3.3.tgz#b55cd8e8ddf659fe89b064680e1c6a4dceab0325"
-  integrity sha512-/lqqLAmuIPi79WYfRpy2i8z+x+vxU3zX2uAm0gs1q52qTuKwolOj1P8XbufpXcsydrpKx2yGn2wzAnxCMV86QA==
-
 axe-core@4.3.5:
   version "4.3.5"
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.3.5.tgz#78d6911ba317a8262bfee292aeafcc1e04b49cc5"
   integrity sha512-WKTW1+xAzhMS5dJsxWkliixlO/PqC4VhmO9T4juNYcaTg9jzWiJsou6m5pxWYGfigWbwzJWeFY6z47a+4neRXA==
 
-axe-core@^4.2.0:
+axe-core@^4.2.0, axe-core@^4.4.1:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.4.2.tgz#dcf7fb6dea866166c3eab33d68208afe4d5f670c"
   integrity sha512-LVAaGp/wkkgYJcjmHsoKx4juT1aQvJyPcW09MLCjVTh3V2cc6PnyempiLMNH5iMdfIX/zdbjUx2KDjMLCTdPeA==
