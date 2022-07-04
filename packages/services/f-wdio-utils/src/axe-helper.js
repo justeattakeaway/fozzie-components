@@ -2,10 +2,11 @@ const AxeBuilder = require('@axe-core/webdriverio').default;
 const fs = require('fs');
 const AxeReports = require('axe-reports');
 const { exec } = require('child_process');
-const { getTestConfiguration } = require ('../../../../test/configuration/configuration-helper');   
+const { getTestConfiguration } = require('../../../../test/configuration/configuration-helper');
+
 const configuration = getTestConfiguration();
 
-export default new class AxeHelper {
+class AxeHelper {
     /**
      * Creates a CSV build artifact of the pages accessibility violations.
      * @param {Object} results - The accessibility violations.
@@ -39,7 +40,7 @@ export default new class AxeHelper {
 
         AxeReports.processResults(results, 'csv', filePath, false);
         console.error(`Expected no accessibility violations. Found: ${results.violations.length}`);
-    };
+    }
 
     /**
      * Runs accessibility test results against a set of rules defined.
@@ -51,12 +52,13 @@ export default new class AxeHelper {
                         .withTags(['wcag21a', 'wcag21aa', 'wcag143', 'cat.color', 'cat.aria'])
                         .disableRules(['duplicate-id', 'html-has-lang', 'aria-allowed-role', 'color-contrast-enhanced']);
         try {
-          const results = await builder.analyze();
-          
-          return results;
+            const results = await builder.analyze();
 
+            return results;
         } catch (e) {
-          console.error(e);
+            throw new Error('Unable to get accessibility test results.');
         }
-    };
+    }
 }
+
+export default new AxeHelper();
