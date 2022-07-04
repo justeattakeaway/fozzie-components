@@ -1,4 +1,4 @@
-import FormField from'../../test-utils/component-objects/f-form-field.component';
+import FormField from '../../test-utils/component-objects/f-form-field.component';
 
 describe('Accessibility tests', () => {
     it('a11y - should test f-formField component WCAG compliance', async () => {

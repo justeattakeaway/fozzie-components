@@ -6,6 +6,6 @@ class FormField extends Page {
     }
 
     get component () { return $('[data-test-id="formfield-container"]'); }
-};
+}
 
 export default new FormField();

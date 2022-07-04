@@ -4,6 +4,6 @@ class Popover extends Page {
     constructor () {
         super('atom', 'popover-component');
     }
-};
+}
 
 export default new Popover();

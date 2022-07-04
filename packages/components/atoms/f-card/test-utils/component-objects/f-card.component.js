@@ -4,6 +4,6 @@ class Card extends Page {
     constructor () {
         super('atom', 'card-component');
     }
-};
+}
 
 export default new Card();

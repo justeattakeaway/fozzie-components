@@ -1,4 +1,4 @@
-import Page from'@justeat/f-wdio-utils';
+import Page from '@justeat/f-wdio-utils';
 
 class ImageTile extends Page {
     constructor () {
@@ -8,6 +8,6 @@ class ImageTile extends Page {
     async isComponentClickable () {
         return this.component.isClickable();
     }
-};
+}
 
 export default new ImageTile();

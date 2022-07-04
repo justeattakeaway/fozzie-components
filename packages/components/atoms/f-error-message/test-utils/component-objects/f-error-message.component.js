@@ -4,6 +4,6 @@ class ErrorMessage extends Page {
     constructor () {
         super('atom', 'error-message-component');
     }
-};
+}
 
 export default new ErrorMessage();

@@ -4,6 +4,6 @@ class Link extends Page {
     constructor () {
         super('atom', 'v-link-component');
     }
-};
+}
 
 export default new Link();

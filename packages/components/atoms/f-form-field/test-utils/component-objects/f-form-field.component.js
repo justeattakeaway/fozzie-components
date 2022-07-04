@@ -28,6 +28,6 @@ class FormField extends Page {
     async getUserInput () {
         return this.input.getValue();
     }
-};
+}
 
 export default new FormField();

@@ -4,7 +4,7 @@ describe('Accessibility tests', () => {
     it('a11y - should test f-image-tile component WCAG compliance', async () => {
         // Arrange
         await ImageTile.load();
-        
+
         // Act
         const axeResults = await ImageTile.getAxeResults('f-image-tile');
 
