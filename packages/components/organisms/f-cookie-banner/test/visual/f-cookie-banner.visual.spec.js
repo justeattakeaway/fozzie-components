@@ -12,10 +12,10 @@ forEach([
     beforeEach(async () => {
         // Arrange
         if (device === 'mobile') {
-            browser.setWindowSize(414, 731);
+            await browser.setWindowSize(414, 731);
         }
         cookieBanner = new CookieBanner();
-        cookieBanner.open('/');
+        await cookieBanner.open('/');
         await browser.deleteCookies();
     });
 

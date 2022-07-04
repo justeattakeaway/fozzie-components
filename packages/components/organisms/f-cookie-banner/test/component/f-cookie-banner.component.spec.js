@@ -7,7 +7,7 @@ describe('f-cookie-banner component tests', () => {
 
     beforeEach(async () => {
         cookieBanner = new CookieBanner();
-        cookieBanner.open('/');
+        await cookieBanner.open('/');
         await browser.deleteCookies();
     });
 
@@ -25,8 +25,8 @@ describe('f-cookie-banner component tests', () => {
         const [bannerConsent] = (await browser.getCookies()).filter(cookie => cookie.name === 'je-cookieConsent');
 
         // Assert
-        expect(bannerCookie.value).toBe('130315');
-        expect(bannerConsent.value).toBe(expectedCookieValue);
+        await expect(await bannerCookie.value).toBe('130315');
+        await expect(await bannerConsent.value).toBe(expectedCookieValue);
     });
 
     forEach([
@@ -35,12 +35,12 @@ describe('f-cookie-banner component tests', () => {
         'it-IT',
         'en-GB'
     ])
-    .it('should display the f-cookie-banner component for "%s"', locale => {
+    .it('should display the f-cookie-banner component for "%s"', async locale => {
         // Act
-        cookieBanner.load({ locale });
+        await cookieBanner.load({ locale });
 
         // Assert
-        expect(cookieBanner.isComponentDisplayed()).toBe(true);
+        await expect(await cookieBanner.isComponentDisplayed()).toBe(true);
     });
 
     forEach([
@@ -49,13 +49,11 @@ describe('f-cookie-banner component tests', () => {
         ['en-IE', 'ie/info/cookies-policy'],
         ['it-IT', 'it/informazioni/politica-dei-cookie']
     ])
-    .it('should go to the correct cookie policy page', (locale, expectedCookiePolicyUrl) => {
+    .it('should go to the correct cookie policy page', async (locale, expectedCookiePolicyUrl) => {
         // Act
-        cookieBanner.load({ locale });
-        cookieBanner.clickCookiePolicyLink();
-        browser.switchWindow(new RegExp(`^.*${expectedCookiePolicyUrl}.*$`));
+        await cookieBanner.load({ locale });
 
         // Assert
-        expect(browser.getUrl()).toContain(expectedCookiePolicyUrl);
+        await expect(await cookieBanner.getCookiePolicyUrl()).toContain(expectedCookiePolicyUrl);
     });
 });
