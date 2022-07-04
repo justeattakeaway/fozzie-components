@@ -3,9 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-Latest (add to next release)
+v5.1.0
 ------------------------------
-*June 20, 2021*
+*July 4, 2022*
+
+### Changed
+- Update f-wdio-utils to v1.1.0 to use new Axe Core implementation.
+- Accessibility tests to be async.
+- Specs to ES6 syntax
 
 ### Fixed
 - Missing/duplicated storybook props.

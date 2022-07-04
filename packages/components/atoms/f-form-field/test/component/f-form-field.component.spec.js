@@ -1,20 +1,18 @@
-const FormField = require('../../test-utils/component-objects/f-form-field.component');
-
-const formfield = new FormField();
+import FormField from'../../test-utils/component-objects/f-form-field.component';
 
 describe('f-form-field component tests', () => {
     beforeEach(async () => {
-        await formfield.load();
+        await FormField.load();
     });
 
     it('should display f-form-field', async () => {
         // Assert
-        await expect(await formfield.isComponentDisplayed()).toBe(true);
+        await expect(await FormField.isComponentDisplayed()).toBe(true);
     });
 
     it('should display Label', async () => {
         // Assert
-        await expect(await formfield.isLabelDisplayed()).toBe(true);
+        await expect(await FormField.isLabelDisplayed()).toBe(true);
     });
 
     it('should display user input', async () => {
@@ -24,9 +22,9 @@ describe('f-form-field component tests', () => {
         };
 
         // Act
-        await formfield.addUserInput(userInput);
+        await FormField.addUserInput(userInput);
 
         // Assert
-        await expect(await formfield.getUserInput()).toEqual('abcd');
+        await expect(await FormField.getUserInput()).toEqual('abcd');
     });
 });

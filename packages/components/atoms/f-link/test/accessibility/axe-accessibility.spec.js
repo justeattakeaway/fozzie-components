@@ -1,16 +1,12 @@
-import { getAxeResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
-
-const Link = require('../../test-utils/component-objects/f-link.component');
-
-const link = new Link();
+import Link from '../../test-utils/component-objects/f-link.component';
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        link.load();
-    });
-    it('a11y - should test f-link component WCAG compliance', () => {
+    it('a11y - should test f-link component WCAG compliance', async () => {
+        // Arrange
+        await Link.load();
+        
         // Act
-        const axeResults = getAxeResults('f-link');
+        const axeResults = await Link.getAxeResults('f-link');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

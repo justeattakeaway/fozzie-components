@@ -1,7 +1,9 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class Link extends Page {
+class Link extends Page {
     constructor () {
         super('atom', 'v-link-component');
     }
 };
+
+export default new Link();

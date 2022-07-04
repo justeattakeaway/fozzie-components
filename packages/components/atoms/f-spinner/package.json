@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-spinner",
   "description": "Fozzie Spinner - loading indicator",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "dist/f-spinner.umd.min.js",
   "maxBundleSize": "5kB",
   "files": [
@@ -53,7 +53,7 @@
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-    "@justeat/f-wdio-utils": "0.12.0",
+    "@justeat/f-wdio-utils": "1.1.0",
     "@justeat/fozzie": "9.0.0-beta.2",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",

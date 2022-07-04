@@ -1,14 +1,11 @@
-const FilterPill = require('../../test-utils/component-objects/f-filter-pill.component');
-
-const filterPill = new FilterPill();
+import FilterPill from '../../test-utils/component-objects/f-filter-pill.component';
 
 describe('f-filter-pill component tests', () => {
-    beforeEach(async () => {
-        await filterPill.load();
-    });
-
     it('should display the f-filter-pill component', async () => {
+        // Arrange
+        await FilterPill.load();
+        
         // Assert
-        await expect(await filterPill.isComponentDisplayed()).toBe(true);
+        await expect(await FilterPill.isComponentDisplayed()).toBe(true);
     });
 });

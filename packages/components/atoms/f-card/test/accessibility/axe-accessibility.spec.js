@@ -1,17 +1,12 @@
-const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
-
-const Card = require('../../test-utils/component-objects/f-card.component');
-
-const card = new Card();
+import Card from '../../test-utils/component-objects/f-card.component';
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        card.load();
-    });
-
-    it('a11y - should test f-card component WCAG compliance', () => {
+    it('a11y - should test f-card component WCAG compliance', async () => {
+        // Arrange
+        await Card.load();
+        
         // Act
-        const axeResults = getAxeResults('f-card');
+        const axeResults = await Card.getAxeResults('f-card');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

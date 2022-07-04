@@ -1,6 +1,6 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class FormField extends Page {
+class FormField extends Page {
     constructor () {
         super('atom-folder', 'f-form-field--text-input-default-component');
     }
@@ -29,3 +29,5 @@ module.exports = class FormField extends Page {
         return this.input.getValue();
     }
 };
+
+export default new FormField();
