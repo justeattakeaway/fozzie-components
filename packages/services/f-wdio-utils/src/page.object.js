@@ -1,4 +1,4 @@
-import { source } from 'axe-core';
+import AxeHelper from './axe-helper';
 import { buildUrl } from './storybook-extensions';
 
 export default class Page {
@@ -170,34 +170,14 @@ export default class Page {
         return tabOrderValue;
     }
 
-    /**
-     * Runs accessibility test results against a set of rules defined.
-     *
-     * @returns {ThenArg<ReturnType<BrowserCommandsType["executeAsync"]>>}
-     */
-    getAccessibilityTestResults = () => {
-        browser.execute(source);
 
-        // https://github.com/dequelabs/axe-core/blob/develop/doc/API.md
+    async getAxeResults (componentName) {
+        const results = await AxeHelper.getAccessibilityTestResults();
 
-        return browser.executeAsync(done => {
-            const options = {
-                runOnly: {
-                    type: 'tag',
-                    values: ['wcag21a', 'wcag21aa', 'wcag143', 'cat.color', 'cat.aria']
-                },
-                rules: {
-                    'duplicate-id': { enabled: false },
-                    // Ignoring as lang attribute is provided via a mixin, however Axe still fails.
-                    'html-has-lang': { enabled: false },
-                    'aria-allowed-role': { enabled: false }
-                }
-            };
+        if (results.violations.length > 0) {
+            AxeHelper.processResults(results, componentName);
+        }
 
-            axe.run(document, options, (err, results) => {
-                if (err) throw err;
-                done(results);
-            });
-        });
+        return results;
     };
 }

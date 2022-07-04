@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-wdio-utils",
   "description": "Fozzie Wdio Utils - webdriverIO page object",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "dist/f-wdio-utils.umd.js",
   "module": "dist/f-wdio-utils.es.js",
   "source": "src/index.js",
@@ -39,10 +39,10 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
+    "@axe-core/webdriverio": "4.4.3",
     "@justeat/f-services": "1.7.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "4.5.16",
-    "axe-core": "4.3.3"
+    "@vue/cli-plugin-babel": "4.5.16"
   }
 }
