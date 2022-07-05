@@ -1,14 +1,11 @@
-const Popover = require('../../test-utils/component-objects/f-popover.component');
-
-const popover = new Popover();
+import Popover from '../../test-utils/component-objects/f-popover.component';
 
 describe('f-popover component tests', () => {
-    beforeEach(async () => {
-        await popover.load();
-    });
-
     it('should display the f-popover component', async () => {
+        // Arrange
+        await Popover.load();
+
         // Assert
-        await expect(await popover.isComponentDisplayed()).toBe(true);
+        await expect(await Popover.isComponentDisplayed()).toBe(true);
     });
 });

@@ -1,16 +1,12 @@
-const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
-
-const Popover = require('../../test-utils/component-objects/f-popover.component');
-
-const popover = new Popover();
+import Popover from '../../test-utils/component-objects/f-popover.component';
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        popover.load();
-    });
-    it('a11y - should test f-popover component WCAG compliance', () => {
+    it('a11y - should test f-popover component WCAG compliance', async () => {
+        // Arrange
+        await Popover.load();
+
         // Act
-        const axeResults = getAxeResults('f-popover');
+        const axeResults = await Popover.getAxeResults('f-popover');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

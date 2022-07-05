@@ -1,7 +1,9 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class ErrorMessage extends Page {
+class ErrorMessage extends Page {
     constructor () {
         super('atom', 'error-message-component');
     }
-};
+}
+
+export default new ErrorMessage();
