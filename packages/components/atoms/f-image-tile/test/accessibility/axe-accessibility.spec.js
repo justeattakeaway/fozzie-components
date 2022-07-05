@@ -1,16 +1,12 @@
-import { getAxeResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
-
-const ImageTile = require('../../test-utils/component-objects/f-image-tile.component');
-
-const imageTile = new ImageTile();
+import ImageTile from '../../test-utils/component-objects/f-image-tile.component';
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        imageTile.load();
-    });
-    it('a11y - should test f-image-tile component WCAG compliance', () => {
+    it('a11y - should test f-image-tile component WCAG compliance', async () => {
+        // Arrange
+        await ImageTile.load();
+
         // Act
-        const axeResults = getAxeResults('f-image-tile');
+        const axeResults = await ImageTile.getAxeResults('f-image-tile');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

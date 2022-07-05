@@ -1,14 +1,11 @@
-const Link = require('../../test-utils/component-objects/f-link.component');
-
-const link = new Link();
+import Link from '../../test-utils/component-objects/f-link.component';
 
 describe('f-link component tests', () => {
-    beforeEach(async () => {
-        await link.load();
-    });
-
     it('should display the f-link component', async () => {
+        // Arrange
+        await Link.load();
+
         // Assert
-        await expect(await link.isComponentDisplayed()).toBe(true);
+        await expect(await Link.isComponentDisplayed()).toBe(true);
     });
 });

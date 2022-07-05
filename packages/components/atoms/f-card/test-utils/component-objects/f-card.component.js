@@ -1,7 +1,9 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class Card extends Page {
+class Card extends Page {
     constructor () {
         super('atom', 'card-component');
     }
-};
+}
+
+export default new Card();
