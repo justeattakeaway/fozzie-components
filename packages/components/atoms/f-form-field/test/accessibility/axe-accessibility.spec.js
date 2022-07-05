@@ -1,17 +1,11 @@
-const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
-
-const FormField = require('../../test-utils/component-objects/f-form-field.component');
-
-const formfield = new FormField();
+import FormField from '../../test-utils/component-objects/f-form-field.component';
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        formfield.load();
-    });
-
-    it('a11y - should test f-formField component WCAG compliance', () => {
+    it('a11y - should test f-formField component WCAG compliance', async () => {
+        // Arrange
+        await FormField.load();
         // Act
-        const axeResults = getAxeResults('f-form-field');
+        const axeResults = await FormField.getAxeResults('f-form-field');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

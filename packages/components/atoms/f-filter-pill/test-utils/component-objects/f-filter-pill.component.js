@@ -1,7 +1,9 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class FilterPill extends Page {
+class FilterPill extends Page {
     constructor () {
         super('atom', 'filter-pill-component');
     }
-};
+}
+
+export default new FilterPill();
