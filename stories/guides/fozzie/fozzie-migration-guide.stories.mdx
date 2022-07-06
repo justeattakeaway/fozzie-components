@@ -1,0 +1,145 @@
+<Meta title="Documentation/Guides/Fozzie/Fozzie Migration Guide"/>
+
+# Fozzie version 9 Migration guide for consuming applications
+
+If you are upgrading from an older version of fozzie – i.e v8 and older – then this migration guide will help you update to the latest version (v9) which uses `dart-sass` as opposed to `node-sass`
+
+<a name="scheme"></a><h2>Prerequisites</h2>
+
+Before you get started with the Fozzie SCSS helper library there are a few things you need to know in order to get up and running.
+
+From v9 and above, you'll need the following:
+
+1. [dart-sass](https://sass-lang.com/dart-sass):
+    - Fozzie makes use of new SCSS syntax to compile your Sass (namely `@use` & `@forward`). The [sass](https://www.npmjs.com/package/sass) module now uses dart-sass by default, so if you use the latest version of this module, you'll be fine.
+2. [webpack](https://webpack.js.org/) (or a similar file bundler)
+    - For file resolution paths into the `node_modules` folder. If you aren't using Webpack, then you can use something like [ParcelJs](https://parceljs.org/) instead, which also supports this.
+
+<a name="scheme"></a><h2>Removing node-sass in favour of sass</h2>
+
+If you’re a user of Node Sass, migrating to Dart Sass is straightforward: just replace `node-sass` in your package.json file with `sass`. Both packages expose the same JavaScript API.
+
+```
+// Package.json example
+
+Before:
+---
+{
+  "name": "Example",
+  "version": "0.0.1",
+  "description": "Example",
+  "devDependencies": {
+    "node-sass": "5.0.0", << Old node-sass.
+  }
+}
+
+After:
+---
+{
+  "name": "Example",
+  "version": "0.0.1",
+  "description": "Example",
+  "devDependencies": {
+    "sass": "1.52.3", << node-sass changed for `sass`
+  }
+}
+```
+
+If you have an old version of `fozzie` installed within your application at this point, you will likely see some syntax errors. In order to resolve these issue you will need to move to `v9` of `fozzie` which currently sits in [beta](https://www.npmjs.com/package/@justeat/fozzie/v/9.0.0-beta.5).
+This version of `fozzie` contains changes which will automatically resolve those errors.
+
+<a name="scheme"></a><h2>How to move from `@import` to `@use` & `@forward`</h2>
+
+Once you have moved over to `dart-sass` and switched to the new version of fozzie (v9). You can begin to update your application with the new `@use` & `@forward` syntax. If you are unfamiliar with how `@use` & `@forward` work there's a useful video found [here](https://www.youtube.com/watch?v=CR-a8upNjJ0&ab_channel=KevinPowell) worth watching first.
+
+Assuming a common Vue application structure, we will look at each individually:
+
+```
+┣ layouts
+    ┣ default.vue
+    ┣ anotherPage.vue
+┣ assets
+    ┣ scss
+        ┣ common.scss
+```
+
+### Common.scss
+
+```
+┣ assets
+    ┣ scss
+        ┣ common.scss
+```
+
+You may have a file like `Common.scss` that will usually contain all of the shared styles required throughout an application. If this is the case you should have a setup like below which effectively imports `fozzie` and other helper files making them globally available throughout the application.
+
+#### Old way (@import):
+```
+@import '~@justeat/fozzie/src/scss/fozzie';
+
+@include normalize();
+@include reset();
+@include typography();
+@include links();
+@include trumps-utilities();
+```
+
+#### New way (@use / @forward):
+
+With the new way to import or "use / forward" scss files we can change the above to the following:
+
+```
+@use '~@justeat/fozzie/src/scss/fozzie' as f;
+
+@include f.normalize();
+@include f.reset();
+@include f.typography();
+@include f.links();
+@include f.trumps-utilities();
+```
+
+`Note` the namespacing references, there's more on how namespacing works [here](https://sass-lang.com/documentation/at-rules/use#choosing-a-namespace). If you have scss files like a header and footer shared across your application stored in your common.scss directory then you would simply @forward these on to be used within the Vue single file component like so:
+
+```
+// common.scss
+
+@forward '@justeat/f-header/dist/f-header.css';
+@forward '@justeat/f-footer/dist/f-footer.css';
+
+
+// Single File Component (SFC)
+// default.vue
+
+<style lang="scss">
+@use '../assets/scss/common';
+</style>
+
+```
+
+<a name="scheme"></a><h2>Vue config</h2>
+
+Your application may load in a common.scss file at `vue.config` level (see below) & [here](https://github.com/justeat/fozzie-components/blob/master/packages/components/organisms/f-header/vue.config.js#L21), if that's the case you can still make use of `@use`:
+
+```
+// Default
+
+module.exports = {
+    chainWebpack: config => {
+        config.module
+            .options({
+                additionalData: `@use "../assets/scss/common.scss";`
+            });
+    }
+};
+
+
+// Usage within a SFC
+
+<style lang="scss">
+.c-footer {
+  @include common.background-color($btn-primary-bgColor);
+}
+</style>
+```
+
+
