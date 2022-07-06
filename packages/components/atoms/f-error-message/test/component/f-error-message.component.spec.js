@@ -1,14 +1,11 @@
-const ErrorMessage = require('../../test-utils/component-objects/f-error-message.component');
-
-const errorMessage = new ErrorMessage();
+import ErrorMessage from '../../test-utils/component-objects/f-error-message.component';
 
 describe('f-error-message component tests', () => {
-    beforeEach(async () => {
-        await errorMessage.load();
-    });
-
     it('should display the f-error-message component', async () => {
+        // Arrange
+        await ErrorMessage.load();
+
         // Assert
-        await expect(await errorMessage.isComponentDisplayed()).toBe(true);
+        await expect(await ErrorMessage.isComponentDisplayed()).toBe(true);
     });
 });
