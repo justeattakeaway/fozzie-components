@@ -42,9 +42,11 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-accountInfo-customerCareLink {
     display: block;
-    margin-bottom: spacing(f);
-    @include font-size(body-s);
+    margin-bottom: f.spacing(f);
+    @include f.font-size(body-s);
 }
 </style>

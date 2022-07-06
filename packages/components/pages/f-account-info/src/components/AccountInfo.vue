@@ -490,11 +490,13 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-accountInfo-submitButton {
-    margin-top: spacing(f);
+    margin-top: f.spacing(f);
 }
 
 .c-accountInfo-changePasswordButton {
-    margin-top: spacing(d);
+    margin-top: f.spacing(d);
 }
 </style>
