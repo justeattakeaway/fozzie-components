@@ -60,32 +60,34 @@ export default {
 </script>
 
 <style lang="scss" module>
-    $icon-size: $font-size-base-px;
-    .c-checkout-accordion-header {
-        @include font-size('body-s');
-        display: flex;
-        justify-content: space-between;
-        background: transparent;
-        border: none;
-        border-bottom: 1px solid $color-border-strong;
-        color: $color-content-default;
-        cursor: pointer;
-        font-weight: $font-weight-bold;
-        padding: spacing(d) 0;
-        margin-top: spacing(d);
-        outline: none;
-        text-decoration: none;
-        text-align: left;
-        width: 100%;
-        .c-checkout-accordion-header-arrow {
-            height: $icon-size;
-            width: $icon-size;
-        }
-        .c-checkout-accordion-header-arrow--expanded {
-            transform: rotate(180deg);
-        }
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+$icon-size: f.$font-size-base-px;
+.c-checkout-accordion-header {
+    @include f.font-size('body-s');
+    display: flex;
+    justify-content: space-between;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid f.$color-border-strong;
+    color: f.$color-content-default;
+    cursor: pointer;
+    font-weight: f.$font-weight-bold;
+    padding: f.spacing(d) 0;
+    margin-top: f.spacing(d);
+    outline: none;
+    text-decoration: none;
+    text-align: left;
+    width: 100%;
+    .c-checkout-accordion-header-arrow {
+        height: $icon-size;
+        width: $icon-size;
     }
-    .c-checkout-accordion-section--hidden {
-        display: none;
+    .c-checkout-accordion-header-arrow--expanded {
+        transform: rotate(180deg);
     }
+}
+.c-checkout-accordion-section--hidden {
+    display: none;
+}
 </style>

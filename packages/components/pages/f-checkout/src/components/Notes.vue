@@ -89,8 +89,10 @@ export default {
 </script>
 
 <style lang="scss" module>
-    .c-checkout-accordion-help {
-        display: block;
-        padding: spacing() 0;
-    }
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+.c-checkout-accordion-help {
+    display: block;
+    padding: f.spacing() 0;
+}
 </style>
