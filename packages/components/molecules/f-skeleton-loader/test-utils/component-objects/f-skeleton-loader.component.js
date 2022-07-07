@@ -1,7 +1,9 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class SkeletonLoader extends Page {
+class SkeletonLoader extends Page {
     constructor () {
         super('molecule', 'skeleton-loader-component');
     }
-};
+}
+
+export default new SkeletonLoader();

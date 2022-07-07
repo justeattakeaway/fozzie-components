@@ -1,6 +1,6 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class Alert extends Page {
+class Alert extends Page {
     constructor () {
         super('molecule', 'alert-component');
     }
@@ -16,4 +16,6 @@ module.exports = class Alert extends Page {
     async clickExitButton () {
         await this.exitButton.click();
     }
-};
+}
+
+export default new Alert();

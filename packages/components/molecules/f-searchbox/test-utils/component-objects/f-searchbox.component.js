@@ -1,7 +1,9 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class SearchBox extends Page {
+class SearchBox extends Page {
     constructor () {
         super('molecule', 'searchbox-component');
     }
-};
+}
+
+export default new SearchBox();

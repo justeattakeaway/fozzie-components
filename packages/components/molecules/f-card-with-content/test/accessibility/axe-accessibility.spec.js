@@ -1,17 +1,10 @@
-import { getAxeResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
-
-const CardWithContent = require('../../test-utils/component-objects/f-card-with-content.component');
-
-const cardWithContent = new CardWithContent();
+import CardWithContent from '../../test-utils/component-objects/f-card-with-content.component';
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        cardWithContent.load();
-    });
-
-    it('a11y - should test f-card-with-content component WCAG compliance', () => {
+    it('a11y - should test f-card-with-content component WCAG compliance', async () => {
         // Act
-        const axeResults = getAxeResults('f-card-with-content');
+        await CardWithContent.load();
+        const axeResults = await CardWithContent.getAxeResults('f-card-with-content');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

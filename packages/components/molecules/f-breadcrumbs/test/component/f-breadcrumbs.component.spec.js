@@ -1,13 +1,11 @@
-const Breadcrumbs = require('../../test-utils/component-objects/f-breadcrumbs.component');
-
-const breadcrumbs = new Breadcrumbs();
+import Breadcrumbs from '../../test-utils/component-objects/f-breadcrumbs.component';
 
 describe('f-breadcrumbs component tests', () => {
-    beforeEach(async () => {
-        await breadcrumbs.load();
-    });
     it('should display the f-breadcrumbs component', async () => {
+        // Act
+        await Breadcrumbs.load();
+
         // Assert
-        await expect(await breadcrumbs.isComponentDisplayed()).toBe(true);
+        await expect(await Breadcrumbs.isComponentDisplayed()).toBe(true);
     });
 });
