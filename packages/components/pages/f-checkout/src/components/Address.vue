@@ -63,27 +63,29 @@ export default {
 </script>
 
 <style lang="scss" module>
-$address-colour          : $color-content-default;
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+$address-colour          : f.$color-content-default;
 $address-fontSize        : 'body-s';
-$address-weight-bold     : $font-weight-bold;
+$address-weight-bold     : f.$font-weight-bold;
 
 .c-address-label {
     color: $address-colour;
-    @include font-size($address-fontSize);
+    @include f.font-size($address-fontSize);
     font-weight: $address-weight-bold;
-    margin: spacing(d) 0 spacing();
+    margin: f.spacing(d) 0 f.spacing();
 }
 
 .c-address-group {
-    margin: spacing(d) 0;
+    margin: f.spacing(d) 0;
     padding: 0;
     border: none;
-    @include font-size($address-fontSize);
+    @include f.font-size($address-fontSize);
 
     .c-address-formField {
         &:focus-within,
         &:active {
-            z-index: zIndex(high);
+            z-index: f.zIndex(high);
             position: relative;
         }
     }

@@ -83,11 +83,13 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-checkout-error {
-    @include media('<=narrow') {
+    @include f.media('<=narrow') {
         border: none;
-        padding-top: spacing(d);
-        padding-bottom: spacing(d);
+        padding-top: f.spacing(d);
+        padding-bottom: f.spacing(d);
     }
 }
 </style>
