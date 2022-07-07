@@ -52,15 +52,17 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-accountInfo-inheritWidthAboveNarrow {
     width: 100%;
 
-    @include media('>narrow') {
+    @include f.media('>narrow') {
         width: inherit;
     }
 }
 
 .c-accountInfo-alert {
-    margin-top: spacing(f);
+    margin-top: f.spacing(f);
 }
 </style>

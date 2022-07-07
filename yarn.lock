@@ -2390,13 +2390,6 @@
   dependencies:
     "@justeat/f-services" "0.13.0"
 
-"@justeat/f-card@3.4.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.4.0.tgz#8786fa1d97c50228d40ddeb7c44570bc0f2bd599"
-  integrity sha512-lzOld5dn8867Orjixj1A2qA9X8jrt+waKKuKyb59fomigJ+EnhP6XVeMhZixuu7aVee480EAXT2liklCA2eaxw==
-  dependencies:
-    "@justeat/f-services" "0.13.0"
-
 "@justeat/f-card@3.5.0":
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.5.0.tgz#ecfa557a8a60445ffb01a91b353a1306990b82b6"
@@ -2468,14 +2461,6 @@
   version "4.11.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.11.0.tgz#d70fe29f8338326b8e0a97e106979d76ee60298b"
   integrity sha512-1WZdIY9SuvOJc5kxhVD/PFLdospeanXwMi9KwS0k5TRQ2iwDKt9K1PQRFxAEuG+PSZ890lKLKXWtCDxO6AobJA==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeattakeaway/pie-icons-vue" "1.0.0"
-
-"@justeat/f-form-field@4.13.0":
-  version "4.13.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.13.0.tgz#2f525896b2589341cef0fefb9753ca5e71ee6b7f"
-  integrity sha512-7IY62zCO55HBHSFN6H8gKWcybnRXGN+hqGbPJTcoTXfRq23mF6tQI4M8zDByQuqMtPZLHFzWMgWdKU2iZAl9iQ==
   dependencies:
     "@justeat/f-services" "1.0.0"
     "@justeattakeaway/pie-icons-vue" "1.0.0"
@@ -2806,6 +2791,14 @@
   version "9.0.0-beta.5"
   resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.5.tgz#14d7a2d7c6aba26e885295bc416560ea182736fd"
   integrity sha512-ZE3XqqJM1+QJf1qW60yI8dP+9g2+u/PkxMtJh+DtxZILgegnXHfiz8iCBHOEsIPcn67fJjV4FOyqp3KY1J9qtw==
+  dependencies:
+    "@justeat/pie-design-tokens" "1.4.0"
+    include-media eduardoboucas/include-media#2.0-release
+
+"@justeat/fozzie@9.0.0-beta.6":
+  version "9.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.6.tgz#704a65a0eee089ea5e47243e6893997edea47434"
+  integrity sha512-f+eH9voRFZlii7qPn8Z+pdzdYeGtmBkJkNlB8G/I1Clft6yssEPG8/8U31OVMmp55Wb1F2WoV2FtG5Ttr9Orbg==
   dependencies:
     "@justeat/pie-design-tokens" "1.4.0"
     include-media eduardoboucas/include-media#2.0-release
