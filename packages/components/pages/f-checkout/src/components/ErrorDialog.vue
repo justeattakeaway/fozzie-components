@@ -1,6 +1,7 @@
 <template>
     <mega-modal
         ref="errorModal"
+        :is-text-aligned-center="true"
         data-test-id="checkout-issue-modal"
         has-overlay
         :title="$t(`errorMessages.checkoutIssues.${messageKey}.title`, { serviceType: serviceTypeText })"
