@@ -47,7 +47,7 @@ describe('Shared - f-header component tests', () => {
     ];
 
     tests.forEach(({ tenant, theme }) => {
-        it('should display the "%s - %s" header theme', async () => {
+        it(`should display the "${tenant} - ${theme}" header theme`, async () => {
             // Act
             await Header.load({ locale: tenant, headerBackgroundTheme: theme });
 
@@ -55,7 +55,7 @@ describe('Shared - f-header component tests', () => {
             await browser.percyScreenshot(`f-header - Theme colours - ${theme}`, 'mobile');
         });
 
-        it('should display the mobile nav correctly for theme %s - %s', async () => {
+        it(`should display the mobile nav correctly for theme ${theme} - ${tenant}`, async () => {
             // Act
             await Header.load({
                 locale: tenant,
@@ -87,7 +87,7 @@ describe('Shared - f-header component tests', () => {
     ];
 
     tests.forEach(({ tenant, control }) => {
-        it('should not display "%s" ', async () => {
+        it(`should not display "${control}" `, async () => {
             // Act
             await Header.load({ locale: tenant, [control]: false });
             await Header.openMobileNavigationBar();

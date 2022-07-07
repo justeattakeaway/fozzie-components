@@ -46,7 +46,7 @@ describe('Shared - f-header component tests', () => {
     ];
 
     tests.forEach(({ tenant, theme }) => {
-        it('should display the "%s - %s" header theme', async () => {
+        it(`should display the "${tenant} - ${theme}" header theme`, async () => {
             // Act
             await Header.load({ locale: tenant, headerBackgroundTheme: `${theme}` });
 
@@ -62,7 +62,7 @@ describe('Shared - f-header component tests', () => {
     ];
 
     tests.forEach(({ tenant, control }) => {
-        it('should not display "%s" ', async () => {
+        it(`should not display "${control}" `, async () => {
             // Act
             await Header.load({ locale: tenant, [control]: false });
 
@@ -77,13 +77,13 @@ describe('Shared - f-header component tests', () => {
     ];
 
     tests.forEach(({ tenant, link }) => {
-        it('should display the "%s %s" dropdown lists on hover', async () => {
+        it(`should display the "${tenant} ${link}" dropdown lists on hover`, async () => {
             // Act
             await Header.load({ locale: tenant });
             await Header.moveToNavigationLink(link);
 
             // Assert
-            await browser.percyScreenshot('f-header - %s dropdown', 'desktop');
+            await browser.percyScreenshot(`f-header - ${link} dropdown`, 'desktop');
         });
     });
 

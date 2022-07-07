@@ -6,7 +6,7 @@ const devices = [
 ];
 
 devices.forEach(device => {
-    describe('f-cookie-banner - %s - Visual Tests', () => {
+    describe(`f-cookie-banner - ${device} - Visual Tests`, () => {
         beforeEach(async () => {
             // Arrange
             if (device === 'mobile') {

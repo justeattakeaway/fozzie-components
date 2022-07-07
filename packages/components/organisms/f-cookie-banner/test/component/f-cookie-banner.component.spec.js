@@ -36,7 +36,7 @@ describe('f-cookie-banner component tests', () => {
     ];
 
     locales.forEach(locale => {
-        it('should display the f-cookie-banner component for "%s"', async () => {
+        it(`should display the f-cookie-banner component for "${locale}"`, async () => {
             // Act
             await CookieBanner.load({ locale });
 

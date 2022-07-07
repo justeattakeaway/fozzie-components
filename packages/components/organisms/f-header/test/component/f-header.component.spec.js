@@ -17,7 +17,7 @@ describe('Desktop - f-header component tests', () => {
     ];
 
     links.forEach(link => {
-        it('should test that %s navigation link is clickable', async () => {
+        it(`should test that ${link} navigation link is clickable`, async () => {
             // Assert
             await expect(await Header.isNavigationItemClickable(link)).toBe(true);
         });
