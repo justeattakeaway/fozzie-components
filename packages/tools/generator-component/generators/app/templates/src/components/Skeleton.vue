@@ -36,6 +36,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-<%= name.class %> {
     display: flex;
     justify-content: center;
@@ -44,6 +46,6 @@ export default {
     margin: auto;
     border: 1px solid red;
     font-family: $font-family-base;
-    @include font-size(heading-m);
+    @include f.font-size(heading-m);
 }
 </style>
