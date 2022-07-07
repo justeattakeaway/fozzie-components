@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v2.12.1
+------------------------------
+*July 07, 2022*
+
+### Fixed
+- Missing closing brace in package.json generator template.
+
+
 v2.12.0
 ------------------------------
 *July 06, 2022*
