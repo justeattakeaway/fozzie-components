@@ -192,11 +192,13 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-checkout-ageVerification-description {
-    margin: spacing(d) 0;
+    margin: f.spacing(d) 0;
 }
 
 .c-checkout-ageVerification-button {
-    margin: spacing(d) 0 spacing();
+    margin: f.spacing(d) 0 f.spacing();
 }
 </style>

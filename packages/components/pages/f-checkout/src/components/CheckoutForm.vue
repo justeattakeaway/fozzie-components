@@ -263,16 +263,18 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-checkout-form {
-    margin-top: spacing(d);
+    margin-top: f.spacing(d);
 }
 
 /* If these stay the same then just rename the class to something more generic */
 .c-checkout-submitButton {
-    margin: spacing(f) 0;
+    margin: f.spacing(f) 0;
 
-    @include media('>=#{$checkout-width}') {
-        margin: spacing(f) 0 0;
+    @include f.media('>=#{common.$checkout-width}') {
+        margin: f.spacing(f) 0 0;
     }
 }
 

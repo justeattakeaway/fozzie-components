@@ -181,14 +181,16 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-checkoutFormField-error--grouped {
-    margin-bottom: spacing(d);
+    margin-bottom: f.spacing(d);
 }
 
 .c-checkoutFormField-assistiveText {
-    @include font-size('body-s');
-    font-weight: $font-weight-regular;
-    color: $color-content-subdued;
+    @include f.font-size('body-s');
+    font-weight: f.$font-weight-regular;
+    color: f.$color-content-subdued;
     margin-top: 0;
 }
 </style>
