@@ -114,13 +114,15 @@ describe('Logo', () => {
 
     describe('header logo :: ', () => {
         const $style = {
-            'c-logo-img--alt': 'c-logo-img--alt'
+            'c-logo-img--alt': 'c-logo-img--alt',
+            'c-logo-img--search': 'c-logo-img--search'
         };
 
         it.each([
-            ['transparent'],
-            ['highlight']
-        ])('should have "c-logo-img--alt" class if "headerBackgroundTheme" property is %s', theme => {
+            ['c-logo-img--alt', 'transparent'],
+            ['c-logo-img--alt', 'highlight'],
+            ['c-logo-img--search', 'search']
+        ])('should have "%s" class if "headerBackgroundTheme" property is "%s"', (cssClass, theme) => {
             // Arrange
             const propsData = {
                 theme: 'je',
@@ -139,13 +141,15 @@ describe('Logo', () => {
             const logo = wrapper.find('[data-test-id="header-logo"]');
 
             // Assert
-            expect(logo.classes()).toContain('c-logo-img--alt');
+            expect(logo.classes()).toContain(cssClass);
         });
 
         it.each([
-            ['white'],
-            ['blue']
-        ])('should not have "c-logo-img--alt" class if "headerBackgroundTheme" property is %s', theme => {
+            ['c-logo-img--alt', 'white'],
+            ['c-logo-img--alt', 'search'],
+            ['c-logo-img--search', 'transparent'],
+            ['c-logo-img--search', 'highlight']
+        ])('should not have "%s" class if "headerBackgroundTheme" property is "%s"', (cssClass, theme) => {
             // Arrange
             const propsData = {
                 theme: 'je',
@@ -164,7 +168,7 @@ describe('Logo', () => {
             const logo = wrapper.find('[data-test-id="header-logo"]');
 
             // Assert
-            expect(logo.classes()).not.toContain('c-logo-img--alt');
+            expect(logo.classes()).not.toContain(cssClass);
         });
     });
 });
