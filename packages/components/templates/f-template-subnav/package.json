@@ -44,11 +44,13 @@
   ],
   "dependencies": {},
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.2.0"
+    "@justeat/browserslist-config-fozzie": ">=1.2.0",
+    "@justeat/f-breadcrumbs": "4.x",
+    "@justeat/f-navigation-links": "2.x"
   },
   "devDependencies": {
-    "@justeat/f-breadcrumbs": "4.0.0",
-    "@justeat/f-navigation-links": "2.1.0",
+    "@justeat/f-breadcrumbs": "4.x",
+    "@justeat/f-navigation-links": "2.x",
     "@justeat/f-wdio-utils": "0.4.0",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",

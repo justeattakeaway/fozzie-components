@@ -12,6 +12,7 @@ v6.1.0
 - Update f-wdio-utils to v1.1.0
 - Update component objects / specs to use ES6 syntax.
 
+
 v6.0.0
 ------------------------------
 *June 24, 2022*
@@ -19,9 +20,10 @@ v6.0.0
 ### Changed
 - devDependency version range to match peerDependencies.
 
+
 v5.0.1
 ------------------------------
-*Jun 20, 2022*
+*June 20, 2022*
 
 ### Fixed
 - Alert messages are now read out to accessible users when displayed
@@ -29,7 +31,7 @@ v5.0.1
 
 v5.0.0
 ------------------------------
-*Jun 17, 2022*
+*June 17, 2022*
 
 ### Changed
 - Update to `@use` and `@forward` SASS syntax
@@ -37,7 +39,7 @@ v5.0.0
 
 v4.4.1
 ------------------------------
-*Jun 9, 2022*
+*June 9, 2022*
 
 ### Changed
 - Bumped wdio version and fixed breaking changes.
