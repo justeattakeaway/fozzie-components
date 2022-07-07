@@ -49,11 +49,11 @@
   ],
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
-    "@justeat/f-button": "4.x",
+    "@justeat/f-button": "4.2.0",
     "body-scroll-lock": "3.x"
   },
   "devDependencies": {
-    "@justeat/f-button": "4.x",
+    "@justeat/f-button": "4.2.0",
     "@justeat/f-wdio-utils": "1.1.0",
     "@justeat/fozzie": "9.0.0-beta.5",
     "@justeattakeaway/pie-icons-vue": "1.0.0",
