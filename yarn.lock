@@ -2390,13 +2390,6 @@
   dependencies:
     "@justeat/f-services" "0.13.0"
 
-"@justeat/f-card@3.4.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.4.0.tgz#8786fa1d97c50228d40ddeb7c44570bc0f2bd599"
-  integrity sha512-lzOld5dn8867Orjixj1A2qA9X8jrt+waKKuKyb59fomigJ+EnhP6XVeMhZixuu7aVee480EAXT2liklCA2eaxw==
-  dependencies:
-    "@justeat/f-services" "0.13.0"
-
 "@justeat/f-card@3.5.0":
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.5.0.tgz#ecfa557a8a60445ffb01a91b353a1306990b82b6"
@@ -2465,14 +2458,6 @@
     "@justeat/f-services" "1.0.0"
     "@justeattakeaway/pie-icons-vue" "1.0.0"
 
-"@justeat/f-form-field@4.13.0":
-  version "4.13.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.13.0.tgz#2f525896b2589341cef0fefb9753ca5e71ee6b7f"
-  integrity sha512-7IY62zCO55HBHSFN6H8gKWcybnRXGN+hqGbPJTcoTXfRq23mF6tQI4M8zDByQuqMtPZLHFzWMgWdKU2iZAl9iQ==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeattakeaway/pie-icons-vue" "1.0.0"
-
 "@justeat/f-form-field@4.9.0":
   version "4.9.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.9.0.tgz#831d206f658ee22f22c52d71dabff4b6bc55de70"
@@ -2485,6 +2470,14 @@
   version "4.13.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.13.1.tgz#de26d48647332d3791fefab5014bbcd311db9a7e"
   integrity sha512-Nf4jttNM4u1b1bAx+e8y1wxXiIAOaiyzeurLxEQ6MBDjxjocaYGMuVtSdFwv5YeiiOyo0AcqUGxN9Ix5C6q9Sw==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+    "@justeattakeaway/pie-icons-vue" "1.0.0"
+
+"@justeat/f-form-field@5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-5.0.0.tgz#53d66c992dd485b8eed30ee0eee9cc897fe5cb47"
+  integrity sha512-YexzQrZVTOlPq5n3pKZ05rIWoymjEq35vVjPJqUaS+IU95qUPXrqqUCZD/STIG3GWaEtT9OOI5nQwifWT8tEug==
   dependencies:
     "@justeat/f-services" "1.0.0"
     "@justeattakeaway/pie-icons-vue" "1.0.0"
@@ -2508,6 +2501,13 @@
   version "4.10.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.10.0.tgz#59738afbb1bec54388270521ae8f6de0412d74fb"
   integrity sha512-Sz6A8xdkIdpA2jBfx4XJqCNIJt94FraYfF56wxEs0i9pJLBmgun5As2HPaPpg6sWrbmXA//b2L9bN7uNsZLdLw==
+
+"@justeat/f-link@3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-link/-/f-link-3.1.1.tgz#d1ce567c32f4080914ddb5ad63846281544956af"
+  integrity sha512-a+Q9AEqWu0Iwy6P2+6ezDMlgSB6/i8WbhVLVzz9cCZieC5wX+LyZ14iSgXrBo0m8qUoRoFFXHsCXTiyMY6YhGw==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
 
 "@justeat/f-media-element@2.0.0":
   version "2.0.0"
@@ -2784,6 +2784,14 @@
   version "9.0.0-beta.5"
   resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.5.tgz#14d7a2d7c6aba26e885295bc416560ea182736fd"
   integrity sha512-ZE3XqqJM1+QJf1qW60yI8dP+9g2+u/PkxMtJh+DtxZILgegnXHfiz8iCBHOEsIPcn67fJjV4FOyqp3KY1J9qtw==
+  dependencies:
+    "@justeat/pie-design-tokens" "1.4.0"
+    include-media eduardoboucas/include-media#2.0-release
+
+"@justeat/fozzie@9.0.0-beta.6":
+  version "9.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.6.tgz#704a65a0eee089ea5e47243e6893997edea47434"
+  integrity sha512-f+eH9voRFZlii7qPn8Z+pdzdYeGtmBkJkNlB8G/I1Clft6yssEPG8/8U31OVMmp55Wb1F2WoV2FtG5Ttr9Orbg==
   dependencies:
     "@justeat/pie-design-tokens" "1.4.0"
     include-media eduardoboucas/include-media#2.0-release
