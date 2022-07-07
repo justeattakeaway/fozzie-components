@@ -1,13 +1,13 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
-const {
+import Page from '@justeat/f-wdio-utils';
+import {
     PROMOTION_CARD_2_COMPONENT,
     CTA,
     TEXT,
     TITLE,
     BACKGROUND_IMAGE
-} = require('./f-content-cards-home-promotion.selectors');
+} from './f-content-cards-home-promotion.selectors';
 
-module.exports = class HomePromotionCard2 extends Page {
+class HomePromotionCard2 extends Page {
     constructor () {
         super('molecule-folder', 'f-content-cards--home-promotion-card-2-component');
     }
@@ -41,4 +41,6 @@ module.exports = class HomePromotionCard2 extends Page {
     isComponentClickable () {
         return this.component.isClickable();
     }
-};
+}
+
+export default new HomePromotionCard2();

@@ -1,50 +1,43 @@
-import forEach from 'mocha-each';
-
-const CookieBanner = require('../../test-utils/component-objects/f-cookie-banner-legacy.component');
+import CookieBanner from '../../test-utils/component-objects/f-cookie-banner-legacy.component';
 
 describe('Legacy - f-cookie-banner component tests', () => {
-    let cookieBanner;
-
     beforeEach(async () => {
-        // Arrange
-        cookieBanner = new CookieBanner();
+        await CookieBanner.open('/');
+        await browser.deleteCookies();
     });
 
     it('should display the f-cookie-banner legacy component', async () => {
         // Act
-        cookieBanner.open('/');
-        await browser.deleteCookies();
-        await cookieBanner.load({ locale: 'en-AU', shouldShowLegacyBanner: true });
+        await CookieBanner.load({ locale: 'en-AU', shouldShowLegacyBanner: true });
 
         // Assert
-        await expect(await cookieBanner.isComponentDisplayed()).toBe(true);
+        await expect(await CookieBanner.isComponentDisplayed()).toBe(true);
     });
 
     it('should set "je-cookie_banner" cookie when dismissed.', async () => {
         // Act
-        cookieBanner.open('/');
-        await browser.deleteCookies();
-        await cookieBanner.load({ locale: 'en-AU', shouldShowLegacyBanner: true });
-        await cookieBanner.close();
+        await CookieBanner.load({ locale: 'en-AU', shouldShowLegacyBanner: true });
+        await CookieBanner.close();
 
         // Assert
         const [bannerCookie] = (await browser.getCookies()).filter(cookie => cookie.name === 'je-banner_cookie');
         await expect(bannerCookie.value).toBe('130315');
-        await expect(await cookieBanner.isComponentDisplayed()).toBe(false);
+        await expect(await CookieBanner.isComponentDisplayed()).toBe(false);
     });
 
-    forEach([
-        ['en-AU', 'au/info/privacy-policy#cookies_policy'],
-        ['en-NZ', 'nz/info/privacy-policy#cookies_policy']
-    ])
-    .it('should go to the correct cookie policy page for "%s" - "%s"', (tenant, expectedCookiePolicyUrl) => {
-        // Act
-        cookieBanner.open('/');
-        browser.deleteCookies();
-        cookieBanner.load({ locale: tenant, shouldShowLegacyBanner: true });
-        cookieBanner.clickCookiePolicyLink();
+    const tests = [
+        { locale: 'en-AU', expectedCookiePolicyUrl: 'au/info/privacy-policy#cookies_policy' },
+        { locale: 'en-NZ', expectedCookiePolicyUrl: 'nz/info/privacy-policy#cookies_policy' }
+    ];
 
-        // Assert
-        expect(browser.getUrl()).toContain(expectedCookiePolicyUrl);
+    tests.forEach(({ locale, expectedCookiePolicyUrl }) => {
+        it(`should go to the correct cookie policy page for "${locale}" - "${expectedCookiePolicyUrl}"`, async () => {
+            // Act
+            await CookieBanner.load({ locale, shouldShowLegacyBanner: true });
+            await CookieBanner.clickCookiePolicyLink();
+
+            // Assert
+            await expect(await browser.getUrl()).toContain(expectedCookiePolicyUrl);
+        });
     });
 });

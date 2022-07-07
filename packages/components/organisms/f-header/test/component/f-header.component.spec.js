@@ -1,62 +1,63 @@
-import forEach from 'mocha-each';
-
-const Header = require('../../test-utils/component-objects/f-header.component');
-
-let header;
+import Header from '../../test-utils/component-objects/f-header.component';
 
 describe('Desktop - f-header component tests', () => {
     beforeEach(async () => {
-        // Arrange
-        header = new Header();
-
         // Act
-        await header.load({ showOffersLink: true, showDeliveryEnquiry: true });
+        await Header.load({ showOffersLink: true, showDeliveryEnquiry: true });
         await browser.maximizeWindow();
     });
 
-    forEach([
+
+    const links = [
         'help',
         'userAccount',
         'countrySelector',
         'offersLink',
-        'delivery'])
-    .it('should test that %s navigation link is clickable', async link => {
-        // Assert
-        await expect(await header.isNavigationItemClickable(link)).toBe(true);
+        'delivery'
+    ];
+
+    links.forEach(link => {
+        it('should test that %s navigation link is clickable', async () => {
+            // Assert
+            await expect(await Header.isNavigationItemClickable(link)).toBe(true);
+        });
     });
 
-    forEach([
-        ['gb', 'just-eat.co.uk'],
-        ['au', 'menulog.com.au'],
-        ['at', 'lieferando.at'],
-        ['be', 'takeaway.com/be'],
-        ['bg', 'takeaway.com/bg'],
-        ['ca_en', 'skipthedishes.com'],
-        ['ca_fr', 'skipthedishes.com/fr'],
-        ['dk', 'just-eat.dk'],
-        ['jet_fr', 'just-eat.fr'],
-        ['de', 'lieferando.de'],
-        ['ie', 'just-eat.ie'],
-        ['il', '10bis.co.il'],
-        ['it', 'justeat.it'],
-        ['lu', 'takeaway.com/lu'],
-        ['nl', 'thuisbezorgd.nl'],
-        ['nz', 'menulog.co.nz'],
-        ['no', 'just-eat.no'],
-        ['pl', 'pyszne.pl'],
-        ['pt', 'takeaway.com/pt'],
-        ['ro', 'takeaway.com/ro'],
-        ['es', 'just-eat.es'],
-        ['ch_ch', 'eat.ch'],
-        ['ch_en', 'eat.ch/en'],
-        ['ch_fr', 'eat.ch/fr']
-    ])
-    .it('should display link for country code "%s" and redirect to correct URL ("%s")', async (expectedLocale, expectedUrl) => {
-        // Act
-        await header.moveToNavigationLink('countrySelector');
-        await header.clickCountryListItem(expectedLocale);
+    const tests = [
+        { expectedLocale: 'gb', expectedUrl: 'just-eat.co.uk' },
+        { expectedLocale: 'au', expectedUrl: 'menulog.com.au' },
+        { expectedLocale: 'at', expectedUrl: 'lieferando.at' },
+        { expectedLocale: 'be', expectedUrl: 'takeaway.com/be' },
+        { expectedLocale: 'bg', expectedUrl: 'takeaway.com/bg' },
+        { expectedLocale: 'ca_en', expectedUrl: 'skipthedishes.com' },
+        { expectedLocale: 'ca_fr', expectedUrl: 'skipthedishes.com/fr' },
+        { expectedLocale: 'dk', expectedUrl: 'just-eat.dk' },
+        { expectedLocale: 'jet_fr', expectedUrl: 'just-eat.fr' },
+        { expectedLocale: 'de', expectedUrl: 'lieferando.de' },
+        { expectedLocale: 'ie', expectedUrl: 'just-eat.ie' },
+        { expectedLocale: 'il', expectedUrl: '10bis.co.il' },
+        { expectedLocale: 'it', expectedUrl: 'justeat.it' },
+        { expectedLocale: 'lu', expectedUrl: 'takeaway.com/lu' },
+        { expectedLocale: 'nl', expectedUrl: 'thuisbezorgd.nl' },
+        { expectedLocale: 'nz', expectedUrl: 'menulog.co.nz' },
+        { expectedLocale: 'no', expectedUrl: 'just-eat.no' },
+        { expectedLocale: 'pl', expectedUrl: 'pyszne.pl' },
+        { expectedLocale: 'pt', expectedUrl: 'takeaway.com/pt' },
+        { expectedLocale: 'ro', expectedUrl: 'takeaway.com/ro' },
+        { expectedLocale: 'es', expectedUrl: 'just-eat.es' },
+        { expectedLocale: 'ch_ch', expectedUrl: 'eat.ch' },
+        { expectedLocale: 'ch_en', expectedUrl: 'eat.ch/en' },
+        { expectedLocale: 'ch_fr', expectedUrl: 'eat.ch/fr' }
+    ];
 
-        // Assert
-        await expect(await browser.getUrl()).toContain(expectedUrl);
+    tests.forEach(({ expectedLocale, expectedUrl }) => {
+        it(`should display link for country code ${expectedLocale} and redirect to correct URL (${expectedUrl})`, async () => {
+            // Act
+            await Header.moveToNavigationLink('countrySelector');
+            await Header.clickCountryListItem(expectedLocale);
+
+            // Assert
+            await expect(await browser.getUrl()).toContain(expectedUrl);
+        });
     });
 });

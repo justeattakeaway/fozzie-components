@@ -1,14 +1,11 @@
-const Form = require('../../test-utils/component-objects/f-form.component');
-
-const form = new Form();
+import Form from '../../test-utils/component-objects/f-form.component';
 
 describe('f-form component tests', () => {
-    beforeEach(async () => {
-        await form.load();
-    });
-
     it('should display the f-form component', async () => {
+        // Arrange
+        await Form.load();
+
         // Assert
-        await expect(await form.isComponentDisplayed()).toBe(true);
+        await expect(await Form.isComponentDisplayed()).toBe(true);
     });
 });
