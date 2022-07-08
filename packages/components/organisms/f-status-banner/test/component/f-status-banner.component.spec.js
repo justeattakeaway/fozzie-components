@@ -1,17 +1,11 @@
-const StatusBanner = require('../../test-utils/component-objects/f-status-banner.component');
-
-let statusBanner;
+import StatusBanner from '../../test-utils/component-objects/f-status-banner.component';
 
 describe('f-status-banner component tests', () => {
-    beforeEach(async () => {
-        statusBanner = new StatusBanner();
-    });
-
     it('should display the f-statusBanner component', async () => {
         // Act
-        await statusBanner.load();
+        await StatusBanner.load();
 
         // Assert
-        await expect(await statusBanner.isComponentDisplayed()).toBe(true);
+        await expect(await StatusBanner.isComponentDisplayed()).toBe(true);
     });
 });
