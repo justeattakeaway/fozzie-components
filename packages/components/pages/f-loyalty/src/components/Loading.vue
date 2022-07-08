@@ -34,10 +34,12 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 $loyalty-loadingCardWidthDesktop: 392px;
 $loyalty-cardWidthTablet: 344px;
 $loyalty-loadingCardHeight: 135px;
-$loyalty-loading-bgColour: $color-background-default;
+$loyalty-loading-bgColour: f.$color-background-default;
 $stampCard-responsive-mobileViewBreakpoint: '<=narrowMid';
 $stampCard-responsive-tabletViewBreakpoint: '<=mid';
 
@@ -45,7 +47,7 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
     width: 140px;
     height: 24px;
     margin-bottom: 18px;
-    margin-left: spacing();
+    margin-left: f.spacing();
     background-color: $loyalty-loading-bgColour;
 }
 
@@ -55,18 +57,18 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
 }
 
 .c-loyalty-loadingCardPlaceholder {
-    margin: spacing();
+    margin: f.spacing();
     width: $loyalty-loadingCardWidthDesktop;
     height: $loyalty-loadingCardHeight;
-    padding: spacing(d);
-    border-radius: $border-radius;
+    padding: f.spacing(d);
+    border-radius: f.$border-radius;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.03),
     0 3px 1px -2px rgba(0, 0, 0, 0.07),
     0 1px 5px 0 rgba(0, 0, 0, 0.06);
 
     /** START placeholder graphic details */
 
-    background-color: $color-white;
+    background-color: f.$color-white;
 
     background-image: radial-gradient(circle at center, $loyalty-loading-bgColour, $loyalty-loading-bgColour 20px, rgba(0, 0, 0, 0) 20px), // stamps
     linear-gradient($loyalty-loading-bgColour 100%, transparent 0),
@@ -90,11 +92,11 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
 
     /** END placeholder graphic details */
 
-    @include media($stampCard-responsive-tabletViewBreakpoint) {
+    @include f.media($stampCard-responsive-tabletViewBreakpoint) {
         width: $loyalty-cardWidthTablet;
     }
 
-    @include media($stampCard-responsive-mobileViewBreakpoint) {
+    @include f.media($stampCard-responsive-mobileViewBreakpoint) {
         width: auto;
         flex: 1 1 100vw;
         box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.12);

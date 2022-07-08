@@ -54,6 +54,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 $stampCards-unauthenticated-width: 392px;
 $stampCards-unauthenticated-img-dimension: 200px;
 
@@ -62,14 +64,14 @@ $stampCards-unauthenticated-img-dimension: 200px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: spacing(f);
+    padding: f.spacing(f);
 
-    @include media('<=narrowMid') {
-        padding: spacing(d);
+    @include f.media('<=narrowMid') {
+        padding: f.spacing(d);
     }
 
-    @include media('<=tiny') {
-        padding: spacing();
+    @include f.media('<=tiny') {
+        padding: f.spacing();
     }
 
 }
@@ -79,13 +81,13 @@ $stampCards-unauthenticated-img-dimension: 200px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: spacing(e);
+    margin-bottom: f.spacing(e);
     width: 100%;
     max-width: $stampCards-unauthenticated-width;
-    padding: spacing(g);
+    padding: f.spacing(g);
 
-    @include media('<=tiny') {
-        padding: spacing(d);
+    @include f.media('<=tiny') {
+        padding: f.spacing(d);
     }
 
 }
@@ -96,7 +98,7 @@ $stampCards-unauthenticated-img-dimension: 200px;
 }
 
 .c-loyalty-unauthenticated-title {
-    @include font-size(heading-s);
-    margin-bottom: spacing(e);
+    @include f.font-size(heading-s);
+    margin-bottom: f.spacing(e);
 }
 </style>

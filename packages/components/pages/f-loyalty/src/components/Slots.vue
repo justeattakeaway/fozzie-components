@@ -165,38 +165,40 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 $stampCard-responsive-tabletViewBreakpoint: '<=wide';
 $stampCard-responsive-mobileViewBreakpoint: '<=narrowMid';
 
 .c-loyalty-stampCardsSlotCardsContainer {
-    margin: spacing() 0;
+    margin: f.spacing() 0;
     display: grid;
-    grid-gap: spacing(d);
+    grid-gap: f.spacing(d);
     grid-template-columns: repeat(3, minmax(0, 1fr));
 
-    @include media($stampCard-responsive-tabletViewBreakpoint) {
+    @include f.media($stampCard-responsive-tabletViewBreakpoint) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    @include media($stampCard-responsive-mobileViewBreakpoint) {
+    @include f.media($stampCard-responsive-mobileViewBreakpoint) {
         grid-template-columns: repeat(1, minmax(0, 1fr));
     }
 
     .c-loyalty-stampCardsSlot-stampCard {
         overflow: auto;
         width: 100%;
-        background-color: $color-white;
+        background-color: f.$color-white;
     }
 }
 
 .c-loyalty-stampCardsSlotTitle {
     width: 100%;
-    margin: spacing(f) spacing() spacing();
+    margin: f.spacing(f) f.spacing() f.spacing();
 }
 
 .c-loyalty-stampCardsSlotSubtitle {
     width: 100%;
-    margin: spacing();
+    margin: f.spacing();
 }
 
 // Workaround to force size of restaurant icon to 48x48 until we integrate a version of f-content-cards that

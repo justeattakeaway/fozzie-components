@@ -2309,13 +2309,6 @@
     eslint-config-airbnb-base "15.0.0"
     eslint-plugin-vue "8.4.0"
 
-"@justeat/f-alert@4.3.0":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-4.3.0.tgz#f37e940fab6ceba9883d1968fcc36c2aa5a83765"
-  integrity sha512-QiqFSoTVarQ5rq5K8DCZ4OCwx6IGBhwA8RKgi2H5o8o0ZnOgddvLIkPZy5jDqiLbJQ6mlUzpZW75UGm2j42KAA==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-
 "@justeat/f-alert@5.0.1":
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-5.0.1.tgz#80fb4a1480fb85cdb2bf94ad2020f9fa2f286d05"
@@ -2334,22 +2327,10 @@
     lodash.startswith "4.2.1"
     lodash.uniq "4.5.0"
 
-"@justeat/f-breadcrumbs@3.2.1":
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-breadcrumbs/-/f-breadcrumbs-3.2.1.tgz#df35b871b24a67d1dfa045cfa1bf964b05fa7d9d"
-  integrity sha512-4xt0keFAYwbAnGJKYJM4zZ5rJSYEIrrPMGZN+gshyzSX7/ciohXUqQjWrd1Oys44Amo2+icD8S0n4v8mvpymBQ==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-
 "@justeat/f-button@3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.0.2.tgz#9560d0caf56ae0801208ddd0c27cb50d670d54a8"
   integrity sha512-qzZr6ZN01GTs6yFGOvIpwDcdXQKcH1SCF3CN7s9YTNiemWaQAoLo9sfv08fNuawBsxLwX4ZMLzjMY9dioC4vpg==
-
-"@justeat/f-button@3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.2.0.tgz#635f8aae09e76f0838f804033e19dc399a601fcd"
-  integrity sha512-SXh+kuA/mw2fBbJ5IQ74j63N71kOmTgLFsY+9gxMUML3tWqg1uwPKmQHvDO0/5DFroyGYgQ9IEH5RQBCdTU3RA==
 
 "@justeat/f-button@3.x":
   version "3.4.1"
@@ -2361,33 +2342,12 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-4.0.0.tgz#b6fa2d2f9b6313950f3737224b57533d0e0d7458"
   integrity sha512-ofyIYSVHNo0uyc8Rq9+mqyvPZVyN0JvwK66R473m3jHZbYK74HNzXekrAXMT2WYwEnCM58LumkpQdffKi46AXA==
 
-"@justeat/f-card-with-content@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card-with-content/-/f-card-with-content-1.0.0.tgz#d2e376e121a1b1c89418000a04cb9d5ef3134019"
-  integrity sha512-5BT0MwSDu+JJ1641V25M6NJZrttsxJqz7JaRkfez4x7NoC3BkxW0CbcpRQxGSw9u9pEmMG6io1drNDjzPyrgyQ==
-
 "@justeat/f-card@3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.0.0.tgz#6bc0840adcca276638778a080ea66d6f34309a78"
   integrity sha512-X/XF1yo6whfSZ46i4kaz7VZlLe+U27SDOa8x+N3Vn5dakgYDRhdiIvgsDm8d1v6GX8eB4addlmlb/OkJ+9G42g==
   dependencies:
     "@justeat/f-services" "0.13.0"
-
-"@justeat/f-card@3.6.0":
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.6.0.tgz#4f740d7f63a27fd159fc65ea58025e2869212335"
-  integrity sha512-BQJs4+oZ/0EWegAjmWnFzfA0Wv2VPEUwoCHwEiLmxBTLTxK/RS7qVahFaTcmhA3hcm/esVnRhTZEKYUGf0yE6A==
-  dependencies:
-    "@justeat/f-services" "0.13.0"
-
-"@justeat/f-content-cards@7.4.0":
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-7.4.0.tgz#a3ee8e3dddc28f0fe8305546b1b7666787518735"
-  integrity sha512-kzNub50NlpHb/F1xLzlV9J2Unn8yu4opv4JlyPBih08CBSaYKAvIfyGhcFzAPq22pPMlqjXrdVpYU4cP6wLtSA==
-  dependencies:
-    "@babel/plugin-proposal-class-properties" "7.12.13"
-    "@justeat/f-services" "1.0.1"
-    core-js "3.6.5"
 
 "@justeat/f-content-cards@8.0.0-beta.4":
   version "8.0.0-beta.4"
@@ -2606,13 +2566,6 @@
   dependencies:
     lodash-es "4.17.15"
     window-or-global "1.0.1"
-
-"@justeat/f-tabs@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-tabs/-/f-tabs-2.1.0.tgz#69d60166f5e8d33a0f91a31f3498c6f374fd356d"
-  integrity sha512-Ysv577bEOcrogwvDWMyV7c6pm+d1jIv7s8RvGYSc21VzQx9QCq/6Zas/ybHUEvaHCtADCrVJzD/xXiBLcLRXig==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
 
 "@justeat/f-trak@0.7.1":
   version "0.7.1"
@@ -14968,7 +14921,7 @@ include-media@1.4.9:
   resolved "https://registry.yarnpkg.com/include-media/-/include-media-1.4.9.tgz#d0020b7be3eb2d54868a20943595ce380e0bc43b"
   integrity sha512-IUOcvWDCt6R5V0ktsGk6RbehkW9ks1dODN2ed1p+mhML82TteAl+/ElXy8AJ7ueIuVoKq2NioRVdW9FuwQNOew==
 
-"include-media@github:eduardoboucas/include-media#2.0-release":
+include-media@eduardoboucas/include-media#2.0-release:
   version "2.0.0"
   resolved "https://codeload.github.com/eduardoboucas/include-media/tar.gz/5398b556d4bb24186d360c950b19026f577ff8e5"
 

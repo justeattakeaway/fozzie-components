@@ -48,7 +48,8 @@ module.exports = {
                         'templates',
                         'f-account-info',
                         'f-checkout',
-                        'f-contact-preferences'
+                        'f-contact-preferences',
+                        'f-loyalty'
                     ];
                     const pathContainsUpdatedComponentOrType = updateComponentsAndTypes.some(a => absPathCommonScss.includes(a));
 
