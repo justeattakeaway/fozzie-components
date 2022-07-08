@@ -1,13 +1,13 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-const {
+import {
     ADDRESS_BOX,
     BUTTON,
     ERROR_MESSAGE
-} = require('./f-status-banner.selectors');
+} from './f-status-banner.selectors';
 
 
-module.exports = class StatusBanner extends Page {
+class StatusBanner extends Page {
     constructor () {
         super('organism', 'status-banner-component');
     }
@@ -39,4 +39,6 @@ module.exports = class StatusBanner extends Page {
     async getErrorMessage () {
         return this.errorMessage.getText();
     }
-};
+}
+
+export default new StatusBanner();

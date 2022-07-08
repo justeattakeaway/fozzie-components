@@ -1,13 +1,13 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
-const {
+import Page from '@justeat/f-wdio-utils';
+import {
     COUNTRY_SELECTOR_BUTTON,
     COUNTRY_LINK,
     FEEDBACK_BUTTON,
     FOOTER_ICON,
     FOOTER_LINK_LIST
-} = require('./f-footer.selectors');
+} from './f-footer.selectors';
 
-module.exports = class Footer extends Page {
+class Footer extends Page {
     constructor () {
         super('organism', 'footer-component');
     }
@@ -21,7 +21,7 @@ module.exports = class Footer extends Page {
     async clickIcon (icon) {
         const footerIcon = await $(`[${FOOTER_ICON}${icon}"]`);
         await footerIcon.waitForClickable();
-        return footerIcon.click();
+        await footerIcon.click();
     }
 
     async isFeedbackButtonClickable () {
@@ -29,13 +29,14 @@ module.exports = class Footer extends Page {
     }
 
     async clickCountrySelectorButton () {
-        const countrySelectorButton = await this.countrySelectorButton;
-        return countrySelectorButton.click();
+        await this.countrySelectorButton.click();
     }
 
     async clickCountryLinkItem (country) {
         const countryLink = await $(`[${COUNTRY_LINK}${country}"]`);
 
-        return countryLink.click();
+        await countryLink.click();
     }
-};
+}
+
+export default new Footer();

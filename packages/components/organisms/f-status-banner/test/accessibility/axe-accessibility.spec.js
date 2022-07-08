@@ -1,17 +1,10 @@
-const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
-
-const StatusBanner = require('../../test-utils/component-objects/f-status-banner.component');
-
-let statusBanner;
+import StatusBanner from '../../test-utils/component-objects/f-status-banner.component';
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        statusBanner = new StatusBanner();
-    });
-    it('a11y - should test f-status-banner component WCAG compliance', () => {
+    it('a11y - should test f-status-banner component WCAG compliance', async () => {
         // Act
-        statusBanner.load();
-        const axeResults = getAxeResults('f-status-banner');
+        await StatusBanner.load();
+        const axeResults = await StatusBanner.getAxeResults('f-status-banner');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
