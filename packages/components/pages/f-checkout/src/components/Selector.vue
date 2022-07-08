@@ -169,7 +169,9 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-checkout-selector {
-    margin-top: spacing(d);
+    margin-top: f.spacing(d);
 }
 </style>

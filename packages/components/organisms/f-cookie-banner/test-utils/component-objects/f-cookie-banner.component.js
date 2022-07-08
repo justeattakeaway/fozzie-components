@@ -1,6 +1,6 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class CookieBanner extends Page {
+class CookieBanner extends Page {
     constructor () {
         super('organism', 'cookie-banner-component');
     }
@@ -14,7 +14,7 @@ module.exports = class CookieBanner extends Page {
     get cookieAcceptNecessaryButton () { return $('[data-test-id="accept-necessary-cookies-button"]'); }
 
     async clickCookiePolicyLink () {
-        (await this.cookiePolicyLink).click();
+        await this.cookiePolicyLink.click();
     }
 
     async acceptCookies (value) {
@@ -23,11 +23,11 @@ module.exports = class CookieBanner extends Page {
             necessary: await this.cookieAcceptNecessaryButton
         };
 
-        return cookieType[value].click();
+        await cookieType[value].click();
     }
 
     async getCookiePolicyUrl () {
-        return (await this.cookiePolicyLink).getAttribute('href');
+        return this.cookiePolicyLink.getAttribute('href');
     }
 
     async testTabOrder (tabOrder) {
@@ -41,4 +41,6 @@ module.exports = class CookieBanner extends Page {
             expected: expectedTabOrder.concat(expectedTabOrder[0])
         };
     }
-};
+}
+
+export default new CookieBanner();

@@ -1,13 +1,13 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
-const {
+import Page from '@justeat/f-wdio-utils';
+import {
     COUNTRY_LINK,
     IS_NAV_IN_VIEW,
     MOBILE_NAVIGATION_BAR,
     NAVIGATION
-} = require('./f-header.selectors');
+} from './f-header.selectors';
 
 
-module.exports = class Header extends Page {
+class Header extends Page {
     constructor () {
         super('organism', 'header-component');
     }
@@ -48,13 +48,13 @@ module.exports = class Header extends Page {
     async openCountrySelector () {
         const countrySelectorLink = await this.navigation.countrySelector.link;
 
-        return countrySelectorLink.click();
+        await countrySelectorLink.click();
     }
 
     async clickCountryListItem (country) {
         const countryLink = await $(`[${COUNTRY_LINK}${country}"]`);
 
-        return countryLink.click();
+        await countryLink.click();
     }
 
     async moveToNavigationLink (item) {
@@ -83,4 +83,6 @@ module.exports = class Header extends Page {
     async pressDownTabKey (times = 1) {
         Array.from({ length: times }, () => browser.keys('\uE004'));
     }
-};
+}
+
+export default new Header();

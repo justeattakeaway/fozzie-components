@@ -300,16 +300,18 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-contactPreferences-fieldset {
     display: flex;
     flex-flow: column;
     border: none;
     padding: 0;
-    margin: spacing(d) 0 spacing(f);
+    margin: f.spacing(d) 0 f.spacing(f);
 }
 
 .c-contactPreferences-subtitle {
-    @include font-size(heading-s);
+    @include f.font-size(heading-s);
 }
 
 .c-contactPreferences {
@@ -317,7 +319,7 @@ export default {
         margin-top: 0;
 
         .c-contactPreferences-formField + & {
-            margin-bottom: spacing(d);
+            margin-bottom: f.spacing(d);
         }
     }
 }
@@ -325,7 +327,7 @@ export default {
 .c-contactPreferences-inheritWidthAboveNarrow {
     width: 100%;
 
-    @include media('>narrow') {
+    @include f.media('>narrow') {
         width: inherit;
     }
 }

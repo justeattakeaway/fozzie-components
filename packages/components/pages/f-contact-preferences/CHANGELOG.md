@@ -4,14 +4,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.21.0
-------------------------------
-*July 8, 2021*
+v1.1.0
+-----------------------------
+*July 8, 2022*
 
 ### Added
 - Peer dependencies for all fozzie components.
 
+
+v1.0.0
+-----------------------------
+*July 7, 2022*
+
 ### Changed
+- **Breaking change:** Update to `@use` and `@forward` SASS syntax.
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
 
@@ -37,8 +43,6 @@ v0.18.0
 
 ### Updated
 - Version of `f-alert`
-
-*February 17, 2022*
 
 ### Removed
 - Unneeded controls and watchers in `ContactPreferences.stories`

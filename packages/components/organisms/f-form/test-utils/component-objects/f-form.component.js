@@ -1,7 +1,9 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class Form extends Page {
+class Form extends Page {
     constructor () {
         super('organism', 'v-form-component');
     }
-};
+}
+
+export default new Form();

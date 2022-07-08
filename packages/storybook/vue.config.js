@@ -46,7 +46,9 @@ module.exports = {
                         'molecules',
                         'organisms',
                         'templates',
-                        'f-account-info'
+                        'f-account-info',
+                        'f-checkout',
+                        'f-contact-preferences'
                     ];
                     const pathContainsUpdatedComponentOrType = updateComponentsAndTypes.some(a => absPathCommonScss.includes(a));
 

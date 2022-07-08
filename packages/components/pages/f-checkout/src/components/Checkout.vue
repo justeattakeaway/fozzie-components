@@ -921,8 +921,10 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-checkout {
-    @include media('<=narrow') {
+    @include f.media('<=narrow') {
         border: none;
         margin-top: 0;
         margin-bottom: 0;
@@ -934,12 +936,12 @@ export default {
 }
 
 .c-checkout-alert {
-    width: $checkout-width;
+    width: common.$checkout-width;
     margin-left: auto;
     margin-right: auto;
 
-    @include media('<=#{$checkout-width}') {
-        width: calc(100% - #{spacing(g)}); // Matches the margin of `f-card`
+    @include f.media('<=#{common.$checkout-width}') {
+        width: calc(100% - #{f.spacing(g)}); // Matches the margin of `f-card`
     }
 }
 </style>

@@ -4,14 +4,20 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v3.34.0
-------------------------------
+v4.1.0
+-----------------------------
 *July 8, 2022*
 
 ### Added
 - Peer dependencies for all fozzie components.
 
+
+v4.0.0
+-----------------------------
+*July 7, 2022*
+
 ### Changed
+- **Breaking change:** Update to `@use` and `@forward` SASS syntax.
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
 
