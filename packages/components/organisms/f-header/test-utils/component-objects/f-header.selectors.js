@@ -1,8 +1,8 @@
-exports.MOBILE_NAVIGATION_BAR = '[data-test-id="nav-toggle"]';
-exports.COUNTRY_LINK = 'data-test-id="countrySelector-countryList-';
-exports.IS_NAV_IN_VIEW = '.is-navInView';
+const MOBILE_NAVIGATION_BAR = '[data-test-id="nav-toggle"]';
+const COUNTRY_LINK = 'data-test-id="countrySelector-countryList-';
+const IS_NAV_IN_VIEW = '.is-navInView';
 
-exports.NAVIGATION = {
+const NAVIGATION = {
     offersIcon: {
         link: '[data-test-id="offers-iconLink"]'
     },
@@ -23,4 +23,11 @@ exports.NAVIGATION = {
         currentIcon: '[data-test-id="current-flag-icon"]',
         countryList: '[data-test-id="countrySelector-list"] li'
     }
+};
+
+export {
+    MOBILE_NAVIGATION_BAR,
+    COUNTRY_LINK,
+    IS_NAV_IN_VIEW,
+    NAVIGATION
 };

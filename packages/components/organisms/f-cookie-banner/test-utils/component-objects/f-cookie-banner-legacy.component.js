@@ -1,6 +1,6 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class CookieBannerLegacy extends Page {
+class CookieBannerLegacy extends Page {
     constructor () {
         super('organism', 'cookie-banner-component');
     }
@@ -9,15 +9,15 @@ module.exports = class CookieBannerLegacy extends Page {
 
     get cookiePolicyLink () { return $('[data-test-id="cookie-policy-link"]'); }
 
-    get cookiePolicyLinkHref () { return this.cookiePolicyLink.getAttribute('href'); }
-
     get closeButton () { return $('[data-test-id="cookieBanner-close-button"]'); }
 
-    clickCookiePolicyLink () { this.cookiePolicyLink.click(); }
+    async cookiePolicyLinkHref () { return this.cookiePolicyLink.getAttribute('href'); }
 
-    close () {
-        this.closeButton.click();
+    async clickCookiePolicyLink () { await this.cookiePolicyLink.click(); }
 
-        return this;
+    async close () {
+        await this.closeButton.click();
     }
-};
+}
+
+export default new CookieBannerLegacy();
