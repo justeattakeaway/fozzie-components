@@ -108,41 +108,43 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-checkoutHeader {
     text-align: center;
 }
 
 .c-checkoutHeader-title {
-    @include font-size('heading-m');
+    @include f.font-size('heading-m');
 }
 
 .c-checkoutHeader-guestTitle {
     margin-top: 0;
-    margin-bottom: spacing(a);
-    @include font-size('heading-s');
+    margin-bottom: f.spacing(a);
+    @include f.font-size('heading-s');
 }
 
 .c-checkoutHeader-loginButton {
-    margin-top: spacing(d);
+    margin-top: f.spacing(d);
 }
 
 .c-checkoutHeader-confirmation {
-    margin-top: spacing(a);
+    margin-top: f.spacing(a);
     margin-bottom: 0;
-    @include font-size('body-s');
-    color: $color-content-subdued;
+    @include f.font-size('body-s');
+    color: f.$color-content-subdued;
 }
 
 .c-checkoutHeader-option {
     display: block;
-    margin-top: spacing(d);
-    margin-bottom: spacing(d);
+    margin-top: f.spacing(d);
+    margin-bottom: f.spacing(d);
     text-transform: uppercase;
     font-weight: 300;
     overflow: hidden;
 
     > span {
-        @include font-size('caption');
+        @include f.font-size('caption');
         position: relative;
         display: inline-block;
 
@@ -163,7 +165,7 @@ export default {
             top: 50%;
             width: 9999px;
             height: 1px;
-            background: $color-grey-40;
+            background: f.$color-grey-40;
         }
     }
 }

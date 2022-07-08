@@ -1,6 +1,7 @@
 <template>
     <mega-modal
         ref="errorModal"
+        is-text-aligned-center
         data-test-id="checkout-issue-modal"
         has-overlay
         :title="$t(`errorMessages.checkoutIssues.${messageKey}.title`, { serviceType: serviceTypeText })"
@@ -136,7 +137,9 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-checkout-errorDialogButton {
-    margin: spacing(f) spacing(c) spacing(a);
+    margin: f.spacing(f) f.spacing(c) f.spacing(a);
 }
 </style>

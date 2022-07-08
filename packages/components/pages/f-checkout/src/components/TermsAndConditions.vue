@@ -50,16 +50,18 @@ export default {
 
 
 <style lang="scss" module>
-.c-checkoutTermsAndConditions {
-    background: $color-background-default;
-    margin-top: spacing(g);
-    padding: spacing(e);
-    @include font-size('body-s');
-    text-align: center;
-    color: $color-grey-50;
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
-    @include media('>=narrow') {
-        padding: spacing(d) spacing(g);
+.c-checkoutTermsAndConditions {
+    background: f.$color-background-default;
+    margin-top: f.spacing(g);
+    padding: f.spacing(e);
+    @include f.font-size('body-s');
+    text-align: center;
+    color: f.$color-grey-50;
+
+    @include f.media('>=narrow') {
+        padding: f.spacing(d) f.spacing(g);
         margin-top: 0;
     }
 }

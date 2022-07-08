@@ -33,7 +33,9 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-guest {
-    margin-bottom: spacing(d);
+    margin-bottom: f.spacing(d);
 }
 </style>
