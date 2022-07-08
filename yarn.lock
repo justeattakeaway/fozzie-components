@@ -2309,21 +2309,14 @@
     eslint-config-airbnb-base "15.0.0"
     eslint-plugin-vue "8.4.0"
 
-"@justeat/f-alert@4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-4.2.0.tgz#fe2ca873fdbb4b18c6ac41a4ed702ca689a77e0f"
-  integrity sha512-1dUOkKrY5NGXjJPa+jTP2JpHfRXqNXFtJ9U0enCS+/uHf/4aKcbd5wwX6fLZLcHCoZUoBu3jXO/tPdFrQSotWw==
+"@justeat/f-alert@4.x":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-4.4.1.tgz#616ee1392123adb035b0316d8106adbe2f2bf13c"
+  integrity sha512-G74yEry+xEugTwcDQKizt/eaPpeFC0Q0q8mm6q3VmuF6TgAe0RzFt9bNmpnvRXeOIfJMH5d1hABzWDUwyZMFtg==
   dependencies:
     "@justeat/f-services" "1.0.0"
 
-"@justeat/f-alert@4.3.0":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-4.3.0.tgz#f37e940fab6ceba9883d1968fcc36c2aa5a83765"
-  integrity sha512-QiqFSoTVarQ5rq5K8DCZ4OCwx6IGBhwA8RKgi2H5o8o0ZnOgddvLIkPZy5jDqiLbJQ6mlUzpZW75UGm2j42KAA==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-
-"@justeat/f-alert@5.0.1":
+"@justeat/f-alert@5.x":
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-5.0.1.tgz#80fb4a1480fb85cdb2bf94ad2020f9fa2f286d05"
   integrity sha512-Jx06KGeM0geE9XJrh7vyhQxtSLhIXmiMY4sw31cDcFX9S0N/FrEOLpxiul+oTfNQGWlVrEq4t7NdqOQ1H2zgvA==
@@ -2341,27 +2334,12 @@
     lodash.startswith "4.2.1"
     lodash.uniq "4.5.0"
 
-"@justeat/f-breadcrumbs@3.2.1":
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-breadcrumbs/-/f-breadcrumbs-3.2.1.tgz#df35b871b24a67d1dfa045cfa1bf964b05fa7d9d"
-  integrity sha512-4xt0keFAYwbAnGJKYJM4zZ5rJSYEIrrPMGZN+gshyzSX7/ciohXUqQjWrd1Oys44Amo2+icD8S0n4v8mvpymBQ==
+"@justeat/f-breadcrumbs@3.x":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@justeat/f-breadcrumbs/-/f-breadcrumbs-3.2.2.tgz#6ee562a75055817e331bcf95e85292c81727ae1c"
+  integrity sha512-IQ63wbdZOaQPDaEIjwSyY1R3pBJUTySVKM/2mPvUzP/JXy+9hih1xxCbSr8J8HI03ElLx6p0WvErms5EglfMfw==
   dependencies:
     "@justeat/f-services" "1.0.0"
-
-"@justeat/f-button@3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.0.2.tgz#9560d0caf56ae0801208ddd0c27cb50d670d54a8"
-  integrity sha512-qzZr6ZN01GTs6yFGOvIpwDcdXQKcH1SCF3CN7s9YTNiemWaQAoLo9sfv08fNuawBsxLwX4ZMLzjMY9dioC4vpg==
-
-"@justeat/f-button@3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.2.0.tgz#635f8aae09e76f0838f804033e19dc399a601fcd"
-  integrity sha512-SXh+kuA/mw2fBbJ5IQ74j63N71kOmTgLFsY+9gxMUML3tWqg1uwPKmQHvDO0/5DFroyGYgQ9IEH5RQBCdTU3RA==
-
-"@justeat/f-button@3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.3.0.tgz#b56e48e48d69eed746fe3fb245bb47e915b97252"
-  integrity sha512-iFcYy3ou8QkqkfCRHRyVlR9HOcllXJHsdLiRLKSdJNk6nZLP/ecTNmw4uqHWfhj4pJZU5JgmDno0Wdz1jpuZsQ==
 
 "@justeat/f-button@3.x":
   version "3.4.1"
@@ -2373,41 +2351,22 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-4.0.0.tgz#b6fa2d2f9b6313950f3737224b57533d0e0d7458"
   integrity sha512-ofyIYSVHNo0uyc8Rq9+mqyvPZVyN0JvwK66R473m3jHZbYK74HNzXekrAXMT2WYwEnCM58LumkpQdffKi46AXA==
 
-"@justeat/f-card-with-content@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card-with-content/-/f-card-with-content-1.0.0.tgz#d2e376e121a1b1c89418000a04cb9d5ef3134019"
-  integrity sha512-5BT0MwSDu+JJ1641V25M6NJZrttsxJqz7JaRkfez4x7NoC3BkxW0CbcpRQxGSw9u9pEmMG6io1drNDjzPyrgyQ==
+"@justeat/f-card-with-content@1.x":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-card-with-content/-/f-card-with-content-1.1.1.tgz#582541782c264b3e2f9ecb6d4d5ea0d877149feb"
+  integrity sha512-SDon7xSoP5EUMdVmbZDdxk4i44x2IhGOPjDcEM8IpJVZKUw+XVfuvLhXaHRKz2OfDJcQhL6smW/WbIXtg4bC6A==
 
-"@justeat/f-card-with-content@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card-with-content/-/f-card-with-content-1.1.0.tgz#bb698a779d015fc151b3fad1b4b53591e7cf3e17"
-  integrity sha512-XJhBjKdxbdR81BzG+rrntouCwMxinChZA5ZXmjtaFeTUnfuBtpBXmf0cRu+c1Ozt3uGLRmJ2TsrNHZUCnEHH1A==
-
-"@justeat/f-card@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.0.0.tgz#6bc0840adcca276638778a080ea66d6f34309a78"
-  integrity sha512-X/XF1yo6whfSZ46i4kaz7VZlLe+U27SDOa8x+N3Vn5dakgYDRhdiIvgsDm8d1v6GX8eB4addlmlb/OkJ+9G42g==
+"@justeat/f-card@3.x":
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.6.1.tgz#a1dba4482f7f9581c014214f4b796db801347fb9"
+  integrity sha512-h8lZUw88CvWp++2mGNhEjTBUamU1kkZimPMflMkANPKwXUd39BJjHeiy3J+d4yc0wR4P16rQxpemYqkQLZAdSg==
   dependencies:
     "@justeat/f-services" "0.13.0"
 
-"@justeat/f-card@3.5.0":
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.5.0.tgz#ecfa557a8a60445ffb01a91b353a1306990b82b6"
-  integrity sha512-jm507qjql+rMolL5y9l3QLE88ZZPF/NWK2Z6wQzfpii74/dR/Bs1SYxnPMQJI3ZjddzzM9CQuMmIaDvvMGbRfw==
-  dependencies:
-    "@justeat/f-services" "0.13.0"
-
-"@justeat/f-card@3.6.0":
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.6.0.tgz#4f740d7f63a27fd159fc65ea58025e2869212335"
-  integrity sha512-BQJs4+oZ/0EWegAjmWnFzfA0Wv2VPEUwoCHwEiLmxBTLTxK/RS7qVahFaTcmhA3hcm/esVnRhTZEKYUGf0yE6A==
-  dependencies:
-    "@justeat/f-services" "0.13.0"
-
-"@justeat/f-content-cards@7.4.0":
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-7.4.0.tgz#a3ee8e3dddc28f0fe8305546b1b7666787518735"
-  integrity sha512-kzNub50NlpHb/F1xLzlV9J2Unn8yu4opv4JlyPBih08CBSaYKAvIfyGhcFzAPq22pPMlqjXrdVpYU4cP6wLtSA==
+"@justeat/f-content-cards@7.x":
+  version "7.4.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-7.4.1.tgz#7076118679ba9f75e5395291fce6734e16ab3d3d"
+  integrity sha512-XHrczfrbGr29ybVj595VbL6klPAsM8PDrmmyFINHjb8bMfY538oi+WdpmNJ1GF4cR25rgMc/DBjm7x3hzZ+BRg==
   dependencies:
     "@babel/plugin-proposal-class-properties" "7.12.13"
     "@justeat/f-services" "1.0.1"
@@ -2429,20 +2388,6 @@
   dependencies:
     qwery "^4.0.0"
 
-"@justeat/f-error-message@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-1.0.0.tgz#f68da2b9e47ef902ac4b721b038360450d10c005"
-  integrity sha512-VaD5384grwCsyLFENrJrM7ePOuLeRTcnvYF/ar5UK8tQTg1ixX7nxhfhjQ7ONCClWaRmaZ7NY4dzFKjoz/XrTA==
-  dependencies:
-    "@justeat/f-vue-icons" "1.10.0"
-
-"@justeat/f-error-message@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-1.1.0.tgz#858d423dae20029660976d11a8c5d360f4484991"
-  integrity sha512-tnXNGvSJWlHaq2RwAOJAEna5cfEvWa9ruZV6JSnIzJDlOj1J13nDDcNRGVlBgcAAOD8UWkRf3qunwxZf6OOXlQ==
-  dependencies:
-    "@justeat/f-vue-icons" "1.10.0"
-
 "@justeat/f-error-message@1.x":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-1.2.1.tgz#a83806fe35e51a9c689e9b1ad6f3569a9ee26149"
@@ -2450,34 +2395,10 @@
   dependencies:
     "@justeattakeaway/pie-icons-vue" "1.0.0"
 
-"@justeat/f-form-field@4.11.0":
-  version "4.11.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.11.0.tgz#d70fe29f8338326b8e0a97e106979d76ee60298b"
-  integrity sha512-1WZdIY9SuvOJc5kxhVD/PFLdospeanXwMi9KwS0k5TRQ2iwDKt9K1PQRFxAEuG+PSZ890lKLKXWtCDxO6AobJA==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeattakeaway/pie-icons-vue" "1.0.0"
-
-"@justeat/f-form-field@4.9.0":
-  version "4.9.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.9.0.tgz#831d206f658ee22f22c52d71dabff4b6bc55de70"
-  integrity sha512-KJFdSUAXlJWCahqjE4cZDYm78xiU41mbED29yU4OVDCOF8coWPLfp8GbXmarRsO3zBa5To7Q26WRGEzxaHCn+g==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeat/f-vue-icons" "2.5.0"
-
 "@justeat/f-form-field@4.x":
   version "4.13.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.13.1.tgz#de26d48647332d3791fefab5014bbcd311db9a7e"
   integrity sha512-Nf4jttNM4u1b1bAx+e8y1wxXiIAOaiyzeurLxEQ6MBDjxjocaYGMuVtSdFwv5YeiiOyo0AcqUGxN9Ix5C6q9Sw==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeattakeaway/pie-icons-vue" "1.0.0"
-
-"@justeat/f-form-field@5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-5.0.0.tgz#53d66c992dd485b8eed30ee0eee9cc897fe5cb47"
-  integrity sha512-YexzQrZVTOlPq5n3pKZ05rIWoymjEq35vVjPJqUaS+IU95qUPXrqqUCZD/STIG3GWaEtT9OOI5nQwifWT8tEug==
   dependencies:
     "@justeat/f-services" "1.0.0"
     "@justeattakeaway/pie-icons-vue" "1.0.0"
@@ -2509,27 +2430,22 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/f-media-element@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-media-element/-/f-media-element-2.0.0.tgz#0995cdbb902252cad6e15c4786c1547d2c6ee083"
-  integrity sha512-Xpd+lwCrRxhsg1Q++XMUYH0b0LRHDjBNmCnNuc2iCwDptP/TpHFWH/wMUGPpTYs/QcWISkH/j6GTVmx08e6Lpw==
+"@justeat/f-media-element@2.x":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-media-element/-/f-media-element-2.0.1.tgz#785642873c2f86f029f9cd624616569000635c1c"
+  integrity sha512-bTBYDBYUSxhDA+zuoOSYSJnSFQL/oEJ0S0xTcK6fTLJsl4BBPQmrcFR/pJLiMG6/PnMHpqKWi0hOYALA/7obig==
   dependencies:
     "@justeat/f-services" "1.7.0"
-
-"@justeat/f-mega-modal@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.0.tgz#2e635096c2a6a8fd7da308479a2126748716dcbf"
-  integrity sha512-ZbAgBrqn3a2furQ5F0FLffbsMZar9aIDsRG/2uWnsv6uY0KIHgJi08kH2XK5NzDzckHih2uMN37JiYpQMw6rNQ==
 
 "@justeat/f-mega-modal@3.x":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.2.tgz#81f2b5ca8519a6eca93f5643857df2a9c924666d"
   integrity sha512-3M+wpcjOIIw3hKbtZqyRl3mwdi2zz90wFAJc5RtJciJ/VwD73bHNjvABRl/At+JZj2p0Ongjg11ezSayoKMGJg==
 
-"@justeat/f-mega-modal@4.1.0":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-4.1.0.tgz#43300dd377b6293157bd59378165cc64ace4ade1"
-  integrity sha512-4xwep9kagPo+L6YeFIiU8A65BPhic1CUOzvfv2fzYYdGtYuGi2XVbu2xreYuvlQ/v7pitdW0MUqTZGsoJr+ZTg==
+"@justeat/f-mega-modal@4.x":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-4.2.0.tgz#31a1d07c6e90d3518af6770a136e21c45bcc6104"
+  integrity sha512-3g39OCnjVjsjF1larHjIQR0VSyvUApGmirAeU5UruNn6wNh5OiPCbh9Xqm92OsSk6c+Bi8YmopCskQofZJBOQQ==
 
 "@justeat/f-popover@2.x":
   version "2.3.1"
@@ -2538,7 +2454,7 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/f-searchbox@6.7.0", "@justeat/f-searchbox@6.x":
+"@justeat/f-searchbox@6.x":
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-6.7.0.tgz#b66e3078e376de0c340ac34df7556309f31aea5c"
   integrity sha512-5cyn9dAc0XfS7hfjkLzRLgqvwiMAK+UO0Hc5MdsjT/lGUM/oSKEZqfWpNWqtPBLpk+LI2dBBu3fIm4fwDzXhOQ==
@@ -2636,26 +2552,19 @@
     lodash-es "4.17.15"
     window-or-global "1.0.1"
 
-"@justeat/f-tabs@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-tabs/-/f-tabs-2.1.0.tgz#69d60166f5e8d33a0f91a31f3498c6f374fd356d"
-  integrity sha512-Ysv577bEOcrogwvDWMyV7c6pm+d1jIv7s8RvGYSc21VzQx9QCq/6Zas/ybHUEvaHCtADCrVJzD/xXiBLcLRXig==
+"@justeat/f-tabs@2.x":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-tabs/-/f-tabs-2.1.1.tgz#c807400d9855a1e3ac80404c3e88f891ad847628"
+  integrity sha512-96JAw+N7U9szOLwCsWN/hFQ2aC3XVeBUzo3xFT3yjsgv4hF/UmQONnbLfolAbJphTBQd8YtOgH8X1ynjY3gEDA==
   dependencies:
     "@justeat/f-services" "1.0.0"
 
-"@justeat/f-trak@0.7.1":
+"@justeat/f-trak@0.7.1", "@justeat/f-trak@0.x":
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-trak/-/f-trak-0.7.1.tgz#0ea1650e3a8749e1f8333b4eb72546339ce980be"
   integrity sha512-6XpaZPZWNjDkh7EJBFHL43ab5ExjVoQ4kU2bMJWVldUKoo+7DrcEpktkhkQT8D0IYiNfXKn82mGpqB8v2eDvFw==
   dependencies:
     "@justeat/f-dom" "0.4.0"
-
-"@justeat/f-vue-icons@1.10.0":
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.10.0.tgz#1ae551701ec73b4f6e39651d2a0fab5e105e75c5"
-  integrity sha512-6+JLiYsZzQqNsWoJVOa+ux7KuHT58J5dtJcH6Y+9rukbxidTk22j/0sAvWC7ME6SuKxyYY7MxDL0B6YL875VNQ==
-  dependencies:
-    babel-helper-vue-jsx-merge-props "2.0.3"
 
 "@justeat/f-vue-icons@1.13.0":
   version "1.13.0"
@@ -2675,13 +2584,6 @@
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-2.3.0.tgz#8fddbd2f48bc63efa3d162c81a4e79e22874b09a"
   integrity sha512-bXcAy5T79LH0rS16v62Lh4VwxG7W7t8C9SlgY0KJIK99IZiV3bJS2MK+sIQvWmLMZIJi4qxNeWhUFVXHqPaTuw==
-  dependencies:
-    babel-helper-vue-jsx-merge-props "2.0.3"
-
-"@justeat/f-vue-icons@2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-2.5.0.tgz#769e2ff3725599cf17fdb5a618968f9f814d7179"
-  integrity sha512-eli7NQKc5M8o232QOG6BX6jl1zjs3kJwc1xjWpoN0u17iIWqa9xCsLwqLKWEPXUeZ91xRXYhr8bEccWzMANNUQ==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
