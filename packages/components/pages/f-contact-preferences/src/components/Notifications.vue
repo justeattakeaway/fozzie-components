@@ -52,15 +52,17 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-contactPreferences-inheritWidthAboveNarrow {
     width: 100%;
 
-    @include media('>narrow') {
+    @include f.media('>narrow') {
         width: inherit;
     }
 }
 
 .c-contactPreferences-alert {
-    margin: -(spacing()) 0 spacing(f); // Negative top margin needed to offset the fieldset's bottom margin.
+    margin: -#{f.spacing()} 0 f.spacing(f); // Negative top margin needed to offset the fieldset's bottom margin.
 }
 </style>
