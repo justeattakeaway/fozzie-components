@@ -1,17 +1,10 @@
-const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
-
-const MediaElement = require('../../test-utils/component-objects/f-media-element.component');
-
-const mediaElement = new MediaElement();
+import MediaElement from '../../test-utils/component-objects/f-media-element.component';
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        mediaElement.load();
-    });
-
-    it('a11y - should test f-media-element component WCAG compliance', () => {
+    it('a11y - should test f-media-element component WCAG compliance', async () => {
         // Act
-        const axeResults = getAxeResults('f-media-element');
+        await MediaElement.load();
+        const axeResults = await MediaElement.getAxeResults('f-media-element');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

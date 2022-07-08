@@ -1,24 +1,25 @@
-import forEach from 'mocha-each';
+import CardWithContent from '../../test-utils/component-objects/f-card-with-content.component';
 
-const CardWithContent = require('../../test-utils/component-objects/f-card-with-content.component');
+const devices = [
+    'desktop',
+    'mobile'
+];
 
-let cardWithContent;
+devices.forEach(device => {
+    describe(`f-card-with-content - ${device} Visual Tests`, () => {
+        beforeEach(async () => {
+            // Arrange
+            if (device === 'mobile') {
+                await browser.setWindowSize(414, 731);
+            }
+        });
 
-forEach(['desktop', 'mobile'])
-.describe('f-card-with-content - %s Visual Tests', device => {
-    beforeEach(() => {
-        // Arrange
-        if (device === 'mobile') {
-            browser.setWindowSize(414, 731);
-        }
-        cardWithContent = new CardWithContent();
-    });
+        it('should display default component state', async () => {
+            // Act
+            await CardWithContent.load();
 
-    it('should display default component state', async () => {
-        // Act
-        await cardWithContent.load();
-
-        // Assert
-        browser.percyScreenshot('f-card-with-content - Base State', device);
+            // Assert
+            browser.percyScreenshot('f-card-with-content - Base State', device);
+        });
     });
 });
