@@ -1,16 +1,10 @@
-import { getAxeResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
-
-const RestaurantCard = require('../../test-utils/component-objects/f-restaurant-card.component');
-
-const restaurantCard = new RestaurantCard();
+import RestaurantCard from '../../test-utils/component-objects/f-restaurant-card.component';
 
 describe('Accessibility tests', () => {
-    beforeEach(async () => {
-        await restaurantCard.load();
-    });
-    it('a11y - should test f-restaurant-card component WCAG compliance', () => {
+    it('a11y - should test f-restaurant-card component WCAG compliance', async () => {
         // Act
-        const axeResults = getAxeResults('f-restaurant-card');
+        await RestaurantCard.load();
+        const axeResults = await RestaurantCard.getAxeResults('f-restaurant-card');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

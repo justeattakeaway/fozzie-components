@@ -1,17 +1,10 @@
-const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
-
-const UserMessage = require('../../test-utils/component-objects/f-user-message.component');
-
-const userMessage = new UserMessage();
+import UserMessage from '../../test-utils/component-objects/f-user-message.component';
 
 describe('Accessibility tests', () => {
-    beforeEach(async () => {
-        await userMessage.load();
-    });
-
-    it('a11y - should test f-user-message component WCAG compliance', () => {
+    it('a11y - should test f-user-message component WCAG compliance', async () => {
         // Act
-        const axeResults = getAxeResults('f-user-message');
+        await UserMessage.load();
+        const axeResults = await UserMessage.getAxeResults('f-user-message');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

@@ -1,16 +1,10 @@
-const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
-
-const Tabs = require('../../test-utils/component-objects/f-tabs.component');
-
-const tabs = new Tabs();
+import Tabs from '../../test-utils/component-objects/f-tabs.component';
 
 describe('Accessibility tests', () => {
-    beforeEach(async () => {
-        await tabs.load();
-    });
-    it('a11y - should test f-tabs component WCAG compliance', () => {
+    it('a11y - should test f-tabs component WCAG compliance', async () => {
         // Act
-        const axeResults = getAxeResults('f-tabs');
+        await Tabs.load();
+        const axeResults = await Tabs.getAxeResults('f-tabs');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

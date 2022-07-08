@@ -2309,17 +2309,17 @@
     eslint-config-airbnb-base "15.0.0"
     eslint-plugin-vue "8.4.0"
 
-"@justeat/f-alert@4.3.0":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-4.3.0.tgz#f37e940fab6ceba9883d1968fcc36c2aa5a83765"
-  integrity sha512-QiqFSoTVarQ5rq5K8DCZ4OCwx6IGBhwA8RKgi2H5o8o0ZnOgddvLIkPZy5jDqiLbJQ6mlUzpZW75UGm2j42KAA==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-
 "@justeat/f-alert@5.0.1":
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-5.0.1.tgz#80fb4a1480fb85cdb2bf94ad2020f9fa2f286d05"
   integrity sha512-Jx06KGeM0geE9XJrh7vyhQxtSLhIXmiMY4sw31cDcFX9S0N/FrEOLpxiul+oTfNQGWlVrEq4t7NdqOQ1H2zgvA==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+
+"@justeat/f-alert@6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-6.0.0.tgz#f7a0198ae20d13d1f1040ac62c63f05f35491e9d"
+  integrity sha512-yTh6l5wtf7IXaUd8UCgilCVdOGoSaZ+PIE7bDA9lYB1lmZiytDVzhmXeQHb1Zg3K51wwmYmcWcOHl65ugl+iDw==
   dependencies:
     "@justeat/f-services" "1.0.0"
 
@@ -2361,10 +2361,10 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-4.0.0.tgz#b6fa2d2f9b6313950f3737224b57533d0e0d7458"
   integrity sha512-ofyIYSVHNo0uyc8Rq9+mqyvPZVyN0JvwK66R473m3jHZbYK74HNzXekrAXMT2WYwEnCM58LumkpQdffKi46AXA==
 
-"@justeat/f-card-with-content@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card-with-content/-/f-card-with-content-1.0.0.tgz#d2e376e121a1b1c89418000a04cb9d5ef3134019"
-  integrity sha512-5BT0MwSDu+JJ1641V25M6NJZrttsxJqz7JaRkfez4x7NoC3BkxW0CbcpRQxGSw9u9pEmMG6io1drNDjzPyrgyQ==
+"@justeat/f-card-with-content@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-card-with-content/-/f-card-with-content-3.0.0.tgz#675115fb5e7d58724ce11e7eb3c5697439811541"
+  integrity sha512-siwhAHWWBYkCuUfejvt+8VZhToDoicID4oDAOy5bCGgvMZ+buNWQsBkpob8WcLKOBA/UYb2wYMzAY9XS+//5Bw==
 
 "@justeat/f-card@3.0.0":
   version "3.0.0"
@@ -2501,6 +2501,11 @@
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.2.tgz#81f2b5ca8519a6eca93f5643857df2a9c924666d"
   integrity sha512-3M+wpcjOIIw3hKbtZqyRl3mwdi2zz90wFAJc5RtJciJ/VwD73bHNjvABRl/At+JZj2p0Ongjg11ezSayoKMGJg==
+
+"@justeat/f-mega-modal@7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-7.0.0.tgz#baf7e85217a767bf01809e81bd7bca549c3fd399"
+  integrity sha512-ubtmxeJVYvIVL3rKH6MoLUT5sAMdljGcRt9BhWpaDWuyALsZBgKSGOtSY2zootj27GgrC+3LMhRssmyl8WmHbQ==
 
 "@justeat/f-popover@2.x":
   version "2.3.1"

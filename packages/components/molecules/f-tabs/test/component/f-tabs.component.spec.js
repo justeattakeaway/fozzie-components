@@ -1,25 +1,23 @@
-import forEach from 'mocha-each';
-
-const Tabs = require('../../test-utils/component-objects/f-tabs.component');
-
-const tabs = new Tabs();
+import Tabs from '../../test-utils/component-objects/f-tabs.component';
 
 describe('f-tabs component tests', () => {
     beforeEach(async () => {
-        await tabs.load();
+        await Tabs.load();
     });
 
     it('should display the f-tabs component', async () => {
         // Assert
-        await expect(await tabs.isComponentDisplayed()).toBe(true);
+        await expect(await Tabs.isComponentDisplayed()).toBe(true);
     });
 
-    forEach(['Your Stampcards', 'How it works'])
-        .it('should display individual tabs', async tab => {
-            // Arrange
-            tabs.expectedTabButton = tab;
-
+    const tabs = [
+        'Your Stampcards',
+        'How it works (I can be renamed)'
+    ];
+    tabs.forEach(tab => {
+        it('should display individual tabs', async () => {
             // Assert
-            await expect(await tabs.isTabButtonDisplayed(tab)).toBe(true);
+            await expect(await Tabs.isTabButtonDisplayed(tab)).toBe(true);
         });
+    });
 });

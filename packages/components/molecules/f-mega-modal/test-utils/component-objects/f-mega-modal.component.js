@@ -1,6 +1,6 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class MegaModal extends Page {
+class MegaModal extends Page {
     constructor () {
         super('molecule', 'mega-modal-component');
     }
@@ -15,4 +15,6 @@ module.exports = class MegaModal extends Page {
     async isContentDisplayed () {
         return this.megaModalTitle.isDisplayed();
     }
-};
+}
+
+export default new MegaModal();

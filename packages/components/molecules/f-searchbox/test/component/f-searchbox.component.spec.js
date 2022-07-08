@@ -1,14 +1,11 @@
-const Searchbox = require('../../test-utils/component-objects/f-searchbox.component');
-
-const searchbox = new Searchbox();
+import Searchbox from '../../test-utils/component-objects/f-searchbox.component';
 
 describe('f-searchbox component tests', () => {
-    beforeEach(async () => {
-        await searchbox.load();
-    });
-
     it('should display the f-searchbox component', async () => {
+        // Act
+        await Searchbox.load();
+
         // Assert
-        await expect(await searchbox.isComponentDisplayed()).toBe(true);
+        await expect(await Searchbox.isComponentDisplayed()).toBe(true);
     });
 });

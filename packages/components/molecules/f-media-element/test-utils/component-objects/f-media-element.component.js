@@ -1,7 +1,9 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class MediaElement extends Page {
+class MediaElement extends Page {
     constructor () {
         super('molecule', 'media-element-component');
     }
-};
+}
+
+export default new MediaElement();

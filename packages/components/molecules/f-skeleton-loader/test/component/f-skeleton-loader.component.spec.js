@@ -1,14 +1,11 @@
-const SkeletonLoader = require('../../test-utils/component-objects/f-skeleton-loader.component');
-
-const skeletonLoader = new SkeletonLoader();
+import SkeletonLoader from '../../test-utils/component-objects/f-skeleton-loader.component';
 
 describe('f-skeleton-loader component tests', () => {
-    beforeEach(async () => {
-        await skeletonLoader.load();
-    });
-
     it('should display the f-skeleton-loader component', async () => {
+        // Act
+        await SkeletonLoader.load();
+
         // Assert
-        await expect(await skeletonLoader.isComponentDisplayed()).toBe(true);
+        await expect(await SkeletonLoader.isComponentDisplayed()).toBe(true);
     });
 });

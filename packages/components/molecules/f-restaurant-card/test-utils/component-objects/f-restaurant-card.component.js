@@ -1,7 +1,9 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class RestaurantCard extends Page {
+class RestaurantCard extends Page {
     constructor () {
         super('molecule-folder', 'f-restaurant-card--restaurant-card-component');
     }
-};
+}
+
+export default new RestaurantCard();
