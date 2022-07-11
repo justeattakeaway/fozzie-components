@@ -16,6 +16,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-loyalty-terms {
     display: flex;
     width: 100%;
@@ -24,13 +26,13 @@ export default {
 }
 
 .c-loyalty-terms-link {
-    margin: spacing(e) 0;
+    margin: f.spacing(e) 0;
     text-align: center;
-    font-weight: $font-body-strong-s-weight;
+    font-weight: f.$font-body-strong-s-weight;
     text-decoration: none;
 
     &:hover {
-         text-decoration: underline;
+        text-decoration: underline;
     }
 }
 </style>

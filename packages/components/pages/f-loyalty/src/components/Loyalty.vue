@@ -138,37 +138,39 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-loyalty {
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 100%;
     margin: auto;
-    background-color: $color-background-default;
+    background-color: f.$color-background-default;
 }
 
 .c-loyalty-tabs {
     width: 100%;
-    max-width: #{$layout-max-width}px;
+    max-width: #{f.$layout-max-width}px;
     margin: -42px auto 0;
-    padding: 0 #{$layout-margin}px;
+    padding: 0 #{f.$layout-margin}px;
 
-    @include media('<mid') {
-        padding: 0 #{$layout-margin--mid}px;
+    @include f.media('<mid') {
+        padding: 0 #{f.$layout-margin--mid}px;
     }
 
-    @include media('<narrow') {
-        padding: 0 #{$layout-margin--narrow}px;
+    @include f.media('<narrow') {
+        padding: 0 #{f.$layout-margin--narrow}px;
     }
 }
 
 .c-loyalty-appsHowItWorksContainer {
-    padding-left: spacing(f);
-    padding-right: spacing(f);
+    padding-left: f.spacing(f);
+    padding-right: f.spacing(f);
 
-    @include media('<=wide') {
-        padding-left: spacing(d);
-        padding-right: spacing(d);
+    @include f.media('<=wide') {
+        padding-left: f.spacing(d);
+        padding-right: f.spacing(d);
     }
 }
 </style>
