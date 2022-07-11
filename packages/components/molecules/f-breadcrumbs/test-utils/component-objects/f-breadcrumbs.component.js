@@ -1,7 +1,9 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class Breadcrumbs extends Page {
+class Breadcrumbs extends Page {
     constructor () {
         super('molecule', 'breadcrumbs-component');
     }
-};
+}
+
+export default new Breadcrumbs();

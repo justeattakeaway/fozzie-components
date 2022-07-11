@@ -2316,6 +2316,13 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
+"@justeat/f-alert@6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-6.0.0.tgz#f7a0198ae20d13d1f1040ac62c63f05f35491e9d"
+  integrity sha512-yTh6l5wtf7IXaUd8UCgilCVdOGoSaZ+PIE7bDA9lYB1lmZiytDVzhmXeQHb1Zg3K51wwmYmcWcOHl65ugl+iDw==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+
 "@justeat/f-braze-adapter@5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-5.0.0.tgz#5f38225e6c0f570f9294b47705345b386debac2c"
@@ -2326,6 +2333,13 @@
     lodash.orderby "4.6.0"
     lodash.startswith "4.2.1"
     lodash.uniq "4.5.0"
+
+"@justeat/f-breadcrumbs@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-breadcrumbs/-/f-breadcrumbs-4.0.0.tgz#bc93f5c04f6f807d09e0b5c0a9d40c5a222e2ad3"
+  integrity sha512-/P2mtaoN/Yb8FBLTZZmkg4kTMV0Z60sibQdUQV/h7USadswqEY6291jQDryair9AzC2PQql/94maYcWMp/qaMw==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
 
 "@justeat/f-button@3.0.2":
   version "3.0.2"
@@ -2341,6 +2355,11 @@
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-4.0.0.tgz#b6fa2d2f9b6313950f3737224b57533d0e0d7458"
   integrity sha512-ofyIYSVHNo0uyc8Rq9+mqyvPZVyN0JvwK66R473m3jHZbYK74HNzXekrAXMT2WYwEnCM58LumkpQdffKi46AXA==
+
+"@justeat/f-card-with-content@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-card-with-content/-/f-card-with-content-3.0.0.tgz#675115fb5e7d58724ce11e7eb3c5697439811541"
+  integrity sha512-siwhAHWWBYkCuUfejvt+8VZhToDoicID4oDAOy5bCGgvMZ+buNWQsBkpob8WcLKOBA/UYb2wYMzAY9XS+//5Bw==
 
 "@justeat/f-card@3.0.0":
   version "3.0.0"
@@ -2452,6 +2471,13 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
+"@justeat/f-media-element@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-media-element/-/f-media-element-3.0.0.tgz#2a16708009823f6fc9f465d3abd61861bad10369"
+  integrity sha512-6ohmdn6YPyAvxgVkw+fkm/0pyLvz13hJiu9kLz5v5eCYrbSLXRlHRdrkI6B9pPAhuYLfEggd59PTMJbibhJfKA==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
+
 "@justeat/f-mega-modal@3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.0.tgz#2e635096c2a6a8fd7da308479a2126748716dcbf"
@@ -2461,6 +2487,11 @@
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.2.tgz#81f2b5ca8519a6eca93f5643857df2a9c924666d"
   integrity sha512-3M+wpcjOIIw3hKbtZqyRl3mwdi2zz90wFAJc5RtJciJ/VwD73bHNjvABRl/At+JZj2p0Ongjg11ezSayoKMGJg==
+
+"@justeat/f-mega-modal@7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-7.0.0.tgz#baf7e85217a767bf01809e81bd7bca549c3fd399"
+  integrity sha512-ubtmxeJVYvIVL3rKH6MoLUT5sAMdljGcRt9BhWpaDWuyALsZBgKSGOtSY2zootj27GgrC+3LMhRssmyl8WmHbQ==
 
 "@justeat/f-popover@2.x":
   version "2.3.1"
@@ -2566,6 +2597,13 @@
   dependencies:
     lodash-es "4.17.15"
     window-or-global "1.0.1"
+
+"@justeat/f-tabs@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-tabs/-/f-tabs-3.0.0.tgz#d12660aa126e06071b6a1ebb4c27c8cf9f7c7010"
+  integrity sha512-dQIyPJ6681lQ5ECWeF+6Ot0pPkRI6FLZvOymXDbmRFVUNQAwLbeKMFqPo6JgjkC5mb+wImNVeS1Q0dgA+yM9kg==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
 
 "@justeat/f-trak@0.7.1":
   version "0.7.1"

@@ -1,7 +1,9 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class NavigationLinks extends Page {
+class NavigationLinks extends Page {
     constructor () {
         super('molecule', 'navigation-links-component');
     }
-};
+}
+
+export default new NavigationLinks();

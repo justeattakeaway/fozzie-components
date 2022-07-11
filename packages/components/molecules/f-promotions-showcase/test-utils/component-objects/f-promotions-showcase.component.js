@@ -1,8 +1,9 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class PromotionsShowcase extends Page {
+class PromotionsShowcase extends Page {
     constructor () {
         super('molecule', 'promotions-showcase-component');
     }
-};
+}
 
+export default new PromotionsShowcase();

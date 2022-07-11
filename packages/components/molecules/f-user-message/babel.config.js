@@ -10,7 +10,7 @@ module.exports = api => {
     presets.push(['@vue/app', { useBuiltIns: builtIns }]);
 
     // use for both test and dev/live
-    presets.push('@babel/env');
+    presets.push(['@babel/env', { targets: { node: 'current' } }]);
 
     return {
         presets,
