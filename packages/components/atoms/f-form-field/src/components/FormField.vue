@@ -15,6 +15,7 @@
                 v-if="shouldShowLabel"
                 :label-for="uniqueId"
                 :is-disabled="isDisabled"
+                :is-visually-required="$attrs.required && isVisuallyRequired"
                 v-bind="$props"
                 :data-test-id="testId.label">
                 {{ labelText }}
@@ -40,6 +41,7 @@
                 v-else-if="isSelectionControl"
                 :id="uniqueId"
                 :attributes="$attrs"
+                :is-visually-required="isVisuallyRequired"
                 v-bind="$props"
                 v-on="listeners" />
 
@@ -48,7 +50,6 @@
                 :id="`${uniqueId}`"
                 :aria-labelledby="`label-${uniqueId}`"
                 :value="value"
-                :aria-required="isRequired"
                 v-bind="$attrs"
                 :class="[
                     $style['c-formField-field'],
@@ -64,7 +65,6 @@
                 :aria-labelledby="`label-${uniqueId}`"
                 :value="value"
                 v-bind="$attrs"
-                :aria-required="isRequired"
                 :type="normalisedInputType"
                 :min="normalisedInputType === 'number' ? minNumber : false"
                 :max="normalisedInputType === 'number' ? maxNumber : false"
@@ -235,7 +235,7 @@ export default {
             validator: value => (value.length <= 3)
         },
 
-        isRequired: {
+        isVisuallyRequired: {
             type: Boolean,
             default: true
         }
