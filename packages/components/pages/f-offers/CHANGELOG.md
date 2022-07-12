@@ -10,13 +10,6 @@ v1.12.0-beta.3
 
 ### Changed
 - **breaking changes** Update to `@use` and `@forward` SASS syntax
-
-
-Latest (add to next release)
-------------------------------
-*June 23, 2021*
-
-### Changed
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
 
