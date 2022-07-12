@@ -59,7 +59,5 @@ export default {
 </script>
 
 <style lang="scss" module>
-
-@import './../assets/scss/takeaway-pay-activation';
-
+//
 </style>
