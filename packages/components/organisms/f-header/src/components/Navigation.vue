@@ -13,7 +13,7 @@
                 'is-hidden--noJS',
                 $style['c-nav-trigger'],
                 $style['c-nav-toggle'],
-                { [$style['c-nav-toggle--altColour']]: isNavToggleAltColour },
+                { [$style['c-nav-toggle--altColour']]: isAltColour || (headerBackgroundTheme === 'highlight' && navIsOpen) },
                 { [$style['is-open']]: navIsOpen }
             ]"
             :aria-expanded="navIsOpen ? 'true' : 'false'"
@@ -429,11 +429,6 @@ export default {
         isAltColour () {
             const isMobileNavOpen = this.navIsOpen && this.isBelowMid;
             return ['transparent', 'highlight'].includes(this.headerBackgroundTheme) && !isMobileNavOpen;
-        },
-
-        isNavToggleAltColour () {
-            return ['highlight', 'search'].includes(this.headerBackgroundTheme) ||
-            (this.headerBackgroundTheme === 'transparent' && !this.navIsOpen);
         },
 
         /**

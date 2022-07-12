@@ -8,8 +8,7 @@
             :class="[
                 $style['c-logo-img'],
                 { [$style['c-logo-img--jet']]: theme === 'jet' && shouldResizeLogo },
-                { [$style['c-logo-img--alt']]: isAltLogo },
-                { [$style['c-logo-img--search']]: isSearchLogo }
+                { [$style['c-logo-img--alt']]: isAltLogo }
             ]"
             :data-theme-logo="iconComponent"
             data-test-id="header-logo" />
@@ -88,9 +87,6 @@ export default {
 
             return isHighlight || (isTransparent && !this.isOpen);
         },
-        isSearchLogo () {
-            return this.headerBackgroundTheme === 'search';
-        },
         wrapperComponent () {
             return this.isLogoDisabled ? 'span' : 'a';
         }
@@ -168,14 +164,5 @@ export default {
             & path {
                 fill: common.$header-logo-color--alt;
             }
-    }
-
-    .c-logo-img--search {
-        @include f.media('<=mid') {
-            & g,
-            & path {
-                fill: common.$header-logo-color--alt;
-            }
-        }
     }
 </style>

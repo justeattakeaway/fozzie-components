@@ -277,8 +277,6 @@ html:global(.is-navInView) {
     }
 
     .c-header--searchBg {
-        background-color: f.$color-support-brand-01;
-
         @include f.media('>mid') {
             background-color: transparent;
             box-shadow: none;
