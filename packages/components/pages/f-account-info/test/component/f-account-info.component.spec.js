@@ -1,45 +1,46 @@
-import forEach from 'mocha-each';
-
-const AccountInfo = require('../../test-utils/component-objects/f-account-info.component');
+import AccountInfo from '../../test-utils/component-objects/f-account-info.component';
 
 describe('f-account-info component tests', () => {
-    let accountInfo;
     const illegalInput = '123';
-
-    beforeEach(() => {
-        accountInfo = new AccountInfo();
-    });
 
     it('should display the f-account-info component', async () => {
         // Act
-        await accountInfo.load();
+        await AccountInfo.load();
 
         // Assert
-        await expect(await accountInfo.isComponentDisplayed()).toBe(true);
+        await expect(await AccountInfo.isComponentDisplayed()).toBe(true);
     });
 
     it('should show that the email formfield is disabled', async () => {
         // Act
-        await accountInfo.load();
+        await AccountInfo.load();
 
         // Assert
-        await expect(await accountInfo.isDisabled('emailAddress')).toBe(true);
+        await expect(await AccountInfo.isDisabled('emailAddress')).toBe(true);
     });
 
-    forEach(['changeEmailAddressLink', 'saveChangesButton', 'changePasswordButton', 'deleteAccountLink'])
-    .it('should check if all call to actions are clickable', async cta => {
-        // Act
-        await accountInfo.load();
+    const ctas = [
+        'changeEmailAddressLink',
+        'saveChangesButton',
+        'changePasswordButton',
+        'deleteAccountLink'
+    ];
 
-        // Assert
-        await expect(await accountInfo.canBeClicked(cta)).toBe(true);
+    ctas.forEach(cta => {
+        it(`should check if ${cta} action is clickable`, async () => {
+            // Act
+            await AccountInfo.load();
+
+            // Assert
+            await expect(await AccountInfo.canBeClicked(cta)).toBe(true);
+        });
     });
 
     it('should redirect to the correct URL when `change password` has been clicked', async () => {
         // Act
-        await accountInfo.load();
+        await AccountInfo.load();
 
-        await accountInfo.clickChangePassword();
+        await AccountInfo.clickChangePassword();
 
         // Assert
         await expect(await browser.getUrl()).toContain('/account/change-password');
@@ -50,9 +51,9 @@ describe('f-account-info component tests', () => {
         const expectedUrl = '/account/deactivate';
 
         // Act
-        await accountInfo.load();
+        await AccountInfo.load();
 
-        await accountInfo.clickDeleteAccountLink();
+        await AccountInfo.clickDeleteAccountLink();
         await browser.switchWindow(new RegExp(`^.*${expectedUrl}.*$`));
 
         // Assert
@@ -64,117 +65,119 @@ describe('f-account-info component tests', () => {
         const expectedUrl = '/help/article/203097431/how-do-i-manage-my-account';
 
         // Act
-        await accountInfo.load();
+        await AccountInfo.load();
 
-        await accountInfo.clickChangeEmailAddressLink();
+        await AccountInfo.clickChangeEmailAddressLink();
         await browser.switchWindow(new RegExp(`^.*${expectedUrl}.*$`));
 
         // Assert
         await expect(await browser.getUrl()).toContain(expectedUrl);
     });
 
-    forEach(['firstName', 'lastName', 'phoneNumber', 'addressLine1', 'city', 'postcode'])
-    .it('should display an error message immediately when %s input has been deleted', async field => {
-        // Act
-        await accountInfo.load();
+    const fields = [
+        'firstName',
+        'lastName',
+        'phoneNumber',
+        'addressLine1',
+        'city',
+        'postcode'
+    ];
 
-        await accountInfo.clearBlurField(field);
-        await accountInfo.tabOutOfField(field);
+    fields.forEach(field => {
+        it(`should display an error message immediately when ${field} input has been deleted`, async () => {
+            // Act
+            await AccountInfo.load();
 
-        // Assert
-        await expect(await accountInfo.isEmptyErrorMessageDisplayed(field)).toBe(true);
+            await AccountInfo.clearBlurField(field);
+            await AccountInfo.tabOutOfField(field);
+
+            // Assert
+            await expect(await AccountInfo.isEmptyErrorMessageDisplayed(field)).toBe(true);
+        });
     });
 
     it('should display the illegal first name error message immediately on click', async () => {
         // Act
-        await accountInfo.load();
+        await AccountInfo.load();
 
-        await accountInfo.clearBlurField('firstName');
-        await accountInfo.setFieldValue('firstName', illegalInput);
-        await accountInfo.clickOutOfInputField();
+        await AccountInfo.clearBlurField('firstName');
+        await AccountInfo.setFieldValue('firstName', illegalInput);
+        await AccountInfo.clickOutOfInputField();
 
         // Assert
-        await expect(await accountInfo.isInvalidErrorMessageDisplayed('firstName')).toBe(true);
+        await expect(await AccountInfo.isInvalidErrorMessageDisplayed('firstName')).toBe(true);
     });
 
     it('should display the illegal last name error message immediately on click', async () => {
         // Act
-        await accountInfo.load();
+        await AccountInfo.load();
 
-        await accountInfo.clearBlurField('lastName');
-        await accountInfo.setFieldValue('lastName', illegalInput);
-        await accountInfo.clickOutOfInputField();
+        await AccountInfo.clearBlurField('lastName');
+        await AccountInfo.setFieldValue('lastName', illegalInput);
+        await AccountInfo.clickOutOfInputField();
 
         // Assert
-        await expect(await accountInfo.isInvalidErrorMessageDisplayed('lastName')).toBe(true);
+        await expect(await AccountInfo.isInvalidErrorMessageDisplayed('lastName')).toBe(true);
     });
 
     it('should display the illegal phone number error message immediately on click', async () => {
         // Act
-        await accountInfo.load();
-        await accountInfo.clearBlurField('phoneNumber');
-        await accountInfo.setFieldValue('phoneNumber', illegalInput);
-        await accountInfo.tabOutOfField('phoneNumber');
+        await AccountInfo.load();
+        await AccountInfo.clearBlurField('phoneNumber');
+        await AccountInfo.setFieldValue('phoneNumber', illegalInput);
+        await AccountInfo.tabOutOfField('phoneNumber');
 
         // Assert
-        await expect(await accountInfo.isInvalidErrorMessageDisplayed('phoneNumber')).toBe(true);
+        await expect(await AccountInfo.isInvalidErrorMessageDisplayed('phoneNumber')).toBe(true);
     });
 
     it('should display the illegal postcode error message immediately on click', async () => {
         // Act
-        await accountInfo.load();
+        await AccountInfo.load();
 
-        await accountInfo.clearBlurField('postcode');
-        await accountInfo.setFieldValue('postcode', illegalInput);
-        await accountInfo.clickOutOfInputField();
+        await AccountInfo.clearBlurField('postcode');
+        await AccountInfo.setFieldValue('postcode', illegalInput);
+        await AccountInfo.clickOutOfInputField();
 
         // Assert
-        await expect(await accountInfo.isInvalidErrorMessageDisplayed('postcode')).toBe(true);
+        await expect(await AccountInfo.isInvalidErrorMessageDisplayed('postcode')).toBe(true);
     });
 
-    forEach([
-        ['en-GB']
-    ]).it('should display the %s Error page if GET fails', async locale => {
+    it('should display the %s Error page if GET fails', async () => {
         // Act
-        accountInfo.load({ locale, apiState: 'get-details-fails' });
+        AccountInfo.load({ locale: 'en-GB', apiState: 'get-details-fails' });
 
         // Assert
-        await expect(await accountInfo.isErrorCardComponentDisplayed()).toBe(true);
+        await expect(await AccountInfo.isErrorCardComponentDisplayed()).toBe(true);
     });
 
-    forEach([
-        ['en-GB']
-    ]).it('should display the %s Submit success alert if Submit succeed', async locale => {
+    it('should display the %s Submit success alert if Submit succeed', async () => {
         // Arrange
-        await accountInfo.load({ locale });
+        await AccountInfo.load({ locale: 'en-GB' });
 
-        await accountInfo.clearBlurField('firstName');
-        await accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
+        await AccountInfo.clearBlurField('firstName');
+        await AccountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
 
         // Act
-        await accountInfo.waitForSuccessAlertDisplayed();
-        await accountInfo.clickSaveButton();
+        await AccountInfo.clickSaveButton();
 
         // Assert
-        await expect(await accountInfo.isErrorAlertDisplayed()).toBe(false);
-        await expect(await accountInfo.isSuccessAlertDisplayed()).toBe(true);
+        await expect(await AccountInfo.isErrorAlertDisplayed()).toBe(false);
+        await expect(await AccountInfo.isSuccessAlertDisplayed()).toBe(true);
     });
 
-    forEach([
-        ['en-GB']
-    ]).it('should display the %s Submit error alert if Submit fails', async locale => {
+    it('should display the %s Submit error alert if Submit fails', async () => {
         // Arrange
-        await accountInfo.load({ locale, apiState: 'patch-details-fails' });
+        await AccountInfo.load({ locale: 'en-GB', apiState: 'patch-details-fails' });
 
-        await accountInfo.clearBlurField('firstName');
-        await accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
+        await AccountInfo.clearBlurField('firstName');
+        await AccountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
 
         // Act
-        await accountInfo.waitForErrorAlertDisplayed();
-        await accountInfo.clickSaveButton();
+        await AccountInfo.clickSaveButton();
 
         // Assert
-        await expect(await accountInfo.isSuccessAlertDisplayed()).toBe(false);
-        await expect(await accountInfo.isErrorAlertDisplayed()).toBe(true);
+        await expect(await AccountInfo.isSuccessAlertDisplayed()).toBe(false);
+        await expect(await AccountInfo.isErrorAlertDisplayed()).toBe(true);
     });
 });

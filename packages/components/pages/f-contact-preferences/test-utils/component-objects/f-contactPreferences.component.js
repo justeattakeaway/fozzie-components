@@ -1,13 +1,13 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
-const {
+import Page from '@justeat/f-wdio-utils';
+import {
     ERROR_PAGE,
     SUBMIT_BUTTON,
     CHECKBOXES,
     ERROR_ALERT,
     SUCCESS_ALERT
-} = require('./selectors');
+} from './selectors';
 
-module.exports = class ContactPreferences extends Page {
+class ContactPreferences extends Page {
     constructor () {
         super('page', 'contact-preferences-component');
     }
@@ -24,27 +24,26 @@ module.exports = class ContactPreferences extends Page {
 
     get successAlert () { return $(SUCCESS_ALERT); }
 
-    async isErrorPageDisplayed () {
-        return (await this.errorPage).isDisplayed();
-    }
 
     async isErrorAlertDisplayed () {
-        return (await this.errorAlert).isDisplayed();
+        return this.errorAlert.isDisplayed();
     }
 
     async isSuccessAlertDisplayed () {
-        return (await this.successAlert).isDisplayed();
+        return this.successAlert.isDisplayed();
     }
 
     async clickSubmitButton () {
-        return (await this.submitButton).click();
+        await this.submitButton.click();
     }
 
     async clickNewsEmailCheckbox () {
-        return (await this.newsEmailPreference).click();
+        await this.newsEmailPreference.click();
     }
 
     async clickNewsSmsCheckbox () {
-        return (await this.newsSmsPreference).click();
+        await this.newsSmsPreference.click();
     }
-};
+}
+
+export default new ContactPreferences();

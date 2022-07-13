@@ -1,18 +1,16 @@
-import { getAxeResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
-
-const Offers = require('../../test-utils/component-objects/f-offers.component');
-
-const offers = new Offers();
+import Offers from '../../test-utils/component-objects/f-offers.component';
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        offers.load();
+    beforeEach(async () => {
+        await Offers.load();
     });
-    it('a11y - should test f-offers component WCAG compliance', () => {
+
+    // Offers not currently working in Storybook.
+    it.skip('a11y - should test f-offers component WCAG compliance', async () => {
         // Act
-        const axeResults = getAxeResults('f-offers');
+        const axeResults = await Offers.getAxeResults('f-offers');
 
         // Assert
-        expect(axeResults.violations.length).toBe(0);
+        await expect(axeResults.violations.length).toBe(0);
     });
 });

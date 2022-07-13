@@ -1,24 +1,18 @@
-import forEach from 'mocha-each';
-
-const TakeawayPayComponent = require('../../test-utils/component-objects/f-takeawaypayActivation.component');
-
-let takeawayPayComponent;
+import TakeawayPayComponent from '../../test-utils/component-objects/f-takeawaypayActivation.component';
 
 describe('f-takeawaypay-activation - Unauthenticated - Mobile Visual Tests', () => {
-    beforeEach(async () => {
-        // Arrange
-        takeawayPayComponent = new TakeawayPayComponent();
-    });
+    const locales = [
+        'en-GB',
+        'en-AU'
+    ];
 
-    forEach(['en-GB', 'en-AU'])
-    .it('should display the component when the user is not logged in and tenant is "%s"', async tenant => {
-        // Arrange
-        await takeawayPayComponent.withQuery('knob-Locale', tenant);
+    locales.forEach(locale => {
+        it(`should display the component when the user is not logged in and tenant is "${locale}"`, async () => {
+            // Arrange
+            await TakeawayPayComponent.load({ locale, isLoggedIn: false });
 
-        // Act
-        await takeawayPayComponent.load();
-
-        // Assert
-        await browser.percyScreenshot(`f-takeawaypay-activation - Unauthenticated - ${tenant}`, 'mobile');
+            // Assert
+            await browser.percyScreenshot(`f-takeawaypay-activation - Unauthenticated - ${locale}`, 'mobile');
+        });
     });
 });
