@@ -2472,24 +2472,12 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/f-media-element@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-media-element/-/f-media-element-2.0.0.tgz#0995cdbb902252cad6e15c4786c1547d2c6ee083"
-  integrity sha512-Xpd+lwCrRxhsg1Q++XMUYH0b0LRHDjBNmCnNuc2iCwDptP/TpHFWH/wMUGPpTYs/QcWISkH/j6GTVmx08e6Lpw==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
 "@justeat/f-media-element@3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-media-element/-/f-media-element-3.0.0.tgz#2a16708009823f6fc9f465d3abd61861bad10369"
   integrity sha512-6ohmdn6YPyAvxgVkw+fkm/0pyLvz13hJiu9kLz5v5eCYrbSLXRlHRdrkI6B9pPAhuYLfEggd59PTMJbibhJfKA==
   dependencies:
     "@justeat/f-services" "1.7.0"
-
-"@justeat/f-mega-modal@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.0.tgz#2e635096c2a6a8fd7da308479a2126748716dcbf"
-  integrity sha512-ZbAgBrqn3a2furQ5F0FLffbsMZar9aIDsRG/2uWnsv6uY0KIHgJi08kH2XK5NzDzckHih2uMN37JiYpQMw6rNQ==
 
 "@justeat/f-mega-modal@3.x":
   version "3.0.2"
@@ -2508,7 +2496,7 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/f-searchbox@6.7.0", "@justeat/f-searchbox@6.x":
+"@justeat/f-searchbox@6.x":
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-6.7.0.tgz#b66e3078e376de0c340ac34df7556309f31aea5c"
   integrity sha512-5cyn9dAc0XfS7hfjkLzRLgqvwiMAK+UO0Hc5MdsjT/lGUM/oSKEZqfWpNWqtPBLpk+LI2dBBu3fIm4fwDzXhOQ==
