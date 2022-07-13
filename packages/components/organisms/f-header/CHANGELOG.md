@@ -9,10 +9,10 @@ v10.2.0
 ### Added
 - Theme to support header on Search
 
+
 v10.1.0
 ------------------------------
 *July 7, 2022*
-
 
 ### Changed
 - Update f-wdio-utils to v1.1.0 to use new Axe Core implementation.
