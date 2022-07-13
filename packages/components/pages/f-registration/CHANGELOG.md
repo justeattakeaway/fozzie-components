@@ -8,7 +8,7 @@ v3.0.0
 *July 13, 2022*
 
 ### Changed
-- **breaking changes** Update to `@use` and `@forward` SASS syntax
+- **breaking changes** Update to `@use` and `@forward` SASS syntax.
 
 
 Latest (add to next release)
