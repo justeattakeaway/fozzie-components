@@ -191,7 +191,7 @@ export default {
         },
 
         searchBackgroundClasses () {
-            return this.showSearchHeader ? `${this.$style['c-header--searchBg']}` : '';
+            return this.showSearchHeader ? `${this.$style['c-header--search']}` : '';
         }
     },
 
@@ -276,7 +276,7 @@ html:global(.is-navInView) {
         }
     }
 
-    .c-header--searchBg {
+    .c-header--search {
         @include f.media('>mid') {
             background-color: transparent;
             box-shadow: none;
