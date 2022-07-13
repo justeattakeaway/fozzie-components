@@ -75,6 +75,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 $height-adjustment-for-background-desktop: 64px;
 $height-adjustment-for-background-mobile: 56px;
 $height-adjustment-for-input-desktop: 61px;
@@ -83,40 +85,40 @@ $height-adjustment-for-input-mobile: 48px;
 
 .c-noOffersFound-wrapper {
     width: 100%;
-    background: $color-grey-20;
-    padding: spacing(f) spacing(g);
-    border-radius: $radius-rounded-c;
+    background: f.$color-grey-20;
+    padding: f.spacing(f) f.spacing(g);
+    border-radius: f.$radius-rounded-c;
     position: relative;
-    margin-top: spacing(d);
+    margin-top: f.spacing(d);
 
     & .c-noOffersFound-link {
         padding: 0;
 
-        @include media('<=narrow') {
-            margin-top: spacing(e);
+        @include f.media('<=narrow') {
+            margin-top: f.spacing(e);
         }
     }
 
     & .c-noOffersFound-searchBox {
-        padding-top: spacing(d);
+        padding-top: f.spacing(d);
 
         & input {
-            background-color: $color-white;
+            background-color: f.$color-white;
             height: $height-adjustment-for-input-mobile;
         }
 
-        @include media('<=mid') {
+        @include f.media('<=mid') {
             width: 300px;
         }
 
-        @include media('<=narrowMid') {
+        @include f.media('<=narrowMid') {
             width: 100%;
             & input {
                 height: $height-adjustment-for-input-tablet;
             }
         }
 
-        @include media('<=narrow') {
+        @include f.media('<=narrow') {
             width: 100%;
             & input {
                 height: $height-adjustment-for-input-mobile;
@@ -130,14 +132,14 @@ $height-adjustment-for-input-mobile: 48px;
 
     .c-noOffersFound-searchBox-background {
         position: absolute;
-        top: spacing(d);
+        top: f.spacing(d);
         left:0;
         height: $height-adjustment-for-background-desktop;
-        background-color: $color-white;
+        background-color: f.$color-white;
         width: 100%;
-        border-radius: $radius-rounded-e;
+        border-radius: f.$radius-rounded-e;
 
-        @include media('<=narrow') {
+        @include f.media('<=narrow') {
             height: $height-adjustment-for-background-mobile;
         }
     }

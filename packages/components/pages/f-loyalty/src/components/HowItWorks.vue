@@ -198,6 +198,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 /*
 ==========================================================================
 HOW IT WORKS SECTION
@@ -217,29 +219,29 @@ $examplePercentages-line-width-xl: 550px;
 @mixin percentages-line {
     content: '';
     flex: 1;
-    border-bottom: 1px solid $color-border-subtle;
+    border-bottom: 1px solid f.$color-border-subtle;
 }
 
 
 /* MAIN */
 .c-howItWorks-title {
-    @include font-size(heading-l);
-    margin-top: spacing(e);
-    margin-bottom: spacing();
+    @include f.font-size(heading-l);
+    margin-top: f.spacing(e);
+    margin-bottom: f.spacing();
 }
 
 .c-howItWorks-text {
-    @include font-size(body-s);
-    margin-bottom: spacing(e);
+    @include f.font-size(body-s);
+    margin-bottom: f.spacing(e);
 }
 
 .c-stampcards-appsHowItWorksContainer {
-    padding-left: spacing(f);
-    padding-right: spacing(f);
+    padding-left: f.spacing(f);
+    padding-right: f.spacing(f);
 
-    @include media('<=wide') {
-        padding-left: spacing(d);
-        padding-right: spacing(d);
+    @include f.media('<=wide') {
+        padding-left: f.spacing(d);
+        padding-right: f.spacing(d);
     }
 }
 
@@ -249,8 +251,8 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
 */
 
 .c-howItWorks-exampleTitle {
-    @include font-size(heading-s);
-    margin-bottom: spacing(d);
+    @include f.font-size(heading-s);
+    margin-bottom: f.spacing(d);
 }
 
 .c-howItWorks-example {
@@ -258,21 +260,21 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: spacing();
+    padding: f.spacing();
 
-    @include media('<=mid') {
+    @include f.media('<=mid') {
         padding: 0;
     }
 
-    @include media('<=wide') {
+    @include f.media('<=wide') {
         flex-direction: column;
     }
 
-    @include media('<=narrowMid') {
-        padding: spacing(a);
+    @include f.media('<=narrowMid') {
+        padding: f.spacing(a);
     }
 
-    @include media('<=tiny') {
+    @include f.media('<=tiny') {
         padding: 0;
     }
 
@@ -289,17 +291,17 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
     justify-content: flex-end;
     align-items: center;
 
-    @include media('<=wide') {
+    @include f.media('<=wide') {
         flex-direction: column;
     }
 
 }
 
 .c-howItWorks-example-orders-title {
-    margin-right: spacing(d);
-    margin-top: spacing(f);
+    margin-right: f.spacing(d);
+    margin-top: f.spacing(f);
 
-    @include media('<=wide') {
+    @include f.media('<=wide') {
         margin: 0;
     }
 }
@@ -307,10 +309,10 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
 .c-howItWorks-example-orders-contentWrapper {
     display: flex;
     flex-direction: row;
-    margin-right: spacing(a);
+    margin-right: f.spacing(a);
 
-    @include media('<=wide') {
-        margin-top: spacing(d);
+    @include f.media('<=wide') {
+        margin-top: f.spacing(d);
         margin-right: 0;
     }
 }
@@ -320,37 +322,37 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: spacing() $exampleImages-padding-x;
+    padding: f.spacing() $exampleImages-padding-x;
 
-    @include media('<=mid') {
-        padding: spacing() $exampleImages-padding-x-wide;
+    @include f.media('<=mid') {
+        padding: f.spacing() $exampleImages-padding-x-wide;
     }
 
-    @include media('<=narrowMid') {
-        padding: spacing();
+    @include f.media('<=narrowMid') {
+        padding: f.spacing();
     }
 
-    @include media('<=tiny') {
-        padding: spacing() spacing(a);
+    @include f.media('<=tiny') {
+        padding: f.spacing() f.spacing(a);
     }
 
 }
 
 .c-howItWorks-example-order-number {
-    padding: 2px spacing();
-    background: $color-background-default;
-    border-radius: spacing(d);
-    margin-bottom: spacing(d);
-    font-weight: $font-weight-bold;
-    margin-left: spacing();
+    padding: 2px f.spacing();
+    background: f.$color-background-default;
+    border-radius: f.spacing(d);
+    margin-bottom: f.spacing(d);
+    font-weight: f.$font-weight-bold;
+    margin-left: f.spacing();
 
-    @include media('<=narrowMid') {
+    @include f.media('<=narrowMid') {
         margin-left: 0;
     }
 
 }
 
-@include media('<=narrowMid') {
+@include f.media('<=narrowMid') {
     .c-howItWorks-example-order-image {
         width: 45px;
     }
@@ -362,7 +364,7 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
     flex-direction: row;
     align-items: center;
 
-    @include media('<=wide') {
+    @include f.media('<=wide') {
         flex-direction: column;
     }
 }
@@ -376,18 +378,18 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
 }
 
 .c-howItWorks-example-percentages-title {
-    @include font-size(body-s);
+    @include f.font-size(body-s);
     margin-top: 0;
     flex-shrink: 0;
-    margin-right: spacing(d);
+    margin-right: f.spacing(d);
     display: flex;
     align-items: center;
     text-align: center;
-    font-weight: $font-weight-regular;
+    font-weight: f.$font-weight-regular;
 
-    @include media('<=wide') {
+    @include f.media('<=wide') {
         width: $examplePercentages-line-width-xl;
-        margin: spacing(f) 0;
+        margin: f.spacing(f) 0;
 
         &:before {
             @include percentages-line;
@@ -398,43 +400,43 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
         }
 
         &:not(:empty):before {
-            margin-right: spacing(d);
+            margin-right: f.spacing(d);
         }
 
         &:not(:empty):after {
-            margin-left: spacing(d);
+            margin-left: f.spacing(d);
         }
     }
 
-    @include media('<=mid') {
+    @include f.media('<=mid') {
         width: $examplePercentages-line-width-lg;
     }
 
-    @include media('<=narrowMid') {
+    @include f.media('<=narrowMid') {
         width: $examplePercentages-line-width-md;
     }
 
-    @include media('<=tiny') {
+    @include f.media('<=tiny') {
         width: $examplePercentages-line-width-sm;
     }
 
 }
 
 .c-howItWorks-example-percentages-value {
-    padding: spacing() spacing(g);
+    padding: f.spacing() f.spacing(g);
     margin-top: 0;
-    font-weight: $font-weight-bold;
+    font-weight: f.$font-weight-bold;
 
-    @include media('<=mid') {
-        padding: spacing() spacing(f);
+    @include f.media('<=mid') {
+        padding: f.spacing() f.spacing(f);
     }
 
-    @include media('<=narrowMid') {
-        padding: spacing();
+    @include f.media('<=narrowMid') {
+        padding: f.spacing();
     }
 
-    @include media('<=tiny') {
-        padding: spacing() spacing(a);
+    @include f.media('<=tiny') {
+        padding: f.spacing() f.spacing(a);
     }
 
 }
@@ -442,7 +444,7 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
 .c-howItWorks-example-percentages-icon {
     margin-top: 0;
 
-    @include media('<=wide') {
+    @include f.media('<=wide') {
         &:last-child {
             display: none;
         }
@@ -455,27 +457,27 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: spacing(d) spacing(f);
-    background-color: $color-container-subtle;
+    padding: f.spacing(d) f.spacing(f);
+    background-color: f.$color-container-subtle;
     border-radius: 100%;
     width: 160px;
     height: 160px;
     text-align: center;
-    margin-left: spacing(e);
+    margin-left: f.spacing(e);
 
-    @include media('<=wide') {
+    @include f.media('<=wide') {
         background-color: transparent;
         margin: 0;
         width: 100%;
         height: auto;
     }
 
-    @include media('<=narrowMid') {
-        padding: spacing(d) spacing();
+    @include f.media('<=narrowMid') {
+        padding: f.spacing(d) f.spacing();
     }
 
-    @include media('<=tiny') {
-        padding: spacing(d) 0;
+    @include f.media('<=tiny') {
+        padding: f.spacing(d) 0;
     }
 
 }
@@ -486,7 +488,7 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
     text-align: center;
     margin-top: 0;
 
-    @include media('<=wide') {
+    @include f.media('<=wide') {
         width: $examplePercentages-line-width-xl;
 
         &:before {
@@ -498,30 +500,30 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
         }
 
         &:not(:empty):before {
-            margin-right: spacing(d);
+            margin-right: f.spacing(d);
         }
 
         &:not(:empty):after {
-            margin-left: spacing(d);
+            margin-left: f.spacing(d);
         }
     }
 
-    @include media('<=mid') {
+    @include f.media('<=mid') {
         width: $examplePercentages-line-width-lg;
     }
 
-    @include media('<=narrowMid') {
+    @include f.media('<=narrowMid') {
         width: $examplePercentages-line-width-md;
     }
 
-    @include media('<=tiny') {
+    @include f.media('<=tiny') {
         width: $examplePercentages-line-width-sm;
     }
 
 }
 
 .c-howItWorks-example-total-price {
-    color: $color-content-brand;
+    color: f.$color-content-brand;
 }
 
 /*
@@ -530,9 +532,9 @@ HOW IT WORKS SECTION: MEDIA SECTION
 */
 
 .c-howItWorks-mediaWrapper {
-    margin-bottom: spacing();
+    margin-bottom: f.spacing();
     display: grid;
-    grid-gap: spacing(d);
+    grid-gap: f.spacing(d);
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto auto;
 
@@ -541,28 +543,28 @@ HOW IT WORKS SECTION: MEDIA SECTION
     }
 }
 
-@include media('<=wide') {
+@include f.media('<=wide') {
     .c-howItWorks-mediaWrapper {
         display: grid;
-        grid-gap: spacing(d);
+        grid-gap: f.spacing(d);
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto auto;
     }
 }
 
-@include media('<=narrow') {
+@include f.media('<=narrow') {
     .c-howItWorks-mediaWrapper {
         display: grid;
-        grid-gap: spacing(d);
+        grid-gap: f.spacing(d);
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
     }
 }
 
 .c-howItWorks-mediaTitle {
-    @include font-size(heading-l);
-    margin-top: spacing(h);
-    margin-bottom: spacing(e);
+    @include f.font-size(heading-l);
+    margin-top: f.spacing(h);
+    margin-bottom: f.spacing(e);
 }
 
 .c-stampcards-terms {
@@ -573,9 +575,9 @@ HOW IT WORKS SECTION: MEDIA SECTION
 }
 
 .c-stampcards-terms-link {
-    margin: spacing(e) 0;
+    margin: f.spacing(e) 0;
     text-align: center;
-    font-weight: $font-weight-bold;
+    font-weight: f.$font-weight-bold;
     text-decoration: none;
 
     &:hover {

@@ -1,16 +1,10 @@
-const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
-const Alert = require('../../test-utils/component-objects/f-alert.component');
-
-const alert = new Alert();
+import Alert from '../../test-utils/component-objects/f-alert.component';
 
 describe('Accessibility tests', () => {
-    beforeEach(async () => {
-        await alert.load();
-    });
-
-    it('a11y - should test f-alert component WCAG compliance', () => {
+    it('a11y - should test f-alert component WCAG compliance', async () => {
         // Act
-        const axeResults = getAxeResults('f-alert');
+        await Alert.load();
+        const axeResults = await Alert.getAxeResults('f-alert');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

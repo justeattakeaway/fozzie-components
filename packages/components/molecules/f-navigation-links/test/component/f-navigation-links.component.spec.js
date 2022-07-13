@@ -1,16 +1,11 @@
-const NavigationLinks = require('../../test-utils/component-objects/f-navigation-links.component');
-
-let navigationLinks;
+import NavigationLinks from '../../test-utils/component-objects/f-navigation-links.component';
 
 describe('f-navigation-links component tests', () => {
-    beforeEach(async () => {
-        navigationLinks = new NavigationLinks();
-
-        await navigationLinks.load();
-    });
-
     it('should display the f-navigation-links component', async () => {
+        // Arrange
+        await NavigationLinks.load();
+
         // Assert
-        await expect(await navigationLinks.isComponentDisplayed()).toBe(true);
+        await expect(await NavigationLinks.isComponentDisplayed()).toBe(true);
     });
 });

@@ -1,41 +1,39 @@
-import forEach from 'mocha-each';
+import Alert from '../../test-utils/component-objects/f-alert.component';
 
-const Alert = require('../../test-utils/component-objects/f-alert.component');
+const tests = [
+    { device: 'desktop', type: 'success' },
+    { device: 'desktop', type: 'warning' },
+    { device: 'desktop', type: 'info' },
+    { device: 'desktop', type: 'danger' },
+    { device: 'mobile', type: 'success' },
+    { device: 'mobile', type: 'warning' },
+    { device: 'mobile', type: 'info' },
+    { device: 'mobile', type: 'danger' }
+];
 
-let alert;
+tests.forEach(({ device, type }) => {
+    describe(`f-alert - ${device} - ${type} - visual tests`, () => {
+        beforeEach(async () => {
+            // Arrange
+            if (device === 'mobile') {
+                await browser.setWindowSize(414, 731);
+            }
+        });
 
-forEach([
-    ['desktop', 'success'],
-    ['desktop', 'warning'],
-    ['desktop', 'info'],
-    ['desktop', 'danger'],
-    ['mobile', 'success'],
-    ['mobile', 'warning'],
-    ['mobile', 'info'],
-    ['mobile', 'danger']
-])
-.describe('f-alert - %s - %s - visual tests', (device, type) => {
-    beforeEach(() => {
-        // Arrange
-        if (device === 'mobile') {
-            browser.setWindowSize(414, 731);
-        }
-        alert = new Alert();
-    });
+        it(`should display the f-alert (${type}) component as dismissible`, async () => {
+            // Act
+            await Alert.load({ type: `${type}` });
 
-    it('should display the f-alert (%s) component as dismissible', async () => {
-        // Act
-        await alert.load({ type: `${type}` });
+            // Assert
+            await browser.percyScreenshot(`f-alert - ${type} - dismissible`, device);
+        });
 
-        // Assert
-        await browser.percyScreenshot(`f-alert - ${type} - dismissible`, device);
-    });
+        it(`should display the f-alert (${type}) component as undismissible`, async () => {
+            // Act
+            await Alert.load({ isDismissible: false, type: `${type}` });
 
-    it('should display the f-alert (%s) component as undismissible', async () => {
-        // Act
-        await alert.load({ isDismissible: false, type: `${type}` });
-
-        // Assert
-        await browser.percyScreenshot(`f-alert - ${type} - undismissible`, device);
+            // Assert
+            await browser.percyScreenshot(`f-alert - ${type} - undismissible`, device);
+        });
     });
 });

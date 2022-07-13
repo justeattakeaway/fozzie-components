@@ -3,7 +3,8 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v1.12.0-beta.3
+
+v2.1.0-beta.1
 ------------------------------
 *July 13, 2022*
 
@@ -12,7 +13,12 @@ v1.12.0-beta.3
 - Accessibility tests to be async.
 
 
+v2.0.0-beta.1
+-----------------------------
+*July 12, 2022*
+
 ### Changed
+- **breaking changes** Update to `@use` and `@forward` SASS syntax
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
 

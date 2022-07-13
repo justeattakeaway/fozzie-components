@@ -48,29 +48,31 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-unauthenticated-wrapper {
     width: 100%;
 }
 
 .c-unauthenticated-buttons {
-    margin-top: spacing(d);
-    margin-bottom: spacing(f);
+    margin-top:  f.spacing(d);
+    margin-bottom:  f.spacing(f);
 }
 
 .c-login-button {
-    margin-right: spacing(d);
+    margin-right:  f.spacing(d);
 }
 
 .c-title {
-    @include font-size(heading-lg);
+    @include f.font-size(heading-lg);
 }
 
 .c-subtitle {
-    @include font-size(subheading-s);
+    @include f.font-size(subheading-s);
 }
 
 .c-unauthenticated-image {
     width: 100%;
-    margin-bottom: spacing(f);
+    margin-bottom:  f.spacing(f);
 }
 </style>

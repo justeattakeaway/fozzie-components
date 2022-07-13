@@ -1,6 +1,6 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class UserMessage extends Page {
+class UserMessage extends Page {
     constructor () {
         super('molecule', 'user-message-component');
     }
@@ -8,8 +8,9 @@ module.exports = class UserMessage extends Page {
     get content () { return this.component.$('[data-test-id="user-message-content"]'); }
 
     async isContentDisplayed () {
-        const messageContent = this.content.getText();
-
+        const messageContent = await this.content.getText();
         return this.content.isDisplayed() && messageContent.length > 0;
     }
-};
+}
+
+export default new UserMessage();

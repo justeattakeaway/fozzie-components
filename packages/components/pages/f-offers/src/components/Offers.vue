@@ -102,6 +102,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-offers {
     display: flex;
     flex-direction: column;
@@ -109,21 +111,21 @@ export default {
     width: 100%;
     margin: auto;
     margin-top: -15px;
-    background-color: $color-grey-10;
+    background-color: f.$color-grey-10;
 }
 
 .c-offers-wrapper {
     width: 100%;
-    max-width: #{$layout-max-width}px;
+    max-width: #{f.$layout-max-width}px;
     margin: 0 auto;
-    padding: #{$layout-margin}px;
+    padding: #{f.$layout-margin}px;
 
-    @include media('<mid') {
-        padding: #{$layout-margin--mid}px;
+    @include f.media('<mid') {
+        padding: #{f.$layout-margin--mid}px;
     }
 
-    @include media('<narrow') {
-        padding: #{$layout-margin--narrow}px;
+    @include f.media('<narrow') {
+        padding: #{f.$layout-margin--narrow}px;
     }
 }
 </style>

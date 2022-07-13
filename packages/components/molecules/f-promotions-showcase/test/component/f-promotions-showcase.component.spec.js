@@ -1,14 +1,11 @@
-const PromotionsShowcase = require('../../test-utils/component-objects/f-promotions-showcase.component');
-
-const promotionsShowcase = new PromotionsShowcase();
+import PromotionsShowcase from '../../test-utils/component-objects/f-promotions-showcase.component';
 
 describe('f-promotions-showcase component tests', () => {
-    beforeEach(async () => {
-        await promotionsShowcase.load();
-    });
-
     it('should display the f-promotions-showcase component', async () => {
+        // Act
+        await PromotionsShowcase.load();
+
         // Assert
-        await expect(await promotionsShowcase.isComponentDisplayed()).toBe(true);
+        await expect(await PromotionsShowcase.isComponentDisplayed()).toBe(true);
     });
 });
