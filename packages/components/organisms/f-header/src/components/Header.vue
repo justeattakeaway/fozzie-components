@@ -5,7 +5,7 @@
             $style['c-header'],
             headerBackgroundClass,
             transparentBackgroundClasses,
-            searchBackgroundClasses,
+            searchBackgroundClass,
             { [$style['c-header--navInView']]: mobileNavIsOpen },
             { [$style['c-header--tallBelowMid']]: tallBelowMid }
         ]"
@@ -190,7 +190,7 @@ export default {
             return this.showTransparentHeader ? `${this.$style['c-header--transparent']} ${this.$style['c-header--gradient']}` : '';
         },
 
-        searchBackgroundClasses () {
+        searchBackgroundClass () {
             return this.showSearchHeader ? `${this.$style['c-header--search']}` : '';
         }
     },
