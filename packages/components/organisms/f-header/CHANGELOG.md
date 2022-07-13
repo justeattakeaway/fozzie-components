@@ -13,9 +13,11 @@ v10.1.0
 ------------------------------
 *July 7, 2022*
 
+
 ### Changed
 - Update f-wdio-utils to v1.1.0 to use new Axe Core implementation.
 - Accessibility tests to be async.
+
 
 v10.0.0
 -----------------------------
