@@ -20,7 +20,7 @@
         <slot />
 
         <span
-            v-if="isRequired"
+            v-if="isVisuallyRequired"
             aria-hidden="true">*</span>
 
         <span
@@ -42,7 +42,7 @@ export default {
     props: {
         attributes: {
             type: Object,
-            default: () => {}
+            default: () => ({})
         },
         labelFor: {
             type: String,
@@ -60,7 +60,7 @@ export default {
             type: String,
             default: null
         },
-        isRequired: {
+        isVisuallyRequired: {
             type: Boolean,
             default: true
         }
