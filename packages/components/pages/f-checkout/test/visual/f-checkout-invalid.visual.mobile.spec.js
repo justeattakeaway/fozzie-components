@@ -1,6 +1,6 @@
-const Checkout = require('../../test-utils/component-objects/f-checkout.component');
-
-let checkout;
+import CheckoutError from '../../test-utils/component-objects/f-checkout-error.component';
+import Checkout from '../../test-utils/component-objects/f-checkout.component';
+import CheckoutAgeVerification from '../../test-utils/component-objects/f-checkout-age-verification';
 
 describe('f-checkout - Invalid - Mobile Visual Tests', () => {
     const checkoutInfo = {
@@ -9,14 +9,9 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
         locale: 'en-GB'
     };
 
-    beforeEach(() => {
-        // Arrange
-        checkout = new Checkout();
-    });
-
     it('should display the error page component if the url is invalid', async () => {
         // Act
-        checkout.load({
+        CheckoutError.load({
             ...checkoutInfo,
             serviceType: 'invalid-url'
         });
@@ -27,7 +22,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
 
     it('should display the "Get Checkout 403" error page', async () => {
         // Act
-        checkout.load({
+        Checkout.load({
             ...checkoutInfo,
             serviceType: 'delivery',
             getCheckoutOptions: '403'
@@ -39,7 +34,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
 
     it('should display an error dialog if the basket has invalid products', async () => {
         // Act
-        checkout.load({
+        Checkout.load({
             ...checkoutInfo,
             serviceType: 'delivery',
             getBasketError: 'invalid-products'
@@ -51,7 +46,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
 
     it('should display an error dialog if the basket has offline products', async () => {
         // Act
-        checkout.load({
+        Checkout.load({
             ...checkoutInfo,
             serviceType: 'delivery',
             getBasketError: 'offline-products'
@@ -62,7 +57,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
     });
 
     it('should display an error dialog if age verification is required', async () => {
-        checkout.load({
+        CheckoutAgeVerification.load({
             ...checkoutInfo,
             serviceType: 'delivery',
             getBasketError: 'age-restriction'

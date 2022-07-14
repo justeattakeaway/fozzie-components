@@ -1,16 +1,11 @@
-import forEach from 'mocha-each';
+import Checkout from '../../test-utils/component-objects/f-checkout.component';
 
-const Checkout = require('../../test-utils/component-objects/f-checkout.component');
-
-let checkout;
+let tests;
 
 describe('f-checkout "guest" component tests', () => {
-    beforeEach(() => {
-        // Arrange
-        checkout = new Checkout();
-
+    beforeEach(async () => {
         // Act
-        checkout.load({
+        Checkout.load({
             serviceType: 'delivery',
             isLoggedIn: false,
             isAsapAvailable: true,
@@ -23,56 +18,67 @@ describe('f-checkout "guest" component tests', () => {
         const loginPath = '/login';
 
         // Act
-        await checkout.clickGuestCheckoutLoginButton();
+        await Checkout.clickGuestCheckoutLoginButton();
         const { pathname } = new URL(await browser.getUrl());
 
         // Assert
         await expect(pathname).toEqual(loginPath);
     });
 
-    forEach([
-        [100, 'firstName'],
-        [100, 'lastName'],
-        [50, 'emailAddress']
-    ])
-        .it('should prevent a user from entering more than "%s" characters in the "%s" field', async (maxlength, field) => {
+    tests = [
+        { maxLength: 100, field: 'firstName' },
+        { maxLength: 100, field: 'lastName' },
+        { maxLength: 50, field: 'emailAddress' }
+    ];
+
+    tests.forEach(({ maxLength, field }) => {
+        it(`should prevent a user from entering more than "${maxLength}" characters in the "${field}" field`, async () => {
             // Arrange
-            const userEntry = await 'A'.repeat(maxlength + 1); // Enter more than allowed
+            const userEntry = await 'A'.repeat(maxLength + 1); // Enter more than allowed
 
             // Act
-            await checkout.setFieldValue(field, userEntry);
-            await checkout.goToPayment();
+            await Checkout.setFieldValue(field, userEntry);
+            await Checkout.goToPayment();
 
             // Assert
-            await expect((await checkout.getFieldValue(field)).length).toEqual(maxlength);
+            await expect((await Checkout.getFieldValue(field)).length).toEqual(maxLength);
         });
+    });
 
-    forEach([
-        ['jazz.man@tunetown.com'],
-        ['jazzman@tunetown.com']
-    ])
-        .it('should be valid email address: "%s"', async email => {
+    tests = [
+        'jazz.man@tunetown.com',
+        'jazzman@tunetown.com'
+
+    ];
+
+    tests.forEach(email => {
+        it(`should be valid email address: "${email}"`, async () => {
             // Act
-            await checkout.setFieldValue('emailAddress', email);
-            await checkout.goToPayment();
+            await Checkout.setFieldValue('emailAddress', email);
+            await Checkout.goToPayment();
 
             // Assert
-            await expect(await checkout.isEmailErrorDisplayed()).toBe(false);
+            await expect(await Checkout.isEmailErrorDisplayed()).toBe(false);
         });
+    });
 
-    forEach([
-        ['@jazz.man@tunetown.com'],
-        ['.jazzman@tunetown.com'],
-        ['jazzmantunetown.com'],
-        ['jazzman@'],
-        ['jazzman']
-    ])
-        .it('should be invalid email address: "%s"', async email => {
+
+    tests = [
+        '@jazz.man@tunetown.com',
+        '.jazzman@tunetown.com',
+        'jazzmantunetown.com',
+        'jazzman@',
+        'jazzman'
+    ];
+
+    tests.forEach(email => {
+        it(`should be invalid email address: "${email}"`, async () => {
             // Act
-            await checkout.setFieldValue('emailAddress', email);
-            await checkout.goToPayment();
+            await Checkout.setFieldValue('emailAddress', email);
+            await Checkout.goToPayment();
 
             // Assert
-            await expect(await checkout.isEmailErrorDisplayed()).toBe(true);
+            await expect(await Checkout.isEmailErrorDisplayed()).toBe(true);
         });
+    });
 });

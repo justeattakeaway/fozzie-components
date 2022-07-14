@@ -124,7 +124,7 @@ class AccountInfo extends Page {
     }
 
     async isDisabled (field) {
-        return !this.fields[field].input.isEnabled();
+        return !await this.fields[field].input.isEnabled();
     }
 
     async isErrorAlertDisplayed () {

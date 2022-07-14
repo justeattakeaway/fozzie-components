@@ -12,7 +12,7 @@ class TakeawaypayActivationUnauthenticated extends Page {
 
     get component () { return $(TAKEAWAYPAYACTIVATION_COMPONENT); }
 
-    get unauthenticatedLoginButton () { return $(UNAUTHENTICATED_LOGIN_BUTTON); }
+    get loginButton () { return $(UNAUTHENTICATED_LOGIN_BUTTON); }
 
     get registerButton () { return $(UNAUTHENTICATED_REGISTER_BUTTON); }
 
