@@ -244,15 +244,17 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-offersResults-contentCards {
     display: grid;
-    gap: spacing(d);
+    gap: f.spacing(d);
     justify-items: center;
     grid-template-columns: repeat(1, minmax(0, 1fr));
-    @include media('>=narrowMid') {
+    @include f.media('>=narrowMid') {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    @include media('>=wide') {
+    @include f.media('>=wide') {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }

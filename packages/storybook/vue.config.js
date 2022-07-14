@@ -38,29 +38,6 @@ module.exports = {
                     const relPathCommonScss = path.relative(path.dirname(resourcePath), absPathCommonScss)
                         .replace(new RegExp(path.sep.replace('\\', '\\\\'), 'g'), '/');
 
-                    // add component names 1 by 1 to this array as they're updated
-                    // to the new Sass syntax OR the entire component folder if all completed
-                    // i.e. // [ 'atoms', 'molecules', 'f-checkout' ]
-                    const updateComponentsAndTypes = [
-                        'atoms',
-                        'molecules',
-                        'organisms',
-                        'templates',
-                        'f-account-info',
-                        'f-checkout',
-                        'f-contact-preferences',
-                        'f-loyalty',
-                        'f-takeawaypay-activation'
-                    ];
-                    const pathContainsUpdatedComponentOrType = updateComponentsAndTypes.some(a => absPathCommonScss.includes(a));
-
-                    if (!pathContainsUpdatedComponentOrType) {
-                        return `
-                        @use "sass:math";
-                        @import "${relPathCommonScss}";
-                        ${content}`;
-                    }
-
                     return `
                         @use "sass:math";
                         @use "${relPathCommonScss}";
