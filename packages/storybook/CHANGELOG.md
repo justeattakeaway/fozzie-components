@@ -3,10 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.52.32
+------------------------------
+*July 13, 2022*
+
+### Changed
+- updated vue.config to include f-registration in components using @use and @forward
+
 
 v0.52.31
 ------------------------------
 *July 7, 2022*
+
 ### Changed
 - updated vue.config to include f-offers in components using @use and @forward
 
@@ -14,6 +22,7 @@ v0.52.31
 v0.52.30
 ------------------------------
 *July 7, 2022*
+
 ### Changed
 - updated vue.config to include f-loyalty in components using @use and @forward
 
@@ -21,6 +30,7 @@ v0.52.30
 v0.52.29
 ------------------------------
 *July 7, 2022*
+
 ### Changed
 - updated vue.config to include f-contact-preferences in components using @use and @forward
 
@@ -28,6 +38,7 @@ v0.52.29
 v0.52.28
 ------------------------------
 *July 7, 2022*
+
 ### Changed
 - updated vue.config to include f-checkout in components using @use and @forward
 
@@ -35,6 +46,7 @@ v0.52.28
 v0.52.27
 ------------------------------
 *July 6, 2022*
+
 ### Changed
 - updated vue.config to include f-account-info in components using @use and @forward
 
@@ -42,6 +54,7 @@ v0.52.27
 v0.52.26
 ------------------------------
 *June 29, 2022*
+
 ### Changed
 - updated vue.config to include f-footer in components using @use and @forward
 
@@ -49,6 +62,7 @@ v0.52.26
 v0.52.25
 ------------------------------
 *June 29, 2022*
+
 ### Changed
 - updated vue.config to include `f-header` in components using `@use` and `@forward`.
 
@@ -56,6 +70,7 @@ v0.52.25
 v0.52.24
 ------------------------------
 *June 29, 2022*
+
 ### Changed
 - updated lerna command to correctly build dependencies
 
@@ -63,6 +78,7 @@ v0.52.24
 v0.52.23
 ------------------------------
 *June 28, 2022*
+
 ### Changed
 - updated vue.config to include f-cookie-banner in components using @use and @forward
 
@@ -70,6 +86,7 @@ v0.52.23
 v0.52.22
 ------------------------------
 *June 27, 2022*
+
 ### Changed
 - updated vue.config to include f-content-cards in components using @use and @forward
 
