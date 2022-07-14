@@ -85,7 +85,8 @@ The props that can be defined are as follows (if any):
 | `shouldShowLabelText` | `Boolean` | `true` | Hides the label if set to `false` |
 | `suffix` | `String` | `''` | Suffix will display on the right of the input field. |
 | `value` | `String` or `Number` | `''` | The value of the form field. |
-| `isRequired` | `Boolean` | `true` | Adds `*` to form label and `aria-required` attribute to input if `true`. |
+| `isVisuallyRequired` | `Boolean` | `true` | Adds a visual indicator (e.g., an asterisk) to the form field label when the field also has the attribute `required=required`. When false, a field can still be required but there will be no visual indicator. |
+| `required` | `Boolean` | `n/a` This is an optional attribute, not a prop. | This attribute will be passed to the native field elements (e.g., `input`, `select`, `textarea`) and should be passed to fields that are required for the form to be valid. **Fields are now not required by default.** |
 
 
 ### Slots
