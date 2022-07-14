@@ -11,7 +11,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
 
     it('should display the error page component if the url is invalid', async () => {
         // Act
-        CheckoutError.load({
+        await CheckoutError.load({
             ...checkoutInfo,
             serviceType: 'invalid-url'
         });
@@ -22,7 +22,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
 
     it('should display the "Get Checkout 403" error page', async () => {
         // Act
-        Checkout.load({
+        await Checkout.load({
             ...checkoutInfo,
             serviceType: 'delivery',
             getCheckoutOptions: '403'
@@ -34,7 +34,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
 
     it('should display an error dialog if the basket has invalid products', async () => {
         // Act
-        Checkout.load({
+        await Checkout.load({
             ...checkoutInfo,
             serviceType: 'delivery',
             getBasketError: 'invalid-products'
@@ -46,7 +46,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
 
     it('should display an error dialog if the basket has offline products', async () => {
         // Act
-        Checkout.load({
+        await Checkout.load({
             ...checkoutInfo,
             serviceType: 'delivery',
             getBasketError: 'offline-products'
@@ -57,7 +57,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
     });
 
     it('should display an error dialog if age verification is required', async () => {
-        CheckoutAgeVerification.load({
+        await CheckoutAgeVerification.load({
             ...checkoutInfo,
             serviceType: 'delivery',
             getBasketError: 'age-restriction'

@@ -5,7 +5,7 @@ let tests;
 describe('f-checkout "guest" component tests', () => {
     beforeEach(async () => {
         // Act
-        Checkout.load({
+        await Checkout.load({
             serviceType: 'delivery',
             isLoggedIn: false,
             isAsapAvailable: true,
