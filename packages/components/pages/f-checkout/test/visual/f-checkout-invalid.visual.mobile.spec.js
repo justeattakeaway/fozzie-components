@@ -22,7 +22,7 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
 
     it('should display the "Get Checkout 403" error page', async () => {
         // Act
-        await Checkout.load({
+        await CheckoutError.load({
             ...checkoutInfo,
             serviceType: 'delivery',
             getCheckoutOptions: '403'
@@ -57,9 +57,11 @@ describe('f-checkout - Invalid - Mobile Visual Tests', () => {
     });
 
     it('should display an error dialog if age verification is required', async () => {
+        // Act
         await CheckoutAgeVerification.load({
             ...checkoutInfo,
             serviceType: 'delivery',
+            locale: 'en-AU',
             getBasketError: 'age-restriction'
         });
 

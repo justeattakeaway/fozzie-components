@@ -45,9 +45,10 @@ describe('f-checkout - Invalid - Desktop Visual Tests', () => {
 
     it('should display an error dialog if age verification is required', async () => {
         // Act
-        CheckoutAgeVerification.load({
+        await CheckoutAgeVerification.load({
             ...checkoutInfo,
             serviceType: 'delivery',
+            locale: 'en-AU',
             getBasketError: 'age-restriction'
         });
 
