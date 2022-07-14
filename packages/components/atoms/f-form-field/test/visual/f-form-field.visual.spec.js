@@ -31,13 +31,27 @@ describe('f-form-field visual tests', () => {
         });
     });
 
-    describe('none required state', () => {
-        it('should display all fields in an none required state', async () => {
+    describe('required state', () => {
+        it('should be able to display required fields WITH visual indicator', async () => {
             // Act
-            await FormField.load({ isRequired: false });
+            await FormField.load({
+                required: true,
+                isVisuallyRequired: true
+            });
 
             // Assert
-            await browser.percyScreenshot('f-form-field - None required State', 'desktop');
+            await browser.percyScreenshot('f-form-field - Required WITH visual indicator', 'desktop');
+        });
+
+        it('should be able to display required fields WITHOUT visual indicator', async () => {
+            // Act
+            await FormField.load({
+                required: true,
+                isVisuallyRequired: false
+            });
+
+            // Assert
+            await browser.percyScreenshot('f-form-field - Required WITHOUT visual indicator', 'desktop');
         });
     });
 });

@@ -3,6 +3,26 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v6.0.0
+------------------------------
+*July 12, 2022*
+
+### Removed
+- **BREAKING**: `isRequired` prop in favour of the standard HTML attribute.
+- `aria-required` attributes as they were not adding anything.
+  - `required` behaves as expected for all major screen reader / browser combinations, except Chrome and Firefox with Android Talkback. `aria-required` also does not work for these combinations.
+
+### Changed
+- Now handles `required` attribute and passes this through to each element, e.g., `input`, `select`, `textarea`.
+
+### Added
+- `isVisuallyRequired` prop.
+  - When `true`, required fields will display a visual indicator that the field is required, e.g., an asterisk.
+  - When `false`, fields can still be required but no visual indicator will be shown.
+  - If the field is not required then the indicator will not be shown, regardless of this prop's value.
+
+
 v5.1.0
 ------------------------------
 *July 4, 2022*
@@ -18,7 +38,7 @@ v5.1.0
 
 v5.0.0
 -----------------------------
-*Jun 16, 2022*
+*June 16, 2022*
 
 ### Changed
 - Update to `@use` and `@forward` SASS syntax
@@ -26,7 +46,7 @@ v5.0.0
 
 v4.13.1
 -----------------------------
-*Jun 13, 2022*
+*June 13, 2022*
 
 ### Changed
 - Bumped wdio version and fixed breaking changes.
@@ -34,7 +54,7 @@ v4.13.1
 
 v4.13.0
 ------------------------------
-*Jun 8, 2022*
+*June 8, 2022*
 
 ### Added
 - `isRequired` prop to add `*` to form label and `aria-required` attribute to input.
@@ -42,7 +62,7 @@ v4.13.0
 
 v4.12.0
 ------------------------------
-*Jun 7, 2022*
+*June 7, 2022*
 
 ### Changed
 - Swapped CaretIcon with CaretDownFilledIcon via @justeattakeaway/pie-icons-vue
@@ -147,7 +167,7 @@ v4.5.1
 
 v4.5.0
 ------------------------------
-*December 06, 2021*
+*December 6, 2021*
 
 ### Removed
 - `u-spacing` class from label description
@@ -159,7 +179,7 @@ v4.5.0
 
 v4.4.0
 ------------------------------
-*December 02, 2021*
+*December 2, 2021*
 
 ### Changed
 - Ensure label and label description colour is correct when checkbox is disabled
@@ -167,7 +187,7 @@ v4.4.0
 
 v4.3.0
 ------------------------------
-*December 01, 2021*
+*December 1, 2021*
 
 ### Changed
 - Ensure `labelDescription` prop is passed to checkbox label.
@@ -371,6 +391,7 @@ v1.12.0
 
 ### Added
 - Textarea element to the formField component
+
 
 v1.11.0
 ------------------------------
