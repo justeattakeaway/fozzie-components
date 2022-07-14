@@ -2391,13 +2391,6 @@
   dependencies:
     qwery "^4.0.0"
 
-"@justeat/f-error-message@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-1.0.0.tgz#f68da2b9e47ef902ac4b721b038360450d10c005"
-  integrity sha512-VaD5384grwCsyLFENrJrM7ePOuLeRTcnvYF/ar5UK8tQTg1ixX7nxhfhjQ7ONCClWaRmaZ7NY4dzFKjoz/XrTA==
-  dependencies:
-    "@justeat/f-vue-icons" "1.10.0"
-
 "@justeat/f-error-message@1.x":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-1.2.1.tgz#a83806fe35e51a9c689e9b1ad6f3569a9ee26149"
@@ -2607,13 +2600,6 @@
   integrity sha512-6XpaZPZWNjDkh7EJBFHL43ab5ExjVoQ4kU2bMJWVldUKoo+7DrcEpktkhkQT8D0IYiNfXKn82mGpqB8v2eDvFw==
   dependencies:
     "@justeat/f-dom" "0.4.0"
-
-"@justeat/f-vue-icons@1.10.0":
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.10.0.tgz#1ae551701ec73b4f6e39651d2a0fab5e105e75c5"
-  integrity sha512-6+JLiYsZzQqNsWoJVOa+ux7KuHT58J5dtJcH6Y+9rukbxidTk22j/0sAvWC7ME6SuKxyYY7MxDL0B6YL875VNQ==
-  dependencies:
-    babel-helper-vue-jsx-merge-props "2.0.3"
 
 "@justeat/f-vue-icons@1.13.0":
   version "1.13.0"
