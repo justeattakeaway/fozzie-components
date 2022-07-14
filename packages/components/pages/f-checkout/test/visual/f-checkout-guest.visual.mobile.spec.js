@@ -1,6 +1,4 @@
-const Checkout = require('../../test-utils/component-objects/f-checkout.component');
-
-let checkout = new Checkout();
+import Checkout from '../../test-utils/component-objects/f-checkout.component';
 
 const illegalMobileNumber = '123';
 
@@ -13,11 +11,8 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
     };
 
     beforeEach(async () => {
-        // Arrange
-        checkout = new Checkout();
-
         // Act
-        await checkout.load({
+        await Checkout.load({
             ...checkoutInfo
         });
     });
@@ -29,7 +24,7 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
 
     it('should display the mandatory error messages', async () => {
         // Act
-        await checkout.goToPayment();
+        await Checkout.goToPayment();
 
         // Assert
         await browser.percyScreenshot('f-checkout - Collection - Guest - Mandatory Errors State', 'mobile');
@@ -37,8 +32,8 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
 
     it('should display the illegal mobile number error message', async () => {
         // Act
-        await checkout.setFieldValue('mobileNumber', illegalMobileNumber);
-        await checkout.goToPayment();
+        await Checkout.setFieldValue('mobileNumber', illegalMobileNumber);
+        await Checkout.goToPayment();
 
         // Assert
         await browser.percyScreenshot('f-checkout - Collection - Guest - Illegal Mobile Number Error State', 'mobile');
@@ -46,8 +41,6 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', async () => {
         // Arrange
-        checkout = new Checkout();
-
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -55,16 +48,16 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
             mobileNumber: '07234567890'
         };
 
-        checkout.inputFieldValues = customerInfo;
+        Checkout.inputFieldValues = customerInfo;
 
         // Act
-        await checkout.load({
+        await Checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });
-        await checkout.setFieldValues();
+        await Checkout.setFieldValues();
         await browser.pause(200);
-        await checkout.goToPayment();
+        await Checkout.goToPayment();
 
         // Assert
         await browser.percyScreenshot('f-checkout - Collection - Guest - "Duplicate Order Warning" Modal', 'mobile');
@@ -73,11 +66,8 @@ describe('f-checkout - Collection - Guest - Mobile Visual Tests', () => {
 
 describe('f-checkout - Collection - Guest - isAsapAvailable: false Mobile Visual Tests', () => {
     beforeEach(async () => {
-        // Arrange
-        checkout = new Checkout();
-
         // Act
-        await checkout.load({
+        await Checkout.load({
             serviceType: 'collection',
             isLoggedIn: false,
             isAsapAvailable: false,
@@ -101,11 +91,8 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
     };
 
     beforeEach(async () => {
-        // Arrange
-        checkout = new Checkout();
-
         // Act
-        await checkout.load({
+        await Checkout.load({
             ...checkoutInfo
         });
     });
@@ -117,7 +104,7 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
 
     it('should display the delivery f-checkout guest mandatory error messages', async () => {
         // Act
-        await checkout.goToPayment();
+        await Checkout.goToPayment();
 
         // Assert
         await browser.percyScreenshot('f-checkout - Delivery - Guest - Mandatory Errors State', 'mobile');
@@ -125,8 +112,8 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
 
     it('should display the illegal mobile number error message', async () => {
         // Act
-        await checkout.setFieldValue('mobileNumber', illegalMobileNumber);
-        await checkout.goToPayment();
+        await Checkout.setFieldValue('mobileNumber', illegalMobileNumber);
+        await Checkout.goToPayment();
 
         // Assert
         await browser.percyScreenshot('f-checkout - Delivery - Guest - Illegal Mobile Number Error State', 'mobile');
@@ -134,8 +121,6 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', async () => {
         // Arrange
-        checkout = new Checkout();
-
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -146,16 +131,16 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
             addressPostcode: 'W1D 4HT'
         };
 
-        checkout.inputFieldValues = customerInfo;
+        Checkout.inputFieldValues = customerInfo;
 
         // Act
-        await checkout.load({
+        await Checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });
-        await checkout.setFieldValues();
+        await Checkout.setFieldValues();
         await browser.pause(200);
-        await checkout.goToPayment();
+        await Checkout.goToPayment();
 
         // Assert
         await browser.percyScreenshot('f-checkout - Delivery - Guest - "Duplicate Order Warning" Modal', 'mobile');
@@ -164,11 +149,8 @@ describe('f-checkout - Delivery - Guest - Mobile Visual Tests', () => {
 
 describe('f-checkout - Delivery - Guest - isAsapAvailable: false Mobile Visual Tests', () => {
     beforeEach(async () => {
-        // Arrange
-        checkout = new Checkout();
-
         // Act
-        await checkout.load({
+        await Checkout.load({
             serviceType: 'delivery',
             isLoggedIn: false,
             isAsapAvailable: false,
@@ -191,11 +173,8 @@ describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
     };
 
     beforeEach(async () => {
-        // Arrange
-        checkout = new Checkout();
-
         // Act
-        await checkout.load({
+        await Checkout.load({
             ...checkoutInfo
         });
     });
@@ -207,8 +186,8 @@ describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
 
     it('should display the mandatory error messages', async () => {
         // Act
-        await checkout.clearBlurField('tableIdentifier');
-        await checkout.goToPayment();
+        await Checkout.clearBlurField('tableIdentifier');
+        await Checkout.goToPayment();
 
         // Assert
         await browser.percyScreenshot('f-checkout - Dine In - Guest - Manadatory Errors', 'mobile');
@@ -216,8 +195,8 @@ describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
 
     it('should display the illegal mobile number error message', async () => {
         // Act
-        await checkout.setFieldValue('mobileNumber', illegalMobileNumber);
-        await checkout.goToPayment();
+        await Checkout.setFieldValue('mobileNumber', illegalMobileNumber);
+        await Checkout.goToPayment();
 
         // Assert
         await browser.percyScreenshot('f-checkout - Dine In - Guest - Illegal Mobile Number Error State', 'mobile');
@@ -225,8 +204,6 @@ describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
 
     it('should display the "Duplicate Order Warning" modal', async () => {
         // Arrange
-        checkout = new Checkout();
-
         const customerInfo = {
             firstName: 'Jerry',
             lastName: 'Jazzman',
@@ -235,16 +212,16 @@ describe('f-checkout - Dine In - Guest - Mobile Visual Tests', () => {
             tableIdentifier: '10'
         };
 
-        checkout.inputFieldValues = customerInfo;
+        Checkout.inputFieldValues = customerInfo;
 
         // Act
-        await checkout.load({
+        await Checkout.load({
             ...checkoutInfo,
             placeOrderError: 'duplicate'
         });
-        await checkout.setFieldValues();
+        await Checkout.setFieldValues();
         await browser.pause(200);
-        await checkout.goToPayment();
+        await Checkout.goToPayment();
 
         // Assert
         await browser.percyScreenshot('f-checkout - Dine in - Guest - "Duplicate Order Warning" Modal', 'mobile');

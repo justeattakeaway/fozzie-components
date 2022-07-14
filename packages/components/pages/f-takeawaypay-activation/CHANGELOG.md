@@ -5,11 +5,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 v3.0.0
------------------------------
+------------------------------
 *July 14, 2022*
 
 ### Changed
 - **breaking changes** Update to `@use` and `@forward` SASS syntax
+
+
+v2.14.0
+------------------------------
+*July 13, 2022*
+
+### Changed
+- Update f-wdio-utils to v1.1.0 to use new Axe Core implementation.
+- Accessibility tests to be async.
+
+### Changed
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
 

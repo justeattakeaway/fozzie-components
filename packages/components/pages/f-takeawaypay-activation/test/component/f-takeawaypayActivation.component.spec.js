@@ -1,21 +1,17 @@
-const TakeawaypayActivation = require('../../test-utils/component-objects/f-takeawaypayActivation.component');
-const {
-    AUTHENTICATION_JWT,
-    GUEST_AUTHENTICATION_JWT
-} = require('../../test-utils/constants/f-takeawaypayActivation');
+import TakeawaypayActivationAuthenticated from '../../test-utils/component-objects/f-takeawaypayActivation-authenticated.component';
+import TakeawaypayActivationUnauthenticated from '../../test-utils/component-objects/f-takeawaypayActivation-unauthenticated.component';
+import TakeawaypayActivationError from '../../test-utils/component-objects/f-takeawaypayActivation-error.component';
 
-let takeawayPayComponent;
 
 describe('f-takeawaypay-activation component tests - unauthenticated', () => {
     beforeEach(async () => {
         // Arrange
-        takeawayPayComponent = new TakeawaypayActivation();
-        await takeawayPayComponent.load();
+        await TakeawaypayActivationUnauthenticated.load({ isLoggedIn: false });
     });
 
     it('should display the f-takeawaypay-activation component when the user is not authenticated', async () => {
         // Assert
-        await expect(await takeawayPayComponent.isComponentDisplayed()).toBe(true);
+        await expect(await TakeawaypayActivationUnauthenticated.isComponentDisplayed()).toBe(true);
     });
 
     it('should navigate to the correct link when the - I have an account - button is clicked', async () => {
@@ -23,7 +19,7 @@ describe('f-takeawaypay-activation component tests - unauthenticated', () => {
         const loginPath = '/account/login';
 
         // Act
-        await takeawayPayComponent.clickUnauthenticatedLoginButton();
+        await TakeawaypayActivationUnauthenticated.clickUnauthenticatedLoginButton();
         const { pathname } = new URL(await browser.getUrl());
 
         // Assert
@@ -35,7 +31,7 @@ describe('f-takeawaypay-activation component tests - unauthenticated', () => {
         const registerPath = '/account/register';
 
         // Act
-        await takeawayPayComponent.clickUnauthenticatedRegisterButton();
+        await TakeawaypayActivationUnauthenticated.clickUnauthenticatedRegisterButton();
         const { pathname } = new URL(await browser.getUrl());
 
         // Assert
@@ -46,19 +42,12 @@ describe('f-takeawaypay-activation component tests - unauthenticated', () => {
 describe('f-takeawaypayActivation component tests - logged in as a guest', () => {
     beforeEach(async () => {
         // Arrange
-        takeawayPayComponent = new TakeawaypayActivation();
-        await takeawayPayComponent
-            .withQuery('knob-Authentication', GUEST_AUTHENTICATION_JWT)
-            .withQuery('knob-Employee Id', '12345')
-            .withQuery('knob-Home URL', '/home')
-            .withQuery('knob-Login URL', '/account/login')
-            .withQuery('knob-Registration URL', '/account/register');
-        await takeawayPayComponent.load();
+        await TakeawaypayActivationUnauthenticated.load({ isLoggedIn: false });
     });
 
     it('should display the f-takeawaypayActivation component when the user is logged in as a guest', async () => {
         // Assert
-        await expect(await takeawayPayComponent.isComponentDisplayed()).toBe(true);
+        await expect(await TakeawaypayActivationUnauthenticated.isComponentDisplayed()).toBe(true);
     });
 
     it('should navigate to the correct link when the - I have an account - button is clicked when logged in as a guest', async () => {
@@ -66,7 +55,7 @@ describe('f-takeawaypayActivation component tests - logged in as a guest', () =>
         const loginPath = '/account/login';
 
         // Act
-        await takeawayPayComponent.clickUnauthenticatedLoginButton();
+        await TakeawaypayActivationUnauthenticated.clickUnauthenticatedLoginButton();
         const { pathname } = new URL(await browser.getUrl());
 
         // Assert
@@ -78,7 +67,7 @@ describe('f-takeawaypayActivation component tests - logged in as a guest', () =>
         const registerPath = '/account/register';
 
         // Act
-        await takeawayPayComponent.clickUnauthenticatedRegisterButton();
+        await TakeawaypayActivationUnauthenticated.clickUnauthenticatedRegisterButton();
         const { pathname } = new URL(await browser.getUrl());
 
         // Assert
@@ -89,19 +78,12 @@ describe('f-takeawaypayActivation component tests - logged in as a guest', () =>
 describe('f-takeawaypayActivation component tests - authenticated', () => {
     beforeEach(async () => {
         // Arrange
-        takeawayPayComponent = new TakeawaypayActivation();
-        await takeawayPayComponent
-            .withQuery('knob-Authentication', AUTHENTICATION_JWT)
-            .withQuery('knob-Employee Id', '12345')
-            .withQuery('knob-Home URL', '/home')
-            .withQuery('knob-Login URL', '/account/login')
-            .withQuery('knob-Registration URL', '/account/register');
-        await takeawayPayComponent.load('loggedIn');
+        await TakeawaypayActivationAuthenticated.load({ isLoggedIn: true });
     });
 
     it('should display the f-takeawaypayActivation component when the user is authenticated', async () => {
         // Assert
-        await expect(await takeawayPayComponent.isLoggedInComponentDisplayed()).toBe(true);
+        await expect(await TakeawaypayActivationAuthenticated.isComponentDisplayed()).toBe(true);
     });
 
     it('should navigate to the correct link when the - Use a different account - button is clicked', async () => {
@@ -109,7 +91,7 @@ describe('f-takeawaypayActivation component tests - authenticated', () => {
         const loginPath = '/account/login';
 
         // Act
-        await takeawayPayComponent.clickAuthenticatedLoginButton();
+        await TakeawaypayActivationAuthenticated.clickLoginButton();
         const { pathname } = new URL(await browser.getUrl());
 
         // Assert
@@ -121,7 +103,7 @@ describe('f-takeawaypayActivation component tests - authenticated', () => {
         const registerPath = '/account/register';
 
         // Act
-        await takeawayPayComponent.clickAuthenticatedRegisterButton();
+        await TakeawaypayActivationAuthenticated.clickRegisterButton();
         const { pathname } = new URL(await browser.getUrl());
 
         // Assert
@@ -130,11 +112,11 @@ describe('f-takeawaypayActivation component tests - authenticated', () => {
 
     it('should display the correct status after a successful TakeawayPay activation', async () => {
         // Act
-        await takeawayPayComponent.clickActivateTakeawayPayButton();
-        await takeawayPayComponent.waitForActivationSuccessComponent();
+        await TakeawaypayActivationAuthenticated.clickActivateTakeawayPayButton();
+        await TakeawaypayActivationAuthenticated.waitForActivationSuccessComponent();
 
         // Assert
-        await expect(await takeawayPayComponent.isActivationSuccessComponentDisplayed()).toBe(true);
+        await expect(await TakeawaypayActivationAuthenticated.isActivationSuccessComponentDisplayed()).toBe(true);
     });
 
     it('should navigate to the correct link when the - Start ordering - button is clicked after a successful TakeawayPay activation', async () => {
@@ -142,9 +124,9 @@ describe('f-takeawaypayActivation component tests - authenticated', () => {
         const homePath = '/home';
 
         // Act
-        await takeawayPayComponent.clickActivateTakeawayPayButton();
-        await takeawayPayComponent.waitForActivationSuccessComponent();
-        await takeawayPayComponent.clickStartOrderingButton();
+        await TakeawaypayActivationAuthenticated.clickActivateTakeawayPayButton();
+        await TakeawaypayActivationAuthenticated.waitForActivationSuccessComponent();
+        await TakeawaypayActivationAuthenticated.clickStartOrderingButton();
         const { pathname } = new URL(await browser.getUrl());
 
         // Assert
@@ -155,19 +137,11 @@ describe('f-takeawaypayActivation component tests - authenticated', () => {
 describe('f-takeawaypayActivation component tests - error page', () => {
     beforeEach(async () => {
         // Arrange
-        takeawayPayComponent = new TakeawaypayActivation();
-        await takeawayPayComponent
-            .withQuery('knob-Authentication', AUTHENTICATION_JWT)
-            .withQuery('knob-Employee Id', '12345')
-            .withQuery('knob-Home URL', '/home')
-            .withQuery('knob-Login URL', '/account/login')
-            .withQuery('knob-Registration URL', '/account/register')
-            .withQuery('knob-Activation Status Response', '400');
-        await takeawayPayComponent.load('error');
+        await TakeawaypayActivationError.load({ activationStatusResponse: '400' });
     });
 
     it('should display the f-takeawaypayActivation component when there is an error', async () => {
         // Assert
-        await expect(await takeawayPayComponent.isErrorComponentDisplayed()).toBe(true);
+        await expect(await TakeawaypayActivationError.isComponentDisplayed()).toBe(true);
     });
 });
