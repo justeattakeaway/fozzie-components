@@ -37,24 +37,26 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 $stampCard-responsive-mobileViewBreakpoint: '<=narrowMid';
 $stampCard-responsive-notMobileViewBreakpoint: '>narrowMid';
 $stampCard-iconSize: 96px;
 
 .c-noCardsError {
     width: 100%;
-    padding-top: spacing(a);
-    min-height: $stampCard-iconSize + spacing(a); // Icon size plus padding
+    padding-top: f.spacing(a);
+    min-height: $stampCard-iconSize + f.spacing(a); // Icon size plus padding
 
-    @include media($stampCard-responsive-notMobileViewBreakpoint) {
-        margin-left: spacing();
-        margin-right: spacing();
+    @include f.media($stampCard-responsive-notMobileViewBreakpoint) {
+        margin-left: f.spacing();
+        margin-right: f.spacing();
     }
 }
 
 .c-noCardsError-icon {
     float: left;
-    margin-right: spacing();
+    margin-right: f.spacing();
     width: $stampCard-iconSize;
     height: $stampCard-iconSize;
     display: flex;
@@ -63,14 +65,14 @@ $stampCard-iconSize: 96px;
 }
 
 .c-noCardsError-title {
-    @include media($stampCard-responsive-mobileViewBreakpoint) {
-        @include font-size(heading-s, true, narrow);
+    @include f.media($stampCard-responsive-mobileViewBreakpoint) {
+        @include f.font-size(heading-s, true, narrow);
     }
 }
 
 .c-noCardsError-title,
 .c-noCardsError-subTitle {
-    margin-left: spacing();
-    margin-right: spacing();
+    margin-left: f.spacing();
+    margin-right: f.spacing();
 }
 </style>

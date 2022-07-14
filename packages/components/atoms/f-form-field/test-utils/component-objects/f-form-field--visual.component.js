@@ -1,4 +1,4 @@
-import Page from '@justeat/f-wdio-utils/src/base.page';
+import Page from '@justeat/f-wdio-utils';
 
 class FormField extends Page {
     constructor () {

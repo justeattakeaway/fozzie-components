@@ -108,30 +108,32 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-loyaltyHeader-container {
     width: 100%;
-    max-width: #{$layout-max-width}px;
+    max-width: #{f.$layout-max-width}px;
     margin: 0 auto;
-    padding: 0 #{$layout-margin}px;
+    padding: 0 #{f.$layout-margin}px;
 
-    @include media('<mid') {
-        padding: #{$layout-margin--mid}px;
+    @include f.media('<mid') {
+        padding: #{f.$layout-margin--mid}px;
     }
 
-    @include media('<narrow') {
-        padding: #{$layout-margin--narrow}px;
+    @include f.media('<narrow') {
+        padding: #{f.$layout-margin--narrow}px;
     }
 }
 
 .c-loyaltyHeader {
-    padding: spacing() 0 spacing(h) 0;
-    background-color: $color-container-default;
-    border-bottom: 1px solid $color-grey-20;
+    padding: f.spacing() 0 f.spacing(h) 0;
+    background-color: f.$color-container-default;
+    border-bottom: 1px solid f.$color-grey-20;
 }
 
 .c-loyaltyHeader-media {
-    @include media('<=narrowMid') {
-        margin-top: spacing();
+    @include f.media('<=narrowMid') {
+        margin-top: f.spacing();
     }
 }
 </style>

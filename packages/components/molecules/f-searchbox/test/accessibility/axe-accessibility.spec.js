@@ -1,16 +1,10 @@
-const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
-
-const Searchbox = require('../../test-utils/component-objects/f-searchbox.component');
-
-const searchbox = new Searchbox();
+import Searchbox from '../../test-utils/component-objects/f-searchbox.component';
 
 describe('Accessibility tests', () => {
-    beforeEach(async () => {
-        await searchbox.load();
-    });
-    it('a11y - should test f-searchbox component WCAG compliance', () => {
+    it('a11y - should test f-searchbox component WCAG compliance', async () => {
         // Act
-        const axeResults = getAxeResults('f-searchbox');
+        await Searchbox.load();
+        const axeResults = await Searchbox.getAxeResults('f-searchbox');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

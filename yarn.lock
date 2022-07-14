@@ -2327,13 +2327,6 @@
     lodash.startswith "4.2.1"
     lodash.uniq "4.5.0"
 
-"@justeat/f-breadcrumbs@3.x":
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/@justeat/f-breadcrumbs/-/f-breadcrumbs-3.2.2.tgz#6ee562a75055817e331bcf95e85292c81727ae1c"
-  integrity sha512-IQ63wbdZOaQPDaEIjwSyY1R3pBJUTySVKM/2mPvUzP/JXy+9hih1xxCbSr8J8HI03ElLx6p0WvErms5EglfMfw==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-
 "@justeat/f-button@3.x":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.4.1.tgz#1ddbc5c771f053db41308cb4797a3a611f3af393"
@@ -2350,15 +2343,6 @@
   integrity sha512-h8lZUw88CvWp++2mGNhEjTBUamU1kkZimPMflMkANPKwXUd39BJjHeiy3J+d4yc0wR4P16rQxpemYqkQLZAdSg==
   dependencies:
     "@justeat/f-services" "0.13.0"
-
-"@justeat/f-content-cards@7.x":
-  version "7.4.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-7.4.1.tgz#7076118679ba9f75e5395291fce6734e16ab3d3d"
-  integrity sha512-XHrczfrbGr29ybVj595VbL6klPAsM8PDrmmyFINHjb8bMfY538oi+WdpmNJ1GF4cR25rgMc/DBjm7x3hzZ+BRg==
-  dependencies:
-    "@babel/plugin-proposal-class-properties" "7.12.13"
-    "@justeat/f-services" "1.0.1"
-    core-js "3.6.5"
 
 "@justeat/f-content-cards@8.0.0-beta.4":
   version "8.0.0-beta.4"
@@ -2390,14 +2374,6 @@
   dependencies:
     "@justeattakeaway/pie-icons-vue" "1.0.0"
 
-"@justeat/f-form-field@4.x":
-  version "4.13.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-4.13.1.tgz#de26d48647332d3791fefab5014bbcd311db9a7e"
-  integrity sha512-Nf4jttNM4u1b1bAx+e8y1wxXiIAOaiyzeurLxEQ6MBDjxjocaYGMuVtSdFwv5YeiiOyo0AcqUGxN9Ix5C6q9Sw==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-    "@justeattakeaway/pie-icons-vue" "1.0.0"
-
 "@justeat/f-globalisation@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-0.2.0.tgz#90ec559642c165b6325669c506c417abe09fa5dd"
@@ -2425,17 +2401,15 @@
   dependencies:
     "@justeat/f-services" "1.7.0"
 
-"@justeat/f-media-element@2.x":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-media-element/-/f-media-element-2.0.1.tgz#785642873c2f86f029f9cd624616569000635c1c"
-  integrity sha512-bTBYDBYUSxhDA+zuoOSYSJnSFQL/oEJ0S0xTcK6fTLJsl4BBPQmrcFR/pJLiMG6/PnMHpqKWi0hOYALA/7obig==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
 "@justeat/f-mega-modal@3.x":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.2.tgz#81f2b5ca8519a6eca93f5643857df2a9c924666d"
   integrity sha512-3M+wpcjOIIw3hKbtZqyRl3mwdi2zz90wFAJc5RtJciJ/VwD73bHNjvABRl/At+JZj2p0Ongjg11ezSayoKMGJg==
+
+"@justeat/f-mega-modal@7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-7.0.0.tgz#baf7e85217a767bf01809e81bd7bca549c3fd399"
+  integrity sha512-ubtmxeJVYvIVL3rKH6MoLUT5sAMdljGcRt9BhWpaDWuyALsZBgKSGOtSY2zootj27GgrC+3LMhRssmyl8WmHbQ==
 
 "@justeat/f-popover@2.x":
   version "2.3.1"
@@ -2542,14 +2516,7 @@
     lodash-es "4.17.15"
     window-or-global "1.0.1"
 
-"@justeat/f-tabs@2.x":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-tabs/-/f-tabs-2.1.1.tgz#c807400d9855a1e3ac80404c3e88f891ad847628"
-  integrity sha512-96JAw+N7U9szOLwCsWN/hFQ2aC3XVeBUzo3xFT3yjsgv4hF/UmQONnbLfolAbJphTBQd8YtOgH8X1ynjY3gEDA==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-
-"@justeat/f-trak@0.7.1", "@justeat/f-trak@0.x":
+"@justeat/f-trak@0.x":
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-trak/-/f-trak-0.7.1.tgz#0ea1650e3a8749e1f8333b4eb72546339ce980be"
   integrity sha512-6XpaZPZWNjDkh7EJBFHL43ab5ExjVoQ4kU2bMJWVldUKoo+7DrcEpktkhkQT8D0IYiNfXKn82mGpqB8v2eDvFw==

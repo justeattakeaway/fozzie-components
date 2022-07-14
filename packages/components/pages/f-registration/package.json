@@ -59,7 +59,7 @@
     "@justeat/f-button": "3.x",
     "@justeat/f-card": "3.x",
     "@justeat/f-error-message": "1.x",
-    "@justeat/f-form-field": "5.x",
+    "@justeat/f-form-field": "6.x",
     "@justeat/f-http": "0.x",
     "@justeat/f-link": "3.x"
   },
@@ -67,7 +67,7 @@
     "@justeat/f-button": "3.x",
     "@justeat/f-card": "3.x",
     "@justeat/f-error-message": "1.x",
-    "@justeat/f-form-field": "5.x",
+    "@justeat/f-form-field": "6.x",
     "@justeat/f-http": "0.x",
     "@justeat/f-link": "3.x",
     "@justeat/f-vue-icons": "2.7.0",

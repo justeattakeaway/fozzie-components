@@ -74,6 +74,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 $header-height: 275px;
 
 .c-offerHeader-wrapper {
@@ -84,24 +86,24 @@ $header-height: 275px;
     position: relative;
     overflow: hidden;
     height: $header-height;
-    background-color: $color-support-brand-02;
+    background-color: f.$color-support-brand-02;
 
     & :global(.c-mediaElement-img--override) {
         width: 200px;
         position: absolute;
         top: -30px;
 
-        @include media('<mid') {
+        @include f.media('<mid') {
             top: -35px;
             right: -10px;
         }
 
-        @include media('>=mid') {
+        @include f.media('>=mid') {
             width: auto;
             position: relative;
         }
 
-        @include media('>=wide') {
+        @include f.media('>=wide') {
             width: auto;
             position: relative;
             top: -5px;
@@ -117,33 +119,33 @@ $header-height: 275px;
     left: 0;
     width: 100%;
     height: 40%;
-    background-color: $color-support-brand-01;
+    background-color: f.$color-support-brand-01;
     transform: skewY(4.5deg);
     transform-origin: top right;
 
-    @include media('>=narrow') {
+    @include f.media('>=narrow') {
         height: 45%;
     }
 
-    @include media('>=narrowMid') {
+    @include f.media('>=narrowMid') {
         height: 47.5%;
     }
 
-    @include media('>=mid') {
+    @include f.media('>=mid') {
         height: 55%;
     }
 
-    @include media('>=wide') {
+    @include f.media('>=wide') {
         height: 70%;
     }
 
-    @include media('>=huge') {
+    @include f.media('>=huge') {
         height: 75%;
     }
 }
 
 .c-offersHeader-media {
-    padding-top: spacing(j);
+    padding-top: f.spacing(j);
     position: relative;
     z-index: 1;
     top: 0;
@@ -151,19 +153,19 @@ $header-height: 275px;
 
 .c-offersHeader-container {
     width: 100%;
-    max-width: #{$layout-max-width}px;
+    max-width: #{f.$layout-max-width}px;
     margin: 0 auto;
-    padding-left: #{$layout-margin}px;
-    padding-right: #{$layout-margin}px;
+    padding-left: #{f.$layout-margin}px;
+    padding-right: #{f.$layout-margin}px;
 
-    @include media('<mid') {
-        padding-left: #{$layout-margin--mid}px;
-        padding-right: #{$layout-margin--mid}px;
+    @include f.media('<mid') {
+        padding-left: #{f.$layout-margin--mid}px;
+        padding-right: #{f.$layout-margin--mid}px;
     }
 
-    @include media('<narrow') {
-        padding-left: #{$layout-margin--narrow}px;
-        padding-right: #{$layout-margin--narrow}px;
+    @include f.media('<narrow') {
+        padding-left: #{f.$layout-margin--narrow}px;
+        padding-right: #{f.$layout-margin--narrow}px;
     }
 }
 </style>

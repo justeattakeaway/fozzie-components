@@ -35,9 +35,13 @@ export default {
         control: { type: 'boolean' },
         description: 'Select whether to show label text or not'
     },
-    isRequired: {
+    required: {
         control: { type: 'boolean' },
-        description: 'Is field value required'
+        description: 'Is this a required field?'
+    },
+    isVisuallyRequired: {
+        control: { type: 'boolean' },
+        description: 'Should there be a visual indicator that this field is required?'
     }
 };
 export const sharedArgs = {
@@ -45,7 +49,8 @@ export const sharedArgs = {
     hasError: false,
     isDisabled: false,
     shouldShowLabelText: true,
-    isRequired: true
+    required: true,
+    isVisuallyRequired: true
 };
 
 export const sharedFieldProperties = `
@@ -54,7 +59,8 @@ export const sharedFieldProperties = `
     :label-description="labelDescription"
     :assistive-text="assistiveText"
     :should-show-label-text="shouldShowLabelText"
-    :is-required="isRequired"
+    :required="required"
+    :is-visually-required="isVisuallyRequired"
     :disabled="isDisabled"
     :has-error="hasError"
 `;

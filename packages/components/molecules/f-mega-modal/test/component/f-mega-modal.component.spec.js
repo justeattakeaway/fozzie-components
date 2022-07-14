@@ -1,24 +1,22 @@
-const MegaModal = require('../../test-utils/component-objects/f-mega-modal.component');
-
-const megaModal = new MegaModal();
+import MegaModal from '../../test-utils/component-objects/f-mega-modal.component';
 
 describe('f-mega-modal component tests', () => {
     beforeEach(async () => {
-        await megaModal.load();
+        await MegaModal.load();
     });
 
     it('should display f-mega-modal component', async () => {
         // Assert
-        await expect(await megaModal.isComponentDisplayed()).toBe(true);
+        await expect(await MegaModal.isComponentDisplayed()).toBe(true);
     });
 
     it('should display the title', async () => {
         // Assert
-        await expect(await megaModal.isTitleDisplayed()).toBe(true);
+        await expect(await MegaModal.isTitleDisplayed()).toBe(true);
     });
 
     it('should display the content', async () => {
         // Assert
-        await expect(await megaModal.isContentDisplayed()).toBe(true);
+        await expect(await MegaModal.isContentDisplayed()).toBe(true);
     });
 });
