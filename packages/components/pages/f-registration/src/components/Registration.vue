@@ -533,8 +533,10 @@ export default {
 </script>
 
 <style lang="scss" module>
-$registration-topMargin           : spacing() * 14;
-$registration-topMargin--narrow   : spacing(i);
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+$registration-topMargin           : f.spacing() * 14;
+$registration-topMargin--narrow   : f.spacing(i);
 $registration-icon-width          : 97px;
 $registration-icon-width--narrow  : 92px;
 $registration-icon-height         : 78px;
@@ -544,7 +546,7 @@ $registration-icon-height--narrow : 74px;
 .c-registration {
     margin-top: $registration-topMargin--narrow;
 
-    @include media('>mid') {
+    @include f.media('>mid') {
         margin-top: $registration-topMargin;
     }
 }
@@ -552,11 +554,11 @@ $registration-icon-height--narrow : 74px;
     .c-registration-card {
         position: relative;
 
-        @include media('>=narrow') {
+        @include f.media('>=narrow') {
             // TODO: box shadow value will eventually come from PIE design tokens, but hard coding here for now
-            box-shadow: 0 1px 1px 0 rgba($color-black, 0.03),
-                    0 2px 1px -1px rgba($color-black, 0.07),
-                    0 1px 3px 0 rgba($color-black, 0.06);
+            box-shadow: 0 1px 1px 0 rgba(f.$color-black, 0.03),
+                    0 2px 1px -1px rgba(f.$color-black, 0.07),
+                    0 1px 3px 0 rgba(f.$color-black, 0.06);
         }
     }
 
@@ -568,24 +570,24 @@ $registration-icon-height--narrow : 74px;
         left: 50%;
         transform: translate(-35%);
 
-        @include media('<mid') {
+        @include f.media('<mid') {
             width: $registration-icon-width--narrow;
             height: $registration-icon-height--narrow;
         }
     }
 
     .c-registration-form {
-        margin-top: spacing(e);
+        margin-top: f.spacing(e);
     }
 
     .c-registration-genericError {
         margin-top: 0;
-        margin-bottom: spacing(d);
+        margin-bottom: f.spacing(d);
     }
 
     .c-registration-submit {
-        margin-top: spacing(f);
-        margin-bottom: spacing(f);
+        margin-top: f.spacing(f);
+        margin-bottom: f.spacing(f);
     }
 
     .c-registration-link {
@@ -593,12 +595,12 @@ $registration-icon-height--narrow : 74px;
     }
 
         .c-registration-link--subtitle {
-            margin-top: - spacing(); // shift the subtitle link closer to the main title
+            margin-top: - f.spacing(); // shift the subtitle link closer to the main title
         }
 
         .c-registration-link--bottomSpacing {
-            @include media('<narrow') {
-                padding-bottom: spacing(f);
+            @include f.media('<narrow') {
+                padding-bottom: f.spacing(f);
             }
         }
 </style>
