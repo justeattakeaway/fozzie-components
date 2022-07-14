@@ -3,20 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.1.0
+------------------------------
+*July 13, 2022*
+
+### Changed
+- Update f-wdio-utils to v1.1.0 to use new Axe Core implementation.
+- Accessibility tests to be async.
+
+### Changed
+- Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
+
+
 v3.0.0
 ------------------------------
 *July 13, 2022*
 
 ### Changed
 - **breaking changes** Update to `@use` and `@forward` SASS syntax.
-
-
-Latest (add to next release)
-------------------------------
-*June 23, 2021*
-
-### Changed
-- Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
 
 v2.4.2

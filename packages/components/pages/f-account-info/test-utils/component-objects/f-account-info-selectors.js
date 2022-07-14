@@ -1,12 +1,12 @@
-exports.CHANGE_EMAIL_ADDRESS_LINK = '[name="account-info-change-emailAddress-link"]';
-exports.SAVE_CHANGES_BUTTON = '[data-test-id="account-info-save-changes-button"]';
-exports.CHANGE_PASSWORD_BUTTON = '[data-test-id="account-info-change-password-button"]';
-exports.DELETE_ACCOUNT_LINK = '[name="account-info-delete-account-link"]';
-exports.ERROR_CARD = '[data-test-id="account-info-error-card"]';
-exports.ERROR_ALERT = '[data-test-id="account-info-error-alert"]';
-exports.SUCCESS_ALERT = '[data-test-id="account-info-success-alert"]';
+const CHANGE_EMAIL_ADDRESS_LINK = '[name="account-info-change-emailAddress-link"]';
+const SAVE_CHANGES_BUTTON = '[data-test-id="account-info-save-changes-button"]';
+const CHANGE_PASSWORD_BUTTON = '[data-test-id="account-info-change-password-button"]';
+const DELETE_ACCOUNT_LINK = '[name="account-info-delete-account-link"]';
+const ERROR_CARD = '[data-test-id="account-info-error-card"]';
+const ERROR_ALERT = '[data-test-id="account-info-error-alert"]';
+const SUCCESS_ALERT = '[data-test-id="account-info-success-alert"]';
 
-exports.FIELDS = {
+const FIELDS = {
     firstName: {
         input: '[data-test-id="formfield-account-info-consumer-firstName-input"]',
         emptyError: '[data-test-id="consumer-firstName-empty-error"]',
@@ -44,4 +44,15 @@ exports.FIELDS = {
         emptyError: '[data-test-id="consumer-postcode-empty-error"]',
         invalidError: '[data-test-id="consumer-postcode-invalid-error"]'
     }
+};
+
+export {
+    CHANGE_EMAIL_ADDRESS_LINK,
+    SAVE_CHANGES_BUTTON,
+    CHANGE_PASSWORD_BUTTON,
+    DELETE_ACCOUNT_LINK,
+    ERROR_CARD,
+    ERROR_ALERT,
+    SUCCESS_ALERT,
+    FIELDS
 };

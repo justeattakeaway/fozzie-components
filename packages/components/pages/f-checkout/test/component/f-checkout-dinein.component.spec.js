@@ -1,14 +1,9 @@
-const Checkout = require('../../test-utils/component-objects/f-checkout.component');
-
-let checkout;
+import Checkout from '../../test-utils/component-objects/f-checkout.component';
 
 describe('f-checkout "dinein" component tests', () => {
-    beforeEach(() => {
-        // Arrange
-        checkout = new Checkout();
-
+    beforeEach(async () => {
         // Act
-        checkout.load({
+        await Checkout.load({
             serviceType: 'dinein',
             isLoggedIn: true,
             isAsapAvailable: true,
@@ -22,9 +17,9 @@ describe('f-checkout "dinein" component tests', () => {
         const tableEntry = 'A'.repeat(maxlength + 1); // Enter more than allowed
 
         // Act
-        await checkout.setFieldValue('tableIdentifier', tableEntry);
+        await Checkout.setFieldValue('tableIdentifier', tableEntry);
 
         // Assert
-        await expect((await checkout.getFieldValue('tableIdentifier')).length).toEqual(maxlength);
+        await expect((await Checkout.getFieldValue('tableIdentifier')).length).toEqual(maxlength);
     });
 });

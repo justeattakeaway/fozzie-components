@@ -1,18 +1,15 @@
-import { getAxeResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
-
-const Loyalty = require('../../test-utils/component-objects/f-loyalty.component');
-
-const loyalty = new Loyalty();
+import Loyalty from '../../test-utils/component-objects/f-loyalty.component';
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        loyalty.load();
+    beforeEach(async () => {
+        await Loyalty.load();
     });
-    xit('a11y - should test f-loyalty component WCAG compliance', () => {
+
+    it('a11y - should test f-loyalty component WCAG compliance', async () => {
         // Act
-        const axeResults = getAxeResults('f-loyalty');
+        const axeResults = await Loyalty.getAxeResults('f-loyalty');
 
         // Assert
-        expect(axeResults.violations.length).toBe(0);
+        await expect(axeResults.violations.length).toBe(0);
     });
 });

@@ -1,39 +1,47 @@
-const forEach = require('mocha-each');
-const Registration = require('../../test-utils/component-objects/f-registration.component');
+import Registration from '../../test-utils/component-objects/f-registration.component';
 
-let registration;
+let tests;
 
 describe('Shared - f-registration component tests', () => {
     beforeEach(async () => {
-        registration = new Registration();
-        await registration.load();
+        await Registration.load();
     });
 
     it('should display component', async () => {
         // Assert
-        await expect(await registration.isComponentDisplayed()).toBe(true);
+        await expect(await Registration.isComponentDisplayed()).toBe(true);
     });
 
-    forEach(['termsAndConditionsLink', 'privacyPolicyLink', 'cookiesPolicyLink'])
-    .it('should check if the legal documentation is clickable', async link => {
-        // Assert
-        await expect(await registration.canBeClicked(link)).toBe(true);
+    tests = [
+        'termsAndConditionsLink',
+        'privacyPolicyLink',
+        'cookiesPolicyLink'
+    ];
+
+    tests.forEach(link => {
+        it(`should check if the ${link} is clickable`, async () => {
+            // Assert
+            await expect(await Registration.canBeClicked(link)).toBe(true);
+        });
     });
 
-    forEach([
-        ['termsAndConditionsLink', 'info/terms-and-conditions'],
-        ['privacyPolicyLink', 'info/privacy-policy'],
-        ['cookiesPolicyLink', 'info/cookies-policy']
-    ])
-    .it('should take you to the correct URL when clicking the `%s`', async (linkName, expectedUrl) => {
-        // Arrange
-        const expectedUrlRegex = new RegExp(`^http(s?)://localhost:\\d+/${expectedUrl}$`);
+    tests = [
+        { linkName: 'termsAndConditionsLink', expectedUrl: 'info/terms-and-conditions' },
+        { linkName: 'privacyPolicyLink', expectedUrl: 'info/privacy-policy' },
+        { linkName: 'cookiesPolicyLink', expectedUrl: 'info/cookies-policy' }
+    ];
 
-        // Act
-        await registration[linkName].click();
-        await browser.switchWindow(expectedUrlRegex); // Link was opened in a new tab
+    tests.forEach(({ linkName, expectedUrl }) => {
+        it(`should take you to the ${expectedUrl} URL when clicking the ${linkName}`, async () => {
+            // Arrange
+            const expectedUrlRegex = new RegExp(`^http(s?)://localhost:\\d+/${expectedUrl}$`);
 
-        // Assert
-        await expect(await browser.getUrl()).toMatch(expectedUrlRegex);
+            // Act
+            await Registration[linkName].click();
+            await browser.switchWindow(expectedUrlRegex); // Link was opened in a new tab
+
+            // Assert
+            await expect(await browser.getUrl()).toMatch(expectedUrlRegex);
+        });
     });
 });
