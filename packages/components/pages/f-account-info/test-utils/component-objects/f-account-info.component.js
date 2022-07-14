@@ -1,5 +1,5 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
-const {
+import Page from '@justeat/f-wdio-utils';
+import {
     CHANGE_EMAIL_ADDRESS_LINK,
     SAVE_CHANGES_BUTTON,
     CHANGE_PASSWORD_BUTTON,
@@ -8,9 +8,9 @@ const {
     ERROR_CARD,
     ERROR_ALERT,
     SUCCESS_ALERT
-} = require('./f-account-info-selectors');
+} from './f-account-info-selectors';
 
-module.exports = class AccountInfo extends Page {
+class AccountInfo extends Page {
     constructor () {
         super('page', 'account-info-component');
     }
@@ -77,7 +77,7 @@ module.exports = class AccountInfo extends Page {
     };
 
     async isErrorCardComponentDisplayed () {
-        return (await this.errorCardComponent).isDisplayed();
+        return this.errorCardComponent.isDisplayed();
     }
 
     /**
@@ -92,35 +92,35 @@ module.exports = class AccountInfo extends Page {
     }
 
     async clickOutOfInputField () {
-        (await this.component).click();
+        await this.component.click();
     }
 
     async clickSaveButton () {
-        (await this.LinksAndButtons.saveChangesButton.cta).click();
+        await this.LinksAndButtons.saveChangesButton.cta.click();
     }
 
     async clickChangePassword () {
-        return (await this.LinksAndButtons.changePasswordButton.cta).click();
+        await this.LinksAndButtons.changePasswordButton.cta.click();
     }
 
     async clickDeleteAccountLink () {
-        return (await this.LinksAndButtons.deleteAccountLink.cta).click();
+        await this.LinksAndButtons.deleteAccountLink.cta.click();
     }
 
     async clickChangeEmailAddressLink () {
-        return (await this.LinksAndButtons.changeEmailAddressLink.cta).click();
+        await this.LinksAndButtons.changeEmailAddressLink.cta.click();
     }
 
     async isEmptyErrorMessageDisplayed (fieldName) {
-        return (await this.fields[fieldName].emptyError).isDisplayed();
+        return this.fields[fieldName].emptyError.isDisplayed();
     }
 
     async isInvalidErrorMessageDisplayed (fieldName) {
-        return (await this.fields[fieldName].invalidError).isDisplayed();
+        return this.fields[fieldName].invalidError.isDisplayed();
     }
 
     async canBeClicked (callToActionName) {
-        return (await this.LinksAndButtons[callToActionName].cta).isClickable();
+        return this.LinksAndButtons[callToActionName].cta.isClickable();
     }
 
     async isDisabled (field) {
@@ -128,18 +128,20 @@ module.exports = class AccountInfo extends Page {
     }
 
     async isErrorAlertDisplayed () {
-        return (await this.errorAlert).isDisplayed();
+        return this.errorAlert.isDisplayed();
     }
 
     async waitForErrorAlertDisplayed () {
-        (await this.errorAlert).waitUntil(async () => this.isDisplayed());
+        await this.errorAlert.waitForDisplayed();
     }
 
     async isSuccessAlertDisplayed () {
-        return (await this.successAlert).isDisplayed();
+        return this.successAlert.isDisplayed();
     }
 
     async waitForSuccessAlertDisplayed () {
-        (await this.successAlert).waitUntil(async () => this.isDisplayed());
+        await this.successAlert.waitForDisplayed();
     }
-};
+}
+
+export default new AccountInfo();
