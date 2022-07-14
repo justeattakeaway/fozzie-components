@@ -1,4 +1,5 @@
 import Checkout from '../../test-utils/component-objects/f-checkout.component';
+import CheckoutAgeVerification from '../../test-utils/component-objects/f-checkout-age-verification';
 
 const illegalMobileNumber = '123';
 let tests;
@@ -11,20 +12,22 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
         locale: 'en-GB'
     };
 
-    beforeEach(async () => {
+    it('should display the component base state.', async () => {
         // Act
         await Checkout.load({
-            ...checkoutInfo,
-            placeOrderError: 'duplicate'
+            ...checkoutInfo
         });
-    });
 
-    it('should display the component base state.', async () => {
         // Assert
         await browser.percyScreenshot('f-checkout - Collection - Authenticated - Base State', 'desktop');
     });
 
     it('should display the mandatory error messages.', async () => {
+        // Act
+        await Checkout.load({
+            ...checkoutInfo
+        });
+
         // Act
         await Checkout.clearBlurField('mobileNumber');
         await Checkout.goToPayment();
@@ -71,6 +74,11 @@ describe('f-checkout - Collection - Authenticated - Desktop Visual Tests', () =>
     });
 
     it('should display the illegal mobile number error message', async () => {
+        // Act
+        await Checkout.load({
+            ...checkoutInfo
+        });
+
         // Act
         await Checkout.clearBlurField('mobileNumber');
         await Checkout.setFieldValue('mobileNumber', illegalMobileNumber);
@@ -296,7 +304,7 @@ describe('f-checkout - Delivery - AU Tenant - visibile state field - Desktop Vis
 describe('f-checkout - Delivery - AU Tenant - age verification page - Desktop Visual Tests', () => {
     beforeEach(async () => {
         // Act
-        await Checkout.load({
+        await CheckoutAgeVerification.load({
             serviceType: 'delivery',
             isLoggedIn: true,
             isAsapAvailable: true,

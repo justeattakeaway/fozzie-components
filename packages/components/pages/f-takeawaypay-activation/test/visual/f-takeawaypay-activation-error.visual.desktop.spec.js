@@ -7,12 +7,10 @@ describe('f-takeawaypay-activation - Error page - Desktop Visual Tests', () => {
     ];
 
     locales.forEach(locale => {
-        beforeEach(async () => {
+        it(`should display the component when there is an error and tenant is "${locale}"`, async () => {
             // Arrange
             await TakeawayPayComponent.load({ locale, activationStatusResponse: '400' });
-        });
 
-        it(`should display the component when there is an error and tenant is "${locale}"`, async () => {
             // Assert
             await browser.percyScreenshot(`f-takeawaypay-activation - Error - ${locale}`, 'desktop');
         });

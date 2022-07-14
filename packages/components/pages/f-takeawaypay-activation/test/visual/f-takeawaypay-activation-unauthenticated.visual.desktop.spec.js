@@ -1,4 +1,4 @@
-import TakeawayPayComponent from '../../test-utils/component-objects/f-takeawaypayActivation.component';
+import TakeawayPayComponent from '../../test-utils/component-objects/f-takeawaypayActivation-unauthenticated.component';
 
 describe('f-takeawaypay-activation - Unauthenticated - Desktop Visual Tests', () => {
     const locales = [

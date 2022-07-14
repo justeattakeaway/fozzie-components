@@ -7,17 +7,18 @@ describe('f-takeawaypay-activation - Authenticated - Desktop Visual Tests', () =
     ];
 
     locales.forEach(locale => {
-        beforeEach(async () => {
+        it(`should display user details when the user is logged in and tenant is "${locale}"`, async () => {
             // Arrange
             await TakeawayPayComponent.load({ locale, isLoggedIn: true });
-        });
 
-        it(`should display user details when the user is logged in and tenant is "${locale}"`, async () => {
             // Assert
             await browser.percyScreenshot(`f-takeawaypay-activation - Authenticated - ${locale}`, 'desktop');
         });
 
         it(`should display a successful message when the activation is successful and tenant is "${locale}"`, async () => {
+            // Arrange
+            await TakeawayPayComponent.load({ locale, isLoggedIn: true });
+
             // Act
             await TakeawayPayComponent.clickActivateTakeawayPayButton();
             await TakeawayPayComponent.waitForActivationSuccessComponent();
