@@ -7,7 +7,7 @@ v10.2.0
 *July 1, 2022*
 
 ### Added
-- Theme to support header on Search
+- Theme "disappearingWhite" to support header on Search
 
 
 v10.1.0
