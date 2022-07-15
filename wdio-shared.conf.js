@@ -57,7 +57,7 @@ exports.config = {
     before: async () => {
         console.log('Using the following WDIO Config:', JSON.stringify(configuration));
         if (configuration.testType.services.includes('percy')) {
-            await browser.addCommand('percyScreenshot', (screenshotName, featureType) => {
+            await browser.addCommand('percyScreenshot', async (screenshotName, featureType) => {
                 const formattedFeatureType = featureType.toLowerCase();
 
                 if (formattedFeatureType !== 'mobile' && formattedFeatureType !== 'desktop') {
