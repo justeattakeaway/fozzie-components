@@ -1,74 +1,49 @@
-const { getAxeResults } = require('../../../../../../test/utils/axe-helper');
-
-const TakeawaypayActivation = require('../../test-utils/component-objects/f-takeawaypayActivation.component');
-const { AUTHENTICATION_JWT } = require('../../test-utils/constants/f-takeawaypayActivation');
-
-let takeawayPayComponent;
+import TakeawaypayActivationAuthenticated from '../../test-utils/component-objects/f-takeawaypayActivation-authenticated.component';
+import TakeawaypayActivationUnauthenticated from '../../test-utils/component-objects/f-takeawaypayActivation-unauthenticated.component';
+import TakeawaypayActivationError from '../../test-utils/component-objects/f-takeawaypayActivation-error.component';
 
 describe('Accessibility tests', () => {
-    beforeEach(() => {
-        takeawayPayComponent = new TakeawaypayActivation();
-    });
-
-    it('a11y - should test f-takeawaypayActivation component (unauthenticated) WCAG compliance', () => {
+    it('a11y - should test f-takeawaypayActivation component (unauthenticated) WCAG compliance', async () => {
         // Arrange
-        takeawayPayComponent.load();
+        await TakeawaypayActivationUnauthenticated.load({ isLoggedIn: false });
 
         // Act
-        const axeResults = getAxeResults('f-takeawaypayActivation-unauthenticated');
+        const axeResults = await TakeawaypayActivationUnauthenticated.getAxeResults('f-takeawaypayActivation-unauthenticated');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
     });
 
-    it('a11y - should test f-takeawaypayActivation component (authenticated) WCAG compliance', () => {
+    it('a11y - should test f-takeawaypayActivation component (authenticated) WCAG compliance', async () => {
         // Arrange
-        takeawayPayComponent
-            .withQuery('knob-Authentication', AUTHENTICATION_JWT)
-            .withQuery('knob-Employee Id', '12345')
-            .withQuery('knob-Home URL', '/home')
-            .withQuery('knob-Login URL', '/account/login')
-            .withQuery('knob-Registration URL', '/account/register');
-        takeawayPayComponent.load('loggedIn');
+        await TakeawaypayActivationAuthenticated.load({ isLoggedIn: true });
 
         // Act
-        const axeResults = getAxeResults('f-takeawaypayActivation-authenticated');
+        const axeResults = await TakeawaypayActivationAuthenticated.getAxeResults('f-takeawaypayActivation-authenticated');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
     });
 
-    it('a11y - should test f-takeawaypayActivation component (successful activation) WCAG compliance', () => {
+    it('a11y - should test f-takeawaypayActivation component (successful activation) WCAG compliance', async () => {
         // Arrange
-        takeawayPayComponent
-            .withQuery('knob-Authentication', AUTHENTICATION_JWT)
-            .withQuery('knob-Employee Id', '12345')
-            .withQuery('knob-Home URL', '/home')
-            .withQuery('knob-Login URL', '/account/login')
-            .withQuery('knob-Registration URL', '/account/register');
-        takeawayPayComponent.load('loggedIn');
-        takeawayPayComponent.clickActivateTakeawayPayButton();
-        takeawayPayComponent.waitForActivationSuccessComponent();
+        await TakeawaypayActivationAuthenticated.load({ isLoggedIn: true });
+        await TakeawaypayActivationAuthenticated.clickActivateTakeawayPayButton();
+        await TakeawaypayActivationAuthenticated.waitForActivationSuccessComponent();
 
         // Act
-        const axeResults = getAxeResults('f-takeawaypayActivation-successfulActivation');
+        const axeResults = await TakeawaypayActivationAuthenticated.getAxeResults('f-takeawaypayActivation-successfulActivation');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);
     });
 
-    it('a11y - should test f-takeawaypayActivation component (activation error) WCAG compliance', () => {
+    it('a11y - should test f-takeawaypayActivation component (activation error) WCAG compliance', async () => {
         // Arrange
-        takeawayPayComponent
-            .withQuery('knob-Activation Status Response', '400')
-            .withQuery('knob-Employee Id', '12345')
-            .withQuery('knob-Home URL', '/home')
-            .withQuery('knob-Login URL', '/account/login')
-            .withQuery('knob-Registration URL', '/account/register');
-        takeawayPayComponent.load('error');
+        await TakeawaypayActivationError.load({ activationStatusResponse: '400' });
 
         // Act
-        const axeResults = getAxeResults('f-takeawaypayActivation-error');
+        const axeResults = await TakeawaypayActivationError.getAxeResults('f-takeawaypayActivation-error');
 
         // Assert
         expect(axeResults.violations.length).toBe(0);

@@ -1,11 +1,9 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
-const {
+import Page from '@justeat/f-wdio-utils';
+import {
     ORDER_TIME_DROPDOWN,
     USER_NOTE_INPUT,
     GO_TO_PAYMENT_BUTTON,
     FIELDS,
-    KNOB_CHECKOUT_DROPDOWN,
-    KNOB_BUTTON,
     SWITCH_USER_LINK,
     GUEST_CHECKOUT_LOGIN_BUTTON,
     PRE_ORDER_WARNING,
@@ -23,9 +21,9 @@ const {
     COURIER_ACCORDION_HEADER,
     KITCHEN_ACCORDION_HEADER,
     ORDER_ACCORDION_HEADER
-} = require('./f-checkout-selectors');
+} from './f-checkout-selectors';
 
-module.exports = class Checkout extends Page {
+class Checkout extends Page {
     constructor () {
         super('page', 'checkout-component');
     }
@@ -33,11 +31,7 @@ module.exports = class Checkout extends Page {
 
     get orderTimeDropdown () { return $(ORDER_TIME_DROPDOWN); }
 
-    get knobCheckoutDropdown () { return $(KNOB_CHECKOUT_DROPDOWN); }
-
     get goToPaymentButton () { return $(GO_TO_PAYMENT_BUTTON); }
-
-    get knobButton () { return $(KNOB_BUTTON); }
 
     get userNoteInput () { return $(USER_NOTE_INPUT); }
 
@@ -150,43 +144,43 @@ module.exports = class Checkout extends Page {
      */
 
     async isPostcodeTypeErrorDisplayed () {
-        return (await this.fields.addressPostcode.typeError).isDisplayed();
+        return this.fields.addressPostcode.typeError.isDisplayed();
     }
 
     async isEmailErrorDisplayed () {
-        return (await this.fields.emailAddress.error).isDisplayed();
+        return this.fields.emailAddress.error.isDisplayed();
     }
 
     async isTableIdentifierMaxLengthErrorDisplayed () {
-        return (await this.fields.tableIdentifier.maxLengthError).isDisplayed();
+        return this.fields.tableIdentifier.maxLengthError.isDisplayed();
     }
 
     async isOrderTimeDropdownDisplayed () {
-        return (await this.orderTimeDropdown).isDisplayed();
+        return this.orderTimeDropdown.isDisplayed();
     }
 
     async isAgeVerificationDisplayed () {
-        return (await this.ageVerificationComponent).isDisplayed();
+        return this.ageVerificationComponent.isDisplayed();
     }
 
     async isAgeVerificationErrorDisplayed () {
-        return (await this.ageVerificationError).isDisplayed();
+        return this.ageVerificationError.isDisplayed();
     }
 
     async userNoteMaxCharacterCount () {
-        return (await this.userNoteInput).getAttribute('maxlength');
+        return this.userNoteInput.getAttribute('maxlength');
     }
 
     async clickGuestCheckoutLoginButton () {
-        return (await this.guestCheckoutLoginButton).click();
+        await this.guestCheckoutLoginButton.click();
     }
 
     async clickRetryButton () {
-        return (await this.errorMessageRetry).click();
+        await this.errorMessageRetry.click();
     }
 
     async clickDupOrderGoToHistoryButton () {
-        return (await this.errorMessageDupOrderGoToHistory).click();
+        await this.errorMessageDupOrderGoToHistory.click();
     }
 
     async setFieldValues () {
@@ -206,15 +200,15 @@ module.exports = class Checkout extends Page {
     }
 
     async isCheckoutErrorMessageDisplayed () {
-        return (await this.checkoutErrorMessage).isDisplayedInViewport();
+        return this.checkoutErrorMessage.isDisplayedInViewport();
     }
 
     async isCheckoutErrorCloseButtonDisplayed () {
-        return (await this.errorMessageRetry).isDisplayed();
+        return this.errorMessageRetry.isDisplayed();
     }
 
     async isCheckoutErrorDupOrderGoToHistoryButtonDisplayed () {
-        return (await this.errorMessageDupOrderGoToHistory).isDisplayed();
+        return this.errorMessageDupOrderGoToHistory.isDisplayed();
     }
 
     async populateAgeVerificationForm ({ day, month, year }) {
@@ -242,7 +236,7 @@ module.exports = class Checkout extends Page {
     * @returns {String} The value of the field
     */
     async getFieldValue (fieldName) {
-        return (await this.fields[fieldName].input).getValue();
+        return this.fields[fieldName].input.getValue();
     }
 
     /**
@@ -250,8 +244,8 @@ module.exports = class Checkout extends Page {
     *Submit the checkout form.
     */
     async goToPayment () {
-        (await this.goToPaymentButton).scrollIntoView();
-        (await this.goToPaymentButton).click();
+        await this.goToPaymentButton.scrollIntoView();
+        await this.goToPaymentButton.click();
     }
 
     async submitAgeVerification () {
@@ -270,4 +264,6 @@ module.exports = class Checkout extends Page {
         await this[header].click();
         await this.fields[noteType].input.setValue(note);
     }
-};
+}
+
+export default new Checkout();

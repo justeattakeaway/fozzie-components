@@ -1,95 +1,108 @@
-import forEach from 'mocha-each';
+import AccountInfo from '../../test-utils/component-objects/f-account-info.component';
+import AccountInfoErrorCard from '../../test-utils/component-objects/f-account-info-error.component';
 
-const AccountInfo = require('../../test-utils/component-objects/f-account-info.component');
 
-forEach(['desktop', 'mobile'])
-.describe('f-account-info - Visual Tests', device => {
-    let accountInfo;
+const devices = [
+    'mobile',
+    'desktop'
+];
 
-    beforeEach(async () => {
-        if (device === 'mobile') {
-            await browser.setWindowSize(414, 731);
-        }
+let fields;
+let locales;
 
-        accountInfo = new AccountInfo();
+devices.forEach(device => {
+    describe(`f-account-info - ${device}- Visual Tests`, () => {
+        beforeEach(async () => {
+            if (device === 'mobile') {
+                await browser.setWindowSize(414, 731);
+            }
 
-        await accountInfo.load();
+            await AccountInfo.load();
+        });
 
-        await accountInfo.waitForComponent();
-    });
+        it('should display the default component state', async () => {
+            // Assert
+            await browser.percyScreenshot('f-account-info - Base State', device);
+        });
 
-    it('should display the default component state', async () => {
-        // Act
-        await accountInfo.load();
-        await accountInfo.waitForComponent();
+        fields = [
+            'firstName',
+            'lastName',
+            'phoneNumber',
+            'addressLine1',
+            'city',
+            'postcode'
+        ];
 
-        // Assert
-        await browser.percyScreenshot('f-account-info - Base State', device);
-    });
+        fields.forEach(field => {
+            it('should display an error message immediately when %s input has been deleted', async () => {
+                // Act
+                await AccountInfo.clearBlurField(field);
+                await AccountInfo.clickOutOfInputField();
 
-    forEach(['firstName', 'lastName', 'phoneNumber', 'addressLine1', 'city', 'postcode'])
-    .it('should display an error message immediately when %s input has been deleted', async field => {
-        // Act
-        await accountInfo.load();
-        await accountInfo.clearBlurField(field);
-        await accountInfo.clickOutOfInputField();
+                // Assert
+                await browser.percyScreenshot(`f-account-info - ${field} Input Error Message`, device);
+            });
+        });
 
-        // Assert
-        await browser.percyScreenshot(`f-account-info - ${field} Input Error Message`, device);
-    });
+        fields = [
+            'firstName',
+            'lastName',
+            'phoneNumber',
+            'postcode'
+        ];
 
-    forEach(['firstName', 'lastName', 'phoneNumber', 'postcode'])
-    .it('should display the illegal %s error message immediately on click', async field => {
-        // Arrange
-        const illegalInput = '123';
+        fields.forEach(field => {
+            it(`should display the illegal ${field} error message immediately on click`, async () => {
+                // Arrange
+                const illegalInput = '123';
 
-        // Act
-        await accountInfo.load();
-        await accountInfo.clearBlurField(field);
-        await accountInfo.setFieldValue(field, illegalInput);
-        await accountInfo.clickOutOfInputField();
+                // Act
+                await AccountInfo.clearBlurField(field);
+                await AccountInfo.setFieldValue(field, illegalInput);
+                await AccountInfo.clickOutOfInputField();
 
-        // Assert
-        await browser.percyScreenshot(`f-account-info - illegal ${field} error message`, device);
-    });
+                // Assert
+                await browser.percyScreenshot(`f-account-info - illegal ${field} error message`, device);
+            });
+        });
 
-    forEach([
-        ['en-GB']
-    ]).it('should display the %s Error page if GET fails', async locale => {
-        // Act
-        accountInfo.load({ locale, apiState: 'get-details-fails' });
+        locales = ['en-GB'];
 
-        // Assert
-        await browser.percyScreenshot(`f-account-info - Load Error Page - ${locale}`, device);
-    });
+        locales.forEach(locale => {
+            it(`should display the ${locale} Submit success alert if Submit succeed`, async () => {
+                // Arrange
+                await AccountInfo.load({ locale });
+                await AccountInfo.clearBlurField('firstName');
+                await AccountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
 
-    forEach([
-        ['en-GB']
-    ]).it('should display the %s Submit success alert if Submit succeed', async locale => {
-        // Arrange
-        await accountInfo.load({ locale });
-        await accountInfo.clearBlurField('firstName');
-        await accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
+                // Act
+                await AccountInfo.clickSaveButton();
 
-        // Act
-        await accountInfo.clickSaveButton();
+                // Assert
+                await browser.percyScreenshot(`f-account-info - Submit Success Alert - ${locale}`, device);
+            });
 
-        // Assert
-        await browser.percyScreenshot(`f-account-info - Submit Success Alert - ${locale}`, device);
-    });
+            it(`should display the ${locale} Submit error alert if Submit fails`, async () => {
+                // Arrange
+                await AccountInfo.load({ locale, apiState: 'patch-details-fails' });
+                await AccountInfo.clearBlurField('firstName');
+                await AccountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
 
-    forEach([
-        ['en-GB']
-    ]).it('should display the %s Submit error alert if Submit fails', async locale => {
-        // Arrange
-        await accountInfo.load({ locale, apiState: 'patch-details-fails' });
-        await accountInfo.clearBlurField('firstName');
-        await accountInfo.setFieldValue('firstName', 'Hazza'); // dirty the form to allow submit
+                // Act
+                await AccountInfo.clickSaveButton();
 
-        // Act
-        await accountInfo.clickSaveButton();
+                // Assert
+                await browser.percyScreenshot(`f-account-info - Submit Error Alert - ${locale}`, device);
+            });
 
-        // Assert
-        await browser.percyScreenshot(`f-account-info - Submit Error Alert - ${locale}`, device);
+            it(`should display the ${locale} Error page if GET fails`, async () => {
+                // Act
+                AccountInfoErrorCard.load({ locale, apiState: 'get-details-fails' });
+
+                // Assert
+                await browser.percyScreenshot(`f-account-info - Load Error Page - ${locale}`, device);
+            });
+        });
     });
 });

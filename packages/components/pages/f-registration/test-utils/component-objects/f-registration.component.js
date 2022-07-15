@@ -1,7 +1,6 @@
-/* eslint-disable no-undef */
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-const {
+import {
     CREATE_ACCOUNT_BUTTON,
     TERMS_AND_CONDITIONS_LINK,
     PRIVACY_POLICY_LINK,
@@ -14,9 +13,9 @@ const {
     EMAIL_ERROR_MESSAGE,
     PASSWORD_INPUT,
     PASSWORD_ERROR_MESSAGE
-} = require('./f-registration.selectors');
+} from './f-registration.selectors';
 
-module.exports = class Registration extends Page {
+class Registration extends Page {
     constructor () {
         super('page', 'registration-component');
     }
@@ -79,34 +78,36 @@ module.exports = class Registration extends Page {
     };
 
     async isInputFieldDisplayed (fieldName) {
-        return (await this.fields[fieldName].input).isDisplayed();
+        return this.fields[fieldName].input.isDisplayed();
     }
 
     async submit () {
         await this.createAccountButton.click();
     }
 
-    isEmptyErrorDisplayed (fieldName) {
-        const field = this.fields[fieldName];
+    async isEmptyErrorDisplayed (fieldName) {
+        const field = await this.fields[fieldName];
         return field.errorMessage === field.missing;
     }
 
-    isMaxLengthErrorDisplayed (fieldName) {
-        const field = this.fields[fieldName];
+    async isMaxLengthErrorDisplayed (fieldName) {
+        const field = await this.fields[fieldName];
         return field.errorMessage === field.maxCharacters;
     }
 
-    isEmailExistsErrorDisplayed () {
-        const field = this.fields.email;
+    async isEmailExistsErrorDisplayed () {
+        const field = await this.fields.email;
         return field.errorMessage === field.exists;
     }
 
-    isInvalidErrorDisplayed (fieldName) {
-        const field = this.fields[fieldName];
+    async isInvalidErrorDisplayed (fieldName) {
+        const field = await this.fields[fieldName];
         return field.innerText === field.invalidFormat;
     }
 
     async canBeClicked (link) {
-        return (await this.LinksAndButtons[link].cta).isClickable();
+        return this.LinksAndButtons[link].cta.isClickable();
     }
-};
+}
+
+export default new Registration();
