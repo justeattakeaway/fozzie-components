@@ -54,20 +54,18 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    before: () => {
+    before: async () => {
         console.log('Using the following WDIO Config:', JSON.stringify(configuration));
         if (configuration.testType.services.includes('percy')) {
-            browser.addCommand('percyScreenshot', (screenshotName, featureType) => {
+            await browser.addCommand('percyScreenshot', async (screenshotName, featureType) => {
                 const formattedFeatureType = featureType.toLowerCase();
 
                 if (formattedFeatureType !== 'mobile' && formattedFeatureType !== 'desktop') {
                     throw new Error(`Feature type ${formattedFeatureType} is not supported. Please use 'mobile' or 'desktop'`);
                 }
 
-                browser.call(async () => {
-                    await percySnapshot(`${screenshotName} - ${featureType}`, {
-                        widths: configuration.availableServices.percy.viewports[formattedFeatureType]
-                    });
+                await percySnapshot(`${screenshotName} - ${featureType}`, {
+                    widths: configuration.availableServices.percy.viewports[formattedFeatureType]
                 });
             });
         }
@@ -75,17 +73,17 @@ exports.config = {
     /**
     * Function to be executed before a test (in Mocha/Jasmine)
     */
-    beforeTest: test => {
+    beforeTest: async (test) => {
         if (test.file.includes('mobile')) {
-            browser.setWindowSize(414, 731);
+            await browser.setWindowSize(414, 731);
         }
     },
     /**
     * Function to be executed after a test (in Mocha/Jasmine)
     */
-    afterTest: () => {
-        browser.takeScreenshot();
-        browser.deleteAllCookies();
+    afterTest: async () => {
+        await browser.takeScreenshot();
+        await browser.deleteAllCookies();
     },
     /**
      * Gets executed after all tests are done. You still have access to all global variables from

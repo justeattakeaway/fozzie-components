@@ -203,7 +203,9 @@ export default {
 </script>
 
 <style lang="scss" module>
-@include loadingIndicator('large');
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+@include f.loadingIndicator('large');
 
 .c-spinner-wrapper {
     position: absolute;
@@ -213,7 +215,7 @@ export default {
 
     .c-spinner {
         margin: 0 auto;
-        border: 3px solid $color-content-brand;
+        border: 3px solid f.$color-content-brand;
         border-top: 3px solid rgba(243, 109, 0, 0.2);
     }
 }
@@ -223,11 +225,11 @@ export default {
     justify-content: center;
     min-height: 80vh;
     margin: auto;
-    font-family: $font-family-base;
-    @include font-size(heading-m);
+    font-family: f.$font-family-base;
+    @include f.font-size(heading-m);
     text-align: center;
 
-    @include media('>=narrow') {
+    @include f.media('>=narrow') {
         width: 80vw;
     }
 }
@@ -235,8 +237,8 @@ export default {
     .c-takeawaypayActivation-card {
         position: relative;
 
-        @include media('>=narrow') {
-            box-shadow: 0 1px 1px 0 rgba($color-black, 0.03), 0 2px 1px -1px rgba($color-black, 0.07), 0 1px 3px 0 rgba($color-black, 0.06);
+        @include f.media('>=narrow') {
+            box-shadow: 0 1px 1px 0 rgba(f.$color-black, 0.03), 0 2px 1px -1px rgba(f.$color-black, 0.07), 0 1px 3px 0 rgba(f.$color-black, 0.06);
         }
     }
 </style>
