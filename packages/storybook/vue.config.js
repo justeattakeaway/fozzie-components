@@ -38,30 +38,6 @@ module.exports = {
                     const relPathCommonScss = path.relative(path.dirname(resourcePath), absPathCommonScss)
                         .replace(new RegExp(path.sep.replace('\\', '\\\\'), 'g'), '/');
 
-                    // add component names 1 by 1 to this array as they're updated
-                    // to the new Sass syntax OR the entire component folder if all completed
-                    // i.e. // [ 'atoms', 'molecules', 'f-checkout' ]
-                    const updateComponentsAndTypes = [
-                        'atoms',
-                        'molecules',
-                        'organisms',
-                        'templates',
-                        'f-account-info',
-                        'f-checkout',
-                        'f-contact-preferences',
-                        'f-loyalty',
-                        'f-offers',
-                        'f-registration'
-                    ];
-                    const pathContainsUpdatedComponentOrType = updateComponentsAndTypes.some(a => absPathCommonScss.includes(a));
-
-                    if (!pathContainsUpdatedComponentOrType) {
-                        return `
-                        @use "sass:math";
-                        @import "${relPathCommonScss}";
-                        ${content}`;
-                    }
-
                     return `
                         @use "sass:math";
                         @use "${relPathCommonScss}";
@@ -74,8 +50,8 @@ module.exports = {
             .resourceQuery(/blockType=i18n/)
             .type('javascript/auto')
             .use('i18n')
-              .loader('@kazupon/vue-i18n-loader')
-              .end();
+            .loader('@kazupon/vue-i18n-loader')
+            .end();
 
         const svgRule = config.module.rule('svg');
 

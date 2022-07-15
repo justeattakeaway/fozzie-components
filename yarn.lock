@@ -2333,11 +2333,6 @@
   dependencies:
     "@justeat/f-services" "1.0.0"
 
-"@justeat/f-button@3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.0.2.tgz#9560d0caf56ae0801208ddd0c27cb50d670d54a8"
-  integrity sha512-qzZr6ZN01GTs6yFGOvIpwDcdXQKcH1SCF3CN7s9YTNiemWaQAoLo9sfv08fNuawBsxLwX4ZMLzjMY9dioC4vpg==
-
 "@justeat/f-button@3.x":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.4.1.tgz#1ddbc5c771f053db41308cb4797a3a611f3af393"
@@ -2352,13 +2347,6 @@
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-card-with-content/-/f-card-with-content-3.0.0.tgz#675115fb5e7d58724ce11e7eb3c5697439811541"
   integrity sha512-siwhAHWWBYkCuUfejvt+8VZhToDoicID4oDAOy5bCGgvMZ+buNWQsBkpob8WcLKOBA/UYb2wYMzAY9XS+//5Bw==
-
-"@justeat/f-card@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-3.0.0.tgz#6bc0840adcca276638778a080ea66d6f34309a78"
-  integrity sha512-X/XF1yo6whfSZ46i4kaz7VZlLe+U27SDOa8x+N3Vn5dakgYDRhdiIvgsDm8d1v6GX8eB4addlmlb/OkJ+9G42g==
-  dependencies:
-    "@justeat/f-services" "0.13.0"
 
 "@justeat/f-content-cards@8.0.0-beta.4":
   version "8.0.0-beta.4"
@@ -2660,13 +2648,6 @@
   version "3.8.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-3.8.0.tgz#1d4ff74158a8ca63ec5fea429e772f087c365547"
   integrity sha512-6dEkYZevqi+Do2AiC0EoseGAxoqLRWwz/VJ57owa2IYd1ubJexaRYR4H6tGCqP7Bsn7B/cQgRdbGXQubRMLeeQ==
-  dependencies:
-    babel-helper-vue-jsx-merge-props "2.0.3"
-
-"@justeat/f-vue-icons@3.9.0":
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-3.9.0.tgz#32f98bd90879e515e1af71af66b9e1d1995c1300"
-  integrity sha512-yoi/77e5xInaOMeLaRWe6v/nsshcwPIwqb7h3LmJtnFWQ/oTAqu97c6zsn11wi2g4QzLDe9mJzHzm4SJesRfJA==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
