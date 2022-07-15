@@ -4,7 +4,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v2.1.0-beta.1
+v1.12.0-beta.4
 ------------------------------
 *July 13, 2022*
 
@@ -13,7 +13,7 @@ v2.1.0-beta.1
 - Accessibility tests to be async.
 
 
-v2.0.0-beta.1
+v1.12.0-beta.3
 -----------------------------
 *July 12, 2022*
 
