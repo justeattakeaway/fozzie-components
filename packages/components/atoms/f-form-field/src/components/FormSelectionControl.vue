@@ -22,7 +22,7 @@
             :id="`label-${$attrs.id}`"
             data-test-id="selection-control-form-label"
             :label-for="$attrs.id"
-            :is-visually-required="attributes.required && isVisuallyRequired"
+            :show-required-indicator="showRequiredIndicator"
             :label-description="$attrs.labelDescription"
         >
             {{ labelText }}
@@ -73,6 +73,10 @@ export default {
     },
 
     computed: {
+        showRequiredIndicator () {
+            return this.attributes.required && this.isVisuallyRequired;
+        },
+
         testId () {
             const formFieldName = (this.attributes && this.attributes.name ? this.attributes.name : null);
 
