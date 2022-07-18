@@ -20,7 +20,7 @@
         <slot />
 
         <span
-            v-if="isVisuallyRequired"
+            v-if="showRequiredIndicator"
             aria-hidden="true">*</span>
 
         <span
@@ -60,9 +60,9 @@ export default {
             type: String,
             default: null
         },
-        isVisuallyRequired: {
+        showRequiredIndicator: {
             type: Boolean,
-            default: true
+            default: false
         }
     },
     computed: {
