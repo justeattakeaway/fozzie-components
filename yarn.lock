@@ -2343,10 +2343,22 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-4.0.0.tgz#b6fa2d2f9b6313950f3737224b57533d0e0d7458"
   integrity sha512-ofyIYSVHNo0uyc8Rq9+mqyvPZVyN0JvwK66R473m3jHZbYK74HNzXekrAXMT2WYwEnCM58LumkpQdffKi46AXA==
 
+"@justeat/f-button@4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-4.2.0.tgz#c4efd966cfae4ac29c37ee2d5dc20849c08e2272"
+  integrity sha512-t/ezG/csuwVbryDvwGjLnk1/vAMQcmB0JzhF3NDMWZn0Sb9uuzvx0Xw0SlFdGWTwphOdxx+dmeLT4XBIVsow9Q==
+
 "@justeat/f-card-with-content@3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-card-with-content/-/f-card-with-content-3.0.0.tgz#675115fb5e7d58724ce11e7eb3c5697439811541"
   integrity sha512-siwhAHWWBYkCuUfejvt+8VZhToDoicID4oDAOy5bCGgvMZ+buNWQsBkpob8WcLKOBA/UYb2wYMzAY9XS+//5Bw==
+
+"@justeat/f-card@4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-card/-/f-card-4.1.0.tgz#728cbaf8e91c096adda8bac4d65eb920684ff052"
+  integrity sha512-lpiqmpQbc260YJN4jF2krmZFhTt7KLXEoEO4m3CXbUPsuXVi5WM+w/x3DDlDXJqPrAHmfOatn6T8URYEl/eeXw==
+  dependencies:
+    "@justeat/f-services" "0.13.0"
 
 "@justeat/f-content-cards@8.0.0-beta.4":
   version "8.0.0-beta.4"
@@ -2375,6 +2387,13 @@
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-1.2.1.tgz#a83806fe35e51a9c689e9b1ad6f3569a9ee26149"
   integrity sha512-gc/TryS9UO+W6shW8dj/pm5B0UH54FsCwRPMn5RaJIvwn/pWIEaKW5dvpOm+JVnVO38kK6Sm6hTnjSnLUXpKCw==
+  dependencies:
+    "@justeattakeaway/pie-icons-vue" "1.0.0"
+
+"@justeat/f-error-message@2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-error-message/-/f-error-message-2.1.0.tgz#abd705be6129cd3a8113818c1261a240d3f4a371"
+  integrity sha512-E+oltnCiDx3JSSUo47n9XTSb6EyTOrf+obNojhr0V4Dn1PMAKDc+If69mvjms6CAxQ3LW7CvSHnkwKy+08jZtg==
   dependencies:
     "@justeattakeaway/pie-icons-vue" "1.0.0"
 
@@ -2442,6 +2461,13 @@
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-link/-/f-link-3.1.1.tgz#d1ce567c32f4080914ddb5ad63846281544956af"
   integrity sha512-a+Q9AEqWu0Iwy6P2+6ezDMlgSB6/i8WbhVLVzz9cCZieC5wX+LyZ14iSgXrBo0m8qUoRoFFXHsCXTiyMY6YhGw==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
+
+"@justeat/f-link@3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-link/-/f-link-3.2.0.tgz#070169db0f2d003cdb07de7414009e33861d1370"
+  integrity sha512-JIHJs73DIqwvbxCI9X6Kr9u3NGnXKestV3FAjV9Mk60o+KQeoI/DBJcBfV1/8hKQLv071gH0U3+w6uDgMcZjiw==
   dependencies:
     "@justeat/f-services" "1.7.0"
 
