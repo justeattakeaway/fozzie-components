@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v6.2.0
+------------------------------
+*July 18, 2022*
+
+### Changed
+- Rename (internal) form label prop to prevent fields appearing as required by default.
+
+
 v6.1.0
 ------------------------------
 *July 15, 2022*
