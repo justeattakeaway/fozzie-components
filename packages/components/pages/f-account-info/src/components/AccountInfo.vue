@@ -22,6 +22,7 @@
                     name="account-info-consumer-firstName"
                     autocomplete="on"
                     maxlength="50"
+                    required
                     :label-text="$t('consumer.firstNameLabel')"
                     :placeholder="$t('consumer.firstNamePlaceholder')"
                     @blur="onBlur('firstName')"
@@ -47,6 +48,7 @@
                     name="account-info-consumer-lastName"
                     autocomplete="on"
                     maxlength="50"
+                    required
                     :label-text="$t('consumer.lastNameLabel')"
                     :placeholder="$t('consumer.lastNamePlaceholder')"
                     @blur="onBlur('lastName')"
@@ -72,6 +74,7 @@
                     name="account-info-consumer-phoneNumber"
                     autocomplete="on"
                     maxlength="16"
+                    required
                     :label-text="$t('consumer.phoneNumberLabel')"
                     :placeholder="$t('consumer.phoneNumberPlaceholder')"
                     @blur="onBlur('phoneNumber')"
@@ -102,6 +105,7 @@
                     name="account-info-consumer-line1"
                     autocomplete="on"
                     maxlength="50"
+                    required
                     :label-text="$t('consumer.addressLabel')"
                     :placeholder="$t('consumer.line1Placeholder')"
                     @blur="onBlur('line1')"
@@ -140,6 +144,7 @@
                     name="account-info-consumer-locality"
                     autocomplete="on"
                     maxlength="50"
+                    required
                     :label-text="$t('consumer.localityLabel')"
                     :placeholder="$t('consumer.localityPlaceholder')"
                     @blur="onBlur('locality')"
@@ -160,6 +165,7 @@
                     name="account-info-consumer-postcode"
                     autocomplete="on"
                     maxlength="50"
+                    required
                     :label-text="$t('consumer.postcodeLabel')"
                     :placeholder="$t('consumer.postcodePlaceholder')"
                     @blur="onBlur('postcode')"
