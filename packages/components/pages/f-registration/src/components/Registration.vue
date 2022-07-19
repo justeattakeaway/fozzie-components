@@ -25,6 +25,7 @@
             </p>
             <form
                 method="post"
+                novalidate
                 :class="$style['c-registration-form']"
                 @click="formStart"
                 @focus="formStart"

@@ -10,7 +10,7 @@ v3.2.0
 
 ### Added
 - Peer dependencies for fozzie components.
-- `required` attribute to required fields.
+- `required` attribute to required fields but disable default HTML5 form validation.
 
 
 v3.1.0

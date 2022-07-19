@@ -16,6 +16,7 @@
 
             <form
                 method="post"
+                novalidate
                 @submit.prevent="onFormSubmit">
                 <form-field
                     :value="consumer.firstName"
