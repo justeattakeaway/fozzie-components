@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.2.0
  ------------------------------
- *July 15, 2022*
+ *July 19, 2022*
 
  ### Added
  - Node 16 support.

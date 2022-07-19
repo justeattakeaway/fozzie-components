@@ -1,5 +1,5 @@
-@import "@justeat/fozzie/src/scss/fozzie";
-@include reset();
-@include typography();
-@include links();
-@include trumps-utilities();
+@use "@justeat/fozzie/src/scss/fozzie" as f;
+@include f.reset();
+@include f.typography();
+@include f.links();
+@include f.trumps-utilities();
