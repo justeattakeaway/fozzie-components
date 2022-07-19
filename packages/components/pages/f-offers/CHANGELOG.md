@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.12.0-beta.5
 -----------------------------
-*July 15, 2022*
+*July 19, 2022*
 
 ### Changed
 - Move fozzie components to peer dependencies.

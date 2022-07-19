@@ -6,10 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.2.0
 -----------------------------
-*July 15, 2022*
+*July 19, 2022*
 
 ### Added
 - Peer dependencies for all fozzie components.
+- `required` attribute to required fields.
 
 
 v1.1.0
