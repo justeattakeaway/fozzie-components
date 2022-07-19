@@ -43,11 +43,12 @@
                 <form-field
                     ref="firstName"
                     v-model="firstName"
-                    aria-describedby="error-message-firstname"
-                    :aria-invalid="!!describeFirstnameErrorMessage"
                     name="firstName"
+                    required
                     :label-text="copy.labels.firstName"
                     input-type="text"
+                    aria-describedby="error-message-firstname"
+                    :aria-invalid="!!describeFirstnameErrorMessage"
                     @blur="formFieldBlur('firstName')">
                     <template
                         v-if="describeFirstnameErrorMessage"
@@ -64,11 +65,12 @@
                     ref="lastName"
                     v-model="lastName"
                     name="lastName"
-                    data-test-id="input-last-name"
-                    :label-text="copy.labels.lastName"
                     input-type="text"
+                    :label-text="copy.labels.lastName"
+                    required
                     aria-describedby="error-message-lastname"
                     :aria-invalid="!!describeLastnameErrorMessage"
+                    data-test-id="input-last-name"
                     @blur="formFieldBlur('lastName')">
                     <template
                         v-if="describeLastnameErrorMessage"
@@ -85,10 +87,11 @@
                     ref="email"
                     v-model="email"
                     name="email"
+                    input-type="email"
+                    :label-text="copy.labels.email"
+                    required
                     aria-describedby="error-message-email"
                     :aria-invalid="!!describeEmailErrorMessage"
-                    :label-text="copy.labels.email"
-                    input-type="email"
                     @blur="formFieldBlur('email')">
                     <template
                         v-if="describeEmailErrorMessage"
@@ -104,11 +107,12 @@
                 <form-field
                     ref="password"
                     v-model="password"
+                    name="password"
+                    input-type="password"
+                    :label-text="copy.labels.password"
+                    required
                     aria-describedby="error-message-password"
                     :aria-invalid="!!describePasswordErrorMessage"
-                    name="password"
-                    :label-text="copy.labels.password"
-                    input-type="password"
                     @blur="formFieldBlur('password')">
                     <template
                         v-if="describePasswordErrorMessage"
