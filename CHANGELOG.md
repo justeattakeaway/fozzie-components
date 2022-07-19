@@ -8,6 +8,7 @@ v7.17.0
 *July 19, 2022*
 ### Changed
 - Fixed Storybook deploy
+- set `--concurrency=1` for unit tests to prevent memory issues in CI
 
 
 v7.16.0
