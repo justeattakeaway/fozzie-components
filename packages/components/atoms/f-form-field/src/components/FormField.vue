@@ -15,7 +15,7 @@
                 v-if="shouldShowLabel"
                 :label-for="uniqueId"
                 :is-disabled="isDisabled"
-                :is-visually-required="showVisuallyRequiredIndicator"
+                :show-required-indicator="showRequiredIndicator"
                 v-bind="$props"
                 :data-test-id="testId.label">
                 {{ labelText }}
@@ -343,7 +343,7 @@ export default {
             return this.shouldShowLabelText && !this.isSelectionControl;
         },
 
-        showVisuallyRequiredIndicator () {
+        showRequiredIndicator () {
             return this.$attrs.required && this.isVisuallyRequired;
         }
     },
