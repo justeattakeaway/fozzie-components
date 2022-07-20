@@ -6,8 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.1.0
 ------------------------------
-*July 19, 2022*
+*July 20, 2022*
 
 ### Added
-- Add your change under the following headings: `Added`/`Changed`/`Deprecated`/`Removed`/`Fixed`/`Security`
-!!! Please, add your component to `.circleci/config.yml` under `save_cache_dist_directories` manually after the component is generated.
+- Initial Yeoman Generated Files

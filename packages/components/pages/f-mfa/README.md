@@ -4,7 +4,7 @@
 
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
-Multi-factor Authenticator Input Form
+Multi-factor Authenticator - Input Form
 
 </div>
 
@@ -16,6 +16,7 @@ Multi-factor Authenticator Input Form
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-mfa/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-mfa?targetFile=package.json)
 
 ---
+This form is for accepting a MFA token that has been sent to a user, then submitting it to be verified, if successful then the user is redirected to where they came from.
 
 ## Usage
 
@@ -69,15 +70,9 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
-| Prop  | Type  | Default | Description |
-| ----- | ----- | ------- | ----------- |
-
-### Events
-
-The events that can be subscribed to are as follows (if any):
-
-| Event | Description |
-| ----- | ----------- |
+| Prop  | Type  |  Required | Description |
+| ----- | ----- |  ------- | ----------- |
+| smartGatewayBaseUrl | string | true | the smartgateway host |
 
 ## Development
 
@@ -114,14 +109,7 @@ cd ./fozzie-components
 
 yarn storybook:build
 yarn storybook:serve-static
-```
 
 yarn test-component:chrome
-```
-### Accessibility tests
-```bash
 yarn test-a11y:chrome
 ```
-## Documentation to be completed once module is in stable state.
-
-
