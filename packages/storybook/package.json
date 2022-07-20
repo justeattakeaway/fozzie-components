@@ -1,7 +1,7 @@
 {
   "name": "@justeat/storybook",
   "private":true,
-  "version": "0.52.34",
+  "version": "0.52.35",
   "scripts": {
     "storybook:deploy": "git push origin :gh-pages && git subtree push --prefix storybook-static origin gh-pages",
     "storybook:build": "vue-cli-service storybook:build -s public -c config/storybook",
