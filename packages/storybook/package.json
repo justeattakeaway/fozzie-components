@@ -1,9 +1,9 @@
 {
   "name": "@justeat/storybook",
-  "private":true,
+  "private": true,
   "version": "0.52.35",
   "scripts": {
-    "storybook:deploy": "git push origin :gh-pages && git subtree push --prefix storybook-static origin gh-pages",
+    "storybook:deploy": "gh-pages -d storybook-static",
     "storybook:build": "vue-cli-service storybook:build -s public -c config/storybook",
     "storybook:serve": "vue-cli-service storybook:serve -s public -p 8080 -c config/storybook",
     "storybook:serve-static": "http-server ./storybook-static"
@@ -24,6 +24,7 @@
     "@storybook/theming": "6.4.9",
     "@storybook/vue": "6.4.9",
     "cookie-universal": "2.1.4",
+    "gh-pages": "4.0.0",
     "npm-run-all": "4.1.5",
     "path": "0.12.7",
     "postcss-assets": "5.0.0",
