@@ -3,6 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.52.35
+------------------------------
+*July 20, 2022*
+### Changed
+- `storybook:deploy` to use native git push
+
+### Removed
+- `@storybook/storybook-deployer` dependency
+
+v0.52.34
+------------------------------
+*July 19, 2022*
+### Changed
+- Fixed Storybook deploy
+
 
 v0.52.33
 ------------------------------
