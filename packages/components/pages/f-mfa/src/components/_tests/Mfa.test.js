@@ -1,5 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
-import VMfa from '../Mfa.vue';
+import sut from '../Mfa.vue';
 
 describe('Mfa', () => {
     const baseUrl = 'https://api.test.co.uk/';
@@ -12,7 +12,7 @@ describe('Mfa', () => {
         };
 
         // Act
-        wrapper = shallowMount(VMfa, { propsData });
+        wrapper = shallowMount(sut, { propsData });
     });
 
     it('should be defined', () => {
