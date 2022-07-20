@@ -1,9 +1,9 @@
 {
   "name": "@justeat/storybook",
   "private":true,
-  "version": "0.52.33",
+  "version": "0.52.34",
   "scripts": {
-    "storybook:deploy": "storybook-to-ghpages --script storybook:build",
+    "storybook:deploy": "storybook-to-ghpages --existing-output-dir ./storybook-static",
     "storybook:build": "vue-cli-service storybook:build -s public -c config/storybook",
     "storybook:serve": "vue-cli-service storybook:serve -s public -p 8080 -c config/storybook",
     "storybook:serve-static": "http-server ./storybook-static"
