@@ -45,7 +45,7 @@ export default {
     width: 80vw;
     margin: auto;
     border: 1px solid red;
-    font-family: $font-family-base;
+    font-family: f.$font-family-base;
     @include f.font-size(heading-m);
 }
 </style>
