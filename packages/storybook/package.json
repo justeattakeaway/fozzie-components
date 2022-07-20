@@ -1,9 +1,9 @@
 {
   "name": "@justeat/storybook",
   "private":true,
-  "version": "0.52.34",
+  "version": "0.52.35",
   "scripts": {
-    "storybook:deploy": "storybook-to-ghpages --existing-output-dir ./storybook-static",
+    "storybook:deploy": "git push origin :gh-pages && git subtree push --prefix storybook-static origin gh-pages",
     "storybook:build": "vue-cli-service storybook:build -s public -c config/storybook",
     "storybook:serve": "vue-cli-service storybook:serve -s public -p 8080 -c config/storybook",
     "storybook:serve-static": "http-server ./storybook-static"
@@ -21,7 +21,6 @@
     "@storybook/addon-essentials": "6.4.9",
     "@storybook/addon-knobs": "6.4.0",
     "@storybook/addon-links": "6.4.9",
-    "@storybook/storybook-deployer": "2.8.6",
     "@storybook/theming": "6.4.9",
     "@storybook/vue": "6.4.9",
     "cookie-universal": "2.1.4",
