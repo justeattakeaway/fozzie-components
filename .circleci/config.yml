@@ -373,6 +373,28 @@ jobs:
       - slack_notify_fail
       - slack_notify_success
 
+  deploy-storybook-2:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+         name: Deploy Storybook
+         command: yarn storybook:deploy-2
+      - slack_notify_fail
+      - slack_notify_success
+
+  deploy-storybook-3:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+         name: Deploy Storybook
+         command: yarn storybook:deploy-3
+      - slack_notify_fail
+      - slack_notify_success
+
   publish-to-npm:
     executor: node
     steps:
@@ -416,9 +438,16 @@ workflows:
       - deploy-storybook:
           name: deploy-storybook
           context: web-core
-          filters:
-            branches:
-              only: master
+          requires:
+            - build
+      - deploy-storybook-2:
+          name: deploy-storybook-2
+          context: web-core
+          requires:
+            - build
+      - deploy-storybook-3:
+          name: deploy-storybook-3
+          context: web-core
           requires:
             - build
       - bundlewatch:

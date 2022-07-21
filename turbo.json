@@ -153,6 +153,14 @@
       "cache": false,
       "dependsOn": []
     },
+    "storybook:deploy-2": {
+      "cache": false,
+      "dependsOn": []
+    },
+    "storybook:deploy-3": {
+      "cache": false,
+      "dependsOn": []
+    },
     "lint": {
       "cache": false,
       "dependsOn": []
