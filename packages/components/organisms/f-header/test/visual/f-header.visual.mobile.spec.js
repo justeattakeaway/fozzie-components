@@ -43,8 +43,7 @@ describe('Shared - f-header component tests', () => {
     tests = [
         { tenant: 'en-GB', theme: 'white' },
         { tenant: 'en-GB', theme: 'highlight' },
-        { tenant: 'en-GB', theme: 'transparent' },
-        { tenant: 'en-GB', theme: 'disappearingWhite' }
+        { tenant: 'en-GB', theme: 'transparent' }
     ];
 
     tests.forEach(({ tenant, theme }) => {

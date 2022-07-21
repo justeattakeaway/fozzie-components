@@ -2,9 +2,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v10.3.0
+-----------------------------
+*July 21, 2022*
+
+### Removed
+- "disappearingWhite" theme
+
+
 v10.2.0
 -----------------------------
-*July 1, 2022*
+*July 13, 2022*
 
 ### Added
 - Theme "disappearingWhite" to support header on Search

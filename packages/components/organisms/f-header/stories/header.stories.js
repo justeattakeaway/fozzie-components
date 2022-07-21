@@ -66,7 +66,7 @@ HeaderComponent.argTypes = {
     headerBackgroundTheme: {
         control: { type: 'select' },
         description: 'Choose a theme for the header',
-        options: ['white', 'highlight', 'transparent', 'disappearingWhite']
+        options: ['white', 'highlight', 'transparent']
     },
 
     showLoginInfo: {
