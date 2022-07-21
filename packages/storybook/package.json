@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.52.35",
   "scripts": {
-    "storybook:deploy": "gh-pages -d storybook-static",
+    "storybook:deploy": "cross-env-shell NODE_DEBUG=gh-pages gh-pages -d ./storybook-static",
     "storybook:build": "vue-cli-service storybook:build -s public -c config/storybook",
     "storybook:serve": "vue-cli-service storybook:serve -s public -p 8080 -c config/storybook",
     "storybook:serve-static": "http-server ./storybook-static"
