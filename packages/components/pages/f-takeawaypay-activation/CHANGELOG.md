@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.1.0
+------------------------------
+*July 15, 2021*
+
+### Added
+- Peer dependencies for fozzie components.
+
+
 v3.0.0
 ------------------------------
 *July 14, 2022*
@@ -26,7 +34,7 @@ v2.14.0
 
 v2.13.0
 ------------------------------
-*June 08, 2022*
+*June 8, 2022*
 
 ### Added
 - Added IE/ES/IT localization
@@ -34,7 +42,7 @@ v2.13.0
 
 v2.12.0
 ------------------------------
-*May 03, 2022*
+*May 3, 2022*
 
 ### Changed
 - Improved accessibility by adding <main> tag
@@ -43,7 +51,7 @@ v2.12.0
 
 v2.11.0
 ------------------------------
-*April 04, 2022*
+*April 4, 2022*
 
 ### Changed
 - Added NZ localization
@@ -117,7 +125,7 @@ v2.4.0
 
 v2.3.0
 ------------------------------
-*October 08, 2021*
+*October 8, 2021*
 
 ### Changed
 - Takeaway Pay => Just Eat Pay renaming
@@ -125,14 +133,14 @@ v2.3.0
 
 v2.2.1
 ------------------------------
-*October 06, 2021*
+*October 6, 2021*
 
 Re-publish to clean up the old styles from the compiled package.
 
 
 v2.2.0
 ------------------------------
-*October 06, 2021*
+*October 6, 2021*
 
 ### Changed
 - Reverted Takeaway Pay => Just Eat Pay renaming
@@ -140,7 +148,7 @@ v2.2.0
 
 v2.1.0
 ------------------------------
-*October 05, 2021*
+*October 5, 2021*
 
 ### Added
 - Visual regression tests
@@ -217,6 +225,7 @@ v0.8.0
 ### Changed
 - Cleanup styles
 
+
 v0.7.0
 ------------------------------
 *August 9, 2021*
@@ -228,15 +237,10 @@ v0.7.0
 
 v0.6.0
 ------------------------------
-*August 09, 2021*
+*August 9, 2021*
 
 ### Added
 - Added logging around API requests
-
-
-Latest (to be added to next release)
-------------------------------
-*July 26, 2021*
 
 ### Changed
 - Updated version of `f-button`.

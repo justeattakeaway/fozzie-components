@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.2.0
+-----------------------------
+*July 19, 2022*
+
+### Added
+- Peer dependencies for all fozzie components.
+- `required` attribute to required fields but disable default HTML5 form validation.
+
+
 v1.1.0
 ------------------------------
 *July 13, 2022*
@@ -15,17 +24,10 @@ v1.1.0
 
 v1.0.0
 -----------------------------
-*July 06, 2022*
+*July 6, 2022*
 
 ### Changed
-- **breaking changes** Update to `@use` and `@forward` SASS syntax
-
-
-Latest (add to next release)
-------------------------------
-*June 23, 2021*
-
-### Changed
+- **Breaking change:** Update to `@use` and `@forward` SASS syntax.
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
 
