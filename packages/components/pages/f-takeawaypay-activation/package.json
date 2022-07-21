@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-takeawaypay-activation",
   "description": "Fozzie TakeawayPay Activation - Handles Takeaway Pay activation for users",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "main": "dist/f-takeawaypay-activation.umd.min.js",
   "maxBundleSize": "40kB",
   "files": [
@@ -54,7 +54,9 @@
     "axios": "0.21.2"
   },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.2.0"
+    "@justeat/browserslist-config-fozzie": ">=1.2.0",
+    "@justeat/f-button": "4.x",
+    "@justeat/f-card": "4.x"
   },
   "devDependencies": {
     "@justeat/f-globalisation": "1.x",

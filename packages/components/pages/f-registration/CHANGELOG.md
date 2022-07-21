@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.2.0
+------------------------------
+*July 19, 2021*
+
+### Added
+- Peer dependencies for fozzie components.
+- `required` attribute to required fields but disable default HTML5 form validation.
+
+
 v3.1.0
 ------------------------------
 *July 13, 2022*
@@ -29,6 +39,7 @@ v2.4.2
 
 ### Added
 - Increase password minimum length from 4 to 10 characters.
+
 
 v2.4.1
 ------------------------------

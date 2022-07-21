@@ -28,11 +28,16 @@ describe('Loyalty', () => {
             [ACTION_INITIALISE_LOYALTY]: jest.fn()
         };
 
+        const getters = {
+            isAuthenticated: () => false
+        };
+
         store = new Vuex.Store({
             modules: {
                 [VUEX_MODULE_NAMESPACE_LOYALTY]: {
                     namespaced: true,
-                    actions
+                    actions,
+                    getters
                 }
             }
         });
