@@ -2,9 +2,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v10.2.1
+-----------------------------
+*July 13, 2022*
+
+### Changed
+- Background of the "whiteSeamless" theme
+- Renamed "disappearingWhite" into "whiteSeamless"
+
+
 v10.2.0
 -----------------------------
-*July 1, 2022*
+*July 13, 2022*
 
 ### Added
 - Theme "disappearingWhite" to support header on Search
