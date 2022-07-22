@@ -278,7 +278,6 @@ html:global(.is-navInView) {
 
     .c-header--disappearingWhite {
         @include f.media('>mid') {
-            background-color: transparent;
             box-shadow: none;
         }
     }
