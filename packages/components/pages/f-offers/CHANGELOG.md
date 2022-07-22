@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.12.0-beta.5
+-----------------------------
+*July 19, 2022*
+
+### Changed
+- Move fozzie components to peer dependencies.
+
+
 v1.12.0-beta.4
 ------------------------------
 *July 13, 2022*
@@ -18,7 +26,7 @@ v1.12.0-beta.3
 *July 12, 2022*
 
 ### Changed
-- **breaking changes** Update to `@use` and `@forward` SASS syntax
+- **Breaking changes:** Update to `@use` and `@forward` SASS syntax
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
 
@@ -49,7 +57,7 @@ v1.11.0
 
 v1.10.0
 ------------------------------
-*April 07, 2022*
+*April 7, 2022*
 
 ### Changed
 - `f-searchbox` to stop alerts when `ZERO_RESULTS` appear.
@@ -175,7 +183,7 @@ v0.8.0
 
 v0.7.0
 ------------------------------
-*August 02, 2021*
+*August 2, 2021*
 
 ### Added
 - Unauthenticated state component

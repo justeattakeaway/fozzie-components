@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.2.0
+-----------------------------
+*July 19, 2022*
+
+### Added
+- Peer dependencies for all fozzie components.
+
+
 v4.1.0
 ------------------------------
 *July 13, 2022*
@@ -15,17 +23,10 @@ v4.1.0
 
 v4.0.0
 -----------------------------
-*July 07, 2022*
+*July 7, 2022*
 
 ### Changed
-- **breaking changes** Update to `@use` and `@forward` SASS syntax
-
-
-Latest (add to next release)
-------------------------------
-*June 23, 2021*
-
-### Changed
+- **Breaking change:** Update to `@use` and `@forward` SASS syntax.
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
 
@@ -154,11 +155,13 @@ v3.22.3
 ### Added
 - GTM event fired when GCO successful.
 
+
 v3.22.2
 ------------------------------
 *March 2, 2022*
 ### Changed
 - Converted knobs to controls in `checkout.stories.js`
+
 
 v3.22.1
 ------------------------------
@@ -312,6 +315,7 @@ v3.15.0
 
 ### Added
 - Refresh of note configuration if note isn't accepted
+
 
 v3.14.0
 ------------------------------
@@ -1353,6 +1357,7 @@ v0.119.0
 - Ability to handle orders with the service type `dinein`
 - Table number/name input field
 
+
 v0.118.1
 ------------------------------
 *May 24, 2021*
@@ -1469,6 +1474,7 @@ v0.107.0
 
 ### Fixed
 - `Resturant` to `Restaurant` typo in `en-GB.js` copy text.
+
 
 v0.104.0
 ------------------------------
