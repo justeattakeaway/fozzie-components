@@ -7,7 +7,8 @@ v10.2.1
 *July 13, 2022*
 
 ### Changed
-- Background of the "disappearingWhite" theme
+- Background of the "whiteSeamless" theme
+- Renamed "disappearingWhite" into "whiteSeamless"
 
 
 v10.2.0

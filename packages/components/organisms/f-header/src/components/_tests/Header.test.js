@@ -6,7 +6,7 @@ const $style = {
     'c-header-container': 'c-header-container',
     'c-header--transparent': 'c-header--transparent',
     'c-header--gradient': 'c-header--gradient',
-    'c-header--disappearingWhite': 'c-header--disappearingWhite'
+    'c-header--whiteSeamless': 'c-header--whiteSeamless'
 };
 
 describe('Header', () => {
