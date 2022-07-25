@@ -7,7 +7,8 @@
             data-test-id="f-mfa-verification-card"
             has-inner-spacing-large
             card-size-custom="medium"
-            has-outline>
+            has-outline
+            :is-page-content-wrapper=true>
             <bag-sad-bg-icon
                 :class="$style['c-mfa-icon']" />
             <h2>

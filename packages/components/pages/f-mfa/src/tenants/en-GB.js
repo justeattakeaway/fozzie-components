@@ -4,7 +4,7 @@ const messages = {
     verificationPage: {
         subTitle: "We've emailed your login code",
         instructionsPrimaryText: "We've sent a verification code to <b>{email}</b> to help keep your account secure. Enter it below to log in.",
-        instructionsSecondaryText: 'Your code will be valid for 10 minutes.',
+        instructionsSecondaryText: 'Your code will be valid for 30 minutes.',
         formField: {
             labelText: 'Your verification code',
             placeholderText: 'Enter code',
