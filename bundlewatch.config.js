@@ -5,14 +5,14 @@ const { execSync } = require('child_process');
 
 const getMaxSizeForPackage = packageLocation => {
     // eslint-disable-next-line import/no-dynamic-require,global-require
-    const { maxBundleSize } = require(`${packageLocation}/package.json`);
+    const { maxBundleSize } = require(`./${packageLocation}/package.json`);
 
     return maxBundleSize;
 };
 
 const getChangedPackageLocations = () => {
     let outputPackages;
-    let command = process.env.CIRCLE_BRANCH === 'master' || process.env.RUN_ALL === 'true' ? "npx lerna ls --json" : "npx lerna ls --since origin/master --json" 
+    let command = process.env.CIRCLE_BRANCH === 'master' || process.env.RUN_ALL === 'true' ? "npx turbo run build --dry=json" : "npx turbo run build --filter=[origin/master] --dry=json" 
 
     try {
         outputPackages = execSync(command);
@@ -23,7 +23,7 @@ const getChangedPackageLocations = () => {
 
     const packagesArray = JSON.parse(outputPackages.toString());
 
-    const packageLocations = packagesArray.map(p => p.location);
+    const packageLocations = packagesArray.tasks.map(p => p.directory);
 
     return packageLocations.filter(packageLocation => getMaxSizeForPackage(packageLocation) !== undefined);
 };
@@ -31,7 +31,7 @@ const getChangedPackageLocations = () => {
 const packagesLocations = getChangedPackageLocations();
 
 const files = packagesLocations.map(packageLocation => ({
-    path: `${packageLocation}/dist/*+(.min|.min.umd|.es).js`,
+    path: `./${packageLocation}/dist/*+(.min|.min.umd|.es).js`,
     maxSize: getMaxSizeForPackage(packageLocation)
 }));
 
