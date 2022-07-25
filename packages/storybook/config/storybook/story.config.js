@@ -4,7 +4,7 @@ let outputChangedComponentPackages;
 
 const getChangedPackageStories = () => {
     try {
-        outputChangedComponentPackages = execSync('npx turbo run build --filter=[origin/master] --dry=json', {
+        outputChangedComponentPackages = execSync('npx turbo run build --filter=[origin/master] --dry=json --filter=!@justeat/f-cookie-banner-static', {
             cwd: '../..'
         });
     } catch (error) {
@@ -21,6 +21,8 @@ const getChangedPackageStories = () => {
 
     changedComponentPackages.forEach(pkg => storyPaths.push(`../../../../${pkg.directory}/stories/*.stories.@(js|mdx)`));
 
+
+    console.log('pathssss', storyPaths);
     return storyPaths;
 };
 
