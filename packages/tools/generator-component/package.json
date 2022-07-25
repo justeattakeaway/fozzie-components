@@ -1,7 +1,7 @@
 {
   "name": "@justeat/generator-component",
   "description": "Generator Component – A generator for Fozzie components",
-  "version": "2.13.0",
+  "version": "2.14.0",
   "files": [
     "generators"
   ],
@@ -21,7 +21,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^12 || ^14"
+    "node": "^12 || ^14 || ^16"
   },
   "keywords": [
     "fozzie",
