@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-template-subnav",
   "description": "Fozzie Template Sub Nav - SPA template with breadcrumb, lefthand navigation and centre slot",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "main": "dist/f-template-subnav.umd.min.js",
   "maxBundleSize": "20kB",
   "files": [
@@ -24,7 +24,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^12 || ^14"
+    "node": "^12 || ^14 || ^16"
   },
   "keywords": [
     "fozzie"
