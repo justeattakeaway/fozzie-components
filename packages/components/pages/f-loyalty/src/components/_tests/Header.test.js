@@ -1,5 +1,5 @@
 import Vuex from 'vuex';
-import { createLocalVue, mount } from '@vue/test-utils';
+import { createLocalVue, mount, RouterLinkStub } from '@vue/test-utils';
 import MediaElement from '@justeat/f-media-element';
 import { VueI18n } from '@justeat/f-globalisation/src';
 import { VUEX_MODULE_NAMESPACE_LOYALTY } from '../../store/types';
@@ -46,6 +46,9 @@ describe('Header.vue', () => {
             localVue,
             mocks: {
                 $t: t => i18nMocker(t, mockLocale)
+            },
+            stubs: {
+                RouterLink: RouterLinkStub
             }
         });
     });

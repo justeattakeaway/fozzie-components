@@ -3,12 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+
+v7.18.0
+------------------------------
+*July 25, 2022*
+
+### Removed
+- `lerna` dependency.
+
+
 v7.17.0
 ------------------------------
 *July 19, 2022*
 
-### Removed
-- `lerna` dependency.
+### Changed
+- Fixed Storybook deploy
+- set `--concurrency=1` for unit tests to prevent memory issues in CI
+
 
 v7.16.0
 ------------------------------

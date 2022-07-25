@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.2.0
+-----------------------------
+*July 19, 2022*
+
+### Changed
+- Move fozzie components to peer dependencies.
+
+
 v2.1.0
 ------------------------------
 *July 13, 2022*
@@ -15,12 +23,10 @@ v2.1.0
 
 v2.0.0
 -----------------------------
-*July 08, 2022*
+*July 8, 2022*
 
 ### Changed
-- **breaking changes** Update to `@use` and `@forward` SASS syntax
-
-### Changed
+- **Breaking changes:** Update to `@use` and `@forward` SASS syntax.
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
 
@@ -43,7 +49,7 @@ v1.7.3
 
 v1.7.2
 ------------------------------
-*April 05, 2022*
+*April 5, 2022*
 
 ### Added
 - Added in new logging around jwt decoding for error catching
@@ -75,7 +81,7 @@ v1.6.0
 
 v1.5.0
 ------------------------------
-*February 08, 2022*
+*February 8, 2022*
 
 ### Changed
 - updated tabs to animate
@@ -141,7 +147,7 @@ v1.1.0
 
 v0.9.0
 ------------------------------
-*October 07, 2021*
+*October 7, 2021*
 
 ### Added
 - Terms component
@@ -150,7 +156,7 @@ v0.9.0
 
 v0.8.0
 ------------------------------
-*October 07, 2021*
+*October 7, 2021*
 
 ### Added
 - No card's error state
