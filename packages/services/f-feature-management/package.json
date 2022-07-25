@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-feature-management",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "description": "Service for querying feature values provided by Feature Management",
   "main": "dist/f-feature-management.umd.js",
   "module": "dist/f-feature-management.es.js",
@@ -24,7 +24,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^12 || ^14"
+    "node": "^12 || ^14 || ^16"
   },
   "keywords": [
     "fozzie"
