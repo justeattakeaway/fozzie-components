@@ -21,8 +21,6 @@ const getChangedPackageStories = () => {
 
     changedComponentPackages.forEach(pkg => storyPaths.push(`../../../../${pkg.directory}/stories/*.stories.@(js|mdx)`));
 
-
-    console.log('pathssss', storyPaths);
     return storyPaths;
 };
 
