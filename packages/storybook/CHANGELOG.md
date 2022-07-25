@@ -11,6 +11,13 @@ v0.54.0
 - Node 16 support.
 
 
+v0.53.1
+------------------------------
+*July 25, 2022*
+
+### Fixed
+- `f-cookie-banner-static` from being picked up by Storybook
+
 v0.53.0
 ------------------------------
 *July 25, 2022*
