@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-card-with-content",
   "description": "Fozzie Card With Content - A page content card which can contain an image, heading, text, and (primary and secondary) buttons",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "main": "dist/f-card-with-content.umd.min.js",
   "maxBundleSize": "15kB",
   "files": [
@@ -24,7 +24,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^12 || ^14"
+    "node": "^12 || ^14 || ^16"
   },
   "keywords": [
     "fozzie"
