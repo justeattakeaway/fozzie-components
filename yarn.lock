@@ -2306,11 +2306,6 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.10.0.tgz#59738afbb1bec54388270521ae8f6de0412d74fb"
   integrity sha512-Sz6A8xdkIdpA2jBfx4XJqCNIJt94FraYfF56wxEs0i9pJLBmgun5As2HPaPpg6sWrbmXA//b2L9bN7uNsZLdLw==
 
-"@justeat/f-mega-modal@3.x":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.2.tgz#81f2b5ca8519a6eca93f5643857df2a9c924666d"
-  integrity sha512-3M+wpcjOIIw3hKbtZqyRl3mwdi2zz90wFAJc5RtJciJ/VwD73bHNjvABRl/At+JZj2p0Ongjg11ezSayoKMGJg==
-
 "@justeat/f-popover@2.x":
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-popover/-/f-popover-2.3.1.tgz#e2479ccda23715cca7e446dfeb8c3052450fc3b3"
