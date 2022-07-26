@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.20.0
 ------------------------------
-*July 25, 2022*
+*July 26, 2022*
 
 ### Updated
 - `@justeat/f-wdio-utils` to latest version in root.
