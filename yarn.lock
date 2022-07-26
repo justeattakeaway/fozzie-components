@@ -2248,11 +2248,6 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.4.1.tgz#1ddbc5c771f053db41308cb4797a3a611f3af393"
   integrity sha512-3RHIDDC6OjPNCALHIjQvvIw2EsVCZH300SNmLdNip9IJQUtaKBcjfUolalXeP86jlg0UT2qPSMriEUyBs4o+ag==
 
-"@justeat/f-button@4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-4.0.0.tgz#b6fa2d2f9b6313950f3737224b57533d0e0d7458"
-  integrity sha512-ofyIYSVHNo0uyc8Rq9+mqyvPZVyN0JvwK66R473m3jHZbYK74HNzXekrAXMT2WYwEnCM58LumkpQdffKi46AXA==
-
 "@justeat/f-content-cards@8.0.0-beta.4":
   version "8.0.0-beta.4"
   resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-8.0.0-beta.4.tgz#ff7690532e6743ff4f2b83dd4d7aad04e1485c0a"
@@ -2261,13 +2256,6 @@
     "@babel/plugin-proposal-class-properties" "7.12.13"
     "@justeat/f-services" "1.0.1"
     core-js "3.6.5"
-
-"@justeat/f-cookie-banner@4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-cookie-banner/-/f-cookie-banner-4.0.0.tgz#b017ce721257f6fcc1886aa9de4291337186a694"
-  integrity sha512-Pnn4bBjp1+pJlZbLRHI14hNrtnL2oUDy1Bxc9oxOpPhcrAve3kTK3GvTta6EY1ZWb8kNaBGdqUzAwheGde05qA==
-  dependencies:
-    "@justeat/f-services" "1.14.0"
 
 "@justeat/f-dom@0.4.0":
   version "0.4.0"
@@ -2298,6 +2286,13 @@
   dependencies:
     vue-i18n "8.0.0"
 
+"@justeat/f-globalisation@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-1.0.0.tgz#379c71d089cdfee9c460b4a2e5f0ef0699d02c44"
+  integrity sha512-DWyVG8d+1N9onh8pJEU285tqx/R6cQ47duHZV0lxGfrPSvyc4AXqnLGvfeG67oMaRB5HlCtVXrQFtT6oxPlAhA==
+  dependencies:
+    vue-i18n "8.0.0"
+
 "@justeat/f-http@0.8.0":
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-http/-/f-http-0.8.0.tgz#46a99a274d3611186d387a26920de02d5f1a05d7"
@@ -2311,22 +2306,10 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.10.0.tgz#59738afbb1bec54388270521ae8f6de0412d74fb"
   integrity sha512-Sz6A8xdkIdpA2jBfx4XJqCNIJt94FraYfF56wxEs0i9pJLBmgun5As2HPaPpg6sWrbmXA//b2L9bN7uNsZLdLw==
 
-"@justeat/f-link@3.1.1":
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-link/-/f-link-3.1.1.tgz#d1ce567c32f4080914ddb5ad63846281544956af"
-  integrity sha512-a+Q9AEqWu0Iwy6P2+6ezDMlgSB6/i8WbhVLVzz9cCZieC5wX+LyZ14iSgXrBo0m8qUoRoFFXHsCXTiyMY6YhGw==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
 "@justeat/f-mega-modal@3.x":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-3.0.2.tgz#81f2b5ca8519a6eca93f5643857df2a9c924666d"
   integrity sha512-3M+wpcjOIIw3hKbtZqyRl3mwdi2zz90wFAJc5RtJciJ/VwD73bHNjvABRl/At+JZj2p0Ongjg11ezSayoKMGJg==
-
-"@justeat/f-mega-modal@7.0.0":
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-mega-modal/-/f-mega-modal-7.0.0.tgz#baf7e85217a767bf01809e81bd7bca549c3fd399"
-  integrity sha512-ubtmxeJVYvIVL3rKH6MoLUT5sAMdljGcRt9BhWpaDWuyALsZBgKSGOtSY2zootj27GgrC+3LMhRssmyl8WmHbQ==
 
 "@justeat/f-popover@2.x":
   version "2.3.1"
@@ -2393,14 +2376,6 @@
     lodash-es "4.17.21"
     window-or-global "1.0.1"
 
-"@justeat/f-services@1.14.0":
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.14.0.tgz#03f97c8a755961a548ca9c41b36481ea76fd82d9"
-  integrity sha512-sikaKt2j+LviicXThvBSCMnn9GDIzNB6ItD1Yw053ck1e8HIwMyzDu6BHsWSXL1IRg4016+N5nxIp+Npe9qfoA==
-  dependencies:
-    lodash-es "4.17.21"
-    window-or-global "1.0.1"
-
 "@justeat/f-services@1.16.0":
   version "1.16.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.16.0.tgz#947174c10872f37a0f11c16aa0c0aa177f998e06"
@@ -2454,13 +2429,6 @@
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
-"@justeat/f-vue-icons@2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-2.3.0.tgz#8fddbd2f48bc63efa3d162c81a4e79e22874b09a"
-  integrity sha512-bXcAy5T79LH0rS16v62Lh4VwxG7W7t8C9SlgY0KJIK99IZiV3bJS2MK+sIQvWmLMZIJi4qxNeWhUFVXHqPaTuw==
-  dependencies:
-    babel-helper-vue-jsx-merge-props "2.0.3"
-
 "@justeat/f-vue-icons@2.7.0":
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-2.7.0.tgz#5cb9f3f3eeb4012cb6d247a6a9d5c807fe9a0ab9"
@@ -2468,10 +2436,24 @@
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
+"@justeat/f-vue-icons@2.x":
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-2.8.0.tgz#f0a4a89b936d24cf4ef12f2e87d67efbed91e92d"
+  integrity sha512-iCJpYcQrYFjlyStMwOdnthAx1dtEyDeBgnHxdxpoC2CrRFo+cF9NyB7unY319yGck9k6fn5LOtnjzABbvDYfCg==
+  dependencies:
+    babel-helper-vue-jsx-merge-props "2.0.3"
+
 "@justeat/f-vue-icons@3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-3.0.0.tgz#25207d9c706c530a7fda0a7bc121134295c1bad0"
   integrity sha512-8mgBcRuciU4MnqabZkhd+F6awuFAIHRbQnUh4ZQc3cgdZC+eIgPgyrLLURg5HNJOXhi6ojhqAFUqJNb1Rc1ZMQ==
+  dependencies:
+    babel-helper-vue-jsx-merge-props "2.0.3"
+
+"@justeat/f-vue-icons@3.10.0":
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-3.10.0.tgz#99c049918160b7a028b2fbb935ebde43181dffa0"
+  integrity sha512-AvDJzcTMUsESxXGfVBtXyvdxbtJk5pBYiYp/lK4wHpj3Y7iig/Ysp3ei1LSOBdsi+tGgWlFPMxjLPbdiECkaOg==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
@@ -2515,6 +2497,14 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.4.0.tgz#6916a392777c88bc84e0d5a258e7e94c64ff7800"
   integrity sha512-CQ69zuqvPGIAmDAF+EZM9dnBoIizBIMrl4L2tpvk27oRPKycQGgFIjfq1v/wTgVNwVXVJNCEG6zEKNjccSl+Ew==
   dependencies:
+    "@justeat/f-services" "1.7.0"
+
+"@justeat/f-wdio-utils@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-1.1.0.tgz#a5b10a5055da8549dd13d02042e7f264b6f3dab3"
+  integrity sha512-TIS3uXOMlfJcArOM+PE5AR4oHprYu/ubEb8uXeA8BIyM5AEebRMTfnTLTVsgzVJnyObGI1h8PK1mWiBc8VVOEA==
+  dependencies:
+    "@axe-core/webdriverio" "4.4.3"
     "@justeat/f-services" "1.7.0"
 
 "@justeat/feature-management@^1.0.0":
