@@ -4,6 +4,8 @@ let outputChangedComponentPackages;
 
 const getChangedPackageStories = () => {
     try {
+        // Return a JSON object of changed components and their dependants to be served by Storybook.
+        // Except f-cookie-banner-static as we don't have / need a .stories file.
         outputChangedComponentPackages = execSync('npx turbo run build --filter=...[origin/master] --dry=json --filter=!@justeat/f-cookie-banner-static', {
             cwd: '../..'
         });
