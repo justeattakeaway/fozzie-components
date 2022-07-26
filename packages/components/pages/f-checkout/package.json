@@ -1,9 +1,9 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout - Fozzie Checkout Component",
-  "version": "4.3.0",
+  "version": "4.4.0",
   "main": "dist/f-checkout.umd.min.js",
-  "maxBundleSize": "125kB",
+  "maxBundleSize": "130kB",
   "files": [
     "dist",
     "test-utils",
