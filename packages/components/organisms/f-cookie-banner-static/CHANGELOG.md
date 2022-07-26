@@ -7,7 +7,7 @@ v1.2.0
 ------------------------------
 *July 26, 2022*
 
-### Updated
+### Changed
 - `f-cookie-banner` version.
 
 v1.1.0

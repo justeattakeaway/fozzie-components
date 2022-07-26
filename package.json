@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "7.19.0",
+  "version": "7.20.0",
   "private": true,
   "scripts": {
     "build": "turbo run build --continue",
@@ -57,7 +57,7 @@
     "@babel/preset-env": "7.14.9",
     "@justeat/browserslist-config-fozzie": "1.2.0",
     "@justeat/eslint-config-fozzie": "5.1.0",
-    "@justeat/f-wdio-utils": "0.12.0",
+    "@justeat/f-wdio-utils": "1.x",
     "@justeat/fozzie": "8.2.0",
     "@justeat/stylelint-config-fozzie": "2.2.0",
     "@percy/cli": "1.0.5",
