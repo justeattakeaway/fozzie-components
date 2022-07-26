@@ -2279,7 +2279,7 @@
     "@justeat/f-services" "1.0.0"
     "@justeattakeaway/pie-icons-vue" "1.0.0"
 
-"@justeat/f-globalisation@0.2.0":
+"@justeat/f-globalisation@0.x":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-0.2.0.tgz#90ec559642c165b6325669c506c417abe09fa5dd"
   integrity sha512-WXBBl/nu88HxVKIuEt1/1KYnAB2XUImi+CK9ZdKQt/FiQolDMe+9hqxTRr2YSbeLXulGXR17WOCDAJQKwHU2Og==
@@ -2415,17 +2415,17 @@
   dependencies:
     "@justeat/f-dom" "0.4.0"
 
-"@justeat/f-vue-icons@1.13.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.13.0.tgz#83b483c300f4f43569a0fcb3ed47b7bcc189e2c7"
-  integrity sha512-3gXdEpIQD+wRUSsv7gKCzT/JD4XlKYtRiTd0JPFjkrC9btwfotD+Iax3c/kjRT+rpvYjxHQSgfd06CIfJ72rPA==
-  dependencies:
-    babel-helper-vue-jsx-merge-props "2.0.3"
-
 "@justeat/f-vue-icons@1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.2.0.tgz#74b08c7539f3790cddc7f98df148c2642fcf0a75"
   integrity sha512-TI0Jwd2vBCVCwR26CDZhzp2Xdd35T+12sX3mkoztx14XpJ+EXJ7elR9SmI/N1vZ59o8sRP6Ix7iV+mSeAGv9Zg==
+  dependencies:
+    babel-helper-vue-jsx-merge-props "2.0.3"
+
+"@justeat/f-vue-icons@1.x":
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.13.0.tgz#83b483c300f4f43569a0fcb3ed47b7bcc189e2c7"
+  integrity sha512-3gXdEpIQD+wRUSsv7gKCzT/JD4XlKYtRiTd0JPFjkrC9btwfotD+Iax3c/kjRT+rpvYjxHQSgfd06CIfJ72rPA==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
@@ -2464,13 +2464,6 @@
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
-"@justeat/f-vue-icons@3.4.0":
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-3.4.0.tgz#47743051d93e7a320d95bd2b7bd5e83580d60480"
-  integrity sha512-DK3uvkXqm7tjB0yDHdOaUVoOtKeBQb/WKAp0FnlnXCzl1YiOenNVggVcdqLLAmQn9GSZuhVK+aECCbDeohDjgQ==
-  dependencies:
-    babel-helper-vue-jsx-merge-props "2.0.3"
-
 "@justeat/f-vue-icons@3.7.0":
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-3.7.0.tgz#53c343d32d4fc132fca8eb146521c5513c81c8bd"
@@ -2484,28 +2477,6 @@
   integrity sha512-6dEkYZevqi+Do2AiC0EoseGAxoqLRWwz/VJ57owa2IYd1ubJexaRYR4H6tGCqP7Bsn7B/cQgRdbGXQubRMLeeQ==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
-
-"@justeat/f-wdio-utils@0.12.0":
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.12.0.tgz#28cf4295e080e410d2cb41467f804fae641f8687"
-  integrity sha512-LUj+rGxP2MJBNZ4ZTRTqh5lYPJciiDPixNsWDw1IO9UjwEfsu70isc/FssLk4kRs1Hs0M2vprHGLlX7GXj0kfw==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
-"@justeat/f-wdio-utils@0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.4.0.tgz#6916a392777c88bc84e0d5a258e7e94c64ff7800"
-  integrity sha512-CQ69zuqvPGIAmDAF+EZM9dnBoIizBIMrl4L2tpvk27oRPKycQGgFIjfq1v/wTgVNwVXVJNCEG6zEKNjccSl+Ew==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
-"@justeat/f-wdio-utils@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-1.1.0.tgz#a5b10a5055da8549dd13d02042e7f264b6f3dab3"
-  integrity sha512-TIS3uXOMlfJcArOM+PE5AR4oHprYu/ubEb8uXeA8BIyM5AEebRMTfnTLTVsgzVJnyObGI1h8PK1mWiBc8VVOEA==
-  dependencies:
-    "@axe-core/webdriverio" "4.4.3"
-    "@justeat/f-services" "1.7.0"
 
 "@justeat/feature-management@^1.0.0":
   version "1.0.1"
@@ -2569,7 +2540,7 @@
   resolved "https://registry.yarnpkg.com/@justeat/stylelint-config-fozzie/-/stylelint-config-fozzie-2.2.0.tgz#7cdab9fd0b341723eb52c93e88381130245438a2"
   integrity sha512-EPg/T/223kWeCG7MyrjKzBP6swaA2Y1R0WjltN2gVOR5bHjBc7yaDE0tK3O7pZriAKvNvH/YvFoB9MZsgkB8UA==
 
-"@justeattakeaway/pie-icons-vue@1.0.0":
+"@justeattakeaway/pie-icons-vue@1.0.0", "@justeattakeaway/pie-icons-vue@1.x":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@justeattakeaway/pie-icons-vue/-/pie-icons-vue-1.0.0.tgz#62f86c4fedb449c072e4d37955ad619d10baa9a2"
   integrity sha512-4HoFiGCB4wz3v9m70n8Box4k3dRFJAf7h4Gxg8zL/22YBchFl27owk0WaJuY3EP3t15LoGRFX1grFHWRD7vGdA==
