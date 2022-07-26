@@ -67,7 +67,7 @@ commands:
             then
               yarn << parameters.command_name >>
             else
-              yarn << parameters.command_name >> --filter=[master]
+              yarn << parameters.command_name >> --filter=...[master]
             fi
 
   build_packages:
@@ -144,7 +144,7 @@ commands:
               then
                 yarn ci:test:visual:<< parameters.component_type >> --concurrency=1
               else
-                yarn ci:test:visual:<< parameters.component_type >> --filter=[master] --concurrency=1
+                yarn ci:test:visual:<< parameters.component_type >> --filter=...[master] --concurrency=1
               fi
             else
               echo Skipping visual regression tests because PR is either in draft mode or has wip label applied

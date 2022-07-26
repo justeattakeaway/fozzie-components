@@ -12,7 +12,7 @@ const getMaxSizeForPackage = packageLocation => {
 
 const getChangedPackageLocations = () => {
     let outputPackages;
-    let command = process.env.CIRCLE_BRANCH === 'master' || process.env.RUN_ALL === 'true' ? "npx turbo run build --dry=json" : "npx turbo run build --filter=[origin/master] --dry=json" 
+    let command = process.env.CIRCLE_BRANCH === 'master' || process.env.RUN_ALL === 'true' ? "npx turbo run build --dry=json" : "npx turbo run build --filter=...[origin/master] --dry=json" 
 
     try {
         outputPackages = execSync(command);
