@@ -1,7 +1,9 @@
-const Page = require('@justeat/f-wdio-utils/src/base.page');
+import Page from '@justeat/f-wdio-utils';
 
-module.exports = class Mfa extends Page {
+class Mfa extends Page {
     constructor () {
         super('page', 'v-mfa-component');
     }
-};
+}
+
+export default new Mfa();
