@@ -73,6 +73,7 @@
     "@justeat/f-globalisation": "0.x",
     "@justeat/f-mega-modal": "7.x",
     "@justeat/f-vue-icons": "1.x",
+    "@justeat/f-wdio-utils": "1.x",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3",
