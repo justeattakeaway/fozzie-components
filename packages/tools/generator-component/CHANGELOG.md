@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.14.1
 ------------------------------
-*July 25, 2022*
+*July 27, 2022*
 
 ### Fixed
 - Generated WebdriverIO tests to use ES6 syntax.
