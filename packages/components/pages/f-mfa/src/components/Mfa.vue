@@ -7,18 +7,15 @@
             data-test-id="f-mfa-verification-card"
             has-inner-spacing-large
             card-size-custom="medium"
-            has-outline
-            :is-page-content-wrapper=true>
-            <bag-sad-bg-icon
+            has-outline>
+            <bag-surf-bg-icon
                 :class="$style['c-mfa-icon']" />
             <h2>
                 {{ $t('verificationPage.subTitle') }}
             </h2>
             <p
-                :class="$style['c-mfa-instructions>']"
                 v-html="$t('verificationPage.instructionsPrimaryText', { email })" />
-            <p
-                :class="$style['c-mfa-instructions>']">
+            <p>
                 {{ $t('verificationPage.instructionsSecondaryText') }}
             </p>
 
@@ -69,7 +66,7 @@ import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 
 import {
-    BagSadBgIcon
+    BagSurfBgIcon
 } from '@justeat/f-vue-icons';
 import tenantConfigs from '../tenants';
 
@@ -82,7 +79,7 @@ export default {
         FCard,
         FormField,
         FButton,
-        BagSadBgIcon
+        BagSurfBgIcon
     },
 
     mixins: [VueGlobalisationMixin],
@@ -157,37 +154,32 @@ export default {
     display: flex;
     justify-content: center;
     margin: auto;
-    font-family: f.$font-family-base;
-    @include f.font-size(heading-m);
     text-align: center;
 
     @include f.media('>=narrow') {
         width: 80vw;
+    }
+
+    h2 {
+        margin-top: 0;
     }
 }
 
 .c-mfa-icon {
     transform: translate(10%);
     margin-top: - f.spacing(d);
-    margin-bottom: - f.spacing(g);
     width: 183px;
 }
 
 .c-mfa-card {
-    position: relative;
-
     @include f.media('>=narrow') {
-        box-shadow: 0 1px 1px 0 rgba(f.$color-black, 0.03), 0 2px 1px -1px rgba(f.$color-black, 0.07), 0 1px 3px 0 rgba(f.$color-black, 0.06);
+        box-shadow: f.$elevation-01;
     }
 }
 
 .c-mfa-formField {
     text-align: left;
-    margin-top: f.spacing(d);
-}
-
-.c-mfa-instructions {
-    @include f.font-size(body-l);
+    margin-top: f.spacing(f);
 }
 
 .c-mfa-submit {
