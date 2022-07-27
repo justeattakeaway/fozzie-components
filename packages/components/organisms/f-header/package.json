@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-header",
   "description": "Fozzie Header - Globalised Header Component",
-  "version": "10.3.0",
+  "version": "10.4.0",
   "main": "dist/f-header.umd.min.js",
   "maxBundleSize": "45kB",
   "files": [
@@ -49,7 +49,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.3.0"
+    "@justeat/f-services": "1.x"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
@@ -59,11 +59,11 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.12.13",
-    "@justeat/f-button": "3.x",
+    "@justeat/f-button": "4.x",
     "@justeat/f-popover": "2.x",
-    "@justeat/f-vue-icons": "3.4.0",
+    "@justeat/f-vue-icons": "3.x",
+    "@justeattakeaway/pie-icons-vue": "1.x",
     "@justeat/f-wdio-utils": "1.x",
-    "@justeattakeaway/pie-icons-vue": "1.0.0",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3",
