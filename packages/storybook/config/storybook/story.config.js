@@ -4,7 +4,7 @@ let outputChangedComponentPackages;
 
 const getChangedPackageStories = () => {
     try {
-        outputChangedComponentPackages = execSync('npx turbo run build --filter=[origin/master] --dry=json', {
+        outputChangedComponentPackages = execSync('npx turbo run build --filter=[origin/master] --dry=json --filter=!@justeat/f-cookie-banner-static', {
             cwd: '../..'
         });
     } catch (error) {

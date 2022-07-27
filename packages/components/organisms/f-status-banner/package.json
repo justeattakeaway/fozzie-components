@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-status-banner",
   "description": "Fozzie Status Banner - Global status page",
-  "version": "6.2.0",
+  "version": "6.3.0",
   "main": "dist/f-status-banner.umd.min.js",
   "maxBundleSize": "60kB",
   "files": [
@@ -25,7 +25,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^12 || ^14"
+    "node": "^12 || ^14 || ^16"
   },
   "keywords": [
     "fozzie"
@@ -61,7 +61,7 @@
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3",
-    "@justeat/f-wdio-utils": "1.1.0",
-    "@justeat/fozzie": "9.0.0-beta.5"
+    "@justeat/fozzie": "9.0.0-beta.5",
+    "@justeat/f-wdio-utils": "1.x"
   }
 }
