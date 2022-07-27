@@ -54,11 +54,9 @@
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-    "@justeat/f-card": "4.1.0",
-    "@justeat/f-form-field": "6.2.0",
-    "@justeat/f-button": "4.2.0",
-    "@justeat/f-link": "3.2.0",
-    "@justeat/f-card-with-content": "3.0.0",
+    "@justeat/f-card": "4.x",
+    "@justeat/f-form-field": "6.x",
+    "@justeat/f-button": "4.x",
     "@justeat/f-wdio-utils": "0.12.0",
     "@vue/cli-plugin-babel": "4.5.15",
     "@vue/cli-plugin-unit-jest": "4.5.15",
