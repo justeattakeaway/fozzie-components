@@ -5,7 +5,7 @@
             $style['c-header'],
             headerBackgroundClass,
             transparentBackgroundClasses,
-            disappearingWhiteBackgroundClass,
+            whiteSeamlessBackgroundClass,
             { [$style['c-header--navInView']]: mobileNavIsOpen },
             { [$style['c-header--tallBelowMid']]: tallBelowMid }
         ]"
@@ -174,8 +174,8 @@ export default {
             return this.headerBackgroundTheme === 'transparent' && !this.mobileNavIsOpen;
         },
 
-        showDisappearingWhiteHeader () {
-            return this.headerBackgroundTheme === 'disappearingWhite';
+        showWhiteSeamlessHeader () {
+            return this.headerBackgroundTheme === 'whiteSeamless';
         },
 
         showOffersLinkWithContent () {
@@ -190,8 +190,8 @@ export default {
             return this.showTransparentHeader ? `${this.$style['c-header--transparent']} ${this.$style['c-header--gradient']}` : '';
         },
 
-        disappearingWhiteBackgroundClass () {
-            return this.showDisappearingWhiteHeader ? `${this.$style['c-header--disappearingWhite']}` : '';
+        whiteSeamlessBackgroundClass () {
+            return this.showWhiteSeamlessHeader ? `${this.$style['c-header--whiteSeamless']}` : '';
         }
     },
 
@@ -276,9 +276,8 @@ html:global(.is-navInView) {
         }
     }
 
-    .c-header--disappearingWhite {
+    .c-header--whiteSeamless {
         @include f.media('>mid') {
-            background-color: transparent;
             box-shadow: none;
         }
     }

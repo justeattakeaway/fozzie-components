@@ -4,7 +4,9 @@ let outputChangedComponentPackages;
 
 const getChangedPackageStories = () => {
     try {
-        outputChangedComponentPackages = execSync('npx lerna ls --since origin/master --json --include-dependencies');
+        outputChangedComponentPackages = execSync('npx turbo run build --filter=[origin/master] --dry=json', {
+            cwd: '../..'
+        });
     } catch (error) {
         console.info('No changed component packages found.');
         process.exit(0);
@@ -12,12 +14,12 @@ const getChangedPackageStories = () => {
 
     const changedPackagesArray = JSON.parse(outputChangedComponentPackages.toString());
 
-    const changedComponentPackages = changedPackagesArray
-        .filter(pkg => pkg.location.match(new RegExp('packages/components')));
+    const changedComponentPackages = changedPackagesArray.tasks
+        .filter(pkg => pkg.directory.match(new RegExp('packages/components')));
 
     const storyPaths = [];
 
-    changedComponentPackages.forEach(pkg => storyPaths.push(`${pkg.location}/stories/*.stories.@(js|mdx)`));
+    changedComponentPackages.forEach(pkg => storyPaths.push(`../../../../${pkg.directory}/stories/*.stories.@(js|mdx)`));
 
     return storyPaths;
 };
