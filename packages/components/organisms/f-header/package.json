@@ -62,6 +62,7 @@
     "@justeat/f-button": "3.x",
     "@justeat/f-popover": "2.x",
     "@justeat/f-vue-icons": "3.4.0",
+    "@justeat/f-wdio-utils": "1.x",
     "@justeattakeaway/pie-icons-vue": "1.0.0",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",

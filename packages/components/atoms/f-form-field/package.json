@@ -59,6 +59,7 @@
     "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3",
     "@justeat/fozzie": "9.0.0-beta.2",
+    "@justeat/f-wdio-utils": "1.x",
     "postcss-assets": "5.0.0"
   }
 }
