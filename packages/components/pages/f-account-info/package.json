@@ -52,7 +52,7 @@
   ],
   "dependencies": {
     "@justeat/f-globalisation": "1.0.0",
-    "@justeat/f-services": "1.13.0",
+    "@justeat/f-services": "1.x",
     "@justeat/f-vue-icons": "3.3.0",
     "vuelidate": "0.7.6"
   },
