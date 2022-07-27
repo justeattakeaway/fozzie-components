@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-cookie-banner",
   "description": "Fozzie Cookie Banner - Cookie Banner",
-  "version": "4.1.0",
+  "version": "4.3.0",
   "main": "dist/f-cookie-banner.umd.min.js",
   "maxBundleSize": "40kB",
   "files": [
@@ -24,7 +24,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^12 || ^14"
+    "node": "^12 || ^14 || ^16"
   },
   "keywords": [
     "fozzie"
@@ -51,18 +51,18 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.14.0"
+    "@justeat/f-services": "1.x"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
     "js-cookie": "2.2.1"
   },
   "devDependencies": {
-    "@justeat/f-button": "4.0.0",
-    "@justeat/f-link": "3.1.1",
-    "@justeat/f-mega-modal": "7.0.0",
-    "@justeat/f-vue-icons": "2.3.0",
-    "@justeat/f-wdio-utils": "1.1.0",
+    "@justeat/f-button": "4.x",
+    "@justeat/f-link": "3.x",
+    "@justeat/f-mega-modal": "7.x",
+    "@justeat/f-vue-icons": "2.x",
+    "@justeat/f-wdio-utils": "1.x",
     "@justeat/fozzie": "9.0.0-beta.5",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",

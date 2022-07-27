@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-feature-management-vue",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Service for querying feature values provided by Feature Management, made reactive for Vue 2/3.",
   "main": "dist/f-feature-management-vue.umd.js",
   "module": "dist/f-feature-management-vue.es.js",
@@ -24,7 +24,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^12 || ^14"
+    "node": "^12 || ^14 || ^16"
   },
   "keywords": [
     "fozzie"

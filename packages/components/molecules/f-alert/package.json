@@ -56,8 +56,8 @@
   },
   "devDependencies": {
     "@justeat/f-button": "4.x",
-    "@justeat/f-wdio-utils": "1.1.0",
     "@justeat/fozzie": "9.0.0-beta.6",
+    "@justeat/f-wdio-utils": "1.x",
     "@justeattakeaway/pie-icons-vue": "1.0.0",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",
