@@ -1,25 +1,25 @@
-import forEach from 'mocha-each';
+import Mfa from '../../test-utils/component-objects/f-mfa.component';
 
-const Mfa = require('../../test-utils/component-objects/f-mfa.component');
+const devices = [
+    'desktop',
+    'mobile'
+];
 
-forEach(['desktop', 'mobile'])
-.describe('f-mfa - %s - Visual tests', device => {
-    let mfa;
+devices.forEach(device => {
+    describe('f-mfa - %s - Visual tests', () => {
+        beforeEach(async () => {
+            // Arrange
+            if (device === 'mobile') {
+                await browser.setWindowSize(414, 731);
+            }
+        });
 
-    beforeEach(() => {
-        // Arrange
-        if (device === 'mobile') {
-            browser.setWindowSize(414, 731);
-        }
+        it('should display the f-mfa component', async () => {
+            // Act
+            await Mfa.load();
 
-        mfa = new Mfa();
-    });
-
-    it('should display the f-mfa component', async () => {
-        // Act
-        await mfa.load();
-
-        // Assert
-        await browser.percyScreenshot('f-mfa - Visual Test', device);
+            // Assert
+            await browser.percyScreenshot('f-mfa - Visual Test', device);
+        });
     });
 });

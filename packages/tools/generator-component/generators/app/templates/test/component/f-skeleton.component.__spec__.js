@@ -1,19 +1,12 @@
-const <%= name.filename %> = require('../../test-utils/component-objects/f-<%= name.default %>.component');
+import <%= name.filename %> from '../../test-utils/component-objects/f-<%= name.default %>.component';
 
 describe('f-<%= name.default %> - Component tests', () => {
-    let <%= name.class %>;
-
-    beforeEach(() => {
-        // Arrange
-        <%= name.class %> = new <%= name.filename %>();
-    });
-
     it('should display the f-<%= name.default %> component', async () => {
         // Act
-        await <%= name.class %>.load();
+        await <%= name.filename %>.load();
 
         // Assert
-        const result = await <%= name.class %>.isComponentDisplayed();
-        expect(result).toBe(true);
+        const result = await <%= name.filename %>.isComponentDisplayed();
+        await expect(result).toBe(true);
     });
 });

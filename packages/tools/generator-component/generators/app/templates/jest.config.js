@@ -34,8 +34,9 @@ module.exports = {
     },
 
     modulePathIgnorePatterns: [
-        './test/accessibility/',
-        './test/component/'
+        <% if(config.needsComponentTests) { %>'./test/accessibility/',
+        './test/component/'<% } %><% if(config.needsVisualTests) { %>,
+        './test/visual/'<% } %>
     ],
 
     testURL: 'http://localhost/'
