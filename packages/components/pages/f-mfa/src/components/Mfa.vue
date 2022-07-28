@@ -4,53 +4,53 @@
         data-test-id="v-mfa-component">
         <f-card
             :class="$style['c-mfa-card']"
-            data-test-id="f-mfa-verification-card"
             has-inner-spacing-large
-            card-size-custom="medium"
-            has-outline>
-            <bag-surf-bg-icon
-                :class="$style['c-mfa-icon']" />
-            <h2>
-                {{ $t('verificationPage.subTitle') }}
-            </h2>
-            <p
-                v-html="$t('verificationPage.instructionsPrimaryText', { email })" />
-            <p>
-                {{ $t('verificationPage.instructionsSecondaryText') }}
-            </p>
+            has-outline
+            data-test-id="f-mfa-verification-card">
+            <div :class="$style['c-mfa-card-content']">
+                <bag-surf-bg-icon
+                    :class="$style['c-mfa-icon']" />
+                <h2>
+                    {{ $t('verificationPage.subTitle') }}
+                </h2>
+                <p
+                    v-html="$t('verificationPage.instructionsPrimaryText', { email })" />
+                <p>
+                    {{ $t('verificationPage.instructionsSecondaryText') }}
+                </p>
 
-            <form
-                method="post"
-                novalidate
-                @submit.prevent="onFormSubmit">
-                <form-field
-                    v-model.lazy="verificationCode"
-                    :class="$style['c-mfa-formField']"
-                    data-test-id="mfa-verification-code-textbox"
-                    required="true"
-                    :is-visually-required=false
-                    maxlength="10"
-                    :label-text="$t('verificationPage.formField.labelText')"
-                    :placeholder="$t('verificationPage.formField.placeholderText')" />
+                <form
+                    method="post"
+                    novalidate
+                    @submit.prevent="onFormSubmit">
+                    <form-field
+                        v-model="verificationCode"
+                        :class="$style['c-mfa-formField']"
+                        :label-text="$t('verificationPage.formField.labelText')"
+                        :placeholder="$t('verificationPage.formField.placeholderText')"
+                        required
+                        :is-visually-required="false"
+                        data-test-id="mfa-verification-code-textbox"
+                        maxlength="10" />
+
+                    <f-button
+                        :class="$style['c-mfa-submit']"
+                        :disabled="isSubmitButtonDisabled"
+                        action-type="submit"
+                        :is-loading="isSubmitting"
+                        data-test-id="mfa-submit-button">
+                        {{ $t('verificationPage.submitButtonText') }}
+                    </f-button>
+                </form>
 
                 <f-button
-                    :class="$style['c-mfa-submit']"
-                    data-test-id="mfa-submit-button"
-                    :disabled="verificationCode.trim().length < 1"
-                    button-type="primary"
-                    action-type="submit"
-                    :is-loading="isSubmitting">
-                    {{ $t('verificationPage.submitButtonText') }}
+                    :class="$style['c-mfa-need-help-link']"
+                    button-type="link"
+                    data-test-id="mfa-need-help-link"
+                    @click="onShowHelpInfo">
+                    {{ $t('verificationPage.helpModalLinkText') }}
                 </f-button>
-            </form>
-
-            <f-button
-                :class="$style['c-mfa-help-info']"
-                data-test-id="mfa-need-help-link"
-                button-type=link
-                @click="onShowHelpInfo">
-                {{ $t('verificationPage.helpModalLinkText') }}
-            </f-button>
+            </div>
         </f-card>
     </div>
 </template>
@@ -99,6 +99,12 @@ export default {
             isSubmitting: false,
             showErrorPage: false
         };
+    },
+
+    computed: {
+        isSubmitButtonDisabled () {
+            return this.verificationCode.length < 1;
+        }
     },
 
     mounted () {
@@ -156,10 +162,6 @@ export default {
     margin: auto;
     text-align: center;
 
-    @include f.media('>=narrow') {
-        width: 80vw;
-    }
-
     h2 {
         margin-top: 0;
     }
@@ -167,13 +169,22 @@ export default {
 
 .c-mfa-icon {
     transform: translate(10%);
-    margin-top: - f.spacing(d);
-    width: 183px;
+    margin: -#{f.spacing(g)} 0 -#{f.spacing(d)};
+    width: 212px;
 }
 
 .c-mfa-card {
     @include f.media('>=narrow') {
         box-shadow: f.$elevation-01;
+    }
+}
+
+.c-mfa-card-content {
+    max-width: 392px;
+    margin: 0 f.spacing(d);
+
+    @include f.media('>mid') {
+        margin: 0 f.spacing(i);
     }
 }
 
@@ -187,7 +198,7 @@ export default {
     margin-bottom: f.spacing(f);
 }
 
-.c-mfa-help-info {
+.c-mfa-need-help-link {
     margin-bottom: f.spacing(d);
 }
 </style>

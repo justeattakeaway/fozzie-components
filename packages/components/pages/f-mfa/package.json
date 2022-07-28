@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-mfa",
   "description": "Fozzie Mfa - Multi-factor Authenticator Input Form",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "main": "dist/f-mfa.umd.min.js",
   "maxBundleSize": "50kB",
   "files": [
@@ -46,17 +46,20 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
+    "@justeat/f-globalisation": "1.0.0",
     "@justeat/f-services": "1.16.0",
-    "@justeat/f-vue-icons": "3.3.0",
-    "@justeat/f-globalisation": "1.0.0"
+    "@justeat/f-vue-icons": "3.3.0"
   },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.2.0"
-  },
-  "devDependencies": {
+    "@justeat/browserslist-config-fozzie": ">=1.2.0",
     "@justeat/f-card": "4.x",
     "@justeat/f-form-field": "6.x",
+    "@justeat/f-button": "4.x"
+  },
+  "devDependencies": {
     "@justeat/f-button": "4.x",
+    "@justeat/f-card": "4.x",
+    "@justeat/f-form-field": "6.x",
     "@justeat/f-wdio-utils": "0.12.0",
     "@vue/cli-plugin-babel": "4.5.15",
     "@vue/cli-plugin-unit-jest": "4.5.15",
