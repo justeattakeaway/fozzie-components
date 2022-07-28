@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import sharedServices from '@justeat/f-services';
+import { globalisationServices } from '@justeat/f-services';
 import { ClockIcon } from '@justeattakeaway/pie-icons-vue';
 import tenantConfigs from '../tenants';
 import UserMessageApi from '../services/UserMessageApi';
@@ -38,8 +38,8 @@ export default {
         }
     },
     data () {
-        const locale = sharedServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const theme = sharedServices.getTheme(locale);
+        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
+        const theme = globalisationServices.getTheme(locale);
 
         return {
             theme,
