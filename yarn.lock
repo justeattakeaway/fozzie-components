@@ -2339,14 +2339,6 @@
     lodash-es "4.17.21"
     window-or-global "1.0.1"
 
-"@justeat/f-services@1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.4.0.tgz#e783b8455904b5f3879e3a90d744913bf01bd0a3"
-  integrity sha512-EjeUhz++c0QlToz1SvBOtmFSsWO6qRccJoYXYWcws3eNNZKvQbckqFVZ6cvjxaHZ66kcue53kOiazCGN+rpbuw==
-  dependencies:
-    lodash-es "4.17.15"
-    window-or-global "1.0.1"
-
 "@justeat/f-services@1.7.0":
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.7.0.tgz#e73ce22b84578388058fe00442ef8bfbb692193c"
@@ -2373,13 +2365,6 @@
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.13.0.tgz#83b483c300f4f43569a0fcb3ed47b7bcc189e2c7"
   integrity sha512-3gXdEpIQD+wRUSsv7gKCzT/JD4XlKYtRiTd0JPFjkrC9btwfotD+Iax3c/kjRT+rpvYjxHQSgfd06CIfJ72rPA==
-  dependencies:
-    babel-helper-vue-jsx-merge-props "2.0.3"
-
-"@justeat/f-vue-icons@2.7.0":
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-2.7.0.tgz#5cb9f3f3eeb4012cb6d247a6a9d5c807fe9a0ab9"
-  integrity sha512-I4aWl5i1NhST//1B7Nsc4xuxuLJOS+l+4KZDTp/UxICzHb3yd8QbwebtjSbKyH+tCI+MWQz4HEiP1/zIOHiSbw==
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
