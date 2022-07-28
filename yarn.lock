@@ -2217,13 +2217,6 @@
     eslint-config-airbnb-base "15.0.0"
     eslint-plugin-vue "8.4.0"
 
-"@justeat/f-alert@5.x":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-5.0.1.tgz#80fb4a1480fb85cdb2bf94ad2020f9fa2f286d05"
-  integrity sha512-Jx06KGeM0geE9XJrh7vyhQxtSLhIXmiMY4sw31cDcFX9S0N/FrEOLpxiul+oTfNQGWlVrEq4t7NdqOQ1H2zgvA==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-
 "@justeat/f-braze-adapter@5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-5.0.0.tgz#5f38225e6c0f570f9294b47705345b386debac2c"
