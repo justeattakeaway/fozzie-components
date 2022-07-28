@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.3.0
 ------------------------------
-*July 19, 2022*
+*July 29, 2022*
 
 ### Added
 - Node 16 compatible version of `@justeat/f-services`.
