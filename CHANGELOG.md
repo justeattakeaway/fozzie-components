@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.21.0
+------------------------------
+*July 26, 2022*
+
+### Changed
+- Components to use Node 16 compatible verisons of f-services
+
+### Removed
+`lerna.json`
+
 v7.20.1
 ------------------------------
 *July 26, 2022*
