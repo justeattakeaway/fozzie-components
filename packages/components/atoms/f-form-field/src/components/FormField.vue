@@ -344,7 +344,7 @@ export default {
         },
 
         showRequiredIndicator () {
-            return this.$attrs.required && this.isVisuallyRequired;
+            return Boolean(this.$attrs.required && this.isVisuallyRequired);
         }
     },
 
