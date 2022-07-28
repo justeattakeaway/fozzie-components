@@ -2225,13 +2225,6 @@
     eslint-config-airbnb-base "15.0.0"
     eslint-plugin-vue "8.4.0"
 
-"@justeat/f-alert@5.x":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-alert/-/f-alert-5.0.1.tgz#80fb4a1480fb85cdb2bf94ad2020f9fa2f286d05"
-  integrity sha512-Jx06KGeM0geE9XJrh7vyhQxtSLhIXmiMY4sw31cDcFX9S0N/FrEOLpxiul+oTfNQGWlVrEq4t7NdqOQ1H2zgvA==
-  dependencies:
-    "@justeat/f-services" "1.0.0"
-
 "@justeat/f-braze-adapter@5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-braze-adapter/-/f-braze-adapter-5.0.0.tgz#5f38225e6c0f570f9294b47705345b386debac2c"
@@ -2359,14 +2352,6 @@
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.11.0.tgz#2705cdcb83434527c9fe1bccfbdd0222e25ab38b"
   integrity sha512-/DCnsOQmfEkz/dyD/u5VMaKDwEzAAjwW+qePXh6ofxNRm7SR9dWS0Qvwzg+kQvZ3ktN6b20PfcUcalLf00guFw==
-  dependencies:
-    lodash-es "4.17.21"
-    window-or-global "1.0.1"
-
-"@justeat/f-services@1.13.0":
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.13.0.tgz#bb8d92eb77d6b62b571edcd618dbc54ffedcb8ac"
-  integrity sha512-jm3DW0sI1A3VAKvSM511Hm6rWRxbXBKxsjLrkFEpwJ5Opn/EB0av14DbyeljSDjGACJjDKfmY3K+/fviL2bofg==
   dependencies:
     lodash-es "4.17.21"
     window-or-global "1.0.1"
@@ -13520,7 +13505,7 @@ include-media@1.4.9:
   resolved "https://registry.yarnpkg.com/include-media/-/include-media-1.4.9.tgz#d0020b7be3eb2d54868a20943595ce380e0bc43b"
   integrity sha512-IUOcvWDCt6R5V0ktsGk6RbehkW9ks1dODN2ed1p+mhML82TteAl+/ElXy8AJ7ueIuVoKq2NioRVdW9FuwQNOew==
 
-"include-media@github:eduardoboucas/include-media#2.0-release":
+include-media@eduardoboucas/include-media#2.0-release:
   version "2.0.0"
   resolved "https://codeload.github.com/eduardoboucas/include-media/tar.gz/5398b556d4bb24186d360c950b19026f577ff8e5"
 

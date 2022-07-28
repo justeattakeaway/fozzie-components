@@ -1,20 +1,12 @@
-import { getAxeResults } from '../../../../../../test/utils/axe-helper'; // eslint-disable-line import/no-relative-packages
-
-const Mfa = require('../../test-utils/component-objects/f-mfa.component');
+import Mfa from '../../test-utils/component-objects/f-mfa.component';
 
 describe('f-mfa - Accessibility tests', () => {
-    let mfa;
-
-    beforeEach(() => {
-        mfa = new Mfa();
-    });
-
-    it('a11y - should test f-mfa component WCAG compliance', () => {
+    it('a11y - should test f-mfa component WCAG compliance', async () => {
         // Act
-        mfa.load();
+        await Mfa.load();
 
         // Assert
-        const axeResults = getAxeResults('f-mfa');
+        const axeResults = await Mfa.getAxeResults('f-mfa');
         expect(axeResults.violations.length).toBe(0);
     });
 });
