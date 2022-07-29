@@ -12,6 +12,7 @@ v3.4.0
 - Node 16 compatible version of `@justeat/f-error-message`.
 - Node 16 compatible version of `@justeat/f-vue-icons`.
 - Node 16 compatible peerDependency version of `@justeat/f-button`.
+- Node 16 compatible peerDependency version of `@justeat/f-card`.
 
 
 v3.3.0

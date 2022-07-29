@@ -57,7 +57,7 @@
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
     "@justeat/f-button": "4.x",
-    "@justeat/f-card": "3.x",
+    "@justeat/f-card": "4.x",
     "@justeat/f-error-message": "2.x",
     "@justeat/f-form-field": "6.x",
     "@justeat/f-http": "0.x",
