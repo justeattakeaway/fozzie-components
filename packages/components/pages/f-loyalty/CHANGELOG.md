@@ -10,6 +10,7 @@ v2.4.0
 ### Added
 - Node 16 compatible version of `@justeat/f-services`.
 - Node 16 compatible version of `@justeat/f-globalisation`.
+- New `maxSize` for Bundlewatch.
 
 
 v2.3.0
