@@ -2233,15 +2233,6 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-3.4.1.tgz#1ddbc5c771f053db41308cb4797a3a611f3af393"
   integrity sha512-3RHIDDC6OjPNCALHIjQvvIw2EsVCZH300SNmLdNip9IJQUtaKBcjfUolalXeP86jlg0UT2qPSMriEUyBs4o+ag==
 
-"@justeat/f-content-cards@8.0.0-beta.4":
-  version "8.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-8.0.0-beta.4.tgz#ff7690532e6743ff4f2b83dd4d7aad04e1485c0a"
-  integrity sha512-cLUbPemnxsaQ8Ljxm5Kyu4uOEBWFNi3QEC89c1QtBbmwZ2/kc1Sz2V51zMdilBHCLG93/Cn8bQYl+bOODJskrw==
-  dependencies:
-    "@babel/plugin-proposal-class-properties" "7.12.13"
-    "@justeat/f-services" "1.0.1"
-    core-js "3.6.5"
-
 "@justeat/f-dom@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-0.4.0.tgz#3e838a2dd06d4d5281c17f5fb9f66d7485fd759a"
@@ -2315,22 +2306,6 @@
     lodash-es "4.17.15"
     window-or-global "1.0.1"
 
-"@justeat/f-services@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.0.1.tgz#702aa241aee6476767608533e5dc466a68b50471"
-  integrity sha512-S6m33ZERPECfRoZNQeKjkXxlB1G93pN9ajPLSDwVAtEoOkc7hIs3Ti0wPFN7JKJiDHloD7tC4/y19Yp6ll39aw==
-  dependencies:
-    lodash-es "4.17.15"
-    window-or-global "1.0.1"
-
-"@justeat/f-services@1.11.0":
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.11.0.tgz#2705cdcb83434527c9fe1bccfbdd0222e25ab38b"
-  integrity sha512-/DCnsOQmfEkz/dyD/u5VMaKDwEzAAjwW+qePXh6ofxNRm7SR9dWS0Qvwzg+kQvZ3ktN6b20PfcUcalLf00guFw==
-  dependencies:
-    lodash-es "4.17.21"
-    window-or-global "1.0.1"
-
 "@justeat/f-services@1.16.0":
   version "1.16.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.16.0.tgz#947174c10872f37a0f11c16aa0c0aa177f998e06"
@@ -2361,13 +2336,6 @@
   integrity sha512-6XpaZPZWNjDkh7EJBFHL43ab5ExjVoQ4kU2bMJWVldUKoo+7DrcEpktkhkQT8D0IYiNfXKn82mGpqB8v2eDvFw==
   dependencies:
     "@justeat/f-dom" "0.4.0"
-
-"@justeat/f-vue-icons@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-vue-icons/-/f-vue-icons-1.2.0.tgz#74b08c7539f3790cddc7f98df148c2642fcf0a75"
-  integrity sha512-TI0Jwd2vBCVCwR26CDZhzp2Xdd35T+12sX3mkoztx14XpJ+EXJ7elR9SmI/N1vZ59o8sRP6Ix7iV+mSeAGv9Zg==
-  dependencies:
-    babel-helper-vue-jsx-merge-props "2.0.3"
 
 "@justeat/f-vue-icons@1.x":
   version "1.13.0"
@@ -13472,7 +13440,7 @@ include-media@1.4.9:
   resolved "https://registry.yarnpkg.com/include-media/-/include-media-1.4.9.tgz#d0020b7be3eb2d54868a20943595ce380e0bc43b"
   integrity sha512-IUOcvWDCt6R5V0ktsGk6RbehkW9ks1dODN2ed1p+mhML82TteAl+/ElXy8AJ7ueIuVoKq2NioRVdW9FuwQNOew==
 
-"include-media@github:eduardoboucas/include-media#2.0-release":
+include-media@eduardoboucas/include-media#2.0-release:
   version "2.0.0"
   resolved "https://codeload.github.com/eduardoboucas/include-media/tar.gz/a3c0288e5b22cc746cc2d320d0a374b2ed9d0aeb"
 

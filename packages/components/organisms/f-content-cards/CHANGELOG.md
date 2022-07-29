@@ -3,12 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v8.2.0
+v8.3.0
  ------------------------------
- *July 25, 2022*
+ *July 29, 2022*
 
  ### Added
- - Node 16 support.
+ - Node 16 compatible version of `@justeat/f-services`.
+ - Node 16 compatible version of `@justeat/f-vue-icons`.
+
+
+v8.2.0
+------------------------------
+*July 25, 2022*
+
+### Added
+- Node 16 support.
 
 
 v8.1.0
