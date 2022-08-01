@@ -10,11 +10,17 @@
             <div :class="$style['c-mfa-card-content']">
                 <bag-surf-bg-icon
                     :class="$style['c-mfa-icon']" />
-                <h2>
+
+                <h2 :class="$style['c-mfa-card-heading']">
                     {{ $t('verificationPage.subTitle') }}
                 </h2>
-                <p
-                    v-html="$t('verificationPage.instructionsPrimaryText', { email })" />
+
+                <i18n
+                    path="verificationPage.instructionsPrimaryText"
+                    tag="p">
+                    <strong>{{ email }}</strong>
+                </i18n>
+
                 <p>
                     {{ $t('verificationPage.instructionsSecondaryText') }}
                 </p>
@@ -161,10 +167,10 @@ export default {
     justify-content: center;
     margin: auto;
     text-align: center;
+}
 
-    h2 {
-        margin-top: 0;
-    }
+.c-mfa-card-heading {
+    margin-top: 0;
 }
 
 .c-mfa-icon {
