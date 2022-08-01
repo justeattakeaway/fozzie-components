@@ -65,6 +65,7 @@
 import { mapActions, mapState } from 'vuex';
 import { CrossIcon } from '@justeat/f-vue-icons';
 import ClearButton from '@justeat/f-button';
+import '@justeat/f-button/dist/f-button.css';
 import FormSearchInnerFieldWrapper from './FormSearchInnerFieldWrapper.vue';
 import FormFullAddressSearchOverlay from './FormFullAddressSearchModalOverlay.vue';
 import LoadingIndicator from '../FormStates/FormLoadingIndicator.vue';
