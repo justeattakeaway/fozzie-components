@@ -67,7 +67,7 @@
   "devDependencies": {
     "@braze/web-sdk": "3.3.0",
     "@justeat/f-button": "4.x",
-    "@justeat/f-content-cards": "8.x",
+    "@justeat/f-content-cards": "8.3.0-beta.1",
     "@justeat/f-media-element": "3.x",
     "@justeat/f-mega-modal": "7.x",
     "@justeat/f-searchbox": "6.x",
