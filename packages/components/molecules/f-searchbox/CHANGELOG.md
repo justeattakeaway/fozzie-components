@@ -11,6 +11,7 @@ v4.0.0-beta.46
 - Node 16 compatible version of `@justeat/f-button`.
 - Node 16 compatible version of `@justeat/f-error-message`.
 - Node 16 compatible version of `@justeat/f-vue-icons`.
+- Import css from dependencies.
 
 
 v4.0.0-beta.45

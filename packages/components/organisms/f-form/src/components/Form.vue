@@ -49,8 +49,11 @@
 <script>
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import FButton from '@justeat/f-button';
+import '@justeat/f-button/dist/f-button.css';
 import FormField from '@justeat/f-form-field';
+import '@justeat/f-form-field/dist/f-form-field.css';
 import ErrorMessage from '@justeat/f-error-message';
+import '@justeat/f-error-message/dist/f-error-message.css';
 import FormValidationMixin from '../mixin/formValidation.mixin';
 import tenantConfigs from '../tenants';
 import { DEFAULT_BUTTON_TEXT, FORM_EVENTS, PROP_VALIDATION_MESSAGES } from '../constants';

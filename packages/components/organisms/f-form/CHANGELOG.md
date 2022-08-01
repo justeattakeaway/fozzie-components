@@ -10,6 +10,7 @@ v0.8.0
 ### Added
 - Node 16 compatible version of `@justeat/f-error-message`.
 - Node 16 compatible version of `@justeat/f-button`.
+- Import css from dependencies.
 
 
 v0.7.0
