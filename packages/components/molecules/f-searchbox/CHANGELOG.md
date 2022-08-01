@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.0.0-beta.46
+------------------------------
+*July 29, 2022*
+
+### Added
+- Node 16 compatible version of `@justeat/f-button`.
+- Node 16 compatible version of `@justeat/f-error-message`.
+- Node 16 compatible version of `@justeat/f-vue-icons`.
+- Import css from dependencies.
+
+
 v4.0.0-beta.45
 ------------------------------
 *July 26, 2022*
