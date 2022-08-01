@@ -2418,13 +2418,6 @@
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
-"@justeat/f-wdio-utils@0.12.0":
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-wdio-utils/-/f-wdio-utils-0.12.0.tgz#28cf4295e080e410d2cb41467f804fae641f8687"
-  integrity sha512-LUj+rGxP2MJBNZ4ZTRTqh5lYPJciiDPixNsWDw1IO9UjwEfsu70isc/FssLk4kRs1Hs0M2vprHGLlX7GXj0kfw==
-  dependencies:
-    "@justeat/f-services" "1.7.0"
-
 "@justeat/feature-management@^1.0.0":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@justeat/feature-management/-/feature-management-1.0.1.tgz#1c60864658400def14a9389b10af6c586b3099c7"
