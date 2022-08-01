@@ -1,25 +1,25 @@
-import forEach from 'mocha-each';
+import <%= name.filename %> from '../../test-utils/component-objects/f-<%= name.default %>.component';
 
-const <%= name.filename %> = require('../../test-utils/component-objects/f-<%= name.default %>.component');
+const devices = [
+    'desktop',
+    'mobile'
+];
 
-forEach(['desktop', 'mobile'])
-.describe('f-<%= name.default %> - %s - Visual tests', device => {
-    let <%= name.class %>;
+devices.forEach(device => {
+    describe('f-<%= name.default %> - %s - Visual tests', () => {
+        beforeEach(async () => {
+            // Arrange
+            if (device === 'mobile') {
+                await browser.setWindowSize(414, 731);
+            }
+        });
 
-    beforeEach(() => {
-        // Arrange
-        if (device === 'mobile') {
-            browser.setWindowSize(414, 731);
-        }
+        it('should display the f-<%= name.default %> component', async () => {
+            // Act
+            await <%= name.filename %>.load();
 
-        <%= name.class %> = new <%= name.filename %>();
-    });
-
-    it('should display the f-<%= name.default %> component', async () => {
-        // Act
-        await <%= name.class %>.load();
-
-        // Assert
-        await browser.percyScreenshot('f-<%= name.default %> - Visual Test', device);
+            // Assert
+            await browser.percyScreenshot('f-<%= name.default %> - Visual Test', device);
+        });
     });
 });

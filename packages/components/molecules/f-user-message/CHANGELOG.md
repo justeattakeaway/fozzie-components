@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.3.0
+------------------------------
+*July 28, 2022*
+
+### Changed
+- f-services implementation to use new major version.
+
+
 v4.2.0
  ------------------------------
  *July 19, 2022*

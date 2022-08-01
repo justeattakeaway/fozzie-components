@@ -6,10 +6,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.3.0
 ------------------------------
-*July 28, 2022*
+*August 1, 2022*
 
 ### Added
 - MFA page template to match designs
+
+
+v0.2.1
+------------------------------
+*July 27, 2022*
+
+### Fixed
+- ES6 syntax in WebDriverIO tests.
+- Tests not async / awaiting commands.
 
 
 v0.2.0
