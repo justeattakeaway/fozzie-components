@@ -18,13 +18,14 @@ export const VMfaComponent = (args, { argTypes }) => ({
 VMfaComponent.storyName = 'f-mfa';
 
 VMfaComponent.args = {
-    locale: locales.gb
+    locale: locales.gb,
+    smartGatewayBaseUrl: 'https://smart-gateway.just-eat.co.uk'
 };
 
 VMfaComponent.argTypes = {
     locale: {
         control: { type: 'select' },
-        options: [locales.gb],
+        options: [locales.gb, locales.ie, locales.au, locales.nz, locales.es, locales.it],
         description: 'Choose a locale',
         defaultValue: locales.gb
     }
