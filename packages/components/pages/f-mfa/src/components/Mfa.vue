@@ -11,23 +11,25 @@
                 <bag-surf-bg-icon
                     :class="$style['c-mfa-icon']" />
 
-                <h2 :class="$style['c-mfa-card-heading']">
+                <h2 :class="$style['c-mfa-heading']">
                     {{ $t('verificationPage.subTitle') }}
                 </h2>
 
                 <i18n
                     path="verificationPage.instructionsPrimaryText"
-                    tag="p">
+                    tag="p"
+                    :class="$style['c-mfa-description']">
                     <strong>{{ email }}</strong>
                 </i18n>
 
-                <p>
+                <p :class="$style['c-mfa-description']">
                     {{ $t('verificationPage.instructionsSecondaryText') }}
                 </p>
 
                 <form
                     method="post"
                     novalidate
+                    :class="$style['c-mfa-form']"
                     @submit.prevent="onFormSubmit">
                     <form-field
                         v-model="verificationCode"
@@ -35,12 +37,31 @@
                         :label-text="$t('verificationPage.formField.labelText')"
                         :placeholder="$t('verificationPage.formField.placeholderText')"
                         required
+                        :has-error="showValidationError"
                         :is-visually-required="false"
                         data-test-id="mfa-verification-code-textbox"
-                        maxlength="10" />
+                        maxlength="10">
+                        <template
+                            v-if="showValidationError"
+                            #error>
+                            <error-message
+                                data-test-id="mfa-form-validation-error">
+                                {{ $t('errorMessages.validation') }}
+                            </error-message>
+                        </template>
+                    </form-field>
+
+                    <f-alert
+                        v-show="hasSubmitError"
+                        data-test-id="mfa-submit-error-alert"
+                        type="danger"
+                        :class="$style['c-mfa-submit-error']"
+                        :heading="$t('errorMessages.submitMfa.heading')">
+                        {{ $t('errorMessages.submitMfa.description') }}
+                    </f-alert>
 
                     <f-button
-                        :class="$style['c-mfa-submit']"
+                        :class="$style['c-mfa-submitButton']"
                         :disabled="isSubmitButtonDisabled"
                         action-type="submit"
                         :is-loading="isSubmitting"
@@ -64,8 +85,12 @@
 <script>
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 
+import FAlert from '@justeat/f-alert';
+import '@justeat/f-alert/dist/f-alert.css';
 import FCard from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
+import ErrorMessage from '@justeat/f-error-message';
+import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import FButton from '@justeat/f-button';
@@ -82,7 +107,9 @@ export default {
     name: 'VMfa',
 
     components: {
+        FAlert,
         FCard,
+        ErrorMessage,
         FormField,
         FButton,
         BagSurfBgIcon
@@ -103,7 +130,9 @@ export default {
             email: '',
             tenantConfigs,
             isSubmitting: false,
-            showErrorPage: false
+            showErrorPage: false,
+            hasSubmitError: false,
+            showValidationError: false
         };
     },
 
@@ -137,13 +166,32 @@ export default {
         */
         async onFormSubmit () {
             this.isSubmitting = true;
+            this.hasSubmitError = false;
+
             try {
-                // TODO
-                // eslint-disable-next-line no-promise-executor-return
-                await new Promise(resolve => setTimeout(resolve, 1000)) // DEBUG - Simulate network delay
-                .then(console.log('DEBUG - onFormSubmit', { verificationCode: this.verificationCode, code: this.code, email: this.email })); // eslint-disable-line no-console
+                const isOtpValid = this.validateOtp();
+                this.showValidationError = !isOtpValid;
+
+                if (isOtpValid) {
+                    this.postValidateMfaToken();
+                }
             } catch (error) {
-                this.$log.error('Error submitting mfa verification code', error, standardLogTags);
+                if (error.response && error.response.status) {
+                    const { status } = error.response;
+                    this.hasSubmitError = true;
+
+                    // Bad request
+                    if (status === 400) {
+                        this.$log.error('Bad request when submitting MFA', error, standardLogTags);
+                        return;
+                    }
+
+                    // Too many requests
+                    if (status === 429) {
+                        this.$log.error('Throttled when submitting MFA', error, standardLogTags);
+                        return;
+                    }
+                }
             } finally {
                 this.isSubmitting = false;
             }
@@ -154,6 +202,20 @@ export default {
         */
         onShowHelpInfo () {
             console.log('DEBUG - onShowHelpInfo'); // eslint-disable-line no-console
+        },
+
+        // To be replaced by API call
+        postValidateMfaToken () {
+            const err = new Error('TEST - 400 error');
+            err.response = {
+                status: 400
+            };
+            throw err;
+        },
+
+        validateOtp () {
+            // TODO
+            return this.verificationCode.length >= 6;
         }
     }
 };
@@ -163,14 +225,17 @@ export default {
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .c-mfa {
-    display: flex;
-    justify-content: center;
     margin: auto;
-    text-align: center;
+    max-width: 600px;
 }
 
-.c-mfa-card-heading {
+.c-mfa-heading {
     margin-top: 0;
+}
+
+.c-mfa-heading,
+.c-mfa-description {
+    text-align: center;
 }
 
 .c-mfa-icon {
@@ -186,22 +251,32 @@ export default {
 }
 
 .c-mfa-card-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     max-width: 392px;
-    margin: 0 f.spacing(d);
+    margin: 0 auto;
+}
 
-    @include f.media('>mid') {
-        margin: 0 f.spacing(i);
-    }
+.c-mfa-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .c-mfa-formField {
-    text-align: left;
+    width: 100%;
     margin-top: f.spacing(f);
 }
 
-.c-mfa-submit {
-    margin-top: f.spacing(g);
-    margin-bottom: f.spacing(f);
+.c-mfa-submitButton {
+    margin: f.spacing(f) 0;
+}
+
+.c-mfa-submit-error {
+    width: 100%;
+    margin-top: f.spacing(f);
 }
 
 .c-mfa-need-help-link {
