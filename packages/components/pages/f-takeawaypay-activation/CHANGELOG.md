@@ -10,6 +10,8 @@ v3.4.0
 ### Changed
 - Bundlewatch `maxSize`.
 - Jest snapshot to include updated SVG
+
+
 v3.3.0
 ------------------------------
 *July 29, 2022*
