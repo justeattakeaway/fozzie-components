@@ -3,7 +3,7 @@
   "description": "Fozzie Mfa - Multi-factor Authenticator Input Form",
   "version": "0.5.0",
   "main": "dist/f-mfa.umd.min.js",
-  "maxBundleSize": "50kB",
+  "maxBundleSize": "100kB",
   "files": [
     "dist",
     "test-utils",
