@@ -6,6 +6,7 @@ version: 2.1
 
 orbs:
   slack: circleci/slack@4.1.3
+  browser-tools: circleci/browser-tools@1.4.0
 
 commands:
   set_deploy_key:
@@ -270,6 +271,8 @@ jobs:
     executor: node
     steps:
       - checkout
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - install_node_dependencies
       - persist_to_workspace:
           root: .

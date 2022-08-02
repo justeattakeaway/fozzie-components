@@ -21,6 +21,7 @@ const configuration = {
         chromedriver: {
             headless: false,
             path: '/',
+            chromedriverCustomPath: './node_modules/chromedriver/bin',
             args: []
         }
     },
