@@ -143,3 +143,20 @@ module.exports = {
 }
 </style>
 ```
+
+<a name="gulp-migration"></a><h2>If you're coming from Gulp</h2>
+
+If your application uses a different build tool other than webpack (see [prerequisites](#prerequisites) above) such as [Gulp](https://gulpjs.com/). This section will cover the steps you need to complete in-order to migrate successfully.
+
+#### Gulp Build Fozzie:
+
+[Gulp build fozzie](https://github.com/justeat/gulp-build-fozzie) is a set of Gulp tasks used across Fozzie modules. If your application uses this to build packages, instead of Webpack, you will need to firstly update to the latest version (v11.0.0). Version 11.0.0 removes a package called eyeglass which essentially creates a shortcut to your `node_modules` folder.
+
+The following changes need to happen once you've updated gulp-build-fozzie to v11 or greater:
+1. Bump `fozzie` to the latest major version (v9), see changelog for details.
+2. If you are using `node-sass` then you will need to change over to use `dart-sass` this is as simple as changing it to `sass` within your `package.json`.
+3. Within your application you will need to update some of the fozzie paths to follow the new `@use/@forward` rules, see [here](#new-way-use--forward) for more details.
+    - Essentially:
+        `import 'fozzie';` changes to `'@justeat/fozzie/src/scss/fozzie' as f;`
+4. With the new `@use` change above you will now need to update your entire application so `fozzie` helpers can be accessed correctly. See [example](https://github.com/justeat/fozzie-components/pull/2033) PR.
+5. Run your application build command to make sure there are no errors in your app.
