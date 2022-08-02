@@ -28,7 +28,7 @@ const messages = {
         validation: 'Please check and try again',
         submitMfa: {
             heading: 'Something went wrong',
-            description: 'Check your connection and try again'
+            description: 'Sorry about that. Please try again.'
         }
     }
 };
