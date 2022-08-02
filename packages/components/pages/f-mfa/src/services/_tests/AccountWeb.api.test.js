@@ -8,7 +8,7 @@ import {
 import {
     baseUrl,
     conversationId,
-    postChallengeBody
+    postBody
 } from '../../../test-utils/setup';
 
 let apiProvider;
@@ -47,17 +47,17 @@ describe('AccountWebApi Provider', () => {
         });
     });
 
-    describe('When calling `postChallenge`', () => {
+    describe('When calling `postValidateMfaToken`', () => {
         it('should send the correct parameters to the api', async () => {
             // Arrange
             const expectedUri = `${baseUrl}/${SUBMIT_LOGIN_CHALLENGE_URL}`;
-            const expectedBody = postChallengeBody;
+            const expectedBody = postBody;
             const expectedHeaders = {
                 [CONVERSATION_ID_HEADER_NAME]: conversationId
             };
 
             // Act
-            await apiProvider.postChallenge(postChallengeBody, conversationId);
+            await apiProvider.postValidateMfaToken(postBody, conversationId);
 
             // Assert
             expect(httpPostSpy).toHaveBeenCalledWith(expectedUri, expectedBody, expectedHeaders);
@@ -65,7 +65,7 @@ describe('AccountWebApi Provider', () => {
 
         it('should set the cookie with a new conversation id if not provided with one', async () => {
             // Act
-            await apiProvider.postChallenge(postChallengeBody);
+            await apiProvider.postValidateMfaToken(postBody);
 
             // Assert
             expect(cookiesSetSpy).toHaveBeenCalledWith(CONVERSATION_ID_COOKIE_NAME, expect.anything());
@@ -73,7 +73,7 @@ describe('AccountWebApi Provider', () => {
 
         it('should not set the cookie if already provided with a conversation id', async () => {
             // Act
-            await apiProvider.postChallenge(postChallengeBody, conversationId);
+            await apiProvider.postValidateMfaToken(postBody, conversationId);
 
             // Assert
             expect(cookiesSetSpy).not.toHaveBeenCalled();

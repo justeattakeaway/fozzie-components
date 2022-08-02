@@ -17,7 +17,7 @@ export default class AccountWebApi {
         this.#baseUrl = baseUrl;
     }
 
-    async postChallenge (body, conversationId = this.setConversationId()) {
+    async postValidateMfaToken (body, conversationId = this.setConversationId()) {
         const headers = {
             [CONVERSATION_ID_HEADER_NAME]: conversationId
         };
