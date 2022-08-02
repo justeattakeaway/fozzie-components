@@ -16,7 +16,7 @@ const configuration = {
             args: ['--whitelisted-ips=127.0.0.1', '--disable-dev-shm-usage'],
             headless: true,
             path: '/',
-            chromedriverCustomPath: '/usr/local/bin'
+            chromedriverCustomPath: './test/chromedriver'
         },
         percy: {
             viewports: {
