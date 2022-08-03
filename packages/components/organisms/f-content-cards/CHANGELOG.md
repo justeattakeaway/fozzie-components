@@ -10,6 +10,7 @@ v9.0.0
 
 ### Changed
 - Rebased and updated from the beta branch to fix the issue where two v8 versions were running side by side
+- Added `@justeat/f-button` as a peerDependency + devDependency
 
 
 v8.0.0-beta.4 (beta 3 excluded due to error)
