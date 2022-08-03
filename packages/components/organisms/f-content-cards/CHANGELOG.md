@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v9.0.0
+------------------------------
+*August 03, 2022*
+
+### Changed
+- Rebased and updated from the beta branch to fix the issue where two v8 versions were running side by side
+
+
 v8.0.0-beta.4 (beta 3 excluded due to error)
 ------------------------------
 *May 24, 2022*
