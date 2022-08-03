@@ -1,10 +1,9 @@
 {
   "name": "@justeat/f-content-cards",
   "description": "Fozzie Content Cards",
-  "version": "8.3.0-beta.1",
-  "tag": "beta",
+  "version": "9.0.0",
   "main": "dist/f-content-cards.umd.min.js",
-  "maxBundleSize": "75kB",
+  "maxBundleSize": "80kB",
   "files": [
     "dist",
     "docs"
@@ -55,13 +54,15 @@
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
+    "@justeat/f-button": "4.x",
     "vue": "2.x",
     "@braze/web-sdk": ">=3.3.0",
     "date-fns": ">=2.17.0"
   },
   "devDependencies": {
     "@braze/web-sdk": "^3.3.0",
-    "@justeat/f-braze-adapter": "5.0.0",
+    "@justeat/f-button": "4.x",
+    "@justeat/f-braze-adapter": "5.x",
     "@justeat/f-vue-icons": "3.x",
     "@justeat/f-wdio-utils": "1.x",
     "@justeat/fozzie": "9.0.0-beta.5",

@@ -3,7 +3,93 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+<<<<<<< HEAD
 v8.3.0
+=======
+
+v9.0.0
+------------------------------
+*August 03, 2022*
+
+### Changed
+- Rebased and updated from the beta branch to fix the issue where two v8 versions were running side by side
+- Added `@justeat/f-button` as a peerDependency + devDependency
+
+
+v8.0.0-beta.4 (beta 3 excluded due to error)
+------------------------------
+*May 24, 2022*
+
+### Changed
+- updated image to have minimum height and object fit properties
+
+
+v8.0.0-beta.2
+------------------------------
+*May 23, 2022*
+
+### Changed
+- removing unnecessary height value
+
+
+v8.0.0-beta.1
+------------------------------
+*May 11, 2022*
+
+### Changed
+- Updated to beta for use in offers page
+
+
+v8.0.0-alpha.8
+------------------------------
+*May 4, 2022*
+
+### Changed
+- Updated export to use new cards
+- Adjusted card body component
+
+
+v8.0.0-alpha.7
+------------------------------
+*April 20, 2022*
+
+### Added
+- Promotion card one and story file
+
+
+v8.0.0-alpha.6
+------------------------------
+*April 11, 2022*
+
+### Added
+- new Voucher card based on updated icing changes
+
+
+v8.0.0-alpha.5
+------------------------------
+*April 11, 2022*
+
+### Added
+- New Promotion card two card.
+
+
+v8.0.0-alpha.4
+------------------------------
+*April 04, 2022*
+
+### Added
+- Voucher code component for new content cards template system.
+
+
+v8.0.0-alpha.3
+------------------------------
+*March 29, 2022*
+
+### Added
+- Container component for new content cards template system.
+
+v8.2.0
+>>>>>>> 71674b0aa32c3d701d83eea2f45a6dda7f26c9c6
  ------------------------------
  *July 29, 2022*
 
@@ -18,6 +104,14 @@ v8.2.0
 
 ### Added
 - Node 16 support.
+
+
+v8.0.0-alpha.2
+------------------------------
+*March 23, 2022*
+
+### Added
+- Body component for new content cards template system.
 
 
 v8.1.0
@@ -47,10 +141,12 @@ v7.4.1
 - Refactor WebDriverIO tests to use async in order to support Node 16 using `codemod` utility.
 
 
+v8.0.0-alpha.1
 ------------------------------
-*February 24, 2022*
+*March 15, 2022*
 
-### Changed
+### Added
+- Added Image component as part of the new Icing changes
 - Storybook knobs to controls
 
 
