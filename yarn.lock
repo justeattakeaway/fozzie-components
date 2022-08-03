@@ -2243,6 +2243,15 @@
     "@justeat/f-services" "1.0.1"
     core-js "3.6.5"
 
+"@justeat/f-content-cards@8.x":
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-8.2.0.tgz#5a17241e2ab5f6bbc5437cd0b6822d39fdd5ad71"
+  integrity sha512-jODW8Ln3ZhhHw42FmUfhn/WdizQJZPMYCfn+loDe110FAUEEnsJPpAy2fFg98H37XBr6Eu0r5cDv3bdvl3+cNw==
+  dependencies:
+    "@babel/plugin-proposal-class-properties" "7.12.13"
+    "@justeat/f-services" "1.0.1"
+    core-js "3.6.5"
+
 "@justeat/f-dom@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-0.4.0.tgz#3e838a2dd06d4d5281c17f5fb9f66d7485fd759a"
@@ -13401,7 +13410,7 @@ include-media@1.4.9:
   resolved "https://registry.yarnpkg.com/include-media/-/include-media-1.4.9.tgz#d0020b7be3eb2d54868a20943595ce380e0bc43b"
   integrity sha512-IUOcvWDCt6R5V0ktsGk6RbehkW9ks1dODN2ed1p+mhML82TteAl+/ElXy8AJ7ueIuVoKq2NioRVdW9FuwQNOew==
 
-"include-media@github:eduardoboucas/include-media#2.0-release":
+include-media@eduardoboucas/include-media#2.0-release:
   version "2.0.0"
   resolved "https://codeload.github.com/eduardoboucas/include-media/tar.gz/a3c0288e5b22cc746cc2d320d0a374b2ed9d0aeb"
 
