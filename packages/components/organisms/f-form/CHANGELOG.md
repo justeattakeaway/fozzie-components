@@ -5,6 +5,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.8.0
 ------------------------------
+*August 3, 2022*
+
+### Fixed
+- Use correct version of `@justeat/f-form-field`.
+
+v0.8.0
+------------------------------
 *July 29, 2022*
 
 ### Added

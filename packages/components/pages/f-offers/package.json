@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-offers",
   "description": "Fozzie Offers - displays offers to the customers",
-  "version": "1.13.0-beta.1",
+  "version": "1.14.0",
   "main": "dist/f-offers.umd.min.js",
   "maxBundleSize": "150kB",
   "files": [
@@ -47,8 +47,8 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-globalisation": "1.0.0",
-    "@justeat/f-services": "1.11.0",
+    "@justeat/f-globalisation": "1.x",
+    "@justeat/f-services": "1.x",
     "axios": "0.21.2",
     "jwt-decode": "3.1.2"
   },
@@ -66,7 +66,7 @@
   "devDependencies": {
     "@braze/web-sdk": "3.3.0",
     "@justeat/f-button": "4.x",
-    "@justeat/f-content-cards": "8.0.0-beta.4",
+    "@justeat/f-content-cards": "9.x",
     "@justeat/f-media-element": "3.x",
     "@justeat/f-mega-modal": "7.x",
     "@justeat/f-searchbox": "6.x",
