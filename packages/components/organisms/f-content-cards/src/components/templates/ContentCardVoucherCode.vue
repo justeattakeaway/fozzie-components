@@ -159,7 +159,7 @@ export default {
 
 .c-contentCard-voucher-code,
 .c-contentCard-voucher-copy {
-    @include font-size(body-l);
+    @include f.font-size(body-l);
     font-weight: f.$font-weight-bold;
     color: f.$color-content-link;
     width: 50%;

@@ -44,15 +44,15 @@ $image-logoWidth: 48px;
     position: absolute;
     left: f.spacing(d);
     top: f.spacing(d);
-    border-radius: f.$image-borderRadius;
-    width: f.$image-logoWidth;
+    border-radius: $image-borderRadius;
+    width: $image-logoWidth;
 }
 
 .c-content-cardImage {
     width: 100%;
-    border-radius: f.$image-borderRadius;
+    border-radius: $image-borderRadius;
     object-fit: cover;
-    min-height: f.$image-minHeight;
+    min-height: $image-minHeight;
 
     @include f.media('<=narrow') {
         border-radius: 0;
