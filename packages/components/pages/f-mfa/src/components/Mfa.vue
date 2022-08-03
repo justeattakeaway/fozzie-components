@@ -52,7 +52,7 @@
                     </form-field>
 
                     <f-alert
-                        v-show="hasSubmitError"
+                        v-if="hasSubmitError"
                         data-test-id="mfa-submit-error-alert"
                         type="danger"
                         :class="$style['c-mfa-submit-error']"

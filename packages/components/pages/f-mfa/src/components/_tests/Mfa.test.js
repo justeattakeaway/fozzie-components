@@ -1,4 +1,4 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { createLocalVue, mount, shallowMount } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
 import sut from '../Mfa.vue';
 import tenantConfigs from '../../tenants';
@@ -30,13 +30,16 @@ describe('Mfa', () => {
     const mountSut = async ({
         mocks = sutMocks,
         propsData = sutProps,
-        data = sutData
+        data = sutData,
+        shallow = true
     } = {}) => {
         // initialiseSpy = jest.spyOn(sut.methods, 'initialise');
         // onFormSubmitSpy = jest.spyOn(sut.methods, 'onFormSubmit');
         // onShowHelpInfoSpy = jest.spyOn(sut.methods, 'onShowHelpInfo');
 
-        const mock = shallowMount(sut, {
+        const mountFn = shallow ? shallowMount : mount;
+
+        const mock = mountFn(sut, {
             i18n,
             localVue,
             propsData,
@@ -74,5 +77,39 @@ describe('Mfa', () => {
 
         // Assert
         expect(wrapper.exists()).toBe(true);
+    });
+
+    it.each([
+        ['show', true],
+        ['NOT show', false]
+    ])('should %s error message when hasSubmitError is %s', async (_, hasSubmitError) => {
+        // Arrange
+        wrapper = await mountSut();
+
+        // Act
+        await wrapper.setData({
+            hasSubmitError
+        });
+
+        // Assert
+        const alert = wrapper.find('[data-test-id="mfa-submit-error-alert"]');
+        expect(alert.exists()).toBe(hasSubmitError);
+    });
+
+    it.each([
+        ['show', true],
+        ['NOT show', false]
+    ])('should %s validation error when showValidationError is %s', async (_, showValidationError) => {
+        // Arrange
+        wrapper = await mountSut({ shallow: false }); // Deep mount to make sure slot is rendered
+
+        // Act
+        await wrapper.setData({
+            showValidationError
+        });
+
+        // Assert
+        const validationError = wrapper.find('[data-test-id="mfa-form-validation-error"]');
+        expect(validationError.exists()).toBe(showValidationError);
     });
 });
