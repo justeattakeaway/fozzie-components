@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.14.0
+------------------------------
+*August 3, 2022*
+
+### Added
+- Node 16 compatible version of `@justeat/f-services`.
+- Node 16 compatible version of `@justeat/f-globalisation`.
+- Node 16 compatible version of `@justeat/f-content-cards`.
+
+
 v1.13.0-beta.1
 ------------------------------
 *July 25, 2022*
