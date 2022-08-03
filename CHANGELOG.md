@@ -9,6 +9,7 @@ v7.22.0
 
 ### Changed
 - CircleCI to use Node 16 Docker image.
+- Updated Chromedriver to use latest version.
 
 
 v7.21.0
