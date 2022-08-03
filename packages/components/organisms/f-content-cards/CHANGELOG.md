@@ -3,9 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-<<<<<<< HEAD
-v8.3.0
-=======
+v9.1.0
+------------------------------
+*July 29, 2022*
+
+ ### Added
+- Node 16 compatible version of `@justeat/f-services`.
+- Node 16 compatible version of `@justeat/f-braze-adapter`.
+- Node 16 compatible version of `@justeat/f-vue-icons`.
+
 
 v9.0.0
 ------------------------------
@@ -89,13 +95,6 @@ v8.0.0-alpha.3
 - Container component for new content cards template system.
 
 v8.2.0
->>>>>>> 71674b0aa32c3d701d83eea2f45a6dda7f26c9c6
- ------------------------------
- *July 29, 2022*
-
- ### Added
- - Node 16 compatible version of `@justeat/f-services`.
- - Node 16 compatible version of `@justeat/f-vue-icons`.
 
 
 v8.2.0

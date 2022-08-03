@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.3.0
 ------------------------------
-*July 29, 2022*
+*August 3, 2022*
 
 ### Added
 - Node 16 compatible version of `@justeat/f-vue-icons`.
