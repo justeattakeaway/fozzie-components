@@ -66,9 +66,9 @@ commands:
           command: |
             if [ "${RUN_ALL}" == "true" ];
             then
-              yarn << parameters.command_name >>
+              yarn << parameters.command_name >> --concurrency=1
             else
-              yarn << parameters.command_name >> --filter=...[master]
+              yarn << parameters.command_name >> --filter=...[master] --concurrency=1
             fi
 
   build_packages:
@@ -271,10 +271,6 @@ jobs:
     executor: node
     steps:
       - checkout
-      - browser-tools/install-chrome
-      - run:
-          command: |
-            google-chrome --version
       - install_node_dependencies
       - persist_to_workspace:
           root: .
@@ -342,6 +338,10 @@ jobs:
     steps:
       - attach_workspace:
           at: .
+      - browser-tools/install-chrome
+      - run:
+          command: |
+            google-chrome --version
       - detect_root_change
       - run: # Install Component Test Dependencies
           name: Install Component Test Dependencies
