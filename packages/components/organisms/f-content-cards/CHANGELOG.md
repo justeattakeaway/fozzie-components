@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v9.1.0
 ------------------------------
-*July 29, 2022*
+*August 3, 2022*
 
  ### Added
 - Node 16 compatible version of `@justeat/f-services`.
@@ -93,8 +93,6 @@ v8.0.0-alpha.3
 
 ### Added
 - Container component for new content cards template system.
-
-v8.2.0
 
 
 v8.2.0
