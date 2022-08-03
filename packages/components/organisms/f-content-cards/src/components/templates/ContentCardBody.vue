@@ -64,6 +64,8 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-content-card-bodyTop {
     flex-grow: 1;
 }
@@ -73,45 +75,45 @@ export default {
     padding: spacing(d);
     border-radius: 12px;
     height: 100%;
-    box-shadow: $elevation-box-shadow-01;
+    box-shadow: f.$elevation-box-shadow-01;
     display: flex;
     flex-direction: column;
 }
 
 .c-content-card-title {
-    @include font-size(heading-s);
+    @include f.font-size(heading-s);
     margin-bottom: spacing(b);
     text-decoration: none;
 }
 
 .c-content-card-subtitle {
     margin-top: 0;
-    margin-bottom: spacing(b);
+    margin-bottom: f.spacing(b);
     text-decoration: none;
 }
 
 .c-content-card-description {
-    @include font-size(caption);
+    @include f.font-size(caption);
     margin-top: 0;
-    margin-bottom: spacing(d);
+    margin-bottom: f.spacing(d);
     text-decoration: none;
 }
 
 .c-content-card-footer {
-    padding-top: spacing(d);
+    padding-top: f.spacing(d);
 }
 
 .c-content-card-footer--border {
-    border-top: 1px solid $color-border-default;
+    border-top: 1px solid f.$color-border-default;
 }
 
 .c-content-card-bodyWrapper {
-    margin-top: -(spacing(e));
+    margin-top: -(f.spacing(e));
     z-index: 10;
     width: 100%;
     flex-grow: 1;
-    @include media('<=narrow') {
-        padding: spacing(d);
+    @include f.media('<=narrow') {
+        padding: f.spacing(d);
     }
 }
 </style>

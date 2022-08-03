@@ -29,7 +29,9 @@ export default {
 </script>
 
 <style lang="scss" module>
-$image-borderRadius: $radius-rounded-c;
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+$image-borderRadius: f.$radius-rounded-c;
 $image-minHeight: 160px;
 $image-logoWidth: 48px;
 
@@ -40,19 +42,19 @@ $image-logoWidth: 48px;
 
 .c-content-cardLogo {
     position: absolute;
-    left: spacing(d);
-    top: spacing(d);
-    border-radius: $image-borderRadius;
-    width: $image-logoWidth;
+    left: f.spacing(d);
+    top: f.spacing(d);
+    border-radius: f.$image-borderRadius;
+    width: f.$image-logoWidth;
 }
 
 .c-content-cardImage {
     width: 100%;
-    border-radius: $image-borderRadius;
+    border-radius: f.$image-borderRadius;
     object-fit: cover;
-    min-height: $image-minHeight;
+    min-height: f.$image-minHeight;
 
-    @include media('<=narrow') {
+    @include f.media('<=narrow') {
         border-radius: 0;
     }
 }

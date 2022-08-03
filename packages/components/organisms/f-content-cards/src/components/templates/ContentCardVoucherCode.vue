@@ -146,10 +146,12 @@ export default {
 </script>
 
 <style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
 .c-contentCard-voucher {
     display: flex;
     width: 100%;
-    font-family: $font-family-base;
+    font-family: f.$font-family-base;
     border: none;
     cursor: pointer;
     background: transparent;
@@ -158,8 +160,8 @@ export default {
 .c-contentCard-voucher-code,
 .c-contentCard-voucher-copy {
     @include font-size(body-l);
-    font-weight: $font-weight-bold;
-    color: $color-content-link;
+    font-weight: f.$font-weight-bold;
+    color: f.$color-content-link;
     width: 50%;
 }
 
@@ -172,7 +174,7 @@ export default {
 }
 
 .c-contentCard-voucher-copy--copied {
-    color: $color-content-default;
+    color: f.$color-content-default;
 }
 
 .c-contentCard-voucher-copy--transitionOut {
@@ -188,10 +190,10 @@ export default {
 }
 
 .c-contentCard-voucher-code-cooldownTick {
-    fill: $color-content-default;
-    width: spacing(d);
-    height: spacing(d);
+    fill: f.$color-content-default;
+    width: f.spacing(d);
+    height: f.spacing(d);
     padding: 0;
-    margin-top: -#{spacing()};
+    margin-top: -#{f.spacing()};
 }
 </style>
