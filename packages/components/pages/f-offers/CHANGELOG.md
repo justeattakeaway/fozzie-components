@@ -8,7 +8,6 @@ v1.14.0
 *August 3, 2022*
 
 ### Added
-- "beta" tag to ensure package gets tagged correctly on npm when published.
 - Node 16 compatible version of `@justeat/f-services`.
 - Node 16 compatible version of `@justeat/f-globalisation`.
 - Node 16 compatible version of `@justeat/f-content-cards`.
