@@ -72,7 +72,7 @@ export default {
 .c-content-card-body {
     width: 100%;
     background-color: #fff;
-    padding: spacing(d);
+    padding: f.spacing(d);
     border-radius: 12px;
     height: 100%;
     box-shadow: f.$elevation-box-shadow-01;
@@ -82,7 +82,7 @@ export default {
 
 .c-content-card-title {
     @include f.font-size(heading-s);
-    margin-bottom: spacing(b);
+    margin-bottom: f.spacing(b);
     text-decoration: none;
 }
 
