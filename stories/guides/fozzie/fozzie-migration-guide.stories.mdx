@@ -158,5 +158,5 @@ The following changes need to happen once you've updated `gulp-build-fozzie` to 
 3. Within your application you will need to update some of the fozzie paths to follow the new `@use/@forward` rules, see [here for more details](#new-way-use--forward).
     - Essentially:
         `import 'fozzie';` changes to `'@justeat/fozzie/src/scss/fozzie' as f;`
-4. With the new `@use` change above you will now need to update your entire application so `fozzie` helpers can be accessed correctly. See [example](https://github.com/justeat/fozzie-components/pull/2033) PR.
+4. With the new `@use` change above you will now need to update your SCSS so that `fozzie` helpers can be accessed correctly. See [this PR](https://github.com/justeat/fozzie-components/pull/2033) for an example of these changes.
 5. Run your application build command to make sure there are no errors in your app.
