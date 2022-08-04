@@ -25,7 +25,13 @@ There's two solutions you could try from the root of the project which may fix t
 
 
 ## Development
-It is recommended to run the following commands at the root of the monorepo in order to install dependencies and allow you to view components in isolation via Storybook.
+We use [Turborepo](https://www.turborepo.org) to handle all of our build tasks in order to speed up development. We utilise Turborepo caching so that certain tasks only execute for changed components and their dependencies / dependants.
+
+Because of this, it is recommended to run the following tasks at the root of the monorepo to ensure tasks are executed for the required components:
+
+`build`
+`test`
+`lint`
 
 ## Importing optional SCSS helpers from Fozzie
 We have created several optional mixin helpers in [Fozzie](https://github.com/justeat/fozzie/tree/master/src/scss/components/optional).
@@ -61,48 +67,6 @@ You could remove the need for namespacing by using something like `@use "../asse
 
 ```
 
-## Testing
-Unit / Integration / Contract
-
-```bash
-# Run Unit / Integration / Contract tests for all components
-cd ./fozzie-components
-yarn test
-```
-
-OR
-
-```bash
-# Run Unit / Integration / Contract tests for individual f-* packag
-cd ./fozzie-components/packages/f-*
-yarn test
-```
-
-Component Tests
-```bash
-# Run Component tests for all components
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components
-
-yarn storybook:build
-yarn storybook:serve-static
-yarn test-component:chrome
-```
-
-OR
-
-```bash
-# Run Component tests for individual f-* package
-# Note: Ensure Storybook is not running when running the following commands
-cd ./fozzie-components
-yarn storybook:build
-yarn storybook:serve-static
-
-# And in another window
-cd ./fozzie-components/packages/f-*user-message*
-yarn test-component:chrome
-```
-
 ## Running Storybook
 
 To run storybook first you must run the following at the the top level
@@ -111,6 +75,7 @@ To run storybook first you must run the following at the the top level
 
 Then run `yarn storybook:serve` to start storybook, which will open on `localhost:8080`.
 
+Alternatively, you can run `yarn storybook:serve-changed` to just view the component you're working on, as well as any of it's dependencies / dependants.
 
 ### Running a single component in Storybook
 
