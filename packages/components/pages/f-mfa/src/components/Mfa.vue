@@ -115,11 +115,12 @@ import {
 } from '@justeat/f-vue-icons';
 import AccountWebApi from '../services/AccountWeb.api';
 import tenantConfigs from '../tenants';
-// import {
-//     EMAIL_HTML5_REGEX,
-//     MFA_CODE_REGEX,
-//     RETURN_URL_REGEX
-// } from '../constants';
+import {
+    EMAIL_RFC5322_REGEX,
+    MFA_CODE_REGEX,
+    RETURN_URL_REGEX,
+    REDIRECT_URL_EVENT_NAME
+} from '../constants';
 
 const standardLogTags = ['account-pages', 'mfa'];
 
@@ -156,12 +157,7 @@ export default {
             showErrorPage: false,
             returnUrl: '/',
             hasSubmitError: false,
-            showValidationError: false,
-            accountWebApi: new AccountWebApi({
-                httpClient: this.$http,
-                cookies: this.$cookies,
-                baseUrl: this.smartGatewayBaseUrl
-            })
+            showValidationError: false
         };
     },
 
@@ -177,17 +173,30 @@ export default {
 
     methods: {
         /**
-        * TODO
+        * Sets the showErrorPage flag to false, so it is clean before we start.
+        * Validates the returnUrl and sets it to the returnUrl property.
+        * Validates the email and sets it to the email property.
+        * Validates the code and sets it to the mfa property.
         */
         initialise () {
             this.showErrorPage = false;
-            // this.processQueryString('returnUrl', 'returnUrl', RETURN_URL_REGEX);
-            // this.processQueryString('email', 'email', EMAIL_HTML5_REGEX);
-            // this.processQueryString('code', 'mfa', MFA_CODE_REGEX);
+            this.processQueryString('returnUrl', 'returnUrl', RETURN_URL_REGEX);
+            this.processQueryString('email', 'email', EMAIL_RFC5322_REGEX);
+            this.processQueryString('code', 'mfa', MFA_CODE_REGEX);
         },
 
         /**
-        * TODO
+        * Raises the isSubmitting which disables the Submit button.
+        * Sets the hasSubmitError flag to false, so it is clean before we start.
+        * Validates the otp value and if valid, posts the form data to the api.
+        * Then upon success emits an event to the parent component to redirect
+        * to the supplied returnUrl.
+        * If the otp is invalid, lowers the isSubmitting flag and sets the
+        * showValidationError flag to true, which displays the error message
+        * below the form field.
+        * If the post fails, lowers the isSubmitting flag and it sets the
+        * hasSubmitError flag to true, which displays the alert message
+        * below the form field plus logs the issue.
         */
         async onFormSubmit () {
             this.isSubmitting = true;
@@ -198,8 +207,12 @@ export default {
                 this.showValidationError = !isOtpValid;
 
                 if (isOtpValid) {
-                    this.accountWebApi.postValidateMfaToken({ mfa_token: this.mfa, otp: this.otp }); // eslint-disable-line camelcase
-                    this.redirect(this.returnUrl); // Completed successfully, redirect to returnUrl
+                    (new AccountWebApi({
+                        httpClient: this.$http,
+                        cookies: this.$cookies,
+                        baseUrl: this.smartGatewayBaseUrl
+                    })).postValidateMfaToken({ mfa_token: this.mfa, otp: this.otp }); // eslint-disable-line camelcase
+                    this.emitRedirectEvent(this.returnUrl); // Completed successfully, emit redirect return url
                 }
             } catch (error) {
                 if (error.response && error.response.status) {
@@ -231,48 +244,60 @@ export default {
         },
 
         /**
-        * TODO
+        * If no error has already occurred it reads, decodes, trims,
+        * validates the query string parameters based on the regex
+        * provided. Then store the value against the supplied property
+        * indicated by the key.
+        * If the key is not present in the query string or the value is
+        * not valid, the showErrorPage flag is raised and the issue is
+        * logged.
+        *
+        * @param {string} key - The key to search for in the query string.
+        * @param {string} field - The data field to store the value against.
+        * @param {string} regex - The regex to validate the value against.
         */
         processQueryString (key, field, regex) {
-            // Only validate query string if clientside
-            if (typeof (window) !== 'undefined') {
-                let err = new Error(`Missing or Failed Regex [${key}]`);
-                try {
-                    const urlParams = new URLSearchParams(window.location.search);
-                    if (!urlParams.has(key)) {
-                        const param = decodeURI(urlParams.get(key)).trim();
-                        if (regex.test(param)) {
-                            this[field] = param;
-                        } else {
-                            this.showErrorPage = true;
-                        }
+            if (this.showErrorPage === true) {
+                return;
+            }
+            let err = new Error(`Missing key in querystring or failed regex [${key}]`);
+            try {
+                if (this.$route.query[key]) {
+                    const param = decodeURIComponent(this.$route.query[key]).trim();
+                    const rx = new RegExp(regex);
+                    if (rx.test(param)) {
+                        this[field] = param;
                     } else {
                         this.showErrorPage = true;
                     }
-                } catch (error) {
+                } else {
                     this.showErrorPage = true;
-                    err = error;
-                } finally {
-                    if (this.showErrorPage) {
-                        this.$log.warn(`Error validating mfa(${key}) querystring data`, err, standardLogTags);
-                    }
+                }
+            } catch (error) {
+                this.showErrorPage = true;
+                err = error;
+            } finally {
+                if (this.showErrorPage) {
+                    this.$log.warn(`Error validating mfa(${key}) querystring data`, err, standardLogTags);
                 }
             }
         },
 
         /**
-        * Redirect to url
+        * Emit Success Event - Redirect url
         * (check/tidy up the path due to unknown source)
         */
-        redirect (url) {
+        emitRedirectEvent (url) {
             const pathRaw = url.trim();
             const path = `${pathRaw.charAt(0) === '/' ? pathRaw : `/${pathRaw}`}`;
-            window.location.href = path; // Perform redirect
+            this.$emit(REDIRECT_URL_EVENT_NAME, path);
         },
 
+        /**
+        * Validates the otp value is within acceptable bounds
+        */
         validateOtp () {
-            // TODO
-            return true;
+            return this.otp.length > 0 && this.otp.length < 11;
         }
     }
 };

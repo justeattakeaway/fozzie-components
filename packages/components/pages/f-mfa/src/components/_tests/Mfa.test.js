@@ -2,24 +2,20 @@ import { createLocalVue, mount, shallowMount } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
 import sut from '../Mfa.vue';
 import tenantConfigs from '../../tenants';
+import {
+    REDIRECT_URL_EVENT_NAME
+} from '../../constants';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
 const baseUrl = 'https://api.test.co.uk/';
 let wrapper;
-let cookiesSpy;
-let httpSpy;
 let sutMocks;
 let sutProps;
 let sutData;
-let windowSpy;
-let windowCopy;
-let windowMock;
-const windowUrl = 'https://www.test.co.uk/mfa/optPage?code=ABC123&email=jazz.man@hemail.com&returnurl=place/i/came/from';
 let initialiseSpy;
-// let onFormSubmitSpy;
-// let onShowHelpInfoSpy;
 
+// Default to en-GB
 const i18n = {
     locale: 'en-GB',
     messages: {
@@ -27,26 +23,32 @@ const i18n = {
     }
 };
 
+// Mock the route date with valid data and as it would appear enocded in the location.value.href
+const routeMock = {
+    query: {
+        code: 'ABC123',
+        email: 'jazz.man%40hemail.com',
+        returnUrl: '%2Fplace%2Fi%2Fcame%2Ffrom'
+    }
+};
+
+// Spy on the logging warn method
+const warnLogSpy = jest.fn();
 const logMocks = {
-    info: jest.fn(),
-    warn: jest.fn(),
-    error: jest.fn()
+    warn: warnLogSpy
 };
 
-const PrepWindowMock = hrefMock => {
-    windowCopy = { ...global.window };
-    windowMock = ({
-        ...windowCopy,
-        location: {
-            value: {
-                href: hrefMock
-            }
-        }
-    });
-    windowSpy = jest.spyOn(global, 'window', 'get');
-    windowSpy.mockImplementation(() => windowMock);
-};
+// Spy on the AccountWebApi.postValidateMfaToken method
+const mockPostValidateMfaToken = jest.fn();
+jest.mock(
+    '../../services/AccountWeb.api',
+    () => jest.fn().mockImplementation(() => ({
+        postValidateMfaToken: mockPostValidateMfaToken
+    }))
+);
 
+// Provide a generic mount method to be called by each test which
+// can override mocks, props and data within each test if required
 const mountSut = async ({
     mocks = sutMocks,
     propsData = sutProps,
@@ -54,8 +56,6 @@ const mountSut = async ({
     shallow = true
 } = {}) => {
     initialiseSpy = jest.spyOn(sut.methods, 'initialise');
-    // onFormSubmitSpy = jest.spyOn(sut.methods, 'onFormSubmit');
-    // onShowHelpInfoSpy = jest.spyOn(sut.methods, 'onShowHelpInfo');
 
     const mountFn = shallow ? shallowMount : mount;
 
@@ -73,8 +73,7 @@ const mountSut = async ({
 
 describe('Mfa', () => {
     beforeEach(() => {
-        // Arrange
-        PrepWindowMock(windowUrl);
+        // Arrange clean valid defaults (can be overridden by each test)
         sutData = () => ({
             otp: '',
             mfa: '',
@@ -88,10 +87,8 @@ describe('Mfa', () => {
             smartGatewayBaseUrl: baseUrl
         };
         sutMocks = {
-            $http: httpSpy,
-            $cookies: cookiesSpy,
-            $log: logMocks,
-            window: windowMock
+            $route: routeMock,
+            $log: logMocks
         };
     });
 
@@ -131,64 +128,93 @@ describe('Mfa', () => {
     });
 
     describe('When calling the initialise() method', () => {
-        it('should set the returnUrl if a valid value supplied on the querystring', async () => {
+        it.each([
+            ['returnUrl', '/place/i/came/from'],
+            ['email', 'jazz.man@hemail.com'],
+            ['mfa', 'ABC123']
+        ])('should set the %s if a valid value supplied on the querystring', async (key, expected) => {
+            // Act
+            wrapper = await mountSut();
+
+            // Assert
+            expect(wrapper.vm[key]).toBe(expected);
         });
 
-        it('should set the email address if a valid value supplied on the querystring', async () => {
-        });
+        it.each([
+            ['returnUrl', 'https%3A%2F%2Fwww.somebadplace.co.uk%3FreturnUrl%3Dnottheplace%2Fi%2Fcame%2Ffrom'],
+            ['email', 'mysite..123%40hemail.b'],
+            ['code', '123456789012345678901234567890XXX']
+        ])('should show the error page if the %s validation fails', async (key, value) => {
+            // Arrange
+            const expected = true;
+            const sutOverrideMocks = {
+                ...sutMocks,
+                $route: {
+                    ...routeMock,
+                    query: {
+                        ...routeMock.query,
+                        [key]: value
+                    }
+                }
+            };
 
-        it('should set the mfa code if a valid value supplied on the querystring', async () => {
-        });
+            // Act
+            wrapper = await mountSut({ mocks: sutOverrideMocks });
 
-        it('should show the error page if the return url validation fails', async () => {
-        });
-
-        it('should show the error page if the email address validation fails', async () => {
-        });
-
-        it('should show the error page if the mfa code validation fails', async () => {
+            // Assert
+            const errorCard = wrapper.find('[data-test-id="mfa-error-page"]');
+            expect(errorCard.exists()).toBe(expected);
         });
     });
 
     describe('When calling the onFormSubmit() method', () => {
-        describe('And is Unsuccessful', () => {
-            it.each([
-                ['show', true],
-                ['NOT show', false]
-            ])('should %s error alert when hasSubmitError is %s', async (_, hasSubmitError) => {
-                // Arrange
-                wrapper = await mountSut();
+        it.each([
+            ['show', true],
+            ['NOT show', false]
+        ])('should %s error alert when hasSubmitError is %s', async (_, hasSubmitError) => {
+            // Arrange
+            wrapper = await mountSut();
 
-                // Act
-                await wrapper.setData({
-                    hasSubmitError
-                });
-
-                // Assert
-                const alert = wrapper.find('[data-test-id="mfa-submit-error-alert"]');
-                expect(alert.exists()).toBe(hasSubmitError);
+            // Act
+            await wrapper.setData({
+                hasSubmitError
             });
 
-            it.each([
-                ['show', true],
-                ['NOT show', false]
-            ])('should %s validation error when showValidationError is %s', async (_, showValidationError) => {
-                // Arrange
-                wrapper = await mountSut({ shallow: false }); // Deep mount to make sure slot is rendered
+            // Assert
+            const alert = wrapper.find('[data-test-id="mfa-submit-error-alert"]');
+            expect(alert.exists()).toBe(hasSubmitError);
+        });
 
-                // Act
-                await wrapper.setData({
-                    showValidationError
-                });
+        it.each([
+            ['show', true],
+            ['NOT show', false]
+        ])('should %s validation error when showValidationError is %s', async (_, showValidationError) => {
+            // Arrange
+            wrapper = await mountSut({ shallow: false }); // Deep mount to make sure slot is rendered
 
-                // Assert
-                const validationError = wrapper.find('[data-test-id="mfa-form-validation-error"]');
-                expect(validationError.exists()).toBe(showValidationError);
+            // Act
+            await wrapper.setData({
+                showValidationError
             });
+
+            // Assert
+            const validationError = wrapper.find('[data-test-id="mfa-form-validation-error"]');
+            expect(validationError.exists()).toBe(showValidationError);
         });
 
         describe('And the form data is valid', () => {
             it('should call the postValidateMfaToken() method with the correct params', async () => {
+                // Arrange
+                const expectedParams = { mfa_token: 'ABC123', otp: 'test-otp' }; // eslint-disable-line camelcase
+                wrapper = await mountSut();
+                await wrapper.setData({
+                    otp: 'test-otp'
+                });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+
+                expect(mockPostValidateMfaToken).toHaveBeenCalledWith(expectedParams);
             });
 
             describe('And the submitting of the form data was unsuccessful', () => {
@@ -200,7 +226,20 @@ describe('Mfa', () => {
             });
 
             describe('And the submitting of the form data was successful', () => {
-                it('should call the redirect method', async () => {
+                it('should emit correct event if api call successful', async () => {
+                    // Arrange
+                    const expectedUrl = '/place/i/came/from';
+                    wrapper = await mountSut();
+                    await wrapper.setData({
+                        otp: 'test-otp'
+                    });
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    expect(wrapper.emitted()[REDIRECT_URL_EVENT_NAME]).toBeTruthy();
+                    expect(wrapper.emitted()[REDIRECT_URL_EVENT_NAME].length).toEqual(1);
+                    expect(wrapper.emitted()[REDIRECT_URL_EVENT_NAME][0]).toEqual([expectedUrl]);
                 });
             });
         });
