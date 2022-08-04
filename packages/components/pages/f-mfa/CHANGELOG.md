@@ -11,6 +11,7 @@ v0.6.0
 ### Added
 - Validation of the input data (querystring).
 - Error page
+- Event upon success with the return url
 
 
 v0.5.0
