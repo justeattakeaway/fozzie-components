@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.5.0
+------------------------------
+*August 2, 2022*
+
+### Added
+- Error handling for different status codes.
+- Visuals for errors from validation and API.
+
+
 v0.4.0
 ------------------------------
 *August 1, 2022*
