@@ -150,9 +150,9 @@ commands:
             then
               if [ "${RUN_ALL}" == "true" ];
               then
-                yarn ci:test:visual:<< parameters.component_type >> --concurrency=2
+                yarn ci:test:visual:<< parameters.component_type >> --concurrency=1
               else
-                yarn ci:test:visual:<< parameters.component_type >> --filter=...[master] --concurrency=2
+                yarn ci:test:visual:<< parameters.component_type >> --filter=...[master] --concurrency=1
               fi
             else
               echo Skipping visual regression tests because PR is either in draft mode or has wip label applied
