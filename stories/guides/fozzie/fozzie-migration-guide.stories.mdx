@@ -150,7 +150,7 @@ If your application uses a different build tool other than webpack (see [prerequ
 
 #### Gulp Build Fozzie:
 
-[Gulp build fozzie](https://github.com/justeat/gulp-build-fozzie) is a set of Gulp tasks used across Fozzie modules. If your application uses this to build packages, instead of Webpack, you will need to firstly update to the latest version (v11.0.0). Version 11.0.0 removes a package called eyeglass which essentially creates a shortcut to your `node_modules` folder.
+[Gulp build fozzie](https://github.com/justeat/gulp-build-fozzie) is a (now deprecated) set of Gulp tasks that can be used to build Fozzie modules. If your application uses this to bundle your project, instead of Webpack, you will firstly need to update to the latest version of `gulp-build-fozzie` (v11.0.0). Version 11.0.0 is compatible with the latest versions of fozzie (v9+), removing support for a package called eyeglass which essentially creates a shortcut to your `node_modules` folder.
 
 The following changes need to happen once you've updated gulp-build-fozzie to v11 or greater:
 1. Bump `fozzie` to the latest major version (v9), see changelog for details.
