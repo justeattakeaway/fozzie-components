@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.23.0
 ------------------------------
-*August 3, 2022*
+*August 4, 2022*
 
 ### Added
 - Turborepo local caching for `build` / `lint` / `test` / tasks
