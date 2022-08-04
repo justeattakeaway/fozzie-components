@@ -122,7 +122,7 @@ commands:
       - run_command:
           command_description: Run component tests for packages
           command_name: "ci:test-component:chrome:<< parameters.component_type >>"
-          turborepo_concurrency: "2"
+          turborepo_concurrency: "1"
 
   accessibility_tests:
     description: Run Accessibility Tests
@@ -133,7 +133,7 @@ commands:
       - run_command:
           command_description: Run accessibility tests for packages
           command_name: "ci:test-a11y:chrome:<< parameters.component_type >>"
-          turborepo_concurrency: "2"
+          turborepo_concurrency: "1"
 
   visual_regression_tests:
     description: Run Percy Visual Regression Tests
