@@ -33,6 +33,31 @@ Because of this, it is recommended to run the following tasks at the root of the
 `test`
 `lint`
 
+For other test tasks you can execute in a number of ways:
+
+Component Tests
+ ```bash
+ # Run Component tests for all components
+ # Note: Ensure Storybook is not running when running the following commands
+ cd ./fozzie-components
+ yarn storybook:build
+ yarn storybook:serve-static
+ yarn test-component:chrome
+ ```
+
+ OR
+
+ ```bash
+ # Run Component tests for individual f-* package
+ # Note: Ensure Storybook is not running when running the following commands
+ cd ./fozzie-components
+ yarn storybook:build
+ yarn storybook:serve-static
+ # And in another window
+ cd ./fozzie-components/packages/f-*user-message*
+ yarn test-component:chrome
+ ```
+
 ## Importing optional SCSS helpers from Fozzie
 We have created several optional mixin helpers in [Fozzie](https://github.com/justeat/fozzie/tree/master/src/scss/components/optional).
 Here's an example of how to use it:
