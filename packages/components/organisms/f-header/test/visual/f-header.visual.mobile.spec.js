@@ -82,19 +82,23 @@ describe('Shared - f-header component tests', () => {
     });
 
     tests = [
-        { tenant: 'en-GB', control: 'showLoginInfo' },
-        { tenant: 'en-GB', control: 'showHelpLink' },
-        { tenant: 'en-GB', control: 'showCountrySelector' }
+        { tenant: 'en-GB', control: 'showLoginInfo', displayState: false },
+        { tenant: 'en-GB', control: 'showLoginInfo', displayState: true },
+        { tenant: 'en-GB', control: 'showHelpLink', displayState: false },
+        { tenant: 'en-GB', control: 'showHelpLink', displayState: true },
+        { tenant: 'en-GB', control: 'showCountrySelector', displayState: false },
+        { tenant: 'en-GB', control: 'showCountrySelector', displayState: true },
+        { tenant: 'en-GB', control: 'showCorporateLink', displayState: false },
+        { tenant: 'en-GB', control: 'showCorporateLink', displayState: true }
     ];
 
-    tests.forEach(({ tenant, control }) => {
-        it(`should not display "${control}" `, async () => {
+    tests.forEach(({ tenant, control, displayState }) => {
+        it(`should display "${control}" - ${displayState} `, async () => {
             // Act
-            await Header.load({ locale: tenant, [control]: false });
-            await Header.openMobileNavigationBar();
+            await Header.load({ locale: tenant, [control]: displayState });
 
             // Assert
-            await browser.percyScreenshot(`f-header - ${control} - False`, 'mobile');
+            await browser.percyScreenshot(`f-header - ${control} - ${displayState}`, 'mobile');
         });
     });
 

@@ -8,6 +8,7 @@ v10.6.0
 
 ### Added
 - `showCorporateLink` - Shows "Corporate Ordering" Link
+- Component / Visual regression tests
 
 v10.5.0
 ------------------------------
