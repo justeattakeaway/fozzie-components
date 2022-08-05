@@ -407,6 +407,15 @@ describe('CookieBanner', () => {
         });
 
         describe('acceptAllCookiesActions', () => {
+            beforeEach(() => {
+                Object.defineProperty(window, 'dispatchEvent', {
+                    writable: true,
+                    value: jest.fn().mockImplementation(() => ({
+                        dispatchEvent: jest.fn()
+                    }))
+                });
+            });
+
             it('should set the banner consent cookie to `full`', async () => {
                 // Arrange
                 const propsData = {};
