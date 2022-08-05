@@ -23,6 +23,13 @@ const messages = {
         instructionsPoint4Text: 'See our [{helpLink}] if you still need help',
         submitButtonText: 'Got it',
         alternativeLoginLinkText: 'Login another way'
+    },
+    errorMessages: {
+        validation: 'Please check and try again',
+        submitMfa: {
+            heading: 'Something went wrong',
+            description: 'Sorry about that. Please try again.'
+        }
     }
 };
 
