@@ -13,11 +13,11 @@ class Header extends Page {
     }
 
     navigation = {
-        corporate: {
-            get link () { return $(NAVIGATION.corporate.link); }
-        },
         offersIcon: {
             get link () { return $(NAVIGATION.offersIcon.link); }
+        },
+        corporate: {
+            get link () { return $(NAVIGATION.corporate.link); }
         },
         offersLink: {
             get link () { return $(NAVIGATION.offersLink.link); }

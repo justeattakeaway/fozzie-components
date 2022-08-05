@@ -3,11 +3,11 @@ const COUNTRY_LINK = 'data-test-id="countrySelector-countryList-';
 const IS_NAV_IN_VIEW = '.is-navInView';
 
 const NAVIGATION = {
-    corporate: {
-        link: '[data-test-id="corporate-link"]'
-    },
     offersIcon: {
         link: '[data-test-id="offers-iconLink"]'
+    },
+    corporate: {
+        link: '[data-test-id="corporate-link"]'
     },
     offersLink: {
         link: '[data-test-id="offers-link"]'

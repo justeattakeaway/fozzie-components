@@ -96,6 +96,28 @@
                 </li>
 
                 <li
+                    v-if="showOffersLink"
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    <nav-link
+                        :text="copy.offers.text"
+                        :tabindex="tabIndex"
+                        :href="copy.offers.url"
+                        :data-trak="analyticsObjects.navigation.offers.clickLink"
+                        :is-alt-colour="isAltColour"
+                        :background-theme="headerBackgroundTheme"
+                        data-test-id="offers-link">
+                        <template #icon>
+                            <gift-icon
+                                :class="[
+                                    $style['c-nav-icon'],
+                                    $style['c-nav-icon--offers'],
+                                    { [$style['c-nav-icon--alt']]: isAltColour }
+                                ]" />
+                        </template>
+                    </nav-link>
+                </li>
+
+                <li
                     v-if="showCorporateLink"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
@@ -113,28 +135,6 @@
                                 :class="[
                                     $style['c-nav-icon'],
                                     $style['c-nav-icon--corporate'],
-                                    { [$style['c-nav-icon--alt']]: isAltColour }
-                                ]" />
-                        </template>
-                    </nav-link>
-                </li>
-
-                <li
-                    v-if="showOffersLink"
-                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
-                    <nav-link
-                        :text="copy.offers.text"
-                        :tabindex="tabIndex"
-                        :href="copy.offers.url"
-                        :data-trak="analyticsObjects.navigation.offers.clickLink"
-                        :is-alt-colour="isAltColour"
-                        :background-theme="headerBackgroundTheme"
-                        data-test-id="offers-link">
-                        <template #icon>
-                            <gift-icon
-                                :class="[
-                                    $style['c-nav-icon'],
-                                    $style['c-nav-icon--offers'],
                                     { [$style['c-nav-icon--alt']]: isAltColour }
                                 ]" />
                         </template>
@@ -345,12 +345,12 @@ export default {
             default: false
         },
 
-        showCorporateLink: {
+        showOffersLink: {
             type: Boolean,
             default: false
         },
 
-        showOffersLink: {
+        showCorporateLink: {
             type: Boolean,
             default: false
         },
@@ -472,8 +472,8 @@ export default {
         },
 
         hasNavigationLinks () {
-            return this.showCorporateLink ||
-                this.showOffersLink ||
+            return this.showOffersLink ||
+                this.showCorporateLink ||
                 this.showHelpLink ||
                 this.showDeliveryEnquiry ||
                 this.showLoginInfo ||

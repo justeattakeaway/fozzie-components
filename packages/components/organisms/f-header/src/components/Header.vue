@@ -29,8 +29,8 @@
                 :copy="copy"
                 :custom-nav-links="customNavLinks"
                 :show-delivery-enquiry="showDeliveryEnquiryWithContent"
-                :show-corporate-link="showCorporateLinkWithContent"
                 :show-offers-link="showOffersLinkWithContent"
+                :show-corporate-link="showCorporateLinkWithContent"
                 :show-help-link="showHelpLink"
                 :error-log="errorLog"
                 :user-info-prop="userInfoProp"
@@ -112,12 +112,12 @@ export default {
             default: true
         },
 
-        showCorporateLink: {
+        showOffersLink: {
             type: Boolean,
             default: false
         },
 
-        showOffersLink: {
+        showCorporateLink: {
             type: Boolean,
             default: false
         },
@@ -184,12 +184,12 @@ export default {
             return this.headerBackgroundTheme === 'whiteSeamless';
         },
 
-        showCorporateLinkWithContent () {
-            return !!this.copy.corporate;
-        },
-
         showOffersLinkWithContent () {
             return this.copy.offers && this.showOffersLink;
+        },
+
+        showCorporateLinkWithContent () {
+            return !!this.copy.corporate && this.showCorporateLink;
         },
 
         headerBackgroundClass () {
