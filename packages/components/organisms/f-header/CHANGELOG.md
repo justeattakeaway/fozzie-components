@@ -2,6 +2,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v10.6.0
+------------------------------
+*August 5, 2022*
+
+### Added
+- `showCorporateLink` - Shows "Corporate Ordering" Link
+
 v10.5.0
 ------------------------------
 *July 29, 2022*

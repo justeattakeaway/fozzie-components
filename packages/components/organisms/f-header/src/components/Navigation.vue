@@ -96,6 +96,30 @@
                 </li>
 
                 <li
+                    v-if="showCorporateLink"
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    <nav-link
+                        :text="copy.corporate.text"
+                        :tabindex="tabIndex"
+                        :href="copy.corporate.url"
+                        :data-trak="analyticsObjects.navigation.clickHeaderLink({
+                            label: copy.corporate.gtm
+                        })"
+                        :is-alt-colour="isAltColour"
+                        :background-theme="headerBackgroundTheme"
+                        data-test-id="corporate-link">
+                        <template #icon>
+                            <office-small-icon
+                                :class="[
+                                    $style['c-nav-icon'],
+                                    $style['c-nav-icon--corporate'],
+                                    { [$style['c-nav-icon--alt']]: isAltColour }
+                                ]" />
+                        </template>
+                    </nav-link>
+                </li>
+
+                <li
                     v-if="showOffersLink"
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <nav-link
@@ -284,6 +308,7 @@ import VPopover from '@justeat/f-popover';
 
 // Internal
 import {
+    OfficeSmallIcon,
     GiftIcon,
     HelpCircleOutlineIcon,
     MopedIcon,
@@ -299,6 +324,7 @@ export default {
     name: 'HeaderNavigation',
     components: {
         CountrySelector,
+        OfficeSmallIcon,
         GiftIcon,
         HelpCircleOutlineIcon,
         MopedIcon,
@@ -315,6 +341,11 @@ export default {
         },
 
         showDeliveryEnquiry: {
+            type: Boolean,
+            default: false
+        },
+
+        showCorporateLink: {
             type: Boolean,
             default: false
         },
@@ -441,7 +472,8 @@ export default {
         },
 
         hasNavigationLinks () {
-            return this.showOffersLink ||
+            return this.showCorporateLink ||
+                this.showOffersLink ||
                 this.showHelpLink ||
                 this.showDeliveryEnquiry ||
                 this.showLoginInfo ||
@@ -809,7 +841,8 @@ export default {
 .c-nav-icon--profile,
 .c-nav-icon--delivery,
 .c-nav-icon--help,
-.c-nav-icon--offers {
+.c-nav-icon--offers,
+.c-nav-icon--corporate {
     @include f.media('<=mid') {
         & path {
             fill: common.$nav-icon-color--mobileWhiteBg;

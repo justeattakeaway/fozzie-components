@@ -3,7 +3,7 @@ import Header from '../../test-utils/component-objects/f-header.component';
 describe('Desktop - f-header component tests', () => {
     beforeEach(async () => {
         // Act
-        await Header.load({ showOffersLink: true, showDeliveryEnquiry: true });
+        await Header.load({ showOffersLink: true, showDeliveryEnquiry: true, showCorporateLink: true });
         await browser.maximizeWindow();
     });
 
@@ -12,6 +12,7 @@ describe('Desktop - f-header component tests', () => {
         'help',
         'userAccount',
         'countrySelector',
+        'corporate',
         'offersLink',
         'delivery'
     ];

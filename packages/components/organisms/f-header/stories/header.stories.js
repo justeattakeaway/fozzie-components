@@ -24,6 +24,7 @@ export const HeaderComponent = (args, { argTypes }) => ({
     template: `
         <vue-header
             :user-info-prop="userInfoProp"
+            :show-corporate-link="showCorporateLink"
             :show-offers-link="showOffersLink"
             :show-help-link="showHelpLink"
             :locale="locale"
@@ -49,6 +50,7 @@ HeaderComponent.args = {
     showCountrySelector: true,
     showHelpLink: true,
     showSkipLink: true,
+    showCorporateLink: false,
     showOffersLink: false,
     showDeliveryEnquiry: false,
     logoLinkDisabled: false,
@@ -114,6 +116,10 @@ HeaderComponent.argTypes = {
 
     showSkipLink: {
         description: 'Includes the "Skip to main content" link'
+    },
+
+    showCorporateLink: {
+        description: 'Shows the "Corporate Ordering" Link'
     },
 
     showOffersLink: {
