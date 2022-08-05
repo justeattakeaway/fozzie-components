@@ -82,13 +82,9 @@ describe('Shared - f-header component tests', () => {
     });
 
     tests = [
-        { tenant: 'en-GB', control: 'showLoginInfo', displayState: false },
         { tenant: 'en-GB', control: 'showLoginInfo', displayState: true },
-        { tenant: 'en-GB', control: 'showHelpLink', displayState: false },
         { tenant: 'en-GB', control: 'showHelpLink', displayState: true },
-        { tenant: 'en-GB', control: 'showCountrySelector', displayState: false },
         { tenant: 'en-GB', control: 'showCountrySelector', displayState: true },
-        { tenant: 'en-GB', control: 'showCorporateLink', displayState: false },
         { tenant: 'en-GB', control: 'showCorporateLink', displayState: true }
     ];
 
