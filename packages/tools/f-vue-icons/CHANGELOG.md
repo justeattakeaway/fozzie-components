@@ -7,6 +7,9 @@ v3.13.0
 ------------------------------
 *August 4, 2022*
 
+### Changed
+ - `maxBundleSize` to `155kB`
+
 ### Added
 - `CorporateOfficeSmallIcon` icon
 
