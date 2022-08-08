@@ -11,22 +11,19 @@ jobs:
   install:
     runs-on: ubuntu-latest
     steps:
-    - name: "Checkout"
+    - name: Checkout
       uses: actions/checkout@v3
-    - name: "Cache Node Modules"
-      uses: actions/cache@v3
+    - name: Cache yarn dependencies
+      uses: actions/cache@v2
+      id: yarn-cache
       with:
-        path: ./node_modules
-        key: node_modules-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: node_modules-
-    - name: "Yarn Install"
+        path: |
+          ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          **/node_modules
+        key: our-cache-yarn-${{ hashFiles('**/yarn.lock') }}
+    - name: Install packages
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: yarn
-    - name: "Cache Node Modules"
-      uses: actions/cache@v3
-      with:
-        path: ./node_modules
-        key: node_modules-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: node_modules-
     
   build:
     needs: install
@@ -34,11 +31,17 @@ jobs:
     steps:
     - name: "Checkout"
       uses: actions/checkout@v3
-    - name: "Restore Node Modules Cache"
-      uses: actions/cache@v3
+    - name: "Setup Node"
+      uses: actions/setup-node@v3
       with:
-        path: ./node_modules
-        key: node_modules-${{ hashFiles('**/yarn.lock') }}
-        restore-keys: node_modules-
+        node-version: 16
+    - name: Cache yarn dependencies
+      uses: actions/cache@v2
+      id: yarn-cache
+      with:
+        path: |
+          ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          **/node_modules
+        key: our-cache-yarn-${{ hashFiles('**/yarn.lock') }}
     - name: "Build"
       run: yarn build
