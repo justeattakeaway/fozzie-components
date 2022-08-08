@@ -203,7 +203,7 @@ export default {
             this.hasSubmitError = false;
 
             try {
-                const isOtpValid = this.validateOtp();
+                const isOtpValid = this.isOtpValid();
                 this.showValidationError = !isOtpValid;
 
                 if (isOtpValid) {
@@ -258,7 +258,7 @@ export default {
             if (this.showErrorPage === true) {
                 return;
             }
-            let err = new Error(`Missing key in querystring or failed regex [${key}]`);
+            let err;
             try {
                 if (this.$route.query[key]) {
                     const param = decodeURIComponent(this.$route.query[key]).trim();
@@ -267,9 +267,11 @@ export default {
                         this[field] = param;
                     } else {
                         this.showErrorPage = true;
+                        err = new Error('The regex failed');
                     }
                 } else {
                     this.showErrorPage = true;
+                    err = new Error('The querystring key missing');
                 }
             } catch (error) {
                 this.showErrorPage = true;
@@ -295,7 +297,7 @@ export default {
         /**
         * Validates the otp value is within acceptable bounds (currently 1-10 characters).
         */
-        validateOtp () {
+        isOtpValid () {
             return this.otp.length > 0 && this.otp.length < 11;
         }
     }

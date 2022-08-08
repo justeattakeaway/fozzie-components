@@ -274,8 +274,6 @@ describe('Mfa', () => {
                     // Act
                     await wrapper.vm.onFormSubmit();
 
-                    expect(wrapper.emitted()[REDIRECT_URL_EVENT_NAME]).toBeTruthy();
-                    expect(wrapper.emitted()[REDIRECT_URL_EVENT_NAME].length).toEqual(1);
                     expect(wrapper.emitted()[REDIRECT_URL_EVENT_NAME][0]).toEqual([expectedUrl]);
                     expect(wrapper.vm.isSubmitting).toBe(false);
                 });
