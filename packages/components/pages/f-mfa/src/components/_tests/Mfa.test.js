@@ -108,10 +108,12 @@ describe('Mfa', () => {
     it.each([
         ['enable', 'populated', 'abc123', undefined],
         ['disable', 'unpopulated', '', 'true']
-    ])('should %s the submit button if the otp field is %s', async (_, __, optValue, expected) => {
-        // Act
+    ])('should %s the submit button if the otp field is %s', async (_, __, otp, expected) => {
+        // Arrange
         wrapper = await mountSut();
-        await wrapper.setData({ otp: optValue });
+        
+        // Act
+        await wrapper.setData({ otp });
 
         // Assert
         const button = wrapper.find('[data-test-id="mfa-submit-button"]');
