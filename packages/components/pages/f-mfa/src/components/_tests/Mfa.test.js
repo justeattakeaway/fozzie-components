@@ -245,11 +245,14 @@ describe('Mfa', () => {
             });
 
             describe('And the submitting of the form data was unsuccessful', () => {
-                it('should log bad request if the error status is 400', async () => {
+                it.each(
+                    ['bad request', 400, 'Bad request when submitting MFA'],
+                    ['throttled request', 429, 'Throttled when submitting MFA'],
+                )('should log bad request if the error status is 400', async (errorMessage, status, exceptionMessage) => {
                     // Arrange
-                    const err400 = new Error('sorry but bad request');
-                    err400.response = { status: 400 };
-                    mockPostValidateMfaToken = jest.fn(() => { throw err400; }); // Add 400 error mock to the spy
+                    const error = new Error(errorMessage);
+                    error.response = { status };
+                    mockPostValidateMfaToken = jest.fn(() => { throw error; });
                     wrapper = await mountSut();
                     await wrapper.setData({ otp: 'test-otp' });
 
@@ -257,7 +260,7 @@ describe('Mfa', () => {
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(errorLogSpy).toHaveBeenCalledWith('Bad request when submitting MFA', err400, ['account-pages', 'mfa']);
+                    expect(errorLogSpy).toHaveBeenCalledWith(exceptionMessage, error, ['account-pages', 'mfa']);
                     expect(wrapper.vm.isSubmitting).toBe(false);
                 });
 
