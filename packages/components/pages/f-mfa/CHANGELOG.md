@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.5.1
+------------------------------
+*August 8, 2022*
+
+### Changed
+- Primary and secondary action buttons to size large.
+- Primary button to full width.
+
+
 v0.5.0
 ------------------------------
 *August 2, 2022*
