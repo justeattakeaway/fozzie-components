@@ -93,6 +93,8 @@ describe('Shared - f-header component tests', () => {
             // Act
             await Header.load({ locale: tenant, [control]: displayState });
 
+            await Header.openMobileNavigationBar();
+
             // Assert
             await browser.percyScreenshot(`f-header - ${control} - ${displayState}`, 'mobile');
         });
