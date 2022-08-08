@@ -189,14 +189,11 @@ export default {
         * Raises the isSubmitting which disables the Submit button.
         * Sets the hasSubmitError flag to false, so it is clean before we start.
         * Validates the otp value and if valid, posts the form data to the api.
-        * Then upon success emits an event to the parent component to redirect
-        * to the supplied returnUrl.
-        * If the otp is invalid, lowers the isSubmitting flag and sets the
-        * showValidationError flag to true, which displays the error message
-        * below the form field.
-        * If the post fails, lowers the isSubmitting flag and it sets the
-        * hasSubmitError flag to true, which displays the alert message
-        * below the form field plus logs the issue.
+        * Then upon success emits an event to the parent component to redirect to the supplied returnUrl.
+        * If the otp is invalid, lowers the isSubmitting flag and sets the showValidationError flag
+        * to true, which displays the error message below the form field.
+        * If the post fails, lowers the isSubmitting flag and it sets the hasSubmitError flag to
+        * true, which displays the alert message below the form field plus logs the issue.
         */
         async onFormSubmit () {
             this.isSubmitting = true;
@@ -244,13 +241,11 @@ export default {
         },
 
         /**
-        * If no error has already occurred it reads, decodes, trims,
-        * validates the query string parameters based on the regex
-        * provided. Then store the value against the supplied property
-        * indicated by the key.
-        * If the key is not present in the query string or the value is
-        * not valid, the showErrorPage flag is raised and the issue is
-        * logged.
+        * If no error has already occurred it reads, decodes, trims, validates the query
+        * string parameters based on the regex provided. Then store the value against the
+        * supplied property indicated by the key.
+        * If the key is not present in the query string or the value is not valid, the
+        * showErrorPage flag is raised and the issue is logged.
         *
         * @param {string} key - The key to search for in the query string.
         * @param {string} field - The data field to store the value against.

@@ -14,6 +14,7 @@ let sutMocks;
 let sutProps;
 let sutData;
 let initialiseSpy;
+let mockPostValidateMfaToken;
 
 // Default to en-GB
 const i18n = {
@@ -34,12 +35,13 @@ const routeMock = {
 
 // Spy on the logging warn method
 const warnLogSpy = jest.fn();
+const errorLogSpy = jest.fn();
 const logMocks = {
-    warn: warnLogSpy
+    warn: warnLogSpy,
+    error: errorLogSpy
 };
 
-// Spy on the AccountWebApi.postValidateMfaToken method
-const mockPostValidateMfaToken = jest.fn();
+// Add Spy on the AccountWebApi.postValidateMfaToken method
 jest.mock(
     '../../services/AccountWeb.api',
     () => jest.fn().mockImplementation(() => ({
@@ -55,10 +57,7 @@ const mountSut = async ({
     data = sutData,
     shallow = true
 } = {}) => {
-    initialiseSpy = jest.spyOn(sut.methods, 'initialise');
-
     const mountFn = shallow ? shallowMount : mount;
-
     const mock = mountFn(sut, {
         i18n,
         localVue,
@@ -66,6 +65,7 @@ const mountSut = async ({
         data,
         mocks
     });
+
     await mock.vm.$nextTick();
 
     return mock;
@@ -90,6 +90,7 @@ describe('Mfa', () => {
             $route: routeMock,
             $log: logMocks
         };
+        initialiseSpy = jest.spyOn(sut.methods, 'initialise');
     });
 
     afterEach(() => {
@@ -110,9 +111,7 @@ describe('Mfa', () => {
     ])('should %s the submit button if the otp field is %s', async (_, __, optValue, expected) => {
         // Act
         wrapper = await mountSut();
-        await wrapper.setData({
-            otp: optValue
-        });
+        await wrapper.setData({ otp: optValue });
 
         // Assert
         const button = wrapper.find('[data-test-id="mfa-submit-button"]');
@@ -138,13 +137,14 @@ describe('Mfa', () => {
 
             // Assert
             expect(wrapper.vm[key]).toBe(expected);
+            expect(warnLogSpy).not.toHaveBeenCalled();
         });
 
         it.each([
             ['returnUrl', 'https%3A%2F%2Fwww.somebadplace.co.uk%3FreturnUrl%3Dnottheplace%2Fi%2Fcame%2Ffrom'],
             ['email', 'mysite..123%40hemail.b'],
             ['code', '123456789012345678901234567890XXX']
-        ])('should show the error page if the %s validation fails', async (key, value) => {
+        ])('should show the error page and log warn if the %s validation fails', async (key, value) => {
             // Arrange
             const expected = true;
             const sutOverrideMocks = {
@@ -164,6 +164,35 @@ describe('Mfa', () => {
             // Assert
             const errorCard = wrapper.find('[data-test-id="mfa-error-page"]');
             expect(errorCard.exists()).toBe(expected);
+            expect(warnLogSpy).toHaveBeenCalled();
+        });
+
+        it.each([
+            ['returnUrl'],
+            ['email'],
+            ['code']
+        ])('should show the error page and log warn if the %s values are missing', async key => {
+            // Arrange
+            const expected = true;
+            const queryMock = {
+                ...routeMock.query
+            };
+            delete queryMock[key];
+            const sutOverrideMocks = {
+                ...sutMocks,
+                $route: {
+                    ...routeMock,
+                    query: queryMock
+                }
+            };
+
+            // Act
+            wrapper = await mountSut({ mocks: sutOverrideMocks });
+
+            // Assert
+            const errorCard = wrapper.find('[data-test-id="mfa-error-page"]');
+            expect(errorCard.exists()).toBe(expected);
+            expect(warnLogSpy).toHaveBeenCalled();
         });
     });
 
@@ -176,9 +205,7 @@ describe('Mfa', () => {
             wrapper = await mountSut();
 
             // Act
-            await wrapper.setData({
-                hasSubmitError
-            });
+            await wrapper.setData({ hasSubmitError });
 
             // Assert
             const alert = wrapper.find('[data-test-id="mfa-submit-error-alert"]');
@@ -193,9 +220,7 @@ describe('Mfa', () => {
             wrapper = await mountSut({ shallow: false }); // Deep mount to make sure slot is rendered
 
             // Act
-            await wrapper.setData({
-                showValidationError
-            });
+            await wrapper.setData({ showValidationError });
 
             // Assert
             const validationError = wrapper.find('[data-test-id="mfa-form-validation-error"]');
@@ -205,30 +230,40 @@ describe('Mfa', () => {
         describe('And the form data is valid', () => {
             it('should call the postValidateMfaToken() method with the correct params', async () => {
                 // Arrange
+                mockPostValidateMfaToken = jest.fn(() => {}); // Add default mock to the spy
                 const expectedParams = { mfa_token: 'ABC123', otp: 'test-otp' }; // eslint-disable-line camelcase
                 wrapper = await mountSut();
-                await wrapper.setData({
-                    otp: 'test-otp'
-                });
+                await wrapper.setData({ otp: 'test-otp' });
 
                 // Act
                 await wrapper.vm.onFormSubmit();
 
+                // Assert
                 expect(mockPostValidateMfaToken).toHaveBeenCalledWith(expectedParams);
             });
 
             describe('And the submitting of the form data was unsuccessful', () => {
                 it('should log bad request if the error status is 400', async () => {
+                    // Arrange
+                    const err400 = new Error('sorry but bad request');
+                    err400.response = { status: 400 };
+                    mockPostValidateMfaToken = jest.fn(() => { throw err400; }); // Add 400 error mock to the spy
+                    wrapper = await mountSut();
+                    await wrapper.setData({ otp: 'test-otp' });
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
+                    // Assert
+                    expect(errorLogSpy).toHaveBeenCalledWith('Bad request when submitting MFA', err400, ['account-pages', 'mfa']);
+                    expect(wrapper.vm.isSubmitting).toBe(false);
                 });
 
                 it('should log throttled request if the error status is 429', async () => {
-                });
-            });
-
-            describe('And the submitting of the form data was successful', () => {
-                it('should emit correct event if api call successful', async () => {
                     // Arrange
-                    const expectedUrl = '/place/i/came/from';
+                    const err429 = new Error('sorry but too many requests');
+                    err429.response = { status: 429 };
+                    mockPostValidateMfaToken = jest.fn(() => { throw err429; }); // Add 429 error mock to the spy
                     wrapper = await mountSut();
                     await wrapper.setData({
                         otp: 'test-otp'
@@ -237,9 +272,27 @@ describe('Mfa', () => {
                     // Act
                     await wrapper.vm.onFormSubmit();
 
+                    // Assert
+                    expect(errorLogSpy).toHaveBeenCalledWith('Throttled when submitting MFA', err429, ['account-pages', 'mfa']);
+                    expect(wrapper.vm.isSubmitting).toBe(false);
+                });
+            });
+
+            describe('And the submitting of the form data was successful', () => {
+                it('should emit correct event if api call successful', async () => {
+                    // Arrange
+                    mockPostValidateMfaToken = jest.fn(() => {}); // Add default mock to the spy
+                    const expectedUrl = '/place/i/came/from';
+                    wrapper = await mountSut();
+                    await wrapper.setData({ otp: 'test-otp' });
+
+                    // Act
+                    await wrapper.vm.onFormSubmit();
+
                     expect(wrapper.emitted()[REDIRECT_URL_EVENT_NAME]).toBeTruthy();
                     expect(wrapper.emitted()[REDIRECT_URL_EVENT_NAME].length).toEqual(1);
                     expect(wrapper.emitted()[REDIRECT_URL_EVENT_NAME][0]).toEqual([expectedUrl]);
+                    expect(wrapper.vm.isSubmitting).toBe(false);
                 });
             });
         });

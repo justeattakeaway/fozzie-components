@@ -6,12 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.6.0
 ------------------------------
-*August 4, 2022*
+*August 8, 2022*
 
 ### Added
 - Validation of the input data (querystring).
 - Error page
-- Event upon success with the return url
+- Emit Event upon success with the return url
 
 
 v0.5.0
