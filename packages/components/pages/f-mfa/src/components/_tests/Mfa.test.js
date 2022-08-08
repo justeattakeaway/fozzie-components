@@ -111,7 +111,7 @@ describe('Mfa', () => {
     ])('should %s the submit button if the otp field is %s', async (_, __, otp, expected) => {
         // Arrange
         wrapper = await mountSut();
-        
+
         // Act
         await wrapper.setData({ otp });
 
@@ -148,7 +148,6 @@ describe('Mfa', () => {
             ['code', '123456789012345678901234567890XXX']
         ])('should show the error page and log warn if the %s validation fails', async (key, value) => {
             // Arrange
-            const expected = true;
             const sutOverrideMocks = {
                 ...sutMocks,
                 $route: {
@@ -165,7 +164,7 @@ describe('Mfa', () => {
 
             // Assert
             const errorCard = wrapper.find('[data-test-id="mfa-error-page"]');
-            expect(errorCard.exists()).toBe(expected);
+            expect(errorCard.exists()).toBe(true);
             expect(warnLogSpy).toHaveBeenCalled();
         });
 
@@ -175,7 +174,6 @@ describe('Mfa', () => {
             ['code']
         ])('should show the error page and log warn if the %s values are missing', async key => {
             // Arrange
-            const expected = true;
             const queryMock = {
                 ...routeMock.query
             };
@@ -193,7 +191,7 @@ describe('Mfa', () => {
 
             // Assert
             const errorCard = wrapper.find('[data-test-id="mfa-error-page"]');
-            expect(errorCard.exists()).toBe(expected);
+            expect(errorCard.exists()).toBe(true);
             expect(warnLogSpy).toHaveBeenCalled();
         });
     });
@@ -233,9 +231,9 @@ describe('Mfa', () => {
             it('should call the postValidateMfaToken() method with the correct params', async () => {
                 // Arrange
                 mockPostValidateMfaToken = jest.fn(() => {}); // Add default mock to the spy
-                const expectedParams = { mfa_token: 'ABC123', otp: 'test-otp' }; // eslint-disable-line camelcase
+                const expectedParams = { mfa_token: 'XYZ1234', otp: 'test-otp' }; // eslint-disable-line camelcase
                 wrapper = await mountSut();
-                await wrapper.setData({ otp: 'test-otp' });
+                await wrapper.setData({ otp: 'test-otp', mfa: 'XYZ1234' });
 
                 // Act
                 await wrapper.vm.onFormSubmit();
@@ -245,14 +243,14 @@ describe('Mfa', () => {
             });
 
             describe('And the submitting of the form data was unsuccessful', () => {
-                it.each(
-                    ['bad request', 400, 'Bad request when submitting MFA'],
-                    ['throttled request', 429, 'Throttled when submitting MFA'],
-                )('should log bad request if the error status is 400', async (errorMessage, status, exceptionMessage) => {
+                it.each([
+                    ['Bad request when submitting MFA', 400],
+                    ['Throttled when submitting MFA', 429]
+                ])("should log the error '%s' if the response status is '%s'", async (logMessage, status) => {
                     // Arrange
-                    const error = new Error(errorMessage);
-                    error.response = { status };
-                    mockPostValidateMfaToken = jest.fn(() => { throw error; });
+                    const errLogged = new Error('some status error message');
+                    errLogged.response = { status };
+                    mockPostValidateMfaToken = jest.fn(() => { throw errLogged; }); // Add error mock to the spy
                     wrapper = await mountSut();
                     await wrapper.setData({ otp: 'test-otp' });
 
@@ -260,25 +258,7 @@ describe('Mfa', () => {
                     await wrapper.vm.onFormSubmit();
 
                     // Assert
-                    expect(errorLogSpy).toHaveBeenCalledWith(exceptionMessage, error, ['account-pages', 'mfa']);
-                    expect(wrapper.vm.isSubmitting).toBe(false);
-                });
-
-                it('should log throttled request if the error status is 429', async () => {
-                    // Arrange
-                    const err429 = new Error('sorry but too many requests');
-                    err429.response = { status: 429 };
-                    mockPostValidateMfaToken = jest.fn(() => { throw err429; }); // Add 429 error mock to the spy
-                    wrapper = await mountSut();
-                    await wrapper.setData({
-                        otp: 'test-otp'
-                    });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-
-                    // Assert
-                    expect(errorLogSpy).toHaveBeenCalledWith('Throttled when submitting MFA', err429, ['account-pages', 'mfa']);
+                    expect(errorLogSpy).toHaveBeenCalledWith(logMessage, errLogged, ['account-pages', 'mfa']);
                     expect(wrapper.vm.isSubmitting).toBe(false);
                 });
             });
