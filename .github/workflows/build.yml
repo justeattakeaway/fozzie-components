@@ -10,7 +10,6 @@ on:
 jobs:
   install:
     runs-on: ubuntu-latest
-    container: cimg/node:16.16.0-browsers
     steps:
     - uses: actions/checkout@v3
     - run: yarn
