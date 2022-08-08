@@ -3,50 +3,50 @@
   "baseBranch": "origin/master",
   "pipeline": {
     "build": {
-      "cache": false,
+      "cache": true,
       "dependsOn": ["^build"]
     },
     "test": {
-      "cache": false,
+      "cache": true,
       "dependsOn": []
     },
     "ci:test": {
-      "cache": false,
+      "cache": true,
       "dependsOn": [],
       "outputs":[]
     },
     "ci:test:tools": {
-      "cache": false,
+      "cache": true,
       "dependsOn": [],
       "outputs":[]
     },
     "ci:test:services": {
-      "cache": false,
+      "cache": true,
       "dependsOn": [],
       "outputs":[]
     },
     "ci:test:atoms": {
-      "cache": false,
+      "cache": true,
       "dependsOn": [],
       "outputs":[]
     },
     "ci:test:molecules": {
-      "cache": false,
+      "cache": true,
       "dependsOn": [],
       "outputs":[]
     },
     "ci:test:organisms": {
-      "cache": false,
+      "cache": true,
       "dependsOn": [],
       "outputs":[]
     },
     "ci:test:pages": {
-      "cache": false,
+      "cache": true,
       "dependsOn": [],
       "outputs":[]
     },
     "ci:test:templates": {
-      "cache": false,
+      "cache": true,
       "dependsOn": [],
       "outputs":[]
     },
@@ -154,7 +154,7 @@
       "dependsOn": []
     },
     "lint": {
-      "cache": false,
+      "cache": true,
       "dependsOn": []
     },
     "lint:fix": {
@@ -162,7 +162,7 @@
       "dependsOn": []
     },
     "lint:style": {
-      "cache": false,
+      "cache": true,
       "dependsOn": []
     }
   }
