@@ -14,6 +14,15 @@ v0.6.0
 - Emit Event upon success with the return url
 
 
+v0.5.1
+------------------------------
+*August 8, 2022*
+
+### Changed
+- Primary and secondary action buttons to size large.
+- Primary button to full width.
+
+
 v0.5.0
 ------------------------------
 *August 2, 2022*

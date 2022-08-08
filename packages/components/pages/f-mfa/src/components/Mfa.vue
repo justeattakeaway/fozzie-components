@@ -65,7 +65,9 @@
                         :class="$style['c-mfa-submitButton']"
                         :disabled="isSubmitButtonDisabled"
                         action-type="submit"
+                        button-size="large"
                         :is-loading="isSubmitting"
+                        is-full-width
                         data-test-id="mfa-submit-button">
                         {{ $t('verificationPage.submitButtonText') }}
                     </f-button>
@@ -74,6 +76,7 @@
                 <f-button
                     :class="$style['c-mfa-need-help-link']"
                     button-type="link"
+                    button-size="large"
                     data-test-id="mfa-need-help-link"
                     @click="onShowHelpInfo">
                     {{ $t('verificationPage.helpModalLinkText') }}
