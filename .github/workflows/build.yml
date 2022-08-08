@@ -4,39 +4,34 @@
 name: Node.js CI
 
 on:
-  push:
-    branches: [ "master", "storybook-actions-test" ]
   pull_request:
     branches: [ "master", "storybook-actions-test" ]
 
 jobs:
   install:
     runs-on: ubuntu-latest
+    container: cimg/node:16.16.0-browsers
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js v16
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: 'yarn'
     - run: yarn
-    - name: Persist node_modules
-      uses: actions/upload-artifact@v3
+    - name: Cache node modules
+      uses: actions/cache@v3
       with:
-        name: workspace-with-node-modules
-        path: ./
+        path: ./node_modules
+        key: node_modules-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: node_modules-
     
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js v16
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: 'yarn'
-    - name: Download math result for job 1
-      uses: actions/download-artifact@v3
-      with:
-        name: workspace-with-node-modules
-    - run: yarn build
+  # build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #   - name: Use Node.js v16
+  #     uses: actions/setup-node@v3
+  #     with:
+  #       node-version: 16
+  #       cache: 'yarn'
+  #   - name: Download math result for job 1
+  #     uses: actions/download-artifact@v3
+  #     with:
+  #       name: workspace-with-node-modules
+  #   - run: yarn build
