@@ -24,7 +24,7 @@ const i18n = {
     }
 };
 
-// Mock the route date with valid data and as it would appear enocded in the location.value.href
+// Mock the route date with valid data and as it would appear encoded in the location.value.href
 const routeMock = {
     query: {
         code: 'ABC123',

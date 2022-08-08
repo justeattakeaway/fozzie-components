@@ -279,8 +279,9 @@ export default {
         },
 
         /**
-        * Emit Success Event - Redirect url
-        * (check/tidy up the path due to unknown source)
+        * Emit Success Event
+        *
+        * @param {string} url - The return url
         */
         emitRedirectEvent (url) {
             const pathRaw = url.trim();
@@ -289,7 +290,7 @@ export default {
         },
 
         /**
-        * Validates the otp value is within acceptable bounds
+        * Validates the otp value is within acceptable bounds (currently 1-10 characters).
         */
         validateOtp () {
             return this.otp.length > 0 && this.otp.length < 11;
