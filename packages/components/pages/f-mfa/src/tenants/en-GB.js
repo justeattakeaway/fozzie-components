@@ -29,6 +29,10 @@ const messages = {
         submitMfa: {
             heading: 'Something went wrong',
             description: 'Sorry about that. Please try again.'
+        },
+        loading: {
+            heading: 'Something went wrong',
+            message: 'Sorry about that. Please try again.'
         }
     }
 };
