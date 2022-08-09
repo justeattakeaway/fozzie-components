@@ -18,8 +18,15 @@ jobs:
       with:
         node-version: 16
         cache: 'yarn'
-    - name: Install packages
-      run: yarn --prefer-offline
+    - name: Cache Node Modules
+      id: cache-node-modules
+      uses: actions/cache@v2
+      with:
+        path: node_modules
+        key: node-modules-${{ hashFiles('yarn.lock') }}
+    - name: Install Dependencies
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: yarn
     
   build:
     needs: install
@@ -32,8 +39,15 @@ jobs:
       with:
         node-version: 16
         cache: 'yarn'
-    - name: Install packages
-      run: yarn --prefer-offline
+    - name: Cache Node Modules
+      id: cache-node-modules
+      uses: actions/cache@v2
+      with:
+        path: node_modules
+        key: node-modules-${{ hashFiles('yarn.lock') }}
+    - name: Install Dependencies
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: yarn
     - name: Build Components
       run: yarn build
     - name: Storybook Build
