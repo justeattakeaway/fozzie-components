@@ -12,7 +12,7 @@ export const VMfaComponent = (args, { argTypes }) => ({
 
     props: Object.keys(argTypes),
 
-    template: '<v-mfa v-bind="$props" />'
+    template: '<v-mfa code="ABC999" email="harry.potter@dot.com" v-bind="$props" />'
 });
 
 VMfaComponent.storyName = 'f-mfa';
