@@ -1,6 +1,10 @@
 import { withA11y } from '@storybook/addon-a11y';
 import { locales } from '@justeat/storybook/constants/globalisation';
 import VMfa from '../src/components/Mfa.vue';
+import {
+    apiStateControlDataSource,
+    setupApiMockState
+} from './story.helper';
 
 export default {
     title: 'Components/Pages',
@@ -12,21 +16,42 @@ export const VMfaComponent = (args, { argTypes }) => ({
 
     props: Object.keys(argTypes),
 
-    template: '<v-mfa code="ABC999" email="harry.potter@dot.com" v-bind="$props" />'
+    watch: {
+        apiState: {
+            immediate: true,
+            async handler (value) {
+                setupApiMockState(value);
+            }
+        }
+    },
+
+    template: '<v-mfa v-bind="$props" />'
 });
 
 VMfaComponent.storyName = 'f-mfa';
 
 VMfaComponent.args = {
     locale: locales.gb,
-    smartGatewayBaseUrl: 'https://smart-gateway.just-eat.co.uk'
+    smartGatewayBaseUrl: 'https://some-smart-gateway-url.com',
+    code: 'ABC123',
+    email: 'harry.potter@home.com',
+    returnUrl: '/where/i/came/from',
+    apiState: apiStateControlDataSource.default
 };
 
 VMfaComponent.argTypes = {
     locale: {
-        control: { type: 'select' },
+        control: {
+            type: 'select'
+        },
         options: [locales.gb, locales.ie, locales.au, locales.nz, locales.es, locales.it],
-        description: 'Choose a locale',
-        defaultValue: locales.gb
+        description: 'Choose a locale'
+    },
+    apiState: {
+        control: {
+            type: 'select'
+        },
+        options: apiStateControlDataSource.states,
+        description: apiStateControlDataSource.title
     }
 };
