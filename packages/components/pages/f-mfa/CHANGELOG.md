@@ -4,7 +4,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.7.0
+v0.8.0
 ------------------------------
 *August 9, 2022*
 
@@ -13,6 +13,14 @@ v0.7.0
 
 ### Changed
 - "Need help?" button now points to new help page.
+
+
+v0.7.0
+------------------------------
+*August 9, 2022*
+
+### Changed
+- Instead of reading the querystring for our values they are now being supplied as properties
 
 
 v0.6.0
