@@ -117,4 +117,8 @@ jobs:
         key: storybook-cache
     # Deploy Storybook
     - name: Storybook deploy
-      run: yarn storybook:deploy
+      run: |
+        git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+        yarn storybook:deploy
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
