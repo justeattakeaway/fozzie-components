@@ -58,7 +58,7 @@ jobs:
       run: yarn --prefer-offline
     # Restore Turborepo's component 'dist' cache - If not, cache is created at end of build.
     - name: Cache Turborepo Dist
-      id: turborepo-dist-cache-${{ env.GITHUB_JOB }}-${{ env.GITHUB_REF_NAME }}
+      id: turborepo-dist-cache
       uses: actions/cache@v2
       with:
         path: .turbo
@@ -101,7 +101,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: .turbo
-        key: turborepo-dist-cache-${{ env.GITHUB_JOB }}-${{ env.GITHUB_REF_NAME }}
+        key: turborepo-dist-cache
     # Deploy Storybook
     - name: Storybook deploy
       run: yarn storybook:deploy
