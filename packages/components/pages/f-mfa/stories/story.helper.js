@@ -21,28 +21,27 @@ const apiStates = {
 
 // Mocks for the API calls
 const otpPOST200 = {
-    url: `/${SUBMIT_LOGIN_CHALLENGE_URL}`,
+    url: `http://localhost:8080/${SUBMIT_LOGIN_CHALLENGE_URL}`,
     method: httpVerbs.post,
     responseStatus: httpStatusCodes.ok,
-    // eslint-disable-next-line camelcase
-    requestData: { mfa_token: 'XYZ1234', otp: 'test-otp' },
-    responseData: null
+    requestData: { mfa_token: 'ABC123', otp: 'otp123' }, // eslint-disable-line camelcase
+    responseData: {}
 };
 
 const otpPOST400 = {
-    url: `/${SUBMIT_LOGIN_CHALLENGE_URL}`,
+    url: `http://localhost:8080/${SUBMIT_LOGIN_CHALLENGE_URL}`,
     method: httpVerbs.post,
     responseStatus: httpStatusCodes.badrequest,
-    requestData: {},
-    responseData: null
+    requestData: { mfa_token: 'ABC123', otp: 'otp123' }, // eslint-disable-line camelcase
+    responseData: {}
 };
 
 const otpPOST429 = {
-    url: `/${SUBMIT_LOGIN_CHALLENGE_URL}`,
+    url: `http://localhost:8080/${SUBMIT_LOGIN_CHALLENGE_URL}`,
     method: httpVerbs.post,
     responseStatus: httpStatusCodes.throttledrequest,
-    requestData: {},
-    responseData: null
+    requestData: { mfa_token: 'ABC123', otp: 'otp123' }, // eslint-disable-line camelcase
+    responseData: {}
 };
 
 // Build the mock definition for the API calls
@@ -86,8 +85,6 @@ export const setupApiMockState = (apiState = apiStates.none) => {
     process.mockFactory.reset();
 
     apiDefinitions.find(e => e.state === apiState)?.states.forEach(x => {
-        console.log('DEBUG1 setupApiMockState', apiState, x);
-
         process.mockFactory.setupMockResponse(
             x.method,
             x.url,

@@ -214,7 +214,7 @@ export default {
                 this.showValidationError = !isOtpValid;
 
                 if (isOtpValid) {
-                    (new AccountWebApi({
+                    await (new AccountWebApi({
                         httpClient: this.$http,
                         cookies: this.$cookies,
                         baseUrl: this.smartGatewayBaseUrl
@@ -260,7 +260,7 @@ export default {
         validateProperty (value, propertyName, regex) {
             if (!regex.test(value)) {
                 this.showErrorPage = true;
-                this.$log.warn(`Error validating mfa properties [${propertyName}]`, new Error('The regex failed'), standardLogTags);
+                this.$log.warn(`Error validating mfa property '${propertyName}' - Regex Failed`, standardLogTags);
             }
         },
 

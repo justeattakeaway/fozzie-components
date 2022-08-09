@@ -14,7 +14,7 @@ export default {
 export const VMfaComponent = (args, { argTypes }) => ({
     components: { VMfa },
 
-    props: Object.keys(argTypes),
+    props: Object.keys(argTypes, args),
 
     watch: {
         apiState: {
@@ -32,7 +32,7 @@ VMfaComponent.storyName = 'f-mfa';
 
 VMfaComponent.args = {
     locale: locales.gb,
-    smartGatewayBaseUrl: 'https://some-smart-gateway-url.com',
+    smartGatewayBaseUrl: 'http://localhost:8080',
     code: 'ABC123',
     email: 'harry.potter@home.com',
     returnUrl: '/where/i/came/from',
