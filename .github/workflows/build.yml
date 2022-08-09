@@ -63,7 +63,7 @@ jobs:
       with:
         path: |
           node_modules/.cache/turbo
-        key: node-modules-${{ hashFiles('node_modules/.cache/turbo/*-turbo-lock.yaml') }}
+        key: turborepo-dist-cache-${{ hashFiles('node_modules/.cache/turbo/*-turbo-lock.yaml') }}
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
       if: steps.turborepo-dist-cache.outputs.cache-hit != 'true'
