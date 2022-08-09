@@ -147,18 +147,27 @@ export default {
         smartGatewayBaseUrl: {
             type: String,
             required: true
+        },
+        code: {
+            type: String,
+            default: ''
+        },
+        email: {
+            type: String,
+            default: ''
+        },
+        returnUrl: {
+            type: String,
+            default: '/'
         }
     },
 
     data () {
         return {
             otp: '',
-            mfa: '',
-            email: '',
             tenantConfigs,
             isSubmitting: false,
             showErrorPage: false,
-            returnUrl: '/',
             hasSubmitError: false,
             showValidationError: false
         };
@@ -177,15 +186,13 @@ export default {
     methods: {
         /**
         * Sets the showErrorPage flag to false, so it is clean before we start.
-        * Validates the returnUrl and sets it to the returnUrl property.
-        * Validates the email and sets it to the email property.
-        * Validates the code and sets it to the mfa property.
+        * Validates the returnUrl, email & code properties.
         */
         initialise () {
             this.showErrorPage = false;
-            this.processQueryString('returnUrl', 'returnUrl', RETURN_URL_REGEX);
-            this.processQueryString('email', 'email', EMAIL_RFC5322_REGEX);
-            this.processQueryString('code', 'mfa', MFA_CODE_REGEX);
+            this.validateProperty(this.returnUrl, 'returnUrl', RETURN_URL_REGEX);
+            this.validateProperty(this.email.toLowerCase(), 'email', EMAIL_RFC5322_REGEX);
+            this.validateProperty(this.code, 'code', MFA_CODE_REGEX);
         },
 
         /**
@@ -211,7 +218,7 @@ export default {
                         httpClient: this.$http,
                         cookies: this.$cookies,
                         baseUrl: this.smartGatewayBaseUrl
-                    })).postValidateMfaToken({ mfa_token: this.mfa, otp: this.otp }); // eslint-disable-line camelcase
+                    })).postValidateMfaToken({ mfa_token: this.code, otp: this.otp }); // eslint-disable-line camelcase
                     this.emitRedirectEvent(this.returnUrl); // Completed successfully, emit redirect return url
                 }
             } catch (error) {
@@ -244,42 +251,16 @@ export default {
         },
 
         /**
-        * If no error has already occurred it reads, decodes, trims, validates the query
-        * string parameters based on the regex provided. Then store the value against the
-        * supplied property indicated by the key.
-        * If the key is not present in the query string or the value is not valid, the
-        * showErrorPage flag is raised and the issue is logged.
+        * If no error has already occurred it validates the props based on the regex provided.
+        * If the prop value is not valid, the showErrorPage flag is raised and the issue is logged.
         *
-        * @param {string} key - The key to search for in the query string.
-        * @param {string} field - The data field to store the value against.
-        * @param {string} regex - The regex to validate the value against.
+        * @param {string} prop - The prop value to validate.
+        * @param {object} regex - The regex to validate the value against.
         */
-        processQueryString (key, field, regex) {
-            if (this.showErrorPage === true) {
-                return;
-            }
-            let err;
-            try {
-                if (this.$route.query[key]) {
-                    const param = decodeURIComponent(this.$route.query[key]).trim();
-                    const rx = new RegExp(regex);
-                    if (rx.test(param)) {
-                        this[field] = param;
-                    } else {
-                        this.showErrorPage = true;
-                        err = new Error('The regex failed');
-                    }
-                } else {
-                    this.showErrorPage = true;
-                    err = new Error('The querystring key missing');
-                }
-            } catch (error) {
+        validateProperty (value, propertyName, regex) {
+            if (!regex.test(value)) {
                 this.showErrorPage = true;
-                err = error;
-            } finally {
-                if (this.showErrorPage) {
-                    this.$log.warn(`Error validating mfa(${key}) querystring data`, err, standardLogTags);
-                }
+                this.$log.warn(`Error validating mfa properties [${propertyName}]`, new Error('The regex failed'), standardLogTags);
             }
         },
 
