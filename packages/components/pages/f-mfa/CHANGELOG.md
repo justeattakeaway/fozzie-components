@@ -12,6 +12,17 @@ v0.8.1
 - Prepared the storybook story to handle changing of the properties and simulating the different api responses
 
 
+v0.8.0
+------------------------------
+*August 9, 2022*
+
+### Added
+- Help info card/page.
+
+### Changed
+- "Need help?" button now points to new help page.
+
+
 v0.7.0
 ------------------------------
 *August 9, 2022*
