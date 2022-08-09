@@ -91,7 +91,7 @@
 
         <f-card-with-content
             v-else
-            data-test-id="mfa-error-page"
+            data-test-id="v-mfa-error-component"
             :card-heading="$t('errorMessages.loading.heading')"
             :card-description="$t('errorMessages.loading.message')">
             <template #icon>
@@ -254,15 +254,10 @@ export default {
 
         onHideHelpInfo () {
             this.showHelpInfo = false;
-            console.log('DEBUG - onHideHelpInfo'); // eslint-disable-line no-console
         },
 
-        /**
-        * TODO
-        */
         onShowHelpInfo () {
             this.showHelpInfo = true;
-            console.log('DEBUG - onShowHelpInfo'); // eslint-disable-line no-console
         },
 
         /**
