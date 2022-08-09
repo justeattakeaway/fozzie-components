@@ -74,6 +74,12 @@ The props that can be defined are as follows (if any):
 | ----- | ----- |  ------- | ----------- |
 | smartGatewayBaseUrl | string | true | the smartgateway host |
 
+### Events
+
+| Event | Payload | Description |
+| ----- | ----- | ----------- |
+| `mfa-success-return-url` | return url (no host) |  The mfa & otp have been successfully submitted and the user is now logged in, the payload of the event carries the return url (path only, no host and a leading `'/'`, i.e. `/where/i/came/from` ). |
+
 ## Development
 
 Start by cloning the repository and installing the required dependencies:
