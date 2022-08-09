@@ -86,8 +86,6 @@ export const setupApiMockState = (apiState = apiStates.none) => {
     process.mockFactory.reset();
 
     apiDefinitions.find(e => e.state === apiState)?.states.forEach(x => {
-        console.log('DEBUG1 setupApiMockState', apiState, x);
-
         process.mockFactory.setupMockResponse(
             x.method,
             x.url,
