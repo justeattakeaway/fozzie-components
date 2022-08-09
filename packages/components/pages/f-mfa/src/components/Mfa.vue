@@ -3,7 +3,7 @@
         :class="$style['c-mfa']"
         data-test-id="v-mfa-component">
         <f-card
-            v-if="!showErrorPage"
+            v-if="!showErrorPage && !showHelpInfo"
             :class="$style['c-mfa-card']"
             has-inner-spacing-large
             has-outline
@@ -62,31 +62,36 @@
                     </f-alert>
 
                     <f-button
-                        :class="$style['c-mfa-submitButton']"
+                        :class="$style['c-mfa-primaryButton']"
                         :disabled="isSubmitButtonDisabled"
                         action-type="submit"
                         button-size="large"
                         :is-loading="isSubmitting"
                         is-full-width
                         data-test-id="mfa-submit-button">
-                        {{ $t('verificationPage.submitButtonText') }}
+                        {{ $t('verificationPage.primaryButtonText') }}
                     </f-button>
                 </form>
 
                 <f-button
-                    :class="$style['c-mfa-need-help-link']"
+                    :class="$style['c-mfa-secondaryButton']"
                     button-type="link"
                     button-size="large"
                     data-test-id="mfa-need-help-link"
                     @click="onShowHelpInfo">
-                    {{ $t('verificationPage.helpModalLinkText') }}
+                    {{ $t('verificationPage.secondaryButtonText') }}
                 </f-button>
             </div>
         </f-card>
 
+        <help-info
+            v-else-if="showHelpInfo"
+            :email="email"
+            @primary-button-click="onHideHelpInfo" />
+
         <f-card-with-content
             v-else
-            data-test-id="mfa-error-page"
+            data-test-id="v-mfa-error-component"
             :card-heading="$t('errorMessages.loading.heading')"
             :card-description="$t('errorMessages.loading.message')">
             <template #icon>
@@ -117,6 +122,8 @@ import {
     BagSadBgIcon
 } from '@justeat/f-vue-icons';
 import AccountWebApi from '../services/AccountWeb.api';
+
+import HelpInfo from './Help.vue';
 import tenantConfigs from '../tenants';
 import {
     EMAIL_RFC5322_REGEX,
@@ -131,14 +138,15 @@ export default {
     name: 'VMfa',
 
     components: {
+        BagSadBgIcon,
+        BagSurfBgIcon,
+        ErrorMessage,
         FAlert,
+        FButton,
         FCard,
         FCardWithContent,
-        ErrorMessage,
         FormField,
-        FButton,
-        BagSurfBgIcon,
-        BagSadBgIcon
+        HelpInfo
     },
 
     mixins: [VueGlobalisationMixin],
@@ -165,11 +173,12 @@ export default {
     data () {
         return {
             otp: '',
-            tenantConfigs,
             isSubmitting: false,
+            showHelpInfo: false,
             showErrorPage: false,
             hasSubmitError: false,
-            showValidationError: false
+            showValidationError: false,
+            tenantConfigs
         };
     },
 
@@ -243,11 +252,12 @@ export default {
             }
         },
 
-        /**
-        * TODO
-        */
+        onHideHelpInfo () {
+            this.showHelpInfo = false;
+        },
+
         onShowHelpInfo () {
-            console.log('DEBUG - onShowHelpInfo'); // eslint-disable-line no-console
+            this.showHelpInfo = true;
         },
 
         /**
@@ -288,40 +298,6 @@ export default {
 <style lang="scss" module>
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
-.c-mfa {
-    margin: auto;
-    max-width: 600px;
-}
-
-.c-mfa-heading {
-    margin-top: 0;
-}
-
-.c-mfa-heading,
-.c-mfa-description {
-    text-align: center;
-}
-
-.c-mfa-icon {
-    transform: translate(10%);
-    margin: -#{f.spacing(g)} 0 -#{f.spacing(d)};
-    width: 212px;
-}
-
-.c-mfa-card {
-    @include f.media('>=narrow') {
-        box-shadow: f.$elevation-01;
-    }
-}
-
-.c-mfa-card-content {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    max-width: 392px;
-    margin: 0 auto;
-}
-
 .c-mfa-form {
     width: 100%;
     display: flex;
@@ -334,16 +310,8 @@ export default {
     margin-top: f.spacing(f);
 }
 
-.c-mfa-submitButton {
-    margin: f.spacing(f) 0;
-}
-
 .c-mfa-submit-error {
     width: 100%;
     margin-top: f.spacing(f);
-}
-
-.c-mfa-need-help-link {
-    margin-bottom: f.spacing(d);
 }
 </style>

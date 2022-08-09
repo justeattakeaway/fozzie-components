@@ -93,6 +93,23 @@ describe('Mfa', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
+    it.each`
+        pageName          | selector                    | showErrorPage | showHelpInfo
+        ${'verification'} | ${'v-mfa-component'}        | ${false}      | ${false}
+        ${'error'}        | ${'v-mfa-error-component'}  | ${true}       | ${false}
+        ${'help'}         | ${'v-mfa-help-component'}   | ${false}      | ${true}
+        ${'help'}         | ${'v-mfa-help-component'}   | ${true}       | ${true}
+        `('should show the $pageName page when showErrorPage is $showErrorPage and showHelpInfo is $showHelpInfo', async ({ selector, showErrorPage, showHelpInfo }) => {
+        // Arrange
+        wrapper = await mountSut({ shallow: false });
+
+        // Act
+        await wrapper.setData({ showErrorPage, showHelpInfo });
+
+        // Assert
+        expect(wrapper.find(`[data-test-id="${selector}"]`).exists()).toBeTruthy();
+    });
+
     it.each([
         ['enable', 'populated', 'abc123', undefined],
         ['disable', 'unpopulated', '', 'true']
@@ -129,7 +146,7 @@ describe('Mfa', () => {
             });
 
             // Assert
-            const errorCard = wrapper.find('[data-test-id="mfa-error-page"]');
+            const errorCard = wrapper.find('[data-test-id="v-mfa-error-component"]');
             expect(errorCard.exists()).toBe(true);
             expect(warnLogSpy).toHaveBeenCalled();
         });
@@ -146,7 +163,7 @@ describe('Mfa', () => {
             wrapper = await mountSut({ propsData: props });
 
             // Assert
-            const errorCard = wrapper.find('[data-test-id="mfa-error-page"]');
+            const errorCard = wrapper.find('[data-test-id="v-mfa-error-component"]');
             expect(errorCard.exists()).toBe(true);
             expect(warnLogSpy).toHaveBeenCalled();
         });
@@ -161,7 +178,7 @@ describe('Mfa', () => {
             wrapper = await mountSut({ propsData: props });
 
             // Assert
-            const errorCard = wrapper.find('[data-test-id="mfa-error-page"]');
+            const errorCard = wrapper.find('[data-test-id="v-mfa-error-component"]');
             expect(errorCard.exists()).toBe(false);
             expect(warnLogSpy).not.toHaveBeenCalled();
             expect(wrapper.vm.returnUrl).toBe(expected);
