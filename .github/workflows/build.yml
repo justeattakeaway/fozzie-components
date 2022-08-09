@@ -19,7 +19,7 @@ jobs:
         node-version: 16
         cache: 'yarn'
     - name: Install packages
-      run: yarn
+      run: yarn --prefer-offline
     
   build:
     needs: install
