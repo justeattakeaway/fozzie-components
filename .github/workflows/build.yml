@@ -25,7 +25,7 @@ jobs:
       id: cache-node-modules
       uses: actions/cache@v2
       with:
-        path: node_modules
+        path: '**/node_modules'
         key: node-modules-${{ hashFiles('yarn.lock') }}
     # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible
     - name: Install Dependencies
@@ -50,7 +50,7 @@ jobs:
       id: cache-node-modules
       uses: actions/cache@v2
       with:
-        path: node_modules
+        path: '**/node_modules'
         key: node-modules-${{ hashFiles('yarn.lock') }}
     # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible
     - name: Install Dependencies
@@ -58,16 +58,15 @@ jobs:
       run: yarn --prefer-offline
     # Restore Turborepo's component 'dist' cache - If not, cache is created at end of build.
     - name: Cache Turborepo Dist
-      id: turborepo-dist-cache
+      id: turborepo-dist-cache-${{ github.job }}-${{ github.ref_name }}
       uses: actions/cache@v2
       with:
-        path: |
-          node_modules/.cache/turbo
-        key: turborepo-dist-cache-${{ hashFiles('node_modules/.cache/turbo/*-turbo-lock.yaml') }}
+        path: .turbo
+        key: turborepo-dist-cache
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
       if: steps.turborepo-dist-cache.outputs.cache-hit != 'true'
-      run: yarn build
+      run: yarn build --cache-dir=".turbo"
     # Build Storybook
     - name: Storybook Build
       run: yarn storybook:build
@@ -90,7 +89,7 @@ jobs:
       id: cache-node-modules
       uses: actions/cache@v2
       with:
-        path: node_modules
+        path: '**/node_modules'
         key: node-modules-${{ hashFiles('yarn.lock') }}
     # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible
     - name: Install Dependencies
@@ -101,9 +100,8 @@ jobs:
       id: turborepo-dist-cache
       uses: actions/cache@v2
       with:
-        path: |
-          node_modules/.cache/turbo
-        key: turborepo-dist-cache-${{ hashFiles('node_modules/.cache/turbo/*-turbo-lock.yaml') }}
+        path: .turbo
+        key: turborepo-dist-cache-${{ github.job }}-${{ github.ref_name }}
     # Deploy Storybook
     - name: Storybook deploy
       run: yarn storybook:deploy
