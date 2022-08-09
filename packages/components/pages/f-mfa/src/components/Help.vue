@@ -46,6 +46,7 @@
                 <f-button
                     :class="$style['c-mfa-secondaryButton']"
                     button-type="link"
+                    :href="loginLinkWithReturnUrl"
                     button-size="large"
                     data-test-id="mfa-help-login-link">
                     {{ $t('helpInfo.secondaryButtonText') }}
@@ -83,6 +84,10 @@ export default {
         email: {
             type: String,
             required: true
+        },
+        returnUrl: {
+            type: String,
+            default: '/'
         }
     },
 
@@ -90,6 +95,12 @@ export default {
         return {
             tenantConfigs
         };
+    },
+
+    computed: {
+        loginLinkWithReturnUrl () {
+            return `/account/login?returnUrl=${this.returnUrl}`;
+        }
     }
 };
 </script>
