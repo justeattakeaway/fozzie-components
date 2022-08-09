@@ -71,3 +71,39 @@ jobs:
     # Build Storybook
     - name: Storybook Build
       run: yarn storybook:build
+
+  storybook-deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the Repo
+    - name: Checkout
+      uses: actions/checkout@v3
+    # Setup Node 16 
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'yarn'
+    # Restore node_modules - Cache should exist as one was created in previous 'install' job
+    - name: Cache Node Modules
+      id: cache-node-modules
+      uses: actions/cache@v2
+      with:
+        path: node_modules
+        key: node-modules-${{ hashFiles('yarn.lock') }}
+    # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible
+    - name: Install Dependencies
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: yarn --prefer-offline
+    # Restore Turborepo's component 'dist' cache - If not, cache is created at end of build.
+    - name: Cache Turborepo Dist
+      id: turborepo-dist-cache
+      uses: actions/cache@v2
+      with:
+        path: |
+          node_modules/.cache/turbo
+        key: turborepo-dist-cache-${{ hashFiles('node_modules/.cache/turbo/*-turbo-lock.yaml') }}
+    # Deploy Storybook
+    - name: Storybook deploy
+      run: yarn storybook:deploy
