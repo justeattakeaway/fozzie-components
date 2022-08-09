@@ -65,7 +65,6 @@ jobs:
         key: turborepo-dist-cache
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
-      if: steps.turborepo-dist-cache.outputs.cache-hit != 'true'
       run: yarn build --cache-dir=".turbo"
     # Build Storybook
     - name: Storybook Build
