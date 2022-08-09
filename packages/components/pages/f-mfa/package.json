@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-mfa",
   "description": "Fozzie Mfa - Multi-factor Authenticator Input Form",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "main": "dist/f-mfa.umd.min.js",
   "maxBundleSize": "100kB",
   "files": [
@@ -54,6 +54,7 @@
     "@justeat/f-alert": "6.x",
     "@justeat/f-button": "4.x",
     "@justeat/f-card": "4.x",
+    "@justeat/f-card-with-content": "3.x",
     "@justeat/f-error-message": "2.x",
     "@justeat/f-form-field": "6.x"
   },
@@ -61,6 +62,7 @@
     "@justeat/f-alert": "6.x",
     "@justeat/f-button": "4.x",
     "@justeat/f-card": "4.x",
+    "@justeat/f-card-with-content": "3.x",
     "@justeat/f-error-message": "2.x",
     "@justeat/f-form-field": "6.x",
     "@justeat/f-wdio-utils": "1.x",

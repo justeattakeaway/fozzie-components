@@ -3,6 +3,7 @@
         :class="$style['c-mfa']"
         data-test-id="v-mfa-component">
         <f-card
+            v-if="!showErrorPage"
             :class="$style['c-mfa-card']"
             has-inner-spacing-large
             has-outline
@@ -32,7 +33,7 @@
                     :class="$style['c-mfa-form']"
                     @submit.prevent="onFormSubmit">
                     <form-field
-                        v-model="verificationCode"
+                        v-model="otp"
                         :class="$style['c-mfa-formField']"
                         :label-text="$t('verificationPage.formField.labelText')"
                         :placeholder="$t('verificationPage.formField.placeholderText')"
@@ -82,6 +83,16 @@
                 </f-button>
             </div>
         </f-card>
+
+        <f-card-with-content
+            v-else
+            data-test-id="mfa-error-page"
+            :card-heading="$t('errorMessages.loading.heading')"
+            :card-description="$t('errorMessages.loading.message')">
+            <template #icon>
+                <bag-sad-bg-icon />
+            </template>
+        </f-card-with-content>
     </div>
 </template>
 
@@ -92,6 +103,8 @@ import FAlert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
 import FCard from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
+import FCardWithContent from '@justeat/f-card-with-content';
+import '@justeat/f-card-with-content/dist/f-card-with-content.css';
 import ErrorMessage from '@justeat/f-error-message';
 import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
@@ -100,9 +113,17 @@ import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 
 import {
-    BagSurfBgIcon
+    BagSurfBgIcon,
+    BagSadBgIcon
 } from '@justeat/f-vue-icons';
+import AccountWebApi from '../services/AccountWeb.api';
 import tenantConfigs from '../tenants';
+import {
+    EMAIL_RFC5322_REGEX,
+    MFA_CODE_REGEX,
+    RETURN_URL_REGEX,
+    REDIRECT_URL_EVENT_NAME
+} from '../constants';
 
 const standardLogTags = ['account-pages', 'mfa'];
 
@@ -112,10 +133,12 @@ export default {
     components: {
         FAlert,
         FCard,
+        FCardWithContent,
         ErrorMessage,
         FormField,
         FButton,
-        BagSurfBgIcon
+        BagSurfBgIcon,
+        BagSadBgIcon
     },
 
     mixins: [VueGlobalisationMixin],
@@ -129,11 +152,13 @@ export default {
 
     data () {
         return {
-            verificationCode: '',
+            otp: '',
+            mfa: '',
             email: '',
             tenantConfigs,
             isSubmitting: false,
             showErrorPage: false,
+            returnUrl: '/',
             hasSubmitError: false,
             showValidationError: false
         };
@@ -141,7 +166,7 @@ export default {
 
     computed: {
         isSubmitButtonDisabled () {
-            return this.verificationCode.length < 1;
+            return this.otp.length < 1;
         }
     },
 
@@ -151,32 +176,43 @@ export default {
 
     methods: {
         /**
-        * TODO
+        * Sets the showErrorPage flag to false, so it is clean before we start.
+        * Validates the returnUrl and sets it to the returnUrl property.
+        * Validates the email and sets it to the email property.
+        * Validates the code and sets it to the mfa property.
         */
         initialise () {
-            try {
-                // TODO - Validate Querystring params - Invalid > raise showErrorPage flag
-                // TODO - Assign to data model
-                this.email = 'email@email.com';
-                this.code = 'someCode123';
-            } catch (error) {
-                this.$log.error('Error validating mfa data', error, standardLogTags);
-            }
+            this.showErrorPage = false;
+            this.processQueryString('returnUrl', 'returnUrl', RETURN_URL_REGEX);
+            this.processQueryString('email', 'email', EMAIL_RFC5322_REGEX);
+            this.processQueryString('code', 'mfa', MFA_CODE_REGEX);
         },
 
         /**
-        * TODO
+        * Raises the isSubmitting which disables the Submit button.
+        * Sets the hasSubmitError flag to false, so it is clean before we start.
+        * Validates the otp value and if valid, posts the form data to the api.
+        * Then upon success emits an event to the parent component to redirect to the supplied returnUrl.
+        * If the otp is invalid, lowers the isSubmitting flag and sets the showValidationError flag
+        * to true, which displays the error message below the form field.
+        * If the post fails, lowers the isSubmitting flag and it sets the hasSubmitError flag to
+        * true, which displays the alert message below the form field plus logs the issue.
         */
         async onFormSubmit () {
             this.isSubmitting = true;
             this.hasSubmitError = false;
 
             try {
-                const isOtpValid = this.validateOtp();
+                const isOtpValid = this.isOtpValid();
                 this.showValidationError = !isOtpValid;
 
                 if (isOtpValid) {
-                    this.postValidateMfaToken();
+                    (new AccountWebApi({
+                        httpClient: this.$http,
+                        cookies: this.$cookies,
+                        baseUrl: this.smartGatewayBaseUrl
+                    })).postValidateMfaToken({ mfa_token: this.mfa, otp: this.otp }); // eslint-disable-line camelcase
+                    this.emitRedirectEvent(this.returnUrl); // Completed successfully, emit redirect return url
                 }
             } catch (error) {
                 if (error.response && error.response.status) {
@@ -207,18 +243,62 @@ export default {
             console.log('DEBUG - onShowHelpInfo'); // eslint-disable-line no-console
         },
 
-        // To be replaced by API call
-        postValidateMfaToken () {
-            const err = new Error('TEST - 400 error');
-            err.response = {
-                status: 400
-            };
-            throw err;
+        /**
+        * If no error has already occurred it reads, decodes, trims, validates the query
+        * string parameters based on the regex provided. Then store the value against the
+        * supplied property indicated by the key.
+        * If the key is not present in the query string or the value is not valid, the
+        * showErrorPage flag is raised and the issue is logged.
+        *
+        * @param {string} key - The key to search for in the query string.
+        * @param {string} field - The data field to store the value against.
+        * @param {string} regex - The regex to validate the value against.
+        */
+        processQueryString (key, field, regex) {
+            if (this.showErrorPage === true) {
+                return;
+            }
+            let err;
+            try {
+                if (this.$route.query[key]) {
+                    const param = decodeURIComponent(this.$route.query[key]).trim();
+                    const rx = new RegExp(regex);
+                    if (rx.test(param)) {
+                        this[field] = param;
+                    } else {
+                        this.showErrorPage = true;
+                        err = new Error('The regex failed');
+                    }
+                } else {
+                    this.showErrorPage = true;
+                    err = new Error('The querystring key missing');
+                }
+            } catch (error) {
+                this.showErrorPage = true;
+                err = error;
+            } finally {
+                if (this.showErrorPage) {
+                    this.$log.warn(`Error validating mfa(${key}) querystring data`, err, standardLogTags);
+                }
+            }
         },
 
-        validateOtp () {
-            // TODO
-            return this.verificationCode.length >= 6;
+        /**
+        * Emit Success Event
+        *
+        * @param {string} url - The return url
+        */
+        emitRedirectEvent (url) {
+            const pathRaw = url.trim();
+            const path = `${pathRaw.charAt(0) === '/' ? pathRaw : `/${pathRaw}`}`;
+            this.$emit(REDIRECT_URL_EVENT_NAME, path);
+        },
+
+        /**
+        * Validates the otp value is within acceptable bounds (currently 1-10 characters).
+        */
+        isOtpValid () {
+            return this.otp.length > 0 && this.otp.length < 11;
         }
     }
 };
