@@ -73,8 +73,8 @@ The props that can be defined are as follows (if any):
 | Prop  | Type  |  Required |  default | Description |
 | ----- | ----- |  ------- |  ------- | ----------- |
 | smartGatewayBaseUrl | string | true |  - | the smartgateway host |
-| code | string | true |  - | the mfa token to post to the api |
-| email | string | true |  - | the email to display on the screen |
+| code | string | false | `''` | the mfa token to post to the api |
+| email | string | false |  `''` | the email to display on the screen |
 | returnUrl | string | false |  `/` | the return url to return to upon success |
 
 ### Events
