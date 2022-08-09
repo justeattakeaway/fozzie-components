@@ -32,6 +32,8 @@ jobs:
       with:
         node-version: 16
         cache: 'yarn'
+    - name: Install packages
+      run: yarn --prefer-offline
     - name: Build Components
       run: yarn build
     - name: Storybook Build
