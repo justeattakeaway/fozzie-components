@@ -1,7 +1,7 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Fozzie Components CI
 
 on:
   pull_request:
@@ -13,35 +13,26 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - name: Cache yarn dependencies
-      uses: actions/cache@v2
-      id: yarn-cache
+    - name: Setup Node  
+      uses: actions/setup-node@v3
       with:
-        path: |
-          ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          **/node_modules
-        key: our-cache-yarn-${{ hashFiles('**/yarn.lock') }}
+        node-version: 16
+        cache: 'yarn'
     - name: Install packages
-      if: steps.yarn-cache.outputs.cache-hit != 'true'
       run: yarn
     
   build:
     needs: install
     runs-on: ubuntu-latest
     steps:
-    - name: "Checkout"
+    - name: Checkout
       uses: actions/checkout@v3
-    - name: "Setup Node"
+    - name: Setup Node
       uses: actions/setup-node@v3
       with:
         node-version: 16
-    - name: Cache yarn dependencies
-      uses: actions/cache@v2
-      id: yarn-cache
-      with:
-        path: |
-          ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          **/node_modules
-        key: our-cache-yarn-${{ hashFiles('**/yarn.lock') }}
-    - name: "Build"
+        cache: 'yarn'
+    - name: Build Components
       run: yarn build
+    - name: Storybook Build
+      run: yarn storybook:build
