@@ -16,7 +16,7 @@ Multi-factor Authenticator - Input Form
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-mfa/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-mfa?targetFile=package.json)
 
 ---
-This form is for accepting a MFA token that has been sent to a user, then submitting it to be verified, if successful then the user is redirected to where they came from.
+This form is for accepting a MFA token that has been sent to a user, then submitting it to be verified, if successful then an event to passed to the parent component to return the user to where they came from.
 
 ## Usage
 
@@ -70,9 +70,12 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
-| Prop  | Type  |  Required | Description |
-| ----- | ----- |  ------- | ----------- |
-| smartGatewayBaseUrl | string | true | the smartgateway host |
+| Prop  | Type  |  Required |  default | Description |
+| ----- | ----- |  ------- |  ------- | ----------- |
+| smartGatewayBaseUrl | string | true |  - | the smartgateway host |
+| code | string | true |  - | the mfa token to post to the api |
+| email | string | true |  - | the email to display on the screen |
+| returnUrl | string | false |  `/` | the return url to return to upon success |
 
 ### Events
 
