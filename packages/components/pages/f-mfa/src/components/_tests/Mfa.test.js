@@ -13,7 +13,6 @@ let wrapper;
 let sutMocks;
 let sutProps;
 let sutData;
-let initialiseSpy;
 let mockPostValidateMfaToken;
 
 // Default to en-GB
@@ -21,15 +20,6 @@ const i18n = {
     locale: 'en-GB',
     messages: {
         'en-GB': tenantConfigs['en-GB'].messages
-    }
-};
-
-// Mock the route date with valid data and as it would appear encoded in the location.value.href
-const routeMock = {
-    query: {
-        code: 'ABC123',
-        email: 'jazz.man%40hemail.com',
-        returnUrl: '%2Fplace%2Fi%2Fcame%2Ffrom'
     }
 };
 
@@ -76,21 +66,19 @@ describe('Mfa', () => {
         // Arrange clean valid defaults (can be overridden by each test)
         sutData = () => ({
             otp: '',
-            mfa: '',
-            email: '',
             tenantConfigs,
             isSubmitting: false,
-            showErrorPage: false,
-            returnUrl: '/'
+            showErrorPage: false
         });
         sutProps = {
-            smartGatewayBaseUrl: baseUrl
+            smartGatewayBaseUrl: baseUrl,
+            code: 'ABC123',
+            email: 'jazz.man@hemail.com',
+            returnUrl: '/place/i/came/from'
         };
         sutMocks = {
-            $route: routeMock,
             $log: logMocks
         };
-        initialiseSpy = jest.spyOn(sut.methods, 'initialise');
     });
 
     afterEach(() => {
@@ -120,47 +108,25 @@ describe('Mfa', () => {
         expect(button.attributes('disabled')).toBe(expected);
     });
 
-    it('should call the initialise() method on the Mounted() hook', async () => {
-        // Act
-        wrapper = await mountSut();
-
-        // Assert
-        expect(initialiseSpy).toHaveBeenCalled();
-    });
-
     describe('When calling the initialise() method', () => {
-        it.each([
-            ['returnUrl', '/place/i/came/from'],
-            ['email', 'jazz.man@hemail.com'],
-            ['mfa', 'ABC123']
-        ])('should set the %s if a valid value supplied on the querystring', async (key, expected) => {
+        it('should not log if valid props supplied', async () => {
             // Act
             wrapper = await mountSut();
 
             // Assert
-            expect(wrapper.vm[key]).toBe(expected);
             expect(warnLogSpy).not.toHaveBeenCalled();
         });
 
         it.each([
-            ['returnUrl', 'https%3A%2F%2Fwww.somebadplace.co.uk%3FreturnUrl%3Dnottheplace%2Fi%2Fcame%2Ffrom'],
-            ['email', 'mysite..123%40hemail.b'],
+            ['returnUrl', 'https://www.somebadplace.co.uk?returnUrl=nottheplace/i/came/from'],
+            ['email', 'mysite..123@hemail.b'],
             ['code', '123456789012345678901234567890XXX']
         ])('should show the error page and log warn if the %s validation fails', async (key, value) => {
-            // Arrange
-            const sutOverrideMocks = {
-                ...sutMocks,
-                $route: {
-                    ...routeMock,
-                    query: {
-                        ...routeMock.query,
-                        [key]: value
-                    }
-                }
-            };
-
             // Act
-            wrapper = await mountSut({ mocks: sutOverrideMocks });
+            wrapper = await mountSut({
+                propsData:
+                    { ...sutProps, [key]: value }
+            });
 
             // Assert
             const errorCard = wrapper.find('[data-test-id="mfa-error-page"]');
@@ -169,30 +135,36 @@ describe('Mfa', () => {
         });
 
         it.each([
-            ['returnUrl'],
             ['email'],
             ['code']
         ])('should show the error page and log warn if the %s values are missing', async key => {
             // Arrange
-            const queryMock = {
-                ...routeMock.query
-            };
-            delete queryMock[key];
-            const sutOverrideMocks = {
-                ...sutMocks,
-                $route: {
-                    ...routeMock,
-                    query: queryMock
-                }
-            };
+            const props = { ...sutProps };
+            delete props[key];
 
             // Act
-            wrapper = await mountSut({ mocks: sutOverrideMocks });
+            wrapper = await mountSut({ propsData: props });
 
             // Assert
             const errorCard = wrapper.find('[data-test-id="mfa-error-page"]');
             expect(errorCard.exists()).toBe(true);
             expect(warnLogSpy).toHaveBeenCalled();
+        });
+
+        it('should set the default for returnUrl if not supplied', async () => {
+            // Arrange
+            const expected = '/';
+            const props = { ...sutProps };
+            delete props.returnUrl;
+
+            // Act
+            wrapper = await mountSut({ propsData: props });
+
+            // Assert
+            const errorCard = wrapper.find('[data-test-id="mfa-error-page"]');
+            expect(errorCard.exists()).toBe(false);
+            expect(warnLogSpy).not.toHaveBeenCalled();
+            expect(wrapper.vm.returnUrl).toBe(expected);
         });
     });
 
@@ -232,8 +204,11 @@ describe('Mfa', () => {
                 // Arrange
                 mockPostValidateMfaToken = jest.fn(() => {}); // Add default mock to the spy
                 const expectedParams = { mfa_token: 'XYZ1234', otp: 'test-otp' }; // eslint-disable-line camelcase
-                wrapper = await mountSut();
-                await wrapper.setData({ otp: 'test-otp', mfa: 'XYZ1234' });
+                wrapper = await mountSut({
+                    propsData:
+                        { ...sutProps, code: 'XYZ1234' }
+                });
+                await wrapper.setData({ otp: 'test-otp' });
 
                 // Act
                 await wrapper.vm.onFormSubmit();
