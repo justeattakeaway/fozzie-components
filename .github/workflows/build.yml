@@ -5,7 +5,8 @@ name: Fozzie Components CI
 
 on:
   pull_request:
-    branches: [ "master" ]
+    branches: 
+      - master
 
 jobs:
   install:
