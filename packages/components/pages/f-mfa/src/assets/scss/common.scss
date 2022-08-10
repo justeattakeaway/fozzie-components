@@ -2,7 +2,7 @@
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .c-mfa {
-    margin: auto;
+    margin: f.spacing(f) auto;
     max-width: 600px;
 }
 
