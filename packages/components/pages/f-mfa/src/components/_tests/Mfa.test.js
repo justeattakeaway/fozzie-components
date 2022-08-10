@@ -148,7 +148,7 @@ describe('Mfa', () => {
             // Assert
             const errorCard = wrapper.find('[data-test-id="v-mfa-error-component"]');
             expect(errorCard.exists()).toBe(true);
-            expect(warnLogSpy).toHaveBeenCalled();
+            expect(warnLogSpy).toHaveBeenCalledWith(`Error validating mfa property '${key}' - Regex Failed`, ['account-pages', 'mfa']);
         });
 
         it.each([
@@ -165,7 +165,7 @@ describe('Mfa', () => {
             // Assert
             const errorCard = wrapper.find('[data-test-id="v-mfa-error-component"]');
             expect(errorCard.exists()).toBe(true);
-            expect(warnLogSpy).toHaveBeenCalled();
+            expect(warnLogSpy).toHaveBeenCalledWith(`Error validating mfa property '${key}' - Regex Failed`, ['account-pages', 'mfa']);
         });
 
         it('should set the default for returnUrl if not supplied', async () => {
