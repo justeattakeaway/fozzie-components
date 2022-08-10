@@ -4,9 +4,9 @@
 name: Fozzie Components CI
 
 on:
-  pull_request:
+  push:
     branches: 
-      - master
+    - master
 
 jobs:
   install:
