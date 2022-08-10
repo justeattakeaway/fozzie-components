@@ -10,25 +10,31 @@ const messages = {
             validationMessage: 'Please enter a valid code'
         },
         submitErrorText: 'Please check and try again',
-        submitButtonText: 'Continue',
-        helpModalLinkText: 'Need help?'
+        primaryButtonText: 'Continue',
+        secondaryButtonText: 'Need help?'
     },
-    helpModal: {
+    helpInfo: {
         title: 'Help',
-        straplineText: 'Need help?',
+        subTitle: 'Need help?',
         instructionsPrimaryText: "We've emailed a code to {0}. It will be valid for 30 minutes. If you're having trouble:",
         instructionsPoint1Text: 'Wait a few minutes for the email to come through',
         instructionsPoint2Text: 'Check your spam folder',
         instructionsPoint3Text: 'Try logging in another way',
-        instructionsPoint4Text: 'See our [{helpLink}] if you still need help',
-        submitButtonText: 'Got it',
-        alternativeLoginLinkText: 'Login another way'
+        instructionsPoint4Text: 'See our {0} if you still need help',
+        instructionsHelpCentreLink: '/help',
+        instructionsHelpCentreText: 'help centre',
+        primaryButtonText: 'Enter code',
+        secondaryButtonText: 'Log in another way'
     },
     errorMessages: {
         validation: 'Please check and try again',
         submitMfa: {
             heading: 'Something went wrong',
             description: 'Sorry about that. Please try again.'
+        },
+        loading: {
+            heading: 'Something went wrong',
+            message: 'Sorry about that. Please try again.'
         }
     }
 };
