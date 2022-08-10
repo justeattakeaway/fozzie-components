@@ -32,7 +32,7 @@ export const VMfaComponent = (args, { argTypes }) => ({
 
     template: `<v-mfa
         v-bind="$props"
-        @mfa-success-return-url="mfaSuccess()" />`
+        @mfa-success-return-url="mfaSuccess" />`
 });
 
 VMfaComponent.storyName = 'f-mfa';
