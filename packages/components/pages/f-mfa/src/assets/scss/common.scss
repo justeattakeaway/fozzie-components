@@ -1,1 +1,44 @@
 // Add styles here so it can be injected first via vue.config.js.
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+.c-mfa {
+    margin: auto;
+    max-width: 600px;
+}
+
+.c-mfa-heading {
+    margin-top: 0;
+}
+
+.c-mfa-heading,
+.c-mfa-description {
+    text-align: center;
+}
+
+.c-mfa-icon {
+    transform: translate(10%);
+    margin: -#{f.spacing(g)} 0 -#{f.spacing(d)};
+    width: 212px;
+}
+
+.c-mfa-card {
+    @include f.media('>=narrow') {
+        box-shadow: f.$elevation-01;
+    }
+}
+
+.c-mfa-card-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 392px;
+    margin: 0 auto;
+}
+
+.c-mfa-primaryButton {
+    margin: f.spacing(f) 0;
+}
+
+.c-mfa-secondaryButton {
+    margin-bottom: f.spacing(d);
+}
