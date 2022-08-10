@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.9.0
+------------------------------
+*August 10, 2022*
+
+### Changed
+- Take in the entire MFA `validateUrl` instead of building it up from `smartGatewayBaseUrl`.
+
+### Fixed
+- Pass `returnUrl` through to Help component.
+
+
 v0.8.2
 ------------------------------
 *August 10, 2022*

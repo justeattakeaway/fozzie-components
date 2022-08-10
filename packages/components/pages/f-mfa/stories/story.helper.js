@@ -1,7 +1,3 @@
-import {
-    SUBMIT_LOGIN_CHALLENGE_URL
-} from '../src/constants';
-
 const httpStatusCodes = {
     ok: 200,
     badrequest: 400,
@@ -21,7 +17,7 @@ const apiStates = {
 
 // Mocks for the API calls
 const otpPOST200 = {
-    url: `http://localhost:8080/${SUBMIT_LOGIN_CHALLENGE_URL}`,
+    url: 'http://localhost:8080/mfa/validate',
     method: httpVerbs.post,
     responseStatus: httpStatusCodes.ok,
     requestData: { mfa_token: 'ABC123', otp: 'otp123' }, // eslint-disable-line camelcase
@@ -29,7 +25,7 @@ const otpPOST200 = {
 };
 
 const otpPOST400 = {
-    url: `http://localhost:8080/${SUBMIT_LOGIN_CHALLENGE_URL}`,
+    url: 'http://localhost:8080/mfa/validate',
     method: httpVerbs.post,
     responseStatus: httpStatusCodes.badrequest,
     requestData: { mfa_token: 'ABC123', otp: 'otp123' }, // eslint-disable-line camelcase
@@ -37,7 +33,7 @@ const otpPOST400 = {
 };
 
 const otpPOST429 = {
-    url: `http://localhost:8080/${SUBMIT_LOGIN_CHALLENGE_URL}`,
+    url: 'http://localhost:8080/mfa/validate',
     method: httpVerbs.post,
     responseStatus: httpStatusCodes.throttledrequest,
     requestData: { mfa_token: 'ABC123', otp: 'otp123' }, // eslint-disable-line camelcase
