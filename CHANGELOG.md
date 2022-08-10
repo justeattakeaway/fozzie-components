@@ -5,6 +5,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.23.0
 ------------------------------
+*August 10, 2022*
+
+### Added
+- Turborepo local caching for `build` / `lint` / `test` / tasks
+- New concurrency rules in CircleCI config
+- Disabled npm publishing / Storybook deploy
+
+
+v7.23.0
+------------------------------
 *August 4, 2022*
 
 ### Added

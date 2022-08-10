@@ -5,7 +5,7 @@ name: Fozzie Components CI
 
 on:
   pull_request:
-    branches: [ "master", "storybook-actions-test" ]
+    branches: [ "master" ]
 
 jobs:
   install:
@@ -26,7 +26,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: '**/node_modules'
-        key: node-modules-${{ hashFiles('yarn.lock') }}
+        key: node-modules-${{ hashFiles('**/yarn.lock') }}
     # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible
     - name: Install Dependencies
       if: steps.cache-node-modules.outputs.cache-hit != 'true'
@@ -51,7 +51,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: '**/node_modules'
-        key: node-modules-${{ hashFiles('yarn.lock') }}
+        key: node-modules-${{ hashFiles('**/yarn.lock') }}
     # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible
     - name: Install Dependencies
       if: steps.cache-node-modules.outputs.cache-hit != 'true'
@@ -96,7 +96,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: '**/node_modules'
-        key: node-modules-${{ hashFiles('yarn.lock') }}
+        key: node-modules-${{ hashFiles('**/yarn.lock') }}
     # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible
     - name: Install Dependencies
       if: steps.cache-node-modules.outputs.cache-hit != 'true'
