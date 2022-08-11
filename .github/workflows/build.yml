@@ -1,0 +1,125 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Fozzie Components CI
+
+on:
+  push:
+    branches: 
+    - master
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the Repo
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Setup Node 
+    # Setup Node 16 
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'yarn'
+    # Restore node_modules if cache exists. If not, cache is created at end of build.
+    - name: Cache Node Modules
+      id: cache-node-modules
+      uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: node-modules-${{ hashFiles('**/yarn.lock') }}
+    # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible
+    - name: Install Dependencies
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: yarn --prefer-offline
+    
+  build:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the Repo
+    - name: Checkout
+      uses: actions/checkout@v3
+    # Setup Node 16 
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'yarn'
+    # Restore node_modules - Cache should exist as one was created in previous 'install' job
+    - name: Cache Node Modules
+      id: cache-node-modules
+      uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: node-modules-${{ hashFiles('**/yarn.lock') }}
+    # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible
+    - name: Install Dependencies
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: yarn --prefer-offline
+    # Restore Turborepo's component 'dist' cache - If not, cache is created at end of build.
+    - name: Cache Turborepo Dist
+      id: turborepo-dist-cache
+      uses: actions/cache@v2
+      with:
+        path: .turbo
+        key: turborepo-dist-cache
+    # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
+    - name: Build Components
+      run: yarn build --cache-dir=".turbo"
+    # Build Storybook
+    - name: Storybook Build
+      run: yarn storybook:build
+    # Cache 'storybook-static'
+    - name: Cache Storybook Static Directory
+      id: storybook-cache
+      uses: actions/cache@v2
+      with:
+        path: ./packages/storybook/storybook-static
+        key: storybook-cache
+
+  storybook-deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the Repo
+    - name: Checkout
+      uses: actions/checkout@v3
+    # Setup Node 16 
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'yarn'
+    # Restore node_modules - Cache should exist as one was created in previous 'install' job
+    - name: Restore Cache -  Node Modules
+      id: cache-node-modules
+      uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: node-modules-${{ hashFiles('**/yarn.lock') }}
+    # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible
+    - name: Install Dependencies
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: yarn --prefer-offline
+    # Restore Turborepo's component 'dist' cache - If not, cache is created at end of build.
+    - name: Restore Cache -  Turborepo Dist
+      id: turborepo-dist-cache
+      uses: actions/cache@v2
+      with:
+        path: .turbo
+        key: turborepo-dist-cache
+    # Restory Storybook 'storybook-static'
+    - name: Restore Cache -  Storybook Static Directory
+      id: storybook-cache
+      uses: actions/cache@v2
+      with:
+        path: ./packages/storybook/storybook-static
+        key: storybook-cache
+    # Deploy Storybook
+    - name: Storybook deploy
+      run: |
+        git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+        yarn storybook:deploy
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
