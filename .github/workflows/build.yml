@@ -69,11 +69,11 @@ jobs:
     - name: Build Components
       run: yarn build --cache-dir=".turbo"
     # Build + Deploy Storybook
-    - name: Build and deploy apps to gh-pages
+    - name: Build and deploy app to gh-pages
       uses: sauloxd/review-apps@v2.0.0
       with:
-        branch: "gh-pages-storybook" # The branch you chose to be your github-pages source
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Optional, if you want the apps URL commented in your PR
+        branch: "github-pages"
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         apps: |
           {
             "storybook": {
