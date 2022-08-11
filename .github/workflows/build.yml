@@ -14,20 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Create check run
-      - uses: octokit/request-action@v2.x
-        id: create_deployment_environment
-        with:
-          route: PUT /repos/{owner}/{repo}/environments/{environment_name}
-          accept: application/vnd.github+json
-          owner: justeat
-          repo: fozzie-components
-          environment_name: ${{ github.REF_NAME }}-storybook
-          name: "Create Deployment Environment"
-          head_sha: ${{ github.sha }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
+    - uses: satak/webrequest-action@master
+      with:
+        url: https://api.github.com/repos/justeat/fozzie-components/environments/${{ github.REF_NAME }}-storybook
+        method: PUT
+        headers: '{"Authentication": "Token ${{ secrets.GITHUB_TOKEN }}"}'
 
 
   # install:
