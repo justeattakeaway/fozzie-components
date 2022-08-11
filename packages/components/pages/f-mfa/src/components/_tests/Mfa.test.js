@@ -72,7 +72,7 @@ describe('Mfa', () => {
         });
         sutProps = {
             validateUrl,
-            code: 'ABC123',
+            code: 'AaBbCcDdEeFfGg-HhIiJjKkLlMmNnOoPp_QqRrSsTtUuVv-WwXxYyZz09',
             email: 'jazz.man@hemail.com',
             returnUrl: '/place/i/came/from'
         };
@@ -126,29 +126,37 @@ describe('Mfa', () => {
     });
 
     describe('When calling the initialise() method', () => {
-        it('should not log if valid props supplied', async () => {
+        it('should log success if valid props supplied', async () => {
             // Act
             wrapper = await mountSut();
 
             // Assert
-            expect(warnLogSpy).not.toHaveBeenCalled();
+            expect(warnLogSpy).toHaveBeenCalledTimes(1);
+            expect(warnLogSpy).toHaveBeenCalledWith('MFA page loaded successfully');
         });
 
         it.each([
             ['returnUrl', 'https://www.somebadplace.co.uk?returnUrl=nottheplace/i/came/from'],
             ['email', 'mysite..123@hemail.b'],
-            ['code', '123456789012345678901234567890XXX']
+            ['code', 'ABCDEabcde012345'], // Too short
+            ['code', 'ABCDEFG%abcdefg/+=0123456789'], // Illegal characters
+            ['code', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz-0123456789'] // Too long
         ])('should show the error page and log warn if the %s validation fails', async (key, value) => {
+            // Arrange
+            const propsData = {
+                ...sutProps,
+                [key]: value
+            };
+
             // Act
-            wrapper = await mountSut({
-                propsData:
-                    { ...sutProps, [key]: value }
-            });
+            wrapper = await mountSut({ propsData });
 
             // Assert
             const errorCard = wrapper.find('[data-test-id="v-mfa-error-component"]');
             expect(errorCard.exists()).toBe(true);
+            expect(warnLogSpy).toHaveBeenCalledTimes(2);
             expect(warnLogSpy).toHaveBeenCalledWith(`Error validating mfa property '${key}' - Regex Failed`, ['account-pages', 'mfa']);
+            expect(warnLogSpy).toHaveBeenCalledWith('Error loading MFA page');
         });
 
         it.each([
@@ -156,32 +164,36 @@ describe('Mfa', () => {
             ['code']
         ])('should show the error page and log warn if the %s values are missing', async key => {
             // Arrange
-            const props = { ...sutProps };
-            delete props[key];
+            const propsData = { ...sutProps };
+            delete propsData[key];
 
             // Act
-            wrapper = await mountSut({ propsData: props });
+            wrapper = await mountSut({ propsData });
 
             // Assert
             const errorCard = wrapper.find('[data-test-id="v-mfa-error-component"]');
             expect(errorCard.exists()).toBe(true);
+            expect(warnLogSpy).toHaveBeenCalledTimes(2);
             expect(warnLogSpy).toHaveBeenCalledWith(`Error validating mfa property '${key}' - Regex Failed`, ['account-pages', 'mfa']);
+            expect(warnLogSpy).toHaveBeenCalledWith('Error loading MFA page');
         });
 
         it('should set the default for returnUrl if not supplied', async () => {
             // Arrange
             const expected = '/';
-            const props = { ...sutProps };
-            delete props.returnUrl;
+            const propsData = { ...sutProps };
+            delete propsData.returnUrl;
 
             // Act
-            wrapper = await mountSut({ propsData: props });
+            wrapper = await mountSut({ propsData });
 
             // Assert
             const errorCard = wrapper.find('[data-test-id="v-mfa-error-component"]');
             expect(errorCard.exists()).toBe(false);
-            expect(warnLogSpy).not.toHaveBeenCalled();
             expect(wrapper.vm.returnUrl).toBe(expected);
+
+            expect(warnLogSpy).toHaveBeenCalledTimes(1);
+            expect(warnLogSpy).toHaveBeenCalledWith('MFA page loaded successfully');
         });
     });
 

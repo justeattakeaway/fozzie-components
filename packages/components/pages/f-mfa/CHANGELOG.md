@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.9.1
+------------------------------
+*August 11, 2022*
+
+### Changed
+- Update `code` regex.
+
+### Added
+- Success/failure logs on page load.
+
+
 v0.9.0
 ------------------------------
 *August 11, 2022*
