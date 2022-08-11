@@ -70,12 +70,12 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
-| Prop  | Type  |  Required |  default | Description |
-| ----- | ----- |  ------- |  ------- | ----------- |
-| smartGatewayBaseUrl | string | true |  - | the smartgateway host |
-| code | string | false | `''` | the mfa token to post to the api |
-| email | string | false |  `''` | the email to display on the screen |
-| returnUrl | string | false |  `/` | the return url to return to upon success |
+| Prop        | Type   | Required |  default | Description |
+| ----------- | ------ | -------- | -------- | ----------- |
+| validateUrl | string | true     | n/a      | The URL to POST the MFA validation request to. |
+| code        | string | false    | `''`     | The MFA token to POST to the API |
+| email       | string | false    | `''`     | The email to display on the page |
+| returnUrl   | string | false    |  `/`     | The URL to return the user to upon success |
 
 ### Events
 

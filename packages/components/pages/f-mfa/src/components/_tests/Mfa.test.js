@@ -8,7 +8,7 @@ import {
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
-const baseUrl = 'https://api.test.co.uk/';
+const validateUrl = 'https://localhost:8080/mfa/validate';
 let wrapper;
 let sutMocks;
 let sutProps;
@@ -71,7 +71,7 @@ describe('Mfa', () => {
             showErrorPage: false
         });
         sutProps = {
-            smartGatewayBaseUrl: baseUrl,
+            validateUrl,
             code: 'ABC123',
             email: 'jazz.man@hemail.com',
             returnUrl: '/place/i/came/from'
