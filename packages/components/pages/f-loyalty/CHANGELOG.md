@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v2.5.0
+------------------------------
+*August 3, 2022*
+
+### Changed
+- Changed some translation copy for AU for how it works section
+- Modified tests to account for the translation changes
+
+
 v2.4.0
 ------------------------------
 *August 3, 2022*
