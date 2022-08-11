@@ -374,17 +374,6 @@ jobs:
       - slack_notify_fail
       - slack_notify_success
 
-  # Not currently working in CircleCI
-  # deploy-storybook:
-  #   executor: node
-  #   steps:
-  #     - attach_workspace:
-  #         at: .
-  #     - run:
-  #        name: Deploy Storybook
-  #        command: yarn storybook:deploy
-  #     - slack_notify_fail
-  #     - slack_notify_success
 
   # Not currently working in CircleCI
   # publish-to-npm:
@@ -427,15 +416,6 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - danger-checks
-      # Not currently working in CircleCI
-      # - deploy-storybook:
-      #     name: deploy-storybook
-      #     context: web-core
-      #     filters:
-      #       branches:
-      #         only: master
-      #     requires:
-      #       - build
       - bundlewatch:
           name: bundlewatch
           context: web-core
