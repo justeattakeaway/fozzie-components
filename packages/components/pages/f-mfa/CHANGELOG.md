@@ -6,10 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.9.0
 ------------------------------
-*August 10, 2022*
+*August 11, 2022*
 
 ### Changed
 - Take in the entire MFA `validateUrl` instead of building it up from `smartGatewayBaseUrl`.
+- Help link now points to FAQs page.
 
 ### Fixed
 - Pass `returnUrl` through to Help component.

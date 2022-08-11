@@ -29,7 +29,7 @@
                     <i18n
                         path="helpInfo.instructionsPoint4Text"
                         tag="li">
-                        <a :href="$t('helpInfo.instructionsHelpCentreLink')">{{ $t('helpInfo.instructionsHelpCentreText') }}</a>
+                        <a :href="$t('helpInfo.instructionsHelpLink')"><strong>{{ $t('helpInfo.instructionsHelpText') }}</strong></a>
                     </i18n>
                 </ul>
 
