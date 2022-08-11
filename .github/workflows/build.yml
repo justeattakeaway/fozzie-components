@@ -7,6 +7,7 @@ on:
   push:
     branches: 
     - master
+    - netlify-storybook-deploy
 
 jobs:
   install:
