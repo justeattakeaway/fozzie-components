@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.26.0
+------------------------------
+*August 11, 2022*
+
+### Changed
+- Small updates to Storybook config
+
 v7.25.0
 ------------------------------
 *August 11, 2022*
@@ -31,6 +38,7 @@ v7.23.0
 
 ### Changed
 - Allure report generation to execute on fail to speed up CI.
+
 
 v7.22.0
 ------------------------------
