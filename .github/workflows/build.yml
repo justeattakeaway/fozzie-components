@@ -78,6 +78,6 @@ jobs:
           {
             "storybook": {
               "build": "yarn storybook:build",
-              "dist": "../../packages/storybook/storybook-static"
+              "dist": "packages/storybook/storybook-static"
             }
           }
