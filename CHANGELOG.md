@@ -3,12 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v7.24.0
+v7.25.0
 ------------------------------
 *August 11, 2022*
 
 ### Added
 - `fozzie > guides` consuming application documentation for Gulp.
+
+
+v7.24.0
+------------------------------
+*August 10, 2022*
+
+### Added
+- New GitHub Actions config to build components / deploy storybook in master
+- Removed references to Storybook Deploy in CircleCI config.
 
 
 v7.23.0
