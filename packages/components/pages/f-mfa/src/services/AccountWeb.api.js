@@ -1,7 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
 import {
-    SUBMIT_LOGIN_CHALLENGE_URL,
     CONVERSATION_ID_HEADER_NAME,
     CONVERSATION_ID_COOKIE_NAME
 } from '../constants';
@@ -9,12 +8,12 @@ import {
 export default class AccountWebApi {
     #httpClient;
     #cookies;
-    #baseUrl;
+    #validateUrl;
 
-    constructor ({ httpClient, cookies, baseUrl } = {}) {
+    constructor ({ httpClient, cookies, validateUrl } = {}) {
         this.#httpClient = httpClient;
         this.#cookies = cookies;
-        this.#baseUrl = baseUrl;
+        this.#validateUrl = validateUrl;
     }
 
     async postValidateMfaToken (body, conversationId = this.setConversationId()) {
@@ -22,7 +21,7 @@ export default class AccountWebApi {
             [CONVERSATION_ID_HEADER_NAME]: conversationId
         };
 
-        const response = await this.#httpClient.post(`${this.#baseUrl}/${SUBMIT_LOGIN_CHALLENGE_URL}`, body, headers);
+        const response = await this.#httpClient.post(this.#validateUrl, body, headers);
 
         return response;
     }

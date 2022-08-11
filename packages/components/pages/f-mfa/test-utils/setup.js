@@ -1,4 +1,4 @@
-export const baseUrl = 'https://smartGatewayBaseUrl.com';
+export const validateUrl = 'https://localhost:8080/mfa/validate';
 
 export const conversationId = 'b7386108-95e6-4e73-9421-5b066c089153';
 
