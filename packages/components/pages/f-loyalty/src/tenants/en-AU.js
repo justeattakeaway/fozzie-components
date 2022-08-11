@@ -3,7 +3,7 @@ const messages = {
     percentage: '15',
     currency: 'dollar',
     currencySymbol: '$',
-    termsUrl: '/info/terms-and-conditions#ii.just-eat-voucher-terms-conditions',
+    termsUrl: '/blog/menulog-news/stamp-cards',
     termsText: 'See Terms & Conditions',
     header: {
         title: 'StampCards',
@@ -51,7 +51,7 @@ const messages = {
                 },
                 earn: {
                     title: 'Earn',
-                    text: 'Each stamp is worth 10% of your order’s value (exc. fees and charges) and will be saved on its own StampCard.'
+                    text: 'Each stamp is worth 15% of your order’s value (exc. fees and charges) and will be saved on its own StampCard.'
                 },
                 collect: {
                     title: 'Collect',
