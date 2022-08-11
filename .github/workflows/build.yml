@@ -18,7 +18,7 @@ jobs:
       with:
         url: https://api.github.com/repos/justeat/fozzie-components/environments/${{ github.REF_NAME }}-storybook
         method: PUT
-        headers: '{"Authentication": "Bearer ${{ secrets.GITHUB_TOKEN }}"}'
+        headers: '{"Authentication": "Bearer ${{ secrets.CREATE_ENVIRONMENT_TOKEN }}"}'
 
 
   # install:
