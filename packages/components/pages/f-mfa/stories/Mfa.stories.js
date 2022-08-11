@@ -40,7 +40,7 @@ VMfaComponent.storyName = 'f-mfa';
 VMfaComponent.args = {
     locale: locales.gb,
     validateUrl: 'http://localhost:8080/mfa/validate',
-    code: 'ABC123',
+    code: '0AbCdEfG1_2HiJkLmNoP3-4QrStUvWxYz5',
     email: 'harry.potter@home.com',
     returnUrl: '/where/i/came/from',
     apiState: apiStateControlDataSource.default

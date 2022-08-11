@@ -203,6 +203,12 @@ export default {
             this.validateProperty(this.returnUrl, 'returnUrl', RETURN_URL_REGEX);
             this.validateProperty(this.email.toLowerCase(), 'email', EMAIL_RFC5322_REGEX);
             this.validateProperty(this.code, 'code', MFA_CODE_REGEX);
+
+            if (this.showErrorPage) {
+                this.$log.warn('Error loading MFA page');
+            } else {
+                this.$log.warn('MFA page loaded successfully');
+            }
         },
 
         /**
