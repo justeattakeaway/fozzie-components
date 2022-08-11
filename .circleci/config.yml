@@ -59,6 +59,8 @@ commands:
         type: string
       command_name:
         type: string
+      turborepo_concurrency:
+        type: string
     description: Runs commands based on passed parameters
     steps:
       - run:
@@ -66,9 +68,9 @@ commands:
           command: |
             if [ "${RUN_ALL}" == "true" ];
             then
-              yarn << parameters.command_name >> --concurrency=1
+              yarn << parameters.command_name >> --concurrency=<< parameters.turborepo_concurrency >>
             else
-              yarn << parameters.command_name >> --filter=...[master] --concurrency=1
+              yarn << parameters.command_name >> --filter=...[master] --concurrency=<< parameters.turborepo_concurrency >>
             fi
 
   build_packages:
@@ -77,6 +79,7 @@ commands:
       - run_command:
           command_description: Build packages
           command_name: build
+          turborepo_concurrency: "5"
 
   lint_packages:
     description: Locally lints all packages in the monorepo
@@ -84,6 +87,7 @@ commands:
       - run_command:
           command_description: Run linting for packages
           command_name: lint
+          turborepo_concurrency: "10"
 
   unit_integration_tests:
     description: Run Unit / Integration Tests
@@ -94,6 +98,7 @@ commands:
       - run_command:
           command_description: Run unit / integration tests for packages
           command_name: "ci:test:<< parameters.component_type >>"
+          turborepo_concurrency: "10"
 
   build_storybook:
     description: Build Storybook for UI tests
@@ -117,6 +122,7 @@ commands:
       - run_command:
           command_description: Run component tests for packages
           command_name: "ci:test-component:chrome:<< parameters.component_type >>"
+          turborepo_concurrency: "1"
 
   accessibility_tests:
     description: Run Accessibility Tests
@@ -127,6 +133,7 @@ commands:
       - run_command:
           command_description: Run accessibility tests for packages
           command_name: "ci:test-a11y:chrome:<< parameters.component_type >>"
+          turborepo_concurrency: "1"
 
   visual_regression_tests:
     description: Run Percy Visual Regression Tests
@@ -359,7 +366,7 @@ jobs:
       - run:
           name: Allure - Generate Test Results
           command: yarn allure:generate
-          when: always
+          when: on_fail
       - store_artifacts:
           path: allure-report
       - store_artifacts:
@@ -367,30 +374,32 @@ jobs:
       - slack_notify_fail
       - slack_notify_success
 
-  deploy-storybook:
-    executor: node
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-         name: Deploy Storybook
-         command: yarn storybook:deploy
-      - slack_notify_fail
-      - slack_notify_success
+  # Not currently working in CircleCI
+  # deploy-storybook:
+  #   executor: node
+  #   steps:
+  #     - attach_workspace:
+  #         at: .
+  #     - run:
+  #        name: Deploy Storybook
+  #        command: yarn storybook:deploy
+  #     - slack_notify_fail
+  #     - slack_notify_success
 
-  publish-to-npm:
-    executor: node
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: Auth With NPM
-          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > .npmrc
-      - run:
-          name: Publish unreleased package versions to npm
-          command: npx lerna publish from-package --ignore-scripts --yes
-      - slack_notify_fail
-      - slack_notify_success
+  # Not currently working in CircleCI
+  # publish-to-npm:
+  #   executor: node
+  #   steps:
+  #     - attach_workspace:
+  #         at: .
+  #     - run:
+  #         name: Auth With NPM
+  #         command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > .npmrc
+  #     - run:
+  #         name: Publish unreleased package versions to npm
+  #         command: npx lerna publish from-package --ignore-scripts --yes
+  #     - slack_notify_fail
+  #     - slack_notify_success
 
 workflows:
   version: 2
@@ -418,14 +427,15 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - danger-checks
-      - deploy-storybook:
-          name: deploy-storybook
-          context: web-core
-          filters:
-            branches:
-              only: master
-          requires:
-            - build
+      # Not currently working in CircleCI
+      # - deploy-storybook:
+      #     name: deploy-storybook
+      #     context: web-core
+      #     filters:
+      #       branches:
+      #         only: master
+      #     requires:
+      #       - build
       - bundlewatch:
           name: bundlewatch
           context: web-core
@@ -454,13 +464,14 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - unit-tests-<< matrix.component_type >>
-      - publish-to-npm:
-          context: web-core
-          filters:
-            branches:
-              only: master
-          requires:
-            - browser-tests-atoms
-            - browser-tests-molecules
-            - browser-tests-organisms
-            - browser-tests-pages
+      # Not currently working in CircleCI
+      # - publish-to-npm:
+      #     context: web-core
+      #     filters:
+      #       branches:
+      #         only: master
+      #     requires:
+      #       - browser-tests-atoms
+      #       - browser-tests-molecules
+      #       - browser-tests-organisms
+      #       - browser-tests-pages
