@@ -4,7 +4,7 @@
 
 If you are upgrading from an older version of fozzie – i.e v8 and older – then this migration guide will help you update to the latest version (v9) which uses `dart-sass` as opposed to `node-sass`.
 
-<a name="prerequisites"></a><h2>Prerequisites</h2>
+## Prerequisites
 
 Before you get started with the Fozzie SCSS helper library there are a few things you need to know in order to get up and running.
 
@@ -12,10 +12,11 @@ From v9 and above, you'll need the following:
 
 1. [dart-sass](https://sass-lang.com/dart-sass):
     - Fozzie makes use of new SCSS syntax to compile your Sass (namely `@use` & `@forward`). The [sass](https://www.npmjs.com/package/sass) module now uses `dart-sass` by default, so if you use the latest version of this module, you'll be fine.
-2. [webpack](https://webpack.js.org/) (or a similar file bundler)
+2. [Webpack](https://webpack.js.org/) (or a similar file bundler)
     - For file resolution paths into the `node_modules` folder. If you aren't using Webpack, then you can use something like [ParcelJs](https://parceljs.org/) instead, which also supports this.
 
-<a name="removing-node-sass"></a><h2>Removing node-sass in favour of sass</h2>
+
+## Removing node-sass in favour of sass
 
 If you use Node Sass, migrating to Dart Sass is straightforward; just replace `node-sass` in your `package.json` file with `sass`. Both packages expose the same JavaScript API.
 
@@ -48,7 +49,7 @@ After:
 If you have an old version of `fozzie` installed within your application at this point, you will likely see some syntax errors. In order to resolve these issue you will need to move to `v9` of `fozzie` which currently sits in [beta](https://www.npmjs.com/package/@justeat/fozzie/v/9.0.0-beta.5).
 This version of `fozzie` contains changes which will automatically resolve those errors.
 
-<a name="scheme"></a><h2>How to move from `@import` to `@use` & `@forward`</h2>
+## How to move from `@import` to `@use` & `@forward`
 
 Once you have moved over to `dart-sass` and switched to the new version of fozzie (v9). You can begin to update your application with the new `@use` & `@forward` syntax. If you are unfamiliar with how `@use` & `@forward` work there's a useful video found [here](https://www.youtube.com/watch?v=CR-a8upNjJ0&ab_channel=KevinPowell) worth watching first.
 
@@ -144,7 +145,7 @@ module.exports = {
 </style>
 ```
 
-<a name="gulp-migration"></a><h2>If you're coming from Gulp</h2>
+## If you're coming from Gulp
 
 If your application uses a different build tool other than webpack (see [prerequisites](#prerequisites) above) such as [Gulp](https://gulpjs.com/), this section will cover the steps you need to complete in order to migrate successfully.
 
