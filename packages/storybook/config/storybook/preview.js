@@ -48,9 +48,13 @@ export const parameters = {
                     ],
                     'Guides',
                     [
+                        'Fozzie',
                         [
-                            'Component Dependencies',
-                            'Typography'
+                            'What is Fozzie?',
+                            'Fozzie and Sass',
+                            'Structure',
+                            'CSS Naming',
+                            'Fozzie Migration Guide'
                         ]
                     ]
                 ],
