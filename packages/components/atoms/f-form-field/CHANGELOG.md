@@ -6,10 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v6.2.1
 ------------------------------
-*July 28, 2022*
+*August 16, 2022*
 
 ### Fixed
-- `false` value for `isVisuallyRequired` prop not being handled correctly.
+- Empty string value for `isVisuallyRequired` prop not being handled correctly.
+
+### Added
+- Unit tests.
+  - The only *actual* values for the `required` attribute should be `''` (if the attribute is given) or `undefined` (if it is not).
 
 
 v6.2.0

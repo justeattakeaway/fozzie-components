@@ -74,7 +74,8 @@ export default {
 
     computed: {
         showRequiredIndicator () {
-            return this.attributes.required && this.isVisuallyRequired;
+            // Empty string is default value and should return true
+            return ![undefined, false].includes(this.attributes.required) && this.isVisuallyRequired;
         },
 
         testId () {
