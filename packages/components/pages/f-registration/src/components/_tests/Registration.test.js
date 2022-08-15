@@ -251,6 +251,39 @@ describe('Registration', () => {
                 expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
             });
 
+            it('should emit login blocked event when service responds with a 401', async () => {
+                // Arrange
+                const err = {
+                    response: {
+                        status: 401,
+                        data: {
+                            faultId: '123',
+                            traceId: '123',
+                            errors: [{
+                                description: 'Failed user authentication.',
+                                errorCode: 'FailedUserAuthentication'
+                            }]
+                        }
+                    }
+                };
+
+                RegistrationServiceApi.createAccount.mockImplementation(async () => {
+                    throw err;
+                });
+                wrapper = mountComponentAndAttachToDocument();
+                Object.defineProperty(wrapper.vm.$v, '$invalid', {
+                    get: jest.fn(() => false)
+                });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                expect(wrapper.emitted(EventNames.LoginBlocked).length).toBe(1);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
+            });
+
             it('should populate generic error message and emit failure event when service responds with a 400', async () => {
                 // Arrange
                 const err = {
