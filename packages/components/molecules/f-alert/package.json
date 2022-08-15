@@ -3,7 +3,7 @@
   "description": "Fozzie Alert – Fozzie Alert Component",
   "version": "6.2.0",
   "main": "dist/f-alert.umd.min.js",
-  "maxBundleSize": "15kB",
+  "maxBundleSize": "20kB",
   "files": [
     "dist"
   ],
@@ -48,7 +48,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.0.0"
+    "@justeat/f-services": "1.x"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",

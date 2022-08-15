@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-form",
   "description": "Fozzie Form - fozzie form",
-  "version": "0.7.0",
+  "version": "0.9.0",
   "main": "dist/f-form.umd.min.js",
   "maxBundleSize": "50kB",
   "files": [
@@ -47,21 +47,21 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.7.0",
-    "@justeat/f-globalisation": "1.0.0",
+    "@justeat/f-services": "1.x",
+    "@justeat/f-globalisation": "1.x",
     "vue-scrollto": "2.20.0",
     "vuelidate": "0.7.6"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",
-    "@justeat/f-button": "3.x",
-    "@justeat/f-form-field": "4.x",
-    "@justeat/f-error-message": "1.x"
+    "@justeat/f-button": "4.x",
+    "@justeat/f-form-field": "6.x",
+    "@justeat/f-error-message": "2.x"
   },
   "devDependencies": {
-    "@justeat/f-button": "3.x",
-    "@justeat/f-form-field": "4.x",
-    "@justeat/f-error-message": "1.x",
+    "@justeat/f-button": "4.x",
+    "@justeat/f-form-field": "6.x",
+    "@justeat/f-error-message": "2.x",
     "@justeat/f-wdio-utils": "1.x",
     "@vue/cli-plugin-babel": "4.5.15",
     "@vue/cli-plugin-unit-jest": "4.5.15",

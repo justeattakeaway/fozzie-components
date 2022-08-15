@@ -3,6 +3,55 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.25.0
+------------------------------
+*August 11, 2022*
+
+### Added
+- `fozzie > guides` consuming application documentation for Gulp.
+
+
+v7.24.0
+------------------------------
+*August 10, 2022*
+
+### Added
+- New GitHub Actions config to build components / deploy storybook in master
+- Removed references to Storybook Deploy in CircleCI config.
+
+
+v7.23.0
+------------------------------
+*August 4, 2022*
+
+### Added
+- Turborepo local caching for `build` / `lint` / `test` / tasks
+- New concurrency rules in CircleCI config
+- Disabled npm publishing / Storybook deploy
+
+### Changed
+- Allure report generation to execute on fail to speed up CI.
+
+v7.22.0
+------------------------------
+*August 3, 2022*
+
+### Changed
+- CircleCI to use Node 16 Docker image.
+- Updated Chromedriver to use latest version.
+- Add concurrency=1 to stop build errors due to lack of memory.
+
+
+v7.21.0
+------------------------------
+*July 26, 2022*
+
+### Changed
+- Components to use Node 16 compatible verisons of f-services
+
+### Removed
+`lerna.json`
+
 v7.20.1
 ------------------------------
 *July 26, 2022*

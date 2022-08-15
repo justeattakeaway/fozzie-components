@@ -3,6 +3,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.8.0
+------------------------------
+*August 3, 2022*
+
+### Fixed
+- Use correct version of `@justeat/f-form-field`.
+
+v0.8.0
+------------------------------
+*July 29, 2022*
+
+### Added
+- Node 16 compatible version of `@justeat/f-error-message`.
+- Node 16 compatible version of `@justeat/f-button`.
+- Import css from dependencies.
+
+
 v0.7.0
  ------------------------------
  *July 25, 2022*

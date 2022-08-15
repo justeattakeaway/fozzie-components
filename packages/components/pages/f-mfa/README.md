@@ -16,7 +16,7 @@ Multi-factor Authenticator - Input Form
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-mfa/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-mfa?targetFile=package.json)
 
 ---
-This form is for accepting a MFA token that has been sent to a user, then submitting it to be verified, if successful then the user is redirected to where they came from.
+This form is for accepting a MFA token that has been sent to a user, then submitting it to be verified, if successful then an event to passed to the parent component to return the user to where they came from.
 
 ## Usage
 
@@ -70,9 +70,18 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
-| Prop  | Type  |  Required | Description |
-| ----- | ----- |  ------- | ----------- |
-| smartGatewayBaseUrl | string | true | the smartgateway host |
+| Prop        | Type   | Required |  default | Description |
+| ----------- | ------ | -------- | -------- | ----------- |
+| validateUrl | string | true     | n/a      | The URL to POST the MFA validation request to. |
+| code        | string | false    | `''`     | The MFA token to POST to the API |
+| email       | string | false    | `''`     | The email to display on the page |
+| returnUrl   | string | false    |  `/`     | The URL to return the user to upon success |
+
+### Events
+
+| Event | Payload | Description |
+| ----- | ----- | ----------- |
+| `mfa-success-return-url` | return url (no host) |  The mfa & otp have been successfully submitted and the user is now logged in, the payload of the event carries the return url (path only, no host and a leading `'/'`, i.e. `/where/i/came/from` ). |
 
 ## Development
 
