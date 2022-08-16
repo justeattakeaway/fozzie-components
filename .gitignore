@@ -45,6 +45,9 @@ test/results/ci
 # Build pipeline artifacts
 .turbo
 
+# Storybook static directory
+**/storybook-static
+
 # Tmp build output
 packages/components/organisms/f-cookie-banner-static/.tmp-dist/
 packages/components/organisms/f-cookie-banner-static/.tmp-vue/
