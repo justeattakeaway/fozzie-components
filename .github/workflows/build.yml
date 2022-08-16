@@ -7,6 +7,7 @@ on:
   push:
     branches: 
     - master
+    - vercel/deploy
 
 jobs:
   install:
@@ -70,6 +71,13 @@ jobs:
     # Build Storybook
     - name: Storybook Build
       run: yarn storybook:build
+    - uses: amondnet/vercel-action@v20 #deploy
+      with:
+        vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
+        github-token: ${{ secrets.GITHUB_TOKEN }} #Optional 
+        vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}  #Required
+        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}} #Required 
+        working-directory: ./
     # Cache 'storybook-static'
     - name: Cache Storybook Static Directory
       id: storybook-cache
@@ -78,48 +86,48 @@ jobs:
         path: ./packages/storybook/storybook-static
         key: storybook-cache
 
-  storybook-deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    # Checkout the Repo
-    - name: Checkout
-      uses: actions/checkout@v3
-    # Setup Node 16 
-    - name: Setup Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: 'yarn'
-    # Restore node_modules - Cache should exist as one was created in previous 'install' job
-    - name: Restore Cache -  Node Modules
-      id: cache-node-modules
-      uses: actions/cache@v2
-      with:
-        path: '**/node_modules'
-        key: node-modules-${{ hashFiles('**/yarn.lock') }}
-    # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible
-    - name: Install Dependencies
-      if: steps.cache-node-modules.outputs.cache-hit != 'true'
-      run: yarn --prefer-offline
-    # Restore Turborepo's component 'dist' cache - If not, cache is created at end of build.
-    - name: Restore Cache -  Turborepo Dist
-      id: turborepo-dist-cache
-      uses: actions/cache@v2
-      with:
-        path: .turbo
-        key: turborepo-dist-cache
-    # Restory Storybook 'storybook-static'
-    - name: Restore Cache -  Storybook Static Directory
-      id: storybook-cache
-      uses: actions/cache@v2
-      with:
-        path: ./packages/storybook/storybook-static
-        key: storybook-cache
-    # Deploy Storybook
-    - name: Storybook deploy
-      run: |
-        git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-        yarn storybook:deploy
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # storybook-deploy:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   # Checkout the Repo
+  #   - name: Checkout
+  #     uses: actions/checkout@v3
+  #   # Setup Node 16 
+  #   - name: Setup Node
+  #     uses: actions/setup-node@v3
+  #     with:
+  #       node-version: 16
+  #       cache: 'yarn'
+  #   # Restore node_modules - Cache should exist as one was created in previous 'install' job
+  #   - name: Restore Cache -  Node Modules
+  #     id: cache-node-modules
+  #     uses: actions/cache@v2
+  #     with:
+  #       path: '**/node_modules'
+  #       key: node-modules-${{ hashFiles('**/yarn.lock') }}
+  #   # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible
+  #   - name: Install Dependencies
+  #     if: steps.cache-node-modules.outputs.cache-hit != 'true'
+  #     run: yarn --prefer-offline
+  #   # Restore Turborepo's component 'dist' cache - If not, cache is created at end of build.
+  #   - name: Restore Cache -  Turborepo Dist
+  #     id: turborepo-dist-cache
+  #     uses: actions/cache@v2
+  #     with:
+  #       path: .turbo
+  #       key: turborepo-dist-cache
+  #   # Restory Storybook 'storybook-static'
+  #   - name: Restore Cache -  Storybook Static Directory
+  #     id: storybook-cache
+  #     uses: actions/cache@v2
+  #     with:
+  #       path: ./packages/storybook/storybook-static
+  #       key: storybook-cache
+  #   # Deploy Storybook
+  #   - name: Storybook deploy
+  #     run: |
+  #       git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+  #       yarn storybook:deploy
+  #     env:
+  #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

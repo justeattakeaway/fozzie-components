@@ -48,3 +48,4 @@ test/results/ci
 # Tmp build output
 packages/components/organisms/f-cookie-banner-static/.tmp-dist/
 packages/components/organisms/f-cookie-banner-static/.tmp-vue/
+.vercel
