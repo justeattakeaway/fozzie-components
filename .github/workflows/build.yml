@@ -77,7 +77,7 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }} #Optional 
         vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}  #Required
         vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}} #Required 
-        working-directory: ./
+        working-directory: ./packages/storybook
     # Cache 'storybook-static'
     - name: Cache Storybook Static Directory
       id: storybook-cache
