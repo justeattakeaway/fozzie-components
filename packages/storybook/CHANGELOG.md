@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.56.0
+------------------------------
+*August 16, 2022*
+
+### Added
+- Added Custom Viewports for Storybook testing (based around breakpoints and example devices)
+
+
 v0.55.0
 ------------------------------
 *August 10, 2022*

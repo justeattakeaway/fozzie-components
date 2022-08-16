@@ -3,7 +3,7 @@ const messages = {
     percentage: '10',
     currency: 'pound',
     currencySymbol: '£',
-    termsUrl: '/info/terms-and-conditions#ii.just-eat-voucher-terms-conditions',
+    termsUrl: '/info/terms-and-conditions#stampcards-terms-conditions',
     termsText: 'See Terms & Conditions',
     header: {
         title: 'StampCards',

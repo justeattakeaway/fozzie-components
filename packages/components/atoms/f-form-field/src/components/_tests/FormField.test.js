@@ -672,6 +672,30 @@ describe('FormField', () => {
                 expect(wrapper.html()).not.toContain('<p>Click this <a>link</a></p>');
             });
         });
+
+        describe('showRequiredIndicator ::', () => {
+            it.each([
+                [true, 'required', true],
+                [true, '', true],
+                [true, true, true],
+                [false, undefined, true],
+                [false, false, true],
+                [false, 'required', false],
+                [false, '', false],
+                [false, true, false],
+                [false, undefined, false],
+                [false, false, false]
+            ])('should return %s if required attribute is %s and isVisuallyRequired is %s', (expected, required, isVisuallyRequired) => {
+                // Arrange & Act
+                const wrapper = mount(FormField, {
+                    propsData: { isVisuallyRequired },
+                    attrs: { required }
+                });
+
+                // Assert
+                expect(wrapper.vm.showRequiredIndicator).toBe(expected);
+            });
+        });
     });
 
     describe('attrs ::', () => {

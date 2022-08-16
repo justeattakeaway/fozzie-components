@@ -7,8 +7,7 @@ import tenantConfigs from '../../tenants';
 const localVue = createLocalVue();
 localVue.use(VueI18n);
 
-let messages,
-    wrapper;
+let messages;
 
 beforeEach(() => {
     jest.resetAllMocks();
@@ -19,7 +18,7 @@ beforeEach(() => {
     };
 });
 
-describe('Terms.vue', () => {
+const setupTerms = locale => {
     // Arrange
     const component = {
         name: 'mockWrapper',
@@ -33,26 +32,27 @@ describe('Terms.vue', () => {
     };
 
     const i18n = {
-        locale: 'en-AU',
-        fallbackLocale: 'en-AU',
+        locale,
         messages
     };
 
-    beforeEach(() => {
-        // Arrange
-        wrapper = mount(component, {
-            localVue,
-            i18n,
-            mocks: {
-                $t: key => i18nMocker(key, i18n.locale)
-            }
-        });
+    return mount(component, {
+        localVue,
+        i18n,
+        mocks: {
+            $t: key => i18nMocker(key, i18n.locale)
+        }
     });
+};
 
+describe('Terms.vue', () => {
     it.each([
         'en-GB',
         'en-AU'
     ])('should render the correct text for the link', key => {
+        // Arrange
+        const wrapper = setupTerms(key);
+
         // Act
         const link = wrapper.find('[data-test-id="terms-and-conditions"]');
 
@@ -64,6 +64,9 @@ describe('Terms.vue', () => {
         'en-GB',
         'en-AU'
     ])('should render the terms url in the href attribute', key => {
+        // Arrange
+        const wrapper = setupTerms(key);
+
         // Act
         const link = wrapper.find('[data-test-id="terms-and-conditions"]');
         const href = link.attributes('href');

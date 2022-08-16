@@ -1,14 +1,13 @@
 import AccountWebApi from '../AccountWeb.api';
 
 import {
-    SUBMIT_LOGIN_CHALLENGE_URL,
     CONVERSATION_ID_HEADER_NAME,
     CONVERSATION_ID_COOKIE_NAME
 } from '../../constants';
 import {
-    baseUrl,
     conversationId,
-    postBody
+    postBody,
+    validateUrl
 } from '../../../test-utils/setup';
 
 let apiProvider;
@@ -26,7 +25,7 @@ describe('AccountWebApi Provider', () => {
             set: cookiesSetSpy
         };
 
-        apiProvider = new AccountWebApi({ httpClient: httpClientMock, cookies: cookiesMock, baseUrl });
+        apiProvider = new AccountWebApi({ httpClient: httpClientMock, cookies: cookiesMock, validateUrl });
     });
 
     afterEach(() => {
@@ -50,7 +49,7 @@ describe('AccountWebApi Provider', () => {
     describe('When calling `postValidateMfaToken`', () => {
         it('should send the correct parameters to the api', async () => {
             // Arrange
-            const expectedUri = `${baseUrl}/${SUBMIT_LOGIN_CHALLENGE_URL}`;
+            const expectedUri = 'https://localhost:8080/mfa/validate';
             const expectedBody = postBody;
             const expectedHeaders = {
                 [CONVERSATION_ID_HEADER_NAME]: conversationId

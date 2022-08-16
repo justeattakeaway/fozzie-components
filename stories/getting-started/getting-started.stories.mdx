@@ -2,19 +2,32 @@ import LinkTo from '@storybook/addon-links/react';
 
 <Meta title="Documentation/Getting Started/Intro"/>
 
-# UI Component Mono-repo
+# Getting Started with Fozzie Components (and Fozzie SCSS)
 
-## Introduction
+Fozzie is a UI Component Framework used at JET, built to help modularise and share the UI code we write. It was created by the L-JE team, but is now the recommended framework for use on Vue applications across JET.
+
+- The **[Fozzie SCSS Helper Library](https://github.com/justeat/fozzie)** that helps ensure web projects across JET have access to a lightweight set of baseline SCSS variables, mixins and functions.
+  Fozzie SCSS is Vue agnostic – it's only dependency is Sass. This also extends the JET PIE Design Tokens.
+- The [fozzie-components component mono-repo](https://github.com/justeat/fozzie-components) – a component library of shared Vue components, built to adhere to JET's global design language, PIE.
+
+## Fozzie SCSS
+
+For more information on the Fozzie SCSS Helper Library, check out our <LinkTo kind="Documentation/Guides/Fozzie/What is Fozzie?" story="page">Fozzie SCSS Guide</LinkTo>.
+
+## The Fozzie Component Mono-repo
 
 A mono-repo is a single repository containing multiple packages – in our case UI components and services.
 
-Using multi-package repository reduces the time and space requirements for numerous copies of packages in development and build environments - normally a downside of dividing a project into many separate NPM packages. Updating common configuration across components is also much simpler as these dependencies can be shared and updated from the root of the mono-repo; for example linting or test dependencies.
+Using a multi-package repository reduces the time and space requirements for numerous copies of packages in development and enables the sharing of build environments - normally a downside of dividing a project into many separate NPM packages.
+
+Updating common configuration across components is also much simpler as these dependencies can be shared and updated from the root of the mono-repo; for example linting or test dependencies.
 
 Each individual component can be found in the [`components`](https://github.com/justeat/fozzie-components/tree/master/packages/components) directory, and are all controlled from a top level `packages.json`.
 
 ## Dependencies
 
-For more information on the dependencies needed when including these shared UI components as part of your application, check out our <LinkTo kind="Documentation/Guides/Component Dependencies" story="page">Component Dependency guide</LinkTo>.
+For more information on the dependencies needed when including the shared Fozzie Vue Components as part of your application, check out our <LinkTo kind="Documentation/Guides/Component Dependencies" story="page">Component Dependency Guide</LinkTo>.
+
 
 ## Repo Structure
 

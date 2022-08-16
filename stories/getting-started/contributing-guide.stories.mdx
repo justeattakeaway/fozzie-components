@@ -27,6 +27,7 @@ The basic premise of semantic versioning is that given a version number MAJOR.MI
 ### Beta Version Tags
 When versioning a package as a beta version (such as f-header@v1.4.0-beta.11), you must ensure the `tag: "beta"` property is present in the package's `package.json` file to ensure it's tagged correctly when published to **npm**.
 
+
 ## Testing
 
 When creating a new component through the component generator, some test spec files will be automatically generated for you.
@@ -36,6 +37,7 @@ We have some testing standards for all our components which we implement includi
 We've also written a guide to get visual regression tests started on your new component. You can find that guide [here](https://vue.pie.design/?path=/story/documentation-standards-testing-visual-regression-setup--page).
 
 If you have any questions about how to implement any of these testing standards, please don’t hesitate to reach out to the Web Core Testing Team.
+
 
 ## Badges for README.md
 
@@ -64,6 +66,7 @@ External contributors should raise a pull request and the release will be handle
 
 Once you are happy that the package is ready to be published, ensure you are on the correct branch — typically the `master`/`main` branch with the latest changes pulled. Then run `npm publish` on the command line.
 
+
 ## Publishing beta releases
 
 It can be useful to publish a package under a beta or alpha tag, prior to publishing it on the default release tag. For example, when working on a major version release that can be used by some consuming applications, but should not be made fully available for consumption.
@@ -80,6 +83,7 @@ As an example, if the current version of `@justeat/f-header` was currently `2.5.
 
 
 If however you want beta versions to be released as part of CI, we recommend you add the `tag: "beta"` property to the package's `package.json` file **before** merging to master. This ensures the package is tagged correctly on **npm**. You will still be required to manually create the git tag.
+
 
 ## Pull Requests
 

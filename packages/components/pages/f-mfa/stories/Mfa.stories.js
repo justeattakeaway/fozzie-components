@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import { withA11y } from '@storybook/addon-a11y';
 import { locales } from '@justeat/storybook/constants/globalisation';
 import VMfa from '../src/components/Mfa.vue';
@@ -16,6 +17,10 @@ export const VMfaComponent = (args, { argTypes }) => ({
 
     props: Object.keys(argTypes, args),
 
+    methods: {
+        mfaSuccess: action('mfa-success')
+    },
+
     watch: {
         apiState: {
             immediate: true,
@@ -25,15 +30,17 @@ export const VMfaComponent = (args, { argTypes }) => ({
         }
     },
 
-    template: '<v-mfa v-bind="$props" />'
+    template: `<v-mfa
+        v-bind="$props"
+        @mfa-success-return-url="mfaSuccess" />`
 });
 
 VMfaComponent.storyName = 'f-mfa';
 
 VMfaComponent.args = {
     locale: locales.gb,
-    smartGatewayBaseUrl: 'http://localhost:8080',
-    code: 'ABC123',
+    validateUrl: 'http://localhost:8080/mfa/validate',
+    code: '0AbCdEfG1_2HiJkLmNoP3-4QrStUvWxYz5',
     email: 'harry.potter@home.com',
     returnUrl: '/where/i/came/from',
     apiState: apiStateControlDataSource.default

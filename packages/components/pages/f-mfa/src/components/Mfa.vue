@@ -87,6 +87,7 @@
         <help-info
             v-else-if="showHelpInfo"
             :email="email"
+            :return-url="returnUrl"
             @primary-button-click="onHideHelpInfo" />
 
         <f-card-with-content
@@ -152,7 +153,7 @@ export default {
     mixins: [VueGlobalisationMixin],
 
     props: {
-        smartGatewayBaseUrl: {
+        validateUrl: {
             type: String,
             required: true
         },
@@ -202,6 +203,12 @@ export default {
             this.validateProperty(this.returnUrl, 'returnUrl', RETURN_URL_REGEX);
             this.validateProperty(this.email.toLowerCase(), 'email', EMAIL_RFC5322_REGEX);
             this.validateProperty(this.code, 'code', MFA_CODE_REGEX);
+
+            if (this.showErrorPage) {
+                this.$log.warn('Error loading MFA page');
+            } else {
+                this.$log.warn('MFA page loaded successfully');
+            }
         },
 
         /**
@@ -226,7 +233,7 @@ export default {
                     await (new AccountWebApi({
                         httpClient: this.$http,
                         cookies: this.$cookies,
-                        baseUrl: this.smartGatewayBaseUrl
+                        validateUrl: this.validateUrl
                     })).postValidateMfaToken({ mfa_token: this.code, otp: this.otp }); // eslint-disable-line camelcase
                     this.emitRedirectEvent(this.returnUrl); // Completed successfully, emit redirect return url
                 }

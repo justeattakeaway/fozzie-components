@@ -344,7 +344,8 @@ export default {
         },
 
         showRequiredIndicator () {
-            return this.$attrs.required && this.isVisuallyRequired;
+            // Empty string is default value and should return true
+            return ![undefined, false].includes(this.$attrs.required) && this.isVisuallyRequired;
         }
     },
 

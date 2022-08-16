@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-mfa",
   "description": "Fozzie Mfa - Multi-factor Authenticator Input Form",
-  "version": "0.8.2",
+  "version": "0.9.1",
   "main": "dist/f-mfa.umd.min.js",
   "maxBundleSize": "100kB",
   "files": [
