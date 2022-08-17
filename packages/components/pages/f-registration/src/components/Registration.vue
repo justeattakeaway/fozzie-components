@@ -498,7 +498,7 @@ export default {
                         return;
                     }
 
-                    if (status === 403) {
+                    if (status === 403 || status === 401) {
                         this.$emit(EventNames.LoginBlocked);
                         return;
                     }
