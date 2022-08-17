@@ -48,7 +48,8 @@
                     button-type="link"
                     :href="loginLinkWithReturnUrl"
                     button-size="large"
-                    data-test-id="mfa-help-login-link">
+                    data-test-id="mfa-help-login-link"
+                    @click="recordAnalytics">
                     {{ $t('helpInfo.secondaryButtonText') }}
                 </f-button>
             </div>
@@ -68,6 +69,7 @@ import {
     BagSadBgIcon
 } from '@justeat/f-vue-icons';
 import tenantConfigs from '../tenants';
+import { buildEvent } from '../services/EventBuilder';
 
 export default {
     name: 'VMfa',
@@ -100,6 +102,12 @@ export default {
     computed: {
         loginLinkWithReturnUrl () {
             return `/account/login?returnUrl=${encodeURIComponent(this.returnUrl)}`;
+        }
+    },
+
+    methods: {
+        recordAnalytics () {
+            this.$gtm.pushEvent(buildEvent('s9'));
         }
     }
 };
