@@ -2,9 +2,9 @@ const AxeBuilder = require('@axe-core/webdriverio').default;
 const fs = require('fs');
 const AxeReports = require('axe-reports');
 const { exec } = require('child_process');
-const { getTestConfiguration } = require('../../../../test/configuration/configuration-helper');
+// const { getTestConfiguration } = require('../../../../test/configuration/configuration-helper');
 
-const configuration = getTestConfiguration();
+// const configuration = getTestConfiguration();
 
 class AxeHelper {
     /**
@@ -15,7 +15,8 @@ class AxeHelper {
     processResults (results, componentName) {
         console.log('Creating .CSV artifact for Axe violations');
 
-        const filePath = `${configuration.testType.violationCSVDirectory}/${componentName}-a11y-violations`;
+        // const filePath = `${configuration.testType.violationCSVDirectory}/${componentName}-a11y-violations`;
+        const filePath = `../../../../${componentName}-a11y-violations`;
 
         // axe-reports can't create the CSV in CI due to permissions so we have to create the file ourselves.
         if (process.env.CIRCLECI) {

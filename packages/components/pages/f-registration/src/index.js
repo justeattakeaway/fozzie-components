@@ -7,6 +7,7 @@
 
 // Import vue component
 import FRegistration from '@/components/Registration.vue';
+import Page from '../test-utils/component-objects/f-registration.component';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
@@ -33,3 +34,4 @@ if (GlobalVue) {
 
 // To allow use as module (npm/webpack/etc.) export component
 export default FRegistration;
+export { Page };

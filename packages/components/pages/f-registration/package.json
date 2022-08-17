@@ -6,7 +6,6 @@
   "maxBundleSize": "70kB",
   "files": [
     "dist",
-    "test-utils",
     "src/services"
   ],
   "publishConfig": {
