@@ -7,6 +7,8 @@
 
 // Import vue component
 import AccountInfo from '@/components/AccountInfo.vue';
+import AccountInfoComponent from '../test-utils/component-objects/f-account-info.component';
+import AccountInfoErrorComponent from '../test-utils/component-objects/f-account-info-error.component';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
@@ -33,3 +35,7 @@ if (GlobalVue) {
 
 // To allow use as module (npm/webpack/etc.) export component
 export default AccountInfo;
+export { 
+    AccountInfoComponent,
+    AccountInfoErrorComponent
+ };

@@ -7,6 +7,7 @@
 
 // Import vue component
 import VMfa from '@/components/Mfa.vue';
+import MfaComponent from '../test-utils/component-objects/f-mfa.component';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
@@ -31,5 +32,6 @@ if (GlobalVue) {
     GlobalVue.use(plugin);
 }
 
+export { MfaComponent };
 // To allow use as module (npm/webpack/etc.) export component
 export default VMfa;

@@ -8,6 +8,7 @@
 
 // Import vue component
 import VOffers from '@/components/Offers.vue';
+import OffersComponent from '../test-utils/component-objects/f-offers.component';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
@@ -32,6 +33,7 @@ if (GlobalVue) {
     GlobalVue.use(plugin);
 }
 
+export { OffersComponent };
 // To allow use as module (npm/webpack/etc.) export component
 export default VOffers;
 

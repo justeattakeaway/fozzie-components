@@ -9,6 +9,8 @@
 // Import vue component
 import ContactPreferences from '@/components/ContactPreferences.vue';
 import fContactPreferencesModule from '@/store/contactPreferences.module';
+import ContactPreferencesComponent from '../test-utils/component-objects/f-contactPreferences.component';
+import ContactPreferencesErrorComponent from '../test-utils/component-objects/f-contactPreferences-error.component';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
@@ -36,7 +38,9 @@ if (GlobalVue) {
 // To allow use as module (npm/webpack/etc.) export component
 export {
     ContactPreferences,
-    fContactPreferencesModule
+    fContactPreferencesModule,
+    ContactPreferencesComponent,
+    ContactPreferencesErrorComponent
 };
 
 

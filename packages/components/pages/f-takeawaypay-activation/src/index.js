@@ -8,6 +8,10 @@
 
 // Import vue component
 import TakeawaypayActivation from '@/components/TakeawaypayActivation.vue';
+import TakeawaypayActivationAuthenticatedComponent from '../test-utils/component-objects/f-takeawaypayActivation-authenticated.component';
+import TakeawaypayActivationUnauthenticatedComponent from '../test-utils/component-objects/f-takeawaypayActivation-unauthenticated.component';
+import TakeawaypayActivationErrorComponent from '../test-utils/component-objects/f-takeawaypayActivation-error.component';
+
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
@@ -31,6 +35,12 @@ if (typeof window !== 'undefined') {
 if (GlobalVue) {
     GlobalVue.use(plugin);
 }
+
+export {
+    TakeawaypayActivationAuthenticatedComponent,
+    TakeawaypayActivationUnauthenticatedComponent,
+    TakeawaypayActivationErrorComponent
+};
 
 // To allow use as module (npm/webpack/etc.) export component
 export default TakeawaypayActivation;

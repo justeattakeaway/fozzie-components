@@ -8,6 +8,7 @@
 
 // Import vue component
 import VLoyalty from '@/components/Loyalty.vue';
+import LoyaltyComponent from '../test-utils/component-objects/f-loyalty.component';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
@@ -32,6 +33,7 @@ if (GlobalVue) {
     GlobalVue.use(plugin);
 }
 
+export { LoyaltyComponent };
 // To allow use as module (npm/webpack/etc.) export component
 export default VLoyalty;
 
