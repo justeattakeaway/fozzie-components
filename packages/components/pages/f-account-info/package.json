@@ -3,7 +3,7 @@
   "description": "Fozzie Account Info - The account information page",
   "version": "1.4.1",
   "main": "dist/f-account-info.umd.min.js",
-  "maxBundleSize": "100kB",
+  "maxBundleSize": "175kB",
   "files": [
     "dist",
     "src/services",

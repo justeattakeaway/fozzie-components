@@ -3,7 +3,7 @@
   "description": "Fozzie Offers - displays offers to the customers",
   "version": "1.14.1",
   "main": "dist/f-offers.umd.min.js",
-  "maxBundleSize": "150kB",
+  "maxBundleSize": "275kB",
   "files": ["dist"],
   "publishConfig": {
     "access": "public"
