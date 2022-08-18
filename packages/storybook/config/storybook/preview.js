@@ -5,6 +5,7 @@ import StoryRouter from 'storybook-vue-router';
 import setupContext from '../../context';
 import jetPieThemeDocs from './jetPieThemeDocs';
 import './scss-loader.scss';
+import CUSTOM_VIEWPORTS from './viewports';
 
 setupContext();
 
@@ -17,6 +18,9 @@ export const decorators = [StoryRouter({}, {
 export const parameters = {
     docs: {
         theme: jetPieThemeDocs
+    },
+    viewport: {
+        viewports: CUSTOM_VIEWPORTS
     },
     options: {
         storySort: {
@@ -48,9 +52,13 @@ export const parameters = {
                     ],
                     'Guides',
                     [
+                        'Fozzie',
                         [
-                            'Component Dependencies',
-                            'Typography'
+                            'What is Fozzie?',
+                            'Fozzie and Sass',
+                            'Structure',
+                            'CSS Naming',
+                            'Fozzie Migration Guide'
                         ]
                     ]
                 ],
