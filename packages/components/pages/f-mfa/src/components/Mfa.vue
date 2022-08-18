@@ -239,9 +239,9 @@ export default {
                 this.$gtm.pushEvent(buildEvent(MFA_SUCCESS));
                 this.emitRedirectEvent(this.returnUrl); // Completed successfully, emit redirect return url
             } catch (error) {
+                this.hasSubmitError = true;
                 if (error.response && error.response.status) {
                     const { status } = error.response;
-                    this.hasSubmitError = true;
 
                     this.$gtm.pushEvent(buildEvent(MFA_ERROR, `http error status : ${status}`));
 
