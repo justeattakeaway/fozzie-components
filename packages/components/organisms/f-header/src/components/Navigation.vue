@@ -675,6 +675,7 @@ export default {
 
 .c-nav-container {
     display: none;
+
     @include f.media('>mid') {
         display: block;
         height: common.$header-height;
@@ -733,8 +734,22 @@ export default {
     @include f.font-size(common.$nav-text-size);
     color: common.$nav-text-color;
     font-weight: f.$font-weight-regular;
+
     @include f.media('>mid') {
         font-weight: common.$nav-text-weight;
+    }
+    @include f.media('>mid', '<wide') {
+        @include f.truncate(200px);
+    }
+
+    $navTextTweakpointMid: f.em(800);
+    $navTextTweakpointMidWide: f.em(900);
+    // truncate the length of user friendly name at certain breakpoints
+    @include f.media('>mid', '<=#{$navTextTweakpointMid}') {
+        max-width: 78px;
+    }
+    @include f.media('>#{$navTextTweakpointMid}', '<#{$navTextTweakpointMidWide}') {
+        max-width: 110px;
     }
 }
 
@@ -753,6 +768,7 @@ export default {
     @include f.font-size(common.$nav-text-size);
     margin-left: f.spacing(h);
     color: common.$nav-text-color;
+
     &.u-showBelowMid {
         @include f.media('>mid') {
             display: none !important;
