@@ -3,6 +3,7 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
 v1.2.0
 ------------------------------
 *July 25, 2022*
@@ -18,6 +19,7 @@ v1.1.0
 ### Changed
 - Axe Core implementation to use native WDIO plugin.
 
+
 v1.0.0
 ------------------------------
 *July 1, 2022*
@@ -27,6 +29,7 @@ v1.0.0
 
 ### Added
 - Vite to build f-wdio-utils
+
 
 v0.12.0
 ------------------------------
@@ -62,7 +65,7 @@ v0.9.0
 
 v0.8.1
 ------------------------------
-*March 08, 2022*
+*March 8, 2022*
 
 ### Fixed
 - Use `require` statement as import.
@@ -70,7 +73,7 @@ v0.8.1
 
 v0.8.0
 ------------------------------
-*March 07, 2022*
+*March 7, 2022*
 
 ### Added
 - `axe-core` to `page.object.js` file & devDeps.
@@ -78,7 +81,7 @@ v0.8.0
 
 v0.7.0
 ------------------------------
-*March 02, 2022*
+*March 2, 2022*
 
 ### Added
 - `getAccessibilityTestResults` to `page.object.js` file.
@@ -115,6 +118,7 @@ v0.3.0
 ### Added
 - New test tab function that can be importated to any component for use in tab looping tests for accessibility.
 
+
 v0.2.0
 ------------------------------
 *March 24, 2021*
@@ -122,6 +126,7 @@ v0.2.0
 ### Added
 - New storybook extensions module.
 - New page object base class that facilitates the URL builder
+
 
 v0.1.1
 ------------------------------

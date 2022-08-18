@@ -3,6 +3,7 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
 v7.25.0
 ------------------------------
 *August 11, 2022*
@@ -32,6 +33,7 @@ v7.23.0
 ### Changed
 - Allure report generation to execute on fail to speed up CI.
 
+
 v7.22.0
 ------------------------------
 *August 3, 2022*
@@ -51,6 +53,7 @@ v7.21.0
 
 ### Removed
 `lerna.json`
+
 
 v7.20.1
 ------------------------------
@@ -80,6 +83,7 @@ v7.19.0
 
 ### Added
 - Node 16 support.
+
 
 v7.18.1
 ------------------------------
@@ -113,6 +117,7 @@ v7.16.0
 ### Removed
 - `@wdio/sync` dependency to enable Node 16 support.
 
+
 v7.14.5
 ------------------------------
 *July 6, 2022*
@@ -128,12 +133,14 @@ v7.14.4
 ### Changed
 - `@justeat/f-wdio-utils` package version on various packages from `0.11.0` to `0.12.0`
 
+
 v7.14.3
 ------------------------------
 *June 27, 2022*
 
 ### Fixed
 - Storybook deploy step
+
 
 v7.14.2
 ------------------------------
@@ -142,6 +149,7 @@ v7.14.2
 ### Fixed
 - Bug with BASH_ENV not being updated in CircleCI config.
 - Evaluation in bundlewatch.config.js
+
 
 v7.14.1
 ------------------------------
@@ -168,6 +176,7 @@ v7.13.0
 
 ### Added
 - Vite as a global monorepo dependency to stop version clashing
+
 
 v7.12.0
 ------------------------------
@@ -222,6 +231,7 @@ v7.7.0
 ### Added
 - Renovate for automatic version bumps of minor dependencies
 
+
 v7.6.0
 ------------------------------
 *April 13, 2022*
@@ -236,6 +246,7 @@ v7.5.0
 
 ### Changed
 - Upgrade Percy packages to prevent warnings in the Percy dashboard.
+
 
 v7.4.0
 ------------------------------
@@ -388,21 +399,23 @@ v5.8.5
 
 v5.8.4
 ------------------------------
-*January 07, 2022*
+*January 7, 2022*
 
 ### Fixed
 - Storybook deploy + reverted to old cache mechanism.
 
+
 v5.8.3
 ------------------------------
-*January 07, 2022*
+*January 7, 2022*
 
 ### Fixed
 - Storybook deploy.
 
+
 v5.8.2
 ------------------------------
-*January 04, 2022*
+*January 4, 2022*
 
 ### Added
 - `f-form` to Circle CI cache.
@@ -533,6 +546,7 @@ v5.1.0
 ### Changed
 - fozzie package update to the latest (6.0.0) to include latest pie-design-tokens.
 
+
 v5.0.4
 ------------------------------
 *October 28, 2021*
@@ -547,6 +561,7 @@ v5.0.4
 
 ### Changed
 - Circle CI cached components to include new f-image-tile component
+
 
 v5.0.3
 ------------------------------
@@ -852,12 +867,14 @@ v3.44.5
 ### Fixed
 - Build all packages when running bundlewatch
 
+
 v3.44.4
 ------------------------------
 *July 6, 2021*
 
 ## Fix
 - Removed Bundlewatch comparison to master
+
 
 v3.44.3
 ------------------------------
@@ -866,12 +883,14 @@ v3.44.3
 ## Fix
 - Fix Bundlewatch fails
 
+
 v3.44.2
 ------------------------------
 *July 5, 2021*
 
 ## Fix
 - Fix CircleCI lint error when building one component.
+
 
 v3.44.1
 ------------------------------
