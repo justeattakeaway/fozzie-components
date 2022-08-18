@@ -23,7 +23,7 @@ const messages = {
         instructionsPoint4Text: 'See our {0} if you still need help',
         instructionsHelpLink: 'https://www.just-eat.co.uk/help/section/201054682/how-do-i-use-this-just-eat-thing',
         instructionsHelpText: 'FAQs',
-        primaryButtonText: 'Enter code',
+        primaryButtonText: 'Got it',
         secondaryButtonText: 'Log in another way'
     },
     errorMessages: {
@@ -34,7 +34,8 @@ const messages = {
         },
         loading: {
             heading: 'Something went wrong',
-            message: 'Sorry about that. Please try again.'
+            message: 'Sorry about that. Please try again.',
+            primaryButtonText: 'Go back'
         }
     }
 };

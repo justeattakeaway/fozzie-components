@@ -7,7 +7,7 @@
             :class="$style['c-mfa-card']"
             has-inner-spacing-large
             has-outline
-            data-test-id="f-mfa-verification-card">
+            data-test-id="v-mfa-verification-component">
             <div :class="$style['c-mfa-card-content']">
                 <bag-surf-bg-icon
                     :class="$style['c-mfa-icon']" />
@@ -38,19 +38,9 @@
                         :label-text="$t('verificationPage.formField.labelText')"
                         :placeholder="$t('verificationPage.formField.placeholderText')"
                         required
-                        :has-error="showValidationError"
                         :is-visually-required="false"
                         data-test-id="mfa-verification-code-textbox"
-                        maxlength="10">
-                        <template
-                            v-if="showValidationError"
-                            #error>
-                            <error-message
-                                data-test-id="mfa-form-validation-error">
-                                {{ $t('errorMessages.validation') }}
-                            </error-message>
-                        </template>
-                    </form-field>
+                        maxlength="10" />
 
                     <f-alert
                         v-if="hasSubmitError"
@@ -94,7 +84,9 @@
             v-else
             data-test-id="v-mfa-error-component"
             :card-heading="$t('errorMessages.loading.heading')"
-            :card-description="$t('errorMessages.loading.message')">
+            :card-description="$t('errorMessages.loading.message')"
+            :primary-button="errorPrimaryButton"
+            @primary-button-click="recordAnalytics">
             <template #icon>
                 <bag-sad-bg-icon />
             </template>
@@ -111,8 +103,6 @@ import FCard from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FCardWithContent from '@justeat/f-card-with-content';
 import '@justeat/f-card-with-content/dist/f-card-with-content.css';
-import ErrorMessage from '@justeat/f-error-message';
-import '@justeat/f-error-message/dist/f-error-message.css';
 import FormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
 import FButton from '@justeat/f-button';
@@ -123,6 +113,16 @@ import {
     BagSadBgIcon
 } from '@justeat/f-vue-icons';
 import AccountWebApi from '../services/AccountWeb.api';
+import {
+    buildEvent,
+    ERROR_BACK,
+    ERROR_VISIBLE,
+    HELP_HIDDEN,
+    HELP_VISIBLE,
+    MFA_ERROR,
+    MFA_SUCCESS,
+    MFA_VISIBLE
+} from '../services/EventBuilder';
 
 import HelpInfo from './Help.vue';
 import tenantConfigs from '../tenants';
@@ -141,7 +141,6 @@ export default {
     components: {
         BagSadBgIcon,
         BagSurfBgIcon,
-        ErrorMessage,
         FAlert,
         FButton,
         FCard,
@@ -178,7 +177,6 @@ export default {
             showHelpInfo: false,
             showErrorPage: false,
             hasSubmitError: false,
-            showValidationError: false,
             tenantConfigs
         };
     },
@@ -186,6 +184,13 @@ export default {
     computed: {
         isSubmitButtonDisabled () {
             return this.otp.length < 1;
+        },
+
+        errorPrimaryButton () {
+            return {
+                href: this.cleanUrl(this.returnUrl),
+                text: this.$t('errorMessages.loading.primaryButtonText')
+            };
         }
     },
 
@@ -206,18 +211,18 @@ export default {
 
             if (this.showErrorPage) {
                 this.$log.warn('Error loading MFA page');
+                this.$gtm.pushEvent(buildEvent(ERROR_VISIBLE));
             } else {
-                this.$log.warn('MFA page loaded successfully');
+                this.$log.info('MFA page loaded successfully');
+                this.$gtm.pushEvent(buildEvent(MFA_VISIBLE));
             }
         },
 
         /**
-        * Raises the isSubmitting which disables the Submit button.
+        * Raises the isSubmitting flag which disables the Submit button.
         * Sets the hasSubmitError flag to false, so it is clean before we start.
-        * Validates the otp value and if valid, posts the form data to the api.
+        * Posts the form data to the api.
         * Then upon success emits an event to the parent component to redirect to the supplied returnUrl.
-        * If the otp is invalid, lowers the isSubmitting flag and sets the showValidationError flag
-        * to true, which displays the error message below the form field.
         * If the post fails, lowers the isSubmitting flag and it sets the hasSubmitError flag to
         * true, which displays the alert message below the form field plus logs the issue.
         */
@@ -226,21 +231,19 @@ export default {
             this.hasSubmitError = false;
 
             try {
-                const isOtpValid = this.isOtpValid();
-                this.showValidationError = !isOtpValid;
-
-                if (isOtpValid) {
-                    await (new AccountWebApi({
-                        httpClient: this.$http,
-                        cookies: this.$cookies,
-                        validateUrl: this.validateUrl
-                    })).postValidateMfaToken({ mfa_token: this.code, otp: this.otp }); // eslint-disable-line camelcase
-                    this.emitRedirectEvent(this.returnUrl); // Completed successfully, emit redirect return url
-                }
+                await (new AccountWebApi({
+                    httpClient: this.$http,
+                    cookies: this.$cookies,
+                    validateUrl: this.validateUrl
+                })).postValidateMfaToken({ mfa_token: this.code, otp: this.otp.toUpperCase() }); // eslint-disable-line camelcase
+                this.$gtm.pushEvent(buildEvent(MFA_SUCCESS));
+                this.emitRedirectEvent(this.returnUrl); // Completed successfully, emit redirect return url
             } catch (error) {
+                this.hasSubmitError = true;
                 if (error.response && error.response.status) {
                     const { status } = error.response;
-                    this.hasSubmitError = true;
+
+                    this.$gtm.pushEvent(buildEvent(MFA_ERROR, `http error status : ${status}`));
 
                     // Bad request
                     if (status === 400) {
@@ -260,10 +263,12 @@ export default {
         },
 
         onHideHelpInfo () {
+            this.$gtm.pushEvent(buildEvent(HELP_HIDDEN));
             this.showHelpInfo = false;
         },
 
         onShowHelpInfo () {
+            this.$gtm.pushEvent(buildEvent(HELP_VISIBLE));
             this.showHelpInfo = true;
         },
 
@@ -287,16 +292,18 @@ export default {
         * @param {string} url - The return url
         */
         emitRedirectEvent (url) {
-            const pathRaw = url.trim();
-            const path = `${pathRaw.charAt(0) === '/' ? pathRaw : `/${pathRaw}`}`;
-            this.$emit(REDIRECT_URL_EVENT_NAME, path);
+            this.$emit(REDIRECT_URL_EVENT_NAME, this.cleanUrl(url));
         },
 
-        /**
-        * Validates the otp value is within acceptable bounds (currently 1-10 characters).
-        */
-        isOtpValid () {
-            return this.otp.length > 0 && this.otp.length < 11;
+        cleanUrl (url) {
+            const pathRaw = url.trim();
+            const path = `${pathRaw.charAt(0) === '/' ? pathRaw : `/${pathRaw}`}`;
+
+            return path;
+        },
+
+        recordAnalytics () {
+            this.$gtm.pushEvent(buildEvent(ERROR_BACK));
         }
     }
 };
