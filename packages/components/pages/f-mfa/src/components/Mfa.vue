@@ -202,10 +202,10 @@ export default {
 
             if (this.showErrorPage) {
                 this.$log.warn('Error loading MFA page');
-                this.$gtm.pushEvent(buildEvent('s2'));
+                this.$gtm.pushEvent(buildEvent('error-visible'));
             } else {
                 this.$log.info('MFA page loaded successfully');
-                this.$gtm.pushEvent(buildEvent('s1b'));
+                this.$gtm.pushEvent(buildEvent('mfa-visible'));
             }
         },
 
@@ -229,14 +229,14 @@ export default {
                     cookies: this.$cookies,
                     validateUrl: this.validateUrl
                 })).postValidateMfaToken({ mfa_token: this.code, otp: this.otp.toUpperCase() }); // eslint-disable-line camelcase
-                this.$gtm.pushEvent(buildEvent('s6'));
+                this.$gtm.pushEvent(buildEvent('mfa-success'));
                 this.emitRedirectEvent(this.returnUrl); // Completed successfully, emit redirect return url
             } catch (error) {
                 if (error.response && error.response.status) {
                     const { status } = error.response;
                     this.hasSubmitError = true;
 
-                    this.$gtm.pushEvent(buildEvent('s4', `http error status : ${status}`));
+                    this.$gtm.pushEvent(buildEvent('mfa-error', `http error status : ${status}`));
 
                     // Bad request
                     if (status === 400) {
@@ -256,12 +256,12 @@ export default {
         },
 
         onHideHelpInfo () {
-            this.$gtm.pushEvent(buildEvent('s8'));
+            this.$gtm.pushEvent(buildEvent('help-hidden'));
             this.showHelpInfo = false;
         },
 
         onShowHelpInfo () {
-            this.$gtm.pushEvent(buildEvent('s7'));
+            this.$gtm.pushEvent(buildEvent('help-visible'));
             this.showHelpInfo = true;
         },
 
@@ -296,7 +296,7 @@ export default {
         },
 
         recordAnalytics () {
-            this.$gtm.pushEvent(buildEvent('s3'));
+            this.$gtm.pushEvent(buildEvent('error-back'));
         }
     }
 };

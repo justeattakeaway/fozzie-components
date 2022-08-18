@@ -110,7 +110,7 @@ export default {
 
     methods: {
         recordAnalytics () {
-            this.$gtm.pushEvent(buildEvent('s9'));
+            this.$gtm.pushEvent(buildEvent('help-login'));
         }
     }
 };
