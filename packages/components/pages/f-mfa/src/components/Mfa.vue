@@ -212,10 +212,8 @@ export default {
         /**
         * Raises the isSubmitting flag which disables the Submit button.
         * Sets the hasSubmitError flag to false, so it is clean before we start.
-        * Validates the otp value and if valid, posts the form data to the api.
+        * Posts the form data to the api.
         * Then upon success emits an event to the parent component to redirect to the supplied returnUrl.
-        * If the otp is invalid, lowers the isSubmitting flag and sets the showValidationError flag
-        * to true, which displays the error message below the form field.
         * If the post fails, lowers the isSubmitting flag and it sets the hasSubmitError flag to
         * true, which displays the alert message below the form field plus logs the issue.
         */
