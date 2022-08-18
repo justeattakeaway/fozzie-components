@@ -86,9 +86,13 @@ describe('Registration API service', () => {
             faultId: '00000000-0000-0000-0000-000000000000',
             traceId: 'H3TKh4QSJUSwVBCBqEtkKw',
             errors: [{
-                description: 'Failed user authentication.',
-                errorCode: 'FailedUserAuthentication'
-            }]
+                description: 'MFA Challenge Issued',
+                errorCode: 'MFAChallengeIssued'
+            }],
+            // eslint-disable-next-line camelcase
+            mfa_token: 'mfa-token',
+            // eslint-disable-next-line camelcase
+            mfa_target: 'someone@somewhere.com'
         });
 
         // Act
@@ -96,7 +100,10 @@ describe('Registration API service', () => {
         await flushPromises();
 
         // Assert
-        expect(wrapper.emitted(EventNames.LoginBlocked).length).toBe(1);
+        const mfaChallengeIssuedEvent = wrapper.emitted(EventNames.MfaChallengeIssued);
+        expect(mfaChallengeIssuedEvent.length).toBe(1);
+        expect(mfaChallengeIssuedEvent[0][0].mfaToken).toBe('mfa-token');
+        expect(mfaChallengeIssuedEvent[0][0].mfaTarget).toBe('someone@somewhere.com');
         expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
     });
 

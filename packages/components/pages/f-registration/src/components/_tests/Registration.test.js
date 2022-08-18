@@ -218,7 +218,7 @@ describe('Registration', () => {
                 expect(wrapper.emitted(EventNames.CreateAccountWarning).length).toBe(1);
             });
 
-            it('should emit login blocked event when service responds with a 403', async () => {
+            it('should emit mfa challenge issued event when service responds with a 403', async () => {
                 // Arrange
                 const err = {
                     response: {
@@ -227,9 +227,13 @@ describe('Registration', () => {
                             faultId: '123',
                             traceId: '123',
                             errors: [{
-                                description: 'Failed user authentication.',
-                                errorCode: 'FailedUserAuthentication'
-                            }]
+                                description: '"MFA Challenge Issued"',
+                                errorCode: 'MFAChallengeIssued'
+                            }],
+                            // eslint-disable-next-line camelcase
+                            mfa_token: 'mfa-token',
+                            // eslint-disable-next-line camelcase
+                            mfa_target: 'someone@somewhere.com'
                         }
                     }
                 };
@@ -247,7 +251,10 @@ describe('Registration', () => {
                 await flushPromises();
 
                 // Assert
-                expect(wrapper.emitted(EventNames.LoginBlocked).length).toBe(1);
+                const mfaChallengeIssuedEvent = wrapper.emitted(EventNames.MfaChallengeIssued);
+                expect(mfaChallengeIssuedEvent.length).toBe(1);
+                expect(mfaChallengeIssuedEvent[0][0].mfaToken).toBe('mfa-token');
+                expect(mfaChallengeIssuedEvent[0][0].mfaTarget).toBe('someone@somewhere.com');
                 expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
             });
 
