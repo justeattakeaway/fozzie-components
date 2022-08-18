@@ -3,6 +3,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v10.6.1
+------------------------------
+*August 18, 2022*
+
+### Changed
+- Truncation now uses fozzie `truncate()` mixin (compiled CSS is exactly the same).
+
+
 v10.6.0
 ------------------------------
 *August 17, 2022*
