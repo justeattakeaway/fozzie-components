@@ -29,7 +29,10 @@
                     <i18n
                         path="helpInfo.instructionsPoint4Text"
                         tag="li">
-                        <a :href="$t('helpInfo.instructionsHelpLink')"><strong>{{ $t('helpInfo.instructionsHelpText') }}</strong></a>
+                        <a
+                            data-test-id="f-mfa-help-faq-link"
+                            :href="$t('helpInfo.instructionsHelpLink')">
+                            <strong>{{ $t('helpInfo.instructionsHelpText') }}</strong></a>
                     </i18n>
                 </ul>
 

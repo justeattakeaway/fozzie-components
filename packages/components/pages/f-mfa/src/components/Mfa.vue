@@ -7,7 +7,7 @@
             :class="$style['c-mfa-card']"
             has-inner-spacing-large
             has-outline
-            data-test-id="f-mfa-verification-card">
+            data-test-id="v-mfa-verification-component">
             <div :class="$style['c-mfa-card-content']">
                 <bag-surf-bg-icon
                     :class="$style['c-mfa-icon']" />
