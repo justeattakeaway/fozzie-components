@@ -113,7 +113,16 @@ import {
     BagSadBgIcon
 } from '@justeat/f-vue-icons';
 import AccountWebApi from '../services/AccountWeb.api';
-import { buildEvent } from '../services/EventBuilder';
+import {
+    buildEvent,
+    ERROR_BACK,
+    ERROR_VISIBLE,
+    HELP_HIDDEN,
+    HELP_VISIBLE,
+    MFA_ERROR,
+    MFA_SUCCESS,
+    MFA_VISIBLE
+} from '../services/EventBuilder';
 
 import HelpInfo from './Help.vue';
 import tenantConfigs from '../tenants';
@@ -202,10 +211,10 @@ export default {
 
             if (this.showErrorPage) {
                 this.$log.warn('Error loading MFA page');
-                this.$gtm.pushEvent(buildEvent('error-visible'));
+                this.$gtm.pushEvent(buildEvent(ERROR_VISIBLE));
             } else {
                 this.$log.info('MFA page loaded successfully');
-                this.$gtm.pushEvent(buildEvent('mfa-visible'));
+                this.$gtm.pushEvent(buildEvent(MFA_VISIBLE));
             }
         },
 
@@ -227,14 +236,14 @@ export default {
                     cookies: this.$cookies,
                     validateUrl: this.validateUrl
                 })).postValidateMfaToken({ mfa_token: this.code, otp: this.otp.toUpperCase() }); // eslint-disable-line camelcase
-                this.$gtm.pushEvent(buildEvent('mfa-success'));
+                this.$gtm.pushEvent(buildEvent(MFA_SUCCESS));
                 this.emitRedirectEvent(this.returnUrl); // Completed successfully, emit redirect return url
             } catch (error) {
                 if (error.response && error.response.status) {
                     const { status } = error.response;
                     this.hasSubmitError = true;
 
-                    this.$gtm.pushEvent(buildEvent('mfa-error', `http error status : ${status}`));
+                    this.$gtm.pushEvent(buildEvent(MFA_ERROR, `http error status : ${status}`));
 
                     // Bad request
                     if (status === 400) {
@@ -254,12 +263,12 @@ export default {
         },
 
         onHideHelpInfo () {
-            this.$gtm.pushEvent(buildEvent('help-hidden'));
+            this.$gtm.pushEvent(buildEvent(HELP_HIDDEN));
             this.showHelpInfo = false;
         },
 
         onShowHelpInfo () {
-            this.$gtm.pushEvent(buildEvent('help-visible'));
+            this.$gtm.pushEvent(buildEvent(HELP_VISIBLE));
             this.showHelpInfo = true;
         },
 
@@ -294,7 +303,7 @@ export default {
         },
 
         recordAnalytics () {
-            this.$gtm.pushEvent(buildEvent('error-back'));
+            this.$gtm.pushEvent(buildEvent(ERROR_BACK));
         }
     }
 };

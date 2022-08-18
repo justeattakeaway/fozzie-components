@@ -72,7 +72,10 @@ import {
     BagSadBgIcon
 } from '@justeat/f-vue-icons';
 import tenantConfigs from '../tenants';
-import { buildEvent } from '../services/EventBuilder';
+import {
+    buildEvent,
+    HELP_LOGIN
+} from '../services/EventBuilder';
 
 export default {
     name: 'VMfa',
@@ -110,7 +113,7 @@ export default {
 
     methods: {
         recordAnalytics () {
-            this.$gtm.pushEvent(buildEvent('help-login'));
+            this.$gtm.pushEvent(buildEvent(HELP_LOGIN));
         }
     }
 };

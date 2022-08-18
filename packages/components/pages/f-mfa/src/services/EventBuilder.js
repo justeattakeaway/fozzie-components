@@ -1,8 +1,16 @@
 /* eslint-disable camelcase */
-// eslint-disable-next-line import/prefer-default-export
+export const MFA_VISIBLE = 'mfa-visible';
+export const ERROR_VISIBLE = 'error-visible';
+export const ERROR_BACK = 'error-back';
+export const MFA_ERROR = 'mfa-error';
+export const MFA_SUCCESS = 'mfa-success';
+export const HELP_VISIBLE = 'help-visible';
+export const HELP_HIDDEN = 'help-hidden';
+export const HELP_LOGIN = 'help-login';
+
 export const buildEvent = (key, data = '') => {
     switch (key) {
-        case 'mfa-visible':
+        case MFA_VISIBLE:
             return {
                 EventName: 'form_view',
                 Parameters: {
@@ -11,7 +19,7 @@ export const buildEvent = (key, data = '') => {
                     form_action: 'view'
                 }
             };
-        case 'error-visible':
+        case ERROR_VISIBLE:
             return {
                 EventName: 'dialog_view',
                 Parameters: {
@@ -21,7 +29,7 @@ export const buildEvent = (key, data = '') => {
                     dialog_type: 'info'
                 }
             };
-        case 'error-back':
+        case ERROR_BACK:
             return {
                 EventName: 'dialog_select',
                 Parameters: {
@@ -32,7 +40,7 @@ export const buildEvent = (key, data = '') => {
                     dialog_buttonText: 'go back'
                 }
             };
-        case 'mfa-error':
+        case MFA_ERROR:
             return {
                 EventName: 'form_error',
                 Parameters: {
@@ -42,7 +50,7 @@ export const buildEvent = (key, data = '') => {
                     error_message: data
                 }
             };
-        case 'mfa-success':
+        case MFA_SUCCESS:
             return {
                 EventName: 'form_success',
                 Parameters: {
@@ -51,7 +59,7 @@ export const buildEvent = (key, data = '') => {
                     form_action: 'success'
                 }
             };
-        case 'help-visible':
+        case HELP_VISIBLE:
             return {
                 EventName: 'dialog_view',
                 Parameters: {
@@ -61,7 +69,7 @@ export const buildEvent = (key, data = '') => {
                     dialog_type: 'info'
                 }
             };
-        case 'help-hidden':
+        case HELP_HIDDEN:
             return {
                 EventName: 'dialog_select',
                 Parameters: {
@@ -72,7 +80,7 @@ export const buildEvent = (key, data = '') => {
                     dialog_buttonText: 'got it'
                 }
             };
-        case 'help-login':
+        case HELP_LOGIN:
             return {
                 EventName: 'dialog_cancel',
                 Parameters: {
