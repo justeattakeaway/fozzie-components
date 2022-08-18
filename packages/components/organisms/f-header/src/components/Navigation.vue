@@ -739,10 +739,7 @@ export default {
         font-weight: common.$nav-text-weight;
     }
     @include f.media('>mid', '<wide') {
-        max-width: 200px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
+        @include f.truncate(200px);
     }
 
     $navTextTweakpointMid: f.em(800);
