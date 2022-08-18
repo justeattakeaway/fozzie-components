@@ -25,19 +25,19 @@ class Mfa extends Page {
 
     get helpScreen () { return $('[data-test-id="v-mfa-help-component"]'); }
 
-    async isMfaScreenDisplayed () {
+    async waitForMfaScreenDisplayed (timeoutMs = 1000) {
         // eslint-disable-next-line no-return-await
-        return await this.mfaScreen.isDisplayed();
+        return await this.mfaScreen.waitForComponent(timeoutMs);
     }
 
-    async isErrorScreenDisplayed () {
+    async waitForErrorScreenDisplayed (timeoutMs = 1000) {
         // eslint-disable-next-line no-return-await
-        return await this.errorScreen.isDisplayed();
+        return await this.errorScreen.waitForComponent(timeoutMs);
     }
 
-    async isHelpScreenDisplayed () {
+    async waitForHelpScreenDisplayed (timeoutMs = 1000) {
         // eslint-disable-next-line no-return-await
-        return await this.helpScreen.isDisplayed();
+        return await this.helpScreen.waitForComponent(timeoutMs);
     }
 }
 
