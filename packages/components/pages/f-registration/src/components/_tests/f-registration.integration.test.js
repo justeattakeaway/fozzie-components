@@ -105,6 +105,7 @@ describe('Registration API service', () => {
         expect(mfaChallengeIssuedEvent[0][0].mfaToken).toBe('mfa-token');
         expect(mfaChallengeIssuedEvent[0][0].mfaTarget).toBe('someone@somewhere.com');
         expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
+        expect(wrapper.emitted(EventNames.LoginBlocked)).toBeUndefined();
     });
 
     it('responds with 401 when login blocked by ravelin or recaptcha', async () => {
