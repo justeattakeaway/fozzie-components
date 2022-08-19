@@ -1,29 +1,52 @@
 import Page from '@justeat/f-wdio-utils';
 
+import {
+    MFA_SUBMIT_BUTTON,
+    MFA_TEXT_BOX,
+    MFA_HELP_LINK,
+    HELP_FAQ_LINK,
+    HELP_CLOSE_BUTTON,
+    HELP_LOGIN_LINK,
+    ERROR_BACK_BUTTON,
+    SUBIT_ERROR_ALERT,
+    MFA_VERIFICATION_COMPONENT,
+    MFA_ERROR_COMPONENT,
+    MFA_HELP_COMPONENT,
+    FIELD
+} from './f-mfa-selectors';
+
 class Mfa extends Page {
     constructor () {
         super('page', 'v-mfa-component');
     }
 
-    get mfaSubmitButton () { return $('[data-test-id="mfa-submit-button"]'); }
+    get mfaSubmitButton () { return $(MFA_SUBMIT_BUTTON); }
 
-    get mfaTextBox () { return $('[data-test-id="mfa-verification-code-textbox"]'); }
+    get mfaTextBox () { return $(MFA_TEXT_BOX); }
 
-    get mfaHelpLink () { return $('[data-test-id="mfa-need-help-link"]'); }
+    get mfaHelpLink () { return $(MFA_HELP_LINK); }
 
-    get helpFaqLink () { return $('[data-test-id="f-mfa-help-faq-link"]'); }
+    get helpFaqLink () { return $(HELP_FAQ_LINK); }
 
-    get helpCloseButton () { return $('[data-test-id="mfa-help-enter-code-button"]'); }
+    get helpCloseButton () { return $(HELP_CLOSE_BUTTON); }
 
-    get helpLoginLink () { return $('[data-test-id="mfa-help-login-link"]'); }
+    get helpLoginLink () { return $(HELP_LOGIN_LINK); }
 
-    get errorBackButton () { return $('[data-test-id="cardWithContent-primaryButton"]'); }
+    get errorBackButton () { return $(ERROR_BACK_BUTTON); }
 
-    get mfaScreen () { return $('[data-test-id="v-mfa-verification-component"]'); }
+    get submitErrorAlert () { return $(SUBIT_ERROR_ALERT); }
 
-    get errorScreen () { return $('[data-test-id="v-mfa-error-component"]'); }
+    get mfaScreen () { return $(MFA_VERIFICATION_COMPONENT); }
 
-    get helpScreen () { return $('[data-test-id="v-mfa-help-component"]'); }
+    get errorScreen () { return $(MFA_ERROR_COMPONENT); }
+
+    get helpScreen () { return $(MFA_HELP_COMPONENT); }
+
+    fields = {
+        mfaCodeInput: {
+            get input () { return $(FIELD.mfaCodeInput.input); }
+        }
+    };
 
     async waitForMfaScreenDisplayed (timeoutMs = 1000) {
         // eslint-disable-next-line no-return-await
@@ -38,6 +61,14 @@ class Mfa extends Page {
     async waitForHelpScreenDisplayed (timeoutMs = 1000) {
         // eslint-disable-next-line no-return-await
         return await this.helpScreen.waitForComponent(timeoutMs);
+    }
+
+    async goToHelp () {
+        await this.mfaHelpLink.click();
+    }
+
+    async goToSubmit () {
+        await this.mfaSubmitButton.click();
     }
 }
 
