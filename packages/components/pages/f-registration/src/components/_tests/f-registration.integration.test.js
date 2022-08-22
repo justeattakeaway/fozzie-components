@@ -127,4 +127,26 @@ describe('Registration API service', () => {
         expect(wrapper.emitted(EventNames.LoginBlocked).length).toBe(1);
         expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
     });
+
+    it('responds with 429 when CloudFlare rate limit is exceeded', async () => {
+        // Arrange
+        mockFactory.setupMockResponse(httpModule.httpVerbs.POST, propsData.createAccountUrl, CONSUMERS_REQUEST_DATA, 429, {
+            faultId: '00000000-0000-0000-0000-000000000000',
+            traceId: 'H3TKh4QSJUSwVBCBqEtkKw',
+            errors: [{
+                description: 'Rate limit exceeded',
+                errorCode: 'RateLimitExceeded'
+            }]
+        });
+
+        // Act
+        await wrapper.vm.onFormSubmit();
+        await flushPromises();
+
+        // Assert
+        const rateLimitExceededEvent = wrapper.emitted(EventNames.RateLimitExceeded);
+        expect(rateLimitExceededEvent.length).toBe(1);
+        expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
+        expect(wrapper.emitted(EventNames.LoginBlocked)).toBeUndefined();
+    });
 });
