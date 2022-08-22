@@ -292,6 +292,41 @@ describe('Registration', () => {
                 expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
             });
 
+            it('should emit rate limit exceeded event when service responds with a 429', async () => {
+                // Arrange
+                const err = {
+                    response: {
+                        status: 429,
+                        data: {
+                            faultId: '123',
+                            traceId: '123',
+                            errors: [{
+                                description: '"Rate limit exceeded"',
+                                errorCode: 'RateLimitExceeded'
+                            }]
+                        }
+                    }
+                };
+
+                RegistrationServiceApi.createAccount.mockImplementation(async () => {
+                    throw err;
+                });
+                wrapper = mountComponentAndAttachToDocument();
+                Object.defineProperty(wrapper.vm.$v, '$invalid', {
+                    get: jest.fn(() => false)
+                });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                const rateLimitExceededEvent = wrapper.emitted(EventNames.RateLimitExceeded);
+                expect(rateLimitExceededEvent.length).toBe(1);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
+                expect(wrapper.emitted(EventNames.LoginBlocked)).toBeUndefined();
+            });
+
             it('should populate generic error message and emit failure event when service responds with a 400', async () => {
                 // Arrange
                 const err = {
