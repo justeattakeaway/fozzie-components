@@ -274,7 +274,7 @@ const messages = {
         delivery: 'Delivery'
     },
 
-    checkoutTermsAndConditions: 'By placing an order you agree to our {termsAndConditions}. Please read our {privacyPolicy} and {cookiePolicy}.',
+    checkoutTermsAndConditions: 'By placing an order you agree to our {0}. Please read our {1} and {2}.',
 
     termsAndConditionsLinkText: 'Terms and Conditions',
     termsAndConditionsLinkUrl: 'https://www.just-eat.co.uk/termsandconditions',
