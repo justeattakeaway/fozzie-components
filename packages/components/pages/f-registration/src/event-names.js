@@ -15,5 +15,6 @@ export default {
     CreateAccountInlineError,
     VisitLoginPage,
     LoginBlocked,
-    MfaChallengeIssued
+    MfaChallengeIssued,
+    RateLimitExceeded
 };

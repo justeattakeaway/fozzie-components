@@ -511,6 +511,11 @@ export default {
 
                         return;
                     }
+
+                    if (status === 429) {
+                        this.$emit(EventNames.RateLimitExceeded);
+                        return;
+                    }
                 }
 
                 this.genericErrorMessage = this.copy.genericErrorMessage;
