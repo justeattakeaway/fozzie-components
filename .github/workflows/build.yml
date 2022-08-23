@@ -88,7 +88,7 @@ jobs:
   browser-tests:
     strategy:
       matrix:
-        component-type: ['atoms', 'molecules', 'organisms' , 'pages', 'templates']
+        component-type: ['atoms', 'molecules', 'organisms' , 'pages']
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -108,10 +108,6 @@ jobs:
       with:
         path: '**/node_modules'
         key: node-modules-${{ hashFiles('**/yarn.lock') }}
-    # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible
-    - name: Install Dependencies
-      if: steps.cache-node-modules.outputs.cache-hit != 'true'
-      run: yarn --prefer-offline
     # Restore Cache - Turborepo Dist
     - name: Cache Turborepo Dist
       id: turborepo-dist-cache
@@ -134,11 +130,11 @@ jobs:
         restore-keys: |
           storybook-cache-${{ github.ref }}
           storybook-cache-
-    # Deploy Storybook
+    # Run Component Tests
     - name: Run tests
       run: |
         yarn storybook:serve-static &
-        yarn ci:test-component:chrome:${{ matrix.component-type }}
+        yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1
 
   storybook-deploy:
     needs: build
