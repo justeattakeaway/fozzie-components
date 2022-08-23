@@ -10,17 +10,6 @@ on:
     - browser-tests-gh-actions
 
 jobs:
-  create-deployment-environment:
-    runs-on: ubuntu-latest
-    steps:
-      # Create check run
-    - uses: satak/webrequest-action@master
-      with:
-        url: https://api.github.com/repos/justeat/fozzie-components/environments/${{ github.REF_NAME }}-storybook
-        method: PUT
-        headers: '{"Authorization": "Bearer ${{ secrets.CREATE_ENVIRONMENT_TOKEN }}"}'
-
-
   install:
     runs-on: ubuntu-latest
     steps:
@@ -93,6 +82,63 @@ jobs:
         restore-keys: |
           storybook-cache-${{ github.ref }}
           storybook-cache-
+
+
+
+  browser-tests:
+    strategy:
+      matrix:
+        component-type: ['atoms', 'molecules', 'organisms' , 'pages', 'templates']
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the Repo
+    - name: Checkout
+      uses: actions/checkout@v3
+    # Setup Node 16 
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'yarn'
+    # Restore node_modules - Cache should exist as one was created in previous 'install' job
+    - name: Restore Cache -  Node Modules
+      id: cache-node-modules
+      uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: node-modules-${{ hashFiles('**/yarn.lock') }}
+    # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible
+    - name: Install Dependencies
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: yarn --prefer-offline
+    # Restore Cache - Turborepo Dist
+    - name: Cache Turborepo Dist
+      id: turborepo-dist-cache
+      uses: actions/cache@v2
+      with:
+        path: .turbo
+        key: turborepo-dist-cache-${{ github.ref }}-${{ github.sha }}
+        # Use one of the following keys if the above is not found.
+        restore-keys: |
+          turborepo-dist-cache-${{ github.ref }}
+          turborepo-dist-cache-
+    # Restore Storybook 'storybook-static'
+    - name: Cache Storybook Static Directory
+      id: storybook-cache
+      uses: actions/cache@v2
+      with:
+        path: ./packages/storybook/storybook-static
+        key: storybook-cache-${{ github.ref }}-${{ github.sha }}
+        # Use one of the following keys if the above is not found.
+        restore-keys: |
+          storybook-cache-${{ github.ref }}
+          storybook-cache-
+    # Deploy Storybook
+    - name: Run tests
+      run: |
+        yarn storybook:serve-static &
+        yarn ci:test-component:chrome:${{ matrix.component-type }}
 
   storybook-deploy:
     needs: build
