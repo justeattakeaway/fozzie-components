@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.11.1
+------------------------------
+*August 23, 2022*
+
+### Changed
+- No changes. Republish to pull latest versions of atoms.
+
+
 v0.11.0
 ------------------------------
 *August 19, 2022*
@@ -19,7 +27,7 @@ v0.10.0
 ### Changed
 - Changed mfa load success log message to `Info`.
 - Help screen primary button text.
-  
+
 ### Removed
 - Mfa Form field validation/message.
 
