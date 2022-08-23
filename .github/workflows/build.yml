@@ -71,7 +71,11 @@ jobs:
       uses: actions/cache@v2
       with:
         path: .turbo
-        key: turborepo-dist-cache
+        key: turborepo-dist-cache-${{ github.ref }}-${{ github.sha }}
+        # Use one of the following keys if the above is not found.
+        restore-keys: |
+          turborepo-dist-cache-${{ github.ref }}
+          turborepo-dist-cache-
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
       run: yarn build --cache-dir=".turbo"
@@ -84,7 +88,11 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ./packages/storybook/storybook-static
-        key: storybook-cache
+        key: storybook-cache-${{ github.ref }}-${{ github.sha }}
+        # Use one of the following keys if the above is not found.
+        restore-keys: |
+          storybook-cache-${{ github.ref }}
+          storybook-cache-
 
   storybook-deploy:
     needs: build
@@ -110,20 +118,28 @@ jobs:
     - name: Install Dependencies
       if: steps.cache-node-modules.outputs.cache-hit != 'true'
       run: yarn --prefer-offline
-    # Restore Turborepo's component 'dist' cache - If not, cache is created at end of build.
-    - name: Restore Cache -  Turborepo Dist
+    # Restore Cache - Turborepo Dist
+    - name: Cache Turborepo Dist
       id: turborepo-dist-cache
       uses: actions/cache@v2
       with:
         path: .turbo
-        key: turborepo-dist-cache
-    # Restory Storybook 'storybook-static'
-    - name: Restore Cache -  Storybook Static Directory
+        key: turborepo-dist-cache-${{ github.ref }}-${{ github.sha }}
+        # Use one of the following keys if the above is not found.
+        restore-keys: |
+          turborepo-dist-cache-${{ github.ref }}
+          turborepo-dist-cache-
+    # Restore Storybook 'storybook-static'
+    - name: Cache Storybook Static Directory
       id: storybook-cache
       uses: actions/cache@v2
       with:
         path: ./packages/storybook/storybook-static
-        key: storybook-cache
+        key: storybook-cache-${{ github.ref }}-${{ github.sha }}
+        # Use one of the following keys if the above is not found.
+        restore-keys: |
+          storybook-cache-${{ github.ref }}
+          storybook-cache-
     # Deploy Storybook
     - name: Storybook deploy
       run: |

@@ -23,12 +23,20 @@ const i18n = {
     }
 };
 
-// Spy on the logging warn method
+// Spy on the logging methods
+const infoLogSpy = jest.fn();
 const warnLogSpy = jest.fn();
 const errorLogSpy = jest.fn();
 const logMocks = {
+    info: infoLogSpy,
     warn: warnLogSpy,
     error: errorLogSpy
+};
+
+// Spy on the gtm event method
+const pushEventSpy = jest.fn();
+const gtmMocks = {
+    pushEvent: pushEventSpy
 };
 
 // Add Spy on the AccountWebApi.postValidateMfaToken method
@@ -77,7 +85,8 @@ describe('Mfa', () => {
             returnUrl: '/place/i/came/from'
         };
         sutMocks = {
-            $log: logMocks
+            $log: logMocks,
+            $gtm: gtmMocks
         };
     });
 
@@ -131,8 +140,9 @@ describe('Mfa', () => {
             wrapper = await mountSut();
 
             // Assert
-            expect(warnLogSpy).toHaveBeenCalledTimes(1);
-            expect(warnLogSpy).toHaveBeenCalledWith('MFA page loaded successfully');
+            expect(infoLogSpy).toHaveBeenCalledTimes(1);
+            expect(infoLogSpy).toHaveBeenCalledWith('MFA page loaded successfully');
+            expect(pushEventSpy).toMatchSnapshot();
         });
 
         it.each([
@@ -157,6 +167,7 @@ describe('Mfa', () => {
             expect(warnLogSpy).toHaveBeenCalledTimes(2);
             expect(warnLogSpy).toHaveBeenCalledWith(`Error validating mfa property '${key}' - Regex Failed`, ['account-pages', 'mfa']);
             expect(warnLogSpy).toHaveBeenCalledWith('Error loading MFA page');
+            expect(pushEventSpy).toMatchSnapshot();
         });
 
         it.each([
@@ -176,6 +187,7 @@ describe('Mfa', () => {
             expect(warnLogSpy).toHaveBeenCalledTimes(2);
             expect(warnLogSpy).toHaveBeenCalledWith(`Error validating mfa property '${key}' - Regex Failed`, ['account-pages', 'mfa']);
             expect(warnLogSpy).toHaveBeenCalledWith('Error loading MFA page');
+            expect(pushEventSpy).toMatchSnapshot();
         });
 
         it('should set the default for returnUrl if not supplied', async () => {
@@ -192,95 +204,67 @@ describe('Mfa', () => {
             expect(errorCard.exists()).toBe(false);
             expect(wrapper.vm.returnUrl).toBe(expected);
 
-            expect(warnLogSpy).toHaveBeenCalledTimes(1);
-            expect(warnLogSpy).toHaveBeenCalledWith('MFA page loaded successfully');
+            expect(infoLogSpy).toHaveBeenCalledTimes(1);
+            expect(infoLogSpy).toHaveBeenCalledWith('MFA page loaded successfully');
+            expect(pushEventSpy).toMatchSnapshot();
         });
     });
 
     describe('When calling the onFormSubmit() method', () => {
-        it.each([
-            ['show', true],
-            ['NOT show', false]
-        ])('should %s error alert when hasSubmitError is %s', async (_, hasSubmitError) => {
+        it('should call the postValidateMfaToken() method with the correct params', async () => {
             // Arrange
-            wrapper = await mountSut();
-
-            // Act
-            await wrapper.setData({ hasSubmitError });
-
-            // Assert
-            const alert = wrapper.find('[data-test-id="mfa-submit-error-alert"]');
-            expect(alert.exists()).toBe(hasSubmitError);
-        });
-
-        it.each([
-            ['show', true],
-            ['NOT show', false]
-        ])('should %s validation error when showValidationError is %s', async (_, showValidationError) => {
-            // Arrange
-            wrapper = await mountSut({ shallow: false }); // Deep mount to make sure slot is rendered
-
-            // Act
-            await wrapper.setData({ showValidationError });
-
-            // Assert
-            const validationError = wrapper.find('[data-test-id="mfa-form-validation-error"]');
-            expect(validationError.exists()).toBe(showValidationError);
-        });
-
-        describe('And the form data is valid', () => {
-            it('should call the postValidateMfaToken() method with the correct params', async () => {
-                // Arrange
-                mockPostValidateMfaToken = jest.fn(() => {}); // Add default mock to the spy
-                const expectedParams = { mfa_token: 'XYZ1234', otp: 'test-otp' }; // eslint-disable-line camelcase
-                wrapper = await mountSut({
-                    propsData:
+            mockPostValidateMfaToken = jest.fn(() => {}); // Add default mock to the spy
+            const expectedParams = { mfa_token: 'XYZ1234', otp: 'TEST-OTP' }; // eslint-disable-line camelcase
+            wrapper = await mountSut({
+                propsData:
                         { ...sutProps, code: 'XYZ1234' }
-                });
+            });
+            await wrapper.setData({ otp: 'test-otp' });
+
+            // Act
+            await wrapper.vm.onFormSubmit();
+
+            // Assert
+            expect(mockPostValidateMfaToken).toHaveBeenCalledWith(expectedParams);
+            expect(pushEventSpy).toMatchSnapshot();
+        });
+
+        describe('And the submitting of the form data was unsuccessful', () => {
+            it.each([
+                ['Bad request when submitting MFA', 400],
+                ['Throttled when submitting MFA', 429]
+            ])("should log the error '%s' if the response status is '%s'", async (logMessage, status) => {
+                // Arrange
+                const errLogged = new Error('some status error message');
+                errLogged.response = { status };
+                mockPostValidateMfaToken = jest.fn(() => { throw errLogged; }); // Add error mock to the spy
+                wrapper = await mountSut();
                 await wrapper.setData({ otp: 'test-otp' });
 
                 // Act
                 await wrapper.vm.onFormSubmit();
 
                 // Assert
-                expect(mockPostValidateMfaToken).toHaveBeenCalledWith(expectedParams);
+                expect(errorLogSpy).toHaveBeenCalledWith(logMessage, errLogged, ['account-pages', 'mfa']);
+                expect(wrapper.vm.isSubmitting).toBe(false);
+                expect(pushEventSpy).toMatchSnapshot();
             });
+        });
 
-            describe('And the submitting of the form data was unsuccessful', () => {
-                it.each([
-                    ['Bad request when submitting MFA', 400],
-                    ['Throttled when submitting MFA', 429]
-                ])("should log the error '%s' if the response status is '%s'", async (logMessage, status) => {
-                    // Arrange
-                    const errLogged = new Error('some status error message');
-                    errLogged.response = { status };
-                    mockPostValidateMfaToken = jest.fn(() => { throw errLogged; }); // Add error mock to the spy
-                    wrapper = await mountSut();
-                    await wrapper.setData({ otp: 'test-otp' });
+        describe('And the submitting of the form data was successful', () => {
+            it('should emit correct event if api call successful', async () => {
+                // Arrange
+                mockPostValidateMfaToken = jest.fn(() => {}); // Add default mock to the spy
+                const expectedUrl = '/place/i/came/from';
+                wrapper = await mountSut();
+                await wrapper.setData({ otp: 'test-otp' });
 
-                    // Act
-                    await wrapper.vm.onFormSubmit();
+                // Act
+                await wrapper.vm.onFormSubmit();
 
-                    // Assert
-                    expect(errorLogSpy).toHaveBeenCalledWith(logMessage, errLogged, ['account-pages', 'mfa']);
-                    expect(wrapper.vm.isSubmitting).toBe(false);
-                });
-            });
-
-            describe('And the submitting of the form data was successful', () => {
-                it('should emit correct event if api call successful', async () => {
-                    // Arrange
-                    mockPostValidateMfaToken = jest.fn(() => {}); // Add default mock to the spy
-                    const expectedUrl = '/place/i/came/from';
-                    wrapper = await mountSut();
-                    await wrapper.setData({ otp: 'test-otp' });
-
-                    // Act
-                    await wrapper.vm.onFormSubmit();
-
-                    expect(wrapper.emitted()[REDIRECT_URL_EVENT_NAME][0]).toEqual([expectedUrl]);
-                    expect(wrapper.vm.isSubmitting).toBe(false);
-                });
+                expect(wrapper.emitted()[REDIRECT_URL_EVENT_NAME][0]).toEqual([expectedUrl]);
+                expect(wrapper.vm.isSubmitting).toBe(false);
+                expect(pushEventSpy).toMatchSnapshot();
             });
         });
     });

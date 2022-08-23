@@ -5,6 +5,8 @@ const CreateAccountStart = 'registration-create-account-start';
 const CreateAccountInlineError = 'registration-create-account-inline-error';
 const VisitLoginPage = 'registration-visit-login-page';
 const LoginBlocked = 'registration-login-blocked';
+const MfaChallengeIssued = 'registration-mfa-challenge-issued';
+const RateLimitExceeded = 'registration-rate-limit-exceeded';
 
 export default {
     CreateAccountSuccess,
@@ -13,5 +15,7 @@ export default {
     CreateAccountStart,
     CreateAccountInlineError,
     VisitLoginPage,
-    LoginBlocked
+    LoginBlocked,
+    MfaChallengeIssued,
+    RateLimitExceeded
 };

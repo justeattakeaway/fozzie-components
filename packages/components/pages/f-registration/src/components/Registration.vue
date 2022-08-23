@@ -498,8 +498,22 @@ export default {
                         return;
                     }
 
-                    if (status === 403 || status === 401) {
+                    if (status === 401) {
                         this.$emit(EventNames.LoginBlocked);
+                        return;
+                    }
+
+                    if (status === 403) {
+                        this.$emit(EventNames.MfaChallengeIssued, {
+                            mfaToken: error.response.data.mfa_token,
+                            mfaTarget: error.response.data.mfa_target
+                        });
+
+                        return;
+                    }
+
+                    if (status === 429) {
+                        this.$emit(EventNames.RateLimitExceeded);
                         return;
                     }
                 }
