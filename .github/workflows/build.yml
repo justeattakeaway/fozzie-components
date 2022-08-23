@@ -143,6 +143,7 @@ jobs:
   storybook-deploy:
     needs: build
     runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/master' }}
     steps:
     # Checkout the Repo
     - name: Checkout
