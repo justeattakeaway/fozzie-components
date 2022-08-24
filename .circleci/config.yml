@@ -337,7 +337,7 @@ jobs:
       - unit_integration_tests:
           component_type: << parameters.component_type >>
 
-  browser-tests:
+  # browser-tests:
     executor: node
     parameters:
       component_type:
@@ -434,16 +434,16 @@ workflows:
               ignore: ['gh-pages']
           requires:
             - build
-      - browser-tests:
-          matrix:
-            parameters:
-              component_type: ['atoms', 'molecules', 'organisms', 'pages']
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-          requires:
-            - unit-tests-<< matrix.component_type >>
+      # - browser-tests:
+      #     matrix:
+      #       parameters:
+      #         component_type: ['atoms', 'molecules', 'organisms', 'pages']
+      #     context: web-core
+      #     filters:
+      #       branches:
+      #         ignore: ['gh-pages']
+      #     requires:
+      #       - unit-tests-<< matrix.component_type >>
       # Not currently working in CircleCI
       # - publish-to-npm:
       #     context: web-core
