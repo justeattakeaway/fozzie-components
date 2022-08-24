@@ -139,7 +139,7 @@ jobs:
         yarn storybook:serve-static &
         yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
         yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 &&
-        yarn ci:visual:${{ matrix.component-type }} --concurrency=1
+        yarn ci:test:visual:${{ matrix.component-type }} --concurrency=1
 
   storybook-deploy:
     needs: build
