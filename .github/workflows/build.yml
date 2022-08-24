@@ -119,6 +119,9 @@ jobs:
         restore-keys: |
           turborepo-dist-cache-${{ github.ref }}
           turborepo-dist-cache-
+    # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
+    - name: Build Components
+      run: yarn build --cache-dir=".turbo"
     # Restore Storybook 'storybook-static'
     - name: Cache Storybook Static Directory
       id: storybook-cache
