@@ -3,7 +3,7 @@ global.baseDir = __dirname;
 const percySnapshot = require('@percy/webdriverio');
 const { getTestConfiguration, setTestReporters } = require('./test/configuration/configuration-helper');
 const configuration = getTestConfiguration();
-const { CIRCLECI } = process.env;
+const { CI } = process.env;
 
 exports.config = {
     baseUrl: configuration.baseUrl,
@@ -94,7 +94,7 @@ exports.config = {
      */
     // eslint-disable-next-line consistent-return
     after: () => {
-        if (!CIRCLECI) {
+        if (!CI) {
             console.log(
                 '-----------------------------------------------------', '\n',
                 'For more error logs, add "allure" to "testReporters" in "test/configuration/local.config.js".', '\n', '\n', 'To then see the ALLURE REPORT, please head to the route of the directory and run', '\n',
