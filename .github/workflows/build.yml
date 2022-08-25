@@ -149,9 +149,9 @@ jobs:
       if: failure()
       uses: actions/upload-artifact@v3
       with:
-        name: test-artifacts
+        name: test-artifacts-${{ matrix.component-type }}
         path: |
-          allure-report-${{ matrix.component-type }}
+          allure-report
           test/results/axe-violations
 
   storybook-deploy:
