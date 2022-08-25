@@ -135,6 +135,7 @@ jobs:
           storybook-cache-
     # Run Component / A11y / Visual Tests
     - name: Run Component / A11y / Visual Tests
+      continue-on-error: true
       run: |
         yarn storybook:serve-static &
         yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
@@ -150,7 +151,7 @@ jobs:
       with:
         name: test-artifacts
         path: |
-          allure-report
+          allure-report-${{ matrix.component-type }}
           test/results/axe-violations
 
   storybook-deploy:
