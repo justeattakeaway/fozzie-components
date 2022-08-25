@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.6.0
+------------------------------
+*August 25, 2022*
+
+### Fixed
+- Geolocation API calls when location already exists.
+
+
 v4.5.1
 ------------------------------
 *August 22, 2022*
