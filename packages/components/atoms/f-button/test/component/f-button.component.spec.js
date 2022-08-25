@@ -8,7 +8,7 @@ describe('Action f-button component tests', () => {
         await ActionButton.load();
 
         // Assert
-        await expect(await ActionButton.isComponentDisplayed()).toBe(false);
+        await expect(await ActionButton.isComponentDisplayed()).toBe(true);
     });
 
     it('should check that the f-button action component is clickable', async () => {
