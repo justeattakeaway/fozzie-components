@@ -49,7 +49,8 @@ class AxeHelper {
      */
     async getAccessibilityTestResults () {
         const builder = new AxeBuilder({ client: browser })
-                        .withTags(['wcag21a', 'wcag21aa', 'wcag143', 'cat.color', 'cat.aria']);
+                        .withTags(['wcag21a', 'wcag21aa', 'wcag143', 'cat.color', 'cat.aria'])
+                        .disableRules(['duplicate-id', 'html-has-lang', 'aria-allowed-role', 'color-contrast-enhanced']);
         try {
             const results = await builder.analyze();
 
