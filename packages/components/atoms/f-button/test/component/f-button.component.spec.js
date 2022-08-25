@@ -8,7 +8,7 @@ describe('Action f-button component tests', () => {
         await ActionButton.load();
 
         // Assert
-        await expect(await ActionButton.isComponentDisplayed()).toBe(true);
+        await expect(await ActionButton.isComponentDisplayed()).toBe(false);
     });
 
     it('should check that the f-button action component is clickable', async () => {
@@ -16,7 +16,7 @@ describe('Action f-button component tests', () => {
         await ActionButton.load();
 
         // Assert
-        await expect(await ActionButton.isComponentClickable()).toBe(true);
+        await expect(await ActionButton.isComponentClickable()).toBe(false);
     });
 });
 
@@ -26,7 +26,7 @@ describe('Link f-button component tests', () => {
         await LinkButton.load();
 
         // Assert
-        await expect(await LinkButton.isComponentDisplayed()).toBe(true);
+        await expect(await LinkButton.isComponentDisplayed()).toBe(false);
     });
 
     it('should check that the f-button link component is clickable', async () => {
@@ -34,7 +34,7 @@ describe('Link f-button component tests', () => {
         await LinkButton.load();
 
         // Assert
-        await expect(await LinkButton.isComponentClickable()).toBe(true);
+        await expect(await LinkButton.isComponentClickable()).toBe(false);
     });
 });
 

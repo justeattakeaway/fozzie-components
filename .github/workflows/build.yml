@@ -133,13 +133,24 @@ jobs:
         restore-keys: |
           storybook-cache-${{ github.ref }}
           storybook-cache-
-    # Run Component Tests
-    - name: Run tests
+    # Run Component / A11y / Visual Tests
+    - name: Run Component / A11y / Visual Tests
       run: |
         yarn storybook:serve-static &
         yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
         yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 &&
         yarn ci:test:visual:${{ matrix.component-type }} --concurrency=1
+    # On Failure - Upload Allure Report
+    - name: Generate Allure Report
+      if: failure()
+      run: yarn allure:generate
+    - name: Upload Allure Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-artifacts
+        path: |
+          allure-report
+          test/results/axe-violations
 
   storybook-deploy:
     needs: build
