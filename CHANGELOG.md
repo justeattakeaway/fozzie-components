@@ -3,12 +3,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v7.26.0
+------------------------------
+*August 23, 2022*
+
+### Changed
+- Codeowners updated to point to new Core Team for mono-repo config, atoms and core owned components (like `f-header`/`f-footer`).
+  Test files are set to be owned by the QE Reviewers team.
+
+
 v7.25.1
 ------------------------------
 *August 22, 2022*
 
 ### Fixed
 - Issue where incorrect cache was being used to deploy Storybook.
+
 
 v7.25.0
 ------------------------------
