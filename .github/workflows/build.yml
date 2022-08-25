@@ -145,6 +145,7 @@ jobs:
       if: failure()
       run: yarn allure:generate
     - name: Upload Allure Report
+      if: failure()
       uses: actions/upload-artifact@v3
       with:
         name: test-artifacts
