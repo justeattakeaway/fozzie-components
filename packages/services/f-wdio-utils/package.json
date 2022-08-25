@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-wdio-utils",
   "description": "Fozzie Wdio Utils - webdriverIO page object",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "dist/f-wdio-utils.umd.js",
   "module": "dist/f-wdio-utils.es.js",
   "source": "src/index.js",
