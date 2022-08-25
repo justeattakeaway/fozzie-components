@@ -8,6 +8,9 @@ v4.6.0
 ------------------------------
 *August 25, 2022*
 
+### Removed
+- Geolocating functionality as it's causing issues and wasn't a 'must-have'.
+
 ### Fixed
 - Geolocation API calls when location already exists.
 
