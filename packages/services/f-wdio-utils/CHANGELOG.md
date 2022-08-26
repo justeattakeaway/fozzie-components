@@ -3,6 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.3.0
+------------------------------
+*August 26, 2022*
+
+### Fixed
+- Issue with configuration import.
+
+
+v1.2.1
+------------------------------
+*August 25, 2022*
+
+### Changed
+- Environment variable to ensure tests work across multiple CI systems.
+
 v1.2.0
 ------------------------------
 *July 25, 2022*
