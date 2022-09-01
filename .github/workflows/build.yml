@@ -125,11 +125,8 @@ jobs:
     - name: Build Components
       run: yarn build --cache-dir=".turbo"
     # Unit Test components.
-    - name: Build Components
+    - name: Unit Test Components
       run: yarn ci:test:${{ matrix.component-type}} --concurrency=10
-
-
-
     # Restore Storybook 'storybook-static'
     - name: Cache Storybook Static Directory
       if: matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages'
