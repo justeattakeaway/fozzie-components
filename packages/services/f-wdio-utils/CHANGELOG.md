@@ -13,7 +13,7 @@ v1.3.0
 
 v1.2.1
 ------------------------------
-*August 25, 2022*
+*September 1, 2022*
 
 ### Changed
 - Environment variable to ensure tests work across multiple CI systems.
