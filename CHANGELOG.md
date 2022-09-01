@@ -10,6 +10,10 @@ v7.27.0
 ### Added
 - Browser tests to GitHub Actions
 
+### Changed
+- Chromedriver version
+- Locked Chromedriver version in CI.
+
 v7.26.0
 ------------------------------
 *August 23, 2022*

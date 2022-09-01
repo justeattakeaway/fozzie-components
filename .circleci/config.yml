@@ -346,6 +346,7 @@ jobs:
       - attach_workspace:
           at: .
       - browser-tools/install-chrome
+          chrome-version: 105.0.5195.68
       - run:
           command: |
             google-chrome --version

@@ -1,7 +1,7 @@
 const { testType } = require('./shared.config');
 
 const configuration = {
-    logLevel: 'debug',
+    logLevel: 'error',
     baseUrl: 'http://localhost:8080',
     bail: 0,
     mochaOpts: {
