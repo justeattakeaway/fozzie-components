@@ -7,7 +7,6 @@ on:
   push:
     branches: 
     - master
-    - gh-actions-unit-linting
 
 jobs:
   install:
