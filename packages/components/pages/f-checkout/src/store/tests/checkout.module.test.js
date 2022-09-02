@@ -1190,10 +1190,10 @@ describe('CheckoutModule', () => {
 
                     jest.spyOn(addressService, 'isAddressInLocalStorage').mockReturnValue(true);
                     jest.spyOn(addressService, 'getAddressFromLocalStorage').mockReturnValue({
-                        line1: storedAddress.Line1,
-                        line2: storedAddress.Line2,
-                        locality: storedAddress.City,
-                        postcode: storedAddress.PostalCode,
+                        Line1: storedAddress.Line1,
+                        Line2: storedAddress.Line2,
+                        City: storedAddress.City,
+                        PostalCode: storedAddress.PostalCode,
                         Field1: '51.529747',
                         Field2: '-0.142396'
                     });
