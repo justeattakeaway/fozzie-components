@@ -94,6 +94,7 @@ describe('ErrorBoundary', () => {
             // Assert
             const [[emittedPayload]] = wrapper.emitted('on-error');
             expect(emittedPayload).toEqual({
+                hasError: true,
                 error,
                 info,
                 loggerPayload,
