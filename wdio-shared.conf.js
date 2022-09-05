@@ -1,4 +1,4 @@
-require('@babel/register');
+require('@babel/register')({ ignore: [/node_modules\/(?!(@justeat))/] });
 global.baseDir = __dirname;
 const percySnapshot = require('@percy/webdriverio');
 const { getTestConfiguration, setTestReporters } = require('./test/configuration/configuration-helper');
