@@ -245,7 +245,7 @@ describe('Mfa', () => {
                 await wrapper.vm.onFormSubmit();
 
                 // Assert
-                expect(errorLogSpy).toHaveBeenCalledWith(logMessage, errLogged, ['account-pages', 'mfa']);
+                expect(warnLogSpy).toHaveBeenCalledWith(logMessage, errLogged, ['account-pages', 'mfa']);
                 expect(wrapper.vm.isSubmitting).toBe(false);
                 expect(pushEventSpy).toMatchSnapshot();
             });

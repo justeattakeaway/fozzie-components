@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.13.0
+------------------------------
+*September 5, 2022*
+
+### Changed
+- Logs for 400/429 errors to warnings.
+
+
 v0.12.0
 ------------------------------
 *August 24, 2022*

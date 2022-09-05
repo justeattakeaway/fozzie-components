@@ -247,15 +247,17 @@ export default {
 
                     // Bad request
                     if (status === 400) {
-                        this.$log.error('Bad request when submitting MFA', error, standardLogTags);
+                        this.$log.warn('Bad request when submitting MFA', error, standardLogTags);
                         return;
                     }
 
                     // Too many requests
                     if (status === 429) {
-                        this.$log.error('Throttled when submitting MFA', error, standardLogTags);
+                        this.$log.warn('Throttled when submitting MFA', error, standardLogTags);
                         return;
                     }
+
+                    this.$log.error(`Unexpected ${status} response when submitting MFA`, error, standardLogTags);
                 }
             } finally {
                 this.isSubmitting = false;
