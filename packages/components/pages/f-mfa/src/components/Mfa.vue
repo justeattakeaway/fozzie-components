@@ -195,6 +195,7 @@ export default {
     },
 
     mounted () {
+        this.otp = ''; // Clear the field
         this.initialise();
     },
 
