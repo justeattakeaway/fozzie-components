@@ -40,7 +40,8 @@
                         required
                         :is-visually-required="false"
                         data-test-id="mfa-verification-code-textbox"
-                        maxlength="10" />
+                        maxlength="10"
+                        autocomplete="off" />
 
                     <f-alert
                         v-if="hasSubmitError"

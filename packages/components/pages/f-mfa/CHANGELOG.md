@@ -4,15 +4,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v0.14.0
+v0.15.0
 ------------------------------
-*September 6, 2022*
+*September 7, 2022*
 
 ### Changed
 - Only make a new API call if there isn't one already in flight.
 - Move query string validation from CSR to SSR.
 - Logs for 400/429 errors to warnings.
 - Protect against null/undefined query string values.
+
+
+v0.14.0
+------------------------------
+*September 6, 2022*
+
+### Changed
+- Disable the auto complete on the opt field.
 
 
 v0.13.0
