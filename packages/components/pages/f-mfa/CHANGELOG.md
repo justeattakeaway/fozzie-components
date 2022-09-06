@@ -6,9 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.13.0
 ------------------------------
-*September 5, 2022*
+*September 6, 2022*
 
 ### Changed
+- Move query string validation from CSR to SSR.
 - Logs for 400/429 errors to warnings.
 
 

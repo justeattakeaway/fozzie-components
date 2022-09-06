@@ -194,7 +194,7 @@ export default {
         }
     },
 
-    mounted () {
+    created () {
         this.initialise();
     },
 
