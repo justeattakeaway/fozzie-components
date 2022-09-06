@@ -224,6 +224,7 @@ export default {
 
         /**
         * Raises the isSubmitting flag which disables the Submit button.
+        * If the flag is already raised, do nothing.
         * Sets the hasSubmitError flag to false, so it is clean before we start.
         * Posts the form data to the api.
         * Then upon success emits an event to the parent component to redirect to the supplied returnUrl.
@@ -231,6 +232,10 @@ export default {
         * true, which displays the alert message below the form field plus logs the issue.
         */
         async onFormSubmit () {
+            if (this.isSubmitting) {
+                return; // Prevents multiple requests, especially on slow networks
+            }
+
             this.isSubmitting = true;
             this.hasSubmitError = false;
 

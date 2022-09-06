@@ -9,6 +9,7 @@ v0.14.0
 *September 6, 2022*
 
 ### Changed
+- Only make a new API call if there isn't one already in flight.
 - Move query string validation from CSR to SSR.
 - Logs for 400/429 errors to warnings.
 

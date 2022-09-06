@@ -267,5 +267,28 @@ describe('Mfa', () => {
                 expect(pushEventSpy).toMatchSnapshot();
             });
         });
+
+        it('should not make another API call if `isSubmitting` is already true', async () => {
+            // Arrange
+            mockPostValidateMfaToken = jest.fn();
+            wrapper = await mountSut({
+                propsData: {
+                    ...sutProps,
+                    code: 'XYZ1234'
+                }
+            });
+            await wrapper.setData({
+                isSubmitting: true
+            });
+            pushEventSpy.mockClear();
+
+            // Act
+            await wrapper.vm.onFormSubmit();
+
+            // Assert
+            expect(mockPostValidateMfaToken).not.toHaveBeenCalled();
+            expect(pushEventSpy).not.toHaveBeenCalled();
+            expect(wrapper.vm.isSubmitting).toBe(true);
+        });
     });
 });
