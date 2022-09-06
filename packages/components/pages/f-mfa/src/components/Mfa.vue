@@ -188,7 +188,7 @@ export default {
 
         errorPrimaryButton () {
             return {
-                href: this.cleanUrl(this.returnUrl),
+                href: this.cleanUrl(this.returnUrl || '/'),
                 text: this.$t('errorMessages.loading.primaryButtonText')
             };
         }
@@ -210,7 +210,7 @@ export default {
         initialise () {
             this.showErrorPage = false;
             this.validateProperty(this.returnUrl, 'returnUrl', RETURN_URL_REGEX);
-            this.validateProperty(this.email.toLowerCase(), 'email', EMAIL_RFC5322_REGEX);
+            this.validateProperty(this.email?.toLowerCase(), 'email', EMAIL_RFC5322_REGEX);
             this.validateProperty(this.code, 'code', MFA_CODE_REGEX);
 
             if (this.showErrorPage) {
@@ -246,7 +246,7 @@ export default {
                     validateUrl: this.validateUrl
                 })).postValidateMfaToken({ mfa_token: this.code, otp: this.otp.toUpperCase() }); // eslint-disable-line camelcase
                 this.$gtm.pushEvent(buildEvent(MFA_SUCCESS));
-                this.emitRedirectEvent(this.returnUrl); // Completed successfully, emit redirect return url
+                this.emitRedirectEvent(this.returnUrl || '/'); // Completed successfully, emit redirect return url
             } catch (error) {
                 this.hasSubmitError = true;
                 if (error.response && error.response.status) {
@@ -291,7 +291,7 @@ export default {
         * @param {object} regex - The regex to validate the value against.
         */
         validateProperty (value, propertyName, regex) {
-            if (!regex.test(value)) {
+            if ([null, undefined].includes(value) || !regex.test(value)) {
                 this.showErrorPage = true;
                 this.$log.warn(`Error validating mfa property '${propertyName}' - Regex Failed`, standardLogTags);
             }

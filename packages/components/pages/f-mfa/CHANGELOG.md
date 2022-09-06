@@ -12,6 +12,7 @@ v0.14.0
 - Only make a new API call if there isn't one already in flight.
 - Move query string validation from CSR to SSR.
 - Logs for 400/429 errors to warnings.
+- Protect against null/undefined query string values.
 
 
 v0.13.0
