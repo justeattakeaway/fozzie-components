@@ -21,7 +21,7 @@ const messages = {
         instructionsPoint2Text: 'Check your spam folder',
         instructionsPoint3Text: 'Try logging in another way',
         instructionsPoint4Text: 'See our {0} if you still need help',
-        instructionsHelpLink: 'https://www.just-eat.co.uk/help/section/201054682/how-do-i-use-this-just-eat-thing',
+        instructionsHelpLink: 'https://www.just-eat.co.uk/help/article/6620525642013/why-am-i-sometimes-asked-to-enter-a-verification-code-when-using-just-eat',
         instructionsHelpText: 'FAQs',
         primaryButtonText: 'Got it',
         secondaryButtonText: 'Log in another way'
