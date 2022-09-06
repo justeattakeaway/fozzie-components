@@ -10,6 +10,7 @@ v0.13.0
 
 ### Changed
 - Clear the opt field on mount().
+- New FAQ url
 
 v0.12.0
 ------------------------------
