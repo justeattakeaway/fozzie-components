@@ -67,6 +67,9 @@ jobs:
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
       run: yarn build --cache-dir=".turbo"
+    # Lint components
+    - name: Lint Components
+      run: yarn lint --concurrency=10
     # Build Storybook
     - name: Storybook Build
       run: yarn storybook:build
@@ -82,13 +85,12 @@ jobs:
           storybook-cache-${{ github.ref }}
           storybook-cache-
 
-
-
-  browser-tests:
+  tests:
     strategy:
       fail-fast: false
       matrix:
-        component-type: ['atoms', 'molecules', 'organisms' , 'pages']
+        component-type: ['atoms', 'molecules', 'organisms' , 'pages', 'templates', 'tools', 'services']
+    name: tests-${{ matrix.component-type }}
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -122,8 +124,12 @@ jobs:
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
       run: yarn build --cache-dir=".turbo"
+    # Unit Test components.
+    - name: Unit Test Components
+      run: yarn ci:test:${{ matrix.component-type}} --concurrency=10
     # Restore Storybook 'storybook-static'
     - name: Cache Storybook Static Directory
+      if: matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages'
       id: storybook-cache
       uses: actions/cache@v2
       with:
@@ -135,6 +141,7 @@ jobs:
           storybook-cache-
     # Run Component / A11y / Visual Tests
     - name: Run Component / A11y / Visual Tests
+      if: matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages'
       run: |
         yarn storybook:serve-static &
         yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&

@@ -195,7 +195,11 @@ export default {
     },
 
     created () {
-        this.initialise();
+        this.initialise(); // Query string validation should happen during SSR to prevent reflecting malicious input
+    },
+
+    mounted () {
+        this.otp = ''; // Clear the field
     },
 
     methods: {

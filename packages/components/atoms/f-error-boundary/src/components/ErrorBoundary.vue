@@ -46,6 +46,7 @@ export default {
             this.info = info;
 
             this.$emit('on-error', {
+                hasError: this.hasError,
                 error,
                 vm,
                 info,
