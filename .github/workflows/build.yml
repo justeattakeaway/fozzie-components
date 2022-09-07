@@ -37,6 +37,8 @@ jobs:
   danger:
     needs: install
     runs-on: ubuntu-latest
+    permissions: 
+      pull-requests: write
     steps:
     # Checkout the Repo
     - name: Checkout
