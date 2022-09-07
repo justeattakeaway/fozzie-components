@@ -107,8 +107,8 @@ export default {
     padding: f.spacing(c) f.spacing(d) f.spacing(c) 0;
 
     &:focus {
-            outline-color: common.$nav-link-focus-color;
-            border-radius: 0;
+        outline-color: common.$nav-link-focus-color;
+        border-radius: 0;
     }
 
     &:hover {
@@ -118,6 +118,10 @@ export default {
     &:active {
         background: f.$color-container-strong;
     }
+
+    @include f.media('>mid') {
+        padding: 0;
+    }
 }
 
 .c-user-list-link {
@@ -126,7 +130,8 @@ export default {
     @include f.font-size(common.$nav-text-size);
 
     @include f.media('>mid') {
-        padding-left: f.spacing(d);
+        display: block;
+        padding: 12px f.spacing(d);
     }
 }
 </style>
