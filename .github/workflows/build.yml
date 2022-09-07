@@ -59,6 +59,8 @@ jobs:
     # Run Danger Checks
     - name: Run Danger Checks
       run: yarn danger ci --failOnErrors
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build:
     needs: install
