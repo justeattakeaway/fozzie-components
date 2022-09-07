@@ -107,7 +107,7 @@ export default {
 
     computed: {
         loginLinkWithReturnUrl () {
-            return `/account/login?returnUrl=${encodeURIComponent(this.returnUrl)}`;
+            return `/account/login?returnUrl=${encodeURIComponent(this.returnUrl || '/')}`;
         }
     },
 
