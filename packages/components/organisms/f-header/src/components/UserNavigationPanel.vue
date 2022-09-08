@@ -131,7 +131,7 @@ export default {
 
     @include f.media('>mid') {
         display: block;
-        padding: 12px f.spacing(d);
+        padding: f.spacing(c) f.spacing(d);
     }
 }
 </style>
