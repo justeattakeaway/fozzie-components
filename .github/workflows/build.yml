@@ -57,10 +57,10 @@ jobs:
         path: '**/node_modules'
         key: node-modules-${{ hashFiles('**/yarn.lock') }}
     # Run Danger Checks
-    - name: Run Danger Checks
-      run: yarn danger ci --failOnErrors
+    - name: Danger CI
+      uses: vtex/danger@master
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 
   build:
     needs: install
