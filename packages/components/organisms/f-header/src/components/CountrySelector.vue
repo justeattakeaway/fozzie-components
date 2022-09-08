@@ -127,6 +127,7 @@ export default {
     padding: f.spacing(c) f.spacing(c);
     margin-top: f.spacing(d);
     margin-bottom: f.spacing(d);
+    cursor: pointer;
 
     @include f.media('<=mid') {
         width: 100%;
