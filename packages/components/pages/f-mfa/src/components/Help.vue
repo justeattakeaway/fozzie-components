@@ -29,10 +29,14 @@
                     <i18n
                         path="helpInfo.instructionsPoint4Text"
                         tag="li">
-                        <a
+                        <f-link
                             data-test-id="f-mfa-help-faq-link"
-                            :href="$t('helpInfo.instructionsHelpLink')">
-                            <strong>{{ $t('helpInfo.instructionsHelpText') }}</strong></a>
+                            :href="$t('helpInfo.instructionsHelpLink')"
+                            is-bold
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            <span>{{ $t('helpInfo.instructionsHelpText') }}</span>
+                        </f-link>
                     </i18n>
                 </ul>
 
@@ -63,14 +67,14 @@
 <script>
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 
+import { BagSadBgIcon } from '@justeat/f-vue-icons';
 import FCard from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
+import FLink from '@justeat/f-link';
+import '@justeat/f-link/dist/f-link.css';
 
-import {
-    BagSadBgIcon
-} from '@justeat/f-vue-icons';
 import tenantConfigs from '../tenants';
 import {
     buildEvent,
@@ -81,9 +85,10 @@ export default {
     name: 'VMfa',
 
     components: {
+        BagSadBgIcon,
         FCard,
         FButton,
-        BagSadBgIcon
+        FLink
     },
 
     mixins: [VueGlobalisationMixin],
