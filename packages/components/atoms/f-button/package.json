@@ -2,12 +2,14 @@
   "name": "@justeat/f-button",
   "description": "Fozzie Button – The generic button component",
   "version": "4.3.0",
-  "main": "dist/f-button.umd.min.js",
+  "main": "dist/f-button.umd.js",
+  "module": "dist/f-button.es.js",
   "maxBundleSize": "5kB",
   "files": [
     "dist",
     "test-utils"
   ],
+  "sideEffects": false,
   "publishConfig": {
     "access": "public"
   },
@@ -31,7 +33,7 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-button ./src/index.js",
+    "build": "vite build",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "lint:style": "stylelint ./src/**/*.{vue,htm,html,css,sss,less,scss}",
@@ -60,12 +62,13 @@
     "vue-router": ">=3.4.8"
   },
   "devDependencies": {
-    "@justeattakeaway/pie-icons-vue": "1.0.0",
-    "@justeat/fozzie": "9.0.0-beta.2",
     "@justeat/f-wdio-utils": "1.x",
+    "@justeat/fozzie": "9.3.1",
+    "@justeattakeaway/pie-icons-vue": "1.0.0",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3",
+    "vite-plugin-vue2": "2.0.2",
     "vue-router": "3.5.2"
   }
 }
