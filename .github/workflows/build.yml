@@ -7,6 +7,7 @@ on:
   push:
     branches: 
     - master
+    - storybook-gh-actions-fix
 
 jobs:
   install:
@@ -162,7 +163,6 @@ jobs:
   storybook-deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/master' }}
     steps:
     # Checkout the Repo
     - name: Checkout
@@ -208,8 +208,6 @@ jobs:
           storybook-cache-
     # Deploy Storybook
     - name: Storybook deploy
-      run: |
-        git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-        yarn storybook:deploy
+      run: yarn storybook:deploy
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
