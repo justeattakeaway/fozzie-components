@@ -216,7 +216,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish:
-      needs: storybook-deploy
+      needs: ['tests-atoms', 'tests-molecules', 'tests-organisms' , 'tests-pages', 'tests-templates', 'tests-tools', 'tests-services']
       runs-on: ubuntu-latest
       if: ${{ github.ref == 'refs/heads/master' }}
       steps:
@@ -234,10 +234,6 @@ jobs:
           with:
             path: '**/node_modules'
             key: node-modules-${{ hashFiles('**/yarn.lock') }}
-        # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible
-        - name: Install Dependencies
-          if: steps.cache-node-modules.outputs.cache-hit != 'true'
-          run: yarn --prefer-offline
         # Restore Cache - Turborepo Dist
         - name: Cache Turborepo Dist
           id: turborepo-dist-cache
@@ -249,7 +245,7 @@ jobs:
             restore-keys: |
               turborepo-dist-cache-${{ github.ref }}
               turborepo-dist-cache-
-        - run: npm test
+        - run: yarn build
         - uses: JS-DevTools/npm-publish@v1
           with:
             token: ${{ secrets.NPM_TOKEN }}
