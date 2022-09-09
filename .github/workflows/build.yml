@@ -60,10 +60,10 @@ jobs:
       uses: actions/cache@v2
       with:
         path: .turbo
-        key: turborepo-dist-cache-${{ github.ref }}-${{ github.sha }}
+        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.sha }}
         # Use one of the following keys if the above is not found.
         restore-keys: |
-          turborepo-dist-cache-${{ github.ref }}
+          turborepo-dist-cache-${{ github.ref_name }}
           turborepo-dist-cache-
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
@@ -80,10 +80,10 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ./packages/storybook/storybook-static
-        key: storybook-cache-${{ github.ref }}-${{ github.sha }}
+        key: storybook-cache-${{ github.ref_name }}-${{ github.sha }}
         # Use one of the following keys if the above is not found.
         restore-keys: |
-          storybook-cache-${{ github.ref }}
+          storybook-cache-${{ github.ref_name }}
           storybook-cache-
 
   tests:
@@ -117,10 +117,10 @@ jobs:
       uses: actions/cache@v2
       with:
         path: .turbo
-        key: turborepo-dist-cache-${{ github.ref }}-${{ github.sha }}
+        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.sha }}
         # Use one of the following keys if the above is not found.
         restore-keys: |
-          turborepo-dist-cache-${{ github.ref }}
+          turborepo-dist-cache-${{ github.ref_name }}
           turborepo-dist-cache-
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
@@ -135,10 +135,10 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ./packages/storybook/storybook-static
-        key: storybook-cache-${{ github.ref }}-${{ github.sha }}
+        key: storybook-cache-${{ github.ref_name }}-${{ github.sha }}
         # Use one of the following keys if the above is not found.
         restore-keys: |
-          storybook-cache-${{ github.ref }}
+          storybook-cache-${{ github.ref_name }}
           storybook-cache-
     # Run Component / A11y / Visual Tests
     - name: Run Component / A11y / Visual Tests
@@ -190,10 +190,10 @@ jobs:
       uses: actions/cache@v2
       with:
         path: .turbo
-        key: turborepo-dist-cache-${{ github.ref }}-${{ github.sha }}
+        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.sha }}
         # Use one of the following keys if the above is not found.
         restore-keys: |
-          turborepo-dist-cache-${{ github.ref }}
+          turborepo-dist-cache-${{ github.ref_name }}
           turborepo-dist-cache-
     # Restore Storybook 'storybook-static'
     - name: Cache Storybook Static Directory
@@ -201,10 +201,10 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ./packages/storybook/storybook-static
-        key: storybook-cache-${{ github.ref }}-${{ github.sha }}
+        key: storybook-cache-${{ github.ref_name }}-${{ github.sha }}
         # Use one of the following keys if the above is not found.
         restore-keys: |
-          storybook-cache-${{ github.ref }}
+          storybook-cache-${{ github.ref_name }}
           storybook-cache-
     # Deploy Storybook
     - name: Storybook deploy
