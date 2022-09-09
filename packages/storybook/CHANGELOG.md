@@ -10,6 +10,7 @@ v0.57.0
 ### Changed
 - Dependency to old `@storybook/storybook-deployer` implementation as it has better stability in GH Actions.
 
+
 v0.56.0
 ------------------------------
 *August 16, 2022*
