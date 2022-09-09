@@ -134,7 +134,7 @@ describe('Mfa', () => {
         expect(button.attributes('disabled')).toBe(expected);
     });
 
-    describe('When calling the initialise() method', () => {
+    describe('When creating the component', () => {
         it('should log success if valid props supplied', async () => {
             // Act
             wrapper = await mountSut();
