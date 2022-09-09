@@ -216,7 +216,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish:
-      needs: [tests-atoms, tests-molecules, tests-organisms , tests-pages, tests-templates, tests-tools, tests-services]
+      needs: tests
       runs-on: ubuntu-latest
       if: ${{ github.ref == 'refs/heads/master' }}
       steps:
