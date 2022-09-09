@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.17.0
 ------------------------------
-*September 9, 2022*
+*September 12, 2022*
 
 ### Fixed
 - Handling of returnUrl. If missing or invalid, return users to the homepage.
