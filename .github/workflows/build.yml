@@ -80,7 +80,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ./packages/storybook/storybook-static
-        key: storybook-cache-${{ github.ref_name }}-${{ github.sha }}
+        key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
         # Use one of the following keys if the above is not found.
         restore-keys: |
           storybook-cache-${{ github.ref_name }}
@@ -135,7 +135,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ./packages/storybook/storybook-static
-        key: storybook-cache-${{ github.ref_name }}-${{ github.sha }}
+        key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
         # Use one of the following keys if the above is not found.
         restore-keys: |
           storybook-cache-${{ github.ref_name }}
@@ -201,7 +201,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ./packages/storybook/storybook-static
-        key: storybook-cache-${{ github.ref_name }}-${{ github.sha }}
+        key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
         # Use one of the following keys if the above is not found.
         restore-keys: |
           storybook-cache-${{ github.ref_name }}
