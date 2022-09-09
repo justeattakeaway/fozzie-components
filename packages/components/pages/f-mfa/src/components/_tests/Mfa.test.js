@@ -142,11 +142,10 @@ describe('Mfa', () => {
             // Assert
             expect(infoLogSpy).toHaveBeenCalledTimes(1);
             expect(infoLogSpy).toHaveBeenCalledWith('MFA page loaded successfully');
-            expect(pushEventSpy).toMatchSnapshot();
+            expect(pushEventSpy.mock.calls).toMatchSnapshot();
         });
 
         it.each([
-            ['returnUrl', 'https://www.somebadplace.co.uk?returnUrl=nottheplace/i/came/from'],
             ['email', 'mysite..123@hemail.b'],
             ['code', 'ABCDEabcde012345'], // Too short
             ['code', 'ABCDEFG%abcdefg/+=0123456789'], // Illegal characters
@@ -167,7 +166,33 @@ describe('Mfa', () => {
             expect(warnLogSpy).toHaveBeenCalledTimes(2);
             expect(warnLogSpy).toHaveBeenCalledWith(`Error validating mfa property '${key}' - Regex Failed`, ['account-pages', 'mfa']);
             expect(warnLogSpy).toHaveBeenCalledWith('Error loading MFA page');
-            expect(pushEventSpy).toMatchSnapshot();
+            expect(pushEventSpy.mock.calls).toMatchSnapshot();
+        });
+
+        it.each([
+            'https://www.somebadplace.co.uk?returnUrl=nottheplace/i/came/from',
+            'google.com',
+            '%2Faccount%2Flogin%26returnUrl%3Dgoogle.com',
+            null,
+            ''
+        ])('should log a warning but NOT show the error page if the returnUrl validation fails', async value => {
+            // Arrange
+            const propsData = {
+                ...sutProps,
+                returnUrl: value
+            };
+
+            // Act
+            wrapper = await mountSut({ propsData });
+            const errorCard = wrapper.find('[data-test-id="v-mfa-error-component"]');
+
+            // Assert
+            expect(errorCard.exists()).toBe(false);
+            expect(wrapper.vm.validatedReturnUrl).toBe('/');
+
+            expect(warnLogSpy).toHaveBeenCalledTimes(1);
+            expect(warnLogSpy).toHaveBeenCalledWith("Error validating mfa property 'returnUrl' - Regex Failed", ['account-pages', 'mfa']);
+            expect(pushEventSpy.mock.calls).toMatchSnapshot();
         });
 
         it.each([
@@ -187,7 +212,7 @@ describe('Mfa', () => {
             expect(warnLogSpy).toHaveBeenCalledTimes(2);
             expect(warnLogSpy).toHaveBeenCalledWith(`Error validating mfa property '${key}' - Regex Failed`, ['account-pages', 'mfa']);
             expect(warnLogSpy).toHaveBeenCalledWith('Error loading MFA page');
-            expect(pushEventSpy).toMatchSnapshot();
+            expect(pushEventSpy.mock.calls).toMatchSnapshot();
         });
 
         it('should set the default for returnUrl if not supplied', async () => {
@@ -202,11 +227,11 @@ describe('Mfa', () => {
             // Assert
             const errorCard = wrapper.find('[data-test-id="v-mfa-error-component"]');
             expect(errorCard.exists()).toBe(false);
-            expect(wrapper.vm.returnUrl).toBe(expected);
+            expect(wrapper.vm.validatedReturnUrl).toBe(expected);
 
             expect(infoLogSpy).toHaveBeenCalledTimes(1);
             expect(infoLogSpy).toHaveBeenCalledWith('MFA page loaded successfully');
-            expect(pushEventSpy).toMatchSnapshot();
+            expect(pushEventSpy.mock.calls).toMatchSnapshot();
         });
     });
 
@@ -226,7 +251,7 @@ describe('Mfa', () => {
 
             // Assert
             expect(mockPostValidateMfaToken).toHaveBeenCalledWith(expectedParams);
-            expect(pushEventSpy).toMatchSnapshot();
+            expect(pushEventSpy.mock.calls).toMatchSnapshot();
         });
 
         describe('And the submitting of the form data was unsuccessful', () => {
@@ -247,7 +272,7 @@ describe('Mfa', () => {
                 // Assert
                 expect(warnLogSpy).toHaveBeenCalledWith(logMessage, errLogged, ['account-pages', 'mfa']);
                 expect(wrapper.vm.isSubmitting).toBe(false);
-                expect(pushEventSpy).toMatchSnapshot();
+                expect(pushEventSpy.mock.calls).toMatchSnapshot();
             });
         });
 
@@ -264,7 +289,7 @@ describe('Mfa', () => {
 
                 expect(wrapper.emitted()[REDIRECT_URL_EVENT_NAME][0]).toEqual([expectedUrl]);
                 expect(wrapper.vm.isSubmitting).toBe(false);
-                expect(pushEventSpy).toMatchSnapshot();
+                expect(pushEventSpy.mock.calls).toMatchSnapshot();
             });
         });
 

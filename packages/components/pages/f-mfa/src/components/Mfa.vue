@@ -78,7 +78,7 @@
         <help-info
             v-else-if="showHelpInfo"
             :email="email"
-            :return-url="returnUrl"
+            :return-url="validatedReturnUrl"
             @primary-button-click="onHideHelpInfo" />
 
         <f-card-with-content
@@ -178,7 +178,8 @@ export default {
             showHelpInfo: false,
             showErrorPage: false,
             hasSubmitError: false,
-            tenantConfigs
+            tenantConfigs,
+            validatedReturnUrl: '/'
         };
     },
 
@@ -189,7 +190,7 @@ export default {
 
         errorPrimaryButton () {
             return {
-                href: this.cleanUrl(this.returnUrl || '/'),
+                href: this.cleanUrl(this.validatedReturnUrl),
                 text: this.$t('errorMessages.loading.primaryButtonText')
             };
         }
@@ -209,10 +210,14 @@ export default {
         * Validates the returnUrl, email & code properties.
         */
         initialise () {
-            this.showErrorPage = false;
-            this.validateProperty(this.returnUrl, 'returnUrl', RETURN_URL_REGEX);
-            this.validateProperty(this.email?.toLowerCase(), 'email', EMAIL_RFC5322_REGEX);
-            this.validateProperty(this.code, 'code', MFA_CODE_REGEX);
+            this.validateProperty(this.email?.toLowerCase(), 'email', EMAIL_RFC5322_REGEX, true);
+            this.validateProperty(this.code, 'code', MFA_CODE_REGEX, true);
+
+            const isReturnUrlValid = this.validateProperty(this.returnUrl, 'returnUrl', RETURN_URL_REGEX, false);
+
+            if (isReturnUrlValid) {
+                this.validatedReturnUrl = this.returnUrl;
+            }
 
             if (this.showErrorPage) {
                 this.$log.warn('Error loading MFA page');
@@ -247,7 +252,7 @@ export default {
                     validateUrl: this.validateUrl
                 })).postValidateMfaToken({ mfa_token: this.code, otp: this.otp.toUpperCase() }); // eslint-disable-line camelcase
                 this.$gtm.pushEvent(buildEvent(MFA_SUCCESS));
-                this.emitRedirectEvent(this.returnUrl || '/'); // Completed successfully, emit redirect return url
+                this.emitRedirectEvent(this.validatedReturnUrl);
             } catch (error) {
                 this.hasSubmitError = true;
                 if (error.response && error.response.status) {
@@ -286,16 +291,24 @@ export default {
 
         /**
         * If no error has already occurred it validates the props based on the regex provided.
-        * If the prop value is not valid, the showErrorPage flag is raised and the issue is logged.
+        * If the prop value is not valid, the issue is logged. Additionally, if errorOnFail is true, the showErrorPage flag is raised.
         *
-        * @param {string} prop - The prop value to validate.
+        * @param {string} value - The prop value to validate.
+        * @param {string} propertyName - The name of the property to validate.
         * @param {object} regex - The regex to validate the value against.
+        * @param {boolean} errorOnFail - If the validation fails, should the error page be shown?
+        * @returns {boolean} - Whether or not the property's value is valid.
         */
-        validateProperty (value, propertyName, regex) {
-            if ([null, undefined].includes(value) || !regex.test(value)) {
-                this.showErrorPage = true;
+        validateProperty (value, propertyName, regex, errorOnFail = true) {
+            if (!value || !regex.test(value)) {
+                if (errorOnFail) {
+                    this.showErrorPage = true;
+                }
+
                 this.$log.warn(`Error validating mfa property '${propertyName}' - Regex Failed`, standardLogTags);
+                return false;
             }
+            return true;
         },
 
         /**
