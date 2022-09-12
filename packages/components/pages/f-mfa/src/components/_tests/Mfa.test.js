@@ -102,6 +102,92 @@ describe('Mfa', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
+    describe('validatedReturnUrl', () => {
+        it('should prepend a forward slash if there isn\'t one already', async () => {
+            // Arrange
+            const returnUrl = 'forward-slash';
+
+            // Act
+            wrapper = await mountSut({
+                propsData: {
+                    ...sutProps,
+                    returnUrl
+                }
+            });
+
+            // Assert
+            expect(wrapper.vm.validatedReturnUrl).toBe('/forward-slash');
+        });
+
+        it('should not prepend a forward-slash if there already is one', async () => {
+            // Arrange
+            const returnUrl = '/forward-slash';
+
+            // Act
+            wrapper = await mountSut({
+                propsData: {
+                    ...sutProps,
+                    returnUrl
+                }
+            });
+
+            // Assert
+            expect(wrapper.vm.validatedReturnUrl).toBe('/forward-slash');
+        });
+
+        it('should trim whitespace', async () => {
+            // Arrange
+            const returnUrl = '  /spacing   ';
+
+            // Act
+            wrapper = await mountSut({
+                propsData: {
+                    ...sutProps,
+                    returnUrl
+                }
+            });
+
+            // Assert
+            expect(wrapper.vm.validatedReturnUrl).toBe('/spacing');
+        });
+
+        it('should default to the homepage if returnUrl is invalid', async () => {
+            // Arrange
+            const returnUrl = '<script>alert("test");</script>';
+
+            // Act
+            wrapper = await mountSut({
+                propsData: {
+                    ...sutProps,
+                    returnUrl
+                }
+            });
+
+            // Assert
+            expect(wrapper.vm.validatedReturnUrl).toBe('/');
+        });
+
+        it('should log a warning if returnUrl is invalid', async () => {
+            // Arrange
+            const returnUrl = '<script>alert("test");</script>';
+
+            // Act
+            wrapper = await mountSut({
+                propsData: {
+                    ...sutProps,
+                    returnUrl
+                }
+            });
+
+            // Assert
+            expect(warnLogSpy).toHaveBeenCalledTimes(1);
+            expect(warnLogSpy).toHaveBeenCalledWith(
+                "Error validating mfa property 'returnUrl' - Regex Failed",
+                ['account-pages', 'mfa']
+            );
+        });
+    });
+
     it.each`
         pageName          | selector                    | showErrorPage | showHelpInfo
         ${'verification'} | ${'v-mfa-component'}        | ${false}      | ${false}

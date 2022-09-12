@@ -165,8 +165,9 @@ export default {
             type: String,
             default: ''
         },
-        // Please use the computed property validatedReturnUrl
         returnUrl: {
+            // Please use the data property validatedReturnUrl,
+            // which gets populated on component creation
             type: String,
             default: '/'
         }
@@ -179,7 +180,8 @@ export default {
             showHelpInfo: false,
             showErrorPage: false,
             hasSubmitError: false,
-            tenantConfigs
+            tenantConfigs,
+            validatedReturnUrl: '/'
         };
     },
 
@@ -193,16 +195,6 @@ export default {
                 href: this.validatedReturnUrl,
                 text: this.$t('errorMessages.loading.primaryButtonText')
             };
-        },
-
-        validatedReturnUrl () {
-            const isReturnUrlValid = this.isPropertyValid(this.returnUrl, 'returnUrl', RETURN_URL_REGEX);
-            if (!isReturnUrlValid) {
-                return '/';
-            }
-
-            const trimmedReturnUrl = this.returnUrl.trim();
-            return trimmedReturnUrl.charAt(0) === '/' ? trimmedReturnUrl : `/${trimmedReturnUrl}`;
         }
     },
 
@@ -219,6 +211,8 @@ export default {
             this.$log.warn('Error loading MFA page');
             this.$gtm.pushEvent(buildEvent(ERROR_VISIBLE));
         }
+
+        this.validatedReturnUrl = this.getValidatedReturnUrl();
     },
 
     methods: {
@@ -271,6 +265,16 @@ export default {
             } finally {
                 this.isSubmitting = false;
             }
+        },
+
+        getValidatedReturnUrl () {
+            const isReturnUrlValid = this.isPropertyValid(this.returnUrl, 'returnUrl', RETURN_URL_REGEX);
+            if (!isReturnUrlValid) {
+                return '/';
+            }
+
+            const trimmedReturnUrl = this.returnUrl.trim();
+            return trimmedReturnUrl.charAt(0) === '/' ? trimmedReturnUrl : `/${trimmedReturnUrl}`;
         },
 
         onHideHelpInfo () {
