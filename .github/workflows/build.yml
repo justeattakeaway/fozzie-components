@@ -71,9 +71,6 @@ jobs:
     # Lint components
     - name: Lint Components
       run: yarn lint --concurrency=10
-    # Build Storybook
-    - name: Storybook Build
-      run: yarn storybook:build
     # Cache 'storybook-static'
     - name: Cache Storybook Static Directory
       id: storybook-cache
@@ -85,6 +82,10 @@ jobs:
         restore-keys: |
           storybook-cache-${{ github.ref_name }}
           storybook-cache-
+    # Build Storybook
+    - name: Storybook Build
+      if: steps.storybook-cache.outputs.cache-hit != 'true'
+      run: yarn storybook:build
 
   tests:
     strategy:
