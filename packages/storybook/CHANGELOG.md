@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.57.0
+------------------------------
+*September 12, 2022*
+
+### Changed
+- Dependency to old `@storybook/storybook-deployer` implementation as it has better stability in GH Actions.
+
 
 v0.56.0
 ------------------------------
