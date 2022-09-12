@@ -51,6 +51,7 @@ describe('Regex :: ', () => {
         it.each([
             'deliveroo.com',
             '<script>alert("test")</script>',
+            '%3Cscript%3Ealert(%22test%22)%3C%2Fscript%3E',
             "%253Cscript%253Ealert('XSS')%253C%252Fscript%253E",
             "%253cscript%253ealert('XSS')%253c%252fscript%253e",
             '%253c',
