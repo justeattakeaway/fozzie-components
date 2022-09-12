@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.57.0
 ------------------------------
-*September 9, 2022*
+*September 12, 2022*
 
 ### Changed
 - Dependency to old `@storybook/storybook-deployer` implementation as it has better stability in GH Actions.

@@ -78,10 +78,6 @@ jobs:
       with:
         path: ./packages/storybook/storybook-static
         key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
-        # Use one of the following keys if the above is not found.
-        restore-keys: |
-          storybook-cache-${{ github.ref_name }}
-          storybook-cache-
     # Build Storybook
     - name: Storybook Build
       if: steps.storybook-cache.outputs.cache-hit != 'true'
@@ -137,10 +133,6 @@ jobs:
       with:
         path: ./packages/storybook/storybook-static
         key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
-        # Use one of the following keys if the above is not found.
-        restore-keys: |
-          storybook-cache-${{ github.ref_name }}
-          storybook-cache-
     # Run Component / A11y / Visual Tests
     - name: Run Component / A11y / Visual Tests
       if: matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages'
@@ -203,10 +195,6 @@ jobs:
       with:
         path: ./packages/storybook/storybook-static
         key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
-        # Use one of the following keys if the above is not found.
-        restore-keys: |
-          storybook-cache-${{ github.ref_name }}
-          storybook-cache-
     # Deploy Storybook
     - name: Storybook deploy
       run: yarn storybook:deploy

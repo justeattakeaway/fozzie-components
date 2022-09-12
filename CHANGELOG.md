@@ -5,10 +5,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.28.1
 ------------------------------
-*September 9, 2022*
+*September 12, 2022*
 
 ### Fixed
 - Environment variable used for cache keys in GH Actions config.
+- Incorrect Storybook cache being pulled.
 
 
 v7.28.0
