@@ -60,10 +60,10 @@ jobs:
       uses: actions/cache@v2
       with:
         path: .turbo
-        key: turborepo-dist-cache-${{ github.ref }}-${{ github.sha }}
+        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.sha }}
         # Use one of the following keys if the above is not found.
         restore-keys: |
-          turborepo-dist-cache-${{ github.ref }}
+          turborepo-dist-cache-${{ github.ref_name }}
           turborepo-dist-cache-
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
@@ -71,20 +71,17 @@ jobs:
     # Lint components
     - name: Lint Components
       run: yarn lint --concurrency=10
-    # Build Storybook
-    - name: Storybook Build
-      run: yarn storybook:build
     # Cache 'storybook-static'
     - name: Cache Storybook Static Directory
       id: storybook-cache
       uses: actions/cache@v2
       with:
         path: ./packages/storybook/storybook-static
-        key: storybook-cache-${{ github.ref }}-${{ github.sha }}
-        # Use one of the following keys if the above is not found.
-        restore-keys: |
-          storybook-cache-${{ github.ref }}
-          storybook-cache-
+        key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
+    # Build Storybook
+    - name: Storybook Build
+      if: steps.storybook-cache.outputs.cache-hit != 'true'
+      run: yarn storybook:build
 
   tests:
     strategy:
@@ -117,10 +114,10 @@ jobs:
       uses: actions/cache@v2
       with:
         path: .turbo
-        key: turborepo-dist-cache-${{ github.ref }}-${{ github.sha }}
+        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.sha }}
         # Use one of the following keys if the above is not found.
         restore-keys: |
-          turborepo-dist-cache-${{ github.ref }}
+          turborepo-dist-cache-${{ github.ref_name }}
           turborepo-dist-cache-
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
@@ -135,11 +132,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ./packages/storybook/storybook-static
-        key: storybook-cache-${{ github.ref }}-${{ github.sha }}
-        # Use one of the following keys if the above is not found.
-        restore-keys: |
-          storybook-cache-${{ github.ref }}
-          storybook-cache-
+        key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
     # Run Component / A11y / Visual Tests
     - name: Run Component / A11y / Visual Tests
       if: matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages'
@@ -163,7 +156,6 @@ jobs:
   storybook-deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/master' }}
     steps:
     # Checkout the Repo
     - name: Checkout
@@ -191,10 +183,10 @@ jobs:
       uses: actions/cache@v2
       with:
         path: .turbo
-        key: turborepo-dist-cache-${{ github.ref }}-${{ github.sha }}
+        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.sha }}
         # Use one of the following keys if the above is not found.
         restore-keys: |
-          turborepo-dist-cache-${{ github.ref }}
+          turborepo-dist-cache-${{ github.ref_name }}
           turborepo-dist-cache-
     # Restore Storybook 'storybook-static'
     - name: Cache Storybook Static Directory
@@ -202,51 +194,45 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ./packages/storybook/storybook-static
-        key: storybook-cache-${{ github.ref }}-${{ github.sha }}
-        # Use one of the following keys if the above is not found.
-        restore-keys: |
-          storybook-cache-${{ github.ref }}
-          storybook-cache-
+        key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
     # Deploy Storybook
     - name: Storybook deploy
-      run: |
-        git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-        yarn storybook:deploy
+      run: yarn storybook:deploy
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
 
   publish:
-      needs: tests
-      runs-on: ubuntu-latest
-      # if: ${{ github.ref == 'refs/heads/master' }}
-      steps:
-        # Checkout the Repo
-        - uses: actions/checkout@v3
-        # Setup Node 16
-        - uses: actions/setup-node@v3
-          with:
-            node-version: 16
-            cache: 'yarn'
-        # Restore node_modules - Cache should exist as one was created in previous 'install' job
-        - name: Restore Cache -  Node Modules
-          id: cache-node-modules
-          uses: actions/cache@v2
-          with:
-            path: '**/node_modules'
-            key: node-modules-${{ hashFiles('**/yarn.lock') }}
-        # Restore Cache - Turborepo Dist
-        - name: Cache Turborepo Dist
-          id: turborepo-dist-cache
-          uses: actions/cache@v2
-          with:
-            path: .turbo
-            key: turborepo-dist-cache-${{ github.ref }}-${{ github.sha }}
-            # Use one of the following keys if the above is not found.
-            restore-keys: |
-              turborepo-dist-cache-${{ github.ref }}
-              turborepo-dist-cache-
-        - run: yarn build
-        - uses: JS-DevTools/npm-publish@v1
-          with:
-            token: ${{ secrets.NPM_TOKEN }}
-            dry-run: true
+    needs: tests
+    runs-on: ubuntu-latest
+    # if: ${{ github.ref == 'refs/heads/master' }}
+    steps:
+      # Checkout the Repo
+      - uses: actions/checkout@v3
+      # Setup Node 16
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'yarn'
+      # Restore node_modules - Cache should exist as one was created in previous 'install' job
+      - name: Restore Cache -  Node Modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: node-modules-${{ hashFiles('**/yarn.lock') }}
+      # Restore Cache - Turborepo Dist
+      - name: Cache Turborepo Dist
+        id: turborepo-dist-cache
+        uses: actions/cache@v2
+        with:
+          path: .turbo
+          key: turborepo-dist-cache-${{ github.ref }}-${{ github.sha }}
+          # Use one of the following keys if the above is not found.
+          restore-keys: |
+            turborepo-dist-cache-${{ github.ref }}
+            turborepo-dist-cache-
+      - run: yarn build
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          dry-run: true
