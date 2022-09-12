@@ -7,6 +7,7 @@ on:
   push:
     branches: 
     - master
+    - danger-gh-actions
 
 jobs:
   install:
@@ -33,6 +34,34 @@ jobs:
       if: steps.cache-node-modules.outputs.cache-hit != 'true'
       run: yarn --prefer-offline
     
+  danger:
+    needs: install
+    runs-on: ubuntu-latest
+    permissions: 
+      pull-requests: write
+    steps:
+    # Checkout the Repo
+    - name: Checkout
+      uses: actions/checkout@v3
+    # Setup Node 16 
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'yarn'
+    # Restore node_modules - Cache should exist as one was created in previous 'install' job
+    - name: Cache Node Modules
+      id: cache-node-modules
+      uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: node-modules-${{ hashFiles('**/yarn.lock') }}
+    # Run Danger Checks
+    - name: Run Danger Checks
+      run: yarn danger ci --failOnErrors
+      env:
+        DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+
   build:
     needs: install
     runs-on: ubuntu-latest
@@ -81,6 +110,44 @@ jobs:
     - name: Storybook Build
       if: steps.storybook-cache.outputs.cache-hit != 'true'
       run: yarn storybook:build
+
+  bundlewatch:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the Repo
+    - name: Checkout
+      uses: actions/checkout@v3
+    # Setup Node 16 
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'yarn'
+    # Restore node_modules - Cache should exist as one was created in previous 'install' job
+    - name: Cache Node Modules
+      id: cache-node-modules
+      uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: node-modules-${{ hashFiles('**/yarn.lock') }}
+    # Restore Turborepo's component 'dist' cache - If not, cache is created at end of build.
+    - name: Cache Turborepo Dist
+      id: turborepo-dist-cache
+      uses: actions/cache@v2
+      with:
+        path: .turbo
+        key: turborepo-dist-cache-${{ github.ref }}-${{ github.sha }}
+        # Use one of the following keys if the above is not found.
+        restore-keys: |
+          turborepo-dist-cache-${{ github.ref }}
+          turborepo-dist-cache-
+    # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
+    - name: Build Components
+      run: yarn build --cache-dir=".turbo"
+    # Run Bundlewatch checks
+    - name: Run Bundlewatch checks
+      run: yarn bundlewatch
 
   tests:
     strategy:
