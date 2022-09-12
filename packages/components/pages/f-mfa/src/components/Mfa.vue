@@ -78,7 +78,7 @@
         <help-info
             v-else-if="showHelpInfo"
             :email="email"
-            :return-url="returnUrl"
+            :return-url="validatedReturnUrl"
             @primary-button-click="onHideHelpInfo" />
 
         <f-card-with-content
@@ -167,6 +167,8 @@ export default {
             default: ''
         },
         returnUrl: {
+            // Please use the data property validatedReturnUrl,
+            // which gets populated on component creation
             type: String,
             default: '/'
         }
@@ -179,7 +181,8 @@ export default {
             showHelpInfo: false,
             showErrorPage: false,
             hasSubmitError: false,
-            tenantConfigs
+            tenantConfigs,
+            validatedReturnUrl: '/'
         };
     },
 
@@ -190,40 +193,30 @@ export default {
 
         errorPrimaryButton () {
             return {
-                href: this.cleanUrl(this.returnUrl || '/'),
+                href: this.validatedReturnUrl,
                 text: this.$t('errorMessages.loading.primaryButtonText')
             };
         }
     },
 
     created () {
-        this.initialise(); // Query string validation should happen during SSR to prevent reflecting malicious input
-    },
+        // Query string validation should happen during SSR to prevent reflecting malicious input
+        const isEmailValid = this.isPropertyValid(this.email?.toLowerCase(), 'email', EMAIL_RFC5322_REGEX);
+        const isCodeValid = this.isPropertyValid(this.code, 'code', MFA_CODE_REGEX);
 
-    mounted () {
-        this.otp = ''; // Clear the field
+        if (isEmailValid && isCodeValid) {
+            this.$log.info('MFA page loaded successfully');
+            this.$gtm.pushEvent(buildEvent(MFA_VISIBLE));
+        } else {
+            this.showErrorPage = true;
+            this.$log.warn('Error loading MFA page');
+            this.$gtm.pushEvent(buildEvent(ERROR_VISIBLE));
+        }
+
+        this.validatedReturnUrl = this.getValidatedReturnUrl();
     },
 
     methods: {
-        /**
-        * Sets the showErrorPage flag to false, so it is clean before we start.
-        * Validates the returnUrl, email & code properties.
-        */
-        initialise () {
-            this.showErrorPage = false;
-            this.validateProperty(this.returnUrl, 'returnUrl', RETURN_URL_REGEX);
-            this.validateProperty(this.email?.toLowerCase(), 'email', EMAIL_RFC5322_REGEX);
-            this.validateProperty(this.code, 'code', MFA_CODE_REGEX);
-
-            if (this.showErrorPage) {
-                this.$log.warn('Error loading MFA page');
-                this.$gtm.pushEvent(buildEvent(ERROR_VISIBLE));
-            } else {
-                this.$log.info('MFA page loaded successfully');
-                this.$gtm.pushEvent(buildEvent(MFA_VISIBLE));
-            }
-        },
-
         /**
         * Raises the isSubmitting flag which disables the Submit button.
         * If the flag is already raised, do nothing.
@@ -249,7 +242,7 @@ export default {
                     validateUrl: this.validateUrl
                 })).postValidateMfaToken({ mfa_token: this.code, otp: this.otp.toUpperCase() }); // eslint-disable-line camelcase
                 this.$gtm.pushEvent(buildEvent(MFA_SUCCESS));
-                this.emitRedirectEvent(this.returnUrl || '/'); // Completed successfully, emit redirect return url
+                this.$emit(REDIRECT_URL_EVENT_NAME, this.validatedReturnUrl);
             } catch (error) {
                 this.hasSubmitError = true;
                 if (error.response && error.response.status) {
@@ -276,6 +269,16 @@ export default {
             }
         },
 
+        getValidatedReturnUrl () {
+            const isReturnUrlValid = this.isPropertyValid(this.returnUrl, 'returnUrl', RETURN_URL_REGEX);
+            if (!isReturnUrlValid) {
+                return '/';
+            }
+
+            const trimmedReturnUrl = this.returnUrl.trim();
+            return trimmedReturnUrl.charAt(0) === '/' ? trimmedReturnUrl : `/${trimmedReturnUrl}`;
+        },
+
         onHideHelpInfo () {
             this.$gtm.pushEvent(buildEvent(HELP_HIDDEN));
             this.showHelpInfo = false;
@@ -287,33 +290,20 @@ export default {
         },
 
         /**
-        * If no error has already occurred it validates the props based on the regex provided.
-        * If the prop value is not valid, the showErrorPage flag is raised and the issue is logged.
+        * Validates the given property based on the regex provided.
+        * If the value is not valid, the a warning is logged.
         *
-        * @param {string} prop - The prop value to validate.
-        * @param {object} regex - The regex to validate the value against.
+        * @param {string} value - The prop value to validate.
+        * @param {string} propertyName - The name of the property to validate, to be included in the log.
+        * @param {object} regex - The regular expression for validation.
+        * @returns {boolean} Whether or not the property's value is valid.
         */
-        validateProperty (value, propertyName, regex) {
-            if ([null, undefined].includes(value) || !regex.test(value)) {
-                this.showErrorPage = true;
+        isPropertyValid (value, propertyName, regex) {
+            if (!value || !regex.test(value)) {
                 this.$log.warn(`Error validating mfa property '${propertyName}' - Regex Failed`, standardLogTags);
+                return false;
             }
-        },
-
-        /**
-        * Emit Success Event
-        *
-        * @param {string} url - The return url
-        */
-        emitRedirectEvent (url) {
-            this.$emit(REDIRECT_URL_EVENT_NAME, this.cleanUrl(url));
-        },
-
-        cleanUrl (url) {
-            const pathRaw = url.trim();
-            const path = `${pathRaw.charAt(0) === '/' ? pathRaw : `/${pathRaw}`}`;
-
-            return path;
+            return true;
         },
 
         recordAnalytics () {
