@@ -1,8 +1,8 @@
 {
   "name": "@justeat/f-error-boundary",
   "description": "Fozzie Error Boundary - A reusable component for catching JavaScript errors and displaying fallback UIs",
-  "version": "0.3.0",
-  "main": "dist/f-error-boundary.umd.min.js",
+  "version": "0.4.0",
+  "main": "dist/f-error-boundary.umd.js",
   "module": "dist/f-error-boundary.es.js",
   "maxBundleSize": "5kB",
   "files": [

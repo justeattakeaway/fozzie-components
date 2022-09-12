@@ -5,10 +5,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.29.0
 ------------------------------
-*September 5, 2022*
+*September 12, 2022*
 
 ### Added
 - Danger / Bundlewatch checks to GitHub Actions.
+
+
+v7.28.1
+------------------------------
+*September 12, 2022*
+
+### Fixed
+- Environment variable used for cache keys in GH Actions config.
+- Incorrect Storybook cache being pulled.
 
 
 v7.28.0

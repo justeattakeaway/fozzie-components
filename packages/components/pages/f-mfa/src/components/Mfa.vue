@@ -40,7 +40,8 @@
                         required
                         :is-visually-required="false"
                         data-test-id="mfa-verification-code-textbox"
-                        maxlength="10" />
+                        maxlength="10"
+                        autocomplete="off" />
 
                     <f-alert
                         v-if="hasSubmitError"
@@ -188,14 +189,18 @@ export default {
 
         errorPrimaryButton () {
             return {
-                href: this.cleanUrl(this.returnUrl),
+                href: this.cleanUrl(this.returnUrl || '/'),
                 text: this.$t('errorMessages.loading.primaryButtonText')
             };
         }
     },
 
+    created () {
+        this.initialise(); // Query string validation should happen during SSR to prevent reflecting malicious input
+    },
+
     mounted () {
-        this.initialise();
+        this.otp = ''; // Clear the field
     },
 
     methods: {
@@ -206,7 +211,7 @@ export default {
         initialise () {
             this.showErrorPage = false;
             this.validateProperty(this.returnUrl, 'returnUrl', RETURN_URL_REGEX);
-            this.validateProperty(this.email.toLowerCase(), 'email', EMAIL_RFC5322_REGEX);
+            this.validateProperty(this.email?.toLowerCase(), 'email', EMAIL_RFC5322_REGEX);
             this.validateProperty(this.code, 'code', MFA_CODE_REGEX);
 
             if (this.showErrorPage) {
@@ -220,6 +225,7 @@ export default {
 
         /**
         * Raises the isSubmitting flag which disables the Submit button.
+        * If the flag is already raised, do nothing.
         * Sets the hasSubmitError flag to false, so it is clean before we start.
         * Posts the form data to the api.
         * Then upon success emits an event to the parent component to redirect to the supplied returnUrl.
@@ -227,6 +233,10 @@ export default {
         * true, which displays the alert message below the form field plus logs the issue.
         */
         async onFormSubmit () {
+            if (this.isSubmitting) {
+                return; // Prevents multiple requests, especially on slow networks
+            }
+
             this.isSubmitting = true;
             this.hasSubmitError = false;
 
@@ -237,7 +247,7 @@ export default {
                     validateUrl: this.validateUrl
                 })).postValidateMfaToken({ mfa_token: this.code, otp: this.otp.toUpperCase() }); // eslint-disable-line camelcase
                 this.$gtm.pushEvent(buildEvent(MFA_SUCCESS));
-                this.emitRedirectEvent(this.returnUrl); // Completed successfully, emit redirect return url
+                this.emitRedirectEvent(this.returnUrl || '/'); // Completed successfully, emit redirect return url
             } catch (error) {
                 this.hasSubmitError = true;
                 if (error.response && error.response.status) {
@@ -247,15 +257,17 @@ export default {
 
                     // Bad request
                     if (status === 400) {
-                        this.$log.error('Bad request when submitting MFA', error, standardLogTags);
+                        this.$log.warn('Bad request when submitting MFA', error, standardLogTags);
                         return;
                     }
 
                     // Too many requests
                     if (status === 429) {
-                        this.$log.error('Throttled when submitting MFA', error, standardLogTags);
+                        this.$log.warn('Throttled when submitting MFA', error, standardLogTags);
                         return;
                     }
+
+                    this.$log.error(`Unexpected ${status} response when submitting MFA`, error, standardLogTags);
                 }
             } finally {
                 this.isSubmitting = false;
@@ -280,7 +292,7 @@ export default {
         * @param {object} regex - The regex to validate the value against.
         */
         validateProperty (value, propertyName, regex) {
-            if (!regex.test(value)) {
+            if ([null, undefined].includes(value) || !regex.test(value)) {
                 this.showErrorPage = true;
                 this.$log.warn(`Error validating mfa property '${propertyName}' - Regex Failed`, standardLogTags);
             }

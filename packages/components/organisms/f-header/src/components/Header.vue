@@ -93,7 +93,7 @@ export default {
 
         orderCountUrl: {
             type: String,
-            default: '/api/analytics/ordercount'
+            default: '/analytics/ordercount'
         },
 
         showDeliveryEnquiry: {

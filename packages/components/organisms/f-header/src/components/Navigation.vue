@@ -701,6 +701,7 @@ export default {
     border: 0;
     padding: f.spacing(c) f.spacing(c);
     display: flex;
+    cursor: pointer;
 
     &:focus {
         outline-color: common.$nav-link-focus-color;

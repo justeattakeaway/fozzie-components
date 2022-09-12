@@ -245,7 +245,7 @@ describe('Mfa', () => {
                 await wrapper.vm.onFormSubmit();
 
                 // Assert
-                expect(errorLogSpy).toHaveBeenCalledWith(logMessage, errLogged, ['account-pages', 'mfa']);
+                expect(warnLogSpy).toHaveBeenCalledWith(logMessage, errLogged, ['account-pages', 'mfa']);
                 expect(wrapper.vm.isSubmitting).toBe(false);
                 expect(pushEventSpy).toMatchSnapshot();
             });
@@ -266,6 +266,29 @@ describe('Mfa', () => {
                 expect(wrapper.vm.isSubmitting).toBe(false);
                 expect(pushEventSpy).toMatchSnapshot();
             });
+        });
+
+        it('should not make another API call if `isSubmitting` is already true', async () => {
+            // Arrange
+            mockPostValidateMfaToken = jest.fn();
+            wrapper = await mountSut({
+                propsData: {
+                    ...sutProps,
+                    code: 'XYZ1234'
+                }
+            });
+            await wrapper.setData({
+                isSubmitting: true
+            });
+            pushEventSpy.mockClear();
+
+            // Act
+            await wrapper.vm.onFormSubmit();
+
+            // Assert
+            expect(mockPostValidateMfaToken).not.toHaveBeenCalled();
+            expect(pushEventSpy).not.toHaveBeenCalled();
+            expect(wrapper.vm.isSubmitting).toBe(true);
         });
     });
 });
