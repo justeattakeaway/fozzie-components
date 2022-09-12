@@ -2,6 +2,7 @@
 export const MFA_VISIBLE = 'mfa-visible';
 export const ERROR_VISIBLE = 'error-visible';
 export const ERROR_BACK = 'error-back';
+export const MFA_SUBMIT = 'mfa-submit';
 export const MFA_ERROR = 'mfa-error';
 export const MFA_SUCCESS = 'mfa-success';
 export const HELP_VISIBLE = 'help-visible';
@@ -10,84 +11,113 @@ export const HELP_LOGIN = 'help-login';
 
 export const buildEvent = (key, data = '') => {
     switch (key) {
-        case MFA_VISIBLE:
+        case MFA_VISIBLE: // Tech spec id : S1b
             return {
-                EventName: 'form_view',
-                Parameters: {
-                    component_name: 'multiFactorAuthentication',
-                    component_type: 'form',
-                    form_action: 'view'
+                event: 'form_view',
+                component: {
+                    name: 'multiFactorAuthentication',
+                    type: 'form'
+                },
+                form: {
+                    action: 'view'
                 }
             };
-        case ERROR_VISIBLE:
+        case ERROR_VISIBLE: // Tech spec id : S2
             return {
-                EventName: 'dialog_view',
-                Parameters: {
-                    component_name: 'multiFactorAuthenticationbadActor',
-                    component_type: 'dialog',
-                    dialog_action: 'view',
-                    dialog_type: 'info'
+                event: 'dialog_view',
+                component: {
+                    name: 'multiFactorAuthenticationbadActor',
+                    type: 'dialog'
+                },
+                dialog: {
+                    action: 'view',
+                    type: 'info'
                 }
             };
-        case ERROR_BACK:
+        case ERROR_BACK: // Tech spec id : S3
             return {
-                EventName: 'dialog_select',
-                Parameters: {
-                    component_name: 'multiFactorAuthenticationbadActor',
-                    component_type: 'dialog',
-                    dialog_action: 'select',
-                    dialog_type: 'info',
+                event: 'dialog_select',
+                component: {
+                    name: 'multiFactorAuthenticationbadActor',
+                    type: 'dialog'
+                },
+                dialog: {
+                    action: 'select',
+                    type: 'info',
                     dialog_buttonText: 'go back'
                 }
             };
-        case MFA_ERROR:
+        case MFA_ERROR: // Tech spec id : S4
             return {
-                EventName: 'form_error',
-                Parameters: {
-                    component_name: 'multiFactorAuthentication',
-                    component_type: 'form',
-                    form_action: 'error',
-                    error_message: data
+                event: 'form_error',
+                component: {
+                    name: 'multiFactorAuthentication',
+                    type: 'form'
+                },
+                form: {
+                    action: 'error'
+                },
+                error: {
+                    message: data
                 }
             };
-        case MFA_SUCCESS:
+        case MFA_SUBMIT: // Tech spec id : S5
             return {
-                EventName: 'form_success',
-                Parameters: {
-                    component_name: 'multiFactorAuthentication',
-                    component_type: 'form',
-                    form_action: 'success'
+                event: 'form_submit',
+                component: {
+                    name: 'multiFactorAuthentication',
+                    type: 'form'
+                },
+                form: {
+                    action: 'submit'
                 }
             };
-        case HELP_VISIBLE:
+        case MFA_SUCCESS: // Tech spec id : S6
             return {
-                EventName: 'dialog_view',
-                Parameters: {
-                    component_name: 'multiFactorAuthenticationHelp',
-                    component_type: 'dialog',
-                    dialog_action: 'view',
-                    dialog_type: 'info'
+                event: 'form_success',
+                component: {
+                    name: 'multiFactorAuthentication',
+                    type: 'form'
+                },
+                form: {
+                    action: 'success'
                 }
             };
-        case HELP_HIDDEN:
+        case HELP_VISIBLE: // Tech spec id : S7
             return {
-                EventName: 'dialog_select',
-                Parameters: {
-                    component_name: 'multiFactorAuthenticationHelp',
-                    component_type: 'dialog',
-                    dialog_action: 'select',
-                    dialog_type: 'info',
+                event: 'dialog_view',
+                component: {
+                    name: 'multiFactorAuthenticationHelp',
+                    type: 'dialog'
+                },
+                dialog: {
+                    action: 'view',
+                    type: 'info'
+                }
+            };
+        case HELP_HIDDEN: // Tech spec id : S8
+            return {
+                event: 'dialog_select',
+                component: {
+                    name: 'multiFactorAuthenticationHelp',
+                    type: 'dialog'
+                },
+                dialog: {
+                    action: 'select',
+                    type: 'info',
                     dialog_buttonText: 'got it'
                 }
             };
-        case HELP_LOGIN:
+        case HELP_LOGIN: // Tech spec id : S9
             return {
-                EventName: 'dialog_cancel',
-                Parameters: {
-                    component_name: 'multiFactorAuthenticationHelp',
-                    component_type: 'dialog',
-                    dialog_action: 'cancel',
-                    dialog_type: 'info',
+                event: 'dialog_cancel',
+                component: {
+                    name: 'multiFactorAuthenticationHelp',
+                    type: 'dialog'
+                },
+                dialog: {
+                    action: 'cancel',
+                    type: 'info',
                     dialog_buttonText: 'login a different way'
                 }
             };

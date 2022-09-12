@@ -142,7 +142,7 @@ describe('Mfa', () => {
             // Assert
             expect(infoLogSpy).toHaveBeenCalledTimes(1);
             expect(infoLogSpy).toHaveBeenCalledWith('MFA page loaded successfully');
-            expect(pushEventSpy).toMatchSnapshot();
+            expect(pushEventSpy.mock.calls).toMatchSnapshot();
         });
 
         it.each([
@@ -167,7 +167,7 @@ describe('Mfa', () => {
             expect(warnLogSpy).toHaveBeenCalledTimes(2);
             expect(warnLogSpy).toHaveBeenCalledWith(`Error validating mfa property '${key}' - Regex Failed`, ['account-pages', 'mfa']);
             expect(warnLogSpy).toHaveBeenCalledWith('Error loading MFA page');
-            expect(pushEventSpy).toMatchSnapshot();
+            expect(pushEventSpy.mock.calls).toMatchSnapshot();
         });
 
         it.each([
@@ -187,7 +187,7 @@ describe('Mfa', () => {
             expect(warnLogSpy).toHaveBeenCalledTimes(2);
             expect(warnLogSpy).toHaveBeenCalledWith(`Error validating mfa property '${key}' - Regex Failed`, ['account-pages', 'mfa']);
             expect(warnLogSpy).toHaveBeenCalledWith('Error loading MFA page');
-            expect(pushEventSpy).toMatchSnapshot();
+            expect(pushEventSpy.mock.calls).toMatchSnapshot();
         });
 
         it('should set the default for returnUrl if not supplied', async () => {
@@ -206,7 +206,7 @@ describe('Mfa', () => {
 
             expect(infoLogSpy).toHaveBeenCalledTimes(1);
             expect(infoLogSpy).toHaveBeenCalledWith('MFA page loaded successfully');
-            expect(pushEventSpy).toMatchSnapshot();
+            expect(pushEventSpy.mock.calls).toMatchSnapshot();
         });
     });
 
@@ -226,7 +226,7 @@ describe('Mfa', () => {
 
             // Assert
             expect(mockPostValidateMfaToken).toHaveBeenCalledWith(expectedParams);
-            expect(pushEventSpy).toMatchSnapshot();
+            expect(pushEventSpy.mock.calls).toMatchSnapshot();
         });
 
         describe('And the submitting of the form data was unsuccessful', () => {
@@ -247,7 +247,7 @@ describe('Mfa', () => {
                 // Assert
                 expect(warnLogSpy).toHaveBeenCalledWith(logMessage, errLogged, ['account-pages', 'mfa']);
                 expect(wrapper.vm.isSubmitting).toBe(false);
-                expect(pushEventSpy).toMatchSnapshot();
+                expect(pushEventSpy.mock.calls).toMatchSnapshot();
             });
         });
 
@@ -264,7 +264,7 @@ describe('Mfa', () => {
 
                 expect(wrapper.emitted()[REDIRECT_URL_EVENT_NAME][0]).toEqual([expectedUrl]);
                 expect(wrapper.vm.isSubmitting).toBe(false);
-                expect(pushEventSpy).toMatchSnapshot();
+                expect(pushEventSpy.mock.calls).toMatchSnapshot();
             });
         });
 

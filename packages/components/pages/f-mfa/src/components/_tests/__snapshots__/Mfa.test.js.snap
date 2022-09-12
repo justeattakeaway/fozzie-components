@@ -1,366 +1,332 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Mfa When calling the initialise() method should log success if valid props supplied 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "EventName": "form_view",
-        "Parameters": Object {
-          "component_name": "multiFactorAuthentication",
-          "component_type": "form",
-          "form_action": "view",
-        },
-      },
-    ],
-  ],
-  "results": Array [
+Array [
+  Array [
     Object {
-      "type": "return",
-      "value": undefined,
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_view",
+      "form": Object {
+        "action": "view",
+      },
     },
   ],
-}
+]
 `;
 
 exports[`Mfa When calling the initialise() method should set the default for returnUrl if not supplied 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "EventName": "form_view",
-        "Parameters": Object {
-          "component_name": "multiFactorAuthentication",
-          "component_type": "form",
-          "form_action": "view",
-        },
-      },
-    ],
-  ],
-  "results": Array [
+Array [
+  Array [
     Object {
-      "type": "return",
-      "value": undefined,
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_view",
+      "form": Object {
+        "action": "view",
+      },
     },
   ],
-}
+]
 `;
 
 exports[`Mfa When calling the initialise() method should show the error page and log warn if the code validation fails 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "EventName": "dialog_view",
-        "Parameters": Object {
-          "component_name": "multiFactorAuthenticationbadActor",
-          "component_type": "dialog",
-          "dialog_action": "view",
-          "dialog_type": "info",
-        },
-      },
-    ],
-  ],
-  "results": Array [
+Array [
+  Array [
     Object {
-      "type": "return",
-      "value": undefined,
+      "component": Object {
+        "name": "multiFactorAuthenticationbadActor",
+        "type": "dialog",
+      },
+      "dialog": Object {
+        "action": "view",
+        "type": "info",
+      },
+      "event": "dialog_view",
     },
   ],
-}
+]
 `;
 
 exports[`Mfa When calling the initialise() method should show the error page and log warn if the code validation fails 2`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "EventName": "dialog_view",
-        "Parameters": Object {
-          "component_name": "multiFactorAuthenticationbadActor",
-          "component_type": "dialog",
-          "dialog_action": "view",
-          "dialog_type": "info",
-        },
-      },
-    ],
-  ],
-  "results": Array [
+Array [
+  Array [
     Object {
-      "type": "return",
-      "value": undefined,
+      "component": Object {
+        "name": "multiFactorAuthenticationbadActor",
+        "type": "dialog",
+      },
+      "dialog": Object {
+        "action": "view",
+        "type": "info",
+      },
+      "event": "dialog_view",
     },
   ],
-}
+]
 `;
 
 exports[`Mfa When calling the initialise() method should show the error page and log warn if the code validation fails 3`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "EventName": "dialog_view",
-        "Parameters": Object {
-          "component_name": "multiFactorAuthenticationbadActor",
-          "component_type": "dialog",
-          "dialog_action": "view",
-          "dialog_type": "info",
-        },
-      },
-    ],
-  ],
-  "results": Array [
+Array [
+  Array [
     Object {
-      "type": "return",
-      "value": undefined,
+      "component": Object {
+        "name": "multiFactorAuthenticationbadActor",
+        "type": "dialog",
+      },
+      "dialog": Object {
+        "action": "view",
+        "type": "info",
+      },
+      "event": "dialog_view",
     },
   ],
-}
+]
 `;
 
 exports[`Mfa When calling the initialise() method should show the error page and log warn if the code values are missing 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "EventName": "dialog_view",
-        "Parameters": Object {
-          "component_name": "multiFactorAuthenticationbadActor",
-          "component_type": "dialog",
-          "dialog_action": "view",
-          "dialog_type": "info",
-        },
-      },
-    ],
-  ],
-  "results": Array [
+Array [
+  Array [
     Object {
-      "type": "return",
-      "value": undefined,
+      "component": Object {
+        "name": "multiFactorAuthenticationbadActor",
+        "type": "dialog",
+      },
+      "dialog": Object {
+        "action": "view",
+        "type": "info",
+      },
+      "event": "dialog_view",
     },
   ],
-}
+]
 `;
 
 exports[`Mfa When calling the initialise() method should show the error page and log warn if the email validation fails 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "EventName": "dialog_view",
-        "Parameters": Object {
-          "component_name": "multiFactorAuthenticationbadActor",
-          "component_type": "dialog",
-          "dialog_action": "view",
-          "dialog_type": "info",
-        },
-      },
-    ],
-  ],
-  "results": Array [
+Array [
+  Array [
     Object {
-      "type": "return",
-      "value": undefined,
+      "component": Object {
+        "name": "multiFactorAuthenticationbadActor",
+        "type": "dialog",
+      },
+      "dialog": Object {
+        "action": "view",
+        "type": "info",
+      },
+      "event": "dialog_view",
     },
   ],
-}
+]
 `;
 
 exports[`Mfa When calling the initialise() method should show the error page and log warn if the email values are missing 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "EventName": "dialog_view",
-        "Parameters": Object {
-          "component_name": "multiFactorAuthenticationbadActor",
-          "component_type": "dialog",
-          "dialog_action": "view",
-          "dialog_type": "info",
-        },
-      },
-    ],
-  ],
-  "results": Array [
+Array [
+  Array [
     Object {
-      "type": "return",
-      "value": undefined,
+      "component": Object {
+        "name": "multiFactorAuthenticationbadActor",
+        "type": "dialog",
+      },
+      "dialog": Object {
+        "action": "view",
+        "type": "info",
+      },
+      "event": "dialog_view",
     },
   ],
-}
+]
 `;
 
 exports[`Mfa When calling the initialise() method should show the error page and log warn if the returnUrl validation fails 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "EventName": "dialog_view",
-        "Parameters": Object {
-          "component_name": "multiFactorAuthenticationbadActor",
-          "component_type": "dialog",
-          "dialog_action": "view",
-          "dialog_type": "info",
-        },
-      },
-    ],
-  ],
-  "results": Array [
+Array [
+  Array [
     Object {
-      "type": "return",
-      "value": undefined,
+      "component": Object {
+        "name": "multiFactorAuthenticationbadActor",
+        "type": "dialog",
+      },
+      "dialog": Object {
+        "action": "view",
+        "type": "info",
+      },
+      "event": "dialog_view",
     },
   ],
-}
+]
 `;
 
 exports[`Mfa When calling the onFormSubmit() method And the submitting of the form data was successful should emit correct event if api call successful 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "EventName": "form_view",
-        "Parameters": Object {
-          "component_name": "multiFactorAuthentication",
-          "component_type": "form",
-          "form_action": "view",
-        },
-      },
-    ],
-    Array [
-      Object {
-        "EventName": "form_success",
-        "Parameters": Object {
-          "component_name": "multiFactorAuthentication",
-          "component_type": "form",
-          "form_action": "success",
-        },
-      },
-    ],
-  ],
-  "results": Array [
+Array [
+  Array [
     Object {
-      "type": "return",
-      "value": undefined,
-    },
-    Object {
-      "type": "return",
-      "value": undefined,
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_view",
+      "form": Object {
+        "action": "view",
+      },
     },
   ],
-}
+  Array [
+    Object {
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_submit",
+      "form": Object {
+        "action": "submit",
+      },
+    },
+  ],
+  Array [
+    Object {
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_success",
+      "form": Object {
+        "action": "success",
+      },
+    },
+  ],
+]
 `;
 
 exports[`Mfa When calling the onFormSubmit() method And the submitting of the form data was unsuccessful should log the error 'Bad request when submitting MFA' if the response status is '400' 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "EventName": "form_view",
-        "Parameters": Object {
-          "component_name": "multiFactorAuthentication",
-          "component_type": "form",
-          "form_action": "view",
-        },
-      },
-    ],
-    Array [
-      Object {
-        "EventName": "form_error",
-        "Parameters": Object {
-          "component_name": "multiFactorAuthentication",
-          "component_type": "form",
-          "error_message": "http error status : 400",
-          "form_action": "error",
-        },
-      },
-    ],
-  ],
-  "results": Array [
+Array [
+  Array [
     Object {
-      "type": "return",
-      "value": undefined,
-    },
-    Object {
-      "type": "return",
-      "value": undefined,
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_view",
+      "form": Object {
+        "action": "view",
+      },
     },
   ],
-}
+  Array [
+    Object {
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_submit",
+      "form": Object {
+        "action": "submit",
+      },
+    },
+  ],
+  Array [
+    Object {
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "error": Object {
+        "message": "http error status : 400",
+      },
+      "event": "form_error",
+      "form": Object {
+        "action": "error",
+      },
+    },
+  ],
+]
 `;
 
 exports[`Mfa When calling the onFormSubmit() method And the submitting of the form data was unsuccessful should log the error 'Throttled when submitting MFA' if the response status is '429' 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "EventName": "form_view",
-        "Parameters": Object {
-          "component_name": "multiFactorAuthentication",
-          "component_type": "form",
-          "form_action": "view",
-        },
-      },
-    ],
-    Array [
-      Object {
-        "EventName": "form_error",
-        "Parameters": Object {
-          "component_name": "multiFactorAuthentication",
-          "component_type": "form",
-          "error_message": "http error status : 429",
-          "form_action": "error",
-        },
-      },
-    ],
-  ],
-  "results": Array [
+Array [
+  Array [
     Object {
-      "type": "return",
-      "value": undefined,
-    },
-    Object {
-      "type": "return",
-      "value": undefined,
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_view",
+      "form": Object {
+        "action": "view",
+      },
     },
   ],
-}
+  Array [
+    Object {
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_submit",
+      "form": Object {
+        "action": "submit",
+      },
+    },
+  ],
+  Array [
+    Object {
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "error": Object {
+        "message": "http error status : 429",
+      },
+      "event": "form_error",
+      "form": Object {
+        "action": "error",
+      },
+    },
+  ],
+]
 `;
 
 exports[`Mfa When calling the onFormSubmit() method should call the postValidateMfaToken() method with the correct params 1`] = `
-[MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "EventName": "dialog_view",
-        "Parameters": Object {
-          "component_name": "multiFactorAuthenticationbadActor",
-          "component_type": "dialog",
-          "dialog_action": "view",
-          "dialog_type": "info",
-        },
-      },
-    ],
-    Array [
-      Object {
-        "EventName": "form_success",
-        "Parameters": Object {
-          "component_name": "multiFactorAuthentication",
-          "component_type": "form",
-          "form_action": "success",
-        },
-      },
-    ],
-  ],
-  "results": Array [
+Array [
+  Array [
     Object {
-      "type": "return",
-      "value": undefined,
-    },
-    Object {
-      "type": "return",
-      "value": undefined,
+      "component": Object {
+        "name": "multiFactorAuthenticationbadActor",
+        "type": "dialog",
+      },
+      "dialog": Object {
+        "action": "view",
+        "type": "info",
+      },
+      "event": "dialog_view",
     },
   ],
-}
+  Array [
+    Object {
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_submit",
+      "form": Object {
+        "action": "submit",
+      },
+    },
+  ],
+  Array [
+    Object {
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_success",
+      "form": Object {
+        "action": "success",
+      },
+    },
+  ],
+]
 `;
