@@ -21,7 +21,7 @@ const messages = {
         instructionsPoint2Text: 'Check your spam folder',
         instructionsPoint3Text: 'Try logging in another way',
         instructionsPoint4Text: 'See our {0} if you still need help',
-        instructionsHelpLink: 'https://www.menulog.com.au/help',
+        instructionsHelpLink: 'https://www.menulog.com.au/help/article/5448178892303/why-am-i-sometimes-asked-to-enter-a-verification-code-when-using-menulog',
         instructionsHelpText: 'FAQs',
         primaryButtonText: 'Got it',
         secondaryButtonText: 'Log in another way'
