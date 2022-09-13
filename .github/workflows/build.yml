@@ -232,7 +232,9 @@ jobs:
             turborepo-dist-cache-${{ github.ref }}
             turborepo-dist-cache-
       - run: yarn build
-      - uses: JS-DevTools/npm-publish@v1
+      - name: Auth with NPM
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+      - name: Publish unreleased package versions to npm
+        run: lerna publish from-package --ignore-scripts --yes
         with:
-          token: ${{ secrets.NPM_TOKEN }}
           dry-run: true

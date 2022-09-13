@@ -375,22 +375,6 @@ jobs:
       - slack_notify_fail
       - slack_notify_success
 
-
-  # Not currently working in CircleCI
-  # publish-to-npm:
-  #   executor: node
-  #   steps:
-  #     - attach_workspace:
-  #         at: .
-  #     - run:
-  #         name: Auth With NPM
-  #         command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > .npmrc
-  #     - run:
-  #         name: Publish unreleased package versions to npm
-  #         command: npx lerna publish from-package --ignore-scripts --yes
-  #     - slack_notify_fail
-  #     - slack_notify_success
-
 workflows:
   version: 2
 
