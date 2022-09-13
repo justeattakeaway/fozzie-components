@@ -1,6 +1,5 @@
 /* global danger, fail, message */
 const { pr } = danger.github;
-console.log('pr is', pr);
 const bodyAndTitle = (pr.body + pr.title).toLowerCase();
 const isTrivial = bodyAndTitle.includes('#trivial'); // turns off all danger checks
 const isGlobalConfigUpdate = bodyAndTitle.includes('#globalconfig'); // turns off danger checks for packages outside the root
