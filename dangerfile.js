@@ -1,4 +1,4 @@
-import { danger, fail } from 'danger';
+/* global danger, fail, message */
 const { pr } = danger.github;
 const bodyAndTitle = (pr.body + pr.title).toLowerCase();
 const isTrivial = bodyAndTitle.includes('#trivial'); // turns off all danger checks
