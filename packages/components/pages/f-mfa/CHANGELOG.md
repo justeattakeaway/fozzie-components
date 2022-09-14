@@ -12,6 +12,14 @@ v0.19.0
 - Translations for en-AU and en-NZ locales.
 
 
+v0.18.0
+------------------------------
+*September 12, 2022*
+
+### Changed
+- Changed the GA tracking models shape
+
+
 v0.17.0
 ------------------------------
 *September 12, 2022*
