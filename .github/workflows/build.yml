@@ -71,6 +71,8 @@ jobs:
     # Run Bundlewatch checks
     - name: Run Bundlewatch checks
       run: yarn bundlewatch
+      env:
+        BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_TOKEN }}
     # Lint components
     - name: Lint Components
       run: yarn lint --concurrency=10
