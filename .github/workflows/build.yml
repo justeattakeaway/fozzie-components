@@ -7,7 +7,6 @@ on:
   push:
     branches: 
     - master
-    - gh-actions-bundlewatch-danger
 
 jobs:
   install:
