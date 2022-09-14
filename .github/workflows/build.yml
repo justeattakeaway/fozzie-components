@@ -235,6 +235,4 @@ jobs:
       - name: Auth with NPM
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
       - name: Publish unreleased package versions to npm
-        run: lerna publish from-package --ignore-scripts --yes
-        with:
-          dry-run: true
+        run: npx lerna publish from-package --ignore-scripts --yes
