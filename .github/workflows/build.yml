@@ -80,7 +80,6 @@ jobs:
         key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
     # Build Storybook
     - name: Storybook Build
-      if: steps.storybook-cache.outputs.cache-hit != 'true'
       run: yarn storybook:build
 
   bundlewatch:
@@ -110,10 +109,6 @@ jobs:
       with:
         path: .turbo
         key: turborepo-dist-cache-${{ github.ref }}-${{ github.sha }}
-        # Use one of the following keys if the above is not found.
-        restore-keys: |
-          turborepo-dist-cache-${{ github.ref }}
-          turborepo-dist-cache-
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
       run: yarn build --cache-dir=".turbo"
@@ -153,10 +148,6 @@ jobs:
       with:
         path: .turbo
         key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.sha }}
-        # Use one of the following keys if the above is not found.
-        restore-keys: |
-          turborepo-dist-cache-${{ github.ref_name }}
-          turborepo-dist-cache-
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
       run: yarn build --cache-dir=".turbo"
@@ -222,10 +213,6 @@ jobs:
       with:
         path: .turbo
         key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.sha }}
-        # Use one of the following keys if the above is not found.
-        restore-keys: |
-          turborepo-dist-cache-${{ github.ref_name }}
-          turborepo-dist-cache-
     # Restore Storybook 'storybook-static'
     - name: Cache Storybook Static Directory
       id: storybook-cache
