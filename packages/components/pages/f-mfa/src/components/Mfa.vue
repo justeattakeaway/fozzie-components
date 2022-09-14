@@ -120,6 +120,7 @@ import {
     ERROR_VISIBLE,
     HELP_HIDDEN,
     HELP_VISIBLE,
+    MFA_SUBMIT,
     MFA_ERROR,
     MFA_SUCCESS,
     MFA_VISIBLE
@@ -230,6 +231,7 @@ export default {
                 return; // Prevents multiple requests, especially on slow networks
             }
 
+            this.$gtm.pushEvent(buildEvent(MFA_SUBMIT));
             this.isSubmitting = true;
             this.hasSubmitError = false;
 
