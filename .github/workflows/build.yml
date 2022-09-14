@@ -86,6 +86,7 @@ jobs:
       run: yarn storybook:build
     env:
       BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_TOKEN }}
+      RUN_ALL: true
 
   tests:
     strategy:
