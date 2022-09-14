@@ -7,7 +7,6 @@ on:
   push:
     branches:
     - master
-    - npm-publish-gh-action
 
 jobs:
   install:
@@ -201,7 +200,7 @@ jobs:
   publish:
     needs: tests
     runs-on: ubuntu-latest
-    # if: ${{ github.ref == 'refs/heads/master' }}
+    if: ${{ github.ref == 'refs/heads/master' }}
     steps:
       # Checkout the Repo
       - uses: actions/checkout@v3
@@ -232,5 +231,5 @@ jobs:
       # Prevent NPM publishes until we've fully migrated away from CircleCI.
       # - name: Auth with NPM
       #   run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-      - name: Publish unreleased package versions to npm
-        run: yarn lerna publish from-package --ignore-scripts --yes
+      # - name: Publish unreleased package versions to npm
+      #   run: yarn lerna publish from-package --ignore-scripts --yes
