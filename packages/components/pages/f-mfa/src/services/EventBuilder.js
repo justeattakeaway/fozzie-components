@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 export const MFA_VISIBLE = 'mfa-visible';
 export const ERROR_VISIBLE = 'error-visible';
 export const ERROR_BACK = 'error-back';
@@ -44,7 +43,7 @@ export const buildEvent = (key, data = '') => {
                 dialog: {
                     action: 'select',
                     type: 'info',
-                    dialog_buttonText: 'go back'
+                    buttonText: 'go back'
                 }
             };
         case MFA_ERROR: // Tech spec id : S4
@@ -105,7 +104,7 @@ export const buildEvent = (key, data = '') => {
                 dialog: {
                     action: 'select',
                     type: 'info',
-                    dialog_buttonText: 'got it'
+                    buttonText: 'got it'
                 }
             };
         case HELP_LOGIN: // Tech spec id : S9
@@ -118,7 +117,7 @@ export const buildEvent = (key, data = '') => {
                 dialog: {
                     action: 'cancel',
                     type: 'info',
-                    dialog_buttonText: 'login a different way'
+                    buttonText: 'login a different way'
                 }
             };
         default:
