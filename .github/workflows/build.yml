@@ -232,7 +232,8 @@ jobs:
             turborepo-dist-cache-${{ github.ref }}
             turborepo-dist-cache-
       - run: yarn build
-      - name: Auth with NPM
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+      # Prevent NPM publishes until we've fully migrated away from CircleCI.
+      # - name: Auth with NPM
+      #   run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
       - name: Publish unreleased package versions to npm
-        run: npx lerna publish from-package --ignore-scripts --yes
+        run: yarn lerna publish from-package --ignore-scripts --yes
