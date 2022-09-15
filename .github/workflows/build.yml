@@ -223,7 +223,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: .turbo
-          key: turborepo-dist-cache-${{ github.ref }}-${{ github.run_id }}
+          key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.run_id }}
       - run: yarn build
       # Prevent NPM publishes until we've fully migrated away from CircleCI.
       - name: Auth with NPM
