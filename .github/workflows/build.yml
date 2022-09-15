@@ -224,7 +224,7 @@ jobs:
         with:
           path: .turbo
           key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.run_id }}
-      - run: yarn build
+      - run: yarn build --cache-dir=".turbo"
       # Prevent NPM publishes until we've fully migrated away from CircleCI.
       - name: Auth with NPM
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
