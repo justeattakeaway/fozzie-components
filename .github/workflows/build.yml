@@ -60,7 +60,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: .turbo
-        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.run_id }}
+        key: turborepo-dist-cache-${{ hashFiles('**/.turbo') }}
         # Use one of the following keys if the above is not found.
         restore-keys: |
           turborepo-dist-cache-${{ github.ref_name }}
@@ -119,7 +119,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: .turbo
-        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.run_id }}
+        key: turborepo-dist-cache-${{ hashFiles('**/.turbo') }}
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
       run: yarn build --cache-dir=".turbo"
@@ -184,7 +184,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: .turbo
-        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.run_id }}
+        key: turborepo-dist-cache-${{ hashFiles('**/.turbo') }}
     # Restore Storybook 'storybook-static'
     - name: Cache Storybook Static Directory
       id: storybook-cache
@@ -223,7 +223,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: .turbo
-          key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.run_id }}
+          key: turborepo-dist-cache-${{ hashFiles('**/.turbo') }}
       - run: yarn build --cache-dir=".turbo"
       # Prevent NPM publishes until we've fully migrated away from CircleCI.
       - name: Auth with NPM
