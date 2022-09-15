@@ -7,6 +7,7 @@ on:
   push:
     branches:
     - master
+    - npm-publish-gh-action
 
 jobs:
   install:
@@ -59,11 +60,11 @@ jobs:
       uses: actions/cache@v2
       with:
         path: .turbo
-        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.sha }}
+        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.run_id }}
         # Use one of the following keys if the above is not found.
         restore-keys: |
           turborepo-dist-cache-${{ github.ref_name }}
-          turborepo-dist-cache-
+          turborepo-dist-cache-master
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
       run: yarn build --cache-dir=".turbo"
@@ -118,7 +119,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: .turbo
-        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.sha }}
+        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.run_id }}
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
       run: yarn build --cache-dir=".turbo"
@@ -183,7 +184,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: .turbo
-        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.sha }}
+        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.run_id }}
     # Restore Storybook 'storybook-static'
     - name: Cache Storybook Static Directory
       id: storybook-cache
@@ -222,14 +223,10 @@ jobs:
         uses: actions/cache@v2
         with:
           path: .turbo
-          key: turborepo-dist-cache-${{ github.ref }}-${{ github.sha }}
-          # Use one of the following keys if the above is not found.
-          restore-keys: |
-            turborepo-dist-cache-${{ github.ref }}
-            turborepo-dist-cache-
+          key: turborepo-dist-cache-${{ github.ref }}-${{ github.run_id }}
       - run: yarn build
       # Prevent NPM publishes until we've fully migrated away from CircleCI.
-      # - name: Auth with NPM
-      #   run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-      # - name: Publish unreleased package versions to npm
-      #   run: yarn lerna publish from-package --ignore-scripts --yes
+      - name: Auth with NPM
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+      - name: Publish unreleased package versions to npm
+        run: yarn lerna publish from-package --ignore-scripts --yes
