@@ -47,29 +47,6 @@ class Mfa extends Page {
             get input () { return $(FIELD.mfaCodeInput.input); }
         }
     };
-
-    async waitForMfaScreenDisplayed (timeoutMs = 1000) {
-        // eslint-disable-next-line no-return-await
-        return await this.mfaScreen.waitForComponent(timeoutMs);
-    }
-
-    async waitForErrorScreenDisplayed (timeoutMs = 1000) {
-        // eslint-disable-next-line no-return-await
-        return await this.errorScreen.waitForComponent(timeoutMs);
-    }
-
-    async waitForHelpScreenDisplayed (timeoutMs = 1000) {
-        // eslint-disable-next-line no-return-await
-        return await this.helpScreen.waitForComponent(timeoutMs);
-    }
-
-    async goToHelp () {
-        await this.mfaHelpLink.click();
-    }
-
-    async goToSubmit () {
-        await this.mfaSubmitButton.click();
-    }
 }
 
 export default new Mfa();

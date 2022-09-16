@@ -51,7 +51,7 @@ VMfaComponent.argTypes = {
         control: {
             type: 'select'
         },
-        options: [locales.gb, locales.ie, locales.au, locales.nz, locales.es, locales.it],
+        options: [locales.gb, locales.au, locales.nz],
         description: 'Choose a locale'
     },
     apiState: {

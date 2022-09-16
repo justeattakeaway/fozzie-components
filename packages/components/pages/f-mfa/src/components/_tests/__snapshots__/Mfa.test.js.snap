@@ -4,21 +4,37 @@ exports[`Mfa When calling the onFormSubmit() method And the submitting of the fo
 Array [
   Array [
     Object {
-      "EventName": "form_view",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthentication",
-        "component_type": "form",
-        "form_action": "view",
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_view",
+      "form": Object {
+        "action": "view",
       },
     },
   ],
   Array [
     Object {
-      "EventName": "form_success",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthentication",
-        "component_type": "form",
-        "form_action": "success",
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_submit",
+      "form": Object {
+        "action": "submit",
+      },
+    },
+  ],
+  Array [
+    Object {
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_success",
+      "form": Object {
+        "action": "success",
       },
     },
   ],
@@ -29,22 +45,40 @@ exports[`Mfa When calling the onFormSubmit() method And the submitting of the fo
 Array [
   Array [
     Object {
-      "EventName": "form_view",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthentication",
-        "component_type": "form",
-        "form_action": "view",
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_view",
+      "form": Object {
+        "action": "view",
       },
     },
   ],
   Array [
     Object {
-      "EventName": "form_error",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthentication",
-        "component_type": "form",
-        "error_message": "http error status : 400",
-        "form_action": "error",
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_submit",
+      "form": Object {
+        "action": "submit",
+      },
+    },
+  ],
+  Array [
+    Object {
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "error": Object {
+        "message": "http error status : 400",
+      },
+      "event": "form_error",
+      "form": Object {
+        "action": "error",
       },
     },
   ],
@@ -55,22 +89,40 @@ exports[`Mfa When calling the onFormSubmit() method And the submitting of the fo
 Array [
   Array [
     Object {
-      "EventName": "form_view",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthentication",
-        "component_type": "form",
-        "form_action": "view",
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_view",
+      "form": Object {
+        "action": "view",
       },
     },
   ],
   Array [
     Object {
-      "EventName": "form_error",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthentication",
-        "component_type": "form",
-        "error_message": "http error status : 429",
-        "form_action": "error",
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_submit",
+      "form": Object {
+        "action": "submit",
+      },
+    },
+  ],
+  Array [
+    Object {
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "error": Object {
+        "message": "http error status : 429",
+      },
+      "event": "form_error",
+      "form": Object {
+        "action": "error",
       },
     },
   ],
@@ -81,22 +133,38 @@ exports[`Mfa When calling the onFormSubmit() method should call the postValidate
 Array [
   Array [
     Object {
-      "EventName": "dialog_view",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthenticationbadActor",
-        "component_type": "dialog",
-        "dialog_action": "view",
-        "dialog_type": "info",
+      "component": Object {
+        "name": "multiFactorAuthenticationbadActor",
+        "type": "dialog",
+      },
+      "dialog": Object {
+        "action": "view",
+        "type": "info",
+      },
+      "event": "dialog_view",
+    },
+  ],
+  Array [
+    Object {
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_submit",
+      "form": Object {
+        "action": "submit",
       },
     },
   ],
   Array [
     Object {
-      "EventName": "form_success",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthentication",
-        "component_type": "form",
-        "form_action": "success",
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_success",
+      "form": Object {
+        "action": "success",
       },
     },
   ],
@@ -107,11 +175,13 @@ exports[`Mfa When creating the component should log a warning but NOT show the e
 Array [
   Array [
     Object {
-      "EventName": "form_view",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthentication",
-        "component_type": "form",
-        "form_action": "view",
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_view",
+      "form": Object {
+        "action": "view",
       },
     },
   ],
@@ -122,11 +192,13 @@ exports[`Mfa When creating the component should log a warning but NOT show the e
 Array [
   Array [
     Object {
-      "EventName": "form_view",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthentication",
-        "component_type": "form",
-        "form_action": "view",
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_view",
+      "form": Object {
+        "action": "view",
       },
     },
   ],
@@ -137,11 +209,13 @@ exports[`Mfa When creating the component should log a warning but NOT show the e
 Array [
   Array [
     Object {
-      "EventName": "form_view",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthentication",
-        "component_type": "form",
-        "form_action": "view",
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_view",
+      "form": Object {
+        "action": "view",
       },
     },
   ],
@@ -152,11 +226,13 @@ exports[`Mfa When creating the component should log a warning but NOT show the e
 Array [
   Array [
     Object {
-      "EventName": "form_view",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthentication",
-        "component_type": "form",
-        "form_action": "view",
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_view",
+      "form": Object {
+        "action": "view",
       },
     },
   ],
@@ -167,11 +243,13 @@ exports[`Mfa When creating the component should log a warning but NOT show the e
 Array [
   Array [
     Object {
-      "EventName": "form_view",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthentication",
-        "component_type": "form",
-        "form_action": "view",
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_view",
+      "form": Object {
+        "action": "view",
       },
     },
   ],
@@ -182,11 +260,13 @@ exports[`Mfa When creating the component should log success if valid props suppl
 Array [
   Array [
     Object {
-      "EventName": "form_view",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthentication",
-        "component_type": "form",
-        "form_action": "view",
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_view",
+      "form": Object {
+        "action": "view",
       },
     },
   ],
@@ -197,11 +277,13 @@ exports[`Mfa When creating the component should set the default for returnUrl if
 Array [
   Array [
     Object {
-      "EventName": "form_view",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthentication",
-        "component_type": "form",
-        "form_action": "view",
+      "component": Object {
+        "name": "multiFactorAuthentication",
+        "type": "form",
+      },
+      "event": "form_view",
+      "form": Object {
+        "action": "view",
       },
     },
   ],
@@ -212,13 +294,15 @@ exports[`Mfa When creating the component should show the error page and log warn
 Array [
   Array [
     Object {
-      "EventName": "dialog_view",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthenticationbadActor",
-        "component_type": "dialog",
-        "dialog_action": "view",
-        "dialog_type": "info",
+      "component": Object {
+        "name": "multiFactorAuthenticationbadActor",
+        "type": "dialog",
       },
+      "dialog": Object {
+        "action": "view",
+        "type": "info",
+      },
+      "event": "dialog_view",
     },
   ],
 ]
@@ -228,13 +312,15 @@ exports[`Mfa When creating the component should show the error page and log warn
 Array [
   Array [
     Object {
-      "EventName": "dialog_view",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthenticationbadActor",
-        "component_type": "dialog",
-        "dialog_action": "view",
-        "dialog_type": "info",
+      "component": Object {
+        "name": "multiFactorAuthenticationbadActor",
+        "type": "dialog",
       },
+      "dialog": Object {
+        "action": "view",
+        "type": "info",
+      },
+      "event": "dialog_view",
     },
   ],
 ]
@@ -244,13 +330,15 @@ exports[`Mfa When creating the component should show the error page and log warn
 Array [
   Array [
     Object {
-      "EventName": "dialog_view",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthenticationbadActor",
-        "component_type": "dialog",
-        "dialog_action": "view",
-        "dialog_type": "info",
+      "component": Object {
+        "name": "multiFactorAuthenticationbadActor",
+        "type": "dialog",
       },
+      "dialog": Object {
+        "action": "view",
+        "type": "info",
+      },
+      "event": "dialog_view",
     },
   ],
 ]
@@ -260,13 +348,15 @@ exports[`Mfa When creating the component should show the error page and log warn
 Array [
   Array [
     Object {
-      "EventName": "dialog_view",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthenticationbadActor",
-        "component_type": "dialog",
-        "dialog_action": "view",
-        "dialog_type": "info",
+      "component": Object {
+        "name": "multiFactorAuthenticationbadActor",
+        "type": "dialog",
       },
+      "dialog": Object {
+        "action": "view",
+        "type": "info",
+      },
+      "event": "dialog_view",
     },
   ],
 ]
@@ -276,13 +366,15 @@ exports[`Mfa When creating the component should show the error page and log warn
 Array [
   Array [
     Object {
-      "EventName": "dialog_view",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthenticationbadActor",
-        "component_type": "dialog",
-        "dialog_action": "view",
-        "dialog_type": "info",
+      "component": Object {
+        "name": "multiFactorAuthenticationbadActor",
+        "type": "dialog",
       },
+      "dialog": Object {
+        "action": "view",
+        "type": "info",
+      },
+      "event": "dialog_view",
     },
   ],
 ]
@@ -292,13 +384,15 @@ exports[`Mfa When creating the component should show the error page and log warn
 Array [
   Array [
     Object {
-      "EventName": "dialog_view",
-      "Parameters": Object {
-        "component_name": "multiFactorAuthenticationbadActor",
-        "component_type": "dialog",
-        "dialog_action": "view",
-        "dialog_type": "info",
+      "component": Object {
+        "name": "multiFactorAuthenticationbadActor",
+        "type": "dialog",
       },
+      "dialog": Object {
+        "action": "view",
+        "type": "info",
+      },
+      "event": "dialog_view",
     },
   ],
 ]
