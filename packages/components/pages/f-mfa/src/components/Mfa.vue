@@ -205,15 +205,21 @@ export default {
         const isCodeValid = this.isPropertyValid(this.code, 'code', MFA_CODE_REGEX);
 
         if (isEmailValid && isCodeValid) {
-            this.$log.info('MFA page loaded successfully');
-            this.$gtm.pushEvent(buildEvent(MFA_VISIBLE));
+            this.$log.info('MFA page loaded successfully', standardLogTags);
         } else {
             this.showErrorPage = true;
-            this.$log.warn('Error loading MFA page');
-            this.$gtm.pushEvent(buildEvent(ERROR_VISIBLE));
+            this.$log.warn('Error loading MFA page', standardLogTags);
         }
 
         this.validatedReturnUrl = this.getValidatedReturnUrl();
+    },
+
+    mounted () {
+        if (this.showErrorPage) {
+            this.$gtm.pushEvent(buildEvent(ERROR_VISIBLE));
+        } else {
+            this.$gtm.pushEvent(buildEvent(MFA_VISIBLE));
+        }
     },
 
     methods: {

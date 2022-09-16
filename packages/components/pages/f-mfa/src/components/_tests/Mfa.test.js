@@ -26,11 +26,9 @@ const i18n = {
 // Spy on the logging methods
 const infoLogSpy = jest.fn();
 const warnLogSpy = jest.fn();
-const errorLogSpy = jest.fn();
 const logMocks = {
     info: infoLogSpy,
-    warn: warnLogSpy,
-    error: errorLogSpy
+    warn: warnLogSpy
 };
 
 // Spy on the gtm event method
@@ -227,7 +225,7 @@ describe('Mfa', () => {
 
             // Assert
             expect(infoLogSpy).toHaveBeenCalledTimes(1);
-            expect(infoLogSpy).toHaveBeenCalledWith('MFA page loaded successfully');
+            expect(infoLogSpy).toHaveBeenCalledWith('MFA page loaded successfully', ['account-pages', 'mfa']);
             expect(pushEventSpy.mock.calls).toMatchSnapshot();
         });
 
@@ -251,7 +249,7 @@ describe('Mfa', () => {
             expect(errorCard.exists()).toBe(true);
             expect(warnLogSpy).toHaveBeenCalledTimes(2);
             expect(warnLogSpy).toHaveBeenCalledWith(`Error validating mfa property '${key}' - Regex Failed`, ['account-pages', 'mfa']);
-            expect(warnLogSpy).toHaveBeenCalledWith('Error loading MFA page');
+            expect(warnLogSpy).toHaveBeenCalledWith('Error loading MFA page', ['account-pages', 'mfa']);
             expect(pushEventSpy.mock.calls).toMatchSnapshot();
         });
 
@@ -297,7 +295,7 @@ describe('Mfa', () => {
             expect(errorCard.exists()).toBe(true);
             expect(warnLogSpy).toHaveBeenCalledTimes(2);
             expect(warnLogSpy).toHaveBeenCalledWith(`Error validating mfa property '${key}' - Regex Failed`, ['account-pages', 'mfa']);
-            expect(warnLogSpy).toHaveBeenCalledWith('Error loading MFA page');
+            expect(warnLogSpy).toHaveBeenCalledWith('Error loading MFA page', ['account-pages', 'mfa']);
             expect(pushEventSpy.mock.calls).toMatchSnapshot();
         });
 
@@ -316,7 +314,7 @@ describe('Mfa', () => {
             expect(wrapper.vm.validatedReturnUrl).toBe(expected);
 
             expect(infoLogSpy).toHaveBeenCalledTimes(1);
-            expect(infoLogSpy).toHaveBeenCalledWith('MFA page loaded successfully');
+            expect(infoLogSpy).toHaveBeenCalledWith('MFA page loaded successfully', ['account-pages', 'mfa']);
             expect(pushEventSpy.mock.calls).toMatchSnapshot();
         });
     });
