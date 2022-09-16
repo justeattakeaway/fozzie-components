@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.19.0
+------------------------------
+*September 16, 2022*
+
+### Changed
+- Converted the objects being passed to `pushEvent()` to simple object which removes any unwanted reflection details
+
+
 v0.18.0
 ------------------------------
 *July 25, 2022*
@@ -17,6 +26,7 @@ v0.17.1
 
 ### Removed
 - Removed vite as a dependency and moved to monorepo root `package.json` to solve version conflict issue
+
 
 v0.17.0
 ------------------------------
