@@ -75,7 +75,6 @@ export default class HttpClient {
      * @return {object} - Returns data from response
      */
     async post (resource, body, headers = {}) {
-        console.log(headers);
         return this.sendRequestWithBody(
             httpVerbs.POST,
             resource,
