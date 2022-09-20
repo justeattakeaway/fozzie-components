@@ -1,3 +1,5 @@
+import axios from 'axios'
+import MockAdapter from 'axios-mock-adapter';
 import CreateClient from '../createClient';
 
 describe('createClient', () => {
@@ -60,6 +62,27 @@ describe('createClient', () => {
 
             // Assert
             expect(mergedOptions).toStrictEqual(expectedResult);
+        });
+
+        it('should provide conversation header when cookie function is supplied', async () => {
+            // Arrange
+            const getCookieFunction = (cookieName) => {
+                return `${cookieName}-123456`
+            }
+
+            const axiosMock = new MockAdapter(axios);
+            axiosMock.onGet('/test.json').reply(200, {
+                fakeResult: null
+            });
+
+            const httpClient = new CreateClient(null, getCookieFunction);
+
+            // Act
+            const result = await httpClient.get('/test.json')
+
+            // Assert
+            expect(result.data).toEqual({ fakeResult: null});
+            expect(result.headers['x-je-conversation']).toEqual('x-je-conversation-123456');
         });
     });
 });
