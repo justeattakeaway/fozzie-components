@@ -20,7 +20,8 @@ export default class RequestDispatcher {
 
             return {
                 statusCode: response.status,
-                data: response.data
+                data: response.data,
+                headers: response.config.headers
             };
         } catch (error) {
             return handleError(error, this.configuration.errorCallback);
