@@ -26,8 +26,6 @@ This package exposes methods for interacting with restful services, it may abstr
 
 ## Benefits (Soon)
 - _Opt-in ability to use dynamic timeouts_
-- _Opt-in automatic providing of diagnostic headers, such as je-conversation_
-- _Opt-in automatic providing of headers, such as accept-tenant_
 
 ## Usage
 
@@ -51,7 +49,11 @@ const options = { // Options are described later
     baseUrl: 'https://jsonplaceholder.typicode.com'
 };
 
-const httpClient = new httpModule.CreateClient(options);
+// Optional: Implement wrapper using cookie tech you have available
+// Enables conversation ID to be automatically provided with requests
+const getCookieFunction = cookieName => app.$cookies.get(cookieName);
+
+const httpClient = new httpModule.CreateClient(options, getCookieFunction);
 
 // WHEN: Using a Nuxt Plugin
 inject('http', httpClient);
@@ -139,6 +141,17 @@ mockFactory.reset();
 // Setup a fake response
 mockFactory.setupMockResponse(httpVerbs.POST, '/URL', REQUEST_DATA, 201);
 ```
+
+## Parameters
+None of these parameters are required, but using them enables you to customise your http client
+
+Option | Description | Type | Default
+------------- | ------------- | ------------- | -------------
+options | An object containing options you wish to override (see below) | object | {}
+getCookieFunction | Wrapper function providing ability to read cookies | function | null
+statisticsClient | Instance of f-statistics to capture dependency timings | object | null
+
+<hr>
 
 ## Options
 All options are optional, you don't need to specify any overrides if you are happy with the default values
