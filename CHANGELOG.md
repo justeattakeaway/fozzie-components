@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.30.0
+------------------------------
+*September 21, 2022*
+
+### Added
+- `fozzie` v9.3.1 to the root.
+
+### Added
+- Removed beta versions from individual components.
+
+
 v7.29.0
 ------------------------------
 *September 14, 2022*

@@ -2279,50 +2279,18 @@
     axios "0.25.0"
     crypto-js "4.1.1"
 
-"@justeat/fozzie@8.2.0":
-  version "8.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-8.2.0.tgz#caba00d7d807c7d098b8a1c495b88c3f879efdb9"
-  integrity sha512-Pn5Uhi/mOLe0EnXIrjXbeBWBFbcJejVqt7hYiOLnFsbLYiFLwPHZjo+DgKSGCcTGfMPZsBPqPF5/f7zONoopAw==
+"@justeat/fozzie@9.3.1":
+  version "9.3.1"
+  resolved "https://registry.npmjs.org/@justeat/fozzie/-/fozzie-9.3.1.tgz#4e3c8f073b2880787127a69d072006c3ae483449"
+  integrity sha512-GSSyULm00xH27dLP/Se1QQsiUsMWkf5u/11jHTjCw6Kf+nNSmYTyaEqCk/jT+xFVso5Q36+8uXQLqDEPmIO8ww==
   dependencies:
-    "@justeat/pie-design-tokens" "1.4.0"
-    include-media "1.4.10"
-
-"@justeat/fozzie@9.0.0-beta.2":
-  version "9.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.2.tgz#678404404597eac15b9b45362febae090af5fcaf"
-  integrity sha512-DuiVeJ0EEmVB7YkxrhFGyjxEMVzBI1f+sp2RQlVVM/F7wbTuF4enFBZzN6WtF0PDQB8BxA1g9s/uJS7uCI2l+Q==
-  dependencies:
-    "@justeat/pie-design-tokens" "1.4.0"
+    "@justeat/pie-design-tokens" "1.6.0"
     include-media eduardoboucas/include-media#2.0-release
 
-"@justeat/fozzie@9.0.0-beta.3":
-  version "9.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.3.tgz#e97815d3f1fff757b783fc216ad594876b652c1e"
-  integrity sha512-Yqp7ODkSieLbie91zJpemOxwKN8xRraIttXUPS3djp6mkoQDOT7UhF+rz0JaMiJMD0hJLUHqezKsjwPU+A1VJg==
-  dependencies:
-    "@justeat/pie-design-tokens" "1.4.0"
-    include-media eduardoboucas/include-media#2.0-release
-
-"@justeat/fozzie@9.0.0-beta.5":
-  version "9.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.5.tgz#14d7a2d7c6aba26e885295bc416560ea182736fd"
-  integrity sha512-ZE3XqqJM1+QJf1qW60yI8dP+9g2+u/PkxMtJh+DtxZILgegnXHfiz8iCBHOEsIPcn67fJjV4FOyqp3KY1J9qtw==
-  dependencies:
-    "@justeat/pie-design-tokens" "1.4.0"
-    include-media eduardoboucas/include-media#2.0-release
-
-"@justeat/fozzie@9.0.0-beta.6":
-  version "9.0.0-beta.6"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.6.tgz#704a65a0eee089ea5e47243e6893997edea47434"
-  integrity sha512-f+eH9voRFZlii7qPn8Z+pdzdYeGtmBkJkNlB8G/I1Clft6yssEPG8/8U31OVMmp55Wb1F2WoV2FtG5Ttr9Orbg==
-  dependencies:
-    "@justeat/pie-design-tokens" "1.4.0"
-    include-media eduardoboucas/include-media#2.0-release
-
-"@justeat/pie-design-tokens@1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-1.4.0.tgz#adb4b3b7f5ed9ac9691e67e02b02264acd6dcfbf"
-  integrity sha512-V+lBWi4Q7WjYRYYTAm2rJfDqjePArhHrgC4pB8vsQXp4uPmEUG/6cJa4K8DArADxLA924QESE3Akmtn8nAe5dw==
+"@justeat/pie-design-tokens@1.6.0":
+  version "1.6.0"
+  resolved "https://registry.npmjs.org/@justeat/pie-design-tokens/-/pie-design-tokens-1.6.0.tgz#8cde740cf7681927dc321946985e731ccf3401b1"
+  integrity sha512-oXwvSQXrQIH9jlEwq7Su6ZLBQyp8m8vV276Iu0PjncpxsndPs0D+GKHvw/jVQ57ZCQPhBafQEaRCvawHWwg2yA==
   dependencies:
     jsonc-parser "2.2.0"
     lodash.merge "4.6.2"
@@ -13346,17 +13314,12 @@ imurmurhash@^0.1.4:
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
   integrity sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==
 
-include-media@1.4.10:
-  version "1.4.10"
-  resolved "https://registry.yarnpkg.com/include-media/-/include-media-1.4.10.tgz#7a311c92c396c808504ec6a5365115d30571f259"
-  integrity sha512-TymQzKF7oWHbItEcEHOCponZ90lRr1I9QbYeD+qCxXy4Z0/pSpS4Ocz2bq3FMOERlXXrY9Sawsh9GjiObVQA6A==
-
 include-media@1.4.9:
   version "1.4.9"
   resolved "https://registry.yarnpkg.com/include-media/-/include-media-1.4.9.tgz#d0020b7be3eb2d54868a20943595ce380e0bc43b"
   integrity sha512-IUOcvWDCt6R5V0ktsGk6RbehkW9ks1dODN2ed1p+mhML82TteAl+/ElXy8AJ7ueIuVoKq2NioRVdW9FuwQNOew==
 
-include-media@eduardoboucas/include-media#2.0-release:
+"include-media@github:eduardoboucas/include-media#2.0-release":
   version "2.0.0"
   resolved "https://codeload.github.com/eduardoboucas/include-media/tar.gz/a3c0288e5b22cc746cc2d320d0a374b2ed9d0aeb"
 
