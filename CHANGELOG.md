@@ -10,8 +10,8 @@ v7.30.0
 ### Added
 - `fozzie` v9.3.1 to the root.
 
-### Added
-- Removed beta versions from individual components.
+### Removed
+- Beta versions from individual components.
 
 
 v7.29.0
