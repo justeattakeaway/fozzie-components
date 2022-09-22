@@ -244,7 +244,6 @@ export default {
             try {
                 await (new AccountWebApi({
                     httpClient: this.$http,
-                    cookies: this.$cookies,
                     validateUrl: this.validateUrl
                 })).postValidateMfaToken({ mfa_token: this.code, otp: this.otp.toUpperCase() }); // eslint-disable-line camelcase
                 this.$gtm.pushEvent(buildEvent(MFA_SUCCESS));
