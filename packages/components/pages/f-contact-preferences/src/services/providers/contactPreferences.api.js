@@ -14,15 +14,13 @@ const BuildHeaders = (authToken, locale) => {
 };
 export default class ContactPreferencesApi {
     #httpClient;
-    #cookies;
     #baseUrl;
     #locale;
 
     constructor ({
-        httpClient, cookies, baseUrl, locale
+        httpClient, baseUrl, locale
     } = {}) {
         this.#httpClient = httpClient;
-        this.#cookies = cookies;
         this.#baseUrl = baseUrl;
         this.#locale = locale;
     }

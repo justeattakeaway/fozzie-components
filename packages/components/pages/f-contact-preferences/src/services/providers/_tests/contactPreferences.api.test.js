@@ -9,9 +9,7 @@ import {
 describe('ContactPreferencesApi Provider', () => {
     let apiProvider;
     let httpMock;
-    let cookiesMock;
     const locale = 'en-GB';
-    const cookiesSetSpy = jest.fn();
     const httpGetSpy = jest.fn();
     const httpPostSpy = jest.fn();
 
@@ -21,14 +19,10 @@ describe('ContactPreferencesApi Provider', () => {
             get: httpGetSpy,
             post: httpPostSpy
         };
-        cookiesMock = {
-            set: cookiesSetSpy
-        };
 
         // Arrange - sut
         apiProvider = new ContactPreferencesApi({
             httpClient: httpMock,
-            cookies: cookiesMock,
             baseUrl,
             locale
         });
@@ -43,7 +37,6 @@ describe('ContactPreferencesApi Provider', () => {
             // Act
             const createInstance = () => new ContactPreferencesApi({
                 httpClient: httpMock,
-                cookies: cookiesMock,
                 baseUrl
             });
 
