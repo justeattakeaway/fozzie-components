@@ -1,0 +1,15 @@
+{
+  "version": "independent",
+  "npmClient": "yarn",
+  "packages": [
+    "packages/*",
+    "packages/components/atoms/*",
+    "packages/components/molecules/*",
+    "packages/components/organisms/*",
+    "packages/components/templates/*",
+    "packages/components/pages/*",
+    "packages/services/*",
+    "packages/tools/*"
+  ],
+  "useWorkspaces": true
+}
