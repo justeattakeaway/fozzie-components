@@ -6,10 +6,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.30.0
 ------------------------------
-*September 15, 2022*
+*September 27, 2022*
 
 ### Added
 - NPM publish to GitHub Actions.
+
+
+v7.29.1
+------------------------------
+*September 27, 2022*
+
+### Changed
+- Include any Storybook changes in PR test triggers for CircleCI
 
 
 v7.29.0

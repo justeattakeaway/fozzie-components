@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v1.0.1
+------------------------------
+*September 16, 2022*
+
+### Changed
+- Normally import `Axios` rather than lazy require to fix test adapter issues
+
+
 v1.0.0
 ------------------------------
 *September 16, 2022*
