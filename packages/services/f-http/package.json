@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-http",
   "description": "Javascript HTTP client for interacting with restful services",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "maxBundleSize": "400kB",
   "main": "dist/f-http.umd.js",
   "module": "dist/f-http.es.js",
@@ -35,7 +35,6 @@
     "build": "vite build",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
-    "storybook:build": "vite build",
     "test": "jest",
     "ci:test:services": "yarn test",
     "test:coverage": "jest test:unit --coverage"

@@ -3,6 +3,7 @@ import setAuthorisationToken from './authorisationHandler';
 import httpVerbs from './httpVerbs';
 import interceptors from './interceptors';
 import RequestDispatcher from './requestDispatcher';
+import axios from 'axios';
 
 /**
  * Create a httpClient
@@ -20,9 +21,6 @@ export default class HttpClient {
             ...defaultOptions,
             ...options
         };
-
-        // Important for Isomorphism: loads correct version of Axios for Node vs Browser
-        const axios = require('axios').default;
 
         this.axiosInstance = axios.create({
             baseURL: this.configuration.baseUrl,
