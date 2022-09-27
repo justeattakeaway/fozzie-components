@@ -58,8 +58,6 @@ export default class HttpClient {
      * @return {object} - Returns data from response
      */
     async get (resource, headers = {}) {
-        console.log('LATEST VERSION');
-
         return this.sendRequest(
             httpVerbs.GET,
             resource,
