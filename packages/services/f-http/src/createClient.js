@@ -1,9 +1,9 @@
-import axios from 'axios';
 import defaultOptions from './defaultOptions';
 import setAuthorisationToken from './authorisationHandler';
 import httpVerbs from './httpVerbs';
 import interceptors from './interceptors';
 import RequestDispatcher from './requestDispatcher';
+import axios from 'axios';
 
 /**
  * Create a httpClient
@@ -11,7 +11,11 @@ import RequestDispatcher from './requestDispatcher';
  * @return {object} - Returns an object with restful request methods
  */
 export default class HttpClient {
-    constructor (options = {}, statsClient = null) {
+    constructor (
+        options = {},
+        getCookieFunction = null,
+        statsClient = null
+    ) {
         // Merge default configuration with overrides
         this.configuration = {
             ...defaultOptions,
@@ -26,6 +30,8 @@ export default class HttpClient {
             }
         });
 
+        this.getCookieFunction = getCookieFunction;
+
         if (statsClient) {
             // Only add interceptors when capturing statistics
             interceptors.captureResponseStatistics(this.axiosInstance, statsClient);
@@ -37,6 +43,14 @@ export default class HttpClient {
         this.setAuthorisationToken = setAuthorisationToken;
     }
 
+    getConversationIdHeader () {
+        const conversationId = this.getCookieFunction && this.getCookieFunction('x-je-conversation');
+
+        return conversationId
+            ? { 'x-je-conversation': conversationId }
+            : null;
+    }
+
     /**
      * Get a resource
      * @param {string} resource - The resource to get (URL)
@@ -44,7 +58,11 @@ export default class HttpClient {
      * @return {object} - Returns data from response
      */
     async get (resource, headers = {}) {
-        return this.sendRequest(httpVerbs.GET, resource, headers);
+        return this.sendRequest(
+            httpVerbs.GET,
+            resource,
+            { ...headers, ...this.getConversationIdHeader() }
+        );
     }
 
     /**
@@ -55,7 +73,12 @@ export default class HttpClient {
      * @return {object} - Returns data from response
      */
     async post (resource, body, headers = {}) {
-        return this.sendRequestWithBody(httpVerbs.POST, resource, body, headers);
+        return this.sendRequestWithBody(
+            httpVerbs.POST,
+            resource,
+            body,
+            { ...headers, ...this.getConversationIdHeader() }
+        );
     }
 
     /**
@@ -66,7 +89,12 @@ export default class HttpClient {
      * @return {object} - Returns data from response
      */
     async patch (resource, body, headers = {}) {
-        return this.sendRequestWithBody(httpVerbs.PATCH, resource, body, headers);
+        return this.sendRequestWithBody(
+            httpVerbs.PATCH,
+            resource,
+            body,
+            { ...headers, ...this.getConversationIdHeader() }
+        );
     }
 
     /**
@@ -77,7 +105,12 @@ export default class HttpClient {
      * @return {object} - Returns data from response
      */
     async put (resource, body, headers = {}) {
-        return this.sendRequestWithBody(httpVerbs.PUT, resource, body, headers);
+        return this.sendRequestWithBody(
+            httpVerbs.PUT,
+            resource,
+            body,
+            { ...headers, ...this.getConversationIdHeader() }
+        );
     }
 
     /**
@@ -87,7 +120,11 @@ export default class HttpClient {
      * @return {object} - Returns data from response
      */
     async delete (resource, headers = {}) {
-        this.sendRequest(httpVerbs.DELETE, resource, headers);
+        this.sendRequest(
+            httpVerbs.DELETE,
+            resource,
+            { ...headers, ...this.getConversationIdHeader() }
+        );
     }
 
     setAuthorisationToken (authorisationToken) {

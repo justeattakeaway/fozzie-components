@@ -3,6 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.59.0
+------------------------------
+*September 27, 2022*
+
+### Changed
+- Changed F-HTTP to `1.x`
+
+
+v0.58.0
+------------------------------
+*September 21, 2022*
+
+### Changed
+- Upgraded F-HTTP dependency and context with new Conversation ID forwarding
+
+
 v0.57.0
 ------------------------------
 *September 12, 2022*
