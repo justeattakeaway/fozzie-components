@@ -9,9 +9,9 @@ const replace = require('gulp-replace');
 const LOCALES = ['en-GB', 'es-ES', 'it-IT', 'en-IE', 'en-AU', 'en-NZ', 'da-DK'];
 
 const PATHS = {
-    vueSrcFolder: './cookie-banner-static/src',
-    tempDistFolder: './cookie-banner-static/.tmp-dist',
-    tempVueFolder: './cookie-banner-static/.tmp-vue',
+    vueSrcFolder: './static/src',
+    tempDistFolder: './static/.tmp-dist',
+    tempVueFolder: './static/.tmp-vue',
     rootDistFolder: './dist/static',
     nodeModulesFolder: './node_modules'
 };
@@ -51,7 +51,7 @@ function setVueProps (locale) {
  */
 function vueBuild () {
     log('running vue-cli-service build');
-    return exec(`vue-cli-service build --dest ${PATHS.tempVueFolder} ./cookie-banner-static/src/main.js`, (err, stdout, stderr) => {
+    return exec(`vue-cli-service build --dest ${PATHS.tempVueFolder} ./static/src/main.js`, (err, stdout, stderr) => {
         log(stdout);
         log(stderr);
         if (err) { log(err); }
