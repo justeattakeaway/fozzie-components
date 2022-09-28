@@ -63,7 +63,7 @@ export default {
     },
     CheckoutGetFailure: {
         logMessage: 'Get Checkout Failure',
-        logMethod: 'warn'
+        logMethod: 'error'
     },
     CheckoutGetForbidden: {
         logMessage: 'Get Checkout Failure: Access Forbidden',
