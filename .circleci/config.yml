@@ -34,7 +34,7 @@ commands:
 
             echo 'Checking changes'
             globalChanges=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig' || true; }`
-            storybookChanges=`git diff --name-only origin/master...ci-circle-fix | { grep '^packages/storybook' || true; }`
+            storybookChanges=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep '^packages/storybook' || true; }`
             echo 'Global Changes detected:'
             echo $globalChanges
 
