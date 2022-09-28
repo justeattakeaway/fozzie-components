@@ -9,6 +9,7 @@ v4.6.0
 
 ### Updated
 - Moved `f-cookie-banner-static` files to be part of `f-cookie-banner` package.
+- Update bundlewatch maxSize due to static files being part of the bundle.
 
 ### Removed
 - Old `demo` npm script
