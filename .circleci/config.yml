@@ -41,7 +41,7 @@ commands:
             echo 'Storybook Changes detected:'
             echo $storybookChanges
 
-            if [[ $globalChanges ]] || [[ $storybookChanges ]] [ $CIRCLE_BRANCH == "master" ]; then
+            if [[ $globalChanges ]] || [[ $storybookChanges ]] || [ $CIRCLE_BRANCH == "master" ]; then
               echo 'export RUN_ALL=true' >> $BASH_ENV
               source $BASH_ENV
             else
