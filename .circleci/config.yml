@@ -33,7 +33,7 @@ commands:
             }
 
             echo 'Checking changes'
-            changes=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig' || true; }`
+            changes=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages\/(?!storybook)|yarn.lock|bear.png|.editorconfig' || true; }`
             echo 'Changes detected:'
             echo $changes
 
@@ -374,22 +374,6 @@ jobs:
           path: test/results/axe-violations
       - slack_notify_fail
       - slack_notify_success
-
-
-  # Not currently working in CircleCI
-  # publish-to-npm:
-  #   executor: node
-  #   steps:
-  #     - attach_workspace:
-  #         at: .
-  #     - run:
-  #         name: Auth With NPM
-  #         command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > .npmrc
-  #     - run:
-  #         name: Publish unreleased package versions to npm
-  #         command: npx lerna publish from-package --ignore-scripts --yes
-  #     - slack_notify_fail
-  #     - slack_notify_success
 
 workflows:
   version: 2
