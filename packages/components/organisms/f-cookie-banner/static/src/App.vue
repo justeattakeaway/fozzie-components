@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import CookieBanner from '@justeat/f-cookie-banner';
-import '@justeat/f-cookie-banner/dist/f-cookie-banner.css';
+import CookieBanner from '../../src/components/CookieBanner.vue';
+import '../../dist/f-cookie-banner.css';
 
 export default {
     components: {
