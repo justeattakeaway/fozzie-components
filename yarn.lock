@@ -2356,7 +2356,7 @@
 
 "@justeat/fozzie@8.2.0":
   version "8.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-8.2.0.tgz#caba00d7d807c7d098b8a1c495b88c3f879efdb9"
+  resolved "https://registry.npmjs.org/@justeat/fozzie/-/fozzie-8.2.0.tgz#caba00d7d807c7d098b8a1c495b88c3f879efdb9"
   integrity sha512-Pn5Uhi/mOLe0EnXIrjXbeBWBFbcJejVqt7hYiOLnFsbLYiFLwPHZjo+DgKSGCcTGfMPZsBPqPF5/f7zONoopAw==
   dependencies:
     "@justeat/pie-design-tokens" "1.4.0"
@@ -14475,7 +14475,7 @@ imurmurhash@^0.1.4:
 
 include-media@1.4.10:
   version "1.4.10"
-  resolved "https://registry.yarnpkg.com/include-media/-/include-media-1.4.10.tgz#7a311c92c396c808504ec6a5365115d30571f259"
+  resolved "https://registry.npmjs.org/include-media/-/include-media-1.4.10.tgz#7a311c92c396c808504ec6a5365115d30571f259"
   integrity sha512-TymQzKF7oWHbItEcEHOCponZ90lRr1I9QbYeD+qCxXy4Z0/pSpS4Ocz2bq3FMOERlXXrY9Sawsh9GjiObVQA6A==
 
 include-media@1.4.9:
@@ -14485,7 +14485,6 @@ include-media@1.4.9:
 
 include-media@eduardoboucas/include-media#2.0-release:
   version "2.0.0"
-  uid a3c0288e5b22cc746cc2d320d0a374b2ed9d0aeb
   resolved "https://codeload.github.com/eduardoboucas/include-media/tar.gz/a3c0288e5b22cc746cc2d320d0a374b2ed9d0aeb"
 
 indent-string@^2.1.0:
