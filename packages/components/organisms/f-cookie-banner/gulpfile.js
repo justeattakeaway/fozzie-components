@@ -9,10 +9,11 @@ const replace = require('gulp-replace');
 const LOCALES = ['en-GB', 'es-ES', 'it-IT', 'en-IE', 'en-AU', 'en-NZ', 'da-DK'];
 
 const PATHS = {
-    vueSrcFolder: './src',
-    tempDistFolder: './.tmp-dist',
-    tempVueFolder: './.tmp-vue',
-    rootDistFolder: '../f-cookie-banner/dist/static'
+    vueSrcFolder: './static/src',
+    tempDistFolder: './static/.tmp-dist',
+    tempVueFolder: './static/.tmp-vue',
+    rootDistFolder: './dist/static',
+    nodeModulesFolder: './node_modules'
 };
 
 /**
@@ -20,15 +21,15 @@ const PATHS = {
  */
 function cleanTmpFolders () {
     log('clear .tmp folders and dest folder');
-    return del([PATHS.tempVueFolder, PATHS.tempDistFolder, '../f-cookie-banner/.node_modules/.cache/vue-loader'], { force: true });
+    return del([PATHS.tempVueFolder, PATHS.tempDistFolder, `${PATHS.nodeModulesFolder}/.cache/vue-loader`], { force: true });
 }
 
 /**
  * Remove the vue-cli cache to ensure it picks up prop changes from setVueProps()
  */
 function clearVueCliCache () {
-    log('clear ./node_modules/.cache');
-    return del(['./node_modules/.cache/vue-loader'], { force: true });
+    log(`clear ${PATHS.nodeModulesFolder}/.cache`);
+    return del([`${PATHS.nodeModulesFolder}/.cache/vue-loader`], { force: true });
 }
 
 /**
@@ -49,8 +50,8 @@ function setVueProps (locale) {
  * Run vue-cli build to compile using pre-render package into a temp folder
  */
 function vueBuild () {
-    log('running vue-cli-service build ');
-    return exec(`npx vue-cli-service build --dest ${PATHS.tempVueFolder}`, (err, stdout, stderr) => {
+    log('running vue-cli-service build');
+    return exec(`vue-cli-service build --dest ${PATHS.tempVueFolder} ./static/src/main.js`, (err, stdout, stderr) => {
         log(stdout);
         log(stderr);
         if (err) { log(err); }
@@ -89,7 +90,7 @@ function concatJS (locale) {
  * Move the final static files to the root dist folder f-cookie-banner/dist/static
  */
 function moveFilesToRootDist () {
-    log('move generated files to ../dist/static');
+    log('move generated files to ./dist/static');
     return src(`${PATHS.tempDistFolder}/**`)
             .pipe(dest(PATHS.rootDistFolder));
 }
