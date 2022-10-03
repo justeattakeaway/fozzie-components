@@ -62,7 +62,7 @@ export default {
 
     .c-cookieWarning {
         box-sizing: border-box;
-        background-color: f.$color-grey;
+        background-color: f.$color-charcoal-75;
         position: fixed;
         left: 0;
         right: 0;

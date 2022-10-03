@@ -111,7 +111,7 @@ export default {
     width: 100%;
     margin: auto;
     margin-top: -15px;
-    background-color: f.$color-grey-10;
+    background-color: f.$color-background-default;
 }
 
 .c-offers-wrapper {

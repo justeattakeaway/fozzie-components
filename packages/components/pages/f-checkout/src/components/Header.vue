@@ -165,7 +165,7 @@ export default {
             top: 50%;
             width: 9999px;
             height: 1px;
-            background: f.$color-grey-40;
+            background: f.$color-border-strong;
         }
     }
 }
