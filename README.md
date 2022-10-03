@@ -98,7 +98,7 @@ To run storybook first you must run the following at the the top level
 
 Then run `yarn storybook:serve` to start storybook, which will open on `localhost:8080`.
 
-Alternatively, you can run `yarn storybook:serve-changed` to just view the component you're working on, as well as any of it's dependencies / dependants.
+Alternatively, you can run `yarn build:changed` and `yarn storybook:serve-changed` to just view the component you're working on, as well as any of it's dependencies / dependants.
 
 ### Running a single component in Storybook
 

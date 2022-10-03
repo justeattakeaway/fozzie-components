@@ -14,6 +14,13 @@ v7.31.0
 - Beta versions from individual components.
 
 
+v7.31.0
+------------------------------
+*October 3, 2022*
+
+### Added
+- New `build:changed` script to build any changed components and their dependencies.
+
 v7.30.1
 ------------------------------
 *September 28, 2022*
