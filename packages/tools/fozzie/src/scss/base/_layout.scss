@@ -1,0 +1,148 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../settings/variables' as v;
+@use '../settings/include-media' as *;
+@use '../tools/mixins/type';
+@use '../tools/functions/index' as functions;
+
+@mixin layout() {
+    /**
+    * Global Layout Definitions & Helpers
+    * =================================
+    *
+    * This is an optional component within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include layout();` into your SCSS dependencies file.
+    */
+
+    body {
+        background-color: dt.$color-background-default;
+    }
+
+    /*
+    * By default we want to give focus styling to all elements that are focusable.
+    */
+    :focus {
+        @extend %u-elementFocus;
+    }
+
+    /*
+    * Hide focus styles if they're not needed, for example, when an element receives focus via the mouse.
+    */
+    :focus:not(:focus-visible) {
+        outline: 0;
+    }
+
+    /*
+    * Show focus styles on keyboard focus.
+    */
+    :focus-visible {
+        @extend %u-elementFocus;
+    }
+
+    /**
+    * Default layout container
+    */
+    .l-container {
+        width: 100%;
+        max-width: #{v.$layout-max-width}px;
+        margin: 0 auto;
+        padding-left: #{v.$layout-margin}px;
+        padding-right: #{v.$layout-margin}px;
+
+        @include media('<mid') {
+            padding-left: #{v.$layout-margin--mid}px;
+            padding-right: #{v.$layout-margin--mid}px;
+        }
+
+        @include media('<narrow') {
+            padding-left: #{v.$layout-margin--narrow}px;
+            padding-right: #{v.$layout-margin--narrow}px;
+        }
+    }
+
+    /**
+    * Layout container for blocks that don't need padding on the sides
+    */
+    .l-innerContainer {
+        width: 100%;
+        max-width: #{v.$layout-max-width}px;
+        margin: 0 auto;
+    }
+
+    .l-innerContainer--verticalSpacing {
+        margin: functions.spacing(f) 0;
+
+        @include media('>=mid') {
+            margin: functions.spacing(g) auto functions.spacing(h);
+        }
+
+        @include media('>=wide') {
+            margin: functions.spacing(i) auto;
+        }
+    }
+
+    /**
+    * Layout class for containers that contain content (such as T&cs and Privacy pages)
+    */
+    .l-content {
+        padding-top: functions.spacing(d);
+
+        @include media('>mid') {
+            padding-top: functions.spacing(f);
+        }
+    }
+
+        .l-content-header {
+            margin: 0 0 functions.spacing(d);
+
+            @include media('>mid') {
+                margin: functions.spacing(d) 0 functions.spacing(f);
+            }
+
+            > h1 {
+                @include type.font-size(heading-xxl, true, narrow);
+
+                @include media('>mid') {
+                    @include type.font-size(heading-xxl);
+                }
+            }
+        }
+            .l-content-header--centred {
+                text-align: center;
+            }
+            .l-content-header--highlight {
+                color: dt.$color-content-brand;
+            }
+
+        .l-content-main {
+            @extend %u-bordered;
+        }
+
+    // Used for dividing pages or cards horizontally
+    .l-divider {
+        border-bottom: 1px solid dt.$color-border-strong;
+    }
+
+    // utility that lets you align items side by side and vertically centered
+    %l-inlined,
+    .l-inlined {
+        display: flex;
+        align-items: center;
+
+        .no-flexbox & {
+            display: inline-block;
+        }
+    }
+
+        .l-inlined--top {
+            display: flex;
+            align-items: flex-start;
+        }
+
+    // uses flexbox to centre align content both vertically and horizontally
+    .l-centred, // British or US English spellings..
+    .l-centered {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,408 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../components/optional/loading-indicator';
+@use '../tools/mixins/type';
+@use '../tools/functions/index' as functions;
+@use '../settings/include-media' as *;
+@use '../trumps/utilities' as *;
+
+@mixin buttons() {
+    /**
+    * Objects > Buttons
+    * =================================
+    *
+    * This is an optional component within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include buttons();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * https://fozzie.just-eat.com/styleguide/ui-components/buttons
+    */
+
+    $btn-default-borderRadius              : dt.$radius-rounded-e;
+    $btn-default-font-size                 : 'heading-s';
+    $btn-default-weight                    : dt.$font-weight-bold;
+    $btn-default-padding                   : 10px functions.spacing(e);
+    $btn-default-outline-color             : dt.$color-focus;
+
+    $btn-default-bgColor                   : dt.$color-interactive-brand;
+    $btn-default-color                     : dt.$color-content-interactive-light;
+    $btn-default-bgColor--hover            : darken(dt.$color-interactive-brand, dt.$color-hover-01);
+    $btn-default-bgColor--active           : darken(dt.$color-interactive-brand, dt.$color-active-01);
+
+    $btn-default-loading-opacity           : 0.35;
+
+    $btn-primary-bgColor                   : dt.$color-interactive-brand;
+    $btn-primary-bgColor--hover            : darken(dt.$color-interactive-brand, dt.$color-hover-01);
+    $btn-primary-bgColor--active           : darken(dt.$color-interactive-brand, dt.$color-active-01);
+    $btn-primary-textColor                 : dt.$color-content-interactive-light;
+    $btn-primary-loading-color             : $btn-primary-textColor;
+    $btn-primary-loading-colorOpaque       : rgba($btn-primary-loading-color, $btn-default-loading-opacity);
+
+    $btn-secondary-bgColor                 : dt.$color-interactive-secondary;
+    $btn-secondary-bgColor--hover          : darken(dt.$color-interactive-secondary, dt.$color-hover-01);
+    $btn-secondary-bgColor--active         : darken(dt.$color-interactive-secondary, dt.$color-active-01);
+    $btn-secondary-textColor               : dt.$color-content-interactive-secondary;
+    $btn-secondary-loading-color           : $btn-secondary-textColor;
+    $btn-secondary-loading-colorOpaque     : rgba($btn-secondary-loading-color, $btn-default-loading-opacity);
+
+    $btn-outline-bgColor                   : transparent;
+    $btn-outline-bgColor--hover            : darken(dt.$color-white, dt.$color-hover-01);
+    $btn-outline-bgColor--active           : darken(dt.$color-white, dt.$color-active-01);
+    $btn-outline-textColor                 : dt.$color-content-interactive-tertiary;
+    $btn-outline-border-color              : dt.$color-border-default;
+    $btn-outline-loading-color             : $btn-outline-textColor;
+    $btn-outline-loading-colorOpaque       : rgba($btn-outline-loading-color, $btn-default-loading-opacity);
+
+    $btn-ghost-bgColor                     : transparent;
+    $btn-ghost-bgColor--hover              : darken(dt.$color-white, dt.$color-hover-01);
+    $btn-ghost-bgColor--active             : darken(dt.$color-white, dt.$color-active-01);
+    $btn-ghost-textColor                   : dt.$color-content-interactive-secondary;
+    $btn-ghost-loading-color               : $btn-ghost-textColor;
+    $btn-ghost-loading-colorOpaque         : rgba($btn-ghost-loading-color, $btn-default-loading-opacity);
+
+    $btn-link-loading-color                : dt.$color-content-link;
+    $btn-link-loading-colorOpaque          : rgba($btn-link-loading-color, $btn-default-loading-opacity);
+
+    $btn-disabled-bgColor                  : dt.$color-disabled-01;
+    $btn-disabled-textColor                : dt.$color-content-disabled;
+
+    $btn-sizeLarge-padding                 : 14px functions.spacing(e);
+    $btn-sizeLarge-loading-color           : dt.$color-content-interactive-light;
+
+    $btn-sizeSmall-font-size               : 'body-l';
+    $btn-sizeSmall-padding                 : functions.spacing() functions.spacing(d);
+
+    $btn-sizeXSmall-font-size              : 'body-s';
+    $btn-sizeXSmall-padding                : 6px functions.spacing();
+
+    @include loading-indicator.loadingIndicator('medium');
+
+    .c-spinner {
+        margin: 0 auto;
+        position: absolute;
+        left: calc(50% - 10px); // Substract half of the size of the spinner.
+        top: calc(50% - 10px); // Substract half of the size of the spinner.
+    }
+
+    /**
+    * Base button styles – Based on csswizardry.com/beautons
+    *
+    * 1. Allow us to better style box model properties.
+    * 2. Line different sized buttons up a little nicer.
+    */
+
+    // By deafult the button is Primary medium sized button
+    .o-btn {
+        display: inline-block;                      /* [1] */
+        vertical-align: middle;                     /* [2] */
+        @include type.font-size($btn-default-font-size);
+        cursor: pointer;
+        margin: 0;
+        padding: $btn-default-padding;
+        text-align: center;
+        font-weight: $btn-default-weight;
+
+        background-color: $btn-default-bgColor;
+        border-radius: $btn-default-borderRadius;
+        border: 1px solid transparent;
+        user-select: none;
+        color: $btn-default-color;
+        text-decoration: none;
+
+        &:focus {
+            box-shadow: 0 0 0 2px solid $btn-default-outline-color;
+        }
+
+        &:hover {
+            background-color: $btn-default-bgColor--hover;
+        }
+
+        &:active {
+            background-color: $btn-default-bgColor--active;
+        }
+
+
+        &:hover,
+        &:active {
+            &:not(.o-btn--link) {
+                outline: 0; // no need as already has a focus/active state
+            }
+        }
+
+        &,
+        &:hover,
+        &:active,
+        &:focus,
+        &:visited {
+            text-decoration: none;
+        }
+
+        p + & {
+            margin-top: functions.spacing(d);
+        }
+
+        & .note {
+            display: none;
+
+            @include media('>=mid') {
+                display: block;
+            }
+        }
+        &[type='submit'] {
+            margin-top: functions.spacing(d);
+        }
+    }
+
+    /**
+    * ==========================================================================
+    * Btn Background Colour modifiers
+    * ==========================================================================
+    */
+
+    /**
+    * Modifier – .o-btn--primary
+    *
+    * Sets the btn colour to site primary colour
+    */
+
+    .o-btn--primary {
+        background-color: $btn-primary-bgColor;
+
+        &,
+        &:link,
+        &:visited {
+            color: $btn-primary-textColor;
+        }
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: $btn-primary-textColor;
+        }
+
+        &:hover {
+            background-color: $btn-primary-bgColor--hover;
+        }
+
+        &:active,
+        &.o-btn--loading {
+            background-color: $btn-primary-bgColor--active;
+        }
+
+        @include loading-indicator.spinnerColor($btn-primary-loading-color, $btn-primary-loading-colorOpaque);
+
+        &.o-btn--sizeSmall,
+        &.o-btn--sizeXSmall {
+            background-color: dt.$color-interactive-primary;
+
+            &:hover {
+                background-color: lighten(dt.$color-interactive-primary, dt.$color-hover-02);
+            }
+            &:active,
+            &.o-btn--loading {
+                background-color: lighten(dt.$color-interactive-primary, dt.$color-active-02);
+            }
+        }
+    }
+
+
+    /**
+    * Modifier – .o-btn--secondary
+    *
+    * Accompanying secondary style button (knocked back slightly from the primary button)
+    */
+
+    .o-btn--secondary {
+        background-color: $btn-secondary-bgColor;
+        color: $btn-secondary-textColor;
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: $btn-secondary-textColor;
+        }
+
+        &:hover {
+            background-color: $btn-secondary-bgColor--hover;
+        }
+
+        &:active,
+        &.o-btn--loading {
+            background-color: $btn-secondary-bgColor--active;
+        }
+
+        @include loading-indicator.spinnerColor($btn-secondary-loading-color, $btn-secondary-loading-colorOpaque);
+    }
+
+
+    /**
+    * Modifier – .o-btn--outline
+    *
+    * Accompanying outline style button
+    */
+
+    .o-btn--outline {
+        background-color: $btn-outline-bgColor;
+        color: $btn-outline-textColor;
+        border-color: $btn-outline-border-color;
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: $btn-outline-textColor;
+        }
+
+        &:hover {
+            background-color: $btn-outline-bgColor--hover;
+        }
+
+        &:active,
+        &.o-btn--loading {
+            background-color: $btn-outline-bgColor--active;
+        }
+
+        @include loading-indicator.spinnerColor($btn-outline-loading-color, $btn-outline-loading-colorOpaque);
+    }
+
+
+    /**
+    * Modifier – .o-btn--ghost
+    *
+    * Accompanying ghost style button
+    */
+
+    .o-btn--ghost {
+        background-color: $btn-ghost-bgColor;
+        color: $btn-ghost-textColor;
+
+        &:hover,
+        &:active,
+        &:focus {
+            color: $btn-ghost-textColor;
+        }
+
+        &:hover {
+            background-color: $btn-ghost-bgColor--hover;
+        }
+
+        &:active,
+        &.o-btn--loading {
+            background-color: $btn-ghost-bgColor--active;
+        }
+
+        @include loading-indicator.spinnerColor($btn-ghost-loading-color, $btn-ghost-loading-colorOpaque);
+    }
+
+
+    /**
+    * ==========================================================================
+    * Btn Size Modifiers
+    * ==========================================================================
+    */
+
+    .o-btn--sizeLarge {
+        padding: $btn-sizeLarge-padding;
+    }
+
+    .o-btn--sizeSmall {
+        @include type.font-size($btn-sizeSmall-font-size);
+        padding: $btn-sizeSmall-padding;
+    }
+
+    .o-btn--sizeXSmall {
+        @include type.font-size($btn-sizeXSmall-font-size);
+        padding: $btn-sizeXSmall-padding;
+    }
+
+
+    /**
+    * ==========================================================================
+    * Btn Layout Modifiers
+    * ==========================================================================
+    */
+
+    //remove uneeded styles (like colours) from a button when only an icon is on it (like a close button)
+    .o-btn--icon {
+        @extend %u-ir;
+        background-color: transparent;
+        padding: 0;
+
+        &:hover { background-color: transparent; }
+    }
+
+
+    // Specificity overrides
+    input[type='submit'],
+    input[type='reset'],
+    input[type='button'] {
+        &.o-btn--block {
+            width: 100%;
+        }
+    }
+
+    .o-btn--fullWidth {
+        display: block;
+        width: 100%;
+
+        // Vertically space out multiple fullWidth buttons
+        // same as .o-btn--fullWidth + .o-btn--fullWidth
+        & + & {
+            margin-top: functions.spacing();
+        }
+    }
+
+
+    /**
+    * Disabled button
+    */
+
+    .o-btn--disabled,
+    .o-btn.disabled,
+    .o-btn.is-disabled,
+    .o-btn[disabled] {
+        cursor: not-allowed;
+        color: $btn-disabled-textColor;
+
+        &,
+        &:hover {
+            background-color: $btn-disabled-bgColor;
+            color: $btn-disabled-textColor;
+        }
+
+        &.o-btn--link {
+            background-color: transparent;
+        }
+    }
+
+
+    /**
+    * Link button
+    *
+    * Make a button visually look like a default link
+    * Useful when we semantically want a button but don’t want all the default styling
+    *
+    * Should only be applied to buttons
+    */
+
+    .o-btn--link {
+        border: 0;
+        background-color: transparent;
+        padding: 0;
+        margin: 0;
+        color: dt.$color-content-link;
+        font-weight: dt.$font-weight-bold;
+        text-decoration: underline;
+
+        &:hover {
+            cursor: pointer;
+            color: darken(dt.$color-content-link, dt.$color-hover-01);
+            background-color: transparent;
+        }
+        &:active,
+        &:focus {
+            color: darken(dt.$color-content-link, dt.$color-active-01);
+            background-color: transparent;
+        }
+
+        @include loading-indicator.spinnerColor($btn-link-loading-color, $btn-link-loading-colorOpaque);
+    }
+ }

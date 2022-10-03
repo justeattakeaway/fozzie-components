@@ -1,0 +1,184 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../tools/mixins/type';
+@use '../settings/include-media' as *;
+@use '../tools/functions/index' as functions;
+@use 'sass:math';
+
+@mixin mediaElement() {
+    /**
+    * Components > Media element
+    * ===================================
+    * A common pattern that sees an image followed by a block of information.
+    *
+    * Example: SERP – Restaurant logos
+    * This is an optional component within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include mediaElement();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * https://fozzie.just-eat.com/styleguide/ui-components/mediaElement
+    */
+
+    $mediaElement-img-width         : 50px;
+    $mediaElement-img-width--mid    : 78px;
+    $mediaElement-img-width--wide   : 67px;
+    $mediaElement-img-borderRadius  : dt.$radius-rounded-c;
+    $mediaElement-infoLinkColor     : dt.$color-content-link-distinct;
+    $mediaElement-fontSize          : body-l;
+    $mediaElement-spacing           : functions.spacing(d);
+
+
+    // mediaElement module
+    // Usually consists of having an image to the left and content to the right
+    .c-mediaElement {
+        display: flex; //defaults to row
+        align-items: flex-start;
+        width: 100%;
+
+        & > :not(:last-child) {
+            @include media('>=mid') {
+                margin-right: functions.spacing(b);
+            }
+        }
+    }
+
+    // stacks the elements (across all viewports)
+    .c-mediaElement--fullstack {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    // stacks the elements (only on narrow)
+    .c-mediaElement--stack {
+        @include media('<mid') {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+        .c-mediaElement-img {
+            line-height: 0;
+            margin-right: 5%;
+
+            &,
+            & > img {
+                width: $mediaElement-img-width;
+
+                @include media('>narrow') {
+                    width: $mediaElement-img-width--mid;
+                }
+
+                @include media('>=wide') {
+                    width: $mediaElement-img-width--wide;
+                }
+            }
+
+            // make sure we cut off the corners of the image and the container
+            &,
+            & > img {
+                border-radius: $mediaElement-img-borderRadius;
+            }
+
+            // center the img when stacked
+            .c-mediaElement--fullstack & {
+                margin-right: 0;
+                flex-basis: auto;
+            }
+
+            .c-mediaElement--stack & {
+                flex-basis: auto;
+
+                @include media('<mid') {
+                    margin-right: 0;
+                    flex-grow: 1;
+                }
+
+                @include media('>=mid') {
+                    margin-top: math.div(functions.spacing(b), 4);
+                }
+
+                @include media('>=wide') {
+                    margin-top: 0;
+                }
+            }
+        }
+
+        // apply an outline to the mediaElement img
+        .c-mediaElement-img--outlined {
+            border: solid 1px dt.$color-border-strong;
+            border-radius: $mediaElement-img-borderRadius;
+        }
+
+        .c-mediaElement-img--small {
+            max-width: 70px;
+            max-height: 70px;
+        }
+
+        // positions the image over the top edge of the media element
+        .c-mediaElement-img--negativeTop {
+            margin-top: 0;
+            position: absolute;
+            top: -24px;
+
+            @include media('>=narrow') {
+                top: -40px;
+            }
+        }
+
+        .c-mediaElement-heading {
+            margin: functions.spacing(h) 0 functions.spacing(d);
+        }
+
+        .c-mediaElement-content {
+            flex-basis: 0;
+            flex-grow: 1;
+
+            .c-mediaElement--fullstack & {
+                flex: auto;
+                margin-top: functions.spacing(a);
+            }
+
+            .c-mediaElement--fullstack--negativeTop & {
+                flex: auto;
+                margin-top: functions.spacing(f);
+            }
+
+            // some content uses br for content shaping – get rid of it on mobile devices
+            & br {
+                @include media('<mid') {
+                    display: none;
+                }
+            }
+        }
+
+        .c-mediaElement-text {
+            margin-top: 0;
+            @include type.font-size(caption, false);
+        }
+
+        .c-mediaElement-text--large {
+            @include type.font-size(heading-m, false); // TODO – this should be updated with a more semantic font alias, as it's not a heading
+            line-height: 1.2;
+        }
+
+        .c-mediaElement-infoLink {
+            @include type.font-size($mediaElement-fontSize);
+            align-items: center;
+            color: $mediaElement-infoLinkColor;
+            display: flex;
+            position: absolute;
+            right: $mediaElement-spacing;
+            text-decoration: none;
+            top: $mediaElement-spacing;
+
+            @include media('<mid') {
+                right: functions.spacing(d);
+                top: functions.spacing(d);
+            }
+
+            &:hover,
+            &:focus {
+                text-decoration: underline;
+            }
+        }
+}

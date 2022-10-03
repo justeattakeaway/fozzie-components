@@ -6,6 +6,9 @@
       "cache": true,
       "dependsOn": ["^build"]
     },
+    "prepare": {
+      "dependsOn": []
+    },
     "test": {
       "cache": true,
       "dependsOn": []

@@ -1,0 +1,62 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../../tools/mixins/type';
+@use '../../settings/include-media' as *;
+@use '../../tools/functions/index' as functions;
+
+@mixin cuisinesWidget() {
+    /**
+    * Components > Cuisines Widget
+    * =================================
+    *
+    * Example: Homepage – Popular cuisines image tiles.
+    *
+    * The `c-cuisinesWidget` component is an optional mixin within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include cuisinesWidget();` into your SCSS dependencies file.
+    *
+    */
+
+    $cuisinesWidget-defaultBackground: dt.$color-background-subtle;
+    $cuisinesWidget-gradient: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+
+    @include media-context(('narrow-mid': 570px, 'mid-wide': 1240px)) {
+
+       .c-cuisinesWidget {
+            display: block;
+            border-radius: dt.$radius-rounded-c;
+            overflow: hidden;
+            position: relative;
+            background-color: $cuisinesWidget-defaultBackground;
+            box-shadow: dt.$elevation-01; // token values for cards
+            margin-top: functions.spacing();
+            margin-bottom: functions.spacing();
+
+            &:hover,
+            &:focus {
+                .c-cuisinesWidget-name {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        .c-cuisinesWidget-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: functions.spacing(d) functions.spacing(d) functions.spacing();
+            color: dt.$color-container-default;
+            text-align: center;
+            background-image: $cuisinesWidget-gradient;
+
+            @include media('>=mid-wide') {
+                @include type.font-size(heading-m, false);
+                padding: functions.spacing(d);
+            }
+        }
+
+        .c-cuisinesWidget-img {
+            vertical-align: bottom;
+            width: 100%;
+        }
+    }
+}

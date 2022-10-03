@@ -1,0 +1,96 @@
+{
+  "name": "@justeat/fozzie",
+  "title": "Fozzie – Just Eat UI Web Framework",
+  "description": "UI Web Framework for the Just Eat Global Platform",
+  "version": "10.4.0",
+  "main": "dist/js/index.js",
+  "files": [
+    "dist/js",
+    "src/scss",
+    "src/fonts"
+  ],
+  "homepage": "https://github.com/justeat/fozzie",
+  "contributors": [
+    "Ashley Nolan <ashley.nolan@just-eat.com> (https://ashleynolan.co.uk)",
+    "Damian Mullins <damian.mullins@just-eat.com> (http://www.damianmullins.com)",
+    "Github contributors <https://github.com/justeat/fozzie/graphs/contributors>"
+  ],
+  "authors": [
+    {
+      "name": "Contributors",
+      "url": "https://github.com/justeat/fozzie/graphs/contributors"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:justeat/fozzie.git"
+  },
+  "bugs": {
+    "url": "https://github.com/justeat/fozzie/issues"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": "^14 || ^16"
+  },
+  "dependencies": {
+    "@justeat/pie-design-tokens": "3.0.0",
+    "include-media": "eduardoboucas/include-media#2.0-release"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.18.10",
+    "@babel/core": "7.19.1",
+    "@babel/eslint-parser": "7.19.1",
+    "@babel/preset-env": "7.19.1",
+    "@justeat/browserslist-config-fozzie": "2.0.0",
+    "@justeat/eslint-config-fozzie": "5.1.0",
+    "@justeat/f-dom": "1.1.0",
+    "@justeat/f-logger": "0.8.1",
+    "@justeat/js-test-buddy": "0.4.1",
+    "@justeat/stylelint-config-fozzie": "3.2.0",
+    "caniuse-lite": "1.0.30001409",
+    "concurrently": "7.4.0",
+    "coveralls": "3.1.1",
+    "danger": "11.1.2",
+    "eslint": "8.23.1",
+    "eslint-plugin-import": "2.26.0",
+    "fontfaceobserver": "2.3.0",
+    "glob": "8.0.3",
+    "jest": "29.0.3",
+    "jest-environment-jsdom": "^29.0.3",
+    "postcss": "8.4.16",
+    "sass": "1.55.0",
+    "sass-true": "6.1.0",
+    "stylelint": "14.12.1",
+    "stylelint-config-standard-scss": "5.0.0"
+  },
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0"
+  },
+  "keywords": [
+    "fozzie"
+  ],
+  "scripts": {
+    "compile": "babel -d dist src --ignore \"src/**/*.test.js\"",
+    "lint": "yarn run lint:css && yarn run lint:js",
+    "lint:css": "stylelint src/scss/**/*.scss",
+    "lint:js": "eslint --ext .js .",
+    "test": "concurrently -n \"test:js,test:scss\" -c \"cyan,magenta\" \"yarn test:js\" \"yarn test:scss\"",
+    "test:js": "jest --config=jest.config.js",
+    "test:scss": "jest --config=src/test/scss/jest.config.js",
+    "test:build": "sass --no-source-map --load-path=node_modules --style=compressed src/scss:dist/css",
+    "test:cover": "jest --collect-coverage",
+    "test:cover:CI": "cat coverage/lcov.info | coveralls"
+  },
+  "stylelint": {
+    "extends": "@justeat/stylelint-config-fozzie"
+  },
+  "browserslist": [
+    "extends @justeat/browserslist-config-fozzie"
+  ],
+  "assets": [
+    {
+      "root": "src/",
+      "glob": "fonts/**/*"
+    }
+  ]
+}

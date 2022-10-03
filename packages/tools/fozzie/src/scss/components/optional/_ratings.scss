@@ -1,0 +1,178 @@
+@use '../../tools/mixins/type';
+@use '../../tools/mixins/ratings';
+@use '../../settings/variables' as v;
+
+@mixin rating() {
+    /**
+    * Components > Rating
+    * =================================
+    * Used for displaying restuarant rating stars
+    *
+    * The `c-rating` component is an optional mixin within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include rating();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * https://fozzie.just-eat.com/styleguide/ui-components/custom/star-ratings
+    */
+
+    $star-count                 : 6;
+    $star-size--small           : 12px;
+    $star-size--default         : 16px;
+    $star-size--default--scaleUp: 22px;
+    $star-size--medium          : 28px;
+    $star-size--large           : 42px;
+
+    .c-rating {
+        background-image: inline(#{v.$star-icon-path--empty});
+        background-repeat: repeat-x;
+        display: inline-block;
+        height: $star-size--default;
+        width: ($star-size--default * $star-count);
+
+        &,
+        .c-rating--fill {
+            background-size: $star-size--default $star-size--default;
+        }
+
+        &.c-rating--spaced {
+            width: (($star-size--default * 1.5) * $star-count);
+
+            &,
+            .c-rating--fill {
+                background-size: ($star-size--default * 1.5) $star-size--default;
+            }
+        }
+    }
+
+    .c-rating-description {
+        @include type.font-size(body-s);
+    }
+
+    .c-rating--small {
+
+        height: $star-size--small;
+        width: ($star-size--small * $star-count);
+
+        &,
+        .c-rating--fill {
+            background-size: $star-size--small $star-size--small;
+        }
+
+        &.c-rating--spaced {
+            width: (($star-size--small * 1.5) * $star-count);
+
+            &,
+            .c-rating--fill {
+                background-size: ($star-size--small * 1.5) $star-size--small;
+            }
+        }
+    }
+
+    .c-rating--default--scaleUp {
+        height: $star-size--default--scaleUp;
+        width: ($star-size--default--scaleUp * $star-count);
+
+        &,
+        .c-rating--fill {
+            background-size: $star-size--default--scaleUp $star-size--default--scaleUp;
+        }
+
+        &.c-rating--spaced {
+            width: (($star-size--default--scaleUp * 1.5) * $star-count);
+
+            &,
+            .c-rating--fill {
+                background-size: ($star-size--default--scaleUp * 1.5) $star-size--default--scaleUp;
+            }
+        }
+    }
+
+    .c-rating--medium {
+        height: $star-size--medium;
+        width: ($star-size--medium * $star-count);
+
+        &,
+        .c-rating--fill {
+            background-size: $star-size--medium $star-size--medium;
+        }
+
+        &.c-rating--spaced {
+            width: (($star-size--medium * 1.5) * $star-count);
+
+            &,
+            .c-rating--fill {
+                background-size: ($star-size--medium * 1.5) $star-size--medium;
+            }
+        }
+    }
+
+    .c-rating--large {
+        height: $star-size--large;
+        width: ($star-size--large * $star-count);
+
+        &,
+        .c-rating--fill {
+            background-size: $star-size--large $star-size--large;
+        }
+
+        &.c-rating--spaced {
+            width: (($star-size--large * 1.5) * $star-count);
+
+            &,
+            .c-rating--fill {
+                background-size: ($star-size--large * 1.5) $star-size--large;
+            }
+        }
+    }
+
+    .c-rating--fill {
+        background-image: inline(#{v.$star-icon-path--filled});
+        vertical-align: top;
+        background-repeat: repeat-x;
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        @include ratings.rating-fill($star-count);
+    }
+
+    /*
+    Selectable stars rating component
+    */
+    .c-ratingSelectable {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+    }
+
+    .c-ratingSelectable-input {
+        display: none;
+
+        &:checked {
+            & + label,
+            & ~ input + label {
+                background-image: inline(#{v.$star-icon-path--filled});
+            }
+       }
+    }
+
+    .c-ratingSelectable-input:disabled,
+    .c-ratingSelectable-input[disabled] {
+        & + label {
+            cursor: default;
+            pointer-events: none;
+        }
+    }
+
+    .c-icon--star {
+        display: block;
+        cursor: pointer;
+        background-image: inline(#{v.$star-icon-path--empty});
+        @extend %u-hideText;
+
+        &:hover,
+        &:hover ~ label {
+            background-image: inline(#{v.$star-icon-path--filled});
+        }
+    }
+
+}

@@ -1,0 +1,466 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../settings/include-media' as *;
+@use '../tools/mixins/border';
+@use '../tools/mixins/truncate';
+@use '../tools/functions/index' as functions;
+
+// ====================
+// @TODO - MOVE TO DIFFERENT FILE.
+
+%u-ir {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: 0;
+    direction: ltr;
+    display: block;
+    overflow: hidden;
+    text-align: left;
+    text-indent: -999em;
+
+    br {
+      display: none;
+    }
+}
+
+%u-elementFocus {
+    outline: 2px solid dt.$color-focus;
+}
+
+%u-unstyled {
+    margin-top: 0;
+    margin-left: 0;
+    padding: 0;
+    list-style: none;
+    list-style-image: none;
+
+    & > li {
+        margin-bottom: 0;
+
+      &:before {
+          content: none;
+      }
+    }
+}
+
+%u-hideText {
+    text-indent: 110%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+%u-bordered {
+    @include border.bordered();
+}
+
+%u-elementFocus--boxShadow {
+    outline: none;
+    box-shadow: 0 0 0 2px dt.$color-focus;
+}
+
+%u-focusShadow {
+    outline: none;
+}
+
+%u-focusShadow-content {
+    box-shadow: 0 0 2px 2px dt.$color-focus; /* keyboard-only focus styles */
+}
+
+// ====================
+
+@mixin trumps-utilities() {
+    /**
+    * Utilities
+    * ===================================
+    * Non-semantic helper classes
+    */
+
+    //
+    // Clearfix
+    // http://www.cssmojo.com/latest_new_clearfix_so_far/
+    // See mixins/_utility.scss for a mixin version of this
+    // ==========================================================================
+    .u-clearfix {
+        &:after {
+            content: ' ';
+            display: table;
+            clear: both;
+        }
+    }
+
+    //
+    // Colour Utilities
+    // ==========================================================================
+
+    .u-lightenBg {
+        background-color: dt.$color-white;
+    }
+
+    //
+    // Border Utilities
+    // ==========================================================================
+
+    .u-noBorder {
+        border: none !important;
+    }
+
+    .u-bordered {
+        @extend %u-bordered;
+    }
+
+    .u-bordered--mid {
+        @include media('>mid') {
+            @include border.bordered();
+        }
+    }
+
+
+    //
+    // Display Utilities
+    // ==========================================================================
+
+    // Hide from both screenreaders and browsers: h5bp.com/u
+    .is-hidden,
+    .no-js .is-hidden--noJS {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    .is-shown,
+    .no-js .is-shown--noJS {
+        display: block !important;
+        visibility: visible !important;
+    }
+
+    // Hide only visually, but have it available for screenreaders: h5bp.com/v
+    .is-visuallyHidden {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+
+        // Extends the .is-visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p
+        &.focusable:active,
+        &.focusable:focus {
+            clip: auto;
+            height: auto;
+            margin: 0;
+            overflow: visible;
+            position: static;
+            width: auto;
+        }
+    }
+
+    // Hide visually and from screenreaders, but maintain layout
+    .is-invisible { visibility: hidden; }
+
+    .u-pointer {
+        cursor: pointer;
+    }
+
+    //
+    // Position Utilities
+    // ==========================================================================
+
+    .is-sticky {
+        width: 100%;
+        z-index: functions.zIndex(mid);
+        position: fixed;
+        transition: top 0.2s ease;
+    }
+
+    .u-sticky {
+        position: sticky !important;
+        top: functions.spacing(d);
+    }
+
+    .u-absolutelyCentered {
+        position: absolute;
+        top: 50%;
+        right: 50%;
+        transform: translate(50%, -50%);
+    }
+
+    //
+    // Typographic Helpers
+    // ==========================================================================
+
+    // ensures text inside helper never wraps
+    .u-noWrap {
+        white-space: nowrap;
+    }
+
+    .u-uppercase {
+        text-transform: uppercase;
+    }
+
+    .u-textPad {
+        padding-left: functions.spacing(f) !important;
+    }
+
+    .u-text-truncate {
+        @include truncate.truncate();
+    }
+
+    .u-noUnderline {
+        text-decoration: none;
+
+        &:hover,
+        &:active,
+        &:focus {
+            text-decoration: underline;
+        }
+    }
+
+    .u-text-centre, // British or US English spellings..
+    .u-text-center {
+        text-align: center;
+    }
+
+    .u-text-left {
+        text-align: left;
+    }
+
+    .u-text-right {
+        text-align: right;
+    }
+
+    .u-text-highlight {
+        color: dt.$color-red;
+
+        @at-root em#{&} {
+            font-style: normal;
+        }
+    }
+
+    .u-text-indent {
+        margin-left: functions.spacing(d);
+    }
+
+    //
+    // Typographic Colour Helpers
+    //
+    // Each colour util class is relative to a Fozzie colour within the
+    // Fozzie colour pallette.
+    //
+    // Our current colour pallete can be found here:
+    // https://fozzie.just-eat.com/styleguide/design-elements/colours
+    // ==========================================================================
+
+    .u-color-text {
+        color: dt.$color-content-default;
+    }
+
+    .u-color-link {
+        color: dt.$color-content-link;
+    }
+
+    .u-color-secondary {
+        color: dt.$color-blue;
+    }
+
+    .u-color-text--hint {
+        color: dt.$color-content-subdued;
+    }
+
+    .u-color-text--success {
+        color: dt.$color-content-positive;
+    }
+
+    .u-color-text--danger {
+        color: dt.$color-content-error;
+    }
+
+    .u-color-text--warning {
+        color: dt.$color-content-default;
+    }
+
+    //
+    // Spacing Utilities
+    // ==========================================================================
+
+    .u-noSpacing {
+        margin: 0 !important;
+    }
+
+    .u-spacingTop {
+        margin-top: functions.spacing() !important;
+    }
+
+        .u-spacingTop--small {
+            margin-top: functions.spacing(a) !important;
+        }
+
+        .u-spacingTop--large {
+            margin-top: functions.spacing(d) !important;
+        }
+
+    .u-spacingRight {
+        margin-right: functions.spacing() !important;
+    }
+
+    .u-spacingBottom {
+        margin-bottom: functions.spacing() !important;
+    }
+
+        .u-spacingBottom--large {
+            margin-bottom: functions.spacing(d) !important;
+        }
+
+        .u-spacingBottom--large--aboveMid {
+            @include media('>=mid') {
+                margin-bottom: functions.spacing(d);
+            }
+        }
+
+    .u-spacingLeft {
+        margin-left: functions.spacing() !important;
+    }
+
+    //
+    // Padding Utilities
+    // ==========================================================================
+
+    .u-noPad {
+        padding: 0 !important;
+    }
+
+    .u-padTop {
+        padding-top: functions.spacing() !important;
+    }
+
+        .u-padTop--large {
+            padding-top: functions.spacing(d) !important;
+        }
+
+        .u-padTop--large--aboveMid {
+            @include media('>=mid') {
+                padding-top: functions.spacing(d) !important;
+            }
+        }
+
+
+    //
+    // Overlay Utilities
+    // ==========================================================================
+
+    .u-overlay {
+        background-color: rgba(0, 0, 0, 0.5);
+        bottom: 0;
+        left: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
+    }
+
+        .u-overlay--after {
+            &:after {
+                background-color: rgba(0, 0, 0, 0.5);
+                bottom: 0;
+                content: '';
+                left: 0;
+                position: fixed;
+                right: 0;
+                top: 0;
+                z-index: functions.zIndex(low);
+            }
+        }
+
+    .u-preventScroll {
+        overflow: hidden;
+    }
+
+    //
+    // Image Replacement Techniques
+    // ==========================================================================
+
+    [data-lazy-image-src] {
+        display: block;
+
+        .no-js & {
+            display: none;
+        }
+    }
+
+
+    // For background image replacement
+
+    .u-ir {
+        @extend %u-ir;
+    }
+
+    // Alternative image replacement technique
+    .u-hideText {
+        @extend %u-hideText;
+    }
+
+    //
+    // List Helper
+    // ==========================================================================
+
+    .u-unstyled {
+        @extend %u-unstyled;
+    }
+
+    //
+    // Helper classes for focus accessibility
+    // =================================================================================
+
+    /* Custom outline styling for elements that have a focus state */
+    .u-elementFocus {
+        @extend %u-elementFocus;
+    }
+
+    /* Custom visual outline emulation for better appearance on elements with rounded corners */
+    .u-elementFocus--boxShadow {
+        @extend %u-elementFocus--boxShadow;
+    }
+
+    /*
+    * Clever hack to have focus on an element but only when keyboard focused (not click)
+    * https://stackoverflow.com/questions/31402576/enable-focus-only-on-keyboard-use-or-tab-press
+    */
+    .u-focusShadow:focus,
+    .u-focusShadow-content:focus {
+        @extend %u-focusShadow;
+    }
+
+    .u-focusShadow:focus > .u-focusShadow-content {
+        @extend %u-focusShadow-content;
+    }
+
+
+    //
+    // Misc classes
+    // ==========================================================================
+    .u-shadowBottom--belowMid {
+        padding-bottom: functions.spacing(h);
+
+        @include media('<mid') {
+            &:after {
+                background-color: dt.$color-background-subtle;
+                border: 0;
+                box-shadow: dt.$elevation-01;
+                content: '';
+                display: block;
+                height: functions.spacing(h);
+                left: -#{functions.spacing()};
+                position: absolute;
+                width: 100vw;
+            }
+        }
+    }
+
+    .u-noBackground {
+        background: none !important;
+    }
+
+    .u-hover--cursor {
+        &:hover {
+            cursor: pointer !important;
+        }
+    }
+}

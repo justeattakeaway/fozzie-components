@@ -1,0 +1,110 @@
+@use '../../settings/include-media' as *;
+@use '../../tools/functions/index' as functions;
+
+@mixin overflowCarousel() {
+    /**
+    * Components > Overflow Carousel
+    * --------------------------------
+    * Allows a list of content to be scrolled horizontally
+    *
+    * Example: Used for mobile filter carousel on the Search Page
+    *
+    * The `c-overflowCarousel` component is an optional mixin within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include overflowCarousel();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * TBC
+    */
+
+    .c-overflowCarousel {
+        @include media('<mid') {
+            margin: 0 -#{functions.spacing(d)};
+        }
+    }
+
+    .c-overflowCarousel-inner {
+        @include media('<mid') {
+            @include overflowCarouselInner();
+
+            &.is-active {
+                overflow: visible;
+            }
+        }
+
+        .c-overflowCarousel--fromMid & {
+            @include media('<=mid') {
+                @include overflowCarouselInner();
+
+                &.is-active {
+                    overflow: visible;
+                }
+            }
+        }
+    }
+
+    .c-overflowCarousel-content {
+        @include media('<mid') {
+            @include overflowCarouselContent();
+        }
+
+        .c-overflowCarousel--fromMid & {
+            @include media('<=mid') {
+                @include overflowCarouselContent();
+            }
+        }
+    }
+
+    //solution for block children elements
+    .c-overflowCarousel--withBlockElements {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: functions.spacing() functions.spacing(d);
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: none;
+
+        //add spacing after the last element
+        &:after {
+            content: '';
+            flex: 0 0 functions.spacing(d);
+        }
+
+        @include media('>mid') {
+            padding: functions.spacing(d) functions.spacing(f) functions.spacing();
+        }
+
+        .c-overflowCarousel-item {
+            flex: 1 0 auto;
+            margin-right: functions.spacing();
+
+            @include media('>=mid') {
+                margin-right: functions.spacing(d);
+            }
+        }
+    }
+
+    .c-overflowCarousel--hideScroll {
+        @include media('>=wide') {
+            scrollbar-width: none; /* stylelint-disable-line property-no-unknown */
+        }
+    }
+
+    .c-overflowCarousel--hideScroll::-webkit-scrollbar {
+        width: 0;
+        display: none;
+    }
+}
+
+@mixin overflowCarouselInner() {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+}
+
+@mixin overflowCarouselContent() {
+    display: inline-flex;
+    white-space: nowrap;
+    padding-left: functions.spacing(d);
+    padding-right: functions.spacing(d);
+}

@@ -1,0 +1,49 @@
+//
+// ==========================================================================
+// Ratings variant mixin
+// Used in rating modify to fill the star ratings
+// ==========================================================================
+//
+// eg. example of generated fill classes for a 3 star rating
+//
+// .c-ratings--fill-30 {
+//    width: 50%;
+// }
+//
+// 5 star rating
+//
+// .c-ratings--fill-50 {
+//    width: 83.33%;
+// }
+
+@use 'sass:math';
+
+$rating-iterations: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+@mixin rating-fill($maxStars: 6) {
+    @if $maxStars > 0 {
+        @for $i from 0 to $maxStars + 1 {
+            @if $i < $maxStars {
+                @each $ratingIteration in $rating-iterations {
+                    /* stylelint-disable max-nesting-depth */
+                    @if $i == 0 and $ratingIteration == 0 {
+                        &.c-ratings--fill-00 {
+                            width: 0;
+                        }
+                    } @else {
+                        &.c-ratings--fill-#{$i}#{$ratingIteration} {
+                            width: math.div(($ratingIteration * 0.1) + $i, $maxStars) * 100%;
+                        }
+                    }
+                    /* stylelint-enable max-nesting-depth */
+                }
+            } @else {
+                &.c-ratings--fill-#{$i}#{0} {
+                    width: math.div($i, $maxStars) * 100%;
+                }
+            }
+        }
+    } @else {
+        @warn 'Max star count must be greater than 0';
+    }
+}

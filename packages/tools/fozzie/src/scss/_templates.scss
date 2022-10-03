@@ -1,0 +1,87 @@
+@use 'base/normalize' as *;
+@use 'base/reset' as *;
+@use 'base/typography' as *;
+@use 'tools/helpers/breakpoints' as mixins;
+@use 'base/grid' as *;
+@use 'objects/body' as *;
+@use 'objects/buttons' as *;
+@use 'objects/links' as *;
+@use 'objects/lists' as *;
+@use 'objects/tables' as *;
+@use 'objects/form-controls' as *;
+@use 'objects/form-toggle' as *;
+@use 'components/alerts' as *;
+@use 'components/breadcrumbs' as *;
+@use 'components/cards' as *;
+@use 'components/media-element' as *;
+@use 'base/layout' as *;
+@use 'trumps/utilities' as *;
+@use 'trumps/rwd' as *;
+@use 'base/print' as *;
+
+$includeBaseFramework: false !default;
+$includeMinimalFramework: false !default;
+
+/**
+ * Setting $includeBaseFramework to `true` includes the base styles that were included
+ * as part of Fozzie v4 (useful for anyone upgrading that wants to keep things as-is)
+**/
+@if $includeBaseFramework {
+    @include normalize();
+    @include reset();
+    @include typography();
+    @include mixins.breakpoints();
+
+    @include grid();
+
+    // base objects
+    @include bodyStyles();
+    @include buttons();
+    @include links();
+    @include lists();
+    @include tables();
+    @include formControls();
+    @include formToggle();
+
+    // base components
+    @include alerts();
+    @include breadcrumbs();
+    @include cards();
+    @include mediaElement();
+
+    // layout
+    @include layout();
+
+    // trumps
+    @include trumps-utilities();
+    @include trumps-rwd();
+
+    @include print();
+}
+
+/**
+ * Setting $includeMinimalFramework to `true` includes a recommended base set of styles
+ * that provides styling for most use-cases (links, lists, buttons, grid)
+ **/
+@if $includeMinimalFramework {
+    @include normalize();
+    @include reset();
+    @include typography();
+
+    @include grid();
+
+    // base objects
+    @include bodyStyles();
+    @include buttons();
+    @include links();
+    @include lists();
+
+    // layout
+    @include layout();
+
+    // trumps
+    @include trumps-utilities();
+    @include trumps-rwd();
+
+    @include print();
+}

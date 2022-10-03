@@ -1,0 +1,162 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+
+/* stylelint-disable indentation */
+// =================================
+// Variables
+// =================================
+
+// Typography
+// ==========================================================================
+// Base sizes:
+// Set this in pixels (but do not add px),
+// the font-size mixin will convert to REMS
+
+$font-size-base             : nth(dt.$font-size-d, 1); // Base font size is set to 16 (`body-l` size)
+$font-size-base-px          : $font-size-base * 1px;
+
+// Type map – these are our global font-sizes and line-heights across the site
+$type: (
+    caption: (
+        default: (dt.$font-size-a)
+    ),
+    body-s: (
+        default: (dt.$font-size-b)
+    ),
+    body-l: (
+        default: (dt.$font-size-c)
+    ),
+    subheading-s: (
+        default: (dt.$font-size-d),
+        narrow: (dt.$font-size-c)
+    ),
+    subheading-l: (
+        default: (dt.$font-size-e),
+        narrow: (dt.$font-size-d)
+    ),
+    heading-s: (
+        default: (dt.$font-size-d),
+        narrow: (dt.$font-size-c)
+    ),
+    heading-m: (
+        default: (dt.$font-size-e),
+        narrow: (dt.$font-size-d)
+    ),
+    heading-l: (
+        default: (dt.$font-size-f),
+        narrow: (dt.$font-size-e)
+    ),
+    heading-xl: (
+        default: (dt.$font-size-g),
+        narrow: (dt.$font-size-f)
+    ),
+    heading-xxl: (
+        default: (dt.$font-size-h),
+        narrow: (dt.$font-size-g)
+    )
+) !default;
+
+$font-weight-headings       : dt.$font-weight-extrabold;
+
+// Font stacks
+$font-family-base           : dt.$font-family-primary, dt.$font-family-secondary, sans-serif;
+$font-family-mono           : Menlo, Monaco, 'Courier New', monospace;
+
+
+//  Global Breakpoints and unit intervals
+// ==========================================================================
+
+$fozzie-unit-intervals: (
+  'px': 1,
+  'em': 0.001, // We need more sensitivity, some browsers are very specific with breakpoints
+  'rem': 0.1,
+  '': 0
+);
+
+// Layout setup
+// ==========================================================================
+
+// Setup grid defaults
+$layout-margin                : 32 !default; // [in pixels] Space outside the grid
+$layout-margin--mid           : 16 !default; // [in pixels] Space outside the grid
+$layout-margin--narrow        : 16 !default; // [in pixels] Space outside the grid
+$layout-max-width             : 1272 !default; // [in pixels]
+
+$grid-column-count            : 12 !default; // Total column count
+$grid-gutter-width            : 16 !default; // [in pixels]
+
+$responsive-grid-sizes        : true !default; // Disable this if you don't want grid sizes for each breakpoint
+$responsive-gutters           : true !default; // Disable this if you don't want gutters for each breakpoint
+$use-legacy-grid              : true !default;
+
+
+// spacing map
+// Can access levels by using the spacing function > spacing() or spacing(a) for example
+$spacing: (
+    a    : dt.$spacing-a, // 4px
+    b    : dt.$spacing-b, // 8px
+    c    : dt.$spacing-c, // 12px
+    d    : dt.$spacing-d, // 16px
+    e    : dt.$spacing-e, // 24px
+    f    : dt.$spacing-f, // 32px
+    g    : dt.$spacing-g, // 40px
+    h    : dt.$spacing-h, // 56px
+    i    : dt.$spacing-i, // 64px
+    j    : dt.$spacing-j  // 80px
+);
+
+$border-radius: dt.$radius-rounded-a; // the smallest of pie border tokens
+
+//  z-indexes
+// ==========================================================================
+// In an attempt to keep our z-indexes fairly clean, we have a number of
+// pre-defined vars declared to make maintenance easier
+
+$zIndex: (
+    lowest      : -1,
+    low         : 1,
+    belowMid    : 99,
+    mid         : 100,
+    belowHighest: 8999,
+    high        : 9000,
+    aboveHighest: 9999
+) !default;
+
+// Path vars
+// ==========================================================================
+$img-path                  : 'dist/img' !default; // Usage: background: inline('#{$img-path}/img.jpg') 0 0 no-repeat;
+$img-path-url              : '/assets/img' !default; // Usage: background: url('#{$img-path}/img.jpg') 0 0 no-repeat;
+$icon-path                 : '#{$img-path}/icons' !default;
+$font-path                 : 'dist/fonts' !default;
+
+$star-icon-path--filled    : '#{$icon-path}/stars/star--filled.svg' !default;
+$star-icon-path--empty     : '#{$icon-path}/stars/star--empty.svg' !default;
+
+// App-specific variables
+// ==========================================================================
+// Add common vars below here
+
+$default-transition: all 150ms ease-in-out;
+
+
+// Environment variables
+// ==========================================================================
+// These are passed in through the gulp build task
+// If they don't exist – because we're running Fozzie through a build that hasn't defined them – this will fail silently
+
+@if global-variable-exists(env) {
+    @debug 'Build running in `#{$env}` mode';
+}
+@if global-variable-exists(isDev) {
+    @debug 'isDev is `#{$isDev}`';
+}
+@if global-variable-exists(isProd) {
+    @debug 'isProd is `#{$isProd}`';
+}
+@if global-variable-exists(server) {
+    @if $server == undefined {
+        $server: 'local';
+    }
+    @debug 'Server is set to `#{$server}`';
+}
+
+/* stylelint-enable */

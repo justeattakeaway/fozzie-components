@@ -1,0 +1,274 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../settings/include-media' as *;
+@use '../tools/mixins/truncate';
+@use '../tools/functions/index' as functions;
+
+@mixin cards() {
+    /**
+    * Components > Card
+    * =================================
+    * Used for content listing cards.
+    *
+    * This is an optional component within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include cards();` into your SCSS dependencies file.
+
+    * Documentation:
+    * https://fozzie.just-eat.com/styleguide/ui-components/cards
+    */
+
+    $card-bgColor--active                           : dt.$color-container-default;
+    $card-bgColor--disabled                         : dt.$color-container-subtle;
+    $card-tooltip-width                             : 10px;
+    $card-arrow-bottom-position                     : 0;
+    $card-padding                                   : functions.spacing(d);
+    $card-radius                                    : dt.$radius-rounded-c;
+    $card-borderColor                               : dt.$color-border-default;
+    $card-info-bgColor--active                      : dt.$color-support-warning-02;
+    $card-section-margin                            : functions.spacing(f);
+    $card-section-margin--large                     : functions.spacing(i);
+    $card-section-highlight-backgroundColor         : dt.$color-support-brand-02;
+    $card-section-highlight-color                   : dt.$color-content-default;
+    $card-section-collapsible-paddingRight          : 60px;
+    $card-section-collapsed-height                  : 40px;
+
+
+    .c-card {
+        background-color: $card-bgColor--active;
+        display: block;
+        margin-bottom: functions.spacing();
+        padding: $card-padding;
+        position: relative;
+
+        @include media('>=mid') {
+            margin-bottom: 0;
+        }
+    }
+
+    .c-card--info {
+        background-color: $card-info-bgColor--active;
+    }
+
+        //
+        // Spacing Modifiers
+        // ==========================================================================
+
+        .c-card--noPad {
+            padding: 0;
+        }
+
+        .c-card--noPadVertical {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .c-card--noPadBottom {
+            padding-bottom: 0;
+        }
+
+            .c-card--noPadBottom--aboveMid {
+                @include media('>=mid') {
+                    padding-bottom: 0;
+                }
+            }
+
+            .c-card--padBottom--belowMid {
+                @include media('<mid') {
+                    padding-bottom: functions.spacing(f);
+                }
+            }
+
+        // stretches the card contents outside of their container
+        .c-card--negativeSpacing {
+            margin-left: -#{functions.spacing(d)};
+            margin-right: -#{functions.spacing(d)};
+            padding-left: functions.spacing(d);
+            padding-right: functions.spacing(d);
+        }
+
+            .c-card--negativeSpacing--belowMid {
+                @include media('<mid') {
+                    margin-left: -#{functions.spacing(d)};
+                    margin-right: -#{functions.spacing(d)};
+                }
+            }
+
+            .c-card--negativeSpacing--belowMid--small {
+                @include media('<mid') {
+                    margin-left: -#{functions.spacing()};
+                    margin-right: -#{functions.spacing()};
+                }
+            }
+
+
+        //
+        // Outline Modifiers
+        // ==========================================================================
+
+        .c-card--rounded {
+            border-radius: $card-radius;
+        }
+
+        .c-card--outline {
+            border: solid 1px $card-borderColor;
+        }
+
+            .c-card--outline--aboveMid {
+                @include media('<mid') {
+                    border: none;
+                    border-radius: 0;
+                }
+            }
+
+            .c-card--outlineTop--belowMid {
+                @include media('<mid') {
+                    border-top: solid 1px $card-borderColor;
+                }
+            }
+
+        //
+        // Other Modifiers
+        // ==========================================================================
+
+        .c-card--disabled {
+            background: $card-bgColor--disabled;
+        }
+
+        .c-card--noBgColor {
+            background-color: transparent;
+        }
+
+        // sets all link styles to behave as if they were standard text
+        .c-card--normaliseLinks {
+            text-decoration: none;
+
+            &:hover,
+            &:active,
+            &:focus {
+                color: inherit;
+            }
+        }
+
+        //
+        // Child Elements
+        // ==========================================================================
+
+        // creates a section which is separated off by a border on larger screens
+        .c-card-section {
+            margin-left: -#{functions.spacing(d)};
+            padding-left: functions.spacing(d);
+            width: calc(100% + #{$card-section-margin});
+
+            @include media('>=mid') {
+                border-top: solid 1px $card-borderColor;
+                margin-left: -#{functions.spacing(d)};
+                padding-left: functions.spacing(e);
+            }
+        }
+
+            // used to create a section which has a highlighted background colour applied
+            .c-card-section--highlight {
+                background-color: $card-section-highlight-backgroundColor;
+                border-top: none;
+                color: $card-section-highlight-color;
+                margin-top: functions.spacing(d);
+                padding: functions.spacing(a) functions.spacing();
+
+                + .c-card-section--highlight {
+                    margin-top: 1px;
+
+                    &:last-of-type {
+                        border-bottom-right-radius: $card-radius;
+                        border-bottom-left-radius: $card-radius;
+                    }
+                }
+
+                &.is-last {
+                    border-bottom-right-radius: $card-radius;
+                    border-bottom-left-radius: $card-radius;
+                }
+            }
+
+            .c-card-section--collapsible {
+                overflow: hidden;
+                padding-bottom: functions.spacing(d);
+                padding-right: $card-section-collapsible-paddingRight;
+                position: relative;
+                user-select: none;
+
+                @include media('>=mid') {
+                    padding-bottom: 0;
+                    padding-right: $card-section-collapsible-paddingRight;
+
+                    &.c-card-section {
+                        margin-bottom: functions.spacing(d);
+
+                        &.has-noSpacing {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .c-card-section--collapsible--noPad {
+                margin-left: -#{functions.spacing(f)};
+                padding: 0 $card-section-collapsible-paddingRight 0 functions.spacing(d);
+                width: calc(100% + #{$card-section-margin--large});
+
+                @include media('>=mid') {
+                    margin-left: -#{functions.spacing(d)};
+                    padding: 0 $card-section-collapsible-paddingRight 0 functions.spacing(e);
+                    width: calc(100% + #{$card-section-margin});
+                }
+            }
+
+            .c-card-section--collapsed {
+                @include media('<mid') {
+                    height: $card-section-collapsed-height;
+                }
+
+                p {
+                    @include truncate.truncate();
+
+                    &:not(:first-of-type) {
+                        display: none;
+                    }
+                }
+            }
+
+            .c-card-section-indicator {
+                height: 6px;
+                display: none;
+                position: absolute;
+                right: functions.spacing(d);
+                top: 22px;
+                transform: rotate(180deg);
+                transition: transform 0.4s;
+                width: 10px;
+
+                @include media('>=mid') {
+                    height: 8px;
+                    right: functions.spacing(e);
+                    width: 14px;
+                }
+
+                .c-card-section--collapsible & {
+                    display: block;
+                }
+
+                .c-card-section--collapsed & {
+                    transform: rotate(0);
+                }
+
+                .c-card-section--collapsible--noPad & {
+                    right: 21px;
+
+                    @include media('>=mid') {
+                        right: functions.spacing(e);
+                    }
+                }
+            }
+}

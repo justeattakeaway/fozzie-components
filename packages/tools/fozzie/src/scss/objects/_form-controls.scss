@@ -1,0 +1,249 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../settings/include-media' as *;
+@use '../tools/functions/index' as functions;
+
+@mixin formControls() {
+    /**
+    * Objects > Checkboxes and radios
+    * =================================
+    * Custom Checkbox and Radio button styling
+    *
+    * This is an optional mixin within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include formControls();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * https://fozzie.just-eat.com/styleguide/ui-components/forms/checkboxes
+    * https://fozzie.just-eat.com/styleguide/ui-components/forms/radio-buttons
+    * --------------------------------
+    *
+    * Checkbox button example HTML
+    *
+    *    <label class="o-formControl-label" for="checkbox1">
+    *        <input class="o-formControl-input" type="checkbox" id="checkbox1" name="myCheckbox" value="A value"/>
+    *        <span class="o-formControl-indicator o-formControl-indicator--checkbox"></span>
+    *        My Checkbox Label Text
+    *    </label>
+    *
+    * -------------------------------
+    *
+    * Radio button example HTML
+    *
+    *    <label class="o-formControl-label" for="radio1">
+    *        <input class="o-formControl-input" type="radio" id="radio1" name="myRadioBtn" value="A value"/>
+    *        <span class="o-formControl-indicator o-formControl-indicator--radio"></span>
+    *        My Radio Button Label Text
+    *     </label>
+    *
+    */
+
+    $formControl-bgColor            : dt.$color-white;
+    $formControl-bgColor--disabled  : dt.$color-disabled-01;
+    $formControl-borderColor        : dt.$color-border-strong;
+    $formControl-borderColor--hover : dt.$color-orange;
+    $formControl-color              : dt.$color-orange;
+    $formControl-color--hover       : darken(dt.$color-orange, dt.$color-hover-01);
+    $formControl-background-color   : dt.$color-background-default;
+    $formControl-margin-left        : 0;
+    $formControl-padding-left       : functions.spacing(f);
+    $formControl-width              : 24px;
+    $formControl-width--wide        : 20px;
+    $formControl-height             : 24px;
+    $formControl-height--wide       : 20px;
+    $formControl-border-width       : 1px;
+
+
+    .o-formControl-label {
+        position: relative;
+        display: block;
+        cursor: pointer;
+        user-select: none;
+        padding: functions.spacing();
+        padding-left: $formControl-padding-left;
+
+        &:hover .o-formControl-indicator {
+            border-color: $formControl-borderColor--hover;
+        }
+
+        &:hover .o-formControl-input:disabled ~ .o-formControl-indicator {
+            border-color: $formControl-borderColor;
+            cursor: not-allowed;
+        }
+
+        .o-formControl-input:disabled ~ .o-formControl-indicator {
+            background-color: $formControl-bgColor--disabled;
+        }
+    }
+
+    // Give inline elements some space to the right
+    .o-formControl-label--inline {
+        display: inline-block;
+        padding-right: 2em;
+    }
+
+        // Hide the input element from view
+        .o-formControl-input {
+            position: absolute;
+            opacity: 0;
+            z-index: functions.zIndex(lowest); // Put the input behind the label so it doesn't overlay text
+
+            &:focus {
+                & + .o-formControl-indicator { @extend %u-elementFocus; }
+                & ~ .o-formControl-text { @extend %u-elementFocus; }
+            }
+        }
+
+        // The new checkbox/radio
+        .o-formControl-indicator {
+            position: absolute;
+            left: 0;
+            display: inline-block;
+            width: $formControl-width;
+            height: $formControl-height;
+            border: $formControl-border-width solid dt.$color-border-default;
+            background-color: $formControl-bgColor;
+            vertical-align: middle;
+            margin-left: $formControl-margin-left;
+            margin-top: 0;
+            box-shadow: 0 0 0 2px transparent, 0 0 0 0 transparent; // Used to animate from when element is in :focus
+
+            @include media('>=mid') {
+                width: $formControl-width--wide;
+                height: $formControl-height--wide;
+            }
+        }
+
+        // Checkbox modifiers
+        .o-formControl-indicator--checkbox,
+        .o-formControl-indicator--tickbox {
+            border-radius: 0.2em; // Change to 50% to make them circular
+
+            &:before,
+            &:after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 90%;
+                display: block;
+                opacity: 0; // indicator will be faded out when deselected
+                transition: all 250ms ease-in-out;
+            }
+        }
+
+        .o-formControl-indicator--checkbox {
+            &:before,
+            &:after {
+                top: 50%;
+                width: 90%;
+                height: 0.1em;
+                background-color: $formControl-background-color;
+            }
+
+            &:before {
+                transform: translate(-50%, -50%) rotate(45deg) scale(0);
+            }
+
+            &:after {
+                transform: translate(-50%, -50%) rotate(-45deg) scale(0);
+            }
+        }
+
+        .o-formControl-icon {
+            background-position: center 0;
+            left: functions.spacing();
+            min-width: functions.spacing(c);
+            position: absolute;
+        }
+
+        .o-formControl-indicator--tickbox {
+            &:before {
+                top: 0;
+                transform: translateX(-50%) rotate(45deg) scale(0);
+                border: 2px solid $formControl-background-color;
+                background-color: transparent;
+                width: 40%;
+                height: 80%;
+                border-top: 0;
+                border-left: 0;
+            }
+
+            &:after {
+                display: none;
+            }
+        }
+
+        .o-formControl-input:checked ~ .o-formControl-indicator--checkbox,
+        .o-formControl-input:checked ~ .o-formControl-indicator--tickbox,
+        .o-formControl-input:checked ~ .o-formControl-indicator--radio {
+
+            label:hover & {
+                background-color: $formControl-color--hover;
+                border-color: $formControl-color--hover;
+            }
+        }
+
+        .o-formControl-input:checked ~ .o-formControl-indicator--checkbox,
+        .o-formControl-input:checked ~ .o-formControl-indicator--tickbox {
+            background-color: $formControl-color;
+            border: 3px solid $formControl-color;
+
+            &:before,
+            &:after {
+                opacity: 1;
+            }
+        }
+
+        .o-formControl-input:checked ~ .o-formControl-indicator--tickbox {
+            &:before,
+            &:after {
+                transform: translateX(-50%) rotate(45deg) scale(1);
+            }
+        }
+
+        .o-formControl-input:checked ~ .o-formControl-indicator--checkbox {
+            &:before {
+                transform: translate(-50%, -50%) rotate(45deg) scale(1);
+            }
+
+            &:after {
+                transform: translate(-50%, -50%) rotate(-45deg) scale(1);
+            }
+        }
+
+
+        // Radio modifiers
+        .o-formControl-indicator--radio {
+            border-radius: 50%;
+
+            // add a margin to align the radio where the line height is 1.6 as opposed to 1.2
+            @include media('<wide') {
+                margin-top: 2px;
+            }
+
+            @include media('<=mid') {
+                margin-top: -2px;
+            }
+        }
+
+        .o-formControl-input:checked ~ .o-formControl-indicator--radio {
+            background-color: $formControl-color;
+            border: 6px solid $formControl-borderColor;
+
+            &:before {
+                content: '';
+                background-color: $formControl-color;
+                border: 3px solid dt.$color-border-subtle;
+                border-radius: 50%;
+                width: $formControl-width - 2;
+                height: $formControl-height - 2;
+                position: absolute;
+                top: -5px;
+                left: -5px;
+
+                @include media('>=mid') {
+                    width: $formControl-width--wide - 2;
+                    height: $formControl-height--wide - 2;
+                }
+            }
+        }
+    }

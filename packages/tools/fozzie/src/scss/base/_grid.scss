@@ -1,0 +1,386 @@
+@use '../settings/variables' as v;
+@use '../tools/functions/strip-units';
+@use '../tools/helpers/breakpoints';
+@use '../settings/include-media' as *;
+@use 'sass:math';
+
+/**
+ * The Kickoff Flexbox Grid
+ * =================================
+ * Default grid classes
+ * Grid gutter options
+ * Modifier Classes (column height and cell alignment)
+ * Legacy fallbacks for flexbox
+ * Grid span classes
+ * Breakpoint stacking
+ */
+
+
+/* Import Grid helpers and mixins */
+
+/**
+ * Kickoff grid helpers
+ */
+
+ @mixin ko-gridSpanHelper($breakpoint: null) {
+    $suffix: null;
+
+    @if $breakpoint {
+        $suffix: --#{$breakpoint};
+    }
+
+    @for $i from 1 to v.$grid-column-count + 1 {
+        $col-width: ko-gridColumnWidthCalc($i, true);
+        $col-width-guttered: ko-gridColumnWidthCalc($i, true, true);
+
+        .g-span#{$i}#{$suffix} {
+            flex-basis: $col-width !important;
+            flex-grow: 0;
+            // need this next line for a weird IE9/10/11 bug, where adding padding to a flex-item can throw out the flex-basis and wrap the columns incorrectly
+            // see this for more detail – https://github.com/philipwalton/flexbugs/issues/3
+            max-width: $col-width !important;
+
+            // maybe have an option to include this in a variable
+            &.g-holdWidth#{$suffix} {
+                @include ko-pixelMinWidth($i);
+
+                .g--gutter--scaled & {
+                    @include ko-pixelMinWidth($i, true); // get the hold-width minus the gutter
+                }
+            }
+
+            .g--gutter--scaled & {
+                flex-basis: $col-width-guttered !important;
+                // need this next line for a weird IE9/10/11 bug, where adding padding to a flex-item can throw out the flex-basis and wrap the columns incorrectly
+                // see this for more detail – https://github.com/philipwalton/flexbugs/issues/3
+                max-width: $col-width-guttered;
+
+                @if $i < v.$grid-column-count {
+                    margin-left: ko-gutterCalc();
+                }
+                @else {
+                    margin-left: 0;
+                }
+            }
+
+            @if v.$use-legacy-grid {
+
+                // used in combination with modernizr or another detection mechanism
+                .no-flexbox & {
+                    width: ko-gridColumnWidthCalc($i, true) !important;
+                }
+
+            }
+            // @if $use-legacy-grid
+
+        }
+        @if $i < 12 {
+            .g-offset#{$i}#{$suffix} {
+                margin-left: $col-width !important;
+            }
+        }
+    }
+}
+
+/**
+* Grid stacking
+* Stack grids based on a given breakpoint
+*
+* Usage:
+* .g--stack--narrow
+* .g--stack--wide
+*/
+@mixin ko-grid-stack($breakpoint: 'wide') {
+    @include media('<#{$breakpoint}') {
+        flex-flow: column nowrap;
+
+        & > .g-col {
+            flex-basis: auto !important;
+            max-width: 100% !important;
+            margin-left: 0; // get rid of any grid margins if there are any
+
+            @if v.$use-legacy-grid {
+                .no-flexbox & {
+                    width: 100% !important;
+                }
+            }
+        }
+    }
+}
+
+/**
+* Gutter Calculations
+* Default: percent
+* Usage: ko-gutterCalc() or ko-gutterCalc(false)
+* When show-unit is true, returns the percentage, otherwise return a decimal
+*/
+@function ko-gutterCalc($show-unit: true) {
+    @if $show-unit == true {
+        @return percentage(math.div(strip-units.strip-units(v.$grid-gutter-width), strip-units.strip-units(v.$layout-max-width)));
+    } @else {
+        @return math.div(v.$grid-gutter-width, v.$layout-max-width);
+    }
+}
+
+
+
+/**
+* Grid columns width calculations
+* This is where the magic of working out the column widths happens
+*
+* $column-span: define the width for the number of columns required
+* $show-unit: Switch return value between percentage (default) and decimal
+* $include-gutters: if gutters should be included in the calculations. Default = false
+* $legacy-calc: if we are working out a legacy column width calculation, or not. Default = false
+*/
+@function ko-gridColumnWidthCalc($column-span: 1, $show-unit: true, $include-gutters: false) {
+    $number-of-blocks-in-container : math.div(v.$grid-column-count, $column-span);
+    $total-width-of-all-blocks     : 1;
+
+    // when including gutters, we need to adjust our % width or flex-basis appropriately
+    @if $include-gutters {
+        $total-width-of-all-gutters    : ko-gutterCalc(false) * ($number-of-blocks-in-container - 1);
+        $total-width-of-all-blocks     : 1 - $total-width-of-all-gutters;
+    }
+
+    $width-of-a-single-block       : math.div($total-width-of-all-blocks, $number-of-blocks-in-container);
+
+    @if $show-unit == true {
+        @return percentage(strip-units.strip-units($width-of-a-single-block));
+    } @else {
+        @return $width-of-a-single-block;
+    }
+}
+
+@mixin ko-pixelMinWidth($column-span: 1, $minusGutter: false) {
+    @if $minusGutter == true {
+        min-width: (v.$layout-max-width * ko-gridColumnWidthCalc($column-span, false)) - (v.$layout-max-width * ko-gutterCalc(false)) + px;
+    }
+    @else {
+        min-width: (v.$layout-max-width * ko-gridColumnWidthCalc($column-span, false)) + px;
+    }
+}
+
+
+/**
+* Column width mixin
+* Usage:
+* @include column(2);
+*/
+@mixin column($column-span: 1) {
+    width: ko-gridColumnWidthCalc($column-span, true);
+}
+
+
+@mixin grid() {
+
+    /**
+    * Basic Usage:
+    * =================================
+        <div class="g">
+            <div class="g-col g-span4 g-span6--mid"></div>
+            <div class="g-col g-span8 g-span6--mid"></div>
+        </div>
+    */
+    .g {
+        display: flex !important; // force display: flex, as otherwise may clash with other components display properties (and the grid won’t work)
+        flex-flow: row wrap;
+
+        // any image in the grid should have a max-width of it’s container
+        & img {
+            max-width: 100%;
+        }
+    }
+
+        .g-col {
+            display: block;
+            box-sizing: border-box; // Ensure border-box is specified as the grid proportions rely on this
+
+            // By default, evenly distribute columns
+            // n.b. to support non-flexbox browsers, you should always add .g-spanx
+            flex: 1 0 0;
+            min-width: 0; // this is to make sure that long words don’t get cut off, but wrap as expected
+        }
+
+    /**
+    * Gutter calcs – applied to grid columns in our grid (direct descendants only)
+    * Default: pixels (can look at changing to percentage)
+    * Usage: gutterCalc() or gutterCalc(false)
+    */
+
+    // Three types of gutter
+    // -------------------
+    // .g--gutter
+    // Uses padding and fixed gutter px values.
+    // Pros = Margins will be equal to your $grid-gutter-width (even at larger/smaller container sizes), if that’s what you require
+    // Cons = Can’t set a border directly to grid containers, as uses negative margins.  Need extra element to get the desired effect
+
+    $g-gutter-half: math.div(v.$grid-gutter-width, 2) + px;
+
+    .g--gutter {
+        margin-left: -$g-gutter-half;
+        margin-right: -$g-gutter-half;
+
+        & > .g-col {
+            padding-left: $g-gutter-half;
+            padding-right: $g-gutter-half;
+        }
+    }
+
+    // .g--gutter--<breakpoints>
+    // Generates gutter settings for each defined breakpoint for better gutter control in responsive designs
+    // Only generated if $responsive-gutters == true
+
+    @if v.$responsive-gutters {
+        @each $name, $value in breakpoints.$fozzie-breakpoints {
+            .g--gutter--#{$name} {
+                @include media('>=#{$name}') {
+                    margin-left: -$g-gutter-half;
+                    margin-right: -$g-gutter-half;
+
+                    & > .g-col {
+                        padding-left: $g-gutter-half;
+                        padding-right: $g-gutter-half;
+                    }
+                }
+            }
+        }
+    }
+
+    // .g--gutter--scaled
+    // Uses margin and percentage values.  Scales the margin as the viewport gets smaller (for RWD)
+    // Pro = Good for when your container is always the $layout-max-width.  Means can apply borders to grid elements without more markup
+    // Cons = If container isn’t same size as $layout-max-width, the gutters will also scale (so larger container width === larger gutters and vice versa)
+
+    .g--gutter--scaled {
+        & > .g-col {
+            margin-left: ko-gutterCalc();
+            margin-right: 0;
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
+
+    .g--stack {
+        & > .g-col {
+            flex-basis: 100%;
+            max-width: 100%;
+        }
+        &.g--gutter--scaled > .g-col {
+            margin-left: 0;
+        }
+    }
+
+
+    /**
+    * .g--equalHeight – Equal Height Child Elements
+    */
+    .g--equalHeight {
+        > .g-col {
+            display: flex;
+
+            & > * {
+                flex-basis: 100%;
+            }
+        }
+    }
+
+
+    /**
+    * Alignment
+    * Modifier classes to move our grid elements around
+    */
+    .g--alignTop          { align-items: flex-start; }
+    .g--alignBottom       { align-items: flex-end; }
+    .g--alignSelfBottom   { align-self: flex-end; }
+    .g--alignRight        { justify-content: flex-end; }
+    .g--alignCenter       { justify-content: center; }
+    .g--alignSpaceAround  { justify-content: space-around; }
+    .g--alignSpaceBetween { justify-content: space-between; }
+    .g--alignCenter--v    { align-items: center; }
+
+
+    /**
+    * Centering
+    * Centers an individual column, rather than the entire grid
+    */
+    .g-col--centered {
+        margin: 0 auto;
+    }
+
+    /**
+    * Shrinking Content
+    * Shrink a .g-col down to only the space it needs (flexbox only)
+    *
+    * Effectively just changes it’s values back to the default flex properties
+    */
+    .g-col--shrink {
+        flex: 0 1 auto;
+    }
+
+
+    /**
+    * Add fallbacks for non-flexbox supporting browsers (for example, IE8/9)
+    */
+    @if v.$use-legacy-grid {
+        .no-flexbox {
+            .g {
+                display: block !important; // need this for old Safari, as it thinks it understands flexbox but doesn’t really
+
+                // clearfix
+                &:after {
+                    content: '';
+                    display: table;
+                    clear: both;
+                }
+            }
+
+            .g-col {
+                float: left;
+                min-height: 1px;
+                clear: none;
+                box-sizing: border-box;
+            }
+
+            .g--stack .g-col {
+                width: 100%;
+            }
+
+            .g--equalHeight {
+                > .g-col {
+                    display: block; // again need to overide old safari thinking it knows flexbox, when it doesn’t really
+                }
+            }
+        }
+        //end .no-flexbox
+    }
+
+
+
+    /**
+    * Grid Span classes (for different breakpoints)
+    *
+    * Applied by using .g-spanx to .g-col elements, where x is the number of columns
+    */
+
+    @include ko-gridSpanHelper; // Default sizes
+
+    // Responsive sizes only generated if $responsive-grid-sizes == true
+    @if v.$responsive-grid-sizes {
+        //loop through our breakpoints
+        @each $name, $value in breakpoints.$fozzie-breakpoints {
+            @include media('>=#{$value}') {
+                @include ko-gridSpanHelper($name);
+            }
+        }
+    }
+
+    @each $name, $value in breakpoints.$fozzie-breakpoints {
+        .g--stack--#{$name} {
+            @include ko-grid-stack($name);
+        }
+    }
+
+}

@@ -1,0 +1,142 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../../tools/mixins/type';
+@use '../../tools/mixins/truncate';
+@use '../../tools/functions/index' as functions;
+@use '../../settings/include-media' as *;
+
+@mixin menu() {
+    /**
+    * Components > Menu
+    * =================================
+    * Used for styling small pieces of information.
+    *
+    * Example: Menu – Categories list.
+    *
+    * The `c-menu` component is an optional mixin within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include menu();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * https://fozzie.just-eat.com/styleguide/ui-components/menus
+    */
+
+    $menu-headerHeight                      : 57px;
+    $menu-fontSize                          : body-l;
+    $menu-border-color                      : dt.$color-border-strong;
+    $menu-border-color--active              : dt.$color-border-inverse;
+    $menu-border-width                      : 1px;
+    $menu-border-width--active              : 2px;
+    $menu-link-color                        : dt.$color-content-default;
+    $menu-link-padding                      : functions.spacing() functions.spacing(d);
+    $menu-positionTop                       : $menu-headerHeight + functions.spacing(d);
+    $menu--condensed-link-padding           : functions.spacing(a);
+
+    .c-menu {
+        @extend %u-unstyled;
+        @include type.font-size($menu-fontSize);
+    }
+
+        // Reduces the spacing between menu items
+        .c-menu--condensed {
+            .c-menu-link {
+                padding-bottom: $menu--condensed-link-padding;
+                padding-top: $menu--condensed-link-padding;
+            }
+        }
+
+        // Displays the menu horizontally rather than the default of vertically.
+        .c-menu--horizontal {
+            display: flex;
+
+            .c-menu-item {
+                border-left: none;
+                border-bottom: solid $menu-border-width $menu-border-color;
+            }
+
+            .c-menu-link {
+                padding: functions.spacing();
+            }
+
+            .c-menu-item:active,
+            .c-menu-item:focus,
+            .c-menu-item:hover,
+            .c-menu-item--active {
+                border-left: none;
+                border-bottom: solid $menu-border-width--active $menu-border-color--active;
+                font-weight: dt.$font-weight-regular;
+                margin-left: 0;
+            }
+        }
+
+        .c-menu-openBtnWrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: functions.spacing(f);
+            margin-top: -#{functions.spacing(e)};
+            position: sticky;
+            top: $menu-positionTop;
+            transition: 100ms top ease-in-out;
+            z-index: functions.zIndex(low);
+        }
+
+        .c-menu-openBtn {
+            @include type.font-size(body-s);
+            align-items: center;
+            border-radius: dt.$radius-rounded-d;
+            display: flex;
+            padding: functions.spacing() functions.spacing(d);
+        }
+
+        .c-menu-closeBtn {
+            padding: functions.spacing(d);
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .c-menu--spacingTop--aboveMid {
+            @include media('>=mid') {
+                margin-top: 170px;
+            }
+        }
+
+        .c-menu-item {
+            @include media('>=mid') {
+                &.has-icon {
+                    display: flex;
+                    align-items: center;
+
+                    .c-menu-link {
+                        padding-right: functions.spacing(a);
+                    }
+                }
+            }
+        }
+
+        .c-menu-link {
+            @include truncate.truncate();
+            border-left: solid $menu-border-width $menu-border-color;
+            display: block;
+            padding: $menu-link-padding;
+            text-decoration: none;
+
+            &,
+            &:hover,
+            &:active,
+            &:focus {
+                color: $menu-link-color;
+            }
+
+            &:hover,
+            &:active,
+            &:focus,
+            &.c-menu-link--active {
+                border-left: solid $menu-border-width--active $menu-border-color--active;
+                font-weight: dt.$font-weight-bold;
+                margin-left: -1px;
+            }
+        }
+
+        .c-menu-icon {
+            flex-shrink: 0;
+        }
+}

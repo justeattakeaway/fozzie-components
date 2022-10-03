@@ -1,0 +1,27 @@
+//
+// fozzie.scss – © JUST EAT
+//
+
+/**
+ * Setting $includeBaseFramework to `true` includes the base styles that were included
+ * as part of Fozzie v4 (useful for anyone upgrading that wants to keep things as-is)
+ **/
+$includeBaseFramework: false !default;
+
+/**
+ * Setting $includeMinimalFramework to `true` includes a recommended base set of styles
+ * that provides styling for most use-cases (links, lists, buttons, grid)
+ **/
+$includeMinimalFramework: false !default;
+
+//import our scss file dependencies
+@forward 'dependencies';
+
+/**
+ * Templates for including base sets of styles
+ */
+
+@forward 'templates' with (
+  $includeBaseFramework: $includeBaseFramework,
+  $includeMinimalFramework: $includeMinimalFramework
+);
