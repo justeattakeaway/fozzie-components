@@ -1,9 +1,10 @@
 {
   "name": "root",
-  "version": "7.30.1",
+  "version": "7.31.0",
   "private": true,
   "scripts": {
     "build": "turbo run build --continue",
+    "build:changed": "turbo run build --filter=...[origin/master] --continue",
     "bundlewatch": "bundlewatch --config ./bundlewatch.config.js",
     "lint": "turbo run lint --continue",
     "lint:fix": "turbo run lint -- --fix --continue",

@@ -12,6 +12,15 @@ Every time you get the latest changes in the mono repository, you need to follow
 2. Run the build command at the root: `yarn build`
 3. You can now run storybook using the command `yarn storybook:serve`
 
+Alternatively, you can run the following commands to just view the component you're working on, as well as any of it's dependencies / dependants.
+
+1. Install yarn packages at the root: `yarn`
+2. Run the build command at the root: `yarn build:changed`
+3. You can now run storybook using the command `yarn storybook:serve-changed`
+
+
+Note: It's recommended that you do not `cd` into the individual f-* directory to run build commands, as this will prevent `@justeat/f-*` dependencies from being built.
+
 ### Cannot find module `@justeat/f-<any-package-name>`
 This issue indicates that you have not run yarn build with the latest code, refer to `First time setup` for a solution.
 
