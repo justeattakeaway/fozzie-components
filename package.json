@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "turbo run build --continue",
+    "build:changed": "turbo run build --filter=...[origin/master] --continue",
     "bundlewatch": "bundlewatch --config ./bundlewatch.config.js",
     "lint": "turbo run lint --continue",
     "lint:fix": "turbo run lint -- --fix --continue",
