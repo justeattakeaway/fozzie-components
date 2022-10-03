@@ -2346,21 +2346,12 @@
     axios "0.25.0"
     crypto-js "4.1.1"
 
-<<<<<<< HEAD
 "@justeat/fozzie@10.4.0":
   version "10.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-10.4.0.tgz#add7f2fbcd7ec6caf59c0d06999cffcda6783a2e"
   integrity sha512-8phRpJ8SQ33Sq8UV1kX6bmtoil5Rha2d8HxpRN3FofUE1uhB+2YlGB6DTpjsOVLUGmchSatLHlPro8V318eTig==
   dependencies:
     "@justeat/pie-design-tokens" "3.0.0"
-=======
-"@justeat/fozzie@9.3.1":
-  version "9.3.1"
-  resolved "https://registry.npmjs.org/@justeat/fozzie/-/fozzie-9.3.1.tgz#4e3c8f073b2880787127a69d072006c3ae483449"
-  integrity sha512-GSSyULm00xH27dLP/Se1QQsiUsMWkf5u/11jHTjCw6Kf+nNSmYTyaEqCk/jT+xFVso5Q36+8uXQLqDEPmIO8ww==
-  dependencies:
-    "@justeat/pie-design-tokens" "1.6.0"
->>>>>>> fbe1229a882b2fd7f180fc872e32238e6d0cc8c9
     include-media eduardoboucas/include-media#2.0-release
 
 "@justeat/pie-design-tokens@3.0.0":
@@ -14456,7 +14447,7 @@ include-media@1.4.9:
   resolved "https://registry.yarnpkg.com/include-media/-/include-media-1.4.9.tgz#d0020b7be3eb2d54868a20943595ce380e0bc43b"
   integrity sha512-IUOcvWDCt6R5V0ktsGk6RbehkW9ks1dODN2ed1p+mhML82TteAl+/ElXy8AJ7ueIuVoKq2NioRVdW9FuwQNOew==
 
-"include-media@github:eduardoboucas/include-media#2.0-release":
+include-media@eduardoboucas/include-media#2.0-release:
   version "2.0.0"
   resolved "https://codeload.github.com/eduardoboucas/include-media/tar.gz/a3c0288e5b22cc746cc2d320d0a374b2ed9d0aeb"
 
