@@ -41,7 +41,7 @@ export default {
 .c-errorMessage {
     position: relative;
     color: f.$color-content-error;
-    @include f.font-size();
+    @include f.font-size('body-s');
     margin-top: f.spacing();
 }
 

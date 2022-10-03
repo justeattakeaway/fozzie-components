@@ -2371,14 +2371,6 @@
   dependencies:
     vue-i18n "8.0.0"
 
-"@justeat/f-http@0.x":
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-http/-/f-http-0.10.0.tgz#686a230a9e27e4e39b38ba351d963d7fd6c42b70"
-  integrity sha512-HVfABkVKs6DTxNTdlrbk9Mk9fNSkNxKJ0JKhFCwZ3BRr5jfGksHu9exn1D30ddWFVMJuOyyg7X7wIOuPZ81EWg==
-  dependencies:
-    axios "0.21.2"
-    axios-mock-adapter "1.19.0"
-
 "@justeat/f-icons@4.11.0":
   version "4.11.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.11.0.tgz#59cafdaa850041df000379aaecc84498bd122884"
@@ -2415,53 +2407,12 @@
     axios "0.25.0"
     crypto-js "4.1.1"
 
-"@justeat/fozzie@9.0.0-beta.2":
-  version "9.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.2.tgz#678404404597eac15b9b45362febae090af5fcaf"
-  integrity sha512-DuiVeJ0EEmVB7YkxrhFGyjxEMVzBI1f+sp2RQlVVM/F7wbTuF4enFBZzN6WtF0PDQB8BxA1g9s/uJS7uCI2l+Q==
-  dependencies:
-    "@justeat/pie-design-tokens" "1.4.0"
-    include-media eduardoboucas/include-media#2.0-release
-
-"@justeat/fozzie@9.0.0-beta.3":
-  version "9.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.3.tgz#e97815d3f1fff757b783fc216ad594876b652c1e"
-  integrity sha512-Yqp7ODkSieLbie91zJpemOxwKN8xRraIttXUPS3djp6mkoQDOT7UhF+rz0JaMiJMD0hJLUHqezKsjwPU+A1VJg==
-  dependencies:
-    "@justeat/pie-design-tokens" "1.4.0"
-    include-media eduardoboucas/include-media#2.0-release
-
-"@justeat/fozzie@9.0.0-beta.5":
-  version "9.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.5.tgz#14d7a2d7c6aba26e885295bc416560ea182736fd"
-  integrity sha512-ZE3XqqJM1+QJf1qW60yI8dP+9g2+u/PkxMtJh+DtxZILgegnXHfiz8iCBHOEsIPcn67fJjV4FOyqp3KY1J9qtw==
-  dependencies:
-    "@justeat/pie-design-tokens" "1.4.0"
-    include-media eduardoboucas/include-media#2.0-release
-
-"@justeat/fozzie@9.0.0-beta.6":
-  version "9.0.0-beta.6"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.0.0-beta.6.tgz#704a65a0eee089ea5e47243e6893997edea47434"
-  integrity sha512-f+eH9voRFZlii7qPn8Z+pdzdYeGtmBkJkNlB8G/I1Clft6yssEPG8/8U31OVMmp55Wb1F2WoV2FtG5Ttr9Orbg==
-  dependencies:
-    "@justeat/pie-design-tokens" "1.4.0"
-    include-media eduardoboucas/include-media#2.0-release
-
 "@justeat/js-test-buddy@0.4.1":
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/@justeat/js-test-buddy/-/js-test-buddy-0.4.1.tgz#5ab0f7bd0ebc160c275b7b5d2ad2a6282420e106"
   integrity sha512-p+j8bK0ZcJ4wt1Uu2QPVzGhQJAkq8YaNFrSKKdeU61ps1hHg2L3nBENluIGGrH6wBKORQ1HDDWgFUBl/JFUO0A==
   dependencies:
     "@justeat/dom-buddy" "2.4.3"
-
-"@justeat/pie-design-tokens@1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-1.4.0.tgz#adb4b3b7f5ed9ac9691e67e02b02264acd6dcfbf"
-  integrity sha512-V+lBWi4Q7WjYRYYTAm2rJfDqjePArhHrgC4pB8vsQXp4uPmEUG/6cJa4K8DArADxLA924QESE3Akmtn8nAe5dw==
-  dependencies:
-    jsonc-parser "2.2.0"
-    lodash.merge "4.6.2"
-    mkdirp "1.0.3"
 
 "@justeat/pie-design-tokens@3.0.0":
   version "3.0.0"
@@ -26001,10 +25952,10 @@ vite-plugin-vue2@1.9.0:
     source-map "^0.7.3"
     vue-template-es2015-compiler "^1.9.1"
 
-vite@2.9.12:
-  version "2.9.12"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-2.9.12.tgz#b1d636b0a8ac636afe9d83e3792d4895509a941b"
-  integrity sha512-suxC36dQo9Rq1qMB2qiRorNJtJAdxguu5TMvBHOc/F370KvqAe9t48vYp+/TbPKRNrMh/J55tOUmkuIqstZaew==
+vite@2.9.13:
+  version "2.9.13"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.9.13.tgz#859cb5d4c316c0d8c6ec9866045c0f7858ca6abc"
+  integrity sha512-AsOBAaT0AD7Mhe8DuK+/kE4aWYFMx/i0ZNi98hJclxb4e0OhQcZYUrvLjIaQ8e59Ui7txcvKMiJC1yftqpQoDw==
   dependencies:
     esbuild "^0.14.27"
     postcss "^8.4.13"
