@@ -52,7 +52,7 @@ export default {
     padding: f.spacing(e);
     @include f.font-size('body-s');
     text-align: center;
-    color: f.$color-grey-50;
+    color: f.$color-content-subdued;
 
     @include f.media('>=narrow') {
         padding: f.spacing(d) f.spacing(g);

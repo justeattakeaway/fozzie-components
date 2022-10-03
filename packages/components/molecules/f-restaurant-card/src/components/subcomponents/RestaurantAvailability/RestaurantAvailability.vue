@@ -93,6 +93,6 @@ export default {
 .c-restaurantCard-availability-iconText,
 .c-restaurantCard-availability-message {
     overflow-wrap: break-word;
-    @include f.font-size(f.$font-paragraph-02);
+    @include f.font-size(f.$font-paragraph-spacing-02);
 }
 </style>

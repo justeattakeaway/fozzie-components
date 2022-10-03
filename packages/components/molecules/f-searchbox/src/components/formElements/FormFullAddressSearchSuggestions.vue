@@ -327,7 +327,7 @@ export default {
 
     &:hover,
     &.selected {
-        background: f.$color-grey-10;
+        background: f.$color-background-default;
     }
 }
 .shell {
