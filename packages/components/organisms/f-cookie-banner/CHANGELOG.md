@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.6.0
+------------------------------
+*September 27, 2022*
+
+### Updated
+- Moved `f-cookie-banner-static` files to be part of `f-cookie-banner` package.
+- Update bundlewatch maxSize due to static files being part of the bundle.
+
+### Removed
+- Old `demo` npm script
+
+
 v4.5.0
 ------------------------------
 *August 04, 2022*
