@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v2.3.0
+------------------------------
+*September 30, 2022*
+
+### Added
+- `fozzie` as peerDep so consuming applications use the correct version of `fozzie` when using `f-error-message` v2.3.0.
+
+### Fixed
+- `font-size` call to `body-s`. Version 9 of fozzie changed the way default value was used which causes the size to increase now.
+
+
 v2.2.0
 ------------------------------
 *July 15, 2022*
