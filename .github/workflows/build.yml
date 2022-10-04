@@ -41,9 +41,9 @@ jobs:
     # Checkout the Repo
     - name: Checkout
       uses: actions/checkout@v3
-    # Detect root has changed
+    # Detect changed files
     - uses: dorny/paths-filter@v2
-      id: changes
+      id: file-changes
       with:
         filters: |
           global:
@@ -56,118 +56,154 @@ jobs:
             - 'packages/services/**'
             - 'packages/tools/**'
         list-files: shell
-    # # Setup Node 16
-    # - name: Setup Node
-    #   uses: actions/setup-node@v3
-    #   with:
-    #     node-version: 16
-    #     cache: 'yarn'
-    # # Restore node_modules - Cache should exist as one was created in previous 'install' job
-    # - name: Cache Node Modules
-    #   id: cache-node-modules
-    #   uses: actions/cache@v2
-    #   with:
-    #     path: '**/node_modules'
-    #     key: node-modules-${{ hashFiles('**/yarn.lock') }}
-    # # Restore Turborepo's component 'dist' cache - If not, cache is created at end of build.
-    # - name: Cache Turborepo Dist
-    #   id: turborepo-dist-cache
-    #   uses: actions/cache@v2
-    #   with:
-    #     path: .turbo
-    #     key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.run_id }}
-    #     # Use one of the following keys if the above is not found.
-    #     restore-keys: |
-    #       turborepo-dist-cache-${{ github.ref_name }}
-    #       turborepo-dist-cache-master
-    # # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
-    # - name: Build Components
-    #   run: yarn build --cache-dir=".turbo"
-    # # Run Bundlewatch checks
-    # - name: Run Bundlewatch checks
-    #   run: yarn bundlewatch
-    # # Lint components
-    # - name: Lint Components
-    #   run: yarn lint --concurrency=10
-    # # Cache 'storybook-static'
+    # Setup Node 16
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'yarn'
+    # Restore node_modules - Cache should exist as one was created in previous 'install' job
+    - name: Cache Node Modules
+      id: cache-node-modules
+      uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: node-modules-${{ hashFiles('**/yarn.lock') }}
+    # Restore Turborepo's component 'dist' cache - If not, cache is created at end of build.
+    - name: Cache Turborepo Dist
+      id: turborepo-dist-cache
+      uses: actions/cache@v2
+      with:
+        path: .turbo
+        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.run_id }}
+        # Use one of the following keys if the above is not found.
+        restore-keys: |
+          turborepo-dist-cache-${{ github.ref_name }}
+          turborepo-dist-cache-master
+    # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
+    - name: Build All Components
+      if: steps.changes.outputs.global == 'true' && steps.changes.outputs.packages == 'false'
+      run: yarn build --cache-dir=".turbo"
+    - name: Build Changed Components + Dependants
+      if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
+      run: yarn build --filter=...master --cache-dir=".turbo"
+    # Run Bundlewatch checks
+    - name: Run Bundlewatch checks
+      run: yarn bundlewatch
+    # Lint components
+    - name: Lint All Components
+      if: steps.changes.outputs.global == 'true' && steps.changes.outputs.packages == 'false'
+      run: yarn lint --concurrency=10
+    - name: Build Changed Components + Dependants
+      if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
+      run: yarn lint --filter=...master --concurrency=10
+    # Cache 'storybook-static'
+    - name: Cache Storybook Static Directory
+      id: storybook-cache
+      uses: actions/cache@v2
+      with:
+        path: ./packages/storybook/storybook-static
+        key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
+    # Build Storybook
+    - name: Build Storybook (All Components)
+      if: steps.changes.outputs.global == 'true' && steps.changes.outputs.packages == 'false'
+      run: yarn storybook:build
+    - name: Build Storybook (Changed Components + Dependants)
+      if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
+      run: yarn storybook:build-changed
+    env:
+      BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_TOKEN }}
+      RUN_ALL: true
+
+  tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        component-type: ['atoms', 'molecules', 'organisms' , 'pages', 'templates', 'tools', 'services']
+    name: tests-${{ matrix.component-type }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the Repo
+    - name: Checkout
+      uses: actions/checkout@v3
+    # Detect changed files
+    - uses: dorny/paths-filter@v2
+      id: file-changes
+      with:
+        filters: |
+          global:
+            - '*.js'
+            - '*.json'
+            - '.github/**'
+            - 'packages/storybook/**'
+          packages:
+            - 'packages/components/**'
+            - 'packages/services/**'
+            - 'packages/tools/**'
+        list-files: shell
+    # Setup Node 16
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'yarn'
+    # Restore node_modules - Cache should exist as one was created in previous 'install' job
+    - name: Restore Cache -  Node Modules
+      id: cache-node-modules
+      uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: node-modules-${{ hashFiles('**/yarn.lock') }}
+    # Restore Cache - Turborepo Dist
+    - name: Cache Turborepo Dist
+      id: turborepo-dist-cache
+      uses: actions/cache@v2
+      with:
+        path: .turbo
+        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.run_id }}
+    # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
+    - name: Build All Components
+      if: steps.changes.outputs.global == 'true' && steps.changes.outputs.packages == 'false'
+      run: yarn build --cache-dir=".turbo"
+    - name: Build Changed Components + Dependants
+      if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
+      run: yarn build --filter=...master --cache-dir=".turbo"
+    # Unit Test components.
+
+    - name: Unit Test All Components
+      if: steps.changes.outputs.global == 'true' && steps.changes.outputs.packages == 'false'
+      run: yarn ci:test:${{ matrix.component-type}} --concurrency=10
+    - name: Unit Test Changed Components + Dependants
+      if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
+      run: yarn ci:test:${{ matrix.component-type}} --concurrency=10 --filter=...master
+    # # Restore Storybook 'storybook-static'
     # - name: Cache Storybook Static Directory
+    #   if: matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages'
     #   id: storybook-cache
     #   uses: actions/cache@v2
     #   with:
     #     path: ./packages/storybook/storybook-static
     #     key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
-    # # Build Storybook
-    # - name: Storybook Build
-    #   run: yarn storybook:build
-    # env:
-    #   BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_TOKEN }}
-    #   RUN_ALL: true
-
-  # tests:
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       component-type: ['atoms', 'molecules', 'organisms' , 'pages', 'templates', 'tools', 'services']
-  #   name: tests-${{ matrix.component-type }}
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   # Checkout the Repo
-  #   - name: Checkout
-  #     uses: actions/checkout@v3
-  #   # Setup Node 16
-  #   - name: Setup Node
-  #     uses: actions/setup-node@v3
-  #     with:
-  #       node-version: 16
-  #       cache: 'yarn'
-  #   # Restore node_modules - Cache should exist as one was created in previous 'install' job
-  #   - name: Restore Cache -  Node Modules
-  #     id: cache-node-modules
-  #     uses: actions/cache@v2
-  #     with:
-  #       path: '**/node_modules'
-  #       key: node-modules-${{ hashFiles('**/yarn.lock') }}
-  #   # Restore Cache - Turborepo Dist
-  #   - name: Cache Turborepo Dist
-  #     id: turborepo-dist-cache
-  #     uses: actions/cache@v2
-  #     with:
-  #       path: .turbo
-  #       key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.run_id }}
-  #   # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
-  #   - name: Build Components
-  #     run: yarn build --cache-dir=".turbo"
-  #   # Unit Test components.
-  #   - name: Unit Test Components
-  #     run: yarn ci:test:${{ matrix.component-type}} --concurrency=10
-  #   # Restore Storybook 'storybook-static'
-  #   - name: Cache Storybook Static Directory
-  #     if: matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages'
-  #     id: storybook-cache
-  #     uses: actions/cache@v2
-  #     with:
-  #       path: ./packages/storybook/storybook-static
-  #       key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
-  #   # Run Component / A11y / Visual Tests
-  #   - name: Run Component / A11y / Visual Tests
-  #     if: matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages'
-  #     run: |
-  #       yarn storybook:serve-static &
-  #       yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
-  #       yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1
-  #   # On Failure - Upload Allure Report
-  #   - name: Generate Allure Report
-  #     if: failure()
-  #     run: yarn allure:generate
-  #   - name: Upload Allure Report
-  #     if: failure()
-  #     uses: actions/upload-artifact@v3
-  #     with:
-  #       name: test-artifacts-${{ matrix.component-type }}
-  #       path: |
-  #         allure-report
-  #         test/results/axe-violations
+    # # Run Component / A11y / Visual Tests
+    # - name: Run Component / A11y / Visual Tests
+    #   if: matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages'
+    #   run: |
+    #     yarn storybook:serve-static &
+    #     yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
+    #     yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1
+    # # On Failure - Upload Allure Report
+    # - name: Generate Allure Report
+    #   if: failure()
+    #   run: yarn allure:generate
+    # - name: Upload Allure Report
+    #   if: failure()
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: test-artifacts-${{ matrix.component-type }}
+    #     path: |
+    #       allure-report
+    #       test/results/axe-violations
 
   # storybook-deploy:
   #   needs: build
