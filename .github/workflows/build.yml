@@ -54,6 +54,9 @@ jobs:
             - 'babel.config.js'
             - 'renovate.json'
             - '.github/**'
+            - 'packages/storybook/**'
+          packages:
+            - 'packages/**'
         list-files: shell
     # # Setup Node 16
     # - name: Setup Node
