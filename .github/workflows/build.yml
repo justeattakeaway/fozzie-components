@@ -57,6 +57,7 @@ jobs:
             - 'packages/storybook/**'
           packages:
             - 'packages/**'
+            - '!packages/storybook/**'
         list-files: shell
     # # Setup Node 16
     # - name: Setup Node
