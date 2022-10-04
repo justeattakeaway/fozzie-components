@@ -338,7 +338,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 
     .o-btn-icon svg use,
     .o-btn-icon svg path {
-        fill: f.$color-grey-50;
+        fill: f.$color-content-subdued;
     }
 
     .o-btn-icon--leading {

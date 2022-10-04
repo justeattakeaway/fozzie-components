@@ -192,7 +192,7 @@ export default {
 
     .c-contentCard-voucher-code {
         font-weight: f.$font-weight-regular;
-        color: f.$color-grey-40;
+        color: f.$color-mozzarella-30;
         text-align: left;
     }
 

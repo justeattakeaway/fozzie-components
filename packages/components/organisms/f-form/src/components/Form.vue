@@ -180,7 +180,7 @@ export default {
 
 <style lang="scss" module>
 .c-form {
-    margin-top: spacing(x2);
+    margin-top: spacing(d);
 }
 
 .c-form-submitButton {
