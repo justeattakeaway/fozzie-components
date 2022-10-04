@@ -2346,10 +2346,10 @@
     axios "0.25.0"
     crypto-js "4.1.1"
 
-"@justeat/fozzie@10.4.0":
-  version "10.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-10.4.0.tgz#add7f2fbcd7ec6caf59c0d06999cffcda6783a2e"
-  integrity sha512-8phRpJ8SQ33Sq8UV1kX6bmtoil5Rha2d8HxpRN3FofUE1uhB+2YlGB6DTpjsOVLUGmchSatLHlPro8V318eTig==
+"@justeat/fozzie@10.5.0":
+  version "10.5.0"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-10.5.0.tgz#27fe3594d0ff33d15ba9d07459666c4657b124c2"
+  integrity sha512-jyxIYICjBevGKWe5kVbcic/khTEinl8MtPrlIq4QwnjBgQDvm9Y00sTjlsgwlQzh3of5CepegzbrzpsXK6+aIA==
   dependencies:
     "@justeat/pie-design-tokens" "3.0.0"
     include-media eduardoboucas/include-media#2.0-release
