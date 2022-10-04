@@ -4,7 +4,13 @@
 name: Fozzie Components CI
 
 on:
-  pull_request
+  push:
+    branches:
+    - master
+
+# This needs to be uncommented when we finish migration so that Danger works.
+# on:
+#   pull_request
 
 jobs:
   install:
@@ -31,34 +37,35 @@ jobs:
       if: steps.cache-node-modules.outputs.cache-hit != 'true'
       run: yarn --prefer-offline
 
-  danger:
-    needs: install
-    runs-on: ubuntu-latest
-    steps:
-    # Checkout the Repo
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Setup Node
-    # Setup Node 16
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: 'yarn'
-    # Restore node_modules if cache exists. If not, cache is created at end of build.
-    - name: Cache Node Modules
-      id: cache-node-modules
-      uses: actions/cache@v2
-      with:
-        path: '**/node_modules'
-        key: node-modules-${{ hashFiles('**/yarn.lock') }}
-    # Run Danger Checks
-    - name: Run Danger Checks
-      run: yarn danger ci --failOnErrors
-      env:
-        DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+  # Uncomment when fully migrated
+  # danger:
+  #   needs: install
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   # Checkout the Repo
+  #   - name: Checkout
+  #     uses: actions/checkout@v3
+  #   - name: Setup Node
+  #   # Setup Node 16
+  #     uses: actions/setup-node@v3
+  #     with:
+  #       node-version: 16
+  #       cache: 'yarn'
+  #   # Restore node_modules if cache exists. If not, cache is created at end of build.
+  #   - name: Cache Node Modules
+  #     id: cache-node-modules
+  #     uses: actions/cache@v2
+  #     with:
+  #       path: '**/node_modules'
+  #       key: node-modules-${{ hashFiles('**/yarn.lock') }}
+  #   # Run Danger Checks
+  #   - name: Run Danger Checks
+  #     run: yarn danger ci --failOnErrors
+  #     env:
+  #       DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
 
   build:
-    needs: danger
+    needs: install
     runs-on: ubuntu-latest
     steps:
     # Checkout the Repo

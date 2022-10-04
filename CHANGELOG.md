@@ -5,6 +5,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.31.0
 ------------------------------
+*October 4, 2022*
+
+### Added
+- Danger checks to GitHub Actions.
+
+
+v7.31.0
+------------------------------
 *September 27, 2022*
 
 ### Added
