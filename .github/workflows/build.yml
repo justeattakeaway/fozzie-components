@@ -82,7 +82,7 @@ jobs:
           turborepo-dist-cache-master
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build All Components
-      if: steps.changes.outputs.global == 'true' && steps.changes.outputs.packages == 'false'
+      if: steps.changes.outputs.global == 'true'
       run: yarn build --cache-dir=".turbo"
     - name: Build Changed Components + Dependants
       if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
@@ -92,7 +92,7 @@ jobs:
       run: yarn bundlewatch
     # Lint components
     - name: Lint All Components
-      if: steps.changes.outputs.global == 'true' && steps.changes.outputs.packages == 'false'
+      if: steps.changes.outputs.global == 'true'
       run: yarn lint --concurrency=10
     - name: Build Changed Components + Dependants
       if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
@@ -106,7 +106,7 @@ jobs:
         key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
     # Build Storybook
     - name: Build Storybook (All Components)
-      if: steps.changes.outputs.global == 'true' && steps.changes.outputs.packages == 'false'
+      if: steps.changes.outputs.global == 'true'
       run: yarn storybook:build
     - name: Build Storybook (Changed Components + Dependants)
       if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
@@ -164,7 +164,7 @@ jobs:
         key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.run_id }}
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build All Components
-      if: steps.changes.outputs.global == 'true' && steps.changes.outputs.packages == 'false'
+      if: steps.changes.outputs.global == 'true'
       run: yarn build --cache-dir=".turbo"
     - name: Build Changed Components + Dependants
       if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
@@ -172,7 +172,7 @@ jobs:
     # Unit Test components.
 
     - name: Unit Test All Components
-      if: steps.changes.outputs.global == 'true' && steps.changes.outputs.packages == 'false'
+      if: steps.changes.outputs.global == 'true'
       run: yarn ci:test:${{ matrix.component-type}} --concurrency=10
     - name: Unit Test Changed Components + Dependants
       if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
