@@ -1,446 +1,446 @@
-# version: 2.1 # use CircleCI 2.1
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-version: 2.1
+# # version: 2.1 # use CircleCI 2.1
+# #
+# # Check https://circleci.com/docs/2.0/language-javascript/ for more details
+# #
+# version: 2.1
 
-orbs:
-  slack: circleci/slack@4.1.3
-  browser-tools: circleci/browser-tools@1.4.0
+# orbs:
+#   slack: circleci/slack@4.1.3
+#   browser-tools: circleci/browser-tools@1.4.0
 
-commands:
-  set_deploy_key:
-    description: Sets the ssh key for project access
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "29:ad:60:65:65:54:24:f6:7c:86:a7:4b:97:01:78:3b"
+# commands:
+#   set_deploy_key:
+#     description: Sets the ssh key for project access
+#     steps:
+#       - add_ssh_keys:
+#           fingerprints:
+#             - "29:ad:60:65:65:54:24:f6:7c:86:a7:4b:97:01:78:3b"
 
-  detect_root_change:
-    description: Detects root file changes
-    steps:
-      - run:
-          name: Detect root file changes (if so, treat all packages as updated)
-          command: |
-            set -e
-            trap 'catch $? $LINENO' ERR
+#   detect_root_change:
+#     description: Detects root file changes
+#     steps:
+#       - run:
+#           name: Detect root file changes (if so, treat all packages as updated)
+#           command: |
+#             set -e
+#             trap 'catch $? $LINENO' ERR
 
-            catch() {
-              if [ "$1" != "0" ]; then
-                # error handling goes here
-                echo "Error $1 occurred on $2"
-              fi
-            }
+#             catch() {
+#               if [ "$1" != "0" ]; then
+#                 # error handling goes here
+#                 echo "Error $1 occurred on $2"
+#               fi
+#             }
 
-            echo 'Checking changes'
-            globalChanges=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig' || true; }`
-            storybookChanges=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep '^packages/storybook' || true; }`
-            echo 'Global Changes detected:'
-            echo $globalChanges
+#             echo 'Checking changes'
+#             globalChanges=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep -Ev '^packages/|yarn.lock|bear.png|.editorconfig' || true; }`
+#             storybookChanges=`git diff --name-only origin/master...$CIRCLE_BRANCH | { grep '^packages/storybook' || true; }`
+#             echo 'Global Changes detected:'
+#             echo $globalChanges
 
-            echo 'Storybook Changes detected:'
-            echo $storybookChanges
+#             echo 'Storybook Changes detected:'
+#             echo $storybookChanges
 
-            if [[ $globalChanges ]] || [[ $storybookChanges ]] || [ $CIRCLE_BRANCH == "master" ]; then
-              echo 'export RUN_ALL=true' >> $BASH_ENV
-              source $BASH_ENV
-            else
-            echo 'export RUN_ALL=false' >> $BASH_ENV
-            source $BASH_ENV
-              echo 'Root files not changed'
-            fi
+#             if [[ $globalChanges ]] || [[ $storybookChanges ]] || [ $CIRCLE_BRANCH == "master" ]; then
+#               echo 'export RUN_ALL=true' >> $BASH_ENV
+#               source $BASH_ENV
+#             else
+#             echo 'export RUN_ALL=false' >> $BASH_ENV
+#             source $BASH_ENV
+#               echo 'Root files not changed'
+#             fi
 
-  install_node_dependencies:
-    description: Installs the node dependencies
-    steps:
-      - run:
-          name: Install node dependencies
-          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+#   install_node_dependencies:
+#     description: Installs the node dependencies
+#     steps:
+#       - run:
+#           name: Install node dependencies
+#           command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
 
-  run_command:
-    parameters:
-      command_description:
-        type: string
-      command_name:
-        type: string
-      turborepo_concurrency:
-        type: string
-    description: Runs commands based on passed parameters
-    steps:
-      - run:
-          name: << parameters.command_description >>
-          command: |
-            if [ "${RUN_ALL}" == "true" ];
-            then
-              yarn << parameters.command_name >> --concurrency=<< parameters.turborepo_concurrency >>
-            else
-              yarn << parameters.command_name >> --filter=...[master] --concurrency=<< parameters.turborepo_concurrency >>
-            fi
+#   run_command:
+#     parameters:
+#       command_description:
+#         type: string
+#       command_name:
+#         type: string
+#       turborepo_concurrency:
+#         type: string
+#     description: Runs commands based on passed parameters
+#     steps:
+#       - run:
+#           name: << parameters.command_description >>
+#           command: |
+#             if [ "${RUN_ALL}" == "true" ];
+#             then
+#               yarn << parameters.command_name >> --concurrency=<< parameters.turborepo_concurrency >>
+#             else
+#               yarn << parameters.command_name >> --filter=...[master] --concurrency=<< parameters.turborepo_concurrency >>
+#             fi
 
-  build_packages:
-    description: Locally builds all packages in the monorepo
-    steps:
-      - run_command:
-          command_description: Build packages
-          command_name: build
-          turborepo_concurrency: "5"
+#   build_packages:
+#     description: Locally builds all packages in the monorepo
+#     steps:
+#       - run_command:
+#           command_description: Build packages
+#           command_name: build
+#           turborepo_concurrency: "5"
 
-  lint_packages:
-    description: Locally lints all packages in the monorepo
-    steps:
-      - run_command:
-          command_description: Run linting for packages
-          command_name: lint
-          turborepo_concurrency: "10"
+#   lint_packages:
+#     description: Locally lints all packages in the monorepo
+#     steps:
+#       - run_command:
+#           command_description: Run linting for packages
+#           command_name: lint
+#           turborepo_concurrency: "10"
 
-  unit_integration_tests:
-    description: Run Unit / Integration Tests
-    parameters:
-      component_type:
-        type: string
-    steps:
-      - run_command:
-          command_description: Run unit / integration tests for packages
-          command_name: "ci:test:<< parameters.component_type >>"
-          turborepo_concurrency: "10"
+#   unit_integration_tests:
+#     description: Run Unit / Integration Tests
+#     parameters:
+#       component_type:
+#         type: string
+#     steps:
+#       - run_command:
+#           command_description: Run unit / integration tests for packages
+#           command_name: "ci:test:<< parameters.component_type >>"
+#           turborepo_concurrency: "10"
 
-  build_storybook:
-    description: Build Storybook for UI tests
-    steps:
-      - run:
-          name: Build storybook for updated packages for UI tests
-          command: |
-            if [ "${RUN_ALL}" == "true" ];
-            then
-              yarn storybook:build
-            else
-              yarn storybook:build-changed
-            fi
+#   build_storybook:
+#     description: Build Storybook for UI tests
+#     steps:
+#       - run:
+#           name: Build storybook for updated packages for UI tests
+#           command: |
+#             if [ "${RUN_ALL}" == "true" ];
+#             then
+#               yarn storybook:build
+#             else
+#               yarn storybook:build-changed
+#             fi
 
-  component_tests:
-    description: Run Component Tests
-    parameters:
-      component_type:
-        type: string
-    steps:
-      - run_command:
-          command_description: Run component tests for packages
-          command_name: "ci:test-component:chrome:<< parameters.component_type >>"
-          turborepo_concurrency: "1"
+#   component_tests:
+#     description: Run Component Tests
+#     parameters:
+#       component_type:
+#         type: string
+#     steps:
+#       - run_command:
+#           command_description: Run component tests for packages
+#           command_name: "ci:test-component:chrome:<< parameters.component_type >>"
+#           turborepo_concurrency: "1"
 
-  accessibility_tests:
-    description: Run Accessibility Tests
-    parameters:
-      component_type:
-        type: string
-    steps:
-      - run_command:
-          command_description: Run accessibility tests for packages
-          command_name: "ci:test-a11y:chrome:<< parameters.component_type >>"
-          turborepo_concurrency: "1"
+#   accessibility_tests:
+#     description: Run Accessibility Tests
+#     parameters:
+#       component_type:
+#         type: string
+#     steps:
+#       - run_command:
+#           command_description: Run accessibility tests for packages
+#           command_name: "ci:test-a11y:chrome:<< parameters.component_type >>"
+#           turborepo_concurrency: "1"
 
-  visual_regression_tests:
-    description: Run Percy Visual Regression Tests
-    parameters:
-      component_type:
-        type: string
-    steps:
-      - run:
-          name: Run Percy visual regression tests for packages
-          command: |
-            VISUAL_TESTS=`node ./visual-regression-preflight.js`
+#   visual_regression_tests:
+#     description: Run Percy Visual Regression Tests
+#     parameters:
+#       component_type:
+#         type: string
+#     steps:
+#       - run:
+#           name: Run Percy visual regression tests for packages
+#           command: |
+#             VISUAL_TESTS=`node ./visual-regression-preflight.js`
 
-            if [ "${VISUAL_TESTS}" == "true" ];
-            then
-              if [ "${RUN_ALL}" == "true" ];
-              then
-                yarn ci:test:visual:<< parameters.component_type >> --concurrency=1
-              else
-                yarn ci:test:visual:<< parameters.component_type >> --filter=...[master] --concurrency=1
-              fi
-            else
-              echo Skipping visual regression tests because PR is either in draft mode or has wip label applied
-            fi
+#             if [ "${VISUAL_TESTS}" == "true" ];
+#             then
+#               if [ "${RUN_ALL}" == "true" ];
+#               then
+#                 yarn ci:test:visual:<< parameters.component_type >> --concurrency=1
+#               else
+#                 yarn ci:test:visual:<< parameters.component_type >> --filter=...[master] --concurrency=1
+#               fi
+#             else
+#               echo Skipping visual regression tests because PR is either in draft mode or has wip label applied
+#             fi
 
-  slack_notify_fail:
-    description: Sends a slack notification on job failure
-    steps:
-      - slack/notify:
-          branch_pattern: master
-          event: fail
-          custom: |
-            {
-              "attachments": [
-                {
-                  "blocks": [
-                    {
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": "Your job *${CIRCLE_JOB}* has failed ⚠️"
-                      },
-                      "fields": [
-                        {
-                          "type": "mrkdwn",
-                          "text": "*Author*: ${CIRCLE_USERNAME}"
-                        },
-                        {
-                          "type": "mrkdwn",
-                          "text": "*Commit*: ${CIRCLE_SHA1}"
-                        }
-                      ],
-                      "accessory": {
-                        "type": "image",
-                        "image_url": "https://user-images.githubusercontent.com/26894168/101182589-31708380-3646-11eb-80d5-b174d47bf7fb.png",
-                        "alt_text": "Fozzie Logo"
-                      }
-                    },
-                    {
-                      "type": "actions",
-                      "elements": [
-                        {
-                          "type": "button",
-                          "text": {
-                            "type": "plain_text",
-                            "text": "View Job"
-                          },
-                          "url": "${CIRCLE_BUILD_URL}"
-                        }
-                      ]
-                    }
-                  ],
-                  "color": "danger"
-                }
-              ]
-            }
+#   slack_notify_fail:
+#     description: Sends a slack notification on job failure
+#     steps:
+#       - slack/notify:
+#           branch_pattern: master
+#           event: fail
+#           custom: |
+#             {
+#               "attachments": [
+#                 {
+#                   "blocks": [
+#                     {
+#                       "type": "section",
+#                       "text": {
+#                         "type": "mrkdwn",
+#                         "text": "Your job *${CIRCLE_JOB}* has failed ⚠️"
+#                       },
+#                       "fields": [
+#                         {
+#                           "type": "mrkdwn",
+#                           "text": "*Author*: ${CIRCLE_USERNAME}"
+#                         },
+#                         {
+#                           "type": "mrkdwn",
+#                           "text": "*Commit*: ${CIRCLE_SHA1}"
+#                         }
+#                       ],
+#                       "accessory": {
+#                         "type": "image",
+#                         "image_url": "https://user-images.githubusercontent.com/26894168/101182589-31708380-3646-11eb-80d5-b174d47bf7fb.png",
+#                         "alt_text": "Fozzie Logo"
+#                       }
+#                     },
+#                     {
+#                       "type": "actions",
+#                       "elements": [
+#                         {
+#                           "type": "button",
+#                           "text": {
+#                             "type": "plain_text",
+#                             "text": "View Job"
+#                           },
+#                           "url": "${CIRCLE_BUILD_URL}"
+#                         }
+#                       ]
+#                     }
+#                   ],
+#                   "color": "danger"
+#                 }
+#               ]
+#             }
 
-  slack_notify_success:
-    description: Sends a slack notifaction on job success
-    steps:
-      - slack/notify:
-          branch_pattern: master
-          event: pass
-          custom: |
-            {
-              "attachments": [
-                {
-                  "blocks": [
-                    {
-                      "type": "section",
-                      "text": {
-                        "type": "mrkdwn",
-                        "text": "Your job *${CIRCLE_JOB}* has succeeded 🎉"
-                      },
-                      "fields": [
-                        {
-                          "type": "mrkdwn",
-                          "text": "*Author*: ${CIRCLE_USERNAME}"
-                        },
-                        {
-                          "type": "mrkdwn",
-                          "text": "*Commit*: ${CIRCLE_SHA1}"
-                        }
-                      ],
-                      "accessory": {
-                        "type": "image",
-                        "image_url": "https://user-images.githubusercontent.com/26894168/101182641-4220f980-3646-11eb-8782-29a6a2213815.png",
-                        "alt_text": "Fozzie Logo"
-                      }
-                    },
-                    {
-                      "type": "actions",
-                      "elements": [
-                        {
-                          "type": "button",
-                          "text": {
-                            "type": "plain_text",
-                            "text": "View Job"
-                          },
-                          "url": "${CIRCLE_BUILD_URL}"
-                        }
-                      ]
-                    }
-                  ],
-                  "color": "good"
-                }
-              ]
-            }
+#   slack_notify_success:
+#     description: Sends a slack notifaction on job success
+#     steps:
+#       - slack/notify:
+#           branch_pattern: master
+#           event: pass
+#           custom: |
+#             {
+#               "attachments": [
+#                 {
+#                   "blocks": [
+#                     {
+#                       "type": "section",
+#                       "text": {
+#                         "type": "mrkdwn",
+#                         "text": "Your job *${CIRCLE_JOB}* has succeeded 🎉"
+#                       },
+#                       "fields": [
+#                         {
+#                           "type": "mrkdwn",
+#                           "text": "*Author*: ${CIRCLE_USERNAME}"
+#                         },
+#                         {
+#                           "type": "mrkdwn",
+#                           "text": "*Commit*: ${CIRCLE_SHA1}"
+#                         }
+#                       ],
+#                       "accessory": {
+#                         "type": "image",
+#                         "image_url": "https://user-images.githubusercontent.com/26894168/101182641-4220f980-3646-11eb-8782-29a6a2213815.png",
+#                         "alt_text": "Fozzie Logo"
+#                       }
+#                     },
+#                     {
+#                       "type": "actions",
+#                       "elements": [
+#                         {
+#                           "type": "button",
+#                           "text": {
+#                             "type": "plain_text",
+#                             "text": "View Job"
+#                           },
+#                           "url": "${CIRCLE_BUILD_URL}"
+#                         }
+#                       ]
+#                     }
+#                   ],
+#                   "color": "good"
+#                 }
+#               ]
+#             }
 
-executors:
-  node:
-    docker:
-      # specify the version you desire here
-      - image: cimg/node:16.16.0-browsers # For latest available Node 16 images check – https://hub.docker.com/r/cimg/node/tags?page=1&name=16
+# executors:
+#   node:
+#     docker:
+#       # specify the version you desire here
+#       - image: cimg/node:16.16.0-browsers # For latest available Node 16 images check – https://hub.docker.com/r/cimg/node/tags?page=1&name=16
 
-    resource_class: large
+#     resource_class: large
 
-jobs:
+# jobs:
 
-  working_directory: ~/repo
+#   working_directory: ~/repo
 
-  install:
-    executor: node
-    steps:
-      - checkout
-      - install_node_dependencies
-      - persist_to_workspace:
-          root: .
-          paths:
-            - '*'
-      - slack_notify_fail
-      - slack_notify_success
+#   install:
+#     executor: node
+#     steps:
+#       - checkout
+#       - install_node_dependencies
+#       - persist_to_workspace:
+#           root: .
+#           paths:
+#             - '*'
+#       - slack_notify_fail
+#       - slack_notify_success
 
-  danger-checks:
-    executor: node
-    steps:
-      - attach_workspace:
-          at: .
-      - run: # Run PR Checks
-         name: Run PR Checks
-         command: yarn danger ci --failOnErrors
-      - slack_notify_fail
-      - slack_notify_success
+#   danger-checks:
+#     executor: node
+#     steps:
+#       - attach_workspace:
+#           at: .
+#       - run: # Run PR Checks
+#          name: Run PR Checks
+#          command: yarn danger ci --failOnErrors
+#       - slack_notify_fail
+#       - slack_notify_success
 
-  build:
-    executor: node
-    steps:
-      - attach_workspace:
-          at: .
-      - detect_root_change
-      - build_packages
-      - build_storybook
-      - persist_to_workspace:
-          root: .
-          paths:
-            - '*'
-      - lint_packages
-      - slack_notify_fail
-      - slack_notify_success
+#   build:
+#     executor: node
+#     steps:
+#       - attach_workspace:
+#           at: .
+#       - detect_root_change
+#       - build_packages
+#       - build_storybook
+#       - persist_to_workspace:
+#           root: .
+#           paths:
+#             - '*'
+#       - lint_packages
+#       - slack_notify_fail
+#       - slack_notify_success
 
-  bundlewatch:
-    executor: node
-    steps:
-      - attach_workspace:
-          at: .
-      - detect_root_change
-      - run:
-         name: Run Bundlewatch checks
-         command: yarn bundlewatch
-      - slack_notify_fail
-      - slack_notify_success
+#   bundlewatch:
+#     executor: node
+#     steps:
+#       - attach_workspace:
+#           at: .
+#       - detect_root_change
+#       - run:
+#          name: Run Bundlewatch checks
+#          command: yarn bundlewatch
+#       - slack_notify_fail
+#       - slack_notify_success
 
-  unit-tests:
-    executor: node
-    parameters:
-      component_type:
-        type: string
-    steps:
-      - attach_workspace:
-          at: .
-      - detect_root_change
-      - unit_integration_tests:
-          component_type: << parameters.component_type >>
+#   unit-tests:
+#     executor: node
+#     parameters:
+#       component_type:
+#         type: string
+#     steps:
+#       - attach_workspace:
+#           at: .
+#       - detect_root_change
+#       - unit_integration_tests:
+#           component_type: << parameters.component_type >>
 
-  browser-tests:
-    executor: node
-    parameters:
-      component_type:
-        type: string
-    steps:
-      - attach_workspace:
-          at: .
-      - browser-tools/install-chrome:
-          chrome-version: 104.0.5112.101
-      - run:
-          command: |
-            google-chrome --version
-      - detect_root_change
-      - run: # Install Component Test Dependencies
-          name: Install Component Test Dependencies
-          command: yarn global add @vue/cli @vue/cli-service-global
-      - run: # Serve Storybook
-          name: Serve Storybook
-          command: yarn storybook:serve-static
-          background: true
-      - component_tests:
-          component_type: << parameters.component_type >>
-      - accessibility_tests:
-          component_type: << parameters.component_type >>
-      - visual_regression_tests:
-          component_type: << parameters.component_type >>
-      - run:
-          name: Allure - Generate Test Results
-          command: yarn allure:generate
-          when: on_fail
-      - store_artifacts:
-          path: allure-report
-      - store_artifacts:
-          path: test/results/axe-violations
-      - slack_notify_fail
-      - slack_notify_success
+#   browser-tests:
+#     executor: node
+#     parameters:
+#       component_type:
+#         type: string
+#     steps:
+#       - attach_workspace:
+#           at: .
+#       - browser-tools/install-chrome:
+#           chrome-version: 104.0.5112.101
+#       - run:
+#           command: |
+#             google-chrome --version
+#       - detect_root_change
+#       - run: # Install Component Test Dependencies
+#           name: Install Component Test Dependencies
+#           command: yarn global add @vue/cli @vue/cli-service-global
+#       - run: # Serve Storybook
+#           name: Serve Storybook
+#           command: yarn storybook:serve-static
+#           background: true
+#       - component_tests:
+#           component_type: << parameters.component_type >>
+#       - accessibility_tests:
+#           component_type: << parameters.component_type >>
+#       - visual_regression_tests:
+#           component_type: << parameters.component_type >>
+#       - run:
+#           name: Allure - Generate Test Results
+#           command: yarn allure:generate
+#           when: on_fail
+#       - store_artifacts:
+#           path: allure-report
+#       - store_artifacts:
+#           path: test/results/axe-violations
+#       - slack_notify_fail
+#       - slack_notify_success
 
-workflows:
-  version: 2
+# workflows:
+#   version: 2
 
-  build_and_test:
-    jobs:
-      - install:
-          context: web-core
-          filters:
-            branches:
-              ignore: [ 'gh-pages' ]
-      - danger-checks:
-          name: danger-checks
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-          requires:
-            - install
-      - build:
-          name: build
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-          requires:
-            - danger-checks
-      - bundlewatch:
-          name: bundlewatch
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-          requires:
-            - build
-      - unit-tests:
-          matrix:
-            parameters:
-              component_type: ['tools', 'services', 'atoms', 'molecules', 'organisms', 'pages', 'templates']
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-          requires:
-            - build
-      - browser-tests:
-          matrix:
-            parameters:
-              component_type: ['atoms', 'molecules', 'organisms', 'pages']
-          context: web-core
-          filters:
-            branches:
-              ignore: ['gh-pages']
-          requires:
-            - unit-tests-<< matrix.component_type >>
-      # Not currently working in CircleCI
-      # - publish-to-npm:
-      #     context: web-core
-      #     filters:
-      #       branches:
-      #         only: master
-      #     requires:
-      #       - browser-tests-atoms
-      #       - browser-tests-molecules
-      #       - browser-tests-organisms
-      #       - browser-tests-pages
+#   build_and_test:
+#     jobs:
+#       - install:
+#           context: web-core
+#           filters:
+#             branches:
+#               ignore: [ 'gh-pages' ]
+#       - danger-checks:
+#           name: danger-checks
+#           context: web-core
+#           filters:
+#             branches:
+#               ignore: ['gh-pages']
+#           requires:
+#             - install
+#       - build:
+#           name: build
+#           context: web-core
+#           filters:
+#             branches:
+#               ignore: ['gh-pages']
+#           requires:
+#             - danger-checks
+#       - bundlewatch:
+#           name: bundlewatch
+#           context: web-core
+#           filters:
+#             branches:
+#               ignore: ['gh-pages']
+#           requires:
+#             - build
+#       - unit-tests:
+#           matrix:
+#             parameters:
+#               component_type: ['tools', 'services', 'atoms', 'molecules', 'organisms', 'pages', 'templates']
+#           context: web-core
+#           filters:
+#             branches:
+#               ignore: ['gh-pages']
+#           requires:
+#             - build
+#       - browser-tests:
+#           matrix:
+#             parameters:
+#               component_type: ['atoms', 'molecules', 'organisms', 'pages']
+#           context: web-core
+#           filters:
+#             branches:
+#               ignore: ['gh-pages']
+#           requires:
+#             - unit-tests-<< matrix.component_type >>
+#       # Not currently working in CircleCI
+#       # - publish-to-npm:
+#       #     context: web-core
+#       #     filters:
+#       #       branches:
+#       #         only: master
+#       #     requires:
+#       #       - browser-tests-atoms
+#       #       - browser-tests-molecules
+#       #       - browser-tests-organisms
+#       #       - browser-tests-pages
