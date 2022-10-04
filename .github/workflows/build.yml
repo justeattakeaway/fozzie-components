@@ -47,17 +47,14 @@ jobs:
       with:
         filters: |
           global:
-            - 'package.json'
-            - 'turbo.json'
-            - 'lerna.json'
-            - 'bundlewatch.config.js'
-            - 'babel.config.js'
-            - 'renovate.json'
+            - '*.js'
+            - '*.json'
             - '.github/**'
             - 'packages/storybook/**'
           packages:
-            - 'packages/**'
-            - '!packages/storybook/**'
+            - 'packages/components/**'
+            - 'packages/services/**'
+            - 'packages/tools/**'
         list-files: shell
     # # Setup Node 16
     # - name: Setup Node
