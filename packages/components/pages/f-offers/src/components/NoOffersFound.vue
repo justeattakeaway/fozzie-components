@@ -85,7 +85,7 @@ $height-adjustment-for-input-mobile: 48px;
 
 .c-noOffersFound-wrapper {
     width: 100%;
-    background: f.$color-grey-20;
+    background: f.$color-container-subtle;
     padding: f.spacing(f) f.spacing(g);
     border-radius: f.$radius-rounded-c;
     position: relative;
