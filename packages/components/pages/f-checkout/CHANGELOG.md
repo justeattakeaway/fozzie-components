@@ -11,7 +11,7 @@ v4.6.1
 ### Added
 - New props to README
 
-### Updated
+### Changed
 - Get checkout failure now error instead of warning
 
 
