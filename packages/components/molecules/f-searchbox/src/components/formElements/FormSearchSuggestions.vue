@@ -56,7 +56,7 @@ export default {
 <style lang="scss" module>
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
-$suggestions-shadow: f.$color-grey-45 0 5px 6px -2px;
+$suggestions-shadow: f.$color-charcoal-50 0 5px 6px -2px;
 
 .c-search-suggestions {
     $border-radius: 2px;

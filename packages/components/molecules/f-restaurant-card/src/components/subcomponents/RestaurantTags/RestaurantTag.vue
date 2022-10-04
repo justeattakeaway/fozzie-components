@@ -59,7 +59,7 @@ export default {
     display: block;
     padding: 0 f.spacing(a);
     border-radius: f.$radius-rounded-a;
-    @include f.font-size(f.$font-paragraph-03);
+    @include f.font-size(f.$font-paragraph-spacing-03);
     color: f.$color-content-default;
     background-color: f.$color-container-strong;
     max-width: 30ch;

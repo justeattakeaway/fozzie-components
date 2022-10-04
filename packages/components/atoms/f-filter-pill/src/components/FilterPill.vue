@@ -202,7 +202,7 @@ $filter-pill-ease: ease-in-out;
     }
 
     .c-filterPill--disabled & {
-        color: f.$color-grey-30;
+        color: f.$color-mozzarella-20;
         cursor: default;
     }
 }
