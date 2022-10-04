@@ -216,9 +216,7 @@ export default {
 
     .c-formField-field--checkbox:disabled + label:before,
     .c-formField-field--radio:disabled + label:before {
-        border-color: f.$color-border-default;
-        background-color: f.$color-container-strong;
-        cursor: default;
+        @include common.disabled-field();
     }
 
     .c-formField-field--checkbox:disabled:checked + label:before {
