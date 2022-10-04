@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-http",
   "description": "Javascript HTTP client for interacting with restful services",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "maxBundleSize": "400kB",
   "main": "dist/f-http.umd.js",
   "module": "dist/f-http.es.js",
