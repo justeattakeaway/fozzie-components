@@ -46,8 +46,14 @@ jobs:
       id: changes
       with:
         filters: |
-          root:
-            - '.'
+          global:
+            - 'package.json'
+            - 'turbo.json'
+            - 'lerna.json'
+            - 'bundlewatch.config.js'
+            - 'babel.config.js'
+            - 'renovate.json'
+            - '.github/**'
         list-files: shell
     # # Setup Node 16
     # - name: Setup Node
