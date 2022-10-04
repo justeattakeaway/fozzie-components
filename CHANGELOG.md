@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.33.0
+------------------------------
+*October 4, 2022*
+
+### Added
+- Danger checks to GitHub Actions.
+
+
 v7.32.0
 ------------------------------
 *October 04, 2022*
@@ -10,13 +18,6 @@ v7.32.0
 ### Changed
 - Update to `fozzie` v10.5.0
 - Replaced various design tokens that were removed from the newer version
-
-v7.31.0
-------------------------------
-*October 4, 2022*
-
-### Added
-- Danger checks to GitHub Actions.
 
 
 v7.31.0
