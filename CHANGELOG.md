@@ -5,10 +5,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.32.0
 ------------------------------
-*October 03, 2022*
+*October 04, 2022*
 
 ### Changed
-- Update to `fozzie` v10.4.0
+- Update to `fozzie` v10.5.0
 - Replaced various design tokens that were removed from the newer version
 
 v7.31.0
