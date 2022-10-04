@@ -4,10 +4,7 @@
 name: Fozzie Components CI
 
 on:
-  push:
-    branches:
-    - master
-    - danger-github-actions
+  pull_request
 
 jobs:
   install:
