@@ -81,10 +81,6 @@ jobs:
             - '*.js'
             - '*.json'
             - 'packages/storybook/**'
-          packages:
-            - 'packages/components/**'
-            - 'packages/services/**'
-            - 'packages/tools/**'
         list-files: shell
     # Setup Node 16
     - name: Setup Node
@@ -122,7 +118,7 @@ jobs:
       if: steps.changes.outputs.global == 'true' || github.ref == 'refs/heads/master'
       run: yarn lint --concurrency=10
     - name: Lint Changed Components
-      if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
+      if: steps.changes.outputs.global == 'false'
       run: yarn lint --filter=[origin/master] --concurrency=10
     # Cache 'storybook-static'
     - name: Cache Storybook Static Directory
@@ -136,7 +132,7 @@ jobs:
       if: steps.changes.outputs.global == 'true' || github.ref == 'refs/heads/master'
       run: yarn storybook:build
     - name: Build Storybook (Changed Components + Dependants)
-      if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
+      if: steps.changes.outputs.global == 'false'
       run: yarn storybook:build-changed
     env:
       BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_TOKEN }}
@@ -197,7 +193,7 @@ jobs:
       if: steps.changes.outputs.global == 'true' || github.ref == 'refs/heads/master'
       run: yarn ci:test:${{ matrix.component-type}} --concurrency=10
     - name: Unit Test Changed Components + Dependants
-      if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
+      if: steps.changes.outputs.global == 'false'
       run: yarn ci:test:${{ matrix.component-type}} --concurrency=10 --filter=...[origin/master]
     # Restore Storybook 'storybook-static'
     - name: Cache Storybook Static Directory
@@ -209,13 +205,13 @@ jobs:
         key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
     # Run Component / A11y / Visual Tests
     - name: Run All Component / A11y / Visual Tests
-      if: (matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages') && github.ref == 'refs/heads/master'
+      if: (matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages') && (github.ref == 'refs/heads/master' || steps.changes.outputs.global == 'true' )
       run: |
         yarn storybook:serve-static &
         yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
         yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1
     - name: Run Changed Component / A11y / Visual Tests + Dependants
-      if: (matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages') && github.ref != 'refs/heads/master'
+      if: (matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages') && (github.ref != 'refs/heads/master' || steps.changes.outputs.global == 'false')
       run: |
         yarn storybook:serve-static &
         yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master] &&
