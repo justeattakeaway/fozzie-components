@@ -144,10 +144,13 @@ jobs:
         component-type: ['atoms', 'molecules', 'organisms' , 'pages', 'templates', 'tools', 'services']
         browser_tests: [true, false]
         exclude:
-        - component-type: ['templates', 'tools', 'services', 'templates']
-          browser_tests: true
-        - component-type: ['atoms', 'molecules', 'organisms', 'pages']
-          browser_tests: false
+        - { component-type: atoms, browser_tests: false }
+        - { component-type: molecules, browser_tests: false }
+        - { component-type: organisms, browser_tests: false }
+        - { component-type: pages, browser_tests: false }
+        - { component-type: templates, browser_tests: true }
+        - { component-type: tools, browser_tests: true }
+        - { component-type: services, browser_tests: true }
     name: tests-${{ matrix.component-type }}
     needs: build
     runs-on: ubuntu-latest
