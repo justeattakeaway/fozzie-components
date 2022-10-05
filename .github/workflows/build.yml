@@ -119,11 +119,11 @@ jobs:
       run: yarn bundlewatch
     # Lint components
     - name: Lint All Components
-      if: steps.changes.outputs.global == 'true'
+      if: steps.changes.outputs.global == 'true' || github.ref == 'refs/heads/master'
       run: yarn lint --concurrency=10
-    - name: Build Changed Components + Dependants
+    - name: Lint Changed Components
       if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
-      run: yarn lint --filter=...[origin/master] --concurrency=10
+      run: yarn lint --filter=[origin/master] --concurrency=10
     # Cache 'storybook-static'
     - name: Cache Storybook Static Directory
       id: storybook-cache
@@ -133,7 +133,7 @@ jobs:
         key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
     # Build Storybook
     - name: Build Storybook (All Components)
-      if: steps.changes.outputs.global == 'true'
+      if: steps.changes.outputs.global == 'true' || github.ref == 'refs/heads/master'
       run: yarn storybook:build
     - name: Build Storybook (Changed Components + Dependants)
       if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
@@ -194,82 +194,89 @@ jobs:
     # Unit Test components.
 
     - name: Unit Test All Components
-      if: steps.changes.outputs.global == 'true'
+      if: steps.changes.outputs.global == 'true' || github.ref == 'refs/heads/master'
       run: yarn ci:test:${{ matrix.component-type}} --concurrency=10
     - name: Unit Test Changed Components + Dependants
       if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
       run: yarn ci:test:${{ matrix.component-type}} --concurrency=10 --filter=...[origin/master]
-    # # Restore Storybook 'storybook-static'
-    # - name: Cache Storybook Static Directory
-    #   if: matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages'
-    #   id: storybook-cache
-    #   uses: actions/cache@v2
-    #   with:
-    #     path: ./packages/storybook/storybook-static
-    #     key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
-    # # Run Component / A11y / Visual Tests
-    # - name: Run Component / A11y / Visual Tests
-    #   if: matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages'
-    #   run: |
-    #     yarn storybook:serve-static &
-    #     yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
-    #     yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1
-    # # On Failure - Upload Allure Report
-    # - name: Generate Allure Report
-    #   if: failure()
-    #   run: yarn allure:generate
-    # - name: Upload Allure Report
-    #   if: failure()
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: test-artifacts-${{ matrix.component-type }}
-    #     path: |
-    #       allure-report
-    #       test/results/axe-violations
+    # Restore Storybook 'storybook-static'
+    - name: Cache Storybook Static Directory
+      if: matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages'
+      id: storybook-cache
+      uses: actions/cache@v2
+      with:
+        path: ./packages/storybook/storybook-static
+        key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
+    # Run Component / A11y / Visual Tests
+    - name: Run All Component / A11y / Visual Tests
+      if: (matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages') && github.ref == 'refs/heads/master'
+      run: |
+        yarn storybook:serve-static &
+        yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
+        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1
+    - name: Run Changed Component / A11y / Visual Tests + Dependants
+      if: (matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages') && github.ref != 'refs/heads/master'
+      run: |
+        yarn storybook:serve-static &
+        yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master] &&
+        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master]
+    # On Failure - Upload Allure Report
+    - name: Generate Allure Report
+      if: failure()
+      run: yarn allure:generate
+    - name: Upload Allure Report
+      if: failure()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-artifacts-${{ matrix.component-type }}
+        path: |
+          allure-report
+          test/results/axe-violations
 
-  # storybook-deploy:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   # Checkout the Repo
-  #   - name: Checkout
-  #     uses: actions/checkout@v3
-  #   # Setup Node 16
-  #   - name: Setup Node
-  #     uses: actions/setup-node@v3
-  #     with:
-  #       node-version: 16
-  #       cache: 'yarn'
-  #   # Restore node_modules - Cache should exist as one was created in previous 'install' job
-  #   - name: Restore Cache -  Node Modules
-  #     id: cache-node-modules
-  #     uses: actions/cache@v2
-  #     with:
-  #       path: '**/node_modules'
-  #       key: node-modules-${{ hashFiles('**/yarn.lock') }}
-  #   # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible
-  #   - name: Install Dependencies
-  #     if: steps.cache-node-modules.outputs.cache-hit != 'true'
-  #     run: yarn --prefer-offline
-  #   # Restore Cache - Turborepo Dist
-  #   - name: Cache Turborepo Dist
-  #     id: turborepo-dist-cache
-  #     uses: actions/cache@v2
-  #     with:
-  #       path: .turbo
-  #       key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.run_id }}
-  #   # Restore Storybook 'storybook-static'
-  #   - name: Cache Storybook Static Directory
-  #     id: storybook-cache
-  #     uses: actions/cache@v2
-  #     with:
-  #       path: ./packages/storybook/storybook-static
-  #       key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
-  #   # Deploy Storybook
-  #   - name: Storybook deploy
-  #     run: yarn storybook:deploy
-  #     env:
-  #       GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
+  storybook-deploy:
+    if: ${{ github.ref == 'refs/heads/master' }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the Repo
+    - name: Checkout
+      uses: actions/checkout@v3
+    # Setup Node 16
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'yarn'
+    # Restore node_modules - Cache should exist as one was created in previous 'install' job
+    - name: Restore Cache -  Node Modules
+      id: cache-node-modules
+      uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: node-modules-${{ hashFiles('**/yarn.lock') }}
+    # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible
+    - name: Install Dependencies
+      if: steps.cache-node-modules.outputs.cache-hit != 'true'
+      run: yarn --prefer-offline
+    # Restore Cache - Turborepo Dist
+    - name: Cache Turborepo Dist
+      id: turborepo-dist-cache
+      uses: actions/cache@v2
+      with:
+        path: .turbo
+        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.run_id }}
+    # Restore Storybook 'storybook-static'
+    - name: Cache Storybook Static Directory
+      id: storybook-cache
+      uses: actions/cache@v2
+      with:
+        path: ./packages/storybook/storybook-static
+        key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
+    # Deploy Storybook
+    - name: Storybook deploy
+      run: yarn storybook:deploy
+      env:
+        GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
 
   # publish:
   #   needs: tests
