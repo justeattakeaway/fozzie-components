@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-button",
-  "description": "Fozzie Butt5on – The generic button component",
+  "description": "Fozzie Button – The generic button component",
   "version": "4.3.0",
   "main": "dist/f-button.umd.min.js",
   "maxBundleSize": "5kB",
@@ -62,8 +62,8 @@
   "devDependencies": {
     "@justeattakeaway/pie-icons-vue": "1.0.0",
     "@justeat/f-wdio-utils": "1.x",
-    "@vue/cli-plugin-babel": "4.5.16",
-    "@vue/cli-plugin-unit-jest": "4.5.16",
+    "@vue/cli-plugin-babel": "4.5.17",
+    "@vue/cli-plugin-unit-jest": "4.5.17",
     "@vue/test-utils": "1.0.3",
     "vue-router": "3.5.2"
   }
