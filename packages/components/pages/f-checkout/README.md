@@ -86,7 +86,7 @@ The props that can be defined are as follows:
 | `paymentPageUrlPrefix` | `String` | `-` | URL prefix to navigate to after the order has been successfully placed, so the user can pay. The `orderId` will be appended to this URL to form the full URL. |
 | `applicationName` | `String` | `-` | The name of the application using this component. |
 | `getNoteConfigUrl` | `String` | - | URL for the API called to get the note configuration for split notes |
-| `checkoutFeatures` | `Object` | - | Object containing relevant feature flags set in CoreWeb configuration files |
+| `checkoutFeatures` | `Object` | - | Object containing relevant feature flags |
 
 ### Events
 

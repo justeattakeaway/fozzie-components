@@ -8,7 +8,7 @@ v1.0.2
 *October 4, 2022*
 
 ### Added
-- a build script for storybook
+- `storybook:build` script to package.json
 
 v1.0.1
 ------------------------------
