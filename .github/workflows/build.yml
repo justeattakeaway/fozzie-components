@@ -80,12 +80,9 @@ jobs:
           turborepo-dist-cache-${{ github.ref_name }}
           turborepo-dist-cache-master
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
-    - name: Build All Components
+    - name: Build Components
       if: steps.changes.outputs.global == 'true'
       run: yarn build --cache-dir=".turbo"
-    - name: Build Changed Components + Dependants
-      if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
-      run: yarn build --filter=...[origin/master] --cache-dir=".turbo"
     # Run Bundlewatch checks
     - name: Run Bundlewatch checks
       run: yarn bundlewatch
@@ -112,7 +109,6 @@ jobs:
       run: yarn storybook:build-changed
     env:
       BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_TOKEN }}
-      RUN_ALL: true
 
   tests:
     strategy:
@@ -161,12 +157,9 @@ jobs:
         path: .turbo
         key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.run_id }}
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
-    - name: Build All Components
+    - name: Build Components
       if: steps.changes.outputs.global == 'true'
       run: yarn build --cache-dir=".turbo"
-    - name: Build Changed Components + Dependants
-      if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
-      run: yarn build --filter=...[origin/master] --cache-dir=".turbo"
     # Unit Test components.
 
     - name: Unit Test All Components

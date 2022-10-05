@@ -14,7 +14,7 @@ const getChangedPackageLocations = () => {
     let outputPackages;
     // If master, run bundlewatch against all components
     // Otherwise run Bundlewatch against changed components and their dependants
-    let command = process.env.CIRCLE_BRANCH === 'master' || process.env.RUN_ALL === 'true' ? "npx turbo run build --dry=json" : "npx turbo run build --filter=...[origin/master] --dry=json" 
+    let command = process.env.CIRCLE_BRANCH === 'master' || process.env.RUN_ALL === 'true' || process.env.GITHUB_ACTIONS ? "npx turbo run build --dry=json" : "npx turbo run build --filter=...[origin/master] --dry=json" 
 
     try {
         outputPackages = execSync(command);
