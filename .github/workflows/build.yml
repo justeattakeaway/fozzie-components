@@ -85,7 +85,7 @@ jobs:
       run: yarn build --cache-dir=".turbo"
     - name: Build Changed Components + Dependants
       if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
-      run: yarn build --filter=...[master] --cache-dir=".turbo"
+      run: yarn build --filter=...[origin/master] --cache-dir=".turbo"
     # Run Bundlewatch checks
     - name: Run Bundlewatch checks
       run: yarn bundlewatch
@@ -95,7 +95,7 @@ jobs:
       run: yarn lint --concurrency=10
     - name: Build Changed Components + Dependants
       if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
-      run: yarn lint --filter=...[master] --concurrency=10
+      run: yarn lint --filter=...[origin/master] --concurrency=10
     # Cache 'storybook-static'
     - name: Cache Storybook Static Directory
       id: storybook-cache
@@ -166,7 +166,7 @@ jobs:
       run: yarn build --cache-dir=".turbo"
     - name: Build Changed Components + Dependants
       if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
-      run: yarn build --filter=...[master] --cache-dir=".turbo"
+      run: yarn build --filter=...[origin/master] --cache-dir=".turbo"
     # Unit Test components.
 
     - name: Unit Test All Components
@@ -174,7 +174,7 @@ jobs:
       run: yarn ci:test:${{ matrix.component-type}} --concurrency=10
     - name: Unit Test Changed Components + Dependants
       if: steps.changes.outputs.global == 'false' && steps.changes.outputs.packages == 'true'
-      run: yarn ci:test:${{ matrix.component-type}} --concurrency=10 --filter=...[master]
+      run: yarn ci:test:${{ matrix.component-type}} --concurrency=10 --filter=...[origin/master]
     # # Restore Storybook 'storybook-static'
     # - name: Cache Storybook Static Directory
     #   if: matrix.component-type == 'atoms' || matrix.component-type == 'molecules' || matrix.component-type == 'organisms' || matrix.component-type == 'pages'
