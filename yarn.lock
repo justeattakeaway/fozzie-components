@@ -2346,18 +2346,18 @@
     axios "0.25.0"
     crypto-js "4.1.1"
 
-"@justeat/fozzie@9.3.1":
-  version "9.3.1"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-9.3.1.tgz#4e3c8f073b2880787127a69d072006c3ae483449"
-  integrity sha512-GSSyULm00xH27dLP/Se1QQsiUsMWkf5u/11jHTjCw6Kf+nNSmYTyaEqCk/jT+xFVso5Q36+8uXQLqDEPmIO8ww==
+"@justeat/fozzie@10.5.0":
+  version "10.5.0"
+  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-10.5.0.tgz#27fe3594d0ff33d15ba9d07459666c4657b124c2"
+  integrity sha512-jyxIYICjBevGKWe5kVbcic/khTEinl8MtPrlIq4QwnjBgQDvm9Y00sTjlsgwlQzh3of5CepegzbrzpsXK6+aIA==
   dependencies:
-    "@justeat/pie-design-tokens" "1.6.0"
+    "@justeat/pie-design-tokens" "3.0.0"
     include-media eduardoboucas/include-media#2.0-release
 
-"@justeat/pie-design-tokens@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-1.6.0.tgz#8cde740cf7681927dc321946985e731ccf3401b1"
-  integrity sha512-oXwvSQXrQIH9jlEwq7Su6ZLBQyp8m8vV276Iu0PjncpxsndPs0D+GKHvw/jVQ57ZCQPhBafQEaRCvawHWwg2yA==
+"@justeat/pie-design-tokens@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-3.0.0.tgz#734fe0093fc825d9f5e0d696512655751c15e0f8"
+  integrity sha512-4ZlMO0aoOBbGta/ygWzu2XN5SExfOUVG5ps+5dHTMhbOBtVY+3EywxapK/sosBz3ItB1M/PbHkbeoaUI6o3lgA==
   dependencies:
     jsonc-parser "2.2.0"
     lodash.merge "4.6.2"
