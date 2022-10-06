@@ -116,10 +116,10 @@ jobs:
     # Lint components
     - name: Lint All Components
       if: steps.changes.outputs.global == 'true' || github.ref == 'refs/heads/master'
-      run: yarn lint --concurrency=10
+      run: yarn lint --concurrency=10 --cache-dir=".turbo"
     - name: Lint Changed Components
       if: steps.changes.outputs.global == 'false'
-      run: yarn lint --filter=[origin/master] --concurrency=10
+      run: yarn lint --filter=[origin/master] --concurrency=10 --cache-dir=".turbo"
     # Cache 'storybook-static'
     - name: Cache Storybook Static Directory
       id: storybook-cache
