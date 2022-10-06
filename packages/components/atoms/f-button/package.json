@@ -57,7 +57,8 @@
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
     "vue": "2.x",
-    "vue-router": ">=3.4.8"
+    "vue-router": ">=3.4.8",
+    "@justeat/fozzie": "10.x"
   },
   "devDependencies": {
     "@justeattakeaway/pie-icons-vue": "1.0.0",
