@@ -7,7 +7,6 @@ on:
   push:
     branches:
     - master
-    - filter-gh-actions-path
 
 # This needs to be uncommented when we finish migration so that Danger works.
 # on:
