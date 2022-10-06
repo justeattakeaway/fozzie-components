@@ -52,8 +52,7 @@
   ],
   "dependencies": {
     "@justeat/f-services": "1.x",
-    "vuelidate": "0.7.6",
-    "@justeat/fozzie": "10.5.0"
+    "vuelidate": "0.7.6"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
