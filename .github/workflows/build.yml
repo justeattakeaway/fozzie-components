@@ -197,12 +197,12 @@ jobs:
     - name: Build Components
       run: yarn build --cache-dir=".turbo"
     # Unit Test components.
-    - name: Unit Test All Components
-      if: steps.changes.outputs.global == 'true' || github.ref == 'refs/heads/master'
-      run: yarn ci:test:${{ matrix.component-type}} --concurrency=10
-    - name: Unit Test Changed Components + Dependants
-      if: steps.changes.outputs.global == 'false' && github.ref != 'refs/heads/master'
-      run: yarn ci:test:${{ matrix.component-type}} --concurrency=10 --filter=...[origin/master]
+    # - name: Unit Test All Components
+    #   if: steps.changes.outputs.global == 'true' || github.ref == 'refs/heads/master'
+    #   run: yarn ci:test:${{ matrix.component-type}} --concurrency=10
+    # - name: Unit Test Changed Components + Dependants
+    #   if: steps.changes.outputs.global == 'false' && github.ref != 'refs/heads/master'
+    #   run: yarn ci:test:${{ matrix.component-type}} --concurrency=10 --filter=...[origin/master]
     # Restore Storybook 'storybook-static'
     - name: Cache Storybook Static Directory
       if: ${{ matrix.browser_tests == 'true' }}
@@ -211,31 +211,36 @@ jobs:
       with:
         path: ./packages/storybook/storybook-static
         key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
-    # Run Component / A11y / Visual Tests
-    - name: Run All Component / A11y / Visual Tests
-      if: ${{ (matrix.browser_tests == 'true') && (github.ref == 'refs/heads/master' || steps.changes.outputs.global == 'true') }}
-      run: |
-        yarn storybook:serve-static &
-        yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
-        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1
-    - name: Run Changed Component / A11y / Visual Tests + Dependants
-      if:  ${{ (matrix.browser_tests == 'true') && (github.ref != 'refs/heads/master' || steps.changes.outputs.global == 'false') }}
-      run: |
-        yarn storybook:serve-static &
-        yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master] &&
-        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master]
-    # On Failure - Upload Allure Report
-    - name: Generate Allure Report
-      if: failure()
-      run: yarn allure:generate
-    - name: Upload Allure Report
-      if: failure()
-      uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v3
       with:
-        name: test-artifacts-${{ matrix.component-type }}
+        name: storybook-cache-${{ matrix.component-type }}
         path: |
-          allure-report
-          test/results/axe-violations
+          ./packages/storybook/storybook-static
+    # # Run Component / A11y / Visual Tests
+    # - name: Run All Component / A11y / Visual Tests
+    #   if: ${{ (matrix.browser_tests == 'true') && (github.ref == 'refs/heads/master' || steps.changes.outputs.global == 'true') }}
+    #   run: |
+    #     yarn storybook:serve-static &
+    #     yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
+    #     yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1
+    # - name: Run Changed Component / A11y / Visual Tests + Dependants
+    #   if:  ${{ (matrix.browser_tests == 'true') && (github.ref != 'refs/heads/master' || steps.changes.outputs.global == 'false') }}
+    #   run: |
+    #     yarn storybook:serve-static &
+    #     yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master] &&
+    #     yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master]
+    # # On Failure - Upload Allure Report
+    # - name: Generate Allure Report
+    #   if: failure()
+    #   run: yarn allure:generate
+    # - name: Upload Allure Report
+    #   if: failure()
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: test-artifacts-${{ matrix.component-type }}
+    #     path: |
+    #       allure-report
+    #       test/results/axe-violations
 
   storybook-deploy:
     if: ${{ github.ref == 'refs/heads/master' }}
