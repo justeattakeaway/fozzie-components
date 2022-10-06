@@ -11,9 +11,6 @@ v4.6.1
 ### Added
 - New props `getNoteConfigUrl` and `checkoutFeatures` to README
 
-### Changed
-- Get checkout failure now error instead of warning
-
 
 v4.6.0
 ------------------------------
