@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-http",
   "description": "Javascript HTTP client for interacting with restful services",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "maxBundleSize": "400kB",
   "main": "dist/f-http.umd.js",
   "module": "dist/f-http.es.js",
@@ -37,7 +37,8 @@
     "lint:fix": "yarn lint --fix",
     "test": "jest",
     "ci:test:services": "yarn test",
-    "test:coverage": "jest test:unit --coverage"
+    "test:coverage": "jest test:unit --coverage",
+    "storybook:build": "yarn build"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
