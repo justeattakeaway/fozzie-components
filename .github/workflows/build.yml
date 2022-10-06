@@ -141,20 +141,11 @@ jobs:
     env:
       BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_TOKEN }}
 
-  tests:
+  unit-tests:
     strategy:
       fail-fast: false
       matrix:
         component-type: ['atoms', 'molecules', 'organisms' , 'pages', 'templates', 'tools', 'services']
-        browser_tests: ['true', 'false']
-        exclude:
-        - { component-type: 'atoms', browser_tests: 'false' }
-        - { component-type: 'molecules', browser_tests: 'false' }
-        - { component-type: 'organisms', browser_tests: 'false' }
-        - { component-type: 'pages', browser_tests: 'false' }
-        - { component-type: 'templates', browser_tests: 'true' }
-        - { component-type: 'tools', browser_tests: 'true' }
-        - { component-type: 'services', browser_tests: 'true' }
     name: tests-${{ matrix.component-type }}
     needs: build
     runs-on: ubuntu-latest
@@ -201,12 +192,70 @@ jobs:
     - name: Build Components
       run: yarn build --cache-dir=".turbo"
     # Unit Test components.
-    # - name: Unit Test All Components
-    #   if: steps.changes.outputs.global == 'true' || github.ref == 'refs/heads/master'
-    #   run: yarn ci:test:${{ matrix.component-type}} --concurrency=10
-    # - name: Unit Test Changed Components + Dependants
-    #   if: steps.changes.outputs.global == 'false' && github.ref != 'refs/heads/master'
-    #   run: yarn ci:test:${{ matrix.component-type}} --concurrency=10 --filter=...[origin/master]
+    - name: Unit Test All Components
+      if: steps.changes.outputs.global == 'true' || github.ref == 'refs/heads/master'
+      run: yarn ci:test:${{ matrix.component-type}} --concurrency=10
+    - name: Unit Test Changed Components + Dependants
+      if: steps.changes.outputs.global == 'false' && github.ref != 'refs/heads/master'
+      run: yarn ci:test:${{ matrix.component-type}} --concurrency=10 --filter=...[origin/master]
+
+  browser-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        component-type: ['atoms', 'molecules', 'organisms' , 'pages']
+    name: tests-${{ matrix.component-type }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the Repo
+    - name: Checkout
+      uses: actions/checkout@v3
+    # Detect changed files
+    - uses: dorny/paths-filter@v2
+      id: changes
+      with:
+        filters: |
+          global:
+            - '*.js'
+            - '*.json'
+            - '.github/workflows/**'
+            - 'packages/storybook/**'
+          packages:
+            - 'packages/components/**'
+            - 'packages/services/**'
+            - 'packages/tools/**'
+        list-files: shell
+    # Setup Node 16
+    - name: Setup Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'yarn'
+    # Restore node_modules - Cache should exist as one was created in previous 'install' job
+    - name: Restore Cache -  Node Modules
+      id: cache-node-modules
+      uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: node-modules-${{ hashFiles('**/yarn.lock') }}
+    # Restore Cache - Turborepo Dist
+    - name: Cache Turborepo Dist
+      id: turborepo-dist-cache
+      uses: actions/cache@v2
+      with:
+        path: .turbo
+        key: turborepo-dist-cache-${{ github.ref_name }}-${{ github.run_id }}
+    # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
+    - name: Build Components
+      run: yarn build --cache-dir=".turbo"
+    # Unit Test components.
+    - name: Unit Test All Components
+      if: steps.changes.outputs.global == 'true' || github.ref == 'refs/heads/master'
+      run: yarn ci:test:${{ matrix.component-type}} --concurrency=10
+    - name: Unit Test Changed Components + Dependants
+      if: steps.changes.outputs.global == 'false' && github.ref != 'refs/heads/master'
+      run: yarn ci:test:${{ matrix.component-type}} --concurrency=10 --filter=...[origin/master]
     # Restore Storybook 'storybook-static'
     - name: Cache Storybook Static Directory
       if: ${{ matrix.browser_tests == 'true' }}
@@ -215,36 +264,31 @@ jobs:
       with:
         path: ./packages/storybook/storybook-static
         key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
-    - uses: actions/upload-artifact@v3
-      with:
-        name: storybook-cache-${{ matrix.component-type }}
-        path: |
-          ./packages/storybook/storybook-static
     # Run Component / A11y / Visual Tests
     - name: Run All Component / A11y / Visual Tests
-      if: ${{ (matrix.browser_tests == 'true') && (github.ref == 'refs/heads/master' || steps.changes.outputs.global == 'true') }}
+      if: ${{ (github.ref == 'refs/heads/master' || steps.changes.outputs.global == 'true') }}
       run: |
         yarn storybook:serve-static &
         yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
         yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1
     - name: Run Changed Component / A11y / Visual Tests + Dependants
-      if:  ${{ (matrix.browser_tests == 'true') && (github.ref != 'refs/heads/master' || steps.changes.outputs.global == 'false') }}
+      if:  ${{ (github.ref != 'refs/heads/master' || steps.changes.outputs.global == 'false') }}
       run: |
         yarn storybook:serve-static &
         yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master] &&
         yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master]
-    # # On Failure - Upload Allure Report
-    # - name: Generate Allure Report
-    #   if: failure()
-    #   run: yarn allure:generate
-    # - name: Upload Allure Report
-    #   if: failure()
-    #   uses: actions/upload-artifact@v3
-    #   with:
-    #     name: test-artifacts-${{ matrix.component-type }}
-    #     path: |
-    #       allure-report
-    #       test/results/axe-violations
+    # On Failure - Upload Allure Report
+    - name: Generate Allure Report
+      if: failure()
+      run: yarn allure:generate
+    - name: Upload Allure Report
+      if: failure()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-artifacts-${{ matrix.component-type }}
+        path: |
+          allure-report
+          test/results/axe-violations
 
   storybook-deploy:
     if: ${{ github.ref == 'refs/heads/master' }}
