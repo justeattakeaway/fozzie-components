@@ -220,19 +220,19 @@ jobs:
         name: storybook-cache-${{ matrix.component-type }}
         path: |
           ./packages/storybook/storybook-static
-    # # Run Component / A11y / Visual Tests
-    # - name: Run All Component / A11y / Visual Tests
-    #   if: ${{ (matrix.browser_tests == 'true') && (github.ref == 'refs/heads/master' || steps.changes.outputs.global == 'true') }}
-    #   run: |
-    #     yarn storybook:serve-static &
-    #     yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
-    #     yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1
-    # - name: Run Changed Component / A11y / Visual Tests + Dependants
-    #   if:  ${{ (matrix.browser_tests == 'true') && (github.ref != 'refs/heads/master' || steps.changes.outputs.global == 'false') }}
-    #   run: |
-    #     yarn storybook:serve-static &
-    #     yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master] &&
-    #     yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master]
+    # Run Component / A11y / Visual Tests
+    - name: Run All Component / A11y / Visual Tests
+      if: ${{ (matrix.browser_tests == 'true') && (github.ref == 'refs/heads/master' || steps.changes.outputs.global == 'true') }}
+      run: |
+        yarn storybook:serve-static &
+        yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
+        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1
+    - name: Run Changed Component / A11y / Visual Tests + Dependants
+      if:  ${{ (matrix.browser_tests == 'true') && (github.ref != 'refs/heads/master' || steps.changes.outputs.global == 'false') }}
+      run: |
+        yarn storybook:serve-static &
+        yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master] &&
+        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master]
     # # On Failure - Upload Allure Report
     # - name: Generate Allure Report
     #   if: failure()
