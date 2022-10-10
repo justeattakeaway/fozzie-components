@@ -39,7 +39,7 @@ When raising a PR in the mono-repo, please follow these guidelines.
 - Use draft PRs when it's appropriate (for example, to share code with a colleague or get early feedback on some changes).
 - Test your changes using Storybook (and ensure any modified/added props are added to the components story).
 - Always consider if your change warrants adding/amending the components README. If you're changing or adding props, it will do.
-- You need two reviews on your PR and all of the Danger.js and CircleCI build checks should pass.
+- You need two reviews on your PR and all of the Danger.js and GitHub Action build checks should pass.
 - Please don't add any links to internal facing tools or wikis anywhere in this repo – so that's in the PR title and description, code, comments, commit titles and branch names.
 
 ### CHANGELOG
