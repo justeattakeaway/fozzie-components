@@ -9,6 +9,7 @@ v0.22.0
 
 ### Added
 - `ci` WebDriverIO scripts in `package.json`.
+- Missing component object functions.
 
 
 v0.21.0
