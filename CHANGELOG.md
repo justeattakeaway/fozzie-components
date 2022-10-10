@@ -5,13 +5,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.34.0
 ------------------------------
-*October 6, 2022*
+*October 10, 2022*
 
 ### Added
 - Turborepo filtering to GitHub Actions.
 
 ### Changed
 - Version of Chromedriver to `106`
+
+v7.33.1
+------------------------------
+*October 6, 2022*
+
+### Removed
+- `f-form` organism component
 
 
 v7.33.0
