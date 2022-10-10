@@ -10,6 +10,7 @@ v7.35.0
 ### Added
 - Ability to run GitHub Actions on PR's.
 - Ability to prevent WDIO tests running if previous jobs fail.
+- Remove references to CircleCI.
 
 
 v7.34.0
