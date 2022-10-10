@@ -4,7 +4,19 @@
 name: Fozzie Components CI
 
 on:
-  pull_request
+  pull_request:
+    types: [assigned, opened, synchronize, reopened]
+    paths-ignore:
+      - '.husky/**'
+      - 'stories/**'
+      - '.vscode/**'
+      - 'README.md'
+      - 'CONTRIBUTING.md'
+      - 'CHANGELOG.md'
+      - 'LICENSE'
+  push:
+    branches:
+      - master
 
 concurrency: 
   group: ${{ github.ref }}
@@ -17,6 +29,8 @@ jobs:
     # Checkout the Repo.
     - name: Checkout
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     - name: Setup Node
     # Setup Node 16.
       uses: actions/setup-node@v3
@@ -42,6 +56,8 @@ jobs:
     # Checkout the Repo.
     - name: Checkout
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     - name: Setup Node
     # Setup Node 16.
       uses: actions/setup-node@v3
@@ -68,6 +84,8 @@ jobs:
     # Checkout the Repo.
     - name: Checkout
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     # Detect changed files.
     - uses: dorny/paths-filter@v2
       id: changes
@@ -147,6 +165,8 @@ jobs:
     # Checkout the Repo
     - name: Checkout
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     # Detect changed files
     - uses: dorny/paths-filter@v2
       id: changes
@@ -202,6 +222,8 @@ jobs:
     # Checkout the Repo
     - name: Checkout
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     # Detect changed files
     - uses: dorny/paths-filter@v2
       id: changes
@@ -298,6 +320,8 @@ jobs:
     # Checkout the Repo.
     - name: Checkout
       uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     # Setup Node 16.
     - name: Setup Node
       uses: actions/setup-node@v3
@@ -341,7 +365,10 @@ jobs:
   #   if: ${{ github.ref == 'refs/heads/master' }}
   #   steps:
   #     # Checkout the Repo.
-  #     - uses: actions/checkout@v3
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
   #     # Setup Node 16.
   #     - uses: actions/setup-node@v3
   #       with:
