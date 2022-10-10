@@ -4,7 +4,19 @@
 name: Fozzie Components CI
 
 on:
-  pull_request
+  pull_request:
+    types: [assigned, opened, synchronize, reopened]
+    paths-ignore:
+      - '.husky/**'
+      - 'stories/**'
+      - '.vscode/**'
+      - 'README.md'
+      - 'CONTRIBUTING.md'
+      - 'CHANGELOG.md'
+      - 'LICENSE'
+  push:
+    branches:
+      - master
 
 concurrency: 
   group: ${{ github.ref }}
