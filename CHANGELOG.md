@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.35.1
+------------------------------
+*October 10, 2022*
+
+### Fixed
+- Issue where builds weren't being trigged against master.
+- Issue where all branches/tags weren't fetched, preventing Turborepo `--filter` from working.
+
+
 v7.35.0
 ------------------------------
 *October 10, 2022*
