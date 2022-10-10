@@ -9,6 +9,7 @@ v7.35.1
 
 ### Fixed
 - Issue where builds weren't being trigged against master.
+- Issue where all branches/tags weren't fetched, preventing Turborepo `--filter` from working.
 
 
 v7.35.0
