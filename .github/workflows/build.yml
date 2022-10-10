@@ -95,6 +95,7 @@ jobs:
           global:
             - '*.js'
             - '*.json'
+            - '.github/workflows/**'
             - 'packages/storybook/**'
         list-files: shell
     # Setup Node 16.
@@ -175,6 +176,7 @@ jobs:
           global:
             - '*.js'
             - '*.json'
+            - '.github/workflows/**'
             - 'packages/storybook/**'
         list-files: shell
     # Setup Node 16
@@ -218,6 +220,13 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+    # Run the following steps if previous jobs have succeeded to prevent wasting Percy screenshots.
+    - uses: technote-space/workflow-conclusion-action@v3
+    - name: Fail jobs if previous jobs failed.
+      if: ${{ env.WORKFLOW_CONCLUSION == 'failure' }}
+      run: |
+        echo "Not running browser tests due to a previous job failure."
+        exit 1
     # Checkout the Repo
     - name: Checkout
       uses: actions/checkout@v3
@@ -231,6 +240,7 @@ jobs:
           global:
             - '*.js'
             - '*.json'
+            - '.github/workflows/**'
             - 'packages/storybook/**'
         list-files: shell
     # Setup Node 16
@@ -263,13 +273,6 @@ jobs:
       with:
         path: ./packages/storybook/storybook-static
         key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
-    # Run the following steps if previous jobs have succeeded to prevent wasting Percy screenshots.
-    - uses: technote-space/workflow-conclusion-action@v3
-    - name: Fail jobs if previous jobs failed.
-      if: ${{ env.WORKFLOW_CONCLUSION == 'failure' }}
-      run: |
-        echo "Not running browser tests due to a previous job failure."
-        exit 1
     # Run Component / A11y / Visual Tests against all components if 'master' or root-level changes.
     - name: Run All Component / A11y / Visual Tests
       if: ${{ (github.ref == 'refs/heads/master' || steps.changes.outputs.global == 'true') }}
