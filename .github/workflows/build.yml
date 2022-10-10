@@ -4,13 +4,7 @@
 name: Fozzie Components CI
 
 on:
-  push:
-    branches:
-    - master
-
-# This needs to be uncommented when we finish migration so that Danger works.
-# on:
-#   pull_request
+  pull_request
 
 concurrency: 
   group: ${{ github.ref }}
@@ -41,32 +35,31 @@ jobs:
       if: steps.cache-node-modules.outputs.cache-hit != 'true'
       run: yarn --prefer-offline
 
-  # Uncomment when fully migrated.
-  # danger:
-  #   needs: install
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   # Checkout the Repo.
-  #   - name: Checkout
-  #     uses: actions/checkout@v3
-  #   - name: Setup Node
-  #   # Setup Node 16.
-  #     uses: actions/setup-node@v3
-  #     with:
-  #       node-version: 16
-  #       cache: 'yarn'
-  #   # Restore node_modules if cache exists. If not, cache is created at end of build.
-  #   - name: Cache Node Modules
-  #     id: cache-node-modules
-  #     uses: actions/cache@v2
-  #     with:
-  #       path: '**/node_modules'
-  #       key: node-modules-${{ hashFiles('**/yarn.lock') }}
-  #   # Run Danger Checks.
-  #   - name: Run Danger Checks
-  #     run: yarn danger ci --failOnErrors
-  #     env:
-  #       DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+  danger:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the Repo.
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Setup Node
+    # Setup Node 16.
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'yarn'
+    # Restore node_modules if cache exists. If not, cache is created at end of build.
+    - name: Cache Node Modules
+      id: cache-node-modules
+      uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: node-modules-${{ hashFiles('**/yarn.lock') }}
+    # Run Danger Checks.
+    - name: Run Danger Checks
+      run: yarn danger ci --failOnErrors
+      env:
+        DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
 
   build:
     needs: install
@@ -123,7 +116,7 @@ jobs:
     # Lint changed components if no root-level changes and not master.
     - name: Lint Changed Components
       if: steps.changes.outputs.global == 'false' && github.ref != 'refs/heads/master'
-      run: yarn lint --filter=[origin/master] --concurrency=10 --cache-dir=".turbo"
+      run: yarn lint --filter=[master] --concurrency=10 --cache-dir=".turbo"
     # Cache 'storybook-static'
     - name: Cache Storybook Static Directory
       id: storybook-cache
@@ -195,7 +188,7 @@ jobs:
     # Unit Test changed components + dependants if no root-level changes and not master.
     - name: Unit Test Changed Components + Dependants
       if: steps.changes.outputs.global == 'false' && github.ref != 'refs/heads/master'
-      run: yarn ci:test:${{ matrix.component-type}} --concurrency=10 --filter=...[origin/master]
+      run: yarn ci:test:${{ matrix.component-type}} --concurrency=10 --filter=...[master]
 
   browser-tests:
     strategy:
@@ -250,20 +243,24 @@ jobs:
       with:
         path: ./packages/storybook/storybook-static
         key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
+    # Run the following steps if previous jobs have succeeded to prevent wasting Percy screenshots.
+    - uses: technote-space/workflow-conclusion-action@v3
     # Run Component / A11y / Visual Tests against all components if 'master' or root-level changes.
     - name: Run All Component / A11y / Visual Tests
-      if: ${{ (github.ref == 'refs/heads/master' || steps.changes.outputs.global == 'true') }}
+      if: ${{ (github.ref == 'refs/heads/master' || steps.changes.outputs.global == 'true') && (env.WORKFLOW_CONCLUSION != 'failure') }}
       run: |
         yarn storybook:serve-static &
         yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
-        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1
+        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 &&
+        yarn ci:test:visual:${{ matrix.component-type }} --concurrency=1
     - name: Run Changed Component / A11y / Visual Tests + Dependants
     # Run Component / A11y / Visual Tests against changed components + dependants if no root-level changes and not master.
-      if:  ${{ (github.ref != 'refs/heads/master' || steps.changes.outputs.global == 'false') }}
+      if:  ${{ (github.ref != 'refs/heads/master' && steps.changes.outputs.global == 'false' && env.WORKFLOW_CONCLUSION != 'failure') }}
       run: |
         yarn storybook:serve-static &
-        yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master] &&
-        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master]
+        yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[master] &&
+        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[master] &&
+        yarn ci:test:visual:${{ matrix.component-type }} --concurrency=1 --filter=...[master]
     # On Failure - Upload Allure Report
     - name: Generate Allure Report
       if: failure()
@@ -276,6 +273,22 @@ jobs:
         path: |
           allure-report
           test/results/axe-violations
+    env:
+      PERCY_TOKEN_F_BUTTON: ${{ secrets.PERCY_TOKEN_F_BUTTON }}
+      PERCY_TOKEN_F_FORM_FIELD: ${{ secrets.PERCY_TOKEN_F_FORM_FIELD }}
+      PERCY_TOKEN_F_ALERT: ${{ secrets.PERCY_TOKEN_F_ALERT }}
+      PERCY_TOKEN_F_CARD_WITH_CONTENT: ${{ secrets.PERCY_TOKEN_F_CARD_WITH_CONTENT }}
+      PERCY_TOKEN_F_MEGA_MODAL: ${{ secrets.PERCY_TOKEN_F_MEGA_MODAL }}
+      PERCY_TOKEN_F_COOKIE_BANNER: ${{ secrets.PERCY_TOKEN_F_COOKIE_BANNER }}
+      PERCY_TOKEN_F_FOOTER: ${{ secrets.PERCY_TOKEN_F_FOOTER }}
+      PERCY_TOKEN_F_HEADER: ${{ secrets.PERCY_TOKEN_F_HEADER }}
+      PERCY_TOKEN_F_STATUS_BANNER: ${{ secrets.PERCY_TOKEN_F_STATUS_BANNER }}
+      PERCY_TOKEN_F_ACCOUNT_INFO: ${{ secrets.PERCY_TOKEN_F_ACCOUNT_INFO }}
+      PERCY_TOKEN_F_CHECKOUT: ${{ secrets.PERCY_TOKEN_F_CHECKOUT }}
+      PERCY_TOKEN_F_CONTACT_PREFERENCES: ${{ secrets.PERCY_TOKEN_F_CONTACT_PREFERENCES }}
+      PERCY_TOKEN_F_MFA: ${{ secrets.PERCY_TOKEN_F_MFA }}
+      PERCY_TOKEN_F_REGISTRATION: ${{ secrets.PERCY_TOKEN_F_REGISTRATION }}
+      PERCY_TOKEN_F_TAKEAWAYPAY_ACTIVATION: ${{ secrets.PERCY_TOKEN_F_TAKEAWAYPAY_ACTIVATION }}
 
   storybook-deploy:
     if: ${{ github.ref == 'refs/heads/master' }}
