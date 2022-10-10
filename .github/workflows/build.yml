@@ -255,7 +255,7 @@ jobs:
         yarn ci:test:visual:${{ matrix.component-type }} --concurrency=1
     - name: Run Changed Component / A11y / Visual Tests + Dependants
     # Run Component / A11y / Visual Tests against changed components + dependants if no root-level changes and not master.
-      if:  ${{ (github.ref != 'refs/heads/master' && steps.changes.outputs.global == 'false' && env.WORKFLOW_CONCLUSION != 'failure' }}
+      if:  ${{ (github.ref != 'refs/heads/master' && steps.changes.outputs.global == 'false' && env.WORKFLOW_CONCLUSION != 'failure') }}
       run: |
         yarn storybook:serve-static &
         yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[master] &&
