@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.35.0
+------------------------------
+*October 10, 2022*
+
+### Added
+- Ability to run GitHub Actions on PR's.
+- Ability to prevent WDIO tests running if previous jobs fail.
+- Remove references to CircleCI.
+
+
 v7.34.0
 ------------------------------
 *October 10, 2022*
