@@ -50,6 +50,7 @@ jobs:
       run: yarn --prefer-offline
 
   danger:
+    if: ${{ github.ref != 'refs/heads/master' }}
     needs: install
     runs-on: ubuntu-latest
     steps:
@@ -264,9 +265,14 @@ jobs:
         key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
     # Run the following steps if previous jobs have succeeded to prevent wasting Percy screenshots.
     - uses: technote-space/workflow-conclusion-action@v3
+    - name: Fail jobs if previous jobs failed.
+      if: ${{ env.WORKFLOW_CONCLUSION == 'failure' }}
+      run: |
+        echo "Not running browser tests due to a previous job failure."
+        exit 1
     # Run Component / A11y / Visual Tests against all components if 'master' or root-level changes.
     - name: Run All Component / A11y / Visual Tests
-      if: ${{ (github.ref == 'refs/heads/master' || steps.changes.outputs.global == 'true') && (env.WORKFLOW_CONCLUSION != 'failure') }}
+      if: ${{ (github.ref == 'refs/heads/master' || steps.changes.outputs.global == 'true') }}
       run: |
         yarn storybook:serve-static &
         yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&

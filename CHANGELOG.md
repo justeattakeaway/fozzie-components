@@ -9,6 +9,7 @@ v7.35.2
 
 ### Fixed
 - Get Turborpo to filter by `origin/master`.
+- Stop Danger running against master.
 
 v7.35.1
 ------------------------------
