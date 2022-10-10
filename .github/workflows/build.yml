@@ -4,13 +4,7 @@
 name: Fozzie Components CI
 
 on:
-  push:
-    branches:
-    - master
-
-# This needs to be uncommented when we finish migration so that Danger works.
-# on:
-#   pull_request
+  pull_request
 
 concurrency: 
   group: ${{ github.ref }}
@@ -41,32 +35,31 @@ jobs:
       if: steps.cache-node-modules.outputs.cache-hit != 'true'
       run: yarn --prefer-offline
 
-  # Uncomment when fully migrated.
-  # danger:
-  #   needs: install
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   # Checkout the Repo.
-  #   - name: Checkout
-  #     uses: actions/checkout@v3
-  #   - name: Setup Node
-  #   # Setup Node 16.
-  #     uses: actions/setup-node@v3
-  #     with:
-  #       node-version: 16
-  #       cache: 'yarn'
-  #   # Restore node_modules if cache exists. If not, cache is created at end of build.
-  #   - name: Cache Node Modules
-  #     id: cache-node-modules
-  #     uses: actions/cache@v2
-  #     with:
-  #       path: '**/node_modules'
-  #       key: node-modules-${{ hashFiles('**/yarn.lock') }}
-  #   # Run Danger Checks.
-  #   - name: Run Danger Checks
-  #     run: yarn danger ci --failOnErrors
-  #     env:
-  #       DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+  danger:
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the Repo.
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Setup Node
+    # Setup Node 16.
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'yarn'
+    # Restore node_modules if cache exists. If not, cache is created at end of build.
+    - name: Cache Node Modules
+      id: cache-node-modules
+      uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: node-modules-${{ hashFiles('**/yarn.lock') }}
+    # Run Danger Checks.
+    - name: Run Danger Checks
+      run: yarn danger ci --failOnErrors
+      env:
+        DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
 
   build:
     needs: install
@@ -250,16 +243,19 @@ jobs:
       with:
         path: ./packages/storybook/storybook-static
         key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
+    # Run the following steps if previous jobs have succeeded to prevent wasting Percy screenshots.
+    - uses: technote-space/workflow-conclusion-action@v3
     # Run Component / A11y / Visual Tests against all components if 'master' or root-level changes.
     - name: Run All Component / A11y / Visual Tests
-      if: ${{ (github.ref == 'refs/heads/master' || steps.changes.outputs.global == 'true') }}
+      if: ${{ (github.ref == 'refs/heads/master' || steps.changes.outputs.global == 'true') && (env.WORKFLOW_CONCLUSION != 'failure') }}
       run: |
         yarn storybook:serve-static &
         yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
-        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1
+        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 &&
+        yarn ci:test:visual:${{ matrix.component-type }} --concurrency=1
     - name: Run Changed Component / A11y / Visual Tests + Dependants
     # Run Component / A11y / Visual Tests against changed components + dependants if no root-level changes and not master.
-      if:  ${{ (github.ref != 'refs/heads/master' || steps.changes.outputs.global == 'false') }}
+      if:  ${{ (github.ref != 'refs/heads/master' || steps.changes.outputs.global == 'false') && (env.WORKFLOW_CONCLUSION != 'failure') }}
       run: |
         yarn storybook:serve-static &
         yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master] &&
