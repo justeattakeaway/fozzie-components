@@ -259,7 +259,8 @@ jobs:
       run: |
         yarn storybook:serve-static &
         yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master] &&
-        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master]
+        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master] &&
+        yarn ci:test:visual:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master]
     # On Failure - Upload Allure Report
     - name: Generate Allure Report
       if: failure()
