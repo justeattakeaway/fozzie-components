@@ -48,11 +48,11 @@ class Mfa extends Page {
         }
     };
 
-    async goToHelp() {
+    async goToHelp () {
         await this.mfaHelpLink.click();
     }
 
-    async goToSubmit() {
+    async goToSubmit () {
         await this.mfaSubmitButton.click();
     }
 }
