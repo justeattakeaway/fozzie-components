@@ -77,13 +77,17 @@ Files can be accessed directly via CDN using [unkpg.com](https://unpkg.com/brows
 
 Using the CDN the cookie banner can be added to any web page using basic tags. The page must contain a placeholder element with the id attribute `cookie-banner` for example `<div id="cookie-banner"></div>`
 
+***In order for the static cookie banner to look correct, you must also link to the `fozzie-utilities` CSS file created by `@justeat/fozzie` (please see the example below on how to link to it). Whilst `fozzie-reset` and `fozzie-typography` are not required, we highly recommend linking to them as well***
+
 ```html
 <html>
   <head>
-    <link
-      href="https://unpkg.com/@justeat/f-cookie-banner/dist/static/en-GB.css"
-      rel="stylesheet"
-    />
+    <!-- use fozzie CSS files to provide base styles and utilities classes used by the cookie banner -->
+    <link rel="stylesheet" href="https://unpkg.com/@justeat/fozzie/dist/css/fozzie-reset.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@justeat/fozzie/dist/css/fozzie-typography.css" />
+    <link rel="stylesheet" href="https://unpkg.com/@justeat/fozzie/dist/css/fozzie-utilities.css" />
+    <!--  use the cookie banner CSS  -->
+    <link href="https://unpkg.com/@justeat/f-cookie-banner/dist/static/en-GB.css" rel="stylesheet" />
   </head>
   <body>
     <div id="cookie-banner"></div>
@@ -95,7 +99,7 @@ Using the CDN the cookie banner can be added to any web page using basic tags. T
 </html>
 ```
 
-A working demo can be found on [codesandbax.io](https://codesandbox.io/s/static-cookie-banner-example-lgs9u)
+A working demo can be found on [codepen.io](https://codepen.io/JamieMaguireJE/pen/QWrzboo)
 
 #### Bundling Tool Implementation
 
