@@ -127,13 +127,17 @@ export default {
     .c-formField-field--radio:disabled + label,
     .c-formField-field--checkbox:disabled + label span {
         cursor: default;
-        color: f.$color-content-default;
+        color: f.$color-content-disabled;
     }
 
     .c-formField-field--checkbox + label:before,
     .c-formField-field--radio + label:before {
         content: '';
+<<<<<<< HEAD
         border: 1px solid f.$color-border-strong;
+=======
+        border: 1px solid f.$color-interactive-form;
+>>>>>>> 1277ce5e3206a5d91020b1a1a3f0c2b2205c1c4f
         display: inline-block;
         width: 22px;
         height: 22px;
@@ -192,7 +196,11 @@ export default {
     .c-formField-field--radio:focus:not(:checked) + label:before {
         box-shadow: 0 0 0 1px f.$color-white, 0 0 0 3px f.$color-focus;
 
+<<<<<<< HEAD
         border: 1px solid f.$color-border-strong;
+=======
+        border: 1px solid f.$color-interactive-form;
+>>>>>>> 1277ce5e3206a5d91020b1a1a3f0c2b2205c1c4f
     }
 
     .c-formField-field--checkbox:not(:disabled):checked + label:hover:before,
@@ -216,9 +224,13 @@ export default {
 
     .c-formField-field--checkbox:disabled + label:before,
     .c-formField-field--radio:disabled + label:before {
+<<<<<<< HEAD
         border-color: f.$color-border-default;
         background-color: f.$color-container-strong;
         cursor: default;
+=======
+        @include common.disabled-field();
+>>>>>>> 1277ce5e3206a5d91020b1a1a3f0c2b2205c1c4f
     }
 
     .c-formField-field--checkbox:disabled:checked + label:before {

@@ -51,6 +51,9 @@ $form-input-icon-horizontalIndent       : 19px;
 
 @mixin disabled-field() {
     cursor: not-allowed;
+    background-color: $form-input-bg--disabled;
+    color: $form-input-textColour--disabled;
+    border-color: $form-input-borderColour--disabled;
 
     &,
     &:hover {

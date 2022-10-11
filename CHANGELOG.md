@@ -3,13 +3,68 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v7.32.0
+v7.36.0
 ------------------------------
-*October 03, 2022*
+*October 11, 2022*
 
 ### Changed
 - Update to `fozzie` v10.4.0
 - Replaced various design tokens that were removed from the newer version
+
+
+v7.35.1
+------------------------------
+*October 10, 2022*
+
+### Fixed
+- Issue where builds weren't being trigged against master.
+- Issue where all branches/tags weren't fetched, preventing Turborepo `--filter` from working.
+
+
+v7.35.0
+------------------------------
+*October 10, 2022*
+
+### Added
+- Ability to run GitHub Actions on PR's.
+- Ability to prevent WDIO tests running if previous jobs fail.
+- Remove references to CircleCI.
+
+
+v7.34.0
+------------------------------
+*October 10, 2022*
+
+### Added
+- Turborepo filtering to GitHub Actions.
+
+### Changed
+- Version of Chromedriver to `106`
+
+v7.33.1
+------------------------------
+*October 6, 2022*
+
+### Removed
+- `f-form` organism component
+
+
+v7.33.0
+------------------------------
+*October 4, 2022*
+
+### Added
+- Danger checks to GitHub Actions.
+
+
+v7.32.0
+------------------------------
+*October 04, 2022*
+
+### Changed
+- Update to `fozzie` v10.5.0
+- Replaced various design tokens that were removed from the newer version
+
 
 v7.31.0
 ------------------------------
