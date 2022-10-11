@@ -8,7 +8,7 @@ v4.6.2
 ------------------------------
 *October 11, 2022*
 
-### Updated
+### Changed
 - `README.md` to include `@justeat/fozzie` CSS links in static cookie banner example and explain why it is required to work
 
 

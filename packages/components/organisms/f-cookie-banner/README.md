@@ -86,7 +86,7 @@ Using the CDN the cookie banner can be added to any web page using basic tags. T
     <link rel="stylesheet" href="https://unpkg.com/@justeat/fozzie/dist/css/fozzie-reset.css" />
     <link rel="stylesheet" href="https://unpkg.com/@justeat/fozzie/dist/css/fozzie-typography.css" />
     <link rel="stylesheet" href="https://unpkg.com/@justeat/fozzie/dist/css/fozzie-utilities.css" />
-    <!--  use the cookie banner CSS  -->
+    <!--  use the cookie banner CSS NOTE: It is important that you choose the correct tenant -->
     <link href="https://unpkg.com/@justeat/f-cookie-banner/dist/static/en-GB.css" rel="stylesheet" />
   </head>
   <body>
