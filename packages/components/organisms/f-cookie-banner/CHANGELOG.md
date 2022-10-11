@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v4.6.1
+------------------------------
+*October 11, 2022*
+
+### Updated
+- Only bumping version due to an accidental `npm unpublish` resulting in a required version bump (oops)
+
+
 v4.6.0
 ------------------------------
 *September 27, 2022*
