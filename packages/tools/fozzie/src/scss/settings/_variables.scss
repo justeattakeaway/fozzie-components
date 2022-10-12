@@ -1,6 +1,6 @@
 @use '@justeat/pie-design-tokens/dist/jet' as dt;
 
-/* stylelint-disable indentation */
+// stylelint-disable indentation
 // =================================
 // Variables
 // =================================
@@ -11,7 +11,7 @@
 // Set this in pixels (but do not add px),
 // the font-size mixin will convert to REMS
 
-$font-size-base             : nth(dt.$font-size-d, 1); // Base font size is set to 16 (`body-l` size)
+$font-size-base             : nth(dt.$font-size-c, 1); // Base font size is set to 16 (`body-l` size)
 $font-size-base-px          : $font-size-base * 1px;
 
 // Type map – these are our global font-sizes and line-heights across the site
@@ -159,4 +159,4 @@ $default-transition: all 150ms ease-in-out;
     @debug 'Server is set to `#{$server}`';
 }
 
-/* stylelint-enable */
+// stylelint-enable

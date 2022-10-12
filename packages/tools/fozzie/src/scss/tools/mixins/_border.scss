@@ -2,7 +2,7 @@
 @use '../../settings/variables' as v;
 @use '../functions/index' as functions;
 
-//
+// **
 // ==========================================================================
 // Border mixin
 // Used in bordered utility class to add padding, border and border
@@ -14,6 +14,7 @@
 //
 // Override default values
 // @include bordered(10px, 30px, green);
+// **
 
 @mixin bordered($bordered-radius: v.$border-radius, $bordered-spacing : functions.spacing(e), $bordered-colour: dt.$color-border-strong) { // stylelint-disable-line max-line-length
     border: 1px solid $bordered-colour;

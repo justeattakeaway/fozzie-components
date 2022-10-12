@@ -119,7 +119,7 @@
 
     .c-orderCard-order {
         @include type.font-size(body-l, false);
-        line-height: line-height(16px, 24px);
+        line-height: functions.line-height(16px, 24px);
         font-weight: dt.$font-weight-regular;
         @include type.font-size(22px);
         color: dt.$color-blue;
@@ -130,7 +130,7 @@
     }
 
     .c-orderCard-title {
-        line-height: line-height(16px, 24px);
+        line-height: functions.line-height(16px, 24px);
     }
 
     .c-orderCard-showMore {
@@ -152,7 +152,7 @@
     }
 
     .c-orderCard-summary {
-        line-height: line-height(16px, 23px);
+        line-height: functions.line-height(16px, 23px);
         width: 78%;
     }
 

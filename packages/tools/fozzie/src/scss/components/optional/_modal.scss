@@ -150,7 +150,7 @@
         width: 75%;
 
         @include media('<mid') {
-            min-width: em(22);
+            min-width: functions.em(22);
 
             &.is-fixed {
                 position: fixed;

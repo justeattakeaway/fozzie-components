@@ -18,7 +18,7 @@
     text-indent: -999em;
 
     br {
-      display: none;
+        display: none;
     }
 }
 
@@ -36,9 +36,9 @@
     & > li {
         margin-bottom: 0;
 
-      &:before {
-          content: none;
-      }
+        &:before {
+            content: none;
+        }
     }
 }
 
@@ -62,10 +62,8 @@
 }
 
 %u-focusShadow-content {
-    box-shadow: 0 0 2px 2px dt.$color-focus; /* keyboard-only focus styles */
+    box-shadow: 0 0 2px 2px dt.$color-focus; // keyboard-only focus styles
 }
-
-// ====================
 
 @mixin trumps-utilities() {
     /**
@@ -74,7 +72,6 @@
     * Non-semantic helper classes
     */
 
-    //
     // Clearfix
     // http://www.cssmojo.com/latest_new_clearfix_so_far/
     // See mixins/_utility.scss for a mixin version of this
@@ -87,7 +84,6 @@
         }
     }
 
-    //
     // Colour Utilities
     // ==========================================================================
 
@@ -95,7 +91,6 @@
         background-color: dt.$color-white;
     }
 
-    //
     // Border Utilities
     // ==========================================================================
 
@@ -113,8 +108,6 @@
         }
     }
 
-
-    //
     // Display Utilities
     // ==========================================================================
 
@@ -161,7 +154,6 @@
         cursor: pointer;
     }
 
-    //
     // Position Utilities
     // ==========================================================================
 
@@ -184,7 +176,6 @@
         transform: translate(50%, -50%);
     }
 
-    //
     // Typographic Helpers
     // ==========================================================================
 
@@ -240,7 +231,7 @@
         margin-left: functions.spacing(d);
     }
 
-    //
+
     // Typographic Colour Helpers
     //
     // Each colour util class is relative to a Fozzie colour within the
@@ -278,7 +269,6 @@
         color: dt.$color-content-default;
     }
 
-    //
     // Spacing Utilities
     // ==========================================================================
 
@@ -320,7 +310,6 @@
         margin-left: functions.spacing() !important;
     }
 
-    //
     // Padding Utilities
     // ==========================================================================
 
@@ -342,8 +331,6 @@
             }
         }
 
-
-    //
     // Overlay Utilities
     // ==========================================================================
 
@@ -373,7 +360,6 @@
         overflow: hidden;
     }
 
-    //
     // Image Replacement Techniques
     // ==========================================================================
 
@@ -384,7 +370,6 @@
             display: none;
         }
     }
-
 
     // For background image replacement
 
@@ -397,7 +382,6 @@
         @extend %u-hideText;
     }
 
-    //
     // List Helper
     // ==========================================================================
 
@@ -405,7 +389,6 @@
         @extend %u-unstyled;
     }
 
-    //
     // Helper classes for focus accessibility
     // =================================================================================
 
@@ -432,8 +415,6 @@
         @extend %u-focusShadow-content;
     }
 
-
-    //
     // Misc classes
     // ==========================================================================
     .u-shadowBottom--belowMid {
@@ -443,7 +424,7 @@
             &:after {
                 background-color: dt.$color-background-subtle;
                 border: 0;
-                box-shadow: dt.$elevation-01;
+                box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 10%);
                 content: '';
                 display: block;
                 height: functions.spacing(h);

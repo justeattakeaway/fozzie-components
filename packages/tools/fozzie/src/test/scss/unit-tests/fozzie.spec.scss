@@ -126,6 +126,8 @@
 
     @include it('mixins - does not throw any errors') {
         .test-output {
+            @include systemUnderTest.anim();
+
             @include systemUnderTest.alert-variant(red, white);
             @include systemUnderTest.bordered();
             @include systemUnderTest.bordered(10px, 30px, green);
@@ -146,7 +148,7 @@
             @include systemUnderTest.font-size('body-l', true, 'default', false);
 
             @include systemUnderTest.spacing-classes(systemUnderTest.$spacing-map, 'pad', 'top') using ($spacing-value) {
-                padding-top: spacing(#{$spacing-value});
+                padding-top: systemUnderTest.spacing(#{$spacing-value});
             }
         }
 

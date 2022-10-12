@@ -1,10 +1,12 @@
-//
+// **
 // ==========================================================================
 // Truncate mixin
 // Forces overly long spans of text to truncate
 // ==========================================================================
 //
 // @include truncate(truncation-boundary);
+// **
+
 @mixin truncate($truncation-boundary: null) {
     max-width: $truncation-boundary;
     white-space: nowrap;

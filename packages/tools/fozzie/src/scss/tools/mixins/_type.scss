@@ -23,12 +23,10 @@
     #{$property}: math.div(functions.strip-units($sizeValue), v.$font-size-base) + em;
 }
 
-/**
- * @param {String} $key – The type key you would like to reference. These are mapped to the PIE type definitions.
- * @param {Boolean} $line-height – Specifies whether the relevant `line-height` is output alongside the `font-size` declaration.
- * @param {String} $scale – Defines which sub-type scale definition to output from the Sass type-map.
- * @param {Boolean} $relativeToParent – When set to true, the mixin will output the `font-size` as `em`s rather than `rem`s. By default, the `font-size` is defined relative to the root element.
- */
+// @param {String} $key – The type key you would like to reference. These are mapped to the PIE type definitions.
+// @param {Boolean} $line-height – Specifies whether the relevant `line-height` is output alongside the `font-size` declaration.
+// @param {String} $scale – Defines which sub-type scale definition to output from the Sass type-map.
+// @param {Boolean} $relativeToParent – When set to true, the mixin will output the `font-size` as `em`s rather than `rem`s. By default, the `font-size` is defined relative to the root element.
 @mixin font-size($key: 'body-l', $line-height: true, $scale: 'default', $relativeToParent: false) {
     // if the $key passed in is actually just a font-size
     // then output it (may want to instead force a sass error saying to use the type map?)

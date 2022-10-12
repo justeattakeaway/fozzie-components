@@ -31,9 +31,7 @@
         outline: 0;
     }
 
-    /*
-    * Show focus styles on keyboard focus.
-    */
+    // Show focus styles on keyboard focus.
     :focus-visible {
         @extend %u-elementFocus;
     }

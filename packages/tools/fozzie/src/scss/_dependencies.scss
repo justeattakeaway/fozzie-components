@@ -1,7 +1,7 @@
-/**
- * Just Eat Styleguide
- * =================================
- */
+// **
+// Just Eat Styleguide
+// =================================
+// **
 
 // =================================
 // Site dependencies
@@ -32,18 +32,19 @@
 @forward 'base/typography';
 
 @forward 'base/grid'; // Grid system based on flexbox w float fallbacks – https://github.com/TryKickoff/kickoff-grid.css
-/**
- * Objects
- * =================================
- * Styles apply to an object if they are directly associated to a HTML element.
- * If not, the styles should be defined as a component.
- *
- * For example, it would be expected to have:
- * 	links.scss > styles relating to links (<a> tag)
- * 	tables.scss > styles relating to tables
- *
- * Object styles should be prefixed with `.o-`
- */
+
+// **
+// Objects
+// =================================
+// Styles apply to an object if they are directly associated to a HTML element.
+// If not, the styles should be defined as a component.
+//
+// For example, it would be expected to have:
+// 	links.scss > styles relating to links (<a> tag)
+// 	tables.scss > styles relating to tables
+//
+// Object styles should be prefixed with `.o-`
+// **
 
 @forward 'objects/body';
 @forward 'objects/buttons';
@@ -53,13 +54,13 @@
 @forward 'objects/form-controls';
 @forward 'objects/form-toggle';
 
-/**
- * Components:
- * =================================
- * Components are our resuable chunks of styling that aren’t directly associated to a base tag
- *
- * This is where the majority of our day-to-day styling will take place.  Component styles should be prefixed with `.c-`
- */
+// **
+// Components:
+// =================================
+// Components are our resuable chunks of styling that aren’t directly associated to a base tag
+//
+// This is where the majority of our day-to-day styling will take place.  Component styles should be prefixed with `.c-`
+// **
 @forward 'components/alerts';
 @forward 'components/breadcrumbs';
 @forward 'components/cards';
@@ -89,18 +90,16 @@
 // Global layout definitions & helpers
 @forward 'base/layout';
 
-
-/**
- * Utility classes
- * =====================================
- * These should always come last as they should 'trump' other properties
- */
+// **
+// Utility classes
+// =====================================
+// These should always come last as they should 'trump' other properties
+// **
 @forward 'trumps/utilities';
 @forward 'trumps/spacing';
 @forward 'trumps/rwd';
 
-/**
- * Print styles
- */
+// **
+// Print styles
+// **
 @forward 'base/print';
-

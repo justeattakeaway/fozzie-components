@@ -28,7 +28,6 @@
     * If you'd like to use it in your project you can include it by adding `@include trumps-spacing();` into your SCSS dependencies file.
     */
 
-    //
     // Margin Utilities
     // ==========================================================================
 
@@ -62,8 +61,6 @@
         margin-top: functions.spacing(#{$spacing-value}) !important;
     }
 
-
-    //
     // Padding Utilities
     // ==========================================================================
 

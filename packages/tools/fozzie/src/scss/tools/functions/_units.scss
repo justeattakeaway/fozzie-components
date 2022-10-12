@@ -11,26 +11,8 @@
 //
 // Given a font-size and a line-height (in pixels)
 // Returns a unitless line-height value
-//
 @use 'sass:math';
 @use 'sass:map';
-
-$line-height-base : line-height(); // Lifted out of the variables file to fix circular reference issues
-
-@function line-height($font-size: 'body-s', $line-height: '20', $scale: 'default') {
-    @if type-of($font-size) == 'number' {
-        @return decimal-round(math.div($line-height, $font-size), 2);
-    } @else if map-has-key(v.$type, $font-size) { // else try and find the value in our type map
-        $key-map: map-get(v.$type, $font-size);
-        $font-list: map-get($key-map, $scale);
-
-        @if type-of($font-list) == 'list' {
-            @return line-height(nth($font-list, 1), nth($font-list, 2));
-        } @else {
-            @warn 'No line-height found as part of the $type map for #{ $font-size }';
-        }
-    }
-}
 
 @function decimal-round($number, $digits: 0, $mode: round) {
     $n: 1;
@@ -67,6 +49,23 @@ $line-height-base : line-height(); // Lifted out of the variables file to fix ci
         @return $number;
     }
 }
+
+@function line-height($font-size: 'body-s', $line-height: '20', $scale: 'default') {
+    @if type-of($font-size) == 'number' {
+        @return decimal-round(math.div($line-height, $font-size), 2);
+    } @else if map-has-key(v.$type, $font-size) { // else try and find the value in our type map
+        $key-map: map-get(v.$type, $font-size);
+        $font-list: map-get($key-map, $scale);
+
+        @if type-of($font-list) == 'list' {
+            @return line-height(nth($font-list, 1), nth($font-list, 2));
+        } @else {
+            @warn 'No line-height found as part of the $type map for #{ $font-size }';
+        }
+    }
+}
+
+$line-height-base : line-height(); // Lifted out of the variables file to fix circular reference issues
 
 @function em-to-px($emVal, $base: v.$font-size-base) {
     @return ($emVal * $base) * 1px;

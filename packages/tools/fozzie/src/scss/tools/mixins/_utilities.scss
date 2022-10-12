@@ -5,14 +5,12 @@
 // Utilities Mixins
 // ==========================================================================
 
-/**
- * Extends default $spacing map with an empty entry at the start
- */
+// Extends default $spacing map with an empty entry at the start
 $spacing-map: map.merge((
     '': 0
 ), v.$spacing);
 
-//
+// **
 // ==========================================================================
 // Spacing classes mixin
 //
@@ -37,7 +35,7 @@ $spacing-map: map.merge((
 // .u-pad-h--top { padding-top: spacing(h); }
 // .u-pad-i--top { padding-top: spacing(i); }
 // .u-pad-j--top { padding-top: spacing(j); }
-//
+// **
 @mixin spacing-classes($spacings, $name, $modifier: '') {
     @each $spacing, $value in $spacings {
         $separator: if($spacing == '', '', '-');

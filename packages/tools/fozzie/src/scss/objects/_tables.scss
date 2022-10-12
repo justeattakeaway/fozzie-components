@@ -19,9 +19,7 @@
   * TBC
   */
 
-  /**
-  * Define associated Table variables
-  */
+  // Define associated Table variables
   $table-bgColor                : dt.$color-container-default !global; // Default background color used for all tables.
   $table-bgColor--accent        : dt.$color-background-default !global; // Background color used for `.table-striped`.
   $table-border--color          : dt.$color-border-subtle !global; // Border color for table and cell borders.
@@ -30,9 +28,7 @@
   $table-verticalBorder--color  : dt.$color-border-inverse !global;
 
 
-  /**
-  * Customizes the `.table` component with basic values, each used across all table variations.
-  */
+  //Customizes the `.table` component with basic values, each used across all table variations.
   $table-cell-padding           : 14px !default; // Padding for `<th>`s and `<td>`s.
 
   // Baseline styles

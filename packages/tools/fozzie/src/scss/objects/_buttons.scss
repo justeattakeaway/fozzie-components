@@ -17,7 +17,7 @@
     * https://fozzie.just-eat.com/styleguide/ui-components/buttons
     */
 
-    $btn-default-borderRadius              : dt.$radius-rounded-a;
+    $btn-default-borderRadius              : dt.$radius-rounded-e;
     $btn-default-font-size                 : 'heading-s';
     $btn-default-weight                    : dt.$font-weight-bold;
     $btn-default-padding                   : 10px functions.spacing(e);
@@ -90,10 +90,10 @@
     * 2. Line different sized buttons up a little nicer.
     */
 
-    // By deafult the button is Primary medium sized button
+    // By default the button is Primary medium sized button
     .o-btn {
-        display: inline-block;                      /* [1] */
-        vertical-align: middle;                     /* [2] */
+        display: inline-block;                      // [1]
+        vertical-align: middle;                     // [2]
         @include type.font-size($btn-default-font-size);
         cursor: pointer;
         margin: 0;
@@ -109,7 +109,7 @@
         text-decoration: none;
 
         &:focus {
-            box-shadow: 0 0 0 2px solid $btn-default-outline-color;
+            box-shadow: 0 0 0 2px $btn-default-outline-color;
         }
 
         &:hover {
@@ -151,6 +151,7 @@
             margin-top: functions.spacing(d);
         }
     }
+
 
     /**
     * ==========================================================================
@@ -320,7 +321,7 @@
     * ==========================================================================
     */
 
-    //remove uneeded styles (like colours) from a button when only an icon is on it (like a close button)
+    //remove unneeded styles (like colours) from a button when only an icon is on it (like a close button)
     .o-btn--icon {
         @extend %u-ir;
         background-color: transparent;

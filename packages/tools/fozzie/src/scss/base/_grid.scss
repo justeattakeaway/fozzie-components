@@ -4,25 +4,20 @@
 @use '../settings/include-media' as *;
 @use 'sass:math';
 
-/**
- * The Kickoff Flexbox Grid
- * =================================
- * Default grid classes
- * Grid gutter options
- * Modifier Classes (column height and cell alignment)
- * Legacy fallbacks for flexbox
- * Grid span classes
- * Breakpoint stacking
- */
+ // The Kickoff Flexbox Grid
+ // =================================
+ // Default grid classes
+ // Grid gutter options
+ // Modifier Classes (column height and cell alignment)
+ // Legacy fallbacks for flexbox
+ // Grid span classes
+ // Breakpoint stacking
 
 
-/* Import Grid helpers and mixins */
+// Import Grid helpers and mixins
 
-/**
- * Kickoff grid helpers
- */
-
- @mixin ko-gridSpanHelper($breakpoint: null) {
+// Kickoff grid helpers
+@mixin ko-gridSpanHelper($breakpoint: null) {
     $suffix: null;
 
     @if $breakpoint {
@@ -82,14 +77,12 @@
     }
 }
 
-/**
-* Grid stacking
-* Stack grids based on a given breakpoint
-*
-* Usage:
-* .g--stack--narrow
-* .g--stack--wide
-*/
+// Grid stacking
+// Stack grids based on a given breakpoint
+//
+// Usage:
+// .g--stack--narrow
+// .g--stack--wide
 @mixin ko-grid-stack($breakpoint: 'wide') {
     @include media('<#{$breakpoint}') {
         flex-flow: column nowrap;
@@ -108,12 +101,10 @@
     }
 }
 
-/**
-* Gutter Calculations
-* Default: percent
-* Usage: ko-gutterCalc() or ko-gutterCalc(false)
-* When show-unit is true, returns the percentage, otherwise return a decimal
-*/
+// Gutter Calculations
+// Default: percent
+// Usage: ko-gutterCalc() or ko-gutterCalc(false)
+// When show-unit is true, returns the percentage, otherwise return a decimal
 @function ko-gutterCalc($show-unit: true) {
     @if $show-unit == true {
         @return percentage(math.div(strip-units.strip-units(v.$grid-gutter-width), strip-units.strip-units(v.$layout-max-width)));
@@ -124,15 +115,13 @@
 
 
 
-/**
-* Grid columns width calculations
-* This is where the magic of working out the column widths happens
-*
-* $column-span: define the width for the number of columns required
-* $show-unit: Switch return value between percentage (default) and decimal
-* $include-gutters: if gutters should be included in the calculations. Default = false
-* $legacy-calc: if we are working out a legacy column width calculation, or not. Default = false
-*/
+// Grid columns width calculations
+// This is where the magic of working out the column widths happens
+//
+// $column-span: define the width for the number of columns required
+// $show-unit: Switch return value between percentage (default) and decimal
+// $include-gutters: if gutters should be included in the calculations. Default = false
+// $legacy-calc: if we are working out a legacy column width calculation, or not. Default = false
 @function ko-gridColumnWidthCalc($column-span: 1, $show-unit: true, $include-gutters: false) {
     $number-of-blocks-in-container : math.div(v.$grid-column-count, $column-span);
     $total-width-of-all-blocks     : 1;
@@ -162,11 +151,9 @@
 }
 
 
-/**
-* Column width mixin
-* Usage:
-* @include column(2);
-*/
+// Column width mixin
+// Usage:
+// @include column(2);
 @mixin column($column-span: 1) {
     width: ko-gridColumnWidthCalc($column-span, true);
 }
@@ -174,14 +161,12 @@
 
 @mixin grid() {
 
-    /**
-    * Basic Usage:
-    * =================================
-        <div class="g">
-            <div class="g-col g-span4 g-span6--mid"></div>
-            <div class="g-col g-span8 g-span6--mid"></div>
-        </div>
-    */
+    // Basic Usage:
+    // =================================
+    //   <div class="g">
+    //     <div class="g-col g-span4 g-span6--mid"></div>
+    //     <div class="g-col g-span8 g-span6--mid"></div>
+    //   </div>
     .g {
         display: flex !important; // force display: flex, as otherwise may clash with other components display properties (and the grid won’t work)
         flex-flow: row wrap;
@@ -202,11 +187,9 @@
             min-width: 0; // this is to make sure that long words don’t get cut off, but wrap as expected
         }
 
-    /**
-    * Gutter calcs – applied to grid columns in our grid (direct descendants only)
-    * Default: pixels (can look at changing to percentage)
-    * Usage: gutterCalc() or gutterCalc(false)
-    */
+    // Gutter calcs – applied to grid columns in our grid (direct descendants only)
+    // Default: pixels (can look at changing to percentage)
+    // Usage: gutterCalc() or gutterCalc(false)
 
     // Three types of gutter
     // -------------------
@@ -292,6 +275,7 @@
     * Alignment
     * Modifier classes to move our grid elements around
     */
+
     .g--alignTop          { align-items: flex-start; }
     .g--alignBottom       { align-items: flex-end; }
     .g--alignSelfBottom   { align-self: flex-end; }

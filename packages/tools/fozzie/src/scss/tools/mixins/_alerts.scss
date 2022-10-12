@@ -1,9 +1,9 @@
-//
+// **
 // ==========================================================================
 // Alert variant mixin
 // Used in alert modifier classes to colorize the alert
 // ==========================================================================
-//
+// **
 @mixin alert-variant($color-primary, $color-text) {
     background-color: $color-primary;
     border-color: darken($color-primary, 10%);

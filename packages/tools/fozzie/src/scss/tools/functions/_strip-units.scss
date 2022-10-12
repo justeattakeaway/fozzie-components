@@ -1,11 +1,11 @@
-/**
- * Strip units
- * =================================
- * Remove the unit of a measurement
- *
- * Usage:
- * strip-units(400px)  > 400
- */
+// **
+// Strip units
+// =================================
+// Remove the unit of a measurement
+//
+// Usage:
+// strip-units(400px)  > 400
+// **
 
 @use 'sass:math';
 

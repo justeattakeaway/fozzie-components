@@ -22,10 +22,10 @@
 $includeBaseFramework: false !default;
 $includeMinimalFramework: false !default;
 
-/**
- * Setting $includeBaseFramework to `true` includes the base styles that were included
- * as part of Fozzie v4 (useful for anyone upgrading that wants to keep things as-is)
-**/
+// **
+// Setting $includeBaseFramework to `true` includes the base styles that were included
+// as part of Fozzie v4 (useful for anyone upgrading that wants to keep things as-is)
+// **
 @if $includeBaseFramework {
     @include normalize();
     @include reset();
@@ -59,10 +59,10 @@ $includeMinimalFramework: false !default;
     @include print();
 }
 
-/**
- * Setting $includeMinimalFramework to `true` includes a recommended base set of styles
- * that provides styling for most use-cases (links, lists, buttons, grid)
- **/
+// **
+// Setting $includeMinimalFramework to `true` includes a recommended base set of styles
+// that provides styling for most use-cases (links, lists, buttons, grid)
+// **
 @if $includeMinimalFramework {
     @include normalize();
     @include reset();
