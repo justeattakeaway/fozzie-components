@@ -96,6 +96,7 @@ jobs:
             - '*.json'
             - '.github/workflows/**'
             - 'packages/storybook/**'
+            - 'packages/tools/fozzie/**'
         list-files: shell
     # Setup Node 16.
     - name: Setup Node
@@ -177,6 +178,7 @@ jobs:
             - '*.json'
             - '.github/workflows/**'
             - 'packages/storybook/**'
+            - 'packages/tools/fozzie/**'
         list-files: shell
     # Setup Node 16
     - name: Setup Node
@@ -234,6 +236,7 @@ jobs:
             - '*.json'
             - '.github/workflows/**'
             - 'packages/storybook/**'
+            - 'packages/tools/fozzie/**'
         list-files: shell
     # Setup Node 16
     - name: Setup Node
