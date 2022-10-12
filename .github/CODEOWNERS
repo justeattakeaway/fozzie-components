@@ -2,7 +2,6 @@
 # Root Mono-repo config files
 /*.* @justeat/ui-web-core-team-reviewers
 /.github/ @justeat/ui-web-core-team-reviewers
-/.circleci/ @justeat/ui-web-core-team-reviewers
 /.husky/ @justeat/ui-web-core-team-reviewers
 /config/ @justeat/ui-web-core-team-reviewers
 /packages/components/atoms @justeat/ui-web-core-team-reviewers

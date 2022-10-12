@@ -36,7 +36,7 @@ $midWide: 980px;
     background-color: f.$color-container-default;
     border-radius: f.$border-radius;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16);
-    color: f.$color-grey-50;
+    color: f.$color-content-subdued;
     @include f.font-size('heading-xl', false);
     font-family: f.$font-family-base;
     font-weight: f.$font-weight-regular;
@@ -83,7 +83,7 @@ $midWide: 980px;
 }
 
 .c-searchShell-subtitle {
-    color: f.$color-grey-50;
+    color: f.$color-content-subdued;
     @include f.font-size('subheading-s', true, 'narrow');
     font-weight: f.$font-weight-regular;
     margin-bottom: f.spacing(d);
