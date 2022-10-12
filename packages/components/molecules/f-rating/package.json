@@ -1,16 +1,17 @@
 {
-  "name": "@justeat/f-error-message",
-  "description": "Fozzie Error Message – Generic inline error message",
-  "version": "2.3.0",
-  "main": "dist/f-error-message.umd.min.js",
-  "maxBundleSize": "5kB",
+  "name": "@justeat/f-rating",
+  "description": "Fozzie Rating - Global Rating component",
+  "version": "0.1.0",
+  "main": "dist/f-rating.umd.min.js",
+  "maxBundleSize": "20kB",
   "files": [
-    "dist"
+    "dist",
+    "test-utils"
   ],
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/atoms/f-error-message",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/molecules/f-rating",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -30,32 +31,29 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-error-message ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-rating ./src/index.js",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "lint:style": "stylelint ./src/**/*.{vue,htm,html,css,sss,less,scss}",
     "lint:style:fix": "yarn lint:style --fix",
     "test": "vue-cli-service test:unit",
-    "ci:test:atoms": "yarn test",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
-    "ci:test-component:chrome:atoms": "yarn test-component:chrome",
-    "ci:test-a11y:chrome:atoms": "yarn test-a11y:chrome"
+    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_RATING} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeattakeaway/pie-icons-vue": "1.0.0"
+    "@justeat/f-services": "1.x"
   },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.1.1",
-    "@justeat/fozzie": ">=9.0.0"
+    "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "4.5.16",
-    "@vue/cli-plugin-unit-jest": "4.5.16",
-    "@vue/test-utils": "1.0.3",
-    "@justeat/f-wdio-utils": "1.x"
+    "@justeat/f-wdio-utils": "1.x",
+    "@vue/cli-plugin-babel": "4.5.15",
+    "@vue/cli-plugin-unit-jest": "4.5.15",
+    "@vue/test-utils": "1.2.2"
   }
 }

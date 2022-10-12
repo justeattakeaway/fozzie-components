@@ -5,12 +5,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.36.0
 ------------------------------
-*October 11, 2022*
+*October 12, 2022*
 
 ### Changed
-- Update to `fozzie` v10.4.0
+- Migrate `@justeat/fozzie` to the monorepo.
+- Update root `@justeat/fozzie` to `10.x` so local version if used.
 - Replaced various design tokens that were removed from the newer version
 
+v7.35.2
+------------------------------
+*October 10, 2022*
+
+### Fixed
+- Get Turborpo to filter by `origin/master`.
+- Stop Danger running against master.
 
 v7.35.1
 ------------------------------
