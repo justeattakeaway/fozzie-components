@@ -3,6 +3,92 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.35.2
+------------------------------
+*October 10, 2022*
+
+### Fixed
+- Get Turborpo to filter by `origin/master`.
+- Stop Danger running against master.
+
+v7.35.1
+------------------------------
+*October 10, 2022*
+
+### Fixed
+- Issue where builds weren't being trigged against master.
+- Issue where all branches/tags weren't fetched, preventing Turborepo `--filter` from working.
+
+
+v7.35.0
+------------------------------
+*October 10, 2022*
+
+### Added
+- Ability to run GitHub Actions on PR's.
+- Ability to prevent WDIO tests running if previous jobs fail.
+- Remove references to CircleCI.
+
+
+v7.34.0
+------------------------------
+*October 10, 2022*
+
+### Added
+- Turborepo filtering to GitHub Actions.
+
+### Changed
+- Version of Chromedriver to `106`
+
+v7.33.1
+------------------------------
+*October 6, 2022*
+
+### Removed
+- `f-form` organism component
+
+
+v7.33.0
+------------------------------
+*October 4, 2022*
+
+### Added
+- Danger checks to GitHub Actions.
+
+
+v7.32.0
+------------------------------
+*October 04, 2022*
+
+### Changed
+- Update to `fozzie` v10.5.0
+- Replaced various design tokens that were removed from the newer version
+
+
+v7.31.0
+------------------------------
+*September 27, 2022*
+
+### Added
+- `fozzie` v9.3.1 to the root.
+
+### Removed
+- Beta versions from individual components.
+
+
+v7.31.0
+------------------------------
+*October 3, 2022*
+
+### Added
+- New `build:changed` script to build any changed components and their dependencies.
+
+v7.30.1
+------------------------------
+*September 28, 2022*
+
+### Fixed
+- Issue in CI where Storybook changes weren't picked up as global changes.
 
 v7.30.0
 ------------------------------

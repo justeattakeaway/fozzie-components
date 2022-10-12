@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-registration",
   "description": "Fozzie Registration Form Component",
-  "version": "3.7.0",
+  "version": "3.7.1",
   "main": "dist/f-registration.umd.min.js",
   "maxBundleSize": "70kB",
   "files": [
@@ -60,16 +60,15 @@
     "@justeat/f-card": "4.x",
     "@justeat/f-error-message": "2.x",
     "@justeat/f-form-field": "6.x",
-    "@justeat/f-http": "0.x",
+    "@justeat/f-http": "1.x",
     "@justeat/f-link": "3.x"
   },
   "devDependencies": {
-    "@justeat/fozzie": "9.0.0-beta.6",
     "@justeat/f-button": "4.x",
     "@justeat/f-card": "4.x",
     "@justeat/f-error-message": "2.x",
     "@justeat/f-form-field": "6.x",
-    "@justeat/f-http": "0.x",
+    "@justeat/f-http": "1.x",
     "@justeat/f-link": "3.x",
     "@justeat/f-vue-icons": "3.x",
     "@justeat/f-wdio-utils": "1.x",

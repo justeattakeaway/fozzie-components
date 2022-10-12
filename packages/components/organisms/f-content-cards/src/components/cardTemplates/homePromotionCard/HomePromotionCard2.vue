@@ -200,7 +200,7 @@ export default {
             }
 
             .c-contentCards-homePromotionCard2-title {
-                color: f.$color-grey-20;
+                color: f.$color-interactive-secondary;
             }
         }
     }
