@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.36.0
 ------------------------------
-*October 12, 2022*
+*October 13, 2022*
 
 ### Changed
 - Migrate `@justeat/fozzie` to the monorepo.

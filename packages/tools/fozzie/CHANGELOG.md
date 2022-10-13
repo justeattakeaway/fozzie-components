@@ -10,7 +10,7 @@ Future Todo List
 
 v10.7.0
 ------------------------------
-*October 10, 2022*
+*October 13, 2022*
 
 ### Added
 - CSS outputted files for typography, utilities and reset
