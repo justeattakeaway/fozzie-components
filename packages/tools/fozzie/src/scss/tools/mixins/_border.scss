@@ -1,0 +1,23 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../../settings/variables' as v;
+@use '../functions/index' as functions;
+
+// **
+// ==========================================================================
+// Border mixin
+// Used in bordered utility class to add padding, border and border
+// radius to element
+// ==========================================================================
+//
+// Standard use
+// @include bordered();
+//
+// Override default values
+// @include bordered(10px, 30px, green);
+// **
+
+@mixin bordered($bordered-radius: v.$border-radius, $bordered-spacing : functions.spacing(e), $bordered-colour: dt.$color-border-strong) { // stylelint-disable-line max-line-length
+    border: 1px solid $bordered-colour;
+    padding: $bordered-spacing;
+    border-radius: $bordered-radius;
+}

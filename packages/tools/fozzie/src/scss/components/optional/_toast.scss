@@ -1,0 +1,94 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../../settings/include-media' as *;
+@use '../../tools/functions/index' as functions;
+
+@mixin toast() {
+    /**
+    * Toast Component
+    * =================================
+    * Used to display text in a pop-up style notification.
+    *
+    * The `c-toast` component is an optional mixin within Fozzie.
+    If you'd like to use it in your project you can include it by adding `@include toast();` into your SCSS dependencies file.*
+    *
+    * Documentation:
+    * https://fozzie.just-eat.com/styleguide/ui-components/toast
+    */
+
+    $toast-radius                           : dt.$radius-rounded-c;
+    $toast-textColor                        : dt.$color-content-light;
+    $toast-bgColor--default                 : dt.$color-content-interactive-tertiary;
+    $toast-bgColor--alert                   : dt.$color-orange-55;
+    $toast-animation-duration               : 0.5s;
+    $toast-height                           : 95px;
+    $toast-translateY                       : -#{$toast-height - 5px};
+    $toast-height--aboveNarrow              : 115px;
+    $toast-translateY--aboveNarrow          : -#{$toast-height--aboveNarrow - 5px};
+    $toast-height--aboveMid                 : 115px;
+    $toast-translateY--aboveMid             : -#{$toast-height--aboveMid - 5px};
+
+
+    @keyframes toastSlideUp {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY($toast-translateY);
+        }
+    }
+
+    @keyframes toastSlideUp--aboveNarrow {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY($toast-translateY--aboveNarrow);
+        }
+    }
+
+    @keyframes toastSlideUp--aboveMid {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY($toast-translateY--aboveMid);
+        }
+    }
+
+    .c-toast {
+        animation: toastSlideUp $toast-animation-duration;
+        background-color: $toast-bgColor--default;
+        border-top-left-radius: $toast-radius;
+        border-top-right-radius: $toast-radius;
+        box-shadow: dt.$elevation-05; // token value for 'above elevation'
+        color: $toast-textColor;
+        height: $toast-height;
+        opacity: 0.9;
+        padding: functions.spacing();
+        position: absolute;
+        text-align: center;
+        transform: translateY($toast-translateY);
+        width: calc(100% - 16px);
+        z-index: functions.zIndex(low);
+
+        @include media('>=narrow') {
+            animation: toastSlideUp--aboveNarrow $toast-animation-duration;
+            height: $toast-height--aboveNarrow;
+            transform: translateY($toast-translateY--aboveNarrow);
+        }
+
+        @include media('>=mid') {
+            animation: toastSlideUp--aboveMid $toast-animation-duration;
+            height: $toast-height--aboveMid;
+            transform: translateY($toast-translateY--aboveMid);
+        }
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .c-toast--alert {
+        background-color: $toast-bgColor--alert;
+    }
+}

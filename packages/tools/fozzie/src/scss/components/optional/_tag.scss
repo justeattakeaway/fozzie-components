@@ -1,0 +1,90 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../../tools/mixins/type';
+
+@mixin tag() {
+    /**
+    * Components > Tag
+    * =================================
+    * Used for styling small pieces of information.
+    *
+    * Examples: Menu - Restaurant delivery information and Search - listing labels
+    *
+    * The `c-tag` component is an optional mixin within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include tag();` into your SCSS dependencies file.
+    */
+
+    .c-tag {
+        align-items: center;
+        background-color: dt.$color-container-subtle;
+        border-radius: dt.$radius-rounded-b;
+        color: dt.$color-content-default;
+        display: flex;
+        @include type.font-size(body-s, false);
+        font-weight: dt.$font-weight-regular;
+        line-height: 1;
+        justify-content: center;
+        padding: 4px 6px;
+
+        &.is-strong {
+            background-color: dt.$color-container-inverse;
+            color: dt.$color-content-inverse;
+        }
+    }
+
+        .c-tag--small {
+            border-radius: dt.$radius-rounded-a;
+            @include type.font-size(caption, false);
+            padding: 2px 4px;
+        }
+
+        .c-tag--positive {
+            background-color: dt.$color-support-positive-02;
+            color: dt.$color-content-positive;
+
+            &.is-strong {
+                background-color: dt.$color-support-positive;
+                color: dt.$color-content-light;
+            }
+        }
+
+        .c-tag--error {
+            background-color: dt.$color-support-error-02;
+            color: dt.$color-content-error;
+
+            &.is-strong {
+                background-color: dt.$color-support-error;
+                color: dt.$color-content-light;
+            }
+        }
+
+        .c-tag--white {
+            background-color: dt.$color-container-default;
+            color: dt.$color-content-default;
+        }
+
+        .c-tag--outline {
+            background-color: transparent;
+            border: solid 1px dt.$color-border-default;
+            color: dt.$color-content-default;
+        }
+
+        .c-tag--ghost {
+            background-color: transparent;
+            color: dt.$color-content-default;
+        }
+
+        .c-tag--info {
+            background-color: dt.$color-support-info-02;
+            color: dt.$color-content-default;
+        }
+
+        .c-tag--warning {
+            background-color: dt.$color-support-warning-02;
+            color: dt.$color-content-default;
+        }
+
+        .c-tag--brand {
+            background-color: dt.$color-support-brand-02;
+            color: dt.$color-content-default;
+        }
+}

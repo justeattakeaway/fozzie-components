@@ -1,0 +1,65 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../../tools/mixins/type';
+@use '../../settings/include-media' as *;
+@use '../../tools/functions/index' as functions;
+
+@mixin contentHeader() {
+    /**
+    * Components > Content Header
+    * =================================
+    * Used to display important contextual info at the top of a page
+    *
+    * Example: Restaurant count and location on search page
+    *
+    * The `c-contentHeader` component is an optional mixin within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include contentHeader();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * TBC
+    */
+
+    .c-contentHeader {
+        padding-top: functions.spacing(d);
+        padding-bottom: functions.spacing();
+    }
+
+        .c-contentHeader-title {
+            padding: 0;
+            display: inline-block;
+            margin: 0 functions.spacing(d) 0 0;
+            font-weight: dt.$font-weight-regular;
+            @include type.font-size(body-l, false); // TODO – this should be updated with a more semantic font alias when it's ported to fozzie-components repo
+        }
+
+        .c-contentHeader-subTitle {
+            display: block;
+            margin-top: 4px;
+            @include type.font-size(body-s, false); // TODO – this should be updated with a more semantic font alias when it's ported to fozzie-components repo
+
+            @include media('>mid') {
+                display: inline-block;
+            }
+        }
+
+        .c-contentHeader-title,
+        .c-contentHeader-subTitle {
+            @include media('>=mid') {
+                @include type.font-size(heading-xl, false);
+            }
+        }
+
+        .c-contentHeader-link {
+            display: inline-block;
+            text-decoration: none;
+            font-weight: dt.$font-weight-regular;
+
+            &:hover,
+            &:focus {
+                text-decoration: underline;
+            }
+
+            @include media('>mid') {
+                display: inline-block;
+            }
+        }
+}

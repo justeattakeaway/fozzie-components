@@ -1,0 +1,91 @@
+@use 'true' as *;
+@use 'src/scss/tools/functions/px-to-em' as systemUnderTest;
+
+@include describe('em [function]') {
+    @include it('returns the expected em value') {
+        // arrange
+        $pxValue: 20;
+        $baseFontSize: 10;
+        $expectedEmValue: 2em;
+
+        // act
+        $result: systemUnderTest.em($pxValue, $baseFontSize);
+
+        // assert
+        @include assert-equal($result, $expectedEmValue);
+    }
+
+    @include it('returns the expected em value when no `$base` argument is provided') {
+        // arrange
+        $pxValue: 32;
+        $expectedEmValue: 2em;
+
+        // act
+        $result: systemUnderTest.em($pxValue);
+
+        // assert
+        @include assert-equal($result, $expectedEmValue);
+    }
+
+    @include it('returns the expected decimal em value') {
+        // arrange
+        $pxValue: 16.5;
+        $expectedEmValue: 1.03125em;
+
+        // act
+        $result: systemUnderTest.em($pxValue);
+
+        // assert
+        @include assert-equal($result, $expectedEmValue);
+    }
+}
+
+@include describe('map-to-em [function]') {
+    @include it('returns the expected breakpoints map') {
+        // arrange
+        $breakpoints: (
+            narrow : 400px,
+            mid    : 750px,
+            wide   : 1000px,
+            huge   : 1250px
+        );
+
+        $baseFontSize: 10;
+
+        $expectedBreakpoints: (
+            narrow: 40em,
+            mid: 75em,
+            wide: 100em,
+            huge: 125em
+        );
+
+        // act
+        $result: systemUnderTest.map-to-em($breakpoints, $baseFontSize);
+
+        // assert
+        @include assert-equal($result, $expectedBreakpoints);
+    }
+
+    @include it('returns the expected breakpoints map when no `$base` argument is provided') {
+        // arrange
+        $breakpoints: (
+            narrow : 400px,
+            mid    : 750px,
+            wide   : 1000px,
+            huge   : 1250px
+        );
+
+        $expectedBreakpoints: (
+            narrow: 25em,
+            mid: 46.875em,
+            wide: 62.5em,
+            huge: 78.125em
+        );
+
+        // act
+        $result: systemUnderTest.map-to-em($breakpoints);
+
+        // assert
+        @include assert-equal($result, $expectedBreakpoints);
+    }
+}

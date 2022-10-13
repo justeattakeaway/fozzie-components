@@ -1,0 +1,65 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../../tools/mixins/type';
+@use '../../tools/functions/index' as functions;
+
+@mixin cookieWarning() {
+    /**
+    * Components > Cookie Warning
+    * =================================
+    *
+    * The `c-cookieWarning` component is an optional mixin within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include cookieWarning();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * TBC
+    */
+    .c-cookieWarning {
+        background-color: dt.$color-content-interactive-tertiary;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: functions.zIndex(high);
+
+        & p {
+            @include type.font-size(caption, false);
+            color: dt.$color-white;
+            text-align: center;
+            margin: 0 auto;
+        }
+    }
+
+    .c-cookieWarning-inner {
+        margin: 0 auto;
+        padding: functions.spacing();
+        padding-right: functions.spacing(e);
+        overflow: hidden;
+    }
+
+    .c-cookieWarning-btn {
+        display: block;
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 10px;
+        height: 10px;
+        background: url('//dy3erx8o0a6nh.cloudfront.net/images/icon-close-banner.png') no-repeat center center;
+        background-size: 10px 10px;
+        border: none;
+
+        &:hover,
+        &:active,
+        &:focus {
+            background-color: dt.$color-border-strong;
+            cursor: pointer;
+        }
+    }
+
+    .c-cookieWarning-link {
+        color: dt.$color-white;
+        &:hover,
+        &:active,
+        &:focus {
+            color: dt.$color-white;
+        }
+    }
+}
