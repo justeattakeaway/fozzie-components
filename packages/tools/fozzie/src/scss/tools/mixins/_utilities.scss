@@ -1,0 +1,50 @@
+@use '../../settings/variables' as v;
+@use 'sass:map';
+
+// ==========================================================================
+// Utilities Mixins
+// ==========================================================================
+
+// Extends default $spacing map with an empty entry at the start
+$spacing-map: map.merge((
+    '': 0
+), v.$spacing);
+
+// **
+// ==========================================================================
+// Spacing classes mixin
+//
+// Generates spacing utility classes
+// ==========================================================================
+//
+// Usage:
+// @include utilities.spacing-classes(utilities.$spacing-map, 'pad', 'top') using ($spacing-value) {
+//     padding-top: spacing(#{$spacing-value});
+// }
+//
+// eg. the output of the above would generate the following
+//
+// .u-pad--top { padding-top: spacing(); }
+// .u-pad-a--top { padding-top: spacing(a); }
+// .u-pad-b--top { padding-top: spacing(b); }
+// .u-pad-c--top { padding-top: spacing(c); }
+// .u-pad-d--top { padding-top: spacing(d); }
+// .u-pad-e--top { padding-top: spacing(e); }
+// .u-pad-f--top { padding-top: spacing(f); }
+// .u-pad-g--top { padding-top: spacing(g); }
+// .u-pad-h--top { padding-top: spacing(h); }
+// .u-pad-i--top { padding-top: spacing(i); }
+// .u-pad-j--top { padding-top: spacing(j); }
+// **
+@mixin spacing-classes($spacings, $name, $modifier: '') {
+    @each $spacing, $value in $spacings {
+        $separator: if($spacing == '', '', '-');
+        $modifier-str: if($modifier == '', '', '--#{$modifier}');
+        $suffix: #{$separator}#{$spacing}#{$modifier-str};
+        $spacing-value: if($spacing == '', 'b', $spacing);
+
+        .u-#{$name}#{$suffix} {
+            @content($spacing-value);
+        }
+    }
+}

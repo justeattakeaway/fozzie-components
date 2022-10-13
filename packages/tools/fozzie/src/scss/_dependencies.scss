@@ -1,0 +1,105 @@
+// **
+// Just Eat Styleguide
+// =================================
+// **
+
+// =================================
+// Site dependencies
+// =================================
+
+// =================================
+// Mixins, helpers and functions
+// =================================
+// Most CSS3 vendor prefixed items have a mixin,
+// but we should not need them if autoprefixer is being used
+// See mixins/css3.scss for the full list
+
+// =================================
+// Core variables
+// =================================
+// The colour variables are imported from https://www.npmjs.com/package/@justeat/pie-design-tokens
+@forward '@justeat/pie-design-tokens/dist/jet';
+@forward 'settings/variables';
+@forward 'tools/index'; // imports Fozzie SCSS helper functions and mixins
+@forward 'settings/include-media';
+@forward 'tools/helpers/breakpoints'; // breakpoint helper
+
+// CSS Normalise and then Reset
+@forward 'base/normalize';
+@forward 'base/reset';
+
+// Global typography styles
+@forward 'base/typography';
+
+@forward 'base/grid'; // Grid system based on flexbox w float fallbacks – https://github.com/TryKickoff/kickoff-grid.css
+
+// **
+// Objects
+// =================================
+// Styles apply to an object if they are directly associated to a HTML element.
+// If not, the styles should be defined as a component.
+//
+// For example, it would be expected to have:
+// 	links.scss > styles relating to links (<a> tag)
+// 	tables.scss > styles relating to tables
+//
+// Object styles should be prefixed with `.o-`
+// **
+
+@forward 'objects/body';
+@forward 'objects/buttons';
+@forward 'objects/links';
+@forward 'objects/lists';
+@forward 'objects/tables';
+@forward 'objects/form-controls';
+@forward 'objects/form-toggle';
+
+// **
+// Components:
+// =================================
+// Components are our resuable chunks of styling that aren’t directly associated to a base tag
+//
+// This is where the majority of our day-to-day styling will take place.  Component styles should be prefixed with `.c-`
+// **
+@forward 'components/alerts';
+@forward 'components/breadcrumbs';
+@forward 'components/cards';
+@forward 'components/media-element';
+
+// Optional components – need to be included with the associated mixin in your project dependencies
+@forward 'components/optional/apps-banner';
+@forward 'components/optional/badges';
+@forward 'components/optional/tag';
+@forward 'components/optional/content-header';
+@forward 'components/optional/content-title';
+@forward 'components/optional/cookie-warning';
+@forward 'components/optional/cuisines-widget';
+@forward 'components/optional/fullscreen-pop-over';
+@forward 'components/optional/listings';
+@forward 'components/optional/listings-skeleton';
+@forward 'components/optional/loading-indicator';
+@forward 'components/optional/menu';
+@forward 'components/optional/modal';
+@forward 'components/optional/order-card';
+@forward 'components/optional/overflow-carousel';
+@forward 'components/optional/page-banner';
+@forward 'components/optional/ratings';
+@forward 'components/optional/toast';
+@forward 'components/optional/user-message';
+
+// Global layout definitions & helpers
+@forward 'base/layout';
+
+// **
+// Utility classes
+// =====================================
+// These should always come last as they should 'trump' other properties
+// **
+@forward 'trumps/utilities';
+@forward 'trumps/spacing';
+@forward 'trumps/rwd';
+
+// **
+// Print styles
+// **
+@forward 'base/print';

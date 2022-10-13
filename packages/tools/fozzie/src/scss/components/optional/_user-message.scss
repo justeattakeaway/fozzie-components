@@ -1,0 +1,56 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../../settings/include-media' as *;
+@use '../../tools/functions/index' as functions;
+
+@mixin userMessage() {
+    /**
+    * User Message Component
+    * =================================
+    * Used to display the user message banner on the page.
+    *
+    * The `c-userMessage` component is an optional mixin within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include userMessage();` into your SCSS dependencies file.
+    */
+
+    .c-userMessage {
+        color: dt.$color-white;
+        background-color: dt.$color-orange;
+        max-width: 100%;
+        margin-top: functions.spacing(d);
+    }
+
+    .c-userMessageContainer {
+        max-width: 350px;
+        margin: 0 auto;
+        padding: functions.spacing(d) 0;
+        display: flex;
+
+        @include media('>=narrow') {
+            max-width: 540px;
+        }
+
+        @include media('>=mid') {
+            max-width: 636px;
+            margin: 0 auto;
+        }
+
+        svg {
+            fill: white;
+            min-width: 28px;
+            max-width: 28px;
+            width: 28px;
+            height: 28px;
+            display: block;
+            align-self: center;
+        }
+    }
+
+    .c-userMessageText {
+        margin-left: functions.spacing(d);
+        margin-top: 0;
+
+        @include media('>=mid') {
+            padding-left: 0;
+        }
+    }
+}

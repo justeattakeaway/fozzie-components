@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.36.0
+------------------------------
+*October 13, 2022*
+
+### Changed
+- Migrate `@justeat/fozzie` to the monorepo.
+- Update root `@justeat/fozzie` to `10.x` so local version if used.
+- Replaced various design tokens that were removed from the newer version.
+- Added `@justeat/pie-design-tokens` as a root `devDependency` as it's no longer being hoisted by `@justeat/fozzie` to root `node_modules`.
+
 v7.35.2
 ------------------------------
 *October 10, 2022*
