@@ -11,7 +11,7 @@ describe('Rating', () => {
     });
 
     describe('methods', () => {
-        describe('`getRating`', () => {
+        describe('`hasRating`', () => {
             let propsData;
             let wrapper;
 
@@ -24,7 +24,7 @@ describe('Rating', () => {
             });
 
             it('should exist', () => {
-                expect(wrapper.vm.getRating).toBeDefined();
+                expect(wrapper.vm.hasRating).toBeDefined();
             });
 
             it('should contain a description `c-rating-description`', () => {
@@ -38,7 +38,7 @@ describe('Rating', () => {
             describe('when invoked', () => {
                 it('should return truthy when `starRating` is less than or equal to `rating`', () => {
                     // Act
-                    const result = wrapper.vm.getRating(2);
+                    const result = wrapper.vm.hasRating(2);
 
                     // Assert
                     expect(result).toBe(true);
@@ -46,7 +46,7 @@ describe('Rating', () => {
 
                 it('should return falsey when `starRating` is more than `rating`', () => {
                     // Act
-                    const result = wrapper.vm.getRating(3);
+                    const result = wrapper.vm.hasRating(3);
 
                     // Assert
                     expect(result).toBe(false);

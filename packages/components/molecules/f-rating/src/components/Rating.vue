@@ -8,7 +8,7 @@
                 :key="star"
                 :class="$style['c-rating-star']">
                 <star-filled-icon
-                    v-if="getRating(star)"
+                    v-if="hasRating(star)"
                     :class="$style['c-rating-star-filled']" />
                 <star-icon
                     v-else
@@ -77,12 +77,12 @@ export default {
 
     methods: {
         /**
-         * Check if `star` against value passed by consumer to allow empty stars to render.
+         * Check `star` against value passed by consumer to allow empty stars to render.
          *
          * @param star
          * @returns {boolean}
          */
-        getRating (star) {
+        hasRating (star) {
             return star <= this.rating;
         }
     }
