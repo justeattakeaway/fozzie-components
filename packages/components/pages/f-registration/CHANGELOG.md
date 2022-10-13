@@ -8,7 +8,7 @@ v3.7.2
 *October 13, 2022*
 
 ### Changed
-- Added translations for es-ES, en-IE and it-it.
+- Added translations for es-ES, en-IE and it-IT.
 
 v3.7.1
 ------------------------------
