@@ -32,7 +32,7 @@ exports.processResults = (results, componentName) => {
 
     const filePath = `${configuration.testType.violationCSVDirectory}/${componentName}-a11y-violations`;
     // axe-reports can't create the CSV in CI due to permissions so we have to create the file ourselves.
-    if (process.env.CIRCLECI) {
+    if (process.env.GITHUB_ACTIONS || process.env.CIRCLECI) {
         try {
             if (!fs.existsSync(filePath)) {
                 exec(`touch ${filePath}`, (error, stdout, stderr) => {

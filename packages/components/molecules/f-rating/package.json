@@ -1,18 +1,17 @@
 {
-  "name": "@justeat/f-mfa",
-  "description": "Fozzie Mfa - Multi-factor Authenticator Input Form",
-  "version": "0.22.0",
-  "main": "dist/f-mfa.umd.min.js",
-  "maxBundleSize": "30kB",
+  "name": "@justeat/f-rating",
+  "description": "Fozzie Rating - Global Rating component",
+  "version": "0.1.0",
+  "main": "dist/f-rating.umd.min.js",
+  "maxBundleSize": "20kB",
   "files": [
     "dist",
-    "test-utils",
-    "src/services"
+    "test-utils"
   ],
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/pages/f-mfa",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/molecules/f-rating",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -32,7 +31,7 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-mfa ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-rating ./src/index.js",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "lint:style": "stylelint ./src/**/*.{vue,htm,html,css,sss,less,scss}",
@@ -40,35 +39,18 @@
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
-    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_MFA} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
-    "ci:test:pages": "yarn test",
-    "ci:test-component:chrome:pages": "yarn test-component:chrome",
-    "ci:test-a11y:chrome:pages": "yarn test-a11y:chrome",
-    "ci:test:visual:pages": "yarn test:visual"
+    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_RATING} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-globalisation": "1.x",
-    "@justeat/f-vue-icons": "3.x"
+    "@justeat/f-services": "1.x"
   },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.2.0",
-    "@justeat/f-alert": "6.x",
-    "@justeat/f-button": "4.x",
-    "@justeat/f-card": "4.x",
-    "@justeat/f-card-with-content": "3.x",
-    "@justeat/f-form-field": "6.x",
-    "@justeat/f-link": "3.x"
+    "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-    "@justeat/f-alert": "6.x",
-    "@justeat/f-button": "4.x",
-    "@justeat/f-card": "4.x",
-    "@justeat/f-card-with-content": "3.x",
-    "@justeat/f-form-field": "6.x",
-    "@justeat/f-link": "3.x",
     "@justeat/f-wdio-utils": "1.x",
     "@vue/cli-plugin-babel": "4.5.15",
     "@vue/cli-plugin-unit-jest": "4.5.15",
