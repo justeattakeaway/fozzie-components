@@ -6,13 +6,6 @@
 <p>SCSS Helper Library for Front-End projects that are implementing PIE across JET.</p>
 </div>
 
----
-
-[![npm version](https://badge.fury.io/js/%40justeat%2Ffozzie.svg)](https://badge.fury.io/js/%40justeat%2Ffozzie)
-[![Build Status](https://travis-ci.org/justeat/fozzie.svg)](https://travis-ci.org/justeat/fozzie)
-[![Coverage Status](https://coveralls.io/repos/github/justeat/fozzie/badge.svg)](https://coveralls.io/github/justeat/fozzie)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/justeat/fozzie.svg)](https://lgtm.com/projects/g/justeat/fozzie/alerts/)
-
 ## What is Fozzie?
 
 Fozzie is an SCSS Helper Library that's used to help ensure web projects across JET have access to a set of baseline SCSS variables, mixins and functions.
