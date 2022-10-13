@@ -1,0 +1,103 @@
+@use '../../settings/include-media' as *;
+@use '../../tools/mixins/type';
+@use '../../tools/functions/index' as functions;
+
+@mixin appsBanner() {
+    /**
+    * Apps Banner Component
+    * =================================
+    * Used to display app promo banner on the page.
+    *
+    * The `c-appsBanner` component is an optional mixin within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include appsBanner();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * https://fozzie.just-eat.com/styleguide/ui-components/apps-banner
+    */
+
+    @include media-context(('narrow-mid': 600px)) {
+        /* autoprefixer grid: autoplace */
+        .c-appsBanner {
+            text-align: left;
+            position: relative;
+            display: grid;
+            //for IE it should be explicit grid
+            grid-template-columns: auto auto;
+            grid-template-rows: auto auto;
+
+            @include media('>=narrow-mid') {
+                text-align: center;
+                justify-items: center;
+            }
+
+            .c-appsBanner-heading {
+                grid-column: 1 / 3;
+                grid-row: 1;
+                text-align: center;
+
+                @include media('>=narrow-mid') {
+                    grid-column: 2;
+                    align-self: end;
+                }
+
+                @include media('>=mid') {
+                    max-width: 570px;
+                    @include type.font-size(heading-xl, false);
+                }
+            }
+
+            .c-appsBanner-image {
+                overflow: hidden;
+                max-width: 120px;
+                margin-top: functions.spacing(d);
+                grid-column: 1;
+                grid-row: 2;
+
+                @include media('>=narrow-mid') {
+                    max-width: 220px;
+                    margin-top: 0;
+                    grid-column: 1;
+                    grid-row: 1 / 3;
+                }
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            .c-appsBanner-content {
+                margin-left: functions.spacing(d);
+                grid-column: 2;
+                grid-row: 2;
+
+                @include media('>=narrow-mid') {
+                    align-self: start;
+                }
+
+                @include media('>=mid') {
+                    text-align: center;
+                }
+
+                p {
+                    margin-top: functions.spacing(d);
+
+                    @include media('>=mid') {
+                        margin-top: functions.spacing();
+                    }
+                }
+            }
+        }
+
+        .c-appsBanner-buttons {
+            margin-top: functions.spacing(e);
+        }
+
+        .c-appsBanner-appBtn {
+            display: block;
+
+            @include media('>=mid') {
+                display: inline-block;
+            }
+        }
+    }
+}

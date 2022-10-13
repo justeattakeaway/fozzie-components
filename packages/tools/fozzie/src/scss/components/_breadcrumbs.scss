@@ -1,0 +1,173 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../settings/include-media' as *;
+@use '../tools/mixins/type';
+@use '../tools/functions/index' as functions;
+
+@mixin breadcrumbs() {
+    /**
+    * Components > Breadcrumb
+    * =================================
+    * Used for website navigation breadcrumbs
+    *
+    * This is an optional component within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include breadcrumbs();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * https://fozzie.just-eat.com/styleguide/ui-components/breadcrumbs
+    */
+
+    $breadcrumb-text-color                   : dt.$color-content-subdued;
+    $breadcrumb-text-weight                  : dt.$font-weight-regular;
+    $breadcrumb-link-color                   : dt.$color-content-interactive-tertiary;
+    $breadcrumb-link-color--hover            : darken(dt.$color-content-interactive-tertiary, dt.$color-hover-01);
+    $breadcrumb-link-weight                  : dt.$font-weight-bold;
+    $breadcrumb-icon-fillColor               : dt.$color-content-default;
+    $breadcrumb-border-radius                : dt.$radius-rounded-d;
+    $breadcrumb--compact-background          : rgba(dt.$color-black, 0.2);
+
+    $breadcrumb--transparent-text-color      : dt.$color-content-light;
+    $breadcrumb--transparent-icon-fillColor  : dt.$color-content-light;
+    $breadcrumb--transparent-link-color      : dt.$color-content-link-light;
+
+    $breadcrumb--pill-text-color             : dt.$color-content-light;
+    $breadcrumb--pill-link-color--hover      : dt.$color-content-link-light;
+    $breadcrumb--pill-icon-fillColor         : dt.$color-content-light;
+
+
+    .c-breadcrumb {
+        width: 100%;
+        line-height: 2.5;
+
+        @include media('>=mid') {
+            @include type.font-size(body-l, false);
+        }
+    }
+
+    .c-breadcrumb-item {
+        float: left;
+        color: $breadcrumb-text-color;
+        font-weight: $breadcrumb-text-weight;
+
+        svg,
+        svg path {
+            fill: $breadcrumb-icon-fillColor;
+        }
+    }
+
+    .c-breadcrumb-item--home {
+        padding-left: 0;
+    }
+
+    .c-breadcrumb-item-link {
+        text-decoration: none;
+        color: $breadcrumb-link-color;
+        font-weight: $breadcrumb-link-weight;
+
+        &:hover {
+            text-decoration: underline;
+            color: $breadcrumb-link-color--hover;
+        }
+    }
+
+    .c-breadcrumb-item-icon {
+        margin: 0 functions.spacing(b);
+    }
+
+    .c-breadcrumb--transparent {
+        background-color: transparent;
+
+        .c-breadcrumb-item {
+            color: $breadcrumb--transparent-text-color;
+
+            svg {
+                fill: $breadcrumb--transparent-icon-fillColor;
+            }
+        }
+
+        .c-breadcrumb-item-link {
+            color: $breadcrumb--transparent-link-color;
+        }
+    }
+
+    .c-breadcrumb--compact {
+        @include media('<mid') {
+            .c-breadcrumb-item {
+                display: none;
+            }
+
+            // only show previous page's link
+            .c-breadcrumb-item:nth-last-child(2) {
+                display: list-item;
+                background-color: $breadcrumb--compact-background;
+                border-radius: $breadcrumb-border-radius;
+                line-height: 2;
+                padding-right: functions.spacing(d);
+
+                .c-breadcrumb-item-icon {
+                    float: left;
+
+                    svg {
+                        transform: translateY(-2px) rotate(90deg);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+    * c-breadcrumb--pill
+    * =================================
+    * Adds a black transparent background with rounded corners to the breadcrumb list.
+    * On smaller screens the icon and text are re-ordered.
+    */
+
+    .c-breadcrumb--pill {
+        background-color: rgba(dt.$color-black, 0.5);
+        border-radius: $breadcrumb-border-radius;
+        line-height: normal;
+        display: inline-block;
+        width: auto;
+        padding-right: 12px;
+
+        a {
+            &:hover,
+            &:focus {
+                color: $breadcrumb--pill-link-color--hover;
+            }
+        }
+
+        @include media('>=mid') {
+            padding: 0 12px;
+        }
+
+        .c-breadcrumb-item {
+            display: flex;
+            align-items: center;
+
+            a {
+                @include media('<=mid') {
+                    order: 2;
+                }
+            }
+
+            svg {
+                height: 6px;
+                transform: rotate(-90deg);
+                width: 12px;
+
+                @include media('<=mid') {
+                    transform: rotate(90deg);
+                }
+
+                * {
+                    fill: $breadcrumb--pill-icon-fillColor;
+                }
+            }
+        }
+
+        .c-breadcrumb-item,
+        .c-breadcrumb-item-link {
+            color: $breadcrumb--pill-text-color;
+        }
+    }
+}

@@ -1,0 +1,55 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../tools/mixins/alerts';
+@use '../tools/functions/index' as functions;
+
+@mixin alerts() {
+    /**
+    * Components > Alert
+    * =================================
+    * Messages that appear on the screen to highlight a state (usually with associated text)
+    *
+    * Example: Most form pages or wherever a message is fed back to the user
+    *
+    * This is an optional component within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include alerts();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * TBC
+    */
+
+    $alert-border-radius: dt.$radius-rounded-c;
+
+    // Base styles
+    // -------------------------
+
+    .c-alert {
+        padding: functions.spacing();
+        margin-top: functions.spacing(d);
+        border: 1px solid transparent;
+        border-radius: $alert-border-radius;
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        & + * {
+            margin-top: functions.spacing(d);
+        }
+    }
+
+    // Alternate styles
+    //
+    // Generate contextual modifier classes for colorizing the alert.
+
+    .c-alert--success {
+        @include alerts.alert-variant(dt.$color-support-positive-02, dt.$color-content-positive);
+    }
+
+    .c-alert--warning {
+        @include alerts.alert-variant(dt.$color-support-warning-02, dt.$color-content-default);
+    }
+
+    .c-alert--danger {
+        @include alerts.alert-variant(dt.$color-support-error-02, dt.$color-content-error);
+    }
+}

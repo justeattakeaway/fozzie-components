@@ -1,0 +1,168 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../../settings/variables' as v;
+@use '../../settings/include-media' as *;
+@use '../../tools/functions/index' as functions;
+
+@mixin pageBanner() {
+    /**
+    * Components > Page Banner
+    * =================================
+    * Page Banners stretch to the full width of their container and contain banner images which typically use a `picture` element.
+    * Optionally they can display a white or coloured version of the Just Eat rays at the bottom.
+    *
+    * Example: Menu – Cuisine image at top of page.
+    *
+    * The `c-pageBanner` component is an optional mixin within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include pageBanner();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * https://fozzie.just-eat.com/styleguide/ui-components/page-banner
+    */
+
+    $pageBanner-bg: dt.$color-white;
+    //Vars to use for IE homepage banner rays positioning fix
+    $rays--coloured-spacing: 60px;
+    $rays--coloured-spacing--mid: 164px;
+    $rays--coloured-spacing--wide: 148px;
+    $rays--coloured-spacing--huge: 230px;
+
+
+    .c-pageBanner {
+        background-color: $pageBanner-bg;
+        max-height: 300px;
+        min-height: 100px;
+        overflow: hidden;
+        position: relative;
+
+        @include media('>=wide') {
+            max-height: 400px;
+        }
+    }
+
+    .c-pageBanner--tall {
+        max-height: 220px;
+
+        @include media('>=narrow') {
+            max-height: 450px;
+        }
+
+        @include media('>=wide') {
+            max-height: 600px;
+        }
+
+        &.c-pageBanner--withRays--coloured {
+            .c-pageBanner-img {
+                margin-bottom: $rays--coloured-spacing;
+
+                @include media('>=mid') {
+                    margin-bottom: $rays--coloured-spacing--mid;
+                }
+
+                @include media('>=wide') {
+                    margin-bottom: $rays--coloured-spacing--wide;
+                }
+            }
+        }
+    }
+
+    .c-pageBanner--narrow {
+        max-height: 300px;
+
+        @include media('>=huge') {
+            max-height: 370px;
+        }
+
+        @include media('>=mid') {
+            min-height: 370px;
+        }
+
+        .c-pageBanner-img {
+            @include media('>=mid') {
+                margin-top: -8%;
+            }
+
+            @include media('>=wide') {
+                margin-top: -20%;
+            }
+        }
+    }
+
+    .c-pageBanner--loading {
+        .c-pageBanner-img {
+            margin-top: 0;
+        }
+    }
+
+    .c-pageBanner--withRays--white {
+        // Prevents IE from applying these styles as IE11 doesn't support the @supports rule
+        @supports (position: absolute) {
+            &:after {
+                background: url('#{v.$img-path-url}/decoration/rays--white--narrow.svg') no-repeat bottom left;
+                content: '';
+                height: 100%;
+                position: absolute;
+                bottom: -1px;
+                left: 0;
+                width: 100%;
+                z-index: functions.zIndex(low);
+
+                @include media('>=mid') {
+                    background: url('#{v.$img-path-url}/decoration/rays--white--wide.svg') no-repeat bottom left;
+                }
+            }
+        }
+    }
+
+    .c-pageBanner--withRays--coloured {
+        &:after {
+            background: url('#{v.$img-path-url}/decoration/rays--coloured--narrow.svg') no-repeat bottom left;
+            content: '';
+            height: 100%;
+            position: absolute;
+            left: 0;
+            right: 0;
+            width: 100.1%;
+            z-index: functions.zIndex(low);
+            bottom: -$rays--coloured-spacing;
+
+            @include media('>=mid') {
+                bottom: -$rays--coloured-spacing--mid;
+            }
+
+            @include media('>=wide') {
+                background: url('#{v.$img-path-url}/decoration/rays--coloured--wide.svg') no-repeat bottom left;
+                bottom: -$rays--coloured-spacing--wide;
+            }
+
+            @include media('>=huge') {
+                bottom: -$rays--coloured-spacing--huge;
+            }
+
+            // Prevents IE from applying these styles as IE11 doesn't support the @supports rule
+            @supports (position: absolute) {
+                bottom: 0;
+
+                @include media('>=mid', '<wide') {
+                    // removed this image call from IE because of the svg wrong scaling bug. SVG for smaller screens looks much better in IE
+                    background: url('#{v.$img-path-url}/decoration/rays--coloured--mid.svg') no-repeat bottom left;
+                }
+            }
+        }
+    }
+
+    // any elements below the banner will be moved up, over the bottom part of the banner
+    .c-pageBanner--negativeBottom--aboveMid {
+        @include media('>=mid') {
+            margin-bottom: -100px;
+        }
+
+        @include media('>=wide') {
+            margin-bottom: -132px;
+        }
+    }
+
+    .c-pageBanner-img {
+        vertical-align: bottom;
+        width: 100%;
+    }
+}

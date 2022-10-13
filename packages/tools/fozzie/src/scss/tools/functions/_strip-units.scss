@@ -1,0 +1,22 @@
+// **
+// Strip units
+// =================================
+// Remove the unit of a measurement
+//
+// Usage:
+// strip-units(400px)  > 400
+// **
+
+@use 'sass:math';
+
+@function strip-units($val) {
+    $newVal: 0;
+
+    @if $val {
+        $newVal: $val;
+    } @else {
+        $newVal: 0;
+    }
+
+    @return math.div($newVal, $newVal * 0 + 1);
+}

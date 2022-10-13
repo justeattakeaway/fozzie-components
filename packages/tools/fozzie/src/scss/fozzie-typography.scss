@@ -1,0 +1,10 @@
+// **
+// fozzie-typography.scss
+// =====================================
+// Used to generate the file fozzie-typography.css
+// This can be used from a web app that does not use Sass to incorporate our typography styles
+// **
+
+@use 'base/typography' as t;
+
+@include t.typography()
