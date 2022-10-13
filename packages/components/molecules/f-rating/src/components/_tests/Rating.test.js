@@ -1,28 +1,37 @@
-import { shallowMount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
+import { VueI18n } from '@justeat/f-globalisation';
 import VRating from '../Rating.vue';
+import i18n from './helpers/setup';
+
+const localVue = createLocalVue();
+localVue.use(VueI18n);
 
 describe('Rating', () => {
-    it('should be defined', () => {
-        const propsData = {
-            starRating: 2
+    let propsData;
+    let wrapper;
+    const $tc = jest.fn();
+
+    beforeEach(() => {
+        propsData = {
+            starRating: 2,
+            maxStarRating: 5
         };
-        const wrapper = shallowMount(VRating, { propsData });
+        wrapper = shallowMount(VRating, {
+            propsData,
+            localVue,
+            i18n,
+            mocks: {
+                $tc
+            }
+        });
+    });
+
+    it('should be defined', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
     describe('methods', () => {
         describe('`hasRating`', () => {
-            let propsData;
-            let wrapper;
-
-            beforeEach(() => {
-                propsData = {
-                    starRating: 2,
-                    maxStarRating: 5
-                };
-                wrapper = shallowMount(VRating, { propsData });
-            });
-
             it('should exist', () => {
                 expect(wrapper.vm.hasRating).toBeDefined();
             });
@@ -56,45 +65,51 @@ describe('Rating', () => {
     });
 
     describe('computed', () => {
-        describe('`setRatingDescription`', () => {
-            let propsData;
-            let wrapper;
-
-            beforeEach(() => {
-                propsData = {
-                    starRating: 2,
-                    maxStarRating: 5
-                };
-                wrapper = shallowMount(VRating, { propsData });
-            });
-
+        describe('`getRatingDescription`', () => {
             it('should exist', () => {
-                expect(wrapper.vm.setRatingDescription).toBeDefined();
+                // Arrange
+                propsData.starRating = 2;
+                wrapper = shallowMount(VRating, {
+                    propsData,
+                    localVue,
+                    i18n
+                });
+
+                // Act & Assert
+                expect(wrapper.vm.getRatingDescription).toBeDefined();
             });
 
             describe('when invoked', () => {
                 it('should return a singular description if the rating is less than 2', () => {
                     // Arrange
-                    const description = 'star out of';
+                    const description = '1 star out of 5';
                     propsData = {
                         starRating: 1
                     };
-                    wrapper = shallowMount(VRating, { propsData });
+                    wrapper = shallowMount(VRating, {
+                        propsData,
+                        localVue,
+                        i18n
+                    });
 
                     // Act & Assert
-                    expect(wrapper.vm.setRatingDescription).toBe(description);
+                    expect(wrapper.vm.getRatingDescription).toBe(description);
                 });
 
                 it('should return a plural description if the rating is greater than 1', () => {
                     // Arrange
-                    const description = 'stars out of';
+                    const description = '2 stars out of 5';
                     propsData = {
                         starRating: 2
                     };
-                    wrapper = shallowMount(VRating, { propsData });
+                    wrapper = shallowMount(VRating, {
+                        propsData,
+                        localVue,
+                        i18n
+                    });
 
                     // Act & Assert
-                    expect(wrapper.vm.setRatingDescription).toBe(description);
+                    expect(wrapper.vm.getRatingDescription).toBe(description);
                 });
             });
         });

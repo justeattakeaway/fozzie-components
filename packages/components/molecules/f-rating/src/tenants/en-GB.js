@@ -1,7 +1,10 @@
-export default {
+const messages = {
     locale: 'en-GB',
     ratings: {
-        starsDescription: 'stars out of',
-        starsDescriptionSingular: 'star out of'
+        starsDescription: '{rating} star out of {total} | {rating} stars out of {total}'
     }
+};
+
+export default {
+    messages
 };

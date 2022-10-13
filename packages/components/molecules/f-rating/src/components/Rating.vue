@@ -14,12 +14,12 @@
                     v-else
                     :class="$style['c-rating-star-empty']" />
             </li>
-            <span
-                data-test-id="c-rating-description"
-                class="is-visuallyHidden">
-                {{ starRating }} {{ setRatingDescription }} {{ maxStarRating }}
-            </span>
         </ul>
+        <span
+            data-test-id="c-rating-description"
+            class="is-visuallyHidden">
+            {{ getRatingDescription }}
+        </span>
     </div>
 </template>
 
@@ -28,7 +28,7 @@ import {
     StarFilledIcon,
     StarIcon
 } from '@justeattakeaway/pie-icons-vue';
-import { globalisationServices } from '@justeat/f-services';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import tenantConfigs from '../tenants';
 
 export default {
@@ -37,6 +37,9 @@ export default {
         StarFilledIcon,
         StarIcon
     },
+
+    mixins: [VueGlobalisationMixin],
+
     props: {
         locale: {
             type: String,
@@ -53,25 +56,30 @@ export default {
     },
 
     data () {
-        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
-
         return {
-            copy: { ...localeConfig },
+            tenantConfigs,
             rating: this.starRating
         };
     },
 
     computed: {
         /**
-         * Return singular description if one star.
+         * Return description using `vue-i18n Pluralization` if one star or an alternative if more.
+         *
          *
          * @returns {string|*}
          */
-        setRatingDescription () {
+        getRatingDescription () {
             return this.starRating < 2
-                ? this.copy.ratings.starsDescriptionSingular
-                : this.copy.ratings.starsDescription;
+                ? this.$tc('ratings.starsDescription', 1, {
+                    rating: this.rating,
+                    total: this.maxStarRating
+                })
+
+                : this.$tc('ratings.starsDescription', 2, {
+                    rating: this.rating,
+                    total: this.maxStarRating
+                });
         }
     },
 
@@ -97,22 +105,22 @@ export default {
         margin: 0;
         padding: 0;
         list-style-type: none;
+    }
 
-        .c-rating-star {
-            display: inline-block;
-            width: 15px; // Todo - decide on how to size these. Will create a ticket around this.
+    .c-rating-star {
+        display: inline-block;
+        width: 15px; // Todo - decide on how to size these. Will create a ticket around this.
+    }
+
+    .c-rating-star-filled {
+        & path {
+            fill: f.$color-support-brand-01;
         }
+    }
 
-        .c-rating-star-filled {
-            & path {
-                fill: f.$color-support-brand-01;
-            }
-        }
-
-        .c-rating-star-empty {
-            & path {
-                fill: f.$color-mozzarella-50;
-            }
+    .c-rating-star-empty {
+        & path {
+            fill: f.$color-mozzarella-50;
         }
     }
 }

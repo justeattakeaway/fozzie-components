@@ -2,6 +2,6 @@
 
 exports[`Rating methods \`hasRating\` should contain a description \`c-rating-description\` 1`] = `
 <span data-test-id="c-rating-description" class="is-visuallyHidden">
-            2 stars out of 5
-        </span>
+
+    </span>
 `;

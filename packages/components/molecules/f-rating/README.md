@@ -69,9 +69,10 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
-| Prop          |   Type   | Required | Default | Description                       |
-| :---          |:--------:|:--------:|:-------:|:----------------------------------|
-| `starRating`  | `Number` |   Yes    |    -    | Sets the number of stars out of 5 |
+| Prop          |   Type   | Required | Default | Description                                           |
+| :---          |:--------:|:--------:|:-------:|:------------------------------------------------------|
+| `starRating`  | `Number` |   Yes    |    -    | Sets the number of stars out of 5                     |
+| `maxStarRating`  | `Number` |    No    |    5    | Sets the number of max stars the consumer should use. |
 
 ### Events
 
