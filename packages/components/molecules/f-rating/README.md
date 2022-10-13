@@ -69,8 +69,9 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
-| Prop  | Type  | Default | Description |
-| ----- | ----- | ------- | ----------- |
+| Prop          |   Type   | Required | Default | Description                       |
+| :---          |:--------:|:--------:|:-------:|:----------------------------------|
+| `starRating`  | `Number` |   Yes    |    -    | Sets the number of stars out of 5 |
 
 ### Events
 

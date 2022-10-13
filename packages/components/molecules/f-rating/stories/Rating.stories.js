@@ -12,7 +12,9 @@ export const RatingComponent = (args, { argTypes }) => ({
 
     props: Object.keys(argTypes),
 
-    template: '<rating v-bind="$props" />'
+    template: `<rating
+                  v-bind="$props"
+                  :starRating="2" />`
 });
 
 RatingComponent.storyName = 'f-rating';
