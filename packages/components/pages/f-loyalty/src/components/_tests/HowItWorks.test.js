@@ -67,27 +67,27 @@ describe('HowItWorksLayout', () => {
             expect(wrapper.vm.bags).toEqual([
                 {
                     number: '1st',
-                    image: 'https://d30v2pzvrfyzpo.cloudfront.net/b/hw/img/decoration/40-small-object-bag-dollar.svg',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-40.svg',
                     value: '$6'
                 },
                 {
                     number: '2nd',
-                    image: 'https://d30v2pzvrfyzpo.cloudfront.net/b/hw/img/decoration/50-small-object-bag-dollar.svg',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-50.svg',
                     value: '$7.50'
                 },
                 {
                     number: '3rd',
-                    image: 'https://d30v2pzvrfyzpo.cloudfront.net/b/hw/img/decoration/45-small-object-bag-dollar.svg',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-45.svg',
                     value: '$6.75'
                 },
                 {
                     number: '4th',
-                    image: 'https://d30v2pzvrfyzpo.cloudfront.net/b/hw/img/decoration/40-small-object-bag-dollar.svg',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-40.svg',
                     value: '$6'
                 },
                 {
                     number: '5th',
-                    image: 'https://d30v2pzvrfyzpo.cloudfront.net/b/hw/img/decoration/55-small-object-bag-dollar.svg',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-55.svg',
                     value: '$8.25'
                 }
             ]);
@@ -108,6 +108,7 @@ describe('HowItWorksLayout', () => {
                 messages
             };
 
+
             // Act
             wrapper = shallowMount(HowItWorksLayout, {
                 localVue,
@@ -123,27 +124,27 @@ describe('HowItWorksLayout', () => {
             expect(wrapper.vm.bags).toEqual([
                 {
                     number: '1st',
-                    image: 'https://d30v2pzvrfyzpo.cloudfront.net/b/hw/img/decoration/40-small-object-bag-pound.svg',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-pound-40.svg',
                     value: '£4'
                 },
                 {
                     number: '2nd',
-                    image: 'https://d30v2pzvrfyzpo.cloudfront.net/b/hw/img/decoration/50-small-object-bag-pound.svg',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-pound-50.svg',
                     value: '£5'
                 },
                 {
                     number: '3rd',
-                    image: 'https://d30v2pzvrfyzpo.cloudfront.net/b/hw/img/decoration/45-small-object-bag-pound.svg',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-pound-45.svg',
                     value: '£4.50'
                 },
                 {
                     number: '4th',
-                    image: 'https://d30v2pzvrfyzpo.cloudfront.net/b/hw/img/decoration/40-small-object-bag-pound.svg',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-pound-40.svg',
                     value: '£4'
                 },
                 {
                     number: '5th',
-                    image: 'https://d30v2pzvrfyzpo.cloudfront.net/b/hw/img/decoration/55-small-object-bag-pound.svg',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-pound-55.svg',
                     value: '£5.50'
                 }
             ]);
@@ -152,6 +153,118 @@ describe('HowItWorksLayout', () => {
         it('total should be calculated as expected', () => {
             // Assert
             expect(wrapper.vm.total).toEqual('£23.00');
+        });
+    });
+
+    describe('when in NZ', () => {
+        beforeEach(() => {
+            // Arrange
+            const i18n = {
+                locale: 'en-NZ',
+                fallbackLocale: 'en-NZ',
+                messages
+            };
+
+            // Act
+            wrapper = shallowMount(HowItWorksLayout, {
+                localVue,
+                i18n,
+                mocks: {
+                    $t: key => i18nMocker(key, i18n.locale)
+                }
+            });
+        });
+
+        it('bags should be calculated as expected', () => {
+            // Assert
+            expect(wrapper.vm.bags).toEqual([
+                {
+                    number: '1st',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-40.svg',
+                    value: '$4'
+                },
+                {
+                    number: '2nd',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-50.svg',
+                    value: '$5'
+                },
+                {
+                    number: '3rd',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-45.svg',
+                    value: '$4.50'
+                },
+                {
+                    number: '4th',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-40.svg',
+                    value: '$4'
+                },
+                {
+                    number: '5th',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-55.svg',
+                    value: '$5.50'
+                }
+            ]);
+        });
+
+        it('total should be calculated as expected', () => {
+            // Assert
+            expect(wrapper.vm.total).toEqual('$23.00');
+        });
+    });
+
+    describe('when in IE', () => {
+        beforeEach(() => {
+            // Arrange
+            const i18n = {
+                locale: 'en-IE',
+                fallbackLocale: 'en-IE',
+                messages
+            };
+
+            // Act
+            wrapper = shallowMount(HowItWorksLayout, {
+                localVue,
+                i18n,
+                mocks: {
+                    $t: key => i18nMocker(key, i18n.locale)
+                }
+            });
+        });
+
+        it('bags should be calculated as expected', () => {
+            // Assert
+            expect(wrapper.vm.bags).toEqual([
+                {
+                    number: '1st',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-euro-25.svg',
+                    value: '€2.50'
+                },
+                {
+                    number: '2nd',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-euro-30.svg',
+                    value: '€3'
+                },
+                {
+                    number: '3rd',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-euro-35.svg',
+                    value: '€3.50'
+                },
+                {
+                    number: '4th',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-euro-25.svg',
+                    value: '€2.50'
+                },
+                {
+                    number: '5th',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-euro-30.svg',
+                    value: '€3'
+                }
+            ]);
+        });
+
+        it('total should be calculated as expected', () => {
+            // Assert
+            expect(wrapper.vm.total).toEqual('€14.50');
         });
     });
 });

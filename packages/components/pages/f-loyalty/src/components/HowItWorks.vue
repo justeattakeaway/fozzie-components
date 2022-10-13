@@ -114,8 +114,6 @@
 import FCard from '@justeat/f-card';
 import MediaElement from '@justeat/f-media-element';
 
-const TEMP_IMG_PATH = 'https://d30v2pzvrfyzpo.cloudfront.net/b/hw/img/decoration/';
-
 const formatAsCurrency = (amount, currencySymbol) => `${currencySymbol}${amount
     .toFixed(2)}`;
 
@@ -128,13 +126,6 @@ export default {
     },
 
     data: () => ({
-        bagsData: [
-            40,
-            50,
-            45,
-            40,
-            55
-        ],
         flexLayout: {
             default: {
                 column: true,
@@ -152,44 +143,42 @@ export default {
             // _Very_ naive way of implementing ordinals but will suit our purposes here
             const ordinal = { 0: 'st', 1: 'nd', 2: 'rd' };
 
-            return this.bagsData.map((bagValue, index) => ({
+            return [...this.$t('howItWorks.bagValues')].map((bagValue, index) => ({
                 number: `${index + 1}${ordinal[index] || 'th'}`,
-                image: `${TEMP_IMG_PATH}${bagValue}-small-object-bag-${currency}.svg`,
+                image: `${this.$t('howItWorks.imagePath')}bag-${currency}-${bagValue}.svg`,
                 value: formatAsCurrency(bagValue * percentage * 0.01, currencySymbol)
                     .replace('.00', '') // remove zero pence/cents amounts for bag values
             }));
         },
 
         mediaCards () {
-            const percentage = this.$t('percentage');
-
             return [
                 {
                     title: this.$t('howItWorks.media.cards.order.title'),
                     text: this.$t('howItWorks.media.cards.order.text'),
-                    image: `${TEMP_IMG_PATH}stampcards-complex-object-restaurant-promo.svg`
+                    image: this.$t('howItWorks.media.cards.order.image')
                 },
                 {
                     title: this.$t('howItWorks.media.cards.earn.title'),
                     text: this.$t('howItWorks.media.cards.earn.text'),
-                    image: `${TEMP_IMG_PATH}stampcards-complex-object-login-promo-full-colour-${percentage}.svg`
+                    image: this.$t('howItWorks.media.cards.earn.image')
                 },
                 {
                     title: this.$t('howItWorks.media.cards.collect.title'),
                     text: this.$t('howItWorks.media.cards.collect.text'),
-                    image: `${TEMP_IMG_PATH}stampcards-complex-object-stampcard-colour-03-${percentage}-full.svg`
+                    image: this.$t('howItWorks.media.cards.collect.image')
                 },
                 {
                     title: this.$t('howItWorks.media.cards.reward.title'),
                     text: this.$t('howItWorks.media.cards.reward.text'),
-                    image: `${TEMP_IMG_PATH}stampcards-bag-order-refund.svg`
+                    image: this.$t('howItWorks.media.cards.reward.image')
                 }
             ];
         },
 
         total () {
             return formatAsCurrency(
-                this.bagsData.reduce((sum, current) => sum + current, 0) * this.$t('percentage') * 0.01,
+                [...this.$t('howItWorks.bagValues')].reduce((sum, current) => sum + current, 0) * this.$t('percentage') * 0.01,
                 this.$t('currencySymbol')
             );
         }
@@ -352,12 +341,13 @@ HOW IT WORKS SECTION: EXAMPLE SECTION
 
 }
 
-@include f.media('<=narrowMid') {
-    .c-howItWorks-example-order-image {
+.c-howItWorks-example-order-image {
+    width: 88px;
+
+    @include f.media('<=narrowMid') {
         width: 45px;
     }
 }
-
 
 .c-howItWorks-example-percentages {
     display: flex;
