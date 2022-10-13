@@ -1,0 +1,213 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../../settings/include-media' as *;
+@use '../../tools/mixins/type';
+@use '../../tools/functions/index' as functions;
+@use '../../settings/variables' as v;
+
+@mixin orderCard() {
+    /**
+    * Components > Order Card
+    * =================================
+    *
+    * Example: Homepage – "Order it Again" block.
+    *
+    * The `c-orderCard` component is an optional mixin within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include orderCard();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * https://fozzie.just-eat.com/styleguide/ui-components/order-card
+    */
+
+    $previousOrder-boxShadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    $previousOrder-hoverBoxShadow: 0 2px 8px 0 rgba(0, 0, 0, 0.16), -2px -2px 4px 0 rgba(0, 0, 0, 0.04), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+
+    .c-orderCard {
+        display: flex;
+        flex-direction: column;
+        border-radius: dt.$radius-rounded-c;
+        box-shadow: $previousOrder-boxShadow;
+        background-color: dt.$color-container-default;
+        overflow: hidden;
+        text-decoration: none;
+        width: 280px;
+        max-width: 280px;
+        min-height: 259px;
+
+        @include media('>=mid') {
+            width: 392px;
+            max-width: 392px;
+            min-height: 302px;
+        }
+
+        &:hover,
+        &:focus {
+            box-shadow: $previousOrder-hoverBoxShadow;
+            text-decoration: none;
+            color: dt.$color-support-neutral;
+        }
+    }
+
+    .c-orderCard-yourFavourites {
+        min-height: 200px;
+
+        @include media('>=mid') {
+            min-height: 240px;
+        }
+    }
+
+    .c-orderCard--inactive {
+        min-height: 222px;
+        margin: auto;
+
+        @include media('>=mid') {
+            min-height: 254px;
+        }
+
+        &:hover,
+        &:focus {
+            box-shadow: $previousOrder-boxShadow;
+        }
+
+        .c-orderCard-image {
+            background-color: dt.$color-container-subtle;
+        }
+    }
+
+    .c-orderCard-image {
+        width: 100%;
+        height: 103px;
+        overflow: hidden;
+        position: relative;
+
+        @include media('>=mid') {
+            height: 145px;
+        }
+
+        img {
+            vertical-align: bottom;
+            width: 100%;
+        }
+
+        &:after {
+            content: '';
+            width: 100%;
+            height: 36px;
+            background: url('#{v.$img-path-url}/decoration/rays--white--narrow.svg') no-repeat bottom left;
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            z-index: functions.zIndex(low);
+        }
+    }
+
+    .c-orderCard-yourFavourites-cuisineBanner {
+        height: auto;
+    }
+
+    .c-orderCard-iconContainer {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background-color: dt.$color-container-default;
+
+        svg {
+            width: 40px;
+            height: 40px;
+            fill: dt.$color-support-brand-01;
+        }
+    }
+
+    .c-orderCard-order {
+        @include type.font-size(body-l, false);
+        line-height: functions.line-height(16px, 24px);
+        font-weight: dt.$font-weight-regular;
+        @include type.font-size(22px);
+        color: dt.$color-blue;
+        text-align: center;
+        margin-top: functions.spacing();
+        padding: 2px functions.spacing(c) functions.spacing(c);
+        border-top: 1px solid dt.$color-border-subtle;
+    }
+
+    .c-orderCard-title {
+        line-height: functions.line-height(16px, 24px);
+    }
+
+    .c-orderCard-showMore {
+        font-weight: dt.$font-weight-bold;
+    }
+
+    .c-orderCard-date {
+        margin-top: 0;
+        margin-bottom: functions.spacing();
+        color: dt.$color-support-neutral;
+        display: block;
+    }
+
+    .c-orderCard-summary-grid {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+        flex: 1 0 auto;
+    }
+
+    .c-orderCard-summary {
+        line-height: functions.line-height(16px, 23px);
+        width: 78%;
+    }
+
+    .c-orderCard-orderTotal {
+        margin-right: functions.spacing();
+        margin-left: functions.spacing(e);
+        align-self: flex-end;
+    }
+
+    .c-orderCard-content {
+        padding: functions.spacing() functions.spacing(d) 0;
+        color: dt.$color-content-interactive-tertiary;
+        flex: 1 0 auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .c-orderCard-yourFavourites-content {
+        padding: functions.spacing() functions.spacing(d);
+    }
+
+    .c-orderCard-content--defaultMessage {
+        padding: 0 functions.spacing(d);
+        @include type.font-size(body-l, false);
+    }
+
+    .c-orderCard-cuisines {
+        color: dt.$color-support-neutral;
+        margin-top: 0;
+        text-transform: capitalize;
+        @include type.font-size(body-l, false);
+        font-family: v.$font-family-base;
+    }
+
+    .c-orderCard-image:after {
+        content: none;
+    }
+
+    .c-orderCard--inactive {
+        margin-left: functions.spacing(f);
+    }
+
+    .c-orderCard-header {
+        flex-direction: row;
+        align-items: baseline;
+        display: flex;
+        margin-left: functions.spacing(d);
+
+        @include media('>mid') {
+            margin-left: functions.spacing(f);
+        }
+    }
+
+    .c-orderCard-seeAllText {
+        width: fit-content;
+        margin-left: functions.spacing(d);
+    }
+}

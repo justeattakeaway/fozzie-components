@@ -1,0 +1,237 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../../settings/include-media' as *;
+@use '../../tools/mixins/type';
+@use '../../tools/functions/index' as functions;
+
+@mixin modal() {
+    /**
+    * Components > Item Selector
+    * =================================
+    * Used on menu pages to display a modal to the user.
+    *
+    * Example: Menu – When selecting an item.
+    *
+    * The `c-modal` component is an optional mixin within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include modal();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * TBC
+    */
+
+    $modal-titleFontSize    : body-l !default;
+    $modal-borderRadius     : dt.$radius-rounded-d;
+
+    .c-modal {
+        z-index: functions.zIndex(high);
+    }
+
+        .c-modal--popUp {
+            @include media('<narrowMid') {
+                .c-modal-content {
+                    border-radius: 0;
+                    bottom: -100vh;
+                    box-shadow: 0 -8px 16px 0 rgba(0, 0, 0, 0.22), 0 16px 16px 0 rgba(0, 0, 0, 0.24);
+                    display: block;
+                    left: 0;
+                    top: auto;
+                    transform: none;
+                    width: 100%;
+                }
+
+                .c-modal-content--visible {
+                    bottom: 0;
+                }
+            }
+
+            @include media('>=narrowMid') {
+                .c-modal-title {
+                    @include type.font-size(heading-m);
+                }
+
+                    .c-modal-title--spacing {
+                        padding: functions.spacing(g) functions.spacing(h) functions.spacing(d);
+                    }
+
+                .c-modal-content {
+                    overflow: hidden;
+                }
+            }
+        }
+
+        .c-modal--fullPage--belowMid {
+            @include media('<mid') {
+                .c-modal-content {
+                    border-radius: 0;
+                    bottom: -100vh;
+                    display: block;
+                    left: 0;
+                    top: 0;
+                    transform: none;
+                    width: 100%;
+                    overflow-y: scroll;
+                }
+
+                .c-modal-closeBtn {
+                    z-index: functions.zIndex(high);
+                    position: fixed;
+                }
+
+                .c-modal-content--visible {
+                    bottom: 0;
+                }
+            }
+        }
+
+        .c-modal--hasImageHeader {
+            .c-modal-titleContainer {
+                position: relative;
+            }
+        }
+
+    .c-modal-closeBtn {
+        padding: functions.spacing();
+        position: absolute;
+        right: functions.spacing(d);
+        top: functions.spacing(c);
+        z-index: functions.zIndex(high);
+
+        @include media('>=mid') {
+            position: fixed;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+        .c-modal-closeBtn--rounded {
+            border: solid 1px dt.$color-white;
+            background-color: dt.$color-white;
+            border-radius: 50%;
+            opacity: 0.9;
+
+            &:hover {
+                background-color: dt.$color-white;
+            }
+        }
+
+        .c-modal-closeBtn--fixed {
+            position: fixed;
+        }
+
+    .c-modal-title {
+        @include type.font-size($modal-titleFontSize);
+        padding: 0 functions.spacing(e);
+
+        @include media('>=mid') {
+            @include type.font-size(heading-m);
+        }
+    }
+
+        .c-modal-title--spacing {
+            padding: functions.spacing(e) functions.spacing(h);
+
+            @include media('>=mid') {
+                padding: functions.spacing(g) functions.spacing(h) functions.spacing(d);
+            }
+        }
+
+    .c-modal-content {
+        background-color: dt.$color-white;
+        border-radius: $modal-borderRadius;
+        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.12);
+        display: none;
+        padding: functions.spacing(e);
+        position: fixed;
+        right: 50%;
+        text-align: center;
+        top: 50%;
+        transform: translate(50%, -50%);
+        width: 75%;
+
+        @include media('<mid') {
+            min-width: functions.em(22);
+
+            &.is-fixed {
+                position: fixed;
+                height: 100%;
+            }
+
+            &.is-resetHeight {
+                height: auto;
+            }
+        }
+
+        @include media('>=mid') {
+            max-height: 90vh;
+            max-width: 600px;
+            overflow: hidden;
+            padding: functions.spacing(g);
+        }
+    }
+
+        .c-modal-content--wide {
+            max-width: 1005px;
+        }
+
+        .c-modal-content--narrow {
+            max-width: 100%;
+
+            @include media('>=narrowMid') {
+                max-width: 450px;
+            }
+        }
+
+        .c-modal-content--flush {
+            padding: 0;
+        }
+
+        .c-modal-content--visible {
+            display: block;
+        }
+
+    .c-modal-content-scrollHeight {
+        max-height: 100vh;
+
+        @include media('>=mid') {
+            max-height: 550px;
+        }
+
+        @include media('height<=narrowMid', '>=mid') {
+            max-height: 90vh;
+        }
+
+        &.is-stuck {
+            padding-top: 0;
+        }
+    }
+
+    .c-modal-content-scrollable {
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: relative;
+    }
+
+    .c-modal-actions {
+        background-color: dt.$color-white;
+        box-shadow: 0 -2px 4px 0 rgba(0, 0, 0, 0.12);
+        bottom: 0;
+        padding: functions.spacing(e);
+        position: sticky;
+        width: 100%;
+    }
+
+    .c-modal-textSeparator {
+        font-weight: dt.$font-weight-bold;
+        @include type.font-size(body-l);
+        margin: functions.spacing(e) 0 0;
+
+        @include media('>=narrow') {
+            margin: 0;
+        }
+    }
+
+        .c-modal-textSeparator--spaceAround {
+            margin: functions.spacing(e) 0 functions.spacing(d);
+        }
+}

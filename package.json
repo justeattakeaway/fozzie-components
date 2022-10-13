@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "7.35.2",
+  "version": "7.36.0",
   "private": true,
   "scripts": {
     "build": "turbo run build --continue",
@@ -58,7 +58,8 @@
     "@babel/preset-env": "7.14.9",
     "@justeat/browserslist-config-fozzie": "1.2.0",
     "@justeat/eslint-config-fozzie": "5.1.0",
-    "@justeat/fozzie": "10.5.0",
+    "@justeat/fozzie": "10.x",
+    "@justeat/pie-design-tokens": "3.0.0",
     "@justeat/stylelint-config-fozzie": "2.2.0",
     "@percy/cli": "1.0.5",
     "@percy/webdriverio": "2.0.1",
@@ -134,16 +135,20 @@
   "stylelint": {
     "extends": "@justeat/stylelint-config-fozzie"
   },
-  "workspaces": [
-    "packages/*",
-    "packages/components/atoms/*",
-    "packages/components/molecules/*",
-    "packages/components/organisms/*",
-    "packages/components/templates/*",
-    "packages/components/pages/*",
-    "packages/services/*",
-    "packages/tools/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "packages/components/atoms/*",
+      "packages/components/molecules/*",
+      "packages/components/organisms/*",
+      "packages/components/templates/*",
+      "packages/components/pages/*",
+      "packages/services/*",
+      "packages/tools/*"
+    ],
+
+    "nohoist": ["**/@justeat/fozzie/**"] 
+  },
   "dependencies": {
     "deepmerge": "4.2.2"
   },

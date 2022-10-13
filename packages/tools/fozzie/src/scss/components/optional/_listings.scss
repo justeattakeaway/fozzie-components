@@ -1,0 +1,420 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../../settings/include-media' as *;
+@use '../../tools/mixins/type';
+@use '../../tools/functions/index' as functions;
+
+@mixin listing() {
+    /**
+    * Components > Listing
+    * ===================================
+    * Component that styles lists of content
+    *
+    * Example: SERP Page – Restaurant Information Lists
+    *
+    * The `c-listing` component is an optional mixin within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include listing();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * https://fozzie.just-eat.com/styleguide/ui-components/listings
+    */
+
+    // The mixins below are to help juggle the badge items between stacked and
+    // inline and target viewports in-between mid and wide (landscape mobiles and very small desktops).
+    //
+    // On narrow, mid and wide you will see:
+    //
+    // item • item
+    //
+    // between mid and wide you will see:
+    //
+    // item
+    // item
+    //
+    // The mixins are used to stop code duplication as each chunk of
+    // code needs to be within its own media mixin.
+
+    $listing-bg                     : dt.$color-container-default;
+    $listing-borderColor            : dt.$color-border-strong;
+    $listing-border-radius          : dt.$radius-rounded-c;
+    $listing-promoIcon-color        : dt.$color-content-brand;
+
+    $listing--subsequent-bg         : dt.$color-background-subtle;
+    $listing--inactive-bg           : rgba($listing-bg, 0.5);
+
+    .c-listing {
+        border-radius: $listing-border-radius;
+
+        @include media('<mid') {
+            border: 0;
+            padding: 0;
+            border-radius: 0;
+        }
+
+        &.has-noItems {
+            display: none;
+        }
+    }
+
+    // Subsequent listing is styling used for searchWeb pre-order
+    // Inactive listing is styling used for searchWeb offline
+    .c-listing--subsequent,
+    .c-listing--inactive {
+        margin-top: functions.spacing(e);
+    }
+
+    .c-listing--subsequent {
+        overflow: hidden;
+        padding: 0 functions.spacing(d) functions.spacing(d);
+        background: $listing--subsequent-bg;
+    }
+
+        .c-listing-loader {
+            opacity: 1;
+            transition: opacity 200ms ease, transform 200ms ease;
+
+            @include media('<mid') {
+                &.is-loading {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+            }
+        }
+
+        .c-listing-item {
+            margin-bottom: functions.spacing(d);
+            box-shadow: dt.$elevation-01; // token value for card default state
+            padding-bottom: functions.spacing();
+
+            @include media('>mid') {
+                min-height: 96px;
+                padding: functions.spacing(a);
+            }
+
+            &.is-active {
+                display: block;
+            }
+            &.is-inactive {
+                display: none;
+            }
+
+            .c-listing--inactive & {
+                opacity: 0.6;
+            }
+        }
+
+        .c-listing-item--withHeader {
+            overflow: hidden;
+            // Specific padding top % is based on an image size of 288x104 and maintaining an aspect ratio of 36 : 13
+            padding-top: calc(37.69% + #{functions.spacing(a)});
+
+            @include media('>mid') {
+                padding-top: functions.spacing();
+            }
+        }
+
+            .c-listing-item-header {
+                top: 0;
+                left: 0;
+                width: 100%;
+                overflow: hidden;
+                position: absolute;
+                padding-top: 37.69%;
+
+                @include media('>mid') {
+                    width: 87px;
+                    height: 87px;
+                    padding-top: 0;
+                    top: functions.spacing(a);
+                    left: functions.spacing(a);
+                    border-radius: $listing-border-radius;
+                }
+
+                @include media('>=wide') {
+                    width: 17.5%;
+                }
+
+                &:not(.c-listing-item-header--noImage) {
+                    background: dt.$color-background-subtle;
+                }
+            }
+
+            .c-listing-item-header-img {
+                top: 50%;
+                left: 50%;
+                width: 100%;
+                height: auto;
+                position: absolute;
+                transform: translate(-50%, -50%);
+
+                @include media('>mid') {
+                    width: auto;
+                    height: 100%;
+                    max-width: none !important;
+                }
+            }
+
+            .c-listing-item-header-frame {
+                left: 0;
+                bottom: 0;
+                position: absolute;
+
+                svg {
+                    height: 45px;
+                    vertical-align: bottom;
+                }
+
+                @include media('>mid') {
+                    display: none;
+                }
+            }
+
+            // when the listing item has a wrapper link descendent
+            // make sure it doesn’t underline everything (only the main title)
+            .c-listing-item-link {
+                display: block;
+                color: dt.$color-content-default;
+                text-decoration: none;
+
+                &:hover,
+                &:active,
+                &:focus {
+                    color: currentColor;
+                    text-decoration: none;
+                }
+
+                &:hover {
+                    text-decoration: none;
+
+                    & .c-listing-item-title {
+                        text-decoration: underline;
+                    }
+                }
+
+                @include media('>mid') {
+                    display: flex;
+                    min-height: 80px;
+                    flex-flow: row wrap;
+                }
+            }
+
+            .c-listing-item-img {
+                width: 55px;
+                height: 55px;
+                top: functions.spacing(d);
+                left: functions.spacing(d);
+                position: absolute;
+                border: 1px solid dt.$color-border-subtle;
+                border-radius: $listing-border-radius;
+
+                @include media('>=wide') {
+                    width: 65px;
+                    height: 65px;
+                }
+
+                //If we have a header (a cuisine image)
+                .c-listing-item--withHeader & {
+                    top: auto;
+                    transform: translateY(-4px);
+
+                    @include media('>mid') {
+                        top: 20px;
+                        left: 60px;
+                        transform: none;
+                    }
+                    @include media('>=wide') {
+                        top: functions.spacing(d);
+                        left: calc(17.5% - 33px);
+                    }
+                }
+            }
+
+            .c-listing-item-imgItem {
+                width: 100%;
+                height: auto;
+                border-radius: $listing-border-radius;
+            }
+
+            .c-listing-item-info {
+                position: relative;
+                color: dt.$color-content-default;
+                padding-left: 70px;
+                min-height: 60px;
+
+                @include media('>mid') {
+                    width: 55%;
+                    padding-top: functions.spacing();
+                }
+                @include media('>=wide') {
+                    padding-left: 92px;
+                }
+
+                //If we have a header (a cuisine image)
+                .c-listing-item--withHeader & {
+                    top: -4px;
+                }
+                @include media('>mid') {
+                    .c-listing-item--withHeader & {
+                        padding-left: 126px;
+                    }
+                }
+                @include media('>=wide') {
+                    .c-listing-item--withHeader & {
+                        padding-left: calc(17.5% + 46px);
+                    }
+                }
+            }
+
+            .c-listing-item-title {
+                word-break: break-word;
+                padding-right: functions.spacing();
+                @include type.font-size(body-l, false);
+
+                @include media('>mid') {
+                    margin: functions.spacing(a) 0;
+                    padding-right: functions.spacing(d);
+                }
+            }
+
+            .c-listing-item-new {
+                top: -4px;
+                color: dt.$color-content-positive;
+                position: relative;
+                margin-right: functions.spacing(a);
+            }
+
+            .c-listing-item-details {
+                width: 100%;
+                position: relative;
+
+                @include media('>mid') {
+                    width: 45%;
+                    margin-top: auto;
+                    padding: functions.spacing() functions.spacing() 0 functions.spacing(d);
+                }
+
+                @include media('>=wide') {
+                    width: 45%;
+                }
+            }
+
+            .c-listing-item-detailsRow {
+                display: flex;
+                align-items: center;
+                margin-bottom: functions.spacing(a);
+            }
+
+            .c-listing-item-detailsRow-icon {
+                width: 20px;
+                height: 20px;
+                fill: dt.$color-content-subdued;
+            }
+
+            .c-listing-item-detailsRow-text {
+                white-space: initial;
+                margin-left: functions.spacing();
+            }
+
+            .c-listing-item-badge {
+                @include media('>mid') {
+                    @include inlineDivider();
+                }
+
+                @include media('<wide') {
+                    @include inlineDivider();
+                }
+
+                @include media('<=mid') {
+                    @include blockDivider();
+                }
+
+                @include media('>=wide') {
+                    @include blockDivider();
+                }
+            }
+
+            .c-listing-item-promo,
+            .c-listing-item-alert {
+                svg {
+                    fill: $listing-promoIcon-color;
+                }
+            }
+            .c-listing-item-promo-text {
+                color: $listing-promoIcon-color;
+            }
+
+            .c-listing-item-promo-text--earned {
+                color: dt.$color-content-positive;
+            }
+
+            .c-listing-item-rating {
+                padding: 2px 0 3px;
+            }
+
+            .c-listing-item-ratingText {
+                top: -4px;
+                position: relative;
+                @include type.font-size(caption, true);
+            }
+
+            .c-listing-item-text {
+                margin-top: 0;
+            }
+
+            .c-listing-item-meta {
+                text-align: left;
+
+                @include media('>mid') {
+                    padding-left: 27px;
+                }
+
+                @include media('>=wide') {
+                    padding-left: 0;
+                    text-align: right;
+                }
+            }
+
+            .c-listing-item-label {
+                padding: 1px 4px;
+                margin-bottom: functions.spacing();
+                @include type.font-size(caption, false);
+
+                @include media('>mid') {
+                    @include type.font-size(body-s, false);
+                }
+            }
+
+            .c-listing-item-premier {
+                display: block;
+                text-align: center;
+
+                @include media('>=mid') {
+                    top: 0;
+                    right: functions.spacing();
+                    position: absolute;
+                }
+
+                .c-listing--inactive & {
+                    display: none;
+                }
+            }
+
+            .c-listing-item-premierImage {
+                svg {
+                    height: 32px;
+                }
+            }
+}
+
+@mixin inlineDivider() {
+    span {
+        display: block;
+        font-size: 0;
+    }
+}
+
+@mixin blockDivider() {
+    span {
+        display: inline-block;
+        font-size: 1em;
+    }
+}
