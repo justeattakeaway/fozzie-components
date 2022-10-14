@@ -47,6 +47,37 @@ describe('Rating', () => {
             describe('when invoked', () => {
                 it('should return truthy when the argument `star` is less than or equal to `starRating`', () => {
                     // Act
+                    const star = 1;
+                    const result = wrapper.vm.isRatingStarFilled(star);
+
+                    // Assert
+                    expect(result).toBe(true);
+                });
+
+                it.each([1, 2])('should return truthy when the argument star is %s', value => {
+                    // Arrange
+                    propsData = {
+                        starRating: value,
+                        maxStarRating: 5
+                    };
+
+                    // Act
+                    wrapper = shallowMount(VRating, {
+                        propsData,
+                        localVue,
+                        i18n,
+                        mocks: {
+                            $tc
+                        }
+                    });
+                    const result = wrapper.vm.isRatingStarFilled(value);
+
+                    // Assert
+                    expect(result).toBe(true);
+                });
+
+                it('should return truthy when the argument `star` is equal to `starRating`', () => {
+                    // Act
                     const star = 2;
                     const result = wrapper.vm.isRatingStarFilled(star);
 
