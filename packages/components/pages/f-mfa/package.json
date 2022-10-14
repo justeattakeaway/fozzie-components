@@ -1,9 +1,9 @@
 {
   "name": "@justeat/f-mfa",
   "description": "Fozzie Mfa - Multi-factor Authenticator Input Form",
-  "version": "0.5.0",
+  "version": "0.22.0",
   "main": "dist/f-mfa.umd.min.js",
-  "maxBundleSize": "100kB",
+  "maxBundleSize": "30kB",
   "files": [
     "dist",
     "test-utils",
@@ -40,7 +40,11 @@
     "test": "vue-cli-service test:unit",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
-    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_MFA} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js"
+    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_MFA} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
+    "ci:test:pages": "yarn test",
+    "ci:test-component:chrome:pages": "yarn test-component:chrome",
+    "ci:test-a11y:chrome:pages": "yarn test-a11y:chrome",
+    "ci:test:visual:pages": "yarn test:visual"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
@@ -54,19 +58,20 @@
     "@justeat/f-alert": "6.x",
     "@justeat/f-button": "4.x",
     "@justeat/f-card": "4.x",
-    "@justeat/f-error-message": "2.x",
-    "@justeat/f-form-field": "6.x"
+    "@justeat/f-card-with-content": "3.x",
+    "@justeat/f-form-field": "6.x",
+    "@justeat/f-link": "3.x"
   },
   "devDependencies": {
     "@justeat/f-alert": "6.x",
     "@justeat/f-button": "4.x",
     "@justeat/f-card": "4.x",
-    "@justeat/f-error-message": "2.x",
+    "@justeat/f-card-with-content": "3.x",
     "@justeat/f-form-field": "6.x",
+    "@justeat/f-link": "3.x",
     "@justeat/f-wdio-utils": "1.x",
     "@vue/cli-plugin-babel": "4.5.15",
     "@vue/cli-plugin-unit-jest": "4.5.15",
-    "@vue/test-utils": "1.2.2",
-    "axios": "0.24.0"
+    "@vue/test-utils": "1.2.2"
   }
 }

@@ -12,11 +12,21 @@ Every time you get the latest changes in the mono repository, you need to follow
 2. Run the build command at the root: `yarn build`
 3. You can now run storybook using the command `yarn storybook:serve`
 
+Alternatively, you can run the following commands to just view the component you're working on, as well as any of it's dependencies / dependants.
+
+1. Install yarn packages at the root: `yarn`
+2. Run the build command at the root: `yarn build:changed`
+3. You can now run storybook using the command `yarn storybook:serve-changed`
+
+
+Note: It's recommended that you do not `cd` into the individual f-* directory to run build commands, as this will prevent `@justeat/f-*` dependencies from being built.
+
 ### Cannot find module `@justeat/f-<any-package-name>`
 This issue indicates that you have not run yarn build with the latest code, refer to `First time setup` for a solution.
 
 ### Storybook error reading: `ENOENT: no such file or directory, open ...`
 This issue indicates that you have not run yarn build with the latest code, refer to `First time setup` for a solution.
+
 
 ## Development Process
 
@@ -42,6 +52,7 @@ We have streamlined the process for creating new components, but we would recomm
 3. Run the generator command: `yo @justeat/f-component`
 4. Follow the generator wizard which will create a new component for you.
 
+
 ## Writing tests
 
 ### When running tests I see the error `SyntaxError: Unexpected token 'export'`
@@ -49,6 +60,7 @@ We use WebDriver for interaction based testing, which includes integration and s
 
 - WebDriver does not support the import export syntax available in the most recent ES versions
 - When writing code that is directly imported by WebDriver, make sure to use `require` and `module.exports` based syntax in your code
+
 
 ## Submitting Code changes
 

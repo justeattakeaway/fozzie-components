@@ -1,0 +1,14 @@
+// **
+// fozzie-utilities.scss
+// =====================================
+// Used to generate the file fozzie-utilities.css
+// This can be used from a web app that does not use Sass to access our utility classes
+// **
+
+@use 'trumps/utilities' as u;
+@use 'trumps/spacing' as s;
+@use 'trumps/rwd' as r;
+
+@include u.trumps-utilities();
+@include s.trumps-spacing();
+@include r.trumps-rwd();

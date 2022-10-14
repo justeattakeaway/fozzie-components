@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.5.0
+------------------------------
+*August 22, 2022*
+
+### Changed
+- Updating `f-alert` peerDep to `v6.x`
+
+### Removed
+- `vuex` peerDependency, as we don't need to directly specify this as Nuxt depends on Vuex (and causes `UNMET PEER DEPENDENCY` warnings that are false positives).
+
+
 v1.4.0
 ------------------------------
 *July 27, 2022*

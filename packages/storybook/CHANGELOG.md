@@ -3,6 +3,46 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.59.0
+------------------------------
+*September 27, 2022*
+
+### Changed
+- Changed F-HTTP to `1.x`
+
+
+v0.58.0
+------------------------------
+*September 21, 2022*
+
+### Changed
+- Upgraded F-HTTP dependency and context with new Conversation ID forwarding
+
+
+v0.57.0
+------------------------------
+*September 12, 2022*
+
+### Changed
+- Dependency to old `@storybook/storybook-deployer` implementation as it has better stability in GH Actions.
+
+
+v0.56.0
+------------------------------
+*August 16, 2022*
+
+### Added
+- Added Custom Viewports for Storybook testing (based around breakpoints and example devices)
+
+
+v0.55.0
+------------------------------
+*August 10, 2022*
+
+### Changed
+- `storybook:deploy` step to work in GitHub Actions.
+
+
 v0.54.1
 ------------------------------
 *July 26, 2022*

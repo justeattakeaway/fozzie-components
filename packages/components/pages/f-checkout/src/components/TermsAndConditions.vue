@@ -1,40 +1,34 @@
 <template>
-    <div
+    <i18n
+        tag="div"
+        path="checkoutTermsAndConditions"
         data-test-id="checkout-terms-and-conditions-component"
         :class="$style['c-checkoutTermsAndConditions']">
-        <i18n path="checkoutTermsAndConditions">
-            <template #termsAndConditions>
-                <v-link
-                    is-bold
-                    is-distinct
-                    :href="$t('termsAndConditionsLinkUrl')"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    {{ $t('termsAndConditionsLinkText') }}
-                </v-link>
-            </template>
-            <template #privacyPolicy>
-                <v-link
-                    is-bold
-                    is-distinct
-                    :href="$t('privacyPolicyLinkUrl')"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    {{ $t('privacyPolicyLinkText') }}
-                </v-link>
-            </template>
-            <template #cookiePolicy>
-                <v-link
-                    is-bold
-                    is-distinct
-                    :href="$t('cookiePolicyLinkUrl')"
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    {{ $t('cookiePolicyLinkText') }}
-                </v-link>
-            </template>
-        </i18n>
-    </div>
+        <v-link
+            is-bold
+            is-distinct
+            :href="$t('termsAndConditionsLinkUrl')"
+            target="_blank"
+            rel="noopener noreferrer">
+            {{ $t('termsAndConditionsLinkText') }}
+        </v-link>
+        <v-link
+            is-bold
+            is-distinct
+            :href="$t('privacyPolicyLinkUrl')"
+            target="_blank"
+            rel="noopener noreferrer">
+            {{ $t('privacyPolicyLinkText') }}
+        </v-link>
+        <v-link
+            is-bold
+            is-distinct
+            :href="$t('cookiePolicyLinkUrl')"
+            target="_blank"
+            rel="noopener noreferrer">
+            {{ $t('cookiePolicyLinkText') }}
+        </v-link>
+    </i18n>
 </template>
 
 <script>
@@ -58,7 +52,7 @@ export default {
     padding: f.spacing(e);
     @include f.font-size('body-s');
     text-align: center;
-    color: f.$color-grey-50;
+    color: f.$color-content-subdued;
 
     @include f.media('>=narrow') {
         padding: f.spacing(d) f.spacing(g);

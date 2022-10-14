@@ -157,7 +157,10 @@ export default class AnalyticService {
         if (isDataLayerPresent()) {
             const events = [...this.store.state[`${this.options.namespace}`].events];
 
-            events.forEach(e => window.dataLayer.push({ ...e }));
+            // Note; we need to remove the unwanted reflection details from being pushed
+            // along with the simple object.
+            // So by converting to plain simple object using stringify/parse removes these details.
+            events.forEach(e => window.dataLayer.push(JSON.parse(JSON.stringify(e))));
 
             this.store.dispatch(`${this.options.namespace}/clearEvents`);
         }

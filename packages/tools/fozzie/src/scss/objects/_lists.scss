@@ -1,0 +1,71 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../tools/mixins/type';
+@use '../tools/functions/index' as functions;
+
+@mixin lists() {
+    /**
+    * Objects > Lists
+    * =================================
+    * Default list styles (for unordered and ordered lists)
+    *
+    * This is an optional component within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include lists();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * TBC
+    */
+
+    $list-bullet-color: dt.$color-orange;
+
+
+    ul,
+    ol {
+        padding: 0;
+        margin: functions.spacing(d) 0 0 functions.spacing(d);
+
+        li {
+            margin-bottom: functions.spacing();
+        }
+
+        ul,
+        ol {
+            margin-top: functions.spacing();
+        }
+    }
+
+    ul {
+        margin-left: 1.5rem;
+        list-style: none;
+
+        // Adds a coloured circle before list-items
+        > li:before,
+        > li ul > li:before {
+            color: $list-bullet-color;
+            content: '\2022'; /* Unicode for circle character */
+            font-size: 1.8em;
+            padding-right: functions.spacing();
+            position: relative;
+            top: 0.15em;
+            margin-left: -1.5rem;
+        }
+    }
+
+    ol {
+        > li {
+            padding-left: functions.spacing();
+        }
+    }
+
+    .c-list-ordered {
+        > li {
+            font-weight: dt.$font-weight-bold;
+            @include type.font-size(heading-s); // TODO – this should be updated with a more semantic font alias specific to lists
+            margin-bottom: functions.spacing(f);
+
+            > div {
+                font-weight: dt.$font-weight-regular;
+                @include type.font-size(body-s);
+            }
+        }
+    }
+}

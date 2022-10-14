@@ -1,0 +1,128 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../../settings/include-media' as *;
+@use '../../tools/functions/index' as functions;
+
+@mixin fullScreenPopOver() {
+    /**
+    * Components > Fullscreen Popovers
+    * =================================
+    * Component that styles a full-page popover/takeover on top of the current content
+    *
+    * Example: Used for the mobile filters fullscreen popover on the Search Page
+    *
+    * The `c-fullScreenPopOver` component is an optional mixin within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include fullScreenPopOver();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * TBC
+    */
+
+    $fullScreenPopOver-background        : dt.$color-background-default;
+    $fullScreenPopOver-action-background : dt.$color-white;
+    $fullScreenPopOver-padding           : functions.spacing(d);
+    $fullScreenPopOver-border-color      : dt.$color-border-default;
+    $fullScreenPopOver-shadow-color      : rgba(dt.$color-black, 0.12);
+
+    .c-fullScreenPopOver {
+        @include media('<mid') {
+            left: 0;
+            top: 60px;
+            height: 0;
+            opacity: 0;
+            width: 100vw;
+            position: fixed;
+            overflow: hidden;
+            z-index: functions.zIndex(high);
+            background: $fullScreenPopOver-background;
+            transition: top 200ms ease, opacity 150ms ease;
+
+            &.is-open {
+                top: 0;
+                opacity: 1;
+                height: 100%;
+                overflow: visible;
+                transition: top 200ms ease, opacity 150ms ease;
+                padding: 56px $fullScreenPopOver-padding 80px $fullScreenPopOver-padding;
+            }
+        }
+    }
+
+        // This style block is for accessibility - it's so the user can't get caught tabbing
+        // within a modal if it's not visible on mid and below
+        .c-fullScreenPopOver--noTab--mid {
+            & > * {
+                @include media('<mid') {
+                    display: none;
+                }
+            }
+
+            &.is-open {
+                & > * {
+                    @include media('<mid') {
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        .c-fullScreenPopOver-header,
+        .c-fullScreenPopOver-footer {
+            left: 0;
+            width: 100vw;
+            position: absolute;
+            padding: $fullScreenPopOver-padding;
+            background: $fullScreenPopOver-action-background;
+
+            @include media('>=mid') {
+                display: none;
+            }
+        }
+
+        .c-fullScreenPopOver-header {
+            top: 0;
+            z-index: functions.zIndex(high);
+            box-shadow: dt.$elevation-03; // token value for sticky headers
+        }
+
+        .c-fullScreenPopOver-header-actionFirst,
+        .c-fullScreenPopOver-header-actionSecond {
+            top: 50%;
+            position: absolute;
+            text-decoration: none;
+            transform: translateY(-50%);
+
+            &:hover,
+            &:focus {
+                text-decoration: underline;
+            }
+        }
+
+        .c-fullScreenPopOver-header-actionFirst {
+            left: $fullScreenPopOver-padding;
+        }
+
+        .c-fullScreenPopOver-header-actionSecond {
+            right: $fullScreenPopOver-padding;
+        }
+
+        .c-fullScreenPopOver-header-title {
+            margin-top: 0;
+            text-align: center;
+            font-weight: dt.$font-weight-regular;
+        }
+
+        .c-fullScreenPopOver-footer {
+            bottom: 0;
+            box-shadow: dt.$elevation-05; // token value for 'above elevation'
+        }
+
+        .c-fullScreenPopOver-content {
+            @include media('<mid') {
+                height: 100%;
+                overflow-x: hidden;
+                overflow-y: scroll;
+                padding: functions.spacing(d) 0;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+}

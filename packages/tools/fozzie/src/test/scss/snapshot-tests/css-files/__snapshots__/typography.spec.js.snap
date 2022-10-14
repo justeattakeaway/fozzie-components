@@ -1,0 +1,275 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fozzie-reset.scss compiles the expected CSS 1`] = `
+"@charset "UTF-8";
+/**
+* Typography
+* =================================
+* - Base
+* - Paragraphs
+* - Headings
+* - Type sizes
+* - Misc
+* - Utilities
+*
+* Body font size, leadings etc have been set in _variables.scss
+*
+* This is an optional component within Fozzie.
+* If you'd like to use it in your project you can include it by adding \`@include typography();\` into your SCSS dependencies file.
+*
+* Documentation:
+* TBC
+*/
+/**
+* Typography preloading styles
+*/
+html {
+  font-size: 16px;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: "JetSansDigital", "Arial", sans-serif;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #242e30;
+  font-weight: 400;
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+}
+
+/**
+* Paragraphs
+*/
+p {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+/**
+* Headings
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.alpha,
+.beta,
+.gamma,
+.delta,
+.epsilon {
+  color: #242e30;
+  margin: 0;
+  margin-bottom: 0;
+  font-family: "JetSansDigital", "Arial", sans-serif;
+  font-weight: 800;
+}
+h1 small,
+h2 small,
+h3 small,
+h4 small,
+h5 small,
+h6 small,
+.alpha small,
+.beta small,
+.gamma small,
+.delta small,
+.epsilon small {
+  font-weight: normal;
+}
+
+h1,
+.alpha {
+  font-size: 28px;
+  font-size: 1.75rem;
+  line-height: 1.29;
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+@media (min-width: 48.001em) {
+  h1,
+.alpha {
+    font-size: 32px;
+    font-size: 2rem;
+    line-height: 1.25;
+  }
+}
+h1:first-child,
+.alpha:first-child {
+  margin-top: 0;
+}
+
+h2,
+.beta {
+  font-size: 20px;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+@media (min-width: 48.001em) {
+  h2,
+.beta {
+    font-size: 24px;
+    font-size: 1.5rem;
+    line-height: 1.33;
+  }
+}
+
+h3,
+.gamma,
+h4,
+.delta,
+h5,
+.epsilon {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+@media (min-width: 48.001em) {
+  h3,
+.gamma,
+h4,
+.delta,
+h5,
+.epsilon {
+    font-size: 20px;
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+}
+
+h6,
+.zeta {
+  font-size: 12px;
+  font-size: 0.75rem;
+  line-height: 1.33;
+}
+
+* + h2,
+* + .beta {
+  margin-top: 32px;
+}
+
+* + h3,
+* + .gamma,
+* + h4,
+* + .delta {
+  margin-top: 16px;
+}
+
+small {
+  font-size: 80%;
+}
+
+/**
+* Miscellaneous
+*/
+strong,
+b {
+  font-weight: 700;
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+abbr[title] {
+  border-bottom: 1px dotted #ddd;
+  cursor: help;
+}
+
+/**
+* Blockquotes
+*/
+blockquote {
+  padding-left: 10px;
+  margin: 16px;
+  border-left: 4px solid #cccccc;
+}
+blockquote p {
+  margin-bottom: 0;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  font-weight: 300;
+}
+blockquote small {
+  display: block;
+  color: #b3b3b3;
+}
+blockquote small:before {
+  content: "— ";
+}
+
+/**
+* Buttons
+*/
+button {
+  font-family: "JetSansDigital", "Arial", sans-serif;
+}
+
+q:before, q:after,
+blockquote:before,
+blockquote:after {
+  content: "";
+}
+
+cite {
+  font-style: normal;
+}
+
+dfn {
+  font-style: italic;
+}
+
+mark {
+  background: #fff9df;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+address {
+  font-style: normal;
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+samp {
+  font-family: Menlo, Monaco, "Courier New", monospace;
+}
+
+hr {
+  margin: 16px 0;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.hyphenate {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}"
+`;

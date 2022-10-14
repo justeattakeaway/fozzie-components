@@ -2,13 +2,40 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v10.6.0
+v10.7.0
 ------------------------------
-*August 5, 2022*
+*September 07, 2022*
+
+### Fixed
+- Log out clickable area not allowing users to logout properly.
 
 ### Added
-- `showCorporateLink` - Shows "Corporate Ordering" Link
-- Component / Visual regression tests
+- Cursor pointers to `countrySelector` and `userNavigationPanel` components.
+
+
+v10.6.2
+------------------------------
+*September 6, 2022*
+
+### Fixed
+- Analytics order count URL.
+
+
+v10.6.1
+------------------------------
+*August 18, 2022*
+
+### Changed
+- Truncation now uses fozzie `truncate()` mixin (compiled CSS is exactly the same).
+
+
+v10.6.0
+------------------------------
+*August 17, 2022*
+
+### Fixed
+- Friendly name now gets truncated at longer lengths on narrower screen widths. Previously, for longer names it would cause the navigation links to wrap onto two lines just above the mid breakpoint (>769px).
+
 
 v10.5.0
 ------------------------------

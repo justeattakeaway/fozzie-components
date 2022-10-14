@@ -80,9 +80,37 @@ describe('Registration API service', () => {
         expect(wrapper.vm.conflictedEmailAddress).toBe(CONSUMERS_REQUEST_DATA.emailAddress);
     });
 
-    it('responds with 403 when login blocked by ravelin or recaptcha', async () => {
+    it('responds with 403 when login blocked by MFA challenge', async () => {
         // Arrange
         mockFactory.setupMockResponse(httpModule.httpVerbs.POST, propsData.createAccountUrl, CONSUMERS_REQUEST_DATA, 403, {
+            faultId: '00000000-0000-0000-0000-000000000000',
+            traceId: 'H3TKh4QSJUSwVBCBqEtkKw',
+            errors: [{
+                description: 'MFA Challenge Issued',
+                errorCode: 'MFAChallengeIssued'
+            }],
+            // eslint-disable-next-line camelcase
+            mfa_token: 'mfa-token',
+            // eslint-disable-next-line camelcase
+            mfa_target: 'someone@somewhere.com'
+        });
+
+        // Act
+        await wrapper.vm.onFormSubmit();
+        await flushPromises();
+
+        // Assert
+        const mfaChallengeIssuedEvent = wrapper.emitted(EventNames.MfaChallengeIssued);
+        expect(mfaChallengeIssuedEvent.length).toBe(1);
+        expect(mfaChallengeIssuedEvent[0][0].mfaToken).toBe('mfa-token');
+        expect(mfaChallengeIssuedEvent[0][0].mfaTarget).toBe('someone@somewhere.com');
+        expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
+        expect(wrapper.emitted(EventNames.LoginBlocked)).toBeUndefined();
+    });
+
+    it('responds with 401 when login blocked by ravelin or recaptcha', async () => {
+        // Arrange
+        mockFactory.setupMockResponse(httpModule.httpVerbs.POST, propsData.createAccountUrl, CONSUMERS_REQUEST_DATA, 401, {
             faultId: '00000000-0000-0000-0000-000000000000',
             traceId: 'H3TKh4QSJUSwVBCBqEtkKw',
             errors: [{
@@ -98,5 +126,27 @@ describe('Registration API service', () => {
         // Assert
         expect(wrapper.emitted(EventNames.LoginBlocked).length).toBe(1);
         expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
+    });
+
+    it('responds with 429 when CloudFlare rate limit is exceeded', async () => {
+        // Arrange
+        mockFactory.setupMockResponse(httpModule.httpVerbs.POST, propsData.createAccountUrl, CONSUMERS_REQUEST_DATA, 429, {
+            faultId: '00000000-0000-0000-0000-000000000000',
+            traceId: 'H3TKh4QSJUSwVBCBqEtkKw',
+            errors: [{
+                description: 'Rate limit exceeded',
+                errorCode: 'RateLimitExceeded'
+            }]
+        });
+
+        // Act
+        await wrapper.vm.onFormSubmit();
+        await flushPromises();
+
+        // Assert
+        const rateLimitExceededEvent = wrapper.emitted(EventNames.RateLimitExceeded);
+        expect(rateLimitExceededEvent.length).toBe(1);
+        expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
+        expect(wrapper.emitted(EventNames.LoginBlocked)).toBeUndefined();
     });
 });

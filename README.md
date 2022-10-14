@@ -90,8 +90,6 @@ To access anything from the common file, simply prefix the value like so:
 
 You could remove the need for namespacing by using something like `@use "../assets/scss/common.scss" as *` however utilising the namespace makes it much easier to understand where a value is coming from.
 
-```
-
 ## Running Storybook
 
 To run storybook first you must run the following at the the top level
@@ -100,7 +98,7 @@ To run storybook first you must run the following at the the top level
 
 Then run `yarn storybook:serve` to start storybook, which will open on `localhost:8080`.
 
-Alternatively, you can run `yarn storybook:serve-changed` to just view the component you're working on, as well as any of it's dependencies / dependants.
+Alternatively, you can run `yarn build:changed` and `yarn storybook:serve-changed` to just view the component you're working on, as well as any of it's dependencies / dependants.
 
 ### Running a single component in Storybook
 

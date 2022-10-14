@@ -3,6 +3,190 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.36.0
+------------------------------
+*October 13, 2022*
+
+### Changed
+- Migrate `@justeat/fozzie` to the monorepo.
+- Update root `@justeat/fozzie` to `10.x` so local version if used.
+- Replaced various design tokens that were removed from the newer version.
+- Added `@justeat/pie-design-tokens` as a root `devDependency` as it's no longer being hoisted by `@justeat/fozzie` to root `node_modules`.
+
+v7.35.2
+------------------------------
+*October 10, 2022*
+
+### Fixed
+- Get Turborpo to filter by `origin/master`.
+- Stop Danger running against master.
+
+v7.35.1
+------------------------------
+*October 10, 2022*
+
+### Fixed
+- Issue where builds weren't being trigged against master.
+- Issue where all branches/tags weren't fetched, preventing Turborepo `--filter` from working.
+
+
+v7.35.0
+------------------------------
+*October 10, 2022*
+
+### Added
+- Ability to run GitHub Actions on PR's.
+- Ability to prevent WDIO tests running if previous jobs fail.
+- Remove references to CircleCI.
+
+
+v7.34.0
+------------------------------
+*October 10, 2022*
+
+### Added
+- Turborepo filtering to GitHub Actions.
+
+### Changed
+- Version of Chromedriver to `106`
+
+v7.33.1
+------------------------------
+*October 6, 2022*
+
+### Removed
+- `f-form` organism component
+
+
+v7.33.0
+------------------------------
+*October 4, 2022*
+
+### Added
+- Danger checks to GitHub Actions.
+
+
+v7.32.0
+------------------------------
+*October 04, 2022*
+
+### Changed
+- Update to `fozzie` v10.5.0
+- Replaced various design tokens that were removed from the newer version
+
+
+v7.31.0
+------------------------------
+*September 27, 2022*
+
+### Added
+- `fozzie` v9.3.1 to the root.
+
+### Removed
+- Beta versions from individual components.
+
+
+v7.31.0
+------------------------------
+*October 3, 2022*
+
+### Added
+- New `build:changed` script to build any changed components and their dependencies.
+
+v7.30.1
+------------------------------
+*September 28, 2022*
+
+### Fixed
+- Issue in CI where Storybook changes weren't picked up as global changes.
+
+v7.30.0
+------------------------------
+*September 27, 2022*
+
+### Added
+- NPM publish to GitHub Actions.
+
+
+v7.29.1
+------------------------------
+*September 27, 2022*
+
+### Changed
+- Include any Storybook changes in PR test triggers for CircleCI
+
+
+v7.29.0
+------------------------------
+*September 14, 2022*
+
+### Added
+- Bundlewatch checks to GitHub Actions.
+
+
+v7.28.1
+------------------------------
+*September 12, 2022*
+
+### Fixed
+- Environment variable used for cache keys in GH Actions config.
+- Incorrect Storybook cache being pulled.
+
+
+v7.28.0
+------------------------------
+*September 2, 2022*
+
+### Added
+- Unit testing / Linting to GitHub Actions.
+
+
+v7.27.0
+------------------------------
+*September 1, 2022*
+
+### Added
+- Browser tests to GitHub Actions
+
+### Changed
+- Chromedriver version
+- Locked Chromedriver version in CI.
+
+v7.26.0
+------------------------------
+*August 23, 2022*
+
+### Changed
+- Codeowners updated to point to new Core Team for mono-repo config, atoms and core owned components (like `f-header`/`f-footer`).
+  Test files are set to be owned by the QE Reviewers team.
+
+
+
+v7.25.1
+------------------------------
+*August 22, 2022*
+
+### Fixed
+- Issue where incorrect cache was being used to deploy Storybook.
+
+
+v7.25.0
+------------------------------
+*August 11, 2022*
+
+### Added
+- `fozzie > guides` consuming application documentation for Gulp.
+
+
+v7.24.0
+------------------------------
+*August 10, 2022*
+
+### Added
+- New GitHub Actions config to build components / deploy storybook in master
+- Removed references to Storybook Deploy in CircleCI config.
+
+
 v7.23.0
 ------------------------------
 *August 4, 2022*

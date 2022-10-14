@@ -74,7 +74,8 @@ export default {
 
     computed: {
         showRequiredIndicator () {
-            return this.attributes.required && this.isVisuallyRequired;
+            // Empty string is default value and should return true
+            return ![undefined, false].includes(this.attributes.required) && this.isVisuallyRequired;
         },
 
         testId () {
@@ -126,13 +127,13 @@ export default {
     .c-formField-field--radio:disabled + label,
     .c-formField-field--checkbox:disabled + label span {
         cursor: default;
-        color: f.$color-content-default;
+        color: f.$color-content-disabled;
     }
 
     .c-formField-field--checkbox + label:before,
     .c-formField-field--radio + label:before {
         content: '';
-        border: 1px solid f.$color-grey-45;
+        border: 1px solid f.$color-interactive-form;
         display: inline-block;
         width: 22px;
         height: 22px;
@@ -191,7 +192,7 @@ export default {
     .c-formField-field--radio:focus:not(:checked) + label:before {
         box-shadow: 0 0 0 1px f.$color-white, 0 0 0 3px f.$color-focus;
 
-        border: 1px solid f.$color-grey-45;
+        border: 1px solid f.$color-interactive-form;
     }
 
     .c-formField-field--checkbox:not(:disabled):checked + label:hover:before,
@@ -215,9 +216,7 @@ export default {
 
     .c-formField-field--checkbox:disabled + label:before,
     .c-formField-field--radio:disabled + label:before {
-        border-color: f.$color-grey-30;
-        background-color: f.$color-grey-30;
-        cursor: default;
+        @include common.disabled-field();
     }
 
     .c-formField-field--checkbox:disabled:checked + label:before {
@@ -225,6 +224,6 @@ export default {
     }
 
     .c-formField-field--radio:disabled:checked + label:before {
-        background-color: f.$color-grey-45;
+        background-color: f.$color-content-disabled;
     }
 </style>

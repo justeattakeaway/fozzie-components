@@ -218,11 +218,52 @@ describe('Registration', () => {
                 expect(wrapper.emitted(EventNames.CreateAccountWarning).length).toBe(1);
             });
 
-            it('should emit login blocked event when service responds with a 403', async () => {
+            it('should emit mfa challenge issued event when service responds with a 403', async () => {
                 // Arrange
                 const err = {
                     response: {
                         status: 403,
+                        data: {
+                            faultId: '123',
+                            traceId: '123',
+                            errors: [{
+                                description: '"MFA Challenge Issued"',
+                                errorCode: 'MFAChallengeIssued'
+                            }],
+                            // eslint-disable-next-line camelcase
+                            mfa_token: 'mfa-token',
+                            // eslint-disable-next-line camelcase
+                            mfa_target: 'someone@somewhere.com'
+                        }
+                    }
+                };
+
+                RegistrationServiceApi.createAccount.mockImplementation(async () => {
+                    throw err;
+                });
+                wrapper = mountComponentAndAttachToDocument();
+                Object.defineProperty(wrapper.vm.$v, '$invalid', {
+                    get: jest.fn(() => false)
+                });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                const mfaChallengeIssuedEvent = wrapper.emitted(EventNames.MfaChallengeIssued);
+                expect(mfaChallengeIssuedEvent.length).toBe(1);
+                expect(mfaChallengeIssuedEvent[0][0].mfaToken).toBe('mfa-token');
+                expect(mfaChallengeIssuedEvent[0][0].mfaTarget).toBe('someone@somewhere.com');
+                expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
+                expect(wrapper.emitted(EventNames.LoginBlocked)).toBeUndefined();
+            });
+
+            it('should emit login blocked event when service responds with a 401', async () => {
+                // Arrange
+                const err = {
+                    response: {
+                        status: 401,
                         data: {
                             faultId: '123',
                             traceId: '123',
@@ -249,6 +290,41 @@ describe('Registration', () => {
                 // Assert
                 expect(wrapper.emitted(EventNames.LoginBlocked).length).toBe(1);
                 expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
+            });
+
+            it('should emit rate limit exceeded event when service responds with a 429', async () => {
+                // Arrange
+                const err = {
+                    response: {
+                        status: 429,
+                        data: {
+                            faultId: '123',
+                            traceId: '123',
+                            errors: [{
+                                description: '"Rate limit exceeded"',
+                                errorCode: 'RateLimitExceeded'
+                            }]
+                        }
+                    }
+                };
+
+                RegistrationServiceApi.createAccount.mockImplementation(async () => {
+                    throw err;
+                });
+                wrapper = mountComponentAndAttachToDocument();
+                Object.defineProperty(wrapper.vm.$v, '$invalid', {
+                    get: jest.fn(() => false)
+                });
+
+                // Act
+                await wrapper.vm.onFormSubmit();
+                await flushPromises();
+
+                // Assert
+                const rateLimitExceededEvent = wrapper.emitted(EventNames.RateLimitExceeded);
+                expect(rateLimitExceededEvent.length).toBe(1);
+                expect(wrapper.emitted(EventNames.CreateAccountFailure)).toBeUndefined();
+                expect(wrapper.emitted(EventNames.LoginBlocked)).toBeUndefined();
             });
 
             it('should populate generic error message and emit failure event when service responds with a 400', async () => {

@@ -1,0 +1,182 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../../settings/include-media' as *;
+@use '../../tools/functions/index' as functions;
+
+@mixin listingSkeleton() {
+  /**
+  * Components > Listing Skeleton
+  * =================================
+  * Shows a Skeleton listing layout.
+  *
+  * Example: Search listings.
+  *
+  * The `c-listingSkeleton` component is an optional mixin within Fozzie.
+  * If you'd like to use it in your project you can include it by adding `@include listingSkeleton();` into your SCSS dependencies file.
+  *
+  * Documentation:
+  * TBC
+  */
+
+  .c-listingSkeleton {
+    position: relative;
+    background: dt.$color-container-default;
+    border-radius: dt.$radius-rounded-c;
+    padding: 85px functions.spacing(d) functions.spacing(d);
+    margin-bottom: functions.spacing(d);
+
+    @include media('>mid') {
+      padding-top: 73px;
+    }
+  }
+
+  .c-listingSkeleton-info {
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: functions.spacing(d);
+      @include anim();
+    }
+
+    //Skeleton image
+    &:before {
+      left: functions.spacing(d);
+      height: 55px;
+      width: 55px;
+    }
+
+    //Skeleton title
+    &:after {
+      left: 87px;
+      height: 16px;
+      width: 180px;
+
+      @include media('>mid') {
+        width: 300px;
+      }
+    }
+  }
+
+  .c-listingSkeleton-review {
+    position: absolute;
+    top: 57px;
+    left: 87px;
+
+    &:before,
+    &:after {
+      content: '';
+      height: 12px;
+      @include anim();
+      display: inline-block;
+    }
+
+    //Review stars
+    &:before {
+      width: 70px;
+      margin-right: functions.spacing();
+
+      @include media('>mid') {
+        width: 80px;
+      }
+    }
+
+    //Review count
+    &:after {
+      width: 25px;
+
+      @include media('>mid') {
+        width: 30px;
+      }
+    }
+  }
+
+  .c-listingSkeleton-cuisines {
+    top: 38px;
+    left: 87px;
+    position: absolute;
+
+    &:before,
+    &:after {
+      content: '';
+      height: 12px;
+      @include anim();
+      display: inline-block;
+    }
+
+    &:before {
+      width: 50px;
+      margin-right: functions.spacing();
+
+      @include media('>mid') {
+        width: 70px;
+      }
+    }
+
+    &:after {
+      width: 35px;
+
+      @include media('>mid') {
+        width: 60px;
+      }
+    }
+  }
+
+  .c-listingSkeleton-meta {
+    width: 100%;
+    position: relative;
+    margin-bottom: 40px;
+
+    &,
+    &:before,
+    &:after {
+      height: 15px;
+      display: block;
+      @include anim();
+
+      @include media('>mid') {
+        height: 13px;
+      }
+    }
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      margin-bottom: functions.spacing();
+    }
+
+    &:before {
+      width: 60%;
+      top: calc(100% + 8px);
+    }
+
+    &:after {
+      width: 25%;
+      top: calc(200% + 16px);
+    }
+
+    @include media('>mid') {
+      width: 360px;
+      position: absolute;
+      top: functions.spacing(d);
+      right: functions.spacing(d);
+    }
+  }
+}
+
+@keyframes skeletonGradient {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@mixin anim() {
+  border-radius: 2px;
+  background: linear-gradient(-45deg, dt.$color-background-default, dt.$color-background-default, dt.$color-background-subtle, dt.$color-background-default, dt.$color-background-default);
+  background-size: 2000px 600%;
+  animation: skeletonGradient 2s ease infinite;
+  animation-fill-mode: forwards;
+}

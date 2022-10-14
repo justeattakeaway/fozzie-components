@@ -425,6 +425,8 @@ export default {
                     addressCoords = storedAddress.Field1 && storedAddress.Field2 ? [storedAddress.Field2, storedAddress.Field1] : null;
                     commit(UPDATE_GEO_LOCATION, addressCoords);
                 } else {
+                    commit(UPDATE_GEO_LOCATION, null);
+
                     const addressDetails = state.address;
 
                     window.localStorage.setItem('je-full-address-details', JSON.stringify({

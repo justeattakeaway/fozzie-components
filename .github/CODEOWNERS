@@ -1,1 +1,20 @@
-* @justeat/ui-senior-reviewers-web @justeat/ui-reviewers-web
+# Web Core Platform reviewers file matches
+# Root Mono-repo config files
+/*.* @justeat/ui-web-core-team-reviewers
+/.github/ @justeat/ui-web-core-team-reviewers
+/.husky/ @justeat/ui-web-core-team-reviewers
+/config/ @justeat/ui-web-core-team-reviewers
+/packages/components/atoms @justeat/ui-web-core-team-reviewers
+/packages/components/organisms/f-header @justeat/ui-web-core-team-reviewers
+/packages/components/organisms/f-footer @justeat/ui-web-core-team-reviewers
+/packages/components/organisms/f-cookie-banner @justeat/ui-web-core-team-reviewers
+
+# Test reviewers file matches
+/test @justeat/ui-web-qe-reviewers
+**/test/* @justeat/ui-web-qe-reviewers
+*.spec.js @justeat/ui-web-qe-reviewers
+*.component.js @justeat/ui-web-qe-reviewers
+*.component.spec.js @justeat/ui-web-qe-reviewers
+
+# Commented out for now, while we test other file matches
+# * @justeat/ui-web-senior-reviewers @justeat/ui-web-reviewers

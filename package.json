@@ -1,10 +1,11 @@
 {
   "name": "root",
-  "version": "7.23.0",
+  "version": "7.36.0",
   "private": true,
   "scripts": {
     "build": "turbo run build --continue",
-    "bundlewatch": "bundlewatch --config bundlewatch.config.js",
+    "build:changed": "turbo run build --filter=...[origin/master] --continue",
+    "bundlewatch": "bundlewatch --config ./bundlewatch.config.js",
     "lint": "turbo run lint --continue",
     "lint:fix": "turbo run lint -- --fix --continue",
     "lint:style": "turbo run lint:style --continue",
@@ -57,7 +58,8 @@
     "@babel/preset-env": "7.14.9",
     "@justeat/browserslist-config-fozzie": "1.2.0",
     "@justeat/eslint-config-fozzie": "5.1.0",
-    "@justeat/fozzie": "8.2.0",
+    "@justeat/fozzie": "10.x",
+    "@justeat/pie-design-tokens": "3.0.0",
     "@justeat/stylelint-config-fozzie": "2.2.0",
     "@percy/cli": "1.0.5",
     "@percy/webdriverio": "2.0.1",
@@ -81,7 +83,7 @@
     "babel-jest": "26.1.0",
     "babel-loader": "8.1.0",
     "bundlewatch": "0.3.1",
-    "chromedriver": "103.0.0",
+    "chromedriver": "106.0.0",
     "cross-env": "7.0.2",
     "css-loader": "1.0.1",
     "danger": "10.2.1",
@@ -93,6 +95,7 @@
     "eyeglass": "3.0.2",
     "husky": "6.0.0",
     "include-media": "1.4.9",
+    "lerna": "3.22.1",
     "mocha-each": "2.0.1",
     "mocha-tags": "1.0.1",
     "npm-run-all": "4.1.5",
@@ -103,7 +106,7 @@
     "stylelint": "13.7.2",
     "stylelint-scss": "3.18.0",
     "turbo": "^1.2.9",
-    "vite": "2.9.12",
+    "vite": "2.9.13",
     "vue": "2.6.10",
     "vue-svg-loader": "0.16.0",
     "vue-template-compiler": "2.6.10",
@@ -132,16 +135,20 @@
   "stylelint": {
     "extends": "@justeat/stylelint-config-fozzie"
   },
-  "workspaces": [
-    "packages/*",
-    "packages/components/atoms/*",
-    "packages/components/molecules/*",
-    "packages/components/organisms/*",
-    "packages/components/templates/*",
-    "packages/components/pages/*",
-    "packages/services/*",
-    "packages/tools/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "packages/components/atoms/*",
+      "packages/components/molecules/*",
+      "packages/components/organisms/*",
+      "packages/components/templates/*",
+      "packages/components/pages/*",
+      "packages/services/*",
+      "packages/tools/*"
+    ],
+
+    "nohoist": ["**/@justeat/fozzie/**"] 
+  },
   "dependencies": {
     "deepmerge": "4.2.2"
   },

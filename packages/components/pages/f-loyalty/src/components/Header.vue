@@ -128,7 +128,7 @@ export default {
 .c-loyaltyHeader {
     padding: f.spacing() 0 f.spacing(h) 0;
     background-color: f.$color-container-default;
-    border-bottom: 1px solid f.$color-grey-20;
+    border-bottom: 1px solid f.$color-border-subtle;
 }
 
 .c-loyaltyHeader-media {

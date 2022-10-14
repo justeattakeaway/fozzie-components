@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-form-field",
   "description": "Fozzie Form Field - Fozzie Form Field Component",
-  "version": "6.2.0",
+  "version": "6.2.1",
   "main": "dist/f-form-field.umd.min.js",
   "maxBundleSize": "20kB",
   "files": [
@@ -58,7 +58,6 @@
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3",
-    "@justeat/fozzie": "9.0.0-beta.2",
     "@justeat/f-wdio-utils": "1.x",
     "postcss-assets": "5.0.0"
   }

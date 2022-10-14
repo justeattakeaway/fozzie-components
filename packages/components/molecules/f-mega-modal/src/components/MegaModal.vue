@@ -404,8 +404,7 @@ export default {
 }
 
 .c-megaModal-content--flush {
-    padding-top: 0;
-    padding-bottom: 0;
+    padding: 0;
 }
 
 .c-megaModal-content.c-megaModal-content--flush {
