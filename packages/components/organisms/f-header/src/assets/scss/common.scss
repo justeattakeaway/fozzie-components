@@ -42,3 +42,10 @@ $header--transparent-opacity        : 0.7;
         padding-top: 0;
     }
 }
+
+// Hides element in-between the mid and wide breakpoint
+.hide-on-mid {
+    @include f.media('>mid', '<wide') {
+        display: none;
+    }
+}

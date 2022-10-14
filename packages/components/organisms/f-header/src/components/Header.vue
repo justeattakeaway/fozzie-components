@@ -40,6 +40,7 @@
                 :header-background-theme="headerBackgroundTheme"
                 :show-login-info="showLoginInfo"
                 :show-country-selector="showCountrySelector"
+                :is-condensed-on-mid="isCondensedOnMid"
                 @onMobileNavToggle="mobileNavToggled" />
         </div>
     </header>
@@ -88,6 +89,11 @@ export default {
         },
 
         isLogoLinkDisabled: {
+            type: Boolean,
+            default: false
+        },
+
+        isCondensedOnMid: {
             type: Boolean,
             default: false
         },

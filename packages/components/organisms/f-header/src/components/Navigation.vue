@@ -92,6 +92,7 @@
                         :href="customNavLink.url"
                         :data-trak="customNavLink.gtm && analyticsObjects.navigation.clickHeaderLink({ ...customNavLink.gtm })"
                         :is-alt-colour="isAltColour"
+                        :is-condensed-on-mid="isCondensedOnMid"
                         :background-theme="headerBackgroundTheme" />
                 </li>
 
@@ -104,6 +105,7 @@
                         :href="copy.offers.url"
                         :data-trak="analyticsObjects.navigation.offers.clickLink"
                         :is-alt-colour="isAltColour"
+                        :is-condensed-on-mid="isCondensedOnMid"
                         :background-theme="headerBackgroundTheme"
                         data-test-id="offers-link">
                         <template #icon>
@@ -128,6 +130,7 @@
                             label: copy.corporate.gtm
                         })"
                         :is-alt-colour="isAltColour"
+                        :is-condensed-on-mid="isCondensedOnMid"
                         :background-theme="headerBackgroundTheme"
                         data-test-id="corporate-link">
                         <template #icon>
@@ -152,6 +155,7 @@
                             label: copy.deliveryEnquiry.gtm
                         })"
                         :is-alt-colour="isAltColour"
+                        :is-condensed-on-mid="isCondensedOnMid"
                         :background-theme="headerBackgroundTheme"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -194,7 +198,8 @@
                             :class="[
                                 $style['c-nav-icon'],
                                 $style['c-nav-icon--profile'],
-                                { [$style['c-nav-icon--alt']]: isAltColour }
+                                { [$style['c-nav-icon--alt']]: isAltColour },
+                                { [$style['hide-on-mid']]: isCondensedOnMid }
                             ]" />
                         <span
                             :class="[
@@ -238,6 +243,7 @@
                             label: copy.accountLogin.gtm
                         })"
                         :is-alt-colour="isAltColour"
+                        :is-condensed-on-mid="isCondensedOnMid"
                         :background-theme="headerBackgroundTheme"
                         rel="nofollow"
                         data-test-id="login-link" />
@@ -271,6 +277,7 @@
                             label: copy.help.gtm
                         })"
                         :is-alt-colour="isAltColour"
+                        :is-condensed-on-mid="isCondensedOnMid"
                         :background-theme="headerBackgroundTheme"
                         data-test-id="help-link">
                         <template #icon>
@@ -388,6 +395,11 @@ export default {
         isOrderCountSupported: {
             type: Boolean,
             default: true
+        },
+
+        isCondensedOnMid: {
+            type: Boolean,
+            default: false
         },
 
         headerBackgroundTheme: {
