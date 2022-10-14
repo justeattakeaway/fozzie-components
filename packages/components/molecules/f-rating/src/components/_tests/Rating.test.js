@@ -31,9 +31,9 @@ describe('Rating', () => {
     });
 
     describe('methods', () => {
-        describe('`hasRating`', () => {
+        describe('`isRatingStarFilled`', () => {
             it('should exist', () => {
-                expect(wrapper.vm.hasRating).toBeDefined();
+                expect(wrapper.vm.isRatingStarFilled).toBeDefined();
             });
 
             it('should contain a description `c-rating-description`', () => {
@@ -45,17 +45,19 @@ describe('Rating', () => {
             });
 
             describe('when invoked', () => {
-                it('should return truthy when `starRating` is less than or equal to `rating`', () => {
+                it('should return truthy when the argument `star` is less than or equal to `starRating`', () => {
                     // Act
-                    const result = wrapper.vm.hasRating(2);
+                    const star = 2;
+                    const result = wrapper.vm.isRatingStarFilled(star);
 
                     // Assert
                     expect(result).toBe(true);
                 });
 
-                it('should return falsey when `starRating` is more than `rating`', () => {
+                it('should return falsey when argument `star` is greater than `starRating`', () => {
                     // Act
-                    const result = wrapper.vm.hasRating(3);
+                    const star = 3;
+                    const result = wrapper.vm.isRatingStarFilled(star);
 
                     // Assert
                     expect(result).toBe(false);
@@ -82,7 +84,6 @@ describe('Rating', () => {
             describe('when invoked', () => {
                 it('should return a singular description if the rating is less than 2', () => {
                     // Arrange
-                    const description = '1 star out of 5';
                     propsData = {
                         starRating: 1
                     };
@@ -93,12 +94,11 @@ describe('Rating', () => {
                     });
 
                     // Act & Assert
-                    expect(wrapper.vm.getRatingDescription).toBe(description);
+                    expect(wrapper.vm.getRatingDescription).toMatchSnapshot();
                 });
 
                 it('should return a plural description if the rating is greater than 1', () => {
                     // Arrange
-                    const description = '2 stars out of 5';
                     propsData = {
                         starRating: 2
                     };
@@ -109,7 +109,7 @@ describe('Rating', () => {
                     });
 
                     // Act & Assert
-                    expect(wrapper.vm.getRatingDescription).toBe(description);
+                    expect(wrapper.vm.getRatingDescription).toMatchSnapshot();
                 });
             });
         });

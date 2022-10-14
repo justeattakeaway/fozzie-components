@@ -2,13 +2,14 @@
     <div
         :class="$style['c-rating']"
         data-test-id="rating-component">
-        <ul :class="$style['c-rating-star-wrapper']">
+        <ul
+            :class="$style['c-rating-starWrapper']">
             <li
                 v-for="star in maxStarRating"
                 :key="star"
                 :class="$style['c-rating-star']">
                 <star-filled-icon
-                    v-if="hasRating(star)"
+                    v-if="isRatingStarFilled(star)"
                     :class="$style['c-rating-star-filled']" />
                 <star-icon
                     v-else
@@ -57,8 +58,7 @@ export default {
 
     data () {
         return {
-            tenantConfigs,
-            rating: this.starRating
+            tenantConfigs
         };
     },
 
@@ -72,12 +72,12 @@ export default {
         getRatingDescription () {
             return this.starRating < 2
                 ? this.$tc('ratings.starsDescription', 1, {
-                    rating: this.rating,
+                    rating: this.starRating,
                     total: this.maxStarRating
                 })
 
                 : this.$tc('ratings.starsDescription', 2, {
-                    rating: this.rating,
+                    rating: this.starRating,
                     total: this.maxStarRating
                 });
         }
@@ -87,11 +87,11 @@ export default {
         /**
          * Check `star` against value passed by consumer to allow empty stars to render.
          *
-         * @param star
+         * @param star {Number}
          * @returns {boolean}
          */
-        hasRating (star) {
-            return star <= this.rating;
+        isRatingStarFilled (star) {
+            return star <= this.starRating;
         }
     }
 };
@@ -100,12 +100,11 @@ export default {
 <style lang="scss" module>
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
-.c-rating {
-    .c-rating-star-wrapper {
-        margin: 0;
-        padding: 0;
-        list-style-type: none;
-    }
+.c-rating-starWrapper {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
 
     .c-rating-star {
         display: inline-block;
@@ -123,5 +122,4 @@ export default {
             fill: f.$color-mozzarella-50;
         }
     }
-}
 </style>
