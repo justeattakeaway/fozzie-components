@@ -47,6 +47,14 @@ class Mfa extends Page {
             get input () { return $(FIELD.mfaCodeInput.input); }
         }
     };
+
+    async goToHelp () {
+        await this.mfaHelpLink.click();
+    }
+
+    async goToSubmit () {
+        await this.mfaSubmitButton.click();
+    }
 }
 
 export default new Mfa();

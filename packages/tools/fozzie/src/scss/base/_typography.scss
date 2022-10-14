@@ -1,0 +1,255 @@
+@use '../settings/variables' as v;
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../tools/mixins/type';
+@use '../tools/functions/index' as functions;
+@use '../settings/include-media' as *;
+
+@mixin typography() {
+    /**
+    * Typography
+    * =================================
+    * - Base
+    * - Paragraphs
+    * - Headings
+    * - Type sizes
+    * - Misc
+    * - Utilities
+    *
+    * Body font size, leadings etc have been set in _variables.scss
+    *
+    * This is an optional component within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include typography();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * TBC
+    */
+
+
+    /**
+    * Typography preloading styles
+    */
+
+    html {
+        font-size: v.$font-size-base-px; //default font size in px (16px)
+        text-size-adjust: 100%;
+    }
+
+    body {
+        font-family: v.$font-family-base;
+        @include type.font-size(body-l); // default body font size == 1rem/16px
+        color: dt.$color-content-default;
+        font-weight: dt.$font-weight-regular;
+
+        text-rendering: optimizelegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-font-smoothing: antialiased;
+    }
+
+    /**
+    * Paragraphs
+    */
+    p {
+        @include type.font-size(body-l);
+        margin-top: functions.spacing(d);
+        margin-bottom: 0;
+    }
+
+    /**
+    * Headings
+    */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .alpha,
+    .beta,
+    .gamma,
+    .delta,
+    .epsilon {
+        color: dt.$color-content-default;
+        margin: 0;
+        margin-bottom: 0;
+        font-family: v.$font-family-base;
+        font-weight: v.$font-weight-headings;
+
+        small {
+            font-weight: normal;
+        }
+    }
+
+    // Use the helper classes to emulate styles for another element
+    // For example: h3.h1 or h3.alpha
+    h1,
+    .alpha {
+        @include type.font-size(heading-xl, true, narrow);
+        margin-top: functions.spacing(f);
+        margin-bottom: functions.spacing(d);
+
+        @include media('>mid') {
+            @include type.font-size(heading-xl);
+        }
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    h2,
+    .beta {
+        @include type.font-size(heading-m, true, narrow);
+
+        @include media('>mid') {
+            @include type.font-size(heading-m);
+        }
+    }
+
+    h3,
+    .gamma,
+    h4,
+    .delta,
+    h5,
+    .epsilon {
+        @include type.font-size(heading-s, true, narrow);
+
+        @include media('>mid') {
+            @include type.font-size(heading-s);
+        }
+    }
+
+    h6,
+    .zeta {
+        @include type.font-size(caption);
+    }
+
+    // Only give these headings a margin-top if they are after other elements
+    * + h2,
+    * + .beta {
+        margin-top: functions.spacing(f);
+    }
+
+    * + h3,
+    * + .gamma,
+    * + h4,
+    * + .delta {
+        margin-top: functions.spacing(d);
+    }
+
+    small {
+        font-size: 80%;
+    }
+
+    /**
+    * Miscellaneous
+    */
+
+    // Emphasis
+    strong,
+    b {
+        font-weight: dt.$font-weight-bold;
+    }
+
+    em,
+    i {
+        font-style: italic;
+    }
+
+    // Abbreviations and acronyms
+    abbr[title] {
+        border-bottom: 1px dotted #ddd;
+        cursor: help;
+    }
+
+    /**
+    * Blockquotes
+    */
+    blockquote {
+        padding-left: 10px;
+        margin: functions.spacing(d);
+        border-left: 4px solid lighten(#000, 80%);
+
+        p {
+            margin-bottom: 0;
+            @include type.font-size(body-s);
+            font-weight: 300;
+        }
+
+        small {
+            display: block;
+            color: lighten(#000, 70%);
+
+            &:before {
+                content: '\2014 \00A0';
+            }
+        }
+    }
+
+    /**
+    * Buttons
+    */
+    button {
+        font-family: v.$font-family-base;
+    }
+
+    // Quotes
+    q,
+    blockquote {
+        &:before,
+        &:after {
+            content: '';
+        }
+    }
+
+    cite {
+        font-style: normal;
+    }
+
+    // Addresses styling not present in S5, Chrome
+    dfn {
+        font-style: italic;
+    }
+
+    mark {
+        background: dt.$color-yellow-10;
+        padding: 2px 4px;
+        border-radius: dt.$radius-rounded-a;
+    }
+
+    address {
+        font-style: normal;
+        margin-top: functions.spacing(d);
+        margin-bottom: 0;
+    }
+
+    // Prevents sub and sup affecting line-height in all browsers
+    // gist.github.com/413930
+    sub,
+    sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+        vertical-align: baseline;
+    }
+
+    sup { top: -0.5em; }
+    sub { bottom: -0.25em; }
+    samp { font-family: v.$font-family-mono; }
+
+    //
+    // @include ko-text-selection($color-selection, $color-selection-bg);
+
+    // Horizontal rules
+    hr {
+        margin: functions.spacing(d) 0;
+        border: 0;
+        border-top: 1px solid dt.$color-divider-default;
+    }
+
+    // https://justmarkup.com/log/2015/07/dealing-with-long-words-in-css/
+    .hyphenate {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+}

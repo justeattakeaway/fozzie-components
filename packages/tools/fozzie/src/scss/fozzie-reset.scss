@@ -1,0 +1,12 @@
+// **
+// fozzie-reset.scss
+// =====================================
+// Used to generate the file fozzie-reset.css
+// This can be used from a web app that does not use Sass to incorporate our reset styles
+// **
+
+@use 'base/normalize' as n;
+@use 'base/reset' as r;
+
+@include n.normalize();
+@include r.reset();
