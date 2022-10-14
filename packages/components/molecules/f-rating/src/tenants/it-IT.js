@@ -1,6 +1,6 @@
 export default {
     locale: 'it-IT',
     ratings: {
-        starsDescription: '{rating} star out of {total} | {rating} stars out of {total}'
+        starsDescription: '{rating} ADD TRANSLATION {total} | {rating} ADD TRANSLATION {total}'
     }
 };
