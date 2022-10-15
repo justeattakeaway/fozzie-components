@@ -1,8 +1,7 @@
 import Rating from '../../test-utils/component-objects/f-rating.component';
 
 const devices = [
-    'desktop',
-    'mobile'
+    'desktop'
 ];
 
 devices.forEach(device => {
@@ -14,12 +13,16 @@ devices.forEach(device => {
             }
         });
 
-        it('should display the f-rating component', async () => {
-            // Act
-            await Rating.load();
+        describe('Visually displayed', () => {
+            it('should display the f-rating component', async () => {
+                // Act
+                await Rating.load();
 
-            // Assert
-            await browser.percyScreenshot('f-rating - Visual Test', device);
+                // Assert
+                await browser.percyScreenshot('f-rating - Visual Test', device);
+            });
         });
+
+        // Add visual tests for demo variants - Ticket to be added.
     });
 });
