@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.37.0
 ------------------------------
-*October 14, 2022*
+*October 17, 2022*
 
 ### Removed
 - Duplicate dependencies of `atoms` packages.
