@@ -7,7 +7,8 @@ v10.8.0
 *October 17, 2022*
 
 ### Fixed
-- JE Icon vertical positioning
+- JE Icon vertical positioning.
+- Overflow nav-links will not wrap under header to conserve margin and padding.
 
 ### Added
 - `showCorporateLink` - Shows "Corporate Ordering" Link.
