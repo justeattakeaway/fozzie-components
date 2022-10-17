@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "7.36.0",
+  "version": "7.38.0",
   "private": true,
   "scripts": {
     "build": "turbo run build --continue",
@@ -108,6 +108,7 @@
     "turbo": "^1.2.9",
     "vite": "2.9.13",
     "vue": "2.6.10",
+    "vuex": "3.5.1",
     "vue-svg-loader": "0.16.0",
     "vue-template-compiler": "2.6.10",
     "wdio-chromedriver-service": "7.3.2",
