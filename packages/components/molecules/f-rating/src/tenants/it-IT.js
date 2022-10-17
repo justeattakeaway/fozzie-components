@@ -1,4 +1,6 @@
 export default {
     locale: 'it-IT',
-    text: 'I am a VRating Component (IT)'
+    ratings: {
+        starsDescription: '{rating} ADD TRANSLATION {total} | {rating} ADD TRANSLATION {total}'
+    }
 };
