@@ -312,6 +312,7 @@ html:global(.is-navInView) {
         padding-right: #{f.$layout-margin}px;
         position: relative;
         min-height: common.$header-height--narrow;
+        overflow: hidden;
 
         @include f.media('>mid') {
             padding-left: #{f.$layout-margin}px;
