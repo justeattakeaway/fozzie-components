@@ -15,6 +15,15 @@ v0.4.0
 ### Changed
 - Refactored markup to allow fractional rating sizes.
 
+
+v0.3.0
+------------------------------
+*October 17, 2022*
+
+### Changed
+- `@justeattakeaway/pie-icons-vue` to live as DevDep for now.
+
+
 v0.2.0
 ------------------------------
 *October 13, 2022*
