@@ -150,7 +150,7 @@ describe('Rating', () => {
                 expect(validator(rating)).toBe(true);
             });
 
-            it('should NOT only allow values outside `0 or 5`', () => {
+            it('should NOT only allow values outside `0 - 5`', () => {
                 // Arrange
                 const { validator } = VRating.props.starRating;
 
