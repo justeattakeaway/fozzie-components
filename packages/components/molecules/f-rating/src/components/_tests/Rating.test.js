@@ -146,7 +146,7 @@ describe('Rating', () => {
                 // Act
                 const { validator } = VRating.props.starRating;
 
-                // Arrange
+                // Assert
                 expect(validator(rating)).toBe(true);
             });
 
