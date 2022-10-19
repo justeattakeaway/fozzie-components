@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.4.0
+------------------------------
+*October 19, 2022*
+
+### Added
+- Test coverage for code changes.
+- `starRatingSize` to allow component sizing.
+- Prop validation.
+
+### Changed
+- Refactored markup to allow fractional rating sizes.
+
 v0.2.0
 ------------------------------
 *October 13, 2022*
