@@ -1,62 +1,62 @@
 export default {
     locale: 'es-ES',
-    genericErrorMessage: 'No es posible crear tu cuenta ahora mismo',
+    genericErrorMessage: 'No es posible crear una cuenta en este momento',
 
     navLinks: {
         termsAndConditions: {
             prefix: 'Al crear una cuenta, aceptas nuestros ',
             suffix: '.',
-            text: 'términos y condiciones',
+            text: 'Términos y Condiciones',
             url: '/info/terms-and-conditions'
         },
         privacyPolicy: {
-            prefix: 'Lee nuestra ',
-            text: 'política de privacidad',
+            prefix: 'Por favor, lee nuestra ',
+            text: 'Política de Privacidad',
             url: '/info/privacy-policy'
         },
         cookiesPolicy: {
             prefix: ' y ',
-            text: 'política de cookies',
+            text: 'Política de Cookie',
             url: '/info/cookies-policy',
             suffix: '.'
         },
         login: {
-            text: '¿Ya tienes cuenta?'
+            text: '¿Ya formas parte de [Just Eat]?'
         }
     },
 
     labels: {
-        createAccountTitle: 'Regístrate',
-        createAccountBtn: 'Regístrate',
-        firstName: 'Nombre de pila',
-        lastName: 'Nombre de familia',
-        email: 'Tu email',
-        password: 'Tu contraseña'
+        createAccountTitle: 'Crear cuenta',
+        createAccountBtn: 'Crear cuenta',
+        firstName: 'Nombre',
+        lastName: 'Apellido',
+        email: 'Correo electrónico',
+        password: 'Contraseña'
     },
 
     validationMessages: {
         firstName: {
-            requiredError: 'Introduce tu nombre',
+            requiredError: 'Por favor, introduce tu nombre',
             maxLengthError: 'El nombre supera los 50 caracteres',
-            invalidCharError: 'Tu nombre solo puede contener letras, guiones o apóstrofes'
+            invalidCharError: 'Tu nombre solo puede tener letras, guiones o apóstrofes'
         },
 
         lastName: {
-            requiredError: 'Introduce tu apellido',
-            maxLengthError: 'El apellido supera los 50 caracteres.',
-            invalidCharError: 'Tu apellido solo puede contener letras, guiones o apóstrofos'
+            requiredError: 'Por favor, introduce tu apellido',
+            maxLengthError: 'El apellido supera los 50 caracteres',
+            invalidCharError: 'Tu apellido solo puede tener letras, guiones o apóstrofes'
         },
 
         email: {
-            requiredError: 'Introduce tu email',
-            maxLengthError: 'El email supera los 50 caracteres',
-            invalidEmailError: 'Introduce tu email',
-            alreadyExistsError: 'Este email ya está registrado'
+            requiredError: 'Por favor, introduce tu correo electrónico',
+            maxLengthError: 'El correo electrónico supera los 50 caracteres',
+            invalidEmailError: 'Por favor, introduce un correo electrónico válido',
+            alreadyExistsError: 'Este correo electrónico ya está registrado'
         },
 
         password: {
-            requiredError: 'Introduce una contraseña',
-            minLengthError: 'La contraseña debe tener como mínimo 10 caracteres'
+            requiredError: 'Por favor, introduce una contraseña',
+            minLengthError: 'Tu contraseña debe tener al menos 10 caracteres'
         }
     }
 };

@@ -4,9 +4,9 @@ export default {
 
     navLinks: {
         termsAndConditions: {
-            prefix: 'Registrandoti accetti i ',
+            prefix: 'Creando un account, accetti i nostri ',
             suffix: '.',
-            text: 'Termini e le condizioni d\'uso',
+            text: 'Termini e condizioni d\'uso',
             url: '/info/terms-and-conditions'
         },
         privacyPolicy: {
@@ -26,18 +26,18 @@ export default {
     },
 
     labels: {
-        createAccountTitle: 'Registrati',
-        createAccountBtn: 'Registrati',
+        createAccountTitle: 'Crea un account',
+        createAccountBtn: 'Crea un account',
         firstName: 'Nome',
-        lastName: 'Nome',
-        email: 'La tua email',
-        password: 'La tua password'
+        lastName: 'Cognome',
+        email: 'Email',
+        password: 'Password'
     },
 
     validationMessages: {
         firstName: {
             requiredError: 'Inserisci il tuo nome',
-            maxLengthError: 'Il nome supera i 50 caratteri',
+            maxLengthError: 'Il nome supera 50 caratteri',
             invalidCharError: 'Il tuo nome può contenere solo lettere, trattini o apostrofi'
         },
 
@@ -48,9 +48,9 @@ export default {
         },
 
         email: {
-            requiredError: 'Si prega di inserire un indirizzo email',
+            requiredError: 'Inserisci la tua email',
             maxLengthError: 'L\'indirizzo email supera i 50 caratteri',
-            invalidEmailError: 'Si prega di inserire un indirizzo email',
+            invalidEmailError: 'Si prega di inserire un indirizzo email valido',
             alreadyExistsError: 'Indirizzo email già registrato'
         },
 
