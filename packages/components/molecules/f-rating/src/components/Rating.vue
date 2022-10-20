@@ -2,25 +2,39 @@
     <div
         :class="$style['c-rating']"
         data-test-id="rating-component">
-        <ul
-            :class="$style['c-rating-starWrapper']">
-            <li
-                v-for="star in maxStarRating"
-                :key="star"
-                :class="$style['c-rating-star']">
-                <star-filled-icon
-                    v-if="isRatingStarFilled(star)"
-                    :class="$style['c-rating-star-filled']" />
+        <div :class="$style['c-rating-starWrapper']">
+            <div :class="$style['c-rating-container']">
                 <star-icon
-                    v-else
-                    :class="$style['c-rating-star-empty']" />
-            </li>
-        </ul>
-        <span
-            data-test-id="c-rating-description"
-            class="is-visuallyHidden">
-            {{ getRatingDescription }}
-        </span>
+                    v-for="star in maxStarRating"
+                    :key="star"
+                    :class="[
+                        $style['c-rating-star-empty'],
+                        $style[`c-rating-star--${starRatingSize}`]
+                    ]" />
+            </div>
+
+            <div
+                :class="[
+                    $style['c-rating-mask'],
+                    $style['c-rating-container']
+                ]"
+                :style="`--starRatingPercentage: ${getRatingStarPercentage}`">
+                <star-filled-icon
+                    v-for="star in maxStarRating"
+                    :key="star"
+                    :style="`--starRatingSize: c-rating-star--${starRatingSize}`"
+                    :class="[
+                        $style['c-rating-star-filled'],
+                        $style[`c-rating-star--${starRatingSize}`]
+                    ]" />
+            </div>
+
+            <span
+                data-test-id="c-rating-description"
+                class="is-visuallyHidden">
+                {{ getRatingDescription }}
+            </span>
+        </div>
     </div>
 </template>
 
@@ -31,6 +45,7 @@ import {
 } from '@justeattakeaway/pie-icons-vue';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import tenantConfigs from '../tenants';
+import { VALID_STAR_RATING_SIZES } from '../constants';
 
 export default {
     name: 'VRating',
@@ -48,11 +63,17 @@ export default {
         },
         starRating: {
             type: Number,
-            required: true
+            required: true,
+            validator: value => value >= 0 && value <= 5
         },
         maxStarRating: {
             type: Number,
             default: 5
+        },
+        starRatingSize: {
+            type: String,
+            default: 'small',
+            validator: value => !!VALID_STAR_RATING_SIZES[value]
         }
     },
 
@@ -80,18 +101,15 @@ export default {
                     rating: this.starRating,
                     total: this.maxStarRating
                 });
-        }
-    },
+        },
 
-    methods: {
         /**
-         * Check `star` against value passed by consumer to allow empty stars to render.
+         * Calculate a percentage from the `starRating` value passed in by the consuming application.
          *
-         * @param star {Number}
-         * @returns {boolean}
+         * @returns {string}
          */
-        isRatingStarFilled (star) {
-            return star <= this.starRating;
+        getRatingStarPercentage () {
+            return `${(this.starRating / this.maxStarRating) * 100}%`;
         }
     }
 };
@@ -103,12 +121,25 @@ export default {
 .c-rating-starWrapper {
     margin: 0;
     padding: 0;
-    list-style-type: none;
+    position: relative;
+    display: inline-block;
 }
+    .c-rating-container {
+        display: flex;
+    }
 
     .c-rating-star {
-        display: inline-block;
-        width: 15px; // Todo - decide on how to size these. Will create a ticket around this.
+        &--small {
+            width: 12px;
+        }
+
+        &--medium {
+            width: 16px;
+        }
+
+        &--large {
+            width: 28px;
+        }
     }
 
     .c-rating-star-filled {
@@ -120,6 +151,18 @@ export default {
     .c-rating-star-empty {
         & path {
             fill: f.$color-mozzarella-50;
+        }
+    }
+
+    .c-rating-mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        width: var(--starRatingPercentage);
+
+        svg {
+            flex-shrink: 0;
         }
     }
 </style>
