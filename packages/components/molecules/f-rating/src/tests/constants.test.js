@@ -4,13 +4,14 @@ describe('`constants`', () => {
     describe('VALID_STAR_RATING_SIZES', () => {
         it('should contain the correct sizes', () => {
             // Arrange
-            const values = ['small', 'medium', 'large'];
+            const values = {
+                small: true,
+                medium: true,
+                large: true
+            };
 
-            // Act
-            const result = VALID_STAR_RATING_SIZES.every(value => values.includes(value));
-
-            // Assert
-            expect(result).toBe(true);
+            // Act & Assert
+            expect(VALID_STAR_RATING_SIZES).toEqual(values);
         });
     });
 });

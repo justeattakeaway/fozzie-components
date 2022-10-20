@@ -18,10 +18,11 @@
                     $style['c-rating-mask'],
                     $style['c-rating-container']
                 ]"
-                :style="getRatingStarPercentage">
+                :style="`--starRatingPercentage: ${getRatingStarPercentage}`">
                 <star-filled-icon
                     v-for="star in maxStarRating"
                     :key="star"
+                    :style="`--starRatingSize: c-rating-star--${starRatingSize}`"
                     :class="[
                         $style['c-rating-star-filled'],
                         $style[`c-rating-star--${starRatingSize}`]
@@ -72,7 +73,7 @@ export default {
         starRatingSize: {
             type: String,
             default: 'small',
-            validator: value => VALID_STAR_RATING_SIZES.includes(value)
+            validator: value => !!VALID_STAR_RATING_SIZES[value]
         }
     },
 
@@ -108,9 +109,7 @@ export default {
          * @returns {string}
          */
         getRatingStarPercentage () {
-            const percentage = (this.starRating / this.maxStarRating) * 100;
-
-            return `width: ${percentage}%`;
+            return `${(this.starRating / this.maxStarRating) * 100}%`;
         }
     }
 };
@@ -160,6 +159,7 @@ export default {
         top: 0;
         left: 0;
         overflow: hidden;
+        width: var(--starRatingPercentage);
 
         svg {
             flex-shrink: 0;

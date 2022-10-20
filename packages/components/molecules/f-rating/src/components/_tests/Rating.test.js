@@ -2,7 +2,6 @@ import { createLocalVue, shallowMount } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
 import VRating from '../Rating.vue';
 import i18n from './helpers/setup';
-import { VALID_STAR_RATING_SIZES } from '../../constants';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
@@ -59,7 +58,7 @@ describe('Rating', () => {
                     });
 
                     // Act & Assert
-                    expect(wrapper.vm.getRatingStarPercentage).toBe('width: 40%');
+                    expect(wrapper.vm.getRatingStarPercentage).toBe('40%');
                 });
             });
         });
@@ -119,12 +118,12 @@ describe('Rating', () => {
                 expect(VRating.props.starRatingSize.default).toBe('small');
             });
 
-            it.each(VALID_STAR_RATING_SIZES)('should allow valid type prop of `%s`', type => {
+            it('should return a true when type prop of exists', () => {
                 // Act
                 const { validator } = VRating.props.starRatingSize;
 
                 // Arrange
-                expect(validator(type)).toBe(true);
+                expect(validator('small')).toBe(true);
             });
 
             it('should NOT allow invalid props', () => {
