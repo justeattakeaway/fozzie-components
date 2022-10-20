@@ -21,7 +21,7 @@ export default {
             suffix: '.'
         },
         login: {
-            text: '¿Ya formas parte de [Just Eat]?'
+            text: '¿Ya formas parte de Just Eat?'
         }
     },
 
