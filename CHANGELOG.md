@@ -3,12 +3,20 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.38.0
+------------------------------
+*October 24, 2022*
+### Removed
+- Duplicate dependencies of `atoms` packages.
+*October 19, 2022*
+
+
 v7.37.0
 ------------------------------
 *October 17, 2022*
 
-### Removed
-- Duplicate dependencies of `atoms` packages.
+### Changed
+- Updated Browser Support page by removing Internet Explorer 11 and versions.
 
 
 v7.36.0
