@@ -39,7 +39,7 @@
     "build:icons": "node build && babel src/components -d icons",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
-    "test": "vue-cli-service test:unit --passWithNoTests",
+    "test": "jest --passWithNoTests",
     "ci:test:tools": "yarn test",
     "example": "poi --serve --config example/poi.config.js",
     "build:example": "poi --prod --config example/poi.config.js",

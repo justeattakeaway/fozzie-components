@@ -38,7 +38,7 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "stylelint ./src/**/*.{vue,htm,html,css,sss,less,scss}",
     "lint:style:fix": "yarn lint:style --fix",
-    "test": "vue-cli-service test:unit",
+    "test": "jest",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test:visual": "cross-env-shell JE_ENV=local PERCY_TOKEN=${PERCY_TOKEN_F_CONTACT_PREFERENCES} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
@@ -71,8 +71,6 @@
     "@justeat/f-form-field": "6.x",
     "@justeat/f-vue-icons": "3.x",
     "@justeat/f-wdio-utils": "1.x",
-    "@vue/cli-plugin-babel": "4.5.16",
-    "@vue/cli-plugin-unit-jest": "4.5.16",
-    "@vue/test-utils": "1.0.3"
+    "@vue/cli-plugin-babel": "4.5.16"
   }
 }

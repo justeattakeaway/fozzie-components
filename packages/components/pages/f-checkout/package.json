@@ -38,8 +38,8 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "stylelint ./src/**/*.{vue,htm,html,css,sss,less,scss}",
     "lint:style:fix": "yarn lint:style --fix",
-    "test": "vue-cli-service test:unit",
-    "test:watch": "vue-cli-service test:unit --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "test:coverage": "yarn test --coverage",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_CHECKOUT} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
@@ -73,7 +73,6 @@
     "vuex": "3.5.1"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "7.12.13",
     "@justeat/f-alert": "6.x",
     "@justeat/f-button": "4.x",
     "@justeat/f-card": "4.x",
@@ -84,10 +83,6 @@
     "@justeat/f-mega-modal": "7.x",
     "@justeat/f-vue-icons": "3.x",
     "@justeat/f-wdio-utils": "1.x",
-    "@vue/cli-plugin-babel": "4.5.16",
-    "@vue/cli-plugin-unit-jest": "4.5.16",
-    "@vue/test-utils": "1.0.3",
-    "flush-promises": "1.0.2",
-    "vuex": "3.5.1"
+    "@vue/cli-plugin-babel": "4.5.16"
   }
 }

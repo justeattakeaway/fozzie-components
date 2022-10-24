@@ -49,19 +49,13 @@
     "extends @justeat/browserslist-config-fozzie"
   ],<% if(config.isComponent) { %>
   "dependencies": {<% if(config.needsComponentTranslations){%>
-    "@justeat/f-services": "1.16.0"<% }%>
+    "@justeat/f-services": "1.x"<% }%>
   },<% } %>
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-<% if(config.isComponent) { %>    "@justeat/f-wdio-utils": "1.x",
-    "@vue/cli-plugin-babel": "4.5.15",
-    "@vue/cli-plugin-unit-jest": "4.5.15",
-    "@vue/test-utils": "1.2.2"<% } else { %>
-"core-js": "3.19.1",
-    "eslint": "7.32.0",
-    "jest-extended": "0.11.5"<% } %><% if(config.needsTestingApiMocks) { %>,
+<% if(config.isComponent) { %>    "@justeat/f-wdio-utils": "1.x"<% } else { %> <% } %><% if(config.needsTestingApiMocks) { %>,
     "axios": "0.24.0"<%
     } %>
   }
