@@ -36,7 +36,7 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "stylelint ./src/**/*.{vue,htm,html,css,sss,less,scss}",
     "lint:style:fix": "yarn lint:style --fix",
-    "test": "vue-cli-service test:unit",
+    "test": "jest",
     "ci:test:atoms": "yarn test",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_BUTTON} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
@@ -62,9 +62,6 @@
   "devDependencies": {
     "@justeattakeaway/pie-icons-vue": "1.0.0",
     "@justeat/f-wdio-utils": "1.x",
-    "@vue/cli-plugin-babel": "4.5.16",
-    "@vue/cli-plugin-unit-jest": "4.5.16",
-    "@vue/test-utils": "1.0.3",
     "vue-router": "3.5.2"
   }
 }
