@@ -23,7 +23,6 @@
                 <star-filled-icon
                     v-for="star in maxStarRating"
                     :key="star"
-                    :style="`--starRatingSize: c-rating-star--${ratingDisplayType}`"
                     :class="[
                         $style['c-rating-star'],
                         $style['c-rating-star--filled'],
