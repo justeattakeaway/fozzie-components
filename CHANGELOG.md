@@ -11,6 +11,22 @@ v7.39.0
  - Duplicate dependencies of `molecules` packages.
 
 
+v7.38.0
+------------------------------
+*October 24, 2022*
+
+### Removed
+- Duplicate dependencies of `atoms` packages.
+
+
+v7.37.1
+------------------------------
+*October 21, 2022*
+
+### Changed
+- Updated `danger` to `11.4.1`
+
+
 v7.37.0
 ------------------------------
 *October 19, 2022*
