@@ -47,18 +47,34 @@ devices.forEach(device => {
         });
 
         describe('`starRatingSize`', () => {
-            it('should be displayed', async () => {
+            it('should be displayed at the correct size', async () => {
+                // Act
+                await Rating.load({ starRatingSize: 'small' });
+
+                // Assert
+                await browser.percyScreenshot('f-rating - Visual Test for Prop - starRatingSize = small', device);
+            });
+
+            it('should be displayed at the correct size', async () => {
                 // Act
                 await Rating.load({ starRatingSize: 'medium' });
 
                 // Assert
                 await browser.percyScreenshot('f-rating - Visual Test for Prop - starRatingSize = medium', device);
             });
+
+            it('should be displayed at the correct size', async () => {
+                // Act
+                await Rating.load({ starRatingSize: 'large' });
+
+                // Assert
+                await browser.percyScreenshot('f-rating - Visual Test for Prop - starRatingSize = large', device);
+            });
         });
 
         describe('`ratingDisplayType`', () => {
-            describe('when populated with a valid type', () => {
-                it('should be displayed', async () => {
+            describe('when populated with a `long` display type', () => {
+                it('should be displayed with the correct description', async () => {
                     // Act
                     await Rating.load({ ratingDisplayType: 'long' });
 
@@ -67,10 +83,40 @@ devices.forEach(device => {
                 });
             });
 
-            describe('when using a default type', () => {
-                it('should be displayed', async () => {
+            describe('when populated with a `short` display type', () => {
+                it('should be displayed with the correct description', async () => {
+                    // Act
+                    await Rating.load({ ratingDisplayType: 'short' });
+
+                    // Assert
+                    await browser.percyScreenshot('f-rating - Visual Test for Prop - ratingDisplayType = short', device);
+                });
+            });
+
+            describe('when populated with a `medium` display type', () => {
+                it('should be displayed with the correct description', async () => {
+                    // Act
+                    await Rating.load({ ratingDisplayType: 'medium' });
+
+                    // Assert
+                    await browser.percyScreenshot('f-rating - Visual Test for Prop - ratingDisplayType = medium', device);
+                });
+            });
+
+            describe('when populated with a `noRating` display type', () => {
+                it('should be displayed with the correct description', async () => {
                     // Act
                     await Rating.load({ ratingDisplayType: 'noRating' });
+
+                    // Assert
+                    await browser.percyScreenshot('f-rating - Visual Test for Prop - ratingDisplayType = noRating', device);
+                });
+            });
+
+            describe('when using a default display type', () => {
+                it('should be displayed with no description', async () => {
+                    // Act
+                    await Rating.load({ ratingDisplayType: null });
 
                     // Assert
                     await browser.percyScreenshot('f-rating - Visual Test for Prop - ratingDisplayType = noRating', device);

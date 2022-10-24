@@ -245,7 +245,7 @@ describe('Rating', () => {
                         const result = wrapper.vm.getRatingDisplayFormat();
 
                         // Assert
-                        expect(result).toBe('No ratings yet');
+                        expect(result).toBe(false);
                     });
                 });
             });

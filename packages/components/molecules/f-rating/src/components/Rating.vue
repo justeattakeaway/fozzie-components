@@ -90,7 +90,7 @@ export default {
         },
         ratingDisplayType: {
             type: String,
-            default: 'noRating',
+            default: null,
             validator: value => VALID_STAR_RATING_DISPLAY_TYPE.includes(value)
         },
         totalReviews: {
