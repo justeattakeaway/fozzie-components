@@ -2747,13 +2747,6 @@
   dependencies:
     babel-helper-vue-jsx-merge-props "2.0.3"
 
-"@justeattakeaway/pie-icons-vue@2.0.0-beta.0":
-  version "2.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@justeattakeaway/pie-icons-vue/-/pie-icons-vue-2.0.0-beta.0.tgz#606857698e4f53dbdce481b917fd9c4d121b5f87"
-  integrity sha512-YRT84dOFOGHex/HcBk5B08mEuNPKuNiRYm9fCsE8iF7WKxBt9OHAQakFXT3vjDu6RiYwkKDMwwK1mNz7BlGVFQ==
-  dependencies:
-    "@vue/babel-helper-vue-jsx-merge-props" "1.4.0"
-
 "@kazupon/vue-i18n-loader@0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@kazupon/vue-i18n-loader/-/vue-i18n-loader-0.5.0.tgz#64819fc9dbe21bac523e3436b7e15c32bcd33b92"
@@ -5544,7 +5537,7 @@
   resolved "https://registry.yarnpkg.com/@vercel/ncc/-/ncc-0.31.1.tgz#9346c7e59326f5eeac75c0286e47df94c2d6d8f7"
   integrity sha512-g0FAxwdViI6UzsiVz5HssIHqjcPa1EHL6h+2dcJD893SoCJaGdqqgUF09xnMW6goWnnhbLvgiKlgJWrJa+7qYA==
 
-"@vue/babel-helper-vue-jsx-merge-props@1.4.0", "@vue/babel-helper-vue-jsx-merge-props@^1.2.1", "@vue/babel-helper-vue-jsx-merge-props@^1.4.0":
+"@vue/babel-helper-vue-jsx-merge-props@^1.2.1", "@vue/babel-helper-vue-jsx-merge-props@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@vue/babel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-1.4.0.tgz#8d53a1e21347db8edbe54d339902583176de09f2"
   integrity sha512-JkqXfCkUDp4PIlFdDQ0TdXoIejMtTHP67/pvxlgeY+u5k3LEdKuWZ3LK6xkxo52uDoABIVyRwqVkfLQJhk7VBA==

@@ -73,6 +73,7 @@ The props that can be defined are as follows (if any):
 | :---          |:--------:|:--------:|:-------:|:-----------------------------------------------------------------------------------------------------------------------|
 | `starRating`  | `Number` |   Yes    |    -    | Sets the displayed rating (filled stars). i.e. for `2 out of x`, 2 would be the `starRating`                           |
 | `maxStarRating`  | `Number` |    No    |    5    | Sets the maximum number of stars that the rating is set against. i.e. for `x out of 5`, 5 would be the `maxStarRating` |
+| `starRatingSize`  | `String` |    No    | 'small' | Sets the component size. By default the component will use `small` the other options are `medium` & `large`            |
 
 ### Events
 

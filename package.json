@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "7.38.0",
+  "version": "7.39.0",
   "private": true,
   "scripts": {
     "build": "turbo run build --continue",
@@ -148,7 +148,7 @@
       "packages/tools/*"
     ],
 
-    "nohoist": ["**/@justeat/fozzie/**"] 
+    "nohoist": ["**/@justeat/fozzie/**"]
   },
   "dependencies": {
     "deepmerge": "4.2.2"
