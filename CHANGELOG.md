@@ -6,14 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 v7.38.0
 ------------------------------
 *October 24, 2022*
+
 ### Removed
 - Duplicate dependencies of `atoms` packages.
-*October 19, 2022*
 
 
 v7.37.0
 ------------------------------
-*October 17, 2022*
+*October 19, 2022*
 
 ### Changed
 - Updated Browser Support page by removing Internet Explorer 11 and versions.
