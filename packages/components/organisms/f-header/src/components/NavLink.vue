@@ -70,7 +70,7 @@ export default {
 
         isCondensedOnMid: {
             type: Boolean,
-            default: true
+            default: false
         },
 
         backgroundTheme: {
