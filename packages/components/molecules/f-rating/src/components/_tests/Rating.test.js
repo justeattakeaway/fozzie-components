@@ -30,74 +30,39 @@ describe('Rating', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
-    describe('methods', () => {
-        describe('`isRatingStarFilled`', () => {
+    describe('computed', () => {
+        describe('`getRatingStarPercentage`', () => {
             it('should exist', () => {
-                expect(wrapper.vm.isRatingStarFilled).toBeDefined();
-            });
+                // Arrange
+                propsData.starRating = 2;
+                wrapper = shallowMount(VRating, {
+                    propsData,
+                    localVue,
+                    i18n
+                });
 
-            it('should contain a description `c-rating-description`', () => {
-                // Act
-                const result = wrapper.find('[data-test-id="c-rating-description"]');
-
-                // Assert
-                expect(result).toMatchSnapshot();
+                // Act & Assert
+                expect(wrapper.vm.getRatingStarPercentage).toBeDefined();
             });
 
             describe('when invoked', () => {
-                it('should return truthy when the argument `star` is less than or equal to `starRating`', () => {
-                    // Act
-                    const star = 1;
-                    const result = wrapper.vm.isRatingStarFilled(star);
-
-                    // Assert
-                    expect(result).toBe(true);
-                });
-
-                it.each([1, 2])('should return truthy when the argument star is %s', value => {
+                it('should return a percentage from a combination of `starRating` and `maxStarRating`', () => {
                     // Arrange
                     propsData = {
-                        starRating: value,
-                        maxStarRating: 5
+                        starRating: 2
                     };
-
-                    // Act
                     wrapper = shallowMount(VRating, {
                         propsData,
                         localVue,
-                        i18n,
-                        mocks: {
-                            $tc
-                        }
+                        i18n
                     });
-                    const result = wrapper.vm.isRatingStarFilled(value);
 
-                    // Assert
-                    expect(result).toBe(true);
-                });
-
-                it('should return truthy when the argument `star` is equal to `starRating`', () => {
-                    // Act
-                    const star = 2;
-                    const result = wrapper.vm.isRatingStarFilled(star);
-
-                    // Assert
-                    expect(result).toBe(true);
-                });
-
-                it('should return falsey when argument `star` is greater than `starRating`', () => {
-                    // Act
-                    const star = 3;
-                    const result = wrapper.vm.isRatingStarFilled(star);
-
-                    // Assert
-                    expect(result).toBe(false);
+                    // Act & Assert
+                    expect(wrapper.vm.getRatingStarPercentage).toBe('40%');
                 });
             });
         });
-    });
 
-    describe('computed', () => {
         describe('`getRatingDescription`', () => {
             it('should exist', () => {
                 // Arrange
@@ -142,6 +107,54 @@ describe('Rating', () => {
                     // Act & Assert
                     expect(wrapper.vm.getRatingDescription).toMatchSnapshot();
                 });
+            });
+        });
+    });
+
+    describe('props', () => {
+        describe('`starRatingSize`', () => {
+            it('should set a default value of `small`', () => {
+                // Act & Assert
+                expect(VRating.props.starRatingSize.default).toBe('small');
+            });
+
+            it('should return a true when type prop of exists', () => {
+                // Act
+                const { validator } = VRating.props.starRatingSize;
+
+                // Arrange
+                expect(validator('small')).toBe(true);
+            });
+
+            it('should NOT allow invalid props', () => {
+                // Arrange
+                const { validator } = VRating.props.starRatingSize;
+
+                // Act & Assert
+                expect(validator('supernova')).toBe(false);
+            });
+        });
+
+        describe('`starRating`', () => {
+            it('should be required', () => {
+                // Act & Assert
+                expect(VRating.props.starRating.required).toBe(true);
+            });
+
+            it.each([0, 1, 2, 3, 4, 5])('should allow value `%s`', rating => {
+                // Act
+                const { validator } = VRating.props.starRating;
+
+                // Assert
+                expect(validator(rating)).toBe(true);
+            });
+
+            it('should NOT only allow values outside `0 - 5`', () => {
+                // Arrange
+                const { validator } = VRating.props.starRating;
+
+                // Act & Assert
+                expect(validator(6)).toBe(false);
             });
         });
     });
