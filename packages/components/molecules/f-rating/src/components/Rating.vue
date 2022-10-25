@@ -137,7 +137,7 @@ export default {
 
     methods: {
         /**
-         * Display review rating message format.
+         * Gets the correct rating display format from translations.
          *
          * @todo - If the component is using `short` as a `starRatingSize` we shouldn't display text
          * alongside it for now. (TBC with design - ticket in backlog).
