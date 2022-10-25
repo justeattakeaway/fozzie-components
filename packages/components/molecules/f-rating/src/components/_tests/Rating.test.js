@@ -3,7 +3,6 @@ import { VueI18n } from '@justeat/f-globalisation';
 import VRating from '../Rating.vue';
 import i18n from './helpers/setup';
 import { VALID_STAR_RATING_DISPLAY_TYPE } from '../../constants';
-import i18nMocker from '@justeat/f-loyalty/src/components/_tests/helper';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
