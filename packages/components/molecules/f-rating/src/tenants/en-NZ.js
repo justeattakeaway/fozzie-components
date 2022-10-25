@@ -4,9 +4,9 @@ export default {
         starsDescription: '{rating} star out of {maxStarRating} | {rating} stars out of {maxStarRating}',
         ratingDisplayType: {
             noRating: 'No ratings yet',
-            short: '{totalReviews}',
+            short: '{reviewCount}',
             medium: '{rating} of {maxStarRating}',
-            long: 'View {totalReviews} reviews'
+            long: 'View {reviewCount} reviews'
         }
     }
 };

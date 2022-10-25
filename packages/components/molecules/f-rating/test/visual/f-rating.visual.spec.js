@@ -36,13 +36,13 @@ devices.forEach(device => {
             });
         });
 
-        describe('`totalReviews`', () => {
+        describe('`reviewCount`', () => {
             it('should be displayed', async () => {
                 // Act
-                await Rating.load({ totalReviews: 700 });
+                await Rating.load({ reviewCount: 700 });
 
                 // Assert
-                await browser.percyScreenshot('f-rating - Visual Test for Prop - totalReviews = 700', device);
+                await browser.percyScreenshot('f-rating - Visual Test for Prop - reviewCount = 700', device);
             });
         });
 

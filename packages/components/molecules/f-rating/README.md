@@ -75,7 +75,7 @@ The props that can be defined are as follows (if any):
 | `maxStarRating`  | `Number` |    No    |    5    | Sets the maximum number of stars that the rating is set against. i.e. for `x out of 5`, 5 would be the `maxStarRating` | -
 | `starRatingSize`  | `String` |    No    | 'small' | Sets the component size. By default the component will use `small`.                                                    | `small` `medium` `large`
 | `ratingDisplayType`  | `String` |    No    |  null   | Sets the descriptive text which will be displayed next to the component. By default there will be no text.             | `noRating` `short` `medium` `long`
-| `totalReviews`  | `Number` |    No    |  null   | Sets the total number of reviews to display. Example: `View 499 reviews` where `499` is the total.                     | -
+| `reviewCount`  | `Number` |    No    |  null   | Sets the total number of reviews to display. Example: `View 499 reviews` where `499` is the total.                     | -
 
 ### Events
 

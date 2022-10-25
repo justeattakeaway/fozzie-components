@@ -11,7 +11,7 @@ v0.5.0
 - Test coverage for code changes.
 - Visual tests.
 - Prop validation.
-- Props `ratingDisplayType` & `totalReviews`.
+- Props `ratingDisplayType` & `reviewCount`.
 - Storybook contains ratings in different sizes & formats.
 
 ### Changed

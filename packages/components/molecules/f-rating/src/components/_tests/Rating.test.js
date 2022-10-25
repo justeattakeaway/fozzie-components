@@ -215,7 +215,7 @@ describe('Rating', () => {
                         // Arrange
                         propsData = {
                             starRating: 2,
-                            totalReviews: 499,
+                            reviewCount: 499,
                             ratingDisplayType: type
                         };
 

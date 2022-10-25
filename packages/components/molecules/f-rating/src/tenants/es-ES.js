@@ -4,9 +4,9 @@ export default {
         starsDescription: '{rating} ADD TRANSLATION {total} | {rating} ADD TRANSLATION {total}',
         ratingDisplayType: {
             noRating: 'ADD TRANSLATION',
-            short: '{totalReviews}',
+            short: '{reviewCount}',
             medium: '{rating} ADD TRANSLATION {maxStarRating}',
-            long: 'ADD TRANSLATION {totalReviews} ADD TRANSLATION'
+            long: 'ADD TRANSLATION {reviewCount} ADD TRANSLATION'
         }
     }
 };

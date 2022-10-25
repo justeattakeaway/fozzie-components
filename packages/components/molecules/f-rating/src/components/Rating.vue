@@ -93,7 +93,7 @@ export default {
             default: null,
             validator: value => VALID_STAR_RATING_DISPLAY_TYPE.includes(value)
         },
-        totalReviews: {
+        reviewCount: {
             type: Number,
             default: null
         }
@@ -142,17 +142,14 @@ export default {
          * @todo - If the component is using `short` as a `starRatingSize` we shouldn't display text
          * alongside it for now. (TBC with design - ticket in backlog).
          *
-         * @returns {string|boolean}
+         * @returns {string}
          */
         getRatingDisplayFormat () {
-            return this.ratingDisplayType
-                ?
-                this.$t(`ratings.ratingDisplayType.${this.ratingDisplayType}`, {
-                    rating: this.starRating,
-                    maxStarRating: this.maxStarRating,
-                    totalReviews: this.totalReviews
-                })
-                : false;
+            return this.$t(`ratings.ratingDisplayType.${this.ratingDisplayType}`, {
+                rating: this.starRating,
+                maxStarRating: this.maxStarRating,
+                reviewCount: this.reviewCount
+            });
         }
     }
 };
