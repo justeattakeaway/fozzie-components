@@ -4,7 +4,7 @@
  * @module f-content-cards
  */
 
-import ContentCards, { CARDSOURCE_METADATA, CARDSOURCE_CUSTOM } from './components/ContentCards';
+import ContentCards from './components/ContentCards';
 import {
     FirstTimeCustomerCard,
     PromotionCard,
@@ -23,8 +23,6 @@ import PromotionCardTwo from './components/cards/PromotionCardTwo.vue';
 import VoucherCard from './components/cards/VoucherCard.vue';
 
 export {
-    CARDSOURCE_METADATA,
-    CARDSOURCE_CUSTOM,
     ContentCards,
     FirstTimeCustomerCard,
     PromotionCard,
