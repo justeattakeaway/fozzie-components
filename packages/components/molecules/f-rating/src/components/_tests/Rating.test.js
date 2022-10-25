@@ -47,7 +47,7 @@ describe('Rating', () => {
             });
 
             describe('when invoked', () => {
-                it('should return a percentage from a combination of `starRating` and `maxStarRating`', () => {
+                it('should return a correct calculated number from a combination of `starRating` and `maxStarRating`', () => {
                     // Arrange
                     propsData = {
                         starRating: 2
@@ -59,7 +59,7 @@ describe('Rating', () => {
                     });
 
                     // Act & Assert
-                    expect(wrapper.vm.getRatingStarPercentage).toBe('40%');
+                    expect(wrapper.vm.getRatingStarPercentage).toBe(40);
                 });
             });
         });
@@ -192,6 +192,30 @@ describe('Rating', () => {
 
                     // Assert
                     expect(result.exists()).toBe(true);
+                });
+            });
+
+            describe('when `ratingDisplayType` is falsey', () => {
+                it('should not display descriptive content', () => {
+                    // Arrange & Act
+                    propsData = {
+                        starRating: 2,
+                        maxStarRating: 5,
+                        ratingDisplayType: null
+                    };
+                    wrapper = shallowMount(VRating, {
+                        propsData,
+                        localVue,
+                        i18n,
+                        mocks: {
+                            $tc
+                        }
+                    });
+
+                    const result = wrapper.find('[data-test-id="c-rating-displayType"]');
+
+                    // Assert
+                    expect(result.exists()).toBe(false);
                 });
             });
         });

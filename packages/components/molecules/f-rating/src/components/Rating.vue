@@ -19,7 +19,7 @@
                     $style['c-rating-mask'],
                     $style['c-rating-stars-icons']
                 ]"
-                :style="`--starRatingPercentage: ${getRatingStarPercentage}`">
+                :style="`--starRatingPercentage: ${getRatingStarPercentage}%`">
                 <star-filled-icon
                     v-for="star in maxStarRating"
                     :key="star"
@@ -131,7 +131,7 @@ export default {
          * @returns {string}
          */
         getRatingStarPercentage () {
-            return `${(this.starRating / this.maxStarRating) * 100}%`;
+            return (this.starRating / this.maxStarRating) * 100;
         }
     },
 
