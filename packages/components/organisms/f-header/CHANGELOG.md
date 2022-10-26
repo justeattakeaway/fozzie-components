@@ -10,7 +10,7 @@ v10.8.0
 - JE Icon vertical positioning.
 
 ### Changed
-- Nav list now uses flex with whitespace nowrap
+- Remove right padding of country selector Icon (Right-most element)
 
 ### Added
 - `showCorporateLink` - Shows "Corporate Ordering" Link.

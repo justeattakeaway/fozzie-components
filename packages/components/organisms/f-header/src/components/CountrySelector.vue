@@ -125,6 +125,7 @@ export default {
     border: 0;
     display: block;
     padding: f.spacing(c) f.spacing(b);
+    padding-right: 0;
     margin-top: f.spacing(d);
     margin-bottom: f.spacing(d);
     cursor: pointer;
