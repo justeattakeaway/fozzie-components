@@ -1,0 +1,41 @@
+// Add styles here so it can be injected first via vue.config.js.
+@use '@justeat/fozzie/src/scss/fozzie' as f;
+
+.c-rating {
+    display: flex;
+}
+
+.c-rating-stars {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: inline-block;
+}
+.c-rating-stars-icons,
+.c-rating-stars-icon {
+  display: flex;
+}
+
+.c-rating-star {
+  width: 12px;
+}
+
+.c-rating-star--medium {
+  width: 16px;
+}
+
+.c-rating-star--large {
+  width: 28px;
+}
+
+.c-rating-star--filled {
+  & path {
+    fill: f.$color-support-brand-01;
+  }
+}
+
+.c-rating-star--empty {
+  & path {
+    fill: f.$color-mozzarella-50;
+  }
+}

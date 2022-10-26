@@ -32,38 +32,6 @@ describe('Rating', () => {
     });
 
     describe('computed', () => {
-        describe('`getRatingStarPercentage`', () => {
-            it('should exist', () => {
-                // Arrange
-                propsData.starRating = 2;
-                wrapper = shallowMount(VRating, {
-                    propsData,
-                    localVue,
-                    i18n
-                });
-
-                // Act & Assert
-                expect(wrapper.vm.getRatingStarPercentage).toBeDefined();
-            });
-
-            describe('when invoked', () => {
-                it('should return a correct calculated number from a combination of `starRating` and `maxStarRating`', () => {
-                    // Arrange
-                    propsData = {
-                        starRating: 2
-                    };
-                    wrapper = shallowMount(VRating, {
-                        propsData,
-                        localVue,
-                        i18n
-                    });
-
-                    // Act & Assert
-                    expect(wrapper.vm.getRatingStarPercentage).toBe(40);
-                });
-            });
-        });
-
         describe('`getRatingDescription`', () => {
             it('should exist', () => {
                 // Arrange
@@ -107,6 +75,59 @@ describe('Rating', () => {
 
                     // Act & Assert
                     expect(wrapper.vm.getRatingDescription).toMatchSnapshot();
+                });
+            });
+        });
+
+        describe('`setRatingVariant`', () => {
+            it('should exist', () => {
+                // Arrange
+                propsData.starRating = 2;
+                wrapper = shallowMount(VRating, {
+                    propsData,
+                    localVue,
+                    i18n
+                });
+
+                // Act & Assert
+                expect(wrapper.vm.setRatingVariant).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                describe('and prop `isSingleStarVariant` is truthy', () => {
+                    it('should return the single star rating variant: `rating-single-star`', () => {
+                        // Arrange
+                        propsData = {
+                            starRating: 2,
+                            isSingleStarVariant: true
+                        };
+                        wrapper = shallowMount(VRating, {
+                            propsData,
+                            localVue,
+                            i18n
+                        });
+
+                        // Act & Assert
+                        expect(wrapper.vm.setRatingVariant).toBe('rating-single-star');
+                    });
+                });
+
+                describe('and prop `isSingleStarVariant` is falsey', () => {
+                    it('should return the five star rating variant: `rating-five-star`', () => {
+                        // Arrange
+                        propsData = {
+                            starRating: 2,
+                            isSingleStarVariant: false
+                        };
+                        wrapper = shallowMount(VRating, {
+                            propsData,
+                            localVue,
+                            i18n
+                        });
+
+                        // Act & Assert
+                        expect(wrapper.vm.setRatingVariant).toBe('rating-five-star');
+                    });
                 });
             });
         });
@@ -217,6 +238,13 @@ describe('Rating', () => {
                     // Assert
                     expect(result.exists()).toBe(false);
                 });
+            });
+        });
+
+        describe('`isSingleStarVariant`', () => {
+            it('should be set to false by default', () => {
+                // Act & Assert
+                expect(VRating.props.isSingleStarVariant.default).toBe(false);
             });
         });
     });

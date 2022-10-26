@@ -123,5 +123,27 @@ devices.forEach(device => {
                 });
             });
         });
+
+        describe('`isSingleStarVariant`', () => {
+            describe('when populated with `false`', () => {
+                it('should display the five star variant', async () => {
+                    // Act
+                    await Rating.load({ isSingleStarVariant: false });
+
+                    // Assert
+                    await browser.percyScreenshot('f-rating - Visual Test for Prop - isSingleStarVariant = false', device);
+                });
+            });
+
+            describe('when populated with `true`', () => {
+                it('should display a single star variant', async () => {
+                    // Act
+                    await Rating.load({ isSingleStarVariant: true });
+
+                    // Assert
+                    await browser.percyScreenshot('f-rating - Visual Test for Prop - isSingleStarVariant = true', device);
+                });
+            });
+        });
     });
 });

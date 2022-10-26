@@ -3,32 +3,11 @@
         :class="$style['c-rating']"
         data-test-id="rating-component">
         <div :class="$style['c-rating-stars']">
-            <div :class="$style['c-rating-stars-icons']">
-                <star-icon
-                    v-for="star in maxStarRating"
-                    :key="star"
-                    :class="[
-                        $style['c-rating-star'],
-                        $style['c-rating-star--empty'],
-                        $style[`c-rating-star--${starRatingSize}`]
-                    ]" />
-            </div>
-
-            <div
-                :class="[
-                    $style['c-rating-mask'],
-                    $style['c-rating-stars-icons']
-                ]"
-                :style="`--starRatingPercentage: ${getRatingStarPercentage}%`">
-                <star-filled-icon
-                    v-for="star in maxStarRating"
-                    :key="star"
-                    :class="[
-                        $style['c-rating-star'],
-                        $style['c-rating-star--filled'],
-                        $style[`c-rating-star--${starRatingSize}`]
-                    ]" />
-            </div>
+            <component
+                :is="setRatingVariant"
+                :max-star-rating="maxStarRating"
+                :star-rating-size="starRatingSize"
+                :star-rating="starRating" />
 
             <span
                 data-test-id="c-rating-description"
@@ -49,22 +28,20 @@
 </template>
 
 <script>
-import {
-    StarFilledIcon,
-    StarIcon
-} from '@justeattakeaway/pie-icons-vue';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import tenantConfigs from '../tenants';
 import {
     VALID_STAR_RATING_SIZES,
     VALID_STAR_RATING_DISPLAY_TYPE
 } from '../constants';
+import RatingFiveStar from './RatingFiveStarVariant.vue';
+import RatingSingleStar from './RatingSingleStarVariant.vue';
 
 export default {
     name: 'VRating',
     components: {
-        StarFilledIcon,
-        StarIcon
+        RatingFiveStar,
+        RatingSingleStar
     },
 
     mixins: [VueGlobalisationMixin],
@@ -96,6 +73,10 @@ export default {
         reviewCount: {
             type: Number,
             default: null
+        },
+        isSingleStarVariant: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -126,12 +107,14 @@ export default {
         },
 
         /**
-         * Calculate a percentage from the `starRating` value passed in by the consuming application.
+         * Return the correct imported star variant to use based on prop.
          *
          * @returns {string}
          */
-        getRatingStarPercentage () {
-            return (this.starRating / this.maxStarRating) * 100;
+        setRatingVariant () {
+            return this.isSingleStarVariant
+                ? 'rating-single-star'
+                : 'rating-five-star';
         }
     },
 
@@ -157,62 +140,13 @@ export default {
 
 <style lang="scss" module>
 @use '@justeat/fozzie/src/scss/fozzie' as f;
+@use '../../src/assets/scss/rating';
 
-.c-rating {
+.c-rating-message {
     display: flex;
+    align-items: center;
+    @include f.font-size('body-s');
+    font-weight: f.$font-weight-bold;
+    margin-left: f.spacing(a);
 }
-
-.c-rating-stars {
-    margin: 0;
-    padding: 0;
-    position: relative;
-    display: inline-block;
-}
-    .c-rating-stars-icons {
-        display: flex;
-    }
-
-    .c-rating-star {
-        width: 12px;
-    }
-
-    .c-rating-star--medium {
-        width: 16px;
-    }
-
-    .c-rating-star--large {
-        width: 28px;
-    }
-
-    .c-rating-star--filled {
-        & path {
-            fill: f.$color-support-brand-01;
-        }
-    }
-
-    .c-rating-star--empty {
-        & path {
-            fill: f.$color-mozzarella-50;
-        }
-    }
-
-    .c-rating-mask {
-        position: absolute;
-        top: 0;
-        left: 0;
-        overflow: hidden;
-        width: var(--starRatingPercentage);
-
-        svg {
-            flex-shrink: 0;
-        }
-    }
-
-    .c-rating-message {
-        display: flex;
-        align-items: center;
-        @include f.font-size('body-s');
-        font-weight: f.$font-weight-bold;
-        margin-left: f.spacing(a);
-    }
 </style>
