@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-rating",
   "description": "Fozzie Rating - Global Rating component",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "main": "dist/f-rating.umd.min.js",
   "maxBundleSize": "20kB",
   "files": [
