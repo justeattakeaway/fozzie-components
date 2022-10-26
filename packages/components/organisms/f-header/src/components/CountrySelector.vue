@@ -124,7 +124,7 @@ export default {
     background: transparent;
     border: 0;
     display: block;
-    padding: f.spacing(c) f.spacing(c);
+    padding: f.spacing(c) f.spacing(b);
     margin-top: f.spacing(d);
     margin-bottom: f.spacing(d);
     cursor: pointer;

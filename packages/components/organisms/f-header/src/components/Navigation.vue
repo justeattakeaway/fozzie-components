@@ -205,6 +205,7 @@
                             :class="[
                                 $style['c-nav-list-btn-text'],
                                 {
+                                    [$style['c-nav-list-link--condensed']]: isCondensedOnMid,
                                     [$style['c-nav-list-link--alt']]: isAltColour,
                                     [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent'
                                 }]">
@@ -716,6 +717,9 @@ export default {
 
 <style lang="scss" module>
 @use '@justeat/fozzie/src/scss/fozzie' as f;
+$navTextTweakpointWide: f.em(1100);
+$navTextTweakpointMidWide: f.em(910);
+$navTextTweakpointMid: f.em(800);
 
 .c-nav-container {
     display: none;
@@ -734,7 +738,7 @@ export default {
         float: left;
     }
 
-    @include f.media('>wide') {
+    @include f.media('>huge') {
         margin-left: f.spacing(c);
     }
 }
@@ -783,18 +787,30 @@ export default {
     @include f.media('>mid') {
         font-weight: common.$nav-text-weight;
     }
-    @include f.media('>mid', '<wide') {
-        @include f.truncate(200px);
-    }
 
-    $navTextTweakpointMid: f.em(800);
-    $navTextTweakpointMidWide: f.em(900);
     // truncate the length of user friendly name at certain breakpoints
+    @include f.truncate(300px);
+    @include f.media('>mid', '<huge') {
+        max-width: 200px;
+    }
     @include f.media('>mid', '<=#{$navTextTweakpointMid}') {
-        max-width: 78px;
+        max-width: 80px;
     }
     @include f.media('>#{$navTextTweakpointMid}', '<#{$navTextTweakpointMidWide}') {
         max-width: 110px;
+    }
+}
+
+.c-nav-list-link--condensed {
+    // truncate the length of user friendly name at certain breakpoints
+    @include f.media('>mid', '<=#{$navTextTweakpointMid}') {
+        max-width: 60px;
+    }
+    @include f.media('>#{$navTextTweakpointMid}', '<#{$navTextTweakpointMidWide}') {
+        max-width: 90px;
+    }
+    @include f.media('>wide', '<#{$navTextTweakpointWide}') {
+        max-width: 130px;
     }
 }
 

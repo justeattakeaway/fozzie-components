@@ -8,11 +8,13 @@ v10.8.0
 
 ### Fixed
 - JE Icon vertical positioning.
-- Overflow nav-links will not wrap under header to conserve margin and padding.
+
+### Changed
+- Nav list now uses flex with whitespace nowrap
 
 ### Added
 - `showCorporateLink` - Shows "Corporate Ordering" Link.
-- `isCondensedOnMid` - A flag to hide icons and reduce spacing between nav-links on mid screen size.
+- `isCondensedOnMid` - A flag to hide icons, reduce spacing between nav-links on mid screen size and apply stricter friendly name truncation.
 
 
 v10.7.0

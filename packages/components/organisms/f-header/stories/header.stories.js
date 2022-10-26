@@ -137,7 +137,7 @@ HeaderComponent.argTypes = {
     },
 
     condensedOnMid: {
-        description: 'Hides Icons and reduces spacing for mid breakpoint'
+        description: 'Hides Icons, reduces spacing and applies stricter friendly name truncation for mid breakpoint'
     },
 
     tallBelowMid: {
