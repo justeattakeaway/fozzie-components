@@ -2,7 +2,7 @@
     <div :class="$style['c-registration']">
         <card-component
             :data-theme-registration="theme"
-            :card-heading="copy.labels.createAccountTitle"
+            :card-heading="$t('labels.createAccountTitle')"
             is-page-content-wrapper
             card-heading-position="center"
             data-test-id="registration-component"
@@ -20,7 +20,7 @@
                     is-bold
                     is-distinct
                     :href="loginUrl">
-                    {{ copy.navLinks.login.text }}
+                    {{ $t('navLinks.login.text') }}
                 </v-link>
             </p>
             <form
@@ -46,7 +46,7 @@
                     v-model="firstName"
                     name="firstName"
                     required
-                    :label-text="copy.labels.firstName"
+                    :label-text="$t('labels.firstName')"
                     input-type="text"
                     aria-describedby="error-message-firstname"
                     :aria-invalid="!!describeFirstnameErrorMessage"
@@ -67,7 +67,7 @@
                     v-model="lastName"
                     name="lastName"
                     input-type="text"
-                    :label-text="copy.labels.lastName"
+                    :label-text="$t('labels.lastName')"
                     required
                     aria-describedby="error-message-lastname"
                     :aria-invalid="!!describeLastnameErrorMessage"
@@ -89,7 +89,7 @@
                     v-model="email"
                     name="email"
                     input-type="email"
-                    :label-text="copy.labels.email"
+                    :label-text="$t('labels.email')"
                     required
                     aria-describedby="error-message-email"
                     :aria-invalid="!!describeEmailErrorMessage"
@@ -110,7 +110,7 @@
                     v-model="password"
                     name="password"
                     input-type="password"
-                    :label-text="copy.labels.password"
+                    :label-text="$t('labels.password')"
                     required
                     aria-describedby="error-message-password"
                     :aria-invalid="!!describePasswordErrorMessage"
@@ -134,49 +134,50 @@
                     is-full-width
                     action-type="submit"
                     :disabled="shouldDisableCreateAccountButton">
-                    {{ copy.labels.createAccountBtn }}
+                    {{ $t('labels.createAccountBtn') }}
                 </f-button>
             </form>
             <p
                 :class="[
                     $style['c-registration-link'],
                     $style['c-registration-link--bottomSpacing']]">
-                {{ copy.navLinks.termsAndConditions.prefix }}
+                {{ $t('navLinks.termsAndConditions.prefix') }}
                 <v-link
                     is-bold
                     is-distinct
                     data-test-id="ts-and-cs-link"
-                    :href="copy.navLinks.termsAndConditions.url"
+                    :href="$t('navLinks.termsAndConditions.url')"
                     target="_blank"
                     rel="noopener noreferrer">
-                    {{ copy.navLinks.termsAndConditions.text }}
-                </v-link>{{ copy.navLinks.termsAndConditions.suffix }}
-                {{ copy.navLinks.privacyPolicy.prefix }}
+                    {{ $t('navLinks.termsAndConditions.text') }}
+                </v-link>{{ $t('navLinks.termsAndConditions.suffix') }}
+                {{ $t('navLinks.privacyPolicy.prefix') }}
                 <v-link
                     is-bold
                     is-distinct
                     data-test-id="privacy-policy-link"
-                    :href="copy.navLinks.privacyPolicy.url"
+                    :href="$t('navLinks.privacyPolicy.url')"
                     target="_blank"
                     rel="noopener noreferrer">
-                    {{ copy.navLinks.privacyPolicy.text }}
+                    {{ $t('navLinks.privacyPolicy.text') }}
                 </v-link>
-                {{ copy.navLinks.cookiesPolicy.prefix }}
+                {{ $t('navLinks.cookiesPolicy.prefix') }}
                 <v-link
                     is-bold
                     is-distinct
                     data-test-id="cookies-policy-link"
-                    :href="copy.navLinks.cookiesPolicy.url"
+                    :href="$t('navLinks.cookiesPolicy.url')"
                     target="_blank"
                     rel="noopener noreferrer">
-                    {{ copy.navLinks.cookiesPolicy.text }}
-                </v-link>{{ copy.navLinks.cookiesPolicy.suffix }}
+                    {{ $t('navLinks.cookiesPolicy.text') }}
+                </v-link>{{ $t('navLinks.cookiesPolicy.suffix') }}
             </p>
         </card-component>
     </div>
 </template>
 
 <script>
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import { globalisationServices } from '@justeat/f-services';
 import { validationMixin } from 'vuelidate';
 import {
@@ -248,7 +249,10 @@ export default {
         VLink
     },
 
-    mixins: [validationMixin],
+    mixins: [
+        validationMixin,
+        VueGlobalisationMixin
+    ],
 
     props: {
         locale: {
@@ -270,12 +274,9 @@ export default {
     },
 
     data () {
-        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
-        const localeConfig = tenantConfigs[locale];
-        const theme = globalisationServices.getTheme(locale);
+        const theme = globalisationServices.getTheme(this.locale);
 
         return {
-            copy: { ...localeConfig },
             theme,
             firstName: null,
             lastName: null,
@@ -284,7 +285,8 @@ export default {
             shouldDisableCreateAccountButton: false,
             genericErrorMessage: null,
             formStarted: false,
-            conflictedEmailAddress: ''
+            conflictedEmailAddress: '',
+            tenantConfigs
         };
     },
 
@@ -298,64 +300,64 @@ export default {
 
         describeFirstnameErrorMessage () {
             if (this.$v.firstName.$dirty) {
-                const messages = this.copy.validationMessages.firstName;
+                const textKeyPrefix = 'validationMessages.firstName.';
 
                 if (!this.$v.firstName.required) {
-                    return messages.requiredError;
+                    return this.$t(`${textKeyPrefix}requiredError`);
                 }
                 if (!this.$v.firstName.maxLength) {
-                    return messages.maxLengthError;
+                    return this.$t(`${textKeyPrefix}maxLengthError`);
                 }
                 if (!this.$v.firstName.meetsCharacterValidationRules) {
-                    return messages.invalidCharError;
+                    return this.$t(`${textKeyPrefix}invalidCharError`);
                 }
             }
             return '';
         },
         describeLastnameErrorMessage () {
             if (this.$v.lastName.$dirty) {
-                const messages = this.copy.validationMessages.lastName;
+                const textKeyPrefix = 'validationMessages.lastName.';
 
                 if (!this.$v.lastName.required) {
-                    return messages.requiredError;
+                    return this.$t(`${textKeyPrefix}requiredError`);
                 }
                 if (!this.$v.lastName.maxLength) {
-                    return messages.maxLengthError;
+                    return this.$t(`${textKeyPrefix}maxLengthError`);
                 }
                 if (!this.$v.lastName.meetsCharacterValidationRules) {
-                    return messages.invalidCharError;
+                    return this.$t(`${textKeyPrefix}invalidCharError`);
                 }
             }
             return '';
         },
         describeEmailErrorMessage () {
             if (this.$v.email.$dirty) {
-                const messages = this.copy.validationMessages.email;
+                const textKeyPrefix = 'validationMessages.email.';
 
                 if (!this.$v.email.required) {
-                    return messages.requiredError;
+                    return this.$t(`${textKeyPrefix}requiredError`);
                 }
                 if (!this.$v.email.maxLength) {
-                    return messages.maxLengthError;
+                    return this.$t(`${textKeyPrefix}maxLengthError`);
                 }
                 if (!this.$v.email.email) {
-                    return messages.invalidEmailError;
+                    return this.$t(`${textKeyPrefix}invalidEmailError`);
                 }
                 if (!this.$v.email.isValidEmailAddress) {
-                    return messages.alreadyExistsError;
+                    return this.$t(`${textKeyPrefix}alreadyExistsError`);
                 }
             }
             return '';
         },
         describePasswordErrorMessage () {
             if (this.$v.password.$dirty) {
-                const messages = this.copy.validationMessages.password;
+                const textKeyPrefix = 'validationMessages.password.';
 
                 if (!this.$v.password.required) {
-                    return messages.requiredError;
+                    return this.$t(`${textKeyPrefix}requiredError`);
                 }
                 if (!this.$v.password.minLength) {
-                    return messages.minLengthError;
+                    return this.$t(`${textKeyPrefix}minLengthError`);
                 }
             }
             return '';
@@ -518,7 +520,7 @@ export default {
                     }
                 }
 
-                this.genericErrorMessage = this.copy.genericErrorMessage;
+                this.genericErrorMessage = this.$t('genericErrorMessage');
                 this.$emit(EventNames.CreateAccountFailure, this.genericErrorMessage);
             } finally {
                 this.shouldDisableCreateAccountButton = false;
@@ -541,7 +543,7 @@ export default {
             v.email.$touch();
             v.password.$touch();
             if (v.$invalid) {
-                this.genericErrorMessage = `There are ${countErrors()} errors in the form.`;
+                this.genericErrorMessage = this.$t('validationMessages.formError', { errorCount: countErrors() });
                 return true;
             }
             this.genericErrorMessage = '';
