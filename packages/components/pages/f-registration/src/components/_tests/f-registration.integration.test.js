@@ -2,23 +2,14 @@ import httpModule from '@justeat/f-http';
 import { mount, createLocalVue } from '@vue/test-utils';
 import flushPromises from 'flush-promises';
 
+import { VueI18n } from '@justeat/f-globalisation';
+import Vuex from 'vuex';
 import Registration from '../Registration.vue';
 import EventNames from '../../event-names';
 import CONSUMERS_REQUEST_DATA from '../../../test/constants/consumer';
+import { i18n, defaultPropData } from './helpers/setup';
 
-import Vuex from 'vuex';
-import { VueI18n } from '@justeat/f-globalisation';
-
-import {
-    i18n
-} from './helpers/setup';
-
-const propsData = {
-    locale: 'en-GB',
-    createAccountUrl: 'http://localhost/consumer/uk',
-    showLoginLink: true,
-    loginUrl: '/account/register'
-};
+const propsData = defaultPropData;
 
 const localVue = createLocalVue();
 

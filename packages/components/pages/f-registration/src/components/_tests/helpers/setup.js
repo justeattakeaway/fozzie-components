@@ -1,15 +1,20 @@
 import tenantConfigs from '../../../tenants';
 
+const defaultPropData = {
+    locale: 'en-GB',
+    createAccountUrl: 'http://localhost/account/register',
+    showLoginLink: true,
+    loginUrl: '/account/register'
+};
+
 const i18n = {
     locale: 'en-GB',
     messages: {
         'en-GB': tenantConfigs['en-GB'].messages
-    },
-    dateTimeFormats: {
-        'en-GB': tenantConfigs['en-GB'].dateTimeFormats
     }
 };
 
 export {
+    defaultPropData,
     i18n
 };
