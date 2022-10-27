@@ -547,7 +547,7 @@ export default {
 
                 this.genericErrorMessage = errorCount === 1
                     ? this.$t('validationMessages.singleFieldError')
-                    : this.$t('validationMessages.multipleFieldErrors', { errorCount: errorCount });
+                    : this.$t('validationMessages.multipleFieldErrors', { errorCount });
 
                 return true;
             }
