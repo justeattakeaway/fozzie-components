@@ -5,10 +5,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.8.0
 ------------------------------
-*October 26, 2022*
+*October 27, 2022*
 
 ### Changed
-- Update component to use Vue I18n
+- Update component to use Vue I18n.
 - Added translations for form error message.
 
 v3.7.2
