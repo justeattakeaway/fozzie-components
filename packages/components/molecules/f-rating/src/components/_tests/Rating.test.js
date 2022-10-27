@@ -1,6 +1,8 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
 import VRating from '../Rating.vue';
+import RatingSingleStarVariant from '../RatingSingleStarVariant.vue';
+import RatingFiveStarVariant from '../RatingFiveStarVariant.vue';
 import i18n from './helpers/setup';
 import { VALID_STAR_RATING_DISPLAY_TYPE } from '../../constants';
 
@@ -59,7 +61,7 @@ describe('Rating', () => {
                     });
 
                     // Act & Assert
-                    expect(wrapper.vm.getRatingDescription).toMatchSnapshot();
+                    expect(wrapper.vm.getRatingDescription).toBe('1 star out of 5');
                 });
 
                 it('should return a plural description if the rating is greater than 1', () => {
@@ -74,7 +76,7 @@ describe('Rating', () => {
                     });
 
                     // Act & Assert
-                    expect(wrapper.vm.getRatingDescription).toMatchSnapshot();
+                    expect(wrapper.vm.getRatingDescription).toBe('2 stars out of 5');
                 });
             });
         });
@@ -108,7 +110,7 @@ describe('Rating', () => {
                         });
 
                         // Act & Assert
-                        expect(wrapper.vm.setRatingVariant).toBe('rating-single-star');
+                        expect(wrapper.findComponent(RatingSingleStarVariant).exists()).toBe(true);
                     });
                 });
 
@@ -126,7 +128,7 @@ describe('Rating', () => {
                         });
 
                         // Act & Assert
-                        expect(wrapper.vm.setRatingVariant).toBe('rating-five-star');
+                        expect(wrapper.findComponent(RatingFiveStarVariant).exists()).toBe(true);
                     });
                 });
             });

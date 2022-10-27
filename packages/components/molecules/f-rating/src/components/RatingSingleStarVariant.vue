@@ -50,9 +50,7 @@ export default {
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 @use '../../src/assets/scss/rating';
 
-.c-rating-star--empty {
-    & path {
-        fill: f.$color-support-brand-01;
-    }
+.c-rating-star--empty path {
+    fill: f.$color-support-brand-01;
 }
 </style>
