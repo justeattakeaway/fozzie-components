@@ -2,7 +2,7 @@ import { createLocalVue, shallowMount } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
 import VRating from '../Rating.vue';
 import RatingSingleStarVariant from '../RatingSingleStarVariant.vue';
-import RatingFiveStarVariant from '../RatingFiveStarVariant.vue';
+import RatingMultiStarVariant from '../RatingMultiStarVariant.vue';
 import i18n from './helpers/setup';
 import { VALID_STAR_RATING_DISPLAY_TYPE } from '../../constants';
 
@@ -115,7 +115,7 @@ describe('Rating', () => {
                 });
 
                 describe('and prop `isSingleStarVariant` is falsey', () => {
-                    it('should return the five star rating variant: `rating-five-star`', () => {
+                    it('should return a multi star rating variant: `rating-multi-star`', () => {
                         // Arrange
                         propsData = {
                             starRating: 2,
@@ -128,7 +128,7 @@ describe('Rating', () => {
                         });
 
                         // Act & Assert
-                        expect(wrapper.findComponent(RatingFiveStarVariant).exists()).toBe(true);
+                        expect(wrapper.findComponent(RatingMultiStarVariant).exists()).toBe(true);
                     });
                 });
             });
@@ -142,12 +142,12 @@ describe('Rating', () => {
                 expect(VRating.props.starRatingSize.default).toBe('small');
             });
 
-            it('should return a true when type prop of exists', () => {
+            it.each(['small', 'medium', 'large'])('should allow value `%s`', ratingSize => {
                 // Act
                 const { validator } = VRating.props.starRatingSize;
 
-                // Arrange
-                expect(validator('small')).toBe(true);
+                // Assert
+                expect(validator(ratingSize)).toBe(true);
             });
 
             it('should NOT allow invalid props', () => {

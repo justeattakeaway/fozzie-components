@@ -1,7 +1,7 @@
 import { withA11y } from '@storybook/addon-a11y';
 import { locales } from '@justeat/storybook/constants/globalisation';
 import Rating from '../src/components/Rating.vue';
-import RatingFiveStar from '../src/components/RatingFiveStarVariant.vue';
+import RatingMultiStar from '../src/components/RatingMultiStarVariant.vue';
 import RatingSingleStar from '../src/components/RatingSingleStarVariant.vue';
 
 export default {
@@ -12,7 +12,7 @@ export default {
 export const RatingComponent = (args, { argTypes }) => ({
     components: {
         Rating,
-        RatingFiveStar,
+        RatingMultiStar,
         RatingSingleStar
     },
 
@@ -56,7 +56,7 @@ RatingComponent.argTypes = {
     isSingleStarVariant: {
         control: { type: 'select' },
         options: [false, true],
-        description: 'Choose star rating variant (Single = true or Five star = false)',
+        description: 'Choose star rating variant (Single = true or Multi star = false)',
         default: false
     }
 };

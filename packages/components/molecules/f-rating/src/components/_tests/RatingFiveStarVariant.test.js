@@ -1,12 +1,12 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
-import VRatingFiveStarVariant from '../RatingFiveStarVariant.vue';
+import VRatingMultiStarVariant from '../RatingMultiStarVariant.vue';
 import i18n from './helpers/setup';
 
 const localVue = createLocalVue();
 localVue.use(VueI18n);
 
-describe('RatingFiveStarVariant', () => {
+describe('RatingMultiStarVariant', () => {
     let propsData;
     let wrapper;
     const $tc = jest.fn();
@@ -16,7 +16,7 @@ describe('RatingFiveStarVariant', () => {
             starRating: 2,
             maxStarRating: 5
         };
-        wrapper = shallowMount(VRatingFiveStarVariant, {
+        wrapper = shallowMount(VRatingMultiStarVariant, {
             propsData,
             localVue,
             i18n,
@@ -35,7 +35,7 @@ describe('RatingFiveStarVariant', () => {
             it('should exist', () => {
                 // Arrange
                 propsData.starRating = 2;
-                wrapper = shallowMount(VRatingFiveStarVariant, {
+                wrapper = shallowMount(VRatingMultiStarVariant, {
                     propsData,
                     localVue,
                     i18n
@@ -51,7 +51,7 @@ describe('RatingFiveStarVariant', () => {
                     propsData = {
                         starRating: 2
                     };
-                    wrapper = shallowMount(VRatingFiveStarVariant, {
+                    wrapper = shallowMount(VRatingMultiStarVariant, {
                         propsData,
                         localVue,
                         i18n

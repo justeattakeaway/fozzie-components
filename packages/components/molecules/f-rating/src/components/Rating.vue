@@ -34,13 +34,13 @@ import {
     VALID_STAR_RATING_SIZES,
     VALID_STAR_RATING_DISPLAY_TYPE
 } from '../constants';
-import RatingFiveStar from './RatingFiveStarVariant.vue';
+import RatingMultiStar from './RatingMultiStarVariant.vue';
 import RatingSingleStar from './RatingSingleStarVariant.vue';
 
 export default {
     name: 'VRating',
     components: {
-        RatingFiveStar,
+        RatingMultiStar,
         RatingSingleStar
     },
 
@@ -63,7 +63,7 @@ export default {
         starRatingSize: {
             type: String,
             default: 'small',
-            validator: value => !!VALID_STAR_RATING_SIZES[value]
+            validator: value => VALID_STAR_RATING_SIZES.includes(value)
         },
         ratingDisplayType: {
             type: String,
@@ -114,7 +114,7 @@ export default {
         setRatingVariant () {
             return this.isSingleStarVariant
                 ? 'rating-single-star'
-                : 'rating-five-star';
+                : 'rating-multi-star';
         }
     },
 
