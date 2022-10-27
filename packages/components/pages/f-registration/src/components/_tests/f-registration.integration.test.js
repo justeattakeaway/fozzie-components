@@ -1,10 +1,17 @@
 import httpModule from '@justeat/f-http';
-import { mount } from '@vue/test-utils';
+import { mount, createLocalVue } from '@vue/test-utils';
 import flushPromises from 'flush-promises';
 
 import Registration from '../Registration.vue';
 import EventNames from '../../event-names';
 import CONSUMERS_REQUEST_DATA from '../../../test/constants/consumer';
+
+import Vuex from 'vuex';
+import { VueI18n } from '@justeat/f-globalisation';
+
+import {
+    i18n
+} from './helpers/setup';
 
 const propsData = {
     locale: 'en-GB',
@@ -12,6 +19,11 @@ const propsData = {
     showLoginLink: true,
     loginUrl: '/account/register'
 };
+
+const localVue = createLocalVue();
+
+localVue.use(VueI18n);
+localVue.use(Vuex);
 
 const setFormFieldValues = wrapper => {
     wrapper.find('[data-test-id="formfield-firstName-input"]').setValue(CONSUMERS_REQUEST_DATA.firstName);
@@ -36,7 +48,9 @@ describe('Registration API service', () => {
                 $cookies: {
                     remove: jest.fn()
                 }
-            }
+            },
+            localVue,
+            i18n
         });
 
         setFormFieldValues(wrapper);
