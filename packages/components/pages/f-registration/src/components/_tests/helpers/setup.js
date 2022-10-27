@@ -4,7 +4,7 @@ const defaultPropData = {
     locale: 'en-GB',
     createAccountUrl: 'http://localhost/account/register',
     showLoginLink: true,
-    loginUrl: '/account/register'
+    loginUrl: '/account/login'
 };
 
 const i18n = {

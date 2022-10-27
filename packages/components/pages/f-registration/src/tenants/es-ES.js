@@ -33,7 +33,8 @@ export default {
             password: 'Contraseña'
         },
         validationMessages: {
-            formError: 'Hay {errorCount} errores en el formulario',
+            singleFieldError: 'Hay 1 error en el formulario',
+            multipleFieldErrors: 'Hay {errorCount} errores en el formulario',
             firstName: {
                 requiredError: 'Por favor, introduce tu nombre',
                 maxLengthError: 'El nombre supera los 50 caracteres',

@@ -33,7 +33,8 @@ export default {
             password: 'Password'
         },
         validationMessages: {
-            formError: 'Ci sono {errorCount} errori nel modulo',
+            singleFieldError: 'C’è un errore nel modulo',
+            multipleFieldErrors: 'Ci sono {errorCount} errori nel modulo',
             firstName: {
                 requiredError: 'Inserisci il tuo nome',
                 maxLengthError: 'Il nome supera 50 caratteri',

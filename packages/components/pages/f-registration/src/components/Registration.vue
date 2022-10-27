@@ -543,7 +543,12 @@ export default {
             v.email.$touch();
             v.password.$touch();
             if (v.$invalid) {
-                this.genericErrorMessage = this.$t('validationMessages.formError', { errorCount: countErrors() });
+                const errorCount = countErrors();
+
+                this.genericErrorMessage = errorCount === 1
+                    ? this.$t('validationMessages.singleFieldError')
+                    : this.$t('validationMessages.multipleFieldErrors', { errorCount: errorCount });
+
                 return true;
             }
             this.genericErrorMessage = '';
