@@ -717,9 +717,9 @@ export default {
 
 <style lang="scss" module>
 @use '@justeat/fozzie/src/scss/fozzie' as f;
-$navTextTweakpointWide: f.em(1100);
-$navTextTweakpointMidWide: f.em(910);
-$navTextTweakpointMid: f.em(800);
+$navTextTweakpointWide: f.em(1120);
+$navTextTweakpointMidWide: f.em(940);
+$navTextTweakpointMid: f.em(820);
 
 .c-nav-container {
     display: none;
@@ -793,10 +793,10 @@ $navTextTweakpointMid: f.em(800);
     @include f.media('>mid', '<huge') {
         max-width: 200px;
     }
-    @include f.media('>mid', '<=#{$navTextTweakpointMid}') {
+    @include f.media('>mid', '<#{$navTextTweakpointMid}') {
         max-width: 80px;
     }
-    @include f.media('>#{$navTextTweakpointMid}', '<#{$navTextTweakpointMidWide}') {
+    @include f.media('>=#{$navTextTweakpointMid}', '<#{$navTextTweakpointMidWide}') {
         max-width: 110px;
     }
 }
@@ -804,13 +804,13 @@ $navTextTweakpointMid: f.em(800);
 .c-nav-list-link--condensed {
     // truncate the length of user friendly name at certain breakpoints
     @include f.media('>mid', '<=#{$navTextTweakpointMid}') {
-        max-width: 60px;
+        max-width: 65px;
     }
-    @include f.media('>#{$navTextTweakpointMid}', '<#{$navTextTweakpointMidWide}') {
-        max-width: 90px;
+    @include f.media('>=#{$navTextTweakpointMid}', '<#{$navTextTweakpointMidWide}') {
+        max-width: 85px;
     }
-    @include f.media('>wide', '<#{$navTextTweakpointWide}') {
-        max-width: 130px;
+    @include f.media('>=wide', '<#{$navTextTweakpointWide}') {
+        max-width: 120px;
     }
 }
 

@@ -13,7 +13,7 @@
         }]">
         <div
             v-if="hasIcon"
-            :class="[{ [$style['hide-on-mid']]: isCondensedOnMid }]">
+            :class="[$style['c-navLink-icon'], { [$style['hide-on-mid']]: isCondensedOnMid }]">
             <slot name="icon" />
         </div>
         <span
@@ -196,9 +196,21 @@ export default {
     }
 }
 
+.c-navLink-icon {
+    display: flex;
+}
+
 .c-navLink--condensedMid {
-    @include f.media('>mid', '<wide') {
+    $navLinkTweakpointMid: f.em(820);
+    $navLinkTweakpointWide: f.em(1120);
+
+    @include f.media('>mid', '<#{$navLinkTweakpointWide}') {
         padding-left: f.spacing(b);
+        padding-right: f.spacing(b);
+        margin-right: f.spacing(a);
+    }
+    @include f.media('>mid', '<#{$navLinkTweakpointMid}') {
+        margin-right: 0;
     }
 }
 </style>

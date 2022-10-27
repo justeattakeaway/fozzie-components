@@ -15,7 +15,11 @@
             :text="copy.skipToMainContentText"
             :transparent-bg="showTransparentHeader" />
 
-        <div :class="$style['c-header-container']">
+        <div
+            :class="[
+                $style['c-header-container'],
+                { [$style['c-header-container--condensed']]: isCondensedOnMid }
+            ]">
             <logo
                 :theme="theme"
                 :company-name="copy.companyName"
@@ -331,6 +335,14 @@ html:global(.is-navInView) {
         @include f.media('<narrow') {
             padding-left: #{f.$layout-margin--narrow}px;
             padding-right: #{f.$layout-margin--narrow}px;
+        }
+    }
+
+    .c-header-container--condensed {
+        $headerContainerTweakpointMid: f.em(820);
+        @include f.media('>mid', '<#{$headerContainerTweakpointMid}') {
+            padding-left: f.spacing(c);
+            padding-right: f.spacing(a);
         }
     }
 

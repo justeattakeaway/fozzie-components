@@ -10,11 +10,10 @@ v10.8.0
 - JE Icon vertical positioning.
 
 ### Changed
-- Remove right padding of country selector Icon (Right-most element)
-
+- Friendly Name Truncation Tweak Points
 ### Added
 - `showCorporateLink` - Shows "Corporate Ordering" Link.
-- `isCondensedOnMid` - A flag to hide icons, reduce spacing between nav-links on mid screen size and apply stricter friendly name truncation.
+- `isCondensedOnMid` - A flag to hide icons, reduce spacing between nav-links on mid screen size, reduce container padding on tweak points and apply stricter friendly name truncation.
 
 
 v10.7.0
