@@ -804,7 +804,7 @@ $navTextTweakpointMid: f.em(830);
 .c-nav-list-link--condensed {
     // truncate the length of user friendly name at certain breakpoints
     @include f.media('>mid', '<=#{$navTextTweakpointMid}') {
-        max-width: 65px;
+        max-width: 62px;
     }
     @include f.media('>=#{$navTextTweakpointMid}', '<#{$navTextTweakpointMidWide}') {
         max-width: 85px;
