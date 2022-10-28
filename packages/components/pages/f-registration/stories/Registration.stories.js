@@ -43,7 +43,7 @@ RegistrationComponent.argTypes = {
     createAccountUrl : {
         control: { type: 'text' },
         description: 'Create Account URL',
-        defaultValue: '/account/login'
+        defaultValue: '/account/register'
     },
     buttonText : {
         control: { type: 'text' },

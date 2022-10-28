@@ -5,7 +5,7 @@ const devices = [
     'mobile'
 ];
 
-const locales = ['en-GB', 'en-AU', 'en-NZ', 'es-ES', 'it-IT'];
+const locales = ['en-GB', 'en-AU', 'en-NZ', 'en-IE', 'es-ES', 'it-IT'];
 
 devices.forEach(device => {
     locales.forEach(locale => {
