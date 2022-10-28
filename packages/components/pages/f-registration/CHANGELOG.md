@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.9.0
 ------------------------------
-*October 27, 2022*
+*October 28, 2022*
 
 ### Changed
 - Visual tests to include new tenants
