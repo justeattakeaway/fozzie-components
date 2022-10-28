@@ -1,5 +1,6 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import isEqual from 'lodash.isequal';
 import addressService from '../services/addressService';
 import {
     VUEX_CHECKOUT_ANALYTICS_MODULE, DEFAULT_CHECKOUT_ISSUE, DOB_REQUIRED_ISSUE, AGE_VERIFICATION_ISSUE, ERROR_TYPES,
@@ -37,6 +38,16 @@ import {
 
 
 import checkoutIssues from '../checkout-issues';
+
+const initialAddress = {
+    line1: '',
+    line2: '',
+    line3: '',
+    line4: '',
+    administrativeArea: '',
+    locality: '',
+    postcode: ''
+};
 
 /**
  * @param {String} code - The code returned by an API.
@@ -87,7 +98,6 @@ const resolveCustomerDetails = (data, state) => {
     }
 };
 
-
 export default {
     namespaced: true,
 
@@ -118,15 +128,7 @@ export default {
             from: '',
             to: ''
         },
-        address: {
-            line1: '',
-            line2: '',
-            line3: '',
-            line4: '',
-            administrativeArea: '',
-            locality: '',
-            postcode: ''
-        },
+        address: initialAddress,
         notes: {},
         isFulfillable: true,
         errors: [],
@@ -412,39 +414,26 @@ export default {
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
         getGeoLocation: async ({ commit, state }, {
-            url, postData, timeout, tenant
+            url, postData, timeout, tenant, cookies, shouldLoadAddressFromLocalStorage
         }) => {
             let addressCoords;
-
+            const stateAddress = state.address;
             const isAddressInLocalStorage = addressService.isAddressInLocalStorage();
 
-            if (isAddressInLocalStorage) {
-                const storedAddress = addressService.getAddressFromLocalStorage(tenant, false);
+            addressCoords = addressService.getAddressCoordsFromStorage(tenant, cookies, stateAddress, shouldLoadAddressFromLocalStorage);
 
-                if (addressService.doesAddressInStorageAndFormMatch(storedAddress, state.address)) {
-                    addressCoords = storedAddress.Field1 && storedAddress.Field2 ? [storedAddress.Field2, storedAddress.Field1] : null;
-                    commit(UPDATE_GEO_LOCATION, addressCoords);
-                } else {
-                    commit(UPDATE_GEO_LOCATION, null);
-
-                    const addressDetails = state.address;
-
-                    window.localStorage.setItem('je-full-address-details', JSON.stringify({
-                        PostalCode: addressDetails.postcode,
-                        Line1: addressDetails.line1,
-                        Line2: addressDetails.line2,
-                        Line3: addressDetails.line3,
-                        Line4: addressDetails.line4,
-                        administrativeArea: addressDetails.administrativeArea,
-                        City: addressDetails.locality
-                    }));
-                }
+            if (!addressCoords && shouldLoadAddressFromLocalStorage && isAddressInLocalStorage) {
+                addressService.setAddressInLocalStorage(stateAddress);
             }
 
             if (!addressCoords && state.authToken) {
                 const { data } = await addressGeocodingApi.getGeoLocation(url, postData, timeout, state);
+                addressCoords = data?.geometry.coordinates;
+            }
 
-                commit(UPDATE_GEO_LOCATION, data?.geometry.coordinates);
+            // We also accept null as value
+            if (addressCoords !== undefined) {
+                commit(UPDATE_GEO_LOCATION, addressCoords);
             }
         },
 
@@ -496,7 +485,7 @@ export default {
             isFulfillable,
             notices,
             messages,
-            notes, tenant
+            notes
         }) => {
             state.id = id;
             state.serviceType = serviceType;
@@ -509,28 +498,16 @@ export default {
 
             state.time = fulfilment.time.scheduled || state.time;
 
-            let address = null;
-            if (addressService.isAddressInLocalStorage()) {
-                address = addressService.getAddressFromLocalStorage(tenant);
+            const isEmptyAddress = isEqual(state.address, initialAddress);
 
-                if (address) {
-                    state.address.line1 = address.line1;
-                    if (address.line2) { state.address.line2 = address.line2; }
-                    if (address.line3) { state.address.line3 = address.line3; }
-                    if (address.line4) { state.address.line4 = address.line4; }
-                }
-            } else if (fulfilment?.location?.address?.lines) {
-                /* eslint-disable prefer-destructuring */
-                address = fulfilment.location.address;
+            if (isEmptyAddress && fulfilment?.location?.address?.lines) {
+                const { address } = fulfilment.location;
                 if (address) {
                     [state.address.line1, state.address.line2, state.address.line3, state.address.line4] = address.lines;
+                    state.address.locality = address.locality;
+                    state.address.postcode = address.postcode || address.postalCode || address.PostalCode;
+                    state.address.administrativeArea = address.administrativeArea;
                 }
-            }
-
-            if (address) {
-                state.address.locality = address.locality;
-                state.address.postcode = address.postcode || address.postalCode || address.PostalCode;
-                state.address.administrativeArea = address.administrativeArea;
             }
 
             state.geolocation = fulfilment?.location?.geolocation || null;
