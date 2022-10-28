@@ -114,7 +114,7 @@
 import FCard from '@justeat/f-card';
 import MediaElement from '@justeat/f-media-element';
 import { globalisationServices } from '@justeat/f-services';
-import tenantConfigs from '@justeat/f-registration/src/tenants';
+import tenantConfigs from '../tenants';
 import tenantBagFees from '../tenantBagFees';
 
 const formatAsCurrency = (amount, currencySymbol) => `${currencySymbol}${amount
