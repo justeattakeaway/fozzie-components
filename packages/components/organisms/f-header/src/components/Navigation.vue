@@ -717,9 +717,9 @@ export default {
 
 <style lang="scss" module>
 @use '@justeat/fozzie/src/scss/fozzie' as f;
-$navTextTweakpointWide: f.em(1120);
+$navTextTweakpointWide: f.em(1130);
 $navTextTweakpointMidWide: f.em(940);
-$navTextTweakpointMid: f.em(820);
+$navTextTweakpointMid: f.em(830);
 
 .c-nav-container {
     display: none;
@@ -810,7 +810,7 @@ $navTextTweakpointMid: f.em(820);
         max-width: 85px;
     }
     @include f.media('>=wide', '<#{$navTextTweakpointWide}') {
-        max-width: 120px;
+        max-width: 110px;
     }
 }
 

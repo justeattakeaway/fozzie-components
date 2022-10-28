@@ -202,7 +202,7 @@ export default {
 
 .c-navLink--condensedMid {
     $navLinkTweakpointMid: f.em(820);
-    $navLinkTweakpointWide: f.em(1120);
+    $navLinkTweakpointWide: f.em(1130);
 
     @include f.media('>mid', '<#{$navLinkTweakpointWide}') {
         padding-left: f.spacing(b);

@@ -339,7 +339,7 @@ html:global(.is-navInView) {
     }
 
     .c-header-container--condensed {
-        $headerContainerTweakpointMid: f.em(820);
+        $headerContainerTweakpointMid: f.em(830);
         @include f.media('>mid', '<#{$headerContainerTweakpointMid}') {
             padding-left: f.spacing(c);
             padding-right: f.spacing(a);
