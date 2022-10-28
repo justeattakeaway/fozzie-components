@@ -208,6 +208,11 @@ export default {
         checkoutFeatures: {
             type: Object,
             default: () => ({})
+        },
+
+        shouldLoadAddressFromLocalStorage: {
+            type: Boolean,
+            default: true
         }
     },
 
@@ -273,7 +278,7 @@ export default {
                 (!this.address || !this.address.line1);
         },
 
-        /* If phone number is missing both from chckout api and from
+        /* If phone number is missing both from checkout api and from
         * `state.AuthToken`, then retrieve the phone number from customer api
         * This can happen for newly created guest */
         shouldLoadCustomer () {
@@ -429,8 +434,8 @@ export default {
             this.isLoading = true;
 
             const promises = this.isLoggedIn
-                ? [this.loadBasket(), this.loadCheckout(), this.loadAvailableFulfilment()]
-                : [this.loadBasket(), this.loadAddressFromLocalStorage(), this.loadAvailableFulfilment()];
+                ? [this.loadBasket(), this.loadAddressFromStorage(), this.loadCheckout(), this.loadAvailableFulfilment()]
+                : [this.loadBasket(), this.loadAddressFromStorage(), this.loadAvailableFulfilment()];
 
             await Promise.all(promises);
 
@@ -449,11 +454,11 @@ export default {
         },
 
         /**
-         * Update address lines if localStorage is populated.
+         * Update address lines if it is saved in storage.
          *
          * */
-        loadAddressFromLocalStorage () {
-            const address = addressService.getAddressFromLocalStorage(this.tenant);
+        loadAddressFromStorage () {
+            const address = addressService.getAddressFromStorage(this.tenant, this.$cookies, this.shouldLoadAddressFromLocalStorage);
 
             if (address) {
                 this.updateAddress(address);
@@ -773,7 +778,9 @@ export default {
                             url: this.getGeoLocationUrl,
                             postData: locationData,
                             timeout: this.checkoutTimeout,
-                            tenant: this.tenant
+                            tenant: this.tenant,
+                            cookies: this.$cookies,
+                            shouldLoadAddressFromLocalStorage: this.shouldLoadAddressFromLocalStorage
                         });
                     }
                 } catch (error) {
