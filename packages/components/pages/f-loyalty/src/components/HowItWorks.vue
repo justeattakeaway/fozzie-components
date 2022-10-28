@@ -113,6 +113,9 @@
 <script>
 import FCard from '@justeat/f-card';
 import MediaElement from '@justeat/f-media-element';
+import { globalisationServices } from '@justeat/f-services';
+import tenantConfigs from '@justeat/f-registration/src/tenants';
+import tenantBagFees from '../tenantBagFees';
 
 const formatAsCurrency = (amount, currencySymbol) => `${currencySymbol}${amount
     .toFixed(2)}`;
@@ -125,14 +128,25 @@ export default {
         MediaElement
     },
 
-    data: () => ({
-        flexLayout: {
-            default: {
-                column: true,
-                reverse: true
-            }
+    props: {
+        locale: {
+            type: String,
+            default: ''
         }
-    }),
+    },
+
+    data () {
+        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
+        return {
+            tenant: locale,
+            flexLayout: {
+                default: {
+                    column: true,
+                    reverse: true
+                }
+            }
+        };
+    },
 
     computed: {
         bags () {
@@ -143,7 +157,7 @@ export default {
             // _Very_ naive way of implementing ordinals but will suit our purposes here
             const ordinal = { 0: 'st', 1: 'nd', 2: 'rd' };
 
-            return [...this.$t('howItWorks.bagValues')].map((bagValue, index) => ({
+            return [...tenantBagFees(this.tenant)].map((bagValue, index) => ({
                 number: `${index + 1}${ordinal[index] || 'th'}`,
                 image: `${this.$t('howItWorks.imagePath')}bag-${currency}-${bagValue}.svg`,
                 value: formatAsCurrency(bagValue * percentage * 0.01, currencySymbol)
@@ -178,11 +192,12 @@ export default {
 
         total () {
             return formatAsCurrency(
-                [...this.$t('howItWorks.bagValues')].reduce((sum, current) => sum + current, 0) * this.$t('percentage') * 0.01,
+                [...tenantBagFees(this.tenant)].reduce((sum, current) => sum + current, 0) * this.$t('percentage') * 0.01,
                 this.$t('currencySymbol')
             );
         }
     }
+
 };
 </script>
 

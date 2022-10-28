@@ -34,13 +34,6 @@ const messages = {
     },
     howItWorks: {
         imagePath: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/',
-        bagValues: [
-            25,
-            30,
-            35,
-            25,
-            30
-        ],
         title: 'Save on your favourite flavours',
         text: 'Get rewarded for your loyalty. Start collecting stamps from your favourite restaurants and unlock a tasty little discount on the way…',
         exampleSection: {

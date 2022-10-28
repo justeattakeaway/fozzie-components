@@ -24,8 +24,9 @@ beforeEach(() => {
 describe('HowItWorksLayout', () => {
     it('should be defined', () => {
         // Arrange
+        const locale = 'en-AU';
         const i18n = {
-            locale: 'en-AU',
+            locale,
             fallbackLocale: 'en-AU',
             messages
         };
@@ -34,6 +35,9 @@ describe('HowItWorksLayout', () => {
         wrapper = shallowMount(HowItWorksLayout, {
             localVue,
             i18n,
+            propsData: {
+                locale
+            },
             mocks: {
                 $t: key => i18nMocker(key, i18n.locale)
             }
@@ -46,8 +50,9 @@ describe('HowItWorksLayout', () => {
     describe('when in AU', () => {
         beforeEach(() => {
             // Arrange
+            const locale = 'en-AU';
             const i18n = {
-                locale: 'en-AU',
+                locale,
                 fallbackLocale: 'en-AU',
                 messages
             };
@@ -56,6 +61,9 @@ describe('HowItWorksLayout', () => {
             wrapper = shallowMount(HowItWorksLayout, {
                 localVue,
                 i18n,
+                propsData: {
+                    locale
+                },
                 mocks: {
                     $t: key => i18nMocker(key, i18n.locale)
                 }
@@ -102,8 +110,9 @@ describe('HowItWorksLayout', () => {
     describe('when in UK', () => {
         beforeEach(() => {
             // Arrange
+            const locale = 'en-GB';
             const i18n = {
-                locale: 'en-GB',
+                locale,
                 fallbackLocale: 'en-GB',
                 messages
             };
@@ -113,6 +122,9 @@ describe('HowItWorksLayout', () => {
             wrapper = shallowMount(HowItWorksLayout, {
                 localVue,
                 i18n,
+                propsData: {
+                    locale
+                },
                 mocks: {
                     $t: key => i18nMocker(key, i18n.locale)
                 }
@@ -159,8 +171,9 @@ describe('HowItWorksLayout', () => {
     describe('when in NZ', () => {
         beforeEach(() => {
             // Arrange
+            const locale = 'en-NZ';
             const i18n = {
-                locale: 'en-NZ',
+                locale,
                 fallbackLocale: 'en-NZ',
                 messages
             };
@@ -169,6 +182,9 @@ describe('HowItWorksLayout', () => {
             wrapper = shallowMount(HowItWorksLayout, {
                 localVue,
                 i18n,
+                propsData: {
+                    locale
+                },
                 mocks: {
                     $t: key => i18nMocker(key, i18n.locale)
                 }
@@ -215,8 +231,9 @@ describe('HowItWorksLayout', () => {
     describe('when in IE', () => {
         beforeEach(() => {
             // Arrange
+            const locale = 'en-IE';
             const i18n = {
-                locale: 'en-IE',
+                locale,
                 fallbackLocale: 'en-IE',
                 messages
             };
@@ -225,6 +242,9 @@ describe('HowItWorksLayout', () => {
             wrapper = shallowMount(HowItWorksLayout, {
                 localVue,
                 i18n,
+                propsData: {
+                    locale
+                },
                 mocks: {
                     $t: key => i18nMocker(key, i18n.locale)
                 }
