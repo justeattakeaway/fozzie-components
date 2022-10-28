@@ -1,11 +1,15 @@
 import {
     mount,
-    shallowMount
+    shallowMount,
+    createLocalVue
 } from '@vue/test-utils';
 import flushPromises from 'flush-promises';
+import { VueI18n } from '@justeat/f-globalisation';
+import Vuex from 'vuex';
 import RegistrationServiceApi from '../../services/RegistrationServiceApi';
 import Registration from '../Registration.vue';
 import EventNames from '../../event-names';
+import { i18n, defaultPropData } from './helpers/setup';
 
 jest.mock('../../services/RegistrationServiceApi', () => ({
     createAccount: jest.fn()
@@ -13,18 +17,20 @@ jest.mock('../../services/RegistrationServiceApi', () => ({
 
 let wrapper;
 
+const localVue = createLocalVue();
+
+localVue.use(VueI18n);
+localVue.use(Vuex);
+
 describe('Registration', () => {
-    const propsData = {
-        locale: 'en-GB',
-        createAccountUrl: 'http://localhost/account/register',
-        showLoginLink: true,
-        loginUrl: '/account/register'
-    };
+    const propsData = defaultPropData;
 
     it('should be defined', () => {
         // Arrange & Act
         wrapper = shallowMount(Registration, {
-            propsData
+            propsData,
+            localVue,
+            i18n
         });
 
         // Assert
@@ -34,7 +40,9 @@ describe('Registration', () => {
     it('should have one form with method "post"', () => {
         // Arrange
         wrapper = mount(Registration, {
-            propsData
+            propsData,
+            localVue,
+            i18n
         });
 
         // Act
@@ -48,7 +56,9 @@ describe('Registration', () => {
     it('should have a button', () => {
         // Arrange
         wrapper = shallowMount(Registration, {
-            propsData
+            propsData,
+            localVue,
+            i18n
         });
 
         // Act
@@ -66,7 +76,9 @@ describe('Registration', () => {
                     createAccountUrl: 'http://localhost/account/register',
                     showLoginLink: true,
                     loginUrl: '/account/register'
-                }
+                },
+                localVue,
+                i18n
             });
 
             // Act
@@ -83,7 +95,9 @@ describe('Registration', () => {
                     createAccountUrl: 'http://localhost/account/register',
                     showLoginLink: false,
                     loginUrl: ''
-                }
+                },
+                localVue,
+                i18n
             });
 
             // Act
@@ -96,7 +110,9 @@ describe('Registration', () => {
         it('should show the login link if showLoginLink prop not set', () => {
             // Arrange
             wrapper = shallowMount(Registration, {
-                propsData
+                propsData,
+                localVue,
+                i18n
             });
 
             // Act
@@ -113,7 +129,9 @@ describe('Registration', () => {
                     createAccountUrl: 'http://localhost/account/register',
                     showLoginLink: true,
                     loginUrl: '/account/register'
-                }
+                },
+                localVue,
+                i18n
             });
 
             // Act
@@ -137,7 +155,9 @@ describe('Registration', () => {
                     $cookies: {
                         remove: jest.fn()
                     }
-                }
+                },
+                localVue,
+                i18n
             });
         };
 

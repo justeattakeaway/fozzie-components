@@ -4,3 +4,5 @@ export const VALID_STAR_RATING_SIZES = {
     medium: true,
     large: true
 };
+
+export const VALID_STAR_RATING_DISPLAY_TYPE = ['noRating', 'short', 'medium', 'long'];
