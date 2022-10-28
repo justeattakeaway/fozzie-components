@@ -15,7 +15,7 @@ const additionalAddress = {
     ZipCode: '8042',
     Line1: '42 Tintern Avenue',
     Line2: 'Flat 1',
-    Line3: 'null',
+    Line3: null,
     Line4: 'Riccarton',
     AddressId: 18086210
 };
