@@ -1,3 +1,4 @@
+import { when } from 'jest-when';
 import addressService from '../addressService';
 import localStorageMock from '../../../test-utils/local-storage/local-storage-mock';
 import { Addresses } from '../../../stories/helpers/addresses';
@@ -254,6 +255,158 @@ describe('addressService', () => {
         });
     });
 
+    describe('getAddressCoords ::', () => {
+        it('should return coordinates in correct order', () => {
+            // Arrange
+            const address = {
+                Line1: 'Flat 101',
+                Line2: 'Made Up House',
+                Line3: 'Camden Town',
+                Line4: '',
+                Line5: '',
+                City: 'London',
+                Field1: '51.529747',
+                Field2: '-0.142396',
+                PostalCode: 'NW1 4DE',
+                searchBoxAddress: 'NW1 4DE'
+            };
+
+            const expectedCoords = ['51.529747', '-0.142396'];
+
+            // Act & Assert
+            expect(addressService.getAddressCoords(address)).toEqual(expectedCoords);
+        });
+
+        it('should return coordinates in reverse order if shouldReverse is truthy', () => {
+            // Arrange
+            const address = {
+                Line1: 'Flat 101',
+                Line2: 'Made Up House',
+                Line3: 'Camden Town',
+                Line4: '',
+                Line5: '',
+                City: 'London',
+                Field1: '51.529747',
+                Field2: '-0.142396',
+                PostalCode: 'NW1 4DE',
+                searchBoxAddress: 'NW1 4DE'
+            };
+
+            const expectedCoords = ['-0.142396', '51.529747'];
+
+            // Act & Assert
+            expect(addressService.getAddressCoords(address, true)).toEqual(expectedCoords);
+        });
+
+        it('should return null if coordinates are missing in address', () => {
+            // Arrange
+            const address = {
+                Line1: 'Flat 101',
+                Line2: 'Made Up House',
+                Line3: 'Camden Town',
+                Line4: '',
+                Line5: '',
+                City: 'London',
+                Field1: null,
+                Field2: null,
+                PostalCode: 'NW1 4DE',
+                searchBoxAddress: 'NW1 4DE'
+            };
+
+            // Act & Assert
+            expect(addressService.getAddressCoords(address)).toEqual(null);
+        });
+    });
+
+    describe('getAddressFromCookie ::', () => {
+        const tenant = 'au';
+        it('when the input cookies parameter is invalid should return null', () => {
+            // Arrange
+            const invalidCookies = {};
+            // Act & Assert
+            expect(addressService.getAddressFromCookie(tenant, invalidCookies)).toBe(null);
+        });
+
+        it('when the address does NOT exists in cookies returns null', () => {
+            // Arrange
+            const emptyCookies = { get: jest.fn().mockReturnValue(null) };
+            // Act & Assert
+            expect(addressService.getAddressFromCookie(tenant, emptyCookies)).toBe(null);
+        });
+
+        it('when the address in cookies is incomplete returns null', () => {
+            // Arrange
+            const get = jest.fn();
+            when(get).calledWith('je-last_houseNo_used').mockReturnValue('1');
+            const incompleteCookies = { get };
+
+            // Act & Assert
+            expect(addressService.getAddressFromCookie(tenant, incompleteCookies)).toBe(null);
+        });
+
+        describe('when the address does exist in cookies', () => {
+            let get;
+            let cookies;
+            const houseNumber = '35';
+            const street = 'Myrtle Bank Road';
+            const unitNumber = 'Flat 1';
+            const latitude = '54.24';
+            const longitude = '0.24';
+            const sublocality = '1';
+            const state = 'TAS';
+            const postalCode = '7259';
+            const city = 'Myrtle Bank';
+            const searchBoxAddress = '35 Myrtle Bank Road Flat 1, Myrtle Bank 7259 TAS, Australia';
+
+            beforeEach(() => {
+                // Arrange - cookies
+                get = jest.fn();
+                when(get).calledWith('je-last_houseNo_used').mockReturnValue(houseNumber);
+                when(get).calledWith('je-last_street_used').mockReturnValue(street);
+                when(get).calledWith('je-last_unitNumber_used').mockReturnValue(unitNumber);
+                when(get).calledWith('je-last_latitude_used').mockReturnValue(latitude);
+                when(get).calledWith('je-last_longitude_used').mockReturnValue(longitude);
+                when(get).calledWith('je-last_sublocality_used').mockReturnValue(sublocality);
+                when(get).calledWith('je-last_state_used').mockReturnValue(state);
+                when(get).calledWith('je-location').mockReturnValue(postalCode);
+                when(get).calledWith('je-last_city_used').mockReturnValue(city);
+                when(get).calledWith('je-last_suggestion_used').mockReturnValue(searchBoxAddress);
+                cookies = { get };
+            });
+
+            it('return correct address', () => {
+                // Arrange
+                const expectedAddress = {
+                    line1: `${houseNumber} ${street}`,
+                    line2: unitNumber,
+                    locality: city,
+                    administrativeArea: state,
+                    postcode: postalCode
+                };
+
+                // Act & Assert
+                expect(addressService.getAddressFromCookie(tenant, cookies)).toStrictEqual(expectedAddress);
+            });
+
+            it('return correct unformatted address when mapped is falsy', () => {
+                // Arrange
+                const expectedAddress = {
+                    Line1: `${houseNumber} ${street}`,
+                    Line2: unitNumber,
+                    Line3: sublocality,
+                    administrativeArea: state,
+                    City: city,
+                    PostalCode: postalCode,
+                    Field1: latitude,
+                    Field2: longitude,
+                    searchBoxAddress
+                };
+                // Act & Assert
+                expect(addressService.getAddressFromCookie(tenant, cookies, false)).toStrictEqual(expectedAddress);
+            });
+        });
+    });
+
     describe('doesAddressInStorageAndFormMatch ::', () => {
         describe('when the address fields are the same', () => {
             it('should return true', () => {
@@ -318,6 +471,40 @@ describe('addressService', () => {
 
                 // Act & Assert
                 expect(addressService.doesAddressInStorageAndFormMatch(storageAddress, formAddress)).toEqual(false);
+            });
+        });
+    });
+
+    describe('setAddressInLocalStorage ::', () => {
+        const addressDetails = {
+            postcode: 'TA3 1SS',
+            line1: '86 Pier Road',
+            line2: 'Flat 1',
+            line3: null,
+            line4: null,
+            administrativeArea: null,
+            locality: 'Stapley'
+        };
+
+        describe('when local storage is available', () => {
+            it('save address in local storage correctly', () => {
+                // Arrange
+                const spy = jest.spyOn(window.localStorage, 'setItem');
+                const expectedValue = JSON.stringify({
+                    PostalCode: addressDetails.postcode,
+                    Line1: addressDetails.line1,
+                    Line2: addressDetails.line2,
+                    Line3: addressDetails.line3,
+                    Line4: addressDetails.line4,
+                    administrativeArea: addressDetails.administrativeArea,
+                    City: addressDetails.locality
+                });
+
+                // Act
+                addressService.setAddressInLocalStorage(addressDetails);
+
+                // Assert
+                expect(spy).toHaveBeenCalledWith('je-full-address-details', expectedValue);
             });
         });
     });
