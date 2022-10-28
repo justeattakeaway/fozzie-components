@@ -19,7 +19,7 @@ export const RegistrationComponent = () => ({
     components: { Registration },
     props: {
         locale: {
-            default: select('Locale', ['en-GB', 'en-AU'])
+            default: select('Locale', ['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'es-ES', 'it-IT'])
         },
         title: {
             default: text('Title', 'Create Account')
