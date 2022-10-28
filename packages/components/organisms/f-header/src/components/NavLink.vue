@@ -201,7 +201,7 @@ export default {
 }
 
 .c-navLink--condensedMid {
-    $navLinkTweakpointMid: f.em(820);
+    $navLinkTweakpointMid: f.em(830);
     $navLinkTweakpointWide: f.em(1130);
 
     @include f.media('>mid', '<#{$navLinkTweakpointWide}') {
