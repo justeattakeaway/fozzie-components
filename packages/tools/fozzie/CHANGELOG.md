@@ -8,6 +8,15 @@ Future Todo List
 - Make typography and utility classes silent extenders (so that they can be extended by components without importing all utility classes).
 
 
+v10.8.0
+------------------------------
+*October 25, 2022*
+
+### Changed
+- Updated to `v3.2.0` of `pie-design-tokens`
+- Some minor dependency updates
+
+
 v10.7.0
 ------------------------------
 *October 13, 2022*

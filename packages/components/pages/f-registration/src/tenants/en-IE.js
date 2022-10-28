@@ -1,6 +1,6 @@
 export default {
     messages: {
-        locale: 'en-GB',
+        locale: 'en-IE',
         genericErrorMessage: 'Unable to Create Account at this time',
         navLinks: {
             termsAndConditions: {
@@ -51,7 +51,6 @@ export default {
                 invalidEmailError: 'Please enter your email address correctly',
                 alreadyExistsError: 'Email address is already registered'
             },
-
             password: {
                 requiredError: 'Please enter a password',
                 minLengthError: 'Password is less than ten characters'
