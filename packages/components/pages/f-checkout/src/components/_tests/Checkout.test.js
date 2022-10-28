@@ -4,6 +4,7 @@ import flushPromises from 'flush-promises';
 import { VueI18n } from '@justeat/f-globalisation';
 import { validations } from '@justeat/f-services';
 import VueScrollTo from 'vue-scrollto';
+import Cookies from 'universal-cookie';
 import {
     ANALYTICS_ERROR_CODE_INVALID_MODEL_STATE,
     CHECKOUT_METHOD_DELIVERY,
@@ -56,6 +57,8 @@ jest.mock('../../services/analytics', () => jest.fn().mockImplementation(() => (
     trackLowValueOrderExperiment: jest.fn(),
     trackGuestCheckoutSubmission: jest.fn()
 })));
+
+jest.mock('universal-cookie', () => jest.fn());
 
 const message = {
     code: ERROR_CODE_FULFILMENT_TIME_INVALID,
@@ -114,6 +117,8 @@ describe('Checkout', () => {
 
     beforeEach(() => {
         windowLocationSpy = jest.spyOn(window.location, 'assign').mockImplementation();
+        const get = jest.fn().mockReturnValue(null);
+        Cookies.mockImplementation(() => ({ get }));
     });
 
     afterEach(() => {
@@ -885,9 +890,9 @@ describe('Checkout', () => {
                     expect(loadCheckoutSpy).not.toHaveBeenCalled();
                 });
 
-                it('should call `loadAddressFromLocalStorage` so we can pre-populate the guest checkout address', async () => {
+                it('should call `loadAddressFromStorage`', async () => {
                     // Arrange & Act
-                    const loadAddressFromLocalStorageSpy = jest.spyOn(VueCheckout.methods, 'loadAddressFromLocalStorage');
+                    const loadAddressFromStorageSpy = jest.spyOn(VueCheckout.methods, 'loadAddressFromStorage');
 
                     shallowMount(VueCheckout, {
                         store: createStore(),
@@ -898,7 +903,7 @@ describe('Checkout', () => {
                     await flushPromises();
 
                     // Assert
-                    expect(loadAddressFromLocalStorageSpy).toHaveBeenCalled();
+                    expect(loadAddressFromStorageSpy).toHaveBeenCalled();
                 });
             });
 
@@ -919,9 +924,9 @@ describe('Checkout', () => {
                     expect(loadCheckoutSpy).toHaveBeenCalled();
                 });
 
-                it('should not call `loadAddressFromLocalStorage`', async () => {
+                it('should call `loadAddressFromStorage`', async () => {
                     // Arrange & Act
-                    const loadAddressFromLocalStorageSpy = jest.spyOn(VueCheckout.methods, 'loadAddressFromLocalStorage');
+                    const loadAddressFromStorageSpy = jest.spyOn(VueCheckout.methods, 'loadAddressFromStorage');
 
                     shallowMount(VueCheckout, {
                         store: createStore({ ...defaultCheckoutState, isLoggedIn: true }),
@@ -932,15 +937,15 @@ describe('Checkout', () => {
                     await flushPromises();
 
                     // Assert
-                    expect(loadAddressFromLocalStorageSpy).not.toHaveBeenCalled();
+                    expect(loadAddressFromStorageSpy).toHaveBeenCalled();
                 });
             });
         });
 
-        describe('loadAddressFromLocalStorage ::', () => {
-            it('should make a call to `addressService.getAddressFromLocalStorage`', () => {
+        describe('loadAddressFromStorage ::', () => {
+            it('should make a call to `addressService.getAddressFromStorage`', () => {
                 // Arrange
-                const addressServiceSpy = jest.spyOn(addressService, 'getAddressFromLocalStorage');
+                const addressServiceSpy = jest.spyOn(addressService, 'getAddressFromStorage');
 
                 const wrapper = shallowMount(VueCheckout, {
                     store: createStore(),
@@ -951,14 +956,77 @@ describe('Checkout', () => {
                         return {
                             isLoading: true
                         };
+                    },
+                    mocks: {
+                        $cookies
                     }
                 });
 
                 // Act
-                wrapper.vm.loadAddressFromLocalStorage();
+                wrapper.vm.loadAddressFromStorage();
 
                 // Assert
-                expect(addressServiceSpy).toHaveBeenCalledWith(ukTenant);
+                expect(addressServiceSpy).toHaveBeenCalledWith(ukTenant, $cookies, true);
+            });
+
+            it('should call `updateAddress` if `addressService.getAddressFromStorage` returns address', () => {
+                // Arrange
+                const address = {
+                    line1: 'Fleet Place House',
+                    line2: 'Farringdon',
+                    locality: 'London',
+                    postcode: 'EC4M 7RE'
+                };
+                jest.spyOn(addressService, 'getAddressFromStorage').mockReturnValue(address);
+                const updateAddressSpy = jest.spyOn(VueCheckout.methods, 'updateAddress').mockImplementation();
+
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    data () {
+                        return {
+                            isLoading: true
+                        };
+                    },
+                    mocks: {
+                        $cookies
+                    }
+                });
+
+                // Act
+                wrapper.vm.loadAddressFromStorage();
+
+                // Assert
+                expect(updateAddressSpy).toHaveBeenCalledWith(address);
+            });
+
+            it('should not call `updateAddress` if `addressService.getAddressFromStorage` does not return address', () => {
+                // Arrange
+                jest.spyOn(addressService, 'getAddressFromStorage').mockReturnValue(null);
+                const updateAddressSpy = jest.spyOn(VueCheckout.methods, 'updateAddress');
+
+                const wrapper = shallowMount(VueCheckout, {
+                    store: createStore(),
+                    i18n,
+                    localVue,
+                    propsData,
+                    data () {
+                        return {
+                            isLoading: true
+                        };
+                    },
+                    mocks: {
+                        $cookies
+                    }
+                });
+
+                // Act
+                wrapper.vm.loadAddressFromStorage();
+
+                // Assert
+                expect(updateAddressSpy).not.toHaveBeenCalled();
             });
         });
 
@@ -2194,7 +2262,9 @@ describe('Checkout', () => {
                         ]
                     },
                     timeout: 60000,
-                    tenant: ukTenant
+                    tenant: ukTenant,
+                    cookies: $cookies,
+                    shouldLoadAddressFromLocalStorage: true
                 };
 
                 beforeEach(async () => {
@@ -2269,7 +2339,7 @@ describe('Checkout', () => {
                 });
             });
 
-            describe('when adddress is empty', () => {
+            describe('when address is empty', () => {
                 // Arrange
                 let wrapper;
                 let getGeoLocationSpy;

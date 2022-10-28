@@ -1,7 +1,6 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import CheckoutModule from '../checkout.module';
-import storageMock from '../../../test-utils/local-storage/local-storage-mock';
 import addressService from '../../services/addressService';
 import basketApi from '../../services/basketApi';
 import checkoutApi from '../../services/checkoutApi';
@@ -251,21 +250,21 @@ describe('CheckoutModule', () => {
                 expect(state.address).toEqual(defaultState.address);
             });
 
-            it('should update address with stored address if it exists', () => {
+            it('should not update address if it exists', () => {
                 // Arrange
-                jest.spyOn(addressService, 'isAddressInLocalStorage').mockReturnValue(true);
-                jest.spyOn(addressService, 'getAddressFromLocalStorage').mockReturnValue({
-                    line1: 'Flat 101',
-                    line2: 'Windsor House',
+                const stateAddress = {
+                    line1: '431',
+                    line2: 'Prince Regent Ln',
                     locality: 'London',
-                    postcode: 'NW1 4DE'
-                });
+                    postcode: 'E16 3HX'
+                };
+                state.address = stateAddress;
 
                 // Act
-                mutations[UPDATE_STATE](state, { ...checkoutDelivery, tenant: 'uk' });
+                mutations[UPDATE_STATE](state, checkoutDelivery);
 
                 // Assert
-                expect(state.address).toMatchSnapshot();
+                expect(state.address).toBe(stateAddress);
             });
         });
 
@@ -1132,6 +1131,7 @@ describe('CheckoutModule', () => {
         describe('getGeoLocation ::', () => {
             beforeEach(() => {
                 payload.postData = locationData;
+                payload.cookies = jest.fn();
 
                 addressGeocodingApi.getGeoLocation = jest.fn(() => Promise.resolve({
                     status: 200,
@@ -1139,28 +1139,24 @@ describe('CheckoutModule', () => {
                 }));
             });
 
-            describe('if the auth token is set', () => {
-                beforeEach(() => {
-                    state.authToken = authToken;
-                });
-
-                it(`should get the geo location details from the backend and call ${UPDATE_GEO_LOCATION} mutation.`, async () => {
-                    // Act
-                    await getGeoLocation(context, payload);
-
-                    // Assert
-                    expect(addressGeocodingApi.getGeoLocation).toHaveBeenCalledWith(payload.url, locationData, payload.timeout, state);
-                    expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, geoLocationDetails.geometry.coordinates);
-                });
-            });
-
             describe('if the auth token is not set', () => {
                 beforeEach(() => {
                     state.authToken = null;
                 });
 
-                it('should not make api call and should not call mutation.', async () => {
+                it('should not make api call and should call mutation if getAddressCoordsFromStorage returns null', async () => {
                     // Act
+                    jest.spyOn(addressService, 'getAddressCoordsFromStorage').mockReturnValue(null);
+                    await getGeoLocation(context, payload);
+
+                    // Assert
+                    expect(addressGeocodingApi.getGeoLocation).not.toHaveBeenCalled();
+                    expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, null);
+                });
+
+                it('should not make api call and should not call mutation if getAddressCoordsFromStorage returns undefined', async () => {
+                    // Act
+                    jest.spyOn(addressService, 'getAddressCoordsFromStorage').mockReturnValue(undefined);
                     await getGeoLocation(context, payload);
 
                     // Assert
@@ -1182,29 +1178,103 @@ describe('CheckoutModule', () => {
                     PostalCode: 'NW1 4DE',
                     searchBoxAddress: 'NW1 4DE'
                 };
+                const newPayload = {
+                    ...payload,
+                    shouldLoadAddressFromLocalStorage: true
+                };
 
                 beforeEach(() => {
                     state.authToken = authToken;
 
-                    Object.defineProperty(window, 'localStorage', { value: storageMock });
-
                     jest.spyOn(addressService, 'isAddressInLocalStorage').mockReturnValue(true);
-                    jest.spyOn(addressService, 'getAddressFromLocalStorage').mockReturnValue({
-                        Line1: storedAddress.Line1,
-                        Line2: storedAddress.Line2,
-                        City: storedAddress.City,
-                        PostalCode: storedAddress.PostalCode,
-                        Field1: '51.529747',
-                        Field2: '-0.142396'
-                    });
                 });
 
                 afterEach(() => {
-                    window.localStorage.clear();
                     jest.resetAllMocks();
                 });
 
-                it('should not make api call and should call the mutation with the stored coordinates if the form values match local storage', async () => {
+                it('should not make api call and should call the mutation if getAddressCoordsFromStorage returns coordinates', async () => {
+                    // Arrange
+                    const setAddressInLocalStorageSpy = jest.spyOn(addressService, 'setAddressInLocalStorage');
+                    jest.spyOn(addressService, 'getAddressCoordsFromStorage').mockReturnValue([storedAddress.Field2, storedAddress.Field1]);
+
+                    // Act
+                    await getGeoLocation(context, newPayload);
+
+                    // Assert
+                    expect(setAddressInLocalStorageSpy).not.toHaveBeenCalled();
+                    expect(addressGeocodingApi.getGeoLocation).not.toHaveBeenCalled();
+                    expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, [storedAddress.Field2, storedAddress.Field1]);
+                });
+
+                it('should make api call and should call the mutation with coordinates from api call if getAddressCoordsFromStorage does not return coordinates', async () => {
+                    // Arrange
+                    const stateAddress = {
+                        line1: 'Flat 101',
+                        line2: 'Made Up House',
+                        locality: 'London',
+                        postcode: 'NW1 4DE'
+                    };
+                    const newState = {
+                        ...state,
+                        address: stateAddress
+                    };
+                    const setAddressInLocalStorageSpy = jest.spyOn(addressService, 'setAddressInLocalStorage');
+                    jest.spyOn(addressService, 'getAddressCoordsFromStorage').mockReturnValue(null);
+
+                    // Act
+                    await getGeoLocation({ ...context, state: newState }, newPayload);
+
+                    // Assert
+                    expect(setAddressInLocalStorageSpy).toHaveBeenCalledWith(stateAddress);
+                    expect(addressGeocodingApi.getGeoLocation).toHaveBeenCalled();
+                    expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, geoLocationDetails.geometry.coordinates);
+                });
+            });
+
+            describe('if the address is in cookies', () => {
+                const storedAddress = {
+                    Line1: 'Flat 101',
+                    Line2: 'Made Up House',
+                    Line3: 'Camden Town',
+                    Line4: '',
+                    Line5: '',
+                    City: 'London',
+                    Field1: '51.529747',
+                    Field2: '-0.142396',
+                    PostalCode: 'NW1 4DE',
+                    searchBoxAddress: 'NW1 4DE'
+                };
+                const newPayload = {
+                    ...payload,
+                    shouldLoadAddressFromLocalStorage: false
+                };
+
+                beforeEach(() => {
+                    state.authToken = authToken;
+
+                    jest.spyOn(addressService, 'isAddressInLocalStorage').mockReturnValue(false);
+                });
+
+                afterEach(() => {
+                    jest.resetAllMocks();
+                });
+
+                it('should not make api call and should call the mutation if getAddressCoordsFromStorage returns coordinates', async () => {
+                    // Arrange
+                    const setAddressInLocalStorageSpy = jest.spyOn(addressService, 'setAddressInLocalStorage');
+                    jest.spyOn(addressService, 'getAddressCoordsFromStorage').mockReturnValue([storedAddress.Field2, storedAddress.Field1]);
+
+                    // Act
+                    await getGeoLocation(context, newPayload);
+
+                    // Assert
+                    expect(setAddressInLocalStorageSpy).not.toHaveBeenCalled();
+                    expect(addressGeocodingApi.getGeoLocation).not.toHaveBeenCalled();
+                    expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, [storedAddress.Field2, storedAddress.Field1]);
+                });
+
+                it('should make api call and should call the mutation with coordinates from api call if getAddressCoordsFromStorage does not return coordinates', async () => {
                     // Arrange
                     const newState = {
                         ...state,
@@ -1215,76 +1285,28 @@ describe('CheckoutModule', () => {
                             postcode: 'NW1 4DE'
                         }
                     };
+                    const setAddressInLocalStorageSpy = jest.spyOn(addressService, 'setAddressInLocalStorage');
+                    jest.spyOn(addressService, 'getAddressCoordsFromStorage').mockReturnValue(null);
 
                     // Act
-                    await getGeoLocation({ ...context, state: newState }, payload);
+                    await getGeoLocation({ ...context, state: newState }, newPayload);
 
                     // Assert
-                    expect(addressGeocodingApi.getGeoLocation).not.toHaveBeenCalled();
-                    expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, [storedAddress.Field2, storedAddress.Field1]);
-                });
-
-                it(`should get the geo location details from the backend and call ${UPDATE_GEO_LOCATION} mutation if the form address does not match local storage`, async () => {
-                    // Arrange
-                    const newState = {
-                        ...state,
-                        address: {
-                            line1: 'Flat 101',
-                            line2: 'Made Up House',
-                            locality: 'London',
-                            postcode: 'NW2 3PE'
-                        }
-                    };
-
-                    // Act
-                    await getGeoLocation({ ...context, state: newState }, payload);
-
-                    // Assert
+                    expect(setAddressInLocalStorageSpy).not.toHaveBeenCalled();
+                    expect(addressGeocodingApi.getGeoLocation).toHaveBeenCalled();
                     expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, geoLocationDetails.geometry.coordinates);
                 });
 
-                it(`should get the geo location details from the backend and call ${UPDATE_GEO_LOCATION} mutation if local storage has no stored coordinates`, async () => {
-                    // Arrange
-                    const newState = {
-                        ...state,
-                        address: {
-                            line1: 'Flat 101',
-                            line2: 'Made Up House',
-                            locality: 'London',
-                            postcode: 'NW2 3PE'
-                        }
-                    };
-
-                    window.localStorage.setItem('je-full-address-details', JSON.stringify({ ...storedAddress, Field1: null, Field2: null }));
-
-                    // Act
-                    await getGeoLocation({ ...context, state: newState }, payload);
-
-                    // Assert
-                    expect(commit).toHaveBeenCalledWith(UPDATE_GEO_LOCATION, geoLocationDetails.geometry.coordinates);
-                });
-
-                describe('When the address in localStorage does not match the address `state`', () => {
-                    it('should update localStorage to the changed address', async () => {
-                        // Arrange
-                        const setItemSpy = jest.spyOn(window.localStorage, 'setItem');
-                        jest.spyOn(addressService, 'doesAddressInStorageAndFormMatch').mockImplementation(() => false);
-
-                        context.state.address = {
-                            line1: 'Fleet Place House',
-                            line2: 'Farringdon',
-                            locality: 'London',
-                            postcode: 'EC4M 7RF'
-                        };
-
+                describe('if the addressCoords obtained is undefined', () => {
+                    it('should not call mutation.', async () => {
                         // Act
+                        state.authToken = null;
                         await getGeoLocation(context, payload);
+                        jest.spyOn(addressService, 'getAddressCoordsFromStorage').mockReturnValue(undefined);
 
                         // Assert
-                        expect(setItemSpy).toHaveBeenCalledWith(
-                            'je-full-address-details',
-                            '{"PostalCode":"EC4M 7RF","Line1":"Fleet Place House","Line2":"Farringdon","City":"London"}'
-                        );
+                        expect(addressGeocodingApi.getGeoLocation).not.toHaveBeenCalled();
+                        expect(commit).not.toHaveBeenCalled();
                     });
                 });
             });

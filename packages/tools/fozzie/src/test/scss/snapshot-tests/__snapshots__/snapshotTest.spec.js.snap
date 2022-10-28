@@ -2318,7 +2318,7 @@ body {
 }
 
 .l-content-header--highlight {
-  color: #fb6100;
+  color: #f36805;
 }
 
 .l-divider {
@@ -3888,11 +3888,11 @@ hr {
 
 .c-listing-item-promo svg,
 .c-listing-item-alert svg {
-  fill: #fb6100;
+  fill: #f36805;
 }
 
 .c-listing-item-promo-text {
-  color: #fb6100;
+  color: #f36805;
 }
 
 .c-listing-item-promo-text--earned {
@@ -3986,7 +3986,7 @@ hr {
 }
 
 .c-spinner {
-  border: 3px solid #fb6100;
+  border: 3px solid #f36805;
   border-top: 3px solid rgba(243, 109, 0, 0.2);
   border-right: 3px solid rgba(243, 109, 0, 0.2);
 }
@@ -5280,7 +5280,7 @@ If you'd like to use it in your project you can include it by adding \`@include 
 */
 .c-userMessage {
   color: #fff;
-  background-color: #fb6100;
+  background-color: #f36805;
   max-width: 100%;
   margin-top: 16px;
 }
@@ -5936,7 +5936,7 @@ If you'd like to use it in your project you can include it by adding \`@include 
 }
 
 .c-spinner {
-  border: 3px solid #fb6100;
+  border: 3px solid #f36805;
   border-top: 3px solid rgba(243, 109, 0, 0.2);
   border-right: 3px solid rgba(243, 109, 0, 0.2);
 }
@@ -5973,7 +5973,7 @@ If you'd like to use it in your project you can include it by adding \`@include 
   padding: 10px 24px;
   text-align: center;
   font-weight: 700;
-  background-color: #fb6100;
+  background-color: #f36805;
   border-radius: 50rem;
   border: 1px solid transparent;
   user-select: none;
@@ -5984,10 +5984,10 @@ If you'd like to use it in your project you can include it by adding \`@include 
   box-shadow: 0 0 0 2px #4996fd;
 }
 .o-btn:hover {
-  background-color: #e75900;
+  background-color: #df5f05;
 }
 .o-btn:active {
-  background-color: #be4900;
+  background-color: #b74e04;
 }
 .o-btn:hover:not(.o-btn--link), .o-btn:active:not(.o-btn--link) {
   outline: 0;
@@ -6021,7 +6021,7 @@ p + .o-btn {
 * Sets the btn colour to site primary colour
 */
 .o-btn--primary {
-  background-color: #fb6100;
+  background-color: #f36805;
 }
 .o-btn--primary, .o-btn--primary:link, .o-btn--primary:visited {
   color: #fff;
@@ -6030,10 +6030,10 @@ p + .o-btn {
   color: #fff;
 }
 .o-btn--primary:hover {
-  background-color: #e75900;
+  background-color: #df5f05;
 }
 .o-btn--primary:active, .o-btn--primary.o-btn--loading {
-  background-color: #be4900;
+  background-color: #b74e04;
 }
 .o-btn--primary .c-spinner {
   border: 3px solid #fff;
@@ -6273,7 +6273,7 @@ input[type=button].o-btn--block {
   padding-left: 32px;
 }
 .o-formControl-label:hover .o-formControl-indicator {
-  border-color: #fb6100;
+  border-color: #f36805;
 }
 .o-formControl-label:hover .o-formControl-input:disabled ~ .o-formControl-indicator {
   border-color: #dbd9d7;
@@ -6367,14 +6367,14 @@ input[type=button].o-btn--block {
 label:hover .o-formControl-input:checked ~ .o-formControl-indicator--checkbox,
 label:hover .o-formControl-input:checked ~ .o-formControl-indicator--tickbox,
 label:hover .o-formControl-input:checked ~ .o-formControl-indicator--radio {
-  background-color: #e75900;
-  border-color: #e75900;
+  background-color: #df5f05;
+  border-color: #df5f05;
 }
 
 .o-formControl-input:checked ~ .o-formControl-indicator--checkbox,
 .o-formControl-input:checked ~ .o-formControl-indicator--tickbox {
-  background-color: #fb6100;
-  border: 3px solid #fb6100;
+  background-color: #f36805;
+  border: 3px solid #f36805;
 }
 .o-formControl-input:checked ~ .o-formControl-indicator--checkbox:before, .o-formControl-input:checked ~ .o-formControl-indicator--checkbox:after,
 .o-formControl-input:checked ~ .o-formControl-indicator--tickbox:before,
@@ -6408,12 +6408,12 @@ label:hover .o-formControl-input:checked ~ .o-formControl-indicator--radio {
 }
 
 .o-formControl-input:checked ~ .o-formControl-indicator--radio {
-  background-color: #fb6100;
+  background-color: #f36805;
   border: 6px solid #dbd9d7;
 }
 .o-formControl-input:checked ~ .o-formControl-indicator--radio:before {
   content: "";
-  background-color: #fb6100;
+  background-color: #f36805;
   border: 3px solid #f5f3f1;
   border-radius: 50%;
   width: 22px;
@@ -6799,7 +6799,7 @@ ul {
 }
 ul > li:before,
 ul > li ul > li:before {
-  color: #fb6100;
+  color: #f36805;
   content: "•"; /* Unicode for circle character */
   font-size: 1.8em;
   padding-right: 8px;

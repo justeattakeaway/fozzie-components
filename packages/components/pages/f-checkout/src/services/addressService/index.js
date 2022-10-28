@@ -14,7 +14,7 @@ const tenants = {
     ie
 };
 
-const storedLocationKey = 'je-full-address-details';
+const localStorageStoredLocationKey = 'je-full-address-details';
 
 function toFormattedPostcode (postcode, tenant) {
     const shouldFormatPostCode = tenant === 'uk';
@@ -96,7 +96,8 @@ function getAddressClosestToPostcode (currentPostcode, addressData, tenant) {
  */
 const isAddressInLocalStorage = () => {
     if (window.localStorage) {
-        const address = window.localStorage.getItem(storedLocationKey) ? JSON.parse(window.localStorage.getItem(storedLocationKey)) : null;
+        const item = window.localStorage?.getItem(localStorageStoredLocationKey);
+        const address = item ? JSON.parse(item) : null;
         return !!(address && (address.PostalCode || address.ZipCode));
     }
 
@@ -104,9 +105,13 @@ const isAddressInLocalStorage = () => {
 };
 
 function getStoredAddress () {
-    const storedLocation = window.localStorage.getItem(storedLocationKey);
+    const storedLocation = window.localStorage.getItem(localStorageStoredLocationKey);
 
     return storedLocation ? JSON.parse(storedLocation) : null;
+}
+
+function formatAddress (tenant, address) {
+    return tenants[tenant].formatAddress(formatAddressLines(address));
 }
 
 /**
@@ -119,25 +124,29 @@ function getAddressFromLocalStorage (tenant, mapped = true) {
         const storedAddress = getStoredAddress();
 
         if (storedAddress) {
-            return mapped ? tenants[tenant].formatAddress(formatAddressLines(storedAddress)) : storedAddress;
+            return mapped ? formatAddress(tenant, storedAddress) : storedAddress;
         }
     }
 
     return null;
 }
 
-function getAddressCoordsFromLocalStorage () {
-    if (window.localStorage) {
-        const storedAddress = getStoredAddress();
-
-        return storedAddress?.Field1 && storedAddress?.Field2 ? [storedAddress.Field1, storedAddress.Field2] : null;
+/**
+ * Retrieves the coordinates from address
+ * @param address - address object to retrieve coordinates
+ * @param shouldReverse - boolean deciding the ordering: [latitude, longitude] by default
+ * @returns coordinates - The coordinates in address
+ */
+function getAddressCoords (address, shouldReverse = false) {
+    if (address?.Field1 && address?.Field2) {
+        return shouldReverse ? [address.Field2, address.Field1] : [address.Field1, address.Field2];
     }
 
     return null;
 }
 
 /**
- * Checks whether the address values in local storage match what's is in the form.
+ * Checks whether the address values in local storage match what is in the form.
  * @param storedAddress - The address stored in local storage
  * @param formAddress - The address in form state
  * @returns {boolean} - Whether the form values match
@@ -168,13 +177,120 @@ function getClosestAddress (addressData, tenant, currentPostcode) {
         return tenants[tenant].getEmptyAddress(postcode);
     }
 
-    return tenants[tenant].formatAddress(formatAddressLines(address));
+    return formatAddress(tenant, address);
+}
+
+/**
+ * Retrieves the address from cookie
+ * @param tenant - The current tenant
+ * @param cookies - Cookies object
+ * @param mapped - boolean deciding whether to return the address in a mapped state
+ * @returns address - The address from cookie
+ */
+function getAddressFromCookie (tenant, cookies, mapped = true) {
+    if (!cookies || typeof cookies.get !== 'function') return null;
+    let storedAddress = null;
+
+    const houseNumber = cookies.get('je-last_houseNo_used');
+    const street = cookies.get('je-last_street_used');
+    const unitNumber = cookies.get('je-last_unitNumber_used');
+    const latitude = cookies.get('je-last_latitude_used');
+    const longitude = cookies.get('je-last_longitude_used');
+    const sublocality = cookies.get('je-last_sublocality_used');
+    const state = cookies.get('je-last_state_used');
+    const postalCode = cookies.get('je-location');
+    const city = cookies.get('je-last_city_used');
+    const searchBoxAddress = cookies.get('je-last_suggestion_used');
+
+    const hasAddress = houseNumber && street;
+
+    if (hasAddress) {
+        storedAddress = {
+            Line1: `${houseNumber} ${street}`,
+            Line2: unitNumber,
+            Line3: sublocality,
+            PostalCode: postalCode,
+            administrativeArea: state,
+            City: city,
+            Field1: latitude,
+            Field2: longitude,
+            searchBoxAddress
+        };
+    }
+
+    if (storedAddress) {
+        return mapped ? formatAddress(tenant, storedAddress) : storedAddress;
+    }
+
+    return null;
+}
+
+/**
+ * Retrieves the coordinates from address
+ * @param storedAddress - Address from storage
+ * @param stateAddress - Address from state
+ * @returns coordinates - Address coordinates in reverse order
+ */
+function getAddressCoordsFromAddress (storedAddress, stateAddress) {
+    if (doesAddressInStorageAndFormMatch(storedAddress, stateAddress)) {
+        return getAddressCoords(storedAddress, true);
+    }
+
+    return null;
+}
+
+/**
+ * Retrieves the coordinates from storage(local storage/cookies)
+ * @param tenant - Address from storage
+ * @param cookies - Cookies
+ * @param stateAddress - Address from state
+ * @returns coordinates - Address coordinates in reverse order
+ */
+function getAddressCoordsFromStorage (tenant, cookies, stateAddress, shouldLoadAddressFromLocalStorage) {
+    let addressCoords;
+    const isAddressExistInLocalStorage = isAddressInLocalStorage();
+
+    if (shouldLoadAddressFromLocalStorage && isAddressExistInLocalStorage) {
+        const storedAddress = getAddressFromLocalStorage(tenant, false);
+        addressCoords = getAddressCoordsFromAddress(storedAddress, stateAddress);
+    } else if (!shouldLoadAddressFromLocalStorage) {
+        const storedAddress = getAddressFromCookie(tenant, cookies, false);
+        addressCoords = getAddressCoordsFromAddress(storedAddress, stateAddress);
+    }
+
+    return addressCoords;
+}
+
+function setAddressInLocalStorage (addressDetails) {
+    if (window.localStorage) {
+        window.localStorage.setItem(localStorageStoredLocationKey, JSON.stringify({
+            PostalCode: addressDetails.postcode,
+            Line1: addressDetails.line1,
+            Line2: addressDetails.line2,
+            Line3: addressDetails.line3,
+            Line4: addressDetails.line4,
+            administrativeArea: addressDetails.administrativeArea,
+            City: addressDetails.locality
+        }));
+    }
+}
+
+function getAddressFromStorage (tenant, cookies, shouldLoadAddressFromLocalStorage) {
+    const address = shouldLoadAddressFromLocalStorage ?
+        getAddressFromLocalStorage(tenant) :
+        getAddressFromCookie(tenant, cookies);
+
+    return address;
 }
 
 export default {
     doesAddressInStorageAndFormMatch,
     getClosestAddress,
+    getAddressCoords,
+    getAddressFromStorage,
     getAddressFromLocalStorage,
-    getAddressCoordsFromLocalStorage,
-    isAddressInLocalStorage
+    getAddressFromCookie,
+    isAddressInLocalStorage,
+    setAddressInLocalStorage,
+    getAddressCoordsFromStorage
 };
