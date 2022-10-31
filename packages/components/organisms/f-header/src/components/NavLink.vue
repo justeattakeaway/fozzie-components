@@ -130,7 +130,6 @@ export default {
     @include f.media('<=mid') {
         width: 100vw;
         padding: f.spacing(c) f.spacing(d) f.spacing(c) 0;
-        margin-left: f.spacing(a);
     }
 }
 
