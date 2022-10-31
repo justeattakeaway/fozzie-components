@@ -89,44 +89,6 @@ describe('Shared - f-header component tests', () => {
         });
     });
 
-
-    describe('isCondensedOnMid', () => {
-        // TODO -  Add a desktop setWindowSize to wido beforeTest similar to mobile.
-        //         Last Test rests viewport back to original size
-        tests = [
-            { viewport: { w: 770, h: 500 } },
-            { viewport: { w: 830, h: 500 } },
-            { viewport: { w: 930, h: 500 } },
-            { viewport: { w: 1025, h: 500 } },
-            { viewport: { w: 1130, h: 500 } },
-            { viewport: { w: 1050, h: 800 } }
-        ];
-
-        const scrollBarOffset = 12;
-
-        tests.forEach(({ viewport }) => {
-            it(`should condense header elements at various viewports ${viewport.w}x${viewport.h}`, async () => {
-                // Act
-                await Header.load({
-                    locale: 'en-GB',
-                    showLoginInfo: true,
-                    showHelpLink: true,
-                    showCountrySelector: true,
-                    showCorporateLink: true,
-                    showOffersLink: true,
-                    showDeliveryEnquiry: true,
-                    isCondensedOnMid: true
-                });
-
-                // Browser size != Viewport Size, scrollBarOffset pixels is added for the scroll bar
-                browser.setWindowSize(viewport.w + scrollBarOffset, viewport.h);
-
-                // Assert
-                await browser.percyScreenshot(`f-header - condenseOnMid ${viewport.w}x${viewport.h}`, 'desktop');
-            });
-        });
-    });
-
     // Not currently possible to set complex values (i.e., arrays) for controls via query strings.
     // https://storybook.js.org/docs/vue/essentials/controls#dealing-with-complex-values
     // https://github.com/storybookjs/storybook/issues/14420
