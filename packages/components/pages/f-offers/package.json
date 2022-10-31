@@ -70,7 +70,6 @@
     "@justeat/f-mega-modal": "7.x",
     "@justeat/f-searchbox": "6.x",
     "@justeat/f-wdio-utils": "1.x",
-    "@vue/cli-plugin-babel": "4.5.16",
-    "miragejs": "0.1.41"
+    "@vue/cli-plugin-babel": "4.5.16"
   }
 }
