@@ -5,10 +5,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.40.0
 ------------------------------
-*October 24, 2022*
+*October 31, 2022*
 
 ### Removed
 - Duplicate dependencies of `organisms`, `pages`, `templates`, `services`, and `tools` packages.
+
+
+v7.39.0
+ ------------------------------
+ *October 24, 2022*
+
+ ### Removed
+ - Duplicate dependencies of `molecules` packages.
 
 
 v7.38.0

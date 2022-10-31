@@ -3,6 +3,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.9.0
+------------------------------
+*October 28, 2022*
+
+### Changed
+- Visual tests to include new tenants
+- Updated Story file to use Storybook `Controls`.
+
+
+v3.8.0
+------------------------------
+*October 27, 2022*
+
+### Changed
+- Update component to use Vue I18n.
+- Added translations for form error message.
+
 v3.7.2
 ------------------------------
 *October 13, 2022*
