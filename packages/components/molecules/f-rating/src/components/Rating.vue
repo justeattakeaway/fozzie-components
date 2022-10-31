@@ -58,7 +58,8 @@ export default {
         },
         maxStarRating: {
             type: Number,
-            default: 5
+            default: 5,
+            validator: value => value > 0
         },
         starRatingSize: {
             type: String,

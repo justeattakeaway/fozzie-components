@@ -249,6 +249,31 @@ describe('Rating', () => {
                 expect(VRating.props.isSingleStarVariant.default).toBe(false);
             });
         });
+
+        describe('`maxStarRating`', () => {
+            it('should be set to 5 by default', () => {
+                // Act & Assert
+                expect(VRating.props.maxStarRating.default).toBe(5);
+            });
+
+            describe('validator', () => {
+                it('should only allow positive integers', () => {
+                    // Act
+                    const { validator } = VRating.props.maxStarRating;
+
+                    // Assert
+                    expect(validator(3)).toBe(true);
+                });
+
+                it.each([0, -1])('should not allow integer values at zero or below', value => {
+                    // Act
+                    const { validator } = VRating.props.maxStarRating;
+
+                    // Assert
+                    expect(validator(value)).toBe(false);
+                });
+            });
+        });
     });
 
     describe('methods', () => {
