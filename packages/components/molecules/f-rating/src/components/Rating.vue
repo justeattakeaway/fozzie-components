@@ -59,7 +59,7 @@ export default {
         maxStarRating: {
             type: Number,
             default: 5,
-            validator: value => value > 0 && value % 1 === 0 // Only allow positive `whole` numbers larger than zero and exclude numbers like 2.5.
+            validator: value => value > 0 && value % 1 === 0 // Positive integers
         },
         starRatingSize: {
             type: String,
