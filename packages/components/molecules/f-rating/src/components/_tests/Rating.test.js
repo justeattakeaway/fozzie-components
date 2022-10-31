@@ -257,12 +257,20 @@ describe('Rating', () => {
             });
 
             describe('validator', () => {
-                it('should only allow positive integers', () => {
+                it('should only allow positive whole integers', () => {
                     // Act
                     const { validator } = VRating.props.maxStarRating;
 
                     // Assert
                     expect(validator(3)).toBe(true);
+                });
+
+                it('should not only allow positive integers that are not whole', () => {
+                    // Act
+                    const { validator } = VRating.props.maxStarRating;
+
+                    // Assert
+                    expect(validator(3.5)).toBe(false);
                 });
 
                 it.each([0, -1])('should not allow integer values at zero or below', value => {
