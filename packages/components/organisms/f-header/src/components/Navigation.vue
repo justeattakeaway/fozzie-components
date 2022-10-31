@@ -80,7 +80,11 @@
             ]"
             data-test-id="nav-list-container">
             <ul
-                :class="$style['c-nav-list']"
+                :class="[
+                    $style['c-nav-list'],
+                    {
+                        [$style['c-nav-list--condensed']]: isCondensedOnMid
+                    }]"
                 data-test-id="nav-list">
                 <li
                     v-for="(customNavLink, index) in customNavLinks"
@@ -738,8 +742,14 @@ $navTextTweakpointMid: f.em(830);
         float: left;
     }
 
-    @include f.media('>huge') {
+    @include f.media('>wide') {
         margin-left: f.spacing(c);
+    }
+}
+
+.c-nav-list--condensed .c-nav-list-item--horizontallyAlignedAboveMid {
+    @include f.media('>mid', '<huge') {
+        margin-left: 0;
     }
 }
 
