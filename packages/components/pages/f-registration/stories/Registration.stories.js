@@ -35,17 +35,17 @@ RegistrationComponent.argTypes = {
         options: ['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'es-ES', 'it-IT'],
         defaultValue: 'en-GB'
     },
-    title : {
+    title: {
         control: { type: 'text' },
         description: 'Title Text',
         defaultValue: 'Create Account'
     },
-    createAccountUrl : {
+    createAccountUrl: {
         control: { type: 'text' },
         description: 'Create Account URL',
         defaultValue: '/account/register'
     },
-    buttonText : {
+    buttonText: {
         control: { type: 'text' },
         description: 'Button Text',
         defaultValue: 'Create Account'
@@ -55,11 +55,11 @@ RegistrationComponent.argTypes = {
         description: 'Show login link',
         defaultValue: true
     },
-    loginUrl : {
+    loginUrl: {
         control: { type: 'text' },
         description: 'Login URL',
         defaultValue: '/account/login'
     }
-}
+};
 
 RegistrationComponent.storyName = 'f-registration';
