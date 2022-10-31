@@ -7,10 +7,12 @@ v10.8.0
 *October 17, 2022*
 
 ### Fixed
-- JE Icon vertical positioning.
+- JE Logo vertical positioning.
+- Country text & logo alignment in country selector
 
 ### Changed
 - Friendly Name Truncation Tweak Points
+
 ### Added
 - `showCorporateLink` - Shows "Corporate Ordering" Link.
 - `isCondensedOnMid` - A flag to hide icons, reduce spacing between nav-links on mid screen size, reduce container padding on tweak points and apply stricter friendly name truncation.
