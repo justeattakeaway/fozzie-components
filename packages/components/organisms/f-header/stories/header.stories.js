@@ -55,7 +55,7 @@ HeaderComponent.args = {
     showCorporateLink: false,
     showDeliveryEnquiry: false,
     logoLinkDisabled: false,
-    condensedOnMid: false,
+    isCondensedOnMid: false,
     tallBelowMid: false,
     shouldUseJetLogo: false
 };
