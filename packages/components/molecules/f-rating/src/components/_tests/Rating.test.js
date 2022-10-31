@@ -257,7 +257,7 @@ describe('Rating', () => {
             });
 
             describe('validator', () => {
-                it('should only allow positive whole integers', () => {
+                it('should only allow positive  integers', () => {
                     // Act
                     const { validator } = VRating.props.maxStarRating;
 
@@ -265,7 +265,7 @@ describe('Rating', () => {
                     expect(validator(3)).toBe(true);
                 });
 
-                it('should not allow decimal placed positive integers', () => {
+                it('should not allow decimal placed numbers', () => {
                     // Act
                     const { validator } = VRating.props.maxStarRating;
 
