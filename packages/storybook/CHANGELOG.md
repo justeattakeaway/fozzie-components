@@ -3,12 +3,24 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.60.0
+------------------------------
+*October 25, 2022*
+
+### Changed
+- Added box-shadows to docs images and increased padding & margin for `h2` and list items.
+
+### Fixed
+- The styles for code blocks within a list looked a bit funky. Have fixed this now.
+
+
 v0.59.0
 ------------------------------
 *September 27, 2022*
 
 ### Changed
-- Changed F-HTTP to `1.x`
+- Changed `f-http` to `1.x`
 
 
 v0.58.0
@@ -16,7 +28,7 @@ v0.58.0
 *September 21, 2022*
 
 ### Changed
-- Upgraded F-HTTP dependency and context with new Conversation ID forwarding
+- Upgraded `f-http` dependency and context with new Conversation ID forwarding
 
 
 v0.57.0

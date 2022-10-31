@@ -71,7 +71,7 @@ export default {
 
         isGrouped: {
             type: Boolean,
-            defalut: false
+            default: false
         }
     },
 
