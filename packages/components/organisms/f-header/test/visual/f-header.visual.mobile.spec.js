@@ -100,6 +100,27 @@ describe('Shared - f-header component tests', () => {
         });
     });
 
+    describe('isCondensedOnMid', () => {
+        it('should not affect any elements on mobile', async () => {
+            // Act
+            await Header.load({
+                locale: 'en-GB',
+                showLoginInfo: true,
+                showHelpLink: true,
+                showCountrySelector: true,
+                showCorporateLink: true,
+                showOffersLink: true,
+                showDeliveryEnquiry: true,
+                isCondensedOnMid: true
+            });
+
+            await Header.openMobileNavigationBar();
+
+            // Assert
+            await browser.percyScreenshot('f-header - isCondensedOnMid', 'mobile');
+        });
+    });
+
     // Not currently possible to set complex values (i.e., arrays) for controls via query strings.
     // https://storybook.js.org/docs/vue/essentials/controls#dealing-with-complex-values
     // https://github.com/storybookjs/storybook/issues/14420
