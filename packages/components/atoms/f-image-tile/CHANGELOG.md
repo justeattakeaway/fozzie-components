@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v1.3.0
+------------------------------
+*November 1, 2022*
+
+### Changed
+- Product Orange update (package release to update the compiled CSS)
+
+
 v1.2.0
 ------------------------------
 *July 15, 2022*
