@@ -1,6 +1,8 @@
 import { withA11y } from '@storybook/addon-a11y';
 import { locales } from '@justeat/storybook/constants/globalisation';
 import Rating from '../src/components/Rating.vue';
+import RatingMultiStar from '../src/components/RatingMultiStarVariant.vue';
+import RatingSingleStar from '../src/components/RatingSingleStarVariant.vue';
 
 export default {
     title: 'Components/Molecules',
@@ -8,7 +10,11 @@ export default {
 };
 
 export const RatingComponent = (args, { argTypes }) => ({
-    components: { Rating },
+    components: {
+        Rating,
+        RatingMultiStar,
+        RatingSingleStar
+    },
 
     props: Object.keys(argTypes),
 
@@ -22,7 +28,7 @@ export const RatingComponent = (args, { argTypes }) => ({
                     v-bind="$props"
                     :starRatingSize="rating.starRatingSize"
                     :starRating="rating.starRating"
-                    :reviewCount="rating.reviewCount"/>
+                    :reviewCount="rating.reviewCount" />
             </div>
         </div>`
 });
@@ -45,6 +51,13 @@ RatingComponent.argTypes = {
         options: ['noRating', 'short', 'medium', 'long', null],
         description: 'Choose how to display a rating',
         default: null
+    },
+
+    isSingleStarVariant: {
+        control: { type: 'select' },
+        options: [false, true],
+        description: 'Choose star rating variant (Single = true or Multi star = false)',
+        default: false
     }
 };
 
