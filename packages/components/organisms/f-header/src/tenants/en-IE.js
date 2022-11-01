@@ -70,5 +70,10 @@ export default {
         currentCountryKey: 'ie',
         changeCurrentCountry: 'You are on the Irish website, click here to change',
         goBackToMainMenu: 'Go back to main menu'
+    },
+    corporate: {
+        text: 'Corporate Ordering',
+        url: 'https://business.just-eat.co.uk/just-eat-pay-ie',
+        gtm: 'click_corporate_ordering'
     }
 };
