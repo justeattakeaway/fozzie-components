@@ -7,10 +7,15 @@
             [$style['c-navLink']]: !isPopoverLink,
             [$style['c-navLink--popoverLink']]: isPopoverLink,
             [$style['c-nav-list-link--alt']]: isAltColour,
+            [$style['c-navLink--condensedMid']]: isCondensed,
             [$style['c-navLink--hoverWithWhiteBackground']]: backgroundTheme === 'white',
             [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent'
         }]">
-        <slot name="icon" />
+        <div
+            v-if="hasIcon"
+            :class="[$style['c-navLink-icon'], { [$style['hide-on-mid']]: isCondensed }]">
+            <slot name="icon" />
+        </div>
         <span
             :class="[{
                 [$style['c-navLink-text']]: !isPopoverLink,
@@ -59,6 +64,11 @@ export default {
         },
 
         isPopoverLink: {
+            type: Boolean,
+            default: false
+        },
+
+        isCondensed: {
             type: Boolean,
             default: false
         },
@@ -120,7 +130,6 @@ export default {
     @include f.media('<=mid') {
         width: 100vw;
         padding: f.spacing(c) f.spacing(d) f.spacing(c) 0;
-        margin-left: f.spacing(a);
     }
 }
 
@@ -157,7 +166,7 @@ export default {
 }
 
 .c-navLink--popoverLink {
-    display: block;
+    display: flex;
     text-decoration: none;
     padding: f.spacing(c) f.spacing(d) f.spacing(c) 0;
 
@@ -183,6 +192,24 @@ export default {
     &:focus {
         outline-color: f.$color-focus;
         border-radius: 0;
+    }
+}
+
+.c-navLink-icon {
+    display: flex;
+}
+
+.c-navLink--condensedMid {
+    $navLinkTweakpointMid: f.em(830);
+    $navLinkTweakpointWide: f.em(1130);
+
+    @include f.media('>mid', '<#{$navLinkTweakpointWide}') {
+        padding-left: f.spacing(b);
+        padding-right: f.spacing(b);
+        margin-right: f.spacing(a);
+    }
+    @include f.media('>mid', '<#{$navLinkTweakpointMid}') {
+        margin-right: 0;
     }
 }
 </style>

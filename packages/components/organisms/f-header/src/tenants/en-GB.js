@@ -81,5 +81,10 @@ export default {
         currentCountryKey: 'gb',
         changeCurrentCountry: 'You are on the UK website, click here to change',
         goBackToMainMenu: 'Go back to main menu'
+    },
+    corporate: {
+        text: 'Corporate Ordering',
+        url: 'https://business.just-eat.co.uk/what-we-do',
+        gtm: 'click_corporate_ordering'
     }
 };

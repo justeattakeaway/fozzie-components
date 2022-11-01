@@ -183,6 +183,7 @@ describe('Navigation', () => {
                     propsData: {
                         ...defaultPropsData,
                         showLoginInfo: false,
+                        showCorporateLink: false,
                         showOffersLink: false,
                         showHelpLink: false,
                         showDeliveryEnquiry: false,
@@ -501,6 +502,83 @@ describe('Navigation', () => {
                 // Assert
                 expect(wrapper.find('[data-test-id="offers-link"]').exists()).toBe(false);
                 expect(wrapper.find('[data-test-id="offers-iconLink"]').exists()).toBe(false);
+            });
+        });
+    });
+
+
+    describe('corporate link', () => {
+        it('should be shown on desktop when "showCorporateLink" is true', async () => {
+            // Arrange
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    showCorporateLink: true
+                }
+            });
+
+            // Act
+            await wrapper.setData(defaultData); // need to await this for the state to fully update the DOM
+
+            // Assert
+            expect(wrapper.find('[data-test-id="corporate-link"]').exists()).toBe(true);
+        });
+
+        it('should not be shown on desktop when "showCorporateLink" is false', async () => {
+            // Arrange
+            wrapper = shallowMount(Navigation, {
+                propsData: {
+                    ...defaultPropsData,
+                    showCorporateLink: false
+                }
+            });
+
+            // Act
+            await wrapper.setData(defaultData);
+
+            // Assert
+            expect(wrapper.find('[data-test-id="corporate-link"]').exists()).toBe(false);
+        });
+
+        describe('on mobile', () => {
+            beforeEach(setMobileViewport);
+
+            it('should be shown with open nav when "showCorporateLink" is true', async () => {
+                // Arrange
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        showCorporateLink: true
+                    }
+                });
+
+                // Act
+                await wrapper.setData({
+                    ...defaultData,
+                    navIsOpen: true
+                });
+
+                // Assert
+                expect(wrapper.find('[data-test-id="corporate-link"]').exists()).toBe(true);
+            });
+
+            it('should not be shown with open nav when "showCorporateLink" is false', async () => {
+                // Arrange
+                wrapper = shallowMount(Navigation, {
+                    propsData: {
+                        ...defaultPropsData,
+                        showCorporateLink: false
+                    }
+                });
+
+                // Act
+                await wrapper.setData({
+                    ...defaultData,
+                    navIsOpen: true
+                });
+
+                // Assert
+                expect(wrapper.find('[data-test-id="corporate-link"]').exists()).toBe(false);
             });
         });
     });
