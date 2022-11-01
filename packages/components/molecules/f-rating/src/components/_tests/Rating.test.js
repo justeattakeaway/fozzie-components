@@ -133,6 +133,73 @@ describe('Rating', () => {
                 });
             });
         });
+
+        describe('`hasRatingAvailable`', () => {
+            it('should exist', () => {
+                // Arrange
+                propsData.starRating = 2;
+                wrapper = shallowMount(VRating, {
+                    propsData,
+                    localVue,
+                    i18n
+                });
+
+                // Act & Assert
+                expect(wrapper.vm.hasRatingAvailable).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                describe('and a rating type is available', () => {
+                    beforeEach(() => {
+                        propsData.starRating = 2;
+                        propsData.ratingDisplayType = 'short';
+                        wrapper = shallowMount(VRating, {
+                            propsData,
+                            localVue,
+                            i18n
+                        });
+                    });
+
+                    it('should return truthy', () => {
+                        // Act & Assert
+                        expect(wrapper.vm.hasRatingAvailable).toBe(true);
+                    });
+
+                    it('should enable the visually hidden description', () => {
+                        // Act
+                        const result = wrapper.find('[data-test-id="c-rating-description"]');
+
+                        // Act & Assert
+                        expect(result).toMatchSnapshot();
+                    });
+                });
+
+                describe('and a rating type is set to `noRating`', () => {
+                    beforeEach(() => {
+                        propsData.starRating = 2;
+                        propsData.ratingDisplayType = 'noRating';
+                        wrapper = shallowMount(VRating, {
+                            propsData,
+                            localVue,
+                            i18n
+                        });
+                    });
+
+                    it('should return truthy', () => {
+                        // Act & Assert
+                        expect(wrapper.vm.hasRatingAvailable).toBe(false);
+                    });
+
+                    it('should disable the visually hidden description', () => {
+                        // Act
+                        const result = wrapper.find('[data-test-id="c-rating-description"]').exists();
+
+                        // Act & Assert
+                        expect(result).toBe(false);
+                    });
+                });
+            });
+        });
     });
 
     describe('props', () => {
