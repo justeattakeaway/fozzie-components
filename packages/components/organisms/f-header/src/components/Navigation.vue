@@ -80,7 +80,11 @@
             ]"
             data-test-id="nav-list-container">
             <ul
-                :class="$style['c-nav-list']"
+                :class="[
+                    $style['c-nav-list'],
+                    {
+                        [$style['c-nav-list--condensed']]: isCondensed
+                    }]"
                 data-test-id="nav-list">
                 <li
                     v-for="(customNavLink, index) in customNavLinks"
@@ -92,6 +96,7 @@
                         :href="customNavLink.url"
                         :data-trak="customNavLink.gtm && analyticsObjects.navigation.clickHeaderLink({ ...customNavLink.gtm })"
                         :is-alt-colour="isAltColour"
+                        :is-condensed="isCondensed"
                         :background-theme="headerBackgroundTheme" />
                 </li>
 
@@ -104,6 +109,7 @@
                         :href="copy.offers.url"
                         :data-trak="analyticsObjects.navigation.offers.clickLink"
                         :is-alt-colour="isAltColour"
+                        :is-condensed="isCondensed"
                         :background-theme="headerBackgroundTheme"
                         data-test-id="offers-link">
                         <template #icon>
@@ -111,6 +117,31 @@
                                 :class="[
                                     $style['c-nav-icon'],
                                     $style['c-nav-icon--offers'],
+                                    { [$style['c-nav-icon--alt']]: isAltColour }
+                                ]" />
+                        </template>
+                    </nav-link>
+                </li>
+
+                <li
+                    v-if="showCorporateLink"
+                    :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
+                    <nav-link
+                        :text="copy.corporate.text"
+                        :tabindex="tabIndex"
+                        :href="copy.corporate.url"
+                        :data-trak="analyticsObjects.navigation.clickHeaderLink({
+                            label: copy.corporate.gtm
+                        })"
+                        :is-alt-colour="isAltColour"
+                        :is-condensed="isCondensed"
+                        :background-theme="headerBackgroundTheme"
+                        data-test-id="corporate-link">
+                        <template #icon>
+                            <office-small-icon
+                                :class="[
+                                    $style['c-nav-icon'],
+                                    $style['c-nav-icon--corporate'],
                                     { [$style['c-nav-icon--alt']]: isAltColour }
                                 ]" />
                         </template>
@@ -128,6 +159,7 @@
                             label: copy.deliveryEnquiry.gtm
                         })"
                         :is-alt-colour="isAltColour"
+                        :is-condensed="isCondensed"
                         :background-theme="headerBackgroundTheme"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -170,12 +202,14 @@
                             :class="[
                                 $style['c-nav-icon'],
                                 $style['c-nav-icon--profile'],
-                                { [$style['c-nav-icon--alt']]: isAltColour }
+                                { [$style['c-nav-icon--alt']]: isAltColour },
+                                { [$style['hide-on-mid']]: isCondensed }
                             ]" />
                         <span
                             :class="[
                                 $style['c-nav-list-btn-text'],
                                 {
+                                    [$style['c-nav-list-link--condensed']]: isCondensed,
                                     [$style['c-nav-list-link--alt']]: isAltColour,
                                     [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent'
                                 }]">
@@ -214,6 +248,7 @@
                             label: copy.accountLogin.gtm
                         })"
                         :is-alt-colour="isAltColour"
+                        :is-condensed="isCondensed"
                         :background-theme="headerBackgroundTheme"
                         rel="nofollow"
                         data-test-id="login-link" />
@@ -247,6 +282,7 @@
                             label: copy.help.gtm
                         })"
                         :is-alt-colour="isAltColour"
+                        :is-condensed="isCondensed"
                         :background-theme="headerBackgroundTheme"
                         data-test-id="help-link">
                         <template #icon>
@@ -284,6 +320,7 @@ import VPopover from '@justeat/f-popover';
 
 // Internal
 import {
+    OfficeSmallIcon,
     GiftIcon,
     HelpCircleOutlineIcon,
     MopedIcon,
@@ -299,6 +336,7 @@ export default {
     name: 'HeaderNavigation',
     components: {
         CountrySelector,
+        OfficeSmallIcon,
         GiftIcon,
         HelpCircleOutlineIcon,
         MopedIcon,
@@ -320,6 +358,11 @@ export default {
         },
 
         showOffersLink: {
+            type: Boolean,
+            default: false
+        },
+
+        showCorporateLink: {
             type: Boolean,
             default: false
         },
@@ -357,6 +400,11 @@ export default {
         isOrderCountSupported: {
             type: Boolean,
             default: true
+        },
+
+        isCondensed: {
+            type: Boolean,
+            default: false
         },
 
         headerBackgroundTheme: {
@@ -442,6 +490,7 @@ export default {
 
         hasNavigationLinks () {
             return this.showOffersLink ||
+                this.showCorporateLink ||
                 this.showHelpLink ||
                 this.showDeliveryEnquiry ||
                 this.showLoginInfo ||
@@ -672,6 +721,9 @@ export default {
 
 <style lang="scss" module>
 @use '@justeat/fozzie/src/scss/fozzie' as f;
+$navTextTweakpointWide: f.em(1130);
+$navTextTweakpointMidWide: f.em(940);
+$navTextTweakpointMid: f.em(830);
 
 .c-nav-container {
     display: none;
@@ -692,6 +744,12 @@ export default {
 
     @include f.media('>wide') {
         margin-left: f.spacing(c);
+    }
+}
+
+.c-nav-list--condensed .c-nav-list-item--horizontallyAlignedAboveMid {
+    @include f.media('>mid', '<huge') {
+        margin-left: 0;
     }
 }
 
@@ -739,17 +797,29 @@ export default {
     @include f.media('>mid') {
         font-weight: common.$nav-text-weight;
     }
-    @include f.media('>mid', '<wide') {
-        @include f.truncate(200px);
-    }
 
-    $navTextTweakpointMid: f.em(800);
-    $navTextTweakpointMidWide: f.em(900);
+    // truncate the length of user friendly name at certain breakpoints
+    @include f.truncate(300px);
+    @include f.media('>mid', '<huge') {
+        max-width: 200px;
+    }
+    @include f.media('>mid', '<#{$navTextTweakpointMid}') {
+        max-width: 80px;
+    }
+    @include f.media('>=#{$navTextTweakpointMid}', '<#{$navTextTweakpointMidWide}') {
+        max-width: 110px;
+    }
+}
+
+.c-nav-list-link--condensed {
     // truncate the length of user friendly name at certain breakpoints
     @include f.media('>mid', '<=#{$navTextTweakpointMid}') {
-        max-width: 78px;
+        max-width: 62px;
     }
-    @include f.media('>#{$navTextTweakpointMid}', '<#{$navTextTweakpointMidWide}') {
+    @include f.media('>=#{$navTextTweakpointMid}', '<#{$navTextTweakpointMidWide}') {
+        max-width: 85px;
+    }
+    @include f.media('>=wide', '<#{$navTextTweakpointWide}') {
         max-width: 110px;
     }
 }
@@ -826,7 +896,8 @@ export default {
 .c-nav-icon--profile,
 .c-nav-icon--delivery,
 .c-nav-icon--help,
-.c-nav-icon--offers {
+.c-nav-icon--offers,
+.c-nav-icon--corporate {
     @include f.media('<=mid') {
         & path {
             fill: common.$nav-icon-color--mobileWhiteBg;

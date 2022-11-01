@@ -6,6 +6,9 @@ const NAVIGATION = {
     offersIcon: {
         link: '[data-test-id="offers-iconLink"]'
     },
+    corporate: {
+        link: '[data-test-id="corporate-link"]'
+    },
     offersLink: {
         link: '[data-test-id="offers-link"]'
     },
