@@ -2,9 +2,9 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v10.8.0
+v10.9.0
 ------------------------------
-*October 17, 2022*
+*November 1, 2022*
 
 ### Fixed
 - JE Logo vertical positioning.
@@ -16,6 +16,14 @@ v10.8.0
 ### Added
 - `showCorporateLink` - Shows "Corporate Ordering" Link.
 - `isCondensedOnMid` - A flag to hide icons, reduce spacing between nav-links on mid screen size, reduce container padding on tweak points and apply stricter friendly name truncation.
+
+
+v10.8.0
+------------------------------
+*November 1, 2022*
+
+### Changed
+- Product Orange update (package release to update the compiled CSS)
 
 
 v10.7.0
