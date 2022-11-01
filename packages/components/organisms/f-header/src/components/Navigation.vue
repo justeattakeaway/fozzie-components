@@ -83,7 +83,7 @@
                 :class="[
                     $style['c-nav-list'],
                     {
-                        [$style['c-nav-list--condensed']]: isCondensedOnMid
+                        [$style['c-nav-list--condensed']]: isCondensed
                     }]"
                 data-test-id="nav-list">
                 <li
@@ -96,7 +96,7 @@
                         :href="customNavLink.url"
                         :data-trak="customNavLink.gtm && analyticsObjects.navigation.clickHeaderLink({ ...customNavLink.gtm })"
                         :is-alt-colour="isAltColour"
-                        :is-condensed-on-mid="isCondensedOnMid"
+                        :is-condensed="isCondensed"
                         :background-theme="headerBackgroundTheme" />
                 </li>
 
@@ -109,7 +109,7 @@
                         :href="copy.offers.url"
                         :data-trak="analyticsObjects.navigation.offers.clickLink"
                         :is-alt-colour="isAltColour"
-                        :is-condensed-on-mid="isCondensedOnMid"
+                        :is-condensed="isCondensed"
                         :background-theme="headerBackgroundTheme"
                         data-test-id="offers-link">
                         <template #icon>
@@ -134,7 +134,7 @@
                             label: copy.corporate.gtm
                         })"
                         :is-alt-colour="isAltColour"
-                        :is-condensed-on-mid="isCondensedOnMid"
+                        :is-condensed="isCondensed"
                         :background-theme="headerBackgroundTheme"
                         data-test-id="corporate-link">
                         <template #icon>
@@ -159,7 +159,7 @@
                             label: copy.deliveryEnquiry.gtm
                         })"
                         :is-alt-colour="isAltColour"
-                        :is-condensed-on-mid="isCondensedOnMid"
+                        :is-condensed="isCondensed"
                         :background-theme="headerBackgroundTheme"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -203,13 +203,13 @@
                                 $style['c-nav-icon'],
                                 $style['c-nav-icon--profile'],
                                 { [$style['c-nav-icon--alt']]: isAltColour },
-                                { [$style['hide-on-mid']]: isCondensedOnMid }
+                                { [$style['hide-on-mid']]: isCondensed }
                             ]" />
                         <span
                             :class="[
                                 $style['c-nav-list-btn-text'],
                                 {
-                                    [$style['c-nav-list-link--condensed']]: isCondensedOnMid,
+                                    [$style['c-nav-list-link--condensed']]: isCondensed,
                                     [$style['c-nav-list-link--alt']]: isAltColour,
                                     [$style['c-nav-list-link--transparent']]: headerBackgroundTheme === 'transparent'
                                 }]">
@@ -248,7 +248,7 @@
                             label: copy.accountLogin.gtm
                         })"
                         :is-alt-colour="isAltColour"
-                        :is-condensed-on-mid="isCondensedOnMid"
+                        :is-condensed="isCondensed"
                         :background-theme="headerBackgroundTheme"
                         rel="nofollow"
                         data-test-id="login-link" />
@@ -282,7 +282,7 @@
                             label: copy.help.gtm
                         })"
                         :is-alt-colour="isAltColour"
-                        :is-condensed-on-mid="isCondensedOnMid"
+                        :is-condensed="isCondensed"
                         :background-theme="headerBackgroundTheme"
                         data-test-id="help-link">
                         <template #icon>
@@ -402,7 +402,7 @@ export default {
             default: true
         },
 
-        isCondensedOnMid: {
+        isCondensed: {
             type: Boolean,
             default: false
         },

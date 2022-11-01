@@ -15,7 +15,7 @@ v10.9.0
 
 ### Added
 - `showCorporateLink` - Shows "Corporate Ordering" Link.
-- `isCondensedOnMid` - A flag to hide icons, reduce spacing between nav-links on mid screen size, reduce container padding on tweak points and apply stricter friendly name truncation.
+- `isCondensed` - A flag to hide icons, reduce spacing between nav-links on mid size, reduce container padding on tweak points and apply stricter friendly name truncation.
 
 
 v10.8.0

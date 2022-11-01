@@ -18,7 +18,7 @@
         <div
             :class="[
                 $style['c-header-container'],
-                { [$style['c-header-container--condensed']]: isCondensedOnMid }
+                { [$style['c-header-container--condensed']]: isCondensed }
             ]">
             <logo
                 :theme="theme"
@@ -44,7 +44,7 @@
                 :header-background-theme="headerBackgroundTheme"
                 :show-login-info="showLoginInfo"
                 :show-country-selector="showCountrySelector"
-                :is-condensed-on-mid="isCondensedOnMid"
+                :is-condensed="isCondensed"
                 @onMobileNavToggle="mobileNavToggled" />
         </div>
     </header>
@@ -97,7 +97,7 @@ export default {
             default: false
         },
 
-        isCondensedOnMid: {
+        isCondensed: {
             type: Boolean,
             default: false
         },

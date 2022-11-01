@@ -29,7 +29,7 @@ export const HeaderComponent = (args, { argTypes }) => ({
             :show-help-link="showHelpLink"
             :locale="locale"
             :is-logo-link-disabled="logoLinkDisabled"
-            :is-condensed-on-mid="isCondensedOnMid"
+            :is-condensed="isCondensed"
             :header-background-theme="headerBackgroundTheme"
             :show-delivery-enquiry="showDeliveryEnquiry"
             :show-login-info="showLoginInfo"
@@ -55,7 +55,7 @@ HeaderComponent.args = {
     showCorporateLink: false,
     showDeliveryEnquiry: false,
     logoLinkDisabled: false,
-    isCondensedOnMid: false,
+    isCondensed: false,
     tallBelowMid: false,
     shouldUseJetLogo: false
 };
@@ -136,8 +136,8 @@ HeaderComponent.argTypes = {
         description: 'Prevents the header logo from also being a link'
     },
 
-    isCondensedOnMid: {
-        description: 'Hides Icons, reduces spacing and applies stricter friendly name truncation for mid breakpoint'
+    isCondensed: {
+        description: 'Hides Icons, reduces spacing and applies stricter friendly name truncation where appropriate'
     },
 
     tallBelowMid: {
