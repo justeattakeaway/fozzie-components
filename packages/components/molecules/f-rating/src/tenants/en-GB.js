@@ -1,4 +1,16 @@
-export default {
+const messages = {
     locale: 'en-GB',
-    text: 'I am a VRating Component (GB)'
+    ratings: {
+        starsDescription: '{rating} star out of {maxStarRating} | {rating} stars out of {maxStarRating}',
+        ratingDisplayType: {
+            noRating: 'No ratings yet',
+            short: '{reviewCount}',
+            medium: '{rating} of {maxStarRating}',
+            long: 'View {reviewCount} reviews'
+        }
+    }
+};
+
+export default {
+    messages
 };

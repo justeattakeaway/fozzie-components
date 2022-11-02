@@ -1,4 +1,12 @@
 export default {
     locale: 'it-IT',
-    text: 'I am a VRating Component (IT)'
+    ratings: {
+        starsDescription: '{rating} ADD TRANSLATION {total} | {rating} ADD TRANSLATION {total}',
+        ratingDisplayType: {
+            noRating: 'ADD TRANSLATION',
+            short: '{reviewCount}',
+            medium: '{rating} ADD TRANSLATION {maxStarRating}',
+            long: 'ADD TRANSLATION {reviewCount} ADD TRANSLATION'
+        }
+    }
 };

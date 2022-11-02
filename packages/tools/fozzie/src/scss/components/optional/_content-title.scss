@@ -1,0 +1,51 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../../settings/variables' as v;
+@use '../../tools/mixins/type';
+@use '../../tools/functions/index' as functions;
+
+@mixin contentTitle() {
+    /**
+    * Components > Content title
+    * =================================
+    * Used for displaying a title with an associated action next to it
+    *
+    * Example: Filter titles (Search sidebar)
+    *
+    * The `c-contentTitle` component is an optional mixin within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include contentTitle();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * TBC
+    */
+
+    .c-contentTitle {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin: functions.spacing(d) 0;
+    }
+
+        .c-contentTitle-icon {
+            width: 24px;
+            margin-right: functions.spacing();
+        }
+
+        .c-contentTitle-text {
+            margin: 0;
+            width: 100%;
+            font-weight: dt.$font-weight-regular;
+            @include type.font-size(body-l, false);
+        }
+
+        .c-contentTitle-action {
+            text-decoration: none;
+            font-weight: dt.$font-weight-bold;
+            font-family: v.$font-family-base;
+
+            &:hover,
+            &:focus {
+                text-decoration: underline;
+            }
+        }
+
+}

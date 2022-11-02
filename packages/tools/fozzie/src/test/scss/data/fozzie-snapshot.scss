@@ -1,0 +1,130 @@
+@use 'fozzie' as f;
+
+// This file should call every part of Fozzie.
+// The purpose of this file is to be called during snapshot testing
+// to ensure no accidental breakages to the compiled CSS are introduced
+
+@include f.grid();
+@include f.layout();
+@include f.normalize();
+@include f.print();
+@include f.reset();
+@include f.typography();
+
+@include f.appsBanner();
+@include f.badge();
+@include f.contentHeader();
+@include f.contentTitle();
+@include f.cookieWarning();
+@include f.cuisinesWidget();
+@include f.fullScreenPopOver();
+@include f.listingSkeleton();
+@include f.listing();
+@include f.loadingIndicator();
+@include f.menu();
+@include f.modal();
+@include f.orderCard();
+@include f.overflowCarousel();
+@include f.pageBanner();
+@include f.rating();
+@include f.tag();
+@include f.toast();
+@include f.userMessage();
+@include f.alerts();
+@include f.breadcrumbs();
+@include f.cards();
+@include f.mediaElement();
+
+@include f.bodyStyles();
+@include f.buttons();
+@include f.formControls();
+@include f.formToggle();
+@include f.links();
+@include f.lists();
+@include f.tables();
+
+@include f.trumps-rwd();
+@include f.trumps-spacing();
+@include f.trumps-utilities();
+
+@include f.breakpoints();
+
+$em: f.em(32);
+$emArg: f.em(32, 16);
+
+$mapToEm: f.map-to-em((
+    narrow : 400px,
+    mid    : 750px,
+    wide   : 1000px,
+    huge   : 1250px
+));
+
+$mapToEmArg: f.map-to-em((
+    narrow : 400px,
+    mid    : 750px,
+    wide   : 1000px,
+    huge   : 1250px
+), 16);
+
+$spacing: f.spacing();
+$spacingArg: f.spacing(d);
+
+$stripUnits: f.strip-units(400px);
+
+$lineHeight: f.line-height();
+$lineHeightArgs: f.line-height('body-s', '20', 'default');
+
+$decimalRound: f.decimal-round(10.533);
+$decimalRoundArgs: f.decimal-round(10.533, 0, 'round');
+
+$emToPx: f.em-to-px(3);
+$emToPxArg: f.em-to-px(3, 16);
+
+$mapToPx: f.map-to-px((
+    tiny       : 10em,
+    narrow     : 20em,
+    narrowMid  : 30em,
+    mid        : 40em,
+    wide       : 50em,
+    huge       : 60em
+));
+
+$mapToPxArg: f.map-to-px((
+    tiny       : 10em,
+    narrow     : 20em,
+    narrowMid  : 30em,
+    mid        : 40em,
+    wide       : 50em,
+    huge       : 60em
+), 20);
+
+
+$zIndex: f.zIndex();
+$zIndexArg: f.zIndex('lowest');
+
+.test-output {
+    @include f.anim();
+
+    @include f.alert-variant(red, white);
+    @include f.bordered();
+    @include f.bordered(10px, 30px, green);
+
+    @include f.rating-fill(2);
+    @include f.rating-fill();
+
+    @include f.truncate();
+    @include f.truncate(45px);
+
+    @include f.rem(margin);
+    @include f.rem(margin, 16);
+
+    @include f.em(margin);
+    @include f.em(margin, 16);
+
+    @include f.font-size();
+    @include f.font-size('body-l', true, 'default', false);
+
+    @include f.spacing-classes(f.$spacing-map, 'pad', 'top') using ($spacing-value) {
+        padding-top: f.spacing(#{$spacing-value});
+    }
+}

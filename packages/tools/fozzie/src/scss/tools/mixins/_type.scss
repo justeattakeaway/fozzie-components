@@ -1,0 +1,74 @@
+@use '../../settings/variables' as v;
+@use '../functions/index' as functions;
+
+// ==========================================================================
+// Typography mixins
+// ==========================================================================
+
+// REM
+// @include rem(margin, $font-size-base);
+@use 'sass:math';
+
+@mixin rem($property, $sizeValue: v.$font-size-base) {
+    $unitlessSizeValue: functions.strip-units($sizeValue);
+    $remValue: math.div($unitlessSizeValue, v.$font-size-base);
+
+    #{$property}: ceil($unitlessSizeValue) + px;
+    #{$property}: $remValue + rem;
+}
+
+// EM
+// @include em(margin, $font-size-base);
+@mixin em($property, $sizeValue: v.$font-size-base) {
+    #{$property}: math.div(functions.strip-units($sizeValue), v.$font-size-base) + em;
+}
+
+// @param {String} $key – The type key you would like to reference. These are mapped to the PIE type definitions.
+// @param {Boolean} $line-height – Specifies whether the relevant `line-height` is output alongside the `font-size` declaration.
+// @param {String} $scale – Defines which sub-type scale definition to output from the Sass type-map.
+// @param {Boolean} $relativeToParent – When set to true, the mixin will output the `font-size` as `em`s rather than `rem`s. By default, the `font-size` is defined relative to the root element.
+@mixin font-size($key: 'body-l', $line-height: true, $scale: 'default', $relativeToParent: false) {
+    // if the $key passed in is actually just a font-size
+    // then output it (may want to instead force a sass error saying to use the type map?)
+    @if type-of($key) == 'number' {
+        @if $relativeToParent == true {
+            @include em(font-size, $key);
+        } @else {
+            @include rem(font-size, $key);
+        }
+    } @else if map-has-key(v.$type, $key) { // else try and find the value in our type map
+        $key-map: map-get(v.$type, $key); // get the defined key from the type map
+        $font-list: map-get($key-map, $scale); // get the value for the scale of that type key (e.g. default or narrow)
+
+        // if font-list was found in the map, then carry on, otherwise, report no key value found
+        @if $font-list {
+            // If $font-list is a list – i.e. (12, 16) – then include
+            // both the font-size and line-height (if $line-height == true)
+            @if type-of($font-list) == 'list' {
+                $font-size: nth($font-list, 1); // get the first part of the font definition list
+
+                @if $relativeToParent == true {
+                    @include em(font-size, $font-size);
+                } @else {
+                    @include rem(font-size, $font-size);
+                }
+
+                @if length($font-list) > 1 and $line-height == true {
+                    $line-height: nth($font-list, 2); // get the second part of the font definition list
+
+                    line-height: functions.line-height($font-size, $line-height);
+                }
+            } @else {
+                @if $relativeToParent == true {
+                    @include em(font-size, $font-list);
+                } @else {
+                    @include rem(font-size, $font-list);
+                }
+            }
+        } @else {
+            @warn 'Unknown scale `#{$scale}` for type key `#{$key}.';
+        }
+    } @else {
+        @warn 'Unknown `#{$key}` in $type.';
+    }
+}

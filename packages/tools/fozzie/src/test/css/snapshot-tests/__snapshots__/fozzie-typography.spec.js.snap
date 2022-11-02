@@ -1,0 +1,283 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fozzie-typography CSS files compiles the expected CSS file 1`] = `
+"@charset "UTF-8";
+/**
+* Typography
+* =================================
+* - Base
+* - Paragraphs
+* - Headings
+* - Type sizes
+* - Misc
+* - Utilities
+*
+* Body font size, leadings etc have been set in _variables.scss
+*
+* This is an optional component within Fozzie.
+* If you'd like to use it in your project you can include it by adding \`@include typography();\` into your SCSS dependencies file.
+*
+* Documentation:
+* TBC
+*/
+/**
+* Typography preloading styles
+*/
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+}
+
+body {
+  font-family: "JetSansDigital", "Arial", sans-serif;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #242e30;
+  font-weight: 400;
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+}
+
+/**
+* Paragraphs
+*/
+p {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+/**
+* Headings
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.alpha,
+.beta,
+.gamma,
+.delta,
+.epsilon {
+  color: #242e30;
+  margin: 0;
+  margin-bottom: 0;
+  font-family: "JetSansDigital", "Arial", sans-serif;
+  font-weight: 800;
+}
+h1 small,
+h2 small,
+h3 small,
+h4 small,
+h5 small,
+h6 small,
+.alpha small,
+.beta small,
+.gamma small,
+.delta small,
+.epsilon small {
+  font-weight: normal;
+}
+
+h1,
+.alpha {
+  font-size: 28px;
+  font-size: 1.75rem;
+  line-height: 1.29;
+  margin-top: 32px;
+  margin-bottom: 16px;
+}
+@media (min-width: 48.001em) {
+  h1,
+.alpha {
+    font-size: 32px;
+    font-size: 2rem;
+    line-height: 1.25;
+  }
+}
+h1:first-child,
+.alpha:first-child {
+  margin-top: 0;
+}
+
+h2,
+.beta {
+  font-size: 20px;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+@media (min-width: 48.001em) {
+  h2,
+.beta {
+    font-size: 24px;
+    font-size: 1.5rem;
+    line-height: 1.33;
+  }
+}
+
+h3,
+.gamma,
+h4,
+.delta,
+h5,
+.epsilon {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+@media (min-width: 48.001em) {
+  h3,
+.gamma,
+h4,
+.delta,
+h5,
+.epsilon {
+    font-size: 20px;
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+}
+
+h6,
+.zeta {
+  font-size: 12px;
+  font-size: 0.75rem;
+  line-height: 1.33;
+}
+
+* + h2,
+* + .beta {
+  margin-top: 32px;
+}
+
+* + h3,
+* + .gamma,
+* + h4,
+* + .delta {
+  margin-top: 16px;
+}
+
+small {
+  font-size: 80%;
+}
+
+/**
+* Miscellaneous
+*/
+strong,
+b {
+  font-weight: 700;
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+abbr[title] {
+  border-bottom: 1px dotted #ddd;
+  cursor: help;
+}
+
+/**
+* Blockquotes
+*/
+blockquote {
+  padding-left: 10px;
+  margin: 16px;
+  border-left: 4px solid #cccccc;
+}
+blockquote p {
+  margin-bottom: 0;
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  font-weight: 300;
+}
+blockquote small {
+  display: block;
+  color: #b3b3b3;
+}
+blockquote small:before {
+  content: "— ";
+}
+
+/**
+* Buttons
+*/
+button {
+  font-family: "JetSansDigital", "Arial", sans-serif;
+}
+
+q:before, q:after,
+blockquote:before,
+blockquote:after {
+  content: "";
+}
+
+cite {
+  font-style: normal;
+}
+
+dfn {
+  font-style: italic;
+}
+
+mark {
+  background: #fff9df;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+address {
+  font-style: normal;
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+samp {
+  font-family: Menlo, Monaco, "Courier New", monospace;
+}
+
+hr {
+  margin: 16px 0;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.hyphenate {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+          hyphens: auto;
+}
+
+/*# sourceMappingURL=fozzie-typography.css.map */"
+`;
+
+exports[`fozzie-typography CSS files compiles the expected minified CSS file 1`] = `"@charset "UTF-8";html{-webkit-text-size-adjust:100%;text-size-adjust:100%;font-size:16px}body{-webkit-font-smoothing:antialiased;-moz-font-smoothing:antialiased;color:#242e30;font-family:JetSansDigital,Arial,sans-serif;font-weight:400;text-rendering:optimizelegibility}body,p{font-size:16px;font-size:1rem;line-height:1.5}p{margin-bottom:0;margin-top:16px}.alpha,.beta,.delta,.epsilon,.gamma,h1,h2,h3,h4,h5,h6{color:#242e30;font-family:JetSansDigital,Arial,sans-serif;font-weight:800;margin:0}.alpha small,.beta small,.delta small,.epsilon small,.gamma small,h1 small,h2 small,h3 small,h4 small,h5 small,h6 small{font-weight:400}.alpha,h1{font-size:28px;font-size:1.75rem;line-height:1.29;margin-bottom:16px;margin-top:32px}@media (min-width:48.001em){.alpha,h1{font-size:32px;font-size:2rem;line-height:1.25}}.alpha:first-child,h1:first-child{margin-top:0}.beta,h2{font-size:20px;font-size:1.25rem;line-height:1.4}@media (min-width:48.001em){.beta,h2{font-size:24px;font-size:1.5rem;line-height:1.33}}.delta,.epsilon,.gamma,h3,h4,h5{font-size:16px;font-size:1rem;line-height:1.5}@media (min-width:48.001em){.delta,.epsilon,.gamma,h3,h4,h5{font-size:20px;font-size:1.25rem;line-height:1.4}}.zeta,h6{font-size:12px;font-size:.75rem;line-height:1.33}*+.beta,*+h2{margin-top:32px}*+.delta,*+.gamma,*+h3,*+h4{margin-top:16px}small{font-size:80%}b,strong{font-weight:700}em,i{font-style:italic}abbr[title]{border-bottom:1px dotted #ddd;cursor:help}blockquote{border-left:4px solid #ccc;margin:16px;padding-left:10px}blockquote p{font-size:14px;font-size:.875rem;font-weight:300;line-height:1.43;margin-bottom:0}blockquote small{color:#b3b3b3;display:block}blockquote small:before{content:"— "}button{font-family:JetSansDigital,Arial,sans-serif}blockquote:after,blockquote:before,q:after,q:before{content:""}cite{font-style:normal}dfn{font-style:italic}mark{background:#fff9df;border-radius:4px;padding:2px 4px}address{font-style:normal;margin-bottom:0;margin-top:16px}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:initial}sup{top:-.5em}sub{bottom:-.25em}samp{font-family:Menlo,Monaco,Courier New,monospace}hr{border:0;border-top:1px solid #00000014;margin:16px 0}.hyphenate{word-wrap:break-word;-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}"`;
+
+exports[`fozzie-typography sourcemap file compiles the expected sourcemap file 1`] = `"{"version":3,"sources":["fozzie-typography.css","../../src/scss/base/_typography.scss","../../src/scss/settings/_variables.scss","../../src/scss/tools/mixins/_type.scss","../../node_modules/@justeat/pie-design-tokens/dist/jet.scss","../../node_modules/include-media/dist/_include-media.scss"],"names":[],"mappings":"AAAA,gBAAgB;ACOZ;;;;;;;;;;;;;;;;;CAAA;AAoBA;;CAAA;AAIA;EACI,eClBsB;EDmBtB,8BAAA;UAAA,sBAAA;ADRR;;ACWI;EACI,kDCuBsB;EC7C1B,eAAA;EACA,eAAA;EA0CgB,gBAAA;EFnBZ,cG3BY;EH4BZ,gBGyLc;EHvLd,kCAAA;EACA,mCAAA;EACA,gCAAA;ADPR;;ACUI;;CAAA;AAGA;EEnCA,eAAA;EACA,eAAA;EA0CgB,gBAAA;EFNZ,gBAAA;EACA,gBAAA;ADLR;;ACQI;;CAAA;AAGA;;;;;;;;;;;EAWI,cG1DY;EH2DZ,SAAA;EACA,gBAAA;EACA,kDCbsB;EDctB,gBGsJgB;AJ3JxB;ACOQ;;;;;;;;;;;EACI,mBAAA;ADKZ;;ACCI;;EEpEA,eAAA;EACA,kBAAA;EA0CgB,iBAAA;EF4BZ,gBAAA;EACA,mBAAA;ADIR;AK4eI;EJpfA;;IEpEA,eAAA;IACA,eAAA;IA0CgB,iBAAA;EHwClB;AACF;ACNQ;;EACI,aAAA;ADSZ;;ACLI;;EEnFA,eAAA;EACA,kBAAA;EA0CgB,gBAAA;AHoDpB;AKydI;EJreA;;IEnFA,eAAA;IACA,iBAAA;IA0CgB,iBAAA;EH2DlB;AACF;;ACXI;;;;;;EE5FA,eAAA;EACA,eAAA;EA0CgB,gBAAA;AHuEpB;AKscI;EJ5dA;;;;;;IE5FA,eAAA;IACA,kBAAA;IA0CgB,gBAAA;EHkFlB;AACF;;ACrBI;;EEzGA,eAAA;EACA,kBAAA;EA0CgB,iBAAA;AH0FpB;;ACtBI;;EAEI,gBAAA;ADyBR;;ACtBI;;;;EAII,gBAAA;ADyBR;;ACtBI;EACI,cAAA;ADyBR;;ACtBI;;CAAA;AAKA;;EAEI,gBG0EW;AJnDnB;;ACpBI;;EAEI,kBAAA;ADuBR;;ACnBI;EACI,8BAAA;EACA,YAAA;ADsBR;;ACnBI;;CAAA;AAGA;EACI,kBAAA;EACA,YAAA;EACA,8BAAA;ADsBR;ACpBQ;EACI,gBAAA;EE7JR,eAAA;EACA,mBAAA;EA0CgB,iBAAA;EFoHR,gBAAA;ADwBZ;ACrBQ;EACI,cAAA;EACA,cAAA;ADuBZ;ACrBY;EACI,aAAA;ADuBhB;;AClBI;;CAAA;AAGA;EACI,kDCnIsB;AFwJ9B;;ACfQ;;;EAEI,WAAA;ADmBZ;;ACfI;EACI,kBAAA;ADkBR;;ACdI;EACI,kBAAA;ADiBR;;ACdI;EACI,mBGvKU;EHwKV,gBAAA;EACA,kBG0JI;AJzIZ;;ACdI;EACI,kBAAA;EACA,gBAAA;EACA,gBAAA;ADiBR;;ACZI;;EAEI,cAAA;EACA,cAAA;EACA,kBAAA;EACA,wBAAA;ADeR;;ACZI;EAAM,WAAA;ADgBV;;ACfI;EAAM,eAAA;ADmBV;;AClBI;EAAO,oDC/KmB;AFqM9B;;AChBI;EACI,cAAA;EACA,SAAA;EACA,yCAAA;ADmBR;;ACfI;EACI,yBAAA;EACA,qBAAA;EACA,qBAAA;UAAA,aAAA;ADkBR","file":"fozzie-typography.css"}"`;

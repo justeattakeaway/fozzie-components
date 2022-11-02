@@ -69,8 +69,13 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
-| Prop  | Type  | Default | Description |
-| ----- | ----- | ------- | ----------- |
+| Prop          |   Type   | Required | Default | Description                                                                                                                                                                                                         | Options |
+| :---          |:--------:|:--------:|:-------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| `starRating`  | `Number` |   Yes    |    -    | Sets the displayed rating (filled stars). i.e. for `2 out of x`, 2 would be the `starRating`                                                                                                                        | -
+| `maxStarRating`  | `Number` |    No    |    5    | Sets the maximum number of stars that the rating is set against. i.e. for `x out of 5`, 5 would be the `maxStarRating` You can use any number of stars, so if you currently need 6 all you have to do is pass in 6. | -
+| `starRatingSize`  | `String` |    No    | 'small' | Sets the component size. By default the component will use `small`.                                                                                                                                                 | `small` `medium` `large`
+| `ratingDisplayType`  | `String` |    No    |  null   | Sets the descriptive text which will be displayed next to the component. By default there will be no text.                                                                                                          | `noRating` `short` `medium` `long`
+| `reviewCount`  | `Number` |    No    |  null   | Sets the total number of reviews to display. Example: `View 499 reviews` where `499` is the total.                                                                                                                  | -
 
 ### Events
 
