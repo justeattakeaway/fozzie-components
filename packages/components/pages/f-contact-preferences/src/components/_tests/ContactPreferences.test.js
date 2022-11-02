@@ -15,7 +15,6 @@ localVue.use(VueI18n);
 localVue.use(Vuex);
 
 let wrapper;
-let cookiesSpy;
 let httpSpy;
 let sutMocks;
 let sutProps;
@@ -86,14 +85,12 @@ describe('ContactPreferences Component', () => {
             isFormDirty: false,
             shouldShowErrorPage: false
         });
-        cookiesSpy = jest.fn();
         httpSpy = jest.fn();
         sutMocks = {
             $parent: {
                 $emit: jest.fn()
             },
             $http: httpSpy,
-            $cookies: cookiesSpy,
             $log: logMocks
         };
         sutProps = {
@@ -103,7 +100,6 @@ describe('ContactPreferences Component', () => {
         };
         contactPreferencesMock = new ContactPreferencesApi({
             baseUrl,
-            cookies: cookiesSpy,
             httpClient: httpSpy,
             locale: 'en-GB'
         });
