@@ -3,12 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
 v1.9.0
 ------------------------------
-*September 22, 2022*
+*November 2, 2022*
 
 ### Removed
-- Bespoke Conversation ID Handling - Now handled by F-HTTP
+- Bespoke Conversation ID handling (now handled by f-http as of v1.0.0)
 
 
 v1.8.0
