@@ -1,0 +1,43 @@
+@use 'strip-units';
+@use '../../settings/variables' as v;
+
+// **
+// px to em converter
+// =================================
+// Convert pixels to ems
+//
+// Usage:
+// font-size : em(12);
+// font-size : em(12, 24); // If the parent is another value say 24px
+// **
+
+@use 'sass:math';
+
+@function em($pxval, $base: v.$font-size-base) {
+    @return math.div($pxval, $base) * 1em;
+}
+
+// **
+// Convert a map of breakpoints to ems
+// =================================
+// Takes a map of breakpoints (in px) and a base-font-size
+//
+// Usage:
+//$breakpoints: map-to-em((
+//	narrow : 400px,
+//	mid    : 750px,
+//	wide   : 1000px,
+//	huge   : 1250px
+// ), 16);
+// **
+
+@function map-to-em($breakpoints, $base: v.$font-size-base) {
+    $newBreakpoints: ();
+
+    @each $name, $pxValue in $breakpoints {
+        $emValue: em(strip-units.strip-units($pxValue), $base);
+        $newBreakpoints: map-merge($newBreakpoints, ($name: $emValue));
+    }
+
+    @return $newBreakpoints;
+}

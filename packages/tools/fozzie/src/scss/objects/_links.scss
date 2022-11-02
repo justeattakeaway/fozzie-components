@@ -1,0 +1,62 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+
+@mixin links() {
+    /**
+    * Objects > Links
+    * =================================
+    * Default Link Styling
+    *
+    * This is an optional component within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include links();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * TBC
+    */
+
+    a {
+        & {
+            color: dt.$color-content-link;
+        }
+
+        &:hover,
+        &:focus {
+            color: lighten(dt.$color-content-link, dt.$color-hover-02);
+        }
+
+        &:active {
+            color: lighten(dt.$color-content-link, dt.$color-active-02);
+        }
+    }
+
+    .o-link--full {
+        width: 100%;
+        display: block;
+    }
+
+    .o-link--noDecoration {
+        text-decoration: none;
+
+        // for accessibility reasons we are leaving
+        // text-decoration on hover and focus
+        &:hover,
+        &:focus {
+            text-decoration: underline;
+        }
+    }
+
+    .o-link--bold {
+        font-weight: dt.$font-weight-bold;
+    }
+
+    .o-link--distinct {
+        color: dt.$color-content-link-distinct;
+
+        &:hover,
+        &:focus {
+            color: darken(dt.$color-content-link-distinct, dt.$color-hover-01);
+        }
+        &:active {
+            color: darken(dt.$color-content-link-distinct, dt.$color-active-01);
+        }
+    }
+}

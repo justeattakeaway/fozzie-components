@@ -1,0 +1,326 @@
+@use '@justeat/pie-design-tokens/dist/jet' as dt;
+@use '../settings/include-media' as *;
+@use '../tools/functions/index' as functions;
+@use 'sass:math';
+
+$formToggle-padding                 : functions.spacing() !default;
+$formToggle-border-color            : dt.$color-border-default;
+$formToggle-border-color--interact  : dt.$color-border-strong;
+$formToggle-border-color--checked   : dt.$color-green;
+$formToggle-border-width            : 1px;
+$formToggle-border-radius           : dt.$radius-rounded-e;
+$formToggle-icon-background         : dt.$color-green;
+$formToggle-icon-background--hover  : dt.$color-support-neutral;
+$formToggle-background              : dt.$color-white;
+$formToggle-large-size              : 48px;
+$formToggle-button-color            : dt.$color-blue;
+$formToggle-button-background       : dt.$color-blue-10;
+$formToggle-text--disabled          : dt.$color-disabled-01;
+$formToggle-text--checked           : dt.$color-green;
+
+@mixin formToggle() {
+    /**
+    * Objects > Form Toggle
+    * =================================
+    * Styles a button on top of a checkbox, to toggle inputs to a form
+    *
+    * Example: Search page filters (sidebat)
+    *
+    * The `o-formToggle` object is an optional mixin within Fozzie.
+    * If you'd like to use it in your project you can include it by adding `@include formToggle();` into your SCSS dependencies file.
+    *
+    * Documentation:
+    * TBC
+    */
+
+    .o-formToggle {
+        position: relative;
+        display: inline-block;
+        margin-bottom: functions.spacing();
+        border-radius: $formToggle-border-radius;
+        padding: math.div($formToggle-padding, 2) $formToggle-padding;
+        border: $formToggle-border-width solid $formToggle-border-color;
+
+        @include media('>=mid') {
+            background: $formToggle-background;
+        }
+    }
+
+        .o-formToggle--button {
+            padding-left: functions.spacing(f);
+            color: $formToggle-button-color;
+            background: $formToggle-button-background;
+            border-color: $formToggle-button-background;
+        }
+
+        .o-formToggle--buttonIcon {
+            top: 50%;
+            position: absolute;
+            left: $formToggle-padding;
+            transform: translateY(-50%);
+            fill: $formToggle-button-color;
+        }
+
+        //Used alongside the default styles but for a larger tap area (min 44px) on narrow screens
+        .o-formToggle--largeTouchArea {
+            @include media('<mid') {
+                margin: functions.spacing() 0 functions.spacing() functions.spacing(a);
+            }
+        }
+
+        .o-formToggle--fullWidth {
+            width: 100%;
+            display: block;
+
+            @include media('>=mid') {
+                display: inline-block;
+            }
+        }
+
+        .o-formToggle--fullWidthAboveMid {
+            @include media('>=mid') {
+                width: 100%;
+            }
+        }
+
+        .o-formToggle--withBg {
+            background: $formToggle-background;
+        }
+
+        .o-formToggle--mediumSized {
+            padding: $formToggle-padding ($formToggle-padding * 1.5);
+        }
+
+        .o-formToggle--mediumAboveMid {
+            @include media('>=mid') {
+                padding: $formToggle-padding ($formToggle-padding * 1.5);
+            }
+        }
+
+        .o-formToggle--largeSized {
+            height: $formToggle-large-size;
+            @include formToggle-large();
+        }
+
+        .o-formToggle--largeAboveMid {
+            @include media('>=mid') {
+                float: left;
+                margin: 0 0 functions.spacing();
+                @include formToggle-large();
+            }
+        }
+
+        .o-formToggle-text {
+            width: 100%;
+            display: block;
+            transition: padding 100ms ease-in-out;
+
+            @include media('>=mid') {
+                transition-duration: 200ms;
+            }
+
+            // This before is to increase the click area to the formToggle parent.
+            &:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+
+            .o-formToggle-input:checked ~ & {
+                font-weight: dt.$font-weight-bold;
+                color: $formToggle-text--checked;
+                @include formToggle-checkedSpacing();
+            }
+
+            .o-formToggle-input:not(:disabled):hover ~ &,
+            .o-formToggle-input:not(:disabled):focus ~ & {
+                @include media('>=mid') {
+                    @include formToggle-checkedSpacing();
+                }
+            }
+
+            .o-formToggle:not(.o-formToggle--disabled):hover & {
+                @include media('>=mid') {
+                    @include formToggle-hoverState();
+                }
+            }
+
+            .o-formToggle:not(.o-formToggle--disabled):focus & {
+                @include media('>=mid') {
+                    @include formToggle-focusState();
+                }
+            }
+
+            .o-formToggle-input:not([disabled]):hover ~ &,
+            .o-formToggle-input:not(:disabled):hover ~ & {
+                @include formToggle-hoverState();
+            }
+
+            .o-formToggle-input:not([disabled]):focus ~ &,
+            .o-formToggle-input:not(:disabled):focus ~ & {
+                @include formToggle-focusState();
+            }
+
+
+            .o-formToggle-input:not([disabled]):checked ~ &,
+            .o-formToggle-input:not(:disabled):checked ~ & {
+                @include formToggle-checkedState();
+            }
+
+            .o-formToggle--largeSized & {
+                @include formToggle-largeInputSize();
+            }
+
+            .o-formToggle--largeAboveMid & {
+                @include media('>=mid') {
+                    @include formToggle-largeInputSize();
+                }
+            }
+        }
+
+        .o-formToggle-icon {
+            //TODO - remove target / styling of SVG when inline-helper allows us to add class
+            svg {
+                top: 50%;
+                opacity: 0;
+                width: 16px;
+                height: 10px;
+                position: absolute;
+                margin-top: -4px;
+                left: functions.spacing();
+                display: inline-block;
+                transform: rotate(-45deg) scale(0.5);
+                transition: transform 200ms ease, opacity 250ms ease;
+                fill: $formToggle-icon-background;
+
+                .o-formToggle-input:not([disabled]):hover ~ &,
+                .o-formToggle-input:not([checked]):hover ~ &,
+                .o-formToggle-input:not([disabled]):focus ~ &,
+                .o-formToggle-input:not([checked]):focus ~ & {
+                    @include media('>=mid') {
+                        fill: $formToggle-icon-background--hover;
+                    }
+                }
+
+                .o-formToggle-input:checked ~ & {
+                    @include formToggle-iconActive();
+
+                    &:hover,
+                    &:focus {
+                        fill: $formToggle-icon-background;
+                    }
+                }
+
+                .o-formToggle-input:not(:disabled):focus ~ &,
+                .o-formToggle-input:not(:disabled):hover ~ & {
+                    @include media('>=mid') {
+                        @include formToggle-iconActive();
+                    }
+                }
+            }
+        }
+
+        .o-formToggle--hasCount {
+            display: flex;
+            vertical-align: middle;
+        }
+
+        .o-formToggle-count {
+            pointer-events: none;
+            padding-left: functions.spacing();
+
+            @include media('>mid') {
+                top: 50%;
+                padding-left: 0;
+                right: functions.spacing();
+                position: absolute;
+                transform: translateY(-50%);
+            }
+        }
+
+        .o-formToggle--disabled {
+            background: none;
+            color: $formToggle-text--disabled;
+        }
+}
+
+// associated form toggle mixins
+@mixin formToggle-large() {
+    width: calc(50% - 4px);
+
+    &:nth-child(2n) {
+        margin-left: functions.spacing();
+    }
+}
+
+@mixin formToggle-largeInputSize() {
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@mixin formToggle-checkedSpacing() {
+    padding-left: 20px;
+    font-weight: dt.$font-weight-bold;
+}
+
+@mixin formToggle-border() {
+    cursor: pointer;
+    //the &:after is to create a border that sits over the top of the parents,
+    // it creates a visual state on the parent without the need for a JS class toggle
+    &:after {
+        content: '';
+        top: -1px;
+        left: -1px;
+        display: block;
+        position: absolute;
+    }
+}
+
+// `formToggle-hoverState` is used only when a formToggle has a user interaction :hover
+@mixin formToggle-hoverState() {
+    @include formToggle-border();
+    &:after {
+        width: calc(100% + 2px);
+        height: calc(100% + 2px);
+        border-radius: $formToggle-border-radius;
+        border: $formToggle-border-width solid $formToggle-border-color--interact;
+    }
+}
+
+// `formToggle-hoverState` is used only when a formToggle has a user interaction: :focus
+@mixin formToggle-focusState() {
+    @include formToggle-border();
+    &:after {
+        outline: 2px solid dt.$color-focus;
+        left: 1px;
+        top: 1px;
+        width: calc(100% - 2px);
+        height: calc(100% - 2px);
+        border-radius: $formToggle-border-radius;
+        border: $formToggle-border-width solid $formToggle-border-color--interact;
+    }
+}
+
+@mixin formToggle-checkedState() {
+    @include formToggle-border();
+    // for `formToggle-checkedState` we double the size of the element and scale by
+    // 0.5 to make a 0.5px border render for the checked state
+    &:after {
+        width: calc(200% + 4px);
+        height: calc(200% + 4px);
+        border-radius: ($formToggle-border-radius * 2);
+        border: $formToggle-border-width solid $formToggle-border-color--checked;
+        transform: scale(0.5) translate(-50%, -50%);
+    }
+}
+
+@mixin formToggle-iconActive() {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+}

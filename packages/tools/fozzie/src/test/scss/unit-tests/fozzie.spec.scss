@@ -1,0 +1,157 @@
+@use 'true' as *;
+@use 'src/scss/fozzie' as systemUnderTest;
+
+@include describe('Fozzie') {
+    @include it('base - does not throw any errors') {
+        @include systemUnderTest.grid();
+        @include systemUnderTest.layout();
+        @include systemUnderTest.normalize();
+        @include systemUnderTest.print();
+        @include systemUnderTest.reset();
+        @include systemUnderTest.typography();
+
+        @include assert-true ('No errors were thrown from base');
+    }
+
+    @include it('components - does not throw any errors') {
+        @include systemUnderTest.appsBanner();
+        @include systemUnderTest.badge();
+        @include systemUnderTest.contentHeader();
+        @include systemUnderTest.contentTitle();
+        @include systemUnderTest.cookieWarning();
+        @include systemUnderTest.cuisinesWidget();
+        @include systemUnderTest.fullScreenPopOver();
+        @include systemUnderTest.listingSkeleton();
+        @include systemUnderTest.listing();
+        @include systemUnderTest.loadingIndicator();
+        @include systemUnderTest.menu();
+        @include systemUnderTest.modal();
+        @include systemUnderTest.orderCard();
+        @include systemUnderTest.overflowCarousel();
+        @include systemUnderTest.pageBanner();
+        @include systemUnderTest.rating();
+        @include systemUnderTest.tag();
+        @include systemUnderTest.toast();
+        @include systemUnderTest.userMessage();
+        @include systemUnderTest.alerts();
+        @include systemUnderTest.breadcrumbs();
+        @include systemUnderTest.cards();
+        @include systemUnderTest.mediaElement();
+
+        @include assert-true ('No errors were thrown from components');
+    }
+
+    @include it('objects - does not throw any errors') {
+        @include systemUnderTest.bodyStyles();
+        @include systemUnderTest.buttons();
+        @include systemUnderTest.formControls();
+        @include systemUnderTest.formToggle();
+        @include systemUnderTest.links();
+        @include systemUnderTest.lists();
+        @include systemUnderTest.tables();
+
+        @include assert-true ('No errors were thrown from objects');
+    }
+
+    @include it('trumps - does not throw any errors') {
+        @include systemUnderTest.trumps-rwd();
+        @include systemUnderTest.trumps-spacing();
+        @include systemUnderTest.trumps-utilities();
+
+        @include assert-true ('No errors were thrown from trumps');
+    }
+
+    @include it('helpers - does not throw any errors') {
+        @include systemUnderTest.breakpoints();
+
+        @include assert-true ('No errors were thrown from helpers');
+    }
+
+    @include it('functions - does not throw any errors') {
+        $em: systemUnderTest.em(32);
+        $emArg: systemUnderTest.em(32, 16);
+
+        $mapToEm: systemUnderTest.map-to-em((
+            narrow : 400px,
+            mid    : 750px,
+            wide   : 1000px,
+            huge   : 1250px
+        ));
+
+        $mapToEmArg: systemUnderTest.map-to-em((
+            narrow : 400px,
+            mid    : 750px,
+            wide   : 1000px,
+            huge   : 1250px
+        ), 16);
+
+        $spacing: systemUnderTest.spacing();
+        $spacingArg: systemUnderTest.spacing(d);
+
+        $stripUnits: systemUnderTest.strip-units(400px);
+
+        $lineHeight: systemUnderTest.line-height();
+        $lineHeightArgs: systemUnderTest.line-height('body-s', '20', 'default');
+
+        $decimalRound: systemUnderTest.decimal-round(10.533);
+        $decimalRoundArgs: systemUnderTest.decimal-round(10.533, 0, 'round');
+
+        $emToPx: systemUnderTest.em-to-px(3);
+        $emToPxArg: systemUnderTest.em-to-px(3, 16);
+
+        $mapToPx: systemUnderTest.map-to-px((
+            tiny       : 10em,
+            narrow     : 20em,
+            narrowMid  : 30em,
+            mid        : 40em,
+            wide       : 50em,
+            huge       : 60em
+        ));
+
+        $mapToPxArg: systemUnderTest.map-to-px((
+            tiny       : 10em,
+            narrow     : 20em,
+            narrowMid  : 30em,
+            mid        : 40em,
+            wide       : 50em,
+            huge       : 60em
+        ), 20);
+
+
+        $zIndex: systemUnderTest.zIndex();
+        $zIndexArg: systemUnderTest.zIndex('lowest');
+
+        @include assert-true ('No errors were thrown from functions');
+    }
+
+    @include it('mixins - does not throw any errors') {
+        .test-output {
+            @include systemUnderTest.anim();
+
+            @include systemUnderTest.alert-variant(red, white);
+            @include systemUnderTest.bordered();
+            @include systemUnderTest.bordered(10px, 30px, green);
+
+            @include systemUnderTest.rating-fill(2);
+            @include systemUnderTest.rating-fill();
+
+            @include systemUnderTest.truncate();
+            @include systemUnderTest.truncate(45px);
+
+            @include systemUnderTest.rem(margin);
+            @include systemUnderTest.rem(margin, 16);
+
+            @include systemUnderTest.em(margin);
+            @include systemUnderTest.em(margin, 16);
+
+            @include systemUnderTest.font-size();
+            @include systemUnderTest.font-size('body-l', true, 'default', false);
+
+            @include systemUnderTest.spacing-classes(systemUnderTest.$spacing-map, 'pad', 'top') using ($spacing-value) {
+                padding-top: systemUnderTest.spacing(#{$spacing-value});
+            }
+        }
+
+        @include assert-true ('No errors were thrown from mixins');
+    }
+}

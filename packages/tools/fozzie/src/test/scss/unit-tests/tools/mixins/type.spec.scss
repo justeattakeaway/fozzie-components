@@ -1,0 +1,118 @@
+@use 'true' as *;
+@use 'src/scss/tools/mixins/type' as systemUnderTest;
+
+@include describe('rem [mixin]') {
+    @include it('outputs the expected CSS by rounding `$sizeValue`') {
+        // arrange
+        $property: padding;
+        $sizeValue: 10.5;
+
+        // act & assert
+        @include assert {
+            @include output {
+                @include systemUnderTest.rem($property, $sizeValue);
+            }
+
+            @include expect {
+                padding: 11px;
+                padding: 0.65625rem;
+            }
+        }
+    }
+
+    @include it('outputs the expected CSS using the default `$sizeValue` when no `$sizeValue` argument is provided') {
+        // arrange
+        $property: padding;
+
+        // act & assert
+        @include assert {
+            @include output {
+                @include systemUnderTest.rem($property);
+            }
+
+            @include expect {
+                padding: 16px;
+                padding: 1rem;
+            }
+        }
+    }
+}
+
+@include describe('font-size [mixin]') {
+    @include it('outputs the expected CSS when the default font-size mixin is called') {
+        // arrange
+
+        // act & assert
+        @include assert {
+            @include output {
+                @include systemUnderTest.font-size();
+            }
+
+            @include expect {
+                font-size: 16px;
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+        }
+    }
+
+    @include it('outputs the expected CSS when the font-size key is set to `body-s`') {
+        // arrange
+        $sizeKey: 'body-s';
+
+        // act & assert
+        @include assert {
+            @include output {
+                @include systemUnderTest.font-size($sizeKey);
+            }
+
+            @include expect {
+                font-size: 14px;
+                font-size: 0.875rem;
+                line-height: 1.43;
+            }
+        }
+    }
+
+    @include describe('line-height [param]') {
+        @include it('isn‘t output when the line-height param is set to false') {
+            // arrange
+            $sizeKey: 'body-l';
+            $shouldIncludeLineHeight: false;
+
+            // act & assert
+            @include assert {
+                @include output {
+                    @include systemUnderTest.font-size($sizeKey, $shouldIncludeLineHeight);
+                }
+
+                @include expect {
+                    font-size: 16px;
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+
+    @include describe('scale [param]') {
+        @include it('font size CSS is correctly output when the scale param is set to `narrow` for a type key that has a `narrow` key') {
+            $sizeKey: 'heading-m';
+            $shouldIncludeLineHeight: true;
+            $scaleValue: 'narrow';
+
+            // act & assert
+            @include assert {
+                @include output {
+                    @include systemUnderTest.font-size($sizeKey, $shouldIncludeLineHeight, $scaleValue);
+                }
+
+                @include expect {
+                    font-size: 20px;
+                    font-size: 1.25rem;
+                    line-height: 1.4;
+                }
+            }
+        }
+    }
+}
+

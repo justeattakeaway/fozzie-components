@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "7.35.2",
+  "version": "7.39.0",
   "private": true,
   "scripts": {
     "build": "turbo run build --continue",
@@ -58,7 +58,8 @@
     "@babel/preset-env": "7.14.9",
     "@justeat/browserslist-config-fozzie": "1.2.0",
     "@justeat/eslint-config-fozzie": "5.1.0",
-    "@justeat/fozzie": "10.5.0",
+    "@justeat/fozzie": "10.x",
+    "@justeat/pie-design-tokens": "3.0.0",
     "@justeat/stylelint-config-fozzie": "2.2.0",
     "@percy/cli": "1.0.5",
     "@percy/webdriverio": "2.0.1",
@@ -68,7 +69,7 @@
     "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/cli-service": "4.5.16",
     "@vue/eslint-config-standard": "4.0.0",
-    "@vue/test-utils": "1.0.3",
+    "@vue/test-utils": "1.3.0",
     "@wdio/allure-reporter": "7.19.7",
     "@wdio/cli": "7.19.7",
     "@wdio/local-runner": "7.19.7",
@@ -85,7 +86,7 @@
     "chromedriver": "106.0.0",
     "cross-env": "7.0.2",
     "css-loader": "1.0.1",
-    "danger": "10.2.1",
+    "danger": "11.1.4",
     "eslint": "8.8.0",
     "eslint-import-resolver-webpack": "0.13.2",
     "eslint-plugin-vue": "8.4.0",
@@ -107,6 +108,7 @@
     "turbo": "^1.2.9",
     "vite": "2.9.13",
     "vue": "2.6.10",
+    "vuex": "3.5.1",
     "vue-svg-loader": "0.16.0",
     "vue-template-compiler": "2.6.10",
     "wdio-chromedriver-service": "7.3.2",
@@ -134,16 +136,20 @@
   "stylelint": {
     "extends": "@justeat/stylelint-config-fozzie"
   },
-  "workspaces": [
-    "packages/*",
-    "packages/components/atoms/*",
-    "packages/components/molecules/*",
-    "packages/components/organisms/*",
-    "packages/components/templates/*",
-    "packages/components/pages/*",
-    "packages/services/*",
-    "packages/tools/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "packages/components/atoms/*",
+      "packages/components/molecules/*",
+      "packages/components/organisms/*",
+      "packages/components/templates/*",
+      "packages/components/pages/*",
+      "packages/services/*",
+      "packages/tools/*"
+    ],
+
+    "nohoist": ["**/@justeat/fozzie/**"]
+  },
   "dependencies": {
     "deepmerge": "4.2.2"
   },
