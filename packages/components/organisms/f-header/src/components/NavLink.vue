@@ -167,6 +167,7 @@ export default {
 
 .c-navLink--popoverLink {
     display: flex;
+    align-items: center;
     text-decoration: none;
     padding: f.spacing(c) f.spacing(d) f.spacing(c) 0;
 
