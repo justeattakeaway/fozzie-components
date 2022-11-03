@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v4.8.0
+------------------------------
+*November 2, 2022*
+
+### Changed
+- Added fozzie components as externals in Webpack config.
+
+
 v4.7.0
 ------------------------------
 *October 24, 2022*
@@ -15,6 +24,7 @@ v4.7.0
 
 ### Removed
 -  Get address from local storage logic in the handler of UPDATE_STATE mutation
+
 
 v4.6.1
 ------------------------------

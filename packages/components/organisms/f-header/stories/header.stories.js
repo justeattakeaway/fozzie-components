@@ -25,9 +25,11 @@ export const HeaderComponent = (args, { argTypes }) => ({
         <vue-header
             :user-info-prop="userInfoProp"
             :show-offers-link="showOffersLink"
+            :show-corporate-link="showCorporateLink"
             :show-help-link="showHelpLink"
             :locale="locale"
             :is-logo-link-disabled="logoLinkDisabled"
+            :is-condensed="isCondensed"
             :header-background-theme="headerBackgroundTheme"
             :show-delivery-enquiry="showDeliveryEnquiry"
             :show-login-info="showLoginInfo"
@@ -50,8 +52,10 @@ HeaderComponent.args = {
     showHelpLink: true,
     showSkipLink: true,
     showOffersLink: false,
+    showCorporateLink: false,
     showDeliveryEnquiry: false,
     logoLinkDisabled: false,
+    isCondensed: false,
     tallBelowMid: false,
     shouldUseJetLogo: false
 };
@@ -120,12 +124,20 @@ HeaderComponent.argTypes = {
         description: 'Shows the link to the "For You" page'
     },
 
+    showCorporateLink: {
+        description: 'Shows the "Corporate Ordering" Link'
+    },
+
     showDeliveryEnquiry: {
         description: 'Shows the "Deliver with Just Eat" link'
     },
 
     logoLinkDisabled: {
         description: 'Prevents the header logo from also being a link'
+    },
+
+    isCondensed: {
+        description: 'Hides Icons, reduces spacing and applies stricter friendly name truncation where appropriate'
     },
 
     tallBelowMid: {
