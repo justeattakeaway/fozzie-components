@@ -7,7 +7,7 @@
             [$style['c-navLink']]: !isPopoverLink,
             [$style['c-navLink--popoverLink']]: isPopoverLink,
             [$style['c-nav-list-link--alt']]: isAltColour,
-            [$style['c-navLink--condensedMid']]: isCondensed,
+            [$style['c-navLink--condensed']]: isCondensed,
             [$style['c-navLink--hoverWithWhiteBackground']]: backgroundTheme === 'white',
             [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent'
         }]">
@@ -199,7 +199,7 @@ export default {
     display: flex;
 }
 
-.c-navLink--condensedMid {
+.c-navLink--condensed {
     $navLinkTweakpointMid: f.em(830);
     $navLinkTweakpointWide: f.em(1130);
 

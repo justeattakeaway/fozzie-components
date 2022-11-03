@@ -745,11 +745,11 @@ $navTextTweakpointMid: f.em(830);
     @include f.media('>wide') {
         margin-left: f.spacing(c);
     }
-}
 
-.c-nav-list--condensed .c-nav-list-item--horizontallyAlignedAboveMid {
-    @include f.media('>mid', '<huge') {
-        margin-left: 0;
+    .c-nav-list--condensed & {
+        @include f.media('>mid', '<huge') {
+            margin-left: 0;
+        }
     }
 }
 
