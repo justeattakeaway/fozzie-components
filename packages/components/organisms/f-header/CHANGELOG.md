@@ -9,6 +9,9 @@ v10.10.0
 ### Added
 - "Deliver With Just Eat" copy to ES & IT
 
+### Changed
+ - Update Nav Icons to small variants
+
 
 v10.9.0
 ------------------------------
