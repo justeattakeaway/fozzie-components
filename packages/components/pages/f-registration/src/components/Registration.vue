@@ -46,7 +46,7 @@
                     v-model="firstName"
                     name="firstName"
                     required
-                    :isVisuallyRequired=false
+                    :is-visually-required="false"
                     :label-text="$t('labels.firstName')"
                     input-type="text"
                     aria-describedby="error-message-firstname"
@@ -70,7 +70,7 @@
                     input-type="text"
                     :label-text="$t('labels.lastName')"
                     required
-                    :isVisuallyRequired=false
+                    :is-visually-required="false"
                     aria-describedby="error-message-lastname"
                     :aria-invalid="!!describeLastnameErrorMessage"
                     data-test-id="input-last-name"
@@ -93,7 +93,7 @@
                     input-type="email"
                     :label-text="$t('labels.email')"
                     required
-                    :isVisuallyRequired=false
+                    :is-visually-required="false"
                     aria-describedby="error-message-email"
                     :aria-invalid="!!describeEmailErrorMessage"
                     @blur="formFieldBlur('email')">
@@ -115,7 +115,7 @@
                     input-type="password"
                     :label-text="$t('labels.password')"
                     required
-                    :isVisuallyRequired=false
+                    :is-visually-required="false"
                     aria-describedby="error-message-password"
                     :aria-invalid="!!describePasswordErrorMessage"
                     @blur="formFieldBlur('password')">
