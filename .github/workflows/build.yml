@@ -18,7 +18,7 @@ on:
     branches:
       - master
 
-concurrency: 
+concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
 
@@ -320,6 +320,7 @@ jobs:
       PERCY_TOKEN_F_MFA: ${{ secrets.PERCY_TOKEN_F_MFA }}
       PERCY_TOKEN_F_REGISTRATION: ${{ secrets.PERCY_TOKEN_F_REGISTRATION }}
       PERCY_TOKEN_F_TAKEAWAYPAY_ACTIVATION: ${{ secrets.PERCY_TOKEN_F_TAKEAWAYPAY_ACTIVATION }}
+      PERCY_TOKEN_F_RATING: ${{ secrets.PERCY_TOKEN_F_RATING }}
 
   storybook-deploy:
     if: ${{ github.ref == 'refs/heads/master' }}
