@@ -1,10 +1,10 @@
 <template>
     <div
         :class="$style['c-rating']"
-        :data-test-id="`${setRatingVariant}-component`">
+        :data-test-id="`${getRatingVariant}-component`">
         <div :class="$style['c-rating-stars']">
             <component
-                :is="setRatingVariant"
+                :is="getRatingVariant"
                 :max-star-rating="maxStarRating"
                 :star-rating-size="starRatingSize"
                 :star-rating="starRating" />
@@ -113,7 +113,7 @@ export default {
          *
          * @returns {string}
          */
-        setRatingVariant () {
+        getRatingVariant () {
             return this.isSingleStarVariant
                 ? 'rating-single-star'
                 : 'rating-multi-star';

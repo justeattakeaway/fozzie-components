@@ -81,7 +81,7 @@ describe('Rating', () => {
             });
         });
 
-        describe('`setRatingVariant`', () => {
+        describe('`getRatingVariant`', () => {
             it('should exist', () => {
                 // Arrange
                 propsData.starRating = 2;
@@ -92,7 +92,7 @@ describe('Rating', () => {
                 });
 
                 // Act & Assert
-                expect(wrapper.vm.setRatingVariant).toBeDefined();
+                expect(wrapper.vm.getRatingVariant).toBeDefined();
             });
 
             describe('when invoked', () => {
