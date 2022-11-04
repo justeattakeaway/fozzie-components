@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.11.0
 ------------------------------
-*November 11, 2022*
+*November 4, 2022*
 
 ### Changed
 - Removed asterisks from registration page form fields
