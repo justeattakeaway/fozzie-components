@@ -46,6 +46,15 @@ describe('AccountInfo Store', () => {
 
     describe('actions ::', () => {
         describe('loadConsumerDetails ::', () => {
+            it('should call the getConsumerDetails/getConsumerAddresses method with the correct parameters', async () => {
+                // Act
+                await accountInfoModule.actions.loadConsumerDetails({ commit: jest.fn() }, { api: apiClientMock, authToken: token });
+
+                // Assert
+                expect(getConsumerDetailsMock).toHaveBeenCalledWith(token);
+                expect(getConsumerAddressesMock).toHaveBeenCalledWith(token);
+            });
+
             it(`should call ${UPDATE_CONSUMER_DETAILS} mutation with the correct data`, async () => {
                 // Arrange
                 const commitSpy = jest.fn();
