@@ -804,7 +804,7 @@ $navTextTweakpointMid: f.em(830);
         max-width: 200px;
     }
     @include f.media('>mid', '<#{$navTextTweakpointMid}') {
-        max-width: 80px;
+        max-width: 75px;
     }
     @include f.media('>=#{$navTextTweakpointMid}', '<#{$navTextTweakpointMidWide}') {
         max-width: 110px;
