@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v2.6.0
 ------------------------------
-*October 12, 2022*
+*November 7, 2022*
 
 ### Changed
 - Updated tenant files to include new image paths

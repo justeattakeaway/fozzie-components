@@ -75,27 +75,27 @@ describe('HowItWorksLayout', () => {
             expect(wrapper.vm.bags).toEqual([
                 {
                     number: '1st',
-                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-40.svg',
+                    image: 'https://just-eat-prod-sg-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-40.svg',
                     value: '$6'
                 },
                 {
                     number: '2nd',
-                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-50.svg',
+                    image: 'https://just-eat-prod-sg-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-50.svg',
                     value: '$7.50'
                 },
                 {
                     number: '3rd',
-                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-45.svg',
+                    image: 'https://just-eat-prod-sg-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-45.svg',
                     value: '$6.75'
                 },
                 {
                     number: '4th',
-                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-40.svg',
+                    image: 'https://just-eat-prod-sg-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-40.svg',
                     value: '$6'
                 },
                 {
                     number: '5th',
-                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-55.svg',
+                    image: 'https://just-eat-prod-sg-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-55.svg',
                     value: '$8.25'
                 }
             ]);
@@ -196,27 +196,27 @@ describe('HowItWorksLayout', () => {
             expect(wrapper.vm.bags).toEqual([
                 {
                     number: '1st',
-                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-40.svg',
+                    image: 'https://just-eat-prod-sg-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-40.svg',
                     value: '$4'
                 },
                 {
                     number: '2nd',
-                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-50.svg',
+                    image: 'https://just-eat-prod-sg-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-50.svg',
                     value: '$5'
                 },
                 {
                     number: '3rd',
-                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-45.svg',
+                    image: 'https://just-eat-prod-sg-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-45.svg',
                     value: '$4.50'
                 },
                 {
                     number: '4th',
-                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-40.svg',
+                    image: 'https://just-eat-prod-sg-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-40.svg',
                     value: '$4'
                 },
                 {
                     number: '5th',
-                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-55.svg',
+                    image: 'https://just-eat-prod-sg-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/bag-dollar-55.svg',
                     value: '$5.50'
                 }
             ]);
