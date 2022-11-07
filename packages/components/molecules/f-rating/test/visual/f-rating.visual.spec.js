@@ -5,14 +5,14 @@ const devices = [
 ];
 
 devices.forEach(device => {
-    describe('f-rating - %s - Visual tests', () => {
+    describe('f-rating Multi Star - %s - Visual tests', () => {
         describe('Visually displayed', () => {
             it('should display the f-rating component', async () => {
                 // Act
                 await Rating.load();
 
                 // Assert
-                await browser.percyScreenshot('f-rating - Visual Test', device);
+                await browser.percyScreenshot('f-rating Multi Star - Visual Test', device);
             });
         });
 
@@ -22,7 +22,7 @@ devices.forEach(device => {
                 await Rating.load({ starRating: 5 });
 
                 // Assert
-                await browser.percyScreenshot('f-rating - Visual Test for Prop - starRating = 5', device);
+                await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - starRating = 5', device);
             });
         });
 
@@ -32,7 +32,7 @@ devices.forEach(device => {
                 await Rating.load({ starRating: 5 });
 
                 // Assert
-                await browser.percyScreenshot('f-rating - Visual Test for Prop - maxStarRating = 5', device);
+                await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - maxStarRating = 5', device);
             });
         });
 
@@ -42,7 +42,7 @@ devices.forEach(device => {
                 await Rating.load({ reviewCount: 700 });
 
                 // Assert
-                await browser.percyScreenshot('f-rating - Visual Test for Prop - reviewCount = 700', device);
+                await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - reviewCount = 700', device);
             });
         });
 
@@ -52,7 +52,7 @@ devices.forEach(device => {
                 await Rating.load({ starRatingSize: 'small' });
 
                 // Assert
-                await browser.percyScreenshot('f-rating - Visual Test for Prop - starRatingSize = small', device);
+                await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - starRatingSize = small', device);
             });
 
             it('should be displayed at the correct size', async () => {
@@ -60,7 +60,7 @@ devices.forEach(device => {
                 await Rating.load({ starRatingSize: 'medium' });
 
                 // Assert
-                await browser.percyScreenshot('f-rating - Visual Test for Prop - starRatingSize = medium', device);
+                await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - starRatingSize = medium', device);
             });
 
             it('should be displayed at the correct size', async () => {
@@ -68,7 +68,7 @@ devices.forEach(device => {
                 await Rating.load({ starRatingSize: 'large' });
 
                 // Assert
-                await browser.percyScreenshot('f-rating - Visual Test for Prop - starRatingSize = large', device);
+                await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - starRatingSize = large', device);
             });
         });
 
@@ -79,7 +79,7 @@ devices.forEach(device => {
                     await Rating.load({ ratingDisplayType: 'long' });
 
                     // Assert
-                    await browser.percyScreenshot('f-rating - Visual Test for Prop - ratingDisplayType = long', device);
+                    await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - ratingDisplayType = long', device);
                 });
             });
 
@@ -89,7 +89,7 @@ devices.forEach(device => {
                     await Rating.load({ ratingDisplayType: 'short' });
 
                     // Assert
-                    await browser.percyScreenshot('f-rating - Visual Test for Prop - ratingDisplayType = short', device);
+                    await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - ratingDisplayType = short', device);
                 });
             });
 
@@ -99,7 +99,7 @@ devices.forEach(device => {
                     await Rating.load({ ratingDisplayType: 'medium' });
 
                     // Assert
-                    await browser.percyScreenshot('f-rating - Visual Test for Prop - ratingDisplayType = medium', device);
+                    await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - ratingDisplayType = medium', device);
                 });
             });
 
@@ -109,7 +109,7 @@ devices.forEach(device => {
                     await Rating.load({ ratingDisplayType: 'noRating' });
 
                     // Assert
-                    await browser.percyScreenshot('f-rating - Visual Test for Prop - ratingDisplayType = noRating', device);
+                    await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - ratingDisplayType = noRating', device);
                 });
             });
 
@@ -119,29 +119,7 @@ devices.forEach(device => {
                     await Rating.load({ ratingDisplayType: null });
 
                     // Assert
-                    await browser.percyScreenshot('f-rating - Visual Test for Prop - ratingDisplayType = noRating', device);
-                });
-            });
-        });
-
-        describe('`isSingleStarVariant`', () => {
-            describe('when populated with `false`', () => {
-                it('should display the five star variant', async () => {
-                    // Act
-                    await Rating.load({ isSingleStarVariant: false });
-
-                    // Assert
-                    await browser.percyScreenshot('f-rating - Visual Test for Prop - isSingleStarVariant = false', device);
-                });
-            });
-
-            describe('when populated with `true`', () => {
-                it('should display a single star variant', async () => {
-                    // Act
-                    await Rating.load({ isSingleStarVariant: true });
-
-                    // Assert
-                    await browser.percyScreenshot('f-rating - Visual Test for Prop - isSingleStarVariant = true', device);
+                    await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - ratingDisplayType = null', device);
                 });
             });
         });
