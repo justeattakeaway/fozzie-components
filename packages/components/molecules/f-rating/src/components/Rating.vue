@@ -1,15 +1,16 @@
 <template>
     <div
         :class="$style['c-rating']"
-        data-test-id="rating-component">
+        :data-test-id="`${getRatingVariant}-component`">
         <div :class="$style['c-rating-stars']">
             <component
-                :is="setRatingVariant"
+                :is="getRatingVariant"
                 :max-star-rating="maxStarRating"
                 :star-rating-size="starRatingSize"
                 :star-rating="starRating" />
 
             <span
+                v-if="hasRatingAvailable"
                 data-test-id="c-rating-description"
                 class="is-visuallyHidden">
                 {{ getRatingDescription }}
@@ -112,10 +113,20 @@ export default {
          *
          * @returns {string}
          */
-        setRatingVariant () {
+        getRatingVariant () {
             return this.isSingleStarVariant
                 ? 'rating-single-star'
                 : 'rating-multi-star';
+        },
+
+        /**
+         * Allow only valid rating display types, so we show
+         * visually hidden text in those cases only.
+         *
+         * @returns {boolean}
+         */
+        hasRatingAvailable () {
+            return this.ratingDisplayType !== 'noRating';
         }
     },
 
