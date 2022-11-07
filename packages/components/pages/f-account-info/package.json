@@ -1,9 +1,9 @@
 {
   "name": "@justeat/f-account-info",
   "description": "Fozzie Account Info - The account information page",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "main": "dist/f-account-info.umd.min.js",
-  "maxBundleSize": "100kB",
+  "maxBundleSize": "50kB",
   "files": [
     "dist",
     "test-utils",
