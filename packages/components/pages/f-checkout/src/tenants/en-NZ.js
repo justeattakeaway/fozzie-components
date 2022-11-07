@@ -57,6 +57,9 @@ const messages = {
                 label: 'Level or unit number (Optional)',
                 isGrouped: true
             },
+            line3: {
+                label: 'Suburb'
+            },
             locality: {
                 label: 'Town or city',
                 validationMessages: {

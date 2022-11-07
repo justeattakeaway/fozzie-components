@@ -6,13 +6,6 @@ const devices = [
 
 devices.forEach(device => {
     describe('f-rating - %s - Visual tests', () => {
-        beforeEach(async () => {
-            // Arrange
-            if (device === 'mobile') {
-                await browser.setWindowSize(414, 731);
-            }
-        });
-
         describe('Visually displayed', () => {
             it('should display the f-rating component', async () => {
                 // Act
@@ -23,6 +16,134 @@ devices.forEach(device => {
             });
         });
 
-        // Add visual tests for demo variants - Ticket to be added.
+        describe('`starRating`', () => {
+            it('should be displayed', async () => {
+                // Act
+                await Rating.load({ starRating: 5 });
+
+                // Assert
+                await browser.percyScreenshot('f-rating - Visual Test for Prop - starRating = 5', device);
+            });
+        });
+
+        describe('`maxStarRating`', () => {
+            it('should be displayed', async () => {
+                // Act
+                await Rating.load({ starRating: 5 });
+
+                // Assert
+                await browser.percyScreenshot('f-rating - Visual Test for Prop - maxStarRating = 5', device);
+            });
+        });
+
+        describe('`reviewCount`', () => {
+            it('should be displayed', async () => {
+                // Act
+                await Rating.load({ reviewCount: 700 });
+
+                // Assert
+                await browser.percyScreenshot('f-rating - Visual Test for Prop - reviewCount = 700', device);
+            });
+        });
+
+        describe('`starRatingSize`', () => {
+            it('should be displayed at the correct size', async () => {
+                // Act
+                await Rating.load({ starRatingSize: 'small' });
+
+                // Assert
+                await browser.percyScreenshot('f-rating - Visual Test for Prop - starRatingSize = small', device);
+            });
+
+            it('should be displayed at the correct size', async () => {
+                // Act
+                await Rating.load({ starRatingSize: 'medium' });
+
+                // Assert
+                await browser.percyScreenshot('f-rating - Visual Test for Prop - starRatingSize = medium', device);
+            });
+
+            it('should be displayed at the correct size', async () => {
+                // Act
+                await Rating.load({ starRatingSize: 'large' });
+
+                // Assert
+                await browser.percyScreenshot('f-rating - Visual Test for Prop - starRatingSize = large', device);
+            });
+        });
+
+        describe('`ratingDisplayType`', () => {
+            describe('when populated with a `long` display type', () => {
+                it('should be displayed with the correct description', async () => {
+                    // Act
+                    await Rating.load({ ratingDisplayType: 'long' });
+
+                    // Assert
+                    await browser.percyScreenshot('f-rating - Visual Test for Prop - ratingDisplayType = long', device);
+                });
+            });
+
+            describe('when populated with a `short` display type', () => {
+                it('should be displayed with the correct description', async () => {
+                    // Act
+                    await Rating.load({ ratingDisplayType: 'short' });
+
+                    // Assert
+                    await browser.percyScreenshot('f-rating - Visual Test for Prop - ratingDisplayType = short', device);
+                });
+            });
+
+            describe('when populated with a `medium` display type', () => {
+                it('should be displayed with the correct description', async () => {
+                    // Act
+                    await Rating.load({ ratingDisplayType: 'medium' });
+
+                    // Assert
+                    await browser.percyScreenshot('f-rating - Visual Test for Prop - ratingDisplayType = medium', device);
+                });
+            });
+
+            describe('when populated with a `noRating` display type', () => {
+                it('should be displayed with the correct description', async () => {
+                    // Act
+                    await Rating.load({ ratingDisplayType: 'noRating' });
+
+                    // Assert
+                    await browser.percyScreenshot('f-rating - Visual Test for Prop - ratingDisplayType = noRating', device);
+                });
+            });
+
+            describe('when using a default display type', () => {
+                it('should be displayed with no description', async () => {
+                    // Act
+                    await Rating.load({ ratingDisplayType: null });
+
+                    // Assert
+                    await browser.percyScreenshot('f-rating - Visual Test for Prop - ratingDisplayType = noRating', device);
+                });
+            });
+        });
+
+        describe('`isSingleStarVariant`', () => {
+            describe('when populated with `false`', () => {
+                it('should display the five star variant', async () => {
+                    // Act
+                    await Rating.load({ isSingleStarVariant: false });
+
+                    // Assert
+                    await browser.percyScreenshot('f-rating - Visual Test for Prop - isSingleStarVariant = false', device);
+                });
+            });
+
+            describe('when populated with `true`', () => {
+                it('should display a single star variant', async () => {
+                    // Act
+                    await Rating.load({ isSingleStarVariant: true });
+
+                    // Assert
+                    await browser.percyScreenshot('f-rating - Visual Test for Prop - isSingleStarVariant = true', device);
+                });
+            });
+        });
     });
 });

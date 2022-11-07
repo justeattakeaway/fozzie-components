@@ -49,10 +49,16 @@ const defaultPropsData = {
             currentCountryKey: 'gb',
             changeCurrentCountry: 'You are on the UK website, click here to change',
             goBackToMainMenu: 'Go back to main menu'
+        },
+        corporate: {
+            text: 'Corporate Ordering',
+            url: 'https://business.just-eat.co.uk',
+            gtm: 'click_corporate_ordering'
         }
     },
     showDeliveryEnquiry: false,
     isOrderCountSupported: true,
+    showCorporateLink: false,
     showOffersLink: false,
     showHelpLink: false,
     userInfoProp: false,

@@ -112,7 +112,6 @@ export default {
         @include f.media('>mid') {
             justify-content: left;
             height: common.$header-height;
-            padding: 20px 0;
 
             &:focus {
                border-radius: common.$header-buttonFocus-borderRadius;
