@@ -111,14 +111,14 @@ cd ./fozzie-components
 
 yarn storybook:build
 yarn storybook:serve-static
-```
-
 yarn test-component:chrome
 ```
+
 ### Accessibility tests
-```bash
+```sh
 yarn test-a11y:chrome
 ```
+
 ## Documentation to be completed once module is in stable state.
 
 
