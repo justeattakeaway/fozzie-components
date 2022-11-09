@@ -203,7 +203,7 @@
                                 $style['c-nav-icon'],
                                 $style['c-nav-icon--profile'],
                                 { [$style['c-nav-icon--alt']]: isAltColour },
-                                { [$style['hide-on-mid']]: isCondensed }
+                                { [$style['u-hideOnMid']]: isCondensed }
                             ]" />
                         <span
                             :class="[

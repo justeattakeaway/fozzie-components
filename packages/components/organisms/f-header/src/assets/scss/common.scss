@@ -1,6 +1,13 @@
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 @forward './navigation.scss';
 
+
+/**
+ * Imports
+*/
+@include f.trumps-rwd();
+
+
 /**
  * Component Variables
  */
@@ -43,9 +50,3 @@ $header--transparent-opacity        : 0.7;
     }
 }
 
-// Hides element in-between the mid and wide breakpoint
-.hide-on-mid {
-    @include f.media('>mid', '<wide') {
-        display: none !important;
-    }
-}

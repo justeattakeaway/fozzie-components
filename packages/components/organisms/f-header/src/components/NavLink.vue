@@ -13,7 +13,7 @@
         }]">
         <div
             v-if="hasIcon"
-            :class="[$style['c-navLink-icon'], { [$style['hide-on-mid']]: isCondensed }]">
+            :class="[$style['c-navLink-icon'], { [$style['u-hideOnMid']]: isCondensed }]">
             <slot name="icon" />
         </div>
         <span
