@@ -141,7 +141,6 @@ export default {
             tenantConfigs,
             contactPreferencesApi: new ContactPreferencesApi({
                 httpClient: this.$http,
-                cookies: this.$cookies,
                 baseUrl: this.smartGatewayBaseUrl,
                 locale: this.$i18n.locale
             }),

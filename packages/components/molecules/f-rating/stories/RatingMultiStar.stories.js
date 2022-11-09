@@ -1,14 +1,17 @@
 import { withA11y } from '@storybook/addon-a11y';
 import { locales } from '@justeat/storybook/constants/globalisation';
 import Rating from '../src/components/Rating.vue';
+import commonDefaults from './commonDefaults';
 
 export default {
-    title: 'Components/Molecules',
+    title: 'Components/Molecules/f-rating',
     decorators: [withA11y]
 };
 
 export const RatingComponent = (args, { argTypes }) => ({
-    components: { Rating },
+    components: {
+        Rating
+    },
 
     props: Object.keys(argTypes),
 
@@ -22,29 +25,25 @@ export const RatingComponent = (args, { argTypes }) => ({
                     v-bind="$props"
                     :starRatingSize="rating.starRatingSize"
                     :starRating="rating.starRating"
-                    :reviewCount="rating.reviewCount"/>
+                    :reviewCount="rating.reviewCount" />
             </div>
         </div>`
 });
 
-RatingComponent.storyName = 'f-rating';
+RatingComponent.storyName = 'f-rating Multi Star';
 
 RatingComponent.args = {
     locale: locales.gb
 };
 
 RatingComponent.argTypes = {
-    locale: {
+    ...commonDefaults,
+
+    isSingleStarVariant: {
         control: { type: 'select' },
-        options: [locales.gb],
-        description: 'Choose a locale',
-        defaultValue: locales.gb
-    },
-    ratingDisplayType: {
-        control: { type: 'select' },
-        options: ['noRating', 'short', 'medium', 'long', null],
-        description: 'Choose how to display a rating',
-        default: null
+        options: [false, true],
+        description: 'Choose star rating variant (Single = true or Multi star = false)',
+        default: false
     }
 };
 

@@ -1,6 +1,8 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils';
 import { VueI18n } from '@justeat/f-globalisation';
 import VRating from '../Rating.vue';
+import RatingSingleStarVariant from '../RatingSingleStarVariant.vue';
+import RatingMultiStarVariant from '../RatingMultiStarVariant.vue';
 import i18n from './helpers/setup';
 import { VALID_STAR_RATING_DISPLAY_TYPE } from '../../constants';
 
@@ -32,38 +34,6 @@ describe('Rating', () => {
     });
 
     describe('computed', () => {
-        describe('`getRatingStarPercentage`', () => {
-            it('should exist', () => {
-                // Arrange
-                propsData.starRating = 2;
-                wrapper = shallowMount(VRating, {
-                    propsData,
-                    localVue,
-                    i18n
-                });
-
-                // Act & Assert
-                expect(wrapper.vm.getRatingStarPercentage).toBeDefined();
-            });
-
-            describe('when invoked', () => {
-                it('should return a correct calculated number from a combination of `starRating` and `maxStarRating`', () => {
-                    // Arrange
-                    propsData = {
-                        starRating: 2
-                    };
-                    wrapper = shallowMount(VRating, {
-                        propsData,
-                        localVue,
-                        i18n
-                    });
-
-                    // Act & Assert
-                    expect(wrapper.vm.getRatingStarPercentage).toBe(40);
-                });
-            });
-        });
-
         describe('`getRatingDescription`', () => {
             it('should exist', () => {
                 // Arrange
@@ -91,7 +61,7 @@ describe('Rating', () => {
                     });
 
                     // Act & Assert
-                    expect(wrapper.vm.getRatingDescription).toMatchSnapshot();
+                    expect(wrapper.vm.getRatingDescription).toBe('1 star out of 5');
                 });
 
                 it('should return a plural description if the rating is greater than 1', () => {
@@ -106,7 +76,127 @@ describe('Rating', () => {
                     });
 
                     // Act & Assert
-                    expect(wrapper.vm.getRatingDescription).toMatchSnapshot();
+                    expect(wrapper.vm.getRatingDescription).toBe('2 stars out of 5');
+                });
+            });
+        });
+
+        describe('`getRatingVariant`', () => {
+            it('should exist', () => {
+                // Arrange
+                propsData.starRating = 2;
+                wrapper = shallowMount(VRating, {
+                    propsData,
+                    localVue,
+                    i18n
+                });
+
+                // Act & Assert
+                expect(wrapper.vm.getRatingVariant).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                describe('and prop `isSingleStarVariant` is truthy', () => {
+                    it('should return the single star rating variant: `rating-single-star`', () => {
+                        // Arrange
+                        propsData = {
+                            starRating: 2,
+                            isSingleStarVariant: true
+                        };
+                        wrapper = shallowMount(VRating, {
+                            propsData,
+                            localVue,
+                            i18n
+                        });
+
+                        // Act & Assert
+                        expect(wrapper.findComponent(RatingSingleStarVariant).exists()).toBe(true);
+                    });
+                });
+
+                describe('and prop `isSingleStarVariant` is falsey', () => {
+                    it('should return a multi star rating variant: `rating-multi-star`', () => {
+                        // Arrange
+                        propsData = {
+                            starRating: 2,
+                            isSingleStarVariant: false
+                        };
+                        wrapper = shallowMount(VRating, {
+                            propsData,
+                            localVue,
+                            i18n
+                        });
+
+                        // Act & Assert
+                        expect(wrapper.findComponent(RatingMultiStarVariant).exists()).toBe(true);
+                    });
+                });
+            });
+        });
+
+        describe('`hasRatingAvailable`', () => {
+            it('should exist', () => {
+                // Arrange
+                propsData.starRating = 2;
+                wrapper = shallowMount(VRating, {
+                    propsData,
+                    localVue,
+                    i18n
+                });
+
+                // Act & Assert
+                expect(wrapper.vm.hasRatingAvailable).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                describe('and a rating type is available', () => {
+                    beforeEach(() => {
+                        propsData.starRating = 2;
+                        propsData.ratingDisplayType = 'short';
+                        wrapper = shallowMount(VRating, {
+                            propsData,
+                            localVue,
+                            i18n
+                        });
+                    });
+
+                    it('should return truthy', () => {
+                        // Act & Assert
+                        expect(wrapper.vm.hasRatingAvailable).toBe(true);
+                    });
+
+                    it('should enable the visually hidden description', () => {
+                        // Act
+                        const result = wrapper.find('[data-test-id="c-rating-description"]');
+
+                        // Act & Assert
+                        expect(result).toMatchSnapshot();
+                    });
+                });
+
+                describe('and a rating type is set to `noRating`', () => {
+                    beforeEach(() => {
+                        propsData.starRating = 2;
+                        propsData.ratingDisplayType = 'noRating';
+                        wrapper = shallowMount(VRating, {
+                            propsData,
+                            localVue,
+                            i18n
+                        });
+                    });
+
+                    it('should return truthy', () => {
+                        // Act & Assert
+                        expect(wrapper.vm.hasRatingAvailable).toBe(false);
+                    });
+
+                    it('should disable the visually hidden description', () => {
+                        // Act
+                        const result = wrapper.find('[data-test-id="c-rating-description"]').exists();
+
+                        // Act & Assert
+                        expect(result).toBe(false);
+                    });
                 });
             });
         });
@@ -119,12 +209,12 @@ describe('Rating', () => {
                 expect(VRating.props.starRatingSize.default).toBe('small');
             });
 
-            it('should return a true when type prop of exists', () => {
+            it.each(['small', 'medium', 'large'])('should allow value `%s`', ratingSize => {
                 // Act
                 const { validator } = VRating.props.starRatingSize;
 
-                // Arrange
-                expect(validator('small')).toBe(true);
+                // Assert
+                expect(validator(ratingSize)).toBe(true);
             });
 
             it('should NOT allow invalid props', () => {
@@ -216,6 +306,46 @@ describe('Rating', () => {
 
                     // Assert
                     expect(result.exists()).toBe(false);
+                });
+            });
+        });
+
+        describe('`isSingleStarVariant`', () => {
+            it('should be set to false by default', () => {
+                // Act & Assert
+                expect(VRating.props.isSingleStarVariant.default).toBe(false);
+            });
+        });
+
+        describe('`maxStarRating`', () => {
+            it('should be set to 5 by default', () => {
+                // Act & Assert
+                expect(VRating.props.maxStarRating.default).toBe(5);
+            });
+
+            describe('validator', () => {
+                it('should only allow positive  integers', () => {
+                    // Act
+                    const { validator } = VRating.props.maxStarRating;
+
+                    // Assert
+                    expect(validator(3)).toBe(true);
+                });
+
+                it('should not allow decimal placed numbers', () => {
+                    // Act
+                    const { validator } = VRating.props.maxStarRating;
+
+                    // Assert
+                    expect(validator(3.5)).toBe(false);
+                });
+
+                it.each([0, -1])('should not allow integer values at zero or below', value => {
+                    // Act
+                    const { validator } = VRating.props.maxStarRating;
+
+                    // Assert
+                    expect(validator(value)).toBe(false);
                 });
             });
         });

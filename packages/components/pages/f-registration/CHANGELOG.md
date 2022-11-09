@@ -3,6 +3,39 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v3.13.0
+------------------------------
+*November 8, 2022*
+
+### Changed
+- Added fozzie components as externals in Webpack config (via the PR hokey-cokey)
+
+
+v3.12.0
+------------------------------
+*November 7, 2022*
+
+### Changed
+- Reverting externals change so can test CoreWeb integration further
+
+
+v3.11.0
+------------------------------
+*November 4, 2022*
+
+### Changed
+- Removed asterisks from registration page form fields
+
+
+v3.10.0
+------------------------------
+*November 2, 2022*
+
+### Changed
+- Added fozzie components as externals in Webpack config.
+
+
 v3.9.0
 ------------------------------
 *October 28, 2022*

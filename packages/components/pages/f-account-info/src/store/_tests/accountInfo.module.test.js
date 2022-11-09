@@ -5,7 +5,6 @@ import {
 } from '../../constants';
 import {
     token,
-    conversationId,
     consumerDetailsGetResponse,
     consumerAddressesGetResponse,
     consumerViewModel,
@@ -16,19 +15,16 @@ import {
 
 describe('AccountInfo Store', () => {
     let apiClientMock;
-    let setConversationIdMock;
     let getConsumerDetailsMock;
     let getConsumerAddressesMock;
     let patchConsumerDetailsMock;
 
     beforeEach(() => {
         // Arrange
-        setConversationIdMock = jest.fn(() => conversationId);
         getConsumerDetailsMock = jest.fn(() => consumerDetailsGetResponse);
         getConsumerAddressesMock = jest.fn(() => consumerAddressesGetResponse);
         patchConsumerDetailsMock = jest.fn(() => {});
         apiClientMock = {
-            setConversationId: setConversationIdMock,
             getConsumerDetails: getConsumerDetailsMock,
             getConsumerAddresses: getConsumerAddressesMock,
             patchConsumer: patchConsumerDetailsMock
@@ -55,8 +51,8 @@ describe('AccountInfo Store', () => {
                 await accountInfoModule.actions.loadConsumerDetails({ commit: jest.fn() }, { api: apiClientMock, authToken: token });
 
                 // Assert
-                expect(getConsumerDetailsMock).toHaveBeenCalledWith(token, conversationId);
-                expect(getConsumerAddressesMock).toHaveBeenCalledWith(token, conversationId);
+                expect(getConsumerDetailsMock).toHaveBeenCalledWith(token);
+                expect(getConsumerAddressesMock).toHaveBeenCalledWith(token);
             });
 
             it(`should call ${UPDATE_CONSUMER_DETAILS} mutation with the correct data`, async () => {
@@ -75,7 +71,6 @@ describe('AccountInfo Store', () => {
             it('should not fail if `getConsumerAddresses` returns empty response', async () => {
                 // Arrange
                 const apiMock = {
-                    setConversationId: setConversationIdMock,
                     getConsumerDetails: getConsumerDetailsMock,
                     getConsumerAddresses: jest.fn(() => undefined) // No response
                 };
@@ -101,7 +96,6 @@ describe('AccountInfo Store', () => {
                     data: { Addresses: [] }
                 };
                 const apiMock = {
-                    setConversationId: setConversationIdMock,
                     getConsumerDetails: getConsumerDetailsMock,
                     getConsumerAddresses: jest.fn(() => getAddressResponse) // Empty array
                 };

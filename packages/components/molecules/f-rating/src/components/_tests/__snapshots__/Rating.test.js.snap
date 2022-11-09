@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Rating computed \`getRatingDescription\` when invoked should return a plural description if the rating is greater than 1 1`] = `"2 stars out of 5"`;
-
-exports[`Rating computed \`getRatingDescription\` when invoked should return a singular description if the rating is less than 2 1`] = `"1 star out of 5"`;
+exports[`Rating computed \`hasRatingAvailable\` when invoked and a rating type is available should enable the visually hidden description 1`] = `
+<span data-test-id="c-rating-description" class="is-visuallyHidden">
+            2 stars out of 5
+        </span>
+`;

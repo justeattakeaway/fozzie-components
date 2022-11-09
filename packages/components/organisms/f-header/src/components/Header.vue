@@ -15,7 +15,11 @@
             :text="copy.skipToMainContentText"
             :transparent-bg="showTransparentHeader" />
 
-        <div :class="$style['c-header-container']">
+        <div
+            :class="[
+                $style['c-header-container'],
+                { [$style['c-header-container--condensed']]: isCondensed }
+            ]">
             <logo
                 :theme="theme"
                 :company-name="copy.companyName"
@@ -30,6 +34,7 @@
                 :custom-nav-links="customNavLinks"
                 :show-delivery-enquiry="showDeliveryEnquiryWithContent"
                 :show-offers-link="showOffersLinkWithContent"
+                :show-corporate-link="showCorporateLinkWithContent"
                 :show-help-link="showHelpLink"
                 :error-log="errorLog"
                 :user-info-prop="userInfoProp"
@@ -39,6 +44,7 @@
                 :header-background-theme="headerBackgroundTheme"
                 :show-login-info="showLoginInfo"
                 :show-country-selector="showCountrySelector"
+                :is-condensed="isCondensed"
                 @onMobileNavToggle="mobileNavToggled" />
         </div>
     </header>
@@ -91,6 +97,11 @@ export default {
             default: false
         },
 
+        isCondensed: {
+            type: Boolean,
+            default: false
+        },
+
         orderCountUrl: {
             type: String,
             default: '/analytics/ordercount'
@@ -112,6 +123,11 @@ export default {
         },
 
         showOffersLink: {
+            type: Boolean,
+            default: false
+        },
+
+        showCorporateLink: {
             type: Boolean,
             default: false
         },
@@ -180,6 +196,10 @@ export default {
 
         showOffersLinkWithContent () {
             return this.copy.offers && this.showOffersLink;
+        },
+
+        showCorporateLinkWithContent () {
+            return !!this.copy.corporate && this.showCorporateLink;
         },
 
         headerBackgroundClass () {
@@ -315,6 +335,14 @@ html:global(.is-navInView) {
         @include f.media('<narrow') {
             padding-left: #{f.$layout-margin--narrow}px;
             padding-right: #{f.$layout-margin--narrow}px;
+        }
+    }
+
+    .c-header-container--condensed {
+        $headerContainerTweakpointMid: f.em(830);
+        @include f.media('>mid', '<#{$headerContainerTweakpointMid}') {
+            padding-left: f.spacing(c);
+            padding-right: f.spacing(a);
         }
     }
 
