@@ -18,6 +18,7 @@ module.exports = {
             });
 
         config.externals({
+            // This just externalises the JS currently, not the CSS
             '@justeat/f-button': '@justeat/f-button',
             '@justeat/f-card': '@justeat/f-card',
             '@justeat/f-error-message': '@justeat/f-error-message',
