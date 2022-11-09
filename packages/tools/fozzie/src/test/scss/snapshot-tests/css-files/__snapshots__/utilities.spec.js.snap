@@ -1080,5 +1080,11 @@ em.u-text-highlight {
   .u-showAboveHuge {
     display: none !important;
   }
+}
+
+@media (min-width: 48.001em) and (max-width: 64.0615em) {
+  .u-hideOnMid {
+    display: none !important;
+  }
 }"
 `;

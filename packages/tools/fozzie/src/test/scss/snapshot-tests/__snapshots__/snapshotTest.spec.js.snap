@@ -6975,6 +6975,12 @@ table:not(.not-striped) tbody :nth-child(odd) td,
   }
 }
 
+@media (min-width: 48.001em) and (max-width: 64.0615em) {
+  .u-hideOnMid {
+    display: none !important;
+  }
+}
+
 /**
 * Spacing Trumps
 * ===================================
