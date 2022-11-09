@@ -7,10 +7,11 @@ v10.10.0
 *November 3, 2022*
 
 ### Added
-- "Deliver With Just Eat" copy to ES & IT
+- "Deliver With Just Eat" to ES & IT
 
 ### Changed
  - Update Nav Icons to small variants
+ - Moved `hide-on-mid` to fozzie under `u-hideOnMid`
 
 
 v10.9.0
