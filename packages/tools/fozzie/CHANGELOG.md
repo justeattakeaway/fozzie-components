@@ -7,6 +7,12 @@ Future Todo List
 ------------------------------
 - Make typography and utility classes silent extenders (so that they can be extended by components without importing all utility classes).
 
+v10.8.1
+------------------------------
+*November 1, 2022*
+
+### Added
+- `u-hideOnMid` Responsive Trump Class
 
 v10.8.0
 ------------------------------
