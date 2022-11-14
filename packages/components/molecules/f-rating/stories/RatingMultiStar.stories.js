@@ -50,17 +50,17 @@ RatingComponent.argTypes = {
 RatingComponent.args = {
     ratingVariants: [
         [
-            { starRating: 0, starRatingSize: 'small', reviewCount: 499 },
+            { starRating: 0, starRatingSize: 'small', reviewCount: 0 },
             { starRating: 2.3, starRatingSize: 'small', reviewCount: 499 },
             { starRating: 4.5, starRatingSize: 'small', reviewCount: 499 },
             { starRating: 1.3, starRatingSize: 'small', reviewCount: 499 },
 
-            { starRating: 0, starRatingSize: 'medium', reviewCount: 499 },
+            { starRating: 0, starRatingSize: 'medium', reviewCount: 0 },
             { starRating: 2.3, starRatingSize: 'medium', reviewCount: 499 },
             { starRating: 4.5, starRatingSize: 'medium', reviewCount: 499 },
             { starRating: 1.3, starRatingSize: 'medium', reviewCount: 499 },
 
-            { starRating: 0, starRatingSize: 'large', reviewCount: 499 },
+            { starRating: 0, starRatingSize: 'large', reviewCount: 0 },
             { starRating: 2.3, starRatingSize: 'large', reviewCount: 499 },
             { starRating: 4.5, starRatingSize: 'large', reviewCount: 499 },
             { starRating: 1.3, starRatingSize: 'large', reviewCount: 499 }

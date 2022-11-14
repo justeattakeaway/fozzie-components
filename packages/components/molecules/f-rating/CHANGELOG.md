@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.8.0
+------------------------------
+*November 08, 2022*
+
+### Fixed
+- Some comments from version 0.7.0.
+- Tests so they work with new changes.
+- Simplify prop `ratingDisplayType` so now only accepts 3 options.
+
+
 v0.7.0
 ------------------------------
 *November 01, 2022*
