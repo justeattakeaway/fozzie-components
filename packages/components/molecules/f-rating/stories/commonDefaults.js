@@ -9,7 +9,7 @@ export default {
     },
     ratingDisplayType: {
         control: { type: 'select' },
-        options: ['noRating', 'short', 'medium', 'long', null],
+        options: ['short', 'medium', 'long'],
         description: 'Choose how to display a rating',
         default: null
     }

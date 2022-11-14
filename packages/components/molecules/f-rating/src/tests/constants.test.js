@@ -17,7 +17,7 @@ describe('`constants`', () => {
     describe('`VALID_STAR_RATING_DISPLAY_TYPE`', () => {
         it('should contain the correct display types', () => {
             // Arrange
-            const values = ['noRating', 'short', 'medium', 'long'];
+            const values = ['short', 'medium', 'long'];
 
             // Act
             const result = VALID_STAR_RATING_DISPLAY_TYPE.every(value => values.includes(value));
