@@ -61,6 +61,11 @@ export default {
         url: '/account/logout',
         gtm: 'click_logout'
     },
+    deliveryEnquiry: {
+        text: 'Trabaja como repartidor',
+        url: 'https://www.just-eat.es/repartidor',
+        gtm: 'click_courier_signup'
+    },
     countrySelector: {
         selectYourCountryText: 'Selecciona tu país',
         currentCountryKey: 'es',
