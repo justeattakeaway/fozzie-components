@@ -2,6 +2,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v10.10.0
+------------------------------
+*November 3, 2022*
+
+### Added
+- "Deliver With Just Eat" to ES & IT
+
+### Changed
+ - Update Nav Icons to small variants
+ - Moved `hide-on-mid` to fozzie under `u-hideOnMid`
+
+
 v10.9.0
 ------------------------------
 *November 1, 2022*

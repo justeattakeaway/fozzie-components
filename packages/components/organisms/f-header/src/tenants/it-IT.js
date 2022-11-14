@@ -61,6 +61,11 @@ export default {
         url: '/account/logout',
         gtm: 'click_logout'
     },
+    deliveryEnquiry: {
+        text: 'Diventa un rider Just Eat',
+        url: 'https://www.justeat.it/rider',
+        gtm: 'click_courier_signup'
+    },
     countrySelector: {
         selectYourCountryText: 'Seleziona il tuo paese',
         currentCountryKey: 'it',
