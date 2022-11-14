@@ -62,7 +62,7 @@
                 $style['c-nav-featureLink--hideAboveMid']
             ]">
 
-            <gift-icon
+            <gift-small-icon
                 :class="[
                     $style['c-nav-icon--mobileHeaderIcon'],
                     { [$style['c-nav-icon--alt']]: isAltColour }
@@ -113,7 +113,7 @@
                         :background-theme="headerBackgroundTheme"
                         data-test-id="offers-link">
                         <template #icon>
-                            <gift-icon
+                            <gift-small-icon
                                 :class="[
                                     $style['c-nav-icon'],
                                     $style['c-nav-icon--offers'],
@@ -165,7 +165,7 @@
                         rel="noopener noreferrer"
                         data-test-id="delivery-enquiry-link">
                         <template #icon>
-                            <moped-icon
+                            <moped-small-icon
                                 :class="[
                                     $style['c-nav-icon'],
                                     $style['c-nav-icon--delivery'],
@@ -198,12 +198,12 @@
                         ]"
                         @click.prevent="toggleUserMenu"
                         @keydown.space.prevent="toggleUserMenu">
-                        <user-circle-icon
+                        <user-circle-small-icon
                             :class="[
                                 $style['c-nav-icon'],
                                 $style['c-nav-icon--profile'],
                                 { [$style['c-nav-icon--alt']]: isAltColour },
-                                { [$style['hide-on-mid']]: isCondensed }
+                                { [$style['u-hideOnMid']]: isCondensed }
                             ]" />
                         <span
                             :class="[
@@ -286,7 +286,7 @@
                         :background-theme="headerBackgroundTheme"
                         data-test-id="help-link">
                         <template #icon>
-                            <help-circle-outline-icon
+                            <help-circle-outline-small-icon
                                 :class="[
                                     $style['c-nav-icon'],
                                     $style['c-nav-icon--help'],
@@ -321,10 +321,10 @@ import VPopover from '@justeat/f-popover';
 // Internal
 import {
     OfficeSmallIcon,
-    GiftIcon,
-    HelpCircleOutlineIcon,
-    MopedIcon,
-    UserCircleIcon
+    GiftSmallIcon,
+    HelpCircleOutlineSmallIcon,
+    MopedSmallIcon,
+    UserCircleSmallIcon
 } from '@justeattakeaway/pie-icons-vue';
 import CountrySelector from './CountrySelector.vue';
 import NavLink from './NavLink.vue';
@@ -337,11 +337,11 @@ export default {
     components: {
         CountrySelector,
         OfficeSmallIcon,
-        GiftIcon,
-        HelpCircleOutlineIcon,
-        MopedIcon,
+        GiftSmallIcon,
+        HelpCircleOutlineSmallIcon,
+        MopedSmallIcon,
         NavLink,
-        UserCircleIcon,
+        UserCircleSmallIcon,
         UserNavigationPanel,
         VPopover
     },
@@ -745,11 +745,11 @@ $navTextTweakpointMid: f.em(830);
     @include f.media('>wide') {
         margin-left: f.spacing(c);
     }
-}
 
-.c-nav-list--condensed .c-nav-list-item--horizontallyAlignedAboveMid {
-    @include f.media('>mid', '<huge') {
-        margin-left: 0;
+    .c-nav-list--condensed & {
+        @include f.media('>mid', '<huge') {
+            margin-left: 0;
+        }
     }
 }
 
@@ -804,7 +804,7 @@ $navTextTweakpointMid: f.em(830);
         max-width: 200px;
     }
     @include f.media('>mid', '<#{$navTextTweakpointMid}') {
-        max-width: 80px;
+        max-width: 75px;
     }
     @include f.media('>=#{$navTextTweakpointMid}', '<#{$navTextTweakpointMidWide}') {
         max-width: 110px;

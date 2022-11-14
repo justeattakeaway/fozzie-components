@@ -43,10 +43,8 @@ function getWrapper (
         },
         stubs: [
             'CardCase',
-            'EmptyStamp15',
-            'EmptyStamp10',
-            'FullStamp15',
-            'FullStamp10'
+            'EmptyStamp',
+            'FullStamp'
         ],
         provide: {
             copy: {
@@ -117,10 +115,10 @@ describe('contentCards › StampCard1', () => {
         });
 
         it.each([
-            ['15', 'EmptyStamp15'],
-            ['15', 'FullStamp15'],
-            ['10', 'EmptyStamp10'],
-            ['10', 'FullStamp10']
+            ['15', 'EmptyStamp'],
+            ['15', 'FullStamp'],
+            ['10', 'EmptyStamp'],
+            ['10', 'FullStamp']
         ])('should display the correct stamp image when discount percentage is %s', (discountPercentage, imageComponent) => {
             // Arrange & Act
             const wrapper = getWrapper({
@@ -130,22 +128,6 @@ describe('contentCards › StampCard1', () => {
             // Assert
             const stubbedComponent = wrapper.vm.$options.components[imageComponent];
             expect(wrapper.findComponent(stubbedComponent).exists()).toBeTruthy();
-        });
-
-        it.each([
-            ['15', 'EmptyStamp10'],
-            ['15', 'FullStamp10'],
-            ['10', 'EmptyStamp15'],
-            ['10', 'FullStamp15']
-        ])('should NOT display the incorrect correct stamp image when discount percentage is %s', (discountPercentage, imageComponent) => {
-            // Arrange & Act
-            const wrapper = getWrapper({
-                discountPercentage
-            });
-
-            // Assert
-            const stubbedComponent = wrapper.vm.$options.components[imageComponent];
-            expect(wrapper.findComponent(stubbedComponent).exists()).toBeFalsy();
         });
 
         it.each([
@@ -159,7 +141,7 @@ describe('contentCards › StampCard1', () => {
             });
 
             // Assert
-            const stubbedComponent = wrapper.vm.$options.components.EmptyStamp10;
+            const stubbedComponent = wrapper.vm.$options.components.EmptyStamp;
             expect(wrapper.findComponent(stubbedComponent).exists()).toBeTruthy();
         });
 

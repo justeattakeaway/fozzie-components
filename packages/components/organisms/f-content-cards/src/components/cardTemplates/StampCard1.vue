@@ -82,10 +82,8 @@ import lightFormat from 'date-fns/lightFormat';
 import {
     da, enAU, enNZ, enGB, es, it, nb
 } from 'date-fns/locale';
-import EmptyStamp15 from './images/stamp-empty-15.svg';
-import FullStamp15 from './images/stamp-full-15.svg';
-import EmptyStamp10 from './images/stamp-empty-10.svg';
-import FullStamp10 from './images/stamp-full-10.svg';
+import EmptyStamp from './images/stamp-percentage-empty.svg';
+import FullStamp from './images/stamp-percentage.svg';
 
 import CardCase from './CardCase.vue';
 
@@ -100,10 +98,8 @@ export default {
     name: 'StampCard1',
 
     components: {
-        EmptyStamp15,
-        FullStamp15,
-        EmptyStamp10,
-        FullStamp10,
+        EmptyStamp,
+        FullStamp,
         CardCase
     },
 
@@ -187,10 +183,10 @@ export default {
             for (let i = 0; i < this.card.totalRequiredStamps; i++) {
                 const full = (i < this.card.earnedStamps);
                 stamps.push(full ? {
-                    stampImage: `FullStamp${this.stampCardsPercentage}`,
+                    stampImage: 'FullStamp',
                     classSuffix: 'Full'
                 } : {
-                    stampImage: `EmptyStamp${this.stampCardsPercentage}`,
+                    stampImage: 'EmptyStamp',
                     classSuffix: 'Empty'
                 });
             }
