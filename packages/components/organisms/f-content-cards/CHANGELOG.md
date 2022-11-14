@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v10.0.0
+------------------------------
+*October 7, 2022*
+
+### Changed
+- ContentCards.js has been changed completely to support thew new adapter format
+
+### Deleted
+- temporarily removed story files as I will be adding in new story files in later PR's
+
+
 v9.1.0
 ------------------------------
 *August 3, 2022*

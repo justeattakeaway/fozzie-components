@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-content-cards",
   "description": "Fozzie Content Cards",
-  "version": "9.1.0",
+  "version": "10.0.0",
   "main": "dist/f-content-cards.umd.min.js",
   "maxBundleSize": "85kB",
   "files": [
@@ -53,18 +53,23 @@
     "core-js": "3.6.5"
   },
   "peerDependencies": {
+    "@braze/web-sdk": ">=3.3.0",
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
     "@justeat/f-button": "4.x",
-    "vue": "2.x",
-    "@braze/web-sdk": ">=3.3.0",
-    "date-fns": ">=2.17.0"
+    "date-fns": ">=2.17.0",
+    "vue": "2.x"
   },
   "devDependencies": {
-    "@braze/web-sdk": "^3.3.0",
+    "@braze/web-sdk": "^4.2.1",
+    "@faker-js/faker": "^7.5.0",
     "@justeat/f-button": "4.x",
-    "@justeat/f-braze-adapter": "5.x",
     "@justeat/f-vue-icons": "3.x",
     "@justeat/f-wdio-utils": "1.x",
+    "@justeat/fozzie": "10.7.1",
+    "@justeattakeaway/cc-braze-adapter": "0.2.0",
+    "@justeattakeaway/cc-filters": "0.1.0",
+    "@justeattakeaway/cc-utils": "0.1.0",
+    "@justeattakeaway/cc-stampcards-adapter": "0.2.1",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/cli-plugin-unit-jest": "4.5.16",
     "@vue/test-utils": "1.0.3",
@@ -73,6 +78,7 @@
     "crypto-js": "4.0.0",
     "date-fns": "^2.17.0",
     "faker": "4.1.0",
+    "http-request-mock": "^1.8.2",
     "vue": "2.6.10",
     "xhr-mock": "2.5.1"
   }
