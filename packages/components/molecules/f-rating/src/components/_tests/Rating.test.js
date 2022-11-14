@@ -17,7 +17,8 @@ describe('Rating', () => {
     beforeEach(() => {
         propsData = {
             starRating: 2,
-            maxStarRating: 5
+            maxStarRating: 5,
+            ratingDisplayType: 'short'
         };
         wrapper = shallowMount(VRating, {
             propsData,
@@ -52,7 +53,8 @@ describe('Rating', () => {
                 it('should return a singular description if the rating is less than 2', () => {
                     // Arrange
                     propsData = {
-                        starRating: 1
+                        starRating: 1,
+                        ratingDisplayType: 'short'
                     };
                     wrapper = shallowMount(VRating, {
                         propsData,
@@ -67,7 +69,8 @@ describe('Rating', () => {
                 it('should return a plural description if the rating is greater than 1', () => {
                     // Arrange
                     propsData = {
-                        starRating: 2
+                        starRating: 2,
+                        ratingDisplayType: 'short'
                     };
                     wrapper = shallowMount(VRating, {
                         propsData,
@@ -101,6 +104,7 @@ describe('Rating', () => {
                         // Arrange
                         propsData = {
                             starRating: 2,
+                            ratingDisplayType: 'short',
                             isSingleStarVariant: true
                         };
                         wrapper = shallowMount(VRating, {
@@ -119,6 +123,7 @@ describe('Rating', () => {
                         // Arrange
                         propsData = {
                             starRating: 2,
+                            ratingDisplayType: 'short',
                             isSingleStarVariant: false
                         };
                         wrapper = shallowMount(VRating, {
@@ -149,9 +154,10 @@ describe('Rating', () => {
             });
 
             describe('when invoked', () => {
-                describe('and a rating type is available', () => {
+                describe('and a `reviewCount` is truthy', () => {
                     beforeEach(() => {
                         propsData.starRating = 2;
+                        propsData.reviewCount = 1;
                         propsData.ratingDisplayType = 'short';
                         wrapper = shallowMount(VRating, {
                             propsData,
@@ -174,10 +180,11 @@ describe('Rating', () => {
                     });
                 });
 
-                describe('and a rating type is set to `noRating`', () => {
+                describe('and a `reviewCount` is falsey', () => {
                     beforeEach(() => {
                         propsData.starRating = 2;
-                        propsData.ratingDisplayType = 'noRating';
+                        propsData.reviewCount = 0;
+                        propsData.ratingDisplayType = 'short';
                         wrapper = shallowMount(VRating, {
                             propsData,
                             localVue,
@@ -185,7 +192,7 @@ describe('Rating', () => {
                         });
                     });
 
-                    it('should return truthy', () => {
+                    it('should return falsey', () => {
                         // Act & Assert
                         expect(wrapper.vm.hasRatingAvailable).toBe(false);
                     });
@@ -258,6 +265,11 @@ describe('Rating', () => {
                 expect(validator(displayType)).toBe(true);
             });
 
+            it('should be set to `null` by default', () => {
+                // Act & Assert
+                expect(VRating.props.ratingDisplayType.default).toBe(null);
+            });
+
             describe('when `ratingDisplayType` is truthy', () => {
                 it('should display descriptive content', () => {
                     // Arrange & Act
@@ -282,30 +294,6 @@ describe('Rating', () => {
 
                     // Assert
                     expect(result.exists()).toBe(true);
-                });
-            });
-
-            describe('when `ratingDisplayType` is falsey', () => {
-                it('should not display descriptive content', () => {
-                    // Arrange & Act
-                    propsData = {
-                        starRating: 2,
-                        maxStarRating: 5,
-                        ratingDisplayType: null
-                    };
-                    wrapper = shallowMount(VRating, {
-                        propsData,
-                        localVue,
-                        i18n,
-                        mocks: {
-                            $tc
-                        }
-                    });
-
-                    const result = wrapper.find('[data-test-id="c-rating-displayType"]');
-
-                    // Assert
-                    expect(result.exists()).toBe(false);
                 });
             });
         });
@@ -359,9 +347,55 @@ describe('Rating', () => {
             });
 
             describe('when invoked', () => {
+                describe('and `hasRatingAvailable` is falsey', () => {
+                    it('should return the correct translation reference', () => {
+                        // Arrange
+                        propsData = {
+                            starRating: 2,
+                            reviewCount: 0,
+                            ratingDisplayType: 'short'
+                        };
+
+                        wrapper = shallowMount(VRating, {
+                            propsData,
+                            localVue,
+                            i18n
+                        });
+
+                        // Act
+                        const result = wrapper.vm.getRatingDisplayFormat();
+
+                        // Assert
+                        expect(result).toBe('No ratings yet');
+                    });
+                });
+
+                describe('and `hasRatingAvailable` is truthy', () => {
+                    it('should return the correct translation reference', () => {
+                        // Arrange
+                        propsData = {
+                            starRating: 2,
+                            reviewCount: 499,
+                            ratingDisplayType: 'medium'
+                        };
+
+                        wrapper = shallowMount(VRating, {
+                            propsData,
+                            localVue,
+                            i18n
+                        });
+
+                        // Act
+                        const result = wrapper.vm.getRatingDisplayFormat();
+
+                        // Assert
+                        expect(result).toBe('2 of 5');
+                    });
+                });
+
+
                 describe('and `ratingDisplayType` is passed through', () => {
                     it.each([
-                        ['noRating', 'No ratings yet'],
                         ['short', '499'],
                         ['medium', '2 of 5'],
                         ['long', 'View 499 reviews']

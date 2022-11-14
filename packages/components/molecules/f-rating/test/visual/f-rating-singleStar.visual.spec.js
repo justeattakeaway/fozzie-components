@@ -29,7 +29,7 @@ devices.forEach(device => {
         describe('`maxStarRating`', () => {
             it('should be displayed', async () => {
                 // Act
-                await RatingSingleStar.load({ isSingleStarVariant: true, starRating: 5 });
+                await RatingSingleStar.load({ isSingleStarVariant: true, maxStarRating: 5 });
 
                 // Assert
                 await browser.percyScreenshot('f-rating Single Star - Visual Test for Prop - maxStarRating = 5', device);

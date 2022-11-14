@@ -126,7 +126,7 @@ export default {
          * @returns {boolean}
          */
         hasRatingAvailable () {
-            return this.ratingDisplayType !== 'noRating';
+            return this.reviewCount > 0;
         }
     },
 
@@ -134,12 +134,16 @@ export default {
         /**
          * Gets the correct rating display format from translations.
          *
-         * @todo - If the component is using `short` as a `starRatingSize` we shouldn't display text
-         * alongside it for now. (TBC with design - ticket in backlog).
+         * 1. If reviewCount is Zero, return "No ratings yet".
+         * 2. If reviewCount is available, return `ratingDisplayType` .
          *
          * @returns {string}
          */
         getRatingDisplayFormat () {
+            if (!this.hasRatingAvailable) {
+                return this.$t('ratings.ratingDisplayType.noRating');
+            }
+
             return this.$t(`ratings.ratingDisplayType.${this.ratingDisplayType}`, {
                 rating: this.starRating,
                 maxStarRating: this.maxStarRating,
