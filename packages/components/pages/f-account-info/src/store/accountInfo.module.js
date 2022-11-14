@@ -17,9 +17,8 @@ export default {
 
     actions: {
         async loadConsumerDetails ({ commit }, { api, authToken }) {
-            const conversationId = api.setConversationId();
-            const getDetailsTask = api.getConsumerDetails(authToken, conversationId);
-            const getAddressTask = api.getConsumerAddresses(authToken, conversationId);
+            const getDetailsTask = api.getConsumerDetails(authToken);
+            const getAddressTask = api.getConsumerAddresses(authToken);
 
             const responses = await Promise.all([getDetailsTask, getAddressTask]);
 

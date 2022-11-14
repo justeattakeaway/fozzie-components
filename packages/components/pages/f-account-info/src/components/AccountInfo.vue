@@ -301,7 +301,6 @@ export default {
         return {
             consumerApi: new ConsumerApi({
                 httpClient: this.$http,
-                cookies: this.$cookies,
                 baseUrl: this.smartGatewayBaseUrl
             }),
             tenantConfigs,

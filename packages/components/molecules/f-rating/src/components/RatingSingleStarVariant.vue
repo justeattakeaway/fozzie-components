@@ -1,7 +1,6 @@
 <template>
     <div
-        :class="$style['c-rating']"
-        data-test-id="rating-component">
+        :class="$style['c-rating']">
         <div :class="$style['c-rating-stars-icon']">
             <star-filled-icon
                 v-if="starRating"

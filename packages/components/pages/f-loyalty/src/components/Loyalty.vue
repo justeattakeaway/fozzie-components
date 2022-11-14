@@ -24,7 +24,7 @@
                         name="how-it-works"
                         :selected="showHowItWorks"
                         :title="$t('tabs.howItWorks.title')">
-                        <how-it-works data-test-id="StampCards-HowItWorksTab-Content" />
+                        <how-it-works :locale="locale" data-test-id="StampCards-HowItWorksTab-Content" />
                     </tab>
                 </tabs>
             </div>
@@ -84,6 +84,10 @@ export default {
             default: true
         },
         hash: {
+            type: String,
+            default: ''
+        },
+        locale: {
             type: String,
             default: ''
         }

@@ -2,7 +2,7 @@ const messages = {
     locale: 'en-IE',
     percentage: '10',
     currency: 'euro',
-    currencySymbol: '',
+    currencySymbol: '€',
     termsUrl: '/info/terms-and-conditions#ii.just-eat-voucher-terms-conditions',
     termsText: 'See Terms & Conditions',
     header: {
@@ -33,6 +33,7 @@ const messages = {
         loginButtonText: 'Log in'
     },
     howItWorks: {
+        imagePath: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/',
         title: 'Save on your favourite flavours',
         text: 'Get rewarded for your loyalty. Start collecting stamps from your favourite restaurants and unlock a tasty little discount on the way…',
         exampleSection: {
@@ -47,19 +48,23 @@ const messages = {
             cards: {
                 order: {
                     title: 'Order',
-                    text: 'Collect a stamp every time you order from a participating restaurant.'
+                    text: 'Collect a stamp every time you order from a participating restaurant.',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/stampcards-complex-object-restaurant-promo.svg'
                 },
                 earn: {
                     title: 'Earn',
-                    text: 'Each stamp is worth 10% of your order’s value (exc. fees and charges) and will be saved on its own StampCard.'
+                    text: 'Each stamp is worth 10% of your order’s value (exc. fees and charges) and will be saved on its own StampCard.',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/stampcards-complex-object-login-promo-full-colour-10.svg'
                 },
                 collect: {
                     title: 'Collect',
-                    text: 'Once you’ve collected five stamps from the same restaurant you’ll unlock a discount for your sixth order.'
+                    text: 'Once you’ve collected five stamps from the same restaurant you’ll unlock a discount for your sixth order.',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/stampcards-complex-object-stampcard-colour-03-10-full.svg'
                 },
                 reward: {
                     title: 'Get rewarded',
-                    text: 'Your discount is the total of your five saved stamps and will be automatically applied when you place your sixth order.'
+                    text: 'Your discount is the total of your five saved stamps and will be automatically applied when you place your sixth order.',
+                    image: 'https://just-eat-prod-eu-res.cloudinary.com/image/upload/v1630068495/Experiments/Homeweb-Coreweb/stampcards-bag-order-refund.svg'
                 }
             }
         }
