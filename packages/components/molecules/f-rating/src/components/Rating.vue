@@ -69,7 +69,7 @@ export default {
         },
         ratingDisplayType: {
             type: String,
-            required: true,
+            default: null,
             validator: value => VALID_STAR_RATING_DISPLAY_TYPE.includes(value)
         },
         reviewCount: {
@@ -137,7 +137,7 @@ export default {
          * 1. If reviewCount is Zero, return "No ratings yet".
          * 2. If reviewCount is available, return `ratingDisplayType` .
          *
-         * @returns {String}
+         * @returns {string}
          */
         getRatingDisplayFormat () {
             if (!this.hasRatingAvailable) {

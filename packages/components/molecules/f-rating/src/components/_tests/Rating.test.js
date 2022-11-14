@@ -265,6 +265,11 @@ describe('Rating', () => {
                 expect(validator(displayType)).toBe(true);
             });
 
+            it('should be set to `null` by default', () => {
+                // Act & Assert
+                expect(VRating.props.ratingDisplayType.default).toBe(null);
+            });
+
             describe('when `ratingDisplayType` is truthy', () => {
                 it('should display descriptive content', () => {
                     // Arrange & Act
