@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.13.0
+------------------------------
+*November 8, 2022*
+
+### Changed
+- Added fozzie components as externals in Webpack config (via the PR hokey-cokey)
+
+
 v3.12.0
 ------------------------------
 *November 7, 2022*
