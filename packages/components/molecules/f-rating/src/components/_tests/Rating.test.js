@@ -50,7 +50,7 @@ describe('Rating', () => {
             });
 
             describe('when invoked', () => {
-                it('should return a singular description if the rating is less than 2', () => {
+                it('should return a singular description if the rating is equal to 1', () => {
                     // Arrange
                     propsData = {
                         starRating: 1,
@@ -66,10 +66,14 @@ describe('Rating', () => {
                     expect(wrapper.vm.getRatingDescription).toBe('1 star out of 5');
                 });
 
-                it('should return a plural description if the rating is greater than 1', () => {
+                it.each([
+                    [1.3, '1.3 stars out of 5'],
+                    [0.5, '0.5 stars out of 5'],
+                    [2, '2 stars out of 5']
+                ])('should return a plural description if the rating is NOT equal to 1 `%s`', (type, expected) => {
                     // Arrange
                     propsData = {
-                        starRating: 2,
+                        starRating: type,
                         ratingDisplayType: 'short'
                     };
                     wrapper = shallowMount(VRating, {
@@ -79,7 +83,7 @@ describe('Rating', () => {
                     });
 
                     // Act & Assert
-                    expect(wrapper.vm.getRatingDescription).toBe('2 stars out of 5');
+                    expect(wrapper.vm.getRatingDescription).toBe(expected);
                 });
             });
         });

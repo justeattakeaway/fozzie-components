@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.9.0
+------------------------------
+*November 14, 2022*
+
+### Fixed
+- Description returned within `getRatingDescription` based on `starRating` value.
+- Tests added to cover changes to method `getRatingDescription`.
+
+
 v0.8.0
 ------------------------------
 *November 08, 2022*

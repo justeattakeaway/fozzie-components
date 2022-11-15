@@ -92,11 +92,10 @@ export default {
         /**
          * Return description using `vue-i18n Pluralization` if one star or an alternative if more.
          *
-         *
          * @returns {string|*}
          */
         getRatingDescription () {
-            return this.starRating < 2
+            return this.starRating === 1
                 ? this.$tc('ratings.starsDescription', 1, {
                     rating: this.starRating,
                     maxStarRating: this.maxStarRating
