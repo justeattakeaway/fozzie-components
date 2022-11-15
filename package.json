@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "7.40.0",
+  "version": "7.41.0",
   "private": true,
   "scripts": {
     "build": "turbo run build --continue",
@@ -57,7 +57,7 @@
     "@babel/plugin-proposal-optional-chaining": "7.14.5",
     "@babel/preset-env": "7.14.9",
     "@justeat/browserslist-config-fozzie": "1.2.0",
-    "@justeat/eslint-config-fozzie": "5.1.0",
+    "@justeat/eslint-config-fozzie": "5.4.0",
     "@justeat/fozzie": "10.x",
     "@justeat/pie-design-tokens": "3.0.0",
     "@justeat/stylelint-config-fozzie": "2.2.0",
@@ -87,9 +87,9 @@
     "cross-env": "7.0.2",
     "css-loader": "1.0.1",
     "danger": "11.1.4",
-    "eslint": "8.8.0",
+    "eslint": "8.27.0",
     "eslint-import-resolver-webpack": "0.13.2",
-    "eslint-plugin-vue": "8.4.0",
+    "eslint-plugin-vue": "8.7.1",
     "eslint-plugin-vuejs-accessibility": "1.1.1",
     "eslint-plugin-webdriverio": "1.0.1",
     "eyeglass": "3.0.2",
@@ -108,9 +108,9 @@
     "turbo": "^1.2.9",
     "vite": "2.9.13",
     "vue": "2.6.10",
-    "vuex": "3.5.1",
     "vue-svg-loader": "0.16.0",
     "vue-template-compiler": "2.6.10",
+    "vuex": "3.5.1",
     "wdio-chromedriver-service": "7.3.2",
     "wdio-video-reporter": "3.2.1",
     "webdriverio": "7.19.7"
@@ -147,8 +147,9 @@
       "packages/services/*",
       "packages/tools/*"
     ],
-
-    "nohoist": ["**/@justeat/fozzie/**"]
+    "nohoist": [
+      "**/@justeat/fozzie/**"
+    ]
   },
   "dependencies": {
     "deepmerge": "4.2.2"
