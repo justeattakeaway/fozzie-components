@@ -27,8 +27,7 @@
     $toast-height--aboveMid                 : 115px;
     $toast-translateY--aboveMid             : -#{$toast-height--aboveMid - 5px};
 
-
-    @keyframes toastSlideUp {
+    @keyframes toast-slide-up {
         0% {
             transform: translateY(0);
         }
@@ -37,7 +36,7 @@
         }
     }
 
-    @keyframes toastSlideUp--aboveNarrow {
+    @keyframes toast-slide-up-above-narrow {
         0% {
             transform: translateY(0);
         }
@@ -46,7 +45,7 @@
         }
     }
 
-    @keyframes toastSlideUp--aboveMid {
+    @keyframes toast-slide-up-above-mid {
         0% {
             transform: translateY(0);
         }
@@ -56,7 +55,7 @@
     }
 
     .c-toast {
-        animation: toastSlideUp $toast-animation-duration;
+        animation: toast-slide-up $toast-animation-duration;
         background-color: $toast-bgColor--default;
         border-top-left-radius: $toast-radius;
         border-top-right-radius: $toast-radius;
@@ -72,13 +71,13 @@
         z-index: functions.zIndex(low);
 
         @include media('>=narrow') {
-            animation: toastSlideUp--aboveNarrow $toast-animation-duration;
+            animation: toast-slide-up-above-narrow $toast-animation-duration;
             height: $toast-height--aboveNarrow;
             transform: translateY($toast-translateY--aboveNarrow);
         }
 
         @include media('>=mid') {
-            animation: toastSlideUp--aboveMid $toast-animation-duration;
+            animation: toast-slide-up-above-mid $toast-animation-duration;
             height: $toast-height--aboveMid;
             transform: translateY($toast-translateY--aboveMid);
         }

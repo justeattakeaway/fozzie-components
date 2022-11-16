@@ -164,7 +164,7 @@
   }
 }
 
-@keyframes skeletonGradient {
+@keyframes skeleton-gradient {
   0% {
     background-position: 100% 50%;
   }
@@ -177,6 +177,6 @@
   border-radius: 2px;
   background: linear-gradient(-45deg, dt.$color-background-default, dt.$color-background-default, dt.$color-background-subtle, dt.$color-background-default, dt.$color-background-default);
   background-size: 2000px 600%;
-  animation: skeletonGradient 2s ease infinite;
+  animation: skeleton-gradient 2s ease infinite;
   animation-fill-mode: forwards;
 }
