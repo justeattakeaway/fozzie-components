@@ -13,6 +13,9 @@ v0.10.0
 - Unit tests to constant file to cover `xsmall` prop size.
 - Note about usage for sizes.
 
+### Fixed
+- Text alignment issue.
+
 
 v0.9.0
 ------------------------------
