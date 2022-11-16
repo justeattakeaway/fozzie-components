@@ -10,8 +10,8 @@ const path = require('path');
 const sassTrue = require('sass-true');
 const glob = require('glob');
 
-describe('Sass', () => {
-    it('Find and run tests', () => {
+describe('SCSS', () => {
+    it('should find and run unit tests', () => {
         // All Scss unit tests should follow this naming convention
         const testFileGlob = '**/*.spec.scss';
         const testFilePathGlob = path.resolve(process.cwd(), testFileGlob);
