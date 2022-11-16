@@ -60,7 +60,7 @@ exports[`Compiled CSS output compiles the expected CSS 1`] = `
   box-shadow: 0 0 2px 2px #4996fd;
 }
 
-@keyframes skeletonGradient {
+@keyframes skeleton-gradient {
   0% {
     background-position: 100% 50%;
   }
@@ -3450,7 +3450,7 @@ hr {
   border-radius: 2px;
   background: linear-gradient(-45deg, #fcfcfc, #fcfcfc, #f5f3f1, #fcfcfc, #fcfcfc);
   background-size: 2000px 600%;
-  animation: skeletonGradient 2s ease infinite;
+  animation: skeleton-gradient 2s ease infinite;
   animation-fill-mode: forwards;
 }
 .c-listingSkeleton-info:before {
@@ -3480,7 +3480,7 @@ hr {
   border-radius: 2px;
   background: linear-gradient(-45deg, #fcfcfc, #fcfcfc, #f5f3f1, #fcfcfc, #fcfcfc);
   background-size: 2000px 600%;
-  animation: skeletonGradient 2s ease infinite;
+  animation: skeleton-gradient 2s ease infinite;
   animation-fill-mode: forwards;
   display: inline-block;
 }
@@ -3513,7 +3513,7 @@ hr {
   border-radius: 2px;
   background: linear-gradient(-45deg, #fcfcfc, #fcfcfc, #f5f3f1, #fcfcfc, #fcfcfc);
   background-size: 2000px 600%;
-  animation: skeletonGradient 2s ease infinite;
+  animation: skeleton-gradient 2s ease infinite;
   animation-fill-mode: forwards;
   display: inline-block;
 }
@@ -3546,7 +3546,7 @@ hr {
   border-radius: 2px;
   background: linear-gradient(-45deg, #fcfcfc, #fcfcfc, #f5f3f1, #fcfcfc, #fcfcfc);
   background-size: 2000px 600%;
-  animation: skeletonGradient 2s ease infinite;
+  animation: skeleton-gradient 2s ease infinite;
   animation-fill-mode: forwards;
 }
 @media (min-width: 48.001em) {
@@ -5208,7 +5208,7 @@ If you'd like to use it in your project you can include it by adding \`@include 
 * Documentation:
 * https://fozzie.just-eat.com/styleguide/ui-components/toast
 */
-@keyframes toastSlideUp {
+@keyframes toast-slide-up {
   0% {
     transform: translateY(0);
   }
@@ -5216,7 +5216,7 @@ If you'd like to use it in your project you can include it by adding \`@include 
     transform: translateY(-90px);
   }
 }
-@keyframes toastSlideUp--aboveNarrow {
+@keyframes toast-slide-up-above-narrow {
   0% {
     transform: translateY(0);
   }
@@ -5224,7 +5224,7 @@ If you'd like to use it in your project you can include it by adding \`@include 
     transform: translateY(-110px);
   }
 }
-@keyframes toastSlideUp--aboveMid {
+@keyframes toast-slide-up-above-mid {
   0% {
     transform: translateY(0);
   }
@@ -5233,7 +5233,7 @@ If you'd like to use it in your project you can include it by adding \`@include 
   }
 }
 .c-toast {
-  animation: toastSlideUp 0.5s;
+  animation: toast-slide-up 0.5s;
   background-color: #303d3f;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
@@ -5250,14 +5250,14 @@ If you'd like to use it in your project you can include it by adding \`@include 
 }
 @media (min-width: 25.875em) {
   .c-toast {
-    animation: toastSlideUp--aboveNarrow 0.5s;
+    animation: toast-slide-up-above-narrow 0.5s;
     height: 115px;
     transform: translateY(-110px);
   }
 }
 @media (min-width: 48em) {
   .c-toast {
-    animation: toastSlideUp--aboveMid 0.5s;
+    animation: toast-slide-up-above-mid 0.5s;
     height: 115px;
     transform: translateY(-110px);
   }
@@ -7954,7 +7954,7 @@ em.u-text-highlight {
   border-radius: 2px;
   background: linear-gradient(-45deg, #fcfcfc, #fcfcfc, #f5f3f1, #fcfcfc, #fcfcfc);
   background-size: 2000px 600%;
-  animation: skeletonGradient 2s ease infinite;
+  animation: skeleton-gradient 2s ease infinite;
   animation-fill-mode: forwards;
   background-color: red;
   border-color: #cc0000;

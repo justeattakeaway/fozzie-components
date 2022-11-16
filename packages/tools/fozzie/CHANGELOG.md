@@ -7,12 +7,24 @@ Future Todo List
 ------------------------------
 - Make typography and utility classes silent extenders (so that they can be extended by components without importing all utility classes).
 
+
+v10.9.0
+------------------------------
+*November 16, 2022*
+
+### Fixed
+- Failing tests.
+- Linting errors.
+  - Including renaming keyframe animation names to kebab-case.
+
+
 v10.8.1
 ------------------------------
 *November 1, 2022*
 
 ### Added
 - `u-hideOnMid` Responsive Trump Class
+
 
 v10.8.0
 ------------------------------
@@ -199,6 +211,7 @@ v9.0.0
 - `$font-size-base` was pointing incorrectly at the `font-paragraph-01` design token (which is used for paragraph spacing). Have fixed this to now point at the correct font-size token.
 - Default font-size key in `font-size` mixin changed from `body-s` to `body-l` (`14px` to `16px`).
 
+
 v9.0.0-beta.12
 ------------------------------
 *August 8, 2022*
@@ -256,7 +269,7 @@ v9.0.0-beta.8
 
 v9.0.0-beta.7
 ------------------------------
-*July 06, 2022*
+*July 6, 2022*
 
 ### Changed
 - `yarn test` command now tests js and scss together with `test:js` and `test:scss` individually being called
@@ -264,7 +277,7 @@ v9.0.0-beta.7
 
 v9.0.0-beta.6
 ------------------------------
-*July 01, 2022*
+*July 1, 2022*
 
 ### Added
 - SCSS unit testing capabilities using `sass-true`
@@ -310,7 +323,7 @@ v9.0.0-beta.2
 
 v9.0.0-beta.1
 ------------------------------
-*June 07, 2022*
+*June 7, 2022*
 
 ### Removed
 - Removed namespace.
@@ -327,7 +340,7 @@ v9.0.0-beta.0
 
 v8.4.0
 ------------------------------
-*July 06, 2022*
+*July 6, 2022*
 
 ### Added
 - circleci config file
@@ -347,7 +360,7 @@ v8.3.0
 
 v8.4.1
 ------------------------------
-*July 06, 2022*
+*July 6, 2022*
 
 ### Changed
 - switch from `prepare` to `prepublishOnly` in package.json scripts
@@ -355,13 +368,14 @@ v8.4.1
 
 v8.4.0
 ------------------------------
-*July 06, 2022*
+*July 6, 2022*
 
 ### Added
 - circleci config file
 
 ### Removed
 - unused travis config
+
 
 v8.3.0
 ------------------------------
@@ -470,6 +484,7 @@ v7.0.0
 | spacing(x10) | spacing(j) |
 
 - `pie-design-tokens` package.json version to bring in new elevation changes.
+
 
 v6.2.0
 ------------------------------
@@ -879,12 +894,14 @@ v4.5.2
 ### Fixed
 - fixed the linter error
 
+
 v4.5.1
 ------------------------------
 *July 5, 2021*
 
 ### Fixed
 - fixed `em` scaling
+
 
 v4.5.0
 ------------------------------
@@ -1174,6 +1191,7 @@ v1.88.0
 ### Added
 - New helper to rwd.scss for hiding items on tiny devices
 - Stylelint disable rule for Firefox only element as it was throwing error when running Homeweb
+
 
 v1.87.0
 ------------------------------
@@ -1531,7 +1549,7 @@ v1.54.0
 
 v1.53.0
 ------------------------------
-*June 03, 2019*
+*June 3, 2019*
 
 ### Added
 - Added modifier to  `c-overflowCarousel` to also include mid version
@@ -1542,7 +1560,7 @@ v1.53.0
 
 v1.52.0
 ------------------------------
-*June 06, 2019*
+*June 6, 2019*
 
 ### Added
 - Style for earned promo text
@@ -1550,7 +1568,7 @@ v1.52.0
 
 v1.50.0
 ------------------------------
-*June 03, 2019*
+*June 3, 2019*
 
 ### Fixed
 - Usage of the Glaze theme
@@ -2109,6 +2127,7 @@ v0.101.0
 ### Added
 - Added glyphs file within settings to house CSS glyoh variables
 
+
 v0.100.1
 ------------------------------
 *September 26, 2018*
@@ -2256,6 +2275,7 @@ v0.88.0
 
 ### Added
 - Addition of `c-badge--transparent`
+
 
 v0.87.0
 ------------------------------
@@ -3197,7 +3217,7 @@ v0.16.0
 
 v0.15.0
 ------------------------------
-*October 03, 2017*
+*October 3, 2017*
 
 ### Changed
 - Updated `btnToggle` styles.
