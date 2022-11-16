@@ -17,21 +17,22 @@
     display: flex;
 }
 
-// There are four sizes available, the default size starts at 20px. See readme prop `starRatingSize` for more info.
-.c-rating-star {
+// There are four sizes available, the default size (small) starts at 20px. See readme prop `starRatingSize` for more info.
+
+.c-rating-star--xsmall {
+  width: 16px;
+}
+
+.c-rating-star--small {
   width: 20px;
+}
 
-  &.c-rating-star--xsmall {
-    width: 16px;
-  }
+.c-rating-star--medium {
+  width: 24px;
+}
 
-  &.c-rating-star--medium {
-    width: 24px;
-  }
-
-  &.c-rating-star--large {
-    width: 32px;
-  }
+.c-rating-star--large {
+  width: 32px;
 }
 
 .c-rating-star--filled path {
