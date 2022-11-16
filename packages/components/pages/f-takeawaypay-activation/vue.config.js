@@ -16,6 +16,12 @@ module.exports = {
                 // eslint-disable-next-line quotes
                 additionalData: `@use "../assets/scss/common.scss";`
             });
+
+        config.externals({
+            // This just externalises the JS currently, not the CSS
+            '@justeat/f-button': '@justeat/f-button',
+            '@justeat/f-card': '@justeat/f-card'
+        });
     },
     pluginOptions: {
         lintStyleOnBuild: true
