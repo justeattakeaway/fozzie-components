@@ -51,7 +51,7 @@ $loading-indicator-spacing: 20px;
     animation: spin 1s linear 0s infinite;
 
 
-    @if $loading-indicator-size=='large' {
+    @if $loading-indicator-size == 'large' {
       width: $loading-indicator-size-large;
       height: $loading-indicator-size-large;
     } @else {

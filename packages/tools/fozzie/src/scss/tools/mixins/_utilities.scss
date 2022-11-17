@@ -6,9 +6,7 @@
 // ==========================================================================
 
 // Extends default $spacing map with an empty entry at the start
-$spacing-map: map.merge((
-    '': 0
-), v.$spacing);
+$spacing-map: map.merge(('': 0), v.$spacing);
 
 // **
 // ==========================================================================
