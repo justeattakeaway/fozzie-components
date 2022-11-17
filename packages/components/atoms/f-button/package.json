@@ -61,7 +61,6 @@
   },
   "devDependencies": {
     "@justeattakeaway/pie-icons-vue": "1.0.0",
-    "@justeat/f-wdio-utils": "1.x",
-    "vue-router": "3.5.2"
+    "@justeat/f-wdio-utils": "1.x"
   }
 }
