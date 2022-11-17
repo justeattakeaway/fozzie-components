@@ -95,6 +95,7 @@ jobs:
           global:
             - '*.js'
             - '*.json'
+            - '.github/workflows/**'
             - 'packages/storybook/**'
             - 'packages/tools/fozzie/**'
         list-files: shell
@@ -176,6 +177,7 @@ jobs:
           global:
             - '*.js'
             - '*.json'
+            - '.github/workflows/**'
             - 'packages/storybook/**'
             - 'packages/tools/fozzie/**'
         list-files: shell
@@ -240,6 +242,7 @@ jobs:
           global:
             - '*.js'
             - '*.json'
+            - '.github/workflows/**'
             - 'packages/storybook/**'
             - 'packages/tools/fozzie/**'
         list-files: shell
