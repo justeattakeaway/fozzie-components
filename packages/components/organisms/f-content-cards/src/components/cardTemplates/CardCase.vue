@@ -18,8 +18,8 @@ export default {
     name: 'CardCase',
 
     inject: [
-        'emitCardView',
-        'emitCardClick'
+        'emitCardClick',
+        'observer'
     ],
 
     props: {
@@ -36,16 +36,13 @@ export default {
     },
 
     mounted () {
-        this.onViewContentCard();
+        this.observer.observe(this.$el);
     },
 
     methods: {
-        onViewContentCard () {
-            this.emitCardView(this.card);
-        },
 
         onClickContentCard () {
-            this.emitCardClick(this.card);
+            this.emitCardClick(this.card, this.$el);
         },
 
         testIdForItemWithIndex (index) {

@@ -1,4 +1,5 @@
 import { shallowMount } from '@vue/test-utils';
+import { mockIntersectionObserver } from 'jsdom-testing-mocks';
 import ContentCards, {
     STATE_NO_CARDS,
     STATE_DEFAULT,
@@ -6,6 +7,8 @@ import ContentCards, {
     STATE_LOADING
 } from '../ContentCards';
 import { HAS_LOADED } from '../../events';
+
+mockIntersectionObserver();
 
 const mockLogger = {
     error: jest.fn(),
@@ -151,6 +154,14 @@ describe('ContentCards', () => {
             expect(cards.length).toEqual(0);
         });
 
+        it('should have 0 cards in the cards array', () => {
+            // Act
+            const cards = instance.findAll('[data-test-id="__MOCK_TYPE__"]');
+
+            // Assert
+            expect(cards.length).toEqual(0);
+        });
+
         it('should emit event to indicate that no cards were returned', () => {
             // Assert
             expect(instance.emitted()[HAS_LOADED]).toBeTruthy();
@@ -189,3 +200,9 @@ describe('ContentCards', () => {
 
 // it should have ONLY the cards from adapter with returned cards in the cards array
 
+
+// tests for loading state
+
+// tests for error state
+
+// tests for analytics observe events

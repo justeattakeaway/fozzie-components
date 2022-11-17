@@ -13,7 +13,10 @@ describe('ContentCardContainer.vue', () => {
         wrapper = shallowMount(ContentCardContainer, {
             provide: {
                 emitCardView: jest.fn(),
-                emitCardClick: jest.fn()
+                emitCardClick: jest.fn(),
+                observer: {
+                    observe: jest.fn()
+                }
             },
             propsData: {
                 card: MOCK_CARD,
@@ -23,14 +26,6 @@ describe('ContentCardContainer.vue', () => {
                 default: '<p data-test-id="card-test-slot" slot-scope="cardData">{{cardData.card.id}}</p>'
             }
         });
-    });
-
-    it('should emit view content card event on mount', async () => {
-        // Act
-        await wrapper.vm.$nextTick();
-
-        // Assert
-        expect(wrapper.vm.emitCardView).toHaveBeenCalledWith(MOCK_CARD);
     });
 
     it('should emit click event on click', async () => {

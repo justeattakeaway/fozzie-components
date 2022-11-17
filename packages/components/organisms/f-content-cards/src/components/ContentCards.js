@@ -1,4 +1,6 @@
 import { globalisationServices } from '@justeat/f-services';
+import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
+import { uniq } from 'lodash';
 import tenantConfigs from '../tenants';
 import {
     HAS_LOADED,
@@ -35,10 +37,19 @@ export default {
     data: () => ({
         state: STATE_LOADING,
         cards: [],
-        errors: []
+        errors: [],
+        cardObserver: {}
     }),
 
     computed: {
+        xOffsets () {
+            return uniq(this.$children.map(({ $el }) => $el.offsetLeft)).sort((a, b) => a - b);
+        },
+
+        yOffsets () {
+            return uniq(this.$children.map(({ $el }) => $el.offsetTop)).sort((a, b) => a - b);
+        },
+
         /**
          * Determines the tenant based on the currently selected locale in order to choose correct translations
          * @return {String}
@@ -69,19 +80,56 @@ export default {
         const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
 
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.7
+        };
+
+        const observerCallback = entries => {
+            entries.forEach(entry => {
+                const { card } = entry.target.__vue__.$options.propsData;
+                const { $el } = entry.target.__vue__;
+
+                this.cardObserver = {
+                    ...this.cardObserver,
+                    [card.id]: {
+                        isIntersecting: entry.isIntersecting,
+                        ...(entry.isIntersecting ? { intersectionTime: new Date() } : { intersectionTime: null })
+                    }
+                };
+
+                if (entry.isIntersecting) {
+                    this.handleCardView({
+                        ...card,
+                        metadata: {
+                            coordinates: {
+                                x: this.xOffsets.findIndex(offset => offset === $el.offsetLeft) + 1,
+                                y: this.yOffsets.findIndex(offset => offset === $el.offsetTop) + 1
+                            }
+                        }
+                    });
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, options);
+
         return {
             /**
              * Reflects card click events though to common click event handler
              **/
-            emitCardClick (card) {
-                component.handleCardClick(card);
-            },
-
-            /**
-             * Reflects card view events though to common view event handler
-             **/
-            emitCardView (card) {
-                component.handleCardView(card);
+            emitCardClick (card, el) {
+                component.handleCardClick({
+                    ...card,
+                    metadata: {
+                        viewTime: differenceInMilliseconds(new Date(), component.cardObserver[card.id].intersectionTime),
+                        coordinates: {
+                            x: component.xOffsets.findIndex(offset => offset === el.offsetLeft) + 1,
+                            y: component.yOffsets.findIndex(offset => offset === el.offsetTop) + 1
+                        }
+                    }
+                });
             },
 
             /**
@@ -93,7 +141,9 @@ export default {
                 });
             },
 
-            copy: { ...localeConfig }
+            copy: { ...localeConfig },
+
+            observer
         };
     },
 
@@ -124,7 +174,7 @@ export default {
          */
         handleCardClick (card) {
             this.adapters.forEach(adapter => {
-                if (adapter.source === card.source) {
+                if (adapter.source.toLocaleLowerCase() === card.source.toLocaleLowerCase()) {
                     adapter.handleCardClick(card);
                 }
             });
@@ -136,7 +186,7 @@ export default {
          */
         handleCardView (card) {
             this.adapters.forEach(adapter => {
-                if (adapter.source === card.source) {
+                if (adapter.source.toLocaleLowerCase() === card.source.toLocaleLowerCase()) {
                     adapter.handleCardView(card);
                 }
             });
