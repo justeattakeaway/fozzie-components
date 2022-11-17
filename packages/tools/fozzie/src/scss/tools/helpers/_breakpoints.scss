@@ -1,6 +1,7 @@
 @use '../../settings/variables' as v;
 @use '../functions/index' as functions;
 
+// stylelint-disable function-parentheses-newline-inside, function-comma-newline-after
 // Lifted out of the variables file to fix circular reference issues
 $fozzie-breakpoints: functions.map-to-em((
     tiny       : 375px,
@@ -10,6 +11,7 @@ $fozzie-breakpoints: functions.map-to-em((
     wide       : 1025px,   // wide bp
     huge       : 1280px    // huge bp
 ), 16); // set to 16 as this is default browser size
+// stylelint-enable function-parentheses-newline-inside, function-comma-newline-after
 
 @function populate-breakpoints() {
     $breakpointString: '';
