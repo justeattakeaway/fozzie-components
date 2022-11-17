@@ -3,6 +3,7 @@
 
 .c-rating {
     display: flex;
+    align-items: center;
 }
 
 .c-rating-stars {
@@ -16,16 +17,22 @@
     display: flex;
 }
 
-.c-rating-star {
-    width: 12px;
+// There are four sizes available, the default size (small) starts at 20px. See readme prop `starRatingSize` for more info.
+
+.c-rating-star--xsmall {
+  width: 16px;
+}
+
+.c-rating-star--small {
+  width: 20px;
 }
 
 .c-rating-star--medium {
-    width: 16px;
+  width: 24px;
 }
 
 .c-rating-star--large {
-    width: 28px;
+  width: 32px;
 }
 
 .c-rating-star--filled path {

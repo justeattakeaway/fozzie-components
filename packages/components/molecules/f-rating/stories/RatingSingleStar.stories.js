@@ -49,6 +49,19 @@ RatingSingleStarComponent.args = {
     ratingVariants: [
         [
             {
+                starRating: 0, starRatingSize: 'xsmall', reviewCount: 499, isSingleStarVariant: true
+            },
+            {
+                starRating: 2.3, starRatingSize: 'xsmall', reviewCount: 499, isSingleStarVariant: true
+            },
+            {
+                starRating: 4.5, starRatingSize: 'xsmall', reviewCount: 499, isSingleStarVariant: true
+            },
+            {
+                starRating: 1.3, starRatingSize: 'xsmall', reviewCount: 499, isSingleStarVariant: true
+            },
+
+            {
                 starRating: 0, starRatingSize: 'small', reviewCount: 499, isSingleStarVariant: true
             },
             {
