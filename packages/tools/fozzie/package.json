@@ -2,7 +2,7 @@
   "name": "@justeat/fozzie",
   "title": "Fozzie – Just Eat UI Web Framework",
   "description": "UI Web Framework for the Just Eat Global Platform",
-  "version": "10.8.1",
+  "version": "10.9.0",
   "main": "dist/js/index.js",
   "files": [
     "dist/js",
@@ -12,9 +12,8 @@
   ],
   "homepage": "https://github.com/justeat/fozzie",
   "contributors": [
-    "Ashley Nolan <ashley.nolan@just-eat.com> (https://ashleynolan.co.uk)",
+    "Ashley Watson-Nolan <ashley.watson-nolan@justeattakeaway.com> (https://ashleynolan.co.uk)",
     "Jamie Maguire <jamie.maguire@justeattakeaway.com> (https://www.jamieomaguire.com)",
-    "Damian Mullins <damian.mullins@just-eat.com> (http://www.damianmullins.com)",
     "Github contributors <https://github.com/justeat/fozzie/graphs/contributors>"
   ],
   "authors": [

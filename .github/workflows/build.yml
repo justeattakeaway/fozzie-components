@@ -136,7 +136,7 @@ jobs:
     # Lint changed components if no root-level changes and not master.
     - name: Lint Changed Components
       if: steps.changes.outputs.global == 'false' && github.ref != 'refs/heads/master'
-      run: yarn lint --filter=[origin/master] --concurrency=10 --cache-dir=".turbo"
+      run: yarn lint --filter=[master] --concurrency=10 --cache-dir=".turbo"
     # Cache 'storybook-static'
     - name: Cache Storybook Static Directory
       id: storybook-cache
@@ -211,7 +211,7 @@ jobs:
     # Unit Test changed components + dependants if no root-level changes and not master.
     - name: Unit Test Changed Components + Dependants
       if: steps.changes.outputs.global == 'false' && github.ref != 'refs/heads/master'
-      run: yarn ci:test:${{ matrix.component-type}} --concurrency=10 --filter=...[origin/master]
+      run: yarn ci:test:${{ matrix.component-type}} --concurrency=10 --filter=...[master]
 
   browser-tests:
     strategy:
@@ -278,7 +278,7 @@ jobs:
         key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
     # Run Component / A11y / Visual Tests against all components if 'master' or root-level changes.
     - name: Run All Component / A11y / Visual Tests
-      if: ${{ (github.ref == 'refs/heads/master' || steps.changes.outputs.global == 'true') }}
+      if: ${{ (github.ref == 'refs/heads/master' || steps.changes.outputs.global == 'true') && (env.WORKFLOW_CONCLUSION != 'failure') }}
       run: |
         yarn storybook:serve-static &
         yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
@@ -286,12 +286,12 @@ jobs:
         yarn ci:test:visual:${{ matrix.component-type }} --concurrency=1
     - name: Run Changed Component / A11y / Visual Tests + Dependants
     # Run Component / A11y / Visual Tests against changed components + dependants if no root-level changes and not master.
-      if:  ${{ (github.ref != 'refs/heads/master' && steps.changes.outputs.global == 'false') }}
+      if: ${{ (github.ref != 'refs/heads/master' && steps.changes.outputs.global == 'false' && env.WORKFLOW_CONCLUSION != 'failure') }}
       run: |
         yarn storybook:serve-static &
-        yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master] &&
-        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master] &&
-        yarn ci:test:visual:${{ matrix.component-type }} --concurrency=1 --filter=...[origin/master]
+        yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[master] &&
+        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 --filter=...[master] &&
+        yarn ci:test:visual:${{ matrix.component-type }} --concurrency=1 --filter=...[master]
     # On Failure - Upload Allure Report
     - name: Generate Allure Report
       if: failure()
