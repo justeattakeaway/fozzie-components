@@ -58,6 +58,7 @@
     "@babel/plugin-proposal-optional-chaining": "7.14.5",
     "@babel/plugin-transform-runtime": "7.14.5",
     "@babel/preset-env": "7.14.9",
+    "@babel/register": "7.14.5",
     "@faker-js/faker": "7.5.0",
     "flush-promises": "1.0.2",
     "@justeat/browserslist-config-fozzie": "1.2.0",
