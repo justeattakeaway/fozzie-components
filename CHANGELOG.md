@@ -3,12 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
 v7.42.0
 ------------------------------
 *November 17, 2022*
 
 ### Removed
 - Duplicate dependencies of `organisms`, `pages`, `templates`, `services`, and `tools` packages.
+
 
 v7.41.0
 ------------------------------
