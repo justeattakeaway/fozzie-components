@@ -47,28 +47,21 @@ devices.forEach(device => {
         });
 
         describe('`starRatingSize`', () => {
-            it('should be displayed at the correct size', async () => {
-                // Act
-                await Rating.load({ starRatingSize: 'small' });
+            const starRatingSize = [
+                'xsmall',
+                'small',
+                'medium',
+                'large'
+            ];
 
-                // Assert
-                await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - starRatingSize = small', device);
-            });
+            starRatingSize.forEach(size => {
+                it('should be displayed at the correct size', async () => {
+                    // Act
+                    await Rating.load({ starRatingSize: size });
 
-            it('should be displayed at the correct size', async () => {
-                // Act
-                await Rating.load({ starRatingSize: 'medium' });
-
-                // Assert
-                await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - starRatingSize = medium', device);
-            });
-
-            it('should be displayed at the correct size', async () => {
-                // Act
-                await Rating.load({ starRatingSize: 'large' });
-
-                // Assert
-                await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - starRatingSize = large', device);
+                    // Assert
+                    await browser.percyScreenshot(`f-rating Multi Star - Visual Test for Prop - starRatingSize = ${size}`, device);
+                });
             });
         });
 
