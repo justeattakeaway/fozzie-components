@@ -6,7 +6,7 @@
             v-if="deliveryFeeText"
             :class="[$style['c-restaurantCard-fees-item']]"
             :text="deliveryFeeText"
-            :hide-icon-in-tile-view="true"
+            hide-icon-in-tile-view
             data-test-id="restaurant-fees-delivery">
             <cash-small-icon data-test-id="restaurant-fees-delivery-icon" />
         </icon-text>

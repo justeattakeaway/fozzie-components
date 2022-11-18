@@ -31,7 +31,7 @@
             <div :class="['c-contentCards-homePromotionCard1-innerCard', $style['c-contentCards-homePromotionCard1-innerCard']]">
                 <home-promotion-card2
                     :card="card"
-                    :no-link="true"
+                    no-link
                 />
             </div>
         </div>

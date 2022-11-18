@@ -1,9 +1,8 @@
 <template>
     <card-container
         :card="card"
-        :is-banner-before-description="true"
-        :should-embolden-title="true"
-    >
+        is-banner-before-description
+        should-embolden-title>
         <template v-slot:banner>
             <span
                 :class="['c-restaurantCard-banner', $style['c-restaurantCard-banner']]">

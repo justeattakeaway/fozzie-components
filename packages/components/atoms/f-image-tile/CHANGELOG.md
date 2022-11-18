@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+Latest (to be included in next release)
+------------------------------
+*November 21, 2022*
+
+### Fixed
+- Linting errors
+
+
 v1.3.0
 ------------------------------
 *November 1, 2022*
@@ -29,12 +37,14 @@ v1.1.0
 - Accessibility tests to be async.
 - Specs to ES6 syntax
 
+
 v1.0.1
 -----------------------------
 *Jun 23, 2022*
 
 ### Changed
 - Update icon colour when selected
+
 
 v1.0.0
 -----------------------------
@@ -50,6 +60,7 @@ v0.14.0
 
 ### Added
 - Loading skeletons
+
 
 v0.13.1
 -----------------------------
@@ -80,12 +91,14 @@ v0.12.0
 ### Added
 - Optional `performanceTracker` prop & `performanceTrackerLabel` prop
 
+
 v0.11.1
 ------------------------------
 *March 31, 2022*
 
 ### Added
 - A pointer cursor to image tile
+
 
 v0.11.0
 ------------------------------
@@ -109,6 +122,7 @@ v0.10.3
 - `href` always added to link
 - `isLink` test updated
 
+
 v0.10.2
 ------------------------------
 *March 8, 2022*
@@ -116,12 +130,14 @@ v0.10.2
 ### Changed
 - Margin between text and image
 
+
 v0.10.1
 ------------------------------
 *February 28, 2022*
 
 ### Changed
 - Props and Events within `README.md`
+
 
 v0.10.0
 ------------------------------
@@ -141,12 +157,14 @@ v0.9.2
 ### Fixed
 - Hide image on error
 
+
 v0.9.1
 ------------------------------
 *February 22, 2022*
 
 ### Added
 - `f-vue-icons` as a dependency
+
 
 v0.9.0
 ------------------------------
@@ -190,6 +208,7 @@ v0.5.1
 ### Changed
 - Updated tabindex value on input
 
+
 v0.5.0
 ------------------------------
 *January 28, 2022*
@@ -223,6 +242,7 @@ v0.2.0
 ### Added
 - ImageTile component structure and toggling behaviour
 - ImageTile stories
+
 
 v0.1.0
 ------------------------------

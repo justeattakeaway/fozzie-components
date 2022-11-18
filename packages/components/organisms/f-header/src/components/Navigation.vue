@@ -261,7 +261,7 @@
                         v-if="userInfo && isBelowMid && showLoginInfo"
                         :text="copy.accountLogout.text"
                         :tabindex="tabIndex"
-                        :has-border-top="true"
+                        has-border-top
                         :href="copy.accountLogout.url"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
                             label: copy.accountLogout.gtm
