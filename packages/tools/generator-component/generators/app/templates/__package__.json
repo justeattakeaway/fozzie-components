@@ -39,30 +39,26 @@
     "lint:fix": "yarn lint --fix"<% if(config.isComponent) { %>,
     "lint:style": "stylelint ./src/**/*.{vue,htm,html,css,sss,less,scss}",
     "lint:style:fix": "yarn lint:style --fix"<% } else { %>,
-    "test:coverage": "jest test:unit --coverage"<% } %>,
-    "test": "vue-cli-service test:unit"<% if(config.isComponent) { %><% if(config.needsComponentTests) { %>,
-    "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js"<% } %>,
+    "test:coverage": "jest --coverage"<% } %>,
+    "test": "jest --passWithNoTests",
+    "ci:test:<%= config.isComponent ? storybook.componentCategory.toLowerCase() : "services"%>": "yarn test"<% if(config.isComponent) { %><% if(config.needsComponentTests) { %>,
+    "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
+    "ci:test-component:chrome:<%= storybook.componentCategory.toLowerCase() %>": "yarn test-component:chrome",
+    "ci:test-a11y:chrome:<%= storybook.componentCategory.toLowerCase() %>": "yarn test-a11y:chrome"<% } %>,
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"<% if(config.needsVisualTests) { %>,
-    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_<%= name.default.toUpperCase().replace('-', '_') %>} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js"<% } %><% } %>
+    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_<%= name.default.toUpperCase().replace('-', '_') %>} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
+    "ci:test:visual:<%= storybook.componentCategory.toLowerCase() %>": "yarn test:visual"<% } %><% } %>
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],<% if(config.isComponent) { %>
   "dependencies": {<% if(config.needsComponentTranslations){%>
-    "@justeat/f-services": "1.16.0"<% }%>
+    "@justeat/f-services": "1.x"<% }%>
   },<% } %>
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
-  },
-  "devDependencies": {
-<% if(config.isComponent) { %>    "@justeat/f-wdio-utils": "1.x",
-    "@vue/cli-plugin-babel": "4.5.15",
-    "@vue/cli-plugin-unit-jest": "4.5.15",
-    "@vue/test-utils": "1.2.2"<% } else { %>
-"core-js": "3.19.1",
-    "eslint": "7.32.0",
-    "jest-extended": "0.11.5"<% } %><% if(config.needsTestingApiMocks) { %>,
-    "axios": "0.24.0"<%
-    } %>
-  }
+  }<% if(config.isComponent) { %>,
+  "devDependencies": {<% if(config.needsComponentTests){%>
+    "@justeat/f-wdio-utils": "1.x"<% }%>
+  }<% } %>  
 }
