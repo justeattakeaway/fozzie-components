@@ -36,7 +36,7 @@
     "lint:fix": "yarn lint --fix",
     "lint:style": "stylelint ./src/**/*.{vue,htm,html,css,sss,less,scss}",
     "lint:style:fix": "yarn lint:style --fix",
-    "test": "vue-cli-service test:unit",
+    "test": "jest",
     "ci:test:templates": "yarn test"
   },
   "browserslist": [
@@ -51,9 +51,6 @@
   "devDependencies": {
     "@justeat/f-breadcrumbs": "4.x",
     "@justeat/f-navigation-links": "2.x",
-    "@justeat/f-wdio-utils": "1.x",
-    "@vue/cli-plugin-babel": "4.5.16",
-    "@vue/cli-plugin-unit-jest": "4.5.16",
-    "@vue/test-utils": "1.0.3"
+    "@justeat/f-wdio-utils": "1.x"
   }
 }
