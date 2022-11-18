@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.42.1
+------------------------------
+*November 18, 2022*
+
+### Added
+- Fix CI bug that prevented package changes from executing WDIO tests.
+
 
 v7.42.0
 ------------------------------
