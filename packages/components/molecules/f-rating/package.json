@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-rating",
   "description": "Fozzie Rating - Global Rating component",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "main": "dist/f-rating.umd.min.js",
   "maxBundleSize": "20kB",
   "files": [
@@ -39,7 +39,11 @@
     "test": "jest",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
-    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_RATING} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js"
+    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_RATING} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
+    "ci:test:molecules": "yarn test",
+    "ci:test-component:chrome:molecules": "yarn test-component:chrome",
+    "ci:test-a11y:chrome:molecules": "yarn test-a11y:chrome",
+    "ci:test:visual:molecules": "yarn test:visual"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"

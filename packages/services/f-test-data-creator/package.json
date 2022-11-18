@@ -41,8 +41,5 @@
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
-  },
-  "devDependencies": {
-    "axios": "0.21.2"
   }
 }
