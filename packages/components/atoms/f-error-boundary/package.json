@@ -46,7 +46,6 @@
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "1.x",
-    "core-js": "3.19.1",
     "vite-plugin-vue2": "1.9.0"
   }
 }

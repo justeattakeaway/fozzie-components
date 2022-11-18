@@ -41,10 +41,5 @@
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
-  ],
-  "devDependencies": {
-    "core-js": "3.6.5",
-    "eslint": "7.32.0",
-    "jest-extended": "0.11.5"
-  }
+  ]
 }

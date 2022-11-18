@@ -56,7 +56,6 @@
     "@justeat/f-trak": ">=0.6.0"
   },
   "devDependencies": {
-    "axios-mock-adapter": "1.18.2",
     "@justeat/f-wdio-utils": "1.x"
   }
 }
