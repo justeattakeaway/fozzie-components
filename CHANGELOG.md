@@ -5,10 +5,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.42.1
 ------------------------------
-*November 17, 2022*
+*November 18, 2022*
 
 ### Added
 - Fix CI bug that prevented package changes from executing WDIO tests.
+
+
+v7.42.0
+------------------------------
+*November 17, 2022*
+
+### Removed
+- Duplicate dependencies of `organisms`, `pages`, `templates`, `services`, and `tools` packages.
 
 
 v7.41.0
