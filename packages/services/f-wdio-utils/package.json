@@ -41,8 +41,5 @@
   "dependencies": {
     "@axe-core/webdriverio": "4.4.3",
     "@justeat/f-services": "1.x"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "4.5.16"
   }
 }
