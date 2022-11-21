@@ -14,8 +14,8 @@
                 <div :class="$style['c-offersResults-contentCards']">
                     <template v-for="(card, i) in cards">
                         <group-header-card
-                            :class="$style['c-offersResults-contentCards-groupHeader']"
                             v-if="card.type === 'Header_Card'"
+                            :class="$style['c-offersResults-contentCards-groupHeader']"
                             :key="i"
                             :title="card.title" />
                         <component

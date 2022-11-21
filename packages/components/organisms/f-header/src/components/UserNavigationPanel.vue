@@ -19,7 +19,7 @@
                     label: `${link.gtm}`
                 }"
                 :text="link.text"
-                :has-border-top="true"
+                has-border-top
                 :has-border-bottom="false"
                 @blur="$emit('deactivateNav')"
                 @focus="$emit('activateNav')" />
