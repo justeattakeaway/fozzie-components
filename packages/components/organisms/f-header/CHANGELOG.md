@@ -2,6 +2,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v10.11.0
+------------------------------
+*November 21, 2022*
+
+### Added
+- "Corporate Ordering" to AU & NZ
+
+
 v10.10.0
 ------------------------------
 *November 3, 2022*
