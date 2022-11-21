@@ -35,6 +35,6 @@ export const setGtmEventCookie = (category, action, label, minutes = 1) => {
         expires = date.setTime(date.getTime() + (minutes * millisecondsPerMinute));
     }
 
-    const cookieValue = (category && action && label) ? `${category}|${action}|${label}` : '';
+    const cookieValue = (category || action || label) ? `${category}|${action}|${label}` : '';
     Cookies.set('je-gtm-event', cookieValue, { expires, path: '/' });
 };
