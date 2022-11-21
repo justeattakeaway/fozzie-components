@@ -23,9 +23,9 @@ export const RatingComponent = (args, { argTypes }) => ({
                 <rating
                     v-for="(rating) in list"
                     v-bind="$props"
-                    :starRatingSize="rating.starRatingSize"
-                    :starRating="rating.starRating"
-                    :reviewCount="rating.reviewCount"
+                    :star-rating-size="rating.starRatingSize"
+                    :star-rating="rating.starRating"
+                    :review-count="rating.reviewCount"
                     :is-user-rating="rating.isUserRating"/>
             </div>
         </div>`

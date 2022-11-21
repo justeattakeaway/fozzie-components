@@ -24,9 +24,9 @@ export const RatingSingleStarComponent = (args, { argTypes }) => ({
                     v-for="(rating) in list"
                     v-bind="$props"
                     :is-single-star-variant="rating.isSingleStarVariant"
-                    :starRatingSize="rating.starRatingSize"
-                    :starRating="rating.starRating"
-                    :reviewCount="rating.reviewCount" />
+                    :star-rating-size="rating.starRatingSize"
+                    :star-rating="rating.starRating"
+                    :review-count="rating.reviewCount" />
             </div>
         </div>`
 });

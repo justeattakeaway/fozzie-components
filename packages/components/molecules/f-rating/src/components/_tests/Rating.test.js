@@ -246,7 +246,7 @@ describe('Rating', () => {
                 describe('and `hasRatingAvailable` is falsey and `isUserRating` is truthy', () => {
                     it('should return false', () => {
                         // Arrange
-                        propsData.starRating = 2;
+                        propsData.starRating = 0;
                         propsData.isUserRating = true;
                         wrapper = shallowMount(VRating, {
                             propsData,
