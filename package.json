@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "7.42.1",
+  "version": "7.43.0",
   "private": true,
   "scripts": {
     "build": "turbo run build --continue",
@@ -62,7 +62,7 @@
     "@faker-js/faker": "7.5.0",
     "flush-promises": "1.0.2",
     "@justeat/browserslist-config-fozzie": "1.2.0",
-    "@justeat/eslint-config-fozzie": "5.1.0",
+    "@justeat/eslint-config-fozzie": "5.4.0",
     "@justeat/fozzie": "10.x",
     "@justeat/pie-design-tokens": "3.0.0",
     "@justeat/stylelint-config-fozzie": "2.2.0",
@@ -98,7 +98,7 @@
     "eslint-plugin-jsonc": "1.3.1",
     "eslint-plugin-json-schema-validator": "1.0.48",
     "eslint-import-resolver-webpack": "0.13.2",
-    "eslint-plugin-vue": "8.4.0",
+    "eslint-plugin-vue": "8.7.1",
     "eslint-plugin-vuejs-accessibility": "1.1.1",
     "eslint-plugin-webdriverio": "1.0.1",
     "eyeglass": "3.0.2",
@@ -117,13 +117,13 @@
     "sass-loader": "10.1.0",
     "stylelint": "13.7.2",
     "stylelint-scss": "3.18.0",
-    "turbo": "^1.2.9",
+    "turbo": "1.6.0",
     "vite": "2.9.13",
     "vue": "2.6.10",
     "vue-router": "3.5.2",
-    "vuex": "3.5.1",
     "vue-svg-loader": "0.16.0",
     "vue-template-compiler": "2.6.10",
+    "vuex": "3.5.1",
     "wdio-chromedriver-service": "7.3.2",
     "wdio-video-reporter": "3.2.1",
     "webdriverio": "7.19.7"
@@ -160,8 +160,9 @@
       "packages/services/*",
       "packages/tools/*"
     ],
-
-    "nohoist": ["**/@justeat/fozzie/**"]
+    "nohoist": [
+      "**/@justeat/fozzie/**"
+    ]
   },
   "dependencies": {
     "deepmerge": "4.2.2"

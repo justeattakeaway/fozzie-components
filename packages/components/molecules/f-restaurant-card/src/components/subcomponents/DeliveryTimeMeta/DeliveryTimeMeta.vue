@@ -3,9 +3,9 @@
         <icon-text
             v-if="eta"
             :text="eta"
-            :is-bold="true"
+            is-bold
             color="colorSupportPositive"
-            :hide-icon-in-tile-view="true"
+            hide-icon-in-tile-view
             data-test-id="restaurant-eta"
             :class="[$style['c-deliveryTimeMeta-iconText']]">
             <clock-small-icon data-test-id="restaurant-eta-icon" />
@@ -14,8 +14,8 @@
         <icon-text
             v-else-if="distance"
             :text="distance"
-            :is-bold="true"
-            :hide-icon-in-tile-view="true"
+            is-bold
+            hide-icon-in-tile-view
             data-test-id="restaurant-location">
             <map-pin-icon data-test-id="restaurant-distance-icon" />
         </icon-text>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <slot :shouldTriggerError="shouldTriggerError" />
+        <slot :should-trigger-error="shouldTriggerError" />
 
         <button
             v-if="!shouldTriggerError"
