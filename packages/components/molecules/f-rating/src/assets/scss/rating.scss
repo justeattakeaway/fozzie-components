@@ -35,10 +35,7 @@
   width: 32px;
 }
 
-.c-rating-star--filled path {
-    fill: f.$color-support-brand-01;
-}
-
+.c-rating-star--filled path,
 .c-rating-star--empty path {
     fill: f.$color-support-brand-01;
 }
