@@ -6,7 +6,6 @@ const sassOptions = require('../../../../config/sassOptions')(rootDir);
 
 // vue.config.js
 module.exports = {
-    configureWebpack: { externals: ['@braze/web-sdk'] },
     chainWebpack: config => {
         config.module
             .rule('scss-importer')
@@ -47,6 +46,13 @@ module.exports = {
             .end()
             .use('vue-svg-loader')
             .loader('vue-svg-loader');
+
+        config.externals({
+            '@braze/web-sdk': '@braze/web-sdk',
+
+            // This just externalises the JS currently, not the CSS
+            '@justeat/f-button': '@justeat/f-button'
+        });
     },
     pluginOptions: {
         lintStyleOnBuild: true
