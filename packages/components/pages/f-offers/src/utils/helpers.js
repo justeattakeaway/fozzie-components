@@ -29,9 +29,12 @@ export const pushToDataLayer = (category, action, label) => {
 export const setGtmEventCookie = (category, action, label, minutes = 1) => {
     let expires = '';
     const millisecondsPerMinute = 60 * 1000;
+
     if (minutes) {
         const date = new Date();
         expires = date.setTime(date.getTime() + (minutes * millisecondsPerMinute));
     }
-    Cookies.set('je-gtm-event', (`${category}|${action}|${label}` || ''), { expires, path: '/' });
+
+    const cookieValue = (category || action || label) ? `${category}|${action}|${label}` : '';
+    Cookies.set('je-gtm-event', cookieValue, { expires, path: '/' });
 };

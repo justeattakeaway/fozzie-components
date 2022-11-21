@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v10.1.1
+------------------------------
+*November 21, 2022*
+
+### Fixed
+- Linting errors
+
+
 v10.1.0
 ------------------------------
 *November 15, 2022*
@@ -35,7 +43,7 @@ v9.1.0
 
 v9.0.0
 ------------------------------
-*August 03, 2022*
+*August 3, 2022*
 
 ### Changed
 - Rebased and updated from the beta branch to fix the issue where two v8 versions were running side by side
@@ -101,7 +109,7 @@ v8.0.0-alpha.5
 
 v8.0.0-alpha.4
 ------------------------------
-*April 04, 2022*
+*April 4, 2022*
 
 ### Added
 - Voucher code component for new content cards template system.
@@ -138,6 +146,7 @@ v8.1.0
 ### Changed
 - Update f-wdio-utils to v1.1.0 to use new Axe Core implementation.
 - Accessibility tests to be async.
+
 
 v8.0.0
 -----------------------------
@@ -239,7 +248,7 @@ v6.0.0-beta.0
 
 v5.0.0-beta.2 (INCORRECT VERSION NOW DUE TO MASTER USING V5)
 ------------------------------
-*September 02, 2021*
+*September 2, 2021*
 
 ### Changed
 - Updating braze adapter version
@@ -346,7 +355,7 @@ v4.3.0
 
 v4.2.0
 ------------------------------
-*March 08, 2021*
+*March 8, 2021*
 
 ### Added
 - Mid-size stamp card in an intermediate breakpoint for tablet view
@@ -358,7 +367,7 @@ on the bottom of it when it flows onto the next line
 
 v4.1.0
 ------------------------------
-*March 03, 2021*
+*March 3, 2021*
 
 ### Added
 - Adds some accessibility changes to help improve screen reader compatibility for stamp card content card
@@ -429,7 +438,7 @@ v3.1.0
 
 v3.0.0-beta.1
 ------------------------------
-*January 05, 2021*
+*January 5, 2021*
 
 ### Fixed
 - Old references to font-size keys updated.
@@ -459,7 +468,7 @@ v2.2.0
 
 v2.2.0-beta.9
 ------------------------------
-*December 03, 2020*
+*December 3, 2020*
 
 ### Changed
 - Added in the logging callback for f-metadata
@@ -511,7 +520,7 @@ v2.2.0-beta.4
 
 v2.2.0-beta.3
 ------------------------------
-*November 06, 2020*
+*November 6, 2020*
 
 ### Added
 - Made design / style changes in accordance with design

@@ -48,7 +48,7 @@
                         :tabindex="isOpen ? 0 : -1"
                         :text="country.localisedName"
                         :has-border-bottom="false"
-                        :is-popover-link="true"
+                        is-popover-link
                         :href="country.siteUrl"
                         :lang="country.lang">
                         <template #icon>

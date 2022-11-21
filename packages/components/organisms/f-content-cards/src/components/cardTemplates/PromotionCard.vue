@@ -4,7 +4,7 @@
         :container-title="containerTitle"
         :is-carousel="isCarousel"
         :data-test-id="testId"
-        :bold-title="true"
+        bold-title
     >
         <span
             v-if="type === 'Promotion_Card_1'"
