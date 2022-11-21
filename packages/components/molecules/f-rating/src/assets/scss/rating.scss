@@ -12,12 +12,16 @@
     position: relative;
     display: inline-block;
 }
+
 .c-rating-stars-icons,
 .c-rating-stars-icon {
     display: flex;
 }
 
 // There are four sizes available, the default size (small) starts at 20px. See readme prop `starRatingSize` for more info.
+.c-rating-star {
+  fill: f.$color-support-brand-01;
+}
 
 .c-rating-star--xsmall {
   width: 16px;
@@ -33,9 +37,4 @@
 
 .c-rating-star--large {
   width: 32px;
-}
-
-.c-rating-star--filled path,
-.c-rating-star--empty path {
-    fill: f.$color-support-brand-01;
 }
