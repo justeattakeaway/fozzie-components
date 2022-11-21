@@ -9,7 +9,7 @@ v0.12.0
 
 ### Added
 - `isUserRating` prop to control when (You) is displayed.
-- Tests included both unit and visual.
+- Tests included – both unit and visual.
 
 
 v0.11.0
