@@ -116,5 +116,25 @@ devices.forEach(device => {
                 });
             });
         });
+
+        describe('`isUserRating`', () => {
+            it('should be displayed', async () => {
+                // Act
+                await Rating.load({ isUserRating: true, reviewCount: 100 });
+
+                // Assert
+                await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - isUserRating = true', device);
+            });
+
+            describe('when `reviewCount` is zero', () => {
+                it('should not be displayed', async () => {
+                    // Act
+                    await Rating.load({ isUserRating: true, reviewCount: 0 });
+
+                    // Assert
+                    await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - isUserRating when reviewCount = 0', device);
+                });
+            });
+        });
     });
 });

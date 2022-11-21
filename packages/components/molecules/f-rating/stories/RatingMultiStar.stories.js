@@ -25,7 +25,8 @@ export const RatingComponent = (args, { argTypes }) => ({
                     v-bind="$props"
                     :starRatingSize="rating.starRatingSize"
                     :starRating="rating.starRating"
-                    :reviewCount="rating.reviewCount" />
+                    :reviewCount="rating.reviewCount"
+                    :is-user-rating="rating.isUserRating"/>
             </div>
         </div>`
 });
@@ -50,25 +51,57 @@ RatingComponent.argTypes = {
 RatingComponent.args = {
     ratingVariants: [
         [
-            { starRating: 0, starRatingSize: 'xsmall', reviewCount: 0 },
-            { starRating: 2.3, starRatingSize: 'xsmall', reviewCount: 499 },
-            { starRating: 4.5, starRatingSize: 'xsmall', reviewCount: 499 },
-            { starRating: 1.3, starRatingSize: 'xsmall', reviewCount: 499 },
+            {
+                starRating: 0, starRatingSize: 'xsmall', reviewCount: 0
+            },
+            {
+                starRating: 2.3, starRatingSize: 'xsmall', reviewCount: 499, isUserRating: true
+            },
+            {
+                starRating: 4.5, starRatingSize: 'xsmall', reviewCount: 499
+            },
+            {
+                starRating: 1.3, starRatingSize: 'xsmall', reviewCount: 499
+            },
 
-            { starRating: 0, starRatingSize: 'small', reviewCount: 0 },
-            { starRating: 2.3, starRatingSize: 'small', reviewCount: 499 },
-            { starRating: 4.5, starRatingSize: 'small', reviewCount: 499 },
-            { starRating: 1.3, starRatingSize: 'small', reviewCount: 499 },
+            {
+                starRating: 0, starRatingSize: 'small', reviewCount: 0
+            },
+            {
+                starRating: 2.3, starRatingSize: 'small', reviewCount: 499, isUserRating: true
+            },
+            {
+                starRating: 4.5, starRatingSize: 'small', reviewCount: 499
+            },
+            {
+                starRating: 1.3, starRatingSize: 'small', reviewCount: 499
+            },
 
-            { starRating: 0, starRatingSize: 'medium', reviewCount: 0 },
-            { starRating: 2.3, starRatingSize: 'medium', reviewCount: 499 },
-            { starRating: 4.5, starRatingSize: 'medium', reviewCount: 499 },
-            { starRating: 1.3, starRatingSize: 'medium', reviewCount: 499 },
+            {
+                starRating: 0, starRatingSize: 'medium', reviewCount: 0
+            },
+            {
+                starRating: 2.3, starRatingSize: 'medium', reviewCount: 499, isUserRating: true
+            },
+            {
+                starRating: 4.5, starRatingSize: 'medium', reviewCount: 499
+            },
+            {
+                starRating: 1.3, starRatingSize: 'medium', reviewCount: 499
+            },
 
-            { starRating: 0, starRatingSize: 'large', reviewCount: 0 },
-            { starRating: 2.3, starRatingSize: 'large', reviewCount: 499 },
-            { starRating: 4.5, starRatingSize: 'large', reviewCount: 499 },
-            { starRating: 1.3, starRatingSize: 'large', reviewCount: 499 }
+            {
+                starRating: 0, starRatingSize: 'large', reviewCount: 0
+            },
+            {
+                starRating: 2.3, starRatingSize: 'large', reviewCount: 499, isUserRating: true
+            },
+            {
+                starRating: 4.5, starRatingSize: 'large', reviewCount: 499
+            },
+            {
+                starRating: 1.3, starRatingSize: 'large', reviewCount: 499
+            }
         ]
     ]
 };

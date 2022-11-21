@@ -49,7 +49,7 @@ RatingSingleStarComponent.args = {
     ratingVariants: [
         [
             {
-                starRating: 0, starRatingSize: 'xsmall', reviewCount: 499, isSingleStarVariant: true
+                starRating: 0, starRatingSize: 'xsmall', reviewCount: 499, isSingleStarVariant: true, isUserRating: true
             },
             {
                 starRating: 2.3, starRatingSize: 'xsmall', reviewCount: 499, isSingleStarVariant: true
@@ -62,7 +62,7 @@ RatingSingleStarComponent.args = {
             },
 
             {
-                starRating: 0, starRatingSize: 'small', reviewCount: 499, isSingleStarVariant: true
+                starRating: 0, starRatingSize: 'small', reviewCount: 499, isSingleStarVariant: true, isUserRating: true
             },
             {
                 starRating: 2.3, starRatingSize: 'small', reviewCount: 499, isSingleStarVariant: true
@@ -75,7 +75,7 @@ RatingSingleStarComponent.args = {
             },
 
             {
-                starRating: 0, starRatingSize: 'medium', reviewCount: 499, isSingleStarVariant: true
+                starRating: 0, starRatingSize: 'medium', reviewCount: 499, isSingleStarVariant: true, isUserRating: true
             },
             {
                 starRating: 2.3, starRatingSize: 'medium', reviewCount: 499, isSingleStarVariant: true
@@ -88,7 +88,7 @@ RatingSingleStarComponent.args = {
             },
 
             {
-                starRating: 0, starRatingSize: 'large', reviewCount: 499, isSingleStarVariant: true
+                starRating: 0, starRatingSize: 'large', reviewCount: 499, isSingleStarVariant: true, isUserRating: true
             },
             {
                 starRating: 2.3, starRatingSize: 'large', reviewCount: 499, isSingleStarVariant: true
