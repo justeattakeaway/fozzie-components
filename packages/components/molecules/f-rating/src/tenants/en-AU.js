@@ -2,6 +2,7 @@ export default {
     locale: 'en-AU',
     ratings: {
         starsDescription: '{rating} star out of {maxStarRating} | {rating} stars out of {maxStarRating}',
+        userRating: '(You)',
         ratingDisplayType: {
             noRating: 'No ratings yet',
             short: '{reviewCount}',

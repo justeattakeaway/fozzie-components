@@ -25,6 +25,12 @@
                 $style[`c-rating-message--${ratingDisplayType}`]]">
             {{ getRatingDisplayFormat() }}
         </span>
+
+        <span
+            v-if="shouldDisplayUserOwnRating"
+            :class="$style['c-rating-message']">
+            {{ $t('ratings.userRating') }}
+        </span>
     </div>
 </template>
 
@@ -79,6 +85,10 @@ export default {
         isSingleStarVariant: {
             type: Boolean,
             default: false
+        },
+        isUserRating: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -126,6 +136,15 @@ export default {
          */
         hasRatingAvailable () {
             return this.reviewCount > 0;
+        },
+
+        /**
+         * Determine if the users rating i.e (You), should be displayed.
+         *
+         * @returns {boolean}
+         */
+        shouldDisplayUserOwnRating () {
+            return this.isUserRating && this.hasRatingAvailable;
         }
     },
 

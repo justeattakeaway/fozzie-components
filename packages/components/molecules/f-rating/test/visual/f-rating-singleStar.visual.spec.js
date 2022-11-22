@@ -1,4 +1,5 @@
 import RatingSingleStar from '../../test-utils/component-objects/f-rating-singleStar.component';
+import Rating from '../../test-utils/component-objects/f-rating.component';
 
 const devices = [
     'desktop'
@@ -128,6 +129,26 @@ devices.forEach(device => {
 
                     // Assert
                     await browser.percyScreenshot('f-rating Single Star - Visual Test for Prop - ratingDisplayType = null', device);
+                });
+            });
+        });
+
+        describe('`isUserRating`', () => {
+            it('should be displayed', async () => {
+                // Act
+                await Rating.load({ isUserRating: true, reviewCount: 100 });
+
+                // Assert
+                await browser.percyScreenshot('f-rating Single Star - Visual Test for Prop - isUserRating = true', device);
+            });
+
+            describe('when `reviewCount` is zero', () => {
+                it('should not be displayed', async () => {
+                    // Act
+                    await Rating.load({ isUserRating: true, reviewCount: 0 });
+
+                    // Assert
+                    await browser.percyScreenshot('f-rating Single Star - Visual Test for Prop - isUserRating when reviewCount = 0', device);
                 });
             });
         });
