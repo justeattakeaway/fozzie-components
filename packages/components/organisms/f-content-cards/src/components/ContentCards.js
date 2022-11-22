@@ -41,6 +41,20 @@ export default {
         cardObserver: {}
     }),
 
+    watch: {
+        errors (errors) {
+            if (errors.filter(e => e === STATE_ERROR).length === this.adapters.length) {
+                this.state = STATE_ERROR;
+            }
+            if (errors.filter(e => e === STATE_NO_CARDS).length === this.adapters.length) {
+                this.state = STATE_NO_CARDS;
+            }
+            if (errors.length === this.adapters.length) {
+                this.state = STATE_ERROR;
+            }
+        }
+    },
+
     computed: {
         xOffsets () {
             return uniq(this.$children.map(({ $el }) => $el.offsetLeft)).sort((a, b) => a - b);
@@ -149,6 +163,7 @@ export default {
 
     methods: {
         runAdapterCallbacks (successCallback, errorCallback) {
+            this.state = STATE_LOADING;
             this.adapters.forEach(adapter => {
                 adapter.initialise(this.filters, cards => {
                     if (cards === undefined) {
@@ -217,6 +232,7 @@ export default {
             );
         }, (source, error) => {
             if (error.type === 'NoCards') {
+                this.errors.push(STATE_NO_CARDS);
                 this.$emit(HAS_LOADED, { adapter: source, cards: [] });
                 this.$log.info(
                     `Content Cards Adapters (${source}) - No content cards. Key: (${this.loggingKey})`,
@@ -229,6 +245,7 @@ export default {
                     }
                 );
             } else {
+                this.errors.push(STATE_ERROR);
                 this.$emit(ON_ERROR, { adapter: source });
                 this.$log.info(
                     `Content Cards Adapters (${source}) - Error receiving content cards. Key: (${this.loggingKey})`,
