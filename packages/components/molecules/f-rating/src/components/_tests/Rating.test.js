@@ -211,6 +211,72 @@ describe('Rating', () => {
                 });
             });
         });
+
+        describe('`shouldDisplayUserOwnRating`', () => {
+            it('should exist', () => {
+                // Arrange
+                propsData.starRating = 2;
+                wrapper = shallowMount(VRating, {
+                    propsData,
+                    localVue,
+                    i18n
+                });
+
+                // Act & Assert
+                expect(wrapper.vm.shouldDisplayUserOwnRating).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                describe('and `isUserRating` is falsey and reviewCount is truthy', () => {
+                    it('should return false', () => {
+                        // Arrange
+                        propsData.starRating = 2;
+                        propsData.reviewCount = 100;
+                        wrapper = shallowMount(VRating, {
+                            propsData,
+                            localVue,
+                            i18n
+                        });
+
+                        // Act & Assert
+                        expect(wrapper.vm.shouldDisplayUserOwnRating).toBe(false);
+                    });
+                });
+
+                describe('and `hasRatingAvailable` is falsey and `isUserRating` is truthy', () => {
+                    it('should return false', () => {
+                        // Arrange
+                        propsData.starRating = 0;
+                        propsData.isUserRating = true;
+                        wrapper = shallowMount(VRating, {
+                            propsData,
+                            localVue,
+                            i18n
+                        });
+
+                        // Act & Assert
+                        expect(wrapper.vm.shouldDisplayUserOwnRating).toBe(false);
+                    });
+                });
+
+                describe('and `hasRatingAvailable` & `isUserRating` are both truthy', () => {
+                    it('should return true', () => {
+                        // Arrange
+                        propsData.starRating = 2;
+                        propsData.reviewCount = 100;
+                        propsData.isUserRating = true;
+                        wrapper = shallowMount(VRating, {
+                            propsData,
+                            localVue,
+                            i18n
+                        });
+
+                        // Act & Assert
+                        expect(wrapper.vm.shouldDisplayUserOwnRating).toBe(true);
+                    });
+                });
+            });
+        });
     });
 
     describe('props', () => {
@@ -339,6 +405,13 @@ describe('Rating', () => {
                     // Assert
                     expect(validator(value)).toBe(false);
                 });
+            });
+        });
+
+        describe('`isUserRating`', () => {
+            it('should be set to false by default', () => {
+                // Act & Assert
+                expect(VRating.props.isUserRating.default).toBe(false);
             });
         });
     });

@@ -12,5 +12,12 @@ export default {
         options: ['short', 'medium', 'long'],
         description: 'Choose how to display a rating',
         default: null
+    },
+
+    isUserRating: {
+        control: { type: 'select' },
+        options: [false, true],
+        description: 'Review by user (You)',
+        default: false
     }
 };

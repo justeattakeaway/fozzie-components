@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.12.0
+------------------------------
+*November 21, 2022*
+
+### Added
+- `isUserRating` prop to control when (You) is displayed.
+- Tests included – both unit and visual.
+
+
 v0.11.0
 ------------------------------
 *November 17, 2022*
