@@ -4,10 +4,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v10.11.0
 ------------------------------
-*November 21, 2022*
+*November 23, 2022*
 
 ### Added
 - "Corporate Ordering" to AU & NZ
+
+
+v10.10.1
+------------------------------
+*November 21, 2022*
+
+### Fixed
+- Linting errors
 
 
 v10.10.0
@@ -48,7 +56,7 @@ v10.8.0
 
 v10.7.0
 ------------------------------
-*September 07, 2022*
+*September 7, 2022*
 
 ### Fixed
 - Log out clickable area not allowing users to logout properly.
@@ -97,12 +105,13 @@ v10.4.0
 ### Added
 - Node 16 compatible dependencies
 
-v10.3.0
- ------------------------------
- *July 25, 2022*
 
- ### Added
- - Node 16 support.
+v10.3.0
+------------------------------
+*July 25, 2022*
+
+### Added
+- Node 16 support.
 
 
 v10.2.1

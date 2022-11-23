@@ -2,6 +2,7 @@ export default {
     locale: 'it-IT',
     ratings: {
         starsDescription: '{rating} ADD TRANSLATION {total} | {rating} ADD TRANSLATION {total}',
+        userRating: '(ADD TRANSLATION)',
         ratingDisplayType: {
             noRating: 'ADD TRANSLATION',
             short: '{reviewCount}',

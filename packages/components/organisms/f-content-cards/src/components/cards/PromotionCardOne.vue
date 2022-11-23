@@ -17,7 +17,7 @@
             <template #footer>
                 <f-button
                     :href="url"
-                    isFullWidth
+                    is-full-width
                     type="primary">
                     {{ ctaText }}
                 </f-button>

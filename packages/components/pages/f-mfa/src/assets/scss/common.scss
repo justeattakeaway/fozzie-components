@@ -8,6 +8,7 @@
 
 .c-mfa-heading {
     margin-top: 0;
+    @include f.font-size(subheading-l);
 }
 
 .c-mfa-heading,

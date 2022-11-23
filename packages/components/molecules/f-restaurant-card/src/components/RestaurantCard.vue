@@ -56,8 +56,8 @@
                 <!-- 'New' label -->
                 <restaurant-tag
                     v-if="newTagText"
-                    :is-large="true"
-                    :is-uppercase="true"
+                    is-large
+                    is-uppercase
                     :text="newTagText"
                     data-test-id="restaurant-new-badge"
                     color-scheme="positive" />
