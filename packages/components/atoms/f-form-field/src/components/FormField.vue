@@ -120,6 +120,7 @@
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
+import { v4 as uuid } from 'uuid';
 import FormFieldAffixed from './FormFieldAffixed.vue';
 import FormDropdown from './FormDropdown.vue';
 import FormLabel from './FormLabel.vue';
@@ -242,7 +243,8 @@ export default {
 
     data () {
         return {
-            windowWidth: null
+            windowWidth: null,
+            uniqueIdentifierId: null
         };
     },
 
@@ -281,7 +283,7 @@ export default {
             if (this.$attrs.name) idArray.push(this.$attrs.name);
             if (this.$attrs.id) idArray.push(this.$attrs.id);
 
-            idArray.push(this._uid);
+            idArray.push(this.uniqueIdentifierId);
             return idArray.join('-');
         },
 
@@ -358,6 +360,10 @@ export default {
         }
     },
 
+    created () {
+        this.generateUniqueId();
+    },
+
     mounted () {
         window.addEventListener('resize', debounce(this.updateWidth, 100));
         this.updateWidth();
@@ -404,6 +410,15 @@ export default {
             if (this.suffix && this.hasTrailingIcon) {
                 throw new TypeError('Form field is set to have a "suffix" and "trailingIcon", only one can be displayed');
             }
+        },
+
+        /**
+         * Generate a unique ID to be assigned to label and input elements. Called via the created hook so the
+         * ID will not mismatch via client or serverside rendering.
+         *
+         */
+        generateUniqueId () {
+            this.uniqueIdentifierId = uuid();
         }
     }
 };
