@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.23.0
+------------------------------
+*November 17, 2022*
+
+### Changed
+- Heading tag to h1 for accessibility
+
+
 v0.22.0
 ------------------------------
 *October 10, 2022*

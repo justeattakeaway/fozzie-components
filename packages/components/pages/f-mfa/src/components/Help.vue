@@ -11,9 +11,9 @@
                 <bag-sad-bg-icon
                     :class="$style['c-mfa-icon']" />
 
-                <h2 :class="$style['c-mfa-heading']">
+                <h1 :class="$style['c-mfa-heading']">
                     {{ $t('helpInfo.subTitle') }}
-                </h2>
+                </h1>
 
                 <i18n
                     path="helpInfo.instructionsPrimaryText"

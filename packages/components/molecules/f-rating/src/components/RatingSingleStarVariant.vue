@@ -46,10 +46,5 @@ export default {
 </script>
 
 <style lang="scss" module>
-@use '@justeat/fozzie/src/scss/fozzie' as f;
 @use '../../src/assets/scss/rating';
-
-.c-rating-star--empty path {
-    fill: f.$color-support-brand-01;
-}
 </style>
