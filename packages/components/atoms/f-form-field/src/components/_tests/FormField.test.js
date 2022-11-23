@@ -1,4 +1,5 @@
 import { shallowMount, mount } from '@vue/test-utils';
+import { v4 as uuid } from 'uuid';
 import FormField from '../FormField.vue';
 import FormDropdown from '../FormDropdown.vue';
 import {
@@ -13,6 +14,8 @@ const $style = {
     'c-formField-field--medium': 'c-formField-field--medium',
     'c-formField-field--large': 'c-formField-field--large'
 };
+
+jest.mock('uuid');
 
 const slot = '<div>ICON</div>';
 
@@ -989,6 +992,46 @@ describe('FormField', () => {
                     }).toThrowError('Form field is set to have a "suffix" and "trailingIcon", only one can be displayed');
                 });
             });
+        });
+
+        describe('`generateUniqueId ::`', () => {
+            let wrapper;
+
+            beforeEach(() => {
+                wrapper = shallowMount(FormField);
+            });
+
+            it('should exist', () => {
+                // Act & Assert
+                expect(wrapper.vm.generateUniqueId).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                it('should make a call to uuid to generate a unique ID', () => {
+                    // Arrange
+                    const uuidSpy = jest.spyOn(uuid, 'v4');
+
+                    // Act
+                    wrapper.vm.generateUniqueId();
+
+                    // Assert
+                    expect(uuidSpy).toHaveBeenCalled();
+                });
+            });
+        });
+    });
+
+    describe('created ::', () => {
+        it('should invoke `generateUniqueId` so unique IDs within the form match when the component renders serverside', () => {
+            // Arrange
+            const generateUniqueId = jest.fn();
+
+            shallowMount(FormField, {
+                methods: { generateUniqueId }
+            });
+
+            // Assert
+            expect(generateUniqueId).toHaveBeenCalled();
         });
     });
 });
