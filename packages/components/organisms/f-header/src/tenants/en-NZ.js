@@ -60,5 +60,10 @@ export default {
         currentCountryKey: 'nz',
         changeCurrentCountry: 'You are on the NZ website, click here to change',
         goBackToMainMenu: 'Go back to main menu'
+    },
+    corporate: {
+        text: 'Corporate Ordering',
+        url: 'https://www.menulog.co.nz/business/',
+        gtm: 'click_corporate_ordering'
     }
 };
