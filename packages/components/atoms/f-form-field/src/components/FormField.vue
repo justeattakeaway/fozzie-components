@@ -361,7 +361,7 @@ export default {
     },
 
     created () {
-        this.generateUniqueId();
+        this.uniqueIdentifierId = uuid();
     },
 
     mounted () {
@@ -410,15 +410,6 @@ export default {
             if (this.suffix && this.hasTrailingIcon) {
                 throw new TypeError('Form field is set to have a "suffix" and "trailingIcon", only one can be displayed');
             }
-        },
-
-        /**
-         * Generate a unique ID to be assigned to label and input elements. Called via the created hook so the
-         * ID will not mismatch via client or serverside rendering.
-         *
-         */
-        generateUniqueId () {
-            this.uniqueIdentifierId = uuid();
         }
     }
 };

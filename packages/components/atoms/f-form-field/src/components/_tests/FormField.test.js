@@ -993,45 +993,17 @@ describe('FormField', () => {
                 });
             });
         });
-
-        describe('`generateUniqueId ::`', () => {
-            let wrapper;
-
-            beforeEach(() => {
-                wrapper = shallowMount(FormField);
-            });
-
-            it('should exist', () => {
-                // Act & Assert
-                expect(wrapper.vm.generateUniqueId).toBeDefined();
-            });
-
-            describe('when invoked', () => {
-                it('should make a call to uuid to generate a unique ID', () => {
-                    // Arrange
-                    const uuidSpy = jest.spyOn(uuid, 'v4');
-
-                    // Act
-                    wrapper.vm.generateUniqueId();
-
-                    // Assert
-                    expect(uuidSpy).toHaveBeenCalled();
-                });
-            });
-        });
     });
 
     describe('created ::', () => {
         it('should invoke `generateUniqueId` so unique IDs within the form match when the component renders serverside', () => {
             // Arrange
-            const generateUniqueId = jest.fn();
+            const spyUniqueId = jest.spyOn(uuid, 'v4');
 
-            shallowMount(FormField, {
-                methods: { generateUniqueId }
-            });
+            shallowMount(FormField);
 
             // Assert
-            expect(generateUniqueId).toHaveBeenCalled();
+            expect(spyUniqueId).toHaveBeenCalled();
         });
     });
 });
