@@ -996,14 +996,29 @@ describe('FormField', () => {
     });
 
     describe('created ::', () => {
-        it('should invoke `generateUniqueId` so unique IDs within the form match when the component renders serverside', () => {
-            // Arrange
-            const spyUniqueId = jest.spyOn(uuid, 'v4');
+        describe('when invoked', () => {
+            it('should invoke `uuid` so unique IDs within the form match when the component renders serverside', () => {
+                // Arrange
+                const spyUniqueId = jest.spyOn(uuid, 'v4');
 
-            shallowMount(FormField);
+                // Act
+                shallowMount(FormField);
 
-            // Assert
-            expect(spyUniqueId).toHaveBeenCalled();
+                // Assert
+                expect(spyUniqueId).toHaveBeenCalled();
+            });
+
+            it('should set `uniqueIdentifierId` to a unique ID', () => {
+                // Arrange
+                const uniqueIdMock = 'kepler-452b';
+                jest.spyOn(uuid, 'v4').mockReturnValue(uniqueIdMock);
+
+                // Act
+                const wrapper = shallowMount(FormField);
+
+                // Assert
+                expect(wrapper.vm.uniqueIdentifierId).toBe(uniqueIdMock);
+            });
         });
     });
 });
