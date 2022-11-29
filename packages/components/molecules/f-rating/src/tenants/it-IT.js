@@ -1,13 +1,13 @@
 export default {
     locale: 'it-IT',
     ratings: {
-        starsDescription: '{rating} ADD TRANSLATION {total} | {rating} ADD TRANSLATION {total}',
-        userRating: '(ADD TRANSLATION)',
+        starsDescription: '{rating} stella su {total} | {rating} stelle su {total}',
+        userRating: '(Tu)',
         ratingDisplayType: {
-            noRating: 'ADD TRANSLATION',
+            noRating: 'Ancora nessuna recensione',
             short: '{reviewCount}',
-            medium: '{rating} ADD TRANSLATION {maxStarRating}',
-            long: 'ADD TRANSLATION {reviewCount} ADD TRANSLATION'
+            medium: '{rating} di {maxStarRating}',
+            long: 'Guarda {reviewCount} recensioni '
         }
     }
 };
