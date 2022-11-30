@@ -52,7 +52,7 @@
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "4.5.16",
+    "@vue/cli-plugin-babel": "4.5.19",
     "@justeat/f-wdio-utils": "1.x"
   }
 }

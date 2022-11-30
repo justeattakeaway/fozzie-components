@@ -52,14 +52,14 @@
     "babel-helper-vue-jsx-merge-props": "2.0.3"
   },
   "devDependencies": {
-    "@justeat/f-icons": "4.11.0",
+    "@justeat/f-icons": "4.12.0",
     "bili": "3.4.2",
-    "fs-extra": "9.0.1",
+    "fs-extra": "9.1.0",
     "lodash.kebabcase": "4.1.1",
     "marked": "1.2.5",
     "pascal-case": "3.1.2",
     "poi": "12.10.3",
-    "prismjs": "1.27.0"
+    "prismjs": "1.29.0"
   },
   "babel": {
     "presets": [

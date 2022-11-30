@@ -51,7 +51,7 @@
     "@justeat/f-services": "1.x",
     "@justeattakeaway/pie-icons-vue": "1.0.0",
     "@justeat/f-vue-icons": "3.x",
-    "v-click-outside": "3.1.2"
+    "v-click-outside": "3.2.0"
   },
   "peerDependencies": {
     "@justeat/f-trak": ">=0.6.0"

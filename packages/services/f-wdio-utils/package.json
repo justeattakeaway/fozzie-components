@@ -39,7 +39,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@axe-core/webdriverio": "4.4.3",
+    "@axe-core/webdriverio": "4.5.2",
     "@justeat/f-services": "1.x"
   }
 }
