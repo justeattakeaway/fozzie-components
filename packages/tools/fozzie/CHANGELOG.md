@@ -8,6 +8,16 @@ Future Todo List
 - Make typography and utility classes silent extenders (so that they can be extended by components without importing all utility classes).
 
 
+
+v10.10.0
+------------------------------
+*November 29, 2022*
+
+### Fixed
+- Fix v10.9.1 Patch release, which seems to have been an undocumented version release.
+- Added node version 12 back into support list. This is just so that legacy microsites can use fozzie without having to change their build commands.
+
+
 v10.9.0
 ------------------------------
 *November 16, 2022*
