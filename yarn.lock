@@ -2785,14 +2785,15 @@
     date-fns "2.28.0"
     lodash-es "4.17.21"
 
-"@justeattakeaway/cc-stampcards-adapter@0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-stampcards-adapter/-/cc-stampcards-adapter-0.4.0.tgz#f4675046fb228dd0527d7ee1cb6c398731f2e87b"
-  integrity sha512-xPUTFMT2ls26r93mxzxdChS7pRKv/UdcjXsdlgIkKoST3dfYCCUrUABJeXL5p5+ZyRx6HceHux28hxGAy7xI7Q==
+"@justeattakeaway/cc-stampcards-adapter@0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-stampcards-adapter/-/cc-stampcards-adapter-0.5.1.tgz#69a77e2a97e5be5b04a3b1943f2c0571a8c340a4"
+  integrity sha512-ahD/J894dUGPRnjplosCILFxhImFU4v0iqC9GXykE/BzdsJwB7oMoM65OzNW6rJLPpyDyTwcyGoVXxtiO5nX/w==
   dependencies:
     "@justeat/f-trak" "0.7.1"
     "@justeattakeaway/cc-filters" "0.1.0"
     "@justeattakeaway/cc-utils" "0.1.0"
+    date-fns "^2.29.3"
     lodash-es "4.17.21"
     typesafe-i18n "^5.12.0"
 
@@ -10898,7 +10899,7 @@ date-fns@2.28.0:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.28.0.tgz#9570d656f5fc13143e50c975a3b6bbeb46cd08b2"
   integrity sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==
 
-date-fns@^2.17.0, date-fns@^2.29.1:
+date-fns@^2.17.0, date-fns@^2.29.1, date-fns@^2.29.3:
   version "2.29.3"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.29.3.tgz#27402d2fc67eb442b511b70bbdf98e6411cd68a8"
   integrity sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==
