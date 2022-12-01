@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v10.2.0
 ------------------------------
-*November 22, 2022*
+*December 01, 2022*
 
 ### Added
 - Unit tests for extra states
