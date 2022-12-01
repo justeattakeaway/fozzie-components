@@ -43,6 +43,6 @@ module.exports = {
     ],
 
     setupFiles: [
-        '<rootDir>/test/settings/jest.crypto-setup.js',
+        '<rootDir>/test-utils/settings/jest.crypto-setup.js',
     ],
 };
