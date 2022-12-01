@@ -1,4 +1,5 @@
 import { shallowMount, mount } from '@vue/test-utils';
+import * as uuid from 'uuid';
 import FormField from '../FormField.vue';
 import FormDropdown from '../FormDropdown.vue';
 import {
@@ -13,6 +14,8 @@ const $style = {
     'c-formField-field--medium': 'c-formField-field--medium',
     'c-formField-field--large': 'c-formField-field--large'
 };
+
+jest.mock('uuid');
 
 const slot = '<div>ICON</div>';
 
@@ -988,6 +991,33 @@ describe('FormField', () => {
                         });
                     }).toThrowError('Form field is set to have a "suffix" and "trailingIcon", only one can be displayed');
                 });
+            });
+        });
+    });
+
+    describe('created ::', () => {
+        describe('when invoked', () => {
+            it('should invoke `uuid` so unique IDs within the form match when the component renders serverside', () => {
+                // Arrange
+                const spyUniqueId = jest.spyOn(uuid, 'v4');
+
+                // Act
+                shallowMount(FormField);
+
+                // Assert
+                expect(spyUniqueId).toHaveBeenCalled();
+            });
+
+            it('should set `uniqueIdentifierId` to a unique ID', () => {
+                // Arrange
+                const uniqueIdMock = 'kepler-452b';
+                jest.spyOn(uuid, 'v4').mockReturnValue(uniqueIdMock);
+
+                // Act
+                const wrapper = shallowMount(FormField);
+
+                // Assert
+                expect(wrapper.vm.uniqueIdentifierId).toBe(uniqueIdMock);
             });
         });
     });
