@@ -242,7 +242,8 @@ describe('ContentCards', () => {
             const cards2 = instance.findAll('[data-test-id="__MOCK_TYPE_2__"]');
 
             // Assert
-            expect(cards.length + cards2.length).toEqual(2);
+            expect(cards.length).toEqual(1);
+            expect(cards2.length).toEqual(1);
         });
 
         it('should emit event to indicate that said adapter has returned cards', () => {
@@ -335,7 +336,8 @@ describe('ContentCards', () => {
             const cards2 = instance.findAll('[data-test-id="__MOCK_TYPE_2__"]');
 
             // Assert
-            expect(cards.length + cards2.length).toEqual(1);
+            expect(cards.length).toEqual(1);
+            expect(cards2.length).toEqual(0);
         });
 
         it('should emit event to indicate that said adapter has returned cards', () => {
