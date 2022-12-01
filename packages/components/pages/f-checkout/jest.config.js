@@ -40,5 +40,9 @@ module.exports = {
         './test/accessibility/',
         './test/component/',
         './test/visual/'
-    ]
+    ],
+
+    setupFiles: [
+        '<rootDir>/test/settings/jest.crypto-setup.js',
+    ],
 };

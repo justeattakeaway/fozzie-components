@@ -1,5 +1,5 @@
 import { shallowMount, mount } from '@vue/test-utils';
-import { v4 as uuid } from 'uuid';
+import * as uuid from 'uuid';
 import FormField from '../FormField.vue';
 import FormDropdown from '../FormDropdown.vue';
 import {
