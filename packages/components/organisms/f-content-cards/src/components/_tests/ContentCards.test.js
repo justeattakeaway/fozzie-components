@@ -154,14 +154,6 @@ describe('ContentCards', () => {
             expect(cards.length).toEqual(0);
         });
 
-        it('should have 0 cards in the cards array', () => {
-            // Act
-            const cards = instance.findAll('[data-test-id="__MOCK_TYPE__"]');
-
-            // Assert
-            expect(cards.length).toEqual(0);
-        });
-
         it('should emit event to indicate that no cards were returned', () => {
             // Assert
             expect(instance.emitted()[HAS_LOADED]).toBeTruthy();
