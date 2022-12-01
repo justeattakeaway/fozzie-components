@@ -1,6 +1,5 @@
 import { globalisationServices } from '@justeat/f-services';
 import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
-import { uniq } from 'lodash';
 import tenantConfigs from '../tenants';
 import {
     HAS_LOADED,
@@ -57,11 +56,11 @@ export default {
 
     computed: {
         xOffsets () {
-            return uniq(this.$children.map(({ $el }) => $el.offsetLeft)).sort((a, b) => a - b);
+            return Array.from(new Set(this.$children.map(({ $el }) => $el.offsetLeft))).sort();
         },
 
         yOffsets () {
-            return uniq(this.$children.map(({ $el }) => $el.offsetTop)).sort((a, b) => a - b);
+            return Array.from(new Set(this.$children.map(({ $el }) => $el.offsetTop))).sort();
         },
 
         /**
@@ -100,6 +99,17 @@ export default {
             threshold: 0.7
         };
 
+        /**
+         * This is a callback for the IntersectionObserver. This is to track the visibility of cards within the window.
+         * This fires when a card is 70% in view, at this point we loop over the entries that have been observed
+         * (i.e the cards) and get the card data from props attached to the dom element via vue. With this card data we
+         * add the card to the cardObserver object using its ID as a key. This is so that we can keep track of how long
+         * a card has been in view for, as when the card click event fires we do a lookup to detect the time the card was
+         * initially viewed and get the time between view and click. After this we detect using top and left offsets
+         * where the card is grid wise in the window using this data to report back to GTM. We use index + 1 to for GTM
+         * purposes.
+         * @param entries
+         */
         const observerCallback = entries => {
             entries.forEach(entry => {
                 const { card } = entry.target.__vue__.$options.propsData;
