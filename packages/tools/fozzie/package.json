@@ -2,7 +2,7 @@
   "name": "@justeat/fozzie",
   "title": "Fozzie – Just Eat UI Web Framework",
   "description": "UI Web Framework for the Just Eat Global Platform",
-  "version": "10.9.0",
+  "version": "10.10.1",
   "main": "dist/js/index.js",
   "files": [
     "dist/js",
@@ -31,7 +31,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^14 || ^16"
+    "node": "^12 || ^14 || ^16"
   },
   "dependencies": {
     "@justeat/pie-design-tokens": "3.2.0",
@@ -93,6 +93,7 @@
     "prepack": "concurrently -n \"lint,compile,test\" -c \"blue,yellow,green\" \"yarn lint\" \"yarn compile\" \"yarn test\" --kill-others-on-fail && yarn prepare:css",
     "prepare:css": "yarn run build:css && yarn run autoprefix:css && yarn run build:css:minified && yarn test:css-dist",
     "test": "concurrently -n \"test:js,test:scss\" -c \"cyan,magenta\" \"yarn test:js\" \"yarn test:scss\"",
+    "ci:test:tools": "yarn test",
     "test:build": "sass --no-source-map --load-path=node_modules --style=compressed src/scss:dist/css",
     "test:cover": "jest --collect-coverage",
     "test:cover:CI": "cat coverage/lcov.info | coveralls",
