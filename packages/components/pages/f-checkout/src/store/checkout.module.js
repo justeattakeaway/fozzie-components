@@ -154,12 +154,12 @@ export default {
          * @param {Object} context - Vuex context object, this is the standard first parameter for actions.
          * @param {Object} payload - Parameter with the different configurations for the request.
          */
-        getCheckout: async ({ commit, state, dispatch }, { url, timeout, tenant }) => {
+        getCheckout: async ({ commit, state, dispatch }, { url, timeout }) => {
             const { data } = await checkoutApi.getCheckout(url, state, timeout);
 
             resolveCustomerDetails(data, state);
 
-            commit(UPDATE_STATE, { ...data, tenant });
+            commit(UPDATE_STATE, { ...data });
 
             commit(UPDATE_HAS_ASAP_SELECTED, data.fulfilment.time.asap);
 

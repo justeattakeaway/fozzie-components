@@ -347,14 +347,14 @@ describe('addressService', () => {
         describe('when the address does exist in cookies', () => {
             let get;
             let cookies;
-            const houseNumber = '35';
+            const houseNumber = 35;
             const street = 'Myrtle Bank Road';
             const unitNumber = 'Flat 1';
-            const latitude = '54.24';
-            const longitude = '0.24';
+            const latitude = 54.24;
+            const longitude = 0.24;
             const sublocality = '1';
             const state = 'TAS';
-            const postalCode = '7259';
+            const postalCode = 7259;
             const city = 'Myrtle Bank';
             const searchBoxAddress = '35 Myrtle Bank Road Flat 1, Myrtle Bank 7259 TAS, Australia';
 
@@ -381,7 +381,7 @@ describe('addressService', () => {
                     line2: unitNumber,
                     locality: city,
                     administrativeArea: state,
-                    postcode: postalCode
+                    postcode: postalCode.toString()
                 };
 
                 // Act & Assert
@@ -396,7 +396,7 @@ describe('addressService', () => {
                     Line3: sublocality,
                     administrativeArea: state,
                     City: city,
-                    PostalCode: postalCode,
+                    PostalCode: postalCode.toString(),
                     Field1: latitude,
                     Field2: longitude,
                     searchBoxAddress

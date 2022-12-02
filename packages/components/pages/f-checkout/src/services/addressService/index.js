@@ -209,7 +209,7 @@ function getAddressFromCookie (tenant, cookies, mapped = true) {
             Line1: `${houseNumber} ${street}`,
             Line2: unitNumber,
             Line3: sublocality,
-            PostalCode: postalCode,
+            PostalCode: postalCode.toString(),
             administrativeArea: state,
             City: city,
             Field1: latitude,
