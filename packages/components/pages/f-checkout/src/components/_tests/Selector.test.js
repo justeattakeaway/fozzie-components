@@ -12,6 +12,11 @@ const localVue = createLocalVue();
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
+// required for UUID mocking for snapshot testing.
+jest.mock('crypto', () => ({
+    randomBytes: num => new Array(num).fill(0)
+}));
+
 describe('Selector', () => {
     const propsData = {};
 
