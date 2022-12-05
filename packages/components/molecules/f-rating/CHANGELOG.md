@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+Latest (merge into next release)
+------------------------------
+*December 5, 2022*
+
+### Changed
+- Updated to the new `pie-icons-vue` beta release.
+
+
 v0.13.0
 ------------------------------
 *November 28, 2022*
