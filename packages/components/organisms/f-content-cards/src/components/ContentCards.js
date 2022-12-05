@@ -119,7 +119,7 @@ export default {
                     ...this.cardObserver,
                     [card.id]: {
                         isIntersecting: entry.isIntersecting,
-                        ...(entry.isIntersecting ? { intersectionTime: new Date() } : { intersectionTime: null })
+                        intersectionTime: entry.isIntersecting ? new Date() : null
                     }
                 };
 
