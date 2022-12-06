@@ -1,4 +1,5 @@
 import { globalisationServices } from '@justeat/f-services';
+import differenceInMilliseconds from 'date-fns/differenceInMilliseconds';
 import tenantConfigs from '../tenants';
 import {
     HAS_LOADED,
@@ -35,10 +36,33 @@ export default {
     data: () => ({
         state: STATE_LOADING,
         cards: [],
-        errors: []
+        errors: [],
+        cardObserver: {}
     }),
 
+    watch: {
+        errors (errors) {
+            if (errors.filter(e => e === STATE_ERROR).length === this.adapters.length) {
+                this.state = STATE_ERROR;
+            }
+            if (errors.filter(e => e === STATE_NO_CARDS).length === this.adapters.length) {
+                this.state = STATE_NO_CARDS;
+            }
+            if (errors.length === this.adapters.length) {
+                this.state = STATE_ERROR;
+            }
+        }
+    },
+
     computed: {
+        xOffsets () {
+            return Array.from(new Set(this.$children.map(({ $el }) => $el.offsetLeft))).sort();
+        },
+
+        yOffsets () {
+            return Array.from(new Set(this.$children.map(({ $el }) => $el.offsetTop))).sort();
+        },
+
         /**
          * Determines the tenant based on the currently selected locale in order to choose correct translations
          * @return {String}
@@ -69,19 +93,67 @@ export default {
         const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         const localeConfig = tenantConfigs[locale];
 
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.7
+        };
+
+        /**
+         * This is a callback for the IntersectionObserver. This is to track the visibility of cards within the window.
+         * This fires when a card is 70% in view, at this point we loop over the entries that have been observed
+         * (i.e the cards) and get the card data from props attached to the dom element via vue. With this card data we
+         * add the card to the cardObserver object using its ID as a key. This is so that we can keep track of how long
+         * a card has been in view for, as when the card click event fires we do a lookup to detect the time the card was
+         * initially viewed and get the time between view and click. After this we detect using top and left offsets
+         * where the card is grid wise in the window using this data to report back to GTM. We use index + 1 to for GTM
+         * purposes.
+         * @param entries
+         */
+        const observerCallback = entries => {
+            entries.forEach(entry => {
+                const { card } = entry.target.__vue__.$options.propsData;
+                const { $el } = entry.target.__vue__;
+
+                this.cardObserver = {
+                    ...this.cardObserver,
+                    [card.id]: {
+                        isIntersecting: entry.isIntersecting,
+                        intersectionTime: entry.isIntersecting ? new Date() : null
+                    }
+                };
+
+                if (entry.isIntersecting) {
+                    this.handleCardView({
+                        ...card,
+                        metadata: {
+                            coordinates: {
+                                x: this.xOffsets.findIndex(offset => offset === $el.offsetLeft) + 1,
+                                y: this.yOffsets.findIndex(offset => offset === $el.offsetTop) + 1
+                            }
+                        }
+                    });
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, options);
+
         return {
             /**
              * Reflects card click events though to common click event handler
              **/
-            emitCardClick (card) {
-                component.handleCardClick(card);
-            },
-
-            /**
-             * Reflects card view events though to common view event handler
-             **/
-            emitCardView (card) {
-                component.handleCardView(card);
+            emitCardClick (card, el) {
+                component.handleCardClick({
+                    ...card,
+                    metadata: {
+                        viewTime: differenceInMilliseconds(new Date(), component.cardObserver[card.id].intersectionTime),
+                        coordinates: {
+                            x: component.xOffsets.findIndex(offset => offset === el.offsetLeft) + 1,
+                            y: component.yOffsets.findIndex(offset => offset === el.offsetTop) + 1
+                        }
+                    }
+                });
             },
 
             /**
@@ -93,12 +165,15 @@ export default {
                 });
             },
 
-            copy: { ...localeConfig }
+            copy: { ...localeConfig },
+
+            observer
         };
     },
 
     methods: {
         runAdapterCallbacks (successCallback, errorCallback) {
+            this.state = STATE_LOADING;
             this.adapters.forEach(adapter => {
                 adapter.initialise(this.filters, cards => {
                     if (cards === undefined) {
@@ -124,7 +199,7 @@ export default {
          */
         handleCardClick (card) {
             this.adapters.forEach(adapter => {
-                if (adapter.source === card.source) {
+                if (adapter.source.toLocaleLowerCase() === card.source.toLocaleLowerCase()) {
                     adapter.handleCardClick(card);
                 }
             });
@@ -136,7 +211,7 @@ export default {
          */
         handleCardView (card) {
             this.adapters.forEach(adapter => {
-                if (adapter.source === card.source) {
+                if (adapter.source.toLocaleLowerCase() === card.source.toLocaleLowerCase()) {
                     adapter.handleCardView(card);
                 }
             });
@@ -167,6 +242,7 @@ export default {
             );
         }, (source, error) => {
             if (error.type === 'NoCards') {
+                this.errors.push(STATE_NO_CARDS);
                 this.$emit(HAS_LOADED, { adapter: source, cards: [] });
                 this.$log.info(
                     `Content Cards Adapters (${source}) - No content cards. Key: (${this.loggingKey})`,
@@ -179,6 +255,7 @@ export default {
                     }
                 );
             } else {
+                this.errors.push(STATE_ERROR);
                 this.$emit(ON_ERROR, { adapter: source });
                 this.$log.info(
                     `Content Cards Adapters (${source}) - Error receiving content cards. Key: (${this.loggingKey})`,

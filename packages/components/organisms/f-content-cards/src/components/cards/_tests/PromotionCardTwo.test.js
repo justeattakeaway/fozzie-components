@@ -19,7 +19,10 @@ describe('PromotionCardTwo.vue', () => {
         wrapper = mount(PromotionCardTwo, {
             provide: {
                 emitCardView: jest.fn(),
-                emitCardClick: jest.fn()
+                emitCardClick: jest.fn(),
+                observer: {
+                    observe: jest.fn()
+                }
             },
             propsData: {
                 card: MOCK_CARD
