@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.44.1
+------------------------------
+*December 06, 2022*
+
+### Fixed
+- Provide `--no-verify-access` to Github Actions config to get around issue where npm automation tokens don't work with current lerna version. - https://github.com/lerna/lerna/issues/2788 
+
+
 v7.44.0
 ------------------------------
 *November 30, 2022*
