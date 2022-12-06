@@ -402,4 +402,4 @@ jobs:
       - name: Auth with NPM
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
       - name: Publish unreleased package versions to npm
-        run: yarn lerna publish from-package --ignore-scripts --yes
+        run: yarn lerna publish from-package --ignore-scripts --yes --no-verify-access
