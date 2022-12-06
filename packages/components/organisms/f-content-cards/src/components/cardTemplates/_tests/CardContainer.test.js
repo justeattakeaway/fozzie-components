@@ -22,7 +22,10 @@ const testId = 'CardContainer';
 
 const provide = {
     emitCardView: jest.fn(),
-    emitCardClick: jest.fn()
+    emitCardClick: jest.fn(),
+    observer: {
+        observe: jest.fn()
+    }
 };
 
 describe('ContentCard', () => {
