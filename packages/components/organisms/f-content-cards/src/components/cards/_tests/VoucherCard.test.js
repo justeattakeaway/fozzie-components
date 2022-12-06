@@ -24,6 +24,9 @@ describe('VoucherCard.vue', () => {
                 emitCardView: jest.fn(),
                 emitCardClick: jest.fn(),
                 emitVoucherCodeClick: jest.fn(),
+                observer: {
+                    observe: jest.fn()
+                },
                 copy: {
                     copyCodeLabel: MOCK_COPY_LABEL,
                     codeCopiedLabel: MOCK_COPY_LABEL_COPIED

@@ -35,6 +35,7 @@
 
 <script>
 import copyToClipboard from 'copy-to-clipboard';
+import { TickIcon } from '@justeat/f-vue-icons';
 import {
     COPY_STATE_AVAILABLE,
     COPY_STATE_COOLDOWN,
@@ -43,6 +44,9 @@ import {
 
 export default {
     name: 'VoucherCode',
+    components: {
+        TickIcon
+    },
     inject: [
         // Locale-specific copy configuration
         'copy',

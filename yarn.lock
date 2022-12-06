@@ -2785,14 +2785,15 @@
     date-fns "2.28.0"
     lodash-es "4.17.21"
 
-"@justeattakeaway/cc-stampcards-adapter@0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-stampcards-adapter/-/cc-stampcards-adapter-0.2.1.tgz#0adb22e2562f144e82fedadf5a827e765dcae6c9"
-  integrity sha512-o8xwLZXftJESmhz6ld38LQz9/QGWMcvvgCb4dDxqmgEMnfe27BUVz10PSMfgUIS8Or3lsy5Yj8bC2G11lIPqKQ==
+"@justeattakeaway/cc-stampcards-adapter@0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-stampcards-adapter/-/cc-stampcards-adapter-0.5.1.tgz#69a77e2a97e5be5b04a3b1943f2c0571a8c340a4"
+  integrity sha512-ahD/J894dUGPRnjplosCILFxhImFU4v0iqC9GXykE/BzdsJwB7oMoM65OzNW6rJLPpyDyTwcyGoVXxtiO5nX/w==
   dependencies:
     "@justeat/f-trak" "0.7.1"
     "@justeattakeaway/cc-filters" "0.1.0"
     "@justeattakeaway/cc-utils" "0.1.0"
+    date-fns "^2.29.3"
     lodash-es "4.17.21"
     typesafe-i18n "^5.12.0"
 
@@ -8297,7 +8298,7 @@ better-opn@^2.1.1:
   dependencies:
     open "^7.0.3"
 
-bezier-easing@2.1.0:
+bezier-easing@2.1.0, bezier-easing@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/bezier-easing/-/bezier-easing-2.1.0.tgz#c04dfe8b926d6ecaca1813d69ff179b7c2025d86"
   integrity sha512-gbIqZ/eslnUFC1tjEvtz0sgx+xTK20wDnYMIA27VA04R7w6xxXQPZDbibjA9DTWZRA2CXtwHykkVzlCaAJAZig==
@@ -10454,6 +10455,11 @@ css-loader@^3.0.0, css-loader@^3.5.3, css-loader@^3.6.0:
     schema-utils "^2.7.0"
     semver "^6.3.0"
 
+css-mediaquery@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/css-mediaquery/-/css-mediaquery-0.1.2.tgz#6a2c37344928618631c54bd33cedd301da18bea0"
+  integrity sha512-COtn4EROW5dBGlE/4PiKnh6rZpAPxDeFLaEEwt4i10jpDMFt2EhQGS79QmmrO+iKCHv0PU/HrOWEhijFd1x99Q==
+
 css-modules-loader-core@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/css-modules-loader-core/-/css-modules-loader-core-1.1.0.tgz#5908668294a1becd261ae0a4ce21b0b551f21d16"
@@ -10893,7 +10899,7 @@ date-fns@2.28.0:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.28.0.tgz#9570d656f5fc13143e50c975a3b6bbeb46cd08b2"
   integrity sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==
 
-date-fns@^2.17.0, date-fns@^2.29.1:
+date-fns@^2.17.0, date-fns@^2.29.1, date-fns@^2.29.3:
   version "2.29.3"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.29.3.tgz#27402d2fc67eb442b511b70bbdf98e6411cd68a8"
   integrity sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==
@@ -17866,6 +17872,14 @@ jscodeshift@^0.13.1:
     recast "^0.20.4"
     temp "^0.8.4"
     write-file-atomic "^2.3.0"
+
+jsdom-testing-mocks@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/jsdom-testing-mocks/-/jsdom-testing-mocks-1.6.0.tgz#5c7ee9ffdf4cb591e5397a8c05855a496776ee2f"
+  integrity sha512-fHeCy/vzUpB6eBAYCFbSyFRgSvaIu8KkGHCzeRqIGqkPPT5uSH78jrWErCVGADtFfH0KxoTHf+bZwsRAf7UWnA==
+  dependencies:
+    bezier-easing "^2.1.0"
+    css-mediaquery "^0.1.2"
 
 jsdom@^11.5.1:
   version "11.12.0"

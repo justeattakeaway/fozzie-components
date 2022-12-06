@@ -22,7 +22,10 @@ const testId = 'CardCase';
 
 const provide = {
     emitCardView: jest.fn(),
-    emitCardClick: jest.fn()
+    emitCardClick: jest.fn(),
+    observer: {
+        observe: jest.fn()
+    }
 };
 
 describe('CardCase', () => {
@@ -58,21 +61,6 @@ describe('CardCase', () => {
 
         // Assert
         expect(wrapper.find(`[href="${url}"]`).exists()).toBe(true);
-    });
-
-    it('should call the injected `emitCardView` event when mounted', () => {
-        // Arrange & Act
-        mount(CardCase, {
-            localVue,
-            propsData: {
-                card,
-                testId
-            },
-            provide
-        });
-
-        // Assert
-        expect(provide.emitCardView).toHaveBeenCalled();
     });
 
     it('should call the injected `emitCardClick` event when clicked', () => {

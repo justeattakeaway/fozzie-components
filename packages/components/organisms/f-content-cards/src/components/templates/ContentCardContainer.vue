@@ -14,7 +14,7 @@
 <script>
 export default {
     inject: [
-        'emitCardView',
+        'observer',
         'emitCardClick'
     ],
 
@@ -37,13 +37,10 @@ export default {
     },
 
     mounted () {
-        this.onViewContentCard(); // TODO should only fire if in view
+        this.observer.observe(this.$el);
     },
 
     methods: {
-        onViewContentCard () {
-            this.emitCardView(this.card);
-        },
 
         onClickContentCard () {
             this.emitCardClick(this.card);
