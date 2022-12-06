@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.9.1
 ------------------------------
-*December 2, 2022*
+*December 6, 2022*
 
 ### Fixed
 - Incorrect `PostalCode` type when restoring address from cookies
