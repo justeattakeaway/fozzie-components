@@ -59,8 +59,10 @@
     "vue": "2.x",
     "vue-router": ">=3.4.8"
   },
+  "dependencies": {
+    "@justeattakeaway/pie-icons-vue": "2.0.0-beta.1"
+  },
   "devDependencies": {
-    "@justeattakeaway/pie-icons-vue": "1.0.0",
     "@justeat/f-wdio-utils": "1.x"
   }
 }

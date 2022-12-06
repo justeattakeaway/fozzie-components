@@ -2,7 +2,7 @@
   "name": "@justeat/fozzie",
   "title": "Fozzie – Just Eat UI Web Framework",
   "description": "UI Web Framework for the Just Eat Global Platform",
-  "version": "10.10.1",
+  "version": "10.10.3",
   "main": "dist/js/index.js",
   "files": [
     "dist/js",
