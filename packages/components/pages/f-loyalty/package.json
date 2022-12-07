@@ -65,6 +65,8 @@
     "@justeattakeaway/cc-stampcards-adapter": "0.5.1"
   },
   "devDependencies": {
+    "@justeattakeaway/cc-braze-adapter": "0.2.0",
+    "@justeattakeaway/cc-stampcards-adapter": "0.5.1",
     "@braze/web-sdk": "4.5.0",
     "@faker-js/faker": "7.5.0",
     "@justeat/f-breadcrumbs": "4.x",
