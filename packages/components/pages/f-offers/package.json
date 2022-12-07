@@ -64,6 +64,7 @@
     "vuex": ">=3.5.1"
   },
   "devDependencies": {
+    "@braze/web-sdk": "3.3.0",
     "@justeat/f-button": "4.x",
     "@justeat/f-content-cards": "9.x",
     "@justeat/f-media-element": "3.x",

@@ -52,7 +52,7 @@
     "jwt-decode": "3.1.2"
   },
   "peerDependencies": {
-    "@braze/web-sdk": "4.5.0",
+    "@braze/web-sdk": ">=4.5.0",
     "@justeat/browserslist-config-fozzie": ">=1.2.0",
     "@justeat/f-breadcrumbs": "4.x",
     "@justeat/f-button": "4.x",
