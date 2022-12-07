@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v5.1.1
+------------------------------
+*December 07, 2022*
+
+### Added
+- braze sk 3.3.0 under dev dependencies to allow tests to work.
+
+
 v5.1.0
 ------------------------------
 *July 25, 2022*
