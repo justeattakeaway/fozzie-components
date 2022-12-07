@@ -1476,10 +1476,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@braze/web-sdk@3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@braze/web-sdk/-/web-sdk-3.3.0.tgz#d5c6cf322ad2b8d7e7556834690cf7757f2b9434"
-  integrity sha512-mjor7k9g6wGF+q67k9r0NSjW7FGgYuRrsLTZzbEhK3u2uwqry4ngeuYmxZosJFqH19T+j7ZSvjkYb99+NYURLA==
+"@braze/web-sdk@4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@braze/web-sdk/-/web-sdk-4.5.0.tgz#51ab362f9b8776a5fedfaee44fef0c6edc3c8b05"
+  integrity sha512-pRPiKcYRE5xS2fuXDahX0Fj6vmfEXx89+OFkqNR6kXoySxyxWY5qOk4fmSRsOOAO72Yx2a7z2ApsCQbkOR6ufg==
 
 "@braze/web-sdk@^4.2.1":
   version "4.4.0"
@@ -14892,7 +14892,7 @@ http-proxy@^1.16.2, http-proxy@^1.17.0, http-proxy@^1.18.0, http-proxy@^1.18.1:
     follow-redirects "^1.0.0"
     requires-port "^1.0.0"
 
-http-request-mock@^1.8.2:
+http-request-mock@1.8.3, http-request-mock@^1.8.2:
   version "1.8.3"
   resolved "https://registry.yarnpkg.com/http-request-mock/-/http-request-mock-1.8.3.tgz#6a1c7eefa88dac1c9d4a5aaca61bb82df23ce004"
   integrity sha512-UKcEpyPOvh4CRTU8yfTMUfNIKIsZVAD038S95dYdx709BBj4yGgbO+PiQgfzuRYnShb0dv0UVypufXCfVjPMJA==

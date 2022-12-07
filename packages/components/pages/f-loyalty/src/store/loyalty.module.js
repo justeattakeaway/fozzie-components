@@ -4,7 +4,10 @@ import {
     MUTATION_SET_BRAZE_KEY,
     ACTION_INITIALISE_LOYALTY,
     ACTION_SET_GLOBAL_USER_ID,
-    MUTATION_SET_GLOBAL_USER_ID
+    MUTATION_SET_GLOBAL_USER_ID,
+    MUTATION_SET_TENANT,
+    MUTATION_SET_API_URL,
+    MUTATION_SET_ADAPTER_EXPERIMENT
 } from './types';
 
 /**
@@ -22,7 +25,9 @@ export default {
     state: () => ({
         authToken: null,
         brazeApiKey: null,
-        globalUserId: null
+        globalUserId: null,
+        tenant: null,
+        stampCardsAPIUrl: null
     }),
 
     mutations: {
@@ -36,6 +41,18 @@ export default {
 
         [MUTATION_SET_GLOBAL_USER_ID]: (state, value) => {
             state.globalUserId = value;
+        },
+
+        [MUTATION_SET_TENANT]: (state, value) => {
+            state.tenant = value;
+        },
+
+        [MUTATION_SET_API_URL]: (state, value) => {
+            state.stampCardsAPIUrl = value;
+        },
+
+        [MUTATION_SET_ADAPTER_EXPERIMENT]: (state, value) => {
+            state.inStampCardsAdapterExperiment = value;
         }
     },
 
@@ -52,10 +69,17 @@ export default {
         },
 
         [ACTION_INITIALISE_LOYALTY]: ({ commit, dispatch, getters }, {
-            brazeApiKey, authToken
+            brazeApiKey,
+            authToken,
+            tenant,
+            stampCardsAPIUrl,
+            inStampCardsAdapterExperiment
         }) => {
             commit(MUTATION_SET_AUTH_TOKEN, authToken);
             commit(MUTATION_SET_BRAZE_KEY, brazeApiKey);
+            commit(MUTATION_SET_TENANT, tenant);
+            commit(MUTATION_SET_API_URL, stampCardsAPIUrl);
+            commit(MUTATION_SET_ADAPTER_EXPERIMENT, inStampCardsAdapterExperiment);
             if (getters.isAuthenticated) {
                 dispatch(ACTION_SET_GLOBAL_USER_ID, { authToken });
             }

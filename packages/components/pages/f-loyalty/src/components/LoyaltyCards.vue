@@ -1,11 +1,9 @@
 <template>
     <div class="c-loyaltyCards-stampsContainer">
         <content-cards
-            v-if="globalUserId"
-            :user-id="globalUserId"
-            :api-key="brazeApiKey"
-            :locale="$i18n.locale"
+            :adapters="adapters"
             :tags="tags"
+            :locale="$i18n.locale"
             :push-to-data-layer="pushToDataLayer">
             <template #default="{ cards }">
                 <cards-slot :cards="cards" />
@@ -22,7 +20,6 @@
                 <loyalty-cards-loading-state />
             </template>
         </content-cards>
-        <loyalty-cards-loading-state v-else />
     </div>
 </template>
 
@@ -30,6 +27,8 @@
 import { mapState } from 'vuex';
 import { ContentCards } from '@justeat/f-content-cards';
 import '@justeat/f-content-cards/dist/f-content-cards.css';
+import stampCardsAdapter from '@justeattakeaway/cc-stampcards-adapter';
+import brazeAdapter from '@justeattakeaway/cc-braze-adapter';
 import NoCardsErrorState from './NoCardsErrorState.vue';
 import LoyaltyCardsLoadingState from './Loading.vue';
 import CardsSlot from './Slots.vue';
@@ -50,16 +49,36 @@ export default {
     data () {
         return {
             pushToDataLayer: () => {},
-            tags: 'loyalty'
+            tags: 'loyalty',
+            adapters: []
         };
     },
+
 
     computed: {
         ...mapState(VUEX_MODULE_NAMESPACE_LOYALTY, [
             'globalUserId',
-            'brazeApiKey'
+            'brazeApiKey',
+            'authToken',
+            'tenant',
+            'stampCardsAPIUrl',
+            'inStampCardsAdapterExperiment'
         ])
+    },
+
+    created () {
+        this.adapters.push(this.inStampCardsAdapterExperiment ? stampCardsAdapter({
+            token: () => this.authToken,
+            tenant: this.tenant,
+            url: this.stampCardsAPIUrl
+        }) : brazeAdapter({
+            apiKey: this.brazeApiKey,
+            sdkEndpoint: 'sdk.iad-01.braze.com',
+            userId: this.globalUserId,
+            loggingEnabled: false
+        }));
     }
+
 };
 </script>
 
