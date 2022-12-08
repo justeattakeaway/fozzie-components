@@ -1,6 +1,9 @@
 <template>
     <div
-        :class="$style['c-rating']"
+        :class="[
+            $style['c-rating'], {
+            [$style['c-rating--alignLeft']]: shouldAlignRatingLeft
+        }]"
         :data-test-id="`${getRatingVariant}-component`">
         <div :class="$style['c-rating-stars']">
             <component
@@ -87,6 +90,10 @@ export default {
             default: false
         },
         isUserRating: {
+            type: Boolean,
+            default: false
+        },
+        shouldAlignRatingLeft: {
             type: Boolean,
             default: false
         }

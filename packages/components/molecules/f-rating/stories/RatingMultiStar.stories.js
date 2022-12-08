@@ -26,7 +26,8 @@ export const RatingComponent = (args, { argTypes }) => ({
                     :star-rating-size="rating.starRatingSize"
                     :star-rating="rating.starRating"
                     :review-count="rating.reviewCount"
-                    :is-user-rating="rating.isUserRating"/>
+                    :is-user-rating="rating.isUserRating"
+                    :should-align-rating-left="shouldAlignRatingLeft"/>
             </div>
         </div>`
 });
@@ -100,7 +101,7 @@ RatingComponent.args = {
                 starRating: 4.5, starRatingSize: 'large', reviewCount: 499
             },
             {
-                starRating: 1.3, starRatingSize: 'large', reviewCount: 499
+                starRating: 1.3, starRatingSize: 'large', reviewCount: 499, shouldAlignRatingLeft: false
             }
         ]
     ]
