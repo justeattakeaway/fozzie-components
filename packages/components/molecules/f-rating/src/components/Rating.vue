@@ -2,8 +2,8 @@
     <div
         :class="[
             $style['c-rating'], {
-            [$style['c-rating--alignLeft']]: shouldAlignRatingLeft
-        }]"
+                [$style['c-rating--alignLeft']]: shouldAlignRatingLeft
+            }]"
         :data-test-id="`${getRatingVariant}-component`">
         <div :class="$style['c-rating-stars']">
             <component
