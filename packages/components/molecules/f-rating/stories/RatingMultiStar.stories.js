@@ -101,7 +101,7 @@ RatingComponent.args = {
                 starRating: 4.5, starRatingSize: 'large', reviewCount: 499
             },
             {
-                starRating: 1.3, starRatingSize: 'large', reviewCount: 499, shouldAlignRatingLeft: false
+                starRating: 1.3, starRatingSize: 'large', reviewCount: 499
             }
         ]
     ]
