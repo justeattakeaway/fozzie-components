@@ -6,6 +6,7 @@ import {
     REDIRECT_URL_EVENT_NAME
 } from '../../constants';
 
+
 const localVue = createLocalVue();
 localVue.use(VueI18n);
 const validateUrl = 'https://localhost:8080/mfa/validate';
@@ -44,6 +45,11 @@ jest.mock(
         postValidateMfaToken: mockPostValidateMfaToken
     }))
 );
+
+// required for UUID mocking for snapshot testing.
+jest.mock('crypto', () => ({
+    randomBytes: num => new Array(num).fill(0)
+}));
 
 // Provide a generic mount method to be called by each test which
 // can override mocks, props and data within each test if required
