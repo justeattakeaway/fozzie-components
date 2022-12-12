@@ -16,6 +16,11 @@ const localVue = createLocalVue();
 localVue.use(VueI18n);
 localVue.use(Vuex);
 
+// required for UUID mocking for snapshot testing.
+jest.mock('crypto', () => ({
+    randomBytes: num => new Array(num).fill(0)
+}));
+
 const setFormFieldValues = wrapper => {
     wrapper.find('[data-test-id="formfield-firstName-input"]').setValue(CONSUMERS_REQUEST_DATA.firstName);
     wrapper.find('[data-test-id="formfield-lastName-input"]').setValue(CONSUMERS_REQUEST_DATA.lastName);
