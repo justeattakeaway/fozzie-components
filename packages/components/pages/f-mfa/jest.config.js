@@ -39,5 +39,9 @@ module.exports = {
         './test/visual/'
     ],
 
-    testURL: 'http://localhost/'
+    testURL: 'http://localhost/',
+
+    setupFiles: [
+        '<rootDir>/test-utils/settings/jest.crypto-setup.js',
+    ]
 };
