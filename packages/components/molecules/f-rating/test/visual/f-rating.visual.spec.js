@@ -16,36 +16,6 @@ devices.forEach(device => {
             });
         });
 
-        describe('`starRating`', () => {
-            it('should be displayed', async () => {
-                // Act
-                await Rating.load({ starRating: 5 });
-
-                // Assert
-                await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - starRating = 5', device);
-            });
-        });
-
-        describe('`maxStarRating`', () => {
-            it('should be displayed', async () => {
-                // Act
-                await Rating.load({ maxStarRating: 5 });
-
-                // Assert
-                await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - maxStarRating = 5', device);
-            });
-        });
-
-        describe('`reviewCount`', () => {
-            it('should be displayed', async () => {
-                // Act
-                await Rating.load({ reviewCount: 700 });
-
-                // Assert
-                await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - reviewCount = 700', device);
-            });
-        });
-
         describe('`starRatingSize`', () => {
             const starRatingSize = [
                 'xsmall',
@@ -134,6 +104,26 @@ devices.forEach(device => {
                     // Assert
                     await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - isUserRating when reviewCount = 0', device);
                 });
+            });
+        });
+
+        describe('`shouldAlignRatingLeft`', () => {
+            it('should be displayed on the left hand side of the ratings with a default font size', async () => {
+                // Act
+                await Rating.load({ shouldAlignRatingLeft: true, reviewCount: 5, ratingDisplayType: 'short' });
+
+                // Assert
+                await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - shouldAlignRatingLeft = true', device);
+            });
+        });
+
+        describe('`ratingFontSize`', () => {
+            it('should be displayed on the left hand side of the ratings with a `large` font size', async () => {
+                // Act
+                await Rating.load({ shouldAlignRatingLeft: true, ratingFontSize: 'large', ratingDisplayType: 'short' });
+
+                // Assert
+                await browser.percyScreenshot('f-rating Multi Star - Visual Test for Prop - ratingFontSize = large & shouldAlignRatingLeft = true', device);
             });
         });
     });

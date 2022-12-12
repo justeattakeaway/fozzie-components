@@ -25,7 +25,9 @@
             data-test-id="c-rating-displayType"
             :class="[
                 $style['c-rating-message'],
-                $style[`c-rating-message--${ratingDisplayType}`]]">
+                $style[`c-rating-message--${ratingDisplayType}`],
+                $style[`c-rating-message--${ratingFontSize}`]
+            ]">
             {{ getRatingDisplayFormat() }}
         </span>
 
@@ -42,7 +44,8 @@ import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import tenantConfigs from '../tenants';
 import {
     VALID_STAR_RATING_SIZES,
-    VALID_STAR_RATING_DISPLAY_TYPE
+    VALID_STAR_RATING_DISPLAY_TYPE,
+    VALID_STAR_FONT_SIZES
 } from '../constants';
 import RatingMultiStar from './RatingMultiStarVariant.vue';
 import RatingSingleStar from './RatingSingleStarVariant.vue';
@@ -96,6 +99,11 @@ export default {
         shouldAlignRatingLeft: {
             type: Boolean,
             default: false
+        },
+        ratingFontSize: {
+            type: String,
+            default: 'default',
+            validator: value => VALID_STAR_FONT_SIZES.includes(value)
         }
     },
 
@@ -186,8 +194,20 @@ export default {
 .c-rating-message {
     display: flex;
     align-items: center;
-    @include f.font-size('body-s');
     font-weight: f.$font-weight-bold;
     margin-left: f.spacing(a);
+
+    .c-rating--alignLeft & {
+        margin-left: 0;
+        margin-right: f.spacing(b);
+    }
+}
+
+.c-rating-message--default {
+    @include f.font-size('body-s');
+}
+
+.c-rating-message--large {
+    @include f.font-size('heading-xl');
 }
 </style>
