@@ -17,7 +17,6 @@ v0.14.0
 ### Removed
 - Visual tests that weren't useful.
 
-
 ### Changed
 - Updated to the new `pie-icons-vue` beta release.
 
