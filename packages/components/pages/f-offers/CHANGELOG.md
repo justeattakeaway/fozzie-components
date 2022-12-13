@@ -12,6 +12,15 @@ v1.15.2
 - braze sk 3.3.0 under dev dependencies to allow tests to work.
 
 
+v2.0.0
+------------------------------
+*December 12, 2022*
+
+### Changed
+- Updated to include the new braze adapter
+- also updated to the latest version of content cards
+
+
 v1.15.1
 ------------------------------
 *November 21, 2022*
