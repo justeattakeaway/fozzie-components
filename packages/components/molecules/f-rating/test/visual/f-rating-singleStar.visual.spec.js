@@ -122,23 +122,23 @@ devices.forEach(device => {
             });
         });
 
-        describe('`shouldAlignRatingLeft`', () => {
+        describe('`shouldAlignRatingTextLeft`', () => {
             it('should be displayed on the left hand side of the ratings with a default font size', async () => {
                 // Act
-                await RatingSingleStar.load({ shouldAlignRatingLeft: true, reviewCount: 5, ratingDisplayType: 'short' });
+                await RatingSingleStar.load({ shouldAlignRatingTextLeft: true, reviewCount: 5, ratingDisplayType: 'short' });
 
                 // Assert
-                await browser.percyScreenshot('f-rating Single Star - Visual Test for Prop - shouldAlignRatingLeft = true', device);
+                await browser.percyScreenshot('f-rating Single Star - Visual Test for Prop - shouldAlignRatingTextLeft = true', device);
             });
         });
 
         describe('`ratingFontSize`', () => {
             it('should be displayed on the left hand side of the ratings with a `large` font size', async () => {
                 // Act
-                await RatingSingleStar.load({ shouldAlignRatingLeft: true, ratingFontSize: 'large', ratingDisplayType: 'short' });
+                await RatingSingleStar.load({ shouldAlignRatingTextLeft: true, ratingFontSize: 'large', ratingDisplayType: 'short' });
 
                 // Assert
-                await browser.percyScreenshot('f-rating Single Star - Visual Test for Prop - ratingFontSize = large & shouldAlignRatingLeft = true', device);
+                await browser.percyScreenshot('f-rating Single Star - Visual Test for Prop - ratingFontSize = large & shouldAlignRatingTextLeft = true', device);
             });
         });
     });

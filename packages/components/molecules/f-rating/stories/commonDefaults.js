@@ -19,7 +19,7 @@ export default {
         defaultValue: null
     },
 
-    shouldAlignRatingLeft: {
+    shouldAlignRatingTextLeft: {
         control: { type: 'boolean', options: [false, true] },
         description: 'Choose how to align a rating message',
         defaultValue: false

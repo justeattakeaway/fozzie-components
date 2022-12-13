@@ -10,7 +10,7 @@ v0.14.0
 
 ### Added
 - Props:
-  - `shouldAlignRatingLeft` to allow positioning of accompanying text and SVG icons.
+  - `shouldAlignRatingTextLeft` to allow positioning of accompanying text and SVG icons.
   - `ratingFontSize` to allow large and default font sizes to be used.
 - Visual tests to cover above additions.
 

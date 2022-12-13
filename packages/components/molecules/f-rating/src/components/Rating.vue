@@ -2,7 +2,7 @@
     <div
         :class="[
             $style['c-rating'], {
-                [$style['c-rating--alignLeft']]: shouldAlignRatingLeft
+                [$style['c-rating--alignLeft']]: shouldAlignRatingTextLeft
             }]"
         :data-test-id="`${getRatingVariant}-component`">
         <div :class="$style['c-rating-stars']">
@@ -96,7 +96,7 @@ export default {
             type: Boolean,
             default: false
         },
-        shouldAlignRatingLeft: {
+        shouldAlignRatingTextLeft: {
             type: Boolean,
             default: false
         },
