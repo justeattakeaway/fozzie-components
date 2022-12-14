@@ -20,11 +20,8 @@ describe('`constants`', () => {
             // Arrange
             const values = ['short', 'medium', 'long'];
 
-            // Act
-            const result = VALID_STAR_RATING_DISPLAY_TYPE.every(value => values.includes(value));
-
             // Assert
-            expect(result).toBe(true);
+            expect(VALID_STAR_RATING_DISPLAY_TYPE).toEqual(values);
         });
     });
 
@@ -33,11 +30,8 @@ describe('`constants`', () => {
             // Arrange
             const values = ['default', 'large'];
 
-            // Act
-            const result = VALID_STAR_FONT_SIZES.every(value => values.includes(value));
-
             // Assert
-            expect(result).toBe(true);
+            expect(VALID_STAR_FONT_SIZES).toEqual(values);
         });
     });
 });
