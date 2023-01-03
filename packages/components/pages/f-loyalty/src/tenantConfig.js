@@ -46,4 +46,30 @@ const bagValues = {
 
 const tenantBagFees = tenant => bagValues[tenant];
 
-export default tenantBagFees;
+const ordinals = {
+    'en-GB': true,
+    'en-AU': true,
+    'en-NZ': true,
+    'es-ES': false,
+    'en-IE': true,
+    'it-IT': false
+};
+
+const currencySymbolBefore = {
+    'en-GB': true,
+    'en-AU': true,
+    'en-NZ': true,
+    'es-ES': false,
+    'en-IE': true,
+    'it-IT': false
+};
+
+const tenantOrdinals = tenant => ordinals[tenant];
+
+const tenantCurrencySymbol = tenant => currencySymbolBefore[tenant];
+
+export {
+    tenantBagFees,
+    tenantOrdinals,
+    tenantCurrencySymbol
+};

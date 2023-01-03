@@ -113,6 +113,6 @@ VLoyaltyComponent.args = {
     // this is a fake JWT and contains no confidential data
     authToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vZXhhbXBsZS5jb20vbG95YWx0eSIsImlhdCI6MTY2OTczNTg3NiwiZXhwIjoxNzAxMjcxODc2LCJhdWQiOiJodHRwOi8vZXhhbXBsZS5jb20vbG95YWx0eSIsInN1YiI6IjE3OTg0NzA4IiwiZW1haWwiOiJqb2huc21pdGhAZXhhbXBsZS5jb20iLCJuYW1lIjoiSm9obiBTbWl0aCIsImdsb2JhbF91c2VyX2lkIjoiMTIzNDU2Nzg5IiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJyb2xlIjoiUmVnaXN0ZXJlZCIsImZhbWlseV9uYW1lIjoiU21pdGgifQ.d__NTXKO7y3I1scfi11wkC4MtNhANzziTDH831T3shI',
     brazeApiKey: '83eac5ae-7482-11ed-a1eb-0242ac120002',
-    inStampCardsAdapterExperiment: false,
+    inStampCardsAdapterExperiment: true,
     stampCardsAPIUrl: 'https://example.com/stampcards/status'
 };
