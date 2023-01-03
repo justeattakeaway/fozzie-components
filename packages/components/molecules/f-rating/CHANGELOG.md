@@ -4,13 +4,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (merge into next release)
+v0.14.0
 ------------------------------
-*December 5, 2022*
+*December 12, 2022*
+
+### Added
+- Props:
+  - `shouldAlignRatingTextLeft` to allow positioning of accompanying text and SVG icons.
+  - `ratingFontSize` to allow large and default font sizes to be used.
+- Visual tests to cover above additions.
+
+### Removed
+- Visual tests that weren't useful.
 
 ### Changed
 - Updated to the new `pie-icons-vue` beta release.
-
 
 v0.13.0
 ------------------------------
