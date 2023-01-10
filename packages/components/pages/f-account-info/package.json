@@ -54,7 +54,7 @@
     "@justeat/f-globalisation": "1.x",
     "@justeat/f-services": "1.x",
     "@justeat/f-vue-icons": "3.x",
-    "vuelidate": "0.7.6"
+    "vuelidate": "0.7.7"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",
@@ -75,6 +75,6 @@
     "@justeat/f-form-field": "6.x",
     "@justeat/f-link": "3.x",
     "@justeat/f-wdio-utils": "1.x",
-    "@vue/cli-plugin-babel": "4.5.15"
+    "@vue/cli-plugin-babel": "4.5.19"
   }
 }

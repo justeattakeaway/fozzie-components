@@ -60,10 +60,10 @@
     "@justeat/f-media-element": "3.x",
     "@justeat/f-tabs": "3.x",
     "@justeat/f-trak": "0.x",
-    "@braze/web-sdk": "3.3.0"
+    "@braze/web-sdk": "3.5.1"
   },
   "devDependencies": {
-    "@braze/web-sdk": "3.3.0",
+    "@braze/web-sdk": "3.5.1",
     "@justeat/f-breadcrumbs": "4.x",
     "@justeat/f-button": "4.x",
     "@justeat/f-card": "4.x",
@@ -72,7 +72,7 @@
     "@justeat/f-tabs": "3.x",
     "@justeat/f-trak": "0.x",
     "@justeat/f-wdio-utils": "1.x",
-    "@vue/cli-plugin-babel": "4.5.16",
+    "@vue/cli-plugin-babel": "4.5.19",
     "faker": "5.5.3"
   }
 }

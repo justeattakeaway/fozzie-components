@@ -37,10 +37,10 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "gulp-rename": "1.2.2",
+    "gulp-rename": "1.4.0",
     "lodash": "4.17.21",
-    "update-notifier": "5.0.1",
-    "yeoman-generator": "4.12.0"
+    "update-notifier": "5.1.0",
+    "yeoman-generator": "4.13.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"

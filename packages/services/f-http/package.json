@@ -44,7 +44,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "axios": "0.21.2",
-    "axios-mock-adapter": "1.19.0"
+    "axios": "0.27.2",
+    "axios-mock-adapter": "1.21.2"
   }
 }

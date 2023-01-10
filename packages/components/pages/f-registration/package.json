@@ -52,7 +52,7 @@
   ],
   "dependencies": {
     "@justeat/f-services": "1.x",
-    "vuelidate": "0.7.6"
+    "vuelidate": "0.7.7"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
@@ -72,6 +72,6 @@
     "@justeat/f-link": "3.x",
     "@justeat/f-vue-icons": "3.x",
     "@justeat/f-wdio-utils": "1.x",
-    "@vue/cli-plugin-babel": "4.5.8"
+    "@vue/cli-plugin-babel": "4.5.19"
   }
 }

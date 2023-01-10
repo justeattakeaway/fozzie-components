@@ -48,7 +48,7 @@
   "dependencies": {
     "@justeat/f-services": "1.x",
     "@justeattakeaway/pie-icons-vue": "2.0.0-beta.1",
-    "axios": "0.21.2",
+    "axios": "0.27.2",
     "lodash-es": "4.17.21"
   },
   "peerDependencies": {
