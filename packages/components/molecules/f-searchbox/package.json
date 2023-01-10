@@ -56,7 +56,7 @@
   ],
   "dependencies": {
     "@justeat/f-services": "1.x",
-    "axios": "0.21.2",
+    "axios": "0.27.2",
     "lodash.debounce": "4.0.8"
   },
   "peerDependencies": {
@@ -65,7 +65,7 @@
     "@justeat/f-error-message": "2.x",
     "@justeat/f-mega-modal": "7.x",
     "vue": "2.x",
-    "vuex": "3.5.1"
+    "vuex": "3.6.2"
   },
   "devDependencies": {
     "@justeat/f-button": "4.x",
@@ -74,6 +74,6 @@
     "@justeat/f-mega-modal": "7.x",
     "@justeat/f-vue-icons": "3.x",
     "@justeat/f-wdio-utils": "1.x",
-    "url-loader": "4.1.0"
+    "url-loader": "4.1.1"
   }
 }

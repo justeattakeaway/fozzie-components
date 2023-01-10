@@ -48,13 +48,13 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@babel/plugin-proposal-class-properties": "7.12.13",
+    "@babel/plugin-proposal-class-properties": "7.18.6",
     "@justeat/f-services": "1.x",
-    "@justeattakeaway/cc-braze-adapter": "0.2.0",
+    "@justeattakeaway/cc-braze-adapter": "0.4.0",
     "@justeattakeaway/cc-stampcards-adapter": "0.5.1",
     "@justeattakeaway/cc-filters": "0.1.0",
     "@justeattakeaway/cc-utils": "0.1.0",
-    "core-js": "3.6.5"
+    "core-js": "3.27.1"
   },
   "peerDependencies": {
     "@braze/web-sdk": ">=3.3.0",
@@ -70,14 +70,14 @@
     "@justeat/f-vue-icons": "3.x",
     "@justeat/f-wdio-utils": "1.x",
     "@justeat/fozzie": "10.7.1",
-    "@vue/cli-plugin-babel": "4.5.16",
-    "color": "3.1.3",
-    "copy-to-clipboard": "3.3.1",
-    "crypto-js": "4.0.0",
+    "@vue/cli-plugin-babel": "4.5.19",
+    "color": "3.2.1",
+    "copy-to-clipboard": "3.3.3",
+    "crypto-js": "4.1.1",
     "date-fns": "^2.17.0",
     "http-request-mock": "^1.8.2",
     "jsdom-testing-mocks": "^1.6.0",
-    "vue": "2.6.10",
+    "vue": "2.7.14",
     "xhr-mock": "2.5.1"
   }
 }

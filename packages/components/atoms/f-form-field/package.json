@@ -58,6 +58,6 @@
   "devDependencies": {
     "@justeat/f-wdio-utils": "1.x",
     "postcss-assets": "5.0.0",
-    "@vue/cli-plugin-babel": "4.5.16"
+    "@vue/cli-plugin-babel": "4.5.19"
   }
 }

@@ -41,14 +41,14 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "date-fns": "2.16.1",
+    "date-fns": "2.29.3",
     "lodash.findindex": "4.6.0",
     "lodash.orderby": "4.6.0",
     "lodash.startswith": "4.2.1",
     "lodash.uniq": "4.5.0"
   },
   "devDependencies": {
-    "mockdate": "3.0.2"
+    "mockdate": "3.0.5"
   },
   "peerDependencies": {
     "js-cookie": ">=2.2.1",

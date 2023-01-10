@@ -38,8 +38,8 @@
     "ci:test:services": "yarn test"
   },
   "devDependencies": {
-    "jest": "25.4.0",
-    "jest-mock-axios": "4.4.1"
+    "jest": "25.5.4",
+    "jest-mock-axios": "4.6.2"
   },
   "dependencies": {
     "@justeat/feature-management": "^1.0.0",
