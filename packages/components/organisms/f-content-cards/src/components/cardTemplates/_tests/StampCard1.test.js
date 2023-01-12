@@ -17,7 +17,7 @@ const card = {
     discountPercentage: '15',
     earnedStamps: 2,
     expiryDate: '2021-02-28T23:59:59',
-    expiryLine: 'Discount expires',
+    expiryLine: 'Discount expires 28/02/2021',
     isReadyToClaim: 'false',
     totalRequiredStamps: 5
 };
@@ -196,7 +196,7 @@ describe('contentCards › StampCard1', () => {
 
         it('should format the expiry date into the expiry line', () => {
             // Assert
-            expect(wrapper.find('[data-test-id="stampCard1--expiryInfo"]').text()).toMatch(/(Discount expires\s*28\/02)/gi);
+            expect(wrapper.find('[data-test-id="stampCard1--expiryInfo"]').text()).toMatch(/(Discount expires\s*28\/02\/2021)/gi);
         });
     });
 

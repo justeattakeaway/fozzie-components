@@ -39,16 +39,12 @@
                 :data-test-id="testIdForSection('subStatusText', index)">
                 {{ subStatusLine }}
             </div>
-            <div
+            <p
                 :class="[$style['c-stampCard1-expiryInfo']]"
                 :data-test-id="testIdForSection('expiryInfo')">
-                {{ card.expiryLine }}
-                <template v-if="hasValidExpiryDate">
-                    <span :aria-label="expiryDateAccessible">
-                        <span aria-hidden="true">{{ expiryDateVisual }}</span>
-                    </span>
-                </template>
-            </div>
+                <span aria-hidden="true">{{ card.expiryLine }}</span>
+                <span :class="[$style['c-stampCard1-visually-hidden']]">{{ card.expiryLineAccessible }}</span>
+            </p>
         </div>
         <div
             v-else
@@ -381,5 +377,13 @@ $stampCard-responsive-tabletViewBreakpoint: '<=mid';
     &#{&} { // to increase specificity level to override svg:not(:root) rule
         overflow: visible;
     }
+}
+
+.c-stampCard1-visually-hidden {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px; width: 1px;
+    margin: -1px; padding: 0; border: 0;
 }
 </style>

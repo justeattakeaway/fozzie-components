@@ -13,13 +13,83 @@
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-content-cards/badge.svg)](https://coveralls.io/github/justeat/f-content-cards)
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-content-cards/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-content-cards?targetFile=package.json)
 
+# Content Cards (f-content-cards)
+
+## Introduction
+
+The content cards component is a headless vue component that takes an array of adapters (functions that return cards) and exposes the cards collected from these adapters via the slot prop `cards`. The component also handles the tracking events for viewing and clicking cards, which are then sent back through to the relevant adapter.
+
+## Structure
+
+The component has the following folder structure
+
+- cards (folder for new cards to be placed in)
+- cardTemplates (deprecated folder for older cards not yet updated)
+- templates (components which are sections of content cards, used to make cards)
+- ContentCards.js (Main headless component)
+
+## Main Component (ContentCards.js)
+
+### Props
+
+| Name     | Type   | Required | Default       | Purpose                             |
+|----------|--------|----------|---------------|-------------------------------------|
+| adapters | Array  | true     | N/A           | Functions that return content cards |
+| locale   | String | true     | N/A           | Users tenant, used for i18n         |
+| tags     | String | false    | content-cards | Provides tags for logging           |
+| filters  | Array  | false    | []            | Filters provided cards              |
+
+### Events
+
+| Name               | Event Data | Description |
+|--------------------|------------|-------------|
+| has-loaded         |            |             |
+| on-error           |            |             |
+| voucher-code-click |            |             |
+
+### Slots
+
+The `ContentCards` component makes heavy use of slots in order to surface different states of data retrieval
+
+| Slot name | scoped data | Description                                                                                                                                                         |
+|:----------|:-----------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| loading   |     {}      | The loading slot can be used by the consuming code to surface a loading state to the user before card data has been retrieved                                       |
+| default   |  { cards }  | The `default` slot is used to display the cards when they have been received from the cards source instance, or alternatively injected via the `custom-cards` prop. |
+| no-cards  |     {}      | The `no-cards` slot can be used to surface a message to the user when no cards have been received from the cards source(s)                                          |
+| error     |     {}      | The `error` slot can be used by the consuming code to surface a message to the user when an error has been encountered upon initialising the cards source instance  |
+
+
+### Data
+
+The `state` property is set to the current state of the content cards component, using one of four states to show one of the corresponding four slots. For example `STATE_NO_CARDS` shows the no cards slot.
+
+The `cards` array is where all the cards from all adapters are pushed into so that it can be exposed as a slot prop.
+
+The `errors` array is used to push errors onto which occur while retrieving cards from the adapters in the `adapters` array.
+
+The `cardObserver` is an object that holds the information about intersection time and whether its intersecting using teh cards id. (esentually the viewing time and when it comes on screen and off-screen.)
+
+### Watchers
+
+The `errors` property is watched so that we can update the components state to show the correct slot
+
+## Card Templates
+
+More information coming soon
+
+## Future Changes
+
+More information coming soon
+
+## Unit Testing
+
+More information coming soon
+
+## Visual Regression
+
+More information coming soon
+
 ## Prerequisites
-
-### Appboy (Braze SDK)
-
-This component requires Braze SDK credentials and an associated User ID to invoke calls to the Braze service.
-
-If credentials are not provided the component will attempt to use any instances of appboy that have been initialised on `window.appboy`.
 
 ### Vue
 
@@ -47,7 +117,7 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 
 ## Usage
 
-#### Installation
+### Installation
 
 This package can be installed using npm or yarn:
 
@@ -86,79 +156,6 @@ export default {
     }
 }
 ```
-
-### Non-Vue Applications
-
-This module can be ran as a micro front-end for applications that don't make use of the Vue framework.
-
-The following rudimentary example can be used as a guide for implementing this component in an existing static application:
-
-```html
-<!doctype html>
-<html lang="en">
-<head>
-    <title>Content Cards Example</title>
-    <link rel="stylesheet" href="node_modules/@justeat/f-content-cards/dist/f-content-cards.css">
-</head>
-<body>
-    <div data-content-card>
-        <content-cards />
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="node_modules/@justeat/f-content-cards/dist/f-content-cards.umd.min.js"></script>
-    <script>
-        (function() {
-            if (typeof Vue === 'undefined') return null;
-
-            Vue.config.devtools = false;
-            Vue.config.productionTip = false;
-
-            return new Vue({
-                el: '[data-content-card]',
-            });
-    	})()
-    </script>
-</body>
-</html>
-```
-
-
-## Slots
-
-The `ContentCards` component makes heavy use of slots in order to surface different states of data retrieval
-
-| Slot name | scoped data | Description |
-| :---      | :---:       | :---        |
-| `loading` | `{}` | The `loading` slot can be used by the consuming code to surface a loading state to the user before card data has been retrieved |
-| `default` | `{ cards }` | The `default` slot is used to display the cards when they have been received from the cards source instance, or alternatively injected via the `custom-cards` prop. |
-| `no-cards` | `{}` | The `no-cards` slot can be used to surface a message to the user when no cards have been received from the cards source(s) |
-| `error` | `{}` | The `error` slot can be used by the consuming code to surface a message to the user when an error has been encountered upon initialising the cards source instance |
-
-
-## Configuration
-
-The following props can be used to configure the component:
-
-| Prop                      | Type           | Required      | Default | Description  | Comment |
-| :---                      |     :---:      |     :---:     |  :---:  | :---:        | :---    |
-| `api-key`                 | string         | false         |    -    | The Braze SDK api key. | If no apiKey is provided the component will look for an existing appboy implementation at `window.appboy`. |
-| `user-id`                 | string         | false         |    -    | The Braze User ID associated to the current authenticated user. |  If no userId is provided the component will look for an existing appboy implementation at `window.appboy`. |
-| `custom-cards`            | array          | false         |    -    | Can be used to inject custom card data in the event that no data is received from braze. | |
-| `pushToDataLayer`         | function       | false         |    -    | A callback for feeding back analytics regarding content cards to the consuming application | If no function is passed then this will be replaced with a noop function |
-| `locale`                  | string         | true _if_ [vue-i18n](https://kazupon.github.io/vue-i18n/) plugin not used by consuming application | 'en-GB | Locale in `lang_COUNTRY` format - e.g. `en-GB` | |
-| `testId`                  | string         | false         |   null  | Indicates the test id attribute of the component root element. | If this is missing or nully, all child components will also be rendered without test id attributes. |
-
-## Events
-
-The following events can be emitted by the component, with the shape given:
-
-| Event                 | Description                   | Example Payload |
-| -----                 | -----------                   | --------------- |
-| `@voucher-code-click` | Emitted when a voucher card contained within the component has been clicked | `{ "url": "http://example.org/test" }` |
-| `@on-metadata-init`   | Emitted with the cards source instance once it has initialised. | `appboy` |
-| `@get-card-count`     | Emitted with a number outlining the total card count once Appboy has initialised. | `3` |
-| `@has-loaded`         | Emitted with a boolean indicating that the component has initialised. | true |
-| `@on-error`           | Emitted with an Error object if appboy fails to initialise. | `{ Error }`
 
 ## Cards
 
