@@ -67,7 +67,7 @@ The `cards` array is where all the cards from all adapters are pushed into so th
 
 The `errors` array is used to push errors onto which occur while retrieving cards from the adapters in the `adapters` array.
 
-The `cardObserver` is an object that holds the information about intersection time and whether its intersecting using teh cards id. (esentually the viewing time and when it comes on screen and off-screen.)
+The `cardObserver` is an object that holds the information about intersection time and whether its intersecting using the cards id. (esentually the viewing time and when it comes on screen and off-screen.)
 
 ### Watchers
 
