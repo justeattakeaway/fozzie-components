@@ -23,9 +23,9 @@ export const CustomContentCardsAdapter = (args, { argTypes }) => ({
 
     created () {
         const adapter = () => ({
-            source: 'StampCardsAdapter',
+            source: 'CustomAdapter',
             initialise: (_, callback) => {
-                callback(generateStampCards(4));
+                callback(generateStampCards());
             },
             handleCardView: card => {
                 action('view')(card);

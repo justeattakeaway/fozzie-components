@@ -1,7 +1,7 @@
 <div align="center">
   <h1>f-content-cards</h1>
 
-  <img width="125" alt="Fozzie Bear" src="../../bear.png" />
+  <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
   <p>Content cards component</p>
 </div>
