@@ -32,12 +32,12 @@ The component has the following folder structure
 
 ### Props
 
-| Name     | Type   | Required | Default       | Purpose                             |
-|----------|--------|----------|---------------|-------------------------------------|
-| adapters | Array  | true     | N/A           | Functions that return content cards |
-| locale   | String | true     | N/A           | Users tenant, used for i18n         |
-| tags     | String | false    | content-cards | Provides tags for logging           |
-| filters  | Array  | false    | []            | Filters provided cards              |
+| Name     | Type   | Required | Default       | Purpose                                                                                           |
+|----------|--------|----------|---------------|---------------------------------------------------------------------------------------------------|
+| adapters | Array  | true     | N/A           | Array of Objects conforming to the adapter interface (Refer to Adapters Section for more details) |
+| locale   | String | true     | N/A           | Users tenant, used for i18n                                                                       |
+| tags     | String | false    | content-cards | Provides tags for logging                                                                         |
+| filters  | Array  | false    | []            | Filters provided cards                                                                            |
 
 ### Events
 
@@ -72,6 +72,10 @@ The `cardObserver` is an object that holds the information about intersection ti
 ### Watchers
 
 The `errors` property is watched so that we can update the components state to show the correct slot
+
+## Adapters
+
+AN example of how to use the adapters can be found here https://github.com/justeattakeaway/content-cards-web/blob/main/packages/adapters/braze/README.md
 
 ## Card Templates
 

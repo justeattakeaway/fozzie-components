@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v10.3.0
 ------------------------------
-*January 01, 2023*
+*January 26, 2023*
 
 ### Added
 - New mock data
