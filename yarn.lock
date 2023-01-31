@@ -2768,13 +2768,22 @@
   resolved "https://registry.yarnpkg.com/@justeat/stylelint-config-fozzie/-/stylelint-config-fozzie-3.2.0.tgz#f2e593e70119185e71e2acf53f77b3e092623402"
   integrity sha512-EVdq2lgLxx5J5WHZqdLs1xB+R+ICNGnh+TMAnq5mHMXCIUuRfHQ9h4syc8UKGnMXLBPlr+0qKAMByFrRSwDH6Q==
 
-"@justeattakeaway/cc-braze-adapter@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-braze-adapter/-/cc-braze-adapter-0.2.0.tgz#aedd7ddc8b0455dcd8aefaf7ec1921df24230a0e"
-  integrity sha512-gyxZTiM117xxdjJX3hYpF/m1RUtTzTI8EZ1s/axqIVGTE3/QiBd0+ElBNYg2NwJP9gPUtbHOn6U+Txs3MDjl+g==
+"@justeattakeaway/cc-braze-adapter@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-braze-adapter/-/cc-braze-adapter-0.4.0.tgz#9a1972db5e0de7c0934eb2e5df91ab4911994f9e"
+  integrity sha512-tWwBPMWNIO9/TVAeizKfYxg7u2WOXSQyprbLIgR72GbWAxmdaeC2m5wtmTkGjd+gp8C1d/odUeEQ5cdR1WwjQA==
   dependencies:
     "@justeattakeaway/cc-filters" "0.1.0"
     "@justeattakeaway/cc-utils" "0.1.0"
+    date-fns "2.29.3"
+    lodash-es "4.17.21"
+
+"@justeattakeaway/cc-braze-adapter@file:packages/components/pages/f-loyalty/.yalc/@justeattakeaway/cc-braze-adapter":
+  version "0.3.0"
+  dependencies:
+    "@justeattakeaway/cc-filters" "0.1.0"
+    "@justeattakeaway/cc-utils" "0.1.0"
+    date-fns "2.29.3"
     lodash-es "4.17.21"
 
 "@justeattakeaway/cc-filters@0.1.0":
@@ -2802,12 +2811,12 @@
   resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-utils/-/cc-utils-0.1.0.tgz#f71d3f1d3eb147b2fdb016c2dc06e9c31e89a11b"
   integrity sha512-R4VSIu/C15gTxJIlZieNjvWarOXq7vbbOEXFclNgKHp0JXy2JkK4aVJveQphlmkbo4IhsguAjXI49kerxjZXZw==
 
-"@justeattakeaway/pie-icons-vue@1.0.0", "@justeattakeaway/pie-icons-vue@1.x":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@justeattakeaway/pie-icons-vue/-/pie-icons-vue-1.0.0.tgz#62f86c4fedb449c072e4d37955ad619d10baa9a2"
-  integrity sha512-4HoFiGCB4wz3v9m70n8Box4k3dRFJAf7h4Gxg8zL/22YBchFl27owk0WaJuY3EP3t15LoGRFX1grFHWRD7vGdA==
+"@justeattakeaway/pie-icons-vue@2.0.0-beta.1":
+  version "2.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@justeattakeaway/pie-icons-vue/-/pie-icons-vue-2.0.0-beta.1.tgz#fdfe4a8848e8f4667d8133b03eb6735d566d1276"
+  integrity sha512-izT2q3wMQGbAfBAQqFaGR2+SxxGi7zJj6+vxQzwWEVY8pQ3+WnIQbYNgC+Tv3OeWWkde1lyeiUHrs5PO3qADzw==
   dependencies:
-    babel-helper-vue-jsx-merge-props "2.0.3"
+    "@vue/babel-helper-vue-jsx-merge-props" "1.4.0"
 
 "@kazupon/vue-i18n-loader@0.5.0":
   version "0.5.0"
@@ -5667,7 +5676,7 @@
   resolved "https://registry.yarnpkg.com/@vercel/ncc/-/ncc-0.31.1.tgz#9346c7e59326f5eeac75c0286e47df94c2d6d8f7"
   integrity sha512-g0FAxwdViI6UzsiVz5HssIHqjcPa1EHL6h+2dcJD893SoCJaGdqqgUF09xnMW6goWnnhbLvgiKlgJWrJa+7qYA==
 
-"@vue/babel-helper-vue-jsx-merge-props@^1.2.1", "@vue/babel-helper-vue-jsx-merge-props@^1.4.0":
+"@vue/babel-helper-vue-jsx-merge-props@1.4.0", "@vue/babel-helper-vue-jsx-merge-props@^1.2.1", "@vue/babel-helper-vue-jsx-merge-props@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@vue/babel-helper-vue-jsx-merge-props/-/babel-helper-vue-jsx-merge-props-1.4.0.tgz#8d53a1e21347db8edbe54d339902583176de09f2"
   integrity sha512-JkqXfCkUDp4PIlFdDQ0TdXoIejMtTHP67/pvxlgeY+u5k3LEdKuWZ3LK6xkxo52uDoABIVyRwqVkfLQJhk7VBA==
@@ -10899,7 +10908,7 @@ date-fns@2.28.0:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.28.0.tgz#9570d656f5fc13143e50c975a3b6bbeb46cd08b2"
   integrity sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==
 
-date-fns@^2.17.0, date-fns@^2.29.1, date-fns@^2.29.3:
+date-fns@2.29.3, date-fns@^2.17.0, date-fns@^2.29.1, date-fns@^2.29.3:
   version "2.29.3"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.29.3.tgz#27402d2fc67eb442b511b70bbdf98e6411cd68a8"
   integrity sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==
@@ -27273,6 +27282,11 @@ uuid@8.3.2, uuid@^8.0.0, uuid@^8.3.0, uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+
+uuid@9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.0.tgz#592f550650024a38ceb0c562f2f6aa435761efb5"
+  integrity sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==
 
 uuid@^3.0.0, uuid@^3.0.1, uuid@^3.3.2:
   version "3.4.0"
