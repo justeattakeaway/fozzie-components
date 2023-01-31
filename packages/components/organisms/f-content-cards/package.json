@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-content-cards",
   "description": "Fozzie Content Cards",
-  "version": "10.2.0",
+  "version": "10.3.0",
   "main": "dist/f-content-cards.umd.min.js",
   "maxBundleSize": "85kB",
   "files": [
@@ -50,9 +50,9 @@
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "7.12.13",
     "@justeat/f-services": "1.x",
-    "@justeattakeaway/cc-braze-adapter": "0.2.0",
-    "@justeattakeaway/cc-stampcards-adapter": "0.5.1",
+    "@justeattakeaway/cc-braze-adapter": "0.4.0",
     "@justeattakeaway/cc-filters": "0.1.0",
+    "@justeattakeaway/cc-stampcards-adapter": "0.5.1",
     "@justeattakeaway/cc-utils": "0.1.0",
     "core-js": "3.6.5"
   },

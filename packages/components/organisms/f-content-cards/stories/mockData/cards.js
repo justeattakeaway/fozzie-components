@@ -1,4 +1,4 @@
-import faker from 'faker';
+import { faker } from '@faker-js/faker';
 import sha1 from 'crypto-js/sha1';
 
 /* eslint-disable camelcase */
@@ -94,14 +94,14 @@ const fieldTypeToFaker = {
             { Start: '00:00', End: '23:59' }
         ]
     }),
-    discount_percentage: faker.random.number.bind(faker.random, { min: 1, max: 99 }),
-    earned_stamps: faker.random.number.bind(faker.random, { min: 1, max: 4 }),
-    expiry_date: faker.random.number.bind(faker.random, { min: 1, max: 4 }),
+    discount_percentage: faker.random.numeric.bind(faker.random, { min: 1, max: 99 }),
+    earned_stamps: faker.random.numeric.bind(faker.random, { min: 1, max: 4 }),
+    expiry_date: () => faker.date.soon(),
     expiry_line: randomSentence,
     footer: randomSentence,
     headline: randomSentence,
     icon_1: type => `https://picsum.photos/seed/${type}_icon_1/48/48`,
-    is_ready_to_claim: () => false,
+    is_ready_to_claim: () => true,
     image_1: type => `https://picsum.photos/seed/${type}_image_1/${getImageConfigByType(type)}`,
     line3: randomSentence,
     line4: randomSentence,
@@ -109,8 +109,8 @@ const fieldTypeToFaker = {
     line_4: randomSentence,
     line_5: randomSentence,
     line_6: randomSentence,
-    offer_auth_required: faker.random.boolean.bind(faker.random),
-    restaurant_id: faker.random.number.bind(faker.random, { min: 100, max: 999999 }),
+    offer_auth_required: faker.datatype.boolean.bind(faker.datatype),
+    restaurant_id: faker.random.numeric.bind(faker.random, { min: 100, max: 999999 }),
     restaurant_image_url: type => `https://picsum.photos/seed/${type}_restaurant_image_url/${getImageConfigByType(type)}`,
     restaurant_logo_url: type => `https://picsum.photos/seed/${type}_restaurant_logo_url/48/48`,
     subtitle: randomSentence,
@@ -162,11 +162,10 @@ function seededRandomCardOfType (type) {
                 console.log(`Invalid field: ${field}`);
                 return;
             }
-
             e[field] = fieldTypeToFaker[field](type);
         });
 
-    const id = btoa([`5d79109d167e923a83d3d7db_$_cc=${faker.random.uuid()}`, 'mv=5d79109d167e923a83d3d7dd', 'pi=cmp'].join('&'));
+    const id = btoa([`5d79109d167e923a83d3d7db_$_cc=${faker.datatype.uuid()}`, 'mv=5d79109d167e923a83d3d7dd', 'pi=cmp'].join('&'));
     const tt = faker.lorem.sentence(3);
     const ds = faker.lorem.sentence();
     const dm = faker.internet.domainName();
