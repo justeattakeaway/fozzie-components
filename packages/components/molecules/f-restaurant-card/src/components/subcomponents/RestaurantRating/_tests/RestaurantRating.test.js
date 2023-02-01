@@ -69,6 +69,23 @@ describe('RestaurantRating component', () => {
         expect(ratingsMeanElement.text()).toStrictEqual(expectedRenderedValue);
     });
 
+    it.each([[5, '5'], [6, '6'], [undefined, '6']])('should update the max rating based on value provided %p or fallback to default', (maxRatingValue, expectedValue) => {
+        // arrange
+        const propsData = {
+            mean: 5,
+            count: 250,
+            maxRating: maxRatingValue
+        };
+
+        // act
+        const wrapper = mount(RestaurantRating, { propsData });
+        const ratingsMaxElement = wrapper.find('[data-test-id="ratings-max-value"]');
+
+        // assert
+        expect(ratingsMaxElement.exists()).toBe(true);
+        expect(ratingsMaxElement.text()).toStrictEqual(expectedValue);
+    });
+
     describe('isOwnRatingMessage is true', () => {
         const isOwnRating = true;
 

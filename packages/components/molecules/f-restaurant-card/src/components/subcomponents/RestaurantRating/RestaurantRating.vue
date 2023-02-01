@@ -51,6 +51,7 @@
             <data
                 :class="[$style['c-restaurantCard-rating-outOf']]"
                 :value="maxRating"
+                data-test-id="ratings-max-value"
                 aria-hidden="true">
                 {{ maxRating }}
             </data>
