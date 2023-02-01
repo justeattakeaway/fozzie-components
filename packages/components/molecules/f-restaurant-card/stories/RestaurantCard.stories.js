@@ -32,6 +32,7 @@ RestaurantCardComponent.args = {
         isOwnRating: false,
         mean: 5.00,
         count: 1400,
+        maxRating: 6,
         accessibleMessage: 'rated 5 stars out of 6',
         notRatedMessage: 'No ratings yet',
         isOwnRatingMessage: 'You'
