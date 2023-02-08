@@ -3,7 +3,7 @@ const messages = {
     verificationPage: {
         subTitle: 'Te hemos enviado por correo electrónico tu código de inicio de sesión',
         instructionsPrimaryText: 'Hemos enviado un código de verificación a {0} para ayudarte a mantener tu cuenta segura. Introdúcelo a continuación para iniciar sesión.',
-        instructionsSecondaryText: 'Tu código será válido durante {0} minutos.',
+        instructionsSecondaryText: 'Tu código será válido durante 30 minutos.',
         formField: {
             labelText: 'Tu código de verificación',
             placeholderText: 'Introducir código',

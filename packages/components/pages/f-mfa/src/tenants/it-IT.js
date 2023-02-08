@@ -3,7 +3,7 @@ const messages = {
     verificationPage: {
         subTitle: 'Ti abbiamo inviato un’email con il codice di accesso',
         instructionsPrimaryText: 'Abbiamo inviato un’email con il codice di verifica a {0} per garantire la sicurezza del tuo account. Inserisci il codice qui sotto per accedere.',
-        instructionsSecondaryText: 'Il tuo codice sarà valido per {0} minuti.',
+        instructionsSecondaryText: 'Il tuo codice sarà valido per 30 minuti.',
         formField: {
             labelText: 'Il tuo codice di verifica',
             placeholderText: 'Inserisci il codice',
