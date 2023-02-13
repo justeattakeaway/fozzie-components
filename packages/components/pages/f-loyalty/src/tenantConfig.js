@@ -55,7 +55,7 @@ const ordinals = {
     'it-IT': false
 };
 
-const currencySymbolBefore = {
+const isCurrencySymbolBefore = {
     'en-GB': true,
     'en-AU': true,
     'en-NZ': true,
@@ -66,10 +66,10 @@ const currencySymbolBefore = {
 
 const tenantOrdinals = tenant => ordinals[tenant];
 
-const tenantCurrencySymbol = tenant => currencySymbolBefore[tenant];
+const isTenantCurrencySymbolBefore = tenant => isCurrencySymbolBefore[tenant];
 
 export {
     tenantBagFees,
     tenantOrdinals,
-    tenantCurrencySymbol
+    isTenantCurrencySymbolBefore
 };

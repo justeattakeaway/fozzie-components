@@ -115,9 +115,9 @@ import FCard from '@justeat/f-card';
 import MediaElement from '@justeat/f-media-element';
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
-import { tenantBagFees, tenantOrdinals, tenantCurrencySymbol } from '../tenantConfig';
+import { tenantBagFees, tenantOrdinals, isTenantCurrencySymbolBefore } from '../tenantConfig';
 
-const formatAsCurrency = (amount, currencySymbol, tenant) => `${tenantCurrencySymbol(tenant) ?
+const formatAsCurrency = (amount, currencySymbol, tenant) => `${isTenantCurrencySymbolBefore(tenant) ?
     `${currencySymbol}${amount.toFixed(2)}` : `${amount.toFixed(2)}${currencySymbol}`}`;
 
 export default {
