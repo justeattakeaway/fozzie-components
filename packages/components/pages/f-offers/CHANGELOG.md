@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.15.2
 ------------------------------
-*December 07, 2022*
+*February 13, 2022*
 
 ### Added
 - braze sk 3.3.0 under dev dependencies to allow tests to work.
