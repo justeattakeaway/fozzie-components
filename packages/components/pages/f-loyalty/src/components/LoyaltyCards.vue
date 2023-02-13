@@ -67,16 +67,18 @@ export default {
     },
 
     created () {
-        this.adapters.push(this.inStampCardsAdapterExperiment ? stampCardsAdapter({
-            token: () => this.authToken,
-            tenant: this.tenant,
-            url: this.stampCardsAPIUrl
-        }) : brazeAdapter({
-            apiKey: this.brazeApiKey,
-            sdkEndpoint: 'sdk.iad-01.braze.com',
-            userId: this.globalUserId,
-            loggingEnabled: false
-        }));
+        this.adapters.push(this.inStampCardsAdapterExperiment ?
+            stampCardsAdapter({
+                token: () => this.authToken,
+                tenant: this.tenant,
+                url: this.stampCardsAPIUrl
+            })
+            : brazeAdapter({
+                apiKey: this.brazeApiKey,
+                sdkEndpoint: 'sdk.iad-01.braze.com',
+                userId: this.globalUserId,
+                loggingEnabled: false
+            }));
     }
 
 };

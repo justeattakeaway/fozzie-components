@@ -145,7 +145,7 @@ export default {
         await this.init({
             brazeApiKey: this.brazeApiKey,
             authToken: this.authToken,
-            tenant: TENANT_MAP[this.$i18n.locale],
+            tenant: this.tenant,
             stampCardsAPIUrl: this.stampCardsAPIUrl,
             inStampCardsAdapterExperiment: this.inStampCardsAdapterExperiment
         });
