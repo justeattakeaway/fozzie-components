@@ -115,10 +115,10 @@ import FCard from '@justeat/f-card';
 import MediaElement from '@justeat/f-media-element';
 import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
-import tenantBagFees from '../tenantBagFees';
+import { tenantBagFees, tenantOrdinals, isTenantCurrencySymbolBefore } from '../tenantConfig';
 
-const formatAsCurrency = (amount, currencySymbol) => `${currencySymbol}${amount
-    .toFixed(2)}`;
+const formatAsCurrency = (amount, currencySymbol, tenant) => `${isTenantCurrencySymbolBefore(tenant) ?
+    `${currencySymbol}${amount.toFixed(2)}` : `${amount.toFixed(2)}${currencySymbol}`}`;
 
 export default {
     name: 'HowItWorksLayout',
@@ -158,9 +158,9 @@ export default {
             const ordinal = { 0: 'st', 1: 'nd', 2: 'rd' };
 
             return [...tenantBagFees(this.tenant)].map((bagValue, index) => ({
-                number: `${index + 1}${ordinal[index] || 'th'}`,
+                number: `${index + 1}${tenantOrdinals(this.tenant) ? ordinal[index] || 'th' : ''}`,
                 image: `${this.$t('howItWorks.imagePath')}bag-${currency}-${bagValue}.svg`,
-                value: formatAsCurrency(bagValue * percentage * 0.01, currencySymbol)
+                value: formatAsCurrency(bagValue * percentage * 0.01, currencySymbol, this.tenant)
                     .replace('.00', '') // remove zero pence/cents amounts for bag values
             }));
         },
@@ -193,7 +193,8 @@ export default {
         total () {
             return formatAsCurrency(
                 [...tenantBagFees(this.tenant)].reduce((sum, current) => sum + current, 0) * this.$t('percentage') * 0.01,
-                this.$t('currencySymbol')
+                this.$t('currencySymbol'),
+                this.tenant
             );
         }
     }
