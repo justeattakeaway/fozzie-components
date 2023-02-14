@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-braze-adapter",
   "description": "Fozzie Metadata Service",
-  "version": "5.1.0",
+  "version": "5.1.1",
   "main": "dist/f-braze-adapter.umd.js",
   "module": "dist/f-braze-adapter.es.js",
   "files": [
@@ -48,7 +48,8 @@
     "lodash.uniq": "4.5.0"
   },
   "devDependencies": {
-    "mockdate": "3.0.2"
+    "mockdate": "3.0.2",
+    "@braze/web-sdk": "3.3.0"
   },
   "peerDependencies": {
     "js-cookie": ">=2.2.1",

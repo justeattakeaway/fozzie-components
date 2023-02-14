@@ -54,6 +54,7 @@ import LoyaltyHeader from './Header.vue';
 import HowItWorks from './HowItWorks.vue';
 import LoyaltyCards from './LoyaltyCards.vue';
 import Unauthenticated from './Unauthenticated.vue';
+import TENANT_MAP from '../tenants/map';
 
 
 export default {
@@ -77,6 +78,10 @@ export default {
             type: String,
             default: undefined
         },
+        stampCardsAPIUrl: {
+            type: String,
+            default: undefined
+        },
         brazeApiKey: {
             type: String,
             required: true
@@ -84,6 +89,10 @@ export default {
         showLoyaltyNavigationElements: {
             type: Boolean,
             default: true
+        },
+        inStampCardsAdapterExperiment: {
+            type: Boolean,
+            default: false
         },
         hash: {
             type: String,
@@ -113,6 +122,10 @@ export default {
          */
         showHowItWorks () {
             return this.hash === '#how-it-works';
+        },
+
+        tenant () {
+            return TENANT_MAP[this.$i18n.locale];
         }
     },
 
@@ -131,7 +144,10 @@ export default {
     async mounted () {
         await this.init({
             brazeApiKey: this.brazeApiKey,
-            authToken: this.authToken
+            authToken: this.authToken,
+            tenant: this.tenant,
+            stampCardsAPIUrl: this.stampCardsAPIUrl,
+            inStampCardsAdapterExperiment: this.inStampCardsAdapterExperiment
         });
     },
 
