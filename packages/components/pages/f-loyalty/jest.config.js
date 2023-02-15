@@ -12,14 +12,15 @@ module.exports = {
     },
 
     transformIgnorePatterns: [
-        'node_modules/(?!(lodash-es)/)'
+        'node_modules/(?!(lodash-es|@justeattakeaway/cc-stampcards-adapter|@justeattakeaway/cc-braze-adapter|@justeattakeaway/cc-utils|@justeattakeaway/cc-filters|@braze/web-sdk)/)'
     ],
 
     moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/src/$1',
         '^~include-media/(.*)$': '<rootDir>../../node_modules/include-media/$1',
         '^~@justeat/(.*)$': '<rootDir>../../node_modules/@justeat/$1',
-        '\\.(css|scss)$': 'jest-transform-stub'
+        '\\.(css|scss)$': 'jest-transform-stub',
+        'typesafe-i18n/detectors': 'typesafe-i18n/detectors/detect.cjs'
     },
 
     snapshotSerializers: [
