@@ -9,10 +9,10 @@ Future Todo List
 
 v11.0.0
 ------------------------------
-*February 17, 2022*
+*February 22, 2022*
 
 ### Changed
-- Updated to `v4.1.0` of `pie-design-tokens`
+- Updated to `v4.1.0` of `pie-design-tokens` which includes: new font tokens object (breaking change) and new elevation box-shadows
 - font token names to reflect version bump (e.g. `font-size-a` -> `font-size-12`)
 
 
