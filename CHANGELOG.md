@@ -7,8 +7,8 @@ v7.47.0
 ------------------------------
 *February 21, 2023*
 
-### Changed
-- Updated pie-design-tokens package to version `4.1.0`
+### Removed
+- `pie-design-tokens` package from root
 
 
 v7.46.0

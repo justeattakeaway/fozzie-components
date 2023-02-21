@@ -12,7 +12,7 @@ v10.11.0
 *February 22, 2022*
 
 ### Changed
-- Updated to `v4.1.0` of `pie-design-tokens` which includes: new font tokens object (breaking change) and new elevation box-shadows
+- Updated to `v4.2.0` of `pie-design-tokens`
 - font token names to reflect version bump (e.g. `font-size-a` -> `font-size-12`)
 
 
