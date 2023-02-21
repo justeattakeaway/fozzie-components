@@ -2748,14 +2748,6 @@
     "@justeat/pie-design-tokens" "3.0.0"
     include-media eduardoboucas/include-media#2.0-release
 
-"@justeat/fozzie@10.x":
-  version "10.10.3"
-  resolved "https://registry.yarnpkg.com/@justeat/fozzie/-/fozzie-10.10.3.tgz#008207c67b2d6f5c04ba0b014067e850e37399ea"
-  integrity sha512-GcW4MIyFH1XvIl9rcjiO6pF2znzgbBVnc9sepkRPWKfJ2p+eLT4x4Kkn+RatIAChv5EY8P8i+MPCta4x1ZJVHQ==
-  dependencies:
-    "@justeat/pie-design-tokens" "3.2.0"
-    include-media eduardoboucas/include-media#2.0-release
-
 "@justeat/js-test-buddy@0.4.1":
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/@justeat/js-test-buddy/-/js-test-buddy-0.4.1.tgz#5ab0f7bd0ebc160c275b7b5d2ad2a6282420e106"
@@ -2771,15 +2763,6 @@
     jsonc-parser "2.2.0"
     lodash.merge "4.6.2"
     mkdirp "1.0.3"
-
-"@justeat/pie-design-tokens@3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@justeat/pie-design-tokens/-/pie-design-tokens-3.2.0.tgz#5b43ae8d46d1e8010c43923fd28369e9912a5013"
-  integrity sha512-G0WOSTogip9GbZ1ewp2/icHfvQj7Ye+35IgCw2vzg1+HW/okcYqcdaNGFLhs5HY6JZRK5K19bhf0Uyg8w77+Wg==
-  dependencies:
-    jsonc-parser "3.2.0"
-    lodash.merge "4.6.2"
-    mkdirp "1.0.4"
 
 "@justeat/pie-design-tokens@4.1.0":
   version "4.1.0"
@@ -15281,9 +15264,8 @@ include-media@1.4.9:
   resolved "https://registry.yarnpkg.com/include-media/-/include-media-1.4.9.tgz#d0020b7be3eb2d54868a20943595ce380e0bc43b"
   integrity sha512-IUOcvWDCt6R5V0ktsGk6RbehkW9ks1dODN2ed1p+mhML82TteAl+/ElXy8AJ7ueIuVoKq2NioRVdW9FuwQNOew==
 
-include-media@eduardoboucas/include-media#2.0-release, "include-media@github:eduardoboucas/include-media#2.0-release":
+include-media@eduardoboucas/include-media#2.0-release:
   version "2.0.0"
-  uid a3c0288e5b22cc746cc2d320d0a374b2ed9d0aeb
   resolved "https://codeload.github.com/eduardoboucas/include-media/tar.gz/a3c0288e5b22cc746cc2d320d0a374b2ed9d0aeb"
 
 indent-string@^2.1.0:
