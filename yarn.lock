@@ -2732,10 +2732,10 @@
   dependencies:
     "@justeat/f-dom" "0.4.0"
 
-"@justeat/feature-management@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@justeat/feature-management/-/feature-management-1.0.0.tgz#bd522a2ad1f7d5982496ca7c8f157b5e1f06b87d"
-  integrity sha512-sdm2HZ2EZsAC5Xm8ZumRge5w1IpMrV/LbOe8Do6axJs/cEbmay4ONbbyJYAUcV0ITroqR+mGh4vB6c7dOEeYRg==
+"@justeat/feature-management@^1.0.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@justeat/feature-management/-/feature-management-1.1.0.tgz#58e8f9ed89bbf0372578d7c0762df26f5c4ac7fc"
+  integrity sha512-6turPDPA6u8K2s3I0wJwWgpzXHBBUKY3nc2GYsXS2eI9g+S1062RefENljm+eBo9NLS3wC5kXRe9ZgFE34h44g==
   dependencies:
     axios "0.25.0"
     crypto-js "4.1.1"
