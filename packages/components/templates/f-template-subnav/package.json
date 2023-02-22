@@ -52,5 +52,8 @@
     "@justeat/f-breadcrumbs": "4.x",
     "@justeat/f-navigation-links": "2.x",
     "@justeat/f-wdio-utils": "1.x"
+  },
+  "volta": {
+    "extends": "../../../volta.json"
   }
 }

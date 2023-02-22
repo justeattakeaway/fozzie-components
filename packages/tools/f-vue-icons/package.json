@@ -70,5 +70,8 @@
         }
       ]
     ]
+  },
+  "volta": {
+    "extends": "../../../volta.json"
   }
 }

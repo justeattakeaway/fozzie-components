@@ -44,5 +44,8 @@
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
+  },
+  "volta": {
+    "extends": "../../../volta.json"
   }
 }

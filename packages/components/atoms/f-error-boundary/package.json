@@ -47,5 +47,8 @@
   "devDependencies": {
     "@justeat/f-wdio-utils": "1.x",
     "vite-plugin-vue2": "1.9.0"
+  },
+  "volta": {
+    "extends": "../../../../volta.json"
   }
 }

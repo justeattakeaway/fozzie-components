@@ -64,5 +64,8 @@
     "@justeat/f-card": "4.x",
     "@justeat/f-vue-icons": "3.x",
     "@justeat/f-wdio-utils": "1.x"
+  },
+  "volta": {
+    "extends": "../../../../volta.json"
   }
 }

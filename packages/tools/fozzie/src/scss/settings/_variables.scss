@@ -11,47 +11,98 @@
 // Set this in pixels (but do not add px),
 // the font-size mixin will convert to REMS
 
-$font-size-base             : nth(dt.$font-size-c, 1); // Base font size is set to 16 (`body-l` size)
+$font-size-base             : nth(dt.$font-size-16, 1); // Base font size is set to 16 (`body-l` size)
 $font-size-base-px          : $font-size-base * 1px;
 
 // Type map – these are our global font-sizes and line-heights across the site
 $type: (
     caption: (
-        default: (dt.$font-size-a)
+        default: (
+            dt.$font-size-12,
+            dt.$font-size-12-line-height
+        )
     ),
     body-s: (
-        default: (dt.$font-size-b)
+        default: (
+            dt.$font-size-14,
+            dt.$font-size-14-line-height
+        )
     ),
     body-l: (
-        default: (dt.$font-size-c)
+        default: (
+            dt.$font-size-16,
+            dt.$font-size-16-line-height
+        )
     ),
     subheading-s: (
-        default: (dt.$font-size-d),
-        narrow: (dt.$font-size-c)
+        default: (
+            dt.$font-size-20,
+            dt.$font-size-20-line-height
+        ),
+        narrow: (
+            dt.$font-size-16,
+            dt.$font-size-16-line-height
+        )
     ),
     subheading-l: (
-        default: (dt.$font-size-e),
-        narrow: (dt.$font-size-d)
+        default: (
+            dt.$font-size-24,
+            dt.$font-size-24-line-height
+        ),
+        narrow: (
+            dt.$font-size-20,
+            dt.$font-size-20-line-height
+        )
     ),
     heading-s: (
-        default: (dt.$font-size-d),
-        narrow: (dt.$font-size-c)
+        default: (
+            dt.$font-size-20,
+            dt.$font-size-20-line-height
+        ),
+        narrow: (
+            dt.$font-size-16,
+            dt.$font-size-16-line-height
+        )
     ),
     heading-m: (
-        default: (dt.$font-size-e),
-        narrow: (dt.$font-size-d)
+        default: (
+            dt.$font-size-24,
+            dt.$font-size-24-line-height
+        ),
+        narrow: (
+            dt.$font-size-20,
+            dt.$font-size-20-line-height
+        )
     ),
     heading-l: (
-        default: (dt.$font-size-f),
-        narrow: (dt.$font-size-e)
+        default: (
+            dt.$font-size-28,
+            dt.$font-size-28-line-height
+        ),
+        narrow: (
+            dt.$font-size-24,
+            dt.$font-size-24-line-height
+        )
     ),
     heading-xl: (
-        default: (dt.$font-size-g),
-        narrow: (dt.$font-size-f)
+        default: (
+            dt.$font-size-32,
+            dt.$font-size-32-line-height
+        ),
+        narrow: (
+            dt.$font-size-28,
+            dt.$font-size-28-line-height
+        )
     ),
     heading-xxl: (
-        default: (dt.$font-size-h),
-        narrow: (dt.$font-size-g)
+        default: (
+            dt.$font-size-48,
+            dt.$font-size-48-line-height
+        ),
+        narrow: (
+            dt.$font-size-32,
+            dt.$font-size-32-line-height
+        )
     )
 ) !default;
 

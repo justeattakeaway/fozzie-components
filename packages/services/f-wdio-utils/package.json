@@ -41,5 +41,8 @@
   "dependencies": {
     "@axe-core/webdriverio": "4.4.3",
     "@justeat/f-services": "1.x"
+  },
+  "volta": {
+    "extends": "../../../volta.json"
   }
 }

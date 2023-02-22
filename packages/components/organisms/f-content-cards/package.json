@@ -79,5 +79,8 @@
     "jsdom-testing-mocks": "^1.6.0",
     "vue": "2.6.10",
     "xhr-mock": "2.5.1"
+  },
+  "volta": {
+    "extends": "../../../../volta.json"
   }
 }
