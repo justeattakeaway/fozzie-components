@@ -18,6 +18,8 @@ describe('SCSS', () => {
     // Find all of the Scss files that end in `*.spec.scss` in any directory of this project
     const scssTestFiles = glob.sync(testFilePathGlob);
 
-    // Run True on every file found with the describe and it methods provided
-    scssTestFiles.forEach(file => sassTrue.runSass({ file, includePaths: ['node_modules'] }, { describe, it }));
+    it('should run true on every file found with the correct naming convention', () => {
+        // Run True on every file found with the describe and it methods provided
+        scssTestFiles.forEach(file => sassTrue.runSass({ file, includePaths: ['node_modules'] }, { describe, it }));
+    });
 });
