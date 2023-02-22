@@ -64,7 +64,6 @@
     "@justeat/browserslist-config-fozzie": "1.2.0",
     "@justeat/eslint-config-fozzie": "5.4.0",
     "@justeat/fozzie": "10.x",
-    "@justeat/pie-design-tokens": "4.2.0",
     "@justeat/stylelint-config-fozzie": "2.2.0",
     "@percy/cli": "1.0.5",
     "@percy/webdriverio": "2.0.1",
