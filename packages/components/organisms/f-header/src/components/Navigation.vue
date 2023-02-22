@@ -301,6 +301,7 @@
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <country-selector
                         :is-below-mid="isBelowMid"
+                        :is-nav-open="navIsOpen"
                         :copy="copy.countrySelector"
                         :tabindex="tabIndex"
                         data-test-id="country-selector"
