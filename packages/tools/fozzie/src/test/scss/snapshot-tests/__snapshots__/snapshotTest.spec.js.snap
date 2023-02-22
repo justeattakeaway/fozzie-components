@@ -3276,7 +3276,7 @@ hr {
   overflow: hidden;
   position: relative;
   background-color: #f5f3f1;
-  box-shadow: 0px 2px 2px 0px rgba(27, 35, 36, 0.03), 0px 3px 1px -2px rgba(27, 35, 36, 0.07), 0px 1px 5px 0px rgba(27, 35, 36, 0.06);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.03), 0px 3px 1px -2px rgba(0, 0, 0, 0.07), 0px 1px 5px 0px rgba(0, 0, 0, 0.06);
   margin-top: 8px;
   margin-bottom: 8px;
 }
@@ -3372,7 +3372,7 @@ hr {
 .c-fullScreenPopOver-header {
   top: 0;
   z-index: 9000;
-  box-shadow: 0px 2px 6px 0px rgba(27, 35, 36, 0.04), 0px 8px 12px -2px rgba(27, 35, 36, 0.06), 0px 4px 6px 0px rgba(27, 35, 36, 0.04);
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.04), 0px 8px 12px -2px rgba(0, 0, 0, 0.06), 0px 4px 6px 0px rgba(0, 0, 0, 0.04);
 }
 
 .c-fullScreenPopOver-header-actionFirst,
@@ -3404,7 +3404,7 @@ hr {
 
 .c-fullScreenPopOver-footer {
   bottom: 0;
-  box-shadow: 0px -4px 6px 0px rgba(27, 35, 36, 0.02), 0px -2px 12px -2px rgba(27, 35, 36, 0.08), 0px -3px 6px 0px rgba(27, 35, 36, 0.06);
+  box-shadow: 0px -4px 6px 0px rgba(0, 0, 0, 0.02), 0px -2px 12px -2px rgba(0, 0, 0, 0.08), 0px -3px 6px 0px rgba(0, 0, 0, 0.06);
 }
 
 @media (max-width: 47.999em) {
@@ -3627,7 +3627,7 @@ hr {
 
 .c-listing-item {
   margin-bottom: 16px;
-  box-shadow: 0px 2px 2px 0px rgba(27, 35, 36, 0.03), 0px 3px 1px -2px rgba(27, 35, 36, 0.07), 0px 1px 5px 0px rgba(27, 35, 36, 0.06);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.03), 0px 3px 1px -2px rgba(0, 0, 0, 0.07), 0px 1px 5px 0px rgba(0, 0, 0, 0.06);
   padding-bottom: 8px;
 }
 @media (min-width: 48.001em) {
@@ -5237,7 +5237,7 @@ If you'd like to use it in your project you can include it by adding \`@include 
   background-color: #303d3f;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-  box-shadow: 0px -4px 6px 0px rgba(27, 35, 36, 0.02), 0px -2px 12px -2px rgba(27, 35, 36, 0.08), 0px -3px 6px 0px rgba(27, 35, 36, 0.06);
+  box-shadow: 0px -4px 6px 0px rgba(0, 0, 0, 0.02), 0px -2px 12px -2px rgba(0, 0, 0, 0.08), 0px -3px 6px 0px rgba(0, 0, 0, 0.06);
   color: #fff;
   height: 95px;
   opacity: 0.9;
