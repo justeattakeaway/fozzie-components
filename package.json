@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "7.46.0",
+  "version": "7.47.0",
   "private": true,
   "scripts": {
     "build": "turbo run build --continue",
@@ -64,7 +64,7 @@
     "@justeat/browserslist-config-fozzie": "1.2.0",
     "@justeat/eslint-config-fozzie": "5.4.0",
     "@justeat/fozzie": "10.x",
-    "@justeat/pie-design-tokens": "3.0.0",
+    "@justeat/pie-design-tokens": "4.2.0",
     "@justeat/stylelint-config-fozzie": "2.2.0",
     "@percy/cli": "1.0.5",
     "@percy/webdriverio": "2.0.1",
@@ -89,7 +89,7 @@
     "babel-jest": "26.1.0",
     "babel-loader": "8.1.0",
     "bundlewatch": "0.3.1",
-    "chromedriver": "108.0.0",
+    "chromedriver": "109.0.0",
     "core-js": "3.26.1",
     "cross-env": "7.0.2",
     "css-loader": "1.0.1",
@@ -124,7 +124,7 @@
     "vue-svg-loader": "0.16.0",
     "vue-template-compiler": "2.6.10",
     "vuex": "3.5.1",
-    "wdio-chromedriver-service": "7.3.2",
+    "wdio-chromedriver-service": "8.0.0",
     "wdio-video-reporter": "3.2.1",
     "webdriverio": "7.19.7"
   },
