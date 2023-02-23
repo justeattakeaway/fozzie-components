@@ -977,6 +977,10 @@ $navTextTweakpointMid: f.em(830);
         .c-nav-toggle--altColour & {
             background-color: f.$color-container-default;
         }
+
+        @include f.media('>mid') {
+            display: none;
+        }
     }
 
     &:before,

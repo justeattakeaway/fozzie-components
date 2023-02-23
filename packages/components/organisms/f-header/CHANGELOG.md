@@ -9,6 +9,7 @@ v10.12.0
 
 ### Fixed
 - Country selector chevron flashing on page load
+- Nav toggle icon flashing on page load.
 
 ### Changed
 - Updated to the new `pie-icons-vue` beta release.
