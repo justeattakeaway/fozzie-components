@@ -1,13 +1,10 @@
 <template>
     <div>
         <content-cards
-            :user-id="globalUserId"
-            :api-key="brazeApiKey"
+            :adapters="adapters"
             :locale="$i18n.locale"
             :tags="tags"
-            :push-to-data-layer="pushToDataLayer"
             @has-loaded="hasLoaded"
-            @get-card-count="cardsReceived"
             @voucher-code-click="openModal($event)"
             @on-error="onError">
             <template #default="{ cards }">
@@ -54,6 +51,7 @@ import {
     FirstTimeCustomerCard,
     SkeletonLoader
 } from '@justeat/f-content-cards';
+import brazeAdapter from '@justeattakeaway/cc-braze-adapter';
 import '@justeat/f-content-cards/dist/f-content-cards.css';
 import { mapState } from 'vuex';
 import { VUEX_MODULE_NAMESPACE_OFFERS } from '../store/types';
@@ -92,7 +90,8 @@ export default {
         modalOngoingUrl: '',
         loadingCard: { type: 'postOrder', count: 3 },
         pushToDataLayer: () => {},
-        tags: 'offers'
+        tags: 'offers',
+        adapters: []
     }),
 
     computed: {
@@ -117,6 +116,15 @@ export default {
                 'nb-NO': 'no'
             }[this.locale] || 'uk';
         }
+    },
+
+    created () {
+        this.adapters.push(brazeAdapter({
+            apiKey: this.brazeApiKey,
+            sdkEndpoint: 'sdk.iad-01.braze.com',
+            userId: this.globalUserId,
+            loggingEnabled: false
+        }));
     },
 
     /**
@@ -159,31 +167,16 @@ export default {
         },
 
         /**
-         * Consumes the number of cards received from braze by the content cards component
-         * @param {number} cards
+         * Handles a successful load of the content cards component and logs the total card count for that adapter
          */
-        cardsReceived (cards) {
-            if (cards || this.contentCardsHaveLoaded) {
-                this.$log.info(
-                    'f-offers (Results) - Content cards received',
-                    'offers',
-                    {
-                        ...this.loggingData,
-                        Count: cards
-                    }
-                );
-            }
-        },
-
-        /**
-         * Handles a successful load of the content cards component
-         */
-        hasLoaded () {
+        hasLoaded ({ adapter, cards }) {
             this.contentCardsHaveLoaded = true;
             this.$log.info(
-                'f-offers (Results) - Content cards loaded successfully',
+                `f-offers (Results:${adapter}) - Content cards loaded successfully`,
                 'offers',
                 {
+                    adapter,
+                    Count: cards.length,
                     ...this.loggingData
                 }
             );
