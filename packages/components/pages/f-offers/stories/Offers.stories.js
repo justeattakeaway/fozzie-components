@@ -103,8 +103,8 @@ export const VOffersComponent = (args, { argTypes }) => ({
 VOffersComponent.storyName = 'f-offers';
 
 VOffersComponent.args = {
-    authToken: '__TEST_TOKEN__',
-    brazeApiKey: '__TEST_BRAZE_SDK_KEY__'
+    authToken: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vZXhhbXBsZS5jb20vbG95YWx0eSIsImlhdCI6MTY2OTczNTg3NiwiZXhwIjoxNzAxMjcxODc2LCJhdWQiOiJodHRwOi8vZXhhbXBsZS5jb20vbG95YWx0eSIsInN1YiI6IjE3OTg0NzA4IiwiZW1haWwiOiJqb2huc21pdGhAZXhhbXBsZS5jb20iLCJuYW1lIjoiSm9obiBTbWl0aCIsImdsb2JhbF91c2VyX2lkIjoiMTIzNDU2Nzg5IiwiZ2l2ZW5fbmFtZSI6IkpvaG4iLCJyb2xlIjoiUmVnaXN0ZXJlZCIsImZhbWlseV9uYW1lIjoiU21pdGgifQ.d__NTXKO7y3I1scfi11wkC4MtNhANzziTDH831T3shI',
+    brazeApiKey: 'e7d83458-a234-4ea6-aa43-a92496fbafc9'
 };
 
 VOffersComponent.argTypes = {

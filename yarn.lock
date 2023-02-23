@@ -2664,15 +2664,6 @@
     eslint-config-airbnb-base "15.0.0"
     eslint-plugin-vue "8.7.1"
 
-"@justeat/f-content-cards@9.x":
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-9.1.0.tgz#e12ff1c0b1e26d8c26fcbfca729e8a7fb7f95ac4"
-  integrity sha512-uQmPGcleY1cQOnXrQwWeg0ptoURxWSXOdU3Y3WHdn6mapqtKM+c10TtA99RCK/Sa66hJtwCi8SvTQf7WJDutfQ==
-  dependencies:
-    "@babel/plugin-proposal-class-properties" "7.12.13"
-    "@justeat/f-services" "1.x"
-    core-js "3.6.5"
-
 "@justeat/f-dom@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-0.4.0.tgz#3e838a2dd06d4d5281c17f5fb9f66d7485fd759a"
@@ -2777,6 +2768,15 @@
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-braze-adapter/-/cc-braze-adapter-0.2.0.tgz#aedd7ddc8b0455dcd8aefaf7ec1921df24230a0e"
   integrity sha512-gyxZTiM117xxdjJX3hYpF/m1RUtTzTI8EZ1s/axqIVGTE3/QiBd0+ElBNYg2NwJP9gPUtbHOn6U+Txs3MDjl+g==
+  dependencies:
+    "@justeattakeaway/cc-filters" "0.1.0"
+    "@justeattakeaway/cc-utils" "0.1.0"
+    lodash-es "4.17.21"
+
+"@justeattakeaway/cc-braze-adapter@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-braze-adapter/-/cc-braze-adapter-0.3.0.tgz#2cbe5bcc6f6122f8176ac13a7045af558053ed87"
+  integrity sha512-uDybXmr7nax8MTMF/KJgyveZEo4Behkeh3bpC61mfuw68y3bYlhBsX0l1Jnajxijlubrj1k1zPQeoxMtPVzN+g==
   dependencies:
     "@justeattakeaway/cc-filters" "0.1.0"
     "@justeattakeaway/cc-utils" "0.1.0"

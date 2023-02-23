@@ -12,7 +12,7 @@ module.exports = {
     },
 
     transformIgnorePatterns: [
-        'node_modules/(?!(lodash-es)/)'
+        'node_modules/(?!(lodash-es|@justeattakeaway/cc-stampcards-adapter|@justeattakeaway/cc-braze-adapter|@justeattakeaway/cc-utils|@justeattakeaway/cc-filters|@braze/web-sdk)/)'
     ],
 
     moduleNameMapper: {
