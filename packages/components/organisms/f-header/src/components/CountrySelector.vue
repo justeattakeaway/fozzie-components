@@ -28,7 +28,7 @@
                 {{ copy.selectYourCountryText }}
             </span>
             <chevron-right-icon
-                v-if="isBelowMid"
+                v-if="isNavOpen && isBelowMid"
                 :class="$style['c-countrySelector-openPanelIcon']" />
         </button>
 
@@ -72,6 +72,11 @@ export default {
         isBelowMid: {
             type: Boolean,
             default: true
+        },
+
+        isNavOpen: {
+            type: Boolean,
+            default: false
         },
 
         tabindex: {
