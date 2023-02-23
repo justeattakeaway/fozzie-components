@@ -6232,12 +6232,12 @@
     loglevel-plugin-prefix "^0.8.4"
     strip-ansi "^6.0.0"
 
-"@wdio/logger@^7.5.3":
-  version "7.26.0"
-  resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-7.26.0.tgz#2c105a00f63a81d52de969fef5a54a9035146b2d"
-  integrity sha512-kQj9s5JudAG9qB+zAAcYGPHVfATl2oqKgqj47yjehOQ1zzG33xmtL1ArFbQKWhDG32y1A8sN6b0pIqBEIwgg8Q==
+"@wdio/logger@^8.0.0-alpha.219":
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-8.1.0.tgz#aaefce7da066a477249191aec8e9caa8581aeb33"
+  integrity sha512-QRC5b7FF4JIYUCqggnVA0sZ80TwIUFN9JyBSbuGuMxaSLSLujSo7WfuSrnQXVvsRbnJ16wWwJWYigfLkxOW86Q==
   dependencies:
-    chalk "^4.0.0"
+    chalk "^5.1.2"
     loglevel "^1.6.0"
     loglevel-plugin-prefix "^0.8.4"
     strip-ansi "^6.0.0"
@@ -7415,10 +7415,10 @@ axios@^0.19.0:
   dependencies:
     follow-redirects "1.5.10"
 
-axios@^1.1.3:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.2.2.tgz#72681724c6e6a43a9fea860fc558127dbe32f9f1"
-  integrity sha512-bz/J4gS2S3I7mpN/YZfGFTqhXTYzRho8Ay38w2otuuDR322KzFIWm/4W2K6gIwvWaws5n+mnb7D1lN9uD+QH6Q==
+axios@^1.2.1:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.3.4.tgz#f5760cefd9cfb51fd2481acf88c05f67c4523024"
+  integrity sha512-toYm+Bsyl6VC5wSkfkbbNB6ROv7KY93PEBBL6xyDczaIHasAiv4wPqQ/c4RjoQzipxRD2W5g21cOqQulZ7rHwQ==
   dependencies:
     follow-redirects "^1.15.0"
     form-data "^4.0.0"
@@ -9235,6 +9235,11 @@ chalk@^4.0.0, chalk@^4.0.2, chalk@^4.1.0, chalk@^4.1.1, chalk@^4.1.2:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
+chalk@^5.1.2:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-5.2.0.tgz#249623b7d66869c673699fb66d65723e54dfcfb3"
+  integrity sha512-ree3Gqw/nazQAPuJJEy+avdl7QfZMcUvmHIKgEZkGL+xOBzRvup5Hxo6LHuMceSxOabuJLJm5Yp/92R9eMmMvA==
+
 char-regex@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/char-regex/-/char-regex-1.0.2.tgz#d744358226217f981ed58f479b1d6bcc29545dcf"
@@ -9331,13 +9336,13 @@ chrome-trace-event@^1.0.2:
   resolved "https://registry.yarnpkg.com/chrome-trace-event/-/chrome-trace-event-1.0.3.tgz#1015eced4741e15d06664a957dbbf50d041e26ac"
   integrity sha512-p3KULyQg4S7NIHixdwbGX+nFHkoBiA4YQmyWtjb8XngSKV124nJmRysgAeujbUVb15vh+RvFUfCPqU7rXk+hZg==
 
-chromedriver@108.0.0:
-  version "108.0.0"
-  resolved "https://registry.yarnpkg.com/chromedriver/-/chromedriver-108.0.0.tgz#7994013f423d8b95a513bb9553a55088de81b252"
-  integrity sha512-/kb0rb0dlC4RfXh2BOT7RV87K6d+It3VV5YXebLzO5a8t2knNffiTE23XPJQCH+l1xmgoW8/sOX/NB9irskvOQ==
+chromedriver@109.0.0:
+  version "109.0.0"
+  resolved "https://registry.yarnpkg.com/chromedriver/-/chromedriver-109.0.0.tgz#9407af72f2a01bb19e6db1b85cfc87eb3acd4f6b"
+  integrity sha512-jdmBq11IUwfThLFiygGTZ89qbROSQI4bICQjvOVQy2Bqr1LwC+MFkhwyZp3YG99eehQbZuTlQmmfCZBfpewTNA==
   dependencies:
     "@testim/chrome-version" "^1.1.3"
-    axios "^1.1.3"
+    axios "^1.2.1"
     compare-versions "^5.0.1"
     extract-zip "^2.0.1"
     https-proxy-agent "^5.0.1"
@@ -25173,14 +25178,14 @@ split2@^2.0.0:
   dependencies:
     through2 "^2.0.2"
 
-split2@^3.0.0, split2@^3.2.2:
+split2@^3.0.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/split2/-/split2-3.2.2.tgz#bf2cf2a37d838312c249c89206fd7a17dd12365f"
   integrity sha512-9NThjpgZnifTkJpzTZ7Eue85S49QwpNhZTq6GRJwObb6jnLFNGB7Qm73V5HewTROPyxD0C29xqmaI68bQtV+hg==
   dependencies:
     readable-stream "^3.0.0"
 
-split2@^4.0.0:
+split2@^4.0.0, split2@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/split2/-/split2-4.1.0.tgz#101907a24370f85bb782f08adaabe4e281ecf809"
   integrity sha512-VBiJxFkxiXRlUIeyMQi8s4hgvKCSjtknJv/LVYbrgALPwf5zSKmEwV9Lst25AkvMDnvxODugjdl6KZgwKM1WYQ==
@@ -26035,7 +26040,7 @@ tar@^6.0.2:
     mkdirp "^1.0.3"
     yallist "^4.0.0"
 
-tcp-port-used@^1.0.1:
+tcp-port-used@^1.0.1, tcp-port-used@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/tcp-port-used/-/tcp-port-used-1.0.2.tgz#9652b7436eb1f4cfae111c79b558a25769f6faea"
   integrity sha512-l7ar8lLUD3XS1V2lfoJlCBaeoaWo/2xfYt81hM7VlvR4RrMVFqfmzfhLVk40hAb368uitje5gPtBRL1m/DGvLA==
@@ -27791,15 +27796,15 @@ wcwidth@^1.0.0, wcwidth@^1.0.1:
   dependencies:
     defaults "^1.0.3"
 
-wdio-chromedriver-service@7.3.2:
-  version "7.3.2"
-  resolved "https://registry.yarnpkg.com/wdio-chromedriver-service/-/wdio-chromedriver-service-7.3.2.tgz#569053df4ceaf6ce9e43bebcdd540197f516e313"
-  integrity sha512-4M3OqFzBSC4FdbqkfwOrUMeroMEuyIFCHfcUebkU6tJ1w5GenWO61YweJ8NKlhPZx9nkO8223+20MpvBjv+fTg==
+wdio-chromedriver-service@8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/wdio-chromedriver-service/-/wdio-chromedriver-service-8.0.0.tgz#875a23afe9eebf90d35e31504f4ca5c2dc7d9e1d"
+  integrity sha512-sgx092o3WForNeRb9O3n+WkQBdEHihQD8FUrIuBM2Iui652yYzTsob7fza4VeJnOX2JijFlJb8S79ocbusz06Q==
   dependencies:
-    "@wdio/logger" "^7.5.3"
-    fs-extra "^9.1.0"
-    split2 "^3.2.2"
-    tcp-port-used "^1.0.1"
+    "@wdio/logger" "^8.0.0-alpha.219"
+    fs-extra "^10.1.0"
+    split2 "^4.1.0"
+    tcp-port-used "^1.0.2"
 
 wdio-video-reporter@3.2.1:
   version "3.2.1"
