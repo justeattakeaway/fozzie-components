@@ -301,6 +301,7 @@
                     :class="$style['c-nav-list-item--horizontallyAlignedAboveMid']">
                     <country-selector
                         :is-below-mid="isBelowMid"
+                        :is-nav-open="navIsOpen"
                         :copy="copy.countrySelector"
                         :tabindex="tabIndex"
                         data-test-id="country-selector"
@@ -975,6 +976,10 @@ $navTextTweakpointMid: f.em(830);
 
         .c-nav-toggle--altColour & {
             background-color: f.$color-container-default;
+        }
+
+        @include f.media('>mid') {
+            display: none;
         }
     }
 
