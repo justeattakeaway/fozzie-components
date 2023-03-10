@@ -8,7 +8,9 @@ v3.13.1
 *March 10, 2023*
 
 ### Fixed
-- Added VeganIcon icon to index file
+- Added VeganIcon icon to index file.
+- Changed component name from Vegan to VeganIcon
+- Increased maxBundle size to 155kB
 
 v3.13.0
 ------------------------------
