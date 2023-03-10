@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.13.1
 ------------------------------
-*March 9, 2023*
+*March 10, 2023*
 
 ### Fixed
 - Added VeganIcon icon to index file.
