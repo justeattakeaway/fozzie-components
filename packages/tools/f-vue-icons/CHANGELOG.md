@@ -8,7 +8,7 @@ v3.13.1
 *March 10, 2023*
 
 ### Fixed
-- Added VeganIcon icon to index file.
+- Added VeganIcon icon to index file
 
 v3.13.0
 ------------------------------
