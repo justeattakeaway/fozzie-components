@@ -2685,10 +2685,10 @@
   dependencies:
     vue-i18n "8.0.0"
 
-"@justeat/f-icons@4.11.0":
-  version "4.11.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.11.0.tgz#59cafdaa850041df000379aaecc84498bd122884"
-  integrity sha512-/9Ovm6gMOAjnfCIjDl7WXKaAv4tX2r5OQwx7aXkfppeBPWq5cmMUUVkJhhC4WejCHp0R3yfg0+WES4KoJc2BrQ==
+"@justeat/f-icons@4.13.0":
+  version "4.13.0"
+  resolved "https://artifactory.cd.je-labs.com:443/artifactory/api/npm/npm-virtual/@justeat/f-icons/-/f-icons-4.13.0.tgz#bb24f146c6a517095f1f29ca2ae430b3f5aa510c"
+  integrity sha1-uyTxRsalFwlfHynKKuQws/WqUQw=
 
 "@justeat/f-logger@0.8.1":
   version "0.8.1"
