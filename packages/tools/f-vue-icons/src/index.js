@@ -143,6 +143,7 @@ export { default as StarFilledIcon } from '../icons/StarFilledIcon';
 export { default as StopwatchIcon } from '../icons/StopwatchIcon';
 export { default as SuccessIcon } from '../icons/SuccessIcon';
 export { default as TickIcon } from '../icons/TickIcon';
+export { default as VeganIcon } from '../icons/VeganIcon';
 export { default as VegetarianIcon } from '../icons/VegetarianIcon';
 export { default as WalkingSmallIcon } from '../icons/WalkingSmallIcon';
 export { default as WarningIcon } from '../icons/WarningIcon';
