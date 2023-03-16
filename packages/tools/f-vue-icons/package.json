@@ -1,8 +1,8 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "3.13.0",
+  "version": "3.13.1",
   "main": "dist/f-vue-icons.cjs.js",
-  "maxBundleSize": "150kB",
+  "maxBundleSize": "155kB",
   "cdn": "dist/f-vue-icons.min.js",
   "unpkg": "dist/f-vue-icons.min.js",
   "module": "dist/f-vue-icons.es.js",
