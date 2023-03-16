@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v7.48.0
+------------------------------
+*March 16, 2023*
+
+### Added
+- `volta.json` and extended volta config to each package.json
+
+
 v7.47.0
 ------------------------------
 *February 22, 2023*
