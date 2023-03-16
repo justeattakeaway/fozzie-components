@@ -112,5 +112,8 @@
       "root": "src/",
       "glob": "fonts/**/*"
     }
-  ]
+  ],
+  "volta": {
+    "extends": "../../../../volta.json"
+  }
 }

@@ -71,5 +71,8 @@
     "@justeat/f-link": "3.x",
     "@justeat/f-wdio-utils": "1.x",
     "@vue/cli-plugin-babel": "4.5.15"
+  },
+  "volta": {
+    "extends": "../../../../volta.json"
   }
 }

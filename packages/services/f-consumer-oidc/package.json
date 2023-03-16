@@ -40,5 +40,8 @@
   },
   "peerDependencies": {
     "js-cookie": ">=2.2.1"
+  },
+  "volta": {
+    "extends": "../../../../volta.json"
   }
 }

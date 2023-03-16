@@ -60,5 +60,8 @@
     "@justeat/f-wdio-utils": "1.x",
     "@vue/cli-plugin-babel": "4.5.16",
     "body-scroll-lock": "3.0.3"
+  },
+  "volta": {
+    "extends": "../../../../volta.json"
   }
 }

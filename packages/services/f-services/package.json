@@ -50,5 +50,8 @@
   },
   "peerDependencies": {
     "axios": ">=0.21.1"
+  },
+  "volta": {
+    "extends": "../../../../volta.json"
   }
 }

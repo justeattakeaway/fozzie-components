@@ -44,5 +44,8 @@
   "dependencies": {
     "@justeat/feature-management": "^1.0.0",
     "crypto-js": "4.1.1"
+  },
+  "volta": {
+    "extends": "../../../../volta.json"
   }
 }

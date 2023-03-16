@@ -44,5 +44,8 @@
   ],
   "devDependencies": {
     "bowser": "2.11.0"
+  },
+  "volta": {
+    "extends": "../../../../volta.json"
   }
 }
