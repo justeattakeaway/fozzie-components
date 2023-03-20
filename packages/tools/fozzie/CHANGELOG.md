@@ -7,6 +7,14 @@ Future Todo List
 ------------------------------
 - Make typography and utility classes silent extenders (so that they can be extended by components without importing all utility classes).
 
+v10.11.1
+------------------------------
+*March 15, 2023*
+
+### Added
+- Optional parameter in `f.rating` to set star count.
+
+
 v10.11.0
 ------------------------------
 *February 22, 2023*

@@ -2,7 +2,7 @@
 @use '../../tools/mixins/ratings';
 @use '../../settings/variables' as v;
 
-@mixin rating() {
+@mixin rating($star-count: 6) {
     /**
     * Components > Rating
     * =================================
@@ -15,7 +15,6 @@
     * https://fozzie.just-eat.com/styleguide/ui-components/custom/star-ratings
     */
 
-    $star-count                 : 6;
     $star-size--small           : 12px;
     $star-size--default         : 16px;
     $star-size--default--scaleUp: 22px;
