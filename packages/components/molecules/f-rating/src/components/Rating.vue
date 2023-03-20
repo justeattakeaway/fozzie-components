@@ -41,6 +41,7 @@
 
 <script>
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
+import { globalisationServices } from '@justeat/f-services';
 import tenantConfigs from '../tenants';
 import {
     VALID_STAR_RATING_SIZES,
@@ -108,7 +109,11 @@ export default {
     },
 
     data () {
+        const locale = globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
+        const localeConfig = tenantConfigs[locale];
+
         return {
+            config: { ...localeConfig },
             tenantConfigs
         };
     },
