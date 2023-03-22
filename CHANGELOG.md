@@ -11,6 +11,14 @@ v7.48.0
 - Updated chromedriver to 111.0.0.
 
 
+v7.48.0
+------------------------------
+*March 22, 2023*
+
+### Added
+- Turborepo remote caching
+
+
 v7.47.0
 ------------------------------
 *February 22, 2023*

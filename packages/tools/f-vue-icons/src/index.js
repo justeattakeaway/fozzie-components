@@ -46,6 +46,7 @@ export { default as ClockSmallIcon } from '../icons/ClockSmallIcon';
 export { default as ClockIcon } from '../icons/ClockIcon';
 export { default as CloseCircleIcon } from '../icons/CloseCircleIcon';
 export { default as CollectionIcon } from '../icons/CollectionIcon';
+export { default as CorporateOfficeSmallIcon } from '../icons/CorporateOfficeSmallIcon';
 export { default as CrossIcon } from '../icons/CrossIcon';
 export { default as CuisineIcon } from '../icons/CuisineIcon';
 export { default as DangerIcon } from '../icons/DangerIcon';
