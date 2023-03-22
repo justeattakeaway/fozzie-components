@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.2.0
 ------------------------------
-*March 22, 2022*
+*March 22, 2023*
 
 ### Fixed
 - Merge locale messages instead of replacing them.
