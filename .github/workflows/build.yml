@@ -192,13 +192,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    # Run the following steps if previous jobs have succeeded to prevent wasting Percy screenshots.
-    - uses: technote-space/workflow-conclusion-action@v3
-    - name: Fail jobs if previous jobs failed.
-      if: ${{ env.WORKFLOW_CONCLUSION == 'failure' }}
-      run: |
-        echo "Not running browser tests due to a previous job failure."
-        exit 1
     # Checkout the Repo
     - name: Checkout
       uses: actions/checkout@v3
@@ -241,7 +234,6 @@ jobs:
         key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
     # Run Component / A11y / Visual Tests against all components
     - name: Run All Component / A11y / Visual Tests
-      if: ${{ (github.ref == 'refs/heads/master' || steps.changes.outputs.global == 'true') && (env.WORKFLOW_CONCLUSION != 'failure') }}
       run: |
         yarn storybook:serve-static &
         yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
