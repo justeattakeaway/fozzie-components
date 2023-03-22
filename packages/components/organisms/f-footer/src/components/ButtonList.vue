@@ -47,6 +47,7 @@ $buttonList-font-size: 'subheading-s';
 }
 
 .c-buttonList-button {
+    position: relative;
     background-color: f.$color-interactive-inverse;
     border-radius: 4px;
     color: f.$color-content-interactive-inverse;
@@ -68,6 +69,11 @@ $buttonList-font-size: 'subheading-s';
     &:hover,
     &:focus {
         background-color: darken(f.$color-interactive-inverse, f.$color-hover-01);
+    }
+
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--boxShadow;
     }
 
     @include f.media('<narrow') {

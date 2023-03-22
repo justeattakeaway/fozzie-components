@@ -23,7 +23,42 @@
 }
 
 %u-elementFocus {
-    outline: 2px solid dt.$color-focus;
+    /*
+    Applying both shadows in a single declaration gives anti-aliasing artefacts.
+    box-shadow: 0 0 0 2px dt.$color-focus-inner, 0 0 0 4px dt.$color-focus-outer;
+
+    To prevent this, they should be separated so they don't bleed into each other,
+    i.e., one shadow on the element and another on a pseudo element like :after
+    */
+    box-shadow: 0 0 0 2px dt.$color-focus-inner;
+
+    &:after {
+        content: '';
+        display: block;
+        /*
+        The pseudo element has to be larger than the element itself, but not just by
+        2px (the thickness of the inner shadow), it has to be 1px larger than that to
+        account for the border thickness.
+        */
+        position: absolute;
+        top: -3px;
+        left: -3px;
+        right: -3px;
+        bottom: -3px;
+
+        box-shadow: 0 0 0 2px dt.$color-focus-outer;
+    }
+}
+
+%u-elementFocus--borderless {
+    @extend %u-elementFocus;
+
+    &:after {
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+    }
 }
 
 %u-unstyled {
@@ -53,8 +88,8 @@
 }
 
 %u-elementFocus--boxShadow {
+    @extend %u-elementFocus;
     outline: none;
-    box-shadow: 0 0 0 2px dt.$color-focus;
 }
 
 %u-focusShadow {
@@ -62,7 +97,7 @@
 }
 
 %u-focusShadow-content {
-    box-shadow: 0 0 2px 2px dt.$color-focus; // keyboard-only focus styles
+    @extend %u-elementFocus;
 }
 
 @mixin trumps-utilities() {

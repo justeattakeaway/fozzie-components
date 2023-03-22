@@ -21,7 +21,8 @@
     $btn-default-font-size                 : 'heading-s';
     $btn-default-weight                    : dt.$font-weight-bold;
     $btn-default-padding                   : 10px functions.spacing(e);
-    $btn-default-outline-color             : dt.$color-focus;
+    $btn-default-outline-color-inner       : dt.$color-focus-inner;
+    $btn-default-outline-color-outer       : dt.$color-focus-outer;
 
     $btn-default-bgColor                   : dt.$color-interactive-brand;
     $btn-default-color                     : dt.$color-content-interactive-light;
@@ -108,9 +109,6 @@
         color: $btn-default-color;
         text-decoration: none;
 
-        &:focus {
-            box-shadow: 0 0 0 2px $btn-default-outline-color;
-        }
 
         &:hover {
             background-color: $btn-default-bgColor--hover;

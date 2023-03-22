@@ -11,13 +11,15 @@ const sassTrue = require('sass-true');
 const glob = require('glob');
 
 describe('SCSS', () => {
-    // All Scss unit tests should follow this naming convention
-    const testFileGlob = '**/*.spec.scss';
-    const testFilePathGlob = path.resolve(process.cwd(), testFileGlob);
+    it('setup', () => {
+        // All Scss unit tests should follow this naming convention
+        const testFileGlob = '**/*.spec.scss';
+        const testFilePathGlob = path.resolve(process.cwd(), testFileGlob);
 
-    // Find all of the Scss files that end in `*.spec.scss` in any directory of this project
-    const scssTestFiles = glob.sync(testFilePathGlob);
+        // Find all of the Scss files that end in `*.spec.scss` in any directory of this project
+        const scssTestFiles = glob.sync(testFilePathGlob);
 
-    // Run True on every file found with the describe and it methods provided
-    scssTestFiles.forEach(file => sassTrue.runSass({ file, includePaths: ['node_modules'] }, { describe, it }));
+        // Run True on every file found with the describe and it methods provided
+        scssTestFiles.forEach(file => sassTrue.runSass({ file, includePaths: ['node_modules'] }, { describe, it }));
+    });
 });

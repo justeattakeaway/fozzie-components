@@ -42,7 +42,7 @@
     "jest-mock-axios": "4.4.1"
   },
   "dependencies": {
-    "@justeat/feature-management": "^1.0.0",
+    "@justeat/feature-management": "1.0.1",
     "crypto-js": "4.1.1"
   }
 }

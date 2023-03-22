@@ -10,7 +10,9 @@
             [$style['c-navLink--condensed']]: isCondensed,
             [$style['c-navLink--hoverWithWhiteBackground']]: backgroundTheme === 'white',
             [$style['c-nav-list-link--transparent']]: backgroundTheme === 'transparent'
-        }]">
+        }]"
+        @blur="onBlur"
+        @focus="onFocus">
         <div
             v-if="hasIcon"
             :class="[$style['c-navLink-icon'], { [$style['u-hideOnMid']]: isCondensed }]">
@@ -76,6 +78,16 @@ export default {
         backgroundTheme: {
             type: String,
             default: 'white'
+        },
+
+        onBlur: {
+            type: Function,
+            default: () => {}
+        },
+
+        onFocus: {
+            type: Function,
+            default: () => {}
         }
     },
     computed: {
@@ -91,18 +103,27 @@ export default {
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .c-navLink {
+    position: relative;
     text-decoration: none;
     color: common.$nav-text-color;
     @include f.font-size(common.$nav-text-size);
 
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--boxShadow;
+
+        &, &:after {
+            border-radius: 0;
+
+            @include f.media('>mid') {
+                border-radius: common.$nav-focus-borderRadius;
+            }
+        }
+    }
+
     @include f.media('<=mid') {
         display: flex;
         width: 100%;
-
-        &:focus {
-            outline-color: common.$nav-link-focus-color;
-            border-radius: 0;
-        }
 
         &:hover {
             background: f.$color-container-subtle;
@@ -118,11 +139,6 @@ export default {
         margin: f.spacing(d) 0;
         padding: f.spacing(c) f.spacing(c);
         display: flex;
-
-        &:focus {
-            outline-color: common.$nav-link-focus-color;
-            border-radius: common.$nav-focus-borderRadius;
-        }
     }
 }
 
@@ -166,6 +182,7 @@ export default {
 }
 
 .c-navLink--popoverLink {
+    position: relative;
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -190,9 +207,13 @@ export default {
         border-radius: 0;
     }
 
-    &:focus {
-        outline-color: f.$color-focus;
-        border-radius: 0;
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--boxShadow;
+
+        &, &:after {
+            border-radius: 0;
+        }
     }
 }
 

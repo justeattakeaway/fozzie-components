@@ -194,7 +194,6 @@ $btn-default-borderRadius              : f.$radius-rounded-e;
 $btn-default-font-size                 : 'heading-s';
 $btn-default-weight                    : f.$font-weight-bold;
 $btn-default-padding                   : 9px f.spacing(e);
-$btn-default-outline-color             : f.$color-focus;
 $btn-default-loading-opacity           : 0.35;
 $btn-default-iconHeight                : 18px;
 $btn-default-iconSpacing               : 3px;
@@ -300,7 +299,11 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 
     // Show focus styles on keyboard focus.
     &:focus-visible {
-        box-shadow: 0 0 0 2px $btn-default-outline-color;
+        @extend %u-elementFocus;
+
+        &:after {
+            border-radius: $btn-default-borderRadius;
+        }
     }
 
     &,
