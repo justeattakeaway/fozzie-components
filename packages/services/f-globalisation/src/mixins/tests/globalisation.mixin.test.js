@@ -225,6 +225,34 @@ describe('Globalisation', () => {
                 expect(setDateTimeFormatMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, defaultData.tenantConfigs[ALTERNATIVE_LOCALE].dateTimeFormats);
                 expect(i18n.locale).toBe(DEFAULT_LOCALE);
             });
+
+            it('should merge new messages over old ones when loading a new locale', () => {
+                // Arrange
+                const wrapper = shallowMount(component, {
+                    data () {
+                        return defaultData;
+                    },
+                    i18n
+                });
+
+                // Pre load some messages
+                i18n.setLocaleMessage(DEFAULT_LOCALE, {
+                    AN_ALREADY_LOADED_MESSAGE: 'Test String',
+                    test: 'This will be replaced in the merge'
+                });
+
+                const expectedResult = {
+                    AN_ALREADY_LOADED_MESSAGE: 'Test String',
+                    test: 'Test message (EN)'
+                };
+
+                // Act
+                wrapper.vm.setupLocale(DEFAULT_LOCALE, true);
+
+                // Assert
+                expect(setLocaleMessageMock).toHaveBeenCalledTimes(2);
+                expect(setLocaleMessageMock).toHaveBeenCalledWith(DEFAULT_LOCALE, expectedResult);
+            });
         });
     });
 
