@@ -44,7 +44,8 @@ coverage/
 test/results/ci
 
 # Build pipeline artifacts
-.turbo
+.turbo/*
+!.turbo/config.json
 
 # Tmp build output
 packages/components/organisms/f-cookie-banner-static/.tmp-dist/

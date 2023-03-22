@@ -10,7 +10,7 @@ Future Todo List
 
 v11.0.0
 ------------------------------
-*March 21, 2023*
+*March 23, 2023*
 
 ### Changed
 - Update focus styles to new double-outline, using box-shadow.
@@ -22,6 +22,14 @@ v11.0.0
 - `%u-elementFocus--borderless` for elements that do not have a border.
   - The default `%u-elementFocus` extender assumes the element will have a 1px border, so this extender repositions the `:after` pseudo-element slightly.
   - If the `:after` styles are instead being applied to the parent element, please add `position: relative;` to your element to correctly anchor the styles.
+
+
+v10.11.1
+------------------------------
+*March 15, 2023*
+
+### Added
+- Optional parameter in `f.rating` to set star count.
 
 
 v10.11.0
