@@ -7,6 +7,14 @@ v1.1.0
 ------------------------------
 *July 25, 2022*
 
+### Fixed
+- Merge locale messages instead of replacing them.
+
+
+v1.1.0
+------------------------------
+*July 25, 2022*
+
 ### Added
 - Node 16 support.
 
