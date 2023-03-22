@@ -5,6 +5,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.13.1
 ------------------------------
+*March 22, 2023*
+
+### Fixed
+- Issue where new icons weren't commited.
+
+
+v3.13.1
+------------------------------
 *March 10, 2023*
 
 ### Fixed
