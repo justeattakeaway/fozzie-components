@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v5.0.0
 ------------------------------
-*March 22, 2023*
+*March 24, 2023*
 
 ### Changed
 - New focus styles

@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v2.0.0
+------------------------------
+*March 24, 2023*
+
+### Changed
+- New focus styles
+  - These require the new colour tokens from `pie-design-tokens` which are included in `fozzie` v11+.
+- Use border for "selected" styles instead of box-shadow to avoid conflict with new focus styles.
+
+
 v1.3.0
 ------------------------------
 *July 29, 2022*
@@ -62,6 +73,7 @@ v0.8.0
 ### Added
 - Optional `performanceTracker` prop & `performanceTrackerLabel` prop
 
+
 v0.7.0
 ------------------------------
 *March 24, 2022*
@@ -72,6 +84,7 @@ v0.7.0
 ### Changed
 - moved loading skeleton into separate component
 
+
 v0.6.0
 ------------------------------
 *March 24, 2022*
@@ -81,6 +94,7 @@ v0.6.0
 
 ### Changed
 - Added `aria-hidden` attributes to the elements rendering `displayText` and `displayNumber`
+
 
 v0.5.0
 ------------------------------
@@ -94,6 +108,7 @@ v0.5.0
 - Shorten how we pass props into the Storybook component
 - Use selected color for outline when selected, instead of focus colour
 
+
 v0.4.0
 ------------------------------
 *March 15, 2022*
@@ -101,12 +116,14 @@ v0.4.0
 ### Added
 - `a` tag for the SEO reasons
 
+
 v0.3.1
 ------------------------------
 *March 14, 2022*
 
 ### Added
 - Checked Attribute to Filter Pill
+
 
 v0.3.0
 ------------------------------
@@ -121,6 +138,7 @@ v0.3.0
 ### Fixed
 - Outline in Safari
 
+
 v0.2.0
 ------------------------------
 *February 23, 2022*
@@ -128,6 +146,7 @@ v0.2.0
 ### Added
 - FilterPill basic structure and functionality
 - FilterPill basic styling
+
 
 v0.1.0
 ------------------------------
