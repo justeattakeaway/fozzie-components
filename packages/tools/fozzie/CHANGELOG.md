@@ -10,18 +10,19 @@ Future Todo List
 
 v11.0.0
 ------------------------------
-*March 23, 2023*
+*March 24, 2023*
 
 ### Changed
 - Update focus styles to new double-outline, using box-shadow.
-  - Two prevent anti-aliasing issues when used with rounded borders, the two shadows had to be separated.
+  - To prevent anti-aliasing issues when used with rounded borders, the two shadows had to be separated into separate declarations.
   - The inner shadow is applied to the element and the outer shadow to the `:after` pseudo-element.
-  - Updated `%u-elementFocus--boxShadow`, which should be used for elements that the browser applies a default focus outline to.
+  - Deprecated `%u-elementFocus--boxShadow` as all focus styles should use box-shadow by default.
+    - `%u-elementFocus` now sets `outline: none` by default.
 
 ### Added
 - `%u-elementFocus--borderless` for elements that do not have a border.
   - The default `%u-elementFocus` extender assumes the element will have a 1px border, so this extender repositions the `:after` pseudo-element slightly.
-  - If the `:after` styles are instead being applied to the parent element, please add `position: relative;` to your element to correctly anchor the styles.
+  - `position: relative` is also applied to the element by default (to anchor the position of the `:after` pseudo-element) so if you need a different value please override it.
 
 
 v10.11.1

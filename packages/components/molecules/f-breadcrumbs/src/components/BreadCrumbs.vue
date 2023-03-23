@@ -137,7 +137,6 @@ $breadcrumbs-active-font-weight: f.$font-weight-regular;
 }
 
 .c-breadcrumbs-link {
-    position: relative;
     color: $breadcrumbs-text-colour-noBackground;
     font-weight: $breadcrumbs-not-active-font-weight;
 
@@ -160,7 +159,7 @@ $breadcrumbs-active-font-weight: f.$font-weight-regular;
 
     &:focus,
     &:focus-visible {
-        @extend %u-elementFocus--boxShadow;
+        @extend %u-elementFocus--borderless;
     }
 }
 

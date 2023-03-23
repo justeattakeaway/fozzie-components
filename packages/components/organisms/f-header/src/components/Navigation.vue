@@ -755,7 +755,6 @@ $navTextTweakpointMid: f.em(830);
 }
 
 .c-nav-list-btn {
-    position: relative;
     background: transparent;
     text-decoration: none;
     border: 0;
@@ -765,7 +764,7 @@ $navTextTweakpointMid: f.em(830);
 
     &:focus,
     &:focus-visible {
-        @extend %u-elementFocus--boxShadow;
+        @extend %u-elementFocus;
 
         &, &:after {
             border-radius: 0;
@@ -862,7 +861,8 @@ $navTextTweakpointMid: f.em(830);
 
     &:focus,
     &:focus-visible {
-        @extend %u-elementFocus--boxShadow;
+        @extend %u-elementFocus;
+        position: absolute; // Override 'relative' from %u-elementFocus;
 
         &, &:after {
             border-radius: common.$nav-focus-borderRadius;
@@ -951,7 +951,8 @@ $navTextTweakpointMid: f.em(830);
 
     &:focus,
     &:focus-visible {
-        @extend %u-elementFocus--boxShadow;
+        @extend %u-elementFocus;
+        position: absolute; // Override 'relative' from %u-elementFocus
 
         &, &:after {
             border-radius: common.$nav-focus-borderRadius;

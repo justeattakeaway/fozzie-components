@@ -171,7 +171,6 @@ export default {
 }
 
 .c-footer-list-link {
-    position: relative;
     color: common.$footer-textColor;
     @include f.font-size(body-s);
     display: inline-block;
@@ -190,7 +189,6 @@ export default {
 
     &:focus,
     &:focus-visible {
-        @extend %u-elementFocus--boxShadow;
         @extend %u-elementFocus--borderless;
     }
 }

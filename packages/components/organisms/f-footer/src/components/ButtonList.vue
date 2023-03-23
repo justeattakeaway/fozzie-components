@@ -47,7 +47,6 @@ $buttonList-font-size: 'subheading-s';
 }
 
 .c-buttonList-button {
-    position: relative;
     background-color: f.$color-interactive-inverse;
     border-radius: 4px;
     color: f.$color-content-interactive-inverse;
@@ -73,7 +72,7 @@ $buttonList-font-size: 'subheading-s';
 
     &:focus,
     &:focus-visible {
-        @extend %u-elementFocus--boxShadow;
+        @extend %u-elementFocus;
     }
 
     @include f.media('<narrow') {

@@ -375,7 +375,6 @@ export default {
     display: grid;
     grid-gap: f.spacing(c);
     grid-template-columns: 1fr;
-    position: relative;
 
     &.c-restaurantCard--listItem {
         @include f.media('>mid') {
@@ -390,8 +389,8 @@ export default {
         }
     }
 
+    &:focus,
     &:focus-visible {
-        @extend %u-elementFocus--boxShadow;
         @extend %u-elementFocus--borderless;
     }
 }

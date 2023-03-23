@@ -47,7 +47,6 @@ export default {
             padding: 4px;
             color: f.$color-content-link;
 
-            @extend %u-elementFocus--boxShadow;
             @extend %u-elementFocus--borderless;
 
             &, &:after {

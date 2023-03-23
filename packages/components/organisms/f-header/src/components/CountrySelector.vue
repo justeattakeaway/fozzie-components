@@ -125,7 +125,6 @@ export default {
 }
 
 .c-countrySelector-btn {
-    position: relative;
     text-decoration: none;
     background: transparent;
     border: 0;
@@ -144,7 +143,7 @@ export default {
 
     &:focus,
     &:focus-visible {
-        @extend %u-elementFocus--boxShadow;
+        @extend %u-elementFocus;
 
         &, &:after {
             @include f.media('>mid') {

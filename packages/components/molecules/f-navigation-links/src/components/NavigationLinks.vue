@@ -70,7 +70,6 @@ export default {
 * the router-link within <f-link>. CoreWeb Nuxt custom active link classes are: `is-link-active` and `is-link-exactActive`.
 */
 .c-navigationLinks-link {
-    position: relative;
     display: inline-block;
     padding: f.spacing() 0 f.spacing() f.spacing(d);
     border-left: 2px solid f.$color-border-default;
@@ -88,7 +87,6 @@ export default {
 
     &:focus,
     &:focus-visible {
-        @extend %u-elementFocus--boxShadow;
         @extend %u-elementFocus--borderless;
     }
 }

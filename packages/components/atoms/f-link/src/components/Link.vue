@@ -138,7 +138,6 @@ export default {
 
 .o-link {
     & {
-        position: relative;
         color: f.$color-content-link;
     }
 
@@ -149,7 +148,6 @@ export default {
 
     &:focus,
     &:focus-visible {
-        @extend %u-elementFocus--boxShadow;
         @extend %u-elementFocus--borderless;
     }
 

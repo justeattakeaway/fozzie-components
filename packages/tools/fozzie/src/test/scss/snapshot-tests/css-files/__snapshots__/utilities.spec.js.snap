@@ -15,7 +15,7 @@ exports[`fozzie-utilities.scss compiles the expected CSS 1`] = `
   display: none;
 }
 
-.u-elementFocus, .u-focusShadow:focus > .u-focusShadow-content, .u-elementFocus--boxShadow {
+.u-elementFocus, .u-focusShadow:focus > .u-focusShadow-content, .u-elementFocus--borderless {
   /*
   Applying both shadows in a single declaration gives anti-aliasing artefacts.
   box-shadow: 0 0 0 2px dt.$color-focus-inner, 0 0 0 4px dt.$color-focus-outer;
@@ -24,8 +24,16 @@ exports[`fozzie-utilities.scss compiles the expected CSS 1`] = `
   i.e., one shadow on the element and another on a pseudo element like :after
   */
   box-shadow: 0 0 0 2px #fff;
+  outline: none;
+  /*
+  Setting the position to relative prevents the pseudo-element from
+  anchoring instead to the nearest ancestor with a specified position.
+
+  You can override this if you need another value.
+  */
+  position: relative;
 }
-.u-elementFocus:after, .u-focusShadow:focus > .u-focusShadow-content:after, .u-elementFocus--boxShadow:after {
+.u-elementFocus:after, .u-focusShadow:focus > .u-focusShadow-content:after, .u-elementFocus--borderless:after {
   content: "";
   display: block;
   /*
@@ -39,6 +47,20 @@ exports[`fozzie-utilities.scss compiles the expected CSS 1`] = `
   right: -3px;
   bottom: -3px;
   box-shadow: 0 0 0 2px #094dac;
+}
+
+.u-elementFocus--borderless {
+  /*
+  For elements without a border, the above does not apply
+  so the pseudo-element should be only 2px larger than the
+  element on each side.
+  */
+}
+.u-elementFocus--borderless:after {
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
 }
 
 .u-unstyled {
@@ -65,10 +87,6 @@ exports[`fozzie-utilities.scss compiles the expected CSS 1`] = `
   border: 1px solid #dbd9d7;
   padding: 24px;
   border-radius: 4px;
-}
-
-.u-elementFocus--boxShadow {
-  outline: none;
 }
 
 .u-focusShadow:focus,
@@ -326,7 +344,6 @@ em.u-text-highlight {
 }
 
 /* Custom outline styling for elements that have a focus state */
-/* Custom visual outline emulation for better appearance on elements with rounded corners */
 /*
 * Clever hack to have focus on an element but only when keyboard focused (not click)
 * https://stackoverflow.com/questions/31402576/enable-focus-only-on-keyboard-use-or-tab-press

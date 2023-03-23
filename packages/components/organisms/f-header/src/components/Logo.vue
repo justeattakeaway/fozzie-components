@@ -101,14 +101,13 @@ export default {
     .c-logo {
         display: block;
         display: flex;
-        position: relative;
         justify-content: center;
         height: common.$header-height--narrow;
         padding: f.spacing(d) 0;
 
         &:focus,
         &:focus-visible {
-            @extend %u-elementFocus--boxShadow;
+            @extend %u-elementFocus;
 
             &, &:after {
                 @include f.media('>mid') {

@@ -71,7 +71,6 @@ $feedback-btn-font-size: 'body-s';
 }
 
 .c-feedback-button {
-    position: relative;
     border: 0;
     background-color: transparent;
     padding: 0;
@@ -94,7 +93,6 @@ $feedback-btn-font-size: 'body-s';
 
     &:focus,
     &:focus-visible {
-        @extend %u-elementFocus--boxShadow;
         @extend %u-elementFocus--borderless;
     }
 }

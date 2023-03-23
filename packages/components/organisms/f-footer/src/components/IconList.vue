@@ -120,11 +120,8 @@ export default {
 }
 
 .c-iconList-listLink {
-    position: relative;
-
     &:focus,
     &:focus-visible {
-        @extend %u-elementFocus--boxShadow;
         @extend %u-elementFocus--borderless;
     }
 }

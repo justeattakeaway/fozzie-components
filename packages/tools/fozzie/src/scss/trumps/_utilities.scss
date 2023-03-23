@@ -31,6 +31,15 @@
     i.e., one shadow on the element and another on a pseudo element like :after
     */
     box-shadow: 0 0 0 2px dt.$color-focus-inner;
+    outline: none;
+
+    /*
+    Setting the position to relative prevents the pseudo-element from
+    anchoring instead to the nearest ancestor with a specified position.
+
+    You can override this if you need another value.
+    */
+    position: relative;
 
     &:after {
         content: '';
@@ -51,6 +60,11 @@
 }
 
 %u-elementFocus--borderless {
+    /*
+    For elements without a border, the above does not apply
+    so the pseudo-element should be only 2px larger than the
+    element on each side.
+    */
     @extend %u-elementFocus;
 
     &:after {
@@ -85,11 +99,6 @@
 
 %u-bordered {
     @include border.bordered();
-}
-
-%u-elementFocus--boxShadow {
-    @extend %u-elementFocus;
-    outline: none;
 }
 
 %u-focusShadow {
@@ -432,9 +441,8 @@
         @extend %u-elementFocus;
     }
 
-    /* Custom visual outline emulation for better appearance on elements with rounded corners */
-    .u-elementFocus--boxShadow {
-        @extend %u-elementFocus--boxShadow;
+    .u-elementFocus--borderless {
+        @extend %u-elementFocus--borderless;
     }
 
     /*

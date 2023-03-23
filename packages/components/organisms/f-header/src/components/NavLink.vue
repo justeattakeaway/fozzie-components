@@ -103,14 +103,13 @@ export default {
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .c-navLink {
-    position: relative;
     text-decoration: none;
     color: common.$nav-text-color;
     @include f.font-size(common.$nav-text-size);
 
     &:focus,
     &:focus-visible {
-        @extend %u-elementFocus--boxShadow;
+        @extend %u-elementFocus;
 
         &, &:after {
             border-radius: 0;
@@ -182,7 +181,6 @@ export default {
 }
 
 .c-navLink--popoverLink {
-    position: relative;
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -209,7 +207,7 @@ export default {
 
     &:focus,
     &:focus-visible {
-        @extend %u-elementFocus--boxShadow;
+        @extend %u-elementFocus;
 
         &, &:after {
             border-radius: 0;

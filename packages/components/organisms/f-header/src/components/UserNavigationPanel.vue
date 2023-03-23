@@ -130,7 +130,6 @@ export default {
 }
 
 .c-user-list-link {
-    position: relative;
     text-decoration: none;
     color: common.$nav-text-color;
     @include f.font-size(common.$nav-text-size);
@@ -142,7 +141,7 @@ export default {
 
     &:focus,
     &:focus-visible {
-        @extend %u-elementFocus--boxShadow;
+        @extend %u-elementFocus;
 
         &, &:after {
             border-radius: 0;
