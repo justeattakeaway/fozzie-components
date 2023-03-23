@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-button",
   "description": "Fozzie Button – The generic button component",
-  "version": "4.4.0",
+  "version": "5.0.0",
   "main": "dist/f-button.umd.min.js",
   "maxBundleSize": "5kB",
   "files": [
@@ -64,5 +64,8 @@
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "1.x"
+  },
+  "volta": {
+    "extends": "../../../../package.json"
   }
 }

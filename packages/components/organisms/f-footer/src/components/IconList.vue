@@ -30,6 +30,7 @@
                     v-if="icon.url"
                     :href="icon.url"
                     :title="icon.alt"
+                    :class="$style['c-iconList-listLink']"
                     :data-trak='`{
                         "trakEvent": "click",
                         "category": "engagement",
@@ -115,6 +116,16 @@ export default {
 
     &:last-child {
         margin-right: 0;
+    }
+}
+
+.c-iconList-listLink {
+    position: relative;
+
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--boxShadow;
+        @extend %u-elementFocus--borderless;
     }
 }
 

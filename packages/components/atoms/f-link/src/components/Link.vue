@@ -138,12 +138,19 @@ export default {
 
 .o-link {
     & {
+        position: relative;
         color: f.$color-content-link;
     }
 
     &:hover,
     &:focus {
         color: darken(f.$color-content-link, f.$color-hover-01);
+    }
+
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--boxShadow;
+        @extend %u-elementFocus--borderless;
     }
 
     &:active {

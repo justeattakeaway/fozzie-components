@@ -7,6 +7,23 @@ Future Todo List
 ------------------------------
 - Make typography and utility classes silent extenders (so that they can be extended by components without importing all utility classes).
 
+
+v11.0.0
+------------------------------
+*March 23, 2023*
+
+### Changed
+- Update focus styles to new double-outline, using box-shadow.
+  - Two prevent anti-aliasing issues when used with rounded borders, the two shadows had to be separated.
+  - The inner shadow is applied to the element and the outer shadow to the `:after` pseudo-element.
+  - Updated `%u-elementFocus--boxShadow`, which should be used for elements that the browser applies a default focus outline to.
+
+### Added
+- `%u-elementFocus--borderless` for elements that do not have a border.
+  - The default `%u-elementFocus` extender assumes the element will have a 1px border, so this extender repositions the `:after` pseudo-element slightly.
+  - If the `:after` styles are instead being applied to the parent element, please add `position: relative;` to your element to correctly anchor the styles.
+
+
 v10.11.1
 ------------------------------
 *March 15, 2023*

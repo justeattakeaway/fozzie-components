@@ -250,8 +250,8 @@ $image-tile-text-transform-breakout: translate3d(f.spacing(b), 0, 0);
 }
 
 @mixin image-tile-focus() {
+    @extend %u-elementFocus--borderless;
     border-radius: f.$radius-rounded-b;
-    box-shadow: 0 0 0 2px f.$color-focus;
 }
 
 .c-imageTile {
@@ -260,6 +260,11 @@ $image-tile-text-transform-breakout: translate3d(f.spacing(b), 0, 0);
 
     &:focus-within {
         @include image-tile-focus();
+
+        &:after {
+            // Outer border requires additional radius
+            border-radius: calc(f.$radius-rounded-b + 2px);
+        }
     }
 }
 

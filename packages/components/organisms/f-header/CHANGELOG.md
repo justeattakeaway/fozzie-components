@@ -3,6 +3,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v11.0.0
+------------------------------
+*March 24, 2022*
+
+### Changed
+- New focus styles
+  - These require the new colour tokens from `pie-design-tokens` which are included in `fozzie` v11+.
+- Use CSS Grid in the country selector to avoid issues with CSS overflow between columns.
+  - This has the side effect of reordering the countries, they now wrap by row rather than by column.
+
+
 v10.12.0
 ------------------------------
 *February 23, 2022*

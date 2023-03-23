@@ -17,6 +17,7 @@ $footer-heading-font-size  : 'heading-s';
 }
 
 .c-footer-heading--button {
+    position: relative;
     align-items: center;
     background: none;
     border-style: none;
@@ -36,5 +37,10 @@ $footer-heading-font-size  : 'heading-s';
 
     @include f.media('>=wide') {
         padding: 0;
+    }
+
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--boxShadow;
     }
 }

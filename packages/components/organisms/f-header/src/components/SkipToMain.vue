@@ -33,22 +33,27 @@ export default {
 
 .c-skipTo {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: f.spacing(b);
+    left: f.spacing(b);
+    background-color: f.$color-container-default;
     text-align: center;
     z-index: f.zIndex(high);
 
     .c-skipTo-link {
         &:active,
-        &:focus {
+        &:focus,
+        &:focus-visible {
             display: block;
-            margin: 4px;
             padding: 4px;
             color: f.$color-content-link;
-            outline-color: f.$color-focus;
 
-            @include f.media('>mid') {
-                border-radius: common.$header-buttonFocus-borderRadius;
+            @extend %u-elementFocus--boxShadow;
+            @extend %u-elementFocus--borderless;
+
+            &, &:after {
+                @include f.media('>mid') {
+                    border-radius: common.$header-buttonFocus-borderRadius;
+                }
             }
         }
     }

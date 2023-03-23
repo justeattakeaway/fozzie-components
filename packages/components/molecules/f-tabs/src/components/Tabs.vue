@@ -163,12 +163,18 @@ $tabs-link-border-colour  : f.$color-orange-30;
 
 }
 .c-tabs-button {
+    position: relative;
     padding: f.spacing(c) f.spacing(d);
     cursor: pointer;
     color: $tabs-link-colour;
     border: none;
     background-color: transparent;
     outline: none;
+
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus;
+    }
 
     @include f.media('<narrowMid') {
         /* stylelint-disable */

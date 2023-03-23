@@ -755,6 +755,7 @@ $navTextTweakpointMid: f.em(830);
 }
 
 .c-nav-list-btn {
+    position: relative;
     background: transparent;
     text-decoration: none;
     border: 0;
@@ -762,9 +763,17 @@ $navTextTweakpointMid: f.em(830);
     display: flex;
     cursor: pointer;
 
-    &:focus {
-        outline-color: common.$nav-link-focus-color;
-        border-radius: common.$nav-focus-borderRadius;
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--boxShadow;
+
+        &, &:after {
+            border-radius: 0;
+
+            @include f.media('>mid') {
+                border-radius: common.$nav-focus-borderRadius;
+            }
+        }
     }
 
     @include f.media('>mid') {
@@ -777,11 +786,6 @@ $navTextTweakpointMid: f.em(830);
         text-align: left;
         display: block;
         padding: f.spacing(c) 0;
-
-        &:focus {
-            outline-color: common.$nav-link-focus-color;
-            border-radius: 0;
-        }
 
         &:hover {
             background: f.$color-container-subtle;
@@ -856,6 +860,15 @@ $navTextTweakpointMid: f.em(830);
         fill: common.$nav-icon-color;
     }
 
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--boxShadow;
+
+        &, &:after {
+            border-radius: common.$nav-focus-borderRadius;
+        }
+    }
+
     @include f.media('<=mid') {
         position: absolute;
         top: 0;
@@ -863,10 +876,6 @@ $navTextTweakpointMid: f.em(830);
         width: f.spacing(d) + common.$nav-featureLinkIcon-width + f.spacing(d); // includes padding on both sides
         height: f.spacing(d) + common.$nav-featureLinkIcon-height + f.spacing(d);
         padding: f.spacing(d);
-
-        &:focus {
-            outline-color: f.$color-focus;
-        }
     }
 }
 
@@ -940,9 +949,13 @@ $navTextTweakpointMid: f.em(830);
     background-color: common.$nav-toggleIcon-bg;
     border: none;
 
-    &:focus {
-        outline-color: common.$nav-link-focus-color;
-        border-radius: common.$nav-focus-borderRadius;
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--boxShadow;
+
+        &, &:after {
+            border-radius: common.$nav-focus-borderRadius;
+        }
     }
 
     // hide on wider views

@@ -4,11 +4,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (merge into next release)
+v7.0.0
 ------------------------------
-*December 5, 2022*
+*March 24, 2023*
 
 ### Changed
+- New focus styles
+  - These require the new colour tokens from `pie-design-tokens` which are included in `fozzie` v11+.
 - Updated to the new `pie-icons-vue` beta release.
 
 
