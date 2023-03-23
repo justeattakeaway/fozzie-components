@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "7.48.0",
+  "version": "7.49.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell turbo run build --continue --token=${TURBO_TOKEN}",

@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.61.0
+------------------------------
+*March 24, 2023*
+
+### Added
+- Volta config to `package.json` (reads config from root `package.json`).
+
+
 v0.60.0
 ------------------------------
 *October 25, 2022*
@@ -78,6 +86,7 @@ v0.53.1
 ### Fixed
 - `f-cookie-banner-static` from being picked up by Storybook
 
+
 v0.53.0
 ------------------------------
 *July 25, 2022*
@@ -95,11 +104,13 @@ v0.52.35
 ### Removed
 - `@storybook/storybook-deployer` dependency
 
+
 v0.52.34
 ------------------------------
 *July 19, 2022*
 ### Changed
 - Fixed Storybook deploy
+
 
 v0.52.33
 ------------------------------
@@ -385,6 +396,7 @@ v0.49.0
 ### Added
 - `"private": "true"` property to `package.json` to ensure the package doesn't get published to npm.
 
+
 v0.48.0
 ------------------------------
 *December 16, 2021*
@@ -395,7 +407,7 @@ v0.48.0
 
 v0.47.0
 ------------------------------
-*November 03, 2021*
+*November 3, 2021*
 
 ### Added
 - New `log` context item so we can phase out the `logger` one.
@@ -469,7 +481,7 @@ v0.41.0
 
 v0.40.0
 ------------------------------
-*August 05, 2021*
+*August 5, 2021*
 
 ### Added
 - MDX file for media element
@@ -481,7 +493,7 @@ v0.40.0
 
 v0.39.0
 ------------------------------
-*August 04, 2021*
+*August 4, 2021*
 
 ### Added
 - Upgrade to f-http@v0.6.1
