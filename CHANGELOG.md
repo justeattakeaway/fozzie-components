@@ -5,10 +5,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v7.48.1
 ------------------------------
-*March 22, 2023*
+*March 23, 2023*
 
 ### Fixed
-- Issue where storybook-static wasn't cached by Turborepo.
+- Turned off caching of storybook-build to fix CI deployment.
 
 
 v7.48.0
