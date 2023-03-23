@@ -2664,6 +2664,21 @@
     eslint-config-airbnb-base "15.0.0"
     eslint-plugin-vue "8.7.1"
 
+<<<<<<< Updated upstream
+=======
+"@justeat/f-breadcrumbs@4.x":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-breadcrumbs/-/f-breadcrumbs-4.2.0.tgz#4a53316933cbe08bd549782e7402cdb8159720cd"
+  integrity sha512-FaBWKFb2Xc0GIC82Lpu/V6EX6ZOt8iabWYNYxaaP4/6QqwflzHV4lm3yo4UJq9s6lbT8B1zshgjDzAm3zuvgKQ==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
+
+"@justeat/f-button@4.x":
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-4.4.0.tgz#3d8cee28785387fad683255ccbbf46c568167282"
+  integrity sha512-BlW66dkaZp/OMep32b34XokuO9ErPQDHdLStDh9MsBHoKrYbGYasVjeigQ+PM6ZSXhfSI6/l1ZO2oFKKeWSGrQ==
+
+>>>>>>> Stashed changes
 "@justeat/f-dom@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-0.4.0.tgz#3e838a2dd06d4d5281c17f5fb9f66d7485fd759a"
@@ -2678,6 +2693,15 @@
   dependencies:
     qwery "4.0.0"
 
+"@justeat/f-form-field@6.x":
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-form-field/-/f-form-field-6.4.0.tgz#12a981cd3849995ac210e9bb534d4fafeea9f5dc"
+  integrity sha512-2jtnR8xsA3NujfJIymsCZaiT1MYvpEGSndB1Tm4AfZ+IDqffvFMssWdZQ3oGnioGSQk+I5UWBjQsrfX6utafgQ==
+  dependencies:
+    "@justeat/f-services" "1.x"
+    "@justeattakeaway/pie-icons-vue" "1.x"
+    uuid "9.0.0"
+
 "@justeat/f-globalisation@0.x":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-0.2.0.tgz#90ec559642c165b6325669c506c417abe09fa5dd"
@@ -2690,12 +2714,24 @@
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.13.0.tgz#bb24f146c6a517095f1f29ca2ae430b3f5aa510c"
   integrity sha512-JzjdosErD7FYUi6sH5BIK4RXfcnRK/27aApRRNQ9I0BVTlv8x4+UYh7tcOhtPm9GeS8DVbg/4RdDQH8XQ/Ot8w==
 
+"@justeat/f-link@3.x":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-link/-/f-link-3.3.0.tgz#04b058961ec5ec4094df999f13a248c63f9fc233"
+  integrity sha512-+CyJF5uEe6Gnz9NH3Z4JKLHc7H8VIbalgXnFnShiPfE0WHz2sHnBTx6vtG8rPnelsXj2f9gJXsffyHGHdabBgg==
+  dependencies:
+    "@justeat/f-services" "1.7.0"
+
 "@justeat/f-logger@0.8.1":
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/@justeat/f-logger/-/f-logger-0.8.1.tgz#10aef6a3d97b75e1ded2367fa0b69972661f76e6"
   integrity sha512-owV/JWeve1Bc4HrSu2zFIgXjuAqAD5PYflw2iAMFk7SVbl2gGvewUgKszf61ZOg9qjADdxmCkW5sZPQkRzHmbQ==
   dependencies:
     window-or-global "^1.0.1"
+
+"@justeat/f-navigation-links@2.x":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-navigation-links/-/f-navigation-links-2.4.0.tgz#4fdd2fc528dc98c0d4bf6b2232fe1ea606aba1f9"
+  integrity sha512-dDJL70pQt86cVyUmdvqocvkIZHS7cpD5K2vqhf2Wcc2BbAF0WHNjftGj1RcKo9FXU7bBV2Ezp5cVw+XdCdWElQ==
 
 "@justeat/f-searchbox@6.x":
   version "6.7.0"
@@ -2705,6 +2741,29 @@
     caniuse-lite "1.0.30001251"
     lodash.debounce "4.0.8"
     mitt "3.0.0"
+
+"@justeat/f-services@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.0.0.tgz#790bd0443840eb96dec1411066023db10433ed8f"
+  integrity sha512-/hhLh3lF1wp7HBKE4bGOCQSS93pVXxC9u8ic1e25XsdYCto4xIBzm7inW2WiigEu3Api8wdpga/EXL4IE5+pMA==
+  dependencies:
+    lodash-es "4.17.15"
+    window-or-global "1.0.1"
+
+"@justeat/f-services@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-services/-/f-services-1.7.0.tgz#e73ce22b84578388058fe00442ef8bfbb692193c"
+  integrity sha512-l9xnDEmq4MyouUdBOi2Y3VkT4LQ/FHTbOHz1e0GW+r3xVDzNF0Jzzkybafy3YN+YBU31KPFKYE2wvs4sVl2kNA==
+  dependencies:
+    lodash-es "4.17.15"
+    window-or-global "1.0.1"
+
+"@justeat/f-tabs@3.x":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-tabs/-/f-tabs-3.2.0.tgz#f89aa854f0c66e1a44ba47226786bebfe4f5389f"
+  integrity sha512-QlBMIZ+nFmWWR3WXzqygTjSMK3CvtjJTTK2XscE5Jxd55TuMYSa8XZWU8rN4jGgxZhGoQYHP05jLe0TmWaBJCQ==
+  dependencies:
+    "@justeat/f-services" "1.0.0"
 
 "@justeat/f-trak@0.7.1", "@justeat/f-trak@0.x":
   version "0.7.1"
@@ -2828,6 +2887,13 @@
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-utils/-/cc-utils-0.1.0.tgz#f71d3f1d3eb147b2fdb016c2dc06e9c31e89a11b"
   integrity sha512-R4VSIu/C15gTxJIlZieNjvWarOXq7vbbOEXFclNgKHp0JXy2JkK4aVJveQphlmkbo4IhsguAjXI49kerxjZXZw==
+
+"@justeattakeaway/pie-icons-vue@1.x":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@justeattakeaway/pie-icons-vue/-/pie-icons-vue-1.0.0.tgz#62f86c4fedb449c072e4d37955ad619d10baa9a2"
+  integrity sha512-4HoFiGCB4wz3v9m70n8Box4k3dRFJAf7h4Gxg8zL/22YBchFl27owk0WaJuY3EP3t15LoGRFX1grFHWRD7vGdA==
+  dependencies:
+    babel-helper-vue-jsx-merge-props "2.0.3"
 
 "@justeattakeaway/pie-icons-vue@2.0.0-beta.1":
   version "2.0.0-beta.1"
@@ -18590,6 +18656,11 @@ locate-path@^6.0.0:
   integrity sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==
   dependencies:
     p-locate "^5.0.0"
+
+lodash-es@4.17.15:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.15.tgz#21bd96839354412f23d7a10340e5eac6ee455d78"
+  integrity sha512-rlrc3yU3+JNOpZ9zj5pQtxnx2THmvRykwL4Xlxoa8I9lHBlVbbyPhgyPMioxVZ4NqyxaVVtaJnzsyOidQIhyyQ==
 
 lodash-es@4.17.21:
   version "4.17.21"
