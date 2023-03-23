@@ -4,20 +4,29 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v2.4.0
- ------------------------------
- *November 1, 2022*
+v3.0.0
+------------------------------
+*March 24, 2023*
 
- ### Changed
+### Changed
+- New focus styles
+  - These require the new colour tokens from `pie-design-tokens` which are included in `fozzie` v11+.
+
+
+v2.4.0
+------------------------------
+*November 1, 2022*
+
+### Changed
 - Product Orange update (package release to update the compiled CSS)
 
 
 v2.3.0
- ------------------------------
- *July 19, 2022*
+------------------------------
+*July 19, 2022*
 
- ### Added
- - Node 16 support.
+### Added
+- Node 16 support.
 
 
 v2.2.0
@@ -28,12 +37,14 @@ v2.2.0
 - Update f-wdio-utils to v1.1.0
 - Update component objects / specs to use ES6 syntax.
 
+
 v2.1.0
 ------------------------------
 *June 23, 2022*
 
 ### Changed
 - devDependency version range to match peerDependencies.
+
 
 v2.0.0
 -----------------------------

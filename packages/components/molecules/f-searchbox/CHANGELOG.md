@@ -3,12 +3,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v4.0.0-beta.48
+------------------------------
+*March 24, 2023*
+
+### Changed
+- New focus styles
+  - These require the new colour tokens from `pie-design-tokens` which are included in `fozzie` v11+.
+
+
 v4.0.0-beta.47
 ------------------------------
 *November 1, 2022*
 
 ### Changed
 - Product Orange update (package release to update the compiled CSS)
+
 
 v4.0.0-beta.46
 ------------------------------
@@ -60,6 +71,7 @@ v4.0.0-beta.41
 
 ### Changed
 - devDependency version range to match peerDependencies.
+
 
 v4.0.0-beta.40
 ------------------------------
@@ -258,6 +270,7 @@ v4.0.0-beta.21
 ### Fixed
 - Casing in readme non-vue instructions.
 
+
 v4.0.0-beta.20
 ------------------------------
 *January 22, 2021*
@@ -333,7 +346,7 @@ v4.0.0-beta.16
 
 v4.0.0-beta.15
 ------------------------------
-*January 08, 2021*
+*January 8, 2021*
 
 ### Fixed
 - Accessibility warnings for street number input field & Powered by Google alt tag.
@@ -341,7 +354,7 @@ v4.0.0-beta.15
 
 v4.0.0-beta.14
 ------------------------------
-*January 07, 2021*
+*January 7, 2021*
 
 ### Added
 - Loqate core functionality, initial Axios call & display of results.
@@ -350,7 +363,7 @@ v4.0.0-beta.14
 
 v4.0.0-beta.13
 ------------------------------
-*January 05, 2021*
+*January 5, 2021*
 
 ### Fixed
 - DK & NO field options - provides component with custom attributes,
@@ -419,6 +432,7 @@ v4.0.0-beta.9
 ### Added
 - Cookie support for when `setCookies` is enabled via the consuming app.
 - Test coverage for changes.
+
 
 v4.0.0-beta.8
 ------------------------------
