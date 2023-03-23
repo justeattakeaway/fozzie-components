@@ -16,6 +16,14 @@ v7.49.0
 - Volta config to root `package.json`.
 
 
+v7.48.1
+------------------------------
+*March 23, 2023*
+
+### Fixed
+- Turned off caching of storybook-build to fix CI deployment.
+
+
 v7.48.0
 ------------------------------
 *March 22, 2023*
