@@ -130,11 +130,13 @@
     },
     "storybook:build":  {
       "cache": true,
-      "dependsOn": []
+      "dependsOn": [],
+      "outputs": ["storybook-static"]
     },
     "storybook:build-changed":  {
       "cache": true,
-      "dependsOn": []
+      "dependsOn": [],
+      "outputs": ["storybook-static"]
     },
     "storybook:serve": {
       "cache": false,
