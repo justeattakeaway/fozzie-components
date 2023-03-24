@@ -81,7 +81,7 @@ export default {
         },
         ratingDisplayType: {
             type: String,
-            default: null,
+            default: '',
             validator: value => VALID_STAR_RATING_DISPLAY_TYPE.includes(value)
         },
         reviewCount: {
@@ -179,7 +179,9 @@ export default {
          */
         getRatingDisplayFormat () {
             if (!this.hasRatingAvailable) {
-                return this.$t('ratings.ratingDisplayType.noRating');
+                return this.locale
+                    ? this.$t('ratings.ratingDisplayType.noRating')
+                    : '';
             }
 
             return this.$t(`ratings.ratingDisplayType.${this.ratingDisplayType}`, {

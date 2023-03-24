@@ -340,7 +340,7 @@ describe('Rating', () => {
 
             it('should be set to `null` by default', () => {
                 // Act & Assert
-                expect(VRating.props.ratingDisplayType.default).toBe(null);
+                expect(VRating.props.ratingDisplayType.default).toBe('');
             });
 
             describe('when `ratingDisplayType` is truthy', () => {
@@ -433,7 +433,8 @@ describe('Rating', () => {
                         propsData = {
                             starRating: 2,
                             reviewCount: 0,
-                            ratingDisplayType: 'short'
+                            ratingDisplayType: 'short',
+                            locale: 'en-GB'
                         };
 
                         wrapper = shallowMount(VRating, {
@@ -456,7 +457,8 @@ describe('Rating', () => {
                         propsData = {
                             starRating: 2,
                             reviewCount: 499,
-                            ratingDisplayType: 'medium'
+                            ratingDisplayType: 'medium',
+                            locale: 'en-GB'
                         };
 
                         wrapper = shallowMount(VRating, {
@@ -508,7 +510,7 @@ describe('Rating', () => {
                             localVue,
                             i18n,
                             mocks: {
-                                $t: () => null
+                                $t: () => ''
                             }
                         });
 
@@ -516,7 +518,7 @@ describe('Rating', () => {
                         const result = wrapper.vm.getRatingDisplayFormat();
 
                         // Assert
-                        expect(result).toBe(null);
+                        expect(result).toBe('');
                     });
                 });
             });
