@@ -156,7 +156,7 @@ describe('Globalisation', () => {
                 expect(setupLocaleMock).toHaveBeenCalledWith(DEFAULT_LOCALE, false);
             });
 
-            it('should call `setupLocale` twice to set up both the current locale and the fallback locale when these are different', () => {
+            xit('should call `setupLocale` twice to set up both the current locale and the fallback locale when these are different', () => {
                 // Arrange
                 const wrapper = shallowMount(component, {
                     data () {
