@@ -103,6 +103,7 @@ $form-input-icon-horizontalIndent       : 19px;
     }
 
     &:focus,
+    &:focus-visible,
     &:active,
     &:focus-within {
         box-shadow: $form-input-focus--boxShadow;

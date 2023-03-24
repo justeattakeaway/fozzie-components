@@ -172,7 +172,10 @@ $filter-pill-ease: ease-in-out;
     transition: 0.1s;
 
     &:focus-within:not(.c-filterPill--disabled) {
-        box-shadow: 0 0 0 2px f.$color-focus-inner, 0 0 0 4px f.$color-focus-outer;
+        @extend %u-elementFocus;
+        &, &:after {
+            border-radius: f.$radius-rounded-e;
+        }
     }
 }
 

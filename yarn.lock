@@ -2675,10 +2675,18 @@
     eslint-config-airbnb-base "15.0.0"
     eslint-plugin-vue "8.7.1"
 
-"@justeat/f-button@4.x":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-button/-/f-button-4.4.0.tgz#3d8cee28785387fad683255ccbbf46c568167282"
-  integrity sha512-BlW66dkaZp/OMep32b34XokuO9ErPQDHdLStDh9MsBHoKrYbGYasVjeigQ+PM6ZSXhfSI6/l1ZO2oFKKeWSGrQ==
+"@justeat/f-content-cards@10.3.0":
+  version "10.3.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-10.3.0.tgz#bc3832cf6f283bb5b975bc1831406b292af56173"
+  integrity sha512-a18uLGKnmSckncCY2pYAiPTGFRLheiXuCb7UnAoIif9SmVedrkaiolxPhy/uHFOrbocpUm9Xx1z2DCO7NkHdoQ==
+  dependencies:
+    "@babel/plugin-proposal-class-properties" "7.12.13"
+    "@justeat/f-services" "1.x"
+    "@justeattakeaway/cc-braze-adapter" "0.4.0"
+    "@justeattakeaway/cc-filters" "0.1.0"
+    "@justeattakeaway/cc-stampcards-adapter" "0.5.1"
+    "@justeattakeaway/cc-utils" "0.1.0"
+    core-js "3.6.5"
 
 "@justeat/f-dom@0.4.0":
   version "0.4.0"

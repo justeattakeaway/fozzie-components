@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v3.2.1
 ------------------------------
-*March 24, 2023*
+*March 27, 2023*
 
 ### Changed
 - Increase bundlewatch maxBundleSize from 5 to 6kB.

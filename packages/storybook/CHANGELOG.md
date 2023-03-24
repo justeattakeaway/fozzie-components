@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.61.0
 ------------------------------
-*March 24, 2023*
+*March 27, 2023*
 
 ### Added
 - Volta config to `package.json` (reads config from root `package.json`).

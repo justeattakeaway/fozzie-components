@@ -10,7 +10,7 @@ Future Todo List
 
 v11.0.0
 ------------------------------
-*March 24, 2023*
+*March 27, 2023*
 
 ### Changed
 - Update focus styles to new double-outline, using box-shadow.

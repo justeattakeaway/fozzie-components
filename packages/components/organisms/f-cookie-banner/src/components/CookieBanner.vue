@@ -503,6 +503,11 @@ export default {
             text-decoration: none;
         }
     }
+
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--borderless;
+    }
 }
 
 .c-cookieBanner-content {

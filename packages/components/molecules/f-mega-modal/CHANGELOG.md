@@ -4,28 +4,29 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (merge into next release)
+v7.3.0
 ------------------------------
-*December 5, 2022*
+*March 27, 2023*
 
 ### Changed
 - Updated to the new `pie-icons-vue` beta release.
+- Update f-button to v5.x to get new focus styles, and handle them.
 
 
 v7.2.1
 ------------------------------
- *August 31, 2022*
+*August 31, 2022*
 
- ### Fixed
- - Flush styles
+### Fixed
+- Flush styles
 
 
 v7.2.0
 ------------------------------
- *July 19, 2022*
+*July 19, 2022*
 
- ### Added
- - Node 16 support.
+### Added
+- Node 16 support.
 
 
 v7.1.0
@@ -55,7 +56,7 @@ v6.0.0
 
 v5.1.1
 ------------------------------
-*Jun 9, 2022*
+*June 9, 2022*
 
 ### Changed
 - Bumped wdio version and fixed breaking changes.

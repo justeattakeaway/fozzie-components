@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.8.0
+------------------------------
+*March 27, 2023*
+
+### Changed
+- Update f-button to v5.x to get new focus styles.
+- Apply new focus styles to cookie banner header.
+
+
 v4.7.0
 ------------------------------
 *November 11, 2022*
@@ -57,19 +66,19 @@ v4.4.0
 
 
 v4.3.0
- ------------------------------
- *July 26, 2022*
+------------------------------
+*July 26, 2022*
 
- ### Updated
- - `@justeat` dependencies to use latest minor verisons.
+### Updated
+- `@justeat` dependencies to use latest minor verisons.
 
 
 v4.2.0
- ------------------------------
- *July 25, 2022*
+------------------------------
+*July 25, 2022*
 
- ### Added
- - Node 16 support.
+### Added
+- Node 16 support.
 
 
 v4.1.0
@@ -90,7 +99,7 @@ v4.0.0
 
 v3.10.1
 -----------------------------
-*Jun 22, 2022*
+*June 22, 2022*
 
 ### Changed
 - Bumped wdio version and fixed breaking changes.

@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v10.4.0
+------------------------------
+*March 27, 2023*
+
+### Changed
+- Update f-button to v5.x to get new focus styles.
+
+
 v10.3.0
 ------------------------------
 *January 26, 2023*
@@ -182,7 +190,7 @@ v8.0.0
 
 v7.4.1
 -----------------------------
-*Jun 24, 2022*
+*June 24, 2022*
 
 ### Changed
 - Bumped wdio version and fixed breaking changes.

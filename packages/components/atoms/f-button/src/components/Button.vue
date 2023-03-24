@@ -298,10 +298,11 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     outline: 0;
 
     // Show focus styles on keyboard focus.
+    &:focus,
     &:focus-visible {
         @extend %u-elementFocus;
 
-        &:after {
+        &, &:after {
             border-radius: $btn-default-borderRadius;
         }
     }

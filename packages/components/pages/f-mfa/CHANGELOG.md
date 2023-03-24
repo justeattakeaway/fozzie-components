@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.25.0
+------------------------------
+*March 27, 2023*
+
+### Changed
+- Update f-button to v5.x to get new focus styles.
+
+
 v0.24.0
 ------------------------------
 *February 9, 2023*
