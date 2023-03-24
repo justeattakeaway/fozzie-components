@@ -8,7 +8,7 @@ v1.3.0
 *March 24, 2023*
 
 ### Fixed
-- Merge locale messages of replacing them via locale key.
+- Add a check for locale passed and do not set up locale if not passed by consuming app.
 
 
 v1.2.0
