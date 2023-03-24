@@ -30,7 +30,7 @@ export default {
             // Merge new locale messages with existing ones - prioritising new ones
             this.$i18n.setLocaleMessage(locale, {
                 ...this.$i18n.messages[locale],
-                ...localeConfig.messages[locale]
+                ...localeConfig.messages
             });
 
             this.$i18n.setDateTimeFormat(locale, localeConfig.dateTimeFormats);
@@ -44,7 +44,10 @@ export default {
             const currentLocale = this.locale || this.$i18n.locale;
             const fallbackLocale = 'en-GB';
 
-            this.setupLocale(currentLocale, true);
+            // If no locale passed do not set up locale.
+            if (this.locale) {
+                this.setupLocale(currentLocale, true);
+            }
 
             // Don't load messages for en-GB twice
             if (currentLocale !== fallbackLocale) {
