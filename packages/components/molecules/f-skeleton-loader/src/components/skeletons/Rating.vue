@@ -1,13 +1,22 @@
 <template>
     <div
         :class="$style['c-rating']">
-        ★★★★★★
+        {{ stars }}
     </div>
 </template>
 
 <script>
 export default {
-    name: 'SkeletonRating'
+    name: 'SkeletonRating',
+    inject: { skeletonOptions: { default: {} } },
+    computed: {
+        stars () {
+            if (this.skeletonOptions?.use5Stars === true) {
+                return '★★★★★';
+            }
+            return '★★★★★★';
+        }
+    }
 };
 </script>
 
