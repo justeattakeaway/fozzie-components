@@ -27,7 +27,8 @@ export const RatingComponent = (args, { argTypes }) => ({
                     :star-rating="rating.starRating"
                     :review-count="rating.reviewCount"
                     :is-user-rating="isUserRating"
-                    :should-align-rating-left="shouldAlignRatingTextLeft"/>
+                    :should-align-rating-left="shouldAlignRatingTextLeft"
+                    :locale="locales.gb" />
             </div>
         </div>`
 });

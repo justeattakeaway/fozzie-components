@@ -120,16 +120,21 @@ export default {
          * @returns {string|*}
          */
         getRatingDescription () {
-            return this.starRating === 1
-                ? this.$tc('ratings.starsDescription', 1, {
-                    rating: this.starRating,
-                    maxStarRating: this.maxStarRating
-                })
+            // Allow locale translations to be read within consuming applications if locale is not set when consuming this component.
+            if (this.locale) {
+                return this.starRating === 1 && this.locale
+                    ? this.$tc('ratings.starsDescription', 1, {
+                        rating: this.starRating,
+                        maxStarRating: this.maxStarRating
+                    })
 
-                : this.$tc('ratings.starsDescription', 2, {
-                    rating: this.starRating,
-                    maxStarRating: this.maxStarRating
-                });
+                    : this.$tc('ratings.starsDescription', 2, {
+                        rating: this.starRating,
+                        maxStarRating: this.maxStarRating
+                    });
+            }
+
+            return '';
         },
 
         /**

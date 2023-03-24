@@ -54,7 +54,8 @@ describe('Rating', () => {
                     // Arrange
                     propsData = {
                         starRating: 1,
-                        ratingDisplayType: 'short'
+                        ratingDisplayType: 'short',
+                        locale: 'en-GB'
                     };
                     wrapper = shallowMount(VRating, {
                         propsData,
@@ -74,7 +75,8 @@ describe('Rating', () => {
                     // Arrange
                     propsData = {
                         starRating: type,
-                        ratingDisplayType: 'short'
+                        ratingDisplayType: 'short',
+                        locale: 'en-GB'
                     };
                     wrapper = shallowMount(VRating, {
                         propsData,
@@ -163,6 +165,7 @@ describe('Rating', () => {
                         propsData.starRating = 2;
                         propsData.reviewCount = 1;
                         propsData.ratingDisplayType = 'short';
+                        propsData.locale = 'en-GB';
                         wrapper = shallowMount(VRating, {
                             propsData,
                             localVue,
