@@ -178,10 +178,10 @@ export default {
          * @returns {string}
          */
         getRatingDisplayFormat () {
+            if (!this.locale) return '';
+
             if (!this.hasRatingAvailable) {
-                return this.locale
-                    ? this.$t('ratings.ratingDisplayType.noRating')
-                    : '';
+                return this.$t('ratings.ratingDisplayType.noRating');
             }
 
             return this.$t(`ratings.ratingDisplayType.${this.ratingDisplayType}`, {

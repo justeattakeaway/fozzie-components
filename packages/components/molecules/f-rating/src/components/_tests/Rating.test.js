@@ -486,7 +486,8 @@ describe('Rating', () => {
                         propsData = {
                             starRating: 2,
                             reviewCount: 499,
-                            ratingDisplayType: type
+                            ratingDisplayType: type,
+                            locale: 'en-GB'
                         };
 
                         wrapper = shallowMount(VRating, {
