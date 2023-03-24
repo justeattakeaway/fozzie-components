@@ -30,7 +30,7 @@ export default {
             // Merge new locale messages with existing ones - prioritising new ones
             this.$i18n.setLocaleMessage(locale, {
                 ...this.$i18n.messages[locale],
-                ...localeConfig.messages
+                ...localeConfig.messages[locale]
             });
 
             this.$i18n.setDateTimeFormat(locale, localeConfig.dateTimeFormats);

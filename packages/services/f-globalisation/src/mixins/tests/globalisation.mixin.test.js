@@ -13,6 +13,7 @@ const defaultData = {
     tenantConfigs: {
         [DEFAULT_LOCALE]: {
             messages: {
+                locale: 'en-GB',
                 test: 'Test message (EN)'
             },
             dateTimeFormats: {
@@ -21,7 +22,10 @@ const defaultData = {
         },
         [ALTERNATIVE_LOCALE]: {
             messages: {
-                test: 'Test message (ES)'
+                'es-ES': {
+                    locale: 'es-ES',
+                    test: 'Test message (ES)'
+                }
             },
             dateTimeFormats: {
                 short: { hour: 'numeric' }
@@ -200,7 +204,7 @@ describe('Globalisation', () => {
 
                 // Assert
                 expect(setLocaleMessageMock).toHaveBeenCalledTimes(1);
-                expect(setLocaleMessageMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, defaultData.tenantConfigs[ALTERNATIVE_LOCALE].messages);
+                expect(setLocaleMessageMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, defaultData.tenantConfigs[ALTERNATIVE_LOCALE].messages[ALTERNATIVE_LOCALE]);
                 expect(setDateTimeFormatMock).toHaveBeenCalledTimes(1);
                 expect(setDateTimeFormatMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, defaultData.tenantConfigs[ALTERNATIVE_LOCALE].dateTimeFormats);
                 expect(i18n.locale).toBe(ALTERNATIVE_LOCALE);
@@ -220,7 +224,7 @@ describe('Globalisation', () => {
 
                 // Assert
                 expect(setLocaleMessageMock).toHaveBeenCalledTimes(1);
-                expect(setLocaleMessageMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, defaultData.tenantConfigs[ALTERNATIVE_LOCALE].messages);
+                expect(setLocaleMessageMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, defaultData.tenantConfigs[ALTERNATIVE_LOCALE].messages[ALTERNATIVE_LOCALE]);
                 expect(setDateTimeFormatMock).toHaveBeenCalledTimes(1);
                 expect(setDateTimeFormatMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, defaultData.tenantConfigs[ALTERNATIVE_LOCALE].dateTimeFormats);
                 expect(i18n.locale).toBe(DEFAULT_LOCALE);
@@ -243,7 +247,7 @@ describe('Globalisation', () => {
 
                 const expectedResult = {
                     AN_ALREADY_LOADED_MESSAGE: 'Test String',
-                    test: 'Test message (EN)'
+                    test: 'This will be replaced in the merge'
                 };
 
                 // Act
