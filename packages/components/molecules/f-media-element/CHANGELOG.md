@@ -3,12 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v3.2.0
- ------------------------------
- *July 19, 2022*
 
- ### Added
- - Node 16 support.
+v3.2.1
+------------------------------
+*March 24, 2023*
+
+### Changed
+- Increase bundlewatch maxBundleSize from 5 to 6kB.
+
+
+v3.2.0
+------------------------------
+*July 19, 2022*
+
+### Added
+- Node 16 support.
 
 
 v3.1.0
@@ -54,7 +63,7 @@ v2.0.0
 
 v1.0.0
 ------------------------------
-*July 02, 2021*
+*July 2, 2021*
 
 ### Added
 - Added new prop called flex, which allows custom flex rules when implementing
@@ -80,7 +89,7 @@ v0.4.0
 
 v0.3.0
 ------------------------------
-*June 09, 2021*
+*June 9, 2021*
 
 ### Added
 - Slot to enable additional content to be displayed below the text and title
