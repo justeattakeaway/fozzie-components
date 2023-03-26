@@ -5,6 +5,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v1.3.0
 ------------------------------
+*March 26, 2023*
+
+### Removed
+- v1.3.0 revert this change.
+
+### Added
+- `locale` & `localeConfig` guard to protect consuming applications against having to provide a locale.
+
+
+v1.3.0
+------------------------------
 *March 24, 2023*
 
 ### Fixed
