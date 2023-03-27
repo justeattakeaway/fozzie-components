@@ -338,9 +338,9 @@ describe('Rating', () => {
                 expect(validator(displayType)).toBe(true);
             });
 
-            it('should be set to `null` by default', () => {
+            it('should be set to `short` by default', () => {
                 // Act & Assert
-                expect(VRating.props.ratingDisplayType.default).toBe('');
+                expect(VRating.props.ratingDisplayType.default).toBe('short');
             });
 
             describe('when `ratingDisplayType` is truthy', () => {
