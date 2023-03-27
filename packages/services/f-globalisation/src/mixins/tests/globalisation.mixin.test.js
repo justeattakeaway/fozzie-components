@@ -177,7 +177,7 @@ describe('Globalisation', () => {
             });
 
             describe('when `locale` is falsey', () => {
-                it('should invoke `setupLocale` once to allow the fallack setup locale', async () => {
+                it('should invoke `setupLocale` once to allow the fallback setup locale', async () => {
                     // Arrange
                     const wrapper = shallowMount(component, {
                         data () {
