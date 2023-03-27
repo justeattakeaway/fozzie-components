@@ -13,7 +13,7 @@ v11.0.0
 *March 27, 2023*
 
 ### Changed
-- Update focus styles to new double-outline, using box-shadow.
+- Update focus styles to new double outline, using box-shadow.
   - To prevent anti-aliasing issues when used with rounded borders, the two shadows had to be separated into separate declarations.
   - The inner shadow is applied to the element and the outer shadow to the `:after` pseudo-element.
   - Deprecated `%u-elementFocus--boxShadow` as all focus styles should use box-shadow by default.

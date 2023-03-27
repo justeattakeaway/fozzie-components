@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v10.13.0
 ------------------------------
-*March 27, 2022*
+*March 27, 2023*
 
 ### Changed
 - New focus styles
@@ -17,7 +17,7 @@ v10.13.0
 
 v10.12.0
 ------------------------------
-*February 23, 2022*
+*February 23, 2023*
 
 ### Fixed
 - Country selector chevron flashing on page load

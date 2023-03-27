@@ -163,7 +163,6 @@ $tabs-link-border-colour  : f.$color-orange-30;
 
 }
 .c-tabs-button {
-    position: relative;
     padding: f.spacing(c) f.spacing(d);
     cursor: pointer;
     color: $tabs-link-colour;
