@@ -4,11 +4,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (merge into next release)
+v7.3.0
 ------------------------------
-*December 5, 2022*
+*March 27, 2023*
 
 ### Changed
+- Handle new focus styles from fozzie v11.
+  - Button positioning was specified as `'relative'` by default and needed overriding in some scenarios.
 - Updated to the new `pie-icons-vue` beta release.
 
 

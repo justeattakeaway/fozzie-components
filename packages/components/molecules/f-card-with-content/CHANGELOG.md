@@ -3,7 +3,6 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-
 v3.3.0
 ------------------------------
 *August 3, 2022*
@@ -13,11 +12,11 @@ v3.3.0
 
 
 v3.2.0
-------------------------------
-*July 19, 2022*
+ ------------------------------
+ *July 19, 2022*
 
-### Added
-- Node 16 support.
+ ### Added
+ - Node 16 support.
 
 
 v3.1.0

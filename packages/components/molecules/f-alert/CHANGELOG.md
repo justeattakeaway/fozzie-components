@@ -13,11 +13,11 @@ Latest (merge into next release)
 
 
 v6.2.0
-------------------------------
-*July 19, 2022*
+ ------------------------------
+ *July 19, 2022*
 
-### Added
-- Node 16 support.
+ ### Added
+ - Node 16 support.
 
 
 v6.1.0
