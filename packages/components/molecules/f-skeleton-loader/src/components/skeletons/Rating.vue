@@ -11,7 +11,7 @@ export default {
     inject: { skeletonOptions: { default: {} } },
     computed: {
         stars () {
-            if (this.skeletonOptions?.use5Stars === true) {
+            if (this.skeletonOptions.use5Stars === true) {
                 return '★★★★★';
             }
             return '★★★★★★';
