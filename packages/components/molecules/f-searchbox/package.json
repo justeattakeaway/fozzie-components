@@ -61,14 +61,14 @@
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
-    "@justeat/f-button": "5.x",
+    "@justeat/f-button": "4.x",
     "@justeat/f-error-message": "2.x",
     "@justeat/f-mega-modal": "7.x",
     "vue": "2.x",
     "vuex": "3.5.1"
   },
   "devDependencies": {
-    "@justeat/f-button": "5.x",
+    "@justeat/f-button": "4.x",
     "@justeat/f-error-message": "2.x",
     "@justeat/f-globalisation": "0.x",
     "@justeat/f-mega-modal": "7.x",

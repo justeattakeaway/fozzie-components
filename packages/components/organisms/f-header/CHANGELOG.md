@@ -8,11 +8,16 @@ v10.13.0
 *March 27, 2023*
 
 ### Changed
-- New focus styles
-  - These require the new colour tokens from `pie-design-tokens` which are included in `fozzie` v11+.
+- New focus styles - these require the new colour tokens from `pie-design-tokens` which are included in `fozzie` v11+.
 - Use CSS Grid in the country selector to avoid issues with CSS overflow between columns.
   - This has the side effect of reordering the countries, they now wrap by row rather than by column.
-- Update f-button to v5.x to get new focus styles.
+- Use NavLink component for logout link for consistency and to fix keyboard navigation bug (see below).
+
+### Added
+- `onFocus` and `onBlur` function props to internal NavLinks component to help fix a bug where Shift-Tabbing from the logout link back into the user panel would cause the user panel to close.
+
+### Removed
+- Now-unused `$nav-trigger-focus-color` SCSS variable.
 
 
 v10.12.0

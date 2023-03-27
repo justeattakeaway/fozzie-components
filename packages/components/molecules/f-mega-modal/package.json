@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-mega-modal",
   "description": "Fozzie Mega Modal – A Vue.js modal component",
-  "version": "7.3.0",
+  "version": "7.2.1",
   "main": "dist/f-mega-modal.common.js",
   "maxBundleSize": "6kB",
   "files": [
@@ -49,14 +49,14 @@
   ],
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
-    "@justeat/f-button": "5.x",
+    "@justeat/f-button": "4.x",
     "body-scroll-lock": "3.x"
   },
   "dependencies": {
     "@justeattakeaway/pie-icons-vue": "2.0.0-beta.1"
   },
   "devDependencies": {
-    "@justeat/f-button": "5.x",
+    "@justeat/f-button": "4.x",
     "@justeat/f-wdio-utils": "1.x",
     "@vue/cli-plugin-babel": "4.5.16",
     "body-scroll-lock": "3.0.3"

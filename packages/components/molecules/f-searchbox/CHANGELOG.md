@@ -9,7 +9,6 @@ v4.0.0-beta.48
 *March 27, 2023*
 
 ### Changed
-- Update f-button to v5.x to get new focus styles, and handle them.
 - New focus styles
   - These require the new colour tokens from `pie-design-tokens` which are included in `fozzie` v11+.
 

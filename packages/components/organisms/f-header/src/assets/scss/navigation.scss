@@ -16,7 +16,6 @@ $nav-transition-duration           : 250ms;
 
 $nav-trigger-width                 : 56px;
 $nav-trigger-height                : 56px;
-$nav-trigger-focus-color           : f.$color-content-interactive-secondary;
 $nav-trigger-focus-bg              : f.$color-interactive-secondary;
 
 $nav-popover-width                 : 300px;
@@ -46,8 +45,6 @@ $nav-toggleIcon-bg                 : transparent;
 $nav-toggleIcon-space              : 5px;
 
 $nav-focus-borderRadius            : 800px;
-$nav-link-focus-color-inner        : f.$color-focus-inner;
-$nav-link-focus-color-outer        : f.$color-focus-outer;
 
 $nav-container-border-color        : f.$color-border-subtle;
 $nav-container-separator           : 1px;
@@ -150,7 +147,6 @@ $nav-container-height--narrow      : 56px;
 
     &:focus ~ .c-nav-toggle {
         background-color: $nav-trigger-focus-bg;
-        box-shadow: 0 3px 6px 0 $nav-trigger-focus-color;
 
         .c-header--transparent & {
             background-color: transparent;

@@ -9,7 +9,6 @@ v4.8.0
 *March 27, 2023*
 
 ### Changed
-- Update f-button to v5.x to get new focus styles.
 - Apply new focus styles to cookie banner header.
 
 
