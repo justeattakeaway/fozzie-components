@@ -156,24 +156,46 @@ describe('Globalisation', () => {
                 expect(setupLocaleMock).toHaveBeenCalledWith(DEFAULT_LOCALE, false);
             });
 
-            xit('should call `setupLocale` twice to set up both the current locale and the fallback locale when these are different', () => {
-                // Arrange
-                const wrapper = shallowMount(component, {
-                    data () {
-                        return defaultData;
-                    },
-                    i18n: new VueI18n({
-                        locale: ALTERNATIVE_LOCALE
-                    })
+            describe('when `locale` is truthy', () => {
+                it('should invoke `setupLocale` with the correct params', () => {
+                    // Arrange
+                    const wrapper = shallowMount(component, {
+                        data () {
+                            return defaultData;
+                        },
+                        i18n: new VueI18n({
+                            locale: ALTERNATIVE_LOCALE
+                        })
+                    });
+
+                    // Act
+                    wrapper.vm.initialiseLocalisation();
+
+                    // Assert
+                    expect(setupLocaleMock).toHaveBeenCalledWith(DEFAULT_LOCALE, false);
                 });
+            });
 
-                // Act
-                wrapper.vm.initialiseLocalisation();
+            describe('when `locale` is falsey', () => {
+                it('should invoke `setupLocale` once to allow the fallback setup locale', async () => {
+                    // Arrange
+                    const wrapper = shallowMount(component, {
+                        data () {
+                            return defaultData;
+                        },
+                        i18n: new VueI18n({
+                            locale: ''
+                        })
+                    });
 
-                // Assert
-                expect(setupLocaleMock).toHaveBeenCalledTimes(2);
-                expect(setupLocaleMock).toHaveBeenCalledWith(ALTERNATIVE_LOCALE, true);
-                expect(setupLocaleMock).toHaveBeenCalledWith(DEFAULT_LOCALE, false);
+                    await wrapper.setProps({ locale: '' });
+
+                    // Act
+                    wrapper.vm.initialiseLocalisation();
+
+                    // Assert
+                    expect(setupLocaleMock).toHaveBeenCalledTimes(1);
+                });
             });
         });
 
@@ -226,7 +248,7 @@ describe('Globalisation', () => {
                 expect(i18n.locale).toBe(DEFAULT_LOCALE);
             });
 
-            it('should merge new messages over old ones when loading a new locale', () => {
+            it('should NOT call `setLocaleMessage` if either `locale` or `localeConfig` are not provided', () => {
                 // Arrange
                 const wrapper = shallowMount(component, {
                     data () {
@@ -235,23 +257,11 @@ describe('Globalisation', () => {
                     i18n
                 });
 
-                // Pre load some messages
-                i18n.setLocaleMessage(DEFAULT_LOCALE, {
-                    AN_ALREADY_LOADED_MESSAGE: 'Test String',
-                    test: 'This will be replaced in the merge'
-                });
-
-                const expectedResult = {
-                    AN_ALREADY_LOADED_MESSAGE: 'Test String',
-                    test: 'Test message (EN)'
-                };
-
                 // Act
-                wrapper.vm.setupLocale(DEFAULT_LOCALE, true);
+                wrapper.vm.setupLocale('', false);
 
                 // Assert
-                expect(setLocaleMessageMock).toHaveBeenCalledTimes(2);
-                expect(setLocaleMessageMock).toHaveBeenCalledWith(DEFAULT_LOCALE, expectedResult);
+                expect(setLocaleMessageMock).not.toHaveBeenCalled();
             });
         });
     });
