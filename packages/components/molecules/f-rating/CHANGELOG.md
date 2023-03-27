@@ -8,7 +8,7 @@ v0.15.0
 *March 24, 2023*
 
 ### Added
-- `locale` check to component when return descriptions.
+- `locale` check to component when returning descriptions.
 
 
 v0.14.0
