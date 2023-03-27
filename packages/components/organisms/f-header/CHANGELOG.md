@@ -12,6 +12,7 @@ v10.13.0
 - Use CSS Grid in the country selector to avoid issues with CSS overflow between columns.
   - This has the side effect of reordering the countries, they now wrap by row rather than by column.
 - Use NavLink component for logout link for consistency and to fix keyboard navigation bug (see below).
+- Styles for "Skip to main content" link to make it easier to see and read.
 
 ### Added
 - `onFocus` and `onBlur` function props to internal NavLinks component to help fix a bug where Shift-Tabbing from the logout link back into the user panel would cause the user panel to close.

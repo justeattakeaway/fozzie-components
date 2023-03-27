@@ -24,6 +24,9 @@ v11.0.0
   - The default `%u-elementFocus` extender assumes the element will have a 1px border, so this extender repositions the `:after` pseudo-element slightly.
   - `position: relative` is also applied to the element by default (to anchor the position of the `:after` pseudo-element) so if you need a different value please override it.
 
+### Removed
+- `$btn-default-outline-color` SCSS variable. This shouldn't be being used elsewhere, but if it is then please use the silent extenders to get the focus styles instead.
+
 
 v10.11.1
 ------------------------------
