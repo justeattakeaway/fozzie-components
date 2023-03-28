@@ -9,7 +9,7 @@ v4.8.0
 *March 27, 2023*
 
 ### Changed
-- Apply new focus styles to cookie banner header.
+- Apply new focus styles to cookie banner.
 
 
 v4.7.0
