@@ -8,7 +8,7 @@ v0.16.0
 *March 27, 2023*
 
 ### Fixed
-- `ratingDisplayType` prop default and set it to use `'short''`.
+- `ratingDisplayType` prop default and set it to use `'short'`.
 - Tests for `ratingDisplayType`.
 
 
