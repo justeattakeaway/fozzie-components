@@ -34,7 +34,10 @@ dist/
 coverage/
 /packages/f-content-cards/stories/mocks/
 /.vs
-.yarn
+
+# Yarn
+.yarn/*
+!.yarn/releases
 
 # Test result folders
 **/allure-report
