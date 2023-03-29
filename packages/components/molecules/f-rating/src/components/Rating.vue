@@ -81,7 +81,7 @@ export default {
         },
         ratingDisplayType: {
             type: String,
-            default: '',
+            default: 'short',
             validator: value => VALID_STAR_RATING_DISPLAY_TYPE.includes(value)
         },
         reviewCount: {
