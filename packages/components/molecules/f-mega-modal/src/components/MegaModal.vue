@@ -432,19 +432,25 @@ export default {
     .c-megaModal-closeBtn {
         display: flex;
         opacity: 0.9;
-        position: absolute;
         right: f.spacing(d);
         top: 22px;
         z-index: f.zIndex(high);
-
-        @include f.media('>=mid') {
-            position: fixed;
-        }
 
         svg path {
             fill: f.$color-interactive-primary;
             width: 17px;
             height: 17px;
+        }
+
+        &,
+        &:focus,
+        &:focus-visible {
+            // Override default position from button
+            position: absolute;
+
+            @include f.media('>=mid') {
+                position: fixed;
+            }
         }
     }
 

@@ -156,6 +156,11 @@ $breadcrumbs-active-font-weight: f.$font-weight-regular;
             color: $breadcrumbs-text-colour-hasBackground;
         }
     }
+
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--borderless;
+    }
 }
 
 .c-breadcrumbs-separator {

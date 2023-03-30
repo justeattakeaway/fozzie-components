@@ -4,9 +4,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.5.0
+------------------------------
+*March 27, 2023*
+
+### Changed
+- New focus styles
+  - These require the new colour tokens from `pie-design-tokens` which are included in `fozzie` v11+.
+
+
 v1.4.0
 ------------------------------
-*Feburary 1, 2023*
+*February 1, 2023*
 
 ### Added
 - `maxRating` prop to RestaurantRatings
@@ -104,6 +113,7 @@ v0.29.1
 
 ### Fixed
 - Moved margin declaration to parent `c-deliveryTimeMeta`
+
 
 v0.29.0
 ------------------------------

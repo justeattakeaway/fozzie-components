@@ -141,11 +141,14 @@ export default {
         margin: 0;
     }
 
-    &:focus {
-        outline-color: common.$nav-link-focus-color;
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus;
 
-        @include f.media('>mid') {
-            border-radius: common.$nav-focus-borderRadius;
+        &, &:after {
+            @include f.media('>mid') {
+                border-radius: common.$nav-focus-borderRadius;
+            }
         }
     }
 
@@ -171,7 +174,6 @@ export default {
 
 .c-countrySelector-openPanelIcon {
     float: right;
-
     height: 18px;
 }
 </style>

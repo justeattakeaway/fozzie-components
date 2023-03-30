@@ -3,12 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v3.2.0
- ------------------------------
- *July 19, 2022*
 
- ### Added
- - Node 16 support.
+v3.3.0
+------------------------------
+*March 27, 2023*
+
+### Changed
+- New focus styles
+  - These require the new colour tokens from `pie-design-tokens` which are included in `fozzie` v11+.
+
+
+v3.2.0
+------------------------------
+*July 19, 2022*
+
+### Added
+- Node 16 support.
 
 
 v3.1.0
@@ -140,7 +150,7 @@ v0.3.0
 
 v0.2.1
 ------------------------------
-*February 08, 2021*
+*February 8, 2021*
 
 ### Added
 - Added unit tests for the tabs component
