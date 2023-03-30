@@ -182,10 +182,6 @@ $countrySelector-text-bg-hover : f.$color-container-subtle;
     &:active {
         background: f.$color-container-strong;
     }
-
-    &:focus {
-        outline-color: common.$nav-link-focus-color;
-    }
 }
 
 .c-countrySelector-country-flag {

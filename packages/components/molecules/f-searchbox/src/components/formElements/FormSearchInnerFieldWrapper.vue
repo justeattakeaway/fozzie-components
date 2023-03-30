@@ -84,10 +84,10 @@ $streetInput-width: f.spacing(h);
     border-left: f.$color-border-subtle 1px solid;
     margin-right: f.spacing(a);
     width: $streetInput-width;
-    outline: f.$color-white 2px auto;
 
-    &:focus {
-        outline-color: f.$color-focus;
+    &:focus,
+    &:focus-visible {
+        box-shadow: 0 0 0 2px f.$color-focus-inner, 0 0 0 4px f.$color-focus-outer;
     }
 }
 </style>

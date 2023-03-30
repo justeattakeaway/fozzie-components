@@ -52,7 +52,6 @@ export default {
     -webkit-box-sizing: border-box;
     background-color: common.$search-button-bgColor;
     border: none;
-    border-radius: 0 f.$border-radius f.$border-radius 0;
     box-sizing: border-box;
     color: f.$color-content-interactive-light;
     cursor: pointer;
@@ -68,6 +67,14 @@ export default {
     min-width: 56px;
     padding: f.spacing();
     right: 0;
+
+    &,
+    &:focus,
+    &:focus-visible {
+        &, &:after {
+            border-radius: 0 f.$border-radius f.$border-radius 0;
+        }
+    }
 
     &:focus,
     &:hover {

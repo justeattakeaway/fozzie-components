@@ -36,6 +36,16 @@ export default {
     align-items: center;
     justify-content: center;
     padding: 0 f.spacing() f.spacing(d);
+
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus;
+        position: absolute;
+
+        &, &:after {
+            bottom: 0; // Prevent vertical scrollbar if it doesn't already exist
+        }
+    }
 }
 
 .reopen-link--greyBg {
