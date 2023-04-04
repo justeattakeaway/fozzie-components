@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+7.49.0
+------------------------------
+*April 4, 2023*
+
+### Changed
+- Update `f-restaurant-card` to v1.5.1 to change colour token used for the Promoted tag.
 
 v7.49.0
 ------------------------------
