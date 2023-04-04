@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+0.17.0
+------------------------------
+*April 04, 2023*
+
+### Added
+- Added `hasData` property to hide the RatingMultiStarVariant component until we have data
+- Added mounted on the RatingMultiStarVariant and set a timer to set the `hasData` after Vue.nextTick to avoid a flickering effect between all the stars showing and the real value used to mask the fille stars width
+
+### Changed
+- `starRating` prop default and set it to use `0`.
+
 v0.16.0
 ------------------------------
 *March 27, 2023*

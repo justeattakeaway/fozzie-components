@@ -67,6 +67,7 @@ export default {
         starRating: {
             type: Number,
             required: true,
+            default: 0,
             validator: value => value >= 0 && value <= 5
         },
         maxStarRating: {

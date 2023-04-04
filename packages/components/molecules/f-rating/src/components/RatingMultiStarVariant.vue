@@ -13,6 +13,7 @@
         </div>
 
         <div
+            v-if="hasData"
             :class="[
                 $style['c-rating-mask'],
                 $style['c-rating-stars-icons']
@@ -57,6 +58,10 @@ export default {
         }
     },
 
+    data: () => ({
+        hasData: false
+    }),
+
     computed: {
         /**
          * Calculate a percentage from the `starRating` value passed in by the consuming application.
@@ -66,6 +71,14 @@ export default {
         getRatingStarPercentage () {
             return (this.starRating / this.maxStarRating) * 100;
         }
+    },
+
+    mounted () {
+        // Using setTimeout to ensure that the styles have been set in the DOM
+        // which seem to be happening before Vue.nextTick
+        setTimeout(() => {
+            this.hasData = this.getRatingStarPercentage > 0;
+        }, 20);
     }
 };
 </script>

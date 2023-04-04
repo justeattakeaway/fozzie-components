@@ -312,6 +312,11 @@ describe('Rating', () => {
                 expect(VRating.props.starRating.required).toBe(true);
             });
 
+            it('should set a default value of 0', () => {
+                // Act & Assert
+                expect(VRating.props.starRating.default).toBe(0);
+            });
+
             it.each([0, 1, 2, 3, 4, 5])('should allow value `%s`', rating => {
                 // Act
                 const { validator } = VRating.props.starRating;
