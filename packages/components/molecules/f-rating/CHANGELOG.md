@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 - Added `hasData` property to hide the RatingMultiStarVariant component until we have data
-- Added mounted on the RatingMultiStarVariant and set a timer to set the `hasData` after Vue.nextTick to avoid a flickering effect between all the stars showing and the real value used to mask the fille stars width
+- Added mounted on the RatingMultiStarVariant and using Vue.nextTick to set the `hasData` property after Vue.nextTick to ensure the % of masking over the filled stars occur after the DOM has been updated
 
 ### Changed
 - `starRating` prop default and set it to use `0`.
