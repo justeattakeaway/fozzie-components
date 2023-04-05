@@ -74,11 +74,12 @@ export default {
     },
 
     mounted () {
-        // Using setTimeout to ensure that the styles have been set in the DOM
-        // which seem to be happening before Vue.nextTick
-        setTimeout(() => {
+        // Use Vue.nextTick to wait until the DOM has been updated (i.e. CSS)
+        // before setting the property to avoid the masking happening after
+        // all the stars have been displayed (flickering effect)
+        this.$nextTick(() => {
             this.hasData = this.getRatingStarPercentage > 0;
-        }, 20);
+        });
     }
 };
 </script>
