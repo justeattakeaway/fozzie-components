@@ -23,6 +23,8 @@ export const MegaModalComponent = (args, { argTypes }) => ({
             :is-text-aligned-center="isTextAlignedCenter"
             :has-overlay="hasOverlay"
             :has-close-button="hasCloseButton"
+            :has-back-button="hasBackButton"
+            :has-mode-right-to-left="hasModeRightToLeft"
             :close-on-blur="closeOnBlur"
             :close-button-copy="closeButtonCopy"
             :title="titleCopy"
@@ -49,6 +51,8 @@ MegaModalComponent.args = {
     isTextAlignedCenter: false,
     hasOverlay: true,
     hasCloseButton: true,
+    hasBackButton: false,
+    hasModeRightToLeft: false,
     closeOnBlur: true,
     closeButtonCopy: 'Close modal',
     titleCopy: 'This place isn’t taking orders',
@@ -87,6 +91,12 @@ MegaModalComponent.argTypes = {
         control: { type: 'boolean' }
     },
     hasCloseButton: {
+        control: { type: 'boolean' }
+    },
+    hasBackButton: {
+        control: { type: 'boolean' }
+    },
+    hasModeRightToLeft: {
         control: { type: 'boolean' }
     },
     closeOnBlur: {

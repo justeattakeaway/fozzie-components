@@ -15,6 +15,7 @@
                 [$style['c-megaModal-content--narrow']]: isNarrow,
                 [$style['c-megaModal-content--wide']]: isWide,
                 [$style['c-megaModal-content--flush']]: isFlush,
+                [$style['c-megaModal-content--right-to-left']]: hasModeRightToLeft,
                 [$style['is-fullHeight']]: isFullHeight,
                 [$style['is-positioned-bottom']]: isPositionedBottom,
                 [$style['is-text-aligned-center']]: isTextAlignedCenter
@@ -33,7 +34,10 @@
                         :is="titleHtmlTag"
                         v-if="title"
                         :id="uid"
-                        :class="['c-megaModal-title', $style['c-megaModal-title']]"
+                        :class="['c-megaModal-title', $style['c-megaModal-title'], {
+                            [$style['c-megaModal-hasBackBtn']]: hasBackButton,
+                            [$style['c-megaModal-modeRTL']]: hasModeRightToLeft
+                        }]"
                         data-test-id="mega-modal-title">
                         {{ title }}
                     </component>
@@ -43,13 +47,19 @@
                         <f-button
                             is-icon
                             :class="[$style['c-megaModal-closeBtn'], {
-                                [$style['c-megaModal-closeBtn--fixed']]: isCloseFixed || isFullHeight
+                                [$style['c-megaModal-closeBtn--fixed']]: isCloseFixed || isFullHeight,
+                                [$style['c-megaModal-backBtn']]: hasBackButton,
+                                [$style['c-megaModal-modeRTL']]: hasModeRightToLeft
                             }]"
                             button-type="inverse"
                             button-size="xsmall"
                             data-test-id="close-modal"
                             @click.native="close">
+                            <chevron-left-icon
+                                v-if="hasBackButton" />
+
                             <close-small-icon
+                                v-else
                                 :class="[$style['c-megaModal-closeIcon']]" />
 
                             <span class="is-visuallyHidden">
@@ -66,7 +76,7 @@
 </template>
 
 <script>
-import { CloseSmallIcon } from '@justeattakeaway/pie-icons-vue';
+import { CloseSmallIcon, ChevronLeftIcon } from '@justeattakeaway/pie-icons-vue';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import FButton from '@justeat/f-button';
 
@@ -74,6 +84,7 @@ let uid = 0;
 
 export default {
     components: {
+        ChevronLeftIcon,
         CloseSmallIcon,
         FButton
     },
@@ -133,6 +144,11 @@ export default {
             default: true
         },
 
+        hasBackButton: {
+            type: Boolean,
+            default: false
+        },
+
         closeOnBlur: {
             type: Boolean,
             default: true
@@ -147,14 +163,21 @@ export default {
             type: String,
             default: ''
         },
+
         ariaLabel: {
             type: String,
             default: ''
         },
+
         titleHtmlTag: {
             type: String,
             default: 'h3',
             validator: value => ['h1', 'h2', 'h3', 'h4'].includes(value)
+        },
+
+        hasModeRightToLeft: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -342,6 +365,10 @@ export default {
     transform: translate(50%, -50%);
     width: 95%;
 
+    &.c-megaModal-content--right-to-left {
+        direction: rtl;
+    }
+
     &.is-positioned-bottom {
         border-radius: 0;
         bottom: -100vh;
@@ -436,6 +463,16 @@ export default {
         top: 22px;
         z-index: f.zIndex(high);
 
+        &.c-megaModal-backBtn {
+            left: f.spacing(d);
+        }
+
+        &.c-megaModal-modeRTL {
+            right: f.spacing(d);
+            left: auto;
+            transform: scaleX(-1);
+        }
+
         svg path {
             fill: f.$color-interactive-primary;
             width: 17px;
@@ -461,6 +498,14 @@ export default {
 
 .c-megaModal-title {
     margin: 0 f.spacing(f) 0 0;
+
+    &.c-megaModal-hasBackBtn {
+        margin: 0 0 0 f.spacing(f);
+    }
+
+    &.c-megaModal-modeRTL {
+        margin: 0 f.spacing(f) 0 0;
+    }
 
     .is-text-aligned-center & {
         margin-left: f.spacing(e);
