@@ -14,6 +14,11 @@ import * as skeletons from './skeletons';
 export default {
     name: 'SkeletonLoader',
     components: { ...skeletons },
+    provide () {
+        return {
+            skeletonOptions: this.options
+        };
+    },
     props: {
         skeletonType: {
             type: String,
@@ -21,6 +26,10 @@ export default {
             validator (value) {
                 return Object.keys(skeletons).includes(value);
             }
+        },
+        options: {
+            type: Object,
+            default: () => ({})
         }
     }
 };
