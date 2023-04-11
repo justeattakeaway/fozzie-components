@@ -90,5 +90,10 @@ $feedback-btn-font-size: 'body-s';
         color: darken(f.$color-content-link, f.$color-active-01);
         background-color: transparent;
     }
+
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--borderless;
+    }
 }
 </style>

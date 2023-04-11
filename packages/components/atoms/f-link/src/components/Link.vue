@@ -146,6 +146,11 @@ export default {
         color: darken(f.$color-content-link, f.$color-hover-01);
     }
 
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--borderless;
+    }
+
     &:active {
         color: darken(f.$color-content-link, f.$color-active-01);
     }

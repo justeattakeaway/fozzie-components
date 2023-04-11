@@ -186,5 +186,10 @@ export default {
     &:hover {
         text-decoration: underline;
     }
+
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--borderless;
+    }
 }
 </style>
