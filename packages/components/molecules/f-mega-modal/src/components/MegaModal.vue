@@ -2,8 +2,11 @@
     <div
         ref="megaModal"
         :class="['c-megaModal',
-                 $style['c-megaModal'],
-                 { 'u-overlay': showOverlay }]"
+                 $style['c-megaModal'], {
+                     'u-overlay': showOverlay,
+                     [$style['c-megaModal--hasBackBtn']]: hasBackButton,
+                     [$style['c-megaModal-modeRTL']]: isModeRightToLeft
+                 }]"
         data-test-id='mega-modal-component'
         :aria-hidden="!isOpen"
         @click.self="overlayClose">
@@ -15,7 +18,7 @@
                 [$style['c-megaModal-content--narrow']]: isNarrow,
                 [$style['c-megaModal-content--wide']]: isWide,
                 [$style['c-megaModal-content--flush']]: isFlush,
-                [$style['c-megaModal-content--right-to-left']]: hasModeRightToLeft,
+                [$style['c-megaModal-content--rightToLeft']]: isModeRightToLeft,
                 [$style['is-fullHeight']]: isFullHeight,
                 [$style['is-positioned-bottom']]: isPositionedBottom,
                 [$style['is-text-aligned-center']]: isTextAlignedCenter
@@ -34,10 +37,7 @@
                         :is="titleHtmlTag"
                         v-if="title"
                         :id="uid"
-                        :class="['c-megaModal-title', $style['c-megaModal-title'], {
-                            [$style['c-megaModal-hasBackBtn']]: hasBackButton,
-                            [$style['c-megaModal-modeRTL']]: hasModeRightToLeft
-                        }]"
+                        :class="['c-megaModal-title', $style['c-megaModal-title']]"
                         data-test-id="mega-modal-title">
                         {{ title }}
                     </component>
@@ -47,9 +47,7 @@
                         <f-button
                             is-icon
                             :class="[$style['c-megaModal-closeBtn'], {
-                                [$style['c-megaModal-closeBtn--fixed']]: isCloseFixed || isFullHeight,
-                                [$style['c-megaModal-backBtn']]: hasBackButton,
-                                [$style['c-megaModal-modeRTL']]: hasModeRightToLeft
+                                [$style['c-megaModal-closeBtn--fixed']]: isCloseFixed || isFullHeight
                             }]"
                             button-type="inverse"
                             button-size="xsmall"
@@ -175,7 +173,7 @@ export default {
             validator: value => ['h1', 'h2', 'h3', 'h4'].includes(value)
         },
 
-        hasModeRightToLeft: {
+        isModeRightToLeft: {
             type: Boolean,
             default: false
         }
@@ -365,7 +363,7 @@ export default {
     transform: translate(50%, -50%);
     width: 95%;
 
-    &.c-megaModal-content--right-to-left {
+    .c-megaModal-modeRTL & {
         direction: rtl;
     }
 
@@ -463,16 +461,6 @@ export default {
         top: 22px;
         z-index: f.zIndex(high);
 
-        &.c-megaModal-backBtn {
-            left: f.spacing(d);
-        }
-
-        &.c-megaModal-modeRTL {
-            right: f.spacing(d);
-            left: auto;
-            transform: scaleX(-1);
-        }
-
         svg path {
             fill: f.$color-interactive-primary;
             width: 17px;
@@ -491,25 +479,45 @@ export default {
         }
     }
 
+    &.c-megaModal-modeRTL {
+        .c-megaModal-closeBtn {
+            right: f.spacing(d);
+            left: auto;
+            transform: scaleX(-1);
+        }
+    }
+
+    &.c-megaModal--hasBackBtn {
+        .c-megaModal-closeBtn {
+            left: f.spacing(d);
+        }
+    }
+
     .c-megaModal-closeBtn--fixed {
         position: fixed;
+    }
+}
+
+.c-megaModal-modeRTL {
+    & .c-megaModal-title {
+        margin: 0 f.spacing(f) 0 0;
     }
 }
 
 .c-megaModal-title {
     margin: 0 f.spacing(f) 0 0;
 
-    &.c-megaModal-hasBackBtn {
-        margin: 0 0 0 f.spacing(f);
-    }
-
-    &.c-megaModal-modeRTL {
-        margin: 0 f.spacing(f) 0 0;
-    }
-
     .is-text-aligned-center & {
         margin-left: f.spacing(e);
         margin-right: f.spacing(e);
+    }
+
+    .c-megaModal--hasBackBtn & {
+        margin: 0 0 0 f.spacing(f);
+    }
+
+    .c-megaModal-modeRTL & {
+        margin: 0 f.spacing(f) 0 0;
     }
 }
 </style>

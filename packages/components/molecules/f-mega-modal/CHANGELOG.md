@@ -10,7 +10,7 @@ v7.4.0
 
 ### Added
 - `hasBackButton` prop to allow a chevron icon to be used instead of a close icon.
-- `hasModeRightToLeft` prop to allow a chevron icon to be used in a right to left tenant.
+- `isModeRightToLeft` prop to allow a chevron icon to be used in a right to left tenant.
 
 
 v7.3.0

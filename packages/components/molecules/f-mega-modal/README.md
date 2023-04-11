@@ -108,22 +108,24 @@ The following rudimentary example can be used as a guide for implementing this c
 
 The props that can be defined are as follows:
 
-| Prop  | Type  | Default | Description |
-| ----- | ----- | ------- | ----------- |
-| `is-open` | `Boolean` | `false` | Sets the modal to open or closed state. |
-| `is-narrow` | `Boolean` | `false` | Use the narrow visual style. |
-| `is-wide` | `Boolean` | `false` | Use the wide visual style. |
-| `is-flush` | `Boolean` | `false` | Removes passing around the modal content. |
-| `is-full-height` | `Boolean` | `false` | Sets the modal content to full height of the screen.<br/><br/><blockquote>Note this only applies to small screen devices.</blockquote> |
-| `is-scrollable` | `Boolean` | `false` | Makes the modal content scrollable. |
-| `is-close-fixed` | `Boolean` | `false` | Sets the modal close button position to `fixed`. |
-| `is-positioned-bottom` | `Boolean` | `false` | Sets the modal position to the bottom of the viewport for all screen widths. |
-| `has-overlay` | `Boolean` | `true` | Controls whether or not to display an overlay behind the modal. |
-| `has-close-button` | `Boolean` | `true` | Controls whether or not to display the modal close button. |
-| `close-on-blur` | `Boolean` | `true` | Controls whether or not to close the modal when the user clicks outside of the modal. |
-| `close-button-copy` | `String` | `"Close modal"` | Sets the hidden text value for the close button which is used by screen-readers. |
-| `title` | `String` | `''` | When set, will add a title to the top of the component. If you need to define a custom heading, ignore this prop.  |
-| `titleHtmlTag` | `String` | `h3` | Sets the tag for the component's title.<br><br>Allowed values are `h1`, `h2`, `h3`, and `h4` |
+| Prop                   | Type  | Default         | Description                                                                                                                            |
+|------------------------| ----- |-----------------|----------------------------------------------------------------------------------------------------------------------------------------|
+| `is-open`              | `Boolean` | `false`         | Sets the modal to open or closed state.                                                                                                |
+| `is-narrow`            | `Boolean` | `false`         | Use the narrow visual style.                                                                                                           |
+| `is-wide`              | `Boolean` | `false`         | Use the wide visual style.                                                                                                             |
+| `is-flush`             | `Boolean` | `false`         | Removes passing around the modal content.                                                                                              |
+| `is-full-height`       | `Boolean` | `false`         | Sets the modal content to full height of the screen.<br/><br/><blockquote>Note this only applies to small screen devices.</blockquote> |
+| `is-scrollable`        | `Boolean` | `false`         | Makes the modal content scrollable.                                                                                                    |
+| `is-close-fixed`       | `Boolean` | `false`         | Sets the modal close button position to `fixed`.                                                                                       |
+| `is-positioned-bottom` | `Boolean` | `false`         | Sets the modal position to the bottom of the viewport for all screen widths.                                                           |
+| `has-overlay`          | `Boolean` | `true`          | Controls whether or not to display an overlay behind the modal.                                                                        |
+| `has-close-button`     | `Boolean` | `true`          | Controls whether or not to display the modal close button.                                                                             |
+| `close-on-blur`        | `Boolean` | `true`          | Controls whether or not to close the modal when the user clicks outside of the modal.                                                  |
+| `close-button-copy`    | `String` | `"Close modal"` | Sets the hidden text value for the close button which is used by screen-readers.                                                       |
+| `title`                | `String` | `''`            | When set, will add a title to the top of the component. If you need to define a custom heading, ignore this prop.                      |
+| `titleHtmlTag`         | `String` | `h3`            | Sets the tag for the component's title.<br><br>Allowed values are `h1`, `h2`, `h3`, and `h4`                                           |
+| `hasBackButton`        | `Boolean` | `false`         | Controls whether or not to display the modal cheveron icon instead of a close icon button                                              |
+| `isModeRightToLeft`     | `Boolean` | `false`         | Controls whether or not to display the modal elements in a right to left direction.                                                    |
 
 ### CSS Classes
 
