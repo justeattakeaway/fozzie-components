@@ -146,7 +146,7 @@ To test only `f-segmented-control`, run from the `./fozzie-components/packages/c
 yarn test
 ```
 
-### Component and Accessibility Tests
+### Component Tests
 
 ```bash
 # Note: Ensure Storybook is running when running the following commands
@@ -154,14 +154,14 @@ cd ./fozzie-components
 
 yarn storybook:build
 yarn storybook:serve-static
-```
-
 yarn test-component:chrome
 ```
+
 ### Accessibility tests
 ```bash
 yarn test-a11y:chrome
 ```
+
 ## Documentation to be completed once module is in stable state.
 
 
