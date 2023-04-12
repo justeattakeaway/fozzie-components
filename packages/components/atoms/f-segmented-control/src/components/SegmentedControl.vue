@@ -21,6 +21,7 @@
             :disabled="option.disabled"
             @click="selectOption(option.label)"
         >
+            <!-- TODO: This is a placeholder for adding vue icons -->
             <i
                 v-if="option.icon"
                 :class="option.icon" />
