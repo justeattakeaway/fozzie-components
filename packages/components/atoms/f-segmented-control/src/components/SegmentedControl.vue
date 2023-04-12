@@ -4,6 +4,7 @@
             [$style['c-segmented-control']]: true,
             [$style['c-segmented-control--large']]: size === 'large'
         }"
+        data-test-id="segmented-control"
         :aria-label="screenreaderLabel"
         role="radiogroup"
         tabindex="-1"
@@ -12,6 +13,7 @@
         <button
             v-for="(option, index) in options"
             :key="option.label"
+            :data-test-id="`segmented-control-option-${index}`"
             type="button"
             :class="{
                 [$style['c-segmented-control__option']]: true,

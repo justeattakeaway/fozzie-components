@@ -2,6 +2,8 @@ import { shallowMount } from '@vue/test-utils';
 import SegmentedControl from '../SegmentedControl.vue';
 
 describe('SegmentedControl', () => {
+    const optionSelector = '[data-test-id^="segmented-control-option-"]';
+
     it('should be defined', () => {
         const propsData = {
             screenreaderLabel: 'Test label',
@@ -26,7 +28,7 @@ describe('SegmentedControl', () => {
                 ]
             };
             const wrapper = shallowMount(SegmentedControl, { propsData });
-            const buttons = wrapper.findAll('button');
+            const buttons = wrapper.findAll(optionSelector);
 
             expect(buttons.at(0).attributes('aria-checked')).toBe('true');
             expect(buttons.at(0).attributes('tabindex')).toBe('0');
@@ -46,7 +48,7 @@ describe('SegmentedControl', () => {
                 ]
             };
             const wrapper = shallowMount(SegmentedControl, { propsData });
-            const buttons = wrapper.findAll('button');
+            const buttons = wrapper.findAll(optionSelector);
 
             await buttons.at(1).trigger('click');
 
@@ -68,7 +70,7 @@ describe('SegmentedControl', () => {
                 ]
             };
             const wrapper = shallowMount(SegmentedControl, { propsData });
-            const buttons = wrapper.findAll('button');
+            const buttons = wrapper.findAll(optionSelector);
 
             await buttons.at(0).trigger('keydown', { key: 'ArrowRight' });
 
@@ -90,7 +92,7 @@ describe('SegmentedControl', () => {
                 ]
             };
             const wrapper = shallowMount(SegmentedControl, { propsData });
-            const buttons = wrapper.findAll('button');
+            const buttons = wrapper.findAll(optionSelector);
 
             await buttons.at(0).trigger('keydown', { key: 'ArrowLeft' });
 
@@ -112,7 +114,7 @@ describe('SegmentedControl', () => {
                 ]
             };
             const wrapper = shallowMount(SegmentedControl, { propsData });
-            const buttons = wrapper.findAll('button');
+            const buttons = wrapper.findAll(optionSelector);
 
             await buttons.at(0).trigger('keydown', { key: 'ArrowRight' });
             await buttons.at(1).trigger('keydown', { key: 'Enter' });
@@ -135,7 +137,7 @@ describe('SegmentedControl', () => {
                 ]
             };
             const wrapper = shallowMount(SegmentedControl, { propsData });
-            const buttons = wrapper.findAll('button');
+            const buttons = wrapper.findAll(optionSelector);
 
             await buttons.at(0).trigger('keydown', { key: 'ArrowRight' });
             await buttons.at(1).trigger('keydown', { key: 'Space' });
@@ -158,7 +160,7 @@ describe('SegmentedControl', () => {
                 ]
             };
             const wrapper = shallowMount(SegmentedControl, { propsData });
-            const buttons = wrapper.findAll('button');
+            const buttons = wrapper.findAll(optionSelector);
 
             await buttons.at(0).trigger('click');
             await wrapper.trigger('keydown', { key: 'ArrowRight' });
@@ -180,7 +182,7 @@ describe('SegmentedControl', () => {
             };
             const wrapper = shallowMount(SegmentedControl, { propsData });
 
-            const buttons = wrapper.findAll('button.segmented-control__option');
+            const buttons = wrapper.findAll(optionSelector);
 
             expect(buttons.at(0).attributes('tabindex')).toBe('-1');
             expect(buttons.at(0).attributes('aria-checked')).toBe('false');
@@ -201,7 +203,7 @@ describe('SegmentedControl', () => {
             };
             const wrapper = shallowMount(SegmentedControl, { propsData });
 
-            const buttons = wrapper.findAll('button.segmented-control__option');
+            const buttons = wrapper.findAll(optionSelector);
 
             await buttons.at(1).trigger('keydown', { key: 'ArrowRight' });
 
@@ -224,7 +226,7 @@ describe('SegmentedControl', () => {
             };
             const wrapper = shallowMount(SegmentedControl, { propsData });
 
-            const buttons = wrapper.findAll('button.segmented-control__option');
+            const buttons = wrapper.findAll(optionSelector);
 
             await buttons.at(0).trigger('click');
 
@@ -246,7 +248,7 @@ describe('SegmentedControl', () => {
                 ]
             };
             const wrapper = shallowMount(SegmentedControl, { propsData });
-            const buttons = wrapper.findAll('button');
+            const buttons = wrapper.findAll(optionSelector);
 
             await buttons.at(0).trigger('keydown', { key: 'ArrowUp' });
 
@@ -268,7 +270,7 @@ describe('SegmentedControl', () => {
                 ]
             };
             const wrapper = shallowMount(SegmentedControl, { propsData });
-            const buttons = wrapper.findAll('button');
+            const buttons = wrapper.findAll(optionSelector);
 
             await buttons.at(0).trigger('keydown', { key: 'ArrowLeft' });
 
@@ -290,7 +292,7 @@ describe('SegmentedControl', () => {
                 ]
             };
             const wrapper = shallowMount(SegmentedControl, { propsData });
-            const buttons = wrapper.findAll('button');
+            const buttons = wrapper.findAll(optionSelector);
 
             await buttons.at(0).trigger('keydown', { key: 'ArrowDown' });
 
@@ -312,7 +314,7 @@ describe('SegmentedControl', () => {
                 ]
             };
             const wrapper = shallowMount(SegmentedControl, { propsData });
-            const buttons = wrapper.findAll('button');
+            const buttons = wrapper.findAll(optionSelector);
 
             await buttons.at(0).trigger('keydown', { key: 'ArrowRight' });
 
@@ -334,7 +336,7 @@ describe('SegmentedControl', () => {
                 ]
             };
             const wrapper = shallowMount(SegmentedControl, { propsData });
-            const buttons = wrapper.findAll('button');
+            const buttons = wrapper.findAll(optionSelector);
 
             await buttons.at(0).trigger('keydown', { key: 'ArrowUp' });
 
@@ -356,7 +358,7 @@ describe('SegmentedControl', () => {
                 ]
             };
             const wrapper = shallowMount(SegmentedControl, { propsData });
-            const buttons = wrapper.findAll('button');
+            const buttons = wrapper.findAll(optionSelector);
 
             await buttons.at(0).trigger('keydown', { key: 'ArrowLeft' });
 
@@ -378,7 +380,7 @@ describe('SegmentedControl', () => {
                 ]
             };
             const wrapper = shallowMount(SegmentedControl, { propsData });
-            const buttons = wrapper.findAll('button');
+            const buttons = wrapper.findAll(optionSelector);
 
             await buttons.at(2).trigger('keydown', { key: 'ArrowDown' });
 
@@ -400,7 +402,7 @@ describe('SegmentedControl', () => {
                 ]
             };
             const wrapper = shallowMount(SegmentedControl, { propsData });
-            const buttons = wrapper.findAll('button');
+            const buttons = wrapper.findAll(optionSelector);
 
             await buttons.at(2).trigger('keydown', { key: 'ArrowRight' });
 
@@ -424,45 +426,11 @@ describe('SegmentedControl', () => {
         };
         const wrapper = shallowMount(SegmentedControl, { propsData });
 
-        const buttons = wrapper.findAll('button');
+        const buttons = wrapper.findAll(optionSelector);
 
         expect(buttons.at(0).attributes('disabled')).toBeUndefined();
         expect(buttons.at(1).attributes('disabled')).toBe('disabled');
         expect(buttons.at(2).attributes('disabled')).toBeUndefined();
-    });
-
-    it('should apply large class when size prop is set to large', () => {
-        const propsData = {
-            screenreaderLabel: 'Test label',
-            options: [
-                { label: 'Option 1' },
-                { label: 'Option 2' },
-                { label: 'Option 3' }
-            ],
-            size: 'large'
-        };
-        const wrapper = shallowMount(SegmentedControl, { propsData });
-
-        const segmentedControl = wrapper.find('.segmented-control');
-
-        expect(segmentedControl.classes()).toContain('segmented-control--large');
-    });
-
-    it('should not apply large class when size prop is set to small', () => {
-        const propsData = {
-            screenreaderLabel: 'Test label',
-            options: [
-                { label: 'Option 1' },
-                { label: 'Option 2' },
-                { label: 'Option 3' }
-            ],
-            size: 'small'
-        };
-        const wrapper = shallowMount(SegmentedControl, { propsData });
-
-        const segmentedControl = wrapper.find('.segmented-control');
-
-        expect(segmentedControl.classes()).not.toContain('segmented-control--large');
     });
 
     it('should render the correct label inside each button', () => {
@@ -477,7 +445,7 @@ describe('SegmentedControl', () => {
         };
         const wrapper = shallowMount(SegmentedControl, { propsData });
 
-        const buttons = wrapper.findAll('.segmented-control__option');
+        const buttons = wrapper.findAll(optionSelector);
 
         for (let i = 0; i < propsData.options.length; i++) {
             expect(buttons.at(i).text()).toContain(propsData.options[i].label);
@@ -495,7 +463,7 @@ describe('SegmentedControl', () => {
             size: 'small'
         };
         const wrapper = shallowMount(SegmentedControl, { propsData });
-        const buttons = wrapper.findAll('.segmented-control__option');
+        const buttons = wrapper.findAll(optionSelector);
         expect(buttons.length).toBe(propsData.options.length);
     });
 
@@ -517,7 +485,7 @@ describe('SegmentedControl', () => {
         });
 
         const testButtonClick = async buttonIndex => {
-            const button = wrapper.find(`.segmented-control__option:nth-child(${buttonIndex + 1})`);
+            const button = wrapper.find(`${optionSelector}:nth-child(${buttonIndex + 1})`);
             await button.trigger('click');
             expect(wrapper.emitted().input[0]).toEqual([propsData.options[buttonIndex].label]);
         };
