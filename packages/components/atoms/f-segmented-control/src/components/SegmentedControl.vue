@@ -92,43 +92,44 @@ export default {
             const newIndex = this.options.findIndex(option => option.label === label);
 
             this.selectedLabel = label;
-            this.tabIndex = newIndex;
 
             this.$emit('input', label);
 
-            this.$nextTick(() => {
-                this.$el.children[previousIndex].blur();
-                this.$el.children[newIndex].focus();
-            });
+            if (newIndex !== previousIndex) {
+                this.focusNewButton(newIndex, this.$el.children[previousIndex]);
+            }
         },
-        onKeyDown (e) {
+        onKeyDown (event) {
             let newIndex = this.tabIndex;
+            const currentButton = event.target;
 
-            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+            if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
                 // Move focus to the next button
                 newIndex = (this.tabIndex + 1) % this.options.length;
-            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+            } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
                 // Move focus to the previous button
                 newIndex = (this.tabIndex - 1 + this.options.length) % this.options.length;
-            } else if (e.key === 'Enter' || e.key === 'Space') {
-                e.preventDefault(); // Prevent the default behavior (e.g., scrolling)
+            } else if (event.key === 'Enter' || event.key === 'Space') {
+                event.preventDefault(); // Prevent the default behavior (e.g., scrolling)
                 this.selectOption(this.options[this.tabIndex].label);
-
                 return;
             }
 
             // If the newIndex has changed, update the tabIndex and focus the new button
             if (newIndex !== this.tabIndex) {
-                this.tabIndex = newIndex;
-                e.target.blur(); // Remove focus from the current button
-
-                // Wait for the DOM to update, then focus the new button
-                this.$nextTick(() => {
-                    this.$el.children[this.tabIndex].focus();
-                });
+                this.focusNewButton(newIndex, currentButton);
             }
-        }
+        },
+        focusNewButton (newIndex, currentButton) {
+            this.tabIndex = newIndex;
+            // Remove focus from the current button
+            currentButton.blur();
 
+            // Wait for the DOM to update, then focus the new button
+            this.$nextTick(() => {
+                this.$el.children[this.tabIndex].focus();
+            });
+        }
     }
 };
 </script>
@@ -158,6 +159,7 @@ export default {
 
 .segmented-control__option {
     font-size: inherit;
+    color: inherit;
     flex: 1; /* Distribute available space equally among buttons */
     border-radius: var(--s-c-border-radius);
     border: none;
@@ -169,6 +171,7 @@ export default {
     align-items: center;
     justify-content: center;
     gap: 8px;
+    outline: none;
 
     &--selected {
         font-weight: 700;
@@ -186,16 +189,19 @@ export default {
         cursor: not-allowed;
     }
 
-    &:hover:not(:disabled) {
-        background-color: rgba(0, 0, 0, 0.04);
-    }
-
     &:active:not(:disabled) {
         background-color: rgba(0, 0, 0, 0.12);
     }
 
     &:focus {
-        outline: 2px solid #094DAC;
+        box-shadow: 0 0 0 2px #094DAC;
+    }
+}
+
+// This prevents hover effects from being applied on touch devices
+@media(hover: hover) and (pointer: fine) {
+    .segmented-control__option:hover:not(:disabled) {
+        background-color: rgba(0, 0, 0, 0.04);
     }
 }
 </style>
