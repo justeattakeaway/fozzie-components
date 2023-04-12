@@ -79,9 +79,11 @@ export default {
         }
     },
     data () {
+        const selectedIndex = this.options.findIndex(option => option.selected);
+
         return {
-            selectedLabel: this.options.find(option => option.selected)?.label || this.options[0].label,
-            tabIndex: this.options.findIndex(option => option.selected) > -1 ? this.options.findIndex(option => option.selected) : 0
+            selectedLabel: this.options[selectedIndex]?.label || this.options[0].label,
+            tabIndex: selectedIndex > -1 ? selectedIndex : 0
         };
     },
     computed: {
