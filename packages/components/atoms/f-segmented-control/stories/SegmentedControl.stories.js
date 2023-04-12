@@ -44,8 +44,8 @@ Large.args = {
     size: 'large'
 };
 
-export const WithIcons = Template.bind({});
-WithIcons.args = {
+export const TODOWithIcons = Template.bind({});
+TODOWithIcons.args = {
     ...Small.args,
     options: [
         { label: 'EN', icon: 'icon-classname-1' },
