@@ -4,12 +4,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-v7.4.0
+v8.0.0 ** Breaking Change **
 ------------------------------
-*April 06, 2023*
+*April 12, 2023*
+
+### Changed
+- Prop `hasCloseButton` to `closeButtonStyle` allow either a chevron icon or close icon to be used.
+  - `closeButtonStyle` options: `none`, `close-small-icon`, `chevron-left-icon`.
 
 ### Added
-- `hasBackButton` prop to allow a chevron icon to be used instead of a close icon.
 - `isModeRightToLeft` prop to allow a chevron icon to be used in a right to left tenant.
 
 

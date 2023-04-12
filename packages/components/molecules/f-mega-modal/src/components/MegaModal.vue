@@ -4,7 +4,7 @@
         :class="['c-megaModal',
                  $style['c-megaModal'], {
                      'u-overlay': showOverlay,
-                     [$style['c-megaModal--hasBackBtn']]: hasBackButton,
+                     [$style['c-megaModal--hasChevronIcon']]: hasChevronIcon,
                      [$style['c-megaModal-modeRTL']]: isModeRightToLeft
                  }]"
         data-test-id='mega-modal-component'
@@ -42,7 +42,7 @@
                         {{ title }}
                     </component>
                     <slot
-                        v-if="hasCloseButton"
+                        v-if="closeButtonStyle"
                         name="close-button">
                         <f-button
                             is-icon
@@ -53,12 +53,8 @@
                             button-size="xsmall"
                             data-test-id="close-modal"
                             @click.native="close">
-                            <chevron-left-icon
-                                v-if="hasBackButton" />
-
-                            <close-small-icon
-                                v-else
-                                :class="[$style['c-megaModal-closeIcon']]" />
+                            <component :is="closeButtonStyle"
+                                       :class="[$style['c-megaModal-closeIcon']]" />
 
                             <span class="is-visuallyHidden">
                                 {{ closeButtonCopy }}
@@ -137,14 +133,10 @@ export default {
             default: true
         },
 
-        hasCloseButton: {
-            type: Boolean,
-            default: true
-        },
-
-        hasBackButton: {
-            type: Boolean,
-            default: false
+        closeButtonStyle: {
+            type: String,
+            default: 'close-small-icon',
+            validator: value => ['', 'close-small-icon', 'chevron-left-icon'].includes(value)
         },
 
         closeOnBlur: {
@@ -194,6 +186,9 @@ export default {
         },
         showAriaLabel () {
             return this.ariaLabel === '' ? this.uid : this.ariaLabel;
+        },
+        hasChevronIcon () {
+            return this.closeButtonStyle === 'chevron-left-icon';
         }
     },
 
@@ -487,7 +482,7 @@ export default {
         }
     }
 
-    &.c-megaModal--hasBackBtn {
+    &.c-megaModal--hasChevronIcon {
         .c-megaModal-closeBtn {
             left: f.spacing(d);
         }
@@ -512,7 +507,7 @@ export default {
         margin-right: f.spacing(e);
     }
 
-    .c-megaModal--hasBackBtn & {
+    .c-megaModal--hasChevronIcon & {
         margin: 0 0 0 f.spacing(f);
     }
 
