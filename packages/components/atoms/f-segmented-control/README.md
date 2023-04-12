@@ -105,7 +105,7 @@ export default {
 
 ### Events
 
-The events that can be subscribed to are as follows (if any):
+The events that can be subscribed to are as follows:
 
 | Event | Description |
 | ----- | ----------- |
