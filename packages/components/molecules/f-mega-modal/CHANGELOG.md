@@ -10,7 +10,7 @@ v8.0.0 ** Breaking Change **
 
 ### Changed
 - Prop `hasCloseButton` to `closeButtonStyle` allow either a chevron icon or close icon to be used.
-  - `closeButtonStyle` options: `none`, `close-small-icon`, `chevron-left-icon`.
+  - `closeButtonStyle` options: `''`, `close-small-icon`, `chevron-left-icon`.
 
 ### Added
 - `isModeRightToLeft` prop to allow a chevron icon to be used in a right to left tenant.
