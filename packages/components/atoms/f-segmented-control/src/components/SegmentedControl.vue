@@ -40,7 +40,32 @@ export default {
         },
         options: {
             type: Array,
-            required: true
+            required: true,
+            validator: value => {
+                if (value.length < 2) {
+                    return false;
+                }
+
+                return value.every(option => {
+                    if (typeof option !== 'object') {
+                        return false;
+                    }
+
+                    if (typeof option.label !== 'string' || !option.label) {
+                        return false;
+                    }
+
+                    if (option.iconName && typeof option.iconName !== 'string') {
+                        return false;
+                    }
+
+                    if (option.disabled && typeof option.disabled !== 'boolean') {
+                        return false;
+                    }
+
+                    return true;
+                });
+            }
         },
         size: {
             type: String,
@@ -92,7 +117,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/* Define the main segmented control container */
 .segmented-control {
     --s-c-border-radius: 9999px;
 
