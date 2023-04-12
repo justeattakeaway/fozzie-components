@@ -22,9 +22,6 @@
             @click="selectOption(option.label)"
         >
             <!-- TODO: This is a placeholder for adding vue icons -->
-            <i
-                v-if="option.iconName"
-                :class="option.iconName" />
             <span>{{ option.label }}</span>
         </button>
     </div>
@@ -84,6 +81,7 @@ export default {
         };
     },
     computed: {
+        // dynamically set the tabindex attribute on each button, giving focus only to the currently selected button
         focusedTabIndex () {
             return this.options.map((_, index) => (index === this.tabIndex ? 0 : -1));
         }
