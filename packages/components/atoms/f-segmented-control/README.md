@@ -4,8 +4,6 @@
 
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
-TBD
-
 </div>
 
 ---
@@ -18,6 +16,43 @@ TBD
 ---
 
 ## Usage
+A Segmented Control component is a group of toggle buttons that behave like a single choice element. It is useful for displaying a set of options to the user when only one option can be selected.
+
+
+Import the SegmentedControl component in your .vue file and use it as follows:
+
+```
+<template>
+    <SegmentedControl
+        :screenreaderLabel="screenreaderLabel"
+        :options="options"
+        :size="size"
+        v-model="selectedOption"
+    />
+</template>
+
+<script>
+import SegmentedControl from '@justeat/f-segmented-control';
+
+export default {
+    components: { SegmentedControl },
+    data() {
+        return {
+            screenreaderLabel: 'Select an option',
+            options: [
+                { label: 'Option 1' },
+                { label: 'Option 2' },
+                { label: 'Option 3', selected: true },
+                { label: 'Option 4', disabled: true }
+            ],
+            size: 'large', // Can be 'small' or 'large', defaults to 'small'
+            selectedOption: 'Option 3' // The currently selected option
+        };
+    }
+};
+</script>
+
+```
 
 ### Installation
 
@@ -65,12 +100,13 @@ export default {
 
 ### Props
 
-There may be props that allow you to customise its functionality.
+| Prop | Type | Required | Default | Validator | Description |
+| --- | --- | --- | --- | --- | --- |
+| `screenreaderLabel` | `String` | `true` | N/A | N/A | The label that is read by screen readers to describe the segmented control |
+| `options` | `Array` | `true` | N/A | Array must have at least 2 elements, and each element must have a `label` property of type `string`. The `iconName`, `disabled`, and `selected` properties are optional. `selected` will set the default selected option. | An array of objects representing each button in the segmented control |
+| `size` | `String` | `false` | `'small'` | Must be either `'small'` or `'large'`. | The size of the segmented control |
 
-The props that can be defined are as follows (if any):
 
-| Prop  | Type  | Default | Description |
-| ----- | ----- | ------- | ----------- |
 
 ### Events
 
@@ -78,6 +114,10 @@ The events that can be subscribed to are as follows (if any):
 
 | Event | Description |
 | ----- | ----------- |
+| input | Emitted when the user selects an option. The value emitted is the label of the selected option. |
+
+## Accessibility
+The Segmented Control component follows accessibility best practices and includes support for keyboard navigation. Users can use the arrow keys to navigate between options and the space or enter key to select an option. The component also includes ARIA attributes for screen readers.
 
 ## Development
 
