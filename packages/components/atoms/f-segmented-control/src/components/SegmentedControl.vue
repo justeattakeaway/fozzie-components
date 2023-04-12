@@ -1,7 +1,7 @@
 <template>
     <div
+        class="segmented-control"
         :class="{
-            'segmented-control': true,
             'segmented-control--large': size === 'large'
         }"
         :aria-label="screenreaderLabel"
@@ -45,9 +45,7 @@ export default {
         size: {
             type: String,
             default: 'small',
-            validator: function (value) {
-                return ['small', 'large'].includes(value);
-            }
+            validator: value => ['small', 'large'].includes(value)
         }
     },
     data () {
@@ -63,54 +61,60 @@ export default {
         },
         onKeyDown (e) {
             let newIndex = this.tabIndex;
+
             if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                // Move focus to the next button
                 newIndex = (this.tabIndex + 1) % this.options.length;
             } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                // Move focus to the previous button
                 newIndex = (this.tabIndex - 1 + this.options.length) % this.options.length;
             } else if (e.key === 'Enter' || e.key === 'Space') {
-                e.preventDefault();
+                e.preventDefault(); // Prevent the default behavior (e.g., scrolling)
                 this.selectOption(this.options[this.tabIndex].label);
+
                 return;
             }
+
+            // If the newIndex has changed, update the tabIndex and focus the new button
             if (newIndex !== this.tabIndex) {
                 this.tabIndex = newIndex;
-                e.target.blur();
+                e.target.blur(); // Remove focus from the current button
+
+                // Wait for the DOM to update, then focus the new button
                 this.$nextTick(() => {
                     this.$el.children[this.tabIndex].focus();
                 });
             }
         }
+
     }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 /* Define the main segmented control container */
 .segmented-control {
-    --s-c-border-radius: 9999px; /* Define border radius variable for the control and buttons */
+    --s-c-border-radius: 9999px;
+
     display: flex;
     justify-content: space-between;
     background-color: #EFEDEA;
     border-radius: var(--s-c-border-radius);
-    gap: 2.5px; /* Space between the buttons */
+    gap: 2.5px;
     padding: 2px;
     font-size: 16px;
     min-height: 32px;
-    font-family: sans-serif;
-    user-select: none; /* Prevent text selection */
+    user-select: none;
+
+    &--large {
+        min-height: 48px;
+
+        .segmented-control__option {
+            padding-block: 10px;
+        }
+    }
 }
 
-/* Increase the height of the large variant */
-.segmented-control--large {
-    min-height: 48px;
-}
-
-/* Add padding to buttons in the large variant */
-.segmented-control--large .segmented-control__option {
-    padding-block: 10px;
-}
-
-/* Define the styles for the buttons */
 .segmented-control__option {
     font-size: inherit;
     flex: 1; /* Distribute available space equally among buttons */
@@ -123,40 +127,34 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px; /* Space between the icon and the text inside the button */
-}
+    gap: 8px;
 
-/* Change the cursor for non-disabled buttons */
-.segmented-control__option:not(:disabled) {
-    cursor: pointer;
-}
+    &--selected {
+        font-weight: 700;
+        background-color: #fff;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.02), 0px 2px 12px -2px rgba(0, 0, 0, 0.08), 0px 3px 6px rgba(0, 0, 0, 0.06);
+    }
 
-/* Define styles for disabled buttons */
-.segmented-control__option:disabled {
-    color: #8C999B;
-    background-color: #EFEDEA;
-    cursor: not-allowed;
-}
+    &:not(:disabled) {
+        cursor: pointer;
+    }
 
-/* Define styles for selected buttons */
-.segmented-control__option--selected {
-    font-weight: 700;
-    background-color: #fff;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.02), 0px 2px 12px -2px rgba(0, 0, 0, 0.08), 0px 3px 6px rgba(0, 0, 0, 0.06);
-}
+    &:disabled {
+        color: #8C999B;
+        background-color: #EFEDEA;
+        cursor: not-allowed;
+    }
 
-/* Define styles for button hover state (non-disabled) */
-.segmented-control__option:hover:not(:disabled) {
-    background-color: rgba(0, 0, 0, 0.04);
-}
+    &:hover:not(:disabled) {
+        background-color: rgba(0, 0, 0, 0.04);
+    }
 
-/* Define styles for button active state (non-disabled) */
-.segmented-control__option:active:not(:disabled) {
-    background-color: rgba(0, 0, 0, 0.12);
-}
+    &:active:not(:disabled) {
+        background-color: rgba(0, 0, 0, 0.12);
+    }
 
-/* Define styles for button focus state */
-.segmented-control__option:focus {
-    outline: 2px solid #094DAC;
+    &:focus {
+        outline: 2px solid #094DAC;
+    }
 }
 </style>
