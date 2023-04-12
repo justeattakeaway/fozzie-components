@@ -21,6 +21,12 @@ const Template = (args, { argTypes }) => ({
     template: '<segmented-control v-bind="$props" />'
 });
 
+const RTLTemplate = (args, { argTypes }) => ({
+    props: Object.keys(argTypes),
+    components: { SegmentedControl },
+    template: '<div dir="rtl"><segmented-control v-bind="$props" /></div>'
+});
+
 export const Small = Template.bind({});
 Small.args = {
     screenreaderLabel: 'Please select a language',
@@ -66,4 +72,16 @@ DefaultSelected.args = {
         { label: 'DK', selected: true },
         { label: 'FR' }
     ]
+};
+
+
+export const RightToLeft = RTLTemplate.bind({});
+RightToLeft.args = {
+    screenreaderLabel: 'Please select a language',
+    options: [
+        { label: 'EN' },
+        { label: 'DK' },
+        { label: 'FR' }
+    ],
+    size: 'small'
 };
