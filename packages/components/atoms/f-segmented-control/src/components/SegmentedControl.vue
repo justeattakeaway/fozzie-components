@@ -1,9 +1,7 @@
 <template>
     <div
         class="segmented-control"
-        :class="{
-            'segmented-control--large': size === 'large'
-        }"
+        :class="{ 'segmented-control--large': size === 'large' }"
         :aria-label="screenreaderLabel"
         role="radiogroup"
         tabindex="-1"
@@ -17,9 +15,10 @@
             :class="{
                 'segmented-control__option--selected': option.label === selectedLabel
             }"
-            :aria-checked="option.label === selectedLabel"
+            :aria-checked="option.label === selectedLabel ? 'true' : 'false'"
             role="radio"
-            :tabindex="index === tabIndex ? 0 : -1"
+            :tabindex="focusedTabIndex[index]"
+            :disabled="option.disabled"
             @click="selectOption(option.label)"
         >
             <i
@@ -75,9 +74,14 @@ export default {
     },
     data () {
         return {
-            selectedLabel: this.options[0].label,
-            tabIndex: 0
+            selectedLabel: this.options.find(option => option.selected)?.label || this.options[0].label,
+            tabIndex: this.options.findIndex(option => option.selected) > -1 ? this.options.findIndex(option => option.selected) : 0
         };
+    },
+    computed: {
+        focusedTabIndex () {
+            return this.options.map((_, index) => (index === this.tabIndex ? 0 : -1));
+        }
     },
     methods: {
         selectOption (label) {
@@ -102,6 +106,7 @@ export default {
 
             // If the newIndex has changed, update the tabIndex and focus the new button
             if (newIndex !== this.tabIndex) {
+                console.log('updating index');
                 this.tabIndex = newIndex;
                 e.target.blur(); // Remove focus from the current button
 

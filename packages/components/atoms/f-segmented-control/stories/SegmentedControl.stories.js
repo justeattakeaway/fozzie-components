@@ -47,3 +47,23 @@ WithIcons.args = {
         { label: 'FR', icon: 'icon-classname-3' }
     ]
 };
+
+export const DisabledOptions = Template.bind({});
+DisabledOptions.args = {
+    ...Small.args,
+    options: [
+        { label: 'EN', disabled: true },
+        { label: 'DK', disabled: true },
+        { label: 'FR', disabled: true }
+    ]
+};
+
+export const DefaultSelected = Template.bind({});
+DefaultSelected.args = {
+    ...Small.args,
+    options: [
+        { label: 'EN' },
+        { label: 'DK', selected: true },
+        { label: 'FR' }
+    ]
+};
