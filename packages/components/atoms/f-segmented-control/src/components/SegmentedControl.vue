@@ -1,7 +1,9 @@
 <template>
     <div
-        class="segmented-control"
-        :class="{ 'segmented-control--large': size === 'large' }"
+        :class="{
+            [$style['c-segmented-control']]: true,
+            [$style['c-segmented-control--large']]: size === 'large'
+        }"
         :aria-label="screenreaderLabel"
         role="radiogroup"
         tabindex="-1"
@@ -11,9 +13,9 @@
             v-for="(option, index) in options"
             :key="option.label"
             type="button"
-            class="segmented-control__option"
             :class="{
-                'segmented-control__option--selected': option.label === selectedLabel
+                [$style['c-segmented-control__option']]: true,
+                [$style['c-segmented-control__option--selected']]: option.label === selectedLabel
             }"
             :aria-checked="option.label === selectedLabel ? 'true' : 'false'"
             role="radio"
@@ -134,49 +136,51 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.segmented-control {
-    --s-c-border-radius: 9999px;
+<style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 
+$sc-sm-height: f.spacing(f);
+$sc-l-height: 48px; // TODO - discuss with design as this breaks convention
+$sc-border-radius: 9999px;
+
+.c-segmented-control {
     display: flex;
     justify-content: space-between;
-    background-color: #EFEDEA;
-    border-radius: var(--s-c-border-radius);
+    background-color: f.$color-container-strong;
+    border-radius: $sc-border-radius;
     gap: 2.5px;
     padding: 2px;
-    font-size: 16px;
-    min-height: 32px;
+    min-height: $sc-sm-height; // small size by default
     user-select: none;
 
     &--large {
-        min-height: 48px;
+        min-height: $sc-l-height;
 
-        .segmented-control__option {
+        .c-segmented-control__option {
             padding-block: 10px;
         }
     }
 }
 
-.segmented-control__option {
+.c-segmented-control__option {
     font-size: inherit;
     color: inherit;
-    flex: 1; /* Distribute available space equally among buttons */
-    border-radius: var(--s-c-border-radius);
+    flex: 1; // Distribute available space equally among buttons
+    border-radius: inherit;
     border: none;
-    padding: 4px 24px;
-    text-align: center;
-    font-weight: 400;
+    padding: f.spacing(a) f.spacing(e);
+    font-weight: f.$font-weight-regular;
     background: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    outline: none;
+    gap: f.spacing(b);
+    outline: none; // We replace outline with a box-shadow on focus due to ios safari not respecting border-radius
 
     &--selected {
-        font-weight: 700;
-        background-color: #fff;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.02), 0px 2px 12px -2px rgba(0, 0, 0, 0.08), 0px 3px 6px rgba(0, 0, 0, 0.06);
+        font-weight: f.$font-weight-bold;
+        background-color: f.$color-container-default;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.02), 0px 2px 12px -2px rgba(0, 0, 0, 0.08), 0px 3px 6px rgba(0, 0, 0, 0.06); // TODO - find out how we're meant to use the design tokens for this
     }
 
     &:not(:disabled) {
@@ -184,24 +188,24 @@ export default {
     }
 
     &:disabled {
-        color: #8C999B;
-        background-color: #EFEDEA;
+        color: f.$color-content-disabled;
+        background-color: f.$color-disabled-01;
         cursor: not-allowed;
     }
 
+    &:hover:not(:disabled) {
+        // This prevents hover effects from being applied on touch devices
+        @media(hover: hover) and (pointer: fine) {
+            background-color: rgba(0, 0, 0, 0.04); // TODO - find out how we're meant to use the design tokens for this
+        }
+    }
+
     &:active:not(:disabled) {
-        background-color: rgba(0, 0, 0, 0.12);
+        background-color: rgba(0, 0, 0, 0.12); // TODO - find out how we're meant to use the design tokens for this
     }
 
     &:focus {
-        box-shadow: 0 0 0 2px #094DAC;
-    }
-}
-
-// This prevents hover effects from being applied on touch devices
-@media(hover: hover) and (pointer: fine) {
-    .segmented-control__option:hover:not(:disabled) {
-        background-color: rgba(0, 0, 0, 0.04);
+        box-shadow: 0 0 0 2px f.$color-focus;
     }
 }
 </style>
