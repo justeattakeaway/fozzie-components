@@ -9,9 +9,6 @@
 ---
 
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-segmented-control.svg)](https://badge.fury.io/js/%40justeat%2Ff-segmented-control)
-[![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
-[![Coverage Status](https://coveralls.io/repos/github/justeat/f-segmented-control/badge.svg)](https://coveralls.io/github/justeat/f-segmented-control)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-segmented-control/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-segmented-control?targetFile=package.json)
 
 ---
 
