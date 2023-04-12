@@ -46,7 +46,7 @@ devices.forEach(device => {
             'isOpen',
             'hasOverlay',
             'hasCloseButton',
-            'hasBackButton'
+            'closeButtonStyle'
         ];
 
         args.forEach(arg => {
