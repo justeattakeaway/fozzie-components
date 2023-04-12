@@ -41,7 +41,7 @@ export default {
             type: Array,
             required: true,
             validator: value => {
-                if (value.length < 2 || value.length > 3) {
+                if (value.length < 2 || value.length > 4) {
                     return false;
                 }
 
