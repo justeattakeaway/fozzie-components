@@ -24,7 +24,6 @@ Import the SegmentedControl component in your .vue file and use it as follows:
         :screenreaderLabel="screenreaderLabel"
         :options="options"
         :size="size"
-        v-model="selectedOption"
     />
 </template>
 
@@ -37,13 +36,12 @@ export default {
         return {
             screenreaderLabel: 'Select an option',
             options: [
-                { label: 'Option 1' },
+                { label: 'Option 1', iconName: 'SomeIconName' },
                 { label: 'Option 2' },
                 { label: 'Option 3', selected: true },
                 { label: 'Option 4', disabled: true }
             ],
             size: 'large', // Can be 'small' or 'large', defaults to 'small'
-            selectedOption: 'Option 3' // The currently selected option
         };
     }
 };
@@ -100,7 +98,7 @@ export default {
 | Prop | Type | Required | Default | Validator | Description |
 | --- | --- | --- | --- | --- | --- |
 | `screenreaderLabel` | `String` | `true` | N/A | N/A | The label that is read by screen readers to describe the segmented control |
-| `options` | `Array` | `true` | N/A | Array must have at least 2 elements, and each element must have a `label` property of type `string`. The `iconName`, `disabled`, and `selected` properties are optional. `selected` will set the default selected option. | An array of objects representing each button in the segmented control |
+| `options` | `Array` | `true` | N/A | Array must have 2-3 elements, and each element must have a `label` property of type `string`. The `iconName`, `disabled`, and `selected` properties are optional. `iconName` corresponds with the name of a PIE Icon found [here](https://github.com/justeattakeaway/pie/tree/main/packages/tools/pie-icons-vue). `selected` will set the default selected option. | An array of objects representing each button in the segmented control |
 | `size` | `String` | `false` | `'small'` | Must be either `'small'` or `'large'`. | The size of the segmented control |
 
 

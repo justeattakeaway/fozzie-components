@@ -23,8 +23,8 @@
         >
             <!-- TODO: This is a placeholder for adding vue icons -->
             <i
-                v-if="option.icon"
-                :class="option.icon" />
+                v-if="option.iconName"
+                :class="option.iconName" />
             <span>{{ option.label }}</span>
         </button>
     </div>
@@ -42,7 +42,7 @@ export default {
             type: Array,
             required: true,
             validator: value => {
-                if (value.length < 2) {
+                if (value.length < 2 || value.length > 3) {
                     return false;
                 }
 
