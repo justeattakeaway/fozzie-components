@@ -9,7 +9,7 @@ v8.0.0 ** Breaking Change **
 *April 12, 2023*
 
 ### Changed
-- Prop `hasCloseButton` to `closeButtonStyle` allow either a chevron icon or close icon to be used.
+- Prop `hasCloseButton` to `closeButtonStyle` allows either a chevron icon or close icon to be used or the choice not to display anything.
   - `closeButtonStyle` options: `''`, `close-small-icon`, `chevron-left-icon`.
 
 ### Added
