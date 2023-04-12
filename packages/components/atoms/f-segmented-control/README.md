@@ -98,7 +98,7 @@ export default {
 | Prop | Type | Required | Default | Validator | Description |
 | --- | --- | --- | --- | --- | --- |
 | `screenreaderLabel` | `String` | `true` | N/A | N/A | The label that is read by screen readers to describe the segmented control |
-| `options` | `Array` | `true` | N/A | Array must have 2-3 elements, and each element must have a `label` property of type `string`. The `iconName`, `disabled`, and `selected` properties are optional. `iconName` corresponds with the name of a PIE Icon found [here](https://github.com/justeattakeaway/pie/tree/main/packages/tools/pie-icons-vue). `selected` will set the default selected option. | An array of objects representing each button in the segmented control |
+| `options` | `Array` | `true` | N/A | Array must have 2-4 elements, and each element must have a `label` property of type `string`. The `iconName`, `disabled`, and `selected` properties are optional. `iconName` corresponds with the name of a PIE Icon found [here](https://github.com/justeattakeaway/pie/tree/main/packages/tools/pie-icons-vue). `selected` will set the default selected option. | An array of objects representing each button in the segmented control |
 | `size` | `String` | `false` | `'small'` | Must be either `'small'` or `'large'`. | The size of the segmented control |
 
 ### Events
