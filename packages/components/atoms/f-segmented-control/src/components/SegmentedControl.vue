@@ -122,6 +122,7 @@ export default {
             } else if (event.key === 'Enter' || event.key === 'Space') {
                 event.preventDefault(); // Prevent the default behavior (e.g., scrolling)
                 this.selectOption(this.options[this.tabIndex].label);
+
                 return;
             }
 
@@ -158,11 +159,11 @@ $sc-border-radius: 9999px;
     border-radius: $sc-border-radius;
     gap: 2.5px;
     padding: 2px;
-    min-height: $sc-sm-height; // small size by default
+    min-block-size: $sc-sm-height; // small size by default
     user-select: none;
 
     &--large {
-        min-height: $sc-l-height;
+        min-block-size: $sc-l-height;
 
         .c-segmented-control__option {
             padding-block: 10px;
