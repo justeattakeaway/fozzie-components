@@ -47,6 +47,7 @@ export default {
                     return false;
                 }
 
+                let selectedCount = 0;
                 return value.every(option => {
                     if (typeof option !== 'object') {
                         return false;
@@ -64,8 +65,11 @@ export default {
                         return false;
                     }
 
-                    if (option.selected && typeof option.selected !== 'boolean') {
-                        return false;
+                    if (option.selected) {
+                        selectedCount++;
+                        if (typeof option.selected !== 'boolean' || selectedCount > 1) {
+                            return false;
+                        }
                     }
 
                     return true;
