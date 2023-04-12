@@ -1,6 +1,9 @@
 <template>
     <div
-        class="segmented-control segmented-control--large"
+        :class="{
+            'segmented-control': true,
+            'segmented-control--large': size === 'large'
+        }"
         :aria-label="screenreaderLabel"
         role="radiogroup"
         tabindex="-1"
@@ -11,13 +14,13 @@
             :key="option.label"
             type="button"
             class="segmented-control__option"
-            :class="{ 'segmented-control__option--selected': option.label === selectedLabel }"
+            :class="{
+                'segmented-control__option--selected': option.label === selectedLabel
+            }"
             :aria-checked="option.label === selectedLabel"
             role="radio"
             :tabindex="index === tabIndex ? 0 : -1"
             @click="selectOption(option.label)"
-            @keydown.space.prevent
-            @keydown.enter.prevent
         >
             <i
                 v-if="option.icon"
@@ -38,6 +41,13 @@ export default {
         options: {
             type: Array,
             required: true
+        },
+        size: {
+            type: String,
+            default: 'small',
+            validator: function (value) {
+                return ['small', 'large'].includes(value);
+            }
         }
     },
     data () {
@@ -58,6 +68,7 @@ export default {
             } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
                 newIndex = (this.tabIndex - 1 + this.options.length) % this.options.length;
             } else if (e.key === 'Enter' || e.key === 'Space') {
+                e.preventDefault();
                 this.selectOption(this.options[this.tabIndex].label);
                 return;
             }

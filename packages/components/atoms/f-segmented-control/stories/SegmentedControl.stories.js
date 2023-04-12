@@ -7,7 +7,11 @@ export default {
     component: SegmentedControl,
     argTypes: {
         screenreaderLabel: { control: 'text' },
-        options: { control: 'array' }
+        options: { control: 'array' },
+        size: {
+            control: { type: 'select', options: ['small', 'large'] },
+            defaultValue: 'small'
+        }
     }
 };
 
@@ -17,12 +21,19 @@ const Template = (args, { argTypes }) => ({
     template: '<segmented-control v-bind="$props" />'
 });
 
-export const Default = Template.bind({});
-Default.args = {
+export const Small = Template.bind({});
+Small.args = {
     screenreaderLabel: 'Please select a language',
     options: [
         { label: 'EN', icon: 'icon-classname-1' },
         { label: 'DK', icon: 'icon-classname-2' },
         { label: 'FR', icon: 'icon-classname-3' }
-    ]
+    ],
+    size: 'small'
+};
+
+export const Large = Template.bind({});
+Large.args = {
+    ...Small.args,
+    size: 'large'
 };
