@@ -62,6 +62,10 @@ export default {
                         return false;
                     }
 
+                    if (option.selected && typeof option.selected !== 'boolean') {
+                        return false;
+                    }
+
                     return true;
                 });
             }
@@ -85,8 +89,18 @@ export default {
     },
     methods: {
         selectOption (label) {
+            const previousIndex = this.tabIndex;
+            const newIndex = this.options.findIndex(option => option.label === label);
+
             this.selectedLabel = label;
+            this.tabIndex = newIndex;
+
             this.$emit('input', label);
+
+            this.$nextTick(() => {
+                this.$el.children[previousIndex].blur();
+                this.$el.children[newIndex].focus();
+            });
         },
         onKeyDown (e) {
             let newIndex = this.tabIndex;
@@ -106,7 +120,6 @@ export default {
 
             // If the newIndex has changed, update the tabIndex and focus the new button
             if (newIndex !== this.tabIndex) {
-                console.log('updating index');
                 this.tabIndex = newIndex;
                 e.target.blur(); // Remove focus from the current button
 
