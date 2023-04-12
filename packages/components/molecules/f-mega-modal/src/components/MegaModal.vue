@@ -42,7 +42,7 @@
                         {{ title }}
                     </component>
                     <slot
-                        v-if="closeButtonStyle"
+                        v-if="hasCloseButton"
                         name="close-button">
                         <f-button
                             is-icon
@@ -133,10 +133,15 @@ export default {
             default: true
         },
 
+        hasCloseButton: {
+            type: Boolean,
+            default: true
+        },
+
         closeButtonStyle: {
             type: String,
             default: 'close-small-icon',
-            validator: value => ['', 'close-small-icon', 'chevron-left-icon'].includes(value)
+            validator: value => ['close-small-icon', 'chevron-left-icon'].includes(value)
         },
 
         closeOnBlur: {
@@ -513,6 +518,11 @@ export default {
 
     .c-megaModal-modeRTL & {
         margin: 0 f.spacing(f) 0 0;
+    }
+
+    // Allow the title to sit flush when there is no close button in RTL mode.
+    .c-megaModal-modeRTL &:only-child {
+        margin: 0;
     }
 }
 </style>
