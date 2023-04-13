@@ -83,7 +83,7 @@ export default {
 
 .c-restaurantTag--dark {
     color: f.$color-content-light;
-    background-color: f.$color-dark-container-dark;
+    background-color: f.$color-container-dark;
 }
 
 .c-restaurantTag--warm {
