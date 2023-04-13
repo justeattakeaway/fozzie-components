@@ -119,7 +119,7 @@ The props that can be defined are as follows:
 | `is-close-fixed`       | `Boolean` | `false`         | Sets the modal close button position to `fixed`.                                                                                                                  |
 | `is-positioned-bottom` | `Boolean` | `false`         | Sets the modal position to the bottom of the viewport for all screen widths.                                                                                      |
 | `has-overlay`          | `Boolean` | `true`          | Controls whether or not to display an overlay behind the modal.                                                                                                   |
-| `close-button-style`   | `String`  | `close-small-icon`          | Controls the style of the button. Accepts `close-small-icon` & `chevron-left-icon`. If you pass an empty string '', no styles for the close button will be shown. |
+| `close-button-style`   | `String`  | `close-small-icon`          | Controls the style of the button. Accepts `close-small-icon` & `chevron-left-icon`. |
 | `close-on-blur`        | `Boolean` | `true`          | Controls whether or not to close the modal when the user clicks outside of the modal.                                                                             |
 | `close-button-copy`    | `String`  | `"Close modal"` | Sets the hidden text value for the close button which is used by screen-readers.                                                                                  |
 | `title`                | `String`  | `''`            | When set, will add a title to the top of the component. If you need to define a custom heading, ignore this prop.                                                 |
