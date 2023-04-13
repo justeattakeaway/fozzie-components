@@ -503,12 +503,6 @@ export default {
     }
 }
 
-.c-megaModal-modeRTL {
-    & .c-megaModal-title {
-        margin: 0 f.spacing(f) 0 0;
-    }
-}
-
 .c-megaModal-title {
     margin: 0 f.spacing(f) 0 0;
 
