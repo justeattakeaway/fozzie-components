@@ -101,5 +101,39 @@ describe('MegaModal', () => {
                 expect(modalTitle.element.tagName.toLowerCase()).toBe('h3');
             });
         });
+
+        describe('`hasChevronIcon`', () => {
+            it.each([
+                ['cross', false],
+                ['chevron', true]])('should set `hasChevronIcon` when %s is passed in to %p', (icon, expected) => {
+                // Arrange
+                const propsData = {
+                    closeButtonStyle: icon
+                };
+
+                // Act
+                const wrapper = shallowMount(MegaModal, { propsData });
+
+                // Assert
+                expect(wrapper.vm.hasChevronIcon).toBe(expected);
+            });
+        });
+
+        describe('`setCloseButtonIconStyle`', () => {
+            it.each([
+                ['cross', 'close-small-icon'],
+                ['chevron', 'chevron-left-icon']])('should set the correct close button style type based on the `closeButtonStyle` value', (iconStyle, expected) => {
+                // Arrange
+                const propsData = {
+                    closeButtonStyle: iconStyle
+                };
+
+                // Act
+                const wrapper = shallowMount(MegaModal, { propsData });
+
+                // Assert
+                expect(wrapper.vm.setCloseButtonIconStyle).toBe(expected);
+            });
+        });
     });
 });

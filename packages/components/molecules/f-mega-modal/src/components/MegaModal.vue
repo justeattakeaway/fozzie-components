@@ -4,7 +4,7 @@
         :class="['c-megaModal',
                  $style['c-megaModal'], {
                      'u-overlay': showOverlay,
-                     [$style['c-megaModal--hasChevronIcon']]: hasChevronIcon,
+                     [$style['c-megaModal--hasChevronIcon']]: hasChevronIcon && hasCloseButton,
                      [$style['c-megaModal-modeRTL']]: isModeRightToLeft
                  }]"
         data-test-id='mega-modal-component'
@@ -53,7 +53,7 @@
                             button-size="xsmall"
                             data-test-id="close-modal"
                             @click.native="close">
-                            <component :is="closeButtonStyle"
+                            <component :is="setCloseButtonIconStyle"
                                        :class="[$style['c-megaModal-closeIcon']]" />
 
                             <span class="is-visuallyHidden">
@@ -140,8 +140,8 @@ export default {
 
         closeButtonStyle: {
             type: String,
-            default: 'close-small-icon',
-            validator: value => ['close-small-icon', 'chevron-left-icon'].includes(value)
+            default: 'cross',
+            validator: value => ['cross', 'chevron'].includes(value)
         },
 
         closeOnBlur: {
@@ -193,7 +193,12 @@ export default {
             return this.ariaLabel === '' ? this.uid : this.ariaLabel;
         },
         hasChevronIcon () {
-            return this.closeButtonStyle === 'chevron-left-icon';
+            return this.closeButtonStyle === 'chevron';
+        },
+        setCloseButtonIconStyle () {
+            return this.closeButtonStyle.includes('cross')
+                ? 'close-small-icon'
+                : 'chevron-left-icon';
         }
     },
 

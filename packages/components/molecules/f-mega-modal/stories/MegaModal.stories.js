@@ -51,7 +51,7 @@ MegaModalComponent.args = {
     isTextAlignedCenter: false,
     hasCloseButton: true,
     hasOverlay: true,
-    closeButtonStyle: 'close-small-icon',
+    closeButtonStyle: 'cross',
     isModeRightToLeft: false,
     closeOnBlur: true,
     closeButtonCopy: 'Close modal',
@@ -95,7 +95,7 @@ MegaModalComponent.argTypes = {
     },
     closeButtonStyle: {
         control: { type: 'select' },
-        options: ['close-small-icon', 'chevron-left-icon']
+        options: ['cross', 'chevron']
     },
     isModeRightToLeft: {
         control: { type: 'boolean' }
