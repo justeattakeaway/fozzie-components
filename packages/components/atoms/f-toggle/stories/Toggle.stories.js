@@ -8,13 +8,39 @@ export default {
 
 export const ToggleComponent = (args, { argTypes }) => ({
     components: { Toggle },
+
     props: Object.keys(argTypes),
+
+    data () {
+        return {
+            toggleValueOne: this.checked,
+            toggleValueTwo: this.checked
+        };
+    },
+
+    methods: {
+        updateToggleOne (value) {
+            this.toggleValueOne = value;
+        },
+
+        updateToggleTwo (value) {
+            this.toggleValueTwo = value;
+        }
+    },
+
+    watch: {
+        checked (newValue) {
+            this.toggleValueOne = newValue;
+            this.toggleValueTwo = newValue;
+        }
+    },
 
     template:
         `<div>
             <toggle
                 :disabled="disabled"
-                :value="value"
+                :checked="toggleValueOne"
+                @update="updateToggleOne"
                 :isModeRightToLeft="isModeRightToLeft"/>
 
             <hr>
@@ -27,10 +53,10 @@ export const ToggleComponent = (args, { argTypes }) => ({
                 <toggle
                     :disabled="disabled"
                     name="Necessary"
-                    :checked="value"
-                    :isModeRightToLeft="isModeRightToLeft"
-                    :ariaLabelledBy="ariaLabelledBy"
-                    :ariaDescribedBy="ariaDescribedBy"/>
+                    :checked="toggleValueTwo"
+                    @update="updateToggleTwo"
+                    ariaLabelledBy="labelID"
+                    ariaDescribedBy="descriptionID"/>
             </div>
         </div>`
 });
@@ -38,15 +64,13 @@ export const ToggleComponent = (args, { argTypes }) => ({
 ToggleComponent.storyName = 'f-toggle';
 
 ToggleComponent.args = {
-    value: true,
+    checked: true,
     disabled: false,
-    isModeRightToLeft: false,
-    ariaLabelledBy: 'labelID',
-    ariaDescribedBy: 'descriptionID'
+    isModeRightToLeft: false
 };
 
 ToggleComponent.argTypes = {
-    value: {
+    checked: {
         control: { type: 'boolean' },
         description: 'If set to true, toggle will be selected'
     },

@@ -12,12 +12,11 @@
             :id="uniqueId"
             role="switch"
             type="checkbox"
+            v-bind="$attrs"
             :class="$style['c-toggle-input']"
-            :disabled="$attrs.disabled"
+            :aria-checked="isChecked"
             :aria-labelledby="ariaLabelledBy"
             :aria-describedby="ariaDescribedBy"
-            :value="value"
-            :aria-checked="isChecked"
             @change="toggleOption">
 
         <div :class="$style['c-toggle-control']">
@@ -43,11 +42,6 @@ export default {
     inheritAttrs: false,
 
     props: {
-        value: {
-            type: Boolean,
-            default: false
-        },
-
         isModeRightToLeft: {
             type: Boolean,
             default: false
@@ -64,12 +58,6 @@ export default {
         }
     },
 
-    data () {
-        return {
-            isChecked: this.value
-        };
-    },
-
     computed: {
         uniqueId () {
             const idArray = ['toggle'];
@@ -79,6 +67,10 @@ export default {
 
             idArray.push(this.uniqueIdentifierId);
             return idArray.join('-');
+        },
+
+        isChecked () {
+            return this.$attrs.checked;
         }
     },
 
@@ -88,7 +80,6 @@ export default {
 
     methods: {
         toggleOption (event) {
-            this.isChecked = event.target.checked;
             this.$emit('update', event.target.checked);
         }
     }
@@ -98,30 +89,24 @@ export default {
 <style lang="scss" module>
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
-$toggle-bg--active: darken(f.$color-interactive-form, f.$color-active-01);
-$toggle-bg-checked--active: darken(f.$color-content-interactive-brand, f.$color-active-01);
-$toggle-bg--hover: darken(f.$color-interactive-form, f.$color-hover-01);
-$toggle-bg-checked--hover: darken(f.$color-content-interactive-brand, f.$color-hover-01);
+$toggle-colour: f.$color-interactive-form;
+$toggle-colour--checked: f.$color-interactive-brand;
+$toggle-colour--disabled: f.$color-disabled-01;
 
 $toggle-width: 48px;
 $toggle-height: 24px;
 $toggle-control-size: 20px;
 $toggle-padding: 2px;
 $toggle-radius: f.$radius-rounded-e;
-$toggle-icon-size: 12px;
+$toggle-icon-size: 14px;
 
-@mixin toggle-transition (
-    $properties,
-    $easing: cubic-bezier(0.4, 0, 0.9, 1),
-    $duration: 0.15s,
-    $delay: 0s
-) {
-    $expression: "";
+$toggle-translation: translateX(calc($toggle-width - $toggle-control-size - 2 * $toggle-padding));
 
-    @each $property in $properties {
-        $expression: $expression + "#{$property} #{$duration} #{$easing} #{$delay}, ";
-    }
-    transition: #{$expression};
+@mixin toggle-transition ($property) {
+    transition-property: $property;
+    transition-duration: 0.15s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.9, 1);
+    transition-delay: 0s;
 }
 
 .c-toggle {
@@ -133,36 +118,32 @@ $toggle-icon-size: 12px;
     height: $toggle-height;
     padding: $toggle-padding;
     border-radius: $toggle-radius;
-    background-color: f.$color-interactive-form;
+    background-color: $toggle-colour;
 
     cursor: pointer;
-    user-select: none;
 
     &:hover {
-        background-color: $toggle-bg--hover;
+        background-color: darken($toggle-colour, f.$color-hover-01);
     }
 
     &:focus,
     &:focus-within {
-        background-color: f.$color-interactive-form;
-        box-shadow: 0 0 0 2px f.$color-focus-inner, 0 0 0 4px f.$color-focus-outer;;
+        background-color: $toggle-colour;
+        box-shadow: 0 0 0 2px f.$color-focus-inner, 0 0 0 4px f.$color-focus-outer;
     }
 
     &:active {
-        background-color: $toggle-bg--active;
+        background-color: darken($toggle-colour, f.$color-active-01);
     }
 }
 
 .c-toggle-input {
     appearance: none;
     margin: 0;
-    /* cursor: pointer; */
 }
 
 .c-toggle-control {
     @include toggle-transition(transform);
-
-    position: relative;
 
     display: flex;
 
@@ -177,51 +158,43 @@ $toggle-icon-size: 12px;
 }
 
 .c-toggle-icon {
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-        /* padding: 4px; */
-
-
     width: $toggle-icon-size;
     height: $toggle-icon-size;
 
     path {
         @include toggle-transition(fill);
-        fill: f.$color-content-interactive-brand;
+        fill: $toggle-colour--checked;
     }
 }
 
 
 .c-toggle--checked {
     @include toggle-transition(background-color);
-    background-color: f.$color-content-interactive-brand;
+    background-color: $toggle-colour--checked;
 
     &:hover {
-        background-color: $toggle-bg-checked--hover;
+        background-color: darken($toggle-colour--checked, f.$color-hover-01);
     }
 
     &:focus,
     &:focus-within {
-        background-color: f.$color-content-interactive-brand;
+        background-color: $toggle-colour--checked;
     }
 
     &:active {
-        background-color: $toggle-bg-checked--active;
+        background-color: darken($toggle-colour--checked, f.$color-active-01);
     }
 
     .c-toggle-control {
         @include toggle-transition(transform);
 
-        transform: translateX(calc($toggle-width - $toggle-control-size - 2 * $toggle-padding));
+        transform: $toggle-translation;
     }
 }
 
 .c-toggle--modeRTL {
     .c-toggle-control {
-        transform: translateX(calc($toggle-width - $toggle-control-size - 2 * $toggle-padding));
+        transform: $toggle-translation;
     }
 }
 
@@ -234,22 +207,16 @@ $toggle-icon-size: 12px;
 }
 
 .c-toggle--disabled {
-    background-color: f.$color-disabled-01;
+    background-color: $toggle-colour--disabled;
 
     cursor: not-allowed;
     pointer-events: none;
-
-    .c-toggle-input {
-        background-color: f.$color-content-interactive-light;
-
-        cursor: default;
-    }
 
     .c-toggle-icon {
         path {
             @include toggle-transition(fill);
 
-            fill: f.$color-disabled-01;
+            fill: $toggle-colour--disabled;
         }
     }
 }
