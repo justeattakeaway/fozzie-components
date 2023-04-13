@@ -3,7 +3,7 @@
   "description": "Fozzie Toggle - A component to toggle a single setting on/off",
   "version": "0.1.0",
   "main": "dist/f-toggle.umd.min.js",
-  "maxBundleSize": "20kB",
+  "maxBundleSize": "5kB",
   "files": [
     "dist",
     "test-utils"
@@ -49,11 +49,12 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
+      "uuid": "9.0.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "1.x"
-  }  
+  }
 }

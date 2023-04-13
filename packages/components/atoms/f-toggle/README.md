@@ -4,7 +4,7 @@
 
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
-A component to toggle a single setting on/off
+A component to toggle a single setting on/off.
 
 </div>
 
@@ -71,6 +71,9 @@ The props that can be defined are as follows (if any):
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
+| isModeRightToLeft | Boolean | false | sets reading direction to 'Right to Left' |
+| ariaLabelledBy | String | '' | The id for an element that will 'label' the toggle |
+| ariaDescribedBy | String | '' | The id for an element describing what the toggle will control |
 
 ### Events
 
@@ -78,6 +81,7 @@ The events that can be subscribed to are as follows (if any):
 
 | Event | Description |
 | ----- | ----------- |
+| update | Fired when a user changes the state of the toggle. Payload contains the updated value of the toggle. |
 
 ## Development
 
