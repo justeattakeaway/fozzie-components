@@ -51,3 +51,6 @@ In order to contribute to the `generator-component`, it's advised to link your l
 To do this, run `yarn link` from the root of the `generator-component` folder in the mono-repo.
 
 Once you have done this, running `yo @justeat/component` will run your local copy of the generator (rather than the version installed globally via NPM).
+
+## Note
+!!! There is a manual step temporary required: Please, add your component to `.circleci/config.yml` under `save_cache_dist_directories` manually after the component is generated.
