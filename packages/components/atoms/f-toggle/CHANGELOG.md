@@ -9,5 +9,6 @@ v0.1.0
 *April 13, 2023*
 
 ### Added
-- Add your change under the following headings: `Added`/`Changed`/`Deprecated`/`Removed`/`Fixed`/`Security`
-!!! Please, add your component to `.circleci/config.yml` under `save_cache_dist_directories` manually after the component is generated.
+- Component structure and basic configuration (created using `generator-component`).
+- Component markup and core functionality.
+- Storybook config.
