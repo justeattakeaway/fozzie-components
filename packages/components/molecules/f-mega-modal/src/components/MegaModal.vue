@@ -5,7 +5,7 @@
                  $style['c-megaModal'], {
                      'u-overlay': showOverlay,
                      [$style['c-megaModal--hasBackButton']]: hasBackButton,
-                     [$style['c-megaModal-modeRTL']]: isModeRightToLeft
+                     [$style['c-megaModal--modeRTL']]: isModeRightToLeft
                  }]"
         data-test-id='mega-modal-component'
         :aria-hidden="!isOpen"
@@ -368,7 +368,7 @@ export default {
     transform: translate(50%, -50%);
     width: 95%;
 
-    .c-megaModal-modeRTL & {
+    .c-megaModal--modeRTL & {
         direction: rtl;
     }
 
@@ -484,7 +484,7 @@ export default {
         }
     }
 
-    &.c-megaModal-modeRTL {
+    &.c-megaModal--modeRTL {
         .c-megaModal-closeBtn {
             right: f.spacing(d);
             left: auto;
@@ -515,12 +515,12 @@ export default {
         margin: 0 0 0 f.spacing(f);
     }
 
-    .c-megaModal-modeRTL & {
+    .c-megaModal--modeRTL & {
         margin: 0 f.spacing(f) 0 0;
     }
 
     // Allow the title to sit flush when there is no close button in RTL mode.
-    .c-megaModal-modeRTL &:only-child {
+    .c-megaModal--modeRTL &:only-child {
         margin: 0;
     }
 }
