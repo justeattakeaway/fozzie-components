@@ -4,7 +4,7 @@
         :class="['c-megaModal',
                  $style['c-megaModal'], {
                      'u-overlay': showOverlay,
-                     [$style['c-megaModal--hasChevronIcon']]: hasChevronIcon && hasCloseButton,
+                     [$style['c-megaModal--hasBackButton']]: hasBackButton,
                      [$style['c-megaModal-modeRTL']]: isModeRightToLeft
                  }]"
         data-test-id='mega-modal-component'
@@ -192,8 +192,8 @@ export default {
         showAriaLabel () {
             return this.ariaLabel === '' ? this.uid : this.ariaLabel;
         },
-        hasChevronIcon () {
-            return this.closeButtonStyle === 'chevron';
+        hasBackButton () {
+            return this.closeButtonStyle === 'chevron' && this.hasCloseButton;
         },
         setCloseButtonIconStyle () {
             return this.closeButtonStyle.includes('cross')
@@ -492,7 +492,7 @@ export default {
         }
     }
 
-    &.c-megaModal--hasChevronIcon {
+    &.c-megaModal--hasBackButton {
         .c-megaModal-closeBtn {
             left: f.spacing(d);
         }
@@ -511,7 +511,7 @@ export default {
         margin-right: f.spacing(e);
     }
 
-    .c-megaModal--hasChevronIcon & {
+    .c-megaModal--hasBackButton & {
         margin: 0 0 0 f.spacing(f);
     }
 

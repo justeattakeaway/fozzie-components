@@ -102,7 +102,7 @@ describe('MegaModal', () => {
             });
         });
 
-        describe('`hasChevronIcon`', () => {
+        describe('`hasBackButton`', () => {
             it.each([
                 ['cross', false],
                 ['chevron', true]])('should set `hasChevronIcon` when %s is passed in to %p', (icon, expected) => {
@@ -115,7 +115,21 @@ describe('MegaModal', () => {
                 const wrapper = shallowMount(MegaModal, { propsData });
 
                 // Assert
-                expect(wrapper.vm.hasChevronIcon).toBe(expected);
+                expect(wrapper.vm.hasBackButton).toBe(expected);
+            });
+
+            it('should return falsey if `hasCloseButton` is passed in as `false`', () => {
+                // Arrange
+                const propsData = {
+                    closeButtonStyle: 'cross',
+                    hasCloseButton: false
+                };
+
+                // Act
+                const wrapper = shallowMount(MegaModal, { propsData });
+
+                // Assert
+                expect(wrapper.vm.hasBackButton).toBe(false);
             });
         });
 
