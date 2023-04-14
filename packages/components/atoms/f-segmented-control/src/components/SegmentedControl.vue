@@ -203,6 +203,7 @@ $sc-border-radius: 9999px;
         color: f.$color-content-disabled;
         background-color: f.$color-disabled-01;
         cursor: not-allowed;
+        pointer-events: none;
     }
 
     &:hover:not(:disabled) {
