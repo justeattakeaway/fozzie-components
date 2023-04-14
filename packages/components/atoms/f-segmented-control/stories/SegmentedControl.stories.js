@@ -17,28 +17,28 @@ export const SegmentedControlVariants = (args, { argTypes }) => ({
         <div>
         <h2>Left to right</h2>
         <div>
-            <h2 class="u-spacingBottom--large">Small</h2>
+            <h3 class="u-spacingBottom--large">Small</h3>
             <div
                 class="u-spacingBottom--large"
                 v-for="(list, index) in segmentedControlVariants"
-                :key="'list-' + index">
+                :key="'ltr-small-list-' + index">
                 <segmentedControl
                     class="u-spacingBottom--large"
-                    v-for="(segmentedControl, index) in list"
-                    :key="index"
+                    v-for="(segmentedControl, i) in list"
+                    :key="'ltr-small-control-' + i"
                     :screenreaderLabel="segmentedControl.screenreaderLabel"
                     :options="segmentedControl.options"
                     :size="'small'"/>
             </div>
-            <h2 class="u-spacingBottom--large">Large</h2>
+            <h3 class="u-spacingBottom--large">Large</h3>
             <div
                 class="u-spacingBottom--large"
                 v-for="(list, index) in segmentedControlVariants"
-                :key="'list-' + index">
+                :key="'ltr-large-list-' + index">
                 <segmentedControl
                     class="u-spacingBottom--large"
-                    v-for="(segmentedControl, index) in list"
-                    :key="index"
+                    v-for="(segmentedControl, i) in list"
+                    :key="'ltr-large-control-' + i"
                     :screenreaderLabel="segmentedControl.screenreaderLabel"
                     :options="segmentedControl.options"
                     :size="'large'"/>
@@ -47,28 +47,28 @@ export const SegmentedControlVariants = (args, { argTypes }) => ({
 
         <h2>Right to left</h2>
         <div dir="rtl">
-            <h2 class="u-spacingBottom--large">Small</h2>
+            <h3 class="u-spacingBottom--large">Small</h3>
             <div
                 class="u-spacingBottom--large"
                 v-for="(list, index) in segmentedControlVariants"
-                :key="'list-' + index">
+                :key="'rtl-small-list-' + index">
                 <segmentedControl
                     class="u-spacingBottom--large"
-                    v-for="(segmentedControl, index) in list"
-                    :key="index"
+                    v-for="(segmentedControl, i) in list"
+                    :key="'rtl-small-control-' + i"
                     :screenreaderLabel="segmentedControl.screenreaderLabel"
                     :options="segmentedControl.options"
                     :size="'small'"/>
             </div>
-            <h2 class="u-spacingBottom--large">Large</h2>
+            <h3 class="u-spacingBottom--large">Large</h3>
             <div
                 class="u-spacingBottom--large"
                 v-for="(list, index) in segmentedControlVariants"
-                :key="'list-' + index">
+                :key="'rtl-large-list-' + index">
                 <segmentedControl
                     class="u-spacingBottom--large"
-                    v-for="(segmentedControl, index) in list"
-                    :key="index"
+                    v-for="(segmentedControl, i) in list"
+                    :key="'rtl-large-control-' + i"
                     :screenreaderLabel="segmentedControl.screenreaderLabel"
                     :options="segmentedControl.options"
                     :size="'large'"/>

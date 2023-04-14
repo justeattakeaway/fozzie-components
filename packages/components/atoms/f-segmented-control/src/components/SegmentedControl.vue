@@ -86,7 +86,9 @@ export default {
         const selectedIndex = this.options.findIndex(option => option.selected);
 
         return {
-            selectedLabel: this.options[selectedIndex]?.label || this.options[0].label,
+            selectedLabel: (selectedIndex !== undefined && this.options[selectedIndex])
+                ? this.options[selectedIndex].label
+                : this.options[0].label,
             tabIndex: selectedIndex > -1 ? selectedIndex : 0
         };
     },
