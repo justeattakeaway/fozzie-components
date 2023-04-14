@@ -166,18 +166,21 @@ $filter-pill-ease: ease-in-out;
 }
 
 .c-filterPill {
-    box-shadow: 0 0 0 1px f.$color-border-default;
+    border: 1px solid f.$color-border-default;
     border-radius: f.$radius-rounded-e;
     background: f.$color-white;
     transition: 0.1s;
 
     &:focus-within:not(.c-filterPill--disabled) {
-        box-shadow: 0 0 0 2px f.$color-focus;
+        @extend %u-elementFocus;
+        &, &:after {
+            border-radius: f.$radius-rounded-e;
+        }
     }
 }
 
 .c-filterPill--selected {
-    box-shadow: 0 0 0 1px $filter-pill-selected-color;
+    border: 1px solid $filter-pill-selected-color;
 }
 
 .c-filterPill-link {

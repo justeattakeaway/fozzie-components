@@ -84,5 +84,10 @@ export default {
     &.is-link-exactActive {
         font-weight: f.$font-weight-bold;
     }
+
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--borderless;
+    }
 }
 </style>

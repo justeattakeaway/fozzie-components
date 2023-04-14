@@ -54,7 +54,8 @@ describe('Rating', () => {
                     // Arrange
                     propsData = {
                         starRating: 1,
-                        ratingDisplayType: 'short'
+                        ratingDisplayType: 'short',
+                        locale: 'en-GB'
                     };
                     wrapper = shallowMount(VRating, {
                         propsData,
@@ -74,7 +75,8 @@ describe('Rating', () => {
                     // Arrange
                     propsData = {
                         starRating: type,
-                        ratingDisplayType: 'short'
+                        ratingDisplayType: 'short',
+                        locale: 'en-GB'
                     };
                     wrapper = shallowMount(VRating, {
                         propsData,
@@ -163,6 +165,7 @@ describe('Rating', () => {
                         propsData.starRating = 2;
                         propsData.reviewCount = 1;
                         propsData.ratingDisplayType = 'short';
+                        propsData.locale = 'en-GB';
                         wrapper = shallowMount(VRating, {
                             propsData,
                             localVue,
@@ -335,9 +338,9 @@ describe('Rating', () => {
                 expect(validator(displayType)).toBe(true);
             });
 
-            it('should be set to `null` by default', () => {
+            it('should be set to `short` by default', () => {
                 // Act & Assert
-                expect(VRating.props.ratingDisplayType.default).toBe(null);
+                expect(VRating.props.ratingDisplayType.default).toBe('short');
             });
 
             describe('when `ratingDisplayType` is truthy', () => {
@@ -430,7 +433,8 @@ describe('Rating', () => {
                         propsData = {
                             starRating: 2,
                             reviewCount: 0,
-                            ratingDisplayType: 'short'
+                            ratingDisplayType: 'short',
+                            locale: 'en-GB'
                         };
 
                         wrapper = shallowMount(VRating, {
@@ -453,7 +457,8 @@ describe('Rating', () => {
                         propsData = {
                             starRating: 2,
                             reviewCount: 499,
-                            ratingDisplayType: 'medium'
+                            ratingDisplayType: 'medium',
+                            locale: 'en-GB'
                         };
 
                         wrapper = shallowMount(VRating, {
@@ -481,7 +486,8 @@ describe('Rating', () => {
                         propsData = {
                             starRating: 2,
                             reviewCount: 499,
-                            ratingDisplayType: type
+                            ratingDisplayType: type,
+                            locale: 'en-GB'
                         };
 
                         wrapper = shallowMount(VRating, {
@@ -505,7 +511,7 @@ describe('Rating', () => {
                             localVue,
                             i18n,
                             mocks: {
-                                $t: () => null
+                                $t: () => ''
                             }
                         });
 
@@ -513,7 +519,7 @@ describe('Rating', () => {
                         const result = wrapper.vm.getRatingDisplayFormat();
 
                         // Assert
-                        expect(result).toBe(null);
+                        expect(result).toBe('');
                     });
                 });
             });

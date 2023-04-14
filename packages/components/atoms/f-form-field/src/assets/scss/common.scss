@@ -16,7 +16,7 @@ $form-input-borderColour                : f.$color-border-default;
 $form-input-borderRadius                : f.$radius-rounded-c;
 $form-input-borderColour--invalid       : f.$color-support-error;
 
-$form-input-focus--boxShadow            : 0 0 0 2px f.$color-focus;
+$form-input-focus--boxShadow            : 0 0 0 2px f.$color-focus-inner, 0 0 0 4px f.$color-focus-outer;
 
 $form-input-padding--side               : f.spacing(d);
 
@@ -103,6 +103,7 @@ $form-input-icon-horizontalIndent       : 19px;
     }
 
     &:focus,
+    &:focus-visible,
     &:active,
     &:focus-within {
         box-shadow: $form-input-focus--boxShadow;

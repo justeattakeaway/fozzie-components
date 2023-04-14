@@ -21,28 +21,30 @@
                 :text="link.text"
                 has-border-top
                 :has-border-bottom="false"
-                @blur="$emit('deactivateNav')"
-                @focus="$emit('activateNav')" />
+                :on-blur="deactivateNav"
+                :on-focus="activateNav" />
         </li>
 
         <li
             v-if="!isBelowMid"
             :class="$style['c-user-list-item']">
-            <a
+            <nav-link
+                :class="$style['c-user-list-link']"
                 :tabindex="isUserMenuOpen ? 0 : -1"
                 :href="returnLogoutUrl"
-                :data-trak='`{
-                    "trakEvent": "click",
-                    "category": "engagement",
-                    "action": "header",
-                    "label": "${copy.accountLogout.gtm}"
-                }`'
-                data-test-id="logout-link"
-                :class="$style['c-user-list-link']"
-                @blur="$emit('deactivateNav')"
-                @focus="$emit('activateNav')">
-                {{ copy.accountLogout.text }}
-            </a>
+                is-popover-link
+                :data-trak="{
+                    trakEvent: 'click',
+                    category: 'engagement',
+                    action: 'header',
+                    label: `${copy.accountLogout.gtm}`
+                }"
+                :text="copy.accountLogout.text"
+                has-border-top
+                :has-border-bottom="false"
+                :on-blur="deactivateNav"
+                :on-focus="activateNav"
+                data-test-id="logout-link" />
         </li>
     </ul>
 </template>
@@ -90,6 +92,14 @@ export default {
             }
             return 0;
         }
+    },
+    methods: {
+        activateNav () {
+            this.$emit('activateNav');
+        },
+        deactivateNav () {
+            this.$emit('deactivateNav');
+        }
     }
 };
 </script>
@@ -105,11 +115,6 @@ export default {
 
 .c-user-list-item {
     padding: f.spacing(c) f.spacing(d) f.spacing(c) 0;
-
-    &:focus {
-        outline-color: common.$nav-link-focus-color;
-        border-radius: 0;
-    }
 
     &:hover {
         background: f.$color-container-subtle;
@@ -132,6 +137,15 @@ export default {
     @include f.media('>mid') {
         display: block;
         padding: f.spacing(c) f.spacing(d);
+    }
+
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus;
+
+        &, &:after {
+            border-radius: 0;
+        }
     }
 }
 </style>
