@@ -246,7 +246,7 @@ $sc-background-clr-selected: f.$color-container-default;
 
     // Focus state
     &:focus {
-        box-shadow: 0 0 0 2px f.$color-focus;
+        box-shadow: 0 0 0 2px f.$color-focus-outer;
     }
 }
 </style>
