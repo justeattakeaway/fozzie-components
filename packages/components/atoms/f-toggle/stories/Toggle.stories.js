@@ -72,16 +72,16 @@ ToggleComponent.args = {
 ToggleComponent.argTypes = {
     checked: {
         control: { type: 'boolean' },
-        description: 'If set to true, toggle will be selected'
+        description: 'If set to true, toggle will be selected.'
     },
 
     disabled: {
         control: { type: 'boolean' },
-        description: 'If set to true, toggle will be disabled'
+        description: 'If set to true, toggle will be disabled.'
     },
 
     isModeRightToLeft: {
         control: { type: 'boolean' },
-        description: 'If set to true, toggle will be disabled'
+        description: 'If set to true, toggle direction will change for right to left reading.'
     }
 };
