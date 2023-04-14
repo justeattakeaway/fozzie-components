@@ -5,14 +5,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 0.17.0
 ------------------------------
-*April 04, 2023*
+*April 14, 2023*
 
 ### Added
 - Added `hasData` property to hide the RatingMultiStarVariant component until we have data
 - Added mounted on the RatingMultiStarVariant and using Vue.nextTick to set the `hasData` property after Vue.nextTick to ensure the % of masking over the filled stars occur after the DOM has been updated
+- Default to 0 and log warning when star rating is not within the allowed range
 
 ### Changed
 - `starRating` prop default and set it to use `0`.
+
+### Removed
+- Props validation for the star rating as this is not stateless
 
 v0.16.0
 ------------------------------
