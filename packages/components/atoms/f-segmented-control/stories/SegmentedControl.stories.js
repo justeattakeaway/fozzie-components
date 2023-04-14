@@ -3,85 +3,80 @@ import SegmentedControl from '../src/components/SegmentedControl.vue';
 
 export default {
     title: 'Components/Atoms/f-segmented-control',
-    decorators: [withA11y],
-    component: SegmentedControl,
-    argTypes: {
-        screenreaderLabel: { control: 'text' },
-        options: { control: 'array' },
-        size: {
-            control: { type: 'select', options: ['small', 'large'] },
-            defaultValue: 'small'
-        }
-    }
+    decorators: [withA11y]
 };
 
-const Template = (args, { argTypes }) => ({
+export const SegmentedControlVariants = (args, { argTypes }) => ({
+    components: {
+        SegmentedControl
+    },
+
     props: Object.keys(argTypes),
-    components: { SegmentedControl },
-    template: '<segmented-control v-bind="$props" />'
+
+    template: `
+        <div>
+            <h2 class="u-spacingBottom--large">Small</h2>
+            <div
+                class="u-spacingBottom--large"
+                v-for="(list) in segmentedControlVariants">
+                <segmentedControl
+                    class="u-spacingBottom--large"
+                    v-for="(segmentedControl) in list"
+                    :screenreaderLabel="segmentedControl.screenreaderLabel"
+                    :options="segmentedControl.options"
+                    :size="'small'"/>
+            </div>
+            <h2 class="u-spacingBottom--large">Large</h2>
+            <div
+                class="u-spacingBottom--large"
+                v-for="(list) in segmentedControlVariants">
+                <segmentedControl
+                    class="u-spacingBottom--large"
+                    v-for="(segmentedControl) in list"
+                    :screenreaderLabel="segmentedControl.screenreaderLabel"
+                    :options="segmentedControl.options"
+                    :size="'large'"/>
+            </div>
+        </div>`
 });
 
-const RTLTemplate = (args, { argTypes }) => ({
-    props: Object.keys(argTypes),
-    components: { SegmentedControl },
-    template: '<div dir="rtl"><segmented-control v-bind="$props" /></div>'
-});
+SegmentedControlVariants.storyName = 'f-segmented-control';
 
-export const Small = Template.bind({});
-Small.args = {
-    screenreaderLabel: 'Please select a language',
-    options: [
-        { label: 'EN' },
-        { label: 'DK' },
-        { label: 'FR' }
-    ],
-    size: 'small'
+SegmentedControlVariants.args = {
+
 };
 
-export const Large = Template.bind({});
-Large.args = {
-    ...Small.args,
-    size: 'large'
+SegmentedControlVariants.argTypes = {
+    screenReaderlabel: { control: 'text' }
 };
 
-export const TODOWithIcons = Template.bind({});
-TODOWithIcons.args = {
-    ...Small.args,
-    options: [
-        { label: 'EN', icon: 'icon-classname-1' },
-        { label: 'DK', icon: 'icon-classname-2' },
-        { label: 'FR', icon: 'icon-classname-3' }
+SegmentedControlVariants.args = {
+    segmentedControlVariants: [
+        [
+            {
+                screenreaderLabel: 'Please select a language',
+                options: [
+                    { label: 'EN' },
+                    { label: 'DK' },
+                    { label: 'FR' }
+                ]
+            },
+            {
+                screenreaderLabel: 'Please select a language',
+                options: [
+                    { label: 'EN', disabled: true },
+                    { label: 'DK', disabled: true },
+                    { label: 'FR', disabled: true }
+                ]
+            },
+            {
+                screenreaderLabel: 'Please select a language',
+                options: [
+                    { label: 'EN' },
+                    { label: 'DK', selected: true },
+                    { label: 'FR' }
+                ]
+            }
+        ]
     ]
-};
-
-export const DisabledOptions = Template.bind({});
-DisabledOptions.args = {
-    ...Small.args,
-    options: [
-        { label: 'EN', disabled: true },
-        { label: 'DK', disabled: true },
-        { label: 'FR', disabled: true }
-    ]
-};
-
-export const DefaultSelected = Template.bind({});
-DefaultSelected.args = {
-    ...Small.args,
-    options: [
-        { label: 'EN' },
-        { label: 'DK', selected: true },
-        { label: 'FR' }
-    ]
-};
-
-
-export const RightToLeft = RTLTemplate.bind({});
-RightToLeft.args = {
-    screenreaderLabel: 'Please select a language',
-    options: [
-        { label: 'EN' },
-        { label: 'DK' },
-        { label: 'FR' }
-    ],
-    size: 'small'
 };
