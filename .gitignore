@@ -35,6 +35,10 @@ coverage/
 /packages/f-content-cards/stories/mocks/
 /.vs
 
+# Yarn
+.yarn/*
+!.yarn/releases
+
 # Test result folders
 **/allure-report
 **/test/results/allure-results/*

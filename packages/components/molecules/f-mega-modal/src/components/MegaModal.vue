@@ -2,8 +2,11 @@
     <div
         ref="megaModal"
         :class="['c-megaModal',
-                 $style['c-megaModal'],
-                 { 'u-overlay': showOverlay }]"
+                 $style['c-megaModal'], {
+                     'u-overlay': showOverlay,
+                     [$style['c-megaModal--hasBackButton']]: hasBackButton,
+                     [$style['c-megaModal--modeRTL']]: isModeRightToLeft
+                 }]"
         data-test-id='mega-modal-component'
         :aria-hidden="!isOpen"
         @click.self="overlayClose">
@@ -15,6 +18,7 @@
                 [$style['c-megaModal-content--narrow']]: isNarrow,
                 [$style['c-megaModal-content--wide']]: isWide,
                 [$style['c-megaModal-content--flush']]: isFlush,
+                [$style['c-megaModal-content--rightToLeft']]: isModeRightToLeft,
                 [$style['is-fullHeight']]: isFullHeight,
                 [$style['is-positioned-bottom']]: isPositionedBottom,
                 [$style['is-text-aligned-center']]: isTextAlignedCenter
@@ -49,8 +53,8 @@
                             button-size="xsmall"
                             data-test-id="close-modal"
                             @click.native="close">
-                            <close-small-icon
-                                :class="[$style['c-megaModal-closeIcon']]" />
+                            <component :is="setCloseButtonIconStyle"
+                                       :class="[$style['c-megaModal-closeIcon']]" />
 
                             <span class="is-visuallyHidden">
                                 {{ closeButtonCopy }}
@@ -66,7 +70,7 @@
 </template>
 
 <script>
-import { CloseSmallIcon } from '@justeattakeaway/pie-icons-vue';
+import { CloseSmallIcon, ChevronLeftIcon } from '@justeattakeaway/pie-icons-vue';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import FButton from '@justeat/f-button';
 
@@ -74,6 +78,7 @@ let uid = 0;
 
 export default {
     components: {
+        ChevronLeftIcon,
         CloseSmallIcon,
         FButton
     },
@@ -133,6 +138,12 @@ export default {
             default: true
         },
 
+        closeButtonStyle: {
+            type: String,
+            default: 'cross',
+            validator: value => ['cross', 'chevron'].includes(value)
+        },
+
         closeOnBlur: {
             type: Boolean,
             default: true
@@ -147,14 +158,21 @@ export default {
             type: String,
             default: ''
         },
+
         ariaLabel: {
             type: String,
             default: ''
         },
+
         titleHtmlTag: {
             type: String,
             default: 'h3',
             validator: value => ['h1', 'h2', 'h3', 'h4'].includes(value)
+        },
+
+        isModeRightToLeft: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -173,6 +191,14 @@ export default {
         },
         showAriaLabel () {
             return this.ariaLabel === '' ? this.uid : this.ariaLabel;
+        },
+        hasBackButton () {
+            return this.closeButtonStyle === 'chevron' && this.hasCloseButton;
+        },
+        setCloseButtonIconStyle () {
+            return this.closeButtonStyle.includes('cross')
+                ? 'close-small-icon'
+                : 'chevron-left-icon';
         }
     },
 
@@ -342,6 +368,10 @@ export default {
     transform: translate(50%, -50%);
     width: 95%;
 
+    .c-megaModal--modeRTL & {
+        direction: rtl;
+    }
+
     &.is-positioned-bottom {
         border-radius: 0;
         bottom: -100vh;
@@ -432,19 +462,39 @@ export default {
     .c-megaModal-closeBtn {
         display: flex;
         opacity: 0.9;
-        position: absolute;
         right: f.spacing(d);
         top: 22px;
         z-index: f.zIndex(high);
-
-        @include f.media('>=mid') {
-            position: fixed;
-        }
 
         svg path {
             fill: f.$color-interactive-primary;
             width: 17px;
             height: 17px;
+        }
+
+        &,
+        &:focus,
+        &:focus-visible {
+            // Override default position from button
+            position: absolute;
+
+            @include f.media('>=mid') {
+                position: fixed;
+            }
+        }
+    }
+
+    &.c-megaModal--modeRTL {
+        .c-megaModal-closeBtn {
+            right: f.spacing(d);
+            left: auto;
+            transform: scaleX(-1);
+        }
+    }
+
+    &.c-megaModal--hasBackButton {
+        .c-megaModal-closeBtn {
+            left: f.spacing(d);
         }
     }
 
@@ -459,6 +509,19 @@ export default {
     .is-text-aligned-center & {
         margin-left: f.spacing(e);
         margin-right: f.spacing(e);
+    }
+
+    .c-megaModal--hasBackButton & {
+        margin: 0 0 0 f.spacing(f);
+    }
+
+    .c-megaModal--modeRTL & {
+        margin: 0 f.spacing(f) 0 0;
+    }
+
+    // Allow the title to sit flush when there is no close button in RTL mode.
+    .c-megaModal--modeRTL &:only-child {
+        margin: 0;
     }
 }
 </style>

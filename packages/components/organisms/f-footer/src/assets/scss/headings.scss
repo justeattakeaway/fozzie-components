@@ -37,4 +37,9 @@ $footer-heading-font-size  : 'heading-s';
     @include f.media('>=wide') {
         padding: 0;
     }
+
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus;
+    }
 }

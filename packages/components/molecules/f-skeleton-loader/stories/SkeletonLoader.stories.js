@@ -10,11 +10,14 @@ export default {
 export const SkeletonLoaderComponent = (args, { argTypes }) => ({
     components: { SkeletonLoader },
     props: Object.keys(argTypes),
-    template: '<skeleton-loader :skeletonType="skeletonType" />'
+    template: '<skeleton-loader :skeletonType="skeletonType" :options="options" />'
 });
 
 SkeletonLoaderComponent.args = {
-    skeletonType: 'Sentence'
+    skeletonType: 'Sentence',
+    options: {
+        use5Stars: false
+    }
 };
 
 SkeletonLoaderComponent.argTypes = {

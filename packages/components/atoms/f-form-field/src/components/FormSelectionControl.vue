@@ -171,7 +171,7 @@ export default {
 
     .c-formField-field--checkbox:focus + label:before,
     .c-formField-field--radio:focus + label:before {
-        box-shadow: 0 0 0 1px f.$color-white, 0 0 0 3px f.$color-focus;
+        box-shadow: 0 0 0 2px f.$color-focus-inner, 0 0 0 4px f.$color-focus-outer;
 
         /*
             https://stackoverflow.com/a/58570835
@@ -190,8 +190,7 @@ export default {
 
     .c-formField-field--checkbox:focus:not(:checked) + label:before,
     .c-formField-field--radio:focus:not(:checked) + label:before {
-        box-shadow: 0 0 0 1px f.$color-white, 0 0 0 3px f.$color-focus;
-
+        box-shadow: 0 0 0 2px f.$color-focus-inner, 0 0 0 4px f.$color-focus-outer;
         border: 1px solid f.$color-interactive-form;
     }
 

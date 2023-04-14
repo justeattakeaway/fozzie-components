@@ -3,6 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v0.16.0
+------------------------------
+*March 27, 2023*
+
+### Fixed
+- `ratingDisplayType` prop default and set it to use `'short'`.
+- Tests for `ratingDisplayType`.
+
+
+v0.15.0
+------------------------------
+*March 24, 2023*
+
+### Added
+- `locale` check to component when returning descriptions.
+
 
 v0.14.0
 ------------------------------
