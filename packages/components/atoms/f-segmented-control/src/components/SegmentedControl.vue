@@ -113,6 +113,9 @@ export default {
             let newIndex = this.tabIndex;
             const currentButton = event.target;
 
+            // We're using the roving tabindex pattern here:
+            // Only the focused element has tabindex not set to -1,
+            // so users can easily return to their last focused item when tabbing back.
             if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
                 // Move focus to the next button
                 newIndex = (this.tabIndex + 1) % this.options.length;
