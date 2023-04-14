@@ -113,19 +113,19 @@ export default {
             let newIndex = this.tabIndex;
             const currentButton = event.target;
 
-            // Prevent the default behavior (e.g., scrolling)
-            event.preventDefault();
-
             // We're using the roving tabindex pattern here:
             // Only the focused element has tabindex not set to -1,
             // so users can easily return to their last focused item when tabbing back.
             if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+                event.preventDefault();
                 // Move focus to the next button
                 newIndex = (this.tabIndex + 1) % this.options.length;
             } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+                event.preventDefault();
                 // Move focus to the previous button
                 newIndex = (this.tabIndex - 1 + this.options.length) % this.options.length;
             } else if (event.key === 'Enter' || event.key === 'Space') {
+                event.preventDefault();
                 this.selectOption(this.options[this.tabIndex].label);
 
                 return;
