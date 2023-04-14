@@ -2,7 +2,7 @@ import { withA11y } from '@storybook/addon-a11y';
 import SegmentedControl from '../src/components/SegmentedControl.vue';
 
 export default {
-    title: 'Components/Atoms/f-segmented-control',
+    title: 'Components/Atoms',
     decorators: [withA11y]
 };
 
@@ -75,6 +75,14 @@ SegmentedControlVariants.args = {
                     { label: 'EN' },
                     { label: 'DK', selected: true },
                     { label: 'FR' }
+                ]
+            },
+            {
+                screenreaderLabel: 'Please select a language',
+                options: [
+                    { label: 'English' },
+                    { label: 'Danish' },
+                    { label: 'French but long' }
                 ]
             }
         ]
