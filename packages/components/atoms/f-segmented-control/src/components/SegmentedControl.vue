@@ -155,11 +155,13 @@ $sc-sm-height: f.spacing(f);
 $sc-l-height: calc(f.spacing(b) * 6);
 $sc-border-radius: 9999px;
 $sc-padding-xs-modifier: calc(f.spacing(a) / 2);
+$sc-background-clr: f.$color-container-strong;
+$sc-background-clr-selected: f.$color-container-default;
 
 .c-segmented-control {
     display: flex;
     justify-content: space-between;
-    background-color: f.$color-container-strong;
+    background-color: $sc-background-clr;
     border-radius: $sc-border-radius;
     gap: 2.5px; // ensure outlines and box-shadows don't overlap
     padding: $sc-padding-xs-modifier;
@@ -193,7 +195,18 @@ $sc-padding-xs-modifier: calc(f.spacing(a) / 2);
     &--selected {
         font-weight: f.$font-weight-bold;
         background-color: f.$color-container-default;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.02), 0px 2px 12px -2px rgba(0, 0, 0, 0.08), 0px 3px 6px rgba(0, 0, 0, 0.06); // TODO - find out how we're meant to use the design tokens for this
+        box-shadow: f.$elevation-02;
+
+        &:hover:not(:disabled) {
+            // This prevents hover effects from being applied on touch devices
+            @media(hover: hover) and (pointer: fine) {
+                background-color: darken($sc-background-clr-selected, f.$color-hover-01);
+            }
+        }
+
+        &:active:not(:disabled) {
+            background-color: darken($sc-background-clr-selected, f.$color-active-01);
+        }
     }
 
     &:not(:disabled) {
@@ -210,12 +223,12 @@ $sc-padding-xs-modifier: calc(f.spacing(a) / 2);
     &:hover:not(:disabled) {
         // This prevents hover effects from being applied on touch devices
         @media(hover: hover) and (pointer: fine) {
-            background-color: rgba(0, 0, 0, 0.04); // TODO - find out how we're meant to use the design tokens for this
+            background-color: darken($sc-background-clr, f.$color-hover-01);
         }
     }
 
     &:active:not(:disabled) {
-        background-color: rgba(0, 0, 0, 0.12); // TODO - find out how we're meant to use the design tokens for this
+        background-color: darken($sc-background-clr, f.$color-active-01);
     }
 
     &:focus {
