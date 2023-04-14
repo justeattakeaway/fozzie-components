@@ -113,6 +113,9 @@ export default {
             let newIndex = this.tabIndex;
             const currentButton = event.target;
 
+            // Prevent the default behavior (e.g., scrolling)
+            event.preventDefault();
+
             // We're using the roving tabindex pattern here:
             // Only the focused element has tabindex not set to -1,
             // so users can easily return to their last focused item when tabbing back.
@@ -123,7 +126,6 @@ export default {
                 // Move focus to the previous button
                 newIndex = (this.tabIndex - 1 + this.options.length) % this.options.length;
             } else if (event.key === 'Enter' || event.key === 'Space') {
-                event.preventDefault(); // Prevent the default behavior (e.g., scrolling)
                 this.selectOption(this.options[this.tabIndex].label);
 
                 return;
@@ -151,6 +153,7 @@ export default {
 <style lang="scss" module>
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
+// Variables
 $sc-sm-height: f.spacing(f);
 $sc-l-height: calc(f.spacing(b) * 6);
 $sc-border-radius: 9999px;
@@ -158,16 +161,18 @@ $sc-padding-xs-modifier: calc(f.spacing(a) / 2);
 $sc-background-clr: f.$color-container-strong;
 $sc-background-clr-selected: f.$color-container-default;
 
+// Segmented control container
 .c-segmented-control {
     display: flex;
     justify-content: space-between;
     background-color: $sc-background-clr;
     border-radius: $sc-border-radius;
-    gap: 2.5px; // ensure outlines and box-shadows don't overlap
+    gap: 2.5px; // Ensure outlines and box-shadows don't overlap
     padding: $sc-padding-xs-modifier;
-    min-block-size: $sc-sm-height; // small size by default
+    min-block-size: $sc-sm-height; // Small size by default
     user-select: none;
 
+    // Large size modifier
     &--large {
         min-block-size: $sc-l-height;
 
@@ -177,6 +182,7 @@ $sc-background-clr-selected: f.$color-container-default;
     }
 }
 
+// Segmented control options
 .c-segmented-control__option {
     font-size: inherit;
     color: inherit;
@@ -190,29 +196,34 @@ $sc-background-clr-selected: f.$color-container-default;
     align-items: center;
     justify-content: center;
     gap: f.spacing(b);
-    outline: none; // We replace outline with a box-shadow on focus due to ios safari not respecting border-radius
+    outline: none; // Replace outline with box-shadow on focus due to iOS Safari not respecting border-radius
 
+    // Selected state
     &--selected {
         font-weight: f.$font-weight-bold;
         background-color: f.$color-container-default;
         box-shadow: f.$elevation-02;
 
+        // Hover state
         &:hover:not(:disabled) {
-            // This prevents hover effects from being applied on touch devices
+            // Prevent hover effects from being applied on touch devices
             @media(hover: hover) and (pointer: fine) {
                 background-color: darken($sc-background-clr-selected, f.$color-hover-01);
             }
         }
 
+        // Active state
         &:active:not(:disabled) {
             background-color: darken($sc-background-clr-selected, f.$color-active-01);
         }
     }
 
+    // Not disabled state
     &:not(:disabled) {
         cursor: pointer;
     }
 
+    // Disabled state
     &:disabled {
         color: f.$color-content-disabled;
         background-color: f.$color-disabled-01;
@@ -220,17 +231,20 @@ $sc-background-clr-selected: f.$color-container-default;
         pointer-events: none;
     }
 
+    // Hover state
     &:hover:not(:disabled) {
-        // This prevents hover effects from being applied on touch devices
+        // Prevent hover effects from being applied on touch devices
         @media(hover: hover) and (pointer: fine) {
             background-color: darken($sc-background-clr, f.$color-hover-01);
         }
     }
 
+    // Active state
     &:active:not(:disabled) {
         background-color: darken($sc-background-clr, f.$color-active-01);
     }
 
+    // Focus state
     &:focus {
         box-shadow: 0 0 0 2px f.$color-focus;
     }
