@@ -2,12 +2,7 @@
     <label
         :for="uniqueId"
         data-test-id="toggle-component"
-        :class="[$style['c-toggle'],
-                 {
-                     [$style['c-toggle--checked']]: isChecked,
-                     [$style['c-toggle--disabled']]: $attrs.disabled,
-                     [$style['c-toggle--modeRTL']]: isModeRightToLeft
-                 }]">
+        :class="$style['c-toggle']">
         <input
             :id="uniqueId"
             role="switch"
@@ -15,15 +10,13 @@
             v-bind="$attrs"
             :class="$style['c-toggle-input']"
             :aria-checked="isChecked"
-            :aria-labelledby="ariaLabelledBy"
-            :aria-describedby="ariaDescribedBy"
             @change="toggleOption">
 
         <div :class="$style['c-toggle-control']">
             <check-icon
                 v-if="isChecked"
                 :class="$style['c-toggle-icon']"
-                aria-hidden />
+                aria-hidden="true" />
         </div>
     </label>
 </template>
@@ -40,23 +33,6 @@ export default {
     },
 
     inheritAttrs: false,
-
-    props: {
-        isModeRightToLeft: {
-            type: Boolean,
-            default: false
-        },
-
-        ariaLabelledBy: {
-            type: String,
-            default: ''
-        },
-
-        ariaDescribedBy: {
-            type: String,
-            default: ''
-        }
-    },
 
     computed: {
         uniqueId () {
@@ -92,7 +68,6 @@ export default {
 $toggle-colour: f.$color-interactive-form;
 $toggle-colour--checked: f.$color-interactive-brand;
 $toggle-colour--disabled: f.$color-disabled-01;
-
 $toggle-width: 48px;
 $toggle-height: 24px;
 $toggle-control-size: 20px;
@@ -100,26 +75,25 @@ $toggle-padding: 2px;
 $toggle-radius: f.$radius-rounded-e;
 $toggle-icon-size: 14px;
 
-$toggle-translation: translateX(calc($toggle-width - $toggle-control-size - 2 * $toggle-padding));
+$toggle-translation: calc($toggle-width - $toggle-control-size - 2 * $toggle-padding);
 
 @mixin toggle-transition ($property) {
-    transition-property: $property;
-    transition-duration: 0.15s;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.9, 1);
-    transition-delay: 0s;
+    @media (prefers-reduced-motion: no-preference) {
+        transition-property: $property;
+        transition-duration: 0.15s;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.9, 1);
+        transition-delay: 0s;
+    }
 }
 
 .c-toggle {
     display: flex;
-
     @include toggle-transition(background-color);
-
     width: $toggle-width;
     height: $toggle-height;
     padding: $toggle-padding;
     border-radius: $toggle-radius;
     background-color: $toggle-colour;
-
     cursor: pointer;
 
     &:hover {
@@ -135,6 +109,31 @@ $toggle-translation: translateX(calc($toggle-width - $toggle-control-size - 2 * 
     &:active {
         background-color: darken($toggle-colour, f.$color-active-01);
     }
+
+    &:has(.c-toggle-input:checked) {
+        @include toggle-transition(background-color);
+        background-color: $toggle-colour--checked;
+
+        &:hover {
+            background-color: darken($toggle-colour--checked, f.$color-hover-01);
+        }
+
+        &:focus,
+        &:focus-within {
+            background-color: $toggle-colour--checked;
+        }
+
+        &:active {
+            background-color: darken($toggle-colour--checked, f.$color-active-01);
+        }
+    }
+
+    &:has(.c-toggle-input:disabled) {
+        background-color: $toggle-colour--disabled;
+
+        cursor: not-allowed;
+        pointer-events: none;
+    }
 }
 
 .c-toggle-input {
@@ -144,17 +143,32 @@ $toggle-translation: translateX(calc($toggle-width - $toggle-control-size - 2 * 
 
 .c-toggle-control {
     @include toggle-transition(transform);
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     width: $toggle-control-size;
     height: $toggle-control-size;
-
     border-radius: $toggle-radius;
     background-color: f.$color-content-interactive-light;
+
+    .c-toggle-input:checked + & {
+        @include toggle-transition(transform);
+        transform: translateX($toggle-translation);
+    }
+
+    .c-toggle-input:disabled ~ & {
+        path {
+            @include toggle-transition(fill);
+            fill: $toggle-colour--disabled;
+        }
+    }
+}
+
+[dir="rtl"] {
+    .c-toggle-input:checked + .c-toggle-control {
+        @include toggle-transition(transform);
+        transform: translateX(-$toggle-translation);
+    }
 }
 
 .c-toggle-icon {
@@ -164,60 +178,6 @@ $toggle-translation: translateX(calc($toggle-width - $toggle-control-size - 2 * 
     path {
         @include toggle-transition(fill);
         fill: $toggle-colour--checked;
-    }
-}
-
-
-.c-toggle--checked {
-    @include toggle-transition(background-color);
-    background-color: $toggle-colour--checked;
-
-    &:hover {
-        background-color: darken($toggle-colour--checked, f.$color-hover-01);
-    }
-
-    &:focus,
-    &:focus-within {
-        background-color: $toggle-colour--checked;
-    }
-
-    &:active {
-        background-color: darken($toggle-colour--checked, f.$color-active-01);
-    }
-
-    .c-toggle-control {
-        @include toggle-transition(transform);
-
-        transform: $toggle-translation;
-    }
-}
-
-.c-toggle--modeRTL {
-    .c-toggle-control {
-        transform: $toggle-translation;
-    }
-}
-
-.c-toggle--modeRTL.c-toggle--checked {
-    .c-toggle-control {
-        @include toggle-transition(transform);
-
-        transform: translateX(0);
-    }
-}
-
-.c-toggle--disabled {
-    background-color: $toggle-colour--disabled;
-
-    cursor: not-allowed;
-    pointer-events: none;
-
-    .c-toggle-icon {
-        path {
-            @include toggle-transition(fill);
-
-            fill: $toggle-colour--disabled;
-        }
     }
 }
 </style>

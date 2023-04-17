@@ -11,7 +11,6 @@ A component to toggle a single setting on/off.
 ---
 
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-toggle.svg)](https://badge.fury.io/js/%40justeat%2Ff-toggle)
-[![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-toggle/badge.svg)](https://coveralls.io/github/justeat/f-toggle)
 [![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-toggle/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-toggle?targetFile=package.json)
 
@@ -71,9 +70,10 @@ The props that can be defined are as follows (if any):
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
-| isModeRightToLeft | Boolean | false | sets reading direction to 'Right to Left' |
-| ariaLabelledBy | String | '' | The id for an element that will 'label' the toggle |
-| ariaDescribedBy | String | '' | The id for an element describing what the toggle will control |
+| checked | Boolean | false | Switches the toggle on and off |
+| disabled | Boolean | false | Sets the toggle to disabled |
+| aria-labelledby | String | '' | The id for an element that will 'label' the toggle |
+| aria-describedby | String | '' | The id for an element describing what the toggle will control |
 
 ### Events
 

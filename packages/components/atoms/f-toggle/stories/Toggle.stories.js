@@ -36,7 +36,7 @@ export const ToggleComponent = (args, { argTypes }) => ({
     },
 
     template:
-        `<div>
+        `<div :dir="direction">
             <toggle
                 :disabled="disabled"
                 :checked="toggleValueOne"
@@ -45,9 +45,9 @@ export const ToggleComponent = (args, { argTypes }) => ({
 
             <hr>
 
-            <div style="display: flex; align-items: center;">
+            <fieldset style="display: flex; align-items: center; border: 0;">
                 <div style="max-width: 90%; margin-right: 16px;">
-                    <h4 style="margin-bottom: 8px;" id="labelID">Necessary</h4>
+                    <legend style="font-size: 20px; font-weight: 800;" id="labelID">Necessary</legend>
                     <p id="descriptionID" >These cookies allow the website to remember the choices you make to give you better functionality and personal features.</p>
                 </div>
                 <toggle
@@ -55,9 +55,9 @@ export const ToggleComponent = (args, { argTypes }) => ({
                     name="Necessary"
                     :checked="toggleValueTwo"
                     @update="updateToggleTwo"
-                    ariaLabelledBy="labelID"
-                    ariaDescribedBy="descriptionID"/>
-            </div>
+                    aria-labelledby="labelID"
+                    ari-describedby="descriptionID"/>
+            </fields>
         </div>`
 });
 
@@ -66,7 +66,7 @@ ToggleComponent.storyName = 'f-toggle';
 ToggleComponent.args = {
     checked: true,
     disabled: false,
-    isModeRightToLeft: false
+    direction: 'ltr'
 };
 
 ToggleComponent.argTypes = {
@@ -80,8 +80,8 @@ ToggleComponent.argTypes = {
         description: 'If set to true, toggle will be disabled'
     },
 
-    isModeRightToLeft: {
-        control: { type: 'boolean' },
-        description: 'If set to true, toggle will be disabled'
+    direction: {
+        control: { type: 'select', options: ['ltr', 'rtl'] },
+        description: 'Sets writing/reading direction'
     }
 };
