@@ -91,6 +91,7 @@ $toggle-translation: calc($toggle-width - $toggle-control-size - 2 * $toggle-pad
     @include toggle-transition(background-color);
     width: $toggle-width;
     height: $toggle-height;
+    flex-shrink: 0;
     padding: $toggle-padding;
     border-radius: $toggle-radius;
     background-color: $toggle-colour;
