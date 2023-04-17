@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v3.3.0
+ ------------------------------
+ *March 24, 2023*
+
+ ### Added
+ - An optional `options` prop
+ - Added an optional option `options.use5Stars` to show 5 stars instead of 6 in ratings skeleton.
+
 v3.2.0
  ------------------------------
  *July 19, 2022*
