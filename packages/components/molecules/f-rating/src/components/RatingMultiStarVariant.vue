@@ -13,7 +13,7 @@
         </div>
 
         <div
-            v-if="hasData"
+            v-if="hasRatingData"
             :class="[
                 $style['c-rating-mask'],
                 $style['c-rating-stars-icons']
@@ -59,7 +59,7 @@ export default {
     },
 
     data: () => ({
-        hasData: false
+        hasRatingData: false
     }),
 
     computed: {
@@ -78,7 +78,7 @@ export default {
         // before setting the property to avoid the masking happening after
         // all the stars have been displayed (flickering effect)
         this.$nextTick(() => {
-            this.hasData = this.getRatingStarPercentage > 0;
+            this.hasRatingData = this.getRatingStarPercentage > 0;
         });
     }
 };

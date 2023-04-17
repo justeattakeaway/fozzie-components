@@ -8,8 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 *April 14, 2023*
 
 ### Added
-- Added `hasData` property to hide the RatingMultiStarVariant component until we have data
-- Added mounted on the RatingMultiStarVariant and using Vue.nextTick to set the `hasData` property after Vue.nextTick to ensure the % of masking over the filled stars occur after the DOM has been updated
+- Added `hasRatingData` property to hide the RatingMultiStarVariant component until we have data
+- Added mounted on the RatingMultiStarVariant and using Vue.nextTick to set the `hasRatingData` property after Vue.nextTick to ensure the % of masking over the filled stars occur after the DOM has been updated
 - Default to 0 and log warning when star rating is not within the allowed range
 
 ### Changed
