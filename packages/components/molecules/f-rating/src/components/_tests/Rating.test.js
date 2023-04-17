@@ -65,7 +65,7 @@ describe('Rating', () => {
             });
 
             describe('when invoked', () => {
-                it('should return a singular description if the rating is equal to 1', async () => {
+                it('should return a singular description if the rating is equal to 1', () => {
                     // Arrange
                     propsData = {
                         starRating: 1,
