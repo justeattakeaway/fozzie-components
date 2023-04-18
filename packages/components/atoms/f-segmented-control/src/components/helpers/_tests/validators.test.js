@@ -5,6 +5,7 @@ describe('optionsValidator', () => {
         it('should return false when there are less than 2 options', () => {
             // arrange
             const options = [{ label: 'Option 1' }];
+
             // act
             const result = validateOptions(options);
 
@@ -13,7 +14,7 @@ describe('optionsValidator', () => {
         });
 
         it('should return false when there are more than 4 options', () => {
-        // arrange
+            // arrange
             const options = [{ label: 'Option 1' }, { label: 'Option 2' }, { label: 'Option 3' }, { label: 'Option 4' }, { label: 'Option 5' }];
 
             // act
