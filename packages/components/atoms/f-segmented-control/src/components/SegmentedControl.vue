@@ -113,7 +113,7 @@ export default {
             this.$emit('input', label);
 
             if (newIndex !== previousIndex) {
-                this.focusNewButton(newIndex, this.$el.children[previousIndex]);
+                this.focusNewOption(newIndex, this.$el.children[previousIndex]);
             }
         },
         /**
@@ -123,7 +123,7 @@ export default {
          */
         onKeyDown (event) {
             let newIndex = this.tabIndex;
-            const currentButton = event.target;
+            const currentOption = event.target;
 
             // We're using the roving tabindex pattern here:
             // Only the focused element has tabindex not set to -1,
@@ -145,19 +145,19 @@ export default {
 
             // If the newIndex has changed, update the tabIndex and focus the new button
             if (newIndex !== this.tabIndex) {
-                this.focusNewButton(newIndex, currentButton);
+                this.focusNewOption(newIndex, currentOption);
             }
         },
         /**
-         * focusNewButton - Change focus from the current button to the new one.
+         * focusNewOption - Change focus from the current button to the new one.
          *
          * @param {Number} newIndex - The index of the new button to be focused.
-         * @param {HTMLElement} currentButton - The current button that will lose focus.
+         * @param {HTMLElement} currentOption - The current button that will lose focus.
          */
-        focusNewButton (newIndex, currentButton) {
+        focusNewOption (newIndex, currentOption) {
             this.tabIndex = newIndex;
             // Remove focus from the current button
-            currentButton.blur();
+            currentOption.blur();
 
             // Wait for the DOM to update, then focus the new button
             this.$nextTick(() => {
