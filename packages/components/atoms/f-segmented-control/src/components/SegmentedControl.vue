@@ -99,6 +99,11 @@ export default {
         }
     },
     methods: {
+        /**
+         * selectOption - Select a segmented control button and set focus on it if the selected button has changed.
+         *
+         * @param {String} label - The label of the button to be selected.
+         */
         selectOption (label) {
             const previousIndex = this.tabIndex;
             const newIndex = this.options.findIndex(option => option.label === label);
@@ -111,6 +116,11 @@ export default {
                 this.focusNewButton(newIndex, this.$el.children[previousIndex]);
             }
         },
+        /**
+         * onKeyDown - Handle keyboard navigation and selection for the buttons.
+         *
+         * @param {KeyboardEvent} event - The keyboard event triggered by the user.
+         */
         onKeyDown (event) {
             let newIndex = this.tabIndex;
             const currentButton = event.target;
@@ -138,6 +148,12 @@ export default {
                 this.focusNewButton(newIndex, currentButton);
             }
         },
+        /**
+         * focusNewButton - Change focus from the current button to the new one.
+         *
+         * @param {Number} newIndex - The index of the new button to be focused.
+         * @param {HTMLElement} currentButton - The current button that will lose focus.
+         */
         focusNewButton (newIndex, currentButton) {
             this.tabIndex = newIndex;
             // Remove focus from the current button
