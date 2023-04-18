@@ -200,26 +200,6 @@ $sc-background-clr-selected: f.$color-container-default;
     gap: f.spacing(b);
     outline: none; // Replace outline with box-shadow on focus due to iOS Safari not respecting border-radius
 
-    // Selected state
-    &--selected {
-        font-weight: f.$font-weight-bold;
-        background-color: f.$color-container-default;
-        box-shadow: f.$elevation-02;
-
-        // Hover state
-        &:hover:not(:disabled) {
-            // Prevent hover effects from being applied on touch devices
-            @media(hover: hover) and (pointer: fine) {
-                background-color: darken($sc-background-clr-selected, f.$color-hover-01);
-            }
-        }
-
-        // Active state
-        &:active:not(:disabled) {
-            background-color: darken($sc-background-clr-selected, f.$color-active-01);
-        }
-    }
-
     // Not disabled state
     &:not(:disabled) {
         cursor: pointer;
@@ -249,6 +229,26 @@ $sc-background-clr-selected: f.$color-container-default;
     // Focus state
     &:focus {
         box-shadow: 0 0 0 2px f.$color-focus-outer;
+    }
+
+    // Selected state
+    &--selected {
+        font-weight: f.$font-weight-bold;
+        background-color: f.$color-container-default;
+        box-shadow: f.$elevation-02;
+
+        // Hover state
+        &:hover:not(:disabled) {
+            // Prevent hover effects from being applied on touch devices
+            @media(hover: hover) and (pointer: fine) {
+                background-color: darken($sc-background-clr-selected, f.$color-hover-01);
+            }
+        }
+
+        // Active state
+        &:active:not(:disabled) {
+            background-color: darken($sc-background-clr-selected, f.$color-active-01);
+        }
     }
 }
 </style>
