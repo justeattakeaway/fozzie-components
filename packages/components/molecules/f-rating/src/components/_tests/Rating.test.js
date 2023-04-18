@@ -273,10 +273,10 @@ describe('Rating', () => {
             });
         });
 
-        describe('`starRatingWithValidation`', () => {
+        describe('`validatedStarRating`', () => {
             it('should exist', () => {
                 // Act & Assert
-                expect(wrapper.vm.starRatingWithValidation).toBeDefined();
+                expect(wrapper.vm.validatedStarRating).toBeDefined();
             });
 
             describe('when invoked', () => {
@@ -297,7 +297,7 @@ describe('Rating', () => {
                         });
 
                         // Act & Assert
-                        expect(wrapper.vm.starRatingWithValidation).toBe(0);
+                        expect(wrapper.vm.validatedStarRating).toBe(0);
                         expect(mocks.$log.warn).toHaveBeenCalled();
                     });
                 });
@@ -323,7 +323,7 @@ describe('Rating', () => {
                         });
 
                         // Act & Assert
-                        expect(wrapper.vm.starRatingWithValidation).toBe(starRating);
+                        expect(wrapper.vm.validatedStarRating).toBe(starRating);
                     });
                 });
             });

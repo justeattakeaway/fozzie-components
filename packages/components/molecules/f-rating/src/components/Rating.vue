@@ -10,7 +10,7 @@
                 :is="getRatingVariant"
                 :max-star-rating="maxStarRating"
                 :star-rating-size="starRatingSize"
-                :star-rating="starRatingWithValidation" />
+                :star-rating="validatedStarRating" />
 
             <span
                 v-if="hasRatingAvailable"
@@ -171,7 +171,7 @@ export default {
          *
          * @returns {boolean}
          */
-        starRatingWithValidation () {
+        validatedStarRating () {
             const validate = this.starRating >= 0 && this.starRating <= this.maxStarRating;
             if (validate) {
                 return this.starRating;
