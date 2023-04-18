@@ -227,7 +227,7 @@ $sc-background-color-selected: f.$color-container-default;
     // Hover state
     &:hover:not(:disabled) {
         // Prevent hover effects from being applied on touch devices
-        @media(hover: hover) and (pointer: fine) {
+        @media(hover: hover) {
             background-color: darken($sc-background-color-selected, f.$color-hover-01);
         }
     }
