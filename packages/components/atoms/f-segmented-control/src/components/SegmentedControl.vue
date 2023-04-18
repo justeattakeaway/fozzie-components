@@ -159,14 +159,14 @@ $sc-background-color-selected: f.$color-container-default;
     padding: $sc-padding-xs-modifier;
     min-block-size: $sc-height-small; // Small size by default
     user-select: none;
+}
 
-    // Large size modifier
-    &--large {
-        min-block-size: $sc-height-large;
+// Large size modifier
+.c-segmentedControl--large {
+    min-block-size: $sc-height-large;
 
-        .c-segmentedControl-option {
-            padding-block: calc($sc-padding-xs-modifier + f.spacing(b));
-        }
+    .c-segmentedControl-option {
+        padding-block: calc($sc-padding-xs-modifier + f.spacing(b));
     }
 }
 
@@ -216,25 +216,25 @@ $sc-background-color-selected: f.$color-container-default;
     &:focus {
         box-shadow: 0 0 0 2px f.$color-focus-outer;
     }
+}
 
-    // Selected state
-    &--selected {
-        font-weight: f.$font-weight-bold;
-        background-color: f.$color-container-default;
-        box-shadow: f.$elevation-02;
+// Selected state
+.c-segmentedControl-option--selected {
+    font-weight: f.$font-weight-bold;
+    background-color: f.$color-container-default;
+    box-shadow: f.$elevation-02;
 
-        // Hover state
-        &:hover:not(:disabled) {
-            // Prevent hover effects from being applied on touch devices
-            @media(hover: hover) and (pointer: fine) {
-                background-color: darken($sc-background-color-selected, f.$color-hover-01);
-            }
+    // Hover state
+    &:hover:not(:disabled) {
+        // Prevent hover effects from being applied on touch devices
+        @media(hover: hover) and (pointer: fine) {
+            background-color: darken($sc-background-color-selected, f.$color-hover-01);
         }
+    }
 
-        // Active state
-        &:active:not(:disabled) {
-            background-color: darken($sc-background-color-selected, f.$color-active-01);
-        }
+    // Active state
+    &:active:not(:disabled) {
+        background-color: darken($sc-background-color-selected, f.$color-active-01);
     }
 }
 </style>
