@@ -74,6 +74,7 @@ The props that can be defined are as follows (if any):
 | disabled | Boolean | false | Sets the toggle to disabled |
 | aria-labelledby | String | '' | The id for an element that will 'label' the toggle |
 | aria-describedby | String | '' | The id for an element describing what the toggle will control |
+| dir | String | 'ltr' | The reading/writing direction |
 
 ### Events
 
