@@ -1,6 +1,6 @@
 import { validateOptions } from '../validators';
 
-describe('optionsValidator', () => {
+describe('validators', () => {
     describe('validateOptions', () => {
         it('should return false when there are less than 2 options', () => {
             // arrange
