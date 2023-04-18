@@ -2,12 +2,12 @@ import { validateOptions } from '../validators';
 
 describe('optionsValidator', () => {
     describe('validateOptions', () => {
-        test('should return false when there are less than 2 options', () => {
+        it('should return false when there are less than 2 options', () => {
             const options = [{ label: 'Option 1' }];
             expect(validateOptions(options)).toBe(false);
         });
 
-        test('should return false when there are more than 4 options', () => {
+        it('should return false when there are more than 4 options', () => {
             const options = [
                 { label: 'Option 1' },
                 { label: 'Option 2' },
@@ -18,12 +18,12 @@ describe('optionsValidator', () => {
             expect(validateOptions(options)).toBe(false);
         });
 
-        test('should return false when an option is not an object', () => {
+        it('should return false when an option is not an object', () => {
             const options = ['Option 1', { label: 'Option 2' }];
             expect(validateOptions(options)).toBe(false);
         });
 
-        test('should return false when an option label is not a string or empty', () => {
+        it('should return false when an option label is not a string or empty', () => {
             const options = [
                 { label: 123 },
                 { label: 'Option 2' }
@@ -31,7 +31,7 @@ describe('optionsValidator', () => {
             expect(validateOptions(options)).toBe(false);
         });
 
-        test('should return false when an option iconName is not a string', () => {
+        it('should return false when an option iconName is not a string', () => {
             const options = [
                 { label: 'Option 1', iconName: 123 },
                 { label: 'Option 2' }
@@ -39,7 +39,7 @@ describe('optionsValidator', () => {
             expect(validateOptions(options)).toBe(false);
         });
 
-        test('should return false when an option disabled is not a boolean', () => {
+        it('should return false when an option disabled is not a boolean', () => {
             const options = [
                 { label: 'Option 1', disabled: 'true' },
                 { label: 'Option 2' }
@@ -47,7 +47,7 @@ describe('optionsValidator', () => {
             expect(validateOptions(options)).toBe(false);
         });
 
-        test('should return false when more than one option is selected', () => {
+        it('should return false when more than one option is selected', () => {
             const options = [
                 { label: 'Option 1', selected: true },
                 { label: 'Option 2', selected: true }
@@ -55,7 +55,7 @@ describe('optionsValidator', () => {
             expect(validateOptions(options)).toBe(false);
         });
 
-        test('should return false when an option selected is not a boolean', () => {
+        it('should return false when an option selected is not a boolean', () => {
             const options = [
                 { label: 'Option 1', selected: 'true' },
                 { label: 'Option 2' }
@@ -63,7 +63,7 @@ describe('optionsValidator', () => {
             expect(validateOptions(options)).toBe(false);
         });
 
-        test('should return true when all options are valid', () => {
+        it('should return true when all options are valid', () => {
             const options = [
                 {
                     label: 'Option 1', iconName: 'icon-1', disabled: true, selected: true
