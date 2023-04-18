@@ -1,9 +1,11 @@
 <template>
     <div
-        :class="{
-            [$style['c-segmentedControl']]: true,
-            [$style['c-segmentedControl--large']]: size === 'large'
-        }"
+        :class="[
+            $style['c-segmentedControl'],
+            {
+                [$style['c-segmentedControl--large']]: size === 'large'
+            }
+        ]"
         data-test-id="segmented-control"
         :aria-label="screenreaderLabel"
         role="radiogroup"
@@ -15,10 +17,12 @@
             :key="option.label"
             :data-test-id="`segmented-control-option-${index}`"
             type="button"
-            :class="{
-                [$style['c-segmentedControl-option']]: true,
-                [$style['c-segmentedControl-option--selected']]: option.label === selectedLabel
-            }"
+            :class="[
+                $style['c-segmentedControl-option'],
+                {
+                    [$style['c-segmentedControl-option--selected']]: option.label === selectedLabel
+                }
+            ]"
             :aria-checked="option.label === selectedLabel ? 'true' : 'false'"
             role="radio"
             :tabindex="focusedTabIndex[index]"
