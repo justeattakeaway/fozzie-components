@@ -40,8 +40,7 @@ export const ToggleComponent = (args, { argTypes }) => ({
             <toggle
                 :disabled="disabled"
                 :checked="toggleValueOne"
-                @update="updateToggleOne"
-                :isModeRightToLeft="isModeRightToLeft"/>
+                @update="updateToggleOne"/>
 
             <hr>
 
