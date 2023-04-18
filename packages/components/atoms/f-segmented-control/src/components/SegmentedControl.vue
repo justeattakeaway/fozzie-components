@@ -160,14 +160,14 @@ $sc-sm-height: f.spacing(f);
 $sc-l-height: calc(f.spacing(b) * 6);
 $sc-border-radius: 9999px;
 $sc-padding-xs-modifier: calc(f.spacing(a) / 2);
-$sc-background-clr: f.$color-container-strong;
-$sc-background-clr-selected: f.$color-container-default;
+$sc-background-color: f.$color-container-strong;
+$sc-background-color-selected: f.$color-container-default;
 
 // Segmented control container
 .c-segmented-control {
     display: flex;
     justify-content: space-between;
-    background-color: $sc-background-clr;
+    background-color: $sc-background-color;
     border-radius: $sc-border-radius;
     gap: 2.5px; // Ensure outlines and box-shadows don't overlap
     padding: $sc-padding-xs-modifier;
@@ -217,13 +217,13 @@ $sc-background-clr-selected: f.$color-container-default;
     &:hover:not(:disabled) {
         // Prevent hover effects from being applied on touch devices
         @media(hover: hover) and (pointer: fine) {
-            background-color: darken($sc-background-clr, f.$color-hover-01);
+            background-color: darken($sc-background-color, f.$color-hover-01);
         }
     }
 
     // Active state
     &:active:not(:disabled) {
-        background-color: darken($sc-background-clr, f.$color-active-01);
+        background-color: darken($sc-background-color, f.$color-active-01);
     }
 
     // Focus state
@@ -241,13 +241,13 @@ $sc-background-clr-selected: f.$color-container-default;
         &:hover:not(:disabled) {
             // Prevent hover effects from being applied on touch devices
             @media(hover: hover) and (pointer: fine) {
-                background-color: darken($sc-background-clr-selected, f.$color-hover-01);
+                background-color: darken($sc-background-color-selected, f.$color-hover-01);
             }
         }
 
         // Active state
         &:active:not(:disabled) {
-            background-color: darken($sc-background-clr-selected, f.$color-active-01);
+            background-color: darken($sc-background-color-selected, f.$color-active-01);
         }
     }
 }
