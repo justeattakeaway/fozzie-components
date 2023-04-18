@@ -1,8 +1,8 @@
 <template>
     <div
         :class="{
-            [$style['c-segmented-control']]: true,
-            [$style['c-segmented-control--large']]: size === 'large'
+            [$style['c-segmentedControl']]: true,
+            [$style['c-segmentedControl--large']]: size === 'large'
         }"
         data-test-id="segmented-control"
         :aria-label="screenreaderLabel"
@@ -16,8 +16,8 @@
             :data-test-id="`segmented-control-option-${index}`"
             type="button"
             :class="{
-                [$style['c-segmented-control__option']]: true,
-                [$style['c-segmented-control__option--selected']]: option.label === selectedLabel
+                [$style['c-segmentedControl-option']]: true,
+                [$style['c-segmentedControl-option--selected']]: option.label === selectedLabel
             }"
             :aria-checked="option.label === selectedLabel ? 'true' : 'false'"
             role="radio"
@@ -150,7 +150,7 @@ $sc-background-color: f.$color-container-strong;
 $sc-background-color-selected: f.$color-container-default;
 
 // Segmented control container
-.c-segmented-control {
+.c-segmentedControl {
     display: flex;
     justify-content: space-between;
     background-color: $sc-background-color;
@@ -164,14 +164,14 @@ $sc-background-color-selected: f.$color-container-default;
     &--large {
         min-block-size: $sc-height-large;
 
-        .c-segmented-control__option {
+        .c-segmentedControl-option {
             padding-block: calc($sc-padding-xs-modifier + f.spacing(b));
         }
     }
 }
 
 // Segmented control options
-.c-segmented-control__option {
+.c-segmentedControl-option {
     font-size: inherit;
     color: inherit;
     flex: 1; // Distribute available space equally among buttons
