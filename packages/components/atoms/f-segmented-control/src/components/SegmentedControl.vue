@@ -156,8 +156,8 @@ export default {
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
 // Variables
-$sc-sm-height: f.spacing(f);
-$sc-l-height: calc(f.spacing(b) * 6);
+$sc-height-small: f.spacing(f);
+$sc-height-large: calc(f.spacing(b) * 6);
 $sc-border-radius: 9999px;
 $sc-padding-xs-modifier: calc(f.spacing(a) / 2);
 $sc-background-color: f.$color-container-strong;
@@ -171,12 +171,12 @@ $sc-background-color-selected: f.$color-container-default;
     border-radius: $sc-border-radius;
     gap: 2.5px; // Ensure outlines and box-shadows don't overlap
     padding: $sc-padding-xs-modifier;
-    min-block-size: $sc-sm-height; // Small size by default
+    min-block-size: $sc-height-small; // Small size by default
     user-select: none;
 
     // Large size modifier
     &--large {
-        min-block-size: $sc-l-height;
+        min-block-size: $sc-height-large;
 
         .c-segmented-control__option {
             padding-block: calc($sc-padding-xs-modifier + f.spacing(b));
