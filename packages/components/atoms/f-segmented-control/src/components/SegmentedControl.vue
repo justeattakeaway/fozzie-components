@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import { validateOptions } from './helpers/validators';
+
 export default {
     name: 'SegmentedControl',
     props: {
@@ -42,39 +44,7 @@ export default {
         options: {
             type: Array,
             required: true,
-            validator: value => {
-                if (value.length < 2 || value.length > 4) {
-                    return false;
-                }
-
-                let selectedCount = 0;
-                return value.every(option => {
-                    if (typeof option !== 'object') {
-                        return false;
-                    }
-
-                    if (typeof option.label !== 'string' || !option.label) {
-                        return false;
-                    }
-
-                    if (option.iconName && typeof option.iconName !== 'string') {
-                        return false;
-                    }
-
-                    if (option.disabled && typeof option.disabled !== 'boolean') {
-                        return false;
-                    }
-
-                    if (option.selected) {
-                        selectedCount++;
-                        if (typeof option.selected !== 'boolean' || selectedCount > 1) {
-                            return false;
-                        }
-                    }
-
-                    return true;
-                });
-            }
+            validator: validateOptions
         },
         size: {
             type: String,
