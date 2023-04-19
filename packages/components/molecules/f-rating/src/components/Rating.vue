@@ -10,7 +10,7 @@
                 :is="getRatingVariant"
                 :max-star-rating="maxStarRating"
                 :star-rating-size="starRatingSize"
-                :star-rating="starRating" />
+                :star-rating="validatedStarRating" />
 
             <span
                 v-if="hasRatingAvailable"
@@ -66,8 +66,7 @@ export default {
         },
         starRating: {
             type: Number,
-            required: true,
-            validator: value => value >= 0 && value <= 5
+            required: true
         },
         maxStarRating: {
             type: Number,
@@ -165,6 +164,20 @@ export default {
          */
         shouldDisplayUserOwnRating () {
             return this.isUserRating && this.hasRatingAvailable;
+        },
+
+        /**
+         * Returns the star rating is within the valid range or 0 otherwise
+         *
+         * @returns {boolean}
+         */
+        validatedStarRating () {
+            const validate = this.starRating >= 0 && this.starRating <= this.maxStarRating;
+            if (validate) {
+                return this.starRating;
+            }
+            this.$log.warn(`The star rating should be between 0 and ${this.maxStarRating} but it was ${this.starRating}`);
+            return 0;
         }
     },
 

@@ -1,9 +1,9 @@
 {
-  "name": "@justeat/f-rating",
-  "description": "Fozzie Rating - Global Rating component",
-  "version": "0.17.0",
-  "main": "dist/f-rating.umd.min.js",
-  "maxBundleSize": "20kB",
+  "name": "@justeat/f-toggle",
+  "description": "Fozzie Toggle - A component to toggle a single setting on/off",
+  "version": "0.1.0",
+  "main": "dist/f-toggle.umd.min.js",
+  "maxBundleSize": "5kB",
   "files": [
     "dist",
     "test-utils"
@@ -11,7 +11,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/molecules/f-rating",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/atoms/f-toggle",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -24,34 +24,32 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^12 || ^14 || ^16"
+    "node": "^14 || ^16 || ^18"
   },
   "keywords": [
     "fozzie"
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-rating ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-toggle ./src/index.js",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "lint:style": "stylelint ./src/**/*.{vue,htm,html,css,sss,less,scss}",
     "lint:style:fix": "yarn lint:style --fix",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
+    "ci:test:atoms": "yarn test",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
+    "ci:test-component:chrome:atoms": "yarn test-component:chrome",
+    "ci:test-a11y:chrome:atoms": "yarn test-a11y:chrome",
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
-    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_RATING} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
-    "ci:test:molecules": "yarn test",
-    "ci:test-component:chrome:molecules": "yarn test-component:chrome",
-    "ci:test-a11y:chrome:molecules": "yarn test-a11y:chrome",
-    "ci:test:visual:molecules": "yarn test:visual"
+    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_TOGGLE} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
+    "ci:test:visual:atoms": "yarn test:visual"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-services": "1.x",
-    "@justeat/f-globalisation": "1.x",
-    "@justeattakeaway/pie-icons-vue": "2.0.0-beta.1"
+      "uuid": "9.0.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"

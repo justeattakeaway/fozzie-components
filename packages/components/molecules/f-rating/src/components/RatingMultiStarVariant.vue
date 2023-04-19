@@ -13,6 +13,7 @@
         </div>
 
         <div
+            v-if="hasRatingData"
             :class="[
                 $style['c-rating-mask'],
                 $style['c-rating-stars-icons']
@@ -57,6 +58,10 @@ export default {
         }
     },
 
+    data: () => ({
+        hasRatingData: false
+    }),
+
     computed: {
         /**
          * Calculate a percentage from the `starRating` value passed in by the consuming application.
@@ -66,6 +71,15 @@ export default {
         getRatingStarPercentage () {
             return (this.starRating / this.maxStarRating) * 100;
         }
+    },
+
+    mounted () {
+        // Use Vue.nextTick to wait until the DOM has been updated (i.e. CSS)
+        // before setting the property to avoid the masking happening after
+        // all the stars have been displayed (flickering effect)
+        this.$nextTick(() => {
+            this.hasRatingData = this.getRatingStarPercentage > 0;
+        });
     }
 };
 </script>
