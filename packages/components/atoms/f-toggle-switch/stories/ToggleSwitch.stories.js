@@ -1,46 +1,46 @@
 import { withA11y } from '@storybook/addon-a11y';
-import FSwitch from '../src/components/Switch.vue';
+import ToggleSwitch from '../src/components/ToggleSwitch.vue';
 
 export default {
     title: 'Components/Atoms',
     decorators: [withA11y]
 };
 
-export const SwitchComponent = (args, { argTypes }) => ({
-    components: { FSwitch },
+export const ToggleSwitchComponent = (args, { argTypes }) => ({
+    components: { ToggleSwitch },
 
     props: Object.keys(argTypes),
 
     data () {
         return {
-            switchValueOne: this.checked,
-            switchValueTwo: this.checked
+            toggleSwitchValueOne: this.checked,
+            toggleSwitchValueTwo: this.checked
         };
     },
 
     methods: {
-        updatetSwitchOne (value) {
-            this.switchValueOne = value;
+        updateToggleSwitchOne (value) {
+            this.toggleSwitchValueOne = value;
         },
 
-        updatetSwitchTwo (value) {
-            this.switchValueTwo = value;
+        updateToggleSwitchTwo (value) {
+            this.toggleSwitchValueTwo = value;
         }
     },
 
     watch: {
         checked (newValue) {
-            this.switchValueOne = newValue;
-            this.switchValueTwo = newValue;
+            this.toggleSwitchValueOne = newValue;
+            this.toggleSwitchValueTwo = newValue;
         }
     },
 
     template:
         `<div :dir="direction">
-            <f-switch
+            <toggle-switch
                 :disabled="disabled"
-                :checked="switchValueOne"
-                @update="updatetSwitchOne"/>
+                :checked="toggleSwitchValueOne"
+                @update="updateToggleSwitchOne"/>
 
             <hr>
 
@@ -49,34 +49,34 @@ export const SwitchComponent = (args, { argTypes }) => ({
                     <legend style="font-size: 20px; font-weight: 800;" id="labelID">Necessary</legend>
                     <p id="descriptionID" >These cookies allow the website to remember the choices you make to give you better functionality and personal features.</p>
                 </div>
-                <f-switch
+                <toggle-switch
                     :disabled="disabled"
                     name="Necessary"
-                    :checked="switchValueTwo"
-                    @update="updatetSwitchTwo"
+                    :checked="toggleSwitchValueTwo"
+                    @update="updateToggleSwitchTwo"
                     aria-labelledby="labelID"
                     ari-describedby="descriptionID"/>
             </fieldset>
         </div>`
 });
 
-SwitchComponent.storyName = 'f-switch';
+ToggleSwitchComponent.storyName = 'f-toggle-switch';
 
-SwitchComponent.args = {
+ToggleSwitchComponent.args = {
     checked: false,
     disabled: false,
     direction: 'ltr'
 };
 
-SwitchComponent.argTypes = {
+ToggleSwitchComponent.argTypes = {
     checked: {
         control: { type: 'boolean' },
-        description: 'If set to true, switch will be checked (on).'
+        description: 'If set to true, toggle-switch will be checked (on).'
     },
 
     disabled: {
         control: { type: 'boolean' },
-        description: 'If set to true, switch will be disabled.'
+        description: 'If set to true, toggle-switch will be disabled.'
     },
 
     direction: {
