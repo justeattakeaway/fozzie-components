@@ -10,6 +10,10 @@ v4.9.0
 
 ### Added
 - Scrolling functionality to cookie banner's body text at mobile/tablet viewports.
+- Scroll shadow to indicate that some content is hidden behind the buttons. The shadow disappears as you scroll to the bottom of the content.
+
+### Changed
+- Some styling tweaks to slightly better align with bigger upcoming updates
 
 
 v4.8.0
