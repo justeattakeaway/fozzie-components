@@ -1,0 +1,55 @@
+name: Deploy Storybook Workflow
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: true
+        type: string
+      node-version:
+        required: true
+        type: string
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ${{ inputs.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Repo
+        uses: justeattakeaway/pie/.github/actions/setup-repo
+        with:
+          node-version: ${{ inputs.node-version }}
+          os: ${{ inputs.os }}
+
+  build:
+    runs-on: ${{ inputs.os }}
+    needs: install
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Repo
+        uses: justeattakeaway/pie/.github/actions/setup-repo
+        with:
+          node-version: ${{ inputs.node-version }}
+      - name: Build Packages
+        uses: justeattakeaway/pie/.github/actions/setup-repo
+        with:
+          script-name: "build"
+      - name: Deploy to Amplify
+        uses: justeattakeaway/pie/.github/actions/amplify-deploy
+        with:
+          amplify-app-id: ${{ env.AMPLIFY_ID }}
+          aws-region: "eu-west-1"
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          branch-name: "pr${{ github.event.number }}"
+          bucket-name: ${{ secrets.S3_BUCKET }}
+          package-name: "fozzie-components-storybook"

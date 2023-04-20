@@ -7,13 +7,13 @@ on:
   pull_request:
     types: [assigned, opened, synchronize, reopened]
     paths-ignore:
-      - '.husky/**'
-      - 'stories/**'
-      - '.vscode/**'
-      - 'README.md'
-      - 'CONTRIBUTING.md'
-      - 'CHANGELOG.md'
-      - 'LICENSE'
+      - ".husky/**"
+      - "stories/**"
+      - ".vscode/**"
+      - "README.md"
+      - "CONTRIBUTING.md"
+      - "CHANGELOG.md"
+      - "LICENSE"
   push:
     branches:
       - master
@@ -26,111 +26,111 @@ jobs:
   install:
     runs-on: ubuntu-latest
     steps:
-    # Checkout the Repo.
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - name: Setup Node
-    # Setup Node 16.
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: 'yarn'
-    # Restore node_modules if cache exists. If not, cache is created at end of build.
-    - name: Cache Node Modules
-      id: cache-node-modules
-      uses: actions/cache@v2
-      with:
-        path: '**/node_modules'
-        key: node-modules-${{ hashFiles('**/yarn.lock') }}
-    # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible.
-    - name: Install Dependencies
-      if: steps.cache-node-modules.outputs.cache-hit != 'true'
-      run: yarn --prefer-offline
+      # Checkout the Repo.
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Node
+        # Setup Node 16.
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "yarn"
+      # Restore node_modules if cache exists. If not, cache is created at end of build.
+      - name: Cache Node Modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: node-modules-${{ hashFiles('**/yarn.lock') }}
+      # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible.
+      - name: Install Dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: yarn --prefer-offline
 
   danger:
     if: ${{ github.ref != 'refs/heads/master' }}
     needs: install
     runs-on: ubuntu-latest
     steps:
-    # Checkout the Repo.
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - name: Setup Node
-    # Setup Node 16.
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: 'yarn'
-    # Restore node_modules if cache exists. If not, cache is created at end of build.
-    - name: Cache Node Modules
-      id: cache-node-modules
-      uses: actions/cache@v2
-      with:
-        path: '**/node_modules'
-        key: node-modules-${{ hashFiles('**/yarn.lock') }}
-    # Run Danger Checks.
-    - name: Run Danger Checks
-      run: yarn danger ci --failOnErrors
-      env:
-        DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+      # Checkout the Repo.
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup Node
+        # Setup Node 16.
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "yarn"
+      # Restore node_modules if cache exists. If not, cache is created at end of build.
+      - name: Cache Node Modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: node-modules-${{ hashFiles('**/yarn.lock') }}
+      # Run Danger Checks.
+      - name: Run Danger Checks
+        run: yarn danger ci --failOnErrors
+        env:
+          DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
 
   build:
     needs: install
     runs-on: ubuntu-latest
     steps:
-    # Checkout the Repo.
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    # Detect changed files.
-    - uses: dorny/paths-filter@v2
-      id: changes
-      with:
-        filters: |
-          global:
-            - '*.js'
-            - '*.json'
-            - '.github/workflows/**'
-            - 'packages/storybook/**'
-            - 'packages/tools/fozzie/**'
-        list-files: shell
-    # Setup Node 16.
-    - name: Setup Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: 'yarn'
-    # Restore node_modules - Cache should exist as one was created in previous 'install' job.
-    - name: Cache Node Modules
-      id: cache-node-modules
-      uses: actions/cache@v2
-      with:
-        path: '**/node_modules'
-        key: node-modules-${{ hashFiles('**/yarn.lock') }}
-    # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
-    - name: Build Components
-      run: yarn build
-    # Run Bundlewatch checks
-    - name: Run Bundlewatch checks
-      run: yarn bundlewatch
-    # Lint components
-    - name: Lint Components
-      run: yarn lint --concurrency=10
-    # Cache 'storybook-static'
-    - name: Cache Storybook Static Directory
-      id: storybook-cache
-      uses: actions/cache@v2
-      with:
-        path: ./packages/storybook/storybook-static
-        key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
-    # Build Storybook
-    - name: Build Storybook (All Components)
-      run: yarn storybook:build
+      # Checkout the Repo.
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      # Detect changed files.
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            global:
+              - '*.js'
+              - '*.json'
+              - '.github/workflows/**'
+              - 'packages/storybook/**'
+              - 'packages/tools/fozzie/**'
+          list-files: shell
+      # Setup Node 16.
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "yarn"
+      # Restore node_modules - Cache should exist as one was created in previous 'install' job.
+      - name: Cache Node Modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: node-modules-${{ hashFiles('**/yarn.lock') }}
+      # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
+      - name: Build Components
+        run: yarn build
+      # Run Bundlewatch checks
+      - name: Run Bundlewatch checks
+        run: yarn bundlewatch
+      # Lint components
+      - name: Lint Components
+        run: yarn lint --concurrency=10
+      # Cache 'storybook dist'
+      - name: Cache Storybook Static Directory
+        id: storybook-cache
+        uses: actions/cache@v2
+        with:
+          path: ./packages/storybook/dist
+          key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
+      # Build Storybook
+      - name: Build Storybook (All Components)
+        run: yarn storybook:build
     env:
       BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_TOKEN }}
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -139,47 +139,56 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        component-type: ['atoms', 'molecules', 'organisms' , 'pages', 'templates', 'tools', 'services']
+        component-type:
+          [
+            "atoms",
+            "molecules",
+            "organisms",
+            "pages",
+            "templates",
+            "tools",
+            "services",
+          ]
     name: unit-tests-${{ matrix.component-type }}
     needs: build
     runs-on: ubuntu-latest
     steps:
-    # Checkout the Repo
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    # Detect changed files
-    - uses: dorny/paths-filter@v2
-      id: changes
-      with:
-        filters: |
-          global:
-            - '*.js'
-            - '*.json'
-            - '.github/workflows/**'
-            - 'packages/storybook/**'
-            - 'packages/tools/fozzie/**'
-        list-files: shell
-    # Setup Node 16
-    - name: Setup Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: 'yarn'
-    # Restore node_modules - Cache should exist as one was created in previous 'install' job
-    - name: Restore Cache -  Node Modules
-      id: cache-node-modules
-      uses: actions/cache@v2
-      with:
-        path: '**/node_modules'
-        key: node-modules-${{ hashFiles('**/yarn.lock') }}
-    # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
-    - name: Build Components
-      run: yarn build
-    # Unit Tests
-    - name: Unit Test Components
-      run: yarn ci:test:${{ matrix.component-type}} --concurrency=10
+      # Checkout the Repo
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      # Detect changed files
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            global:
+              - '*.js'
+              - '*.json'
+              - '.github/workflows/**'
+              - 'packages/storybook/**'
+              - 'packages/tools/fozzie/**'
+          list-files: shell
+      # Setup Node 16
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "yarn"
+      # Restore node_modules - Cache should exist as one was created in previous 'install' job
+      - name: Restore Cache -  Node Modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: node-modules-${{ hashFiles('**/yarn.lock') }}
+      # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
+      - name: Build Components
+        run: yarn build
+      # Unit Tests
+      - name: Unit Test Components
+        run: yarn ci:test:${{ matrix.component-type}} --concurrency=10
     env:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
@@ -187,70 +196,70 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        component-type: ['atoms', 'molecules', 'organisms' , 'pages']
+        component-type: ["atoms", "molecules", "organisms", "pages"]
     name: browser-tests-${{ matrix.component-type }}
     needs: build
     runs-on: ubuntu-latest
     steps:
-    # Checkout the Repo
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    # Detect changed files
-    - uses: dorny/paths-filter@v2
-      id: changes
-      with:
-        filters: |
-          global:
-            - '*.js'
-            - '*.json'
-            - '.github/workflows/**'
-            - 'packages/storybook/**'
-            - 'packages/tools/fozzie/**'
-        list-files: shell
-    # Setup Node 16
-    - name: Setup Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: 'yarn'
-    # Restore node_modules - Cache should exist as one was created in previous 'install' job
-    - name: Restore Cache -  Node Modules
-      id: cache-node-modules
-      uses: actions/cache@v2
-      with:
-        path: '**/node_modules'
-        key: node-modules-${{ hashFiles('**/yarn.lock') }}
-    # Build Components
-    - name: Build Components
-      run: yarn build
-    # Restore Storybook 'storybook-static'
-    - name: Cache Storybook Static Directory
-      id: storybook-cache
-      uses: actions/cache@v2
-      with:
-        path: ./packages/storybook/storybook-static
-        key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
-    # Run Component / A11y / Visual Tests against all components
-    - name: Run All Component / A11y / Visual Tests
-      run: |
-        yarn storybook:serve-static &
-        yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
-        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 &&
-        yarn ci:test:visual:${{ matrix.component-type }} --concurrency=1
-    # On Failure - Upload Allure Report
-    - name: Generate Allure Report
-      if: failure()
-      run: yarn allure:generate
-    - name: Upload Allure Report
-      if: failure()
-      uses: actions/upload-artifact@v3
-      with:
-        name: test-artifacts-${{ matrix.component-type }}
-        path: |
-          allure-report
-          test/results/axe-violations
+      # Checkout the Repo
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      # Detect changed files
+      - uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            global:
+              - '*.js'
+              - '*.json'
+              - '.github/workflows/**'
+              - 'packages/storybook/**'
+              - 'packages/tools/fozzie/**'
+          list-files: shell
+      # Setup Node 16
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "yarn"
+      # Restore node_modules - Cache should exist as one was created in previous 'install' job
+      - name: Restore Cache -  Node Modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: node-modules-${{ hashFiles('**/yarn.lock') }}
+      # Build Components
+      - name: Build Components
+        run: yarn build
+      # Restore Storybook 'dist'
+      - name: Cache Storybook Static Directory
+        id: storybook-cache
+        uses: actions/cache@v2
+        with:
+          path: ./packages/storybook/dist
+          key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
+      # Run Component / A11y / Visual Tests against all components
+      - name: Run All Component / A11y / Visual Tests
+        run: |
+          yarn storybook:serve-static &
+          yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
+          yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 &&
+          yarn ci:test:visual:${{ matrix.component-type }} --concurrency=1
+      # On Failure - Upload Allure Report
+      - name: Generate Allure Report
+        if: failure()
+        run: yarn allure:generate
+      - name: Upload Allure Report
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-artifacts-${{ matrix.component-type }}
+          path: |
+            allure-report
+            test/results/axe-violations
     env:
       PERCY_TOKEN_F_BUTTON: ${{ secrets.PERCY_TOKEN_F_BUTTON }}
       PERCY_TOKEN_F_FORM_FIELD: ${{ secrets.PERCY_TOKEN_F_FORM_FIELD }}
@@ -273,45 +282,89 @@ jobs:
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
   storybook-deploy:
-    if: ${{ github.ref == 'refs/heads/master' }}
     needs: build
     runs-on: ubuntu-latest
     steps:
-    # Checkout the Repo.
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    # Setup Node 16.
-    - name: Setup Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: 'yarn'
-    # Restore node_modules - Cache should exist as one was created in previous 'install' job.
-    - name: Restore Cache -  Node Modules
-      id: cache-node-modules
-      uses: actions/cache@v2
-      with:
-        path: '**/node_modules'
-        key: node-modules-${{ hashFiles('**/yarn.lock') }}
-    # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible.
-    - name: Install Dependencies
-      if: steps.cache-node-modules.outputs.cache-hit != 'true'
-      run: yarn --prefer-offline
-    # Restore Storybook 'storybook-static'.
-    - name: Cache Storybook Static Directory
-      id: storybook-cache
-      uses: actions/cache@v2
-      with:
-        path: ./packages/storybook/storybook-static
-        key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
-    # Deploy Storybook.
-    - name: Storybook deploy
-      run: yarn storybook:deploy
-      env:
-        GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
-        TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+      # Checkout the Repo.
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      # Setup Node 16.
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "yarn"
+      # Restore node_modules - Cache should exist as one was created in previous 'install' job.
+      - name: Restore Cache -  Node Modules
+        id: cache-node-modules
+        uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: node-modules-${{ hashFiles('**/yarn.lock') }}
+      # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible.
+      - name: Install Dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: yarn --prefer-offline
+      # Restore Storybook 'dist'.
+      - name: Cache Storybook Static Directory
+        id: storybook-cache
+        uses: actions/cache@v2
+        with:
+          path: ./packages/storybook/dist
+          key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
+      # Build Docs Site
+      - name: Build Docs Site
+        uses: ./.github/actions/run-script
+        with:
+          script-name: "build"
+          package-name: "pie-docs"
+      # Create Github Deployment
+      - name: Create Docs GitHub deployment
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: chrnorm/deployment-action@v2
+        id: docs-deploy
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: "pie-docs-pr-${{ github.event.number }}"
+      # Amplify Deploy
+      - name: Amplify Deploy
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: ./.github/actions/amplify-deploy
+        with:
+          amplify-app-id: ${{ env.AMPLIFY_ID }}
+          aws-region: "eu-west-1"
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          branch-name: "pr${{ github.event.number }}"
+          bucket-name: ${{ secrets.S3_BUCKET }}
+          package-name: "storybook"
+      # If successful
+      - name: Update deployment status (success)
+        if: ${{ github.event_name == 'pull_request' && success() }}
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment-url: https://pr${{ github.event.number }}.${{ env.DOCS_AMPLIFY_ID }}.amplifyapp.com
+          deployment-id: ${{ steps.docs-deploy.outputs.deployment_id }}
+          state: "success"
+      # If it failed
+      - name: Update deployment status (failure)
+        if: ${{ github.event_name == 'pull_request' && failure() }}
+        uses: chrnorm/deployment-status@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment-url: https://pr${{ github.event.number }}.${{ env.DOCS_AMPLIFY_ID }}.amplifyapp.com
+          deployment-id: ${{ steps.docs-deploy.outputs.deployment_id }}
+          state: "failure"
+      # Deploy Storybook.
+      - name: Storybook deploy
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: yarn storybook:deploy
+        env:
+          GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
   publish:
     needs: browser-tests
@@ -327,13 +380,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: 'yarn'
+          cache: "yarn"
       # Restore node_modules - Cache should exist as one was created in previous 'install' job.
       - name: Restore Cache -  Node Modules
         id: cache-node-modules
         uses: actions/cache@v2
         with:
-          path: '**/node_modules'
+          path: "**/node_modules"
           key: node-modules-${{ hashFiles('**/yarn.lock') }}
       - run: yarn build
       - name: Auth with NPM
