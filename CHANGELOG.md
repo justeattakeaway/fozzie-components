@@ -9,7 +9,7 @@ v7.51.0
 *April 19, 2023*
 
 ### Added
-- Percy tokens removed for `f-toggle` and created for `f-switch`
+- Percy tokens removed for `f-toggle` and created for `f-toggle-switch`
 
 
 v7.50.0
