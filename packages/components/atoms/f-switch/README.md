@@ -1,18 +1,18 @@
 <div align="center">
 
-# f-toggle
+# f-switch
 
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
-A component to toggle a single setting on/off.
+A component to switch a single setting on/off.
 
 </div>
 
 ---
 
-[![npm version](https://badge.fury.io/js/%40justeat%2Ff-toggle.svg)](https://badge.fury.io/js/%40justeat%2Ff-toggle)
-[![Coverage Status](https://coveralls.io/repos/github/justeat/f-toggle/badge.svg)](https://coveralls.io/github/justeat/f-toggle)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-toggle/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-toggle?targetFile=package.json)
+[![npm version](https://badge.fury.io/js/%40justeat%2Ff-switch.svg)](https://badge.fury.io/js/%40justeat%2Ff-switch)
+[![Coverage Status](https://coveralls.io/repos/github/justeat/f-switch/badge.svg)](https://coveralls.io/github/justeat/f-switch)
+[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-switch/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-switch?targetFile=package.json)
 
 ---
 
@@ -23,11 +23,11 @@ A component to toggle a single setting on/off.
 Install the module using npm or Yarn:
 
 ```sh
-yarn add @justeat/f-toggle
+yarn add @justeat/f-switch
 ```
 
 ```sh
-npm install @justeat/f-toggle
+npm install @justeat/f-switch
 ```
 
 
@@ -37,25 +37,25 @@ npm install @justeat/f-toggle
 You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
 ```js
-import VToggle from '@justeat/f-toggle';
-import '@justeat/f-toggle/dist/f-toggle.css';
+import FSwitch from '@justeat/f-switch';
+import '@justeat/f-switch/dist/f-switch.css';
 
 export default {
     components: {
-        VToggle
+        FSwitch
     }
 }
 ```
 
-If you are using Webpack, you can import the component dynamically to separate the `v-toggle` bundle from the main `bundle.client.js`:
+If you are using Webpack, you can import the component dynamically to separate the `v-switch` bundle from the main `bundle.client.js`:
 
 ```js
-import '@justeat/f-toggle/dist/f-toggle.css';
+import '@justeat/f-switch/dist/f-switch.css';
 
 export default {
     components: {
         // …
-        VToggle: () => import(/* webpackChunkName: "v-toggle" */ '@justeat/f-toggle')
+        FSwitch: () => import(/* webpackChunkName: "v-switch" */ '@justeat/f-switch')
     }
 }
 ```
@@ -70,10 +70,10 @@ The props that can be defined are as follows (if any):
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
-| checked | Boolean | false | Switches the toggle on and off |
-| disabled | Boolean | false | Sets the toggle to disabled |
-| aria-labelledby | String | '' | The id for an element that will 'label' the toggle |
-| aria-describedby | String | '' | The id for an element describing what the toggle will control |
+| checked | Boolean | false | Switch the switch on and off |
+| disabled | Boolean | false | Sets the switch to disabled |
+| aria-labelledby | String | '' | The id for an element that will 'label' the switch |
+| aria-describedby | String | '' | The id for an element describing what the switch will control |
 | dir | String | 'ltr' | The reading/writing direction |
 
 ### Events
@@ -82,7 +82,7 @@ The events that can be subscribed to are as follows (if any):
 
 | Event | Description |
 | ----- | ----------- |
-| update | Fired when a user changes the state of the toggle. Payload contains the updated value of the toggle. |
+| update | Fired when a user changes the state of the switch. Payload contains the updated value of the switch. |
 
 ## Development
 
@@ -94,16 +94,16 @@ $ cd fozzie-components
 $ yarn
 ```
 
-Change directory to the `f-toggle` package:
+Change directory to the `f-switch` package:
 
 ```sh
-$ cd packages/components/atoms/f-toggle
+$ cd packages/components/atoms/f-switch
 ```
 
 ## Testing
 
 To test all components, run from root directory.
-To test only `f-toggle`, run from the `./fozzie-components/packages/components/atoms/f-toggle` directory.
+To test only `f-switch`, run from the `./fozzie-components/packages/components/atoms/f-switch` directory.
 
 ### Unit and Integration tests
 

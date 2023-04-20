@@ -1,18 +1,18 @@
 
 /**
- * @overview Fozzie Toggle Component JS Wrapper
+ * @overview Fozzie Switch Component JS Wrapper
  *
- * @module f-toggle
+ * @module f-switch
  */
 
 // Import vue component
-import VToggle from '@/components/Toggle.vue';
+import FSwitch from '@/components/Switch.vue';
 
 // Declare install function executed by Vue.use()
 export function install (Vue) {
     if (install.installed) return;
     install.installed = true;
-    Vue.component('VToggle', VToggle);
+    Vue.component('FSwitch', FSwitch);
 }
 
 // Create module definition for Vue.use()
@@ -32,4 +32,4 @@ if (GlobalVue) {
 }
 
 // To allow use as module (npm/webpack/etc.) export component
-export default VToggle;
+export default FSwitch;

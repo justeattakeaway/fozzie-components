@@ -1,13 +1,13 @@
 import { shallowMount } from '@vue/test-utils';
 import * as uuid from 'uuid';
-import FToggle from '../Toggle.vue';
+import FSwitch from '../Switch.vue';
 
 jest.mock('uuid');
 
-describe('Toggle', () => {
+describe('Switch', () => {
     it('should be defined', () => {
         const propsData = {};
-        const wrapper = shallowMount(FToggle, { propsData });
+        const wrapper = shallowMount(FSwitch, { propsData });
         expect(wrapper.exists()).toBe(true);
     });
 
@@ -18,7 +18,7 @@ describe('Toggle', () => {
 
             it('should contain name when given', () => {
                 // Arrange & Act
-                const wrapper = shallowMount(FToggle, {
+                const wrapper = shallowMount(FSwitch, {
                     attrs: { name }
                 });
 
@@ -28,7 +28,7 @@ describe('Toggle', () => {
 
             it('should contain id when given', () => {
                 // Arrange & Act
-                const wrapper = shallowMount(FToggle, {
+                const wrapper = shallowMount(FSwitch, {
                     attrs: { id }
                 });
 
@@ -38,7 +38,7 @@ describe('Toggle', () => {
 
             it('should contain both name and id when given', () => {
                 // Arrange & Act
-                const wrapper = shallowMount(FToggle, {
+                const wrapper = shallowMount(FSwitch, {
                     attrs: { id, name }
                 });
 
@@ -56,7 +56,7 @@ describe('Toggle', () => {
                 const spyUniqueId = jest.spyOn(uuid, 'v4');
 
                 // Act
-                shallowMount(FToggle);
+                shallowMount(FSwitch);
 
                 // Assert
                 expect(spyUniqueId).toHaveBeenCalled();
