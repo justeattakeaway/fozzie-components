@@ -70,7 +70,7 @@ The props that can be defined are as follows (if any):
 
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
-| checked | Boolean | false | Switch the switch on and off |
+| checked | Boolean | false | Toggles the switch on and off |
 | disabled | Boolean | false | Sets the switch to disabled |
 | aria-labelledby | String | '' | The id for an element that will 'label' the switch |
 | aria-describedby | String | '' | The id for an element describing what the switch will control |

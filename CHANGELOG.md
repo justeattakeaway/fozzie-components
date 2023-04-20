@@ -9,7 +9,15 @@ v7.50.0
 *April 19, 2023*
 
 ### Added
-- Percy tokens for `f-switch` and `f-segmented-control`
+- Percy tokens removed for `f-toggle` and created for `f-switch`
+
+
+v7.50.0
+------------------------------
+*April 19, 2023*
+
+### Added
+- Percy tokens for `f-toggle` and `f-segmented-control`
 
 v7.49.0
 ------------------------------
