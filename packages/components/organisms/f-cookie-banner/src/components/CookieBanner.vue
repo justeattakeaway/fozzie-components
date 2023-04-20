@@ -477,6 +477,8 @@ export default {
     bottom: 0;
     left: 0;
     right: 0;
+    max-height: 376px;
+    padding: f.spacing(d) 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -492,7 +494,7 @@ export default {
 
 .c-cookieBanner-title {
     @include f.font-size(heading-m);
-    margin: 0 0 f.spacing();
+    margin: f.spacing(a) 0 f.spacing();
     padding: 0;
     color: f.$color-content-default;
     text-align: left;
@@ -512,8 +514,32 @@ export default {
 
 .c-cookieBanner-content {
     margin: 0 auto;
-    padding: f.spacing(f);
+    padding: 0 f.spacing(d);
     text-align: left;
+    overflow-y: auto;
+
+    @include f.media('>=mid') {
+        padding: 0 f.spacing(f);
+    }
+
+    @include f.media('<mid') {
+        background:
+            // Scroll shadow cover (hides the shadow when you scroll down)
+            linear-gradient(
+                rgba(255,255,255,0),
+                white 70%
+            ) center bottom,
+
+            // Scroll shadow
+            radial-gradient(
+            farthest-side at 50% 100%,
+                rgba(0,0,0,0.3),
+                rgba(0,0,0,0)
+            ) center bottom;
+        background-repeat: no-repeat;
+        background-size: 100% 48px, 1000% 12px;
+        background-attachment: local, scroll;
+    }
 }
 
 .reopen-link-wrapper {
@@ -522,26 +548,24 @@ export default {
     width: 100%;
 }
 
-@include f.media ('<mid') {
+@include f.media('<mid') {
     .c-cookieBanner-card {
         flex-direction: column;
-        padding: f.spacing(d) 0;
     }
 
     .c-cookieBanner-ios {
         padding-bottom: 80px;
     }
 
-    .c-cookieBanner-content,
     .c-cookieBanner-cta {
         padding: f.spacing(d) f.spacing(e) f.spacing(a);
     }
 }
 
-@include f.media ('>=mid') {
+@include f.media('>=mid') {
     .c-cookieBanner-cta {
-        padding: f.spacing(f);
-        min-width: 352px;
+        padding: f.spacing(d);
+        min-width: 320px;
         margin: 0 auto;
     }
 }
