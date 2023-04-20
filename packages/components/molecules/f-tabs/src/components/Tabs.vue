@@ -170,6 +170,11 @@ $tabs-link-border-colour  : f.$color-orange-30;
     background-color: transparent;
     outline: none;
 
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus;
+    }
+
     @include f.media('<narrowMid') {
         /* stylelint-disable */
         flex: 1 1 0px;// important px for IE

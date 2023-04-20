@@ -105,17 +105,21 @@ export default {
         height: common.$header-height--narrow;
         padding: f.spacing(d) 0;
 
-        &:focus {
-            outline-color: f.$color-focus;
+        &:focus,
+        &:focus-visible {
+            @extend %u-elementFocus;
+
+            &, &:after {
+                @include f.media('>mid') {
+                    border-radius: common.$header-buttonFocus-borderRadius;
+                }
+            }
         }
 
         @include f.media('>mid') {
             justify-content: left;
             height: common.$header-height;
-
-            &:focus {
-               border-radius: common.$header-buttonFocus-borderRadius;
-            }
+            padding: f.spacing(d) f.spacing(b);
         }
     }
 

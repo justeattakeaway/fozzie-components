@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-form-field",
   "description": "Fozzie Form Field - Fozzie Form Field Component",
-  "version": "6.3.0",
+  "version": "6.5.0",
   "main": "dist/f-form-field.umd.min.js",
   "maxBundleSize": "20kB",
   "files": [
@@ -49,14 +49,15 @@
   ],
   "dependencies": {
     "@justeat/f-services": "1.x",
-    "@justeattakeaway/pie-icons-vue": "1.x"
+    "@justeattakeaway/pie-icons-vue": "2.0.0-beta.1",
+    "uuid": "9.0.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "1.x",
-    "postcss-assets": "5.0.0",
-    "@vue/cli-plugin-babel": "4.5.16"
+    "@vue/cli-plugin-babel": "4.5.16",
+    "postcss-assets": "5.0.0"
   }
 }

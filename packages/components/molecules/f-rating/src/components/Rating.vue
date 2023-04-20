@@ -1,13 +1,16 @@
 <template>
     <div
-        :class="$style['c-rating']"
+        :class="[
+            $style['c-rating'], {
+                [$style['c-rating--alignLeft']]: shouldAlignRatingTextLeft
+            }]"
         :data-test-id="`${getRatingVariant}-component`">
         <div :class="$style['c-rating-stars']">
             <component
                 :is="getRatingVariant"
                 :max-star-rating="maxStarRating"
                 :star-rating-size="starRatingSize"
-                :star-rating="starRating" />
+                :star-rating="validatedStarRating" />
 
             <span
                 v-if="hasRatingAvailable"
@@ -22,7 +25,9 @@
             data-test-id="c-rating-displayType"
             :class="[
                 $style['c-rating-message'],
-                $style[`c-rating-message--${ratingDisplayType}`]]">
+                $style[`c-rating-message--${ratingDisplayType}`],
+                $style[`c-rating-message--${ratingFontSize}`]
+            ]">
             {{ getRatingDisplayFormat() }}
         </span>
 
@@ -39,7 +44,8 @@ import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import tenantConfigs from '../tenants';
 import {
     VALID_STAR_RATING_SIZES,
-    VALID_STAR_RATING_DISPLAY_TYPE
+    VALID_STAR_RATING_DISPLAY_TYPE,
+    VALID_STAR_FONT_SIZES
 } from '../constants';
 import RatingMultiStar from './RatingMultiStarVariant.vue';
 import RatingSingleStar from './RatingSingleStarVariant.vue';
@@ -60,8 +66,7 @@ export default {
         },
         starRating: {
             type: Number,
-            required: true,
-            validator: value => value >= 0 && value <= 5
+            required: true
         },
         maxStarRating: {
             type: Number,
@@ -75,7 +80,7 @@ export default {
         },
         ratingDisplayType: {
             type: String,
-            default: null,
+            default: 'short',
             validator: value => VALID_STAR_RATING_DISPLAY_TYPE.includes(value)
         },
         reviewCount: {
@@ -89,6 +94,15 @@ export default {
         isUserRating: {
             type: Boolean,
             default: false
+        },
+        shouldAlignRatingTextLeft: {
+            type: Boolean,
+            default: false
+        },
+        ratingFontSize: {
+            type: String,
+            default: 'default',
+            validator: value => VALID_STAR_FONT_SIZES.includes(value)
         }
     },
 
@@ -105,16 +119,21 @@ export default {
          * @returns {string|*}
          */
         getRatingDescription () {
-            return this.starRating === 1
-                ? this.$tc('ratings.starsDescription', 1, {
-                    rating: this.starRating,
-                    maxStarRating: this.maxStarRating
-                })
+            // Allow locale translations to be read within consuming applications if locale is not set when consuming this component.
+            if (this.locale) {
+                return this.starRating === 1 && this.locale
+                    ? this.$tc('ratings.starsDescription', 1, {
+                        rating: this.starRating,
+                        maxStarRating: this.maxStarRating
+                    })
 
-                : this.$tc('ratings.starsDescription', 2, {
-                    rating: this.starRating,
-                    maxStarRating: this.maxStarRating
-                });
+                    : this.$tc('ratings.starsDescription', 2, {
+                        rating: this.starRating,
+                        maxStarRating: this.maxStarRating
+                    });
+            }
+
+            return '';
         },
 
         /**
@@ -145,6 +164,20 @@ export default {
          */
         shouldDisplayUserOwnRating () {
             return this.isUserRating && this.hasRatingAvailable;
+        },
+
+        /**
+         * Returns the star rating is within the valid range or 0 otherwise
+         *
+         * @returns {boolean}
+         */
+        validatedStarRating () {
+            const validate = this.starRating >= 0 && this.starRating <= this.maxStarRating;
+            if (validate) {
+                return this.starRating;
+            }
+            this.$log.warn(`The star rating should be between 0 and ${this.maxStarRating} but it was ${this.starRating}`);
+            return 0;
         }
     },
 
@@ -158,6 +191,8 @@ export default {
          * @returns {string}
          */
         getRatingDisplayFormat () {
+            if (!this.locale) return '';
+
             if (!this.hasRatingAvailable) {
                 return this.$t('ratings.ratingDisplayType.noRating');
             }
@@ -179,8 +214,20 @@ export default {
 .c-rating-message {
     display: flex;
     align-items: center;
-    @include f.font-size('body-s');
     font-weight: f.$font-weight-bold;
     margin-left: f.spacing(a);
+
+    .c-rating--alignLeft & {
+        margin-left: 0;
+        margin-right: f.spacing(b);
+    }
+}
+
+.c-rating-message--default {
+    @include f.font-size('body-s');
+}
+
+.c-rating-message--large {
+    @include f.font-size('heading-xl');
 }
 </style>

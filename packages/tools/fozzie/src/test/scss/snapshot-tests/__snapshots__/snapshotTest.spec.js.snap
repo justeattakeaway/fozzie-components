@@ -16,8 +16,52 @@ exports[`Compiled CSS output compiles the expected CSS 1`] = `
   display: none;
 }
 
-:focus, :focus-visible, .o-formControl-input:focus + .o-formControl-indicator, .o-formControl-input:focus ~ .o-formControl-text, .u-elementFocus {
-  outline: 2px solid #4996fd;
+:focus, :focus-visible, .o-formControl-input:focus + .o-formControl-indicator, .o-formControl-input:focus ~ .o-formControl-text, .u-elementFocus, .u-focusShadow:focus > .u-focusShadow-content, .u-elementFocus--borderless {
+  /*
+  Applying both shadows in a single declaration gives anti-aliasing artefacts.
+  box-shadow: 0 0 0 2px dt.$color-focus-inner, 0 0 0 4px dt.$color-focus-outer;
+
+  To prevent this, they should be separated so they don't bleed into each other,
+  i.e., one shadow on the element and another on a pseudo element like :after
+  */
+  box-shadow: 0 0 0 2px #fff;
+  outline: none;
+  /*
+  Setting the position to relative prevents the pseudo-element from
+  anchoring instead to the nearest ancestor with a specified position.
+
+  You can override this if you need another value.
+  */
+  position: relative;
+}
+:focus:after, :focus-visible:after, .o-formControl-input:focus + .o-formControl-indicator:after, .o-formControl-input:focus ~ .o-formControl-text:after, .u-elementFocus:after, .u-focusShadow:focus > .u-focusShadow-content:after, .u-elementFocus--borderless:after {
+  content: "";
+  display: block;
+  /*
+  The pseudo element has to be larger than the element itself, but not just by
+  2px (the thickness of the inner shadow), it has to be 1px larger than that to
+  account for the border thickness.
+  */
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  box-shadow: 0 0 0 2px #094dac;
+}
+
+.u-elementFocus--borderless {
+  /*
+  For elements without a border, the above does not apply
+  so the pseudo-element should be only 2px larger than the
+  element on each side.
+  */
+}
+.u-elementFocus--borderless:after {
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
 }
 
 .c-menu, .u-unstyled {
@@ -46,18 +90,9 @@ exports[`Compiled CSS output compiles the expected CSS 1`] = `
   border-radius: 4px;
 }
 
-.u-elementFocus--boxShadow {
-  outline: none;
-  box-shadow: 0 0 0 2px #4996fd;
-}
-
 .u-focusShadow:focus,
 .u-focusShadow-content:focus {
   outline: none;
-}
-
-.u-focusShadow:focus > .u-focusShadow-content {
-  box-shadow: 0 0 2px 2px #4996fd;
 }
 
 @keyframes skeleton-gradient {
@@ -3276,7 +3311,7 @@ hr {
   overflow: hidden;
   position: relative;
   background-color: #f5f3f1;
-  box-shadow: 0px 2px 2px 0px rgba(27, 35, 36, 0.03), 0px 3px 1px -2px rgba(27, 35, 36, 0.07), 0px 1px 5px 0px rgba(27, 35, 36, 0.06);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.03), 0px 3px 1px -2px rgba(0, 0, 0, 0.07), 0px 1px 5px 0px rgba(0, 0, 0, 0.06);
   margin-top: 8px;
   margin-bottom: 8px;
 }
@@ -3372,7 +3407,7 @@ hr {
 .c-fullScreenPopOver-header {
   top: 0;
   z-index: 9000;
-  box-shadow: 0px 2px 6px 0px rgba(27, 35, 36, 0.04), 0px 8px 12px -2px rgba(27, 35, 36, 0.06), 0px 4px 6px 0px rgba(27, 35, 36, 0.04);
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.04), 0px 8px 12px -2px rgba(0, 0, 0, 0.06), 0px 4px 6px 0px rgba(0, 0, 0, 0.04);
 }
 
 .c-fullScreenPopOver-header-actionFirst,
@@ -3404,7 +3439,7 @@ hr {
 
 .c-fullScreenPopOver-footer {
   bottom: 0;
-  box-shadow: 0px -4px 6px 0px rgba(27, 35, 36, 0.02), 0px -2px 12px -2px rgba(27, 35, 36, 0.08), 0px -3px 6px 0px rgba(27, 35, 36, 0.06);
+  box-shadow: 0px -4px 6px 0px rgba(0, 0, 0, 0.02), 0px -2px 12px -2px rgba(0, 0, 0, 0.08), 0px -3px 6px 0px rgba(0, 0, 0, 0.06);
 }
 
 @media (max-width: 47.999em) {
@@ -3627,7 +3662,7 @@ hr {
 
 .c-listing-item {
   margin-bottom: 16px;
-  box-shadow: 0px 2px 2px 0px rgba(27, 35, 36, 0.03), 0px 3px 1px -2px rgba(27, 35, 36, 0.07), 0px 1px 5px 0px rgba(27, 35, 36, 0.06);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.03), 0px 3px 1px -2px rgba(0, 0, 0, 0.07), 0px 1px 5px 0px rgba(0, 0, 0, 0.06);
   padding-bottom: 8px;
 }
 @media (min-width: 48.001em) {
@@ -5237,7 +5272,7 @@ If you'd like to use it in your project you can include it by adding \`@include 
   background-color: #303d3f;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-  box-shadow: 0px -4px 6px 0px rgba(27, 35, 36, 0.02), 0px -2px 12px -2px rgba(27, 35, 36, 0.08), 0px -3px 6px 0px rgba(27, 35, 36, 0.06);
+  box-shadow: 0px -4px 6px 0px rgba(0, 0, 0, 0.02), 0px -2px 12px -2px rgba(0, 0, 0, 0.08), 0px -3px 6px 0px rgba(0, 0, 0, 0.06);
   color: #fff;
   height: 95px;
   opacity: 0.9;
@@ -5980,9 +6015,6 @@ If you'd like to use it in your project you can include it by adding \`@include 
   color: #fff;
   text-decoration: none;
 }
-.o-btn:focus {
-  box-shadow: 0 0 0 2px #4996fd;
-}
 .o-btn:hover {
   background-color: #df5f05;
 }
@@ -6587,7 +6619,7 @@ label:hover .o-formControl-input:checked ~ .o-formControl-indicator--radio {
     position: absolute;
   }
   .o-formToggle:not(.o-formToggle--disabled):focus .o-formToggle-text:after {
-    outline: 2px solid #4996fd;
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #094dac;
     left: 1px;
     top: 1px;
     width: calc(100% - 2px);
@@ -6623,7 +6655,7 @@ label:hover .o-formControl-input:checked ~ .o-formControl-indicator--radio {
   position: absolute;
 }
 .o-formToggle-input:not([disabled]):focus ~ .o-formToggle-text:after, .o-formToggle-input:not(:disabled):focus ~ .o-formToggle-text:after {
-  outline: 2px solid #4996fd;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #094dac;
   left: 1px;
   top: 1px;
   width: calc(100% - 2px);
@@ -7915,7 +7947,6 @@ em.u-text-highlight {
 }
 
 /* Custom outline styling for elements that have a focus state */
-/* Custom visual outline emulation for better appearance on elements with rounded corners */
 /*
 * Clever hack to have focus on an element but only when keyboard focused (not click)
 * https://stackoverflow.com/questions/31402576/enable-focus-only-on-keyboard-use-or-tab-press

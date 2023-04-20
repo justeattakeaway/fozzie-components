@@ -26,7 +26,9 @@ export const RatingSingleStarComponent = (args, { argTypes }) => ({
                     :is-single-star-variant="rating.isSingleStarVariant"
                     :star-rating-size="rating.starRatingSize"
                     :star-rating="rating.starRating"
-                    :review-count="rating.reviewCount" />
+                    :review-count="rating.reviewCount"
+                    :should-align-rating-left="shouldAlignRatingTextLeft"
+                    :locale="'en-GB'" />
             </div>
         </div>`
 });
@@ -49,7 +51,7 @@ RatingSingleStarComponent.args = {
     ratingVariants: [
         [
             {
-                starRating: 0, starRatingSize: 'xsmall', reviewCount: 499, isSingleStarVariant: true, isUserRating: true
+                starRating: 0, starRatingSize: 'xsmall', reviewCount: 499, isSingleStarVariant: true
             },
             {
                 starRating: 2.3, starRatingSize: 'xsmall', reviewCount: 499, isSingleStarVariant: true
@@ -62,7 +64,7 @@ RatingSingleStarComponent.args = {
             },
 
             {
-                starRating: 0, starRatingSize: 'small', reviewCount: 499, isSingleStarVariant: true, isUserRating: true
+                starRating: 0, starRatingSize: 'small', reviewCount: 499, isSingleStarVariant: true
             },
             {
                 starRating: 2.3, starRatingSize: 'small', reviewCount: 499, isSingleStarVariant: true
@@ -75,7 +77,7 @@ RatingSingleStarComponent.args = {
             },
 
             {
-                starRating: 0, starRatingSize: 'medium', reviewCount: 499, isSingleStarVariant: true, isUserRating: true
+                starRating: 0, starRatingSize: 'medium', reviewCount: 499, isSingleStarVariant: true
             },
             {
                 starRating: 2.3, starRatingSize: 'medium', reviewCount: 499, isSingleStarVariant: true
@@ -88,7 +90,7 @@ RatingSingleStarComponent.args = {
             },
 
             {
-                starRating: 0, starRatingSize: 'large', reviewCount: 499, isSingleStarVariant: true, isUserRating: true
+                starRating: 0, starRatingSize: 'large', reviewCount: 499, isSingleStarVariant: true
             },
             {
                 starRating: 2.3, starRatingSize: 'large', reviewCount: 499, isSingleStarVariant: true

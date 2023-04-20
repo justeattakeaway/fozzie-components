@@ -4,6 +4,10 @@
 .c-rating {
     display: flex;
     align-items: center;
+
+    &.c-rating--alignLeft {
+      flex-direction: row-reverse;
+    }
 }
 
 .c-rating-stars {

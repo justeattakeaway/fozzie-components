@@ -70,6 +70,11 @@ $buttonList-font-size: 'subheading-s';
         background-color: darken(f.$color-interactive-inverse, f.$color-hover-01);
     }
 
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus;
+    }
+
     @include f.media('<narrow') {
         margin-bottom: f.spacing(d);
         margin-right: 0;

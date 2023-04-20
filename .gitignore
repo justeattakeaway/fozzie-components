@@ -35,6 +35,10 @@ coverage/
 /packages/f-content-cards/stories/mocks/
 /.vs
 
+# Yarn
+.yarn/*
+!.yarn/releases
+
 # Test result folders
 **/allure-report
 **/test/results/allure-results/*
@@ -43,7 +47,8 @@ coverage/
 test/results/ci
 
 # Build pipeline artifacts
-.turbo
+.turbo/*
+!.turbo/config.json
 
 # Tmp build output
 packages/components/organisms/f-cookie-banner-static/.tmp-dist/

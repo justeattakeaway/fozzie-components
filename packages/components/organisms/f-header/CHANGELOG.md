@@ -2,6 +2,45 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v10.14.0
+------------------------------
+*April 17, 2023*
+
+### Changed
+- Update delivery enquiry link for UK.
+
+
+v10.13.0
+------------------------------
+*March 27, 2023*
+
+### Changed
+- New focus styles - these require the new colour tokens from `pie-design-tokens` which are included in `fozzie` v11+.
+- Use CSS Grid in the country selector to avoid issues with CSS overflow between columns.
+  - This has the side effect of reordering the countries, they now wrap by row rather than by column.
+- Use NavLink component for logout link for consistency and to fix keyboard navigation bug (see below).
+- Styles for "Skip to main content" link to make it easier to see and read.
+
+### Added
+- `onFocus` and `onBlur` function props to internal NavLinks component to help fix a bug where Shift-Tabbing from the logout link back into the user panel would cause the user panel to close.
+
+### Removed
+- Now-unused `$nav-trigger-focus-color` SCSS variable.
+
+
+v10.12.0
+------------------------------
+*February 23, 2023*
+
+### Fixed
+- Country selector chevron flashing on page load
+- Nav toggle icon flashing on page load.
+
+### Changed
+- Updated to the new `pie-icons-vue` beta release.
+
+
 v10.11.0
 ------------------------------
 *November 23, 2022*
@@ -166,7 +205,7 @@ v9.17.0
 
 9.16.1
 -----------------------------
-*Jun 21, 2022*
+*June 21, 2022*
 
 ### Changed
 - Bumped wdio version and fixed breaking changes.

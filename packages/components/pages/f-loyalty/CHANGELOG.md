@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.1.0
+------------------------------
+*April 18, 2023*
+
+### Changed
+- Upgraded to the new version the new adapters for stampcards and braze
+
+
+v3.0.0
+------------------------------
+*February 13, 2022*
+
+### Changed
+- Upgraded to the new version of content cards component and included the new adapters for stampcards
+
+
 v2.7.1
 ------------------------------
 *November 21, 2022*
@@ -19,6 +35,8 @@ v2.7.0
 ### Changed
 - Added fozzie components as externals in Webpack config
 
+### Deleted
+- Old mocks
 
 v2.6.0
 ------------------------------

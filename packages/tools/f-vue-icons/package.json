@@ -1,8 +1,8 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "3.12.0",
+  "version": "3.13.2",
   "main": "dist/f-vue-icons.cjs.js",
-  "maxBundleSize": "150kB",
+  "maxBundleSize": "155kB",
   "cdn": "dist/f-vue-icons.min.js",
   "unpkg": "dist/f-vue-icons.min.js",
   "module": "dist/f-vue-icons.es.js",
@@ -52,7 +52,7 @@
     "babel-helper-vue-jsx-merge-props": "2.0.3"
   },
   "devDependencies": {
-    "@justeat/f-icons": "4.11.0",
+    "@justeat/f-icons": "4.13.0",
     "bili": "3.4.2",
     "fs-extra": "9.0.1",
     "lodash.kebabcase": "4.1.1",

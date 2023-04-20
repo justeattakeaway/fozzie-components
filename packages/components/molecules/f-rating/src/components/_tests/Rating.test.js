@@ -9,8 +9,25 @@ import { VALID_STAR_RATING_DISPLAY_TYPE } from '../../constants';
 const localVue = createLocalVue();
 localVue.use(VueI18n);
 
+const logMocks = {
+    warn: jest.fn()
+};
+
+const createComponent = ({
+    propsData,
+    computed,
+    mocks
+} = {}) => shallowMount(VRating, {
+    i18n,
+    localVue,
+    computed,
+    propsData,
+    mocks
+});
+
 describe('Rating', () => {
     let propsData;
+    let mocks;
     let wrapper;
     const $tc = jest.fn();
 
@@ -20,14 +37,20 @@ describe('Rating', () => {
             maxStarRating: 5,
             ratingDisplayType: 'short'
         };
-        wrapper = shallowMount(VRating, {
+
+        mocks = {
+            $log: logMocks,
+            $tc
+        };
+
+        wrapper = createComponent({
             propsData,
-            localVue,
-            i18n,
-            mocks: {
-                $tc
-            }
+            mocks
         });
+    });
+
+    afterEach(() => {
+        jest.clearAllMocks();
     });
 
     it('should be defined', () => {
@@ -36,15 +59,7 @@ describe('Rating', () => {
 
     describe('computed', () => {
         describe('`getRatingDescription`', () => {
-            it('should exist', () => {
-                // Arrange
-                propsData.starRating = 2;
-                wrapper = shallowMount(VRating, {
-                    propsData,
-                    localVue,
-                    i18n
-                });
-
+            it('should exist', async () => {
                 // Act & Assert
                 expect(wrapper.vm.getRatingDescription).toBeDefined();
             });
@@ -54,12 +69,12 @@ describe('Rating', () => {
                     // Arrange
                     propsData = {
                         starRating: 1,
-                        ratingDisplayType: 'short'
+                        ratingDisplayType: 'short',
+                        locale: 'en-GB'
                     };
-                    wrapper = shallowMount(VRating, {
-                        propsData,
-                        localVue,
-                        i18n
+
+                    wrapper = createComponent({
+                        propsData
                     });
 
                     // Act & Assert
@@ -74,12 +89,12 @@ describe('Rating', () => {
                     // Arrange
                     propsData = {
                         starRating: type,
-                        ratingDisplayType: 'short'
+                        ratingDisplayType: 'short',
+                        locale: 'en-GB'
                     };
-                    wrapper = shallowMount(VRating, {
-                        propsData,
-                        localVue,
-                        i18n
+
+                    wrapper = createComponent({
+                        propsData
                     });
 
                     // Act & Assert
@@ -90,14 +105,6 @@ describe('Rating', () => {
 
         describe('`getRatingVariant`', () => {
             it('should exist', () => {
-                // Arrange
-                propsData.starRating = 2;
-                wrapper = shallowMount(VRating, {
-                    propsData,
-                    localVue,
-                    i18n
-                });
-
                 // Act & Assert
                 expect(wrapper.vm.getRatingVariant).toBeDefined();
             });
@@ -111,10 +118,9 @@ describe('Rating', () => {
                             ratingDisplayType: 'short',
                             isSingleStarVariant: true
                         };
-                        wrapper = shallowMount(VRating, {
-                            propsData,
-                            localVue,
-                            i18n
+
+                        wrapper = createComponent({
+                            propsData
                         });
 
                         // Act & Assert
@@ -130,10 +136,9 @@ describe('Rating', () => {
                             ratingDisplayType: 'short',
                             isSingleStarVariant: false
                         };
-                        wrapper = shallowMount(VRating, {
-                            propsData,
-                            localVue,
-                            i18n
+
+                        wrapper = createComponent({
+                            propsData
                         });
 
                         // Act & Assert
@@ -145,14 +150,6 @@ describe('Rating', () => {
 
         describe('`hasRatingAvailable`', () => {
             it('should exist', () => {
-                // Arrange
-                propsData.starRating = 2;
-                wrapper = shallowMount(VRating, {
-                    propsData,
-                    localVue,
-                    i18n
-                });
-
                 // Act & Assert
                 expect(wrapper.vm.hasRatingAvailable).toBeDefined();
             });
@@ -160,13 +157,15 @@ describe('Rating', () => {
             describe('when invoked', () => {
                 describe('and a `reviewCount` is truthy', () => {
                     beforeEach(() => {
-                        propsData.starRating = 2;
-                        propsData.reviewCount = 1;
-                        propsData.ratingDisplayType = 'short';
-                        wrapper = shallowMount(VRating, {
-                            propsData,
-                            localVue,
-                            i18n
+                        propsData = {
+                            starRating: 2,
+                            reviewCount: 1,
+                            ratingDisplayType: 'short',
+                            locale: 'en-GB'
+                        };
+
+                        wrapper = createComponent({
+                            propsData
                         });
                     });
 
@@ -186,13 +185,14 @@ describe('Rating', () => {
 
                 describe('and a `reviewCount` is falsey', () => {
                     beforeEach(() => {
-                        propsData.starRating = 2;
-                        propsData.reviewCount = 0;
-                        propsData.ratingDisplayType = 'short';
-                        wrapper = shallowMount(VRating, {
-                            propsData,
-                            localVue,
-                            i18n
+                        propsData = {
+                            starRating: 2,
+                            reviewCount: 0,
+                            ratingDisplayType: 'short'
+                        };
+
+                        wrapper = createComponent({
+                            propsData
                         });
                     });
 
@@ -214,14 +214,6 @@ describe('Rating', () => {
 
         describe('`shouldDisplayUserOwnRating`', () => {
             it('should exist', () => {
-                // Arrange
-                propsData.starRating = 2;
-                wrapper = shallowMount(VRating, {
-                    propsData,
-                    localVue,
-                    i18n
-                });
-
                 // Act & Assert
                 expect(wrapper.vm.shouldDisplayUserOwnRating).toBeDefined();
             });
@@ -230,12 +222,13 @@ describe('Rating', () => {
                 describe('and `isUserRating` is falsey and reviewCount is truthy', () => {
                     it('should return false', () => {
                         // Arrange
-                        propsData.starRating = 2;
-                        propsData.reviewCount = 100;
-                        wrapper = shallowMount(VRating, {
-                            propsData,
-                            localVue,
-                            i18n
+                        propsData = {
+                            starRating: 2,
+                            reviewCount: 100
+                        };
+
+                        wrapper = createComponent({
+                            propsData
                         });
 
                         // Act & Assert
@@ -246,12 +239,13 @@ describe('Rating', () => {
                 describe('and `hasRatingAvailable` is falsey and `isUserRating` is truthy', () => {
                     it('should return false', () => {
                         // Arrange
-                        propsData.starRating = 0;
-                        propsData.isUserRating = true;
-                        wrapper = shallowMount(VRating, {
-                            propsData,
-                            localVue,
-                            i18n
+                        propsData = {
+                            starRating: 0,
+                            isUserRating: true
+                        };
+
+                        wrapper = createComponent({
+                            propsData
                         });
 
                         // Act & Assert
@@ -262,17 +256,74 @@ describe('Rating', () => {
                 describe('and `hasRatingAvailable` & `isUserRating` are both truthy', () => {
                     it('should return true', () => {
                         // Arrange
-                        propsData.starRating = 2;
-                        propsData.reviewCount = 100;
-                        propsData.isUserRating = true;
-                        wrapper = shallowMount(VRating, {
-                            propsData,
-                            localVue,
-                            i18n
+                        propsData = {
+                            starRating: 2,
+                            reviewCount: 100,
+                            isUserRating: true
+                        };
+
+                        wrapper = createComponent({
+                            propsData
                         });
 
                         // Act & Assert
                         expect(wrapper.vm.shouldDisplayUserOwnRating).toBe(true);
+                    });
+                });
+            });
+        });
+
+        describe('`validatedStarRating`', () => {
+            it('should exist', () => {
+                // Act & Assert
+                expect(wrapper.vm.validatedStarRating).toBeDefined();
+            });
+
+            describe('when invoked', () => {
+                describe('and `starRating` is not within range', () => {
+                    it.each([
+                        [-1, 5],
+                        [6, 5]
+                    ])('should return 0', (starRating, maxStarRating) => {
+                        // Arrange
+                        propsData = {
+                            starRating,
+                            maxStarRating
+                        };
+
+                        wrapper = createComponent({
+                            propsData,
+                            mocks
+                        });
+
+                        // Act & Assert
+                        expect(wrapper.vm.validatedStarRating).toBe(0);
+                        expect(mocks.$log.warn).toHaveBeenCalled();
+                    });
+                });
+
+                describe('and `starRating` is within range', () => {
+                    it.each([
+                        [0, 5],
+                        [1, 5],
+                        [2, 5],
+                        [3, 5],
+                        [4, 5],
+                        [5, 5]
+                    ])('should return the start Rating', (starRating, maxStarRating) => {
+                        // Arrange
+                        propsData = {
+                            starRating,
+                            maxStarRating
+                        };
+
+                        wrapper = createComponent({
+                            propsData,
+                            mocks
+                        });
+
+                        // Act & Assert
+                        expect(wrapper.vm.validatedStarRating).toBe(starRating);
                     });
                 });
             });
@@ -308,22 +359,6 @@ describe('Rating', () => {
                 // Act & Assert
                 expect(VRating.props.starRating.required).toBe(true);
             });
-
-            it.each([0, 1, 2, 3, 4, 5])('should allow value `%s`', rating => {
-                // Act
-                const { validator } = VRating.props.starRating;
-
-                // Assert
-                expect(validator(rating)).toBe(true);
-            });
-
-            it('should NOT only allow values outside `0 - 5`', () => {
-                // Arrange
-                const { validator } = VRating.props.starRating;
-
-                // Act & Assert
-                expect(validator(6)).toBe(false);
-            });
         });
 
         describe('`ratingDisplayType`', () => {
@@ -335,9 +370,9 @@ describe('Rating', () => {
                 expect(validator(displayType)).toBe(true);
             });
 
-            it('should be set to `null` by default', () => {
+            it('should be set to `short` by default', () => {
                 // Act & Assert
-                expect(VRating.props.ratingDisplayType.default).toBe(null);
+                expect(VRating.props.ratingDisplayType.default).toBe('short');
             });
 
             describe('when `ratingDisplayType` is truthy', () => {
@@ -351,13 +386,9 @@ describe('Rating', () => {
                         maxStarRating: 5,
                         ratingDisplayType: 'short'
                     };
-                    wrapper = shallowMount(VRating, {
-                        propsData,
-                        localVue,
-                        i18n,
-                        mocks: {
-                            $tc
-                        }
+
+                    wrapper = createComponent({
+                        propsData
                     });
 
                     const result = wrapper.find('[data-test-id="c-rating-displayType"]');
@@ -430,13 +461,12 @@ describe('Rating', () => {
                         propsData = {
                             starRating: 2,
                             reviewCount: 0,
-                            ratingDisplayType: 'short'
+                            ratingDisplayType: 'short',
+                            locale: 'en-GB'
                         };
 
-                        wrapper = shallowMount(VRating, {
-                            propsData,
-                            localVue,
-                            i18n
+                        wrapper = createComponent({
+                            propsData
                         });
 
                         // Act
@@ -453,13 +483,12 @@ describe('Rating', () => {
                         propsData = {
                             starRating: 2,
                             reviewCount: 499,
-                            ratingDisplayType: 'medium'
+                            ratingDisplayType: 'medium',
+                            locale: 'en-GB'
                         };
 
-                        wrapper = shallowMount(VRating, {
-                            propsData,
-                            localVue,
-                            i18n
+                        wrapper = createComponent({
+                            propsData
                         });
 
                         // Act
@@ -469,7 +498,6 @@ describe('Rating', () => {
                         expect(result).toBe('2 of 5');
                     });
                 });
-
 
                 describe('and `ratingDisplayType` is passed through', () => {
                     it.each([
@@ -481,13 +509,12 @@ describe('Rating', () => {
                         propsData = {
                             starRating: 2,
                             reviewCount: 499,
-                            ratingDisplayType: type
+                            ratingDisplayType: type,
+                            locale: 'en-GB'
                         };
 
-                        wrapper = shallowMount(VRating, {
-                            propsData,
-                            localVue,
-                            i18n
+                        wrapper = createComponent({
+                            propsData
                         });
 
                         // Act
@@ -500,12 +527,10 @@ describe('Rating', () => {
 
                 describe('and `ratingDisplayType` is not passed through', () => {
                     it('should return the default rating display type', () => {
-                        wrapper = shallowMount(VRating, {
-                            propsData,
-                            localVue,
-                            i18n,
+                        wrapper = createComponent({
                             mocks: {
-                                $t: () => null
+                                $t: () => '',
+                                $log: logMocks
                             }
                         });
 
@@ -513,7 +538,7 @@ describe('Rating', () => {
                         const result = wrapper.vm.getRatingDisplayFormat();
 
                         // Assert
-                        expect(result).toBe(null);
+                        expect(result).toBe('');
                     });
                 });
             });

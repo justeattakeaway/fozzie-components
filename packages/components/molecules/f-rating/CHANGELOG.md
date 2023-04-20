@@ -3,6 +3,62 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+0.17.0
+------------------------------
+*April 14, 2023*
+
+### Added
+- Added `hasRatingData` property to hide the RatingMultiStarVariant component until we have data
+- Added mounted on the RatingMultiStarVariant and using Vue.nextTick to set the `hasRatingData` property after Vue.nextTick to ensure the % of masking over the filled stars occur after the DOM has been updated
+- Default to 0 and log warning when star rating is not within the allowed range
+
+### Changed
+- `starRating` prop default and set it to use `0`.
+
+### Removed
+- Props validation for the star rating as this is not stateless
+
+v0.16.0
+------------------------------
+*March 27, 2023*
+
+### Fixed
+- `ratingDisplayType` prop default and set it to use `'short'`.
+- Tests for `ratingDisplayType`.
+
+
+v0.15.0
+------------------------------
+*March 24, 2023*
+
+### Added
+- `locale` check to component when returning descriptions.
+
+
+v0.14.0
+------------------------------
+*December 12, 2022*
+
+### Added
+- Props:
+  - `shouldAlignRatingTextLeft` to allow positioning of accompanying text and SVG icons.
+  - `ratingFontSize` to allow large and default font sizes to be used.
+- Visual tests to cover above additions.
+
+### Removed
+- Visual tests that weren't useful.
+
+### Changed
+- Updated to the new `pie-icons-vue` beta release.
+
+v0.13.0
+------------------------------
+*November 28, 2022*
+
+### Added
+- Translations for ES & IT
+
+
 v0.12.0
 ------------------------------
 *November 21, 2022*

@@ -4,6 +4,30 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v10.3.0
+------------------------------
+*January 26, 2023*
+
+### Added
+- New mock data
+- ContentCardsBrazeAdapter.stories.js
+- ContentCardsCustomAdapter.stories.js
+- ContentCardsStampCardsAdapter.stories.js
+
+### Updated
+- StampCard content card
+- Readme with starting more up to date docs
+
+
+v10.2.0
+------------------------------
+*December 01, 2022*
+
+### Added
+- Unit tests for extra states
+- Analytic tracking events
+
+
 v10.1.1
 ------------------------------
 *November 21, 2022*

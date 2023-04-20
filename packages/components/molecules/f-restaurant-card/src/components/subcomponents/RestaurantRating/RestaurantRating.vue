@@ -50,9 +50,10 @@
             <!-- Max value -->
             <data
                 :class="[$style['c-restaurantCard-rating-outOf']]"
-                :value="ratingsMax"
+                :value="maxRating"
+                data-test-id="ratings-max-value"
                 aria-hidden="true">
-                {{ ratingsMax }}
+                {{ maxRating }}
             </data>
 
             <!-- Own rating message -->
@@ -88,8 +89,6 @@
 <script>
 import { StarEmptyIcon, StarFilledIcon } from '@justeat/f-vue-icons';
 
-const RATINGS_MAX = 6;
-
 export default {
     name: 'RestaurantRating',
     components: {
@@ -119,6 +118,13 @@ export default {
             default: 0
         },
         /**
+         * The max value of the rating
+         */
+        maxRating: {
+            type: Number,
+            default: 6
+        },
+        /**
          * Message to display when no ratings available
          * this is temporary whilst i18n is being fixed - ticket exists to fix
          */
@@ -146,11 +152,6 @@ export default {
             type: String,
             default: ''
         }
-    },
-    data () {
-        return {
-            ratingsMax: RATINGS_MAX
-        };
     },
     computed: {
         noRatingsAvailable () {

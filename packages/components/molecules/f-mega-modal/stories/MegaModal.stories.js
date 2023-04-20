@@ -21,8 +21,10 @@ export const MegaModalComponent = (args, { argTypes }) => ({
             :is-positioned-bottom="isPositionedBottom"
             :is-close-rounded="isCloseRounded"
             :is-text-aligned-center="isTextAlignedCenter"
-            :has-overlay="hasOverlay"
             :has-close-button="hasCloseButton"
+            :has-overlay="hasOverlay"
+            :close-button-style="closeButtonStyle"
+            :is-mode-right-to-left="isModeRightToLeft"
             :close-on-blur="closeOnBlur"
             :close-button-copy="closeButtonCopy"
             :title="titleCopy"
@@ -47,8 +49,10 @@ MegaModalComponent.args = {
     isPositionedBottom: false,
     isCloseRounded: false,
     isTextAlignedCenter: false,
-    hasOverlay: true,
     hasCloseButton: true,
+    hasOverlay: true,
+    closeButtonStyle: 'cross',
+    isModeRightToLeft: false,
     closeOnBlur: true,
     closeButtonCopy: 'Close modal',
     titleCopy: 'This place isn’t taking orders',
@@ -83,10 +87,17 @@ MegaModalComponent.argTypes = {
     isCloseRounded: {
         control: { type: 'boolean' }
     },
+    hasCloseButton: {
+        control: { type: 'boolean' }
+    },
     hasOverlay: {
         control: { type: 'boolean' }
     },
-    hasCloseButton: {
+    closeButtonStyle: {
+        control: { type: 'select' },
+        options: ['cross', 'chevron']
+    },
+    isModeRightToLeft: {
         control: { type: 'boolean' }
     },
     closeOnBlur: {

@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.10.1
+------------------------------
+*March 27, 2023*
+
+### Changed
+- Pin feature-management version to fix monorepo build issue
+
+
 v0.10.0
 ------------------------------
 *July 25, 2022*

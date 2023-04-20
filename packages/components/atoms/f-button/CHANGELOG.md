@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v4.5.0
+------------------------------
+*March 27, 2023*
+
+### Changed
+- New focus styles
+  - These require the new colour tokens from `pie-design-tokens` which are included in `fozzie` v11+.
+- Updated to the new `pie-icons-vue` beta release.
+
+
 v4.4.0
 ------------------------------
 *November 1, 2022*
@@ -36,16 +47,18 @@ v4.1.0
 - Update f-wdio-utils to v1.0.0
 - Update component objects / specs to use ES6 syntax.
 
+
 v4.0.0
 ------------------------------
-*Jun 16, 2022*
+*June 16, 2022*
 
 ### Changed
 - Update to `@use` and `@forward` SASS syntax
 
+
 v3.4.1
 ------------------------------
-*Jun 10, 2022*
+*June 10, 2022*
 
 ### Changed
 - Bumped wdio version and fixed breaking changes.
@@ -219,7 +232,7 @@ v1.9.0
 
 v1.8.1
 ------------------------------
-*July 01, 2021*
+*July 1, 2021*
 
 ### Fixed
 - `$listeners` to button link issue
@@ -231,6 +244,7 @@ v1.8.1
 
 ### Changed
 - Percy to run desktop / mobile in separate specs
+
 
 v1.7.0
 ------------------------------

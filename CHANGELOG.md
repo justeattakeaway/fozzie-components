@@ -4,6 +4,81 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v7.50.0
+------------------------------
+*April 19, 2023*
+
+### Added
+- Percy tokens for `f-toggle` and `f-segmented-control`
+
+v7.49.0
+------------------------------
+*March 27, 2023*
+
+### Changed
+- Update `@justeat/pie-design-tokens` to v5.0.0 for new focus tokens.
+- Update `@justeat/fozzie` to v11 to include new focus styles.
+
+### Added
+- Volta config to root `package.json`.
+
+
+v7.48.1
+------------------------------
+*March 23, 2023*
+
+### Fixed
+- Turned off caching of storybook-build to fix CI deployment.
+
+
+v7.48.0
+------------------------------
+*March 22, 2023*
+
+### Added
+- Turborepo remote caching
+
+
+v7.47.0
+------------------------------
+*February 22, 2023*
+
+### Changed
+- Updated version of `@justeat/pie-design-tokens` to 4.2.0
+
+
+v7.46.0
+------------------------------
+*December 13, 2022*
+
+### Changed
+- Updated chromedriver to 108.0.0.
+
+
+v7.45.0
+------------------------------
+*December 5, 2022*
+
+### Changed
+- Updated packages to the new `pie-icons-vue` beta release.
+
+
+v7.44.1
+------------------------------
+*December 6, 2022*
+
+### Fixed
+- Provide `--no-verify-access` to Github Actions config to get around issue where npm automation tokens don't work with current lerna version. - https://github.com/lerna/lerna/issues/2788
+
+
+v7.44.0
+------------------------------
+*November 30, 2022*
+
+### Added
+- Automatic npm publishing via Github Actions
+
+
 v7.43.0
 ------------------------------
 *November 21, 2022*
