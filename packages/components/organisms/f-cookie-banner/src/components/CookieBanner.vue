@@ -474,11 +474,11 @@ export default {
 
 .c-cookieBanner-card {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset-block-end: 0;
+    inset-inline: 0;
     max-height: 376px;
-    padding: f.spacing(d) 0;
+    padding-block: f.spacing(d);
+    padding-inline: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -494,10 +494,11 @@ export default {
 
 .c-cookieBanner-title {
     @include f.font-size(heading-m);
-    margin: f.spacing(a) 0 f.spacing();
+    margin-block: f.spacing(a) f.spacing(b);
+    margin-inline: 0;
     padding: 0;
     color: f.$color-content-default;
-    text-align: left;
+    text-align: start;
 
     &:hover,
     &:focus {
@@ -513,13 +514,15 @@ export default {
 }
 
 .c-cookieBanner-content {
-    margin: 0 auto;
-    padding: 0 f.spacing(d);
-    text-align: left;
+    margin-block: 0;
+    margin-inline: auto;
+    padding-block: 0;
+    padding-inline: f.spacing(d);
+    text-align: start;
     overflow-y: auto;
 
     @include f.media('>=mid') {
-        padding: 0 f.spacing(f);
+        padding-inline: f.spacing(f);
     }
 
     @include f.media('<mid') {
@@ -544,7 +547,7 @@ export default {
 
 .reopen-link-wrapper {
     position: absolute;
-    bottom: 0;
+    inset-block-end: 0;
     width: 100%;
 }
 
@@ -554,11 +557,12 @@ export default {
     }
 
     .c-cookieBanner-ios {
-        padding-bottom: 80px;
+        padding-block-end: f.spacing(j);
     }
 
     .c-cookieBanner-cta {
-        padding: f.spacing(d) f.spacing(e) f.spacing(a);
+        padding-block: f.spacing(d) f.spacing(a);
+        padding-inline: f.spacing(e);
     }
 }
 
@@ -566,7 +570,8 @@ export default {
     .c-cookieBanner-cta {
         padding: f.spacing(d);
         min-width: 320px;
-        margin: 0 auto;
+        margin-block: 0;
+        margin-inline: auto;
     }
 }
 

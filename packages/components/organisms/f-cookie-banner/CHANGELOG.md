@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.9.0
 ------------------------------
-*April 20, 2023*
+*April 21, 2023*
 
 ### Added
 - Scrolling functionality to cookie banner's body text at mobile/tablet viewports.
@@ -14,6 +14,7 @@ v4.9.0
 
 ### Changed
 - Some styling tweaks to slightly better align with bigger upcoming updates
+- Use inline/block for padding, margin and positioning styles.
 
 
 v4.8.0
