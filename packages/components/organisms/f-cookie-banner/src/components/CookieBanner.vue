@@ -529,15 +529,15 @@ export default {
         background:
             // Scroll shadow cover (hides the shadow when you scroll down)
             linear-gradient(
-                rgba(255,255,255,0),
-                white 70%
+                rgba(f.$color-white, 0),
+                f.$color-white 70%
             ) center bottom,
 
             // Scroll shadow
             radial-gradient(
             farthest-side at 50% 100%,
-                rgba(0,0,0,0.3),
-                rgba(0,0,0,0)
+                rgba(f.$color-black, 0.3),
+                rgba(f.$color-black, 0)
             ) center bottom;
         background-repeat: no-repeat;
         background-size: 100% 48px, 1000% 12px;
