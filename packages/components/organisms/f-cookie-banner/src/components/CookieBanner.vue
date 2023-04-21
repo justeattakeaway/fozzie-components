@@ -480,10 +480,14 @@ export default {
     padding-block: f.spacing(d);
     padding-inline: 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     background-color: f.$color-container-default;
     z-index: 99999992;
+
+    @include f.media('>=mid') {
+        flex-direction: row;
+    }
 }
 
 .c-cookieBanner-text {
@@ -493,12 +497,16 @@ export default {
 }
 
 .c-cookieBanner-title {
-    @include f.font-size(heading-m);
+    @include f.font-size(heading-s);
     margin-block: f.spacing(a) f.spacing(b);
     margin-inline: 0;
     padding: 0;
     color: f.$color-content-default;
     text-align: start;
+
+    @include f.media('>=mid') {
+        @include f.font-size(heading-m);
+    }
 
     &:hover,
     &:focus {
@@ -551,33 +559,22 @@ export default {
     width: 100%;
 }
 
-@include f.media('<mid') {
-    .c-cookieBanner-card {
-        flex-direction: column;
-    }
-
-    .c-cookieBanner-ios {
+.c-cookieBanner-ios {
+    @include f.media('<mid') {
         padding-block-end: f.spacing(j);
-    }
-
-    .c-cookieBanner-cta {
-        padding-block: f.spacing(d) f.spacing(a);
-        padding-inline: f.spacing(e);
     }
 }
 
-@include f.media('>=mid') {
-    .c-cookieBanner-cta {
-        padding: f.spacing(d);
+.c-cookieBanner-cta {
+    padding-block: f.spacing(d) f.spacing(a);
+    padding-inline: f.spacing(e);
+
+    @include f.media('>=mid') {
+        padding-block: f.spacing(d);
+        padding-inline: f.spacing(d);
         min-width: 320px;
         margin-block: 0;
         margin-inline: auto;
-    }
-}
-
-@include f.media('<=narrowMid') {
-    .c-cookieBanner-title {
-        @include f.font-size(heading-s);
     }
 }
 </style>
