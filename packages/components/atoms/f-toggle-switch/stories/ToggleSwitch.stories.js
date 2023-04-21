@@ -1,82 +1,82 @@
 import { withA11y } from '@storybook/addon-a11y';
-import Toggle from '../src/components/Toggle.vue';
+import ToggleSwitch from '../src/components/ToggleSwitch.vue';
 
 export default {
     title: 'Components/Atoms',
     decorators: [withA11y]
 };
 
-export const ToggleComponent = (args, { argTypes }) => ({
-    components: { Toggle },
+export const ToggleSwitchComponent = (args, { argTypes }) => ({
+    components: { ToggleSwitch },
 
     props: Object.keys(argTypes),
 
     data () {
         return {
-            toggleValueOne: this.checked,
-            toggleValueTwo: this.checked
+            toggleSwitchValueOne: this.checked,
+            toggleSwitchValueTwo: this.checked
         };
     },
 
     methods: {
-        updateToggleOne (value) {
-            this.toggleValueOne = value;
+        updateToggleSwitchOne (value) {
+            this.toggleSwitchValueOne = value;
         },
 
-        updateToggleTwo (value) {
-            this.toggleValueTwo = value;
+        updateToggleSwitchTwo (value) {
+            this.toggleSwitchValueTwo = value;
         }
     },
 
     watch: {
         checked (newValue) {
-            this.toggleValueOne = newValue;
-            this.toggleValueTwo = newValue;
+            this.toggleSwitchValueOne = newValue;
+            this.toggleSwitchValueTwo = newValue;
         }
     },
 
     template:
         `<div :dir="direction">
-            <toggle
+            <toggle-switch
                 :disabled="disabled"
-                :checked="toggleValueOne"
-                @update="updateToggleOne"/>
+                :checked="toggleSwitchValueOne"
+                @update="updateToggleSwitchOne"/>
 
             <hr>
 
             <fieldset style="display: flex; align-items: center; border: 0;">
-                <div style="max-width: 90%; margin-right: 16px;">
+                <div style="max-width: 90%; margin: 0 16px;">
                     <legend style="font-size: 20px; font-weight: 800;" id="labelID">Necessary</legend>
                     <p id="descriptionID" >These cookies allow the website to remember the choices you make to give you better functionality and personal features.</p>
                 </div>
-                <toggle
+                <toggle-switch
                     :disabled="disabled"
                     name="Necessary"
-                    :checked="toggleValueTwo"
-                    @update="updateToggleTwo"
+                    :checked="toggleSwitchValueTwo"
+                    @update="updateToggleSwitchTwo"
                     aria-labelledby="labelID"
                     ari-describedby="descriptionID"/>
-            </fields>
+            </fieldset>
         </div>`
 });
 
-ToggleComponent.storyName = 'f-toggle';
+ToggleSwitchComponent.storyName = 'f-toggle-switch';
 
-ToggleComponent.args = {
+ToggleSwitchComponent.args = {
     checked: false,
     disabled: false,
     direction: 'ltr'
 };
 
-ToggleComponent.argTypes = {
+ToggleSwitchComponent.argTypes = {
     checked: {
         control: { type: 'boolean' },
-        description: 'If set to true, toggle will be selected.'
+        description: 'If set to true, toggle-switch will be checked (on).'
     },
 
     disabled: {
         control: { type: 'boolean' },
-        description: 'If set to true, toggle will be disabled.'
+        description: 'If set to true, toggle-switch will be disabled.'
     },
 
     direction: {
