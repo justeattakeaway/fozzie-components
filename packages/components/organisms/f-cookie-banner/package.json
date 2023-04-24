@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-cookie-banner",
   "description": "Fozzie Cookie Banner - Cookie Banner",
-  "version": "4.8.0",
+  "version": "4.9.0",
   "main": "dist/f-cookie-banner.umd.min.js",
   "maxBundleSize": "80kB",
   "files": [
