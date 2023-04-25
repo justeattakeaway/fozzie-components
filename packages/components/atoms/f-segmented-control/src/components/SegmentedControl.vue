@@ -198,7 +198,6 @@ $sc-background-color-selected: f.$color-container-default;
     // Disabled state
     &:disabled {
         color: f.$color-content-disabled;
-        background-color: f.$color-disabled-01;
         cursor: not-allowed;
         pointer-events: none;
     }
