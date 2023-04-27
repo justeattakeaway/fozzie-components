@@ -257,7 +257,7 @@ jobs:
       amplify-app-id: d49a9qirks04j
       bucket-name-main: fozzie-components-storybook
       bucket-name-preview: fozzie-components-storybook-preview
-      package-name: '@justeat/storybook'
+      package-name: 'storybook'
       package-dist-directory: ./packages/storybook/dist
     secrets: inherit
 
