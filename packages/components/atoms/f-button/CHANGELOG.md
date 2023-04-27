@@ -4,6 +4,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v5.0.0
+------------------------------
+*April 28, 2023*
+
+### Removed
+- `small` button size (this still remains for icon buttons)
+
+### Added
+- `small-productive` button size (not for icon buttons)
+- `small-expressive` button size (not for icon buttons)
+  - These buttons are the same height but expressive has a larger font and therefore less vertical padding.
+
+### Changed
+- Use CSS logical properties for padding, margins, heights, widths and spinner positioning.
+
+
 v4.5.0
 ------------------------------
 *March 27, 2023*

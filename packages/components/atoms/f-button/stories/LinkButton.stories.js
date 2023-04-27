@@ -16,7 +16,7 @@ export const LinkButtonComponent = (args, { argTypes }) => ({
     props: Object.keys(argTypes),
     template: `
     <div>
-        <div class="storybook-grid storybook-grid-columns--4 storybook-grid-stack--lessThanWide">
+        <div class="storybook-grid storybook-grid-columns--5 storybook-grid-stack--lessThanWide">
             <f-button
                 class="u-spacingRight u-spacingBottom--large"
                 v-for="(button, index) in buttonList"
@@ -46,10 +46,11 @@ LinkButtonComponent.argTypes = SharedButtonArgTypes;
 
 LinkButtonComponent.args = {
     buttonList: [
-        { size: 'large', text: 'Large Link Button' },
-        { size: 'medium', text: 'Medium Link Button' },
-        { size: 'small', text: 'Small Link Button' },
-        { size: 'xsmall', text: 'Xsmall Link Button' }
+        { size: 'large', text: 'Large Link' },
+        { size: 'medium', text: 'Medium Link' },
+        { size: 'small-expressive', text: 'Small-Expressive Link' },
+        { size: 'small-productive', text: 'Small-Productive Link' },
+        { size: 'xsmall', text: 'Xsmall Link' }
     ],
     href: 'someUrl'
 };
