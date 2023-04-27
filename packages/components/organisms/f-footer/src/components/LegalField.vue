@@ -6,17 +6,27 @@
             {{ info.textField }}
         </p>
 
-        <confianza-icon
+        <a
             v-if="isConfianza"
-            :class="[
-                $style['c-legalField-certificates-icons'],
-                $style['c-legalField-certificates-icons--confianza']
-            ]" />
+            :href="confianzaUrl"
+            :aria-label="confianzaScreenReaderText"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-test-id="confianza-link">
+            <confianza-icon
+                data-test-id="confianza-icon"
+                aria-hidden="true"
+                :class="[
+                    $style['c-legalField-certificates-icons'],
+                    $style['c-legalField-certificates-icons--confianza']
+                ]" />
+        </a>
     </div>
 </template>
 
 <script>
 import { CertificateConfianzaIcon as ConfianzaIcon } from '@justeat/f-vue-icons';
+import { confianzaUrl, confianzaScreenReaderText } from './constants';
 
 export default {
 
@@ -28,6 +38,13 @@ export default {
             type: Object,
             required: true
         }
+    },
+
+    data () {
+        return {
+            confianzaUrl,
+            confianzaScreenReaderText
+        };
     },
 
     computed: {
