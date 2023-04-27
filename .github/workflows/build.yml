@@ -260,7 +260,7 @@ jobs:
   #     PERCY_TOKEN_F_TOGGLE_SWITCH: ${{ secrets.PERCY_TOKEN_F_TOGGLE_SWITCH }}
 
   storybook-deploy:
-    uses: 'justeattakeaway/pie/.github/workflows/amplify-deploy.yml@d7f17afd8c5170e74af04bdc56138b0ed85f8471'
+    uses: 'justeattakeaway/pie/.github/workflows/amplify-deploy.yml@4a713190e9664c23a122212c65053df702208e3b'
     with:
       os: ubuntu-latest
       node-version: 16
