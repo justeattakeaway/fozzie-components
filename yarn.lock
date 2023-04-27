@@ -2707,7 +2707,7 @@
   dependencies:
     window-or-global "^1.0.1"
 
-"@justeat/f-searchbox@6.x":
+"@justeat/f-searchbox@6.x", "@justeat/f-searchbox@workspace: *":
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-searchbox/-/f-searchbox-6.7.0.tgz#b66e3078e376de0c340ac34df7556309f31aea5c"
   integrity sha512-5cyn9dAc0XfS7hfjkLzRLgqvwiMAK+UO0Hc5MdsjT/lGUM/oSKEZqfWpNWqtPBLpk+LI2dBBu3fIm4fwDzXhOQ==

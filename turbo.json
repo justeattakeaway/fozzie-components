@@ -3,7 +3,8 @@
   "pipeline": {
     "build": {
       "cache": true,
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**"]
     },
     "test": {
       "cache": true,
@@ -128,12 +129,8 @@
       "cache": false,
       "dependsOn": []
     },
-    "storybook:build":  {
-      "cache": false,
-      "dependsOn": []
-    },
     "storybook:build-changed":  {
-      "cache": false,
+      "cache": true,
       "dependsOn": []
     },
     "storybook:serve": {
