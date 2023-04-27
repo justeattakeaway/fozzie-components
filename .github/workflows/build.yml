@@ -76,7 +76,7 @@ jobs:
   #     uses: actions/cache@v2
   #     with:
   #       path: '**/node_modules'
-  #       key: node-modules-${{ hashFiles('**/yarn.lock') }}
+  #       key: node-modules-16-ubuntu-latest-${{ hashFiles('**/yarn.lock') }}
   #   # Run Danger Checks.
   #   - name: Run Danger Checks
   #     run: yarn danger ci --failOnErrors
@@ -114,7 +114,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: '**/node_modules'
-        key: node-modules-${{ hashFiles('**/yarn.lock') }}
+        key: node-modules-16-ubuntu-latest-${{ hashFiles('**/yarn.lock') }}
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
       run: yarn build
@@ -163,7 +163,7 @@ jobs:
       uses: actions/cache@v2
       with:
         path: '**/node_modules'
-        key: node-modules-${{ hashFiles('**/yarn.lock') }}
+        key: node-modules-16-ubuntu-latest-${{ hashFiles('**/yarn.lock') }}
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
       run: yarn build
@@ -209,7 +209,7 @@ jobs:
   #     uses: actions/cache@v2
   #     with:
   #       path: '**/node_modules'
-  #       key: node-modules-${{ hashFiles('**/yarn.lock') }}
+  #       key: node-modules-16-ubuntu-latest-${{ hashFiles('**/yarn.lock') }}
   #   # Build Components
   #   - name: Build Components
   #     run: yarn build
@@ -293,7 +293,7 @@ jobs:
   #       uses: actions/cache@v2
   #       with:
   #         path: '**/node_modules'
-  #         key: node-modules-${{ hashFiles('**/yarn.lock') }}
+  #         key: node-modules-16-ubuntu-latest-${{ hashFiles('**/yarn.lock') }}
   #     - run: yarn build
   #     - name: Auth with NPM
   #       run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
