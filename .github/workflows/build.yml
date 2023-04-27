@@ -22,6 +22,11 @@ concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_TOKEN }}
+  DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+
 jobs:
   install:
     runs-on: ubuntu-latest
@@ -75,8 +80,6 @@ jobs:
   #   # Run Danger Checks.
   #   - name: Run Danger Checks
   #     run: yarn danger ci --failOnErrors
-  #     env:
-  #       DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
 
   build:
     needs: install
@@ -121,19 +124,6 @@ jobs:
     # Lint components
     - name: Lint Components
       run: yarn lint --concurrency=10
-    # Cache 'storybook-static'
-    - name: Cache Storybook Static Directory
-      id: storybook-cache
-      uses: actions/cache@v2
-      with:
-        path: ./packages/storybook/storybook-static
-        key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
-    # Build Storybook
-    - name: Build Storybook (All Components)
-      run: yarn storybook:build
-    env:
-      BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_TOKEN }}
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
   unit-tests:
     strategy:
@@ -180,8 +170,6 @@ jobs:
     # Unit Tests
     - name: Unit Test Components
       run: yarn ci:test:${{ matrix.component-type}} --concurrency=10
-    env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
   # browser-tests:
   #   strategy:
@@ -270,18 +258,17 @@ jobs:
   #     PERCY_TOKEN_F_RATING: ${{ secrets.PERCY_TOKEN_F_RATING }}
   #     PERCY_TOKEN_F_SEGMENTED_CONTROL: ${{ secrets.PERCY_TOKEN_F_SEGMENTED_CONTROL }}
   #     PERCY_TOKEN_F_TOGGLE_SWITCH: ${{ secrets.PERCY_TOKEN_F_TOGGLE_SWITCH }}
-  #     TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
   storybook-deploy:
-      uses: 'justeattakeaway/pie/.github/workflows/amplify-deploy.yml@8c4859b'
-      with:
-        os: ubuntu-latest
-        node-version: 16
-        amplify-app-id: d49a9qirks04j
-        bucket-name-main: fozzie-components-storybook
-        bucket-name-preview: fozzie-components-storybook-preview
-        package-name: '@justeat/storybook'
-        package-dist-directory: ./packages/storybook/dist
+    uses: 'justeattakeaway/pie/.github/workflows/amplify-deploy.yml@8c4859b81084cb81d7b08580826aed45cfd24895'
+    with:
+      os: ubuntu-latest
+      node-version: 16
+      amplify-app-id: d49a9qirks04j
+      bucket-name-main: fozzie-components-storybook
+      bucket-name-preview: fozzie-components-storybook-preview
+      package-name: '@justeat/storybook'
+      package-dist-directory: ./packages/storybook/dist
 
   # publish:
   #   needs: browser-tests
@@ -310,5 +297,3 @@ jobs:
   #       run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
   #     - name: Publish unreleased package versions to npm
   #       run: yarn lerna publish from-package --ignore-scripts --yes --no-verify-access
-  #   env:
-  #     TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
