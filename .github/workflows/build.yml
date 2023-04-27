@@ -269,6 +269,7 @@ jobs:
       bucket-name-preview: fozzie-components-storybook-preview
       package-name: '@justeat/storybook'
       package-dist-directory: ./packages/storybook/dist
+    secrets: inherit
 
   # publish:
   #   needs: browser-tests
