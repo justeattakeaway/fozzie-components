@@ -4,6 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v8.5.0
+------------------------------
+*April 27, 2023*
+
+### Changed
+- Wrap the Confianza icon in a url pointing to confianzaonline
+
+### Added
+- Unit tests ensuring the link and icon are correctly rendered
+
+
 v8.4.0
 ------------------------------
 *March 27, 2023*
