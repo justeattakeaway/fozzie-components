@@ -10,6 +10,7 @@
             v-if="isConfianza"
             :href="info.url"
             :aria-label="info.screenReaderText"
+            :class="$style['c-legalField-certificates-link']"
             target="_blank"
             rel="noopener noreferrer"
             data-test-id="confianza-link">
@@ -72,6 +73,10 @@ export default {
 .c-legalField-certificates-icons--confianza {
     width: 50px;
     height: 50px;
+}
+
+.c-legalField-certificates-link:focus {
+    @extend %u-elementFocus--borderless
 }
 </style>
 
