@@ -1,5 +1,5 @@
 const { testType } = require('./shared.config');
-const { BRANCH_NUMBER } = process.env;
+const { AMPLIFY_ID, BRANCH_NUMBER } = process.env;
 
 const url = process.env.BRANCH_NUMBER ? `https://pr${BRANCH_NUMBER}.${AMPLIFY_ID}.amplifyapp.com` : 'https://vue.pie.design';
 
