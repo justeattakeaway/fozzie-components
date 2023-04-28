@@ -184,6 +184,9 @@ jobs:
       with:
         node-version: 16
         os: ubuntu-latest
+    # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
+    - name: Build Components
+      run: yarn build
     # Run Component / A11y / Visual Tests against all components
     - name: Run All Component / A11y / Visual Tests
       run: |
