@@ -129,9 +129,15 @@
       "cache": false,
       "dependsOn": []
     },
+    "storybook:build":  {
+      "cache": true,
+      "dependsOn": ["build"],
+      "outputs": ["dist/**"]
+    },
     "storybook:build-changed":  {
       "cache": true,
-      "dependsOn": []
+      "dependsOn": ["build"],
+      "outputs": ["dist/**"]
     },
     "storybook:serve": {
       "cache": false,

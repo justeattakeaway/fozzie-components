@@ -29,6 +29,7 @@ env:
 
 jobs:
   install:
+    name: 'Install Dependencies'
     runs-on: ubuntu-latest
     steps:
     # Checkout the Repo.
@@ -46,6 +47,7 @@ jobs:
   # danger:
   #   if: ${{ github.ref != 'refs/heads/master' }}
   #   needs: install
+  #   name: 'Danger PR Checks'
   #   runs-on: ubuntu-latest
   #   steps:
   #   # Checkout the Repo.
@@ -72,6 +74,7 @@ jobs:
 
   build:
     needs: install
+    name: 'Build Components'
     runs-on: ubuntu-latest
     steps:
     # Checkout the Repo.
@@ -235,12 +238,14 @@ jobs:
   #     PERCY_TOKEN_F_TOGGLE_SWITCH: ${{ secrets.PERCY_TOKEN_F_TOGGLE_SWITCH }}
 
   storybook-deploy:
+    name: 'Storybook Deploy'
     needs: 'build'
-    uses: 'justeattakeaway/pie/.github/workflows/amplify-deploy.yml@5b605861a03a0db2e09bf5fef1a94aeeac742a07'
+    uses: 'justeattakeaway/pie/.github/workflows/amplify-deploy.yml@f55398fcd667c8ddf70791f688f5bab54543b249'
     with:
       os: ubuntu-latest
       node-version: 16
       amplify-app-id: d49a9qirks04j
+      build-script-name: storybook:build
       bucket-name-main: fozzie-components-storybook
       bucket-name-preview: fozzie-components-storybook-preview
       package-name: 'storybook'
