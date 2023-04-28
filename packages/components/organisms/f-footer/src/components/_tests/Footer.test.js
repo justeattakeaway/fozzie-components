@@ -153,7 +153,7 @@ describe('Footer', () => {
             expect(wrapper.find('[data-test-id="confianza-link"]').attributes('aria-label')).toBe(tenantConfigs['es-ES'].metaLegalField.screenReaderText);
         });
 
-        it('should use hide the Confianza icon from screen readers', () => {
+        it('should hide the Confianza icon from screen readers', () => {
             // Arrange & Act
             propsData = {
                 ...propsData,
