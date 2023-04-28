@@ -1,6 +1,6 @@
-const { testType, BRANCH_NUMBER } = require('./shared.config');
+const { testType } = require('./shared.config');
 
-const url = BRANCH_NUMBER ? `https://pr${BRANCH_NAME}.${AMPLIFY_ID}.amplifyapp.com` : 'https://vue.pie.design';
+const url = process.env.BRANCH_NUMBER ? `https://pr${BRANCH_NAME}.${AMPLIFY_ID}.amplifyapp.com` : 'https://vue.pie.design';
 
 const configuration = {
     logLevel: 'error',
