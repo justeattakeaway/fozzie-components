@@ -75,8 +75,11 @@ export default {
     height: 50px;
 }
 
-.c-legalField-certificates-link:focus {
-    @extend %u-elementFocus--borderless
+.c-legalField-certificates-link {
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--borderless;
+    }
 }
 </style>
 
