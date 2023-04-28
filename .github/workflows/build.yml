@@ -38,7 +38,7 @@ jobs:
         fetch-depth: 0
       # Setup Repo
     - name: Setup Repo
-      uses: ./.github/actions/setup-repo
+      uses: justeattakeaway/pie/.github/actions/setup-repo@5b605861a03a0db2e09bf5fef1a94aeeac742a07
       with:
         node-version: 16
         os: ubuntu-latest
