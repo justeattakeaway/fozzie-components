@@ -250,7 +250,7 @@ jobs:
 
   storybook-deploy:
     needs: 'install'
-    uses: 'justeattakeaway/pie/.github/workflows/amplify-deploy.yml@b1782cbce6a0bf2a6db2b71ad0bd4f4f4d033500'
+    uses: 'justeattakeaway/pie/.github/workflows/amplify-deploy.yml@5b605861a03a0db2e09bf5fef1a94aeeac742a07'
     with:
       os: ubuntu-latest
       node-version: 16
