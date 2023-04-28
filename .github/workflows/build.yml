@@ -91,19 +91,12 @@ jobs:
             - 'packages/storybook/**'
             - 'packages/tools/fozzie/**'
         list-files: shell
-    # Setup Node 16.
-    - name: Setup Node
-      uses: actions/setup-node@v3
+      # Setup Repo
+    - name: Setup Repo
+      uses: justeattakeaway/pie/.github/actions/setup-repo@5b605861a03a0db2e09bf5fef1a94aeeac742a07
       with:
         node-version: 16
-        cache: 'yarn'
-    # Restore node_modules - Cache should exist as one was created in previous 'install' job.
-    - name: Cache Node Modules
-      id: cache-node-modules
-      uses: actions/cache@v2
-      with:
-        path: '**/node_modules'
-        key: node-modules-16-ubuntu-latest-${{ hashFiles('**/yarn.lock') }}
+        os: ubuntu-latest
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
       run: yarn build
@@ -140,19 +133,12 @@ jobs:
             - 'packages/storybook/**'
             - 'packages/tools/fozzie/**'
         list-files: shell
-    # Setup Node 16
-    - name: Setup Node
-      uses: actions/setup-node@v3
+      # Setup Repo
+    - name: Setup Repo
+      uses: justeattakeaway/pie/.github/actions/setup-repo@5b605861a03a0db2e09bf5fef1a94aeeac742a07
       with:
         node-version: 16
-        cache: 'yarn'
-    # Restore node_modules - Cache should exist as one was created in previous 'install' job
-    - name: Restore Cache -  Node Modules
-      id: cache-node-modules
-      uses: actions/cache@v2
-      with:
-        path: '**/node_modules'
-        key: node-modules-16-ubuntu-latest-${{ hashFiles('**/yarn.lock') }}
+        os: ubuntu-latest
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
       run: yarn build
@@ -249,7 +235,7 @@ jobs:
   #     PERCY_TOKEN_F_TOGGLE_SWITCH: ${{ secrets.PERCY_TOKEN_F_TOGGLE_SWITCH }}
 
   storybook-deploy:
-    needs: 'install'
+    needs: 'build'
     uses: 'justeattakeaway/pie/.github/workflows/amplify-deploy.yml@5b605861a03a0db2e09bf5fef1a94aeeac742a07'
     with:
       os: ubuntu-latest
