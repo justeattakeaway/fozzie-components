@@ -9,16 +9,16 @@
             @on-error="onError">
             <template #default="{ cards }">
                 <div :class="$style['c-offersResults-contentCards']">
-                    <template v-for="(card, i) in cards">
+                    <template
+                        v-for="(card, i) in cards"
+                        :key="i">
                         <group-header-card
                             v-if="card.type === 'Header_Card'"
                             :class="$style['c-offersResults-contentCards-groupHeader']"
-                            :key="i"
                             :title="card.title" />
                         <component
                             :is="handleCustomCardType(card.type)"
                             v-else
-                            :key="i"
                             :card="card"
                             :test-id="testIdForItemWithIndex(i)"
                             :tenant="tenant"

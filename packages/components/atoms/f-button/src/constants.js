@@ -7,6 +7,6 @@ export const VALID_BUTTON_TYPES = {
 export const VALID_BUTTON_SIZES = {
     button: ['xsmall', 'small-productive', 'small-expressive', 'medium', 'large'],
     iconButton: ['xsmall', 'small', 'medium', 'large']
-}
+};
 
 export const VALID_BUTTON_ICON_POSITION = ['leading', 'trailing', false];
