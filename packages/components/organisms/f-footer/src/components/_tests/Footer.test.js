@@ -92,28 +92,24 @@ describe('Footer', () => {
         expect(wrapper.find('[data-test-id="country-selector"]').exists()).toBe(true);
     });
 
-    const localesExcludingES = [
+    it.each([
         'en-GB',
         'en-AU',
         'en-IE',
         'en-NZ',
         'it-IT'
-    ];
+    ])(`should not render the Confianza URL and icon when locale is %s`, locale => {
+        // Arrange & Act
+        propsData = {
+            ...propsData,
+            locale
+        };
 
-    localesExcludingES.forEach(locale => {
-        it(`should not render the Confianza URL and icon when locale is ${locale}`, () => {
-            // Arrange & Act
-            propsData = {
-                ...propsData,
-                locale
-            };
+        const wrapper = shallowMount(Footer, { propsData });
 
-            const wrapper = shallowMount(Footer, { propsData });
-
-            // Assert
-            expect(wrapper.find('[data-test-id="confianza-link"]').exists()).toBe(false);
-            expect(wrapper.find('[data-test-id="confianza-icon"]').exists()).toBe(false);
-        });
+        // Assert
+        expect(wrapper.find('[data-test-id="confianza-link"]').exists()).toBe(false);
+        expect(wrapper.find('[data-test-id="confianza-icon"]').exists()).toBe(false);
     });
 
     describe('ES locale', () => {
