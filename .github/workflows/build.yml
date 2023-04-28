@@ -149,94 +149,6 @@ jobs:
     - name: Unit Test Components
       run: yarn ci:test:${{ matrix.component-type}} --concurrency=10
 
-  # browser-tests:
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       component-type: ['atoms', 'molecules', 'organisms' , 'pages']
-  #   name: browser-tests-${{ matrix.component-type }}
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   # Checkout the Repo
-  #   - name: Checkout
-  #     uses: actions/checkout@v3
-  #     with:
-  #       fetch-depth: 0
-  #   # Detect changed files
-  #   - uses: dorny/paths-filter@v2
-  #     id: changes
-  #     with:
-  #       filters: |
-  #         global:
-  #           - '*.js'
-  #           - '*.json'
-  #           - '.github/workflows/**'
-  #           - 'packages/storybook/**'
-  #           - 'packages/tools/fozzie/**'
-  #       list-files: shell
-  #   # Setup Node 16
-  #   - name: Setup Node
-  #     uses: actions/setup-node@v3
-  #     with:
-  #       node-version: 16
-  #       cache: 'yarn'
-  #   # Restore node_modules - Cache should exist as one was created in previous 'install' job
-  #   - name: Restore Cache -  Node Modules
-  #     id: cache-node-modules
-  #     uses: actions/cache@v2
-  #     with:
-  #       path: '**/node_modules'
-  #       key: node-modules-16-ubuntu-latest-${{ hashFiles('**/yarn.lock') }}
-  #   # Build Components
-  #   - name: Build Components
-  #     run: yarn build
-  #   # Restore Storybook 'storybook-static'
-  #   - name: Cache Storybook Static Directory
-  #     id: storybook-cache
-  #     uses: actions/cache@v2
-  #     with:
-  #       path: ./packages/storybook/storybook-static
-  #       key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
-  #   # Run Component / A11y / Visual Tests against all components
-  #   - name: Run All Component / A11y / Visual Tests
-  #     run: |
-  #       yarn storybook:serve-static &
-  #       yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
-  #       yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 &&
-  #       yarn ci:test:visual:${{ matrix.component-type }} --concurrency=1
-  #   # On Failure - Upload Allure Report
-  #   - name: Generate Allure Report
-  #     if: failure()
-  #     run: yarn allure:generate
-  #   - name: Upload Allure Report
-  #     if: failure()
-  #     uses: actions/upload-artifact@v3
-  #     with:
-  #       name: test-artifacts-${{ matrix.component-type }}
-  #       path: |
-  #         allure-report
-  #         test/results/axe-violations
-  #   env:
-  #     PERCY_TOKEN_F_BUTTON: ${{ secrets.PERCY_TOKEN_F_BUTTON }}
-  #     PERCY_TOKEN_F_FORM_FIELD: ${{ secrets.PERCY_TOKEN_F_FORM_FIELD }}
-  #     PERCY_TOKEN_F_ALERT: ${{ secrets.PERCY_TOKEN_F_ALERT }}
-  #     PERCY_TOKEN_F_CARD_WITH_CONTENT: ${{ secrets.PERCY_TOKEN_F_CARD_WITH_CONTENT }}
-  #     PERCY_TOKEN_F_MEGA_MODAL: ${{ secrets.PERCY_TOKEN_F_MEGA_MODAL }}
-  #     PERCY_TOKEN_F_COOKIE_BANNER: ${{ secrets.PERCY_TOKEN_F_COOKIE_BANNER }}
-  #     PERCY_TOKEN_F_FOOTER: ${{ secrets.PERCY_TOKEN_F_FOOTER }}
-  #     PERCY_TOKEN_F_HEADER: ${{ secrets.PERCY_TOKEN_F_HEADER }}
-  #     PERCY_TOKEN_F_STATUS_BANNER: ${{ secrets.PERCY_TOKEN_F_STATUS_BANNER }}
-  #     PERCY_TOKEN_F_ACCOUNT_INFO: ${{ secrets.PERCY_TOKEN_F_ACCOUNT_INFO }}
-  #     PERCY_TOKEN_F_CHECKOUT: ${{ secrets.PERCY_TOKEN_F_CHECKOUT }}
-  #     PERCY_TOKEN_F_CONTACT_PREFERENCES: ${{ secrets.PERCY_TOKEN_F_CONTACT_PREFERENCES }}
-  #     PERCY_TOKEN_F_MFA: ${{ secrets.PERCY_TOKEN_F_MFA }}
-  #     PERCY_TOKEN_F_REGISTRATION: ${{ secrets.PERCY_TOKEN_F_REGISTRATION }}
-  #     PERCY_TOKEN_F_TAKEAWAYPAY_ACTIVATION: ${{ secrets.PERCY_TOKEN_F_TAKEAWAYPAY_ACTIVATION }}
-  #     PERCY_TOKEN_F_RATING: ${{ secrets.PERCY_TOKEN_F_RATING }}
-  #     PERCY_TOKEN_F_SEGMENTED_CONTROL: ${{ secrets.PERCY_TOKEN_F_SEGMENTED_CONTROL }}
-  #     PERCY_TOKEN_F_TOGGLE_SWITCH: ${{ secrets.PERCY_TOKEN_F_TOGGLE_SWITCH }}
-
   storybook-deploy:
     name: 'Storybook Deploy'
     needs: 'build'
@@ -245,12 +157,72 @@ jobs:
       os: ubuntu-latest
       node-version: 16
       amplify-app-id: d49a9qirks04j
-      build-script-name: storybook:build
+      build-script-name: ${{ github.event_name == 'pull_request' && 'storybook:build-changed' || github.ref == 'refs/heads/master' && 'storybook:build' }}
       bucket-name-main: fozzie-components-storybook
       bucket-name-preview: fozzie-components-storybook-preview
       package-name: 'storybook'
       package-dist-directory: ./packages/storybook/dist
     secrets: inherit
+
+  browser-tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        component-type: ['atoms', 'molecules', 'organisms' , 'pages']
+    name: browser-tests-${{ matrix.component-type }}
+    needs: storybook-deploy
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the Repo
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+      # Setup Repo
+    - name: Setup Repo
+      uses: justeattakeaway/pie/.github/actions/setup-repo@5b605861a03a0db2e09bf5fef1a94aeeac742a07
+      with:
+        node-version: 16
+        os: ubuntu-latest
+    # Run Component / A11y / Visual Tests against all components
+    - name: Run All Component / A11y / Visual Tests
+      run: |
+        yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
+        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 &&
+        yarn ci:test:visual:${{ matrix.component-type }} --concurrency=1
+    # On Failure - Upload Allure Report
+    - name: Generate Allure Report
+      if: failure()
+      run: yarn allure:generate
+    - name: Upload Allure Report
+      if: failure()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-artifacts-${{ matrix.component-type }}
+        path: |
+          allure-report
+          test/results/axe-violations
+    env:
+      BRANCH_NUMBER: ${{ github.event.number }}
+      AMPLIFY_ID: ${{ secrets.AMPLIFY_ID }}
+      PERCY_TOKEN_F_BUTTON: ${{ secrets.PERCY_TOKEN_F_BUTTON }}
+      PERCY_TOKEN_F_FORM_FIELD: ${{ secrets.PERCY_TOKEN_F_FORM_FIELD }}
+      PERCY_TOKEN_F_ALERT: ${{ secrets.PERCY_TOKEN_F_ALERT }}
+      PERCY_TOKEN_F_CARD_WITH_CONTENT: ${{ secrets.PERCY_TOKEN_F_CARD_WITH_CONTENT }}
+      PERCY_TOKEN_F_MEGA_MODAL: ${{ secrets.PERCY_TOKEN_F_MEGA_MODAL }}
+      PERCY_TOKEN_F_COOKIE_BANNER: ${{ secrets.PERCY_TOKEN_F_COOKIE_BANNER }}
+      PERCY_TOKEN_F_FOOTER: ${{ secrets.PERCY_TOKEN_F_FOOTER }}
+      PERCY_TOKEN_F_HEADER: ${{ secrets.PERCY_TOKEN_F_HEADER }}
+      PERCY_TOKEN_F_STATUS_BANNER: ${{ secrets.PERCY_TOKEN_F_STATUS_BANNER }}
+      PERCY_TOKEN_F_ACCOUNT_INFO: ${{ secrets.PERCY_TOKEN_F_ACCOUNT_INFO }}
+      PERCY_TOKEN_F_CHECKOUT: ${{ secrets.PERCY_TOKEN_F_CHECKOUT }}
+      PERCY_TOKEN_F_CONTACT_PREFERENCES: ${{ secrets.PERCY_TOKEN_F_CONTACT_PREFERENCES }}
+      PERCY_TOKEN_F_MFA: ${{ secrets.PERCY_TOKEN_F_MFA }}
+      PERCY_TOKEN_F_REGISTRATION: ${{ secrets.PERCY_TOKEN_F_REGISTRATION }}
+      PERCY_TOKEN_F_TAKEAWAYPAY_ACTIVATION: ${{ secrets.PERCY_TOKEN_F_TAKEAWAYPAY_ACTIVATION }}
+      PERCY_TOKEN_F_RATING: ${{ secrets.PERCY_TOKEN_F_RATING }}
+      PERCY_TOKEN_F_SEGMENTED_CONTROL: ${{ secrets.PERCY_TOKEN_F_SEGMENTED_CONTROL }}
+      PERCY_TOKEN_F_TOGGLE_SWITCH: ${{ secrets.PERCY_TOKEN_F_TOGGLE_SWITCH }}
 
   # publish:
   #   needs: browser-tests

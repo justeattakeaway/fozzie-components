@@ -1,8 +1,10 @@
-const { testType } = require('./shared.config');
+const { testType, BRANCH_NUMBER } = require('./shared.config');
+
+const url = BRANCH_NUMBER ? `https://pr${BRANCH_NAME}.${AMPLIFY_ID}.amplifyapp.com` : 'https://vue.pie.design';
 
 const configuration = {
     logLevel: 'error',
-    baseUrl: 'http://localhost:8080',
+    baseUrl: url,
     bail: 0,
     mochaOpts: {
         timeout: parseInt(process.env.WDIO_TIMEOUT, 10) || 60000,
