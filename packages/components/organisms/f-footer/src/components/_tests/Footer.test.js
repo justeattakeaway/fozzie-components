@@ -1,7 +1,7 @@
 import { mount, shallowMount } from '@vue/test-utils';
 import Footer from '../Footer.vue';
 import content from '../../../data/en-GB.json';
-import { confianzaUrl, confianzaScreenReaderText } from '../constants';
+import { tenantConfigs } from '../../tenants';
 
 let propsData;
 
@@ -98,7 +98,7 @@ describe('Footer', () => {
         'en-IE',
         'en-NZ',
         'it-IT'
-    ])(`should not render the Confianza URL and icon when locale is %s`, locale => {
+    ])('should not render the Confianza URL and icon when locale is %s', locale => {
         // Arrange & Act
         propsData = {
             ...propsData,
@@ -137,7 +137,7 @@ describe('Footer', () => {
             const wrapper = mount(Footer, { propsData });
 
             // Assert
-            expect(wrapper.find('[data-test-id="confianza-link"]').attributes('href')).toBe(confianzaUrl);
+            expect(wrapper.find('[data-test-id="confianza-link"]').attributes('href')).toBe(tenantConfigs['es-ES'].metaLegalField.url);
         });
 
         it('should provide an aria label for screen readers', () => {
@@ -150,7 +150,7 @@ describe('Footer', () => {
             const wrapper = mount(Footer, { propsData });
 
             // Assert
-            expect(wrapper.find('[data-test-id="confianza-link"]').attributes('aria-label')).toBe(confianzaScreenReaderText);
+            expect(wrapper.find('[data-test-id="confianza-link"]').attributes('aria-label')).toBe(tenantConfigs['es-ES'].metaLegalField.screenReaderText);
         });
 
         it('should use hide the Confianza icon from screen readers', () => {

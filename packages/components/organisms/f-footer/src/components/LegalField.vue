@@ -8,8 +8,8 @@
 
         <a
             v-if="isConfianza"
-            :href="confianzaUrl"
-            :aria-label="confianzaScreenReaderText"
+            :href="info.url"
+            :aria-label="info.screenReaderText"
             target="_blank"
             rel="noopener noreferrer"
             data-test-id="confianza-link">
@@ -26,7 +26,6 @@
 
 <script>
 import { CertificateConfianzaIcon as ConfianzaIcon } from '@justeat/f-vue-icons';
-import { confianzaUrl, confianzaScreenReaderText } from './constants';
 
 export default {
 
@@ -38,13 +37,6 @@ export default {
             type: Object,
             required: true
         }
-    },
-
-    data () {
-        return {
-            confianzaUrl,
-            confianzaScreenReaderText
-        };
     },
 
     computed: {
