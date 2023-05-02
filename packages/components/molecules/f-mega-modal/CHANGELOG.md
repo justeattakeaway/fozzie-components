@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v7.4.1
+------------------------------
+*April 28, 2023*
+
+### Fixed
+- Linting warning.
+
+
 v7.4.0
 ------------------------------
 *April 12, 2023*
@@ -56,6 +64,7 @@ v7.0.0
 - peerDependency versions to use new major version.
 - devDependency version range to match peerDependencies.
 
+
 v6.0.0
 -----------------------------
 *June 20, 2022*
@@ -66,7 +75,7 @@ v6.0.0
 
 v5.1.1
 ------------------------------
-*Jun 9, 2022*
+*June 9, 2022*
 
 ### Changed
 - Bumped wdio version and fixed breaking changes.
@@ -103,6 +112,7 @@ v5.0.0
 - Close button inset positioning changed to stay in-line with the first line of title
 - Increased modal widths by 10%
 - Changed close button icon color to `$color-interactive-primary`
+
 
 v4.2.0
 ------------------------------
@@ -214,6 +224,7 @@ v0.12.0
 - Aligned to PIE designs
 - Updated version of `f-button`.
 
+
 v0.11.0
 ------------------------------
 *July 14, 2021*
@@ -288,6 +299,7 @@ v0.4.0
 
 ### Fixed
 - Readme component reference.
+
 
 v0.3.0
 ------------------------------

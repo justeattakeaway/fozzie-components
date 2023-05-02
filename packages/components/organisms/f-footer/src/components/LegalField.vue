@@ -6,12 +6,22 @@
             {{ info.textField }}
         </p>
 
-        <confianza-icon
+        <a
             v-if="isConfianza"
-            :class="[
-                $style['c-legalField-certificates-icons'],
-                $style['c-legalField-certificates-icons--confianza']
-            ]" />
+            :href="info.url"
+            :aria-label="info.screenReaderText"
+            :class="$style['c-legalField-certificates-link']"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-test-id="confianza-link">
+            <confianza-icon
+                data-test-id="confianza-icon"
+                aria-hidden="true"
+                :class="[
+                    $style['c-legalField-certificates-icons'],
+                    $style['c-legalField-certificates-icons--confianza']
+                ]" />
+        </a>
     </div>
 </template>
 
@@ -63,6 +73,13 @@ export default {
 .c-legalField-certificates-icons--confianza {
     width: 50px;
     height: 50px;
+}
+
+.c-legalField-certificates-link {
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--borderless;
+    }
 }
 </style>
 

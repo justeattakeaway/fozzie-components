@@ -17,7 +17,7 @@ export const ButtonComponent = (args, { argTypes }) => ({
     template: `
     <div>
         <div
-            class="u-spacingBottom--large storybook-grid storybook-grid-columns--4 storybook-grid-stack--lessThanWide"
+            class="u-spacingBottom--large storybook-grid storybook-grid-columns--5 storybook-grid-stack--lessThanWide"
             v-for="(list, index) in buttonLists">
             <f-button
                 class="u-spacingBottom--large"
@@ -56,28 +56,32 @@ ButtonComponent.argTypes = {
 ButtonComponent.args = {
     buttonLists: [
         [
-            { type: 'primary', size: 'large', text: 'Large Primary Button' },
-            { type: 'primary', size: 'medium', text: 'Medium Primary Button' },
-            { type: 'primary', size: 'small', text: 'Small Primary Button' },
-            { type: 'primary', size: 'xsmall', text: 'Xsmall Primary Button' }
+            { type: 'primary', size: 'large', text: 'Large Primary' },
+            { type: 'primary', size: 'medium', text: 'Medium Primary' },
+            { type: 'primary', size: 'small-expressive', text: 'Small-Expressive Primary' },
+            { type: 'primary', size: 'small-productive', text: 'Small-Productive Primary' },
+            { type: 'primary', size: 'xsmall', text: 'Xsmall Primary' }
         ],
         [
-            { type: 'secondary', size: 'large', text: 'Large Secondary Button' },
-            { type: 'secondary', size: 'medium', text: 'Medium Secondary Button' },
-            { type: 'secondary', size: 'small', text: 'Small Secondary Button' },
-            { type: 'secondary', size: 'xsmall', text: 'Xsmall Secondary Button' }
+            { type: 'secondary', size: 'large', text: 'Large Secondary' },
+            { type: 'secondary', size: 'medium', text: 'Medium Secondary' },
+            { type: 'secondary', size: 'small-expressive', text: 'Small-Expressive Secondary' },
+            { type: 'secondary', size: 'small-productive', text: 'Small-Productive Secondary' },
+            { type: 'secondary', size: 'xsmall', text: 'Xsmall Secondary' }
         ],
         [
-            { type: 'outline', size: 'large', text: 'Large Outline Button' },
-            { type: 'outline', size: 'medium', text: 'Medium Outline Button' },
-            { type: 'outline', size: 'small', text: 'Small Outline Button' },
-            { type: 'outline', size: 'xsmall', text: 'Xsmall Outline Button' }
+            { type: 'outline', size: 'large', text: 'Large Outline' },
+            { type: 'outline', size: 'medium', text: 'Medium Outline' },
+            { type: 'outline', size: 'small-expressive', text: 'Small-Expressive Outline' },
+            { type: 'outline', size: 'small-productive', text: 'Small-Productive Outline' },
+            { type: 'outline', size: 'xsmall', text: 'Xsmall Outline' }
         ],
         [
-            { type: 'ghost', size: 'large', text: 'Large Ghost Button' },
-            { type: 'ghost', size: 'medium', text: 'Medium Ghost Button' },
-            { type: 'ghost', size: 'small', text: 'Small Ghost Button' },
-            { type: 'ghost', size: 'xsmall', text: 'Xsmall Ghost Button' }
+            { type: 'ghost', size: 'large', text: 'Large Ghost' },
+            { type: 'ghost', size: 'medium', text: 'Medium Ghost' },
+            { type: 'ghost', size: 'small-expressive', text: 'Small-Expressive Ghost' },
+            { type: 'ghost', size: 'small-productive', text: 'Small-Productive Ghost' },
+            { type: 'ghost', size: 'xsmall', text: 'Xsmall Ghost' }
         ]
     ]
 };
