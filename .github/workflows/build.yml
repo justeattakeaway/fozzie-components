@@ -157,7 +157,7 @@ jobs:
       os: ubuntu-latest
       node-version: 16
       amplify-app-id: d49a9qirks04j
-      build-script-name: ${{ github.event_name == 'pull_request' && 'storybook:build-changed' || github.ref == 'refs/heads/master' && 'storybook:build' }}
+      build-script-name: storybook:build
       bucket-name-main: fozzie-components-storybook
       bucket-name-preview: fozzie-components-storybook-preview
       package-name: 'storybook'
