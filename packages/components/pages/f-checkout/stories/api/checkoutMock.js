@@ -5,7 +5,7 @@ import mockedRequests from './responses';
 
 const mock = new MockAdapter(axios);
 
-export default function () {
+const setupMock = () => {
     mockedRequests.forEach(request => {
         const methods = {
             [httpMethods.post]: mock.onPost(request.url),
@@ -27,4 +27,6 @@ export default function () {
     });
 
     mock.onAny().passThrough();
-}
+};
+
+export default setupMock;

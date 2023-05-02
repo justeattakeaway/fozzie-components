@@ -53,8 +53,9 @@
                             button-size="xsmall"
                             data-test-id="close-modal"
                             @click.native="close">
-                            <component :is="setCloseButtonIconStyle"
-                                       :class="[$style['c-megaModal-closeIcon']]" />
+                            <component
+                                :is="setCloseButtonIconStyle"
+                                :class="[$style['c-megaModal-closeIcon']]" />
 
                             <span class="is-visuallyHidden">
                                 {{ closeButtonCopy }}

@@ -1,7 +1,7 @@
 {
   "name": "@justeat/storybook",
   "private": true,
-  "version": "0.61.0",
+  "version": "0.62.0",
   "scripts": {
     "storybook:build": "vue-cli-service storybook:build -s public -c config/storybook -o dist",
     "storybook:serve": "vue-cli-service storybook:serve -s public -p 8080 -c config/storybook",

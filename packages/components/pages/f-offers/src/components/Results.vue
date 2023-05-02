@@ -12,13 +12,13 @@
                     <template v-for="(card, i) in cards">
                         <group-header-card
                             v-if="card.type === 'Header_Card'"
+                            :key="`group-header-card-${i}`"
                             :class="$style['c-offersResults-contentCards-groupHeader']"
-                            :key="i"
                             :title="card.title" />
                         <component
                             :is="handleCustomCardType(card.type)"
                             v-else
-                            :key="i"
+                            :key="`custom-card-${i}`"
                             :card="card"
                             :test-id="testIdForItemWithIndex(i)"
                             :tenant="tenant"

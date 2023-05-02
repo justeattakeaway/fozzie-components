@@ -63,7 +63,7 @@ DemoIconButtonComponent.argTypes = {
         defaultValue: 'primary'
     },
     buttonSize: {
-        control: { type: 'select', options: VALID_BUTTON_SIZES },
+        control: { type: 'select', options: VALID_BUTTON_SIZES.iconButton },
         description: 'Choose the button size',
         defaultValue: 'medium'
     },
