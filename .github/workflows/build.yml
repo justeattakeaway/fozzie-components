@@ -39,7 +39,7 @@ jobs:
         fetch-depth: 0
       # Setup Repo
     - name: Setup Repo
-      uses: justeattakeaway/pie/.github/actions/setup-repo@5b605861a03a0db2e09bf5fef1a94aeeac742a07
+      uses: justeattakeaway/pie/.github/actions/setup-repo@832341539563ee3e9d29b992e676cc5bd7376faa
       with:
         node-version: 16
         os: ubuntu-latest
@@ -96,7 +96,7 @@ jobs:
         list-files: shell
       # Setup Repo
     - name: Setup Repo
-      uses: justeattakeaway/pie/.github/actions/setup-repo@5b605861a03a0db2e09bf5fef1a94aeeac742a07
+      uses: justeattakeaway/pie/.github/actions/setup-repo@832341539563ee3e9d29b992e676cc5bd7376faa
       with:
         node-version: 16
         os: ubuntu-latest
@@ -138,7 +138,7 @@ jobs:
         list-files: shell
       # Setup Repo
     - name: Setup Repo
-      uses: justeattakeaway/pie/.github/actions/setup-repo@5b605861a03a0db2e09bf5fef1a94aeeac742a07
+      uses: justeattakeaway/pie/.github/actions/setup-repo@832341539563ee3e9d29b992e676cc5bd7376faa
       with:
         node-version: 16
         os: ubuntu-latest
@@ -152,7 +152,7 @@ jobs:
   storybook-deploy:
     name: 'Storybook Deploy'
     needs: 'build'
-    uses: 'justeattakeaway/pie/.github/workflows/amplify-deploy.yml@f55398fcd667c8ddf70791f688f5bab54543b249'
+    uses: 'justeattakeaway/pie/.github/workflows/amplify-deploy.yml@832341539563ee3e9d29b992e676cc5bd7376faa'
     with:
       os: ubuntu-latest
       node-version: 16
@@ -180,7 +180,7 @@ jobs:
         fetch-depth: 0
       # Setup Repo
     - name: Setup Repo
-      uses: justeattakeaway/pie/.github/actions/setup-repo@5b605861a03a0db2e09bf5fef1a94aeeac742a07
+      uses: justeattakeaway/pie/.github/actions/setup-repo@832341539563ee3e9d29b992e676cc5bd7376faa
       with:
         node-version: 16
         os: ubuntu-latest
