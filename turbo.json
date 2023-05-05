@@ -130,12 +130,12 @@
       "dependsOn": []
     },
     "storybook:build":  {
-      "cache": true,
+      "cache": false,
       "dependsOn": ["build"],
       "outputs": ["dist/**"]
     },
     "storybook:build-changed":  {
-      "cache": true,
+      "cache": false,
       "dependsOn": ["build"],
       "outputs": ["dist/**"]
     },
