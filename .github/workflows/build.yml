@@ -22,8 +22,14 @@ concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_TOKEN }}
+  DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+
 jobs:
   install:
+    name: 'Install Dependencies'
     runs-on: ubuntu-latest
     steps:
     # Checkout the Repo.
@@ -31,55 +37,44 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    - name: Setup Node
-    # Setup Node 16.
-      uses: actions/setup-node@v3
+      # Setup Repo
+    - name: Setup Repo
+      uses: justeattakeaway/pie/.github/actions/setup-repo@832341539563ee3e9d29b992e676cc5bd7376faa
       with:
         node-version: 16
-        cache: 'yarn'
-    # Restore node_modules if cache exists. If not, cache is created at end of build.
-    - name: Cache Node Modules
-      id: cache-node-modules
-      uses: actions/cache@v2
-      with:
-        path: '**/node_modules'
-        key: node-modules-${{ hashFiles('**/yarn.lock') }}
-    # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible.
-    - name: Install Dependencies
-      if: steps.cache-node-modules.outputs.cache-hit != 'true'
-      run: yarn --prefer-offline
+        os: ubuntu-latest
 
-  danger:
-    if: ${{ github.ref != 'refs/heads/master' }}
-    needs: install
-    runs-on: ubuntu-latest
-    steps:
-    # Checkout the Repo.
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - name: Setup Node
-    # Setup Node 16.
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: 'yarn'
-    # Restore node_modules if cache exists. If not, cache is created at end of build.
-    - name: Cache Node Modules
-      id: cache-node-modules
-      uses: actions/cache@v2
-      with:
-        path: '**/node_modules'
-        key: node-modules-${{ hashFiles('**/yarn.lock') }}
-    # Run Danger Checks.
-    - name: Run Danger Checks
-      run: yarn danger ci --failOnErrors
-      env:
-        DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
+  # danger:
+  #   if: ${{ github.ref != 'refs/heads/master' }}
+  #   needs: install
+  #   name: 'Danger PR Checks'
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   # Checkout the Repo.
+  #   - name: Checkout
+  #     uses: actions/checkout@v3
+  #     with:
+  #       fetch-depth: 0
+  #   - name: Setup Node
+  #   # Setup Node 16.
+  #     uses: actions/setup-node@v3
+  #     with:
+  #       node-version: 16
+  #       cache: 'yarn'
+  #   # Restore node_modules if cache exists. If not, cache is created at end of build.
+  #   - name: Cache Node Modules
+  #     id: cache-node-modules
+  #     uses: actions/cache@v2
+  #     with:
+  #       path: '**/node_modules'
+  #       key: node-modules-16-ubuntu-latest-${{ hashFiles('**/yarn.lock') }}
+  #   # Run Danger Checks.
+  #   - name: Run Danger Checks
+  #     run: yarn danger ci --failOnErrors
 
   build:
     needs: install
+    name: 'Build Components'
     runs-on: ubuntu-latest
     steps:
     # Checkout the Repo.
@@ -99,19 +94,12 @@ jobs:
             - 'packages/storybook/**'
             - 'packages/tools/fozzie/**'
         list-files: shell
-    # Setup Node 16.
-    - name: Setup Node
-      uses: actions/setup-node@v3
+      # Setup Repo
+    - name: Setup Repo
+      uses: justeattakeaway/pie/.github/actions/setup-repo@832341539563ee3e9d29b992e676cc5bd7376faa
       with:
         node-version: 16
-        cache: 'yarn'
-    # Restore node_modules - Cache should exist as one was created in previous 'install' job.
-    - name: Cache Node Modules
-      id: cache-node-modules
-      uses: actions/cache@v2
-      with:
-        path: '**/node_modules'
-        key: node-modules-${{ hashFiles('**/yarn.lock') }}
+        os: ubuntu-latest
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
       run: yarn build
@@ -121,19 +109,6 @@ jobs:
     # Lint components
     - name: Lint Components
       run: yarn lint --concurrency=10
-    # Cache 'storybook-static'
-    - name: Cache Storybook Static Directory
-      id: storybook-cache
-      uses: actions/cache@v2
-      with:
-        path: ./packages/storybook/storybook-static
-        key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
-    # Build Storybook
-    - name: Build Storybook (All Components)
-      run: yarn storybook:build
-    env:
-      BUNDLEWATCH_GITHUB_TOKEN: ${{ secrets.BUNDLEWATCH_TOKEN }}
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
   unit-tests:
     strategy:
@@ -161,27 +136,33 @@ jobs:
             - 'packages/storybook/**'
             - 'packages/tools/fozzie/**'
         list-files: shell
-    # Setup Node 16
-    - name: Setup Node
-      uses: actions/setup-node@v3
+      # Setup Repo
+    - name: Setup Repo
+      uses: justeattakeaway/pie/.github/actions/setup-repo@832341539563ee3e9d29b992e676cc5bd7376faa
       with:
         node-version: 16
-        cache: 'yarn'
-    # Restore node_modules - Cache should exist as one was created in previous 'install' job
-    - name: Restore Cache -  Node Modules
-      id: cache-node-modules
-      uses: actions/cache@v2
-      with:
-        path: '**/node_modules'
-        key: node-modules-${{ hashFiles('**/yarn.lock') }}
+        os: ubuntu-latest
     # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
       run: yarn build
     # Unit Tests
     - name: Unit Test Components
       run: yarn ci:test:${{ matrix.component-type}} --concurrency=10
-    env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+
+  storybook-deploy:
+    name: 'Storybook Deploy'
+    needs: 'build'
+    uses: 'justeattakeaway/pie/.github/workflows/amplify-deploy.yml@832341539563ee3e9d29b992e676cc5bd7376faa'
+    with:
+      os: ubuntu-latest
+      node-version: 16
+      amplify-app-id: d49a9qirks04j
+      build-script-name: storybook:build
+      bucket-name-main: fozzie-components-storybook
+      bucket-name-preview: fozzie-components-storybook-preview
+      package-name: 'storybook'
+      package-dist-directory: ./packages/storybook/dist
+    secrets: inherit
 
   browser-tests:
     strategy:
@@ -189,7 +170,7 @@ jobs:
       matrix:
         component-type: ['atoms', 'molecules', 'organisms' , 'pages']
     name: browser-tests-${{ matrix.component-type }}
-    needs: build
+    needs: storybook-deploy
     runs-on: ubuntu-latest
     steps:
     # Checkout the Repo
@@ -197,45 +178,18 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    # Detect changed files
-    - uses: dorny/paths-filter@v2
-      id: changes
-      with:
-        filters: |
-          global:
-            - '*.js'
-            - '*.json'
-            - '.github/workflows/**'
-            - 'packages/storybook/**'
-            - 'packages/tools/fozzie/**'
-        list-files: shell
-    # Setup Node 16
-    - name: Setup Node
-      uses: actions/setup-node@v3
+      # Setup Repo
+    - name: Setup Repo
+      uses: justeattakeaway/pie/.github/actions/setup-repo@832341539563ee3e9d29b992e676cc5bd7376faa
       with:
         node-version: 16
-        cache: 'yarn'
-    # Restore node_modules - Cache should exist as one was created in previous 'install' job
-    - name: Restore Cache -  Node Modules
-      id: cache-node-modules
-      uses: actions/cache@v2
-      with:
-        path: '**/node_modules'
-        key: node-modules-${{ hashFiles('**/yarn.lock') }}
-    # Build Components
+        os: ubuntu-latest
+    # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
     - name: Build Components
       run: yarn build
-    # Restore Storybook 'storybook-static'
-    - name: Cache Storybook Static Directory
-      id: storybook-cache
-      uses: actions/cache@v2
-      with:
-        path: ./packages/storybook/storybook-static
-        key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
     # Run Component / A11y / Visual Tests against all components
     - name: Run All Component / A11y / Visual Tests
       run: |
-        yarn storybook:serve-static &
         yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
         yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 &&
         yarn ci:test:visual:${{ matrix.component-type }} --concurrency=1
@@ -252,6 +206,8 @@ jobs:
           allure-report
           test/results/axe-violations
     env:
+      BRANCH_NUMBER: ${{ github.event.number }}
+      AMPLIFY_ID: ${{ secrets.AMPLIFY_ID }}
       PERCY_TOKEN_F_BUTTON: ${{ secrets.PERCY_TOKEN_F_BUTTON }}
       PERCY_TOKEN_F_FORM_FIELD: ${{ secrets.PERCY_TOKEN_F_FORM_FIELD }}
       PERCY_TOKEN_F_ALERT: ${{ secrets.PERCY_TOKEN_F_ALERT }}
@@ -270,75 +226,31 @@ jobs:
       PERCY_TOKEN_F_RATING: ${{ secrets.PERCY_TOKEN_F_RATING }}
       PERCY_TOKEN_F_SEGMENTED_CONTROL: ${{ secrets.PERCY_TOKEN_F_SEGMENTED_CONTROL }}
       PERCY_TOKEN_F_TOGGLE_SWITCH: ${{ secrets.PERCY_TOKEN_F_TOGGLE_SWITCH }}
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
-  storybook-deploy:
-    if: ${{ github.ref == 'refs/heads/master' }}
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    # Checkout the Repo.
-    - name: Checkout
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    # Setup Node 16.
-    - name: Setup Node
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: 'yarn'
-    # Restore node_modules - Cache should exist as one was created in previous 'install' job.
-    - name: Restore Cache -  Node Modules
-      id: cache-node-modules
-      uses: actions/cache@v2
-      with:
-        path: '**/node_modules'
-        key: node-modules-${{ hashFiles('**/yarn.lock') }}
-    # Run 'yarn' if cache doesn't exist. Use --prefer-offline to download packages from yarn cache folder where possible.
-    - name: Install Dependencies
-      if: steps.cache-node-modules.outputs.cache-hit != 'true'
-      run: yarn --prefer-offline
-    # Restore Storybook 'storybook-static'.
-    - name: Cache Storybook Static Directory
-      id: storybook-cache
-      uses: actions/cache@v2
-      with:
-        path: ./packages/storybook/storybook-static
-        key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
-    # Deploy Storybook.
-    - name: Storybook deploy
-      run: yarn storybook:deploy
-      env:
-        GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
-        TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-
-  publish:
-    needs: browser-tests
-    runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/master' }}
-    steps:
-      # Checkout the Repo.
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      # Setup Node 16.
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          cache: 'yarn'
-      # Restore node_modules - Cache should exist as one was created in previous 'install' job.
-      - name: Restore Cache -  Node Modules
-        id: cache-node-modules
-        uses: actions/cache@v2
-        with:
-          path: '**/node_modules'
-          key: node-modules-${{ hashFiles('**/yarn.lock') }}
-      - run: yarn build
-      - name: Auth with NPM
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-      - name: Publish unreleased package versions to npm
-        run: yarn lerna publish from-package --ignore-scripts --yes --no-verify-access
-    env:
-      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  # publish:
+  #   needs: browser-tests
+  #   runs-on: ubuntu-latest
+  #   if: ${{ github.ref == 'refs/heads/master' }}
+  #   steps:
+  #     # Checkout the Repo.
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
+  #     # Setup Node 16.
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 16
+  #         cache: 'yarn'
+  #     # Restore node_modules - Cache should exist as one was created in previous 'install' job.
+  #     - name: Restore Cache -  Node Modules
+  #       id: cache-node-modules
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: '**/node_modules'
+  #         key: node-modules-16-ubuntu-latest-${{ hashFiles('**/yarn.lock') }}
+  #     - run: yarn build
+  #     - name: Auth with NPM
+  #       run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+  #     - name: Publish unreleased package versions to npm
+  #       run: yarn lerna publish from-package --ignore-scripts --yes --no-verify-access
