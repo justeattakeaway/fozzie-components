@@ -4,9 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v2.0.1
+------------------------------
+*April 28, 2023*
+
+### Fixed
+- Linting warning.
+
+
 v2.0.0
 ------------------------------
-*February 15, 2022*
+*February 15, 2023*
 
 ### Changed
 - Updated to include the new braze adapter
@@ -15,7 +23,7 @@ v2.0.0
 
 v1.15.2
 ------------------------------
-*February 13, 2022*
+*February 13, 2023*
 
 ### Added
 - braze sk 3.3.0 under dev dependencies to allow tests to work.

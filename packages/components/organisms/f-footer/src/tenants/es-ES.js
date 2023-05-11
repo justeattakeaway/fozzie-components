@@ -69,6 +69,8 @@ export default {
     ],
     metaLegalField: {
         textField: '',
+        url: 'https://www.confianzaonline.es/empresas/justeatspain.htm',
+        screenReaderText: 'Accede a Confianza Online y comprueba nuestro sello de calidad en Internet',
         icon: {
             name: 'confianza',
             alt: 'Confianza'

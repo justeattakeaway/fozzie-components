@@ -22,16 +22,18 @@ describe('Button', () => {
             });
 
             it.each([
-                'xsmall',
-                'small',
-                'medium',
-                'large'
-            ])('should not throw an error when buttonSize is set to %s', buttonSize => {
+                ['xsmall', true],
+                ['xsmall', false],
+                ['small', true],
+                ['small-productive', false],
+                ['small-expressive', false],
+                ['medium', true],
+                ['medium', false],
+                ['large', true],
+                ['large', false]
+            ])('should not throw an error when buttonSize is set to %s and isIcon is %s', (buttonSize, isIcon) => {
                 // Arrange
-                const propsData = {
-                    buttonSize,
-                    isIcon: false
-                };
+                const propsData = { buttonSize, isIcon };
 
                 // Act & Assert
                 expect(() => {
@@ -40,18 +42,22 @@ describe('Button', () => {
                     .not.toThrowError();
             });
 
-            it('should throw an error when buttonSize is set to an invalid type', () => {
+            it.each([
+                ['invalid_value', true],
+                ['invalid_value', false],
+                ['small', false],
+                ['small-productive', true],
+                ['small-expressive', true]
+            ])('should throw an error when buttonSize is set to %s when isIcon is %s', (buttonSize, isIcon) => {
                 // Arrange
-                const propsData = {
-                    buttonSize: 'invalid_value',
-                    isIcon: false
-                };
+                const propsData = { buttonSize, isIcon };
+                const buttonOrIconButton = isIcon ? 'iconButton' : 'button';
 
                 // Act & Assert
                 expect(() => {
                     shallowMount(FButton, { propsData });
                 })
-                    .toThrowError('buttonSize is set to "invalid_value"');
+                    .toThrowError(`buttonSize for ${buttonOrIconButton} is set to "${buttonSize}"`);
             });
 
             it.each([
@@ -74,18 +80,20 @@ describe('Button', () => {
                     .not.toThrowError();
             });
 
-            it('should throw an error when the component is a standard button (isIcon="false") and buttonType is set to an invalid type', () => {
+            it.each([
+                true,
+                false
+            ])('should throw an error when isIcon="%s" and buttonType is invalid', isIcon => {
                 // Arrange
-                const propsData = {
-                    buttonType: 'invalid_value',
-                    isIcon: false
-                };
+                const buttonType = 'invalid_value';
+                const propsData = { buttonType, isIcon };
+                const buttonOrIconButton = isIcon ? 'iconButton' : 'button';
 
                 // Act & Assert
                 expect(() => {
                     shallowMount(FButton, { propsData });
                 })
-                    .toThrowError('button is set to have buttonType="invalid_value"');
+                    .toThrowError(`buttonType for ${buttonOrIconButton} is set to "${buttonType}"`);
             });
 
             it.each([
@@ -93,7 +101,7 @@ describe('Button', () => {
                 'secondary',
                 'ghost',
                 'ghostTertiary'
-            ])('should not throw an error when the component is an iconButton (isIcon="true") and buttonType is set to %s', buttonType => {
+            ])('should not throw an error when isIcon="true" and buttonType="%s"', buttonType => {
                 // Arrange
                 const propsData = {
                     buttonType,
@@ -105,20 +113,6 @@ describe('Button', () => {
                     shallowMount(FButton, { propsData });
                 })
                     .not.toThrowError();
-            });
-
-            it('should throw an error when the component is an iconButton (isIcon="true") and the buttonType is set to an invalid type', () => {
-                // Arrange
-                const propsData = {
-                    buttonType: 'invalid_value',
-                    isIcon: true
-                };
-
-                // Act & Assert
-                expect(() => {
-                    shallowMount(FButton, { propsData });
-                })
-                    .toThrowError('iconButton is set to have buttonType="invalid_value"');
             });
 
             it.each([
@@ -279,32 +273,22 @@ describe('Button', () => {
 
     describe('computed :: ', () => {
         describe('buttonSizeClassname :: ', () => {
-            it('should capitalise to first letter of `buttonSize` prop :: ', () => {
+            it.each([
+                ['xsmall', 'XSmall', false],
+                ['small', 'Small', true],
+                ['small-productive', 'SmallProductive', false],
+                ['small-expressive', 'SmallExpressive', false],
+                ['medium', 'Medium', false],
+                ['large', 'Large', false]
+            ])('should convert size %s to %s for use in class name', (buttonSize, className, isIcon) => {
                 // Arrange
-                const propsData = {
-                    buttonSize: 'medium',
-                    actionType
-                };
+                const propsData = { actionType, buttonSize, isIcon };
 
                 // Act
                 const wrapper = shallowMount(FButton, { propsData });
 
                 // Assert
-                expect(wrapper.vm.buttonSizeClassname).toEqual('Medium');
-            });
-
-            it('should capitalise to first two letters of `buttonSize` prop if `xsmall` :: ', () => {
-                // Arrange
-                const propsData = {
-                    buttonSize: 'xsmall',
-                    actionType
-                };
-
-                // Act
-                const wrapper = shallowMount(FButton, { propsData });
-
-                // Assert
-                expect(wrapper.vm.buttonSizeClassname).toEqual('XSmall');
+                expect(wrapper.vm.buttonSizeClassname).toEqual(className);
             });
         });
 
