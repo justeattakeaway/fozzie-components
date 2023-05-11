@@ -567,7 +567,7 @@ export default {
     }
 
     .c-cookieBanner-cta:not(:last-child) {
-        margin-bottom: f.spacing(d);
+        margin-block-end: f.spacing(d);
     }
 
     @include f.media('>=mid') {
@@ -576,17 +576,17 @@ export default {
         padding-block: f.spacing(d);
         padding-inline: f.spacing(d);
         margin-inline: f.spacing(d);
-        min-width: 320px;
+        min-inline-size: 320px;
         margin-block: 0;
 
         .c-cookieBanner-cta {
             width: inherit;
-            margin-left: f.spacing(d);
-            margin-bottom: 0;
+            margin-inline-start: f.spacing(d);
+            margin-block-end: 0;
         }
 
         .c-cookieBanner-cta:not(:last-child) {
-            margin-bottom: 0;
+            margin-block-end: 0;
         }
     }
 }
