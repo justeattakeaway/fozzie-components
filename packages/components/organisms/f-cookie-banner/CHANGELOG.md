@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.10.0
+------------------------------
+*May 10, 2023*
+
+### Added
+- New styles changes to banner.
+  - Button colour changes, positioning of buttons & font sizes.
+
 
 v4.9.0
 ------------------------------
