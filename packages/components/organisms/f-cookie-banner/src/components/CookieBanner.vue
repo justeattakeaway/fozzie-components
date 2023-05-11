@@ -563,7 +563,7 @@ export default {
     padding-inline: f.spacing(e);
 
     .c-cookieBanner-cta {
-        width: 100%;
+        inline-size: 100%;
     }
 
     .c-cookieBanner-cta:not(:last-child) {
@@ -580,7 +580,7 @@ export default {
         margin-block: 0;
 
         .c-cookieBanner-cta {
-            width: inherit;
+            inline-size: inherit;
             margin-inline-start: f.spacing(d);
             margin-block-end: 0;
         }
