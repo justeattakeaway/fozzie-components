@@ -59,7 +59,8 @@
   "devDependencies": {
     "@justeat/f-button": "4.x",
     "@justeat/f-link": "3.x",
-    "@justeat/f-mega-modal": "7.x",
+    "@justeat/f-mega-modal": "file:.yalc/@justeat/f-mega-modal",
+    "@justeat/f-toggle-switch": "file:.yalc/@justeat/f-toggle-switch",
     "@justeat/f-vue-icons": "3.x",
     "@justeat/f-wdio-utils": "1.x",
     "@vue/cli-plugin-babel": "4.5.16",

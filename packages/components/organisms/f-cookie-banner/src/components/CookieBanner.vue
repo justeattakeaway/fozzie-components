@@ -1,7 +1,13 @@
 <template>
     <div v-if="!shouldHideBanner">
+        <manage-preferences-modal
+            :is-open="shouldShowManagePreferencesModal"
+            :copy="copy.managePreferencesModal"
+            :cookie-preferences="cookiePreferences"
+            @close="closeManagePreferences" />
+
         <mega-modal
-            v-if="!legacyBanner"
+            v-if="!legacyBanner && !shouldShowManagePreferencesModal"
             ref="cookieBanner"
             :is-open="!shouldHideBanner"
             is-positioned-bottom
@@ -58,6 +64,13 @@
                     ref="buttonContainer"
                     :class="$style['c-cookieBanner-cta']">
                     <button-component
+                        data-test-id="manage-preferences-cookies-button"
+                        is-full-width
+                        @click="managePreferencesActions">
+                        Manage Preferences
+                    </button-component>
+
+                    <button-component
                         data-test-id="accept-all-cookies-button"
                         is-full-width
                         @click="acceptAllCookiesActions">
@@ -106,6 +119,7 @@ import '@justeat/f-mega-modal/dist/f-mega-modal.css';
 import VLink from '@justeat/f-link';
 import '@justeat/f-link/dist/f-link.css';
 import LegacyBanner from './LegacyBanner.vue';
+import ManagePreferencesModal from './ManagePreferencesModal.vue';
 import ReopenBannerLink from './ReopenBannerLink.vue';
 import tenantConfigs from '../tenants';
 import { LEGACY_CONSENT_COOKIE_NAME, CONSENT_COOKIE_NAME } from '../constants';
@@ -114,6 +128,7 @@ export default {
     components: {
         ButtonComponent,
         LegacyBanner,
+        ManagePreferencesModal,
         MegaModal,
         ReopenBannerLink,
         VLink
@@ -171,6 +186,25 @@ export default {
             config: { ...localeConfig },
             theme,
             copy,
+            cookiePreferences: {
+                necessary: {
+                    checked: true,
+                    disabled: true
+                },
+                functional: {
+                    checked: true,
+                    disabled: false
+                },
+                analytical: {
+                    checked: false,
+                    disabled: false
+                },
+                personalised: {
+                    checked: false,
+                    disabled: false
+                }
+            },
+            shouldShowManagePreferencesModal: false,
             shouldHideBanner: true,
             isIosBrowser: false,
             bodyObserver: undefined,
@@ -459,6 +493,18 @@ export default {
                     }
                 }));
             }
+        },
+
+        managePreferencesActions () {
+            this.shouldShowManagePreferencesModal = true;
+        },
+
+        closeManagePreferences (event) {
+            if (event) {
+                this.cookiePreferences = event;
+            }
+
+            this.shouldShowManagePreferencesModal = false;
         }
     }
 };

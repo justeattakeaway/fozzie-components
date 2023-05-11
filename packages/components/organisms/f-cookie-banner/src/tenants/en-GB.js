@@ -12,7 +12,41 @@ const messages = {
     legacyBannerText: 'We use cookies to improve your browsing experience. By continuing, you agree to receive cookies on our website.',
     legacyBannerLinkText: 'Learn more about our cookies policy.',
     legacyBannerCloseBannerText: 'Close cookie banner',
-    reopenCookieBannerLinkText:  'Check my cookie preferences'
+    reopenCookieBannerLinkText: 'Check my cookie preferences',
+
+    managePreferencesModal: {
+        title: 'Manage your preferences',
+        subheading: {
+            text1: 'You can find all the information in the ',
+            linkText1: 'Cookie Statement',
+            link1: '/', // These links will be updated in another PR.
+            text2: ' and ',
+            linkText2: 'Cookie technology list.',
+            link2: '/' // These links will be updated in another PR.
+        },
+        cookies: {
+            necessary: {
+                title: 'Necessary',
+                text: 'These cookies are necessary to ensure that the website and its features function properly. Services you have asked for cannot be provided without these cookies.'
+            },
+            functional: {
+                title: 'Functional',
+                text: 'These cookies allow the website to remember the choices you make to give you better functionality and personal features.'
+            },
+            analytical: {
+                title: 'Analytical',
+                text: 'These analytical cookies, including statistics, are used to understand how visitors interact with the website and we can measure and improve the performance of our website.'
+            },
+            personalised: {
+                title: 'Personalized (targeting and advertising)',
+                text: 'These marketing cookies are used to tailor the delivery of information to you based upon your interest and to measure the effectiveness of such advertisements, both on our website and our advertising partners\' websites.'
+            }
+        },
+        buttons: {
+            onlySelected: 'Only selected',
+            acceptAll: 'Accept all'
+        }
+    }
 };
 
 const displayLegacy = false;

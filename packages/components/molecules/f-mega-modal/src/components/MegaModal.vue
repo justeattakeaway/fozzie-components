@@ -21,7 +21,8 @@
                 [$style['c-megaModal-content--rightToLeft']]: isModeRightToLeft,
                 [$style['is-fullHeight']]: isFullHeight,
                 [$style['is-positioned-bottom']]: isPositionedBottom,
-                [$style['is-text-aligned-center']]: isTextAlignedCenter
+                [$style['is-text-aligned-center']]: isTextAlignedCenter,
+                [$style['is-full-width-mobile']]: isFullWidthForMobile
             }]"
             role="dialog"
             :aria-labelledby="showAriaLabel">
@@ -50,11 +51,12 @@
                                 [$style['c-megaModal-closeBtn--fixed']]: isCloseFixed || isFullHeight
                             }]"
                             button-type="inverse"
-                            button-size="xsmall"
+                            :button-size="hasBackButton ? 'medium' : 'xsmall'"
                             data-test-id="close-modal"
                             @click.native="close">
-                            <component :is="setCloseButtonIconStyle"
-                                       :class="[$style['c-megaModal-closeIcon']]" />
+                            <component
+                                :is="setCloseButtonIconStyle"
+                                :class="[$style['c-megaModal-closeIcon']]" />
 
                             <span class="is-visuallyHidden">
                                 {{ closeButtonCopy }}
@@ -173,6 +175,11 @@ export default {
         isModeRightToLeft: {
             type: Boolean,
             default: false
+        },
+
+        isFullWidthForMobile: {
+            type: Boolean,
+            default: true
         }
     },
 
@@ -353,6 +360,10 @@ export default {
 
 .c-megaModal {
     z-index: f.zIndex(high);
+
+    header {
+        background-color: f.$color-container-default;
+    }
 }
 
 .c-megaModal-content {
@@ -399,8 +410,12 @@ export default {
     @include f.media('<mid') {
         min-width: f.em(22);
 
-        &.is-fullHeight {
-            height: 100%;
+        &.is-fullHeight  {
+            height: 100vh;
+        }
+
+        &.is-full-width-mobile  {
+            height: 100vh;
         }
     }
 
@@ -430,6 +445,15 @@ export default {
     @include f.media('<mid') {
         width: 100%;
         max-width: 100%;
+    }
+}
+
+.is-full-width-mobile {
+    @include f.media('<mid') {
+        border-radius: 0;
+        width: 100%;
+        max-width: 100%;
+        padding: f.spacing(d);
     }
 }
 
@@ -495,6 +519,16 @@ export default {
     &.c-megaModal--hasBackButton {
         .c-megaModal-closeBtn {
             left: f.spacing(d);
+            top: f.spacing(d);
+
+            @include f.media('<mid') {
+                top: f.spacing(b);
+                }
+            }
+
+        .c-megaModal-title {
+            margin-left: f.spacing(h);
+            margin-bottom: f.spacing(d);
         }
     }
 

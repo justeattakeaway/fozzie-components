@@ -96,6 +96,7 @@ $toggle-switch-translation: calc($toggle-switch-width - $toggle-switch-control-s
     border-radius: $toggle-switch-radius;
     background-color: $toggle-switch-colour;
     cursor: pointer;
+    margin: f.spacing(a);
 
     &:hover {
         background-color: darken($toggle-switch-colour, f.$color-hover-01);
