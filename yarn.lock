@@ -2702,6 +2702,13 @@
   dependencies:
     vue-i18n "8.0.0"
 
+"@justeat/f-globalisation@1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@justeat/f-globalisation/-/f-globalisation-1.2.0.tgz#537444a3dd15752d04e8d043ce4cb68ae745cf18"
+  integrity sha512-LhixjjyVwAivTi8HAch//Obqr121C5p+2kyLvEbpvFLOVzxS37iIl0mAqe0SyHg/I0YR+5geTHBh7mtR2+knjg==
+  dependencies:
+    vue-i18n "8.0.0"
+
 "@justeat/f-icons@4.13.0":
   version "4.13.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-icons/-/f-icons-4.13.0.tgz#bb24f146c6a517095f1f29ca2ae430b3f5aa510c"
