@@ -53,8 +53,8 @@
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "4.5.16",
-    "@justeat/f-wdio-utils": "1.x"
+    "@justeat/f-wdio-utils": "1.x",
+    "@vue/cli-plugin-babel": "4.5.16"
   },
   "volta": {
     "extends": "../../../../package.json"

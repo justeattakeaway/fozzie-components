@@ -52,6 +52,6 @@
     "axios": ">=0.21.1"
   },
   "volta": {
-    "extends": "../../../../package.json"
+    "extends": "../../../package.json"
   }
 }

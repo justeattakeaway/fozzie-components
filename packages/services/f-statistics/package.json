@@ -43,6 +43,6 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "volta": {
-    "extends": "../../../../package.json"
+    "extends": "../../../package.json"
   }
 }

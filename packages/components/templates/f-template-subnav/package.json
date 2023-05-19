@@ -42,7 +42,6 @@
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
-  "dependencies": {},
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",
     "@justeat/f-breadcrumbs": "4.x",

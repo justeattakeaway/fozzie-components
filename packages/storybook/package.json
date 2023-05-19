@@ -46,6 +46,6 @@
     "url": "git@github.com:justeat/fozzie-components.git"
   },
   "volta": {
-    "extends": "../../../../package.json"
+    "extends": "../../package.json"
   }
 }

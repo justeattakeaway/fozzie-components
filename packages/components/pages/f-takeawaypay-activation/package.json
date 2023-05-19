@@ -59,9 +59,9 @@
     "@justeat/f-card": "4.x"
   },
   "devDependencies": {
-    "@justeat/f-globalisation": "1.x",
     "@justeat/f-button": "4.x",
     "@justeat/f-card": "4.x",
+    "@justeat/f-globalisation": "1.x",
     "@justeat/f-vue-icons": "3.x",
     "@justeat/f-wdio-utils": "1.x"
   },

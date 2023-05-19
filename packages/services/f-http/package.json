@@ -48,6 +48,6 @@
     "axios-mock-adapter": "1.19.0"
   },
   "volta": {
-    "extends": "../../../../package.json"
+    "extends": "../../../package.json"
   }
 }

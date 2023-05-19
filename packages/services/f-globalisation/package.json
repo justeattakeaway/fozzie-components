@@ -43,6 +43,6 @@
     "vue-i18n": "8.0.0"
   },
   "volta": {
-    "extends": "../../../../package.json"
+    "extends": "../../../package.json"
   }
 }

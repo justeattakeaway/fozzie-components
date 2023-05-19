@@ -43,6 +43,6 @@
     "@justeat/f-services": "1.x"
   },
   "volta": {
-    "extends": "../../../../package.json"
+    "extends": "../../../package.json"
   }
 }
