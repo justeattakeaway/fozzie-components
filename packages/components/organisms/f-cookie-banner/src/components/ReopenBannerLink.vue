@@ -35,7 +35,18 @@ export default {
     flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
-    padding: 0 f.spacing() f.spacing(d);
+    padding-block: 0 f.spacing(d);
+    padding-inline: f.spacing(b);
+
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus;
+        position: absolute;
+
+        &, &:after {
+            inset-block-end: 0; // Prevent vertical scrollbar if it doesn't already exist
+        }
+    }
 }
 
 .reopen-link--greyBg {

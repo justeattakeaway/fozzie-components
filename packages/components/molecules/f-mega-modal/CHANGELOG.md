@@ -4,28 +4,47 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-Latest (merge into next release)
+v7.4.1
 ------------------------------
-*December 5, 2022*
+*April 28, 2023*
+
+### Fixed
+- Linting warning.
+
+
+v7.4.0
+------------------------------
+*April 12, 2023*
+
+### Added
+- Prop `closeButtonStyle` allows either a chevron icon `chevron-left-icon` or close icon `close-small-icon` to be used.
+- `isModeRightToLeft` prop to allow a chevron icon to be used in a right to left tenant.
+
+
+v7.3.0
+------------------------------
+*March 27, 2023*
 
 ### Changed
+- Handle new focus styles from fozzie v11.
+  - Button positioning was specified as `'relative'` by default and needed overriding in some scenarios.
 - Updated to the new `pie-icons-vue` beta release.
 
 
 v7.2.1
 ------------------------------
- *August 31, 2022*
+*August 31, 2022*
 
- ### Fixed
- - Flush styles
+### Fixed
+- Flush styles
 
 
 v7.2.0
 ------------------------------
- *July 19, 2022*
+*July 19, 2022*
 
- ### Added
- - Node 16 support.
+### Added
+- Node 16 support.
 
 
 v7.1.0
@@ -45,6 +64,7 @@ v7.0.0
 - peerDependency versions to use new major version.
 - devDependency version range to match peerDependencies.
 
+
 v6.0.0
 -----------------------------
 *June 20, 2022*
@@ -55,7 +75,7 @@ v6.0.0
 
 v5.1.1
 ------------------------------
-*Jun 9, 2022*
+*June 9, 2022*
 
 ### Changed
 - Bumped wdio version and fixed breaking changes.
@@ -92,6 +112,7 @@ v5.0.0
 - Close button inset positioning changed to stay in-line with the first line of title
 - Increased modal widths by 10%
 - Changed close button icon color to `$color-interactive-primary`
+
 
 v4.2.0
 ------------------------------
@@ -203,6 +224,7 @@ v0.12.0
 - Aligned to PIE designs
 - Updated version of `f-button`.
 
+
 v0.11.0
 ------------------------------
 *July 14, 2021*
@@ -277,6 +299,7 @@ v0.4.0
 
 ### Fixed
 - Readme component reference.
+
 
 v0.3.0
 ------------------------------

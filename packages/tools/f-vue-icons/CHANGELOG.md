@@ -3,6 +3,23 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html)
 
+v3.13.1
+------------------------------
+*March 22, 2023*
+
+### Fixed
+- Issue where new icons weren't commited.
+
+
+v3.13.1
+------------------------------
+*March 10, 2023*
+
+### Fixed
+- Added VeganIcon icon to index file.
+- Changed component name from Vegan to VeganIcon
+- Increased maxBundle size to 155kB
+
 v3.13.0
 ------------------------------
 *March 9, 2023*

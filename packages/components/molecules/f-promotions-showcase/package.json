@@ -56,6 +56,6 @@
     "@justeat/f-wdio-utils": "1.x"
   },
   "volta": {
-    "extends": "../../../../volta.json"
+    "extends": "../../../../package.json"
   }
 }

@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import { withA11y } from '@storybook/addon-a11y';
 import FButton from '../src/components/Button.vue';
 import SharedButtonArgTypes from './sharedButtonArgTypes';
+import { VALID_BUTTON_SIZES, VALID_BUTTON_TYPES } from '../src/constants';
 
 Vue.use(Router);
 
@@ -57,14 +58,14 @@ RouterLinkComponent.argTypes = {
     buttonType:
     {
         control: { type: 'select' },
-        options: ['primary', 'secondary', 'outline', 'ghost', 'link'],
+        options: VALID_BUTTON_TYPES.button,
         description: 'Choose a Button Type',
         defaultValue: 'primary'
     },
     buttonSize:
     {
         control: { type: 'select' },
-        options: ['xsmall', 'small', 'medium', 'large'],
+        options: VALID_BUTTON_SIZES.button,
         description: 'Choose a Button Size',
         defaultValue: 'medium'
     },

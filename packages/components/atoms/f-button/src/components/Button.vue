@@ -113,7 +113,9 @@ export default {
             if (this.buttonSize === 'xsmall') {
                 return this.buttonSize.slice(0, 2).toUpperCase() + this.buttonSize.slice(2); // xsmall -> XSmall
             }
-            return this.buttonSize.charAt(0).toUpperCase() + this.buttonSize.slice(1); // capitalize the first letter of the prop
+
+            // Convert from kebab-case (if applicable) to PascalCase
+            return this.buttonSize.split('-').map(x => x.charAt(0).toUpperCase() + x.substr(1).toLowerCase()).join('');
         },
 
         /**
@@ -172,11 +174,12 @@ export default {
 
             const validTypes = VALID_BUTTON_TYPES[componentType];
             if (!validTypes.includes(this.buttonType)) {
-                throw new TypeError(`${componentType} is set to have buttonType="${this.buttonType}", but it can only be one of the following buttonTypes: "${validTypes.join('", "')}"`);
+                throw new TypeError(`buttonType for ${componentType} is set to "${this.buttonType}", but it must be one of the following: "${validTypes.join('", "')}"`);
             }
 
-            if (!VALID_BUTTON_SIZES.includes(this.buttonSize)) {
-                throw new TypeError(`buttonSize is set to "${this.buttonSize}", but it can only be one of the following buttonSizes: "${VALID_BUTTON_SIZES.join('", "')}"`);
+            const validSizes = VALID_BUTTON_SIZES[componentType];
+            if (!validSizes.includes(this.buttonSize)) {
+                throw new TypeError(`buttonSize for ${componentType} is set to "${this.buttonSize}", but it must be one of the following: "${validSizes.join('", "')}"`);
             }
 
             if (!VALID_BUTTON_ICON_POSITION.includes(this.hasIcon)) {
@@ -193,8 +196,8 @@ export default {
 $btn-default-borderRadius              : f.$radius-rounded-e;
 $btn-default-font-size                 : 'heading-s';
 $btn-default-weight                    : f.$font-weight-bold;
-$btn-default-padding                   : 9px f.spacing(e);
-$btn-default-outline-color             : f.$color-focus;
+$btn-default-padding-block             : 9px;
+$btn-default-padding-inline            : f.spacing(e);
 $btn-default-loading-opacity           : 0.35;
 $btn-default-iconHeight                : 18px;
 $btn-default-iconSpacing               : 3px;
@@ -248,18 +251,28 @@ $btn-link-loading-colorOpaque          : rgba($btn-link-loading-color, $btn-defa
 $btn-disabled-bgColor                  : f.$color-disabled-01;
 $btn-disabled-textColor                : f.$color-content-disabled;
 
-$btn-sizeLarge-padding                 : 13px f.spacing(e);
+$btn-sizeLarge-padding-block           : 13px;
+$btn-sizeLarge-padding-inline          : f.spacing(e);
 $btn-sizeLarge-loading-color           : f.$color-content-interactive-light;
 $btn-sizeLarge-loading-colorOpaque     : rgba($btn-sizeLarge-loading-color, $btn-default-loading-opacity);
 
-$btn-sizeSmall-font-size               : 'body-l';
-$btn-sizeSmall-padding                 : 7px f.spacing(d);
-$btn-sizeSmall-iconHeight              : 15px;
-$btn-sizeSmall-iconSpacing             : 2.5px;
-$btn-sizeSmall-iconSideSpacing         : $btn-sizeSmall-iconSpacing + f.spacing();
+$btn-sizeSmallExpressive-font-size       : 'heading-s';
+$btn-sizeSmallExpressive-padding-block   : 5px;
+$btn-sizeSmallExpressive-padding-inline  : f.spacing(d);
+$btn-sizeSmallExpressive-iconHeight      : 15px;
+$btn-sizeSmallExpressive-iconSpacing     : 2.5px;
+$btn-sizeSmallExpressive-iconSideSpacing : $btn-sizeSmallExpressive-iconSpacing + f.spacing();
+
+$btn-sizeSmallProductive-font-size       : 'body-l';
+$btn-sizeSmallProductive-padding-block   : 7px;
+$btn-sizeSmallProductive-padding-inline  : f.spacing(d);
+$btn-sizeSmallProductive-iconHeight      : 15px;
+$btn-sizeSmallProductive-iconSpacing     : 2.5px;
+$btn-sizeSmallProductive-iconSideSpacing : $btn-sizeSmallProductive-iconSpacing + f.spacing();
 
 $btn-sizeXSmall-font-size              : 'body-s';
-$btn-sizeXSmall-padding                : 5px f.spacing();
+$btn-sizeXSmall-padding-block          : 5px;
+$btn-sizeXSmall-padding-inline         : f.spacing();
 $btn-sizeXSmall-iconHeight             : 12px;
 $btn-sizeXSmall-iconSpacing            : 2px;
 $btn-sizeXSmall-iconSideSpacing        : $btn-sizeXSmall-iconSpacing + f.spacing();
@@ -275,10 +288,11 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 @include f.loadingIndicator('medium');
 
 .c-spinner {
-    margin: 0 auto;
+    margin-block: 0;
+    margin-inline: auto;
     position: absolute;
-    left: calc(50% - 10px); // Substract half of the size of the spinner.
-    top: calc(50% - 10px); // Substract half of the size of the spinner.
+    inset-inline-start: calc(50% - 10px); // Substract half of the size of the spinner.
+    inset-block-start: calc(50% - 10px); // Substract half of the size of the spinner.
 }
 
 .o-btn {
@@ -287,7 +301,8 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     vertical-align: middle;
     @include f.font-size($btn-default-font-size);
     cursor: pointer;
-    padding: $btn-default-padding;
+    padding-block: $btn-default-padding-block;
+    padding-inline: $btn-default-padding-inline;
     overflow: visible;
     text-align: center;
     font-weight: $btn-default-weight;
@@ -299,8 +314,13 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     outline: 0;
 
     // Show focus styles on keyboard focus.
+    &:focus,
     &:focus-visible {
-        box-shadow: 0 0 0 2px $btn-default-outline-color;
+        @extend %u-elementFocus;
+
+        &, &:after {
+            border-radius: $btn-default-borderRadius;
+        }
     }
 
     &,
@@ -312,7 +332,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     }
 
     p + & {
-        margin-top: f.spacing(d);
+        margin-block-start: f.spacing(d);
     }
 }
     .o-button-content {
@@ -333,7 +353,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 
     .o-btn-icon,
     .o-btn-icon svg {
-        height: $btn-default-iconHeight;
+        block-size: $btn-default-iconHeight;
     }
 
     .o-btn-icon svg use,
@@ -342,11 +362,11 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     }
 
     .o-btn-icon--leading {
-        margin-right: $btn-default-iconSideSpacing;
+        margin-inline-end: $btn-default-iconSideSpacing;
     }
 
     .o-btn-icon--trailing {
-        margin-left: $btn-default-iconSideSpacing;
+        margin-inline-start: $btn-default-iconSideSpacing;
     }
 
 /**
@@ -388,6 +408,7 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     }
 
     &.o-btn--sizeSmall,
+    &.o-btn--sizeSmallProductive,
     &.o-btn--sizeXSmall {
         @include common.background-color(f.$color-interactive-primary);
 
@@ -680,35 +701,38 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
     }
 
     svg {
-        width: $btn-icon-iconSize;
-        height: $btn-icon-iconSize;
+        inline-size: $btn-icon-iconSize;
+        block-size: $btn-icon-iconSize;
     }
-}
 
-.o-btn--icon.o-btn--sizeLarge {
-    width: $btn-icon-sizeLarge-buttonSize;
-    height: $btn-icon-sizeLarge-buttonSize;
-    padding: 0;
+    &.o-btn--sizeLarge {
+        inline-size: $btn-icon-sizeLarge-buttonSize;
+        block-size: $btn-icon-sizeLarge-buttonSize;
+        padding: 0;
 
-    svg {
-        width: $btn-icon-sizeLarge-iconSize;
-        height: $btn-icon-sizeLarge-iconSize;
+        svg {
+            inline-size: $btn-icon-sizeLarge-iconSize;
+            block-size: $btn-icon-sizeLarge-iconSize;
+        }
     }
-}
-.o-btn--icon.o-btn--sizeMedium {
-    width: $btn-icon-sizeMedium-buttonSize;
-    height: $btn-icon-sizeMedium-buttonSize;
-    padding: 0;
-}
-.o-btn--icon.o-btn--sizeSmall {
-    width: $btn-icon-sizeSmall-buttonSize;
-    height: $btn-icon-sizeSmall-buttonSize;
-    padding: 0;
-}
-.o-btn--icon.o-btn--sizeXSmall {
-    width: $btn-icon-sizeXSmall-buttonSize;
-    height: $btn-icon-sizeXSmall-buttonSize;
-    padding: 0;
+
+    &.o-btn--sizeMedium {
+        inline-size: $btn-icon-sizeMedium-buttonSize;
+        block-size: $btn-icon-sizeMedium-buttonSize;
+        padding: 0;
+    }
+
+    &.o-btn--sizeSmall {
+        inline-size: $btn-icon-sizeSmall-buttonSize;
+        block-size: $btn-icon-sizeSmall-buttonSize;
+        padding: 0;
+    }
+
+    &.o-btn--sizeXSmall {
+        inline-size: $btn-icon-sizeXSmall-buttonSize;
+        block-size: $btn-icon-sizeXSmall-buttonSize;
+        padding: 0;
+    }
 }
 
 /**
@@ -718,34 +742,60 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
  */
 
 .o-btn--sizeLarge {
-    padding: $btn-sizeLarge-padding;
+    padding-block: $btn-sizeLarge-padding-block;
+    padding-inline: $btn-sizeLarge-padding-inline;
 }
 
-.o-btn--sizeSmall {
-    @include f.font-size($btn-sizeSmall-font-size);
-    padding: $btn-sizeSmall-padding;
+.o-btn--sizeSmallExpressive {
+    @include f.font-size($btn-sizeSmallExpressive-font-size);
+    padding-block: $btn-sizeSmallExpressive-padding-block;
+    padding-inline: $btn-sizeSmallExpressive-padding-inline;
 
     .o-btn-icon {
-        margin: $btn-sizeSmall-iconSpacing;
+        margin: $btn-sizeSmallExpressive-iconSpacing;
     }
 
     .o-btn-icon,
     .o-btn-icon svg {
-        height: $btn-sizeSmall-iconHeight;
+        block-size: $btn-sizeSmallExpressive-iconHeight;
     }
 
     .o-btn-icon--leading {
-        margin-right: $btn-sizeSmall-iconSideSpacing;
+        margin-inline-end: $btn-sizeSmallExpressive-iconSideSpacing;
     }
 
     .o-btn-icon--trailing {
-        margin-left: $btn-sizeSmall-iconSideSpacing;
+        margin-inline-start: $btn-sizeSmallExpressive-iconSideSpacing;
+    }
+}
+
+.o-btn--sizeSmallProductive {
+    @include f.font-size($btn-sizeSmallProductive-font-size);
+    padding-block: $btn-sizeSmallProductive-padding-block;
+    padding-inline: $btn-sizeSmallProductive-padding-inline;
+
+    .o-btn-icon {
+        margin: $btn-sizeSmallProductive-iconSpacing;
+    }
+
+    .o-btn-icon,
+    .o-btn-icon svg {
+        block-size: $btn-sizeSmallProductive-iconHeight;
+    }
+
+    .o-btn-icon--leading {
+        margin-inline-end: $btn-sizeSmallProductive-iconSideSpacing;
+    }
+
+    .o-btn-icon--trailing {
+        margin-inline-start: $btn-sizeSmallProductive-iconSideSpacing;
     }
 }
 
 .o-btn--sizeXSmall {
     @include f.font-size($btn-sizeXSmall-font-size);
-    padding: $btn-sizeXSmall-padding;
+    padding-block: $btn-sizeXSmall-padding-block;
+    padding-inline: $btn-sizeXSmall-padding-inline;
 
     .o-btn-icon {
         margin: $btn-sizeXSmall-iconSpacing;
@@ -753,15 +803,15 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 
     .o-btn-icon,
     .o-btn-icon svg {
-        height: $btn-sizeXSmall-iconHeight;
+        block-size: $btn-sizeXSmall-iconHeight;
     }
 
     .o-btn-icon--leading {
-        margin-right: $btn-sizeSmall-iconSideSpacing;
+        margin-inline-end: $btn-sizeXSmall-iconSideSpacing;
     }
 
     .o-btn-icon--trailing {
-        margin-left: $btn-sizeSmall-iconSideSpacing;
+        margin-inline-start: $btn-sizeXSmall-iconSideSpacing;
     }
 }
 
@@ -779,12 +829,12 @@ $btn-icon-sizeXSmall-buttonSize        : 32px;
 
 .o-btn--fullWidth {
     display: block;
-    width: 100%;
+    inline-size: 100%;
 
     // Vertically space out multiple fullWidth buttons
     // same as .o-btn--fullWidth + .o-btn--fullWidth
     & + & {
-        margin-top: f.spacing(d);
+        margin-block-start: f.spacing(d);
     }
 }
 

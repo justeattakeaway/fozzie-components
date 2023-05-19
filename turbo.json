@@ -60,12 +60,12 @@
       "outputs":[]
     },
     "ci:test-a11y:chrome:atoms": {
-      "cache": false,
+      "cache": true,
       "dependsOn": [],
       "outputs":[]
     },
     "ci:test-component:chrome:molecules": {
-      "cache": false,
+      "cache": true,
       "dependsOn": [],
       "outputs":[]
     },
@@ -75,12 +75,12 @@
       "outputs":[]
     },
     "ci:test-a11y:chrome:molecules": {
-      "cache": false,
+      "cache": true,
       "dependsOn": [],
       "outputs":[]
     },
     "ci:test-component:chrome:organisms": {
-      "cache": false,
+      "cache": true,
       "dependsOn": [],
       "outputs":[]
     },
@@ -90,12 +90,12 @@
       "outputs":[]
     },
     "ci:test-a11y:chrome:organisms": {
-      "cache": false,
+      "cache": true,
       "dependsOn": [],
       "outputs":[]
     },
     "ci:test-component:chrome:pages": {
-      "cache": false,
+      "cache": true,
       "dependsOn": [],
       "outputs":[]
     },
@@ -105,12 +105,12 @@
       "outputs":[]
     },
     "ci:test-a11y:chrome:pages": {
-      "cache": false,
+      "cache": true,
       "dependsOn": [],
       "outputs":[]
     },
     "test-component:chrome": {
-      "cache": false,
+      "cache": true,
       "dependsOn": [],
       "outputs":[]
     },
@@ -120,7 +120,7 @@
       "outputs":[]
     },
     "test-a11y:chrome": {
-      "cache": false,
+      "cache": true,
       "dependsOn": [],
       "outputs":[]
     },

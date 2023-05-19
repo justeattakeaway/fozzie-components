@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-feature-management",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "Service for querying feature values provided by Feature Management",
   "main": "dist/f-feature-management.umd.js",
   "module": "dist/f-feature-management.es.js",
@@ -42,10 +42,10 @@
     "jest-mock-axios": "4.4.1"
   },
   "dependencies": {
-    "@justeat/feature-management": "^1.0.0",
+    "@justeat/feature-management": "1.0.1",
     "crypto-js": "4.1.1"
   },
   "volta": {
-    "extends": "../../../../volta.json"
+    "extends": "../../../../package.json"
   }
 }

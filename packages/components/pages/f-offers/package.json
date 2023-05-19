@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-offers",
   "description": "Fozzie Offers - displays offers to the customers",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "dist/f-offers.umd.min.js",
   "maxBundleSize": "150kB",
   "files": [
@@ -77,6 +77,6 @@
     "@vue/cli-plugin-babel": "4.5.16"
   },
   "volta": {
-    "extends": "../../../../volta.json"
+    "extends": "../../../../package.json"
   }
 }

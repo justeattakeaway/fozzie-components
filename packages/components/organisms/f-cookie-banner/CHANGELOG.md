@@ -4,6 +4,27 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v4.9.0
+------------------------------
+*April 21, 2023*
+
+### Added
+- Scrolling functionality to cookie banner's body text at mobile/tablet viewports.
+- Scroll shadow to indicate that some content is hidden behind the buttons. The shadow disappears as you scroll to the bottom of the content.
+
+### Changed
+- Some styling tweaks to slightly better align with bigger upcoming updates
+- Use inline/block for padding, margin and positioning styles.
+
+
+v4.8.0
+------------------------------
+*March 27, 2023*
+
+### Changed
+- Apply new focus styles to cookie banner.
+
+
 v4.7.0
 ------------------------------
 *November 11, 2022*
@@ -57,19 +78,19 @@ v4.4.0
 
 
 v4.3.0
- ------------------------------
- *July 26, 2022*
+------------------------------
+*July 26, 2022*
 
- ### Updated
- - `@justeat` dependencies to use latest minor verisons.
+### Updated
+- `@justeat` dependencies to use latest minor verisons.
 
 
 v4.2.0
- ------------------------------
- *July 25, 2022*
+------------------------------
+*July 25, 2022*
 
- ### Added
- - Node 16 support.
+### Added
+- Node 16 support.
 
 
 v4.1.0
@@ -90,7 +111,7 @@ v4.0.0
 
 v3.10.1
 -----------------------------
-*Jun 22, 2022*
+*June 22, 2022*
 
 ### Changed
 - Bumped wdio version and fixed breaking changes.

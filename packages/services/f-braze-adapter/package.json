@@ -56,6 +56,6 @@
     "@braze/web-sdk": ">=3.3.0"
   },
   "volta": {
-    "extends": "../../../../volta.json"
+    "extends": "../../../../package.json"
   }
 }

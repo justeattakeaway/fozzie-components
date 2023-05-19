@@ -7,6 +7,35 @@ Future Todo List
 ------------------------------
 - Make typography and utility classes silent extenders (so that they can be extended by components without importing all utility classes).
 
+
+v11.0.0
+------------------------------
+*March 27, 2023*
+
+### Changed
+- Update focus styles to new double outline, using box-shadow.
+  - To prevent anti-aliasing issues when used with rounded borders, the two shadows had to be separated into separate declarations.
+  - The inner shadow is applied to the element and the outer shadow to the `:after` pseudo-element.
+  - Deprecated `%u-elementFocus--boxShadow` as all focus styles should use box-shadow by default.
+    - `%u-elementFocus` now sets `outline: none` by default.
+
+### Added
+- `%u-elementFocus--borderless` for elements that do not have a border.
+  - The default `%u-elementFocus` extender assumes the element will have a 1px border, so this extender repositions the `:after` pseudo-element slightly.
+  - `position: relative` is also applied to the element by default (to anchor the position of the `:after` pseudo-element) so if you need a different value please override it.
+
+### Removed
+- `$btn-default-outline-color` SCSS variable. This shouldn't be being used elsewhere, but if it is then please use the silent extenders to get the focus styles instead.
+
+
+v10.11.1
+------------------------------
+*March 15, 2023*
+
+### Added
+- Optional parameter in `f.rating` to set star count.
+
+
 v10.11.0
 ------------------------------
 *February 22, 2023*

@@ -10,7 +10,7 @@
                 :is="getRatingVariant"
                 :max-star-rating="maxStarRating"
                 :star-rating-size="starRatingSize"
-                :star-rating="starRating" />
+                :star-rating="validatedStarRating" />
 
             <span
                 v-if="hasRatingAvailable"
@@ -66,8 +66,7 @@ export default {
         },
         starRating: {
             type: Number,
-            required: true,
-            validator: value => value >= 0 && value <= 5
+            required: true
         },
         maxStarRating: {
             type: Number,
@@ -81,7 +80,7 @@ export default {
         },
         ratingDisplayType: {
             type: String,
-            default: null,
+            default: 'short',
             validator: value => VALID_STAR_RATING_DISPLAY_TYPE.includes(value)
         },
         reviewCount: {
@@ -120,16 +119,21 @@ export default {
          * @returns {string|*}
          */
         getRatingDescription () {
-            return this.starRating === 1
-                ? this.$tc('ratings.starsDescription', 1, {
-                    rating: this.starRating,
-                    maxStarRating: this.maxStarRating
-                })
+            // Allow locale translations to be read within consuming applications if locale is not set when consuming this component.
+            if (this.locale) {
+                return this.starRating === 1 && this.locale
+                    ? this.$tc('ratings.starsDescription', 1, {
+                        rating: this.starRating,
+                        maxStarRating: this.maxStarRating
+                    })
 
-                : this.$tc('ratings.starsDescription', 2, {
-                    rating: this.starRating,
-                    maxStarRating: this.maxStarRating
-                });
+                    : this.$tc('ratings.starsDescription', 2, {
+                        rating: this.starRating,
+                        maxStarRating: this.maxStarRating
+                    });
+            }
+
+            return '';
         },
 
         /**
@@ -160,6 +164,20 @@ export default {
          */
         shouldDisplayUserOwnRating () {
             return this.isUserRating && this.hasRatingAvailable;
+        },
+
+        /**
+         * Returns the star rating is within the valid range or 0 otherwise
+         *
+         * @returns {boolean}
+         */
+        validatedStarRating () {
+            const validate = this.starRating >= 0 && this.starRating <= this.maxStarRating;
+            if (validate) {
+                return this.starRating;
+            }
+            this.$log.warn(`The star rating should be between 0 and ${this.maxStarRating} but it was ${this.starRating}`);
+            return 0;
         }
     },
 
@@ -173,6 +191,8 @@ export default {
          * @returns {string}
          */
         getRatingDisplayFormat () {
+            if (!this.locale) return '';
+
             if (!this.hasRatingAvailable) {
                 return this.$t('ratings.ratingDisplayType.noRating');
             }

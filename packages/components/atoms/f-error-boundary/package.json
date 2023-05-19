@@ -49,6 +49,6 @@
     "vite-plugin-vue2": "1.9.0"
   },
   "volta": {
-    "extends": "../../../../volta.json"
+    "extends": "../../../../package.json"
   }
 }

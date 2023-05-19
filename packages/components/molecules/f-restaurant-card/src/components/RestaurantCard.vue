@@ -375,8 +375,6 @@ export default {
     display: grid;
     grid-gap: f.spacing(c);
     grid-template-columns: 1fr;
-    position: relative;
-    outline-color: f.$color-focus;
 
     &.c-restaurantCard--listItem {
         @include f.media('>mid') {
@@ -389,6 +387,11 @@ export default {
         .c-restaurantCard-name {
             text-decoration: underline;
         }
+    }
+
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--borderless;
     }
 }
 

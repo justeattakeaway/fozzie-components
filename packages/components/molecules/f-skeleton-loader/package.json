@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-skeleton-loader",
   "description": "Fozzie Skeleton Loader - Provides a visual indication that another component is loading. ",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "main": "dist/f-skeleton-loader.umd.min.js",
   "maxBundleSize": "10kB",
   "files": [
@@ -56,6 +56,6 @@
     "@justeat/f-wdio-utils": "1.x"
   },
   "volta": {
-    "extends": "../../../../volta.json"
+    "extends": "../../../../package.json"
   }
 }

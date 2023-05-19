@@ -25,9 +25,23 @@ There's two solutions you could try from the root of the project which may fix t
 
 
 ## Development
-We use [Turborepo](https://www.turborepo.org) to handle all of our build tasks in order to speed up development. We utilise Turborepo caching so that certain tasks only execute for changed components and their dependencies / dependants.
 
-Because of this, it is recommended to run the following tasks at the root of the monorepo to ensure tasks are executed for the required components:
+#### Turborepo
+
+- https://turborepo.org/docs
+
+---
+
+Turborepo is an intelligent build system optimized for JavaScript and TypeScript codebases. We use Turborepo to facilitate the execution of all our build scripts within the PIE monorepo.
+
+## Remote Caching in AWS S3
+In order to speed up local development / CI workflows, we use Turborepo's remote caching functionality to publish build artifacts to AWS S3. This ensures that only modified packages have their build tasks executed.
+
+In order to take advantage of this functionality, you must set the `TURBO_TOKEN` environment variable on your local machine. Please reach out to the design system team for the value of this token.
+
+Once enabled you'll see 'Remote caching enabled' when executing a packages node task.
+
+It is recommended to run the following tasks at the root of the monorepo to ensure tasks are executed for the required components:
 
 `build`
 `test`
@@ -54,8 +68,7 @@ Component Tests
  yarn storybook:build
  yarn storybook:serve-static
  # And in another window
- cd ./fozzie-components/packages/f-*user-message*
- yarn test-component:chrome
+ yarn test-component:chrome --filter=@justeat/f-user-message
  ```
 
 ## Importing optional SCSS helpers from Fozzie

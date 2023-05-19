@@ -474,14 +474,20 @@ export default {
 
 .c-cookieBanner-card {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    inset-block-end: 0;
+    inset-inline: 0;
+    max-height: 376px;
+    padding-block: f.spacing(d);
+    padding-inline: 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     background-color: f.$color-container-default;
     z-index: 99999992;
+
+    @include f.media('>=mid') {
+        flex-direction: row;
+    }
 }
 
 .c-cookieBanner-text {
@@ -491,11 +497,16 @@ export default {
 }
 
 .c-cookieBanner-title {
-    @include f.font-size(heading-m);
-    margin: 0 0 f.spacing();
+    @include f.font-size(heading-s);
+    margin-block: f.spacing(a) f.spacing(b);
+    margin-inline: 0;
     padding: 0;
     color: f.$color-content-default;
-    text-align: left;
+    text-align: start;
+
+    @include f.media('>=mid') {
+        @include f.font-size(heading-m);
+    }
 
     &:hover,
     &:focus {
@@ -503,47 +514,67 @@ export default {
             text-decoration: none;
         }
     }
+
+    &:focus,
+    &:focus-visible {
+        @extend %u-elementFocus--borderless;
+    }
 }
 
 .c-cookieBanner-content {
-    margin: 0 auto;
-    padding: f.spacing(f);
-    text-align: left;
+    margin-block: 0;
+    margin-inline: auto;
+    padding-block: 0;
+    padding-inline: f.spacing(d);
+    text-align: start;
+    overflow-y: auto;
+
+    @include f.media('>=mid') {
+        padding-inline: f.spacing(f);
+    }
+
+    @include f.media('<mid') {
+        background:
+            // Scroll shadow cover (hides the shadow when you scroll down)
+            linear-gradient(
+                rgba(f.$color-white, 0),
+                f.$color-white 70%
+            ) center bottom,
+
+            // Scroll shadow
+            radial-gradient(
+            farthest-side at 50% 100%,
+                rgba(f.$color-black, 0.3),
+                rgba(f.$color-black, 0)
+            ) center bottom;
+        background-repeat: no-repeat;
+        background-size: 100% 48px, 1000% 12px;
+        background-attachment: local, scroll;
+    }
 }
 
 .reopen-link-wrapper {
     position: absolute;
-    bottom: 0;
+    inset-block-end: 0;
     width: 100%;
 }
 
-@include f.media ('<mid') {
-    .c-cookieBanner-card {
-        flex-direction: column;
-        padding: f.spacing(d) 0;
-    }
-
-    .c-cookieBanner-ios {
-        padding-bottom: 80px;
-    }
-
-    .c-cookieBanner-content,
-    .c-cookieBanner-cta {
-        padding: f.spacing(d) f.spacing(e) f.spacing(a);
+.c-cookieBanner-ios {
+    @include f.media('<mid') {
+        padding-block-end: f.spacing(j);
     }
 }
 
-@include f.media ('>=mid') {
-    .c-cookieBanner-cta {
-        padding: f.spacing(f);
-        min-width: 352px;
-        margin: 0 auto;
-    }
-}
+.c-cookieBanner-cta {
+    padding-block: f.spacing(d) f.spacing(a);
+    padding-inline: f.spacing(e);
 
-@include f.media('<=narrowMid') {
-    .c-cookieBanner-title {
-        @include f.font-size(heading-s);
+    @include f.media('>=mid') {
+        padding-block: f.spacing(d);
+        padding-inline: f.spacing(d);
+        min-width: 320px;
+        margin-block: 0;
+        margin-inline: auto;
     }
 }
 </style>

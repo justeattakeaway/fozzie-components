@@ -156,7 +156,7 @@ export default {
     box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.11);
 
     &:focus {
-        border: solid 2px f.$color-focus;
+        box-shadow: 0 0 0 2px f.$color-focus-inner, 0 0 0 4px f.$color-focus-outer;
     }
 }
 

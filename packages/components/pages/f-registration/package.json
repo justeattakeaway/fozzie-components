@@ -75,6 +75,6 @@
     "@vue/cli-plugin-babel": "4.5.8"
   },
   "volta": {
-    "extends": "../../../../volta.json"
+    "extends": "../../../../package.json"
   }
 }

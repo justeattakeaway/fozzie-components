@@ -49,6 +49,6 @@
     "vue-demi": "0.11.4"
   },
   "volta": {
-    "extends": "../../../../volta.json"
+    "extends": "../../../../package.json"
   }
 }

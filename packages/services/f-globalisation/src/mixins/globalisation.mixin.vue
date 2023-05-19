@@ -27,6 +27,8 @@ export default {
         setupLocale (locale, applyLocale = false) {
             const localeConfig = this.tenantConfigs[locale];
 
+            if (!locale || !localeConfig) return;
+
             this.$i18n.setLocaleMessage(locale, localeConfig.messages);
             this.$i18n.setDateTimeFormat(locale, localeConfig.dateTimeFormats);
 
@@ -39,7 +41,10 @@ export default {
             const currentLocale = this.locale || this.$i18n.locale;
             const fallbackLocale = 'en-GB';
 
-            this.setupLocale(currentLocale, true);
+            // If no locale passed do not set up locale.
+            if (this.locale) {
+                this.setupLocale(currentLocale, true);
+            }
 
             // Don't load messages for en-GB twice
             if (currentLocale !== fallbackLocale) {
