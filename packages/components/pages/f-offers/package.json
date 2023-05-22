@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-offers",
   "description": "Fozzie Offers - displays offers to the customers",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "main": "dist/f-offers.umd.min.js",
   "maxBundleSize": "150kB",
   "files": [
@@ -47,7 +47,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-globalisation": "1.x",
+    "@justeat/f-globalisation": "1.2.0",
     "@justeat/f-services": "1.x",
     "@justeattakeaway/cc-braze-adapter": "0.3.0",
     "axios": "0.21.2",
