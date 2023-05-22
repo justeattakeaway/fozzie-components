@@ -43,7 +43,6 @@
                             {{ copy.textLine3 }}
                             <v-link
                                 data-test-id="cookie-policy-link"
-                                is-distinct
                                 :href="copy.cookiePolicyLinkUrl"
                                 target="_blank"
                                 rel="noopener noreferrer">
@@ -56,18 +55,19 @@
 
                 <div
                     ref="buttonContainer"
-                    :class="$style['c-cookieBanner-cta']">
+                    :class="$style['c-cookieBanner-cta-container']">
                     <button-component
+                        :class="$style['c-cookieBanner-cta']"
                         data-test-id="accept-all-cookies-button"
-                        is-full-width
+                        button-size="small"
                         @click="acceptAllCookiesActions">
                         {{ copy.acceptButtonText }}
                     </button-component>
 
                     <button-component
-                        button-type="outline"
+                        :class="$style['c-cookieBanner-cta']"
                         data-test-id="accept-necessary-cookies-button"
-                        is-full-width
+                        button-size="small"
                         @click="acceptOnlyNecessaryCookiesActions">
                         {{ copy.nonAcceptButtonText }}
                     </button-component>
@@ -482,22 +482,17 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: f.$color-container-default;
+    background-color: f.$color-background-subtle;
     z-index: 99999992;
-
-    @include f.media('>=mid') {
-        flex-direction: row;
-    }
 }
 
 .c-cookieBanner-text {
     margin: 0;
     padding: 0;
-    @include f.font-size(body-s);
 }
 
 .c-cookieBanner-title {
-    @include f.font-size(heading-s);
+    @include f.font-size(body-l);
     margin-block: f.spacing(a) f.spacing(b);
     margin-inline: 0;
     padding: 0;
@@ -505,7 +500,7 @@ export default {
     text-align: start;
 
     @include f.media('>=mid') {
-        @include f.font-size(heading-m);
+        @include f.font-size(heading-s);
     }
 
     &:hover,
@@ -522,8 +517,6 @@ export default {
 }
 
 .c-cookieBanner-content {
-    margin-block: 0;
-    margin-inline: auto;
     padding-block: 0;
     padding-inline: f.spacing(d);
     text-align: start;
@@ -537,8 +530,8 @@ export default {
         background:
             // Scroll shadow cover (hides the shadow when you scroll down)
             linear-gradient(
-                rgba(f.$color-white, 0),
-                f.$color-white 70%
+                rgba(f.$color-background-subtle, 0),
+                    f.$color-background-subtle 70%
             ) center bottom,
 
             // Scroll shadow
@@ -565,16 +558,36 @@ export default {
     }
 }
 
-.c-cookieBanner-cta {
+.c-cookieBanner-cta-container {
     padding-block: f.spacing(d) f.spacing(a);
     padding-inline: f.spacing(e);
 
+    .c-cookieBanner-cta {
+        inline-size: 100%;
+    }
+
+    .c-cookieBanner-cta:not(:last-child) {
+        margin-block-end: f.spacing(d);
+    }
+
     @include f.media('>=mid') {
+        display: flex;
+        flex-direction: row-reverse;
         padding-block: f.spacing(d);
         padding-inline: f.spacing(d);
-        min-width: 320px;
+        margin-inline: f.spacing(d);
+        min-inline-size: 320px;
         margin-block: 0;
-        margin-inline: auto;
+
+        .c-cookieBanner-cta {
+            inline-size: inherit;
+            margin-inline-start: f.spacing(d);
+            margin-block-end: 0;
+        }
+
+        .c-cookieBanner-cta:not(:last-child) {
+            margin-block-end: 0;
+        }
     }
 }
 </style>
