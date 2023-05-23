@@ -58,5 +58,8 @@
   "devDependencies": {
     "@justeat/f-button": "4.x",
     "@justeat/f-wdio-utils": "1.x"
+  },
+  "volta": {
+    "extends": "../../../../package.json"
   }
 }

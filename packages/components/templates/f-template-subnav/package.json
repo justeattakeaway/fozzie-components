@@ -42,7 +42,6 @@
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
-  "dependencies": {},
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",
     "@justeat/f-breadcrumbs": "4.x",
@@ -52,5 +51,8 @@
     "@justeat/f-breadcrumbs": "4.x",
     "@justeat/f-navigation-links": "2.x",
     "@justeat/f-wdio-utils": "1.x"
+  },
+  "volta": {
+    "extends": "../../../../package.json"
   }
 }
