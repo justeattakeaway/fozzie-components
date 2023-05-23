@@ -49,12 +49,15 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-      "uuid": "9.0.0"
+    "uuid": "9.0.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "1.x"
+  },
+  "volta": {
+    "extends": "../../../../package.json"
   }
 }
