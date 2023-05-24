@@ -75,5 +75,8 @@
     "@justeat/f-vue-icons": "3.x",
     "@justeat/f-wdio-utils": "1.x",
     "url-loader": "4.1.0"
+  },
+  "volta": {
+    "extends": "../../../../package.json"
   }
 }

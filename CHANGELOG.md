@@ -3,9 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.53.0
+------------------------------
+*May 22, 2023*
+
+### Added
+- volta to `components`, `tools`, `services` and `storybook`
+
+
 v7.52.0
 ------------------------------
-*May 18, 2022*
+*May 18, 2023*
 
 ### Changed
 - Updated chromedriver to 113.0.0.
