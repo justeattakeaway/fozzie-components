@@ -53,5 +53,8 @@
   "devDependencies": {
     "@justeat/f-link": "3.x",
     "@justeat/f-wdio-utils": "1.x"
+  },
+  "volta": {
+    "extends": "../../../../package.json"
   }
 }
