@@ -43,7 +43,7 @@ export default {
     methods: {
 
         onClickContentCard () {
-            this.emitCardClick(this.card);
+            this.emitCardClick(this.card, this.$el);
         }
     }
 };
