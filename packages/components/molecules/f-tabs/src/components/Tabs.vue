@@ -102,7 +102,8 @@ export default {
 
             this.$emit('change', {
                 new: newIndex,
-                prev: previousIndex
+                prev: previousIndex,
+                activeTabName: name
             });
 
             this.activeTab = name;
