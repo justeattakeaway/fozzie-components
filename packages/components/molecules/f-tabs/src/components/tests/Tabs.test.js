@@ -203,7 +203,8 @@ describe('Tabs', () => {
                 expect(wrapper.emitted().change.length).toBe(1);
                 expect(wrapper.emitted().change[0]).toStrictEqual([{
                     new: 1,
-                    prev: 0
+                    prev: 0,
+                    activeTabName: registeredTabsMock[1].name
                 }]);
             });
 
@@ -254,7 +255,8 @@ describe('Tabs', () => {
                 expect(wrapper.emitted().change.length).toBe(1);
                 expect(wrapper.emitted().change[0]).toStrictEqual([{
                     new: 1,
-                    prev: 0
+                    prev: 0,
+                    activeTabName: registeredTabsMock[1].name
                 }]);
             });
 
