@@ -7,7 +7,7 @@ export default {
                 prefix: 'By creating an account you agree to our ',
                 suffix: '.',
                 text: 'Terms and Conditions',
-                url: '/info/privacy-policy'
+                url: '/info/terms-and-conditions'
             },
             privacyPolicy: {
                 prefix: 'Please read our ',
