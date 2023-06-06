@@ -2676,19 +2676,6 @@
   dependencies:
     "@justeattakeaway/pie-icons-vue" "2.0.0-beta.1"
 
-"@justeat/f-content-cards@10.3.0":
-  version "10.3.0"
-  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-10.3.0.tgz#bc3832cf6f283bb5b975bc1831406b292af56173"
-  integrity sha512-a18uLGKnmSckncCY2pYAiPTGFRLheiXuCb7UnAoIif9SmVedrkaiolxPhy/uHFOrbocpUm9Xx1z2DCO7NkHdoQ==
-  dependencies:
-    "@babel/plugin-proposal-class-properties" "7.12.13"
-    "@justeat/f-services" "1.x"
-    "@justeattakeaway/cc-braze-adapter" "0.4.0"
-    "@justeattakeaway/cc-filters" "0.1.0"
-    "@justeattakeaway/cc-stampcards-adapter" "0.5.1"
-    "@justeattakeaway/cc-utils" "0.1.0"
-    core-js "3.6.5"
-
 "@justeat/f-dom@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-0.4.0.tgz#3e838a2dd06d4d5281c17f5fb9f66d7485fd759a"
@@ -2796,19 +2783,20 @@
   resolved "https://registry.yarnpkg.com/@justeat/stylelint-config-fozzie/-/stylelint-config-fozzie-3.2.0.tgz#f2e593e70119185e71e2acf53f77b3e092623402"
   integrity sha512-EVdq2lgLxx5J5WHZqdLs1xB+R+ICNGnh+TMAnq5mHMXCIUuRfHQ9h4syc8UKGnMXLBPlr+0qKAMByFrRSwDH6Q==
 
-"@justeattakeaway/cc-braze-adapter@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-braze-adapter/-/cc-braze-adapter-0.3.0.tgz#2cbe5bcc6f6122f8176ac13a7045af558053ed87"
-  integrity sha512-uDybXmr7nax8MTMF/KJgyveZEo4Behkeh3bpC61mfuw68y3bYlhBsX0l1Jnajxijlubrj1k1zPQeoxMtPVzN+g==
-  dependencies:
-    "@justeattakeaway/cc-filters" "0.1.0"
-    "@justeattakeaway/cc-utils" "0.1.0"
-    lodash-es "4.17.21"
-
 "@justeattakeaway/cc-braze-adapter@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-braze-adapter/-/cc-braze-adapter-0.4.0.tgz#9a1972db5e0de7c0934eb2e5df91ab4911994f9e"
   integrity sha512-tWwBPMWNIO9/TVAeizKfYxg7u2WOXSQyprbLIgR72GbWAxmdaeC2m5wtmTkGjd+gp8C1d/odUeEQ5cdR1WwjQA==
+  dependencies:
+    "@justeattakeaway/cc-filters" "0.1.0"
+    "@justeattakeaway/cc-utils" "0.1.0"
+    date-fns "2.29.3"
+    lodash-es "4.17.21"
+
+"@justeattakeaway/cc-braze-adapter@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-braze-adapter/-/cc-braze-adapter-0.5.0.tgz#0eceeafb3902ec87c943c3b8b67a1353073660d4"
+  integrity sha512-1Wo70rNE/fKYpqIfak9pLFUd/tlSJ9QL/DIxcvQmtpGnbp3i0nS6d9+HlAZZuVSR83zJEfRK7GsGMKH6FYyU1g==
   dependencies:
     "@justeattakeaway/cc-filters" "0.1.0"
     "@justeattakeaway/cc-utils" "0.1.0"
