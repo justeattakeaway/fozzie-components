@@ -2,6 +2,7 @@
     <div>
         <content-cards
             :adapters="adapters"
+            :filters="filters"
             :locale="$i18n.locale"
             :tags="tags"
             @has-loaded="hasLoaded"
@@ -52,6 +53,10 @@ import {
     SkeletonLoader
 } from '@justeat/f-content-cards';
 import brazeAdapter from '@justeattakeaway/cc-braze-adapter';
+import {
+    filterByCurrentlyActive,
+    sortByCardOrder
+} from '@justeattakeaway/cc-filters';
 import '@justeat/f-content-cards/dist/f-content-cards.css';
 import { mapState } from 'vuex';
 import { VUEX_MODULE_NAMESPACE_OFFERS } from '../store/types';
@@ -81,6 +86,10 @@ export default {
             'Restaurant_FTC_Offer_Card',
             'Voucher_Card_1',
             'Anniversary_Card_1'
+        ],
+        filters: [
+            filterByCurrentlyActive,
+            sortByCardOrder
         ],
         title: 'Offers',
         hasMounted: false,
