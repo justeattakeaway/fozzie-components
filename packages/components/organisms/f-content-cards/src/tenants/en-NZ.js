@@ -13,5 +13,6 @@ export default {
         3: 'Three stamps earned out of five.',
         4: 'Four stamps earned out of five.',
         5: 'Five stamps earned out of five.'
-    }
+    },
+    stampCardDefaultPercentage: '10'
 };

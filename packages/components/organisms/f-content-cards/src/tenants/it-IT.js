@@ -13,5 +13,6 @@ export default {
         3: 'Tre punti guadagnati su cinque.',
         4: 'Quattro punti guadagnati su cinque.',
         5: 'Five stamps earned out of five.'
-    }
+    },
+    stampCardDefaultPercentage: '10'
 };
