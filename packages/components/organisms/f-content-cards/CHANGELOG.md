@@ -10,7 +10,7 @@ v10.4.0
 
 ### Updated
 - permitted percentages to include numeric version
-- updated es,it and ie tenants to include default percentage
+- updated es, it, ie and nz tenants to include default percentage
 
 
 v10.3.1

@@ -20,6 +20,7 @@ v2.1.3
 - updated version of braze adapter 
 - updated the adapter to accept filters
 
+
 v2.0.3
 ------------------------------
 *May 25, 2023*
