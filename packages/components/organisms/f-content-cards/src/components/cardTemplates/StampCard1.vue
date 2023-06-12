@@ -87,7 +87,9 @@ import makeTextAccessible from '../MakeTextAccessible';
 
 const PERMITTED_STAMPCARDS_PERCENTAGES = [
     '10',
-    '15'
+    '15',
+    10,
+    15
 ];
 
 export default {
