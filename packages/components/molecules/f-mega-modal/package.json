@@ -56,7 +56,7 @@
     "@justeattakeaway/pie-icons-vue": "2.0.0-beta.1"
   },
   "devDependencies": {
-    "@justeat/f-button": "4.x",
+    "@justeat/f-button": "5.x",
     "@justeat/f-wdio-utils": "1.x",
     "@vue/cli-plugin-babel": "4.5.16",
     "body-scroll-lock": "3.0.3"
