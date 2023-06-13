@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v7.5.0
+------------------------------
+*June 13, 2023*
+
+### Changed
+- Upgraded `@justeat/f-button` to `v5.x`
+
+
 v7.4.1
 ------------------------------
 *April 28, 2023*
