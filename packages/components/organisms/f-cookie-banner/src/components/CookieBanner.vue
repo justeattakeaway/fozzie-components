@@ -6,8 +6,8 @@
             :is-open="!shouldHideBanner"
             is-positioned-bottom
             :has-close-button="false"
-            aria-label="cookieConsentTitle"
-            data-cookie-consent-overlay>
+            :has-overlay="false"
+            aria-label="cookieConsentTitle">
             <div
                 :class="[
                     $style['c-cookieBanner-card'],
@@ -185,7 +185,7 @@ export default {
          * @returns {Boolean}
          */
         legacyBanner () {
-            return this.shouldShowLegacyBanner === null ? this.config.displayLegacy : this.shouldShowLegacyBanner;
+            return this.shouldShowLegacyBanner ?? this.config.displayLegacy;
         },
 
         /**
@@ -220,12 +220,6 @@ export default {
 
     mounted () {
         this.checkCookieBannerCookie();
-        if (!this.shouldHideBanner) {
-            this.$nextTick(() => {
-                this.addKeyboardHandler();
-                this.focusOnTitle();
-            });
-        }
         this.isIosBrowser = /(iPhone|iPad).*Safari/.test(navigator.userAgent);
 
         if (typeof window === 'object' && this.shouldAbsolutePositionReopenLink && !this.legacyBanner) {
@@ -303,30 +297,6 @@ export default {
         },
 
         /**
-         * Add keyboard handler
-         */
-        addKeyboardHandler () {
-            if (this.$refs.cookieBanner && this.$refs.cookieBanner.$refs.megaModal) {
-                this.$refs.cookieBanner.$refs.megaModal.addEventListener('keydown', this.setTabLoop);
-            }
-        },
-
-        /**
-         * Set the tab loop for accessibility
-         */
-        setTabLoop (e) {
-            if (e.key === 'Tab') {
-                if (e.shiftKey && e.target === this.$refs.cookieBannerHeading) {
-                    this.$refs.buttonContainer.lastChild.focus();
-                    e.preventDefault();
-                } else if (!e.shiftKey && e.target === this.$refs.buttonContainer.lastChild) {
-                    this.$refs.cookieBannerHeading.focus();
-                    e.preventDefault();
-                }
-            }
-        },
-
-        /**
          * Hide the banner
          */
         hideBanner () {
@@ -351,7 +321,6 @@ export default {
         reopenBanner () {
             this.shouldHideBanner = false;
             this.$nextTick(() => {
-                this.addKeyboardHandler();
                 this.focusOnTitle();
             });
         },
@@ -467,11 +436,6 @@ export default {
 <style lang="scss" module>
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
-[data-cookie-consent-overlay] {
-    position: fixed;
-    color: f.$color-content-default;
-}
-
 .c-cookieBanner-card {
     position: absolute;
     inset-block-end: 0;
@@ -483,6 +447,7 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     background-color: f.$color-background-subtle;
+    box-shadow: f.$elevation-box-shadow-05;
     z-index: 99999992;
 }
 

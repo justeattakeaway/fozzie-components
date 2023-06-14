@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v4.11.0
+------------------------------
+*June 15, 2023*
+
+### Removed
+- Overlay which prevents users from interacting with the page when the cookie banner is open.
+
+### Added
+- Box shadow instead of overlay for visual distinction.
+
+
 v4.10.0
 ------------------------------
 *May 10, 2023*
