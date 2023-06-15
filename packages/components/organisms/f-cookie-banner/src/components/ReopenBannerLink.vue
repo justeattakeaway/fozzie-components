@@ -35,8 +35,7 @@ export default {
     flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
-    padding-block: 0 f.spacing(d);
-    padding-inline: f.spacing(b);
+    padding: 0 f.spacing(b) f.spacing(d);
 
     &:focus,
     &:focus-visible {
@@ -44,7 +43,7 @@ export default {
         position: absolute;
 
         &, &:after {
-            inset-block-end: 0; // Prevent vertical scrollbar if it doesn't already exist
+            bottom: 0; // Prevent vertical scrollbar if it doesn't already exist
         }
     }
 }
