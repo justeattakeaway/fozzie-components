@@ -25,7 +25,7 @@
                         id="cookieConsentTitle"
                         ref="cookieBannerHeading"
                         data-test-id="cookieConsentTitle"
-                        tabindex="0"
+                        :tabindex="tabIndex"
                         :class="$style['c-cookieBanner-title']"
                         data-consent-title>
                         {{ copy.mainTitle }}
@@ -44,6 +44,7 @@
                             <v-link
                                 data-test-id="cookie-policy-link"
                                 :href="copy.cookiePolicyLinkUrl"
+                                :tabindex="tabIndex"
                                 target="_blank"
                                 rel="noopener noreferrer">
                                 {{ copy.cookiePolicyLinkText }}
@@ -60,6 +61,7 @@
                         :class="$style['c-cookieBanner-cta']"
                         data-test-id="accept-all-cookies-button"
                         button-size="small"
+                        :tabindex="tabIndex"
                         @click="acceptAllCookiesActions">
                         {{ copy.acceptButtonText }}
                     </button-component>
@@ -68,6 +70,7 @@
                         :class="$style['c-cookieBanner-cta']"
                         data-test-id="accept-necessary-cookies-button"
                         button-size="small"
+                        :tabindex="tabIndex"
                         @click="acceptOnlyNecessaryCookiesActions">
                         {{ copy.nonAcceptButtonText }}
                     </button-component>
@@ -158,6 +161,11 @@ export default {
         domain: {
             type: String,
             default: null
+        },
+
+        isFirstInTabOrder: {
+            type: Boolean,
+            default: true
         }
     },
 
@@ -196,6 +204,10 @@ export default {
             return this.nameSuffix
                 ? `${CONSENT_COOKIE_NAME}-${this.nameSuffix}`
                 : CONSENT_COOKIE_NAME;
+        },
+
+        tabIndex () {
+            return this.isFirstInTabOrder ? 1 : 0;
         }
     },
 
