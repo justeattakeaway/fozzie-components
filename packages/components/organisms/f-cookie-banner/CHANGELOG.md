@@ -6,13 +6,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v4.11.0
 ------------------------------
-*June 15, 2023*
+*June 19, 2023*
 
 ### Removed
 - Overlay which prevents users from interacting with the page when the cookie banner is open.
+- CSS logical properties due to incompatibility with some consuming apps 😔
+- `position: absolute` on reopen link to fix bug where it floats elsewhere on the page.
 
 ### Added
 - Box shadow instead of overlay for visual distinction.
+- New boolean prop `isFirstInTabOrder` (`true` by default) which sets `tabindex="1"` for all focusable elements to make them appear first in the tab order.
 
 
 v4.10.0

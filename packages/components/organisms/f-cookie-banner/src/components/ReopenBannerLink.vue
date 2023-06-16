@@ -40,7 +40,6 @@ export default {
     &:focus,
     &:focus-visible {
         @extend %u-elementFocus;
-        position: absolute;
 
         &, &:after {
             bottom: 0; // Prevent vertical scrollbar if it doesn't already exist
