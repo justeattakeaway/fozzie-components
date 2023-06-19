@@ -522,8 +522,7 @@ export default {
 }
 
 .reopen-link-wrapper {
-    position: absolute;
-    bottom: 0;
+    position: relative;
     width: 100%;
 }
 
