@@ -31,20 +31,23 @@ export default {
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .reopen-link {
+    position: relative;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
-    padding-block: 0 f.spacing(d);
-    padding-inline: f.spacing(b);
+    padding: 0 f.spacing(b) f.spacing(d);
 
     &:focus,
     &:focus-visible {
-        @extend %u-elementFocus;
-        position: absolute;
+        @extend %u-elementFocus--borderless;
+        position: relative;
 
         &, &:after {
-            inset-block-end: 0; // Prevent vertical scrollbar if it doesn't already exist
+            // Prevent scrollbars from appearing if they don't already exist
+            bottom: 0;
+            left: 0;
+            right: 0;
         }
     }
 }
