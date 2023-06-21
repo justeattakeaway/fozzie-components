@@ -4,7 +4,7 @@
   <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
   <p>Cookie Banner</p>
-  <p>This component will conditionally remove all cookies that are not in the exclusion list for the <a href="src/tenants">appropriate locale</a>.</p>
+  <p>This component lets a user tell us which cookies they consent to, and removes/avoids those that they don't.</p>
 </div>
 
 ---
@@ -33,8 +33,8 @@ npm install @justeat/f-cookie-banner
 You can import it in your Vue SFC like this (please note that styles have to be imported separately):
 
 ```js
-import CookieBanner from "@justeat/f-cookie-banner";
-import "@justeat/f-cookie-banner/dist/f-cookie-banner.css";
+import CookieBanner from '@justeat/f-cookie-banner';
+import '@justeat/f-cookie-banner/dist/f-cookie-banner.css';
 
 export default {
   components: {
@@ -63,7 +63,7 @@ Call the component in your template:
     :locale="$i18n.locale" />
 ```
 
-### Non Vue Applications
+### Non-Vue Applications
 
 A static vanilla version of `f-cookie-banner` is available as part of the published component. These self-contained JS & CSS files are compiled from the base Vue component using the Vue CLI [pre-render plugin](https://github.com/SolarLiner/vue-cli-plugin-prerender-spa).
 
@@ -75,7 +75,7 @@ Files can be accessed directly via CDN using [unkpg.com](https://unpkg.com/brows
 
 ***By omitting the version/tag unpkg will serve the latest version automatically, you may wish to fix the version served in your application***
 
-Using the CDN the cookie banner can be added to any web page using basic tags. The page must contain a placeholder element with the id attribute `cookie-banner` for example `<div id="cookie-banner"></div>`
+Using the CDN the cookie banner can be added to any web page using basic tags. The page must contain a placeholder element with an `id` of `"cookie-banner"`, e.g., `<div id="cookie-banner"></div>`.
 
 ***In order for the static cookie banner to look correct, you must also link to the `fozzie-utilities` CSS file created by `@justeat/fozzie` (please see the example below on how to link to it). Whilst `fozzie-reset` and `fozzie-typography` are not required, we highly recommend linking to them as well***
 
@@ -137,20 +137,20 @@ Finally, use the generated bundle in your HTML page
 </html>
 ```
 
-#### Non Vue Custom Props
+#### Non-Vue Custom Props
 
-The Non Vue version is compiled using the Vue CLI [pre-render plugin](https://github.com/SolarLiner/vue-cli-plugin-prerender-spa) this means that prop values are essentially hardcoded at compilation. You can configure your own custom version by simply adding the required props to the base template file used by the pre-renderer.
+The Non-Vue version is compiled using the Vue CLI [pre-render plugin](https://github.com/SolarLiner/vue-cli-plugin-prerender-spa), which means that prop values are determined at build-time. You can configure your own custom version by simply adding the required props to the base template file used by the pre-renderer.
 
-Props should be added to the [App.vue](https://github.com/justeat/fozzie-components/blob/master/packages/components/organisms/f-cookie-banner/f-cookie-banner-static/src/App.vue) Remember the `locale` prop will be replaced by the `build:static-files` task.
+Props should be added to the [App.vue](https://github.com/justeat/fozzie-components/blob/master/packages/components/organisms/f-cookie-banner/f-cookie-banner-static/src/App.vue). Remember the `locale` prop will be replaced by the `build:static-files` task.
 
 In the code example below we add the `nameSuffix` prop:
 
 ```html
 <template>
     <cookie-banner
-        locale='da-DK'
-        should-absolute-position-reopen-link='false'
-        nameSuffix='myName'
+        locale="da-DK"
+        :should-absolute-position-reopen-link="false"
+        nameSuffix="myName"
     />
 </template>
 ```
@@ -173,6 +173,7 @@ The props that can be defined are as follows:
 | `cookieExpiry` | `Number` | `90` | Expiry time (days) of cookies written to the browser. |
 | `shouldUseGreyBackground` | `Boolean` | `true` | Use grey background for the reopen link. |
 | `shouldAbsolutePositionReopenLink` | `Boolean` | `true` | Adds a ResizeObserver and absolutely positions the re-open link to the bottom when the content is smaller than the window |
+| `isFirstInTabOrder` | `Boolean` | `true` | Whether or not the cookie banner should appear first in the page's tab order. |
 | `nameSuffix` | `String` | `''` | Add a suffix to the cookie name. This allows the cookie banner to create a cookie with a different name to be able to handle multiple sub-domains. |
 | `domain` | `String` | `null` | Specifies which hosts can receive a cookie. If unspecified, the attribute defaults to the same host that set the cookie, excluding subdomains. If it is specified, then subdomains are always included. Therefore, passing the prop is less restrictive than omitting it. For example, if you specify `just-eat.co.uk`, the cookie will be used in any subdomain of `just-eat.co.uk` |
 

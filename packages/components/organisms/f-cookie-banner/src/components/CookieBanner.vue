@@ -6,8 +6,8 @@
             :is-open="!shouldHideBanner"
             is-positioned-bottom
             :has-close-button="false"
-            aria-label="cookieConsentTitle"
-            data-cookie-consent-overlay>
+            :has-overlay="false"
+            aria-label="cookieConsentTitle">
             <div
                 :class="[
                     $style['c-cookieBanner-card'],
@@ -25,7 +25,7 @@
                         id="cookieConsentTitle"
                         ref="cookieBannerHeading"
                         data-test-id="cookieConsentTitle"
-                        tabindex="0"
+                        :tabindex="tabIndex"
                         :class="$style['c-cookieBanner-title']"
                         data-consent-title>
                         {{ copy.mainTitle }}
@@ -44,6 +44,7 @@
                             <v-link
                                 data-test-id="cookie-policy-link"
                                 :href="copy.cookiePolicyLinkUrl"
+                                :tabindex="tabIndex"
                                 target="_blank"
                                 rel="noopener noreferrer">
                                 {{ copy.cookiePolicyLinkText }}
@@ -60,6 +61,7 @@
                         :class="$style['c-cookieBanner-cta']"
                         data-test-id="accept-all-cookies-button"
                         button-size="small"
+                        :tabindex="tabIndex"
                         @click="acceptAllCookiesActions">
                         {{ copy.acceptButtonText }}
                     </button-component>
@@ -68,6 +70,7 @@
                         :class="$style['c-cookieBanner-cta']"
                         data-test-id="accept-necessary-cookies-button"
                         button-size="small"
+                        :tabindex="tabIndex"
                         @click="acceptOnlyNecessaryCookiesActions">
                         {{ copy.nonAcceptButtonText }}
                     </button-component>
@@ -158,6 +161,11 @@ export default {
         domain: {
             type: String,
             default: null
+        },
+
+        isFirstInTabOrder: {
+            type: Boolean,
+            default: true
         }
     },
 
@@ -185,7 +193,7 @@ export default {
          * @returns {Boolean}
          */
         legacyBanner () {
-            return this.shouldShowLegacyBanner === null ? this.config.displayLegacy : this.shouldShowLegacyBanner;
+            return this.shouldShowLegacyBanner ?? this.config.displayLegacy;
         },
 
         /**
@@ -196,6 +204,10 @@ export default {
             return this.nameSuffix
                 ? `${CONSENT_COOKIE_NAME}-${this.nameSuffix}`
                 : CONSENT_COOKIE_NAME;
+        },
+
+        tabIndex () {
+            return this.isFirstInTabOrder ? 1 : 0;
         }
     },
 
@@ -220,12 +232,6 @@ export default {
 
     mounted () {
         this.checkCookieBannerCookie();
-        if (!this.shouldHideBanner) {
-            this.$nextTick(() => {
-                this.addKeyboardHandler();
-                this.focusOnTitle();
-            });
-        }
         this.isIosBrowser = /(iPhone|iPad).*Safari/.test(navigator.userAgent);
 
         if (typeof window === 'object' && this.shouldAbsolutePositionReopenLink && !this.legacyBanner) {
@@ -303,30 +309,6 @@ export default {
         },
 
         /**
-         * Add keyboard handler
-         */
-        addKeyboardHandler () {
-            if (this.$refs.cookieBanner && this.$refs.cookieBanner.$refs.megaModal) {
-                this.$refs.cookieBanner.$refs.megaModal.addEventListener('keydown', this.setTabLoop);
-            }
-        },
-
-        /**
-         * Set the tab loop for accessibility
-         */
-        setTabLoop (e) {
-            if (e.key === 'Tab') {
-                if (e.shiftKey && e.target === this.$refs.cookieBannerHeading) {
-                    this.$refs.buttonContainer.lastChild.focus();
-                    e.preventDefault();
-                } else if (!e.shiftKey && e.target === this.$refs.buttonContainer.lastChild) {
-                    this.$refs.cookieBannerHeading.focus();
-                    e.preventDefault();
-                }
-            }
-        },
-
-        /**
          * Hide the banner
          */
         hideBanner () {
@@ -351,7 +333,6 @@ export default {
         reopenBanner () {
             this.shouldHideBanner = false;
             this.$nextTick(() => {
-                this.addKeyboardHandler();
                 this.focusOnTitle();
             });
         },
@@ -467,22 +448,18 @@ export default {
 <style lang="scss" module>
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
-[data-cookie-consent-overlay] {
-    position: fixed;
-    color: f.$color-content-default;
-}
-
 .c-cookieBanner-card {
     position: absolute;
-    inset-block-end: 0;
-    inset-inline: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     max-height: 376px;
-    padding-block: f.spacing(d);
-    padding-inline: 0;
+    padding: f.spacing(d) 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background-color: f.$color-background-subtle;
+    box-shadow: f.$elevation-box-shadow-05;
     z-index: 99999992;
 }
 
@@ -493,8 +470,7 @@ export default {
 
 .c-cookieBanner-title {
     @include f.font-size(body-l);
-    margin-block: f.spacing(a) f.spacing(b);
-    margin-inline: 0;
+    margin: f.spacing(a) 0 f.spacing(b);
     padding: 0;
     color: f.$color-content-default;
     text-align: start;
@@ -517,13 +493,12 @@ export default {
 }
 
 .c-cookieBanner-content {
-    padding-block: 0;
-    padding-inline: f.spacing(d);
+    padding: 0 f.spacing(d);
     text-align: start;
     overflow-y: auto;
 
     @include f.media('>=mid') {
-        padding-inline: f.spacing(f);
+        padding: 0 f.spacing(f);
     }
 
     @include f.media('<mid') {
@@ -547,47 +522,43 @@ export default {
 }
 
 .reopen-link-wrapper {
-    position: absolute;
-    inset-block-end: 0;
+    position: relative;
     width: 100%;
 }
 
 .c-cookieBanner-ios {
     @include f.media('<mid') {
-        padding-block-end: f.spacing(j);
+        padding-bottom: f.spacing(j);
     }
 }
 
 .c-cookieBanner-cta-container {
-    padding-block: f.spacing(d) f.spacing(a);
-    padding-inline: f.spacing(e);
+    padding: f.spacing(d) f.spacing(e) f.spacing(a);
 
     .c-cookieBanner-cta {
-        inline-size: 100%;
-    }
+        width: 100%;
 
-    .c-cookieBanner-cta:not(:last-child) {
-        margin-block-end: f.spacing(d);
+        @include f.media('>=mid') {
+            width: inherit;
+            margin-left: f.spacing(d);
+            margin-bottom: 0;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: f.spacing(d);
+
+            @include f.media('>=mid') {
+                margin-bottom: 0;
+            }
+        }
     }
 
     @include f.media('>=mid') {
         display: flex;
         flex-direction: row-reverse;
-        padding-block: f.spacing(d);
-        padding-inline: f.spacing(d);
-        margin-inline: f.spacing(d);
-        min-inline-size: 320px;
-        margin-block: 0;
-
-        .c-cookieBanner-cta {
-            inline-size: inherit;
-            margin-inline-start: f.spacing(d);
-            margin-block-end: 0;
-        }
-
-        .c-cookieBanner-cta:not(:last-child) {
-            margin-block-end: 0;
-        }
+        padding: f.spacing(d);
+        margin: 0 f.spacing(d);
+        min-width: 320px;
     }
 }
 </style>
