@@ -2811,18 +2811,6 @@
     date-fns "2.28.0"
     lodash-es "4.17.21"
 
-"@justeattakeaway/cc-stampcards-adapter@0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-stampcards-adapter/-/cc-stampcards-adapter-0.5.1.tgz#69a77e2a97e5be5b04a3b1943f2c0571a8c340a4"
-  integrity sha512-ahD/J894dUGPRnjplosCILFxhImFU4v0iqC9GXykE/BzdsJwB7oMoM65OzNW6rJLPpyDyTwcyGoVXxtiO5nX/w==
-  dependencies:
-    "@justeat/f-trak" "0.7.1"
-    "@justeattakeaway/cc-filters" "0.1.0"
-    "@justeattakeaway/cc-utils" "0.1.0"
-    date-fns "^2.29.3"
-    lodash-es "4.17.21"
-    typesafe-i18n "^5.12.0"
-
 "@justeattakeaway/cc-stampcards-adapter@0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-stampcards-adapter/-/cc-stampcards-adapter-0.7.0.tgz#11c3461606f1bb2c61067c5f205f6e55bd1c5e24"
