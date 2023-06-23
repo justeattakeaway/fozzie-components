@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Test Harness Developement Portal</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" href="./favicon.ico">
+        <link rel="stylesheet" href="./styles.css" />
+        <script src="./scripts_min.js"></script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Test Harness Developement Portal</h1>
+            <p>Development Tool</p>
+        </div>
+
+        <div class="navbar">
+            <a href="#">f-jet-analytics</a>
+        </div>
+
+        <div class="row">
+            <div class="main">
+                <h2>f-jet-analytics</h2>
+                <h5>Parameters</h5>
+                <form action="./harness.html" id="fAnalyticsForm" method="GET">
+                    <p class="optionsArea">
+                        <label for="fname">'namespace'</label><br />
+                        <input type="text" id="namespace" name="namespace" value="default" /><br /><br />
+                        <label for="fname">'options' (JSON Model)</label><br />
+                        <textarea id="options" name="options" rows="20" cols="80">
+{
+    "prop": "value",
+    "prop2": "value2",
+    "prop3": ["value3", "value4"],
+    "prop4": {
+        "prop5": "value5",
+        "prop6": "value6"
+    }
+}
+                    </textarea>
+                    </p>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

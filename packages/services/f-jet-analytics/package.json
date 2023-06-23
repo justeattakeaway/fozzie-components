@@ -1,0 +1,53 @@
+{
+  "name": "@justeat/f-jet-analytics",
+  "description": "Fozzie JET Analytics - A utility that encapsulates the sending of Analytics via Snowplow & GTM (Google Analytics) functionality",
+  "version": "0.20.1",
+  "maxBundleSize": "200kB",
+  "main": "dist/f-jet-analytics.umd.js",
+  "module": "dist/f-jet-analytics.es.js",
+  "source": "src/index.js",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/services/f-jet-analytics",
+  "contributors": [
+    "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:justeat/fozzie-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/justeat/fozzie-components/issues"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": "^12 || ^14 || ^16"
+  },
+  "keywords": [
+    "fozzie"
+  ],
+  "scripts": {
+    "prepublishOnly": "yarn lint && yarn test && yarn build",
+    "build": "vite build",
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
+    "lint:fix": "yarn lint --fix",
+    "test": "jest",
+    "ci:test:services": "yarn test",
+    "test:coverage": "jest test:unit --coverage"
+  },
+  "dependencies": {
+    "crypto-js": "4.0.0",
+    "jwt-decode": "^3.1.2",
+    "universal-cookie": "^4.0.4"
+  },
+  "devDependencies": {
+    "jest-when": "^3.3.1"
+  },
+  "volta": {
+    "extends": "../../../package.json"
+  }
+}
