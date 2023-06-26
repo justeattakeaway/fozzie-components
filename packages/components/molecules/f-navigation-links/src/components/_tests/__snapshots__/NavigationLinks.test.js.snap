@@ -19,7 +19,7 @@ exports[`NavigationLinks should display the list elements correctly for each \`l
       </v-link-stub>
     </li>
     <li>
-      <v-link-stub data-test-id="link4" link-class="c-navigationLinks-link" to="/member/addressbook">
+      <v-link-stub data-test-id="link4" link-class="c-navigationLinks-link" to="/account/addressbook">
         Your address book
       </v-link-stub>
     </li>
