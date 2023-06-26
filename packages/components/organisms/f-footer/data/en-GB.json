@@ -38,7 +38,7 @@
         },
         {
           "text": "My account",
-          "href": "https://prod-uk-green.cms.just-eat.com/member/updateuserinfo",
+          "href": "https://prod-uk-green.cms.just-eat.com/account/info",
           "alt": "",
           "rel": "",
           "target": "",
