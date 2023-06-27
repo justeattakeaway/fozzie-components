@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-content-cards",
   "description": "Fozzie Content Cards",
-  "version": "10.4.1",
+  "version": "10.4.2",
   "main": "dist/f-content-cards.umd.min.js",
   "maxBundleSize": "85kB",
   "files": [
@@ -68,7 +68,7 @@
     "@justeat/fozzie": "10.7.1",
     "@justeattakeaway/cc-braze-adapter": "0.5.0",
     "@justeattakeaway/cc-filters": "0.1.0",
-    "@justeattakeaway/cc-stampcards-adapter": "0.7.0",
+    "@justeattakeaway/cc-stampcards-adapter": "0.7.1",
     "@justeattakeaway/cc-utils": "0.1.0",
     "@vue/cli-plugin-babel": "4.5.16",
     "color": "3.1.3",
