@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v1.21.0
+------------------------------
+*July 03, 2023*
+
+### **breaking changes** Changed
+- Cloned the original `f-analyics` into `core-analytics` and remove any refs. to Vue/Vuex and any SSR functionality.
+
+
 v0.20.1
 ------------------------------
 *September 20, 2022*

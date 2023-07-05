@@ -5,7 +5,7 @@ export default {
         target: 'es2015',
         lib: {
             entry: path.resolve(__dirname, 'src/index.js'),
-            name: 'f-jet-analytics'
+            name: 'core-analytics'
         },
         sourcemap: true
     }

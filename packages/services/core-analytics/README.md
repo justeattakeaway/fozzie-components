@@ -1,6 +1,6 @@
 <div align="center">
 
-# f-jet-analytics
+# core-analytics
 
 <img width="125" alt="Fozzie Bear" src="../../../../bear.png" />
 
@@ -10,26 +10,25 @@ Encapsulates Snowplow & GTM (Google Analytics) functionality
 
 ---
 
-[![npm version](https://badge.fury.io/js/%40justeat%2Ff-jet-analytics.svg)](https://badge.fury.io/js/%40justeat%2Ff-jet-analytics)
+[![npm version](https://badge.fury.io/js/%40justeat%2Fcore-analytics.svg)](https://badge.fury.io/js/%40justeat%2Fcore-analytics)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
-[![Coverage Status](https://coveralls.io/repos/github/justeat/f-jet-analytics/badge.svg)](https://coveralls.io/github/justeat/f-jet-analytics)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-jet-analytics/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-jet-analytics?targetFile=package.json)
+[![Coverage Status](https://coveralls.io/repos/github/justeat/core-analytics/badge.svg)](https://coveralls.io/github/justeat/core-analytics)
+[![Known Vulnerabilities](https://snyk.io/test/github/justeat/core-analytics/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/core-analytics?targetFile=package.json)
 
 ---
 This component abstracts away the gathering of the various data values needed for Google Analytics (GA) and the setting up of Google Tag Manager (GTM).<br>
-Once registered and the site is running it will prepare each page with the required GTM tags for pushing analytics to GA plus it will gather and store any serverside values to be used in analytics that are pushed to GA clientside.<br>
-You can see the GTM tags and any GA data by inspecting the `header` of the page and the `dataLayer` from the browser console in developer tools.  If you exercise all the current functionality you will be able to see the following models `{platformData: {…}}`, `{userData: {…}}`, `{pageData: {…}}` & `{event: ...}` in the `dataLayer`.
+Once registered and the site is running it will prepare each page with the required GTM head tag for pushing analytics to GA.<br>
+You can see the GTM tag and any GA data by inspecting the `head` tag of the page and the `dataLayer` from the browser console in developer tools.  If you exercise all the current functionality you will be able to see the following models `{platformData: {…}}`, `{userData: {…}}`, `{pageData: {…}}` & `{event: ...}` in the `dataLayer`.
 
 
 ## Benefits
 - Single component to record GA data rather than having logic & implementations scattered around in various features.
-- Self-sufficient: With only supplying a small amount of data this component will attempt to evaluate, gather and record all the data required (serverside and clientside) for the GA models: `platformData`, `userData` and `pageData`.
-- Provide the facility to push 'ad-hoc' GA events (even if serverside).
+- Self-sufficient: With only supplying a small amount of data this component will attempt to evaluate, gather and record all the data required (clientside) for the GA models: `platformData`, `userData` and `pageData`.
+- Provide the facility to push 'ad-hoc' GA events.
 - Allows the consumer to dictate if & when to push analytics to GA.
-- Allows the consumer to access this service globally via the name `$gtm`, i.e. `this.$gtm.pushEvent({...}`).
-- Customisation (via `options`) of the global variable name and also of the `namespace` used by the internal vuex store (i.e. if they clashes with names already in use within your site).
+- Customisation (via `options`) if the need arises.
 - Each method returns the model it attempted to push to GA thus allowing you to view/test what has been constructed within each method.
-- Allows extra properties to be appended to each GA model by the consumer before the model is pushed.
+- Allows extra custom properties to be appended to each GA model by the consumer before the model is pushed to the dataLayer.
 - Allows properties to be overridden on each GA model by the consumer before the model is pushed.
 
 <hr></br>
@@ -38,56 +37,29 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
 
 *  <strong>Install the module using npm or Yarn</strong>
     ```
-    yarn add @justeat/f-jet-analytics
+    yarn add @justeat/core-analytics
     ```
     ```
-    npm install @justeat/f-jet-analytics
+    npm install @justeat/core-analytics
     ```
 
 *  <strong>Import & Register</strong>
 
-    f-jet-analytics is a simple class that performs various steps in the constructor during initialisation to prepare the service for use.  To allow all of it's functionality to be available it is best to be declared/instantiated as a 'Nuxt - Plugin' and exposed as a global varible so it can be widely used without keep declaring and instantiating it.  Once declared as a 'Nuxt - Plugin' it needs to be registered in the "nuxt.config.js".  When instantiating the service it allows you to pass in options (see the <a href="#options">_`Options`_</a> section) that allow you to configure some of the static values that may need to change in your environment. Note when naming the 'Nuxt - Plugin' it needs to be run both client side and server side so do not include the terms client or server in the name of the new plugin<br><br>
-    In the example below it demonstrates how to declare and instantiate the `f-jet-analytics` service in a plugin, and how you can create the `options` to pass into the service;
+    core-analytics exposes a simple class that performs various steps in the 'constructor' during initialisation to prepare the service for use.  When instantiating the service it allows you to pass in 'options' (see the <a href="#options">_`Options`_</a> section) that allow you to configure some of the static values that may need to change in your environment<br><br>
+    In the example below it demonstrates how to declare and instantiate the `core-analytics` service and how you can create the `options` to pass into the service;
 
 
-    _./plugins/f.analytics.plugin.js_
     ```js
-    import AnalyticService from '@justeat/f-jet-analytics';
+    import AnalyticService from '@justeat/core-analytics';
 
-    export default (context, inject) => {
-
-      const { store, req } = context;
-      const options = {
-        featureName: 'checkout-web',
-        locale: 'en-GB',
-        id: 'GTM-ABC123X'
-      };
-
-      const service = new AnalyticService(store, req, options);
-
-      inject(service.getOptions().globalVarName, service); // Use the default global variable name
-    };
-    ```
-
-    Then, finally, you need to register the plugin you have just created in the nuxt config, see below;
-
-    _./nuxt.config.js_
-    ```js
-    const config = async () => {
-      return {
-
-        ...
-
-        plugins: [
-          '~/plugins/f.analytics.plugin.js'
-        ],
-
-        ...
-
-      };
+    const req = this.req; // Get a handle to the current request
+    const options = {
+      featureName: 'checkout-web',
+      locale: 'en-GB',
+      id: 'GTM-ABC123X'
     };
 
-    export default config;
+    const service = new AnalyticService(req, options);
     ```
 </br>
 
@@ -109,28 +81,19 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
 
       This will be the model constructed and pushed to the `datalayer` (handy for testing and debugging)<br>
       #### **Notes**
-      This is ideally only called **once** per page so it is best suited at parent of the page component.<br>
-      It gathers most of its data clientside and so needs to be executed in **`beforeMount`** vue hook.<br>
-      Some of the data it needs can only be read serverside but this has already been gathered at the point the plugin was registered and then store internally until this method is executed.
+      This is ideally only called **once** per page so it is best suited in the parent page component.<br>
       #### **Example**
       _./pages/checkout/index.vue_
       ```js
       <script>
+          ...
 
-      export default {
-
-          components: {
-              VueCheckout
-          },
+          window.onload = function() {
+              this.service.pushPlatformData();
+          };
 
           ...
 
-          beforeMount () {
-              this.$gtm.pushPlatformData();
-          },
-
-          ...
-      };
       </script>
       ```
       ___
@@ -150,27 +113,20 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
 
       This will be the model constructed and pushed to the `datalayer` (handy for testing and debugging)
       #### **Notes**
-      This is ideally only called everytime the `User` status changes so it might best suited in the `watch` vue hook.<br>
-      It gathers most of its data clientside and so needs to be executed in a clientside hook.<br>
+      This is ideally only called everytime the `User` status changes so it might best suited in a `login` method.<br>     
       The method is very dependant on the `authToken` parameter and without it the `userData` model will only contain the anonymous user id.
       #### **Example**
       ```js
       <script>
 
-      export default {
-
           ...
 
-          watch: {
-              // Watch for authentication token to become available
-              isAuthFinished (newVal) {
-                  if (newVal === true) {
-                      this.$gtm.pushUserData({ authToken: this.authToken });
-                  }
-              },
+          loggedIn (success) {
+              if (success === true) {
+                  this.service.pushUserData({ authToken: this.authToken });
+              }
           }
           ...
-      };
       </script>
       ```
       ___
@@ -191,9 +147,7 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
 
       This will be the model constructed and pushed to the `datalayer` (handy for testing and debugging)
       #### **Notes**
-      This is ideally called everytime the `Page` status changes.<br>
-      It gathers most of its data clientside and so needs to be executed in a clientside hook.<br>
-      Some of the data it needs can only be read serverside but this has already been gathered at the point the plugin was registered and then store internally until this method is executed.
+      This is ideally called everytime the `Page` status changes, i.e. new page displayed, orientation changed, etc..<br>
       ___
       <br>
     - ### **`setOptions()`**<br>
@@ -241,11 +195,8 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
       ```js
       <script>
 
-      export default {
-
           ...
 
-          watch: {
               if (isLoggedIn(type)) {
                   const loggedInEvent = {
                       event: 'loggedIn-`${type}`',
@@ -260,21 +211,17 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
                       }
                   };
 
-                  this.$gtm.pushEvent(loggedInEvent);
-              },
-          }
+                  this.service.pushEvent(loggedInEvent);
+              }
 
           ...
-      };
       </script>
       ```
   ## Options
-  Note: although `f-jet-analytics` gathers most of it's analytical data from within it does rely on some specific values to be supplied by your feature via an `options` object.  See object spec. below:
+  Note: although `core-analytics` gathers most of it's analytical data from within it does rely on some specific values to be supplied by your feature via an `options` object.  See object spec. below:
 
   | Prop Name | Example | Optional/Required | Default | Description |
   | :--- | :--- | :--- | :--- | :--- |
-  | namespace| 'some_unique-namespace' | Optional | `f-jet-analytics` | This is used to ensure uniqueness with regards to internal objects, e.g. the internal Vuex Store used by this service, do not change unless you have an issue and need to use this namespace locally |
-  | globalVarName| 'gtm' | Optional | `gtm` | This is used to access the global service/methods, do not change unless you have an issue and need to use this name locally |
   | featureName| 'coreweb' | Required | | This is used to identify analytics sent by your feature |
   | locale| 'en-GB' | Optional | `en-GB` | This is used to calcualate various platform data values |
   | id| 'GTM-X1234Z' | | | This is used know what GA account to push analytics to |
@@ -287,15 +234,15 @@ You can see the GTM tags and any GA data by inspecting the `header` of the page 
 </br></br>
 
 ## Environment variables
-Although this component can gather most data with only the `options` object it also needs some values only available on the serverside and will expect these to be present to fulfil all of it's functionality.
+Although this component can gather most data with only the `options` object it also needs some values that may only be available on the serverside.  These can be passed in as 'custom' fields.<br>
+e.g.:
 
 | Prop Name | Type | Example |  Description |
 | :----- | :----- | :----- | :----------- |
-| `justEatEnvironment` | Server Environment Variable | `staging` | This will indicate the current environment |
-| `FEATURE_VERSION` | Server Environment Variable | `1.12.345.0` | This will indicate the current version of the feature |
-| `INSTANCE_POSITION` | Server Environment Variable | `004` | This will indicate the current position of the AWD EC2 instance |
-| `IS_PILOT` | Server Environment Variable | false | This will indicate whether the server is a pilot or not |
-| `je-user_percentage` | cookie (httponly) | `34` | This will indicate the user percent value (this assist with experiment bucketing) |
+| `environment` | Server Environment Variable | `staging` | This will indicate the current environment |
+| `version` | Server Environment Variable | `1.12.345.0` | This will indicate the current version of the feature |
+| `instancePosition` | Server Environment Variable | `004` | This will indicate the current position of the AWD EC2 instance |
+| `isPilot` | Server Environment Variable | false | This will indicate whether the server is a pilot or not |
 </br>
 
 ## Development
@@ -309,17 +256,17 @@ $ yarn
 $ yarn build
 ```
 
-Change directory to the `f-jet-analytics` package:
+Change directory to the `core-analytics` package:
 
 ```sh
-$ cd packages/services/f-jet-analytics
+$ cd packages/services/core-analytics
 ```
 </br>
 
 ## Testing
 
 To test all components, run from root directory.
-To test only `f-jet-analytics`, run from the `./fozzie-components/packages/services/f-jet-analytics` directory.
+To test only `core-analytics`, run from the `./fozzie-components/packages/services/core-analytics` directory.
 
 ### Unit tests
 

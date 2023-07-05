@@ -22,11 +22,11 @@ const defaultState = {
         applicationId: undefined,
         country: undefined,
         language: undefined,
-        jeUserPercentage: undefined,
         currency: undefined,
         version: undefined,
         instancePosition: undefined,
-        isPilot: undefined
+        isPilot: undefined,
+        source: 'core-analytics'
     },
     userData: {
         'a-UserId': undefined,
@@ -38,7 +38,6 @@ const defaultState = {
     },
     pageData: {
         name: undefined,
-        httpStatusCode: 200,
         conversationId: undefined,
         orientation: undefined
     },

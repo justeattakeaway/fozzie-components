@@ -10,7 +10,7 @@ import {
 } from '../constants';
 
 /**
- * Returns the current orientation name (if clientside).
+ * Returns the current orientation name.
  *
  * @return {string} The orientation name
  */
@@ -29,11 +29,10 @@ const getOrientation = () => {
  * Returns the contents of a cookie
  *
  * @param {string} name - The name of the cookie
- * @param {object} req - The `request` context
  * @return {string} The contents of the cookie
  */
-const getCookie = (cookieName, req) => {
-    const cookies = req && req.headers && req.headers.cookie ? new Cookies(req.headers.cookie) : new Cookies();
+const getCookie = cookieName => {
+    const cookies = new Cookies();
     const value = cookies.get(cookieName);
 
     return value;
@@ -42,40 +41,11 @@ const getCookie = (cookieName, req) => {
 /**
  * Maps the anonymous User Id to the UserData 'a-UserId' field.
  *
- * @param {object} req - The `request` context
  * @return {string} UserId from je-auser cookie
  */
-const mapAnonymousUserId = req => {
-    const value = getCookie('je-auser', req);
+const mapAnonymousUserId = () => {
+    const value = getCookie('je-auser');
     return value;
-};
-
-/**
- * Maps various environment variables (if present); that are only available when executed
- * serverside, to the PlatformData.
- * Also maps the user percentage experiment value (if present) to the PlatformData; again
- * only available serverside due to it's protection.
- * Note 1: this is stored until the rest of the PlatformData is collated and sent clientside.
- * Note 2: dot notation on the env vars does not bundle well so using valid alternative [] approach.
- *
- * @param {object} platformData - A reference to the current PlatformData instance
- * @param {object} req - The `request` context
- * @return {object} new platformData object
- */
-export const mapServerSidePlatformData = ({ platformData, req } = {}) => {
-    const userPercent = getCookie('je-user_percentage', req);
-
-    /* eslint-disable dot-notation */
-    const mappedData = {
-        ...platformData,
-        jeUserPercentage: userPercent || platformData.jeUserPercentage,
-        environment: process.env['justEatEnvironment'] || platformData.environment,
-        version: process.env['FEATURE_VERSION'] || platformData.version,
-        instancePosition: process.env['INSTANCE_POSITION'] || platformData.instancePosition,
-        isPilot: process.env['IS_PILOT'] || platformData.isPilot
-    };
-
-    return mappedData;
 };
 
 /**
@@ -109,11 +79,10 @@ export const mapPlatformData = ({
  *
  * @param {object} userData - A reference to the current UserData instance
  * @param {string} authToken - The current authorisation token
- * @param {object} req - The `request` context
  * @return {object} new userData object
  */
-export const mapUserData = ({ userData, authToken, req } = {}) => {
-    const userId = mapAnonymousUserId(req);
+export const mapUserData = ({ userData, authToken } = {}) => {
+    const userId = mapAnonymousUserId();
     let mappedUserData = {
         ...userData,
         'a-UserId': userId || userData['a-UserId']
@@ -146,16 +115,14 @@ export const mapUserData = ({ userData, authToken, req } = {}) => {
  * @param {object} pageData - A reference to the current PageData instance
  * @param {string} pageName - The name of the page
  * @param {number} httpStatusCode - The httpStatusCode (only supplied when 200 needs to be overriden)
- * @param {object} req - The `request` context
  * @return {object} new pageData object
  */
 export const mapPageData = ({
     pageData,
     pageName,
-    httpStatusCode,
-    req
+    httpStatusCode
 } = {}) => {
-    const conversationId = getCookie('x-je-conversation', req);
+    const conversationId = getCookie('x-je-conversation');
     const orientation = getOrientation();
 
     const mappedPageData = {

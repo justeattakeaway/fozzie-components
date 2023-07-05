@@ -2,10 +2,8 @@ import { when } from 'jest-when';
 import Cookies from 'universal-cookie';
 import defaultOptions from '../../defaultOptions';
 import AnalyticService from '../analytics.service';
-import analyticModule from '../../store/analytics.module';
 import {
     defaultState,
-    createStore,
     newEvent,
     options
 } from '../../tests/helpers/setup';
@@ -14,15 +12,11 @@ jest.mock('universal-cookie', () => jest.fn());
 
 describe('Analytic Service ::', () => {
     const auserId = 'fjdhskgshjgk';
-    let store;
-    let storeDispatchSpy;
     let service;
-    let req;
     let windowCopy;
     let windowSpy;
     let windowsPushSpy;
-    let get;
-    let registerStoreModuleSpy;
+    let getCookie;
 
     const mockWindow = ({
         winWidth = 667,
@@ -47,60 +41,29 @@ describe('Analytic Service ::', () => {
         windowSpy.mockImplementation(() => windowMock);
     };
 
-    const mockStore = () => {
-        store = createStore({
-            state: { ...defaultState },
-            actions: analyticModule.actions,
-            mutations: analyticModule.mutations
-        });
-
-        // Hyjack and replicate updating the State thru dispatch calls
-        storeDispatchSpy = jest.fn((action, payload) => {
-            if (action === `${options.namespace}/updateEvents`) {
-                store.state[`${options.namespace}`].events = [...store.state[`${options.namespace}`].events, payload];
-            } else if (action === `${options.namespace}/clearEvents`) {
-                store.state[`${options.namespace}`].events = [];
-            } else if (action === `${options.namespace}/updatePlatformData`) {
-                store.state[`${options.namespace}`].platformData = { ...store.state[`${options.namespace}`].platformData, ...payload };
-            }
-        });
-        store.dispatch = storeDispatchSpy;
-
-        registerStoreModuleSpy = jest.fn();
-        store.registerModule = registerStoreModuleSpy;
-    };
-
     beforeEach(() => {
-        req = jest.fn();
-
-        // Arrange - store
-        mockStore();
-
         // Arrange - cookies
-        get = jest.fn();
-        when(get).calledWith('je-auser').mockReturnValue(auserId);
-        when(get).calledWith('je-user_percentage').mockReturnValue('35');
-        Cookies.mockImplementation(() => ({ get }));
+        getCookie = jest.fn();
+        when(getCookie).calledWith('je-auser').mockReturnValue(auserId);
+        Cookies.mockImplementation(() => ({ get: getCookie }));
 
         // Arrange - window state
         mockWindow();
 
         // Arrange - sut
-        service = new AnalyticService(store, req, options);
+        service = new AnalyticService(options);
     });
 
     afterEach(() => {
-        store = undefined;
         service = undefined;
         windowSpy.mockRestore();
-        storeDispatchSpy.mockRestore();
         jest.clearAllMocks();
     });
 
     describe('When creating a new instance', () => {
         it('should not throw error when instance is created with valid option types', () => {
             // Act
-            const instance = () => new AnalyticService(store, req, options);
+            const instance = () => new AnalyticService(options);
 
             // Assert
             expect(instance).not.toThrowError();
@@ -112,7 +75,7 @@ describe('Analytic Service ::', () => {
             mockWindow({ dataLayerPresent: false });
 
             // Act
-            service = new AnalyticService(store, req, options);
+            service = new AnalyticService(options);
 
             // Assert
             expect(document.head.innerHTML).toContain(`https://www.googletagmanager.com/gtm.js?id=${options.id}`);
@@ -132,7 +95,7 @@ describe('Analytic Service ::', () => {
             mockWindow({ dataLayerPresent: false });
 
             // Act
-            service = new AnalyticService(store, req, currentRegisteredGtmIdOptions);
+            service = new AnalyticService(currentRegisteredGtmIdOptions);
 
             // Assert
             expect(document.head.innerHTML).toContain(`https://www.googletagmanager.com/gtm.js?id=${currentRegisteredGtmIdOptions.id}` +
@@ -148,75 +111,11 @@ describe('Analytic Service ::', () => {
             mockWindow({ dataLayerPresent: true });
 
             // Act
-            service = new AnalyticService(store, req, newRegisteredGtmIdOptions);
+            service = new AnalyticService(newRegisteredGtmIdOptions);
 
             // Assert
             expect(document.head.innerHTML).not.toContain(`https://www.googletagmanager.com/gtm.js?id=${newRegisteredGtmIdOptions.id}`);
             expect(document.head.innerHTML).toContain(`https://www.googletagmanager.com/gtm.js?id=${options.id}`);
-        });
-
-        it('should register the module and preserve the state, if present', () => {
-            // Arrange - add some state to store which should be preserved after re-registation
-            store.state[`${options.namespace}`].events.push(newEvent); // add some state to preserve
-
-            // Act
-            service = new AnalyticService(store, req, options);
-
-            // Assert
-            expect(windowsPushSpy).toHaveBeenCalledWith({ ...newEvent }); // check state is still present after registration
-            expect(registerStoreModuleSpy).toHaveBeenCalledWith(options.namespace, expect.anything(), { preserveState: true });
-        });
-
-        it('should not attempt set the `serverside only` platformData properties if clientside', () => {
-            // Act
-            service = new AnalyticService(store, req, options);
-
-            // Assert
-            expect(storeDispatchSpy).not.toHaveBeenCalledWith(`${options.namespace}/updatePlatformData`, expect.anything());
-        });
-
-        it('should leave the platformData properties with defaults if data not available and serverside', () => {
-            // Arrange
-            delete (process.env.justEatEnvironment);
-            delete (process.env.FEATURE_VERSION);
-            delete (process.env.INSTANCE_POSITION);
-            delete (process.env.IS_PILOT);
-            when(get).calledWith('je-user_percentage').mockReturnValue(undefined);
-
-            const expected = { ...defaultState.platformData };
-            // Arrange - server side
-            mockWindow({ clientside: false });
-
-            // Act
-            service = new AnalyticService(store, req, options);
-
-            // Assert
-            expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/updatePlatformData`, expected);
-        });
-
-        it('should set the platformData properties with data if available and serverside', () => {
-            // Arrange
-            process.env.justEatEnvironment = 'testing123';
-            process.env.FEATURE_VERSION = '4.3.2.1';
-            process.env.INSTANCE_POSITION = '099';
-            process.env.IS_PILOT = false;
-
-            const expected = {
-                ...defaultState.platformData,
-                environment: process.env.justEatEnvironment,
-                version: process.env.FEATURE_VERSION,
-                instancePosition: process.env.INSTANCE_POSITION,
-                isPilot: process.env.IS_PILOT,
-                jeUserPercentage: '35'
-            };
-            // Arrange - server side
-            mockWindow({ clientside: false });
-
-            // Act
-            service = new AnalyticService(store, req, options);
-
-            // Assert
-            expect(storeDispatchSpy).toHaveBeenCalledWith(`${options.namespace}/updatePlatformData`, expected);
         });
 
         it('should use default options if no options supplied', () => {
@@ -224,7 +123,7 @@ describe('Analytic Service ::', () => {
             mockWindow({ dataLayerPresent: false });
 
             // Act
-            service = new AnalyticService(store, req);
+            service = new AnalyticService();
 
             // Assert that all the default options where used
             expect(document.head.innerHTML).toContain(`${defaultOptions.id}`);
@@ -245,7 +144,7 @@ describe('Analytic Service ::', () => {
             };
 
             // Act
-            service = new AnalyticService(store, req, partialOptions);
+            service = new AnalyticService(partialOptions);
 
             // Assert
             expect(document.head.innerHTML).toContain(`${partialOptions.id}`);
@@ -253,22 +152,10 @@ describe('Analytic Service ::', () => {
             expect(document.head.innerHTML).toContain(`${partialOptions.preview}`);
             expect(document.head.innerHTML).toContain(`${partialOptions.cookiesWin}`);
         });
-
-        it('should flush any stored events', () => {
-            // Arrange - Pre-populate Store Events
-            store.state[`${options.namespace}`].events.push(newEvent);
-
-            // Act
-            service = new AnalyticService(store, req, options);
-
-            // Assert
-            expect(windowsPushSpy).toHaveBeenCalledWith({ ...newEvent });
-            expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/clearEvents`);
-        });
     });
 
     describe('When calling pushEvent', () => {
-        it('should dispatch the `event` to the store', () => {
+        it('should push the `event` to the dataLayer', () => {
             // Arrange
             const expectedEvent = { ...newEvent };
 
@@ -276,10 +163,7 @@ describe('Analytic Service ::', () => {
             service.pushEvent(newEvent);
 
             // Assert
-            expect(storeDispatchSpy).toHaveBeenNthCalledWith(1, `${options.namespace}/clearEvents`);
-            expect(storeDispatchSpy).toHaveBeenNthCalledWith(2, `${options.namespace}/updateEvents`, expectedEvent);
             expect(windowsPushSpy).toHaveBeenCalledWith({ ...expectedEvent });
-            expect(storeDispatchSpy).toHaveBeenNthCalledWith(3, `${options.namespace}/clearEvents`);
         });
     });
 
@@ -307,14 +191,13 @@ describe('Analytic Service ::', () => {
                     name: options.featureName
                 };
                 options.locale = localeArg;
-                service = new AnalyticService(store, req, options);
+                service = new AnalyticService(options);
 
                 // Act
                 service.pushPlatformData();
 
                 // Assert
                 expect(windowsPushSpy).toHaveBeenCalledWith({ platformData: { ...expectedPlatformData } });
-                expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/updatePlatformData`, expectedPlatformData);
 
                 // Reset options
                 options.locale = 'en-GB';
@@ -338,7 +221,6 @@ describe('Analytic Service ::', () => {
             service.pushPlatformData({ featureName: expectedPlatformData.name });
 
             // Assert
-            expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/updatePlatformData`, expectedPlatformData);
             expect(windowsPushSpy).toHaveBeenCalledWith({ platformData: { ...expectedPlatformData } });
         });
 
@@ -359,7 +241,6 @@ describe('Analytic Service ::', () => {
             service.pushPlatformData({ locale: 'en-AU' });
 
             // Assert
-            expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/updatePlatformData`, expectedPlatformData);
             expect(windowsPushSpy).toHaveBeenCalledWith({ platformData: { ...expectedPlatformData } });
         });
 
@@ -380,8 +261,89 @@ describe('Analytic Service ::', () => {
             service.pushPlatformData({ featureName: expectedPlatformData.name, customFields: { custom1: 'one', custom2: 'two' } });
 
             // Assert
-            expect(storeDispatchSpy).toHaveBeenLastCalledWith(`${options.namespace}/updatePlatformData`, expectedPlatformData);
             expect(windowsPushSpy).toHaveBeenCalledWith({ platformData: { ...expectedPlatformData, custom1: 'one', custom2: 'two' } });
+        });
+    });
+
+    describe('When calling pushPageData ::', () => {
+        it('should not push pageData to datalayer if datalayer not present', () => {
+            // Arrange - no datalayer
+            mockWindow({ dataLayerPresent: false });
+
+            // Act
+            service.pushPageData();
+
+            // Assert
+            expect(windowsPushSpy).not.toHaveBeenCalled();
+        });
+
+        // 1 = window width, 2 = window height, 3 = expected orientation value
+        const cases = [
+            [1281, 1282, 'Portrait'],
+            [1281, 1280, 'Landscape'],
+            [1280, 1025, 'Landscape'],
+            [1026, 1025, 'Landscape'],
+            [1025, 768, 'Landscape'],
+            [769, 768, 'Landscape'],
+            [768, 414, 'Landscape'],
+            [415, 414, 'Landscape'],
+            [414, 413, 'Landscape'],
+            [414, 415, 'Portrait']
+        ];
+        test.each(cases)(
+            'should set the correct pageData given window width is %p and window height is %p',
+            (winWidth, winHeight, orientationExpected) => {
+                // Arrange
+                mockWindow({ winWidth, winHeight });
+
+                // Act
+                service.pushPageData({ pageName: 'jazz' });
+
+                // Assert
+                expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
+                    pageData: expect.objectContaining({
+                        name: 'jazz',
+                        orientation: orientationExpected
+                    })
+                }));
+            }
+        );
+
+        it('should append custom fields when supplied', () => {
+            // Arrange
+            const expected = {
+                custom1: 'one',
+                custom2: 'two'
+            };
+
+            // Act
+            service.pushPageData({ customFields: { custom1: expected.custom1, custom2: expected.custom2 } });
+
+            // Assert
+            expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
+                pageData: expect.objectContaining({ custom1: expected.custom1, custom2: expected.custom2 })
+            }));
+        });
+
+        it('should set the conversationId value when x-je-conversation cookie exists', () => {
+            // Arrange
+            const expected = {
+                conversationId: 'f0740341-4369-437d-bcce-735a71ee5b78'
+            };
+
+            getCookie = jest.fn();
+            when(getCookie).calledWith('x-je-conversation').mockReturnValue(expected.conversationId);
+            Cookies.mockImplementation(() => ({ get: getCookie }));
+
+            // Act
+            service.pushPageData();
+
+            // Assert
+            expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
+                pageData: expect.objectContaining({
+                    conversationId: expected.conversationId
+                })
+            }));
         });
     });
 
@@ -482,105 +444,6 @@ describe('Analytic Service ::', () => {
                     expect(windowsPushSpy).toHaveBeenCalledWith({ userData: { ...expectedUserDataWithAuthTokenGuest } });
                 });
             });
-        });
-    });
-
-    describe('When calling pushPageData ::', () => {
-        it('should not push pageData to datalayer if datalayer not present', () => {
-            // Arrange - no datalayer
-            mockWindow({ dataLayerPresent: false });
-
-            // Act
-            service.pushPageData();
-
-            // Assert
-            expect(windowsPushSpy).not.toHaveBeenCalled();
-        });
-
-        // 1 = window width, 2 = window height, 3 = expected orientation value
-        const cases = [
-            [1281, 1282, 'Portrait'],
-            [1281, 1280, 'Landscape'],
-            [1280, 1025, 'Landscape'],
-            [1026, 1025, 'Landscape'],
-            [1025, 768, 'Landscape'],
-            [769, 768, 'Landscape'],
-            [768, 414, 'Landscape'],
-            [415, 414, 'Landscape'],
-            [414, 413, 'Landscape'],
-            [414, 415, 'Portrait']
-        ];
-        test.each(cases)(
-            'should set the correct pageData given window width is %p and window height is %p',
-            (winWidth, winHeight, orientationExpected) => {
-                // Arrange
-                mockWindow({ winWidth, winHeight });
-
-                // Act
-                service.pushPageData({ pageName: 'jazz' });
-
-                // Assert
-                expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
-                    pageData: expect.objectContaining({
-                        name: 'jazz',
-                        orientation: orientationExpected
-                    })
-                }));
-            }
-        );
-
-        it('should override the httpStatusCode when provided', () => {
-            // Arrange
-            const expected = {
-                httpStatusCode: 404
-            };
-
-            // Act
-            service.pushPageData({ httpStatusCode: expected.httpStatusCode });
-
-            // Assert
-            expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
-                pageData: expect.objectContaining({
-                    httpStatusCode: expected.httpStatusCode
-                })
-            }));
-        });
-
-        it('should append custom fields when supplied', () => {
-            // Arrange
-            const expected = {
-                custom1: 'one',
-                custom2: 'two'
-            };
-
-            // Act
-            service.pushPageData({ customFields: { custom1: expected.custom1, custom2: expected.custom2 } });
-
-            // Assert
-            expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
-                pageData: expect.objectContaining({ custom1: expected.custom1, custom2: expected.custom2 })
-            }));
-        });
-
-        it('should set the conversationId value when x-je-conversation cookie exists', () => {
-            // Arrange
-            const expected = {
-                conversationId: 'f0740341-4369-437d-bcce-735a71ee5b78'
-            };
-
-            get = jest.fn();
-            when(get).calledWith('x-je-conversation').mockReturnValue(expected.conversationId);
-            Cookies.mockImplementation(() => ({ get }));
-
-            // Act
-            service.pushPageData();
-
-            // Assert
-            expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
-                pageData: expect.objectContaining({
-                    conversationId: expected.conversationId
-                })
-            }));
         });
     });
 

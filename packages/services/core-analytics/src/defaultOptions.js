@@ -1,6 +1,5 @@
 const defaultOptions = {
-    namespace: 'f-analytics',
-    globalVarName: 'gtm',
+    namespace: 'core-analytics',
     featureName: 'feature-name-unset',
     locale: 'en-GB',
     id: 'gtm-id-unset',
