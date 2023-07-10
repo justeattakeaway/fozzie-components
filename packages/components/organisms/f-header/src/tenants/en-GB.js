@@ -9,7 +9,7 @@ export default {
     navLinks: {
         accountInfo: {
             text: 'Your account',
-            url: '/member/updateuserinfo',
+            url: '/account/info',
             gtm: 'click_account_your_account'
         },
         orderHistory: {
@@ -24,7 +24,7 @@ export default {
         },
         addressBook: {
             text: 'Your address book',
-            url: '/member/addressbook',
+            url: '/account/addressbook',
             gtm: 'click_account_address_books'
         },
         redeemAGiftcard: {
@@ -34,7 +34,7 @@ export default {
         },
         redeemVoucher: {
             text: 'Redeem a voucher',
-            url: '/member/useraccount',
+            url: '/account/credit',
             gtm: 'click_account_redeem_voucher'
         },
         contactPreferences: {

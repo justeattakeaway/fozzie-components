@@ -22,7 +22,7 @@ const propsData = {
         },
         {
             id: 'link4',
-            to: '/member/addressbook',
+            to: '/account/addressbook',
             name: 'Your address book'
         },
         {
