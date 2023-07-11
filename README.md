@@ -9,7 +9,7 @@ Each project has its own `package.json` file containing package specific configu
 
 If you run `yarn install` from a package then you may well get an unhelpful error like this:
 
-```none
+```none test
 Error: ENOENT: no such file or directory, symlink '…\fozzie-components\packages\…' -> '…\fozzie-components\node_modules\@justeat\…'
 ```
 
