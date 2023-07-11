@@ -1,7 +1,4 @@
-import Vuex from 'vuex';
-import Vue from 'vue';
-
-const newEvent = {
+export const newEvent = {
     event: 'jazzy',
     experiment: {
         id: 'EX-1234',
@@ -14,7 +11,7 @@ const newEvent = {
     }
 };
 
-const defaultState = {
+export const defaultState = {
     platformData: {
         environment: 'localhost',
         name: undefined,
@@ -44,38 +41,7 @@ const defaultState = {
     events: []
 };
 
-const modifiedState = {
-    platformData: {
-        environment: 'test-environment',
-        name: 'test-name',
-        appType: 'test-appType',
-        applicationId: 9,
-        country: 'zu',
-        language: 'ze',
-        jeUserPercentage: 88,
-        currency: 'zud',
-        version: '9.8.7.6',
-        instancePosition: '999',
-        isPilot: false
-    },
-    userData: {
-        'a-UserId': 'xxxx-xxxx',
-        authType: 'Login',
-        email: 'gjfkdgjdkgjhd',
-        globalUserId: 'fdsgsgsgsg',
-        signinType: 'Email',
-        signupDate: '2021-05-12T10:57:05.9130000Z'
-    },
-    pageData: {
-        name: 'test-name',
-        httpStatusCode: 200,
-        conversationId: '460cc3a8-83f7-4e80-bb46-c8a69967f249',
-        orientation: 'Landscape'
-    },
-    events: [newEvent]
-};
-
-const options = {
+export const options = {
     namespace: 'f-analytics',
     globalVarName: 'gtm',
     featureName: 'test-feature-name',
@@ -83,51 +49,7 @@ const options = {
     id: 'GTM-0000000',
     auth: undefined,
     preview: undefined,
-    cookiesWin: undefined
-};
-
-const defaultActions = {
-    updatePlatformData: jest.fn(),
-    updatePageData: jest.fn(),
-    updateEvents: jest.fn()
-};
-
-const defaultGetters = {};
-
-const defaultMutations = {
-    updatePlatformData: jest.fn(),
-    updatePageData: jest.fn(),
-    updateEvents: jest.fn(),
-    clearEvents: jest.fn()
-};
-
-const createStore = ({
-    name = options.namespace,
-    state = {},
-    actions = defaultActions,
-    getters = defaultGetters,
-    mutations = defaultMutations
-} = {}) => {
-    Vue.use(Vuex);
-    return new Vuex.Store({
-        modules: {
-            [`${name}`]: {
-                namespaced: true,
-                state,
-                actions,
-                getters,
-                mutations
-            },
-            hasModule: jest.fn(() => true)
-        }
-    });
-};
-
-export {
-    defaultState,
-    defaultActions,
-    modifiedState,
-    newEvent,
-    createStore,
-    options
+    cookiesWin: undefined,
+    anonUserCookieName: 'je-user',
+    authTokenType: 'l-je'
 };

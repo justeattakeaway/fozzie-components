@@ -39,12 +39,12 @@ const getCookie = cookieName => {
 };
 
 /**
- * Maps the anonymous User Id to the UserData 'a-UserId' field.
+ * Maps the anonymous User Id to the UserData field, e.g. 'a-UserId'.
  *
- * @return {string} UserId from je-auser cookie
+ * @return {string} UserId from cookie
  */
-const mapAnonymousUserId = () => {
-    const value = getCookie('je-auser');
+const mapAnonymousUserId = cookieName => {
+    const value = getCookie(cookieName);
     return value;
 };
 
@@ -81,14 +81,14 @@ export const mapPlatformData = ({
  * @param {string} authToken - The current authorisation token
  * @return {object} new userData object
  */
-export const mapUserData = ({ userData, authToken } = {}) => {
-    const userId = mapAnonymousUserId();
+export const mapUserData = ({ userData, authToken, options } = {}) => {
+    const userId = mapAnonymousUserId(options.anonUserCookieName);
     let mappedUserData = {
         ...userData,
-        'a-UserId': userId || userData['a-UserId']
+        'a-UserId': userId
     };
 
-    if (authToken) {
+    if (authToken && options.authTokenType === 'l-je') {
         const tokenData = jwtDecode(authToken);
         const authType = tokenData?.is_new_registration ? GRANT_TYPES.registration : (GRANT_TYPES[tokenData?.grant_type] || GRANT_TYPES.default);
         const email = (tokenData?.email) ? SHA256(tokenData?.email).toString() : userData.email;

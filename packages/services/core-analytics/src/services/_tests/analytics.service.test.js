@@ -2,11 +2,7 @@ import { when } from 'jest-when';
 import Cookies from 'universal-cookie';
 import defaultOptions from '../../defaultOptions';
 import AnalyticService from '../analytics.service';
-import {
-    defaultState,
-    newEvent,
-    options
-} from '../../tests/helpers/setup';
+import { defaultState, newEvent, options } from '../../tests/helpers/setup';
 
 jest.mock('universal-cookie', () => jest.fn());
 
@@ -19,10 +15,7 @@ describe('Analytic Service ::', () => {
     let getCookie;
 
     const mockWindow = ({
-        winWidth = 667,
-        winHeight = 375,
-        dataLayerPresent = true,
-        clientside = true
+        winWidth = 667, winHeight = 375, dataLayerPresent = true, clientside = true
     } = {}) => {
         if (!clientside) {
             jest.spyOn(global, 'window', 'get').mockImplementation(() => undefined);
@@ -31,12 +24,12 @@ describe('Analytic Service ::', () => {
         }
         windowCopy = { ...global.window };
         windowsPushSpy = jest.fn();
-        const windowMock = ({
+        const windowMock = {
             ...windowCopy,
             dataLayer: dataLayerPresent ? { push: windowsPushSpy } : undefined,
             innerWidth: winWidth,
             innerHeight: winHeight
-        });
+        };
         windowSpy = jest.spyOn(global, 'window', 'get');
         windowSpy.mockImplementation(() => windowMock);
     };
@@ -44,7 +37,7 @@ describe('Analytic Service ::', () => {
     beforeEach(() => {
         // Arrange - cookies
         getCookie = jest.fn();
-        when(getCookie).calledWith('je-auser').mockReturnValue(auserId);
+        when(getCookie).calledWith(options.anonUserCookieName).mockReturnValue(auserId);
         Cookies.mockImplementation(() => ({ get: getCookie }));
 
         // Arrange - window state
@@ -99,9 +92,9 @@ describe('Analytic Service ::', () => {
 
             // Assert
             expect(document.head.innerHTML).toContain(`https://www.googletagmanager.com/gtm.js?id=${currentRegisteredGtmIdOptions.id}` +
-            `&amp;gtm_auth=${currentRegisteredGtmIdOptions.auth}` +
-            `&amp;gtm_preview=${currentRegisteredGtmIdOptions.preview}` +
-            `&amp;gtm_cookies_win=${currentRegisteredGtmIdOptions.cookiesWin}`);
+                    `&amp;gtm_auth=${currentRegisteredGtmIdOptions.auth}` +
+                    `&amp;gtm_preview=${currentRegisteredGtmIdOptions.preview}` +
+                    `&amp;gtm_cookies_win=${currentRegisteredGtmIdOptions.cookiesWin}`);
         });
 
         it('should not attempt to re-append the GTM tags if already present', () => {
@@ -177,32 +170,29 @@ describe('Analytic Service ::', () => {
             ['en-AU', 'au', 'aud', 'en'],
             ['en-NZ', 'nz', 'nzd', 'en']
         ];
-        test.each(cases)(
-            'should dispatch the correct `plaformData` to the store given %p as the locale',
-            (localeArg, countryExpected, currencyExpected, languageExpected) => {
-                // Arrange
-                const expectedPlatformData = {
-                    ...defaultState.platformData,
-                    appType: 'web',
-                    applicationId: 7,
-                    country: countryExpected,
-                    currency: currencyExpected,
-                    language: languageExpected,
-                    name: options.featureName
-                };
-                options.locale = localeArg;
-                service = new AnalyticService(options);
+        test.each(cases)('should dispatch the correct `plaformData` to the store given %p as the locale', (localeArg, countryExpected, currencyExpected, languageExpected) => {
+            // Arrange
+            const expectedPlatformData = {
+                ...defaultState.platformData,
+                appType: 'web',
+                applicationId: 7,
+                country: countryExpected,
+                currency: currencyExpected,
+                language: languageExpected,
+                name: options.featureName
+            };
+            options.locale = localeArg;
+            service = new AnalyticService(options);
 
-                // Act
-                service.pushPlatformData();
+            // Act
+            service.pushPlatformData();
 
-                // Assert
-                expect(windowsPushSpy).toHaveBeenCalledWith({ platformData: { ...expectedPlatformData } });
+            // Assert
+            expect(windowsPushSpy).toHaveBeenCalledWith({ platformData: { ...expectedPlatformData } });
 
-                // Reset options
-                options.locale = 'en-GB';
-            }
-        );
+            // Reset options
+            options.locale = 'en-GB';
+        });
 
         it('should override the `featureName` when supplied', () => {
             // Arrange
@@ -290,24 +280,21 @@ describe('Analytic Service ::', () => {
             [414, 413, 'Landscape'],
             [414, 415, 'Portrait']
         ];
-        test.each(cases)(
-            'should set the correct pageData given window width is %p and window height is %p',
-            (winWidth, winHeight, orientationExpected) => {
-                // Arrange
-                mockWindow({ winWidth, winHeight });
+        test.each(cases)('should set the correct pageData given window width is %p and window height is %p', (winWidth, winHeight, orientationExpected) => {
+            // Arrange
+            mockWindow({ winWidth, winHeight });
 
-                // Act
-                service.pushPageData({ pageName: 'jazz' });
+            // Act
+            service.pushPageData({ pageName: 'jazz' });
 
-                // Assert
-                expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
-                    pageData: expect.objectContaining({
-                        name: 'jazz',
-                        orientation: orientationExpected
-                    })
-                }));
-            }
-        );
+            // Assert
+            expect(windowsPushSpy).toHaveBeenCalledWith(expect.objectContaining({
+                pageData: expect.objectContaining({
+                    name: 'jazz',
+                    orientation: orientationExpected
+                })
+            }));
+        });
 
         it('should append custom fields when supplied', () => {
             // Arrange
@@ -392,12 +379,13 @@ describe('Analytic Service ::', () => {
         describe('if authToken has been passed', () => {
             describe('and user is logged in', () => {
                 // Arrange
-                const authTokenRegistered = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
-                + 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbS'
-                + 'IsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkz'
-                + 'MDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkI'
-                + 'joiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25h'
-                + 'bWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
+                const authTokenRegistered =
+                    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
+                    'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbS' +
+                    'IsImNyZWF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkz' +
+                    'MDAwMFoiLCJuYW1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkI' +
+                    'joiVTdOUkFsV0FnNXpPZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25h' +
+                    'bWUiOiJKb2UiLCJmYW1pbHlfbmFtZSI6IkJsb2dncyIsImlhdCI6MTYxNTQ2OTUxNn0.VapH6uHnn4lHIkvN_mS9A9IVVWL0YPNE39gDDD-l7SU';
 
                 const expectedUserDataWithAuthTokenRegistered = {
                     'a-UserId': auserId,
@@ -419,13 +407,14 @@ describe('Analytic Service ::', () => {
 
             describe('and user is a guest', () => {
                 // Arrange
-                const authTokenGuest = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.'
-                + 'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZ'
-                + 'WF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW'
-                + '1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXp'
-                + 'PZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1p'
-                + 'bHlfbmFtZSI6IkJsb2dncyIsInN1YiI6IjEyMzQ1Iiwicm9sZSI6Ikd1ZXN0Ii'
-                + 'wiaWF0IjoxNjE1NDY5NTE2fQ.ngfAKpiMH4Gk0Y4gAVC4KeLadWFtVXx4hD1_BSW9SN0';
+                const authTokenGuest =
+                    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
+                    'eyJlbWFpbCI6ImpvZS5ibG9nZ3NAanVzdGVhdHRha2Vhd2F5LmNvbSIsImNyZ' +
+                    'WF0ZWRfZGF0ZSI6IjIwMjEtMDItMDhUMTA6Mjc6NDkuMTkzMDAwMFoiLCJuYW' +
+                    '1lIjoiSm9lIEJsb2dncyIsImdsb2JhbF91c2VyX2lkIjoiVTdOUkFsV0FnNXp' +
+                    'PZHNkUmdmN25rVHlvaTkwWEVvPSIsImdpdmVuX25hbWUiOiJKb2UiLCJmYW1p' +
+                    'bHlfbmFtZSI6IkJsb2dncyIsInN1YiI6IjEyMzQ1Iiwicm9sZSI6Ikd1ZXN0Ii' +
+                    'wiaWF0IjoxNjE1NDY5NTE2fQ.ngfAKpiMH4Gk0Y4gAVC4KeLadWFtVXx4hD1_BSW9SN0';
 
                 const expectedUserDataWithAuthTokenGuest = {
                     'a-UserId': auserId,

@@ -144,7 +144,8 @@ export default class AnalyticService {
     pushUserData ({ authToken, customFields } = {}) {
         let userData = mapUserData({
             userData: userDataDefault,
-            authToken
+            authToken,
+            options: this.options
         });
 
         if (customFields) {
