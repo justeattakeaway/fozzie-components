@@ -205,8 +205,8 @@ const messages = {
         courier: {
             delivery: {
                 title: 'Leave a note for the driver',
-                text: 'Leave a note for the driver with anything they need to know (e.g. the doorbell doesn\'t work).',
-                placeholder: 'e.g. the doorbell doesn’t work.'
+                text: 'Leave a note for the driver with anything they need to know (e.g. the doorbell doesn\'t work). Do not include details about any allergies here.',
+                placeholder: 'e.g. the doorbell doesn’t work. Do not include details about any allergies here.'
             },
             collection: {
                 title: 'Leave a note',
@@ -239,18 +239,18 @@ const messages = {
         kitchen: {
             delivery: {
                 title: 'Leave a note for the kitchen',
-                text: 'Leave a note for the restaurant with anything they need to know.',
-                placeholder: 'We\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery.'
+                text: 'Leave a note for the restaurant with anything they need to know. Do not include details about any allergies here.',
+                placeholder: 'We\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery. Do not include details about any allergies here.'
             },
             dinein: {
                 title: 'Leave a note for the kitchen',
-                text: 'Leave a note for the restaurant with anything they need to know.',
-                placeholder: 'We\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery.'
+                text: 'Leave a note for the restaurant with anything they need to know. Do not include details about any allergies here.',
+                placeholder: 'We\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery. Do not include details about any allergies here.'
             },
             collection: {
                 title: 'Leave a note for the kitchen',
-                text: 'Leave a note for the restaurant with anything they need to know.',
-                placeholder: 'We\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery.'
+                text: 'Leave a note for the restaurant with anything they need to know. Do not include details about any allergies here.',
+                placeholder: 'We\'re working with restaurants to cut waste. Please don\'t ask for plastic cutlery. Do not include details about any allergies here.'
             }
         }
     },
