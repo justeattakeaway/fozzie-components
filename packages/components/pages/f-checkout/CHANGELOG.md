@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.10.0
+------------------------------
+*July 25, 2023*
+
+### Changed
+- Added "no allergen" copy on the Split Notes Web UK.
 
 v4.9.1
 ------------------------------
