@@ -50,7 +50,7 @@
       "outputs":[]
     },
     "ci:test-component:chrome:atoms": {
-      "cache": false,
+      "cache": true,
       "dependsOn": [],
       "outputs":[]
     },

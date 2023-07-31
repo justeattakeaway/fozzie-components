@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "7.51.0",
+  "version": "7.54.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell turbo run build --continue --token=${TURBO_TOKEN}",
@@ -88,7 +88,7 @@
     "babel-jest": "26.1.0",
     "babel-loader": "8.1.0",
     "bundlewatch": "0.3.1",
-    "chromedriver": "113.0.0",
+    "chromedriver": "115.0.0",
     "core-js": "3.26.1",
     "cross-env": "7.0.2",
     "css-loader": "1.0.1",
