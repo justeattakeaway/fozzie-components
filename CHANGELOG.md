@@ -9,6 +9,7 @@ v7.54.0
 
 ### Changed
 - WebDriverIO tests to only run against changed packages and their dependants for PR's. This change should reduce our Percy usage.
+- `chromedriver@115.0.0`
 
 
 v7.53.0
