@@ -87,18 +87,6 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    # Detect changed files.
-    - uses: dorny/paths-filter@v2
-      id: changes
-      with:
-        filters: |
-          global:
-            - '*.js'
-            - '*.json'
-            - '.github/workflows/**'
-            - 'packages/storybook/**'
-            - 'packages/tools/fozzie/**'
-        list-files: shell
     # Setup Node 16.
     - name: Setup Node
       uses: actions/setup-node@v3
@@ -149,18 +137,6 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    # Detect changed files
-    - uses: dorny/paths-filter@v2
-      id: changes
-      with:
-        filters: |
-          global:
-            - '*.js'
-            - '*.json'
-            - '.github/workflows/**'
-            - 'packages/storybook/**'
-            - 'packages/tools/fozzie/**'
-        list-files: shell
     # Setup Node 16
     - name: Setup Node
       uses: actions/setup-node@v3
@@ -197,18 +173,6 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    # Detect changed files
-    - uses: dorny/paths-filter@v2
-      id: changes
-      with:
-        filters: |
-          global:
-            - '*.js'
-            - '*.json'
-            - '.github/workflows/**'
-            - 'packages/storybook/**'
-            - 'packages/tools/fozzie/**'
-        list-files: shell
     # Setup Node 16
     - name: Setup Node
       uses: actions/setup-node@v3
@@ -232,13 +196,16 @@ jobs:
       with:
         path: ./packages/storybook/storybook-static
         key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
-    # Run Component / A11y / Visual Tests against all components
-    - name: Run All Component / A11y / Visual Tests
+    - name: Run Component / A11y / Visual Tests
       run: |
+        FILTER_FLAG=""
+        if [[ "${{ github.event_name }}" == "pull_request" && "${{ github.ref }}" != "refs/heads/master" ]]; then
+          FILTER_FLAG="--filter=...[origin/master]"
+        fi
         yarn storybook:serve-static &
-        yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 &&
-        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 &&
-        yarn ci:test:visual:${{ matrix.component-type }} --concurrency=1
+        yarn ci:test-component:chrome:${{ matrix.component-type }} --concurrency=1 $FILTER_FLAG &&
+        yarn ci:test-a11y:chrome:${{ matrix.component-type }} --concurrency=1 $FILTER_FLAG &&
+        yarn ci:test:visual:${{ matrix.component-type }} --concurrency=1 $FILTER_FLAG
     # On Failure - Upload Allure Report
     - name: Generate Allure Report
       if: failure()

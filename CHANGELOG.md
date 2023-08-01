@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.54.0
+------------------------------
+*July 31, 2023*
+
+### Changed
+- WebDriverIO tests to only run against changed packages and their dependants for PR's. This change should reduce our Percy usage.
+- `chromedriver@115.0.0`
+
+
 v7.53.0
 ------------------------------
 *May 22, 2023*
