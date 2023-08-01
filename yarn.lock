@@ -2676,6 +2676,15 @@
   dependencies:
     "@justeattakeaway/pie-icons-vue" "2.0.0-beta.1"
 
+"@justeat/f-content-cards@10.4.1":
+  version "10.4.1"
+  resolved "https://registry.yarnpkg.com/@justeat/f-content-cards/-/f-content-cards-10.4.1.tgz#4052514992363edc010f35b89e50e3f8aa1e2bcf"
+  integrity sha512-N8FX0HUsbtZ88Vj8h9D2HA6qM8tSxA5B4vi/tI1T2ki3yiw6n4M5A+T8p5OJ9XkY37rY5vHtui+O2gpX/FOgHw==
+  dependencies:
+    "@babel/plugin-proposal-class-properties" "7.12.13"
+    "@justeat/f-services" "1.x"
+    core-js "3.6.5"
+
 "@justeat/f-dom@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@justeat/f-dom/-/f-dom-0.4.0.tgz#3e838a2dd06d4d5281c17f5fb9f66d7485fd759a"
@@ -2783,16 +2792,6 @@
   resolved "https://registry.yarnpkg.com/@justeat/stylelint-config-fozzie/-/stylelint-config-fozzie-3.2.0.tgz#f2e593e70119185e71e2acf53f77b3e092623402"
   integrity sha512-EVdq2lgLxx5J5WHZqdLs1xB+R+ICNGnh+TMAnq5mHMXCIUuRfHQ9h4syc8UKGnMXLBPlr+0qKAMByFrRSwDH6Q==
 
-"@justeattakeaway/cc-braze-adapter@0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-braze-adapter/-/cc-braze-adapter-0.4.0.tgz#9a1972db5e0de7c0934eb2e5df91ab4911994f9e"
-  integrity sha512-tWwBPMWNIO9/TVAeizKfYxg7u2WOXSQyprbLIgR72GbWAxmdaeC2m5wtmTkGjd+gp8C1d/odUeEQ5cdR1WwjQA==
-  dependencies:
-    "@justeattakeaway/cc-filters" "0.1.0"
-    "@justeattakeaway/cc-utils" "0.1.0"
-    date-fns "2.29.3"
-    lodash-es "4.17.21"
-
 "@justeattakeaway/cc-braze-adapter@0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-braze-adapter/-/cc-braze-adapter-0.5.0.tgz#0eceeafb3902ec87c943c3b8b67a1353073660d4"
@@ -2811,10 +2810,10 @@
     date-fns "2.28.0"
     lodash-es "4.17.21"
 
-"@justeattakeaway/cc-stampcards-adapter@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-stampcards-adapter/-/cc-stampcards-adapter-0.7.0.tgz#11c3461606f1bb2c61067c5f205f6e55bd1c5e24"
-  integrity sha512-U8srCiQTH5pCLSG9afiObrgYwKxLWZd3itWQxMGzuKXQqNe9/KDeFN8vlLr5DFgbELVcDoFBBwOi8PowVSnltg==
+"@justeattakeaway/cc-stampcards-adapter@0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@justeattakeaway/cc-stampcards-adapter/-/cc-stampcards-adapter-0.7.1.tgz#fa213cf6415c36e15f7c7a3df6d71194a81695e4"
+  integrity sha512-wU3dGje+SBkp1WaCBUAaCK+nXin++G7X7mqkhEdL+VPtnFVu4Vuw6eRS0TTNHIgxOzo7Tt+gV1sRlqZGBKf5vA==
   dependencies:
     "@justeat/f-trak" "0.7.1"
     "@justeattakeaway/cc-filters" "0.1.0"
