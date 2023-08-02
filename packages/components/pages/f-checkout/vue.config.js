@@ -28,17 +28,6 @@ module.exports = {
             .end()
             .use('vue-svg-loader')
             .loader('vue-svg-loader');
-
-        config.externals({
-            '@justeat/f-alert': '@justeat/f-alert',
-            '@justeat/f-button': '@justeat/f-button',
-            '@justeat/f-card': '@justeat/f-card',
-            '@justeat/f-card-with-content': '@justeat/f-card-with-content',
-            '@justeat/f-error-message': '@justeat/f-error-message',
-            '@justeat/f-form-field': '@justeat/f-form-field',
-            '@justeat/f-link': '@justeat/f-link',
-            '@justeat/f-mega-modal': '@justeat/f-mega-modal'
-        });
     },
     pluginOptions: {
         lintStyleOnBuild: true
