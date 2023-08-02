@@ -143,11 +143,9 @@ export default {
      */
     async mounted () {
         await this.init({
-            brazeApiKey: this.brazeApiKey,
             authToken: this.authToken,
             tenant: this.tenant,
-            stampCardsAPIUrl: this.stampCardsAPIUrl,
-            inStampCardsAdapterExperiment: this.inStampCardsAdapterExperiment
+            stampCardsAPIUrl: this.stampCardsAPIUrl
         });
     },
 
