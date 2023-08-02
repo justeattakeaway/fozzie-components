@@ -28,7 +28,6 @@ import { mapState } from 'vuex';
 import { ContentCards } from '@justeat/f-content-cards';
 import '@justeat/f-content-cards/dist/f-content-cards.css';
 import stampCardsAdapter from '@justeattakeaway/cc-stampcards-adapter';
-import brazeAdapter from '@justeattakeaway/cc-braze-adapter';
 import NoCardsErrorState from './NoCardsErrorState.vue';
 import LoyaltyCardsLoadingState from './Loading.vue';
 import CardsSlot from './Slots.vue';
@@ -57,28 +56,18 @@ export default {
 
     computed: {
         ...mapState(VUEX_MODULE_NAMESPACE_LOYALTY, [
-            'globalUserId',
-            'brazeApiKey',
             'authToken',
             'tenant',
-            'stampCardsAPIUrl',
-            'inStampCardsAdapterExperiment'
+            'stampCardsAPIUrl'
         ])
     },
 
     created () {
-        this.adapters.push(this.inStampCardsAdapterExperiment ?
-            stampCardsAdapter({
-                token: () => this.authToken,
-                tenant: this.tenant,
-                url: this.stampCardsAPIUrl
-            })
-            : brazeAdapter({
-                apiKey: this.brazeApiKey,
-                sdkEndpoint: 'sdk.iad-01.braze.com',
-                userId: this.globalUserId,
-                loggingEnabled: false
-            }));
+        this.adapters.push(stampCardsAdapter({
+            token: () => this.authToken,
+            tenant: this.tenant,
+            url: this.stampCardsAPIUrl
+        }));
     }
 
 };
