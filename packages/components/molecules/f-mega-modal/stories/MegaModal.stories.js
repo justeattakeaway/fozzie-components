@@ -40,7 +40,7 @@ export const MegaModalComponent = (args, { argTypes }) => ({
                 <h1>Some content to test stacking!</h1>
                 <p>This content should all be behind the modal.</p>
                 <ol>
-                    ${'<li>List item with a kinda long name</li>'.repeat(25)}
+                    ${'<li>List item with a kinda long name</li>'.repeat(35)}
                 </ol>
             </div>
 
