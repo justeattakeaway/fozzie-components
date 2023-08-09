@@ -353,6 +353,7 @@ export default {
 @use '@justeat/fozzie/src/scss/fozzie' as f;
 
 .c-megaModal {
+    position: fixed;
     z-index: f.zIndex(high);
 }
 
