@@ -38,7 +38,7 @@
     "ci:test:services": "yarn test"
   },
   "devDependencies": {
-    "jest": "25.4.0",
+    "jest": "26.0.0",
     "jest-mock-axios": "4.4.1"
   },
   "dependencies": {
