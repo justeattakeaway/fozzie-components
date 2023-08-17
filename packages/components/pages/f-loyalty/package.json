@@ -79,7 +79,7 @@
     "@justeattakeaway/cc-stampcards-adapter": "0.7.1",
     "@vue/cli-plugin-babel": "4.5.16",
     "faker": "5.5.3",
-    "http-request-mock": "1.8.3"
+    "http-request-mock": "1.8.16"
   },
   "volta": {
     "extends": "../../../../package.json"
