@@ -38,7 +38,7 @@
     "ci:test:services": "yarn test"
   },
   "devDependencies": {
-    "jest": "25.4.0",
+    "jest": "26.0.0",
     "vue": "^3.0.0"
   },
   "peerDependencies": {
