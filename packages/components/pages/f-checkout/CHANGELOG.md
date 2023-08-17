@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v4.11.0
+------------------------------
+*August 17, 2023*
+
+### Changed
+- Revert linting warning changes on the 4.9.1 version.
+
+
 v4.10.0
 ------------------------------
 *July 25, 2023*

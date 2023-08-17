@@ -8,20 +8,24 @@ import {
 } from '../../../../src/constants';
 import { DELIVERY_TIMES } from '../../../helpers';
 
-const buildCustomer = tenant => customers[tenant];
+function buildCustomer (tenant) {
+    return customers[tenant];
+}
 
-const buildLocation = tenant => Address[tenant];
+function buildLocation (tenant) {
+    return Address[tenant];
+}
 
-const getNoteTypes = notes => {
+function getNoteTypes (notes) {
     const noteTypes = {
         courier: [CHECKOUT_NOTE_TYPE_COURIER],
         split: [CHECKOUT_NOTE_TYPE_COURIER, CHECKOUT_NOTE_TYPE_KITCHEN]
     };
 
     return noteTypes[notes] || null;
-};
+}
 
-const getTime = (isPreOrder, scheduledTime) => {
+function getTime (isPreOrder, scheduledTime) {
     const times = {
         [DELIVERY_TIMES.later]: {
             from: '2020-01-01T02:15:00.000Z',
@@ -43,9 +47,9 @@ const getTime = (isPreOrder, scheduledTime) => {
         asap: !isPreOrder,
         scheduled
     };
-};
+}
 
-const getCheckout = (serviceType = CHECKOUT_METHOD_DELIVERY, tenant = 'uk', additionalToggles) => {
+export default function (serviceType = CHECKOUT_METHOD_DELIVERY, tenant = 'uk', additionalToggles) {
     const isPreOrder = !!additionalToggles?.isPreOrder;
     const scheduledTime = additionalToggles?.scheduledTime;
     const notes = additionalToggles?.notes;
@@ -98,6 +102,4 @@ const getCheckout = (serviceType = CHECKOUT_METHOD_DELIVERY, tenant = 'uk', addi
         ],
         ...(notes ? noteTypes : {})
     };
-};
-
-export default getCheckout;
+}
