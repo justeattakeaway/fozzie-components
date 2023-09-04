@@ -48,7 +48,8 @@
     "prepare": "husky install"
   },
   "resolutions": {
-    "webpack": "4.46.0"
+    "webpack": "4.46.0",
+    "ua-parser-js": "1.0.35"
   },
   "devDependencies": {
     "@babel/cli": "7.14.8",

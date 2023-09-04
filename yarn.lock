@@ -26769,10 +26769,10 @@ typesafe-i18n@^5.12.0:
   resolved "https://registry.yarnpkg.com/typesafe-i18n/-/typesafe-i18n-5.16.3.tgz#39a8bcdf3d987851187ae1b87033a57b8b4089b6"
   integrity sha512-9KxHDFzNW5vA1a4kVPEm9Jslch0H5W2IkPcJjuaqofr86U0EXkrkvF3IbPjzwnWwEf/wC900ZE7RPnePW5KYKg==
 
-ua-parser-js@^1.0.1:
-  version "1.0.32"
-  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-1.0.32.tgz#786bf17df97de159d5b1c9d5e8e9e89806f8a030"
-  integrity sha512-dXVsz3M4j+5tTiovFVyVqssXBu5HM47//YSOeZ9fQkdDKkfzv2v3PP1jmH6FUyPW+yCSn7aBVK1fGGKNhowdDA==
+ua-parser-js@1.0.35, ua-parser-js@^1.0.1:
+  version "1.0.35"
+  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-1.0.35.tgz#c4ef44343bc3db0a3cbefdf21822f1b1fc1ab011"
+  integrity sha512-fKnGuqmTBnIE+/KXSzCn4db8RTigUzw1AN0DmdU6hJovUTbYJKyqj+8Mt1c4VfRDnOVJnENmfYkIPZ946UrSAA==
 
 uglify-js@3.4.x:
   version "3.4.10"
