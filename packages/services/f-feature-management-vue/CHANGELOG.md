@@ -3,12 +3,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v0.3.1
+------------------------------
+*August 10, 2022*
+
+### Changed
+- Bump jest from v25 to v29
+
+
 v0.3.0
 ------------------------------
 *August 10, 2022*
 
 ### Changed
 - Vite config to work in GitHub Actions.
+
 
 v0.2.0
 ------------------------------

@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-consumer-oidc",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Authentication helper to communicate with open apis",
   "main": "dist/f-consumer-oidc.umd.js",
   "module": "dist/f-consumer-oidc.es.js",
@@ -36,7 +36,7 @@
     "ci:test:services": "yarn test"
   },
   "devDependencies": {
-    "jest": "25.4.0"
+    "jest": "29.2.2"
   },
   "peerDependencies": {
     "js-cookie": ">=2.2.1"

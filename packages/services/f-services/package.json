@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-services",
   "description": "Fozzie Services - Shared Services for Components and projects",
-  "version": "1.17.0",
+  "version": "1.17.1",
   "main": "dist/f-services.umd.js",
   "maxBundleSize": "20kB",
   "module": "dist/f-services.es.js",
@@ -46,7 +46,7 @@
     "window-or-global": "1.0.1"
   },
   "devDependencies": {
-    "jest": "26.6.3"
+    "jest": "29.2.2"
   },
   "peerDependencies": {
     "axios": ">=0.21.1"
