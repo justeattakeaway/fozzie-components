@@ -9,7 +9,7 @@ v0.3.1
 *August 10, 2022*
 
 ### Changed
-- Bump jest from v25 to v29
+- Bump jest from v25 to v26
 
 
 v0.3.0
