@@ -4,9 +4,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v3.3.1
+------------------------------
+*September 4, 2023*
+
+### Changed
+- Updated http-request-mock to patch vulnerability.
+
+
 v3.3.0
 ------------------------------
-*August 01, 2023*
+*August 1, 2023*
 
 ### Removed
 - removed braze adapter
@@ -85,6 +93,7 @@ v2.7.0
 
 ### Deleted
 - Old mocks
+
 
 v2.6.0
 ------------------------------

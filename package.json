@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "7.54.1",
+  "version": "7.54.2",
   "private": true,
   "scripts": {
     "build": "cross-env-shell turbo run build --continue --token=${TURBO_TOKEN}",
@@ -93,7 +93,7 @@
     "core-js": "3.26.1",
     "cross-env": "7.0.2",
     "css-loader": "1.0.1",
-    "danger": "11.1.4",
+    "danger": "11.2.8",
     "eslint": "8.26.0",
     "eslint-import-resolver-webpack": "0.13.2",
     "eslint-plugin-import": "2.26.0",

@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v7.54.2
+------------------------------
+*September 4, 2023*
+
+### Changed
+- Bump danger version
+
+
 v7.54.1
 ------------------------------
 *September 4, 2023*
