@@ -87,6 +87,7 @@ $toggle-switch-translation: calc($toggle-switch-width - $toggle-switch-control-s
 }
 
 .c-toggle-switch {
+    position: relative;
     display: flex;
     @include toggle-switch-transition(background-color);
     width: $toggle-switch-width;
@@ -143,6 +144,8 @@ $toggle-switch-translation: calc($toggle-switch-width - $toggle-switch-control-s
 }
 
 .c-toggle-switch-control {
+    position: absolute;
+    left: 2px;
     @include toggle-switch-transition(transform);
     display: flex;
     align-items: center;
@@ -166,6 +169,11 @@ $toggle-switch-translation: calc($toggle-switch-width - $toggle-switch-control-s
 }
 
 [dir="rtl"] {
+    .c-toggle-switch-control {
+        left: initial;
+        right: 2px;
+    }
+
     .c-toggle-switch-input:checked + .c-toggle-switch-control {
         @include toggle-switch-transition(transform);
         transform: translateX(-$toggle-switch-translation);
