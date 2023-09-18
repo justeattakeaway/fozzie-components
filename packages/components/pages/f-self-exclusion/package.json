@@ -1,0 +1,52 @@
+{
+  "name": "@justeat/f-self-exclusion",
+  "description": "Fozzie Self Exclusion - Customers must be able to voluntarily self-exclude or nominate themselves for self exclusion for a specified time period or permanently (includes purchasing and marketing), and their account (associated to the email address or phone number provided during self exclusions) must be blocked from purchasing alcohol and other items.",
+  "version": "0.1.0",
+  "main": "dist/f-self-exclusion.umd.min.js",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/pages/f-self-exclusion",
+  "contributors": [
+    "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:justeat/fozzie-components.git"
+  },
+  "bugs": {
+    "url": "https://github.com/justeat/fozzie-components/issues"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": "^12 || ^14 || ^16"
+  },
+  "keywords": [
+    "fozzie"
+  ],
+  "scripts": {
+    "prepublishOnly": "yarn lint && yarn test && yarn build",
+    "build": "vue-cli-service build --target lib --name f-self-exclusion ./src/index.js",
+    "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
+    "lint:fix": "yarn lint --fix",
+    "lint:style": "stylelint ./src/**/*.{vue,htm,html,css,sss,less,scss}",
+    "lint:style:fix": "yarn lint:style --fix",
+    "test": "jest --passWithNoTests",
+    "ci:test:pages": "yarn test",
+    "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js"
+  },
+  "browserslist": [
+    "extends @justeat/browserslist-config-fozzie"
+  ],
+  "dependencies": {
+    "@justeat/f-services": "1.x"
+  },
+  "peerDependencies": {
+    "@justeat/browserslist-config-fozzie": ">=1.2.0"
+  },
+  "devDependencies": {
+  }  
+}
