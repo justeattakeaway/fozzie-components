@@ -5,86 +5,117 @@
     >
         <card-component
             has-inner-spacing-large
-            card-size-custom="medium"
+            card-size-custom="large"
             has-outline
         >
             <h1 :class="$style['c-selfExclusion-title']">
-                Alcohol self exclusion
+                Exclude alcoholic items
             </h1>
 
-            <span :class="$style['c-selfExclusion-details']">
-                You can exclude alcoholic items from the partner menus here.
-                Please note that these changes are irreversible.
-            </span>
+            <div v-if="isOpenAlertConfirmation && alcoholExcluded">
+                <f-alert
+                    data-test-id="self-exclusion-alert"
+                    type="success"
+                    heading="Confirmed"
+                >
+                    While logged in, you will not see alcoholic items displayed
+                    within restaurant menus for the next 6 months.
+                    <p>These changes may take 24 hours to take effect.</p>
+                    <div :class="$style['c-buttons']">
+                        <f-button
+                            action-type="reset"
+                            button-type="primary"
+                            button-size="small-productive"
+                            @click="closeAlertConfirmation"
+                        >
+                            Cancel
+                        </f-button>
+                    </div>
+                </f-alert>
+            </div>
+
+            <p :class="$style['c-selfExclusion-details']">
+                You can opt out of seeing alcoholic items on menus for a period
+                of six months or permanently. Once selected, this change can't
+                be reversed.
+            </p>
 
             <form :class="$style['c-selfExclusion-form']">
-                <div>
-                    <h2 :class="$style['c-selfExclusion-subtitle']">
-                        Exclude alcoholic beverages
-                    </h2>
-
-                    <fieldset
-                        v-for="option in options"
-                        :key="option.id"
-                        :class="$style['c-selfExclusion-fieldset']"
+                <fieldset
+                    v-for="option in options"
+                    :key="option.id"
+                    :class="$style['c-selfExclusion-fieldset']"
+                >
+                    <f-form-field
+                        :disabled="formDisabled"
+                        input-type="radio"
+                        is-grouped
+                        name="self-exclusion-options"
+                        :label-text="option.label"
+                        :checked="selectedOption === option.value"
+                        @input="selectedOption = option.value"
+                    />
+                    <span
+                        v-if="selectedOption === option.value
+                            && selectedOption === 'period'
+                            && alcoholExcluded"
+                        :class="$style['c-selfExclusion-fieldset-date']"
                     >
-                        <f-form-field
-                            input-type="radio"
-                            is-grouped
-                            name="self-exclusion-options"
-                            :label-text="option.label"
-                            :checked="selectedOption === option.value"
-                            @input="selectedOption = option.value"
-                        />
-                    </fieldset>
-                </div>
+                        Until {{ alcoholExclusionDate }}
+                    </span>
+                </fieldset>
 
                 <div :class="$style['c-buttons']">
-                    <f-button @click="openBottomSheet">
+                    <f-button
+                        :disabled="formDisabled"
+                        @click="openAlertPeriod">
                         Save
                     </f-button>
                 </div>
             </form>
 
             <div
-                v-if="isOpen"
-                :class="$style['c-bottom-sheet-container']">
-                <card-component
-                    :class="$style['c-bottom-sheet']"
-                    has-outline>
-                    <h3 :class="$style['c-bottom-sheet-title']">
-                        Alcohol self exclusion
-                    </h3>
+                v-if="isOpenAlertPeriod"
+                :class="$style['c-selfExclusion-bottom-sheet-container']">
+                <div
+                    v-for="description in alertPeriodDescriptions"
+                    :key="description.id"
+                >
+                    <f-alert
+                        v-if="selectedOption === description.option"
+                        data-test-id="self-exclusion-alert"
+                        :type="description.type"
+                        heading="Exclude alcoholic items"
+                    >
+                        {{ description.text }}
 
-                    <div>
-                        <span
-                            v-for="description in bottomSheetDescriptions"
-                            :key="description.id"
-                        >
-                            {{ description.text }}
+                        <p :class="$style['c-warning-text']">
+                            <b>
+                                {{ description.warningText }}
+                            </b>
+                        </p>
 
-                            <span>{{ description.warningText }}</span>
-                        </span>
-                    </div>
+                        <div :class="$style['c-buttons']">
+                            <f-button
+                                action-type="reset"
+                                button-type="ghost"
+                                button-size="small-productive"
+                                @click="closeAlertPeriod"
+                            >
+                                Cancel
+                            </f-button>
 
-                    <div :class="$style['c-buttons']">
-                        <f-button
-                            action-type="reset"
-                            @click="closeBottomSheet"
-                        >
-                            Cancel
-                        </f-button
-                        >
-
-                        <f-button
-                            action-type="submit"
-                            @click="closeBottomSheet"
-                        >
-                            I agree
-                        </f-button
-                        >
-                    </div>
-                </card-component>
+                            <f-button
+                                action-type="submit"
+                                button-type="primary"
+                                button-size="small-productive"
+                                @click="confirmAlcoholExclusion"
+                            >
+                                Exclude alcohol
+                            </f-button>
+                        </div>
+                    </f-alert>
+                </div>
             </div>
         </card-component>
     </div>
@@ -94,6 +125,8 @@
 import { globalisationServices } from '@justeat/f-services';
 import CardComponent from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
+import FAlert from '@justeat/f-alert';
+import '@justeat/f-alert/dist/f-alert.css';
 import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import FFormField from '@justeat/f-form-field';
@@ -103,7 +136,10 @@ import tenantConfigs from '../tenants';
 export default {
     name: 'SelfExclusion',
     components: {
-        CardComponent, FButton, FFormField
+        CardComponent,
+        FAlert,
+        FButton,
+        FFormField
     },
     props: {
         locale: {
@@ -121,9 +157,12 @@ export default {
 
         return {
             copy: { ...localeConfig },
-            isOpen: false,
-            currentDate: '',
-            futureDate: '',
+            isOpenAlertPeriod: false,
+            isOpenAlertConfirmation: false,
+            alcoholExcluded: false,
+            alcoholExclusionDate: null,
+            alcoholExclusionDateReached: false,
+            formDisabled: false,
             selectedOption: '',
             options: [
                 {
@@ -142,52 +181,71 @@ export default {
                     label: 'Exclude alcoholic beverages permanently'
                 }
             ],
-            bottomSheetDescriptions: [
+            alertPeriodDescriptions: [
                 {
                     id: 1,
-                    option: 2,
-                    text: 'I agree to self exclude from seeing or purchasing alcohol on the Menulog platform for a period of 6 months.',
+                    option: 'show',
+                    type: 'warning',
+                    text: "You haven't saved your changes yet. Do you want to go back?",
+                    warningText: ''
+                },
+                {
+                    id: 2,
+                    option: 'period',
+                    type: 'warning',
+                    text: 'You can opt out of seeing alcoholic items on menus for a period of six months. This change can take up to 24 hours to take effect.',
                     warningText:
-                        'Please note that this change is irreversible.'
+                        'Once selected, this change can’t be reversed.'
                 }
             ]
         };
     },
-    computed: {
-        currentDateFormatted () {
-            return this.formatDate(new Date());
-        },
-        futureDateFormatted () {
-            const future = new Date();
-            future.setMonth(future.getMonth() + 6);
-            return this.formatDate(future);
-        }
-    },
     mounted () {
         this.getSelectedOption();
-        this.futureDate = this.futureDateFormatted;
+        this.getAlcoholExclusionDate();
     },
     methods: {
         getSelectedOption () {
             this.selectedOption = 'show';
         },
 
-        openBottomSheet () {
-            if (this.selectedOption === 'period') {
-                this.isOpen = true;
-            }
+        getAlcoholExclusionDate () {
+            this.alcoholExclusionDate = new Date();
         },
 
-        closeBottomSheet () {
-            this.isOpen = false;
+        setAlcoholExclusionDate () {
+            const endDate = new Date();
+            endDate.setMonth(endDate.getMonth() + 6);
+            this.alcoholExclusionDate = this.formatDate(endDate);
+        },
+
+        confirmAlcoholExclusion () {
+            this.setAlcoholExclusionDate();
+            this.isOpenAlertPeriod = false;
+            this.isOpenAlertConfirmation = true;
+            this.alcoholExcluded = true;
+            this.formDisabled = true;
         },
 
         formatDate (date) {
-            return date.toLocaleDateString('en-GB', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric'
-            });
+            const dd = String(date.getDate()).padStart(2, '0');
+            const mm = String(date.getMonth() + 1).padStart(2, '0');
+            const yyyy = date.getFullYear();
+            return `${dd}-${mm}-${yyyy}`;
+        },
+
+        closeAlertConfirmation () {
+            this.isOpenAlertConfirmation = false;
+        },
+
+        openAlertPeriod () {
+            if (this.selectedOption === 'period') {
+                this.isOpenAlertPeriod = true;
+            }
+        },
+
+        closeAlertPeriod () {
+            this.isOpenAlertPeriod = false;
         }
     }
 };
@@ -206,8 +264,8 @@ export default {
     @include f.font-size(heading-s);
 }
 
-.c-selfExclusion-form {
-    margin-top: f.spacing(d);
+.c-selfExclusion-details {
+    margin-bottom: f.spacing(d);
 }
 
 .c-selfExclusion-fieldset {
@@ -217,25 +275,18 @@ export default {
     padding: 0;
 }
 
-.c-bottom-sheet-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1000;
-    overflow: hidden;
+.c-selfExclusion-fieldset-date {
+    margin-left: f.spacing(f);
+    opacity: 0.5;
 }
 
-.c-bottom-sheet {
-    overflow: auto;
+.c-selfExclusion-bottom-sheet-container {
     position: absolute;
-    bottom: 0;
-    word-break: break-word;
+    width: 58%;
+    left: 2%;
+    bottom: 55%;
 }
-.c-bottom-sheet-title {
-    margin-bottom: f.spacing(d);
-}
+
 
 .c-buttons {
     display: flex;
@@ -244,5 +295,9 @@ export default {
     justify-content: flex-end;
     gap: f.spacing(d);
     padding: f.spacing(d);
+}
+
+.c-warning-text {
+    color: f.$color-content-error;
 }
 </style>

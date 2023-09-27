@@ -34,7 +34,9 @@ module.exports = {
     },
 
     modulePathIgnorePatterns: [
-        
+        './test/component/',
+        './test/accessibility',
+        './test/visual'
     ],
 
     testURL: 'http://localhost/'
