@@ -72,7 +72,7 @@ The exports are:
 
 This function attempts to get a valid JWT for the current user.  It works as follows:
 
-* it stores the token in a cookie (`je-oidc`), so if the user has already done this in their session it will retrieve that
+* it stores the token in a cookie (`oidcSettings.cookie_name`), so if the user has already done this in their session it will retrieve that
 * for the page lifetime (i.e. JS variable) it remembers if the user is not logged in, so that it doesn't attempt to get a token repeatedly
 * by default it will silently refresh the token close to its expiry time, if possible.  This functionality is built in to [`oidc-client`](https://github.com/IdentityModel/oidc-client-js/wiki).
 * you should set the `silentRequestTimeout` setting to a low value, to avoid blocking UI components. By default this is a a very high value - 100 seconds.
@@ -83,6 +83,7 @@ Usage:
 import { silentSignIn } from `@justeat/f-consumer-oidc`;
 
 const oidcSettings = {
+    cookie_name: 'my-cookie-name',
     silentRequestTimeout: 2000
 };
 
