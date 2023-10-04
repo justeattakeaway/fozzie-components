@@ -7,20 +7,16 @@
             has-inner-spacing-large
             card-size-custom="large"
             has-outline
-        >
-            <h1 :class="$style['c-selfExclusion-title']">
-                Exclude alcoholic items
-            </h1>
-
+            :card-heading="$t('heading')"
+            :class="$style['c-selfExclusion-card-component']">
             <div v-if="isOpenAlertConfirmation && alcoholExcluded">
                 <f-alert
                     data-test-id="self-exclusion-alert"
                     type="success"
                     heading="Confirmed"
                 >
-                    While logged in, you will not see alcoholic items displayed
-                    within restaurant menus for the next 6 months.
-                    <p>These changes may take 24 hours to take effect.</p>
+                    {{ $t('alcoholicItemsExcludedConfirmation.text1') }}
+                    <p>{{ $t('alcoholicItemsExcludedConfirmation.text2') }}</p>
                     <div :class="$style['c-buttons']">
                         <f-button
                             action-type="reset"
@@ -28,21 +24,19 @@
                             button-size="small-productive"
                             @click="closeAlertConfirmation"
                         >
-                            Cancel
+                            {{ $t('buttons.cancel') }}
                         </f-button>
                     </div>
                 </f-alert>
             </div>
 
             <p :class="$style['c-selfExclusion-details']">
-                You can opt out of seeing alcoholic items on menus for a period
-                of six months or permanently. Once selected, this change can't
-                be reversed.
+                {{ $t('alcoholSelfExclusionInfo') }}
             </p>
 
             <form :class="$style['c-selfExclusion-form']">
                 <fieldset
-                    v-for="option in options"
+                    v-for="option in alcoholSelfExclusionOptions"
                     :key="option.id"
                     :class="$style['c-selfExclusion-fieldset']"
                 >
@@ -69,7 +63,7 @@
                     <f-button
                         :disabled="formDisabled"
                         @click="openAlertPeriod">
-                        Save
+                        {{ $t('buttons.save') }}
                     </f-button>
                 </div>
             </form>
@@ -77,52 +71,47 @@
             <div
                 v-if="isOpenAlertPeriod"
                 :class="$style['c-selfExclusion-bottom-sheet-container']">
-                <div
-                    v-for="description in alertPeriodDescriptions"
-                    :key="description.id"
+                <f-alert
+                    v-if="selectedOption === 'period'"
+                    data-test-id="self-exclusion-alert"
+                    type="warning"
+                    :heading="$t('heading')"
                 >
-                    <f-alert
-                        v-if="selectedOption === description.option"
-                        data-test-id="self-exclusion-alert"
-                        :type="description.type"
-                        heading="Exclude alcoholic items"
-                    >
-                        {{ description.text }}
+                    {{ $t('alcoholSelfExclusionPeriodAlert.text') }}
 
-                        <p :class="$style['c-warning-text']">
-                            <b>
-                                {{ description.warningText }}
-                            </b>
-                        </p>
+                    <p :class="$style['c-warning-text']">
+                        <b>
+                            {{ $t('alcoholSelfExclusionPeriodAlert.warningText') }}
+                        </b>
+                    </p>
 
-                        <div :class="$style['c-buttons']">
-                            <f-button
-                                action-type="reset"
-                                button-type="ghost"
-                                button-size="small-productive"
-                                @click="closeAlertPeriod"
-                            >
-                                Cancel
-                            </f-button>
+                    <div :class="$style['c-buttons']">
+                        <f-button
+                            action-type="reset"
+                            button-type="ghost"
+                            button-size="small-productive"
+                            @click="closeAlertPeriod"
+                        >
+                            {{ $t('buttons.cancel') }}
+                        </f-button>
 
-                            <f-button
-                                action-type="submit"
-                                button-type="primary"
-                                button-size="small-productive"
-                                @click="confirmAlcoholExclusion"
-                            >
-                                Exclude alcohol
-                            </f-button>
-                        </div>
-                    </f-alert>
-                </div>
+                        <f-button
+                            action-type="submit"
+                            button-type="primary"
+                            button-size="small-productive"
+                            @click="confirmAlcoholExclusion"
+                        >
+                            {{ $t('buttons.excludeAlcohol') }}
+                        </f-button>
+                    </div>
+                </f-alert>
             </div>
         </card-component>
     </div>
 </template>
 
 <script>
-import { globalisationServices } from '@justeat/f-services';
+import { VueGlobalisationMixin } from '@justeat/f-globalisation';
 import CardComponent from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FAlert from '@justeat/f-alert';
@@ -141,6 +130,7 @@ export default {
         FButton,
         FFormField
     },
+    mixins: [VueGlobalisationMixin],
     props: {
         locale: {
             type: String,
@@ -148,57 +138,37 @@ export default {
         }
     },
     data () {
-        const locale = globalisationServices.getLocale(
-            tenantConfigs,
-            this.locale,
-            this.$i18n
-        );
-        const localeConfig = tenantConfigs[locale];
-
         return {
-            copy: { ...localeConfig },
+            tenantConfigs,
             isOpenAlertPeriod: false,
             isOpenAlertConfirmation: false,
             alcoholExcluded: false,
             alcoholExclusionDate: null,
             alcoholExclusionDateReached: false,
             formDisabled: false,
-            selectedOption: '',
-            options: [
+            selectedOption: ''
+        };
+    },
+    computed: {
+        alcoholSelfExclusionOptions () {
+            return [
                 {
                     id: 1,
                     value: 'show',
-                    label: 'Show alcoholic beverages'
+                    label: this.$t('alcoholSelfExclusionOptions.option1')
                 },
                 {
                     id: 2,
                     value: 'period',
-                    label: 'Exclude alcoholic beverages for 6 months'
+                    label: this.$t('alcoholSelfExclusionOptions.option2')
                 },
                 {
                     id: 3,
                     value: 'permanent',
-                    label: 'Exclude alcoholic beverages permanently'
+                    label: this.$t('alcoholSelfExclusionOptions.option3')
                 }
-            ],
-            alertPeriodDescriptions: [
-                {
-                    id: 1,
-                    option: 'show',
-                    type: 'warning',
-                    text: "You haven't saved your changes yet. Do you want to go back?",
-                    warningText: ''
-                },
-                {
-                    id: 2,
-                    option: 'period',
-                    type: 'warning',
-                    text: 'You can opt out of seeing alcoholic items on menus for a period of six months. This change can take up to 24 hours to take effect.',
-                    warningText:
-                        'Once selected, this change can’t be reversed.'
-                }
-            ]
-        };
+            ];
+        }
     },
     mounted () {
         this.getSelectedOption();
@@ -254,6 +224,10 @@ export default {
 <style lang="scss" module>
 @use "@justeat/fozzie/src/scss/fozzie" as f;
 
+.c-selfExclusion-card-component {
+    position: relative;
+}
+
 .c-selfExclusion-title {
     @include f.font-size(heading-m);
     margin-bottom: f.spacing(d);
@@ -282,11 +256,10 @@ export default {
 
 .c-selfExclusion-bottom-sheet-container {
     position: absolute;
-    width: 58%;
-    left: 2%;
-    bottom: 55%;
+    bottom: f.spacing(d);
+    left: f.spacing(d);
+    right: f.spacing(d);
 }
-
 
 .c-buttons {
     display: flex;
