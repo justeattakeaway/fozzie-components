@@ -13,7 +13,7 @@ const messages = {
     },
     alcoholSelfExclusionInfo: 'You can opt out of seeing alcoholic items on menus for a period\n' +
         'of six months or permanently. Once selected, this change can\'t be reversed.',
-    alcoholSelfExclusionPeriodAlert: {
+    alcoholSelfExclusionAlert: {
         text: 'You can opt out of seeing alcoholic items on menus for a period of six months. This change can take up to 24 hours to take effect.',
         warningText: 'Once selected, this change can’t be reversed.'
     },

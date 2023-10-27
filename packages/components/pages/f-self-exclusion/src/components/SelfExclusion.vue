@@ -3,9 +3,9 @@
         :class="$style['c-selfExclusion']"
         data-test-id="self-exclusion-component"
     >
-        <card-component
+        <f-card
             has-inner-spacing-large
-            card-size-custom="large"
+            card-size-custom="medium"
             has-outline
             :card-heading="$t('heading')"
             :class="$style['c-selfExclusion-card-component']">
@@ -15,7 +15,10 @@
                     type="success"
                     heading="Confirmed"
                 >
-                    {{ $t('alcoholicItemsExcludedConfirmation.text1') }}
+                    {{ selectedOption === 'temporary'
+                        ? $t('alcoholicItemsExcludedConfirmation.textTemporary')
+                        : $t('alcoholicItemsExcludedConfirmation.textPermanent') }}
+
                     <p>{{ $t('alcoholicItemsExcludedConfirmation.text2') }}</p>
                     <div :class="$style['c-buttons']">
                         <f-button
@@ -51,7 +54,7 @@
                     />
                     <span
                         v-if="selectedOption === option.value
-                            && selectedOption === 'period'
+                            && selectedOption === 'temporary'
                             && alcoholExcluded"
                         :class="$style['c-selfExclusion-fieldset-date']"
                     >
@@ -62,27 +65,33 @@
                 <div :class="$style['c-buttons']">
                     <f-button
                         :disabled="formDisabled"
-                        @click="openAlertPeriod">
+                        @click="openAlert">
                         {{ $t('buttons.save') }}
                     </f-button>
                 </div>
             </form>
 
             <div
-                v-if="isOpenAlertPeriod"
+                v-if="isOpenAlert"
                 :class="$style['c-selfExclusion-bottom-sheet-container']">
                 <f-alert
-                    v-if="selectedOption === 'period'"
+                    v-if="selectedOption === 'temporary' || selectedOption === 'permanent'"
                     data-test-id="self-exclusion-alert"
                     type="warning"
                     :heading="$t('heading')"
                 >
-                    {{ $t('alcoholSelfExclusionPeriodAlert.text') }}
+                    {{ selectedOption === 'temporary'
+                        ? $t('alcoholSelfExclusionAlert.textTemporary')
+                        : $t('alcoholSelfExclusionAlert.textPermanent') }}
 
                     <p :class="$style['c-warning-text']">
                         <b>
-                            {{ $t('alcoholSelfExclusionPeriodAlert.warningText') }}
+                            {{ $t('alcoholSelfExclusionAlert.warningText') }}
                         </b>
+                    </p>
+
+                    <p>
+                        {{ $t('alcoholSelfExclusionAlert.privacyStatementLinkText') }}
                     </p>
 
                     <div :class="$style['c-buttons']">
@@ -90,7 +99,7 @@
                             action-type="reset"
                             button-type="ghost"
                             button-size="small-productive"
-                            @click="closeAlertPeriod"
+                            @click="closeAlert"
                         >
                             {{ $t('buttons.cancel') }}
                         </f-button>
@@ -106,13 +115,13 @@
                     </div>
                 </f-alert>
             </div>
-        </card-component>
+        </f-card>
     </div>
 </template>
 
 <script>
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
-import CardComponent from '@justeat/f-card';
+import FCard from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FAlert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
@@ -120,12 +129,16 @@ import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import FFormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
+import { TENANT_MAP } from '@justeat/f-checkout/src/constants';
+import { mapActions } from 'vuex';
+import fSelfExclusionModule from '../store/selfExclusion.module';
+import { SELF_EXCLUSION_URL } from '../constants';
 import tenantConfigs from '../tenants';
 
 export default {
     name: 'SelfExclusion',
     components: {
-        CardComponent,
+        FCard,
         FAlert,
         FButton,
         FFormField
@@ -140,7 +153,7 @@ export default {
     data () {
         return {
             tenantConfigs,
-            isOpenAlertPeriod: false,
+            isOpenAlert: false,
             isOpenAlertConfirmation: false,
             alcoholExcluded: false,
             alcoholExclusionDate: null,
@@ -159,7 +172,7 @@ export default {
                 },
                 {
                     id: 2,
-                    value: 'period',
+                    value: 'temporary',
                     label: this.$t('alcoholSelfExclusionOptions.option2')
                 },
                 {
@@ -168,30 +181,84 @@ export default {
                     label: this.$t('alcoholSelfExclusionOptions.option3')
                 }
             ];
+        },
+        tenant () {
+            return TENANT_MAP[this.locale]; // to do: double check on staging
+        },
+        apiUrl () {
+            return SELF_EXCLUSION_URL.replace('{tenant}', this.tenant);
         }
     },
+
     mounted () {
-        this.getSelectedOption();
-        this.getAlcoholExclusionDate();
+        this.getSelfExclusionStatus();
     },
+
+    beforeCreate () {
+        if (!this.$store.hasModule('fSelfExclusionModule')) {
+            this.$store.registerModule('fSelfExclusionModule', fSelfExclusionModule);
+        }
+    },
+
     methods: {
-        getSelectedOption () {
-            this.selectedOption = 'show';
+        ...mapActions('fSelfExclusionModule', [
+            'loadExclusions',
+            'saveExclusions'
+        ]),
+        getSelfExclusionStatus () {
+            const url = this.apiUrl;
+            const token = this.authToken;
+
+            return this.loadExclusions({
+                url,
+                token
+            })
+                .then(response => {
+                    const { exclusions } = response.data;
+                    const alcoholExclusion = exclusions.filter(result => result.type === 'alcohol');
+
+                    if (alcoholExclusion.length > 0) {
+                        if (alcoholExclusion[0].state === 'temporaryExclusion') {
+                            this.selectedOption = 'temporary';
+                            this.alcoholExclusionDate = this.formatDate(new Date(alcoholExclusion[0].expiryDate));
+                        }
+
+                        if (alcoholExclusion[0].state === 'permanentExclusion') {
+                            this.selectedOption = 'permanent';
+                        }
+
+                        this.alcoholExcluded = true;
+                        this.formDisabled = true;
+                    } else {
+                        this.selectedOption = 'show';
+                    }
+                })
+                .catch(error => {
+                    this.$log.error('Error getting self exclusion status', error);
+                });
         },
 
-        getAlcoholExclusionDate () {
-            this.alcoholExclusionDate = new Date();
-        },
+        setSelfExclusionStatus () {
+            const url = this.apiUrl;
+            const token = this.authToken;
+            const exclusionState = this.selectedOption === 'temporary' ? 'temporaryExclusion' : 'permanentExclusion';
 
-        setAlcoholExclusionDate () {
-            const endDate = new Date();
-            endDate.setMonth(endDate.getMonth() + 6);
-            this.alcoholExclusionDate = this.formatDate(endDate);
+            return this.saveExclusions({
+                url,
+                token,
+                exclusionState
+            })
+                .then(response => {
+                    this.$log.info('Self exclusion status updated successfully', response);
+                })
+                .catch(error => {
+                    this.$log.error('Error updating self exclusion status', error);
+                });
         },
 
         confirmAlcoholExclusion () {
-            this.setAlcoholExclusionDate();
-            this.isOpenAlertPeriod = false;
+            this.setSelfExclusionStatus();
+            this.isOpenAlert = false;
             this.isOpenAlertConfirmation = true;
             this.alcoholExcluded = true;
             this.formDisabled = true;
@@ -208,14 +275,12 @@ export default {
             this.isOpenAlertConfirmation = false;
         },
 
-        openAlertPeriod () {
-            if (this.selectedOption === 'period') {
-                this.isOpenAlertPeriod = true;
-            }
+        openAlert () {
+            this.isOpenAlert = true;
         },
 
-        closeAlertPeriod () {
-            this.isOpenAlertPeriod = false;
+        closeAlert () {
+            this.isOpenAlert = false;
         }
     }
 };
@@ -256,7 +321,7 @@ export default {
 
 .c-selfExclusion-bottom-sheet-container {
     position: absolute;
-    bottom: f.spacing(d);
+    bottom: f.spacing(f);
     left: f.spacing(d);
     right: f.spacing(d);
 }
