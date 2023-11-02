@@ -1,4 +1,4 @@
-import { SELF_EXCLUSION_URL, AUTHORISATION_HEADER_NAME } from '../constants';
+import { SELF_EXCLUSION_URL, AUTHORISATION_HEADER_NAME } from '../../constants';
 
 const BuildHeaders = authToken => {
     const headers = {

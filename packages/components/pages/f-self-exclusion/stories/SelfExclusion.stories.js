@@ -1,6 +1,9 @@
 import { withA11y } from '@storybook/addon-a11y';
 import { locales } from '@justeat/storybook/constants/globalisation';
+import Vuex from 'vuex';
 import SelfExclusion from '../src/components/SelfExclusion.vue';
+import fSelfExclusionModule from '../src/store/selfExclusion.module';
+
 
 export default {
     title: 'Components/Pages',
@@ -12,7 +15,19 @@ export const SelfExclusionComponent = (args, { argTypes }) => ({
 
     props: Object.keys(argTypes),
 
-    template: '<self-exclusion v-bind="$props" />'
+    store: new Vuex.Store({
+        modules: {
+            fSelfExclusionModule
+        }
+    }),
+
+    template:
+        `<self-exclusion
+        authToken="some-auth-token"
+        :isAuthFinished="true"
+        :locale="locale"
+        smart-gateway-base-url=""
+    />`
 });
 
 SelfExclusionComponent.storyName = 'f-self-exclusion';

@@ -4,14 +4,15 @@ export default {
     namespaced: true,
 
     state: () => ({
-        exclusions: []
+        exclusions: [{ type: 'alcohol', state: '', expiryDate: '' }]
     }),
 
     actions: {
         async loadExclusions ({ commit }, { api, authToken }) {
             const { data } = await api.getSelfExclusionStatus(authToken);
-
-            commit(UPDATE_EXCLUSIONS, data);
+            if (data) {
+                commit(UPDATE_EXCLUSIONS, data);
+            }
         },
 
         async saveExclusions ({ commit }, { api, authToken, exclusionState }) {
@@ -23,6 +24,10 @@ export default {
 
             commit(UPDATE_EXCLUSIONS, exclusionState);
         }
+    },
+
+    getters: {
+        exclusions: state => state.exclusions
     },
 
     mutations: {
