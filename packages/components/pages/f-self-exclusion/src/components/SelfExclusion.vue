@@ -15,7 +15,7 @@
                     type="success"
                     heading="Confirmed"
                 >
-                    {{ selectedOption === 'temporary'
+                    {{ selectedOption === 'temporaryExclusion'
                         ? $t('alcoholicItemsExcludedConfirmation.textTemporary')
                         : $t('alcoholicItemsExcludedConfirmation.textPermanent') }}
 
@@ -50,11 +50,11 @@
                         name="self-exclusion-options"
                         :label-text="option.label"
                         :checked="selectedOption === option.value"
-                        @input="selectedOption = option.value"
+                        @input="selectedOption === option.value"
                     />
                     <span
                         v-if="selectedOption === option.value
-                            && selectedOption === 'temporary'
+                            && selectedOption === 'temporaryExclusion'
                             && alcoholExcluded"
                         :class="$style['c-selfExclusion-fieldset-date']"
                     >
@@ -75,12 +75,12 @@
                 v-if="isOpenAlert"
                 :class="$style['c-selfExclusion-bottom-sheet-container']">
                 <f-alert
-                    v-if="selectedOption === 'temporary' || selectedOption === 'permanent'"
+                    v-if="selectedOption === 'temporaryExclusion' || selectedOption === 'permanentExclusion'"
                     data-test-id="self-exclusion-alert"
                     type="warning"
                     :heading="$t('heading')"
                 >
-                    {{ selectedOption === 'temporary'
+                    {{ selectedOption === 'temporaryExclusion'
                         ? $t('alcoholSelfExclusionAlert.textTemporary')
                         : $t('alcoholSelfExclusionAlert.textPermanent') }}
 
@@ -164,19 +164,49 @@ export default {
             tenantConfigs,
             isOpenAlert: false,
             isOpenAlertConfirmation: false,
-            alcoholExcluded: false,
-            alcoholExclusionDate: null,
-            alcoholExclusionDateReached: false,
-            formDisabled: false,
-            selectedOption: '',
+            // alcoholExcluded: false,
+            // alcoholExclusionDate: null,
             selfExclusionApi: new SelfExclusionApi({
                 httpClient: this.$http,
-                baseUrl: 'https://customerselfexclusionapi.ap-southeast-2.staging.jet-internal.com',
+                baseUrl: 'https://rest.api.ap-southeast-2.staging.jet-external.com', // to replace
                 locale: this.$i18n.locale
             })
         };
     },
     computed: {
+        ...mapGetters('fSelfExclusionModule', [
+            'exclusions'
+        ]),
+
+        alcoholExclusion () {
+            return this.exclusions.find(result => result.type === 'alcohol');
+        },
+
+        alcoholExclusionDate () {
+            return this.formatDate(new Date(this.alcoholExclusion.expiryDate));
+        },
+
+        alcoholExcluded () {
+            return !!this.alcoholExclusion;
+        },
+
+        selectedOption () {
+            let selectedOption = 'show';
+            if (this.alcoholExclusion.state === 'temporaryExclusion') {
+                selectedOption = 'temporaryExclusion';
+            }
+
+            if (this.alcoholExclusion.state === 'permanentExclusion') {
+                selectedOption = 'permanentExclusion';
+            }
+
+            return selectedOption;
+        },
+
+        formDisabled () {
+            return this.alcoholExclusion.state === 'permanentExclusion' || this.alcoholExclusion.state === 'temporaryExclusion';
+        },
+
         alcoholSelfExclusionOptions () {
             return [
                 {
@@ -186,25 +216,24 @@ export default {
                 },
                 {
                     id: 2,
-                    value: 'temporary',
+                    value: 'temporaryExclusion',
                     label: this.$t('alcoholSelfExclusionOptions.option2')
                 },
                 {
                     id: 3,
-                    value: 'permanent',
+                    value: 'permanentExclusion',
                     label: this.$t('alcoholSelfExclusionOptions.option3')
                 }
             ];
         },
+
         tenant () {
             return TENANT_MAP[this.locale]; // to do: double check on staging
         },
+
         apiUrl () {
             return SELF_EXCLUSION_URL.replace('{tenant}', this.tenant);
-        },
-        ...mapGetters('fSelfExclusionModule', [
-            'exclusions'
-        ])
+        }
     },
 
     async mounted () {
@@ -212,9 +241,6 @@ export default {
             // eslint-disable-next-line max-len
             // const token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6Ik5yaC0waEtzalhlRVE1LVVDaldBQkc1Q293MCIsIng1dCI6Ik5yaC0waEtzalhlRVE1LVVDaldBQkc1Q293MCIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2FsbC1hdXRob3JpemUtaWFwaS1xYTU1LmF1LWp1c3RlYXQtMS1zdGFnaW5nLmplLWxhYnMuY29tL2lkZW50aXR5IiwibmJmIjoxNjk4ODQ5OTUwLCJpYXQiOjE2OTg4NDk5NTAsImV4cCI6MTY5ODg1MzU1MCwiYXVkIjoiaHR0cHM6Ly9hbGwtYXV0aG9yaXplLWlhcGktcWE1NS5hdS1qdXN0ZWF0LTEtc3RhZ2luZy5qZS1sYWJzLmNvbS9pZGVudGl0eS9yZXNvdXJjZXMiLCJzY29wZSI6WyJtb2JpbGVfc2NvcGUiLCJvcGVuaWQiLCJvZmZsaW5lX2FjY2VzcyJdLCJhbXIiOlsicGFzc3dvcmQiXSwiY2xpZW50X2lkIjoiY29uc3VtZXJfd2ViX2plIiwic3ViIjoiMTAzNTM1NDUiLCJhdXRoX3RpbWUiOjE2OTg4NDk5NTAsImlkcCI6Imlkc3J2Iiwicm9sZSI6IlJlZ2lzdGVyZWQiLCJncmFudF90eXBlIjoicGFzc3dvcmQiLCJpc190ZW1wb3JhcnlfbmFtZSI6IkZhbHNlIiwiZ2l2ZW5fbmFtZSI6IlRlc3QiLCJjcmVhdGVkX2RhdGUiOiIyMDIzLTEwLTI2IDEyOjMwOjEwWiIsImVtYWlsIjoidGVzdHRlc3RAdGVzdDExMTExLmNvbSIsImdsb2JhbF91c2VyX2lkIjoiSWhPWXhiZVgyV09xZkxvZ0ZvdWZwVkYvMzE0PSIsInJlYWxtX2lkIjoiYTNjMjQ2ZTEtMjRhNC00NWE2LWEzNjItZmRhNzNhNGI3NWFiIiwiZmFtaWx5X25hbWUiOiJ0ZXN0IiwidGVuYW50IjpbImF1Il0sImlzX25ld19yZWdpc3RyYXRpb24iOiJGYWxzZSIsIm5hbWUiOiJUZXN0IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvc3VybmFtZSI6InRlc3QiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9jb3VudHJ5IjoiYXUiLCJqdGkiOiI2NkJGQzgyMkYxMjY4Q0UwOUU5RDdFRThDQTYxQTUwMyJ9.S-Irpg4xa7JmHwgxWrrRFGkBCltgJlR1BC1r8ihV76sU6JnOBVsbcSuaxD6xRy0JvOrzI89bz0V1eImPhe21VfpKITAmbyHom-xlb_zkaZq_E53Xc0Ek8eabsbOXavILhDPidMXi67u34l3ub1doNX7FZQj6KmqoOrs4HIDgyDL5zxZqyVyg-UyStk5GO8hdUzwmdPnF7fB70OcA2AtZfnQClLISOUrCYf2GLqXfen8KpFH02x1KrU6_Vmu1rhlmNUfKNpH6gLXIRW4Fdi1UoThmNAr4pK6n6rVcNRY2UPp-BDyw20W0aKXI9j6zeDK9lP0_cApNcxTjQbG50T6PwFe5W-e8veSU5KcfCfmfL17fywv6cPTsl_EARyVQmMlBeYnBA6umrieTT9DnnbRwSlNfcm-0aybQBmgjepJwSDlhS-vNA1TI6LgKB3rJ-A5FCvO91dLScjNzB034_h45drdOSWHx5q9qC7Y8HP5mYVBLMYV-ZZgrM3Bp-jOozAGR7nCQhpZ1kDE6YH3Rqjb2hX9Ouya34YFUnKtIwpPUI0E-2GP4EgL2on43WxqugFc1fOqyIUuYF_f_heFvABAqPfHXjyArOuwYUJELlctOs-r8_Ke-Ep7Php3ohLvSrh-MqfG3szt9n6XYcWLHLymv9wIMGdpEQwNfeqyakyQyiLQ';
             await this.loadExclusions({ api: this.selfExclusionApi, authToken: this.authToken });
-            const alcoholExclusion = this.exclusions.find(result => result.type === 'alcohol');
-
-            this.setSelectedOption(alcoholExclusion);
         } catch (error) {
             this.$log.error('Error getting self exclusion status', error);
         }
@@ -232,28 +258,10 @@ export default {
             'saveExclusions'
         ]),
 
-        setSelectedOption (alcoholExclusion) {
-            if (alcoholExclusion) {
-                if (alcoholExclusion.state === 'temporaryExclusion') {
-                    this.selectedOption = 'temporary';
-                    this.alcoholExclusionDate = this.formatDate(new Date(alcoholExclusion.expiryDate));
-                }
-
-                if (alcoholExclusion.state === 'permanentExclusion') {
-                    this.selectedOption = 'permanent';
-                }
-
-                this.alcoholExcluded = true;
-                this.formDisabled = true;
-            } else {
-                this.selectedOption = 'show';
-            }
-        },
-
         setSelfExclusionStatus () {
             const url = this.apiUrl;
             const token = this.authToken;
-            const exclusionState = this.selectedOption === 'temporary' ? 'temporaryExclusion' : 'permanentExclusion';
+            const exclusionState = this.selectedOption;
 
             return this.saveExclusions({
                 url,
@@ -272,8 +280,6 @@ export default {
             this.setSelfExclusionStatus();
             this.isOpenAlert = false;
             this.isOpenAlertConfirmation = true;
-            this.alcoholExcluded = true;
-            this.formDisabled = true;
         },
 
         formatDate (date) {
