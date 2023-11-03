@@ -6,32 +6,50 @@
             has-outline
             :card-heading="$t('heading')"
             :class="$style['c-selfExclusion-card-component']">
-            <div v-if="isOpenAlertConfirmation && hasAlcoholExclusion">
-                <f-alert
-                    type="success"
-                    :heading="$t('alcoholicItemsExcludedConfirmation.heading')">
-                    {{ selectedState === 'temporaryExclusion'
-                        ? $t('alcoholicItemsExcludedConfirmation.textTemporary')
-                        : $t('alcoholicItemsExcludedConfirmation.textPermanent') }}
+            <!-- Alert Confirmation -->
+            <f-alert
+                v-if="isOpenAlertSuccess"
+                type="success"
+                :heading="$t('alcoholicItemsExcludedConfirmation.heading')">
+                {{ selectedState === 'temporaryExclusion'
+                    ? $t('alcoholicItemsExcludedConfirmation.textTemporary')
+                    : $t('alcoholicItemsExcludedConfirmation.textPermanent') }}
 
-                    <p>{{ $t('alcoholicItemsExcludedConfirmation.text2') }}</p>
-                    <div :class="$style['c-buttons']">
-                        <f-button
-                            action-type="reset"
-                            button-type="primary"
-                            button-size="small-productive"
-                            @click="closeAlertConfirmation"
-                        >
-                            {{ $t('buttons.cancel') }}
-                        </f-button>
-                    </div>
-                </f-alert>
-            </div>
+                <p>{{ $t('alcoholicItemsExcludedConfirmation.text2') }}</p>
+                <div :class="$style['c-buttons']">
+                    <f-button
+                        action-type="reset"
+                        button-type="primary"
+                        button-size="small-productive"
+                        @click="closeAlertSuccess"
+                    >
+                        {{ $t('buttons.cancel') }}
+                    </f-button>
+                </div>
+            </f-alert>
+
+            <f-alert
+                v-if="isOpenAlertError"
+                type="success"
+                :heading="$t('alcoholicItemsAlertError.heading')">
+                {{ $t('alcoholicItemsAlertError.text') }}
+                <div :class="$style['c-buttons']">
+                    <f-button
+                        action-type="reset"
+                        button-type="primary"
+                        button-size="small-productive"
+                        @click="closeAlertError"
+                    >
+                        {{ $t('buttons.cancel') }}
+                    </f-button>
+                </div>
+            </f-alert>
 
             <p :class="$style['c-selfExclusion-details']">
                 {{ $t('alcoholSelfExclusionInfo') }}
             </p>
 
+            <!-- Form -->
             <form :class="$style['c-selfExclusion-form']">
                 <fieldset
                     v-for="(option, optionKey) in alcoholExclusionOptions"
@@ -66,6 +84,7 @@
                 </div>
             </form>
 
+            <!-- Alert Warning -->
             <div
                 v-if="isOpenAlert"
                 :class="$style['c-selfExclusion-bottom-sheet-container']">
@@ -98,7 +117,7 @@
                             action-type="submit"
                             button-type="primary"
                             button-size="small-productive"
-                            @click="openAlertConfirmation"
+                            @click="openAlertSuccess"
                         >
                             {{ $t('buttons.excludeAlcohol') }}
                         </f-button>
@@ -153,7 +172,8 @@ export default {
         return {
             tenantConfigs,
             isOpenAlert: false,
-            isOpenAlertConfirmation: false,
+            isOpenAlertSuccess: false,
+            isOpenAlertError: false,
             selectedState: '',
             selfExclusionApi: new SelfExclusionApi({
                 httpClient: this.$http,
@@ -244,32 +264,42 @@ export default {
             this.closeAlert();
         },
 
-        submitExclusionStatus () {
+        async submitExclusionStatus () {
             const url = this.apiUrl;
             const token = this.authToken;
             const exclusionState = this.selectedState;
 
-            return this.updateAlcoholExclusion({
-                url,
-                token,
-                exclusionState
-            })
-                .then(response => {
-                    this.$log.info('Self exclusion status updated successfully', response);
-                })
-                .catch(error => {
-                    this.$log.error('Error updating self exclusion status', error);
+            try {
+                await this.updateAlcoholExclusion({
+                    url,
+                    token,
+                    exclusionState
                 });
+
+                this.$log.info('Alcohol Exclusion saved successfully');
+                this.openAlertSuccess();
+            } catch (error) {
+                this.$log.error('Error saving consumer details', error);
+                this.openAlertError();
+            }
         },
 
-        openAlertConfirmation () {
-            this.submitExclusionStatus();
+        openAlertSuccess () {
             this.isOpenAlert = false;
-            this.isOpenAlertConfirmation = true;
+            this.isOpenAlertSuccess = true;
         },
 
-        closeAlertConfirmation () {
-            this.isOpenAlertConfirmation = false;
+        closeAlertSuccess () {
+            this.isOpenAlertSuccess = false;
+        },
+
+        openAlertError () {
+            this.isOpenAlert = false;
+            this.isOpenAlertError = true;
+        },
+
+        closeAlertError () {
+            this.isOpenAlertError = false;
         },
 
         openAlert () {
