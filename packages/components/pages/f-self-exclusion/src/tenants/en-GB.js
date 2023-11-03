@@ -3,6 +3,7 @@ const messages = {
     text: 'I am a SelfExclusion Component (GB)',
     heading: 'Exclude alcoholic items',
     alcoholicItemsExcludedConfirmation: {
+        heading: 'Confirmed',
         textTemporary: 'While logged in, you will not see alcoholic items displayed within restaurant menus for the next 6 months.',
         textPermanent: 'While logged in, you will not see alcoholic items displayed within restaurant menus.',
         text2: 'These changes may take 24 hours to take effect.'
@@ -20,6 +21,7 @@ const messages = {
         warningText: 'Once selected, this change can’t be reversed.',
         privacyStatementLinkText: 'All personal data is processed in accordance with this privacy statement.'
     },
+    until: 'Until',
     buttons: {
         save: 'Save',
         cancel: 'Cancel',

@@ -1,4 +1,4 @@
-import { SELF_EXCLUSION_URL, AUTHORISATION_HEADER_NAME } from '../../constants';
+import { GET_EXCLUSIONS_URL, AUTHORISATION_HEADER_NAME } from '../../constants';
 
 const BuildHeaders = authToken => {
     const headers = {
@@ -19,18 +19,18 @@ export default class SelfExclusionApi {
         this.#baseUrl = baseUrl;
     }
 
-    async getSelfExclusionStatus (authToken) {
+    async getExclusions (authToken) {
         const headers = BuildHeaders(authToken);
 
-        const response = await this.#httpClient.get(`${this.#baseUrl}/${SELF_EXCLUSION_URL}`, headers);
+        const response = await this.#httpClient.get(`${this.#baseUrl}/${GET_EXCLUSIONS_URL}`, headers);
 
         return response;
     }
 
-    async updateSelfExclusionStatus (authToken, body) {
+    async updateAlcoholExclusion (authToken, body) {
         const headers = BuildHeaders(authToken);
 
-        const response = await this.#httpClient.put(`${this.#baseUrl}/${SELF_EXCLUSION_URL}`, body, headers);
+        const response = await this.#httpClient.put(`${this.#baseUrl}/${GET_EXCLUSIONS_URL}`, body, headers);
 
         return response;
     }

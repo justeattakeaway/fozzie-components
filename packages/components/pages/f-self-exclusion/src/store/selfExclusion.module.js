@@ -1,4 +1,4 @@
-import { UPDATE_EXCLUSIONS, UPDATE_EXCLUSION } from '../constants';
+import { UPDATE_EXCLUSIONS, UPDATE_ALCOHOL_EXCLUSION } from '../constants';
 
 export default {
     namespaced: true,
@@ -8,21 +8,24 @@ export default {
     }),
 
     actions: {
-        async loadExclusions ({ commit }, { api, authToken }) {
-            const { data } = await api.getSelfExclusionStatus(authToken);
+        async getExclusions ({ commit }, { api, authToken }) {
+            const { data } = await api.getExclusions(authToken);
             if (data) {
                 commit(UPDATE_EXCLUSIONS, data);
             }
         },
 
-        async saveExclusions ({ commit }, { api, authToken, exclusionState }) {
+        async updateAlcoholExclusion ({ commit }, { api, authToken, exclusionState }) {
             const body = {
                 state: exclusionState
             };
 
-            await api.updateSelfExclusionStatus(authToken, body);
+            const response = await api.updateAlcoholExclusion(authToken, body);
 
-            commit(UPDATE_EXCLUSIONS, exclusionState);
+            commit(UPDATE_ALCOHOL_EXCLUSION, {
+                state: exclusionState,
+                expiryDate: response.data.expiryDate
+            });
         }
     },
 
@@ -31,12 +34,14 @@ export default {
     },
 
     mutations: {
-        [UPDATE_EXCLUSIONS] (state, exclusions) {
-            state.exclusions = exclusions;
+        [UPDATE_EXCLUSIONS] (state, data) {
+            state.exclusions = data;
         },
 
-        [UPDATE_EXCLUSION] (state, { exclusionState }) {
-            state.exclusions[0].state = exclusionState;
+        [UPDATE_ALCOHOL_EXCLUSION] (state, data) {
+            const alcoholExclusion = state.exclusions.find(exclusion => exclusion.type === 'alcohol');
+            alcoholExclusion.state = data.state;
+            alcoholExclusion.expiryDate = data.expiryDate;
         }
     }
 };
