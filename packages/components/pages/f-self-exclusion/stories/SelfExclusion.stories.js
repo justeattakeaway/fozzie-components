@@ -1,9 +1,12 @@
+import Vuex from 'vuex';
+import Vue from 'vue';
 import { withA11y } from '@storybook/addon-a11y';
 import { locales } from '@justeat/storybook/constants/globalisation';
-import Vuex from 'vuex';
+import { setupApiMockState, apiStateOptions } from '@justeat/f-self-exclusion/stories/story.helper';
 import SelfExclusion from '../src/components/SelfExclusion.vue';
 import fSelfExclusionModule from '../src/store/selfExclusion.module';
 
+Vue.use(Vuex);
 
 export default {
     title: 'Components/Pages',
@@ -12,8 +15,16 @@ export default {
 
 export const SelfExclusionComponent = (args, { argTypes }) => ({
     components: { SelfExclusion },
-
     props: Object.keys(argTypes),
+
+    watch: {
+        apiState: {
+            immediate: true,
+            async handler (value) {
+                setupApiMockState(value);
+            }
+        }
+    },
 
     store: new Vuex.Store({
         modules: {
@@ -22,25 +33,22 @@ export const SelfExclusionComponent = (args, { argTypes }) => ({
     }),
 
     template:
-        `<self-exclusion
-        authToken="some-auth-token"
-        :isAuthFinished="true"
-        :locale="locale"
-        smart-gateway-base-url=""
-    />`
+        '<self-exclusion v-bind="$props" />'
 });
 
 SelfExclusionComponent.storyName = 'f-self-exclusion';
 
 SelfExclusionComponent.args = {
-    locale: locales.gb
+    authToken: 'some-auth-token',
+    locale: locales.au,
+    smartGatewayBaseUrl: ''
 };
 
 SelfExclusionComponent.argTypes = {
-    locale: {
+    apiState: {
         control: { type: 'select' },
-        options: [locales.gb],
-        description: 'Choose a locale',
-        defaultValue: locales.gb
+        options: apiStateOptions.states,
+        description: apiStateOptions.title,
+        defaultValue: apiStateOptions.default
     }
 };

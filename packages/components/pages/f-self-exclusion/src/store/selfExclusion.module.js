@@ -10,7 +10,7 @@ export default {
     actions: {
         async getExclusions ({ commit }, { api, authToken }) {
             const { data } = await api.getExclusions(authToken);
-            if (data) {
+            if (data.length) {
                 commit(UPDATE_EXCLUSIONS, data);
             }
         },

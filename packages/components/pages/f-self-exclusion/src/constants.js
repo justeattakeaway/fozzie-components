@@ -1,7 +1,8 @@
 export const UPDATE_EXCLUSIONS = 'updateExclusions';
 export const UPDATE_ALCOHOL_EXCLUSION = 'updateAlcoholExclusion';
 
-export const GET_EXCLUSIONS_URL = 'consumers/au/me/exclusions';
+export const GET_EXCLUSIONS_URL = 'consumers/{tenant}/me/exclusions';
+export const PUT_ALCOHOL_EXCLUSION_URL = 'consumers/{tenant}/me/exclusions/alcohol';
 
 export const AUTHORISATION_HEADER_NAME = 'Authorization';
 
