@@ -1,11 +1,15 @@
 const messages = {
-    locale: 'en-GB',
-    text: 'I am a SelfExclusion Component (GB)',
+    locale: 'en-nz',
+    text: 'I am a SelfExclusion Component (NZ)',
     heading: 'Exclude alcoholic items',
-    alcoholicItemsExcludedConfirmation: {
+    alcoholicItemsAlertSuccess: {
         heading: 'Confirmed',
         text1: 'While logged in, you will not see alcoholic items displayed within restaurant menus for the next 6 months.',
         text2: 'These changes may take 24 hours to take effect.'
+    },
+    alcoholicItemsAlertError: {
+        heading: 'Error',
+        text: 'An error has occurred, please try again later.'
     },
     alcoholSelfExclusionOptions: {
         option1: 'Show alcoholic beverages',

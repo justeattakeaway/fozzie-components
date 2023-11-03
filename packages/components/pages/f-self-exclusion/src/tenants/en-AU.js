@@ -1,6 +1,6 @@
 const messages = {
-    locale: 'en-GB',
-    text: 'I am a SelfExclusion Component (GB)',
+    locale: 'en-au',
+    text: 'I am a SelfExclusion Component (AU)',
     heading: 'Exclude alcoholic items',
     alcoholicItemsAlertSuccess: {
         heading: 'Confirmed',
