@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-self-exclusion",
   "description": "Fozzie Self Exclusion - Customers must be able to voluntarily self-exclude or nominate themselves for self exclusion for a specified time period or permanently (includes purchasing and marketing), and their account (associated to the email address or phone number provided during self exclusions) must be blocked from purchasing alcohol and other items.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "main": "dist/f-self-exclusion.umd.min.js",
   "files": [
     "dist"
@@ -48,5 +48,5 @@
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-  }  
+  }
 }
