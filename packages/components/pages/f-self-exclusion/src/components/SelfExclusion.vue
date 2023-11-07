@@ -156,11 +156,11 @@ export default {
     props: {
         locale: {
             type: String,
-            default: ''
+            default: 'en-AU'
         },
         authToken: {
             type: String,
-            default: null
+            required: true
         },
         smartGatewayBaseUrl: {
             type: String,
