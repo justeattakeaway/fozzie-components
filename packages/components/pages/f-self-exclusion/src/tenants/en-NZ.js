@@ -1,5 +1,5 @@
 const messages = {
-    locale: 'en-GB',
+    locale: 'en-NZ',
     heading: 'Exclude alcoholic items',
     text1: 'You can opt out of seeing alcoholic items on menus for a period of six months or permanently. Once selected, this change can\'t be reversed.',
     until: 'Until',
