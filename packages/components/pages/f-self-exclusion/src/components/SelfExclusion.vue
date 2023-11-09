@@ -2,7 +2,7 @@
     <div :class="$style['c-selfExclusion']">
         <f-card
             has-inner-spacing-large
-            card-size-custom="medium"
+            card-size-custom="large"
             has-outline
             :card-heading="$t('heading')"
             :class="$style['c-selfExclusion-card-component']">
@@ -10,39 +10,21 @@
             <f-alert
                 v-if="isOpenAlertSuccess"
                 type="success"
-                :heading="$t('alcoholicItemsAlertSuccess.heading')">
+                :heading="$t('alcoholicItemsAlertSuccess.heading')"
+                is-dismissible>
                 {{ selectedState === 'temporaryExclusion'
                     ? $t('alcoholicItemsAlertSuccess.text1Temporary')
                     : $t('alcoholicItemsAlertSuccess.text1Permanent') }}
 
                 <p>{{ $t('alcoholicItemsAlertSuccess.text2') }}</p>
-                <div :class="$style['c-buttons']">
-                    <f-button
-                        action-type="reset"
-                        button-type="primary"
-                        button-size="small-productive"
-                        @click="closeAlertSuccess"
-                    >
-                        {{ $t('buttons.cancel') }}
-                    </f-button>
-                </div>
             </f-alert>
 
             <f-alert
                 v-if="isOpenAlertError"
                 type="danger"
-                :heading="$t('alcoholicItemsAlertError.heading')">
+                :heading="$t('alcoholicItemsAlertError.heading')"
+                is-dismissible>
                 {{ $t('alcoholicItemsAlertError.text1') }}
-                <div :class="$style['c-buttons']">
-                    <f-button
-                        action-type="reset"
-                        button-type="primary"
-                        button-size="small-productive"
-                        @click="closeAlertError"
-                    >
-                        {{ $t('buttons.cancel') }}
-                    </f-button>
-                </div>
             </f-alert>
 
             <p :class="$style['c-selfExclusion-details']">
@@ -107,7 +89,7 @@
                         <f-button
                             action-type="reset"
                             button-type="ghost"
-                            button-size="small-productive"
+                            button-size="small"
                             @click="closeAlertConfirmation"
                         >
                             {{ $t('buttons.cancel') }}
@@ -116,12 +98,21 @@
                         <f-button
                             action-type="submit"
                             button-type="primary"
-                            button-size="small-productive"
+                            button-size="small"
                             @click="submitExclusionStatus"
                         >
                             {{ $t('buttons.excludeAlcohol') }}
                         </f-button>
                     </div>
+                </f-alert>
+
+                <f-alert
+                    v-if="selectedState === ''"
+                    type="success"
+                    heading="Success"
+                    is-dismissible
+                >
+                    {{ $t('alcoholSelfExclusionConfirmation.text1Show') }}
                 </f-alert>
             </div>
         </f-card>
@@ -279,17 +270,9 @@ export default {
             this.isOpenAlertSuccess = true;
         },
 
-        closeAlertSuccess () {
-            this.isOpenAlertSuccess = false;
-        },
-
         openAlertError () {
             this.closeAllAlerts();
             this.isOpenAlertError = true;
-        },
-
-        closeAlertError () {
-            this.isOpenAlertError = false;
         },
 
         openAlertConfirmation () {
@@ -303,8 +286,6 @@ export default {
 
         closeAllAlerts () {
             this.closeAlertConfirmation();
-            this.closeAlertSuccess();
-            this.closeAlertError();
         }
     }
 };
@@ -313,8 +294,11 @@ export default {
 <style lang="scss" module>
 @use "@justeat/fozzie/src/scss/fozzie" as f;
 
-.c-selfExclusion-card-component {
+.c-selfExclusion-card-component > div {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
 .c-selfExclusion-title {
@@ -348,6 +332,14 @@ export default {
     bottom: f.spacing(f);
     left: f.spacing(d);
     right: f.spacing(d);
+
+    @include f.media('<mid') {
+        position: relative;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin-top: auto;
+    }
 }
 
 .c-buttons {

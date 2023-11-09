@@ -14,6 +14,7 @@ const messages = {
         option3: 'Exclude alcoholic beverages permanently'
     },
     alcoholSelfExclusionConfirmation: {
+        text1Show: 'We’ll show alcohol items.',
         text1Temporary: 'You can opt out of seeing alcoholic items on menus for a period of six months. This change can take up to 24 hours to take effect.',
         text1Permanent: 'You can opt out of seeing alcoholic items on menus. This change can take up to 24 hours to take effect.',
         privacyStatementLinkText: 'All personal data is processed in accordance with this privacy statement.',
