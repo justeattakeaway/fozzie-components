@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@justeat/f-icons": "4.13.0",
-    "bili": "3.4.2",
+    "bili": "4.9.1",
     "fs-extra": "9.0.1",
     "lodash.kebabcase": "4.1.1",
     "marked": "1.2.5",
