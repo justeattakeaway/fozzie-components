@@ -15,7 +15,7 @@ const configuration = {
     availableServices: {
         chromedriver: {
             args: ['--whitelisted-ips=127.0.0.1', '--disable-dev-shm-usage'],
-            chromedriverCustomPath: path.join(process.env.process.env.CHROMEWEBDRIVER, 'chromedriver'),
+            chromedriverCustomPath: path.join(process.env.CHROMEWEBDRIVER, 'chromedriver'),
             headless: true,
             path: '/'
         },
