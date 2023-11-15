@@ -2,9 +2,9 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v10.15.1
+v10.16.0
 ------------------------------
-*Nov 15, 2023*
+*November 15, 2023*
 
 ### Changed
 - Added translations (which also enables) for corporate ordering links for ES & IT.
