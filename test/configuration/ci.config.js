@@ -1,4 +1,3 @@
-const path = require('path');
 const { testType } = require('./shared.config');
 
 const configuration = {
@@ -15,9 +14,7 @@ const configuration = {
     availableServices: {
         chromedriver: {
             args: ['--whitelisted-ips=127.0.0.1', '--disable-dev-shm-usage'],
-            chromedriverCustomPath: path.join(process.env.CHROMEWEBDRIVER, 'chromedriver'),
-            headless: true,
-            path: '/'
+            headless: true
         },
         percy: {
             viewports: {

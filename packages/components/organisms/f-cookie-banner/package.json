@@ -59,6 +59,7 @@
   "devDependencies": {
     "@justeat/f-button": "4.x",
     "@justeat/f-link": "3.x",
+    "core-js": "3.33.2",
     "@justeat/f-mega-modal": "7.x",
     "@justeat/f-vue-icons": "3.x",
     "@justeat/f-wdio-utils": "1.x",

@@ -21,7 +21,6 @@ exports.config = {
     // See the full list at http://mochajs.org/
     mochaOpts: {
         // Babel setup
-        require: ['@babel/register'],
         ui: 'bdd',
         timeout: configuration.mochaOpts.timeout
     },
@@ -42,7 +41,7 @@ exports.config = {
     connectionRetryCount: configuration.connectionRetryTimeout,
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
-    // see also: https://webdriver.io/docs/frameworks.html
+    // see also: https://webdriver.io/docs/frameworks tml
     //
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.

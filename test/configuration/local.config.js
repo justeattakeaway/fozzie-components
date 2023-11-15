@@ -1,3 +1,4 @@
+const path = require('path');
 const { testType } = require('./shared.config');
 
 const configuration = {
@@ -20,7 +21,6 @@ const configuration = {
         },
         chromedriver: {
             headless: false,
-            path: '/',
             args: []
         }
     },
