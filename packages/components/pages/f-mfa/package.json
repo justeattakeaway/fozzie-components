@@ -69,7 +69,7 @@
     "@justeat/f-card-with-content": "3.x",
     "@justeat/f-form-field": "6.x",
     "@justeat/f-link": "3.x",
-    "@justeat/f-wdio-utils": "1.x",
+    "@justeat/f-wdio-utils": "1.3.0",
     "@vue/cli-plugin-babel": "4.5.15"
   },
   "volta": {

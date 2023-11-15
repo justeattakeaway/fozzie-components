@@ -78,11 +78,11 @@ export default class Page {
         const el = this.fields[fieldName].input;
         el.waitForClickable();
         el.click();
-        el.keys([CONTROL, 'a']);
+        browser.keys([CONTROL, 'a']);
         el.waitUntil(() => {
             return this.isSelected()
         });
-        el.keys(['Backspace']);
+        browser.keys(['Backspace']);
         el.waitUntil(() => {
             return this.getText().length === 0
         });
@@ -100,11 +100,11 @@ export default class Page {
         const el = this.fields[fieldName].input;
         (await el).waitForClickable();
         (await el).click();
-        (await el).keys([CONTROL, 'a']);
+        (await browser).keys([CONTROL, 'a']);
         (await el).waitUntil(async function () {
             return (await this.isSelected())
         });
-        (await el).keys(['Backspace']);
+        (await browser).keys(['Backspace']);
         (await el).waitUntil(async function () {
             return (await this.getText()).length === 0
         });
