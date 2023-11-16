@@ -1,7 +1,7 @@
 <template>
     <div
         :class="$style['c-selfExclusion']"
-        data-test-id="self-exclusion">
+        data-test-id="self-exclusion-component">
         <f-card
             has-inner-spacing-large
             card-size-custom="large"
