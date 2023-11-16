@@ -41,7 +41,9 @@ SelfExclusionComponent.storyName = 'f-self-exclusion';
 SelfExclusionComponent.args = {
     authToken: 'some-auth-token',
     locale: locales.au,
-    smartGatewayBaseUrl: ''
+    smartGatewayBaseUrl: '',
+    showUnsavedChangesAlert: false,
+    privacyPolicyUrl: 'https://www.menulog.com.au/info/privacy-policy'
 };
 
 SelfExclusionComponent.argTypes = {

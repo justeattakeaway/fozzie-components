@@ -22,11 +22,39 @@
             </f-alert>
 
             <f-alert
-                v-if="isOpenAlertError"
+                v-else-if="isOpenAlertError"
                 type="danger"
                 :heading="$t('alcoholicItemsAlertError.heading')"
                 is-dismissible>
                 {{ $t('alcoholicItemsAlertError.text1') }}
+            </f-alert>
+
+            <f-alert
+                v-else-if="showUnsavedChangesAlert"
+                type="warning"
+                :heading="$t('alcoholSelfExclusionUnsavedChangesAlert.heading')">
+                ,
+                {{ $t('alcoholSelfExclusionUnsavedChangesAlert.text') }}
+
+                <div :class="$style['c-buttons']">
+                    <f-button
+                        action-type="reset"
+                        button-type="ghost"
+                        button-size="small"
+                        @click="cancelLeave"
+                    >
+                        {{ $t('buttons.cancel') }}
+                    </f-button>
+
+                    <f-button
+                        action-type="submit"
+                        button-type="primary"
+                        button-size="small"
+                        @click="confirmLeave"
+                    >
+                        {{ $t('buttons.goBack') }}
+                    </f-button>
+                </div>
             </f-alert>
 
             <p :class="$style['c-selfExclusion-details']">
@@ -75,7 +103,7 @@
                 <f-alert
                     v-if="selectedState === 'temporaryExclusion' || selectedState === 'permanentExclusion'"
                     type="warning"
-                    :heading="$t('heading')"
+                    :heading="$t('alcoholSelfExclusionConfirmation.heading')"
                 >
                     {{ selectedState === 'temporaryExclusion'
                         ? $t('alcoholSelfExclusionConfirmation.text1Temporary')
@@ -85,7 +113,12 @@
                         <strong>{{ $t('alcoholSelfExclusionConfirmation.warningText') }}</strong>
                     </p>
 
-                    <p>{{ $t('alcoholSelfExclusionConfirmation.privacyStatementLinkText') }}</p>
+                    <i18n
+                        path="alcoholSelfExclusionConfirmation.privacyStatement"
+                        tag="p"
+                        :class="$style['c-mfa-help-description']">
+                        <a :href="privacyPolicyUrl">{{ $t('alcoholSelfExclusionConfirmation.privacyStatementLinkText') }}</a>
+                    </i18n>
 
                     <div :class="$style['c-buttons']">
                         <f-button
@@ -156,6 +189,14 @@ export default {
             required: true
         },
         smartGatewayBaseUrl: {
+            type: String,
+            required: true
+        },
+        showUnsavedChangesAlert: {
+            type: Boolean,
+            default: false
+        },
+        privacyPolicyUrl: {
             type: String,
             required: true
         }
@@ -288,6 +329,14 @@ export default {
 
         closeAllAlerts () {
             this.closeAlertConfirmation();
+        },
+
+        cancelLeave () {
+            this.$emit('cancel-leave');
+        },
+
+        confirmLeave () {
+            this.$emit('confirm-leave');
         }
     }
 };
@@ -305,7 +354,6 @@ export default {
 
 .c-selfExclusion-title {
     @include f.font-size(heading-m);
-    margin-bottom: f.spacing(d);
 }
 
 .c-selfExclusion-details,
@@ -314,7 +362,8 @@ export default {
 }
 
 .c-selfExclusion-details {
-    margin-bottom: f.spacing(d);
+    margin-top: f.spacing(c);
+    margin-bottom: f.spacing(b);
 }
 
 .c-selfExclusion-fieldset {
@@ -331,7 +380,7 @@ export default {
 
 .c-selfExclusion-bottom-sheet-container {
     position: absolute;
-    bottom: f.spacing(f);
+    bottom: f.spacing(e);
     left: f.spacing(d);
     right: f.spacing(d);
 
