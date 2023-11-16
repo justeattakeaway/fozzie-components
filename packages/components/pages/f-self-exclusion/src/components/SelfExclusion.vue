@@ -1,5 +1,7 @@
 <template>
-    <div :class="$style['c-selfExclusion']">
+    <div
+        :class="$style['c-selfExclusion']"
+        data-test-id="self-exclusion">
         <f-card
             has-inner-spacing-large
             card-size-custom="large"
