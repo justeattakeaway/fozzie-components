@@ -90,8 +90,13 @@
     "babel-jest": "26.1.0",
     "babel-loader": "8.1.0",
     "bundlewatch": "0.3.1",
+<<<<<<< HEAD
+    "chromedriver": "119.0.1",
+    "core-js": "3.26.1",
+=======
     "chromedriver": "118.0.1",
     "core-js": "3.33.2",
+>>>>>>> origin/master
     "cross-env": "7.0.2",
     "css-loader": "1.0.1",
     "danger": "11.2.8",
