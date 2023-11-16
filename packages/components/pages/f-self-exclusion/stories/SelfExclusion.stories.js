@@ -2,7 +2,7 @@ import Vuex from 'vuex';
 import Vue from 'vue';
 import { withA11y } from '@storybook/addon-a11y';
 import { locales } from '@justeat/storybook/constants/globalisation';
-import { setupApiMockState, apiStateOptions } from '@justeat/f-self-exclusion/stories/story.helper';
+import { setupApiMockState, apiStateOptions } from './story.helper';
 import SelfExclusion from '../src/components/SelfExclusion.vue';
 import fSelfExclusionModule from '../src/store/selfExclusion.module';
 
