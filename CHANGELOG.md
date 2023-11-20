@@ -12,6 +12,7 @@ v7.55.0
 - Bump Node support version
   - Drop support for v.12 and v.14
   - Add support for v.18 and v.20
+- Storybook guides link updates
 
 
 v7.54.2

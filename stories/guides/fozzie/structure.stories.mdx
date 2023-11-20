@@ -28,44 +28,44 @@ Fozzie SCSS is currently structured as shown below:
      ┣ fozzie.scss
 ```
 
-To see the structure of the SCSS directory in Fozzie SCSS, [check it out on Github](https://github.com/justeat/fozzie/tree/master/src/scss).
+To see the structure of the SCSS directory in Fozzie SCSS, [check it out on Github](https://github.com/justeattakeaway/fozzie-components/tree/master/packages/tools/fozzie/src/scss).
 
 ### Key files
 
 Within Fozzie SCSS, there are a few key files that if you want to contribute back into fozzie, it's worth understanding.
 
-#### [fozzie.scss](https://github.com/justeat/fozzie/blob/master/src/scss/fozzie.scss)
+#### [fozzie.scss](https://github.com/justeattakeaway/fozzie-components/tree/master/packages/tools/fozzie/src/scss/fozzie.scss)
 
 This is the main entry point into Fozzie SCSS.
 
 It's main purpose is to call the `_dependencies.scss` as well as providing access to `_templates.scss`, which provides a set of default styling that was available in older versions of Fozzie SCSS (mainly used to help support older web applications using Fozzie SCSS).
 
-#### [_dependencies.scss](https://github.com/justeat/fozzie/blob/master/src/scss/_dependencies.scss)
+#### [_dependencies.scss](https://github.com/justeattakeaway/fozzie-components/tree/master/packages/tools/fozzie/src/scss/_dependencies.scss)
 
 This file is where all of the Fozzie SCSS dependencies are defined. It imports all of the SCSS files that make up the Fozzie SCSS library.
 
 It acts as a de-facto table of contents for what is available in Fozzie SCSS.
 
 
-#### [/settings/_variables.scss](https://github.com/justeat/fozzie/blob/master/src/scss/settings/_variables.scss)
+#### [/settings/_variables.scss](https://github.com/justeattakeaway/fozzie-components/tree/master/packages/tools/fozzie/src/scss/settings/_variables.scss)
 
 Located in the `/settings` folder, this file defines the variables that are available to applications that import Fozzie SCSS.
 
 Examples include the `$type`, `$spacing` and `$zIndex` maps, and `font-family` and `font-weight` helper variables.
 
-#### [/tools/helpers/_breakpoints.scss](https://github.com/justeat/fozzie/blob/master/src/scss/tools/helpers/_breakpoints.scss)
+#### [/tools/helpers/_breakpoints.scss](https://github.com/justeattakeaway/fozzie-components/tree/master/packages/tools/fozzie/src/scss/tools/helpers/_breakpoints.scss)
 
 This file defines the breakpoints that are available when using Fozzie SCSS.
 
 These breakpoints can be referenced when using the `@include media(…)` helper mixin ([see docs here](/story/documentation-guides-fozzie-fozzie-and-sass--page#media-query-helper-mixins)).
 
-#### [/base/_typography.scss](https://github.com/justeat/fozzie/blob/master/src/scss/base/_typography.scss)
+#### [/base/_typography.scss](https://github.com/justeattakeaway/fozzie-components/tree/master/packages/tools/fozzie/src/scss/base/_typography.scss)
 
 This file contains the Fozzie SCSS default typographic styles.
 
 This includes styles for setting the base font-size of the application and definitions for headings, paragraphs, blockquotes etc.
 
-#### [/trumps/_utilities.scss](https://github.com/justeat/fozzie/blob/master/src/scss/trumps/_utilities.scss)
+#### [/trumps/_utilities.scss](https://github.com/justeattakeaway/fozzie-components/tree/master/packages/tools/fozzie/src/scss/trumps/_utilities.scss)
 
 Located in the `/trumps` folder, this file contains a bunch of utility classes such as `.u-unstyled` (to unstyle list elements), `.u-ir` for background image replacement, `.is-hidden` and `is-visuallyHidden` for hiding elements with accessibility in mind etc.
 
@@ -73,21 +73,21 @@ Located in the `/trumps` folder, this file contains a bunch of utility classes s
 
 #### Base
 
-The [base folder](https://github.com/justeat/fozzie/tree/master/src/scss/base) is where the styles that make up the foundation of the Fozzie SCSS library are defined.
+The [base folder](https://github.com/justeattakeaway/fozzie-components/tree/master/packages/tools/fozzie/src/scss/base) is where the styles that make up the foundation of the Fozzie SCSS library are defined.
 
 For example, typographic styles are defined here, as are global layout classes, normalize and print styles.
 
-n.b. We use [Normalize.css](https://github.com/justeat/fozzie/blob/master/src/scss/base/_normalize.scss) over a standard reset stylesheet. For more information on Normalize styles, [see the online docs](https://necolas.github.io/normalize.css/).
+n.b. We use [Normalize.css](https://github.com/justeattakeaway/fozzie-components/tree/master/packages/tools/fozzie/src/scss/base/_normalize.scss) over a standard reset stylesheet. For more information on Normalize styles, [see the online docs](https://necolas.github.io/normalize.css/).
 
 #### Settings
 
-The [settings directory](https://github.com/justeat/fozzie/tree/master/src/scss/settings) should contain anything that is 'set' across your modules styles.
+The [settings directory](https://github.com/justeattakeaway/fozzie-components/tree/master/packages/tools/fozzie/src/scss/settings) should contain anything that is 'set' across your modules styles.
 
 The most common example of this is CSS variables, such as font-sizes, grid settings and breakpoint definitions.
 
 #### Tools
 
-The [tools folder](https://github.com/justeat/fozzie/tree/master/src/scss/tools) is where global mixins and functions are located.
+The [tools folder](https://github.com/justeattakeaway/fozzie-components/tree/master/packages/tools/fozzie/src/scss/tools) is where global mixins and functions are located.
 
 If you pull in styles from a 3rd party library (such as PrismJS which is used for code highlighting) then these should also be located in this folder.
 
@@ -98,13 +98,13 @@ Utilities and helper classes which should have the ability to override anything 
 
 #### Components & Objects
 
-The [components](https://github.com/justeat/fozzie/tree/master/src/scss/components) and [objects folders](https://github.com/justeat/fozzie/tree/master/src/scss/objects) are used to define component styles specific to that component.
+The [components](https://github.com/justeattakeaway/fozzie-components/tree/master/packages/tools/fozzie/src/scss/components) and [objects folders](https://github.com/justeattakeaway/fozzie-components/tree/master/packages/tools/fozzie/src/scss/objects) are used to define component styles specific to that component.
 
 Recently, we have moved towards defining component styles such as this as part of the Fozzie Vue Component mono-repo, with the styles sitting alongside the Vue Single File Component definition. Therefore, we will be looking to deprecate the Component and Object styles definitions in Fozzie SCSS and we don't recommend building new applications using these style classes – these are maintained to support legacy applications.
 
 Component filenames closely relate to their component name. So a component of `c-rating` should have its styles in a file called `_ratings.scss`.
 
-The definition of an Object is any component that can be directly linked to a native HTML element. Therefore the [objects folder](https://github.com/justeat/fozzie/tree/master/src/scss/objects) will include style definitions for buttons, form elements and links among other native element styling.
+The definition of an Object is any component that can be directly linked to a native HTML element. Therefore the [objects folder](https://github.com/justeattakeaway/fozzie-components/tree/master/packages/tools/fozzie/src/scss/objects) will include style definitions for buttons, form elements and links among other native element styling.
 
 
 ## Fozzie Vue Components
