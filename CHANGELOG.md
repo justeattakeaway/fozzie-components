@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v7.55.0
+------------------------------
+*November 20, 2023*
+
+### Changed
+- Bump Node support version
+  - Drop support for v.12 and v.14
+  - Add support for v.18 and v.20
+
+
 v7.54.2
 ------------------------------
 *September 4, 2023*

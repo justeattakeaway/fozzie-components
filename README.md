@@ -72,7 +72,7 @@ Component Tests
  ```
 
 ## Importing optional SCSS helpers from Fozzie
-We have created several optional mixin helpers in [Fozzie](https://github.com/justeat/fozzie/tree/master/src/scss/components/optional).
+We have created several optional mixin helpers in Fozzie [optional folder](./packages/tools/fozzie/src/scss/components/optional).
 Here's an example of how to use it:
 
 Note: Importing the optional mixin and using `@include` in the `common.scss` file of your component doesn't work if you have `module` enabled on your SFC.

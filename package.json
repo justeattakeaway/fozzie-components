@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "7.54.2",
+  "version": "7.55.0",
   "private": true,
   "scripts": {
     "build": "cross-env-shell turbo run build --continue --token=${TURBO_TOKEN}",
@@ -137,7 +137,7 @@
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
   "engines": {
-    "node": "^12 || ^14 || ^16"
+    "node": "^16 || ^18 || ^20"
   },
   "homepage": "https://github.com/justeat/fozzie-components",
   "keywords": [

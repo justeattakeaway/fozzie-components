@@ -23,7 +23,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^12 || ^14 || ^16"
+    "node": "^16 || ^18 || ^20"
   },
   "keywords": [
     "fozzie"
