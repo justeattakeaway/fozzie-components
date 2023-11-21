@@ -26,7 +26,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^12 || ^14 || ^16"
+    "node": "^16 || ^18"
   },
   "keywords": [
     "fozzie"
@@ -60,5 +60,5 @@
   }<% if(config.isComponent) { %>,
   "devDependencies": {<% if(config.needsComponentTests){%>
     "@justeat/f-wdio-utils": "1.x"<% }%>
-  }<% } %>  
+  }<% } %>
 }

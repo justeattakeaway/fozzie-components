@@ -11,6 +11,14 @@ v7.54.4
 - Updated chromedriver to 119.0.1.
 
 
+v7.55.0
+------------------------------
+*November 21, 2023*
+
+### Changed
+- Bump Node engine version to v18
+
+
 v7.54.2
 ------------------------------
 *September 4, 2023*

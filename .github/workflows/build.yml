@@ -35,7 +35,7 @@ jobs:
     # Setup Node 16.
       uses: actions/setup-node@v3
       with:
-        node-version: 16
+        node-version: 18
         cache: 'yarn'
     # Restore node_modules if cache exists. If not, cache is created at end of build.
     - name: Cache Node Modules
@@ -63,7 +63,7 @@ jobs:
     # Setup Node 16.
       uses: actions/setup-node@v3
       with:
-        node-version: 16
+        node-version: 18
         cache: 'yarn'
     # Restore node_modules if cache exists. If not, cache is created at end of build.
     - name: Cache Node Modules
@@ -91,7 +91,7 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v3
       with:
-        node-version: 16
+        node-version: 18
         cache: 'yarn'
     # Restore node_modules - Cache should exist as one was created in previous 'install' job.
     - name: Cache Node Modules
@@ -141,7 +141,7 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v3
       with:
-        node-version: 16
+        node-version: 18
         cache: 'yarn'
     # Restore node_modules - Cache should exist as one was created in previous 'install' job
     - name: Restore Cache -  Node Modules
@@ -177,7 +177,7 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v3
       with:
-        node-version: 16
+        node-version: 18
         cache: 'yarn'
     # Restore node_modules - Cache should exist as one was created in previous 'install' job
     - name: Restore Cache -  Node Modules
@@ -253,7 +253,7 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v3
       with:
-        node-version: 16
+        node-version: 18
         cache: 'yarn'
     # Restore node_modules - Cache should exist as one was created in previous 'install' job.
     - name: Restore Cache -  Node Modules
@@ -293,7 +293,7 @@ jobs:
       # Setup Node 16.
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
           cache: 'yarn'
       # Restore node_modules - Cache should exist as one was created in previous 'install' job.
       - name: Restore Cache -  Node Modules
