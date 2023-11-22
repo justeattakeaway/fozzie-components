@@ -5,7 +5,7 @@ describe('f-self-exclusion component tests', () => {
         await SelfExclusion.load();
     });
 
-    // SelfExclusion not currently working in Storybook.
+    // SelfExclusion tests not currently working in Storybook.
     it.skip('should display the f-self-exclusion component', async () => {
         // Assert
         await expect(await SelfExclusion.isComponentDisplayed()).toBe(true);

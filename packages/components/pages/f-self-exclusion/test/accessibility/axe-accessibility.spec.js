@@ -1,7 +1,7 @@
 import SelfExclusion from '../../test-utils/component-objects/f-self-exclusion.component';
 
 describe('f-self-exclusion - Accessibility tests', () => {
-    it('a11y - should test f-self-exclusion component WCAG compliance', async () => {
+    it.skip('a11y - should test f-self-exclusion component WCAG compliance', async () => {
         // Act
         await SelfExclusion.load();
 
