@@ -261,6 +261,7 @@ export default {
             this.selectedState = this.alcoholExclusion.state;
         } catch (error) {
             this.$log.error('Error getting self exclusion status', error);
+            this.openAlertError();
         }
     },
 

@@ -35,7 +35,7 @@ const messages = {
     },
     alcoholicItemsAlertError: {
         heading: 'Error',
-        text1: 'An error has occurred while trying to update your self-exclusion status. Please, try again later.'
+        text1: 'An error has occurred. Please, try again later.'
     }
 };
 
