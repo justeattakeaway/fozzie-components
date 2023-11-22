@@ -6,8 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v0.1.0
 ------------------------------
-*August 15, 2023*
+*November 21, 2023*
 
 ### Added
-- Add your change under the following headings: `Added`/`Changed`/`Deprecated`/`Removed`/`Fixed`/`Security`
-!!! Please, add your component to `.circleci/config.yml` under `save_cache_dist_directories` manually after the component is generated.
+- `f-self-exclusion` page created with base functionality
