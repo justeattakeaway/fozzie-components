@@ -7,7 +7,7 @@
             card-size-custom="large"
             has-outline
             :card-heading="$t('heading')"
-            :class="$style['c-selfExclusion-card-component']">
+            :class="$style['c-selfExclusion']">
             <!-- Success/Error alerts -->
             <f-alert
                 v-if="isOpenAlertSuccess"
@@ -36,7 +36,7 @@
                 ,
                 {{ $t('alcoholSelfExclusionUnsavedChangesAlert.text') }}
 
-                <div :class="$style['c-buttons']">
+                <div :class="$style['c-selfExclusion-buttons']">
                     <f-button
                         action-type="reset"
                         button-type="ghost"
@@ -87,7 +87,7 @@
                     </span>
                 </fieldset>
 
-                <div :class="$style['c-buttons']">
+                <div :class="$style['c-selfExclusion-buttons']">
                     <f-button
                         :disabled="isFormDisabled"
                         @click="openAlertConfirmation">
@@ -99,7 +99,7 @@
             <!-- Confirmation Alert -->
             <div
                 v-if="isOpenAlertConfirmation"
-                :class="$style['c-selfExclusion-bottom-sheet-container']">
+                :class="$style['c-selfExclusion-bottomSheet']">
                 <f-alert
                     v-if="selectedState === 'temporaryExclusion' || selectedState === 'permanentExclusion'"
                     type="warning"
@@ -109,7 +109,7 @@
                         ? $t('alcoholSelfExclusionConfirmation.text1Temporary')
                         : $t('alcoholSelfExclusionConfirmation.text1Permanent') }}
 
-                    <p :class="$style['c-warning-text']">
+                    <p :class="$style['c-selfExclusion-bottomSheet-warning']">
                         <strong>{{ $t('alcoholSelfExclusionConfirmation.warningText') }}</strong>
                     </p>
 
@@ -120,7 +120,7 @@
                         <a :href="privacyPolicyUrl">{{ $t('alcoholSelfExclusionConfirmation.privacyStatementLinkText') }}</a>
                     </i18n>
 
-                    <div :class="$style['c-buttons']">
+                    <div :class="$style['c-selfExclusion-buttons']">
                         <f-button
                             action-type="reset"
                             button-type="ghost"
@@ -345,19 +345,14 @@ export default {
 <style lang="scss" module>
 @use "@justeat/fozzie/src/scss/fozzie" as f;
 
-.c-selfExclusion-card-component > div {
+.c-selfExclusion > div {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: stretch;
 }
 
-.c-selfExclusion-title {
-    @include f.font-size(heading-m);
-}
-
-.c-selfExclusion-details,
-.c-selfExclusion-subtitle {
+.c-selfExclusion-details {
     @include f.font-size(heading-s);
 }
 
@@ -378,7 +373,7 @@ export default {
     opacity: 0.5;
 }
 
-.c-selfExclusion-bottom-sheet-container {
+.c-selfExclusion-bottomSheet {
     position: absolute;
     bottom: f.spacing(e);
     left: f.spacing(d);
@@ -393,7 +388,7 @@ export default {
     }
 }
 
-.c-buttons {
+.c-selfExclusion-buttons {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -402,7 +397,7 @@ export default {
     padding: f.spacing(d);
 }
 
-.c-warning-text {
+.c-selfExclusion-bottomSheet-warning {
     color: f.$color-content-error;
 }
 </style>
