@@ -16,11 +16,11 @@ v7.55.0
 *November 21, 2023*
 
 ### Changed
-- Removes support for deprecated Node versions (12 and 14).
-- Adds support for Node versions 16, 18.
+- Removes support for deprecated Node version 12
+- Adds support for Node version 18
   - Volta update with Node 18
-  - Needed by consuming applications.
-- Bump package version up to minor.
+  - Needed by consuming applications
+- Bump package version up to minor
 
 
 v7.54.2

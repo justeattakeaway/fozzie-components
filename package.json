@@ -138,7 +138,7 @@
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
   "engines": {
-    "node": "^16 || ^18"
+    "node": "^14 || ^16 || ^18"
   },
   "homepage": "https://github.com/justeat/fozzie-components",
   "keywords": [
