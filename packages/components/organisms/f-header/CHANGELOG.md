@@ -4,7 +4,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 v10.17.0
 ------------------------------
-*November 15, 2023*
+*November 24, 2023*
 
 ### Changed
 - Added translations (which also enables) for 'Become a courier' links for AU & NZ.
