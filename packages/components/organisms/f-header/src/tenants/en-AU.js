@@ -51,6 +51,11 @@ export default {
         url: '/account/logout',
         gtm: 'click_logout'
     },
+    deliveryEnquiry: {
+        text: 'Become a courier',
+        url: 'https://couriers.menulog.com.au/application',
+        gtm: 'click_courier_signup'
+    },
     offers: {
         text: 'For you',
         url: '/offers'
