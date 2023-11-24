@@ -40,7 +40,7 @@
                     <f-button
                         action-type="reset"
                         button-type="ghost"
-                        button-size="small"
+                        button-size="small-productive"
                         @click="cancelLeave"
                     >
                         {{ $t('buttons.cancel') }}
@@ -49,7 +49,7 @@
                     <f-button
                         action-type="submit"
                         button-type="primary"
-                        button-size="small"
+                        button-size="small-productive"
                         @click="confirmLeave"
                     >
                         {{ $t('buttons.goBack') }}
@@ -124,7 +124,7 @@
                         <f-button
                             action-type="reset"
                             button-type="ghost"
-                            button-size="small"
+                            button-size="small-productive"
                             @click="closeAlertConfirmation"
                         >
                             {{ $t('buttons.cancel') }}
@@ -133,7 +133,7 @@
                         <f-button
                             action-type="submit"
                             button-type="primary"
-                            button-size="small"
+                            button-size="small-productive"
                             @click="submitExclusionStatus"
                         >
                             {{ $t('buttons.excludeAlcohol') }}
