@@ -71,5 +71,10 @@ export default {
         currentCountryKey: 'es',
         changeCurrentCountry: 'Estás en Just Eat España, haz clic aquí para cambiar país',
         goBackToMainMenu: 'Vuelve al menú principal'
+    },
+    corporate: {
+        text: 'Pedidos para Empresas',
+        url: 'https://www.just-eat.es/business',
+        gtm: 'click_corporate_ordering'
     }
 };
