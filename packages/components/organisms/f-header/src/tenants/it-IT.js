@@ -71,5 +71,10 @@ export default {
         currentCountryKey: 'it',
         changeCurrentCountry: 'Sei sul sito Italiano, licca qui per cambiare stato',
         goBackToMainMenu: 'Torna al menu principale'
+    },
+    corporate: {
+        text: 'Ordine aziendale',
+        url: 'https://www.justeat.it/business',
+        gtm: 'click_corporate_ordering'
     }
 };
