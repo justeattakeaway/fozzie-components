@@ -2,6 +2,22 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v10.17.0
+------------------------------
+*November 24, 2023*
+
+### Changed
+- Added translations (which also enables) for 'Become a courier' links for AU & NZ.
+
+
+v10.16.0
+------------------------------
+*November 15, 2023*
+
+### Changed
+- Added translations (which also enables) for corporate ordering links for ES & IT.
+
+
 v10.15.0
 ------------------------------
 *June 23, 2023*
