@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@justeat/feature-management": "1.0.1",
-    "crypto-js": "4.1.1"
+    "crypto-js": "4.2.0"
   },
   "volta": {
     "extends": "../../../package.json"
