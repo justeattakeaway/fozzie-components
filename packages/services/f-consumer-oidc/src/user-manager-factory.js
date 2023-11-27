@@ -6,11 +6,11 @@ export function userManagerFactory ({ UserManager }, settings) {
     const root = `${location.protocol}//${location.host}`;
 
     function getCookieData () {
-        return Cookies.getJSON('je-oidc') || {};
+        return Cookies.getJSON(settings.cookie_name) || {};
     }
 
     function setCookieData (obj) {
-        Cookies.set('je-oidc', obj); // TODO: expiry
+        Cookies.set(settings.cookie_name, obj); // TODO: expiry
     }
 
     const userStore = {
@@ -45,6 +45,7 @@ export function userManagerFactory ({ UserManager }, settings) {
     const defaultSettings = {
         authority: root,
         client_id: 'je_web_native',
+        cookie_name: 'je-oidc', // Default cookie name
         response_type: 'code',
         scope: 'openid mobile_scope offline_access',
         silent_redirect_uri: `${root}/tokenweb/content/silent-callback.html`,
