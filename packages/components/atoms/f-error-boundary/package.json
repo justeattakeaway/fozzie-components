@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "1.x",
-    "vite-plugin-vue2": "1.9.0"
+    "vite-plugin-vue2": "1.9.3"
   },
   "volta": {
     "extends": "../../../../package.json"
