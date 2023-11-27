@@ -7,6 +7,13 @@ Future Todo List
 ------------------------------
 - Make typography and utility classes silent extenders (so that they can be extended by components without importing all utility classes).
 
+v11.0.2
+------------------------------
+*November 8, 2023*
+
+### Changed
+- `include-media` reference to released 2.0.0 version.
+
 
 v11.0.1
 ------------------------------

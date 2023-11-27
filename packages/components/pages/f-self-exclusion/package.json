@@ -1,9 +1,8 @@
 {
-  "name": "@justeat/f-checkout",
-  "description": "Fozzie Checkout - Fozzie Checkout Component",
-  "version": "4.11.0",
-  "main": "dist/f-checkout.umd.min.js",
-  "maxBundleSize": "100kB",
+  "name": "@justeat/f-self-exclusion",
+  "description": "Fozzie Self Exclusion - Customers must be able to voluntarily self-exclude or nominate themselves for self exclusion for a specified time period or permanently (includes purchasing and marketing), and their account (associated to the email address or phone number provided during self exclusions) must be blocked from purchasing alcohol and other items.",
+  "version": "1.0.1",
+  "main": "dist/f-self-exclusion.umd.min.js",
   "files": [
     "dist",
     "test-utils",
@@ -13,7 +12,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/pages/f-checkout",
+  "homepage": "https://github.com/justeat/fozzie-components/tree/master/packages/components/pages/f-self-exclusion",
   "contributors": [
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
@@ -33,55 +32,34 @@
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "vue-cli-service build --target lib --name f-checkout ./src/index.js",
+    "build": "vue-cli-service build --target lib --name f-self-exclusion ./src/index.js",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "lint:style": "stylelint ./src/**/*.{vue,htm,html,css,sss,less,scss}",
     "lint:style:fix": "yarn lint:style --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "yarn test --coverage",
+    "test": "jest --passWithNoTests",
     "test-component:chrome": "cross-env-shell TEST_TYPE=component wdio ../../../../wdio-chrome.conf.js",
-    "test:visual": "cross-env-shell PERCY_TOKEN=${PERCY_TOKEN_F_CHECKOUT} TEST_TYPE=visual percy exec -- wdio ../../../../wdio-chrome.conf.js",
     "test-a11y:chrome": "cross-env-shell TEST_TYPE=a11y wdio ../../../../wdio-chrome.conf.js",
     "ci:test:pages": "yarn test",
     "ci:test-component:chrome:pages": "yarn test-component:chrome",
-    "ci:test-a11y:chrome:pages": "yarn test-a11y:chrome",
-    "ci:test:visual:pages": "yarn test:visual"
+    "ci:test-a11y:chrome:pages": "yarn test-a11y:chrome"
   },
   "browserslist": [
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-globalisation": "1.x",
+    "@justeat/f-globalisation": "1.2.0",
     "@justeat/f-services": "1.x",
-    "axios": "1.6.0",
-    "jwt-decode": "3.1.2",
-    "vue-scrollto": "2.20.0",
-    "vuelidate": "0.7.6"
+    "@justeat/f-alert": "6.x",
+    "@justeat/f-button": "5.x",
+    "@justeat/f-card": "4.x",
+    "@justeat/f-form-field": "6.x",
+    "axios": "0.21.2"
   },
   "peerDependencies": {
-    "@justeat/browserslist-config-fozzie": ">=1.1.1",
-    "@justeat/f-alert": "6.x",
-    "@justeat/f-button": "4.x",
-    "@justeat/f-card": "4.x",
-    "@justeat/f-card-with-content": "3.x",
-    "@justeat/f-error-message": "2.x",
-    "@justeat/f-form-field": "6.x",
-    "@justeat/f-link": "3.x",
-    "@justeat/f-mega-modal": "7.x",
-    "vuex": "3.5.1"
+    "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
-    "@justeat/f-alert": "6.x",
-    "@justeat/f-button": "4.x",
-    "@justeat/f-card": "4.x",
-    "@justeat/f-card-with-content": "3.x",
-    "@justeat/f-error-message": "2.x",
-    "@justeat/f-form-field": "6.x",
-    "@justeat/f-link": "3.x",
-    "@justeat/f-mega-modal": "7.x",
-    "@justeat/f-vue-icons": "3.x",
     "@justeat/f-wdio-utils": "1.x",
     "@vue/cli-plugin-babel": "4.5.16",
     "@vue/test-utils": "1.0.3"
