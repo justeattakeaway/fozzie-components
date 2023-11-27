@@ -20,7 +20,7 @@
     "test": "cross-env-shell turbo run test --continue --token=${TURBO_TOKEN}",
     "ci:test:tools": "cross-env-shell turbo run ci:test:tools --continue --token=${TURBO_TOKEN}",
     "ci:test:services": "cross-env-shell turbo run ci:test:services --continue --token=${TURBO_TOKEN}",
-    "ci:test:atoms": "cross-env-shell turbo run ci:test:atoms --continue --token=${TURBO_TOKEN}",
+    "ci:test:atoms": "NODE_OPTIONS=--openssl-legacy-provider cross-env-shell turbo run ci:test:atoms --continue --token=${TURBO_TOKEN}",
     "ci:test:molecules": "cross-env-shell turbo run ci:test:molecules --continue --token=${TURBO_TOKEN}",
     "ci:test:organisms": "cross-env-shell turbo run ci:test:organisms --continue --token=${TURBO_TOKEN}",
     "ci:test:pages": "cross-env-shell turbo run ci:test:pages --continue --token=${TURBO_TOKEN}",
