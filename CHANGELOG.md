@@ -3,6 +3,30 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v7.54.4
+------------------------------
+*November 24, 2023*
+
+### Changed
+- Updated chromedriver to 119.0.1.
+
+
+v7.54.2
+------------------------------
+*September 4, 2023*
+
+### Changed
+- Bump danger version
+
+
+v7.54.1
+------------------------------
+*September 4, 2023*
+
+### Changed
+- Combined several dependabot updates
+
+
 v7.54.0
 ------------------------------
 *July 31, 2023*
@@ -42,6 +66,7 @@ v7.50.0
 
 ### Added
 - Percy tokens for `f-toggle` and `f-segmented-control`
+
 
 v7.49.0
 ------------------------------

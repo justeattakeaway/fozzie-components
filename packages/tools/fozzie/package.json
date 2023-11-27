@@ -2,7 +2,7 @@
   "name": "@justeat/fozzie",
   "title": "Fozzie – Just Eat UI Web Framework",
   "description": "UI Web Framework for the Just Eat Global Platform",
-  "version": "11.0.0",
+  "version": "11.0.2",
   "main": "dist/js/index.js",
   "files": [
     "dist/js",
@@ -10,7 +10,7 @@
     "src/scss",
     "src/fonts"
   ],
-  "homepage": "https://github.com/justeat/fozzie",
+  "homepage": "https://github.com/justeattakeaway/fozzie-components/tree/master/packages/tools/fozzie",
   "contributors": [
     "Ashley Watson-Nolan <ashley.watson-nolan@justeattakeaway.com> (https://ashleynolan.co.uk)",
     "Jamie Maguire <jamie.maguire@justeattakeaway.com> (https://www.jamieomaguire.com)",
@@ -19,15 +19,15 @@
   "authors": [
     {
       "name": "Contributors",
-      "url": "https://github.com/justeat/fozzie/graphs/contributors"
+      "url": "https://github.com/justeattakeaway/fozzie-components/graphs/contributors"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:justeat/fozzie.git"
+    "url": "git@github.com:justeattakeaway/fozzie-components.git"
   },
   "bugs": {
-    "url": "https://github.com/justeat/fozzie/issues"
+    "url": "https://github.com/justeattakeaway/fozzie-components/issues"
   },
   "license": "Apache-2.0",
   "engines": {
@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@justeat/pie-design-tokens": "5.0.0",
-    "include-media": "eduardoboucas/include-media#2.0-release"
+    "include-media": "2.0.0"
   },
   "devDependencies": {
     "@babel/cli": "7.18.10",

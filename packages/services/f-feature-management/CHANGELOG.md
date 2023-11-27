@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+v0.10.2
+------------------------------
+*September 4, 2023*
+
+### Changed
+- Bump jest from v25 to v26
+
+
 v0.10.1
 ------------------------------
 *March 27, 2023*
@@ -43,12 +51,14 @@ v0.8.0
 ### Changed
  - Replace in-situ feature management library with @justeat/feature-management
 
+
 v0.7.2
 ------------------------------
 *February 21, 2022*
 
 ### Changed
  - Fix import of config JSON action import for features store module
+
 
 v0.7.1
 ------------------------------
@@ -57,12 +67,14 @@ v0.7.1
 ### Changed
  - Enable namespacing for store
 
+
 v0.7.0
 ------------------------------
 *November 18, 2021*
 
 ### Changed
  - Improved error logging
+
 
 v0.6.0
 ------------------------------
@@ -73,6 +85,7 @@ v0.6.0
  - Separated Vue-specific and Vue-independent files
  - Updated tests to match new structure
 
+
 v0.5.0
 ------------------------------
 *October 27, 2021*
@@ -81,6 +94,7 @@ v0.5.0
  - Separate config loading and module initialisation
  - Switch from fetch to injected client + default axios client
  - Update tests to use jest-mock-axios
+
 
 v0.4.0
 ------------------------------
@@ -97,6 +111,7 @@ v0.3.0
 ### Changed
 - Switched from Webpack to Vite for the build
 
+
 v0.2.0
 ------------------------------
 *July 30, 2021*
@@ -104,6 +119,7 @@ v0.2.0
 ### Added
 - full implementation, aside from fetching config
 - working e2e tests
+
 
 v0.1.0
 ------------------------------
