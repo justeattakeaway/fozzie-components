@@ -40,7 +40,7 @@
         "test:coverage": "jest test:unit --coverage"
     },
     "dependencies": {
-        "crypto-js": "4.0.0",
+        "crypto-js": "4.2.0",
         "jwt-decode": "^3.1.2",
         "universal-cookie": "^4.0.4"
     },
