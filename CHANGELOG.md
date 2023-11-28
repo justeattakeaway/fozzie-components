@@ -16,11 +16,13 @@ v7.55.0
 *November 21, 2023*
 
 ### Changed
+- Bump package version up to minor
 - Removes support for deprecated Node version 12
 - Adds support for Node version 18
   - Volta update with Node 18
   - Needed by consuming applications
-- Bump package version up to minor
+- Fix issue with Node 17 and above where it requires the use of `--openssl-legacy-provider`
+- Add Axios v.1.6.0 to Jest config `transformIgnorePatterns` (`@justeat/f-checkout`)
 
 
 v7.54.2
