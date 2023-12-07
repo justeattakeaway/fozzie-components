@@ -1,7 +1,10 @@
-[
-  {
-    "type": "alcohol",
-    "state": "",
-    "expiryDate": ""
-  }
-]
+{
+  "exclusions": [
+    {
+      "type": "alcohol",
+      "state": "",
+      "expiryDate": ""
+    }
+  ]
+}
+
