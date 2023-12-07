@@ -264,7 +264,6 @@ export default {
             await this.getExclusions({ api: this.selfExclusionApi, authToken: this.authToken });
             this.$log.info('Self exclusion status fetched successfully');
             this.selectedState = this.alcoholExclusion.state;
-            console.log(`selectedState: ${this.selectedState}`);
         } catch (error) {
             this.$log.error('Error getting self exclusion status', error);
             this.openAlertError();
