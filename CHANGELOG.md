@@ -18,11 +18,13 @@ v7.55.0
 ### Changed
 - Bump package version up to minor
 - Removes support for deprecated Node version 12
-- Adds support for Node version 18
-  - Volta update with Node 18
+- Adds support for Node version 18 and latest Yarn
+  - Volta pin Node v18
+  - Volta pin Yarn v1.22.21
   - Needed by consuming applications
 - Fix issue with Node 17 and above where it requires the use of `--openssl-legacy-provider`
 - Add Axios v.1.6.0 to Jest config `transformIgnorePatterns` (`@justeat/f-checkout`)
+- Fix vulnerabilities with Yeoman component generator
 
 
 v7.54.2
