@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v2.15.0
+------------------------------
+*December 08, 2023*
+
+### Updated
+- Yeoman version update
+  - Vulnerability fixes (Snyk: Proto pollution and ReDoS)
+
 v2.14.1
 ------------------------------
 *July 27, 2022*
