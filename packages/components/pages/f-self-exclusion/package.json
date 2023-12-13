@@ -54,7 +54,7 @@
     "@justeat/f-button": "5.x",
     "@justeat/f-card": "4.x",
     "@justeat/f-form-field": "6.x",
-    "axios": "0.21.2"
+    "axios": "1.6.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
