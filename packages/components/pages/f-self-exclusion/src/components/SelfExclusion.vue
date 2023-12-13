@@ -172,13 +172,16 @@ import tenantConfigs from '../tenants';
 
 export default {
     name: 'SelfExclusion',
+
     components: {
         FCard,
         FAlert,
         FButton,
         FFormField
     },
+
     mixins: [VueGlobalisationMixin],
+
     props: {
         locale: {
             type: String,
@@ -198,9 +201,10 @@ export default {
         },
         privacyPolicyUrl: {
             type: String,
-            required: true
+            default: null
         }
     },
+
     data () {
         return {
             tenantConfigs,
@@ -215,6 +219,7 @@ export default {
             })
         };
     },
+
     computed: {
         ...mapGetters('fSelfExclusionModule', [
             'exclusions'
@@ -290,15 +295,11 @@ export default {
         },
 
         async submitExclusionStatus () {
-            const api = this.selfExclusionApi;
-            const token = this.authToken;
-            const exclusionState = this.selectedState;
-
             try {
                 await this.updateAlcoholExclusion({
-                    api,
-                    token,
-                    exclusionState
+                    api: this.selfExclusionApi,
+                    authToken: this.authToken,
+                    exclusionState: this.selectedState
                 });
 
                 this.$log.info('Alcohol Exclusion saved successfully');
@@ -345,6 +346,13 @@ export default {
 
 <style lang="scss" module>
 @use "@justeat/fozzie/src/scss/fozzie" as f;
+
+.c-selfExclusion {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: f.spacing(c) auto;
+}
 
 .c-selfExclusion > div {
     position: relative;

@@ -10,8 +10,8 @@ export default {
     actions: {
         async getExclusions ({ commit }, { api, authToken }) {
             const { data } = await api.getExclusions(authToken);
-            if (data.length) {
-                commit(UPDATE_EXCLUSIONS, data);
+            if (data.exclusions && data.exclusions.length) {
+                commit(UPDATE_EXCLUSIONS, data.exclusions);
             }
         },
 
@@ -34,8 +34,8 @@ export default {
     },
 
     mutations: {
-        [UPDATE_EXCLUSIONS] (state, data) {
-            state.exclusions = data;
+        [UPDATE_EXCLUSIONS] (state, exclusions) {
+            state.exclusions = exclusions;
         },
 
         [UPDATE_ALCOHOL_EXCLUSION] (state, data) {
