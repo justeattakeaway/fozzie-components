@@ -189,7 +189,7 @@ export default {
         },
         authToken: {
             type: String,
-            default: null
+            required: true
         },
         smartGatewayBaseUrl: {
             type: String,
