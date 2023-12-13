@@ -69,8 +69,13 @@ There may be props that allow you to customise its functionality.
 
 The props that can be defined are as follows (if any):
 
-| Prop  | Type  | Default | Description |
-| ----- | ----- | ------- | ----------- |
+| Prop                    | Type    | Default | Description                                                                   |
+|-------------------------|---------|---------|-------------------------------------------------------------------------------|
+| locale                  | String  | en-AU   | -----------                                                                   |
+| authToken               | String  | ------- | the users authorisation token                                                 |
+| smartGatewayBaseUrl     | String  | ------- | the smartgateway host                                                         |
+| showUnsavedChangesAlert | Boolean | false   | property that controls showing of an alert when user navigates away from page |
+| privacyPolicyUrl        | String  | null    | url to privacy policy page                                                    |
 
 ### Events
 
