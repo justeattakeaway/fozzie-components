@@ -50,7 +50,7 @@
     "@justeat/f-globalisation": "1.2.0",
     "@justeat/f-services": "1.x",
     "@justeattakeaway/cc-braze-adapter": "0.5.0",
-    "axios": "0.21.2",
+    "axios": "1.6.3",
     "jwt-decode": "3.1.2"
   },
   "peerDependencies": {
