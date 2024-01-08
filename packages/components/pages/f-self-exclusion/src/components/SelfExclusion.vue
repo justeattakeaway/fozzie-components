@@ -2,7 +2,11 @@
     <div
         :class="$style['c-selfExclusion']"
         data-test-id="self-exclusion-component">
+        <f-spinner
+            v-if="isLoading"
+            :class="$style['c-selfExclusion-spinner']" />
         <f-card
+            v-if="!isLoading"
             has-inner-spacing-large
             card-size-custom="large"
             has-outline
@@ -164,6 +168,8 @@ import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import FFormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
+import FSpinner from '@justeat/f-spinner';
+import '@justeat/f-spinner/dist/f-spinner.css';
 import { TENANT_MAP } from '@justeat/f-checkout/src/constants';
 import { mapActions, mapGetters } from 'vuex';
 import SelfExclusionApi from '../services/providers/selfExclusion.api';
@@ -177,7 +183,8 @@ export default {
         FCard,
         FAlert,
         FButton,
-        FFormField
+        FFormField,
+        FSpinner
     },
 
     mixins: [VueGlobalisationMixin],
@@ -211,6 +218,7 @@ export default {
             isOpenAlertConfirmation: false,
             isOpenAlertSuccess: false,
             isOpenAlertError: false,
+            isLoading: false,
             selectedState: '',
             selfExclusionApi: new SelfExclusionApi({
                 httpClient: this.$http,
@@ -260,13 +268,16 @@ export default {
     },
 
     async mounted () {
+        this.isLoading = true;
         try {
             await this.getExclusions({ api: this.selfExclusionApi, authToken: this.authToken });
             this.$log.info('Self exclusion status fetched successfully');
             this.selectedState = this.alcoholExclusion.state;
+            this.isLoading = false;
         } catch (error) {
             this.$log.error('Error getting self exclusion status', error);
             this.openAlertError();
+            this.isLoading = false;
         }
     },
 
