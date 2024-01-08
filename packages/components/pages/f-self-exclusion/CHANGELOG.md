@@ -8,7 +8,7 @@ v1.1.1
 *January 8, 2024*
 
 ### Added
-- Added f-spinner component to hide form before form is loaded
+- Added form hiding when loading and when in error state
 
 v1.1.0
 ------------------------------

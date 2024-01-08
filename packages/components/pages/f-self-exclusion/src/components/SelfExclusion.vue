@@ -63,7 +63,7 @@
 
             <!-- Form -->
             <form
-                v-if="isVisible"
+                v-if="isFormVisible"
                 :class="$style['c-selfExclusion-form']">
                 <fieldset
                     v-for="(option, optionKey) in alcoholExclusionOptions"
@@ -213,7 +213,7 @@ export default {
             isOpenAlertConfirmation: false,
             isOpenAlertSuccess: false,
             isOpenAlertError: false,
-            isVisible: false,
+            isFormVisible: false,
             selectedState: '',
             selfExclusionApi: new SelfExclusionApi({
                 httpClient: this.$http,
@@ -267,7 +267,7 @@ export default {
             await this.getExclusions({ api: this.selfExclusionApi, authToken: this.authToken });
             this.$log.info('Self exclusion status fetched successfully');
             this.selectedState = this.alcoholExclusion.state;
-            this.isVisible = true;
+            this.isFormVisible = true;
         } catch (error) {
             this.$log.error('Error getting self exclusion status', error);
             this.openAlertError();
