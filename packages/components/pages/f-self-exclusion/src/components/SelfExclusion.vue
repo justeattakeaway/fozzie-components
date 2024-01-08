@@ -166,8 +166,6 @@ import FButton from '@justeat/f-button';
 import '@justeat/f-button/dist/f-button.css';
 import FFormField from '@justeat/f-form-field';
 import '@justeat/f-form-field/dist/f-form-field.css';
-import FSpinner from '@justeat/f-spinner';
-import '@justeat/f-spinner/dist/f-spinner.css';
 import { TENANT_MAP } from '@justeat/f-checkout/src/constants';
 import { mapActions, mapGetters } from 'vuex';
 import SelfExclusionApi from '../services/providers/selfExclusion.api';
