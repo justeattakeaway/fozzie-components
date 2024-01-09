@@ -83,7 +83,7 @@
     "@justeat/f-mega-modal": "7.x",
     "@justeat/f-vue-icons": "3.x",
     "@justeat/f-wdio-utils": "1.x",
-    "@vue/cli-plugin-babel": "4.5.16",
+    "@vue/cli-plugin-babel": "5.0.0",
     "@vue/test-utils": "1.0.3"
   },
   "volta": {
