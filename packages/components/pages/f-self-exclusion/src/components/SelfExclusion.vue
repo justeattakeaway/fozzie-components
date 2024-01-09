@@ -1,6 +1,5 @@
 <template>
     <div
-        class="f-self-exclusion"
         :class="$style['c-selfExclusion']"
         data-test-id="self-exclusion-component">
         <h1>{{ $t('heading') }}</h1>
@@ -350,7 +349,7 @@ export default {
 }
 
 .c-selfExclusion h1 {
-    margin-bottom: 16px;
+    margin-bottom: f.spacing(d);
 }
 
 .c-selfExclusion-details {
