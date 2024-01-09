@@ -8,6 +8,7 @@ v1.1.1
 *January 8, 2024*
 
 ### Added
+- Removed the Card wrapper
 - Added form hiding when loading and when in error state
 
 v1.1.0
