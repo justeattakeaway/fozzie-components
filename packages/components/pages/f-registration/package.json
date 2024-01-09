@@ -72,7 +72,7 @@
     "@justeat/f-link": "3.x",
     "@justeat/f-vue-icons": "3.x",
     "@justeat/f-wdio-utils": "1.x",
-    "@vue/cli-plugin-babel": "4.5.8"
+    "@vue/cli-plugin-babel": "5.0.0"
   },
   "volta": {
     "extends": "../../../../package.json"
