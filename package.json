@@ -113,6 +113,7 @@
     "miragejs": "0.1.42",
     "mocha-each": "2.0.1",
     "mocha-tags": "1.0.1",
+    "node-gyp": "10.0.1",
     "npm-run-all": "4.1.5",
     "peer-deps-externals-webpack-plugin": "1.0.4",
     "postcss-loader": "3.0.0",
@@ -145,6 +146,7 @@
     "fozzie"
   ],
   "license": "Apache-2.0",
+  "packageManager": "yarn@3.5.0",
   "repository": {
     "type": "git",
     "url": "git@github.com:justeat/fozzie-components.git"
@@ -175,6 +177,6 @@
   },
   "volta": {
     "node": "18.16.1",
-    "yarn": "1.22.21"
+    "yarn": "3.5.0"
   }
 }
