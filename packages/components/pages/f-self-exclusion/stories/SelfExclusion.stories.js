@@ -43,7 +43,33 @@ SelfExclusionComponent.args = {
     locale: locales.au,
     smartGatewayBaseUrl: '',
     showUnsavedChangesAlert: false,
-    privacyPolicyUrl: 'https://www.menulog.com.au/info/privacy-policy'
+    privacyPolicyUrl: 'https://www.menulog.com.au/info/privacy-policy',
+    navLinks: [
+        {
+            url: '/account/info',
+            text: 'Account Info'
+        },
+        {
+            url: '/order-history',
+            text: 'Orders'
+        },
+        {
+            url: '/account/credit',
+            text: 'Account Credit'
+        },
+        {
+            url: '/account/saved-cards',
+            text: 'Payment Methods'
+        },
+        {
+            url: '/account/addressbook',
+            text: 'Delivery Addresses'
+        },
+        {
+            url: '/account/contact-preferences',
+            text: 'Contact Preferences'
+        }
+    ]
 };
 
 SelfExclusionComponent.argTypes = {
