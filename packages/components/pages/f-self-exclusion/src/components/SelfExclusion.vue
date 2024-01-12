@@ -1,157 +1,177 @@
 <template>
-    <div
-        :class="$style['c-selfExclusion']"
-        data-test-id="self-exclusion-component">
-        <h1>{{ $t('heading') }}</h1>
-        <!-- Success/Error alerts -->
-        <f-alert
-            v-if="isOpenAlertSuccess"
-            type="success"
-            :heading="$t('alcoholicItemsAlertSuccess.heading')"
-            is-dismissible>
-            {{ selectedState === 'temporaryExclusion'
-                ? $t('alcoholicItemsAlertSuccess.text1Temporary')
-                : $t('alcoholicItemsAlertSuccess.text1Permanent') }}
+    <div :class="$style['c-selfExclusion']">
+        <div :class="$style['c-selfExclusionNavigation']">
+            <ul>
+                <li
+                    v-for="navLink in navLinks"
+                    :key="navLink.url">
+                    <a :href="navLink.url">{{ navLink.text }}</a>
+                </li>
+                <li><strong>Exclude alcohol items</strong></li>
+            </ul>
+        </div>
 
-            <p>{{ $t('alcoholicItemsAlertSuccess.text2') }}</p>
-        </f-alert>
-
-        <f-alert
-            v-else-if="isOpenAlertError"
-            type="danger"
-            :heading="$t('alcoholicItemsAlertError.heading')"
-            is-dismissible>
-            {{ $t('alcoholicItemsAlertError.text1') }}
-        </f-alert>
-
-        <f-alert
-            v-else-if="showUnsavedChangesAlert"
-            type="warning"
-            :heading="$t('alcoholSelfExclusionUnsavedChangesAlert.heading')">
-            ,
-            {{ $t('alcoholSelfExclusionUnsavedChangesAlert.text') }}
-
-            <div :class="$style['c-selfExclusion-buttons']">
-                <f-button
-                    action-type="reset"
-                    button-type="ghost"
-                    button-size="small-productive"
-                    @click="cancelLeave"
-                >
-                    {{ $t('buttons.cancel') }}
-                </f-button>
-
-                <f-button
-                    action-type="submit"
-                    button-type="primary"
-                    button-size="small-productive"
-                    @click="confirmLeave"
-                >
-                    {{ $t('buttons.goBack') }}
-                </f-button>
-            </div>
-        </f-alert>
-
-        <f-alert
-            v-if="isOpenAlertConfirmation && selectedState === ''"
-            type="success"
-            heading="Success"
-            is-dismissible
-        >
-            {{ $t('alcoholSelfExclusionConfirmation.text1Show') }}
-        </f-alert>
-
-        <p :class="$style['c-selfExclusion-details']">
-            {{ $t('text1') }}
-        </p>
-
-        <!-- Form -->
-        <form
-            v-if="isFormVisible"
-            :class="$style['c-selfExclusion-form']">
-            <fieldset
-                v-for="(option, optionKey) in alcoholExclusionOptions"
-                :key="optionKey"
-                :class="$style['c-selfExclusion-fieldset']"
-            >
-                <f-form-field
-                    :disabled="isFormDisabled"
-                    input-type="radio"
-                    name="self-exclusion-options"
-                    :label-text="option.label"
-                    :checked="selectedState === option.value"
-                    @input="changeState(option.value)"
-                />
-
-                <span
-                    v-if="alcoholExclusion.state === option.value
-                        && alcoholExclusion.state === 'temporaryExclusion'
-                        && hasAlcoholExclusion"
-                    :class="$style['c-selfExclusion-fieldset-date']"
-                >
-                    {{ $t('until') }} {{ alcoholExclusionDate }}
-                </span>
-            </fieldset>
-
-            <div :class="$style['c-selfExclusion-buttons']">
-                <f-button
-                    :disabled="isFormDisabled"
-                    @click="openAlertConfirmation">
-                    {{ $t('buttons.save') }}
-                </f-button>
-            </div>
-        </form>
-
-        <!-- Confirmation Alert -->
         <div
-            v-if="isOpenAlertConfirmation"
-            :class="$style['c-selfExclusion-bottomSheet']">
-            <f-alert
-                v-if="selectedState === 'temporaryExclusion' || selectedState === 'permanentExclusion'"
-                type="warning"
-                :heading="$t('alcoholSelfExclusionConfirmation.heading')"
-            >
-                {{ selectedState === 'temporaryExclusion'
-                    ? $t('alcoholSelfExclusionConfirmation.text1Temporary')
-                    : $t('alcoholSelfExclusionConfirmation.text1Permanent') }}
+            :class="$style['c-selfExclusionContent']"
+            data-test-id="self-exclusion-component">
+            <f-card
+                has-inner-spacing-large
+                card-size-custom="large"
+                has-outline
+                :class="$style['c-selfExclusionCard']"
+                :card-heading="$t('heading')">
+                <!-- Success/Error alerts -->
+                <f-alert
+                    v-if="isOpenAlertSuccess"
+                    type="success"
+                    :heading="$t('alcoholicItemsAlertSuccess.heading')"
+                    is-dismissible>
+                    {{ selectedState === 'temporaryExclusion'
+                        ? $t('alcoholicItemsAlertSuccess.text1Temporary')
+                        : $t('alcoholicItemsAlertSuccess.text1Permanent') }}
 
-                <p :class="$style['c-selfExclusion-bottomSheet-warning']">
-                    <strong>{{ $t('alcoholSelfExclusionConfirmation.warningText') }}</strong>
+                    <p>{{ $t('alcoholicItemsAlertSuccess.text2') }}</p>
+                </f-alert>
+
+                <f-alert
+                    v-else-if="isOpenAlertError"
+                    type="danger"
+                    :heading="$t('alcoholicItemsAlertError.heading')"
+                    is-dismissible>
+                    {{ $t('alcoholicItemsAlertError.text1') }}
+                </f-alert>
+
+                <f-alert
+                    v-if="isOpenAlertConfirmation && selectedState === ''"
+                    type="success"
+                    heading="Success"
+                    is-dismissible
+                >
+                    {{ $t('alcoholSelfExclusionConfirmation.text1Show') }}
+                </f-alert>
+
+                <f-alert
+                    v-else-if="showUnsavedChangesAlert"
+                    type="warning"
+                    :heading="$t('alcoholSelfExclusionUnsavedChangesAlert.heading')">
+                    ,
+                    {{ $t('alcoholSelfExclusionUnsavedChangesAlert.text') }}
+
+                    <div :class="$style['c-selfExclusion-buttons']">
+                        <f-button
+                            action-type="reset"
+                            button-type="ghost"
+                            button-size="small-productive"
+                            @click="cancelLeave"
+                        >
+                            {{ $t('buttons.cancel') }}
+                        </f-button>
+
+                        <f-button
+                            action-type="submit"
+                            button-type="primary"
+                            button-size="small-productive"
+                            @click="confirmLeave"
+                        >
+                            {{ $t('buttons.goBack') }}
+                        </f-button>
+                    </div>
+                </f-alert>
+
+                <p :class="$style['c-selfExclusion-details']">
+                    {{ $t('text1') }}
                 </p>
 
-                <i18n
-                    path="alcoholSelfExclusionConfirmation.privacyStatement"
-                    tag="p"
-                    :class="$style['c-mfa-help-description']">
-                    <a :href="privacyPolicyUrl">{{ $t('alcoholSelfExclusionConfirmation.privacyStatementLinkText') }}</a>
-                </i18n>
-
-                <div :class="$style['c-selfExclusion-buttons']">
-                    <f-button
-                        action-type="reset"
-                        button-type="ghost"
-                        button-size="small-productive"
-                        @click="closeAlertConfirmation"
+                <!-- Form -->
+                <form
+                    v-if="isFormVisible"
+                    :class="$style['c-selfExclusion-form']">
+                    <fieldset
+                        v-for="(option, optionKey) in alcoholExclusionOptions"
+                        :key="optionKey"
+                        :class="$style['c-selfExclusion-fieldset']"
                     >
-                        {{ $t('buttons.cancel') }}
-                    </f-button>
+                        <f-form-field
+                            :disabled="isFormDisabled"
+                            input-type="radio"
+                            name="self-exclusion-options"
+                            :label-text="option.label"
+                            :checked="selectedState === option.value"
+                            @input="changeState(option.value)"
+                        />
 
-                    <f-button
-                        action-type="submit"
-                        button-type="primary"
-                        button-size="small-productive"
-                        @click="submitExclusionStatus"
+                        <span
+                            v-if="alcoholExclusion.state === option.value
+                                && alcoholExclusion.state === 'temporaryExclusion'
+                                && hasAlcoholExclusion"
+                            :class="$style['c-selfExclusion-fieldset-date']"
+                        >
+                            {{ $t('until') }} {{ alcoholExclusionDate }}
+                        </span>
+                    </fieldset>
+
+                    <div :class="$style['c-selfExclusion-buttons']">
+                        <f-button
+                            :disabled="isFormDisabled"
+                            @click="openAlertConfirmation">
+                            {{ $t('buttons.save') }}
+                        </f-button>
+                    </div>
+                </form>
+
+                <!-- Confirmation Alert -->
+                <div
+                    v-if="isOpenAlertConfirmation"
+                    :class="$style['c-selfExclusion-bottomSheet']">
+                    <f-alert
+                        v-if="selectedState === 'temporaryExclusion' || selectedState === 'permanentExclusion'"
+                        type="warning"
+                        :heading="$t('alcoholSelfExclusionConfirmation.heading')"
                     >
-                        {{ $t('buttons.excludeAlcohol') }}
-                    </f-button>
+                        {{ selectedState === 'temporaryExclusion'
+                            ? $t('alcoholSelfExclusionConfirmation.text1Temporary')
+                            : $t('alcoholSelfExclusionConfirmation.text1Permanent') }}
+
+                        <p :class="$style['c-selfExclusion-bottomSheet-warning']">
+                            <strong>{{ $t('alcoholSelfExclusionConfirmation.warningText') }}</strong>
+                        </p>
+
+                        <i18n
+                            path="alcoholSelfExclusionConfirmation.privacyStatement"
+                            tag="p"
+                            :class="$style['c-mfa-help-description']">
+                            <a :href="privacyPolicyUrl">{{ $t('alcoholSelfExclusionConfirmation.privacyStatementLinkText') }}</a>
+                        </i18n>
+
+                        <div :class="$style['c-selfExclusion-buttons']">
+                            <f-button
+                                action-type="reset"
+                                button-type="ghost"
+                                button-size="small-productive"
+                                @click="closeAlertConfirmation"
+                            >
+                                {{ $t('buttons.cancel') }}
+                            </f-button>
+
+                            <f-button
+                                action-type="submit"
+                                button-type="primary"
+                                button-size="small-productive"
+                                @click="submitExclusionStatus"
+                            >
+                                {{ $t('buttons.excludeAlcohol') }}
+                            </f-button>
+                        </div>
+                    </f-alert>
                 </div>
-            </f-alert>
+            </f-card>
         </div>
     </div>
 </template>
 
 <script>
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
+import FCard from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import FAlert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
@@ -169,6 +189,7 @@ export default {
     name: 'SelfExclusion',
 
     components: {
+        FCard,
         FAlert,
         FButton,
         FFormField
@@ -188,6 +209,10 @@ export default {
         smartGatewayBaseUrl: {
             type: String,
             required: true
+        },
+        navLinks: {
+            type: Array,
+            default: () => []
         },
         showUnsavedChangesAlert: {
             type: Boolean,
@@ -344,12 +369,60 @@ export default {
 @use "@justeat/fozzie/src/scss/fozzie" as f;
 
 .c-selfExclusion {
-    max-width: 700px;
-    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    max-width: 1272px;
+    margin: 0 auto;
+    padding: f.spacing(d) f.spacing(e);
+
+    @include f.media('<mid') {
+        padding: f.spacing(d);
+    }
 }
 
-.c-selfExclusion h1 {
-    margin-bottom: f.spacing(d);
+.c-selfExclusionNavigation {
+    flex-basis: 25%;
+    flex-shrink: 0;
+    padding: 0 f.spacing(b);
+
+    @include f.media('<mid') {
+        display: none;
+    }
+}
+
+.c-selfExclusionNavigation ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.c-selfExclusionNavigation a,
+.c-selfExclusionNavigation strong {
+    display: block;
+    padding: f.spacing(c);
+    margin: f.spacing(a) 0;
+    text-decoration: none;
+}
+
+.c-selfExclusionNavigation a:hover,
+.c-selfExclusionNavigation a:focus {
+    text-decoration: underline;
+}
+
+.c-selfExclusionContent {
+    margin-left: 8.33%;
+
+    @include f.media('<mid') {
+        margin-left: 0;
+    }
+}
+
+.c-selfExclusionCard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
 .c-selfExclusion-details {
@@ -375,9 +448,9 @@ export default {
 
 .c-selfExclusion-bottomSheet {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    bottom: f.spacing(e);
+    left: f.spacing(d);
+    right: f.spacing(d);
 
     @include f.media('<mid') {
         position: relative;
@@ -394,11 +467,7 @@ export default {
     align-items: center;
     justify-content: flex-end;
     gap: f.spacing(d);
-    margin-top: f.spacing(d);
-}
-
-.c-selfExclusion-buttons button {
-    margin: 0 5px 5px;
+    padding: f.spacing(d);
 }
 
 .c-selfExclusion-bottomSheet-warning {
