@@ -13,6 +13,9 @@
         <age-verification
             v-if="shouldShowAgeVerificationForm" />
 
+        <address-alert
+            v-if="shouldShowAddressAlert" />
+
         <div
             v-if="shouldShowCheckoutForm"
             data-theme="jet"
@@ -46,13 +49,19 @@
 </template>
 
 <script>
+// External
 import { mapActions, mapGetters, mapState } from 'vuex';
+import VueScrollTo from 'vue-scrollto';
+
+// Fozzie
 import Alert from '@justeat/f-alert';
 import '@justeat/f-alert/dist/f-alert.css';
 import Card from '@justeat/f-card';
 import '@justeat/f-card/dist/f-card.css';
 import { VueGlobalisationMixin } from '@justeat/f-globalisation';
-import VueScrollTo from 'vue-scrollto';
+
+// Internal
+import AddressAlert from './AddressAlert.vue';
 import AgeVerification from './AgeVerification.vue';
 import CheckoutFormField from './CheckoutFormField.vue';
 import CheckoutForm from './CheckoutForm.vue';
@@ -100,6 +109,7 @@ export default {
     name: 'VueCheckout',
 
     components: {
+        AddressAlert,
         AgeVerification,
         Alert,
         Card,
@@ -291,6 +301,11 @@ export default {
 
         shouldShowCheckoutForm () {
             return !this.isLoading && !this.shouldShowCheckoutErrorPage && !this.shouldShowAgeVerificationForm;
+        },
+
+        shouldShowAddressAlert () {
+            // Only show address alert if *delivery* form is shown and translations are present
+            return this.shouldShowCheckoutForm && this.isCheckoutMethodDelivery && this.$te('warningMessages.addressAlert.title');
         },
 
         shouldShowAgeVerificationForm () {

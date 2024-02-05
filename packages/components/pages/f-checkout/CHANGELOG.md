@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+v4.12.0
+------------------------------
+*February 5, 2024*
+
+### Added
+- Address alert to remind customers to check that their address is correctly entered.
+
+
 v4.11.0
 ------------------------------
 *August 17, 2023*
@@ -17,6 +26,7 @@ v4.10.0
 
 ### Changed
 - Added "no allergen" copy on the Split Notes Web UK.
+
 
 v4.9.1
 ------------------------------
