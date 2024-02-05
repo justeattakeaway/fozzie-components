@@ -193,6 +193,10 @@ const messages = {
     },
 
     warningMessages: {
+        addressAlert: {
+            title: 'Please check your address is complete',
+            body: 'This will help the courier find you faster.'
+        },
         preOrder: {
             title: 'Please note, this is a preorder',
             body: 'Please check the day and time above'
