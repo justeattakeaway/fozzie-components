@@ -10,6 +10,8 @@ v4.12.0
 
 ### Added
 - Address alert to remind customers to check that their address is correctly entered.
+- `showAddressAlert` prop to control the alert.
+  - It will only be shown if the prop is `true`, the delivery form is shown and the translations are present (currently `en-GB` only).
 
 
 v4.11.0

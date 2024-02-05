@@ -134,8 +134,9 @@ export const CheckoutComponent = (args, { argTypes }) => ({
         ':getCustomerUrl="getCustomerUrl" ' +
         ':getNoteConfigUrl="getNoteConfigUrl" ' +
         ':checkoutFeatures="checkoutFeatures"' +
+        ':showAddressAlert="showAddressAlert"' +
         // eslint-disable-next-line no-template-curly-in-string
-        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl},${getNoteConfigUrl},${checkoutFeatures}`" />'
+        ' :key="`${locale},${getCheckoutUrl},${updateCheckoutUrl},${checkoutAvailableFulfilmentUrl},${authToken},${createGuestUrl},${getBasketUrl},${getAddressUrl},${placeOrderUrl},${paymentPageUrlPrefix},${getGeoLocationUrl},${getNoteConfigUrl},${checkoutFeatures},${showAddressAlert}`" />'
 });
 
 CheckoutComponent.args = {
@@ -149,7 +150,8 @@ CheckoutComponent.args = {
     createGuestError: propOptions.createGuestErrorOptions.None,
     placeOrderError: propOptions.placeOrderErrorOptions.None,
     fulfilmentTimeErrors: propOptions.fulfilmentTimeErrors.none,
-    noteType: propOptions.noteTypeOptions['Legacy notes']
+    noteType: propOptions.noteTypeOptions['Legacy notes'],
+    showAddressAlert: false
 };
 
 CheckoutComponent.argTypes = {
@@ -215,6 +217,11 @@ CheckoutComponent.argTypes = {
         control: { type: 'select' },
         options: propOptions.noteTypeOptions,
         description: 'Note types'
+    },
+
+    showAddressAlert: {
+        control: { type: 'boolean' },
+        description: 'Show alert reminding customers to check their delivery address'
     }
 };
 

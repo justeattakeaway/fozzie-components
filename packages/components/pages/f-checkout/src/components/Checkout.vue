@@ -223,6 +223,11 @@ export default {
         shouldLoadAddressFromLocalStorage: {
             type: Boolean,
             default: true
+        },
+
+        showAddressAlert: {
+            type: Boolean,
+            default: false
         }
     },
 
@@ -305,7 +310,7 @@ export default {
 
         shouldShowAddressAlert () {
             // Only show address alert if *delivery* form is shown and translations are present
-            return this.shouldShowCheckoutForm && this.isCheckoutMethodDelivery && this.$te('warningMessages.addressAlert.title');
+            return this.showAddressAlert && this.shouldShowCheckoutForm && this.isCheckoutMethodDelivery && this.$te('warningMessages.addressAlert.title');
         },
 
         shouldShowAgeVerificationForm () {
