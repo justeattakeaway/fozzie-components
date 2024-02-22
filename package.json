@@ -121,7 +121,7 @@
     "stylelint": "13.7.2",
     "stylelint-scss": "3.18.0",
     "turbo": "1.6.0",
-    "vite": "2.9.16",
+    "vite": "2.9.17",
     "vue": "2.6.10",
     "vue-router": "3.5.2",
     "vue-svg-loader": "0.16.0",
