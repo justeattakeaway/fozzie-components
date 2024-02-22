@@ -63,7 +63,7 @@ export default {
     },
     deliveryEnquiry: {
         text: 'Diventa un rider Just Eat',
-        url: 'https://www.justeat.it/rider',
+        url: 'https://www.justeat.it/rider?utm_source=mainsite&utm_medium=Referral&utm_campaign=RC_M_WS_ITA_IT_[SCOOB]_[AWRN]_[OWMD]_[Italian]',
         gtm: 'click_courier_signup'
     },
     countrySelector: {

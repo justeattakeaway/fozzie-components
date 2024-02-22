@@ -63,7 +63,7 @@ export default {
     },
     deliveryEnquiry: {
         text: 'Trabaja como repartidor',
-        url: 'https://www.just-eat.es/repartidor',
+        url: 'https://www.just-eat.es/repartidor?utm_source=mainsite&utm_medium=Referral&utm_campaign=RC_M_WS_ESP_ES_[SCOOB]_[AWRN]_[OWMD]_[Spanish]',
         gtm: 'click_courier_signup'
     },
     countrySelector: {
