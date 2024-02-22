@@ -53,7 +53,7 @@ export default {
     },
     deliveryEnquiry: {
         text: 'Become a courier',
-        url: 'https://couriers.menulog.com.au/application',
+        url: 'https://couriers.menulog.com.au/application?utm_source=mainsite&utm_medium=Referral&utm_campaign=RC_M_WS_AUS_EN_[DELCO]_[AWRN]_[OWMD]_[English]',
         gtm: 'click_courier_signup'
     },
     offers: {
