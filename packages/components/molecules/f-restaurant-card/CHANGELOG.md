@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+v1.6.1
+
+_March 25, 2024_
+
+### Changed
+- Update fixed point value of restaurant rating from 2 to 1
+
 ## v1.6.0
 
 _March 13, 2024_

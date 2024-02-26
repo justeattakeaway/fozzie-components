@@ -158,7 +158,7 @@ export default {
             return !this.mean;
         },
         meanFormatted () {
-            return Number.parseFloat(this.mean).toFixed(2);
+            return Number.parseFloat(this.mean).toFixed(1);
         }
     }
 };
