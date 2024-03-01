@@ -21,8 +21,6 @@ module.exports = {
         'jest-serializer-vue'
     ],
 
-    testURL: 'http://localhost/',
-
     globals: {
         'vue-jest': {
             hideStyleWarn: true, // We hide style warnings given the first time we run the tests it complains about some styles. The second time the tests are run, the warning disappears. https://github.com/vuejs/vue-jest/issues/178#issuecomment-529175129
@@ -34,5 +32,11 @@ module.exports = {
         './test/component/',
         './test/accessibility',
         './test/visual'
-    ]
+    ],
+
+    testEnvironmentOptions: {
+        url: 'http://localhost/'
+    },
+
+    testEnvironment: 'jsdom'
 };

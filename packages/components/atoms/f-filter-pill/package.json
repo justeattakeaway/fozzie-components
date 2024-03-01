@@ -23,13 +23,12 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^14 || ^16 || ^18"
+    "node": "^14 || ^16 || ^18 || ^20"
   },
   "keywords": [
     "fozzie"
   ],
   "scripts": {
-    "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-filter-pill ./src/index.js",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",

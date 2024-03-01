@@ -8,5 +8,14 @@ export default {
             name: 'f-analytics'
         },
         sourcemap: true
+    },
+    test: {
+        dir: '.',
+        environment: 'jsdom',
+        globals: true,
+        include: [
+            './src/services/_tests/**/*.{spec,test}.{js,ts}'
+        ],
+        exclude: ['**/node_modules/**']
     }
 };

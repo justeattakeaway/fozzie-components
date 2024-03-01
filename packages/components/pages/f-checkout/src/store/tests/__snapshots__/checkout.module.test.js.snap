@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CheckoutModule mutations :: UPDATE_STATE :: should update state with delivery response. 1`] = `
-Object {
-  "address": Object {
+{
+  "address": {
     "administrativeArea": undefined,
     "line1": "Fleet Place House",
     "line2": "Farringdon",
@@ -12,28 +12,28 @@ Object {
     "postcode": "EC4M 7RF",
   },
   "authToken": "",
-  "availableFulfilment": Object {
+  "availableFulfilment": {
     "isAsapAvailable": false,
-    "times": Array [],
+    "times": [],
   },
-  "basket": Object {
+  "basket": {
     "id": "",
     "total": 0,
   },
   "checkoutErrorMessage": null,
-  "customer": Object {
+  "customer": {
     "dateOfBirth": null,
     "email": "",
     "firstName": "Joe",
     "lastName": "Bloggs",
     "mobileNumber": "+447111111111",
   },
-  "dineIn": Object {
+  "dineIn": {
     "tableIdentifier": "",
   },
-  "errors": Array [],
-  "features": Object {},
-  "geolocation": Object {
+  "errors": [],
+  "features": {},
+  "geolocation": {
     "latitude": 51.5165,
     "longitude": 0.1033,
   },
@@ -42,37 +42,37 @@ Object {
   "isFulfillable": true,
   "isGuestCreated": false,
   "isLoggedIn": false,
-  "messages": Array [
-    Object {
-      "message": Object {
+  "messages": [
+    {
+      "message": {
         "text": "Please hurry, the restaurant is closing soon",
       },
       "type": "warning",
     },
-    Object {
-      "message": Object {
+    {
+      "message": {
         "text": "We’re sorry, some items in your basket are no longer available",
       },
       "type": "information",
     },
   ],
-  "notes": Object {},
-  "notesConfiguration": Object {},
-  "notices": Array [
-    Object {
-      "notice": Object {
-        "text": "If you have a food allergy or intolerance (or someone you’re ordering for has), <a href=\\"https://greggs.co.uk/nutrition\\" data-test-id=\\"allergen-url-link\\" target=\\"_blank\\" rel=\\"noopener\\">read what this restaurant has to say about allergies</a> before placing your order. Do not order if you cannot get the allergy information you need.",
+  "notes": {},
+  "notesConfiguration": {},
+  "notices": [
+    {
+      "notice": {
+        "text": "If you have a food allergy or intolerance (or someone you’re ordering for has), <a href="https://greggs.co.uk/nutrition" data-test-id="allergen-url-link" target="_blank" rel="noopener">read what this restaurant has to say about allergies</a> before placing your order. Do not order if you cannot get the allergy information you need.",
       },
       "type": "allergy",
     },
   ],
   "orderId": "",
-  "restaurant": Object {
+  "restaurant": {
     "id": "",
     "seoName": "",
   },
   "serviceType": "delivery",
-  "time": Object {
+  "time": {
     "from": "",
     "to": "",
   },

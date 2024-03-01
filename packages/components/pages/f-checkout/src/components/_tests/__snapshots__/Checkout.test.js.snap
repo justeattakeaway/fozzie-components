@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Checkout methods :: mapCheckoutUpdateRequest should map the request successfully 1`] = `
-Object {
+{
   "dateOfBirth": "Thu Jul 05 1990 00:00:00 GMT+0100 (British Summer Time)",
   "firstName": "John",
   "lastName": "Smith",
@@ -10,10 +10,10 @@ Object {
 `;
 
 exports[`Checkout methods :: mapCheckoutUpdateRequest should map the request successfully 2`] = `
-Object {
-  "location": Object {
-    "address": Object {
-      "lines": Array [
+{
+  "location": {
+    "address": {
+      "lines": [
         "1 Bristol Road",
         "Flat 1",
       ],
@@ -22,10 +22,10 @@ Object {
     },
     "geolocation": null,
   },
-  "table": Object {},
-  "time": Object {
+  "table": {},
+  "time": {
     "asap": undefined,
-    "scheduled": Object {
+    "scheduled": {
       "from": "",
       "to": "",
     },

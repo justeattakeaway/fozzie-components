@@ -38,6 +38,10 @@ module.exports = {
         './test/component/'
     ],
 
-    testURL: 'http://localhost/'
+    testEnvironment: 'jsdom',
+
+    testEnvironmentOptions: {
+        url: 'http://localhost/'
+    }
 
 };

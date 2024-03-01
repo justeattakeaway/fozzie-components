@@ -25,7 +25,11 @@ module.exports = {
         'jest-serializer-vue'
     ],
 
-    testURL: 'http://localhost/',
+    testEnvironmentOptions: {
+        url: 'http://localhost/'
+    },
+
+    testEnvironment: 'jsdom',
 
     globals: {
         'vue-jest': {

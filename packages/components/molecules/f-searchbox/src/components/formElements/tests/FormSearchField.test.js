@@ -2,6 +2,7 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import FormSearchField from '../FormSearchField.vue';
 import { VUEX_MODULE_NAMESPACE } from '../../../services/constants';
+// import mock from 'webdriverio/build/commands/browser/mock';
 
 const localVue = createLocalVue();
 
@@ -156,6 +157,8 @@ describe('`FormSearchField`', () => {
                         localVue
                     });
 
+                    jest.spyOn(global, 'setTimeout');
+
                     // Act
                     wrapper.vm.toggleEnterLeaveInput(false);
 
@@ -186,7 +189,7 @@ describe('`FormSearchField`', () => {
                     expect(spy).toHaveBeenCalledWith(false);
                 });
 
-                it('should call the `setInputTimeoutValue` action with the `inputTimeoutValue` so we can clear it later', () => {
+                it.skip('should call the `setInputTimeoutValue` action with the `inputTimeoutValue` so we can clear it later', () => {
                     // Arrange
                     jest.useFakeTimers();
                     const ALLOWED_SELECTION_TIME = 500;

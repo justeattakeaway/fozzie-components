@@ -27,6 +27,8 @@ import {
 } from '@justeattakeaway/pie-icons-vue';
 
 export default {
+    name: 'RatingSingleStar',
+
     components: {
         StarFilledIcon,
         StarIcon
@@ -45,6 +47,5 @@ export default {
 };
 </script>
 
-<style lang="scss" module>
-@use '../../src/assets/scss/rating';
+<style lang="css" module>
 </style>

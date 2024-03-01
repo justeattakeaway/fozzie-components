@@ -12,7 +12,7 @@ module.exports = {
     },
 
     transformIgnorePatterns: [
-        'node_modules/(?!(lodash-es)/)'
+        'node_modules/(?!(lodash-es|@justeattakeaway/cc-stampcards-adapter|@justeattakeaway/cc-braze-adapter|@justeattakeaway/cc-utils|@justeattakeaway/cc-filters|@braze/web-sdk)/)'
     ],
 
     moduleNameMapper: {
@@ -39,9 +39,13 @@ module.exports = {
         './test/visual/'
     ],
 
-    testURL: 'http://localhost/',
+    testEnvironmentOptions: {
+        url: 'http://localhost/'
+    },
+
+    testEnvironment: 'jsdom',
 
     setupFiles: [
-        '<rootDir>/test-utils/settings/jest.crypto-setup.js',
+        '<rootDir>/test-utils/settings/jest.crypto-setup.js'
     ]
 };

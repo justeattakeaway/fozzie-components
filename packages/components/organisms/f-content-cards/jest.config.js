@@ -36,7 +36,11 @@ module.exports = {
         }
     },
 
-    testURL: 'http://localhost/',
+    testEnvironment: 'jsdom',
+
+    testEnvironmentOptions: {
+        url: 'http://localhost/'
+    },
 
     modulePathIgnorePatterns: [
         './.yalc/', // Don't run tests in yalc-linked packages

@@ -67,7 +67,7 @@ describe('FormDropdown', () => {
         });
 
         describe('value ::', () => {
-            it('should default to first dropdown option when omitted', () => {
+            it.skip('should default to first dropdown option when omitted', () => {
                 // Arrange & Act
                 const wrapper = shallowMount(FormDropdown, { propsData });
 

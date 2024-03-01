@@ -34,7 +34,11 @@ module.exports = {
         }
     },
 
-    testURL: 'http://localhost/',
+    testEnvironmentOptions: {
+        url: 'http://localhost/'
+    },
+
+    testEnvironment: 'jsdom',
 
     modulePathIgnorePatterns: [
         './test/accessibility/',
@@ -43,6 +47,6 @@ module.exports = {
     ],
 
     setupFiles: [
-        '<rootDir>/test-utils/settings/jest.crypto-setup.js',
-    ],
+        '<rootDir>/test-utils/settings/jest.crypto-setup.js'
+    ]
 };

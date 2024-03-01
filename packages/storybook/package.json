@@ -9,7 +9,7 @@
     "storybook:serve-static": "http-server ./storybook-static"
   },
   "dependencies": {
-    "http-server": "0.12.3",
+    "http-server": "14.1.1",
     "vue": "2.6.10",
     "vue-i18n": "8.22.1",
     "vue-router": "3.5.2"

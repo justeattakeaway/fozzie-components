@@ -5,17 +5,17 @@
   "scripts": {
     "build": "NODE_OPTIONS=--openssl-legacy-provider cross-env-shell turbo run build --continue --token=${TURBO_TOKEN}",
     "build:changed": "NODE_OPTIONS=--openssl-legacy-provider cross-env-shell turbo run build --filter=...[origin/master] --continue --token=${TURBO_TOKEN}",
+    "prepublishOnly": "NODE_OPTIONS=--openssl-legacy-provider cross-env-shell turbo run prepublishOnly --continue --token=${TURBO_TOKEN}",
     "bundlewatch": "bundlewatch --config ./bundlewatch.config.js",
     "lint": " cross-env-shell turbo run lint --continue --token=${TURBO_TOKEN}",
     "lint:fix": "cross-env-shell turbo run lint -- --fix --continue --token=${TURBO_TOKEN}",
     "lint:style": "cross-env-shell turbo run lint:style --continue --token=${TURBO_TOKEN}",
-    "prepublishOnly": "turbo run prepublishOnly --continue",
     "release": "turbo publish --continue",
     "storybook:build": "NODE_OPTIONS=--openssl-legacy-provider cross-env-shell turbo run storybook:build --continue --token=${TURBO_TOKEN}",
     "storybook:build-changed": "NODE_OPTIONS=--openssl-legacy-provider cross-env-shell CHANGED_ONLY=true turbo run storybook:build --include-dependencies --continue --token=${TURBO_TOKEN}",
-    "storybook:serve": "turbo run storybook:serve --continue",
-    "storybook:serve-changed": "cross-env-shell CHANGED_ONLY=true turbo run storybook:serve --continue",
-    "storybook:serve-static": "turbo run storybook:serve-static --continue",
+    "storybook:serve": "NODE_OPTIONS=--openssl-legacy-provider turbo run storybook:serve --continue",
+    "storybook:serve-changed": "NODE_OPTIONS=--openssl-legacy-provider cross-env-shell CHANGED_ONLY=true turbo run storybook:serve --continue",
+    "storybook:serve-static": "NODE_OPTIONS=--openssl-legacy-provider turbo run storybook:serve-static --continue",
     "storybook:deploy": "turbo run storybook:deploy --continue",
     "test": "cross-env-shell turbo run test --continue --token=${TURBO_TOKEN}",
     "ci:test:tools": "cross-env-shell turbo run ci:test:tools --continue --token=${TURBO_TOKEN}",
@@ -107,7 +107,9 @@
     "flush-promises": "1.0.2",
     "husky": "6.0.0",
     "include-media": "1.4.9",
-    "jest-extended": "0.11.5",
+    "jest": "29.7.0",
+    "jest-environment-jsdom": "29.7.0",
+    "jest-extended": "4.0.2",
     "js-cookie": "2.2.1",
     "lerna": "3.22.1",
     "miragejs": "0.1.42",
@@ -139,7 +141,7 @@
     "Github contributors <https://github.com/justeat/fozzie-components/graphs/contributors>"
   ],
   "engines": {
-    "node": "^14 || ^16 || ^18"
+    "node": "^14 || ^16 || ^18 || ^20"
   },
   "homepage": "https://github.com/justeat/fozzie-components",
   "keywords": [
@@ -170,13 +172,14 @@
     ]
   },
   "dependencies": {
-    "deepmerge": "4.2.2"
+    "deepmerge": "4.2.2",
+    "vue-jest": "3.0.7"
   },
   "publishConfig": {
     "access": "public"
   },
   "volta": {
-    "node": "18.16.1",
+    "node": "20.3.1",
     "yarn": "3.5.0"
   }
 }

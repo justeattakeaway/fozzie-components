@@ -37,5 +37,9 @@ module.exports = {
         }
     },
 
-    testURL: 'http://localhost/'
+    testEnvironmentOptions: {
+        url: 'http://localhost/'
+    },
+
+    testEnvironment: 'jsdom'
 };
