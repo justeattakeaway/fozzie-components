@@ -88,6 +88,7 @@ The props that can be defined are as follows:
 | `getNoteConfigUrl` | `String`   | -                                                            | URL for the API called to get the note configuration for split notes                                                                                                                                                                |
 | `checkoutFeatures` | `Object`   | -                                                            | Object containing relevant feature flags                                                                                                                                                                                            |
 | `shouldLoadAddressFromLocalStorage` | `Boolean`  | true                                                            | Flag to control where to retrieve the address from storage (local storage/cookies)                                                                                                                                                  |
+| `showAddressAlert` | `Boolean` | false | If true, displays an alert on the checkout page for delivery orders reminding customers to check that their address is entered correctly. |
 
 ### Events
 
