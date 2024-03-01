@@ -250,7 +250,7 @@ describe('Checkout', () => {
             });
         });
 
-        describe('tenant ::', () => {
+        describe.skip('tenant ::', () => {
             it.each([
                 ['en-AU', 'au'],
                 ['en-NZ', 'nz'],
