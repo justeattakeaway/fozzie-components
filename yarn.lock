@@ -4173,7 +4173,6 @@ __metadata:
     "@justeat/f-vue-icons": 3.x
     "@justeat/f-wdio-utils": 1.x
     "@vue/cli-plugin-babel": 4.5.16
-    "@vue/test-utils": 1.0.3
     axios: 1.6.0
     jwt-decode: 3.1.2
     vue-scrollto: 2.20.0
@@ -18344,7 +18343,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expect@npm:^24.9.0":
+"expect@npm:^24.1.0, expect@npm:^24.9.0":
   version: 24.9.0
   resolution: "expect@npm:24.9.0"
   dependencies:
@@ -23429,7 +23428,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-diff@npm:^29.0.0, jest-diff@npm:^29.7.0":
+"jest-diff@npm:^29.7.0":
   version: 29.7.0
   resolution: "jest-diff@npm:29.7.0"
   dependencies:
@@ -23684,18 +23683,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-extended@npm:4.0.2":
-  version: 4.0.2
-  resolution: "jest-extended@npm:4.0.2"
+"jest-extended@npm:0.11.5":
+  version: 0.11.5
+  resolution: "jest-extended@npm:0.11.5"
   dependencies:
-    jest-diff: ^29.0.0
-    jest-get-type: ^29.0.0
-  peerDependencies:
-    jest: ">=27.2.5"
-  peerDependenciesMeta:
-    jest:
-      optional: true
-  checksum: afdc255eec7caa173f9e805e94562273d8b8aa4c7ab9b396668f018c18ea5236270a6ac499ca84b8c60e90ccbe9ccb4aebf998daef13aec9542c426df1df6079
+    expect: ^24.1.0
+    jest-get-type: ^22.4.3
+    jest-matcher-utils: ^22.0.0
+  checksum: 2830b3bf30024b2825a8f8a964d71189fdd1a9d29127ac793e461c728c49e3384842cb8fe7bb22f1d3814cf91ca818a87d7713fb4135287a54c3bc7c16b2e6f6
+  languageName: node
+  linkType: hard
+
+"jest-get-type@npm:^22.4.3":
+  version: 22.4.3
+  resolution: "jest-get-type@npm:22.4.3"
+  checksum: f2daab7cb762457cdcd5500e3b0222cc96856649b685c40a621fe7395147ee67bbb594a2285b28c0b3cb9d80819eca4f99dd450df1bcac8a7cffa8a2dbaeec31
   languageName: node
   linkType: hard
 
@@ -23727,7 +23729,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-get-type@npm:^29.0.0, jest-get-type@npm:^29.6.3":
+"jest-get-type@npm:^29.6.3":
   version: 29.6.3
   resolution: "jest-get-type@npm:29.6.3"
   checksum: 88ac9102d4679d768accae29f1e75f592b760b44277df288ad76ce5bf038c3f5ce3719dea8aa0f035dac30e9eb034b848ce716b9183ad7cc222d029f03e92205
@@ -23941,6 +23943,17 @@ __metadata:
     jest-get-type: ^29.6.3
     pretty-format: ^29.7.0
   checksum: e3950e3ddd71e1d0c22924c51a300a1c2db6cf69ec1e51f95ccf424bcc070f78664813bef7aed4b16b96dfbdeea53fe358f8aeaaea84346ae15c3735758f1605
+  languageName: node
+  linkType: hard
+
+"jest-matcher-utils@npm:^22.0.0":
+  version: 22.4.3
+  resolution: "jest-matcher-utils@npm:22.4.3"
+  dependencies:
+    chalk: ^2.0.1
+    jest-get-type: ^22.4.3
+    pretty-format: ^22.4.3
+  checksum: 358d11aaea171f62db2ca4d93051fb22706a4c0f59666f452cca1155aab5b221ec5453b97eac77663785cb47a5ef34a1a0a4c585361bb41539d36b0440ad2793
   languageName: node
   linkType: hard
 
@@ -31776,6 +31789,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pretty-format@npm:^22.4.3":
+  version: 22.4.3
+  resolution: "pretty-format@npm:22.4.3"
+  dependencies:
+    ansi-regex: ^3.0.0
+    ansi-styles: ^3.2.0
+  checksum: 300f4fcf32b6d49cd4e6ed81ee20e4e5484ffb55d3791f1ffe7a5f410d0ed14027134fc04e0032bc09b4a44e548472ead12663384c44bc5813eb5f61fe244830
+  languageName: node
+  linkType: hard
+
 "pretty-format@npm:^24.9.0":
   version: 24.9.0
   resolution: "pretty-format@npm:24.9.0"
@@ -34302,7 +34325,7 @@ __metadata:
     include-media: 1.4.9
     jest: 29.7.0
     jest-environment-jsdom: 29.7.0
-    jest-extended: 4.0.2
+    jest-extended: 0.11.5
     js-cookie: 2.2.1
     lerna: 3.22.1
     miragejs: 0.1.42
