@@ -51,8 +51,7 @@
   "dependencies": {
     "@justeat/f-globalisation": "1.x",
     "@justeat/f-services": "1.x",
-    "@justeattakeaway/pie-icons-vue": "2.0.0-beta.1",
-    "node-sass": "^9.0.0"
+    "@justeattakeaway/pie-icons-vue": "2.0.0-beta.1"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
