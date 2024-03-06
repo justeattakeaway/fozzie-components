@@ -4202,7 +4202,7 @@ __metadata:
     "@justeat/f-wdio-utils": 1.x
     "@justeattakeaway/cc-braze-adapter": 0.5.0
     "@vue/cli-plugin-babel": 5.0.0
-    axios: 1.6.4
+    axios: 0.28.0
     jwt-decode: 3.1.2
   peerDependencies:
     "@braze/web-sdk": ">=4.5.0"
@@ -4327,7 +4327,7 @@ __metadata:
     "@justeat/f-services": 1.x
     "@justeat/f-vue-icons": 3.x
     "@justeat/f-wdio-utils": 1.x
-    axios: 1.6.4
+    axios: 0.28.0
     lodash.debounce: 4.0.8
     url-loader: 4.1.0
   peerDependencies:
@@ -4363,7 +4363,7 @@ __metadata:
     "@justeat/f-wdio-utils": 1.x
     "@vue/cli-plugin-babel": 5.0.0
     "@vue/test-utils": 1.0.3
-    axios: 1.6.4
+    axios: 0.28.0
   peerDependencies:
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   languageName: unknown
@@ -4442,7 +4442,7 @@ __metadata:
     "@justeat/f-services": 1.x
     "@justeat/f-vue-icons": 3.x
     "@justeat/f-wdio-utils": 1.x
-    axios: 1.6.4
+    axios: 0.28.0
   peerDependencies:
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
     "@justeat/f-button": 4.x
@@ -4518,7 +4518,7 @@ __metadata:
     bili: 3.4.2
     fs-extra: 9.0.1
     lodash.kebabcase: 4.1.1
-    marked: 1.2.5
+    marked: 2.0.0
     pascal-case: 3.1.2
     poi: 12.10.3
     prismjs: 1.27.0
@@ -10985,6 +10985,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:0.28.0":
+  version: 0.28.0
+  resolution: "axios@npm:0.28.0"
+  dependencies:
+    follow-redirects: ^1.15.0
+    form-data: ^4.0.0
+    proxy-from-env: ^1.1.0
+  checksum: d3782377512e67510787bf325b664f16c8b595ccdbcf52fca58433fbd082e33c3ef58a19e7d016ce92666be5a1a5ea82028add0cb841077981df9617bd071615
+  languageName: node
+  linkType: hard
+
 "axios@npm:1.6.0":
   version: 1.6.0
   resolution: "axios@npm:1.6.0"
@@ -10996,23 +11007,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.6.4":
-  version: 1.6.4
-  resolution: "axios@npm:1.6.4"
+"axios@npm:^0.19.0":
+  version: 0.19.2
+  resolution: "axios@npm:0.19.2"
   dependencies:
-    follow-redirects: ^1.15.4
-    form-data: ^4.0.0
-    proxy-from-env: ^1.1.0
-  checksum: 48d8af8488ac7402fae312437c0189b3b609a472fca2f7fc796129c804d98520589b6317096eba8509711d49f855a3f620b6a24ff23acd73ac26433d0383b8f9
-  languageName: node
-  linkType: hard
-
-"axios@npm:^0.21.1":
-  version: 0.21.4
-  resolution: "axios@npm:0.21.4"
-  dependencies:
-    follow-redirects: ^1.14.0
-  checksum: 44245f24ac971e7458f3120c92f9d66d1fc695e8b97019139de5b0cc65d9b8104647db01e5f46917728edfc0cfd88eb30fc4c55e6053eef4ace76768ce95ff3c
+    follow-redirects: 1.5.10
+  checksum: dcace11a0a25fdf9b3b97fc9d011d23dd9c67cc13d91778080482ddddbbfe731f7410a090b11aa0bbbdf83686c5911ccb4289fd3683b7488c1b0c4d3c882380c
   languageName: node
   linkType: hard
 
@@ -12207,11 +12207,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bundlewatch@npm:0.3.2":
-  version: 0.3.2
-  resolution: "bundlewatch@npm:0.3.2"
+"bundlewatch@npm:0.3.1":
+  version: 0.3.1
+  resolution: "bundlewatch@npm:0.3.1"
   dependencies:
-    axios: ^0.21.1
+    axios: ^0.19.0
     bytes: ^3.0.0
     chalk: ^4.0.0
     ci-env: ^1.14.0
@@ -12223,7 +12223,7 @@ __metadata:
     read-pkg-up: ^7.0.1
   bin:
     bundlewatch: lib/bin/index.js
-  checksum: 3752b3e20392415217a7af292de490556952dd429a988e1161436ef57b34d7c0832a7503259b5121d781b22a50c05c1dd0e71f71ff7a739dd4b7938a305e0b74
+  checksum: 83723282cbf32eea5ab3668052b7ee5bb2dbe740ce5ec85c8a918f3d3ed0461b6ecbb01272393d71fe782cfd593cf347ce076b36c873c5a114a9f9b1f38fda57
   languageName: node
   linkType: hard
 
@@ -12719,9 +12719,9 @@ __metadata:
   linkType: hard
 
 "caniuse-db@npm:^1.0.30000529, caniuse-db@npm:^1.0.30000634, caniuse-db@npm:^1.0.30000639":
-  version: 1.0.30001591
-  resolution: "caniuse-db@npm:1.0.30001591"
-  checksum: 1447e6fc326fbca09e3a628cb54c116a6e03ab7e5f479f9dd6fbb6467e650e6cd6afd2cce89194ee3822de6ed47b07dc82c34c72401743dafc3264422b45f419
+  version: 1.0.30001594
+  resolution: "caniuse-db@npm:1.0.30001594"
+  checksum: 3c49054cf764977404b7ffc81534bda23ab1ead9ef8398b83c08c6f9a37b2be4d83e0b2663312800e6e373839f6949cc6162a5e0f23fba3ee55503cee6894953
   languageName: node
   linkType: hard
 
@@ -15073,7 +15073,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:3.1.0":
+"debug@npm:3.1.0, debug@npm:=3.1.0":
   version: 3.1.0
   resolution: "debug@npm:3.1.0"
   dependencies:
@@ -16013,7 +16013,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron-to-chromium@npm:^1.2.7, electron-to-chromium@npm:^1.3.564, electron-to-chromium@npm:^1.4.668":
+"electron-to-chromium@npm:^1.2.7":
+  version: 1.4.693
+  resolution: "electron-to-chromium@npm:1.4.693"
+  checksum: 3a173467da27d6c82e0e645ee2de3b6aa9cdbd0a8f6b314ddeeadc5b18ebe3555644ed9a720d9b72b7b9ed0574e2617277b7d34e6ee9c5aa962fd55cf1b1a41c
+  languageName: node
+  linkType: hard
+
+"electron-to-chromium@npm:^1.3.564, electron-to-chromium@npm:^1.4.668":
   version: 1.4.689
   resolution: "electron-to-chromium@npm:1.4.689"
   checksum: b7f5242d8788132e8bf08f725c9711ff27474dc9f6b72cccf6b5ef22411f219d35747055fbc4e00c6286f4f8ddb3b625cd2724a0461b001e9832d212de2626d7
@@ -18210,6 +18217,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"follow-redirects@npm:1.5.10":
+  version: 1.5.10
+  resolution: "follow-redirects@npm:1.5.10"
+  dependencies:
+    debug: =3.1.0
+  checksum: 0edc4b74e37e7b88ee716188a8f2a790238877c1d954f00c7b78d560f3bef40061c130536d13bee8e47b4e8e71edf1175a2de2729e51ab8206e4646b2370e484
+  languageName: node
+  linkType: hard
+
 "follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.0, follow-redirects@npm:^1.14.7, follow-redirects@npm:^1.15.0, follow-redirects@npm:^1.15.4":
   version: 1.15.5
   resolution: "follow-redirects@npm:1.15.5"
@@ -19586,13 +19602,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"harmony-reflect@npm:^1.4.6":
-  version: 1.6.2
-  resolution: "harmony-reflect@npm:1.6.2"
-  checksum: 2e5bae414cd2bfae5476147f9935dc69ee9b9a413206994dcb94c5b3208d4555da3d4313aff6fd14bd9991c1e3ef69cdda5c8fac1eb1d7afc064925839339b8c
-  languageName: node
-  linkType: hard
-
 "has-ansi@npm:^2.0.0":
   version: 2.0.0
   resolution: "has-ansi@npm:2.0.0"
@@ -20507,15 +20516,6 @@ __metadata:
   dependencies:
     postcss: ^7.0.14
   checksum: a4ca2c6b82cb3eb879d635bd4028d74bca174edc49ee48ef5f01988489747d340a389d5a0ac6f6887a5c24ab8fc4386c781daab32a7ade5344a2edff66207635
-  languageName: node
-  linkType: hard
-
-"identity-obj-proxy@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "identity-obj-proxy@npm:3.0.0"
-  dependencies:
-    harmony-reflect: ^1.4.6
-  checksum: 97559f8ea2aeaa1a880d279d8c49550dce01148321e00a2102cda5ddf9ce622fa1d7f3efc7bed63458af78889de888fdaebaf31c816312298bb3fdd0ef8aaf2c
   languageName: node
   linkType: hard
 
@@ -25037,12 +25037,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"marked@npm:1.2.5":
-  version: 1.2.5
-  resolution: "marked@npm:1.2.5"
+"marked@npm:2.0.0":
+  version: 2.0.0
+  resolution: "marked@npm:2.0.0"
   bin:
     marked: bin/marked
-  checksum: 8acd81e6b264e74f1eed14aadaa27880ee5eb0c2f7509b863eb8a4f7daab2e9814270d96a2384f20947482afea7e0d4c4df1e07eb1da14aadd248ad92e1d0b17
+  checksum: 80eadb93340cd043b69c1c7ce95836f0f2cb0355121dbd4b4189b6efb7559884e719eaf5cd9300ca51679f54a4f3d8388bc8e7ca0fd0da76619c4f238e72e1ea
   languageName: node
   linkType: hard
 
@@ -31871,12 +31871,12 @@ __metadata:
     allure-commandline: 2.17.2
     axe-core: 4.3.5
     axe-reports: 1.1.11
-    axios: 1.6.4
+    axios: 0.28.0
     axios-mock-adapter: 1.19.0
     babel-core: 7.0.0-bridge.0
     babel-jest: 29.7.0
     babel-loader: 8.1.0
-    bundlewatch: 0.3.2
+    bundlewatch: 0.3.1
     chromedriver: 121.0.2
     core-js: 3.33.2
     cross-env: 7.0.2
@@ -31894,12 +31894,10 @@ __metadata:
     eyeglass: 3.0.2
     flush-promises: 1.0.2
     husky: 6.0.0
-    identity-obj-proxy: ^3.0.0
     include-media: 1.4.9
     jest: 29.7.0
     jest-environment-jsdom: 29.7.0
     jest-extended: 0.11.5
-    jest-transform-stub: ^2.0.0
     js-cookie: 2.2.1
     lerna: 3.22.1
     miragejs: 0.1.42

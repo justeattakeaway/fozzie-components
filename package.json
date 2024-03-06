@@ -85,12 +85,12 @@
     "allure-commandline": "2.17.2",
     "axe-core": "4.3.5",
     "axe-reports": "1.1.11",
-    "axios": "1.6.4",
+    "axios": "0.28.0",
     "axios-mock-adapter": "1.19.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "29.7.0",
     "babel-loader": "8.1.0",
-    "bundlewatch": "0.3.2",
+    "bundlewatch": "0.3.1",
     "chromedriver": "121.0.2",
     "core-js": "3.33.2",
     "cross-env": "7.0.2",
@@ -175,8 +175,6 @@
   "dependencies": {
     "@vue/vue2-jest": "28",
     "deepmerge": "4.2.2",
-    "identity-obj-proxy": "^3.0.0",
-    "jest-transform-stub": "^2.0.0",
     "vue-jest": "3.0.7"
   },
   "publishConfig": {
