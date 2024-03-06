@@ -28,19 +28,19 @@ jobs:
     steps:
       # Checkout the Repo.
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Setup Node
         # Setup Node 20.
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "yarn"
       # Restore node_modules if cache exists. If not, cache is created at end of build.
       - name: Cache Node Modules
         id: cache-node-modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: "**/node_modules"
           key: node-modules-${{ hashFiles('**/yarn.lock') }}
@@ -56,19 +56,19 @@ jobs:
     steps:
       # Checkout the Repo.
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Setup Node
         # Setup Node 20.
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "yarn"
       # Restore node_modules if cache exists. If not, cache is created at end of build.
       - name: Cache Node Modules
         id: cache-node-modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: "**/node_modules"
           key: node-modules-${{ hashFiles('**/yarn.lock') }}
@@ -84,19 +84,19 @@ jobs:
     steps:
       # Checkout the Repo.
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       # Setup Node 20.
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "yarn"
       # Restore node_modules - Cache should exist as one was created in previous 'install' job.
       - name: Cache Node Modules
         id: cache-node-modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: "**/node_modules"
           key: node-modules-${{ hashFiles('**/yarn.lock') }}
@@ -112,7 +112,7 @@ jobs:
       # Cache 'storybook-static'
       - name: Cache Storybook Static Directory
         id: storybook-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ./packages/storybook/storybook-static
           key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
@@ -143,19 +143,19 @@ jobs:
     steps:
       # Checkout the Repo
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       # Setup Node 20
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "yarn"
       # Restore node_modules - Cache should exist as one was created in previous 'install' job
       - name: Restore Cache -  Node Modules
         id: cache-node-modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: "**/node_modules"
           key: node-modules-${{ hashFiles('**/yarn.lock') }}
@@ -179,19 +179,19 @@ jobs:
     steps:
       # Checkout the Repo
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       # Setup Node 20
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "yarn"
       # Restore node_modules - Cache should exist as one was created in previous 'install' job
       - name: Restore Cache -  Node Modules
         id: cache-node-modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: "**/node_modules"
           key: node-modules-${{ hashFiles('**/yarn.lock') }}
@@ -201,7 +201,7 @@ jobs:
       # Restore Storybook 'storybook-static'
       - name: Cache Storybook Static Directory
         id: storybook-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ./packages/storybook/storybook-static
           key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
@@ -255,19 +255,19 @@ jobs:
     steps:
       # Checkout the Repo.
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       # Setup Node 20
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "yarn"
       # Restore node_modules - Cache should exist as one was created in previous 'install' job.
       - name: Restore Cache -  Node Modules
         id: cache-node-modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: "**/node_modules"
           key: node-modules-${{ hashFiles('**/yarn.lock') }}
@@ -278,7 +278,7 @@ jobs:
       # Restore Storybook 'storybook-static'.
       - name: Cache Storybook Static Directory
         id: storybook-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ./packages/storybook/storybook-static
           key: storybook-cache-${{ github.ref_name }}-${{ github.run_id }}
@@ -296,18 +296,18 @@ jobs:
     steps:
       # Checkout the Repo.
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       # Setup Node 20
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "yarn"
       # Restore node_modules - Cache should exist as one was created in previous 'install' job.
       - name: Restore Cache -  Node Modules
         id: cache-node-modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: "**/node_modules"
           key: node-modules-${{ hashFiles('**/yarn.lock') }}

@@ -46,5 +46,5 @@ export default {
 </script>
 
 <style lang="scss" module>
-@use '../../src/assets/scss/rating'
+@use '../../src/assets/scss/rating';
 </style>

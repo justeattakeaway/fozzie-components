@@ -4063,7 +4063,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justeat/f-cookie-banner@workspace:packages/components/organisms/f-cookie-banner"
   dependencies:
-    "@justeat/f-button": 4.x
+    "@justeat/f-button": 5.x
     "@justeat/f-link": 3.x
     "@justeat/f-mega-modal": 7.x
     "@justeat/f-services": 1.x
