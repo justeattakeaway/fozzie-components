@@ -5,26 +5,8 @@ module.exports = {
         'vue'
     ],
 
-    transform: {
-        '^.+\\.js$': 'babel-jest',
-        '^.+\\.vue$': 'vue-jest',
-        '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
-        '^.+\\.svg$': './../../../../test/utils/svgTransform.js'
-    },
-
     transformIgnorePatterns: [
         'node_modules/(?!(lodash-es)/)'
-    ],
-
-    moduleNameMapper: {
-        '^@/(.*)$': '<rootDir>/src/$1',
-        '^~include-media/(.*)$': '<rootDir>../../node_modules/include-media/$1',
-        '^~@justeat/(.*)$': '<rootDir>../../node_modules/@justeat/$1',
-        '\\.(css|scss)$': 'jest-transform-stub'
-    },
-
-    snapshotSerializers: [
-        'jest-serializer-vue'
     ],
 
     globals: {
@@ -33,6 +15,25 @@ module.exports = {
             experimentalCSSCompile: false // hoping this will be a temporary fix, as tests fail when updating to dart-sass currently with vue-cli
         }
     },
+
+    moduleNameMapper: {
+        '\\.(scss|sass|css)$': 'identity-obj-proxy',
+        '\\.(css|scss)$': 'jest-transform-stub',
+        '^@/(.*)$': '<rootDir>/src/$1',
+        '^~include-media/(.*)$': '<rootDir>../../node_modules/include-media/$1',
+        '^~@justeat/(.*)$': '<rootDir>../../node_modules/@justeat/$1'
+    },
+
+    transform: {
+        '^.+\\.js$': 'babel-jest',
+        '^.+\\.vue$': '@vue/vue2-jest',
+        '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
+        '^.+\\.svg$': './../../../../test/utils/svgTransform.js'
+    },
+
+    snapshotSerializers: [
+        'jest-serializer-vue'
+    ],
 
     modulePathIgnorePatterns: [
         './test/accessibility/',

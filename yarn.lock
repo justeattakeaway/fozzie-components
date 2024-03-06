@@ -1451,7 +1451,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-modules-commonjs@npm:^7.13.8, @babel/plugin-transform-modules-commonjs@npm:^7.14.5, @babel/plugin-transform-modules-commonjs@npm:^7.18.6, @babel/plugin-transform-modules-commonjs@npm:^7.23.3, @babel/plugin-transform-modules-commonjs@npm:^7.9.6":
+"@babel/plugin-transform-modules-commonjs@npm:^7.13.8, @babel/plugin-transform-modules-commonjs@npm:^7.14.5, @babel/plugin-transform-modules-commonjs@npm:^7.18.6, @babel/plugin-transform-modules-commonjs@npm:^7.2.0, @babel/plugin-transform-modules-commonjs@npm:^7.23.3, @babel/plugin-transform-modules-commonjs@npm:^7.9.6":
   version: 7.23.3
   resolution: "@babel/plugin-transform-modules-commonjs@npm:7.23.3"
   dependencies:
@@ -3694,7 +3694,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/transform@npm:^26.1.0, @jest/transform@npm:^26.6.2":
+"@jest/transform@npm:^26.6.2":
   version: 26.6.2
   resolution: "@jest/transform@npm:26.6.2"
   dependencies:
@@ -3774,7 +3774,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@jest/types@npm:^26.1.0, @jest/types@npm:^26.6.2":
+"@jest/types@npm:^26.6.2":
   version: 26.6.2
   resolution: "@jest/types@npm:26.6.2"
   dependencies:
@@ -4620,8 +4620,6 @@ __metadata:
     "@justeat/f-services": 1.x
     "@justeat/f-wdio-utils": 1.x
     "@justeattakeaway/pie-icons-vue": 2.0.0-beta.1
-    sass: ^1.71.1
-    vue-jest: ^3.0.7
   peerDependencies:
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   languageName: unknown
@@ -9022,16 +9020,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-vue@npm:^5.0.4":
-  version: 5.0.4
-  resolution: "@vitejs/plugin-vue@npm:5.0.4"
-  peerDependencies:
-    vite: ^5.0.0
-    vue: ^3.2.25
-  checksum: e2ec5446daf87e404d537498ca87c01462d0f749d2c8ee92ab67de568fd9937b267babbbb26e3036a84bfd4d37be584e4e07da5e3471d79c8797a468a2f255cc
-  languageName: node
-  linkType: hard
-
 "@vitest/expect@npm:1.3.1":
   version: 1.3.1
   resolution: "@vitest/expect@npm:1.3.1"
@@ -9693,6 +9681,30 @@ __metadata:
     vue: 2.x
     vue-template-compiler: ^2.x
   checksum: 5f93a1ce3aeb60d93fcf4ea7b28a2d4a327a8309441e87fa1e6c1314106287603d0f2868a084096b7b3db32cc69bba18974f8ba3a19212c7732c05e4da726f61
+  languageName: node
+  linkType: hard
+
+"@vue/vue2-jest@npm:28":
+  version: 28.1.0
+  resolution: "@vue/vue2-jest@npm:28.1.0"
+  dependencies:
+    "@babel/plugin-transform-modules-commonjs": ^7.2.0
+    "@vue/component-compiler-utils": ^3.1.0
+    chalk: ^2.1.0
+    css-tree: ^2.0.1
+    source-map: 0.5.6
+    tsconfig: ^7.0.0
+  peerDependencies:
+    "@babel/core": 7.x
+    babel-jest: ">= 28 < 29"
+    jest: 28.x
+    typescript: ">= 4.3"
+    vue: ^2.x
+    vue-template-compiler: ^2.x
+  peerDependenciesMeta:
+    typescript:
+      optional: true
+  checksum: ef3b50c5986fc4816f74fcf4da0764de7588a4dd4090d69a20c47fad7d3d405ae3b210a44bb1058b55ca24e9fc869e37311b1086370683e644e2001b6aa36442
   languageName: node
   linkType: hard
 
@@ -11561,21 +11573,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-jest@npm:26.1.0":
-  version: 26.1.0
-  resolution: "babel-jest@npm:26.1.0"
+"babel-jest@npm:29.7.0, babel-jest@npm:^29.7.0":
+  version: 29.7.0
+  resolution: "babel-jest@npm:29.7.0"
   dependencies:
-    "@jest/transform": ^26.1.0
-    "@jest/types": ^26.1.0
-    "@types/babel__core": ^7.1.7
-    babel-plugin-istanbul: ^6.0.0
-    babel-preset-jest: ^26.1.0
+    "@jest/transform": ^29.7.0
+    "@types/babel__core": ^7.1.14
+    babel-plugin-istanbul: ^6.1.1
+    babel-preset-jest: ^29.6.3
     chalk: ^4.0.0
-    graceful-fs: ^4.2.4
+    graceful-fs: ^4.2.9
     slash: ^3.0.0
   peerDependencies:
-    "@babel/core": ^7.0.0
-  checksum: 85a20919198de0a5e8473cf09ec65d8e68c6e609873a0197d95bd98e00bf2038897862b1d13e25faf3c53d3c5a2612d0d718812ac68cbf7587153a41838b9856
+    "@babel/core": ^7.8.0
+  checksum: ee6f8e0495afee07cac5e4ee167be705c711a8cc8a737e05a587a131fdae2b3c8f9aa55dfd4d9c03009ac2d27f2de63d8ba96d3e8460da4d00e8af19ef9a83f7
   languageName: node
   linkType: hard
 
@@ -11629,23 +11640,6 @@ __metadata:
   peerDependencies:
     "@babel/core": ^7.8.0
   checksum: 4e93e6e9fb996cc5f1505e924eb8e8cc7b25c294ba9629762a2715390f48af6a4c14dbb84cd9730013ac0e03267a5a9aa2fb6318c544489cda7f50f4e506def4
-  languageName: node
-  linkType: hard
-
-"babel-jest@npm:^29.7.0":
-  version: 29.7.0
-  resolution: "babel-jest@npm:29.7.0"
-  dependencies:
-    "@jest/transform": ^29.7.0
-    "@types/babel__core": ^7.1.14
-    babel-plugin-istanbul: ^6.1.1
-    babel-preset-jest: ^29.6.3
-    chalk: ^4.0.0
-    graceful-fs: ^4.2.9
-    slash: ^3.0.0
-  peerDependencies:
-    "@babel/core": ^7.8.0
-  checksum: ee6f8e0495afee07cac5e4ee167be705c711a8cc8a737e05a587a131fdae2b3c8f9aa55dfd4d9c03009ac2d27f2de63d8ba96d3e8460da4d00e8af19ef9a83f7
   languageName: node
   linkType: hard
 
@@ -12037,7 +12031,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-preset-jest@npm:^26.1.0, babel-preset-jest@npm:^26.6.2":
+"babel-preset-jest@npm:^26.6.2":
   version: 26.6.2
   resolution: "babel-preset-jest@npm:26.6.2"
   dependencies:
@@ -15221,6 +15215,16 @@ __metadata:
     mdn-data: 2.0.14
     source-map: ^0.6.1
   checksum: 79f9b81803991b6977b7fcb1588799270438274d89066ce08f117f5cdb5e20019b446d766c61506dd772c839df84caa16042d6076f20c97187f5abe3b50e7d1f
+  languageName: node
+  linkType: hard
+
+"css-tree@npm:^2.0.1":
+  version: 2.3.1
+  resolution: "css-tree@npm:2.3.1"
+  dependencies:
+    mdn-data: 2.0.30
+    source-map-js: ^1.0.1
+  checksum: 493cc24b5c22b05ee5314b8a0d72d8a5869491c1458017ae5ed75aeb6c3596637dbe1b11dac2548974624adec9f7a1f3a6cf40593dc1f9185eb0e8279543fbc0
   languageName: node
   linkType: hard
 
@@ -20469,6 +20473,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"harmony-reflect@npm:^1.4.6":
+  version: 1.6.2
+  resolution: "harmony-reflect@npm:1.6.2"
+  checksum: 2e5bae414cd2bfae5476147f9935dc69ee9b9a413206994dcb94c5b3208d4555da3d4313aff6fd14bd9991c1e3ef69cdda5c8fac1eb1d7afc064925839339b8c
+  languageName: node
+  linkType: hard
+
 "has-ansi@npm:^2.0.0":
   version: 2.0.0
   resolution: "has-ansi@npm:2.0.0"
@@ -21392,6 +21403,15 @@ __metadata:
   dependencies:
     postcss: ^7.0.14
   checksum: a4ca2c6b82cb3eb879d635bd4028d74bca174edc49ee48ef5f01988489747d340a389d5a0ac6f6887a5c24ab8fc4386c781daab32a7ade5344a2edff66207635
+  languageName: node
+  linkType: hard
+
+"identity-obj-proxy@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "identity-obj-proxy@npm:3.0.0"
+  dependencies:
+    harmony-reflect: ^1.4.6
+  checksum: 97559f8ea2aeaa1a880d279d8c49550dce01148321e00a2102cda5ddf9ce622fa1d7f3efc7bed63458af78889de888fdaebaf31c816312298bb3fdd0ef8aaf2c
   languageName: node
   linkType: hard
 
@@ -26932,6 +26952,13 @@ __metadata:
   version: 2.0.14
   resolution: "mdn-data@npm:2.0.14"
   checksum: 9d0128ed425a89f4cba8f787dca27ad9408b5cb1b220af2d938e2a0629d17d879a34d2cb19318bdb26c3f14c77dd5dfbae67211f5caaf07b61b1f2c5c8c7dc16
+  languageName: node
+  linkType: hard
+
+"mdn-data@npm:2.0.30":
+  version: 2.0.30
+  resolution: "mdn-data@npm:2.0.30"
+  checksum: d6ac5ac7439a1607df44b22738ecf83f48e66a0874e4482d6424a61c52da5cde5750f1d1229b6f5fa1b80a492be89465390da685b11f97d62b8adcc6e88189aa
   languageName: node
   linkType: hard
 
@@ -33996,13 +34023,13 @@ __metadata:
     "@percy/cli": 1.0.5
     "@percy/webdriverio": 2.0.1
     "@vercel/ncc": 0.31.1
-    "@vitejs/plugin-vue": ^5.0.4
     "@vue/babel-preset-app": 4.5.16
     "@vue/cli-plugin-babel": 4.5.16
     "@vue/cli-plugin-unit-jest": 4.5.16
     "@vue/cli-service": 4.5.16
     "@vue/eslint-config-standard": 4.0.0
     "@vue/test-utils": 1.3.0
+    "@vue/vue2-jest": 28
     "@wdio/allure-reporter": 7.19.7
     "@wdio/cli": 7.19.7
     "@wdio/local-runner": 7.19.7
@@ -34014,7 +34041,7 @@ __metadata:
     axios: 0.21.4
     axios-mock-adapter: 1.19.0
     babel-core: 7.0.0-bridge.0
-    babel-jest: 26.1.0
+    babel-jest: 29.7.0
     babel-loader: 8.1.0
     bundlewatch: 0.3.1
     chromedriver: 121.0.2
@@ -34034,10 +34061,12 @@ __metadata:
     eyeglass: 3.0.2
     flush-promises: 1.0.2
     husky: 6.0.0
+    identity-obj-proxy: ^3.0.0
     include-media: 1.4.9
     jest: 29.7.0
     jest-environment-jsdom: 29.7.0
     jest-extended: 0.11.5
+    jest-transform-stub: ^2.0.0
     js-cookie: 2.2.1
     lerna: 3.22.1
     miragejs: 0.1.42
@@ -34268,19 +34297,6 @@ __metadata:
   bin:
     sass: sass.js
   checksum: 7d769ed08efce4e6134e0f3dc11c4f07e32c413ac8eb43c5855f2686890fdcbd80da34165c91fb4ba407f478ca108e171574b5a60cb9814a5ed09d80f6014f96
-  languageName: node
-  linkType: hard
-
-"sass@npm:^1.71.1":
-  version: 1.71.1
-  resolution: "sass@npm:1.71.1"
-  dependencies:
-    chokidar: ">=3.0.0 <4.0.0"
-    immutable: ^4.0.0
-    source-map-js: ">=0.6.2 <2.0.0"
-  bin:
-    sass: sass.js
-  checksum: 19c4939d3042eb9459d462bbd27b1f576fa18034e23c87ca0005b87effdee431c16503b5a785edcdcde1a76dfb804716d9ad42c85a78968ac3825d515e45cb53
   languageName: node
   linkType: hard
 
@@ -34979,7 +34995,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-map-js@npm:>=0.6.2 <2.0.0, source-map-js@npm:^1.0.2":
+"source-map-js@npm:>=0.6.2 <2.0.0, source-map-js@npm:^1.0.1, source-map-js@npm:^1.0.2":
   version: 1.0.2
   resolution: "source-map-js@npm:1.0.2"
   checksum: c049a7fc4deb9a7e9b481ae3d424cc793cb4845daa690bc5a05d428bf41bf231ced49b4cf0c9e77f9d42fdb3d20d6187619fc586605f5eabe995a316da8d377c
@@ -35033,6 +35049,13 @@ __metadata:
   version: 0.4.1
   resolution: "source-map-url@npm:0.4.1"
   checksum: 64c5c2c77aff815a6e61a4120c309ae4cac01298d9bcbb3deb1b46a4dd4c46d4a1eaeda79ec9f684766ae80e8dc86367b89326ce9dd2b89947bd9291fc1ac08c
+  languageName: node
+  linkType: hard
+
+"source-map@npm:0.5.6":
+  version: 0.5.6
+  resolution: "source-map@npm:0.5.6"
+  checksum: 390b3f5165c9631a74fb6fb55ba61e62a7f9b7d4026ae0e2bfc2899c241d71c1bccb8731c496dc7f7cb79a5f523406eb03d8c5bebe8448ee3fc38168e2d209c8
   languageName: node
   linkType: hard
 
@@ -38708,7 +38731,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-jest@npm:3.0.7, vue-jest@npm:^3.0.5, vue-jest@npm:^3.0.7":
+"vue-jest@npm:3.0.7, vue-jest@npm:^3.0.5":
   version: 3.0.7
   resolution: "vue-jest@npm:3.0.7"
   dependencies:

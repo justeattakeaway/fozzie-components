@@ -209,6 +209,7 @@ export default {
 
 <style lang="scss" module>
 @use '@justeat/fozzie/src/scss/fozzie' as f;
+@use '../../src/assets/scss/rating';
 
 .c-rating-message {
     display: flex;
