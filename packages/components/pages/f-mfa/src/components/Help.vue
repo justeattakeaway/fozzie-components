@@ -124,5 +124,6 @@ export default {
 };
 </script>
 
-<style lang="css" module>
+<style lang="scss" module>
+@use '@justeat/fozzie/src/scss/fozzie' as f;
 </style>

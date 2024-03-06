@@ -69,7 +69,7 @@ beforeEach(() => {
     window.appboy = appboy;
 });
 
-describe.skip('instantiation', () => {
+describe('instantiation', () => {
     beforeEach(() => {
         appboySDK.initialize.mockReturnValue(true);
     });
@@ -221,7 +221,7 @@ describe.skip('instantiation', () => {
     });
 });
 
-describe.skip('BrazeDispatcher operation', () => {
+describe('BrazeDispatcher operation', () => {
     const callbackConfiguredComponentParameters = {
         ...enabledComponentParameters
     };
