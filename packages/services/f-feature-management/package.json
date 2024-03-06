@@ -34,11 +34,10 @@
     "build": "vite build",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
-    "test": "jest",
+    "test": "jest --detectOpenHandles --forceExit",
     "ci:test:services": "yarn test"
   },
   "devDependencies": {
-    "jest": "26.6.3",
     "jest-mock-axios": "4.4.1"
   },
   "dependencies": {

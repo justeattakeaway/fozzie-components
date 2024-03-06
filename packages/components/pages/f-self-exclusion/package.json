@@ -54,14 +54,14 @@
     "@justeat/f-form-field": "6.x",
     "@justeat/f-globalisation": "1.2.0",
     "@justeat/f-services": "1.x",
-    "axios": "0.21.2"
+    "axios": "1.6.4"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "1.x",
-    "@vue/cli-plugin-babel": "4.5.16",
+    "@vue/cli-plugin-babel": "5.0.0",
     "@vue/test-utils": "1.0.3"
   },
   "volta": {

@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "1.x",
-    "@vue/cli-plugin-babel": "4.5.16",
+    "@vue/cli-plugin-babel": "5.0.0",
     "postcss-assets": "5.0.0"
   },
   "volta": {

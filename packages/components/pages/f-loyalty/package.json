@@ -78,7 +78,7 @@
     "@justeat/f-wdio-utils": "1.x",
     "@justeattakeaway/cc-braze-adapter": "0.5.0",
     "@justeattakeaway/cc-stampcards-adapter": "0.7.1",
-    "@vue/cli-plugin-babel": "4.5.16",
+    "@vue/cli-plugin-babel": "5.0.0",
     "faker": "5.5.3",
     "http-request-mock": "1.8.17"
   },
