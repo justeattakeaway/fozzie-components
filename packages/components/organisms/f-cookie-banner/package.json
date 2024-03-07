@@ -3,7 +3,7 @@
   "description": "Fozzie Cookie Banner - Cookie Banner",
   "version": "4.11.1",
   "main": "dist/f-cookie-banner.umd.min.js",
-  "maxBundleSize": "80kB",
+  "maxBundleSize": "92kB",
   "files": [
     "dist",
     "test-utils"

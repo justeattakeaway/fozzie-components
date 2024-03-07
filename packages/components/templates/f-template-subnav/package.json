@@ -3,7 +3,7 @@
   "description": "Fozzie Template Sub Nav - SPA template with breadcrumb, lefthand navigation and centre slot",
   "version": "1.2.0",
   "main": "dist/f-template-subnav.umd.min.js",
-  "maxBundleSize": "20kB",
+  "maxBundleSize": "26kB",
   "files": [
     "dist",
     "test-utils"

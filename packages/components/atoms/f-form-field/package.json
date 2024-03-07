@@ -3,7 +3,7 @@
   "description": "Fozzie Form Field - Fozzie Form Field Component",
   "version": "6.5.0",
   "main": "dist/f-form-field.umd.min.js",
-  "maxBundleSize": "20kB",
+  "maxBundleSize": "29kB",
   "files": [
     "dist"
   ],

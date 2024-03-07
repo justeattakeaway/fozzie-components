@@ -9201,27 +9201,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/vue2-jest@npm:28":
-  version: 28.1.0
-  resolution: "@vue/vue2-jest@npm:28.1.0"
+"@vue/vue2-jest@npm:28.0.0":
+  version: 28.0.0
+  resolution: "@vue/vue2-jest@npm:28.0.0"
   dependencies:
     "@babel/plugin-transform-modules-commonjs": ^7.2.0
     "@vue/component-compiler-utils": ^3.1.0
     chalk: ^2.1.0
     css-tree: ^2.0.1
     source-map: 0.5.6
-    tsconfig: ^7.0.0
   peerDependencies:
     "@babel/core": 7.x
     babel-jest: ">= 28 < 29"
     jest: 28.x
-    typescript: ">= 4.3"
+    ts-jest: ">= 28 < 29"
     vue: ^2.x
     vue-template-compiler: ^2.x
   peerDependenciesMeta:
-    typescript:
+    ts-jest:
       optional: true
-  checksum: ef3b50c5986fc4816f74fcf4da0764de7588a4dd4090d69a20c47fad7d3d405ae3b210a44bb1058b55ca24e9fc869e37311b1086370683e644e2001b6aa36442
+  checksum: 07997de912ecb2f8f4f0828bab94f5dbd51e7038049396af6e6bf6b70adb4656fe8897df194065b6aa5e7b10b8abbce714da4fd81123b0cb86c8ab6127fc4d73
   languageName: node
   linkType: hard
 
@@ -11007,12 +11006,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^0.19.0":
-  version: 0.19.2
-  resolution: "axios@npm:0.19.2"
+"axios@npm:^0.24.0":
+  version: 0.24.0
+  resolution: "axios@npm:0.24.0"
   dependencies:
-    follow-redirects: 1.5.10
-  checksum: dcace11a0a25fdf9b3b97fc9d011d23dd9c67cc13d91778080482ddddbbfe731f7410a090b11aa0bbbdf83686c5911ccb4289fd3683b7488c1b0c4d3c882380c
+    follow-redirects: ^1.14.4
+  checksum: 468cf496c08a6aadfb7e699bebdac02851e3043d4e7d282350804ea8900e30d368daa6e3cd4ab83b8ddb5a3b1e17a5a21ada13fc9cebd27b74828f47a4236316
   languageName: node
   linkType: hard
 
@@ -12207,23 +12206,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bundlewatch@npm:0.3.1":
-  version: 0.3.1
-  resolution: "bundlewatch@npm:0.3.1"
+"bundlewatch@npm:0.3.3":
+  version: 0.3.3
+  resolution: "bundlewatch@npm:0.3.3"
   dependencies:
-    axios: ^0.19.0
-    bytes: ^3.0.0
+    axios: ^0.24.0
+    bytes: ^3.1.1
     chalk: ^4.0.0
-    ci-env: ^1.14.0
+    ci-env: ^1.17.0
     commander: ^5.0.0
     glob: ^7.1.2
-    gzip-size: ^5.1.1
+    gzip-size: ^6.0.0
     jsonpack: ^1.1.5
     lodash.merge: ^4.6.1
     read-pkg-up: ^7.0.1
   bin:
     bundlewatch: lib/bin/index.js
-  checksum: 83723282cbf32eea5ab3668052b7ee5bb2dbe740ce5ec85c8a918f3d3ed0461b6ecbb01272393d71fe782cfd593cf347ce076b36c873c5a114a9f9b1f38fda57
+  checksum: ed47e5081664b667c512ef9c4f4d3b60228580939727b3ab39ff2f19c89b3fece7cdd0d0a175ed3ab0ade73a185b60ed9f9bc61a0b36c44f10835b2069f22c6a
   languageName: node
   linkType: hard
 
@@ -12248,7 +12247,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bytes@npm:3.1.2, bytes@npm:^3.0.0":
+"bytes@npm:3.1.2, bytes@npm:^3.0.0, bytes@npm:^3.1.1":
   version: 3.1.2
   resolution: "bytes@npm:3.1.2"
   checksum: e4bcd3948d289c5127591fbedf10c0b639ccbf00243504e4e127374a15c3bc8eed0d28d4aaab08ff6f1cf2abc0cce6ba3085ed32f4f90e82a5683ce0014e1b6e
@@ -12998,7 +12997,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ci-env@npm:^1.14.0":
+"ci-env@npm:^1.17.0":
   version: 1.17.0
   resolution: "ci-env@npm:1.17.0"
   checksum: e6a06d9a6c5abce1ab8fa0f1b0f80e7eb7615d59a937ed0a20a3589441cf49cff1fc64f4fa4b289e3b789dd4a1d9a8255f36a93ed3fc15b6e2be9b795d21fb46
@@ -15073,7 +15072,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug@npm:3.1.0, debug@npm:=3.1.0":
+"debug@npm:3.1.0":
   version: 3.1.0
   resolution: "debug@npm:3.1.0"
   dependencies:
@@ -15889,7 +15888,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"duplexer@npm:^0.1.1":
+"duplexer@npm:^0.1.1, duplexer@npm:^0.1.2":
   version: 0.1.2
   resolution: "duplexer@npm:0.1.2"
   checksum: 62ba61a830c56801db28ff6305c7d289b6dc9f859054e8c982abd8ee0b0a14d2e9a8e7d086ffee12e868d43e2bbe8a964be55ddbd8c8957714c87373c7a4f9b0
@@ -18217,16 +18216,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:1.5.10":
-  version: 1.5.10
-  resolution: "follow-redirects@npm:1.5.10"
-  dependencies:
-    debug: =3.1.0
-  checksum: 0edc4b74e37e7b88ee716188a8f2a790238877c1d954f00c7b78d560f3bef40061c130536d13bee8e47b4e8e71edf1175a2de2729e51ab8206e4646b2370e484
-  languageName: node
-  linkType: hard
-
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.0, follow-redirects@npm:^1.14.7, follow-redirects@npm:^1.15.0, follow-redirects@npm:^1.15.4":
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.0, follow-redirects@npm:^1.14.4, follow-redirects@npm:^1.14.7, follow-redirects@npm:^1.15.0, follow-redirects@npm:^1.15.4":
   version: 1.15.5
   resolution: "follow-redirects@npm:1.15.5"
   peerDependenciesMeta:
@@ -19533,7 +19523,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gzip-size@npm:5.1.1, gzip-size@npm:^5.0.0, gzip-size@npm:^5.1.1":
+"gzip-size@npm:5.1.1, gzip-size@npm:^5.0.0":
   version: 5.1.1
   resolution: "gzip-size@npm:5.1.1"
   dependencies:
@@ -19550,6 +19540,15 @@ __metadata:
     duplexer: ^0.1.1
     pify: ^3.0.0
   checksum: 09cc32964974577137b9ecddea00c5056dc22f0b84bfde78a653ec9529f484f7930c2404164fec955361e065f885f9e6f92895a5ec78c510c6d85977d753748c
+  languageName: node
+  linkType: hard
+
+"gzip-size@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "gzip-size@npm:6.0.0"
+  dependencies:
+    duplexer: ^0.1.2
+  checksum: 2df97f359696ad154fc171dcb55bc883fe6e833bca7a65e457b9358f3cb6312405ed70a8da24a77c1baac0639906cd52358dc0ce2ec1a937eaa631b934c94194
   languageName: node
   linkType: hard
 
@@ -26276,26 +26275,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-gyp@npm:10.0.1, node-gyp@npm:latest":
-  version: 10.0.1
-  resolution: "node-gyp@npm:10.0.1"
-  dependencies:
-    env-paths: ^2.2.0
-    exponential-backoff: ^3.1.1
-    glob: ^10.3.10
-    graceful-fs: ^4.2.6
-    make-fetch-happen: ^13.0.0
-    nopt: ^7.0.0
-    proc-log: ^3.0.0
-    semver: ^7.3.5
-    tar: ^6.1.2
-    which: ^4.0.0
-  bin:
-    node-gyp: bin/node-gyp.js
-  checksum: 60a74e66d364903ce02049966303a57f898521d139860ac82744a5fdd9f7b7b3b61f75f284f3bfe6e6add3b8f1871ce305a1d41f775c7482de837b50c792223f
-  languageName: node
-  linkType: hard
-
 "node-gyp@npm:^5.0.2":
   version: 5.1.1
   resolution: "node-gyp@npm:5.1.1"
@@ -26314,6 +26293,26 @@ __metadata:
   bin:
     node-gyp: bin/node-gyp.js
   checksum: 3a5e7970192a3cee858e6e78c2eb8b5220e631a5939c06667e085946510bf265133c3a02126a269d39eeb0c700fce8407f338e08ec17a35d35174c54ec122653
+  languageName: node
+  linkType: hard
+
+"node-gyp@npm:latest":
+  version: 10.0.1
+  resolution: "node-gyp@npm:10.0.1"
+  dependencies:
+    env-paths: ^2.2.0
+    exponential-backoff: ^3.1.1
+    glob: ^10.3.10
+    graceful-fs: ^4.2.6
+    make-fetch-happen: ^13.0.0
+    nopt: ^7.0.0
+    proc-log: ^3.0.0
+    semver: ^7.3.5
+    tar: ^6.1.2
+    which: ^4.0.0
+  bin:
+    node-gyp: bin/node-gyp.js
+  checksum: 60a74e66d364903ce02049966303a57f898521d139860ac82744a5fdd9f7b7b3b61f75f284f3bfe6e6add3b8f1871ce305a1d41f775c7482de837b50c792223f
   languageName: node
   linkType: hard
 
@@ -31862,7 +31861,7 @@ __metadata:
     "@vue/cli-service": 4.5.16
     "@vue/eslint-config-standard": 4.0.0
     "@vue/test-utils": 1.3.0
-    "@vue/vue2-jest": 28
+    "@vue/vue2-jest": 28.0.0
     "@wdio/allure-reporter": 7.19.7
     "@wdio/cli": 7.19.7
     "@wdio/local-runner": 7.19.7
@@ -31876,7 +31875,7 @@ __metadata:
     babel-core: 7.0.0-bridge.0
     babel-jest: 29.7.0
     babel-loader: 8.1.0
-    bundlewatch: 0.3.1
+    bundlewatch: 0.3.3
     chromedriver: 121.0.2
     core-js: 3.33.2
     cross-env: 7.0.2
@@ -31903,7 +31902,6 @@ __metadata:
     miragejs: 0.1.42
     mocha-each: 2.0.1
     mocha-tags: 1.0.1
-    node-gyp: 10.0.1
     npm-run-all: 4.1.5
     peer-deps-externals-webpack-plugin: 1.0.4
     postcss-loader: 3.0.0

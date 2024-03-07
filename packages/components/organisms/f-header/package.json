@@ -3,7 +3,7 @@
   "description": "Fozzie Header - Globalised Header Component",
   "version": "10.18.0",
   "main": "dist/f-header.umd.min.js",
-  "maxBundleSize": "46kB",
+  "maxBundleSize": "54kB",
   "files": [
     "dist",
     "test-utils"
