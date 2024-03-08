@@ -12,7 +12,7 @@ module.exports = {
     },
 
     transformIgnorePatterns: [
-        'node_modules/(?!(lodash-es|axios|axios-mock-adapter|@justeat/f-http)/)'
+        'node_modules/(?!(lodash-es)/)'
     ],
 
     moduleNameMapper: {
