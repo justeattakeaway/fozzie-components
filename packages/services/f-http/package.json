@@ -44,7 +44,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "axios": "0.21.3",
+    "axios": "1.6.4",
     "axios-mock-adapter": "1.19.0"
   },
   "volta": {
