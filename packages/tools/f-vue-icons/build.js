@@ -24,20 +24,56 @@ export default {
 
 const handleComponentName = name => name.replace(/\-(\d+)/, '$1'); // eslint-disable-line no-useless-escape
 
+const ICONS_DIR = `${process.cwd()}/src/components`;
+const indexPath = path.join(ICONS_DIR, '/index.js');
+
 const icons = Object.keys(ficons.icons).map(name => ({
     name,
     pascalCasedComponentName: pascalCase(`${handleComponentName(name)}-icon`)
 }));
 
-Promise.all(icons.map(icon => {
-    const svg = ficons.icons[icon.name].toSvg();
-    const component = componentTemplate(icon.pascalCasedComponentName, svg);
-    const filepath = `./src/components/${icon.pascalCasedComponentName}.js`;
-    return fs.ensureDir(path.dirname(filepath))
-        .then(() => fs.writeFile(filepath, component, 'utf8'));
-})).then(() => {
-    const main = icons
-        .map(icon => `export { default as ${icon.pascalCasedComponentName} } from '../icons/${icon.pascalCasedComponentName}';\n`)
-        .join('');
-    return fs.outputFile('./src/index.js', main, 'utf8');
-});
+async function checkDirExists (directoryPath) {
+    try {
+        await fs.ensureDir(directoryPath);
+        console.info(`Directory "${directoryPath}" exists.`);
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+// Promise.all(icons.map(icon => {
+//     const svg = ficons.icons[icon.name].toSvg();
+//     const component = componentTemplate(icon.pascalCasedComponentName, svg);
+//     const filepath = `./src/components/${icon.pascalCasedComponentName}.js`;
+//     return fs.ensureDir(path.dirname(filepath))
+//         .then(() => fs.writeFile(filepath, component, 'utf8'));
+// })).then(() => {
+//     const main = icons
+//         .map(icon => {
+//             indexFileString += `export { default as ${icon.pascalCasedComponentName} } from './${icon.pascalCasedComponentName}';\n`;
+//             fs.writeFileSync(`./generated/${icon.pascalCasedComponentName}.js`, component, 'utf8');
+//             return indexFileString;
+//         })
+//         .join('');
+//     // return fs.outputFile('./src/components/index.js', main, 'utf8');
+// });
+
+async function build () {
+    let indexFileString = '/* eslint-disable camelcase */\n';
+    await checkDirExists(ICONS_DIR);
+
+    Promise.all(icons.map(icon => {
+        const svg = ficons.icons[icon.name].toSvg();
+        const component = componentTemplate(icon.pascalCasedComponentName, svg);
+        const componentName = icon.pascalCasedComponentName;
+
+        indexFileString += `export { default as ${componentName} } from './${componentName}';\n`;
+        fs.writeFileSync(`./src/components/${componentName}.js`, component, 'utf8');
+
+        return indexFileString;
+    }));
+
+    fs.outputFileSync(indexPath, indexFileString, 'utf8');
+}
+
+build();

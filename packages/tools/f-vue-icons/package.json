@@ -1,15 +1,20 @@
 {
   "name": "@justeat/f-vue-icons",
   "version": "3.13.2",
-  "main": "dist/f-vue-icons.cjs.js",
+  "main": "dist/index.cjs",
   "maxBundleSize": "155kB",
-  "cdn": "dist/f-vue-icons.min.js",
-  "unpkg": "dist/f-vue-icons.min.js",
-  "module": "dist/f-vue-icons.es.js",
+  "module": "esm/index.mjs",
   "files": [
     "dist",
-    "icons"
+    "icons",
+    "esm"
   ],
+  "exports": {
+    ".": {
+      "import": "./esm/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
   "publishConfig": {
     "access": "public"
   },
@@ -27,16 +32,17 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^14 || ^16 || ^18"
+    "node": "^14 || ^16 || ^18 || ^20"
   },
   "keywords": [
     "fozzie"
   ],
   "scripts": {
     "prepublishOnly": "yarn lint && yarn test && yarn build",
-    "build": "yarn build:icons && yarn build:dist",
-    "build:dist": "bili --format umd,es,cjs,umd-min --js buble --name f-vue-icons",
-    "build:icons": "node build && babel src/components -d icons",
+    "clean": "run -T rimraf -rf ./icons/ ./dist/ ./esm/",
+    "build": "yarn clean && yarn build:icons && yarn build:dist",
+    "build:dist": "rollup -c",
+    "build:icons": "node build && babel src/components -d icons && eslint icons --fix",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "test": "jest --passWithNoTests",
@@ -53,23 +59,14 @@
   },
   "devDependencies": {
     "@justeat/f-icons": "4.13.0",
-    "bili": "3.4.2",
+    "@rollup/plugin-commonjs": "25.0.7",
+    "@rollup/plugin-node-resolve": "15.1.0",
     "fs-extra": "9.0.1",
     "lodash.kebabcase": "4.1.1",
     "marked": "2.0.0",
     "pascal-case": "3.1.2",
-    "poi": "12.10.3",
-    "prismjs": "1.27.0"
-  },
-  "babel": {
-    "presets": [
-      [
-        "poi/babel",
-        {
-          "jsx": "vue"
-        }
-      ]
-    ]
+    "prismjs": "1.27.0",
+    "rollup": "3.20.2"
   },
   "volta": {
     "extends": "../../../package.json"

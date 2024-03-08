@@ -14,7 +14,7 @@ const getChangedPackageLocations = () => {
     let outputPackages;
     // If master, run bundlewatch against all components
     // Otherwise run Bundlewatch against changed components and their dependants
-    let command = process.env.CIRCLE_BRANCH === 'master' || process.env.RUN_ALL === 'true' || process.env.GITHUB_ACTIONS ? "npx turbo run build --dry=json" : "npx turbo run build --filter=...[origin/master] --dry=json" 
+    const command = process.env.CIRCLE_BRANCH === 'master' || process.env.RUN_ALL === 'true' || process.env.GITHUB_ACTIONS ? 'npx turbo run build --dry=json' : 'npx turbo run build --filter=...[origin/master] --dry=json';
 
     try {
         outputPackages = execSync(command);
@@ -32,8 +32,10 @@ const getChangedPackageLocations = () => {
 
 const packagesLocations = getChangedPackageLocations();
 
+console.log(packagesLocations);
+
 const files = packagesLocations.map(packageLocation => ({
-    path: `./${packageLocation}/dist/*+(.min|.min.umd|.es).js`,
+    path: packageLocation === 'packages/tools/f-vue-icons' ? `./${packageLocation}/dist/*.cjs` : `./${packageLocation}/dist/*+(.min|.min.umd|.es).js`,
     maxSize: getMaxSizeForPackage(packageLocation)
 }));
 
