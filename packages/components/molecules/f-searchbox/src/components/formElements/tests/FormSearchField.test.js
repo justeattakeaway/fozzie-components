@@ -2,7 +2,6 @@ import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import FormSearchField from '../FormSearchField.vue';
 import { VUEX_MODULE_NAMESPACE } from '../../../services/constants';
-// import mock from 'webdriverio/build/commands/browser/mock';
 
 const localVue = createLocalVue();
 

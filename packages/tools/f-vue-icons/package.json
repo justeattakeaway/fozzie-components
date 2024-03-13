@@ -42,7 +42,7 @@
     "clean": "run -T rimraf -rf ./icons/ ./dist/ ./esm/",
     "build": "yarn clean && yarn build:icons && yarn build:dist",
     "build:dist": "rollup -c",
-    "build:icons": "node build && babel src/components -d icons && eslint icons --fix",
+    "build:icons": "node build && babel src/components -d icons",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",
     "test": "jest --passWithNoTests",

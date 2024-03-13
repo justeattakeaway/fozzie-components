@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 const path = require('path');
 const ficons = require('@justeat/f-icons');
 const { pascalCase } = require('pascal-case');
@@ -40,23 +39,6 @@ async function checkDirExists (directoryPath) {
         console.error(err);
     }
 }
-
-// Promise.all(icons.map(icon => {
-//     const svg = ficons.icons[icon.name].toSvg();
-//     const component = componentTemplate(icon.pascalCasedComponentName, svg);
-//     const filepath = `./src/components/${icon.pascalCasedComponentName}.js`;
-//     return fs.ensureDir(path.dirname(filepath))
-//         .then(() => fs.writeFile(filepath, component, 'utf8'));
-// })).then(() => {
-//     const main = icons
-//         .map(icon => {
-//             indexFileString += `export { default as ${icon.pascalCasedComponentName} } from './${icon.pascalCasedComponentName}';\n`;
-//             fs.writeFileSync(`./generated/${icon.pascalCasedComponentName}.js`, component, 'utf8');
-//             return indexFileString;
-//         })
-//         .join('');
-//     // return fs.outputFile('./src/components/index.js', main, 'utf8');
-// });
 
 async function build () {
     let indexFileString = '/* eslint-disable camelcase */\n';

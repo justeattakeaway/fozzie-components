@@ -34,7 +34,7 @@
     "node": "^14 || ^16 || ^18 || ^20"
   },
   "dependencies": {
-    "@justeat/pie-design-tokens": "^5.10.1",
+    "@justeat/pie-design-tokens": "^5.0.0",
     "include-media": "2.0.0"
   },
   "devDependencies": {

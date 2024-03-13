@@ -3,11 +3,6 @@ import isAppboyInitialised from '../isAppboyInitialised';
 
 jest.mock('@braze/web-sdk');
 
-jest.mock('@braze/web-sdk', () => ({
-    initialize: jest.fn(),
-    getUser: jest.fn()
-}));
-
 describe('f-braze-adapter › isAppboyInitialised', () => {
     afterEach(() => {
         jest.resetAllMocks();
