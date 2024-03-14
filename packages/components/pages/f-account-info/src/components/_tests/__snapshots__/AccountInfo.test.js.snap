@@ -2,17 +2,17 @@
 
 exports[`AccountInfo \`methods\` onFormSubmit :: publishing analytics form is valid address has changed 1`] = `
 [MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
+  "calls": [
+    [
+      {
         "action": "save_accountinfo_changes",
         "category": "account",
         "event": "trackEvent",
         "label": "submit",
       },
     ],
-    Array [
-      Object {
+    [
+      {
         "action": "account info",
         "category": "my account",
         "event": "trackEvent",
@@ -20,12 +20,12 @@ exports[`AccountInfo \`methods\` onFormSubmit :: publishing analytics form is va
       },
     ],
   ],
-  "results": Array [
-    Object {
+  "results": [
+    {
       "type": "return",
       "value": undefined,
     },
-    Object {
+    {
       "type": "return",
       "value": undefined,
     },
@@ -35,9 +35,9 @@ exports[`AccountInfo \`methods\` onFormSubmit :: publishing analytics form is va
 
 exports[`AccountInfo \`methods\` onFormSubmit :: publishing analytics form is valid address has not changed 1`] = `
 [MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
+  "calls": [
+    [
+      {
         "action": "save_accountinfo_changes",
         "category": "account",
         "event": "trackEvent",
@@ -45,8 +45,8 @@ exports[`AccountInfo \`methods\` onFormSubmit :: publishing analytics form is va
       },
     ],
   ],
-  "results": Array [
-    Object {
+  "results": [
+    {
       "type": "return",
       "value": undefined,
     },

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`addressService getClosestAddress :: when tenant === \`au\` AND last searched postcode is not present should return default address if default address is present 1`] = `
-Object {
+{
   "administrativeArea": "New South Wales",
   "line1": "196 Kurraba Road",
   "line2": "Unit 5",
@@ -11,7 +11,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`au\` AND last searched postcode is not present should return empty address if addresses is empty 1`] = `
-Object {
+{
   "administrativeArea": "",
   "line1": "",
   "line2": "",
@@ -21,7 +21,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`au\` AND last searched postcode is present should return address with full postcode match 1`] = `
-Object {
+{
   "administrativeArea": "New South Wales",
   "line1": "196 Kurraba Road",
   "line2": "Unit 5",
@@ -31,7 +31,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`au\` AND last searched postcode is present should return address with full postcode match when address has no spaces 1`] = `
-Object {
+{
   "administrativeArea": "New South Wales",
   "line1": "196 Kurraba Road",
   "line2": "Unit 5",
@@ -41,7 +41,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`au\` AND last searched postcode is present should return address with postcode partial match 1`] = `
-Object {
+{
   "administrativeArea": "Victoria",
   "line1": "94 Shaftesbury Parade",
   "line2": "",
@@ -51,7 +51,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`au\` AND last searched postcode is present should return empty address with formatted postcode set, when postcode does not match and has no spaces 1`] = `
-Object {
+{
   "administrativeArea": "",
   "line1": "",
   "line2": "",
@@ -61,7 +61,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`au\` AND last searched postcode is present should return empty address with postcode set, when postcode does not match 1`] = `
-Object {
+{
   "administrativeArea": "",
   "line1": "",
   "line2": "",
@@ -71,7 +71,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`it\` AND last searched postcode is not present should return default address if default address is present 1`] = `
-Object {
+{
   "line1": "Via Duomo",
   "line2": "56",
   "line3": "",
@@ -82,7 +82,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`it\` AND last searched postcode is not present should return empty address if addresses is empty 1`] = `
-Object {
+{
   "line1": "",
   "line2": "",
   "line3": "",
@@ -93,7 +93,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`it\` AND last searched postcode is present should return address with full postcode match 1`] = `
-Object {
+{
   "line1": "Via Duomo",
   "line2": "56",
   "line3": "",
@@ -104,7 +104,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`it\` AND last searched postcode is present should return address with full postcode match when address has no spaces 1`] = `
-Object {
+{
   "line1": "Via Duomo",
   "line2": "56",
   "line3": "",
@@ -115,7 +115,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`it\` AND last searched postcode is present should return address with postcode partial match 1`] = `
-Object {
+{
   "line1": "Via Nazario Sauro",
   "line2": "15",
   "line3": "",
@@ -126,7 +126,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`it\` AND last searched postcode is present should return empty address with formatted postcode set, when postcode does not match and has no spaces 1`] = `
-Object {
+{
   "line1": "",
   "line2": "",
   "line3": "",
@@ -137,7 +137,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`it\` AND last searched postcode is present should return empty address with postcode set, when postcode does not match 1`] = `
-Object {
+{
   "line1": "",
   "line2": "",
   "line3": "",
@@ -148,7 +148,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last searched postcode is not present should return default address if default address is present 1`] = `
-Object {
+{
   "line1": "Fleet Place House",
   "line2": "Farringdon",
   "locality": "London",
@@ -157,7 +157,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last searched postcode is not present should return empty address if addresses is empty 1`] = `
-Object {
+{
   "line1": "",
   "line2": "",
   "locality": "",
@@ -166,7 +166,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last searched postcode is present should return address with full postcode match 1`] = `
-Object {
+{
   "line1": "1 Bristol Road",
   "line2": "Flat 1",
   "locality": "Bristol",
@@ -175,7 +175,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last searched postcode is present should return address with full postcode match when address has no spaces 1`] = `
-Object {
+{
   "line1": "Fleet Place House",
   "line2": "Farringdon",
   "locality": "London",
@@ -184,7 +184,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last searched postcode is present should return address with postcode partial match 1`] = `
-Object {
+{
   "line1": "1 Test Road",
   "line2": "",
   "locality": "Area 51",
@@ -193,7 +193,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last searched postcode is present should return empty address with formatted postcode set, when postcode does not match and has no spaces 1`] = `
-Object {
+{
   "line1": "",
   "line2": "",
   "locality": "",
@@ -202,7 +202,7 @@ Object {
 `;
 
 exports[`addressService getClosestAddress :: when tenant === \`uk\` AND last searched postcode is present should return empty address with postcode set, when postcode does not match 1`] = `
-Object {
+{
   "line1": "",
   "line2": "",
   "locality": "",

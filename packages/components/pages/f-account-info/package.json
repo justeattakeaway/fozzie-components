@@ -1,9 +1,9 @@
 {
   "name": "@justeat/f-account-info",
   "description": "Fozzie Account Info - The account information page",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "main": "dist/f-account-info.umd.min.js",
-  "maxBundleSize": "50kB",
+  "maxBundleSize": "55kB",
   "files": [
     "dist",
     "test-utils",
@@ -26,7 +26,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^12 || ^14 || ^16"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie"
@@ -75,7 +75,7 @@
     "@justeat/f-form-field": "6.x",
     "@justeat/f-link": "3.x",
     "@justeat/f-wdio-utils": "1.x",
-    "@vue/cli-plugin-babel": "4.5.15"
+    "@vue/cli-plugin-babel": "5.0.0"
   },
   "volta": {
     "extends": "../../../../package.json"

@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-error-message",
   "description": "Fozzie Error Message – Generic inline error message",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "main": "dist/f-error-message.umd.min.js",
   "maxBundleSize": "5kB",
   "files": [
@@ -23,7 +23,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^12 || ^14 || ^16"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie"

@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-segmented-control",
   "description": "Fozzie Segmented Control - A Segmented Control component is a group of toggle buttons that behave like a single choice element. It is useful for displaying a set of options to the user when only one option can be selected.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "maxBundleSize": "5kB",
   "main": "dist/f-segmented-control.umd.min.js",
   "files": [
@@ -24,7 +24,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^14 || ^16 || ^18"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie"

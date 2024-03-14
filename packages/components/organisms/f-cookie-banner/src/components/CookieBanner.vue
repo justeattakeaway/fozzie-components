@@ -60,7 +60,7 @@
                     <button-component
                         :class="$style['c-cookieBanner-cta']"
                         data-test-id="accept-all-cookies-button"
-                        button-size="small"
+                        button-size="small-productive"
                         :tabindex="tabIndex"
                         @click="acceptAllCookiesActions">
                         {{ copy.acceptButtonText }}
@@ -69,7 +69,7 @@
                     <button-component
                         :class="$style['c-cookieBanner-cta']"
                         data-test-id="accept-necessary-cookies-button"
-                        button-size="small"
+                        button-size="small-productive"
                         :tabindex="tabIndex"
                         @click="acceptOnlyNecessaryCookiesActions">
                         {{ copy.nonAcceptButtonText }}

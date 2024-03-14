@@ -44,10 +44,10 @@ describe('Selector', () => {
                     propsData
                 });
 
-                const selector = wrapper.find('[data-test-id="formfield-order-time-dropdown-select"]');
+                const selector = wrapper.find('[data-test-id="formfield-order-time-label"]');
 
                 // Assert
-                expect(selector.html()).toMatchSnapshot();
+                expect(selector.html()).toContain('Delivery');
             });
 
             it('should show the collection label when the `serviceType` is `collection`', () => {
@@ -59,10 +59,10 @@ describe('Selector', () => {
                     propsData
                 });
 
-                const selector = wrapper.find('[data-test-id="formfield-order-time-dropdown-select"]');
+                const selector = wrapper.find('[data-test-id="formfield-order-time-label"]');
 
                 // Assert
-                expect(selector.html()).toMatchSnapshot();
+                expect(selector.html()).toContain('Collection');
             });
         });
 

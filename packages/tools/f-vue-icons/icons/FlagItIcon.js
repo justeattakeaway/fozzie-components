@@ -1,36 +1,36 @@
-import _mergeJSXProps from "babel-helper-vue-jsx-merge-props";
+import _mergeJSXProps from "@vue/babel-helper-vue-jsx-merge-props";
 export default {
   name: 'FlagItIcon',
   props: {},
   functional: true,
-  render: function render(h, ctx) {
-    var attrs = ctx.data.attrs || {};
+  render(h, ctx) {
+    const attrs = ctx.data.attrs || {};
     ctx.data.attrs = attrs;
     return h("svg", _mergeJSXProps([{
-      attrs: {
-        xmlns: "http://www.w3.org/2000/svg",
-        viewBox: "0 0 640 480"
+      "attrs": {
+        "xmlns": "http://www.w3.org/2000/svg",
+        "viewBox": "0 0 640 480"
       },
       "class": "c-ficon c-ficon--flag.it"
     }, ctx.data]), [h("g", {
-      attrs: {
+      "attrs": {
         "fill-rule": "evenodd",
         "stroke-width": "1pt"
       }
     }, [h("path", {
-      attrs: {
-        fill: "#fff",
-        d: "M0 0h640v479.997H0z"
+      "attrs": {
+        "fill": "#fff",
+        "d": "M0 0h640v479.997H0z"
       }
     }), h("path", {
-      attrs: {
-        fill: "#009246",
-        d: "M0 0h213.33v479.997H0z"
+      "attrs": {
+        "fill": "#009246",
+        "d": "M0 0h213.33v479.997H0z"
       }
     }), h("path", {
-      attrs: {
-        fill: "#ce2b37",
-        d: "M426.663 0h213.33v479.997h-213.33z"
+      "attrs": {
+        "fill": "#ce2b37",
+        "d": "M426.663 0h213.33v479.997h-213.33z"
       }
     })])]);
   }

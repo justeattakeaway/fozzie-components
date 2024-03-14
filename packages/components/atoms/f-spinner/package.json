@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-spinner",
   "description": "Fozzie Spinner - loading indicator",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "main": "dist/f-spinner.umd.min.js",
   "maxBundleSize": "5kB",
   "files": [
@@ -23,7 +23,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^12 || ^14 || ^16"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie"

@@ -7,12 +7,13 @@ module.exports = {
 
     transform: {
         '^.+\\.js$': 'babel-jest',
-        '^.+\\.vue$': 'vue-jest',
+        '^.+\\.vue$': '@vue/vue2-jest',
         '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub'
     },
 
     transformIgnorePatterns: [
-        'node_modules/(?!(lodash-es)/)'
+        // 'node_modules/(?!(lodash-es)/)',
+        'node_modules/(?!(@braze)/)'
     ],
 
     moduleNameMapper: {
@@ -39,5 +40,9 @@ module.exports = {
         './test/visual/'
     ],
 
-    testURL: 'http://localhost/'
+    testEnvironmentOptions: {
+        url: 'http://localhost/'
+    },
+
+    testEnvironment: 'jsdom'
 };

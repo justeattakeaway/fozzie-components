@@ -7,7 +7,7 @@ module.exports = {
 
     transform: {
         '^.+\\.js$': 'babel-jest',
-        '^.+\\.vue$': 'vue-jest',
+        '^.+\\.vue$': '@vue/vue2-jest',
         '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub'
     },
 
@@ -19,8 +19,7 @@ module.exports = {
         '^@/(.*)$': '<rootDir>/src/$1',
         '^~include-media/(.*)$': '<rootDir>../../node_modules/include-media/$1',
         '^~@justeat/(.*)$': '<rootDir>../../node_modules/@justeat/$1',
-        '\\.(css|scss)$': 'jest-transform-stub',
-        'typesafe-i18n/detectors': 'typesafe-i18n/detectors/detect.cjs'
+        '\\.(css|scss)$': 'jest-transform-stub'
     },
 
     snapshotSerializers: [
@@ -39,6 +38,10 @@ module.exports = {
         './test/component/'
     ],
 
-    testURL: 'http://localhost/'
+    testEnvironmentOptions: {
+        url: 'http://localhost/'
+    },
+
+    testEnvironment: 'jsdom'
 
 };

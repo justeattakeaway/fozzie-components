@@ -1,7 +1,7 @@
 {
   "name": "@justeat/generator-component",
   "description": "Generator Component – A generator for Fozzie components",
-  "version": "2.14.1",
+  "version": "2.15.0",
   "files": [
     "generators"
   ],
@@ -21,7 +21,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^12 || ^14 || ^16"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie",
@@ -40,7 +40,7 @@
     "gulp-rename": "1.2.2",
     "lodash": "4.17.21",
     "update-notifier": "5.0.1",
-    "yeoman-generator": "5.0.0"
+    "yeoman-generator": "7.0.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
