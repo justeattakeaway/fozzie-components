@@ -61,7 +61,7 @@
   "devDependencies": {
     "@justeat/f-button": "4.x",
     "@justeat/f-popover": "3.x",
-    "@justeat/f-vue-icons": "3.x",
+    "@justeat/f-vue-icons": "0.2.0",
     "@justeat/f-wdio-utils": "1.x"
   },
   "volta": {
