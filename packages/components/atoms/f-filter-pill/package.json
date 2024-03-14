@@ -43,7 +43,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "@justeat/f-vue-icons": "3.x"
+    "@justeat/f-vue-icons": "0.2.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
