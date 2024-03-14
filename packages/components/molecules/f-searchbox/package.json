@@ -72,7 +72,7 @@
     "@justeat/f-error-message": "2.x",
     "@justeat/f-globalisation": "0.x",
     "@justeat/f-mega-modal": "7.x",
-    "@justeat/f-vue-icons": "3.x",
+    "@justeat/f-vue-icons": "0.2.0",
     "@justeat/f-wdio-utils": "1.x",
     "url-loader": "4.1.0"
   },
