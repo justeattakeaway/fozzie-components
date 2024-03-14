@@ -1,39 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Mfa When calling the onFormSubmit() method And the submitting of the form data was successful should emit correct event if api call successful 1`] = `
-Array [
-  Array [
-    Object {
-      "component": Object {
+[
+  [
+    {
+      "component": {
         "name": "multiFactorAuthentication",
         "type": "form",
       },
       "event": "form_view",
-      "form": Object {
+      "form": {
         "action": "view",
       },
     },
   ],
-  Array [
-    Object {
-      "component": Object {
+  [
+    {
+      "component": {
         "name": "multiFactorAuthentication",
         "type": "form",
       },
       "event": "form_submit",
-      "form": Object {
+      "form": {
         "action": "submit",
       },
     },
   ],
-  Array [
-    Object {
-      "component": Object {
+  [
+    {
+      "component": {
         "name": "multiFactorAuthentication",
         "type": "form",
       },
       "event": "form_success",
-      "form": Object {
+      "form": {
         "action": "success",
       },
     },
@@ -42,42 +42,42 @@ Array [
 `;
 
 exports[`Mfa When calling the onFormSubmit() method And the submitting of the form data was unsuccessful should log the error 'Bad request when submitting MFA' if the response status is '400' 1`] = `
-Array [
-  Array [
-    Object {
-      "component": Object {
+[
+  [
+    {
+      "component": {
         "name": "multiFactorAuthentication",
         "type": "form",
       },
       "event": "form_view",
-      "form": Object {
+      "form": {
         "action": "view",
       },
     },
   ],
-  Array [
-    Object {
-      "component": Object {
+  [
+    {
+      "component": {
         "name": "multiFactorAuthentication",
         "type": "form",
       },
       "event": "form_submit",
-      "form": Object {
+      "form": {
         "action": "submit",
       },
     },
   ],
-  Array [
-    Object {
-      "component": Object {
+  [
+    {
+      "component": {
         "name": "multiFactorAuthentication",
         "type": "form",
       },
-      "error": Object {
+      "error": {
         "message": "http error status : 400",
       },
       "event": "form_error",
-      "form": Object {
+      "form": {
         "action": "error",
       },
     },
@@ -86,42 +86,42 @@ Array [
 `;
 
 exports[`Mfa When calling the onFormSubmit() method And the submitting of the form data was unsuccessful should log the error 'Throttled when submitting MFA' if the response status is '429' 1`] = `
-Array [
-  Array [
-    Object {
-      "component": Object {
+[
+  [
+    {
+      "component": {
         "name": "multiFactorAuthentication",
         "type": "form",
       },
       "event": "form_view",
-      "form": Object {
+      "form": {
         "action": "view",
       },
     },
   ],
-  Array [
-    Object {
-      "component": Object {
+  [
+    {
+      "component": {
         "name": "multiFactorAuthentication",
         "type": "form",
       },
       "event": "form_submit",
-      "form": Object {
+      "form": {
         "action": "submit",
       },
     },
   ],
-  Array [
-    Object {
-      "component": Object {
+  [
+    {
+      "component": {
         "name": "multiFactorAuthentication",
         "type": "form",
       },
-      "error": Object {
+      "error": {
         "message": "http error status : 429",
       },
       "event": "form_error",
-      "form": Object {
+      "form": {
         "action": "error",
       },
     },
@@ -130,40 +130,40 @@ Array [
 `;
 
 exports[`Mfa When calling the onFormSubmit() method should call the postValidateMfaToken() method with the correct params 1`] = `
-Array [
-  Array [
-    Object {
-      "component": Object {
+[
+  [
+    {
+      "component": {
         "name": "multiFactorAuthenticationbadActor",
         "type": "dialog",
       },
-      "dialog": Object {
+      "dialog": {
         "action": "view",
         "type": "info",
       },
       "event": "dialog_view",
     },
   ],
-  Array [
-    Object {
-      "component": Object {
+  [
+    {
+      "component": {
         "name": "multiFactorAuthentication",
         "type": "form",
       },
       "event": "form_submit",
-      "form": Object {
+      "form": {
         "action": "submit",
       },
     },
   ],
-  Array [
-    Object {
-      "component": Object {
+  [
+    {
+      "component": {
         "name": "multiFactorAuthentication",
         "type": "form",
       },
       "event": "form_success",
-      "form": Object {
+      "form": {
         "action": "success",
       },
     },
@@ -172,15 +172,15 @@ Array [
 `;
 
 exports[`Mfa When creating the component should log a warning but NOT show the error page if the returnUrl validation fails 1`] = `
-Array [
-  Array [
-    Object {
-      "component": Object {
+[
+  [
+    {
+      "component": {
         "name": "multiFactorAuthentication",
         "type": "form",
       },
       "event": "form_view",
-      "form": Object {
+      "form": {
         "action": "view",
       },
     },
@@ -189,15 +189,15 @@ Array [
 `;
 
 exports[`Mfa When creating the component should log a warning but NOT show the error page if the returnUrl validation fails 2`] = `
-Array [
-  Array [
-    Object {
-      "component": Object {
+[
+  [
+    {
+      "component": {
         "name": "multiFactorAuthentication",
         "type": "form",
       },
       "event": "form_view",
-      "form": Object {
+      "form": {
         "action": "view",
       },
     },
@@ -206,15 +206,15 @@ Array [
 `;
 
 exports[`Mfa When creating the component should log a warning but NOT show the error page if the returnUrl validation fails 3`] = `
-Array [
-  Array [
-    Object {
-      "component": Object {
+[
+  [
+    {
+      "component": {
         "name": "multiFactorAuthentication",
         "type": "form",
       },
       "event": "form_view",
-      "form": Object {
+      "form": {
         "action": "view",
       },
     },
@@ -223,15 +223,15 @@ Array [
 `;
 
 exports[`Mfa When creating the component should log a warning but NOT show the error page if the returnUrl validation fails 4`] = `
-Array [
-  Array [
-    Object {
-      "component": Object {
+[
+  [
+    {
+      "component": {
         "name": "multiFactorAuthentication",
         "type": "form",
       },
       "event": "form_view",
-      "form": Object {
+      "form": {
         "action": "view",
       },
     },
@@ -240,15 +240,15 @@ Array [
 `;
 
 exports[`Mfa When creating the component should log a warning but NOT show the error page if the returnUrl validation fails 5`] = `
-Array [
-  Array [
-    Object {
-      "component": Object {
+[
+  [
+    {
+      "component": {
         "name": "multiFactorAuthentication",
         "type": "form",
       },
       "event": "form_view",
-      "form": Object {
+      "form": {
         "action": "view",
       },
     },
@@ -257,15 +257,15 @@ Array [
 `;
 
 exports[`Mfa When creating the component should log success if valid props supplied 1`] = `
-Array [
-  Array [
-    Object {
-      "component": Object {
+[
+  [
+    {
+      "component": {
         "name": "multiFactorAuthentication",
         "type": "form",
       },
       "event": "form_view",
-      "form": Object {
+      "form": {
         "action": "view",
       },
     },
@@ -274,15 +274,15 @@ Array [
 `;
 
 exports[`Mfa When creating the component should set the default for returnUrl if not supplied 1`] = `
-Array [
-  Array [
-    Object {
-      "component": Object {
+[
+  [
+    {
+      "component": {
         "name": "multiFactorAuthentication",
         "type": "form",
       },
       "event": "form_view",
-      "form": Object {
+      "form": {
         "action": "view",
       },
     },
@@ -291,14 +291,14 @@ Array [
 `;
 
 exports[`Mfa When creating the component should show the error page and log warn if the code validation fails 1`] = `
-Array [
-  Array [
-    Object {
-      "component": Object {
+[
+  [
+    {
+      "component": {
         "name": "multiFactorAuthenticationbadActor",
         "type": "dialog",
       },
-      "dialog": Object {
+      "dialog": {
         "action": "view",
         "type": "info",
       },
@@ -309,14 +309,14 @@ Array [
 `;
 
 exports[`Mfa When creating the component should show the error page and log warn if the code validation fails 2`] = `
-Array [
-  Array [
-    Object {
-      "component": Object {
+[
+  [
+    {
+      "component": {
         "name": "multiFactorAuthenticationbadActor",
         "type": "dialog",
       },
-      "dialog": Object {
+      "dialog": {
         "action": "view",
         "type": "info",
       },
@@ -327,14 +327,14 @@ Array [
 `;
 
 exports[`Mfa When creating the component should show the error page and log warn if the code validation fails 3`] = `
-Array [
-  Array [
-    Object {
-      "component": Object {
+[
+  [
+    {
+      "component": {
         "name": "multiFactorAuthenticationbadActor",
         "type": "dialog",
       },
-      "dialog": Object {
+      "dialog": {
         "action": "view",
         "type": "info",
       },
@@ -345,14 +345,14 @@ Array [
 `;
 
 exports[`Mfa When creating the component should show the error page and log warn if the code values are missing 1`] = `
-Array [
-  Array [
-    Object {
-      "component": Object {
+[
+  [
+    {
+      "component": {
         "name": "multiFactorAuthenticationbadActor",
         "type": "dialog",
       },
-      "dialog": Object {
+      "dialog": {
         "action": "view",
         "type": "info",
       },
@@ -363,14 +363,14 @@ Array [
 `;
 
 exports[`Mfa When creating the component should show the error page and log warn if the email validation fails 1`] = `
-Array [
-  Array [
-    Object {
-      "component": Object {
+[
+  [
+    {
+      "component": {
         "name": "multiFactorAuthenticationbadActor",
         "type": "dialog",
       },
-      "dialog": Object {
+      "dialog": {
         "action": "view",
         "type": "info",
       },
@@ -381,14 +381,14 @@ Array [
 `;
 
 exports[`Mfa When creating the component should show the error page and log warn if the email values are missing 1`] = `
-Array [
-  Array [
-    Object {
-      "component": Object {
+[
+  [
+    {
+      "component": {
         "name": "multiFactorAuthenticationbadActor",
         "type": "dialog",
       },
-      "dialog": Object {
+      "dialog": {
         "action": "view",
         "type": "info",
       },

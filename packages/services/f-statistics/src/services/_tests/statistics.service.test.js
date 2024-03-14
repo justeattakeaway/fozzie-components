@@ -150,7 +150,7 @@ describe('f-statistics', () => {
 
             // Act
             statisticsService.publish(log.message, { ...log.payload });
-            jest.runTimersToTime(1000);
+            jest.advanceTimersByTime(1000);
 
             // Assert
             expect(justLog.info).toBeCalledTimes(1);
@@ -163,13 +163,13 @@ describe('f-statistics', () => {
 
             // Act
             statisticsService.publish(log.message, { ...log.payload });
-            jest.runTimersToTime(1000);
+            jest.advanceTimersByTime(1000);
 
             expect(justLog.info).toBeCalledTimes(1);
 
             statisticsService.publish(log.message, { ...log.payload });
             statisticsService.publish(log.message, { ...log.payload });
-            jest.runTimersToTime(1000);
+            jest.advanceTimersByTime(1000);
 
             expect(justLog.info).toBeCalledTimes(3);
         });
@@ -181,7 +181,7 @@ describe('f-statistics', () => {
 
             // Act
             statisticsService.publish(log.message, { ...log.payload });
-            jest.runTimersToTime(1);
+            jest.advanceTimersByTime(1);
 
             expect(justLog.info).toBeCalledTimes(1);
         });

@@ -12,5 +12,9 @@ module.exports = {
         'node_modules/(?!(lodash-es)/)'
     ],
 
-    testURL: 'http://localhost/'
+    testEnvironmentOptions: {
+        url: 'http://localhost/'
+    },
+
+    testEnvironment: 'jsdom'
 };

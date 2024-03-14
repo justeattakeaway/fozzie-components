@@ -5,7 +5,7 @@ const sassOptions = require('../../../../config/sassOptions')(rootDir);
 
 let vueConfig = null;
 
-if(process.env.COMPONENT_TYPE === 'vue') {
+if (process.env.COMPONENT_TYPE === 'vue') {
     vueConfig = {
         chainWebpack: config => {
             config.module
@@ -18,7 +18,7 @@ if(process.env.COMPONENT_TYPE === 'vue') {
                     // eslint-disable-next-line quotes
                     additionalData: `@use "../assets/scss/common.scss";`
                 });
-    
+
             config.externals({
                 'js-cookie': 'js-cookie'
             });
@@ -26,9 +26,8 @@ if(process.env.COMPONENT_TYPE === 'vue') {
         pluginOptions: {
             lintStyleOnBuild: true
         }
-    }
-}
-else {
+    };
+} else {
     vueConfig = {
         chainWebpack: config => {
             config.module.rules.delete('eslint');
@@ -44,7 +43,7 @@ else {
                 onlyProduction: true
             }
         }
-    }
+    };
 }
 
 module.exports = vueConfig;

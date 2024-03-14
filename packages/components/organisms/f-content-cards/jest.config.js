@@ -8,7 +8,7 @@ module.exports = {
 
     transform: {
         '^.+\\.js$': 'babel-jest',
-        '^.+\\.vue$': 'vue-jest',
+        '^.+\\.vue$': '@vue/vue2-jest',
         '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
         '^.+\\.svg$': './../../../../test/utils/svgTransform.js'
     },
@@ -36,7 +36,11 @@ module.exports = {
         }
     },
 
-    testURL: 'http://localhost/',
+    testEnvironment: 'jsdom',
+
+    testEnvironmentOptions: {
+        url: 'http://localhost/'
+    },
 
     modulePathIgnorePatterns: [
         './.yalc/', // Don't run tests in yalc-linked packages

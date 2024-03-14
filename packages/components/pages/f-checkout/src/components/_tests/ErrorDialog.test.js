@@ -136,6 +136,12 @@ describe('ErrorDialog', () => {
 
             beforeEach(() => {
                 updateCheckoutErrorMessageSpy = jest.spyOn(ErrorDialog.methods, 'updateCheckoutErrorMessage');
+
+                Object.defineProperty(window, 'location', {
+                    writable: true,
+                    value: { assign: jest.fn() }
+                });
+
                 windowLocationSpy = jest.spyOn(window.location, 'assign').mockImplementation();
             });
             it('should call `updateCheckoutErrorMessage`', () => {
@@ -329,6 +335,12 @@ describe('ErrorDialog', () => {
 
             beforeEach(() => {
                 updateCheckoutErrorMessageSpy = jest.spyOn(ErrorDialog.methods, 'updateCheckoutErrorMessage');
+
+                Object.defineProperty(window, 'location', {
+                    writable: true,
+                    value: { assign: jest.fn() }
+                });
+
                 windowLocationSpy = jest.spyOn(window.location, 'assign').mockImplementation();
             });
 

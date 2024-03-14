@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-restaurant-card",
   "description": "Fozzie Restaurant Card -  Responsible for displaying restaurant data and linking to a restaurant",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "main": "dist/f-restaurant-card.umd.min.js",
   "files": [
     "dist",
@@ -23,7 +23,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^12 || ^14 || ^16"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie"
@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "1.x",
-    "@vue/cli-plugin-babel": "4.5.16"
+    "@vue/cli-plugin-babel": "5.0.0"
   },
   "volta": {
     "extends": "../../../../package.json"

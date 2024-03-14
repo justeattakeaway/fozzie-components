@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FormFieldAffixed computed :: testId ::  when \`attributes\` does not have name value should return default testIds 1`] = `
-Object {
+{
   "affixed": "formfield-affixed",
   "input": "formfield-affixed-input",
   "prefix": "formfield-affixed-prefix",
@@ -10,7 +10,7 @@ Object {
 `;
 
 exports[`FormFieldAffixed computed :: testId ::  when \`attributes\` has name value should return testIds for form field 1`] = `
-Object {
+{
   "affixed": "formfield-formfield-4-affixed",
   "input": "formfield-formfield-4-affixed-input",
   "prefix": "formfield-formfield-4-affixed-prefix",

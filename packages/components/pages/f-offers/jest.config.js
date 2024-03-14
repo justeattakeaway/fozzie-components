@@ -7,7 +7,7 @@ module.exports = {
 
     transform: {
         '^.+\\.js$': 'babel-jest',
-        '^.+\\.vue$': 'vue-jest',
+        '^.+\\.vue$': '@vue/vue2-jest',
         '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub'
     },
 
@@ -38,6 +38,10 @@ module.exports = {
         './test/component/'
     ],
 
-    testURL: 'http://localhost/'
+    testEnvironmentOptions: {
+        url: 'http://localhost/'
+    },
+
+    testEnvironment: 'jsdom'
 
 };

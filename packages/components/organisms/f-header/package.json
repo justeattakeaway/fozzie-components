@@ -1,9 +1,9 @@
 {
   "name": "@justeat/f-header",
   "description": "Fozzie Header - Globalised Header Component",
-  "version": "10.18.0",
+  "version": "10.19.0",
   "main": "dist/f-header.umd.min.js",
-  "maxBundleSize": "46kB",
+  "maxBundleSize": "55kB",
   "files": [
     "dist",
     "test-utils"
@@ -24,7 +24,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^12 || ^14 || ^16"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie"

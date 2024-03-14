@@ -46,16 +46,16 @@ describe('AgeVerification', () => {
                 year: 2020
             };
 
-            it('should call daysInMonthService with selectedDate', () => {
-                beforeEach(() => {
-                    // Arrange
-                    wrapper = shallowMount(AgeVerification, {
-                        i18n,
-                        localVue,
-                        store: createStore()
-                    });
+            beforeEach(() => {
+                // Arrange
+                wrapper = shallowMount(AgeVerification, {
+                    i18n,
+                    localVue,
+                    store: createStore()
                 });
+            });
 
+            it('should call daysInMonthService with selectedDate', () => {
                 // Act
                 wrapper.setData({
                     selectedDate
