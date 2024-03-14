@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-filter-pill",
   "description": "Fozzie Filter Pill - An interactive component for filter toggles.",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "main": "dist/f-filter-pill.umd.min.js",
   "files": [
     "dist",
@@ -23,12 +23,13 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^14 || ^16 || ^18 || ^20"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie"
   ],
   "scripts": {
+    "prepublishOnly": "yarn lint && yarn test && yarn build",
     "build": "vue-cli-service build --target lib --name f-filter-pill ./src/index.js",
     "lint": "eslint \"!(dist)/**/*.{js,vue}\"",
     "lint:fix": "yarn lint --fix",

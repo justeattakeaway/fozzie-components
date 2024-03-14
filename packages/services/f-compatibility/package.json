@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-compatibility",
   "description": "Fozzie Compatibility - Service to check browser compatibilities and warn users with incompatible browsers",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "maxBundleSize": "10kB",
   "main": "dist/f-compatibility.umd.js",
   "module": "dist/f-compatibility.es.js",
@@ -25,7 +25,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^14 || ^16 || ^18 || ^20"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie"

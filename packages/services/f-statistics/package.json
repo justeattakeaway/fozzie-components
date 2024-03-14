@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-statistics",
   "description": "Javascript client for transporting statistics",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "maxBundleSize": "10kB",
   "main": "dist/f-statistics.umd.js",
   "module": "dist/f-statistics.es.js",
@@ -25,7 +25,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^14 || ^16 || ^18 || ^20"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie"

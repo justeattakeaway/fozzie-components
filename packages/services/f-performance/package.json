@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-performance",
   "description": "Fozzie Performance - RUM performance metric collector",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "dist/f-performance.umd.min.js",
   "files": [
     "dist"
@@ -22,7 +22,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^14 || ^16 || ^18 || ^20"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie"

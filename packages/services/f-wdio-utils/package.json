@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-wdio-utils",
   "description": "Fozzie Wdio Utils - webdriverIO page object",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "main": "dist/f-wdio-utils.umd.js",
   "module": "dist/f-wdio-utils.es.js",
   "source": "src/index.js",
@@ -24,7 +24,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^14 || ^16 || ^18 || ^20"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie"

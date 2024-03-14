@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-consumer-oidc",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Authentication helper to communicate with open apis",
   "main": "dist/f-consumer-oidc.umd.js",
   "module": "dist/f-consumer-oidc.es.js",
@@ -24,7 +24,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^14 || ^16 || ^18 || ^20"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie"

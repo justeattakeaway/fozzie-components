@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-globalisation",
   "description": "Fozzie Globalisation – A utility which wires up vue-i18n within your Smart Component",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "main": "dist/f-globalisation.umd.min.js",
   "maxBundleSize": "15kB",
   "files": [
@@ -23,7 +23,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^14 || ^16 || ^18 || ^20"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie"

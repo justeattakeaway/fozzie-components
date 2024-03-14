@@ -4,6 +4,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## v0.63.0
+
+_March 13, 2024_
+
+### Changed
+
+- node engines in `package.json` to include all versions above 14
+- bump of `http-server` dependency to fix snyk vulnerability
+- addition of `@intlify/vue-i18n-loader` to resolve snyk vulnerability
+
 v0.62.0
 ------------------------------
 *April 28, 2023*

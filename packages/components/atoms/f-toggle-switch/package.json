@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-toggle-switch",
   "description": "Fozzie Toggle Switch - A component to switch a single setting on/off",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "dist/f-toggle-switch.umd.min.js",
   "maxBundleSize": "5kB",
   "files": [
@@ -24,7 +24,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^14 || ^16 || ^18 || ^20"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie"

@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-media-element",
   "description": "Fozzie Media Element - provides ability to display text and an image in different orientations",
-  "version": "3.2.1",
+  "version": "3.3.0",
   "main": "dist/f-media-element.umd.min.js",
   "maxBundleSize": "6kB",
   "files": [
@@ -24,7 +24,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^14 || ^16 || ^18 || ^20"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie"

@@ -9,8 +9,10 @@ _March 13, 2024_
 
 ### Fixed
 
+- node engines in `package.json` to include all versions above 14
 - Replaced vulnerable `bili` package with rollup for generating icons
 - bumped vulnerable `marked` package (snyk vulnerability)
+-
 
 ## v3.13.1
 

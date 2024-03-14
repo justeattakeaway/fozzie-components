@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-status-banner",
   "description": "Fozzie Status Banner - Global status page",
-  "version": "6.3.0",
+  "version": "6.4.0",
   "main": "dist/f-status-banner.umd.min.js",
   "maxBundleSize": "60kB",
   "files": [
@@ -25,7 +25,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^14 || ^16 || ^18 || ^20"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie"

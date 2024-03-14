@@ -3,45 +3,60 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v1.2.0
-------------------------------
-*January 11, 2024*
+## v1.3.0
+
+_March 13, 2024_
+
+### Changed
+
+- node engines in `package.json` to include all versions above 14
+- `@vue/cli-plugin-babel` to 5.0.0 to resolve snyk vulnerability
+
+## v1.2.0
+
+_January 11, 2024_
 
 ### Added
+
 - Added navigation
 
-v1.1.1
-------------------------------
-*January 8, 2024*
+## v1.1.1
+
+_January 8, 2024_
 
 ### Added
+
 - Removed the Card wrapper
 - Added form hiding when loading and when in error state
 
-v1.1.0
-------------------------------
-*December 7, 2023*
+## v1.1.0
+
+_December 7, 2023_
 
 ### Added
+
 - Updated API response structure
 
-v1.0.1
-------------------------------
-*November 23, 2023*
+## v1.0.1
+
+_November 23, 2023_
 
 ### Added
+
 - Changed `f-button` version and buttonSize values
 
-v1.0.0
-------------------------------
-*November 22, 2023*
+## v1.0.0
+
+_November 22, 2023_
 
 ### Added
+
 - updated `f-self-exclusion`
 
-v0.1.0
-------------------------------
-*November 21, 2023*
+## v0.1.0
+
+_November 21, 2023_
 
 ### Added
+
 - `f-self-exclusion` page created with base functionality

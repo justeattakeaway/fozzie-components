@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-alert",
   "description": "Fozzie Alert – Fozzie Alert Component",
-  "version": "6.2.0",
+  "version": "6.3.0",
   "main": "dist/f-alert.umd.min.js",
   "maxBundleSize": "27kB",
   "files": [
@@ -23,7 +23,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^14 || ^16 || ^18 || ^20"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie"

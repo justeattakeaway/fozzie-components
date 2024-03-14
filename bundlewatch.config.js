@@ -32,8 +32,6 @@ const getChangedPackageLocations = () => {
 
 const packagesLocations = getChangedPackageLocations();
 
-console.log(packagesLocations);
-
 const files = packagesLocations.map(packageLocation => ({
     path: packageLocation === 'packages/tools/f-vue-icons' ? `./${packageLocation}/dist/*.cjs` : `./${packageLocation}/dist/*+(.min|.min.umd|.es).js`,
     maxSize: getMaxSizeForPackage(packageLocation)

@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-form-field",
   "description": "Fozzie Form Field - Fozzie Form Field Component",
-  "version": "6.5.0",
+  "version": "6.6.0",
   "main": "dist/f-form-field.umd.min.js",
   "maxBundleSize": "29kB",
   "files": [
@@ -23,7 +23,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^14 || ^16 || ^18 || ^20"
+    "node": ">=14"
   },
   "keywords": [
     "fozzie"

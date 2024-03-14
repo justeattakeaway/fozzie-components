@@ -2,7 +2,7 @@
   "name": "@justeat/fozzie",
   "title": "Fozzie – Just Eat UI Web Framework",
   "description": "UI Web Framework for the Just Eat Global Platform",
-  "version": "11.0.2",
+  "version": "11.1.0",
   "main": "dist/js/index.js",
   "files": [
     "dist/js",
@@ -31,7 +31,7 @@
   },
   "license": "Apache-2.0",
   "engines": {
-    "node": "^14 || ^16 || ^18 || ^20"
+    "node": ">=14"
   },
   "dependencies": {
     "@justeat/pie-design-tokens": "^5.0.0",
