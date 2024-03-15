@@ -71,7 +71,7 @@
     "@justeat/f-content-cards": "10.4.2",
     "@justeat/f-media-element": "3.x",
     "@justeat/f-mega-modal": "7.x",
-    "@justeat/f-searchbox": "6.x",
+    "@justeat/f-searchbox": "0.13.0",
     "@justeat/f-trak": "0.x",
     "@justeat/f-wdio-utils": "1.x",
     "@vue/cli-plugin-babel": "5.0.0"
