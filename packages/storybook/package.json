@@ -16,7 +16,7 @@
     "vue-router": "3.5.2"
   },
   "devDependencies": {
-    "@justeat/f-http": "1.x",
+    "@justeat/f-http": "0.9.1",
     "@kazupon/vue-i18n-loader": "0.5.0",
     "@storybook/addon-a11y": "6.4.9",
     "@storybook/addon-essentials": "6.4.9",
