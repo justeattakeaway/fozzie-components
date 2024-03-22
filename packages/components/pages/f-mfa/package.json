@@ -51,7 +51,7 @@
   ],
   "dependencies": {
     "@justeat/f-globalisation": "1.x",
-    "@justeat/f-vue-icons": "3.x"
+    "@justeat/f-vue-icons": "0.2.0"
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.2.0",
@@ -66,7 +66,7 @@
     "@justeat/f-alert": "6.x",
     "@justeat/f-button": "4.x",
     "@justeat/f-card": "4.x",
-    "@justeat/f-card-with-content": "3.x",
+    "@justeat/f-card-with-content": "0.1.0",
     "@justeat/f-form-field": "6.x",
     "@justeat/f-link": "3.x",
     "@justeat/f-wdio-utils": "1.x",
