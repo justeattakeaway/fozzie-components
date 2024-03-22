@@ -57,7 +57,7 @@
     "@justeat/f-searchbox": "6.x"
   },
   "devDependencies": {
-    "@justeat/f-searchbox": "6.x",
+    "@justeat/f-searchbox": "0.13.0",
     "@justeat/f-wdio-utils": "1.x"
   },
   "volta": {
