@@ -60,7 +60,7 @@
     "@justeat/f-button": "5.x",
     "@justeat/f-link": "3.x",
     "@justeat/f-mega-modal": "7.x",
-    "@justeat/f-vue-icons": "3.x",
+    "@justeat/f-vue-icons": "0.2.0",
     "@justeat/f-wdio-utils": "1.x",
     "@vue/cli-plugin-babel": "5.0.0",
     "del": "4.1.1",
