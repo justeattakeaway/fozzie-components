@@ -70,7 +70,7 @@
     "@justeat/f-form-field": "6.x",
     "@justeat/f-http": "1.x",
     "@justeat/f-link": "3.x",
-    "@justeat/f-vue-icons": "3.x",
+    "@justeat/f-vue-icons": "0.2.0",
     "@justeat/f-wdio-utils": "1.x",
     "@vue/cli-plugin-babel": "5.0.0"
   },
