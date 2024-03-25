@@ -9,6 +9,7 @@ _March 25, 2024_
 
 ### Changed
 - Update fixed point value of restaurant rating from 2 to 1
+- Update max number of reviews
 
 ## v1.6.0
 
