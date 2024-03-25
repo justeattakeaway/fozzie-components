@@ -47,13 +47,13 @@ describe('RestaurantRating component', () => {
     });
 
     it.each([
-        [1, '1.00'],
-        [2.5, '2.50'],
-        [4.33, '4.33'],
-        [2.337, '2.34'],
-        [4.5678902, '4.57'],
-        [4.5538902, '4.55']
-    ])('fixes the rating mean value to a fixed point of 2 decimal places', (ratingsValue, expectedRenderedValue) => {
+        [1, '1.0'],
+        [2.5, '2.5'],
+        [4.33, '4.3'],
+        [2.337, '2.3'],
+        [4.5678902, '4.6'],
+        [4.5538902, '4.6']
+    ])('fixes the rating mean value to a fixed point of 1 decimal place', (ratingsValue, expectedRenderedValue) => {
         // arrange
         const propsData = {
             mean: ratingsValue,
@@ -118,7 +118,7 @@ describe('RestaurantRating component', () => {
             expect(filledStarElement.exists()).toBe(true);
             expect(ownRatingMessageElement.exists()).toBe(true);
 
-            expect(ratingsMeanElement.text()).toStrictEqual('5.00');
+            expect(ratingsMeanElement.text()).toStrictEqual('5.0');
             expect(ownRatingMessageElement.text()).toStrictEqual(isOwnRatingMessage);
         });
 
@@ -188,7 +188,7 @@ describe('RestaurantRating component', () => {
             expect(filledStarElement.exists()).toBe(true);
             expect(countMessage.exists()).toBe(true);
 
-            expect(ratingsMeanElement.text()).toStrictEqual('5.00');
+            expect(ratingsMeanElement.text()).toStrictEqual('5.0');
             expect(countMessage.text()).toStrictEqual('250');
         });
 
