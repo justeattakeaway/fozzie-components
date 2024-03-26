@@ -77,8 +77,8 @@
                 <data
                     data-test-id="rating"
                     :class="[$style['c-restaurantCard-rating-count']]"
-                    :value="count">
-                    {{ count }}
+                    :value="formattedCount">
+                    {{ formattedCount }}
                 </data>
                 &#41;
             </span>
@@ -158,7 +158,10 @@ export default {
             return !this.mean;
         },
         meanFormatted () {
-            return Number.parseFloat(this.mean).toFixed(2);
+            return Number.parseFloat(this.mean).toFixed(1);
+        },
+        formattedCount () {
+            return this.count > 200 ? '200+' : this.count;
         }
     }
 };
