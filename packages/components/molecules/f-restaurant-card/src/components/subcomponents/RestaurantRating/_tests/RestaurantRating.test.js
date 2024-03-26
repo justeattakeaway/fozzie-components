@@ -189,7 +189,7 @@ describe('RestaurantRating component', () => {
             expect(countMessage.exists()).toBe(true);
 
             expect(ratingsMeanElement.text()).toStrictEqual('5.0');
-            expect(countMessage.text()).toStrictEqual('250');
+            expect(countMessage.text()).toStrictEqual('200+');
         });
 
         it('shows an empty star and a no ratings message if `mean` is missing', () => {
