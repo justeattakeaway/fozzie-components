@@ -13695,13 +13695,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:3.33.2":
-  version: 3.33.2
-  resolution: "core-js@npm:3.33.2"
-  checksum: 71de081acbd060ff985afdcdf2552de4a00ab3ac4695c77f3535b72ddf4526920dcd0cb73e72e57c2ae16e384838a6d55790e138f0a19d60afcf851f89d0064d
-  languageName: node
-  linkType: hard
-
 "core-js@npm:3.36.1, core-js@npm:^3.0.4, core-js@npm:^3.6.5, core-js@npm:^3.8.2, core-js@npm:^3.8.3":
   version: 3.36.1
   resolution: "core-js@npm:3.36.1"
@@ -30444,7 +30437,7 @@ __metadata:
     babel-loader: 8.1.0
     bundlewatch: 0.3.3
     chromedriver: 122.0.6
-    core-js: 3.33.2
+    core-js: 3.36.1
     cross-env: 7.0.2
     css-loader: 1.0.1
     danger: 11.2.8

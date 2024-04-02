@@ -1,6 +1,6 @@
 <template>
     <cookie-banner
-        locale='da-DK'
+        locale='en-GB'
         should-absolute-position-reopen-link='false' />
 </template>
 
