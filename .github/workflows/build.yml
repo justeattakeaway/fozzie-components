@@ -103,9 +103,6 @@ jobs:
       # Build components. Only components with out-of-date Turborepo hash will rebuilt, speeding up build time.
       - name: Build Components
         run: yarn build
-      # # Run Bundlewatch checks
-      # - name: Run Bundlewatch checks
-      #   run: yarn bundlewatch
       # Lint components
       - name: Lint Components
         run: yarn lint --concurrency=10
