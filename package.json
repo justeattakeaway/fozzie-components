@@ -96,7 +96,7 @@
     "cross-env": "7.0.2",
     "css-loader": "1.0.1",
     "danger": "11.2.8",
-    "eslint": "8.26.0",
+    "eslint": "9.0.0",
     "eslint-import-resolver-webpack": "0.13.2",
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-json-schema-validator": "1.0.48",
