@@ -165,7 +165,7 @@ describe('RestaurantRating component', () => {
             // arrange
             const propsData = {
                 mean: 5,
-                count: 250,
+                count: 200,
                 isOwnRating
             };
 
@@ -189,7 +189,7 @@ describe('RestaurantRating component', () => {
             expect(countMessage.exists()).toBe(true);
 
             expect(ratingsMeanElement.text()).toStrictEqual('5.0');
-            expect(countMessage.text()).toStrictEqual('200+');
+            expect(countMessage.text()).toStrictEqual('200');
         });
 
         it('shows an empty star and a no ratings message if `mean` is missing', () => {
