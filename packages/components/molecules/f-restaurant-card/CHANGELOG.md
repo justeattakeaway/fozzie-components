@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 _April 10, 2024_
 
 ### Changed
-- Create prop for max rating value
+- Create new prop for f-restaurant-card
+- Use prop as the max review threshold to limit the actual number of reviews shown on restaurant card
 
 ## v1.6.1
 

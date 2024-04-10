@@ -158,6 +158,54 @@ describe('RestaurantRating component', () => {
         });
     });
 
+    describe('reviews count threshold', () => {
+        const countThreshold = 200;
+        it('shows proper value when count is less than threshold', () => {
+            // arrange
+            const propsData = {
+                mean: 5,
+                count: 150,
+                isOwnRating: false,
+                countThreshold
+            };
+            // act
+            const wrapper = mount(RestaurantRating, { propsData });
+            const countMessage = wrapper.find('[data-test-id="rating"]');
+            // assert
+            expect(countMessage.exists()).toBe(true);
+            expect(countMessage.text()).toStrictEqual('150');
+        });
+        it('shows proper value when count is higher than threshold', () => {
+            // arrange
+            const propsData = {
+                mean: 5,
+                count: 250,
+                isOwnRating: false,
+                countThreshold
+            };
+            // act
+            const wrapper = mount(RestaurantRating, { propsData });
+            const countMessage = wrapper.find('[data-test-id="rating"]');
+            // assert
+            expect(countMessage.exists()).toBe(true);
+            expect(countMessage.text()).toStrictEqual('200+');
+        });
+        it('shows proper value when count is higher than threshold but no threshold is supplies. it uses default threshold value', () => {
+            // arrange
+            const propsData = {
+                mean: 5,
+                count: 250,
+                isOwnRating: false
+            };
+            // act
+            const wrapper = mount(RestaurantRating, { propsData });
+            const countMessage = wrapper.find('[data-test-id="rating"]');
+            // assert
+            expect(countMessage.exists()).toBe(true);
+            expect(countMessage.text()).toStrictEqual('200+');
+        });
+    });
+
     describe('isOwnRatingMessage is false', () => {
         const isOwnRating = false;
 
@@ -165,7 +213,7 @@ describe('RestaurantRating component', () => {
             // arrange
             const propsData = {
                 mean: 5,
-                count: 200,
+                count: 250,
                 isOwnRating
             };
 
@@ -189,7 +237,7 @@ describe('RestaurantRating component', () => {
             expect(countMessage.exists()).toBe(true);
 
             expect(ratingsMeanElement.text()).toStrictEqual('5.0');
-            expect(countMessage.text()).toStrictEqual('200');
+            expect(countMessage.text()).toStrictEqual('200+');
         });
 
         it('shows an empty star and a no ratings message if `mean` is missing', () => {
