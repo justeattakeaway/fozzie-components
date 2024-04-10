@@ -160,7 +160,9 @@ describe('RestaurantRating component', () => {
 
     describe('reviews count threshold', () => {
         const countThreshold = 200;
-        it('shows proper value when count is less than threshold', () => {
+        const rating = '[data-test-id="rating"]';
+
+        it('displays the count when count is less than threshold', () => {
             // arrange
             const propsData = {
                 mean: 5,
@@ -168,14 +170,17 @@ describe('RestaurantRating component', () => {
                 isOwnRating: false,
                 countThreshold
             };
+
             // act
             const wrapper = mount(RestaurantRating, { propsData });
-            const countMessage = wrapper.find('[data-test-id="rating"]');
+            const countMessage = wrapper.find(rating);
+
             // assert
             expect(countMessage.exists()).toBe(true);
+
             expect(countMessage.text()).toStrictEqual('150');
         });
-        it('shows proper value when count is higher than threshold', () => {
+        it('displays threshold count when count is higher than threshold', () => {
             // arrange
             const propsData = {
                 mean: 5,
@@ -183,25 +188,31 @@ describe('RestaurantRating component', () => {
                 isOwnRating: false,
                 countThreshold
             };
+
             // act
             const wrapper = mount(RestaurantRating, { propsData });
-            const countMessage = wrapper.find('[data-test-id="rating"]');
+            const countMessage = wrapper.find(rating);
+
             // assert
             expect(countMessage.exists()).toBe(true);
+
             expect(countMessage.text()).toStrictEqual('200+');
         });
-        it('shows proper value when count is higher than threshold but no threshold is supplies. it uses default threshold value', () => {
+        it('displays threshold when count is higher than threshold but no threshold is supplied but uses default threshold value', () => {
             // arrange
             const propsData = {
                 mean: 5,
                 count: 250,
                 isOwnRating: false
             };
+
             // act
             const wrapper = mount(RestaurantRating, { propsData });
-            const countMessage = wrapper.find('[data-test-id="rating"]');
+            const countMessage = wrapper.find(rating);
+
             // assert
             expect(countMessage.exists()).toBe(true);
+
             expect(countMessage.text()).toStrictEqual('200+');
         });
     });
