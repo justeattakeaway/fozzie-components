@@ -198,7 +198,7 @@ describe('RestaurantRating component', () => {
 
             expect(countMessage.text()).toStrictEqual('200+');
         });
-        it('displays threshold when count is higher than threshold but no threshold is supplied but uses default threshold value', () => {
+        it('displays threshold when count is higher than threshold with default threshold value', () => {
             // arrange
             const propsData = {
                 mean: 5,
