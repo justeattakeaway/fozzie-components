@@ -159,7 +159,7 @@ describe('RestaurantRating component', () => {
     });
 
     describe('reviews count threshold', () => {
-        const countThreshold = 200;
+        const maxDisplayedRatings = 200;
         const rating = '[data-test-id="rating"]';
 
         it('displays the count when count is less than threshold', () => {
@@ -168,7 +168,7 @@ describe('RestaurantRating component', () => {
                 mean: 5,
                 count: 150,
                 isOwnRating: false,
-                countThreshold
+                maxDisplayedRatings
             };
 
             // act
@@ -187,7 +187,7 @@ describe('RestaurantRating component', () => {
                 mean: 5,
                 count: 250,
                 isOwnRating: false,
-                countThreshold
+                maxDisplayedRatings
             };
 
             // act
