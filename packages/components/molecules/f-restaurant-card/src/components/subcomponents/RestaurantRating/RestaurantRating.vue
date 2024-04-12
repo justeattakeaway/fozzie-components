@@ -120,7 +120,7 @@ export default {
         /**
          * Max amount of ratings to be shown
          */
-        countThreshold: {
+        maxDisplayedRatings: {
             type: Number,
             default: 200
         },
@@ -168,7 +168,7 @@ export default {
             return Number.parseFloat(this.mean).toFixed(1);
         },
         formattedCount () {
-            return this.count > this.countThreshold ? `${this.countThreshold}+` : this.count;
+            return this.count > this.maxDisplayedRatings ? `${this.maxDisplayedRatings}+` : this.count;
         }
     }
 };
