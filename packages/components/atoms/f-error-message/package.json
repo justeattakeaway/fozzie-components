@@ -50,7 +50,7 @@
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
-    "@justeat/fozzie": "11.x"
+    "@justeat/fozzie": ">=9.0.0"
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "1.x"
