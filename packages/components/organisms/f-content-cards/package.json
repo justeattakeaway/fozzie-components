@@ -65,7 +65,7 @@
     "@justeat/f-button": "4.x",
     "@justeat/f-vue-icons": "3.x",
     "@justeat/f-wdio-utils": "1.x",
-    "@justeat/fozzie": "11.x",
+    "@justeat/fozzie": "0.1.1",
     "@justeattakeaway/cc-braze-adapter": "0.5.0",
     "@justeattakeaway/cc-filters": "0.1.0",
     "@justeattakeaway/cc-stampcards-adapter": "0.7.1",
