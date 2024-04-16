@@ -3916,7 +3916,7 @@ __metadata:
     "@justeat/f-services": 1.x
     "@justeat/f-vue-icons": 3.x
     "@justeat/f-wdio-utils": 1.x
-    "@justeat/fozzie": 10.7.1
+    "@justeat/fozzie": 11.x
     "@justeattakeaway/cc-braze-adapter": 0.5.0
     "@justeattakeaway/cc-filters": 0.1.0
     "@justeattakeaway/cc-stampcards-adapter": 0.7.1
@@ -4005,7 +4005,7 @@ __metadata:
     "@justeattakeaway/pie-icons-vue": 2.0.0-beta.1
   peerDependencies:
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
-    "@justeat/fozzie": ">=9.0.0"
+    "@justeat/fozzie": 11.x
   languageName: unknown
   linkType: soft
 
@@ -4646,16 +4646,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@justeat/fozzie@npm:10.7.1":
-  version: 10.7.1
-  resolution: "@justeat/fozzie@npm:10.7.1"
-  dependencies:
-    "@justeat/pie-design-tokens": 3.0.0
-    include-media: "github:eduardoboucas/include-media#2.0-release"
-  checksum: fc61d08368e9ae92cd2ab30ed06608d97219c8d99110c45ea6da60dacb7c0fe299d4635d48e7f498cc97456d285eda3074a2ff553f071b3061eaeadefcc30f7d
-  languageName: node
-  linkType: hard
-
 "@justeat/generator-component@workspace:packages/tools/generator-component":
   version: 0.0.0-use.local
   resolution: "@justeat/generator-component@workspace:packages/tools/generator-component"
@@ -4675,17 +4665,6 @@ __metadata:
   dependencies:
     "@justeat/dom-buddy": 2.4.3
   checksum: 4472216a1c03e9d4b07b1739256fa9256ebea7ca1bb3c85323eb91b4e177908101c6d0855dcf885cdd060f71bd6601465ba5589b190f5909b5c1d68fd896a02c
-  languageName: node
-  linkType: hard
-
-"@justeat/pie-design-tokens@npm:3.0.0":
-  version: 3.0.0
-  resolution: "@justeat/pie-design-tokens@npm:3.0.0"
-  dependencies:
-    jsonc-parser: 2.2.0
-    lodash.merge: 4.6.2
-    mkdirp: 1.0.3
-  checksum: cf86b0ceec16bf5ff5d3cf3183052d8fd69ba27b2fad405978a171e9486b1930d091248e76e1b97ab9b59a21bd7d139e8f02d4d1e78599d04233eb2552e62d32
   languageName: node
   linkType: hard
 
@@ -20074,13 +20053,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"include-media@github:eduardoboucas/include-media#2.0-release":
-  version: 2.0.0
-  resolution: "include-media@https://github.com/eduardoboucas/include-media.git#commit=a3c0288e5b22cc746cc2d320d0a374b2ed9d0aeb"
-  checksum: 4f28ff0addab4d07a809d3e61a6751d7c8e022af66866cf29684b1401c725bd73d2dd224aaa08f32a3cdd9c948766a8aa0d05866ed9acb2d6d0141f33d3af37c
-  languageName: node
-  linkType: hard
-
 "include-media@npm:1.4.9":
   version: 1.4.9
   resolution: "include-media@npm:1.4.9"
@@ -23030,13 +23002,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsonc-parser@npm:2.2.0":
-  version: 2.2.0
-  resolution: "jsonc-parser@npm:2.2.0"
-  checksum: 4fb46e4f765db6f32a81045cc5d4d6c856079c2872e5da146ccd413660e66dddcf4f8fb4a6b0c4862fd80467913cca66d597b9052697a6d7300c0f92dcd2d947
-  languageName: node
-  linkType: hard
-
 "jsonc-parser@npm:3.2.0":
   version: 3.2.0
   resolution: "jsonc-parser@npm:3.2.0"
@@ -25137,15 +25102,6 @@ __metadata:
   bin:
     mkdirp: dist/cjs/src/bin.js
   checksum: 972deb188e8fb55547f1e58d66bd6b4a3623bf0c7137802582602d73e6480c1c2268dcbafbfb1be466e00cc7e56ac514d7fd9334b7cf33e3e2ab547c16f83a8d
-  languageName: node
-  linkType: hard
-
-"mkdirp@npm:1.0.3":
-  version: 1.0.3
-  resolution: "mkdirp@npm:1.0.3"
-  bin:
-    mkdirp: bin/cmd.js
-  checksum: c5c46ae41770edd318df35b0bccd50f977dab02a6617dbae80e716dcd3f28b51c8944968247e2be885f2dd3a56963dda492a2478a916b821620438a69224b671
   languageName: node
   linkType: hard
 
