@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-error-message",
   "description": "Fozzie Error Message – Generic inline error message",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "main": "dist/f-error-message.umd.min.js",
   "maxBundleSize": "5kB",
   "files": [
@@ -50,7 +50,7 @@
   },
   "peerDependencies": {
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
-    "@justeat/fozzie": ">=9.0.0"
+    "@justeat/fozzie": "11.x"
   },
   "devDependencies": {
     "@justeat/f-wdio-utils": "1.x"
