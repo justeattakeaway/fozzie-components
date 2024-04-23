@@ -3,7 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-v1.6.1
+## v1.6.2
+
+_April 10, 2024_
+
+### Changed
+- Create new prop for f-restaurant-card
+- Use prop as the max review threshold to limit the actual number of reviews shown on restaurant card
+
+## v1.6.1
 
 _March 25, 2024_
 

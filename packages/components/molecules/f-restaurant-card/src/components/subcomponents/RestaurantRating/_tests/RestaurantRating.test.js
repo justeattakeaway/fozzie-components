@@ -158,6 +158,67 @@ describe('RestaurantRating component', () => {
         });
     });
 
+    describe('reviews count threshold', () => {
+        const maxDisplayedRatings = 200;
+        const rating = '[data-test-id="rating"]';
+
+        it('displays the count when count is less than threshold', () => {
+            // arrange
+            const propsData = {
+                mean: 5,
+                count: 150,
+                isOwnRating: false,
+                maxDisplayedRatings
+            };
+
+            // act
+            const wrapper = mount(RestaurantRating, { propsData });
+            const countMessage = wrapper.find(rating);
+
+            // assert
+            expect(countMessage.exists()).toBe(true);
+
+            expect(countMessage.text()).toStrictEqual('150');
+        });
+
+        it('displays threshold with + when count is higher than threshold', () => {
+            // arrange
+            const propsData = {
+                mean: 5,
+                count: 250,
+                isOwnRating: false,
+                maxDisplayedRatings
+            };
+
+            // act
+            const wrapper = mount(RestaurantRating, { propsData });
+            const countMessage = wrapper.find(rating);
+
+            // assert
+            expect(countMessage.exists()).toBe(true);
+
+            expect(countMessage.text()).toStrictEqual('200+');
+        });
+
+        it('displays threshold with + when count is higher than threshold with default threshold value', () => {
+            // arrange
+            const propsData = {
+                mean: 5,
+                count: 250,
+                isOwnRating: false
+            };
+
+            // act
+            const wrapper = mount(RestaurantRating, { propsData });
+            const countMessage = wrapper.find(rating);
+
+            // assert
+            expect(countMessage.exists()).toBe(true);
+
+            expect(countMessage.text()).toStrictEqual('200+');
+        });
+    });
+
     describe('isOwnRatingMessage is false', () => {
         const isOwnRating = false;
 
