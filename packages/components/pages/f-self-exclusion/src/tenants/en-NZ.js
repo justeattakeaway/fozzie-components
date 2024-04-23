@@ -19,6 +19,7 @@ const messages = {
         text1Show: 'We’ll show alcohol items.',
         text1Temporary: 'We\'ll exclude items containing alcohol from your menus on Menulog for six months.',
         text1Permanent: 'We\'ll permanently exclude items containing alcohol from your menus on Menulog.',
+        text1Expired: 'You have successfully removed the alcohol self-exclusion. It will take 24 hours for your change to take effect.',
         privacyStatement: 'Updating your menus could take up to 24 hours. Find out more about how we process your personal data in this {0}.',
         privacyStatementLinkText: 'privacy statement',
         warningText: 'This choice can’t be reversed.'
