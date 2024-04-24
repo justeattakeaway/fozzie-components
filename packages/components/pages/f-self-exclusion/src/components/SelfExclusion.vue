@@ -319,7 +319,7 @@ export default {
         },
 
         checkState (state) {
-            if (state === 'exclusionPeriodExpired') {
+            if (this.exclusionPeriodExpired) {
                 this.selectedState = 'temporaryExclusion';
             }
             return state;
