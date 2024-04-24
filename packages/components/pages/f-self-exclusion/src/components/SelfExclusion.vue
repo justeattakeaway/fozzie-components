@@ -48,7 +48,7 @@
                     is-dismissible
                 >
                     {{ exclusionPeriodExpired
-                        ? $t('alcoholSelfExclusionConfirmation.text1Expired')
+                        ? $t('alcoholSelfExclusionConfirmation.text1RemovalAfterExpired')
                         : $t('alcoholSelfExclusionConfirmation.text1Show') }}
                 </f-alert>
 
