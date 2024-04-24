@@ -118,6 +118,13 @@ export default {
             default: 0
         },
         /**
+         * Max amount of ratings to be shown
+         */
+        maxDisplayedRatings: {
+            type: Number,
+            default: 200
+        },
+        /**
          * The max value of the rating
          */
         maxRating: {
@@ -161,7 +168,7 @@ export default {
             return Number.parseFloat(this.mean).toFixed(1);
         },
         formattedCount () {
-            return this.count > 200 ? '200+' : this.count;
+            return this.count > this.maxDisplayedRatings ? `${this.maxDisplayedRatings}+` : this.count;
         }
     }
 };
