@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## v4.4.1
+
+_April 25, 2024_
+
+### Changed
+
+- Update `axios` to latest v0 version.
+
+
 ## v4.4.0
 
 _March 13, 2024_
@@ -55,7 +64,7 @@ _June 23, 2022_
 
 ## v3.2.1
 
-_Jun 9, 2022_
+_June 9, 2022_
 
 ### Changed
 

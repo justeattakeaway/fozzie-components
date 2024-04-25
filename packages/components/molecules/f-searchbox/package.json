@@ -2,7 +2,7 @@
   "name": "@justeat/f-searchbox",
   "description": "Fozzie Searchbox – Just Eat Takeaway Global Searchbox",
   "tag": "beta",
-  "version": "6.9.0",
+  "version": "6.9.1",
   "main": "dist/f-searchbox.umd.min.js",
   "maxBundleSize": "60kB",
   "files": [
