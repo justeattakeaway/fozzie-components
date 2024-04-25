@@ -46,7 +46,7 @@
     "window-or-global": "1.0.1"
   },
   "peerDependencies": {
-    "axios": ">=0.21.1"
+    "axios": ">=0.28.1"
   },
   "volta": {
     "extends": "../../../package.json"
