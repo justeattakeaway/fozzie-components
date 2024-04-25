@@ -222,7 +222,6 @@ describe('`general.services`', () => {
             }());
 
             Object.defineProperty(window, 'localStorage', { value: localStorage });
-            Object.defineProperty(window, 'JSON', { value: JSON });
         });
 
         it('should exist', () => {
