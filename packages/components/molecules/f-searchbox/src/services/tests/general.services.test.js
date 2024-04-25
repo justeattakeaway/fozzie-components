@@ -221,7 +221,8 @@ describe('`general.services`', () => {
                 };
             }());
 
-            Object.defineProperty(global.window, 'localStorage', { value: localStorage });
+            Object.defineProperty(window, 'localStorage', { value: localStorage });
+            Object.defineProperty(window, 'JSON', { value: JSON });
         });
 
         it('should exist', () => {
@@ -237,7 +238,7 @@ describe('`general.services`', () => {
                 describe('AND window.localStorage exists', () => {
                     it('should call `setItem` with the given `key` & value', () => {
                         // Arrange
-                        const spy = jest.spyOn(global.window.localStorage, 'setItem');
+                        const spy = jest.spyOn(window.localStorage, 'setItem');
 
                         // Act
                         generalServices.fullAddressLocalStorageService.setItem('key', { city: 'london' });
@@ -258,7 +259,7 @@ describe('`general.services`', () => {
                 describe('AND window.localStorage exists', () => {
                     it('should call `getItem` with the given `key`', () => {
                         // Arrange
-                        const spy = jest.spyOn(global.window.localStorage, 'getItem');
+                        const spy = jest.spyOn(window.localStorage, 'getItem');
 
                         // Act
                         generalServices.fullAddressLocalStorageService.getItem('key');
@@ -269,7 +270,7 @@ describe('`general.services`', () => {
 
                     it('should return an item when the key exists in localStorage', () => {
                         // Arrange
-                        jest.spyOn(global.window.localStorage, 'getItem');
+                        jest.spyOn(window.localStorage, 'getItem');
 
                         // Act
                         const result = generalServices.fullAddressLocalStorageService.getItem('key');
@@ -280,7 +281,7 @@ describe('`general.services`', () => {
 
                     it('should return false when the key does NOT exists in localStorage', () => {
                         // Arrange
-                        jest.spyOn(global.window.localStorage, 'getItem');
+                        jest.spyOn(window.localStorage, 'getItem');
 
                         // Act
                         const result = generalServices.fullAddressLocalStorageService.getItem('non-existing-key');
@@ -301,7 +302,7 @@ describe('`general.services`', () => {
                 describe('AND window.localStorage exists', () => {
                     it('should call `removeItem` with the given `key`', () => {
                         // Arrange
-                        const spy = jest.spyOn(global.window.localStorage, 'removeItem');
+                        const spy = jest.spyOn(window.localStorage, 'removeItem');
 
                         // Act
                         generalServices.fullAddressLocalStorageService.removeItem('key');
