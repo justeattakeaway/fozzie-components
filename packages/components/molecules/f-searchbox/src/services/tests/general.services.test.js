@@ -1,7 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-
 import * as generalServices from '../general.services';
 import * as helpers from '../../utils/helpers';
 import { LOCATION_COOKIE_PROPS } from '../constants';

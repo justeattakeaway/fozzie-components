@@ -87,11 +87,16 @@ const fullAddressLocalStorageService = {
     },
 
     getItem (key) {
+        console.log('================');
+        console.log('window is', window);
+        console.log('window.localStorage is', window.localStorage);
+        console.log('JSON is', JSON);
         if (window.localStorage) {
             const item = window.localStorage.getItem(key);
-
+            console.log('item is', item);
             return item ? JSON.parse(item) : false;
         }
+        console.log('================');
 
         return false;
     },
