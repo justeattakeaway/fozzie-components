@@ -10,6 +10,7 @@ _April 26, 2024_
 ### Changed
 
 - Assorted security package updates.
+- Update `chromedriver` to v124
 
 
 ## v7.56.0
