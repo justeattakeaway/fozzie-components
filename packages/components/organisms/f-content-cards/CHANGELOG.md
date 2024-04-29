@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## v10.6.1
+
+_April 26, 2024_
+
+### Changed
+
+- Remove `jest` from dev dependencies (should come from the root).
+
+
 ## v10.6.0
 
 _April 16, 2024_
@@ -241,7 +250,7 @@ _June 27, 2022_
 
 ## v7.4.1
 
-_Jun 24, 2022_
+_June 24, 2022_
 
 ### Changed
 

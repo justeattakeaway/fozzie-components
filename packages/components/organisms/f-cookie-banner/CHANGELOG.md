@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## v4.12.1
+
+_April 26, 2024_
+
+### Changed
+
+- Update `prerender-spa-plugin` to recommended version.
+
+
 ## v4.12.0
 
 _March 13, 2024_
