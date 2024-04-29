@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## v7.56.1
+
+_April 26, 2024_
+
+### Changed
+
+- Assorted security package updates.
+- Update `chromedriver` to v124
+
+
 ## v7.56.0
 
 _April 10, 2024_
