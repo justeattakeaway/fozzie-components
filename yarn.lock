@@ -3812,7 +3812,7 @@ __metadata:
     "@justeat/f-vue-icons": 3.x
     "@justeat/f-wdio-utils": 1.x
     "@vue/cli-plugin-babel": 5.0.0
-    axios: 1.6.8
+    axios: 1.6.0
     jwt-decode: 3.1.2
     vue-scrollto: 2.20.0
     vuelidate: 0.7.6
@@ -4118,7 +4118,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justeat/f-http@workspace:packages/services/f-http"
   dependencies:
-    axios: 0.28.1
+    axios: 1.6.0
     axios-mock-adapter: 1.19.0
   languageName: unknown
   linkType: soft
@@ -4280,7 +4280,7 @@ __metadata:
     "@justeat/f-wdio-utils": 1.x
     "@justeattakeaway/cc-braze-adapter": 0.5.0
     "@vue/cli-plugin-babel": 5.0.0
-    axios: 0.28.1
+    axios: 1.6.0
     jwt-decode: 3.1.2
   peerDependencies:
     "@braze/web-sdk": ">=4.5.0"
@@ -4392,7 +4392,7 @@ __metadata:
     "@justeat/f-services": 1.x
     "@justeat/f-vue-icons": 3.x
     "@justeat/f-wdio-utils": 1.x
-    axios: 0.28.1
+    axios: 1.6.0
     lodash.debounce: 4.0.8
     url-loader: 4.1.0
   peerDependencies:
@@ -4428,7 +4428,7 @@ __metadata:
     "@justeat/f-wdio-utils": 1.x
     "@vue/cli-plugin-babel": 5.0.0
     "@vue/test-utils": 1.0.3
-    axios: 0.28.1
+    axios: 1.6.0
   peerDependencies:
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
   languageName: unknown
@@ -4507,7 +4507,7 @@ __metadata:
     "@justeat/f-services": 1.x
     "@justeat/f-vue-icons": 3.x
     "@justeat/f-wdio-utils": 1.x
-    axios: 0.28.1
+    axios: 1.6.0
   peerDependencies:
     "@justeat/browserslist-config-fozzie": ">=1.2.0"
     "@justeat/f-button": 4.x
@@ -4566,7 +4566,7 @@ __metadata:
     "@justeat/f-services": 1.x
     "@justeat/f-wdio-utils": 1.x
     "@justeattakeaway/pie-icons-vue": 2.0.0-beta.1
-    axios: 0.28.1
+    axios: 1.6.0
     lodash-es: 4.17.21
   peerDependencies:
     "@justeat/eslint-config-fozzie": ">=3.3.1"
@@ -10854,25 +10854,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:0.28.1":
-  version: 0.28.1
-  resolution: "axios@npm:0.28.1"
+"axios@npm:1.6.0":
+  version: 1.6.0
+  resolution: "axios@npm:1.6.0"
   dependencies:
     follow-redirects: ^1.15.0
     form-data: ^4.0.0
     proxy-from-env: ^1.1.0
-  checksum: 5115a38d79064d07437c5a28f15841e3607634040e3120ec06a2c4367a7d07cf213b16496eab53b6f58ebc5fb377a440ba9ed4782529b14449a1e285734bfb54
-  languageName: node
-  linkType: hard
-
-"axios@npm:1.6.8, axios@npm:^1.6.7":
-  version: 1.6.8
-  resolution: "axios@npm:1.6.8"
-  dependencies:
-    follow-redirects: ^1.15.6
-    form-data: ^4.0.0
-    proxy-from-env: ^1.1.0
-  checksum: bf007fa4b207d102459300698620b3b0873503c6d47bf5a8f6e43c0c64c90035a4f698b55027ca1958f61ab43723df2781c38a99711848d232cad7accbcdfcdd
+  checksum: c7c9f2ae9e0b9bad7d6f9a4dff030930b12ee667dedf54c3c776714f91681feb743c509ac0796ae5c01e12c4ab4a2bee74905068dd200fbc1ab86f9814578fb0
   languageName: node
   linkType: hard
 
@@ -10882,6 +10871,17 @@ __metadata:
   dependencies:
     follow-redirects: ^1.14.4
   checksum: 468cf496c08a6aadfb7e699bebdac02851e3043d4e7d282350804ea8900e30d368daa6e3cd4ab83b8ddb5a3b1e17a5a21ada13fc9cebd27b74828f47a4236316
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.6.7":
+  version: 1.6.8
+  resolution: "axios@npm:1.6.8"
+  dependencies:
+    follow-redirects: ^1.15.6
+    form-data: ^4.0.0
+    proxy-from-env: ^1.1.0
+  checksum: bf007fa4b207d102459300698620b3b0873503c6d47bf5a8f6e43c0c64c90035a4f698b55027ca1958f61ab43723df2781c38a99711848d232cad7accbcdfcdd
   languageName: node
   linkType: hard
 
@@ -30283,7 +30283,7 @@ __metadata:
     allure-commandline: 2.17.2
     axe-core: 4.3.5
     axe-reports: 1.1.11
-    axios: 0.28.1
+    axios: 1.6.0
     axios-mock-adapter: 1.19.0
     babel-core: 7.0.0-bridge.0
     babel-jest: 29.7.0
