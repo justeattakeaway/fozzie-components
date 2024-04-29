@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-checkout",
   "description": "Fozzie Checkout - Fozzie Checkout Component",
-  "version": "4.13.1",
+  "version": "4.13.2",
   "main": "dist/f-checkout.umd.min.js",
   "maxBundleSize": "102kB",
   "files": [
@@ -83,7 +83,7 @@
     "@justeat/f-mega-modal": "7.x",
     "@justeat/f-vue-icons": "3.x",
     "@justeat/f-wdio-utils": "1.x",
-    "@vue/cli-plugin-babel": "5.0.0"
+    "@vue/cli-plugin-babel": "5.0.8"
   },
   "volta": {
     "extends": "../../../../package.json"
