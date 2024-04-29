@@ -22,7 +22,7 @@
     "@storybook/addon-essentials": "6.5.16",
     "@storybook/addon-knobs": "6.4.0",
     "@storybook/addon-links": "6.5.16",
-    "@storybook/storybook-deployer": "2.8.12",
+    "@storybook/storybook-deployer": "2.8.16",
     "@storybook/theming": "6.5.16",
     "@storybook/vue": "6.5.16",
     "cookie-universal": "2.1.4",
@@ -30,7 +30,7 @@
     "path": "0.12.7",
     "postcss-assets": "5.0.0",
     "storybook-vue-router": "1.0.7",
-    "vue-cli-plugin-storybook": "2.0.0"
+    "vue-cli-plugin-storybook": "2.1.0"
   },
   "bugs": {
     "url": "https://github.com/justeat/fozzie-components/issues"
