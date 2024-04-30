@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html)
 
+## v3.14.1
+_April 30, 2024_
+
+### Removed
+- Unused `marked` dependency.
+
+
 ## v3.14.0
 
 _March 13, 2024_
@@ -12,7 +19,6 @@ _March 13, 2024_
 - node engines in `package.json` to include all versions above 14
 - Replaced vulnerable `bili` package with rollup for generating icons
 - bumped vulnerable `marked` package (snyk vulnerability)
--
 
 ## v3.13.1
 

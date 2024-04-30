@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "3.14.0",
+  "version": "3.14.1",
   "main": "dist/index.cjs",
   "maxBundleSize": "155kB",
   "module": "esm/index.mjs",
