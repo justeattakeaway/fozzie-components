@@ -3,6 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## v7.56.2
+
+_April 29, 2024_
+
+### Changed
+
+- Bump `@vue/cli-service` from v4.5.16 to v4.5.19.
+- Bump `@vue/cli-plugin-babel` from v5.0.0 to v5.0.8
+- Bump `@vue/babel-preset-app` from v5.0.0 to v5.0.8
+- Bump `@vue/cli-plugin-unit-jest` from v5.0.0 to v5.0.8
+
+
 ## v7.56.1
 
 _April 26, 2024_
