@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "7.56.2",
+  "version": "7.57.0",
   "private": true,
   "scripts": {
     "build": "NODE_OPTIONS=--openssl-legacy-provider cross-env-shell turbo run build --continue --token=${TURBO_TOKEN}",
