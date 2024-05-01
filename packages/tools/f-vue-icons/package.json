@@ -1,6 +1,6 @@
 {
   "name": "@justeat/f-vue-icons",
-  "version": "3.14.0",
+  "version": "3.14.1",
   "main": "dist/index.cjs",
   "maxBundleSize": "155kB",
   "module": "esm/index.mjs",
@@ -60,7 +60,6 @@
     "@rollup/plugin-node-resolve": "15.1.0",
     "fs-extra": "9.0.1",
     "lodash.kebabcase": "4.1.1",
-    "marked": "2.0.0",
     "pascal-case": "3.1.2",
     "prismjs": "1.27.0",
     "rollup": "3.20.2"
