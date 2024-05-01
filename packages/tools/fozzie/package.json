@@ -38,10 +38,10 @@
     "include-media": "2.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.18.10",
-    "@babel/core": "7.19.1",
-    "@babel/eslint-parser": "7.19.1",
-    "@babel/preset-env": "7.19.1",
+    "@babel/cli": "7.24.5",
+    "@babel/core": "7.24.5",
+    "@babel/eslint-parser": "7.24.5",
+    "@babel/preset-env": "7.24.5",
     "@justeat/browserslist-config-fozzie": "2.0.0",
     "@justeat/eslint-config-fozzie": "5.1.0",
     "@justeat/f-dom": "1.1.0",
@@ -65,9 +65,6 @@
     "sass-true": "6.1.0",
     "stylelint": "14.14.0",
     "stylelint-config-standard-scss": "5.0.0"
-  },
-  "resolutions": {
-    "babel-core": "7.0.0-bridge.0"
   },
   "keywords": [
     "fozzie"

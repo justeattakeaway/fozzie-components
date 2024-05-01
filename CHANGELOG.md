@@ -3,6 +3,21 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## v7.57.0
+
+_April 30, 2024_
+
+### Changed
+
+- Updated babel dependencies.
+
+### Removed
+
+- Babel plugin proposals which are now included in preset-env:
+  - `plugin-proposal-class-properties`
+  - `plugin-proposal-optional-chaining`
+
+
 ## v7.56.2
 
 _April 29, 2024_
