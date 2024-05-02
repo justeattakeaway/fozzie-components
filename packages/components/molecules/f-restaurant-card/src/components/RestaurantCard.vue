@@ -68,7 +68,8 @@
                     v-if="rating"
                     :tier="3">
                     <restaurant-rating
-                        v-bind="rating" />
+                        v-bind="rating"
+                        :max-displayed-ratings="maxDisplayedRatings" />
                 </component>
 
                 <!-- Premier Icon -->
@@ -322,6 +323,10 @@ export default {
         inlineTileData: {
             type: Boolean,
             default: false
+        },
+        maxDisplayedRatings: {
+            type: Number,
+            default: 0
         }
     },
     computed: {
