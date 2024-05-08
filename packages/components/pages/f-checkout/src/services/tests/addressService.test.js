@@ -1,6 +1,5 @@
 import { when } from 'jest-when';
 import addressService from '../addressService';
-import localStorageMock from '../../../test-utils/local-storage/local-storage-mock';
 import { Addresses } from '../../../stories/helpers/addresses';
 
 const area511Line = {
@@ -53,6 +52,11 @@ const australiaAddressAdditional = {
 };
 
 describe('addressService', () => {
+    afterEach(() => {
+        jest.restoreAllMocks();
+        window.localStorage.clear();
+    });
+
     describe('getClosestAddress ::', () => {
         const ukAddressesData = { Addresses: [area511Line, bristol2Lines, london3LinesDefault] };
         const auAddressesData = { Addresses: [australiaAddressDefault, australiaAddressAdditional], DefaultAddress: defaultAustraliaId };
@@ -159,15 +163,6 @@ describe('addressService', () => {
 
     describe('isAddressInLocalStorage ::', () => {
         describe('if localStorage exists', () => {
-            beforeEach(() => {
-                Object.defineProperty(window, 'localStorage', { value: localStorageMock });
-            });
-
-            afterEach(() => {
-                window.localStorage.clear();
-                jest.resetAllMocks();
-            });
-
             describe('when the address does NOT exist in local storage', () => {
                 it('should return false', () => {
                     expect(addressService.isAddressInLocalStorage()).toBe(false);
@@ -205,16 +200,11 @@ describe('addressService', () => {
         });
 
         describe('if localStorage does NOT exist', () => {
-            beforeAll(() => {
-                Object.defineProperty(window, 'localStorage', { value: null });
-            });
-
-            afterAll(() => {
-                window.localStorage.clear();
-                jest.resetAllMocks();
-            });
-
             it('should return false', () => {
+                // Arrange
+                const localStorageSpy = jest.spyOn(window, 'localStorage', 'get');
+                localStorageSpy.mockReturnValue(null);
+
                 // Assert
                 expect(addressService.isAddressInLocalStorage()).toBe(false);
             });
@@ -222,18 +212,9 @@ describe('addressService', () => {
     });
 
     describe('getAddressFromLocalStorage ::', () => {
-        beforeEach(() => {
-            Object.defineProperty(window, 'localStorage', { value: localStorageMock });
-        });
-
-        afterEach(() => {
-            window.localStorage.clear();
-            jest.resetAllMocks();
-        });
-
         describe('when the address does NOT exist in local storage', () => {
             it('should return null', () => {
-                // Assert
+                // Act & Assert
                 expect(addressService.getAddressFromLocalStorage()).toBe(null);
             });
         });
@@ -489,7 +470,9 @@ describe('addressService', () => {
         describe('when local storage is available', () => {
             it('save address in local storage correctly', () => {
                 // Arrange
-                const spy = jest.spyOn(window.localStorage, 'setItem');
+                const spyFn = jest.fn();
+                const localStorageSpy = jest.spyOn(window, 'localStorage', 'get');
+                localStorageSpy.mockReturnValue({ setItem: spyFn });
                 const expectedValue = JSON.stringify({
                     PostalCode: addressDetails.postcode,
                     Line1: addressDetails.line1,
@@ -504,7 +487,7 @@ describe('addressService', () => {
                 addressService.setAddressInLocalStorage(addressDetails);
 
                 // Assert
-                expect(spy).toHaveBeenCalledWith('je-full-address-details', expectedValue);
+                expect(spyFn).toHaveBeenCalledWith('je-full-address-details', expectedValue);
             });
         });
     });

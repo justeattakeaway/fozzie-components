@@ -3,11 +3,25 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html)
 
+## v11.2.2
+_April 30, 2024_
+
+### Changed
+- Update `glob` to v9.
+
+
+## v11.2.1
+_April 26, 2024_
+
+### Changed
+- Update `jest` to latest version.
+
+
 ## v11.2.0
 
 _April 10, 2024_
 
-### Updated
+### Changed
 
 - `@justeat/pie-design-tokens` from 5.0.0 to 6.2.1
 

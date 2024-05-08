@@ -82,15 +82,14 @@ const generateFormQueryUrl = (queryString, formUrl) => {
 const fullAddressLocalStorageService = {
     setItem (key, value = {}) {
         if (window.localStorage) {
-            window.localStorage.setItem(key, window.JSON.stringify(value));
+            window.localStorage.setItem(key, JSON.stringify(value));
         }
     },
 
     getItem (key) {
         if (window.localStorage) {
             const item = window.localStorage.getItem(key);
-
-            return item ? window.JSON.parse(item) : false;
+            return item ? JSON.parse(item) : false;
         }
 
         return false;

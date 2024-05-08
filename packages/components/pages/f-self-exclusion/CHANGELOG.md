@@ -3,13 +3,32 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## v1.3.1
+## v1.4.0
 
-_April 22, 2024_
+_May 8, 2024_
+
+### Added
+
+- Form functionality to handle cases where the exclusion period has expired.
+
+
+## v1.3.2
+
+_April 29, 2024_
 
 ### Changed
 
-- Added form functionality to handle cases where the exclusion period has expired.
+- Bump `@vue/cli-plugin-babel` from v5.0.0 to v5.0.8
+
+
+## v1.3.1
+
+_April 26, 2024_
+
+### Changed
+
+- Update `axios` to latest v0 version.
+
 
 ## v1.3.0
 

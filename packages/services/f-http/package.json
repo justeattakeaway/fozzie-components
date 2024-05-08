@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-http",
   "description": "Javascript HTTP client for interacting with restful services",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "maxBundleSize": "400kB",
   "main": "dist/f-http.umd.js",
   "module": "dist/f-http.es.js",
@@ -44,7 +44,7 @@
     "extends @justeat/browserslist-config-fozzie"
   ],
   "dependencies": {
-    "axios": "0.21.2",
+    "axios": "0.28.1",
     "axios-mock-adapter": "1.19.0"
   },
   "volta": {

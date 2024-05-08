@@ -2,9 +2,7 @@ module.exports = api => {
     // Use isTest to determine what presets and plugins to use with jest
     const isTest = api.env('test');
     const presets = [];
-    const plugins = [
-        '@babel/plugin-proposal-optional-chaining'
-    ];
+    const plugins = [];
 
     if (isTest) {
         plugins.push('@babel/plugin-transform-runtime');

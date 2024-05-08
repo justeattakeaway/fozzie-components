@@ -2,7 +2,7 @@
   "name": "@justeat/fozzie",
   "title": "Fozzie – Just Eat UI Web Framework",
   "description": "UI Web Framework for the Just Eat Global Platform",
-  "version": "11.2.0",
+  "version": "11.2.2",
   "main": "dist/js/index.js",
   "files": [
     "dist/js",
@@ -38,10 +38,10 @@
     "include-media": "2.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "7.18.10",
-    "@babel/core": "7.19.1",
-    "@babel/eslint-parser": "7.19.1",
-    "@babel/preset-env": "7.19.1",
+    "@babel/cli": "7.24.5",
+    "@babel/core": "7.24.5",
+    "@babel/eslint-parser": "7.24.5",
+    "@babel/preset-env": "7.24.5",
     "@justeat/browserslist-config-fozzie": "2.0.0",
     "@justeat/eslint-config-fozzie": "5.1.0",
     "@justeat/f-dom": "1.1.0",
@@ -56,18 +56,15 @@
     "eslint": "8.26.0",
     "eslint-plugin-import": "2.26.0",
     "fontfaceobserver": "2.3.0",
-    "glob": "8.0.3",
-    "jest": "29.2.2",
-    "jest-environment-jsdom": "29.2.2",
+    "glob": "9.0.0",
+    "jest": "29.7.0",
+    "jest-environment-jsdom": "29.7.0",
     "postcss": "8.4.31",
     "postcss-cli": "10.0.0",
     "sass": "1.55.0",
     "sass-true": "6.1.0",
     "stylelint": "14.14.0",
     "stylelint-config-standard-scss": "5.0.0"
-  },
-  "resolutions": {
-    "babel-core": "7.0.0-bridge.0"
   },
   "keywords": [
     "fozzie"

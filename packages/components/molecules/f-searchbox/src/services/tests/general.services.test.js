@@ -269,7 +269,7 @@ describe('`general.services`', () => {
 
                     it('should return an item when the key exists in localStorage', () => {
                         // Arrange
-                        jest.spyOn(window.localStorage, 'getItem');
+                        generalServices.fullAddressLocalStorageService.setItem('key', { city: 'london' });
 
                         // Act
                         const result = generalServices.fullAddressLocalStorageService.getItem('key');
@@ -278,11 +278,8 @@ describe('`general.services`', () => {
                         expect(result).toEqual({ city: 'london' });
                     });
 
-                    it('should return false when the key does NOT exists in localStorage', () => {
-                        // Arrange
-                        jest.spyOn(window.localStorage, 'getItem');
-
-                        // Act
+                    it('should return false when the key does NOT exist in localStorage', () => {
+                        // Arrange & Act
                         const result = generalServices.fullAddressLocalStorageService.getItem('non-existing-key');
 
                         // Assert
