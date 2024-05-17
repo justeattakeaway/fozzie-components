@@ -187,5 +187,14 @@ export default [
         localisedName: 'Suisse',
         siteUrl: 'https://www.eat.ch/fr',
         gtm: 'click_country_ch_fr'
+    },
+    {
+        key: 'sk',
+        flagKey: 'sk',
+        dataTestKey: 'sk',
+        lang: 'sk',
+        localisedName: 'Slovakia',
+        siteUrl: 'https://www.bistro.sk/',
+        gtm: 'click_country_sk'
     }
 ];

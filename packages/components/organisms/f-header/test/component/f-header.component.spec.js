@@ -45,7 +45,8 @@ describe('Desktop - f-header component tests', () => {
         { expectedLocale: 'es', expectedUrl: 'just-eat.es' },
         { expectedLocale: 'ch_ch', expectedUrl: 'eat.ch' },
         { expectedLocale: 'ch_en', expectedUrl: 'eat.ch/en' },
-        { expectedLocale: 'ch_fr', expectedUrl: 'eat.ch/fr' }
+        { expectedLocale: 'ch_fr', expectedUrl: 'eat.ch/fr' },
+        { expectedLocale: 'sk', expectedUrl: 'bistro.sk' }
     ];
 
     tests.forEach(({ expectedLocale, expectedUrl }) => {

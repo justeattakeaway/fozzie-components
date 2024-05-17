@@ -23,6 +23,7 @@ import {
     FlagEsRoundIcon as FlagIconEs,
     FlagGbRoundIcon as FlagIconGb
 } from '@justeat/f-vue-icons';
+import { FlagSlovakiaIcon as FlagIconSk } from '@justeattakeaway/pie-icons-vue';
 
 export default {
     components: {
@@ -43,7 +44,8 @@ export default {
         FlagIconNo,
         FlagIconPl,
         FlagIconEs,
-        FlagIconGb
+        FlagIconGb,
+        FlagIconSk
     },
 
     props: {

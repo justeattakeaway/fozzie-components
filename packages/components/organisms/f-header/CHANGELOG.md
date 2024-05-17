@@ -10,6 +10,7 @@ _May 16, 2024_
 ### Changed
 
 - Stop Portugal, Romania, and New Zealand support.
+- Support new country Slovakia.
 
 ## v10.19.0
 
