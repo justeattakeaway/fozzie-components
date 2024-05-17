@@ -51,20 +51,6 @@ describe('Header', () => {
         expect(wrapper.attributes('data-theme')).toBe('ml');
     });
 
-    it('should render ml themed component if NZ local passed', () => {
-        // Arrange
-        const propsData = {
-            locale: 'en-NZ',
-            headerBackgroundTheme: 'transparent'
-        };
-
-        // Act
-        const wrapper = shallowMount(Header, { propsData });
-
-        // Assert
-        expect(wrapper.attributes('data-theme')).toBe('ml');
-    });
-
 
     it('should render jet themed component if shouldUseJetLogo prop is true even when there is no locale', () => {
         // Arrange

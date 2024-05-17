@@ -18,11 +18,8 @@ import {
     FlagItRoundIcon as FlagIconIt,
     FlagLuRoundIcon as FlagIconLu,
     FlagNlRoundIcon as FlagIconNl,
-    FlagNzRoundIcon as FlagIconNz,
     FlagNoRoundIcon as FlagIconNo,
     FlagPlRoundIcon as FlagIconPl,
-    FlagPtRoundIcon as FlagIconPt,
-    FlagRoRoundIcon as FlagIconRo,
     FlagEsRoundIcon as FlagIconEs,
     FlagGbRoundIcon as FlagIconGb
 } from '@justeat/f-vue-icons';
@@ -43,11 +40,8 @@ export default {
         FlagIconIt,
         FlagIconLu,
         FlagIconNl,
-        FlagIconNz,
         FlagIconNo,
         FlagIconPl,
-        FlagIconPt,
-        FlagIconRo,
         FlagIconEs,
         FlagIconGb
     },
