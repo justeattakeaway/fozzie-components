@@ -10,6 +10,7 @@ _May 21, 2024_
 ### Changed
 
 - Stop Portugal, Romania, and New Zealand support.
+- Support new country Slovakia.
 - Redirect user from Twitter to X Just Eat page.
 
 ## v8.7.0
