@@ -40,15 +40,13 @@ describe('Desktop - f-header component tests', () => {
         { expectedLocale: 'it', expectedUrl: 'justeat.it' },
         { expectedLocale: 'lu', expectedUrl: 'takeaway.com/lu' },
         { expectedLocale: 'nl', expectedUrl: 'thuisbezorgd.nl' },
-        { expectedLocale: 'nz', expectedUrl: 'menulog.co.nz' },
         { expectedLocale: 'no', expectedUrl: 'just-eat.no' },
         { expectedLocale: 'pl', expectedUrl: 'pyszne.pl' },
-        { expectedLocale: 'pt', expectedUrl: 'takeaway.com/pt' },
-        { expectedLocale: 'ro', expectedUrl: 'takeaway.com/ro' },
         { expectedLocale: 'es', expectedUrl: 'just-eat.es' },
         { expectedLocale: 'ch_ch', expectedUrl: 'eat.ch' },
         { expectedLocale: 'ch_en', expectedUrl: 'eat.ch/en' },
-        { expectedLocale: 'ch_fr', expectedUrl: 'eat.ch/fr' }
+        { expectedLocale: 'ch_fr', expectedUrl: 'eat.ch/fr' },
+        { expectedLocale: 'sk', expectedUrl: 'bistro.sk' }
     ];
 
     tests.forEach(({ expectedLocale, expectedUrl }) => {
