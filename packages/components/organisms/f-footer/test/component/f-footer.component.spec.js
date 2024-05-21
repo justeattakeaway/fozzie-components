@@ -7,7 +7,7 @@ describe('Desktop - f-footer component tests', () => {
         { icon: 'ios', expectedUrl: 'apple' },
         { icon: 'android', expectedUrl: 'google' },
         { icon: 'huawei', expectedUrl: 'appgallery' },
-        { icon: 'X', expectedUrl: 'x.com' },
+        { icon: 'x', expectedUrl: 'x.com' },
         { icon: 'facebook', expectedUrl: 'facebook.com' },
         { icon: 'youtube', expectedUrl: 'youtube.com' }
     ];

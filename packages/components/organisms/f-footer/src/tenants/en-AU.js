@@ -72,7 +72,7 @@ export default {
         },
         {
             url: 'https://www.x.com/menulog',
-            name: 'X',
+            name: 'x',
             alt: 'Menu Log on X (leads to external site)',
             gtm: 'click_follow_twitter'
         }

@@ -47,7 +47,7 @@ export default {
         },
         {
             url: 'https://www.x.com/JustEatUK',
-            name: 'X',
+            name: 'x',
             alt: 'Just Eat on X (leads to external site)',
             gtm: 'click_follow_twitter'
         },
