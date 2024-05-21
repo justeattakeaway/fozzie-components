@@ -65,9 +65,9 @@ export default {
             gtm: 'click_follow_facebook'
         },
         {
-            url: 'https://twitter.com/Menulog',
-            name: 'twitter',
-            alt: 'Menu Log on Twitter (leads to external site)',
+            url: 'https://www.x.com/Menulog',
+            name: 'X',
+            alt: 'Menu Log on X (leads to external site)',
             gtm: 'click_follow_twitter'
         },
         {

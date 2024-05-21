@@ -28,9 +28,9 @@ export default {
             gtm: 'click_follow_facebook'
         },
         {
-            url: 'https://twitter.com/JustEat_it',
-            name: 'twitter',
-            alt: 'Twitter',
+            url: 'https://www.x.com/JustEat_it',
+            name: 'X',
+            alt: 'X',
             gtm: 'click_follow_twitter'
         },
         {

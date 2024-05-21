@@ -40,9 +40,9 @@ export default {
             gtm: 'click_follow_instagram'
         },
         {
-            url: 'https://twitter.com/JustEat_es',
-            name: 'twitter',
-            alt: 'Twitter',
+            url: 'https://www.x.com/JustEat_es',
+            name: 'X',
+            alt: 'X',
             gtm: 'click_follow_twitter'
         }
     ],

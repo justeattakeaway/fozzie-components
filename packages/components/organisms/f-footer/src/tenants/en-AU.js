@@ -71,9 +71,9 @@ export default {
             gtm: 'click_follow_instagram'
         },
         {
-            url: 'https://twitter.com/menulog',
-            name: 'twitter',
-            alt: 'Menu Log on Twitter (leads to external site)',
+            url: 'https://www.x.com/menulog',
+            name: 'X',
+            alt: 'Menu Log on X (leads to external site)',
             gtm: 'click_follow_twitter'
         }
     ],
