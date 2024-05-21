@@ -4,7 +4,6 @@ describe('Accessibility tests', () => {
     const locales = [
         'en-GB',
         'en-AU',
-        'en-NZ',
         'en-IE',
         'it-IT',
         'es-ES'

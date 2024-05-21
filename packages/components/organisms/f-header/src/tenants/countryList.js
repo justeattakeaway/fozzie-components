@@ -135,15 +135,6 @@ export default [
         gtm: 'click_country_nl'
     },
     {
-        key: 'nz',
-        flagKey: 'nz',
-        dataTestKey: 'nz',
-        lang: 'en',
-        localisedName: 'New Zealand',
-        siteUrl: 'https://www.menulog.co.nz',
-        gtm: 'click_country_nz'
-    },
-    {
         key: 'no',
         flagKey: 'no',
         dataTestKey: 'no',
@@ -160,24 +151,6 @@ export default [
         localisedName: 'Polska',
         siteUrl: 'https://www.pyszne.pl',
         gtm: 'click_country_pl'
-    },
-    {
-        key: 'pt',
-        flagKey: 'pt',
-        dataTestKey: 'pt',
-        lang: 'pt',
-        localisedName: 'Portugal',
-        siteUrl: 'https://www.takeaway.com/pt',
-        gtm: 'click_country_pt'
-    },
-    {
-        key: 'ro',
-        flagKey: 'ro',
-        dataTestKey: 'ro',
-        lang: 'ro',
-        localisedName: 'România',
-        siteUrl: 'https://www.takeaway.com/ro',
-        gtm: 'click_country_ro'
     },
     {
         key: 'es',
@@ -214,5 +187,14 @@ export default [
         localisedName: 'Suisse',
         siteUrl: 'https://www.eat.ch/fr',
         gtm: 'click_country_ch_fr'
+    },
+    {
+        key: 'sk',
+        flagKey: 'sk',
+        dataTestKey: 'sk',
+        lang: 'sk',
+        localisedName: 'Slovakia',
+        siteUrl: 'https://www.bistro.sk/',
+        gtm: 'click_country_sk'
     }
 ];

@@ -8,8 +8,6 @@ describe('Shared - f-header component tests', () => {
         { tenant: 'en-GB', isLoggedIn: false },
         { tenant: 'en-AU', isLoggedIn: true },
         { tenant: 'en-AU', isLoggedIn: false },
-        { tenant: 'en-NZ', isLoggedIn: true },
-        { tenant: 'en-NZ', isLoggedIn: false },
         { tenant: 'en-IE', isLoggedIn: true },
         { tenant: 'en-IE', isLoggedIn: false },
         { tenant: 'it-IT', isLoggedIn: true },
