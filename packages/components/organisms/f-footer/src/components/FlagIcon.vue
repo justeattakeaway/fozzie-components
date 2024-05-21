@@ -4,28 +4,26 @@
 
 <script>
 import {
-    FlagAtRoundIcon as FlagIconAt,
-    FlagBeRoundIcon as FlagIconBe,
-    FlagBgRoundIcon as FlagIconBg,
-    FlagCaRoundIcon as FlagIconCa,
-    FlagChRoundIcon as FlagIconCh,
-    FlagDkRoundIcon as FlagIconDk,
-    FlagAuRoundIcon as FlagIconAu,
-    FlagFrRoundIcon as FlagIconFr,
-    FlagDeRoundIcon as FlagIconDe,
-    FlagIeRoundIcon as FlagIconIe,
-    FlagIlRoundIcon as FlagIconIl,
-    FlagItRoundIcon as FlagIconIt,
-    FlagLuRoundIcon as FlagIconLu,
-    FlagNlRoundIcon as FlagIconNl,
-    FlagNzRoundIcon as FlagIconNz,
-    FlagNoRoundIcon as FlagIconNo,
-    FlagPlRoundIcon as FlagIconPl,
-    FlagPtRoundIcon as FlagIconPt,
-    FlagRoRoundIcon as FlagIconRo,
-    FlagEsRoundIcon as FlagIconEs,
-    FlagGbRoundIcon as FlagIconGb
-} from '@justeat/f-vue-icons';
+    FlagAustriaIcon as FlagIconAt,
+    FlagAustraliaIcon as FlagIconAu,
+    FlagBelgiumIcon as FlagIconBe,
+    FlagBulgariaIcon as FlagIconBg,
+    FlagCanadaIcon as FlagIconCa,
+    FlagSwitzerlandIcon as FlagIconCh,
+    FlagDenmarkIcon as FlagIconDk,
+    FlagGermanyIcon as FlagIconDe,
+    FlagFranceIcon as FlagIconFr,
+    FlagUnitedKingdomIcon as FlagIconGb,
+    FlagIrelandIcon as FlagIconIe,
+    FlagIsraelIcon as FlagIconIl,
+    FlagItalyIcon as FlagIconIt,
+    FlagLuxemburgIcon as FlagIconLu,
+    FlagNetherlandsIcon as FlagIconNl,
+    FlagNorwayIcon as FlagIconNo,
+    FlagPolandIcon as FlagIconPl,
+    FlagSpainIcon as FlagIconEs,
+    FlagSlovakiaIcon as FlagIconSk
+} from '@justeattakeaway/pie-icons-vue';
 
 export default {
     components: {
@@ -43,13 +41,11 @@ export default {
         FlagIconIt,
         FlagIconLu,
         FlagIconNl,
-        FlagIconNz,
         FlagIconNo,
         FlagIconPl,
-        FlagIconPt,
-        FlagIconRo,
         FlagIconEs,
-        FlagIconGb
+        FlagIconGb,
+        FlagIconSk
     },
 
     props: {

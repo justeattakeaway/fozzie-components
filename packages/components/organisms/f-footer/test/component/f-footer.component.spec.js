@@ -42,7 +42,8 @@ describe('Desktop - f-footer component tests', () => {
         { country: 'es', expectedUrl: 'just-eat.es' },
         { country: 'ch_ch', expectedUrl: 'eat.ch' },
         { country: 'ch_en', expectedUrl: 'eat.ch/en' },
-        { country: 'ch_fr', expectedUrl: 'eat.ch/fr' }
+        { country: 'ch_fr', expectedUrl: 'eat.ch/fr' },
+        { country: 'sk', expectedUrl: 'www.bistro.sk' }
     ];
 
     tests.forEach(({ country, expectedUrl }) => {
