@@ -20,7 +20,7 @@ import {
 // Social icons
 import {
     SocialFacebookIcon as FacebookIcon,
-    // TODO: Replace with correct icon for X platform when available
+    // TODO: Update to latest icon package with the correct logos
     SocialTwitterIcon as XIcon,
     SocialYoutubeIcon as YoutubeIcon,
     SocialPinterestIcon as PinterestIcon,
