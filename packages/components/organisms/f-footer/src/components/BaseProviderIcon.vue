@@ -20,7 +20,8 @@ import {
 // Social icons
 import {
     SocialFacebookIcon as FacebookIcon,
-    SocialTwitterIcon as TwitterIcon,
+    // TODO: Update to latest icon package with the correct logos
+    SocialTwitterIcon as XIcon,
     SocialYoutubeIcon as YoutubeIcon,
     SocialPinterestIcon as PinterestIcon,
     SocialInstagramIcon as InstagramIcon,
@@ -32,7 +33,7 @@ import iconPropsMixin from '../mixins/iconProps.mixin';
 export default {
     components: {
         FacebookIcon,
-        TwitterIcon,
+        XIcon,
         YoutubeIcon,
         PinterestIcon,
         InstagramIcon,

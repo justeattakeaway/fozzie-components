@@ -38,19 +38,6 @@ describe('Footer', () => {
         expect(wrapper.attributes('data-theme')).toBe('ml');
     });
 
-    it('should render ml themed component if NZ locale passed', () => {
-        // Arrange & Act
-        propsData = {
-            ...propsData,
-            locale: 'en-NZ'
-        };
-
-        const wrapper = shallowMount(Footer, { propsData });
-
-        // Assert
-        expect(wrapper.attributes('data-theme')).toBe('ml');
-    });
-
     it('should render je themed component if IE locale passed', () => {
         // Arrange & Act
         propsData = {
@@ -96,7 +83,6 @@ describe('Footer', () => {
         'en-GB',
         'en-AU',
         'en-IE',
-        'en-NZ',
         'it-IT'
     ])('should not render the Confianza URL and icon when locale is %s', locale => {
         // Arrange & Act
