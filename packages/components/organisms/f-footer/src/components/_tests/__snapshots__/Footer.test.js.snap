@@ -20,7 +20,7 @@ exports[`Footer should render default component markup 1`] = `
     </div>
   </div>
   <div class="">
-    <country-selector-stub currentcountryname="United Kingdom" currentcountrykey="gb" countries="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" changecountrytext="You are on the UK website, click here to change." data-test-id="country-selector"></country-selector-stub>
+    <country-selector-stub currentcountryname="United Kingdom" currentcountrykey="gb" countries="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" changecountrytext="You are on the UK website, click here to change." data-test-id="country-selector"></country-selector-stub>
     <!---->
     <icon-list-stub icons="[object Object],[object Object],[object Object]" title="" listtype="payments" locale="en-GB"></icon-list-stub>
   </div>
