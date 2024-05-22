@@ -7,7 +7,6 @@ describe('f-footer - Desktop Visual Tests', () => {
         'en-GB',
         'en-AU',
         'en-IE',
-        'en-NZ',
         'es-ES',
         'it-IT'
     ];
@@ -38,10 +37,7 @@ describe('f-footer - Desktop Visual Tests', () => {
         });
     });
 
-    locales = [
-        'en-AU',
-        'en-NZ'
-    ];
+    locales = ['en-AU'];
 
     locales.forEach(locale => {
         it(`should display the footer with courier links for tenant: "${locale}"`, async () => {

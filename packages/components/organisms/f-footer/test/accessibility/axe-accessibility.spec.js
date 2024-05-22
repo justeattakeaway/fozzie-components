@@ -6,7 +6,6 @@ describe('Accessibility tests', () => {
         'en-GB',
         'en-AU',
         'en-IE',
-        'en-NZ',
         'es-ES',
         'it-IT'
     ];
@@ -26,8 +25,7 @@ describe('Accessibility tests', () => {
     locales = [
         'en-GB',
         'en-AU',
-        'en-IE',
-        'en-NZ'
+        'en-IE'
     ];
 
     locales.forEach(locale => {
