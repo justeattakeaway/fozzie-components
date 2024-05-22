@@ -7,7 +7,7 @@ describe('Desktop - f-footer component tests', () => {
         { icon: 'ios', expectedUrl: 'apple' },
         { icon: 'android', expectedUrl: 'google' },
         { icon: 'huawei', expectedUrl: 'appgallery' },
-        { icon: 'twitter', expectedUrl: 'twitter.com' },
+        { icon: 'x', expectedUrl: 'x.com' },
         { icon: 'facebook', expectedUrl: 'facebook.com' },
         { icon: 'youtube', expectedUrl: 'youtube.com' }
     ];
@@ -37,15 +37,13 @@ describe('Desktop - f-footer component tests', () => {
         { country: 'it', expectedUrl: 'justeat.it' },
         { country: 'lu', expectedUrl: 'takeaway.com/lu' },
         { country: 'nl', expectedUrl: 'thuisbezorgd.nl' },
-        { country: 'nz', expectedUrl: 'menulog.co.nz' },
         { country: 'no', expectedUrl: 'just-eat.no' },
         { country: 'pl', expectedUrl: 'pyszne.pl' },
-        { country: 'pt', expectedUrl: 'takeaway.com/pt' },
-        { country: 'ro', expectedUrl: 'takeaway.com/ro' },
         { country: 'es', expectedUrl: 'just-eat.es' },
         { country: 'ch_ch', expectedUrl: 'eat.ch' },
         { country: 'ch_en', expectedUrl: 'eat.ch/en' },
-        { country: 'ch_fr', expectedUrl: 'eat.ch/fr' }
+        { country: 'ch_fr', expectedUrl: 'eat.ch/fr' },
+        { country: 'sk', expectedUrl: 'www.bistro.sk' }
     ];
 
     tests.forEach(({ country, expectedUrl }) => {

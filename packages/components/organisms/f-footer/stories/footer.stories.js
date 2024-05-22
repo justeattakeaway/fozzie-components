@@ -3,14 +3,12 @@ import gbContent from '../data/en-GB.json';
 import esContent from '../data/es-ES.json';
 import itContent from '../data/it-IT.json';
 import auContent from '../data/en-AU.json';
-import nzContent from '../data/en-NZ.json';
 import ieContent from '../data/en-IE.json';
 
 const contents = {
     'en-AU': auContent,
     'en-GB': gbContent,
     'en-IE': ieContent,
-    'en-NZ': nzContent,
     'es-ES': esContent,
     'it-IT': itContent
 };
@@ -65,7 +63,7 @@ FooterComponent.argTypes = {
     locale: {
         control: { type: 'select' },
         description: 'Select a tenant',
-        options: ['en-GB', 'en-AU', 'en-IE', 'en-NZ', 'es-ES', 'it-IT']
+        options: ['en-GB', 'en-AU', 'en-IE', 'es-ES', 'it-IT']
     },
 
     showCourierLinks: {

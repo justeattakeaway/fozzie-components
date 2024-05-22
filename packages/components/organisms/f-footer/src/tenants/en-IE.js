@@ -71,9 +71,9 @@ export default {
             gtm: 'click_follow_pinterest'
         },
         {
-            url: 'https://www.twitter.com/JustEatIE',
-            name: 'twitter',
-            alt: 'Just Eat on Twitter (leads to external site)',
+            url: 'https://www.x.com/JustEatIE',
+            name: 'x',
+            alt: 'Just Eat on X (leads to external site)',
             gtm: 'click_follow_twitter'
         }
     ],
