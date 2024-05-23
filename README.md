@@ -1,5 +1,19 @@
 # Fozzie Components Documentation
 
+## Contents
+- [Installation](#installation)
+- [Development](#development)
+  - [Turborepo](#turborepo)
+  - [Remote Caching in AWS S3](#remote-caching-in-aws-s3)
+  - [Component Tests](#component-tests)
+  - [Importing optional SCSS helpers from Fozzie](#importing-optional-scss-helpers-from-fozzie)
+  - [Reusable styling with common.scss](#reusable-styling-with-commonscss)
+  - [Running Storybook](#running-storybook)
+  - [Running a single component in Storybook](#running-a-single-component-in-storybook)
+- [Committing Code](#committing-code)
+- [Publishing Components](#publishing-components)
+- [Vue 3](#vue-3)
+- [Links](#links)
 
 ## Installation
 
@@ -26,7 +40,7 @@ There's two solutions you could try from the root of the project which may fix t
 
 ## Development
 
-#### Turborepo
+### Turborepo
 
 - https://turborepo.org/docs
 
@@ -34,7 +48,7 @@ There's two solutions you could try from the root of the project which may fix t
 
 Turborepo is an intelligent build system optimized for JavaScript and TypeScript codebases. We use Turborepo to facilitate the execution of all our build scripts within the PIE monorepo.
 
-## Remote Caching in AWS S3
+### Remote Caching in AWS S3
 In order to speed up local development / CI workflows, we use Turborepo's remote caching functionality to publish build artifacts to AWS S3. This ensures that only modified packages have their build tasks executed.
 
 In order to take advantage of this functionality, you must set the `TURBO_TOKEN` environment variable on your local machine. Please reach out to the design system team for the value of this token.
@@ -47,9 +61,9 @@ It is recommended to run the following tasks at the root of the monorepo to ensu
 `test`
 `lint`
 
+### Component Tests
 For other test tasks you can execute in a number of ways:
 
-Component Tests
  ```bash
  # Run Component tests for all components
  # Note: Ensure Storybook is not running when running the following commands
@@ -71,8 +85,8 @@ Component Tests
  yarn test-component:chrome --filter=@justeat/f-user-message
  ```
 
-## Importing optional SCSS helpers from Fozzie
-We have created several optional mixin helpers in [Fozzie](https://github.com/justeat/fozzie/tree/master/src/scss/components/optional).
+### Importing optional SCSS helpers from Fozzie
+We have created several optional mixin helpers in [Fozzie](./packages/tools/fozzie/src/scss/components/optional).
 Here's an example of how to use it:
 
 Note: Importing the optional mixin and using `@include` in the `common.scss` file of your component doesn't work if you have `module` enabled on your SFC.
@@ -83,7 +97,7 @@ Note: Importing the optional mixin and using `@include` in the `common.scss` fil
 </style>
 ```
 
-## Reusable styling with common.scss
+### Reusable styling with common.scss
 You can add reusable styles to the `common.scss` file. This can be useful for components that use sub-components and may wish to share mixins, functions and variables.
 
 Every component comes with a `vue.config.js` file that makes the `common.scss` file available under the namespace `common` like so:
@@ -93,7 +107,7 @@ Every component comes with a `vue.config.js` file that makes the `common.scss` f
 To access anything from the common file, simply prefix the value like so:
 
 ```
-// Fake values used for demonstation
+// Fake values used for demonstration
 .someClass {
   color: common.$fontColor;
   line-height: common.line-height();
@@ -103,7 +117,7 @@ To access anything from the common file, simply prefix the value like so:
 
 You could remove the need for namespacing by using something like `@use "../assets/scss/common.scss" as *` however utilising the namespace makes it much easier to understand where a value is coming from.
 
-## Running Storybook
+### Running Storybook
 
 To run storybook first you must run the following at the the top level
 
@@ -133,4 +147,9 @@ For example: `git commit -m "Refactor f-button" --no-verify `.
 
 More information about how to contribute to this repo can be found in our Storybook [Documentation section](https://vue.pie.design/?path=/story/documentation-getting-started-contributing--page)
 
-### [Just Eat Storybook production](https://vue.pie.design/)
+## Vue 3
+
+Fozzie Components were originally authored in Vue 2. To ensure they work in a Vue 3 application, please run Vue 3 in [compat mode](https://v3-migration.vuejs.org/migration-build).
+
+## Links
+- [Just Eat Storybook production](https://vue.pie.design/)
