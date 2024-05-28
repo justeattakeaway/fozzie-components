@@ -3,6 +3,16 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## v1.6.4
+
+_May 2, 2024_
+
+### Changed
+
+- Add maxDisplayRating prop to restuant card component
+- Update logic for displaying restuarant rating
+- Update tests
+
 ## v1.6.3
 
 _April 29, 2024_

@@ -122,7 +122,7 @@ export default {
          */
         maxDisplayedRatings: {
             type: Number,
-            default: 200
+            default: 0
         },
         /**
          * The max value of the rating
@@ -168,7 +168,12 @@ export default {
             return Number.parseFloat(this.mean).toFixed(1);
         },
         formattedCount () {
-            return this.count > this.maxDisplayedRatings ? `${this.maxDisplayedRatings}+` : this.count;
+            if (this.maxDisplayedRatings === 0) {
+                return this.count;
+            } else if (this.count > this.maxDisplayedRatings) {
+                return `${this.maxDisplayedRatings}+`;
+            }
+            return this.count;
         }
     }
 };
