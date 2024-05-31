@@ -233,7 +233,6 @@ export default {
             isOpenAlertSuccess: false,
             isOpenAlertError: false,
             isFormVisible: false,
-            alcoholExclusionState: '',
             selectedState: '',
             selfExclusionApi: new SelfExclusionApi({
                 httpClient: this.$http,
