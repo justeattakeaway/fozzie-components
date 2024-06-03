@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## v1.4.0
+
+_May 8, 2024_
+
+### Added
+
+- Form functionality to handle cases where the exclusion period has expired.
+
+
 ## v1.3.2
 
 _April 29, 2024_
