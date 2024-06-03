@@ -47,7 +47,9 @@
                     heading="Success"
                     is-dismissible
                 >
-                    {{ $t('alcoholSelfExclusionConfirmation.text1Show') }}
+                    {{ exclusionPeriodExpired
+                        ? $t('alcoholSelfExclusionConfirmation.text1RemovalAfterExpired')
+                        : $t('alcoholSelfExclusionConfirmation.text1Show') }}
                 </f-alert>
 
                 <f-alert
@@ -253,6 +255,10 @@ export default {
             return this.exclusions.find(exclusion => exclusion.type === 'alcohol');
         },
 
+        exclusionPeriodExpired () {
+            return this.alcoholExclusion.state === 'exclusionPeriodExpired';
+        },
+
         alcoholExclusionDate () {
             return this.formatDate(new Date(this.alcoholExclusion.expiryDate));
         },
@@ -284,6 +290,7 @@ export default {
             await this.getExclusions({ api: this.selfExclusionApi, authToken: this.authToken });
             this.$log.info('Self exclusion status fetched successfully');
             this.selectedState = this.alcoholExclusion.state;
+            this.checkState(this.selectedState);
             this.isFormVisible = true;
         } catch (error) {
             this.$log.error('Error getting self exclusion status', error);
@@ -308,6 +315,13 @@ export default {
             const mm = String(date.getMonth() + 1).padStart(2, '0');
             const yyyy = date.getFullYear();
             return `${dd}-${mm}-${yyyy}`;
+        },
+
+        checkState (state) {
+            if (this.exclusionPeriodExpired) {
+                this.selectedState = 'temporaryExclusion';
+            }
+            return state;
         },
 
         changeState (state) {
