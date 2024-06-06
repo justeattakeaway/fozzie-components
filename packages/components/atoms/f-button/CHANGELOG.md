@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+
+## v5.1.1
+
+_June 6, 2024_
+
+### Changed
+- Update outline button border colour to `color-border-strong`.
+
+
 ## v5.1.0
 
 _March 13, 2024_
