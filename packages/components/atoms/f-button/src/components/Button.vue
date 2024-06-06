@@ -221,7 +221,7 @@ $btn-outline-bgColor                   : transparent;
 $btn-outline-bgColor--hover            : darken(f.$color-white, f.$color-hover-01);
 $btn-outline-bgColor--active           : darken(f.$color-white, f.$color-active-01);
 $btn-outline-textColor                 : f.$color-content-interactive-tertiary;
-$btn-outline-border-color              : f.$color-border-default;
+$btn-outline-border-color              : f.$color-border-strong;
 $btn-outline-loading-color             : f.$color-content-interactive-tertiary;
 $btn-outline-loading-colorOpaque       : rgba($btn-outline-loading-color, $btn-default-loading-opacity);
 
