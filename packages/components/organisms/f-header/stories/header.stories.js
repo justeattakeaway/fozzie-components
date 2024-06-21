@@ -38,7 +38,8 @@ export const HeaderComponent = (args, { argTypes }) => ({
             :key="locale"
             :show-skip-link="showSkipLink"
             :tall-below-mid="tallBelowMid"
-            :should-use-jet-logo="shouldUseJetLogo" />`
+            :should-use-jet-logo="shouldUseJetLogo"
+            :global-tracking-contexts="globalTrackingContexts" />`
 });
 
 HeaderComponent.storyName = 'f-header';
@@ -57,7 +58,8 @@ HeaderComponent.args = {
     logoLinkDisabled: false,
     isCondensed: false,
     tallBelowMid: false,
-    shouldUseJetLogo: false
+    shouldUseJetLogo: false,
+    globalTrackingContexts: []
 };
 
 HeaderComponent.argTypes = {
@@ -142,5 +144,10 @@ HeaderComponent.argTypes = {
 
     tallBelowMid: {
         description: 'Makes the header taller for narrower viewports'
+    },
+
+    globalTrackingContexts: {
+        control: { type: 'object' },
+        description: 'Array containing the global tracking contexts to be passed through to f-trak.'
     }
 };

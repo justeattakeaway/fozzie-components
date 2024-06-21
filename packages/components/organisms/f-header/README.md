@@ -86,15 +86,16 @@ The props that can be defined are as follows:
 | orderCountUrl             | `String`      | `false` | ?? |
 | showDeliveryEnquiry       | `Boolean`     | `false` | Defines if it is necessary to show the "Deliver with Just Eat" link in the header. |
 | showOffersLink            | `Boolean`     | `false` | Defines whether the offers link should be shown in the navigation. |
-| showCorporateLink            | `Boolean`     | `false` | Shows the "Corporate Ordering" Link |
+| showCorporateLink         | `Boolean`     | `false` | Shows the "Corporate Ordering" Link |
 | showHelpLink              | `Boolean`     | `true`  | Defines whether the help link should be shown in the navigation. |
 | showLoginInfo             | `Boolean`     | `true`  | Defines whether the login & user info icon should be shown in the navigation. |
 | userInfoProp              | `Object`      | `{}`    | Optional object conaining user details. If not provided `userInfoProp` is set via XHR call to `/api/account/details` |
 | userInfoUrl               | `String`      | `/api/account/details` | URL to call to retrieve the userInfo (when `userInfoProp` isn't set). |
 | showCountrySelector       | `Boolean`     | `false` | Defines whether the country selector should be shown in the navigation. |
 | showSkipLink              | `Boolean`     | `true`  | Set to false if you need to remove skip-to-main-content link from the header. |
-| shouldUseJetLogo                | `Boolean`     | `false`  | Set to true if you want to show Jet logo in the header. |
-| isCondensed            | `Boolean`     | `false` | Hides Icons, reduces spacing and applies stricter friendly name truncation where appropriate |
+| shouldUseJetLogo          | `Boolean`     | `false` | Set to true if you want to show Jet logo in the header. |
+| isCondensed               | `Boolean`     | `false` | Hides Icons, reduces spacing and applies stricter friendly name truncation where appropriate |
+| globalTrackingContexts    | `Array`       | `[]`    | Array containing the global tracking contexts to be passed through to f-trak. |
 **Important:** if you're adding a new property to show/hide something on the navigation bar, you probably want to check the `hasNavigationLinks` computed property, since you might have to update it.
 
 ### CSS styles
