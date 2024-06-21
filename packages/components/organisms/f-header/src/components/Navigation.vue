@@ -115,12 +115,12 @@
                         :text="copy.offers.text"
                         :tabindex="tabIndex"
                         :href="copy.offers.url"
-                        :data-trak="JSON.stringify({
+                        :data-trak="{
                             ...analyticsObjects.navigation.offers.clickLink,
                             ...(globalTrackingContexts.length ? {
                                 context: globalTrackingContexts
                             } : {})
-                        })"
+                        }"
                         :is-alt-colour="isAltColour"
                         :is-condensed="isCondensed"
                         :background-theme="headerBackgroundTheme"
@@ -345,11 +345,9 @@
 </template>
 
 <script>
-// Fozzie imports
+// Fozzie/PIE imports
 import { axiosServices, windowServices } from '@justeat/f-services';
 import VPopover from '@justeat/f-popover';
-
-// Internal
 import {
     OfficeSmallIcon,
     GiftSmallIcon,
@@ -357,11 +355,14 @@ import {
     MopedSmallIcon,
     UserCircleSmallIcon
 } from '@justeattakeaway/pie-icons-vue';
+
+// Internal
 import CountrySelector from './CountrySelector.vue';
 import NavLink from './NavLink.vue';
 import UserNavigationPanel from './UserNavigationPanel.vue';
 import { countries } from '../tenants';
 import analyticsObjects from '../services/analytics/objects';
+import analyticsMixin from '../mixins/analytics.mixin';
 
 export default {
     name: 'HeaderNavigation',
@@ -376,6 +377,8 @@ export default {
         UserNavigationPanel,
         VPopover
     },
+
+    mixins: [analyticsMixin],
 
     props: {
         copy: {
@@ -452,11 +455,6 @@ export default {
             type: Array,
             default: () => [],
             validator: links => links.every(link => link.text && link.url)
-        },
-
-        globalTrackingContexts: {
-            type: Array,
-            default: () => []
         }
     },
 

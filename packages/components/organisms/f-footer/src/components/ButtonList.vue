@@ -28,16 +28,15 @@
 </template>
 
 <script>
+import analyticsMixin from '../mixins/analytics.mixin';
+
 export default {
+    mixins: [analyticsMixin],
+
     props: {
         buttonList: {
             type: Object,
             default: () => ({})
-        },
-
-        globalTrackingContexts: {
-            type: Array,
-            default: () => []
         }
     }
 };

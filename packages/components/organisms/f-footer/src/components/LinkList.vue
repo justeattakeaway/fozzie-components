@@ -72,21 +72,22 @@
 import { ChevronIcon } from '@justeat/f-vue-icons';
 import { windowServices } from '@justeat/f-services';
 
+import analyticsMixin from '../mixins/analytics.mixin';
+
 export default {
     components: {
         ChevronIcon
     },
+
+    mixins: [analyticsMixin],
+
     props: {
         linkList: {
             type: Object,
             default: () => ({})
-        },
-
-        globalTrackingContexts: {
-            type: Array,
-            default: () => []
         }
     },
+
     data () {
         return {
             currentScreenWidth: 0,
@@ -94,6 +95,7 @@ export default {
             panelCollapsed: false
         };
     },
+
     computed: {
         listId () {
             return `footer-${this.linkList.name.toLowerCase().split(' ').join('-')}`;
@@ -111,15 +113,18 @@ export default {
             return this.panelCollapsed ? 'linkList-wrapper-collapsed' : 'linkList-wrapper';
         }
     },
+
     mounted () {
         this.currentScreenWidth = windowServices.getWindowWidth();
         windowServices.addEvent('resize', this.onResize, 100);
 
         this.setPanelCollapsed();
     },
+
     destroyed () {
         windowServices.removeEvent('resize', this.onResize);
     },
+
     methods: {
         /**
          * Sets Links List panel collapsed state.
@@ -134,6 +139,7 @@ export default {
                 this.panelCollapsed = false;
             }
         },
+
         /**
          * Handle click events on Link List visibility toggle.
          * Only applied to below `wide` screen width (ref. Fozzie UI breakpoints).
@@ -144,6 +150,7 @@ export default {
                 this.setPanelCollapsed();
             }
         },
+
         /**
          * Handles `resize` window events.
          * Screen width is the only factor that affects Links List presentation.

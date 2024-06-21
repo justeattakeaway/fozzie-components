@@ -12,15 +12,15 @@
                 :tabindex="tabIndex"
                 :href="link.url"
                 :is-popover-link="!isBelowMid"
-                :data-trak='JSON.stringify({
-                    trakEvent: "click",
-                    category: "engagement",
-                    action: "header",
+                :data-trak="{
+                    trakEvent: 'click',
+                    category: 'engagement',
+                    action: 'header',
                     label: link.gtm,
                     ...(globalTrackingContexts.length ? {
                         context: globalTrackingContexts
                     } : {})
-                })'
+                }"
                 :text="link.text"
                 has-border-top
                 :has-border-bottom="false"
@@ -36,15 +36,15 @@
                 :tabindex="isUserMenuOpen ? 0 : -1"
                 :href="returnLogoutUrl"
                 is-popover-link
-                :data-trak='JSON.stringify({
-                    trakEvent: "click",
-                    category: "engagement",
-                    action: "header",
+                :data-trak="{
+                    trakEvent: 'click',
+                    category: 'engagement',
+                    action: 'header',
                     label: copy.accountLogout.gtm,
                     ...(globalTrackingContexts.length ? {
                         context: globalTrackingContexts
                     } : {})
-                })'
+                }"
                 :text="copy.accountLogout.text"
                 has-border-top
                 :has-border-bottom="false"
@@ -57,11 +57,15 @@
 
 <script>
 import NavLink from './NavLink.vue';
+import analyticsMixin from '../mixins/analytics.mixin';
 
 export default {
     components: {
         NavLink
     },
+
+    mixins: [analyticsMixin],
+
     props: {
         isUserMenuOpen: {
             type: Boolean,
@@ -86,12 +90,9 @@ export default {
         isCountrySelectorOpen: {
             type: Boolean,
             default: false
-        },
-        globalTrackingContexts: {
-            type: Array,
-            default: () => []
         }
     },
+
     computed: {
         tabIndex () {
             if (this.isBelowMid && this.isNavOpen && !this.isCountrySelectorOpen) {
@@ -103,10 +104,12 @@ export default {
             return 0;
         }
     },
+
     methods: {
         activateNav () {
             this.$emit('activateNav');
         },
+
         deactivateNav () {
             this.$emit('deactivateNav');
         }

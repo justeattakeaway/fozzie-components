@@ -88,7 +88,9 @@ import {
     CrossIcon
 } from '@justeat/f-vue-icons';
 import vClickOutside from 'v-click-outside';
+
 import FlagIcon from './FlagIcon.vue';
+import analyticsMixin from '../mixins/analytics.mixin';
 
 export default {
     components: {
@@ -100,6 +102,8 @@ export default {
     directives: {
         clickOutside: vClickOutside.directive
     },
+
+    mixins: [analyticsMixin],
 
     props: {
         currentCountryName: {
@@ -120,11 +124,6 @@ export default {
         changeCountryText: {
             type: String,
             default: ''
-        },
-
-        globalTrackingContexts: {
-            type: Array,
-            default: () => []
         }
     },
 

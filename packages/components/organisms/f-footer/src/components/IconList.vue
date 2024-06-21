@@ -61,12 +61,15 @@
 <script>
 import BaseProviderIcon from './BaseProviderIcon.vue';
 import AppStoreIcon from './AppStoreIcon.vue';
+import analyticsMixin from '../mixins/analytics.mixin';
 
 export default {
     components: {
         AppStoreIcon,
         BaseProviderIcon
     },
+
+    mixins: [analyticsMixin],
 
     props: {
         icons: {
@@ -87,11 +90,6 @@ export default {
         locale: {
             type: String,
             default: 'en-GB'
-        },
-
-        globalTrackingContexts: {
-            type: Array,
-            default: () => []
         }
     },
 

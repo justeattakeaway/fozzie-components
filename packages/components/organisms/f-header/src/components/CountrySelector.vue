@@ -56,6 +56,8 @@ import { ChevronRightIcon } from '@justeattakeaway/pie-icons-vue';
 import CountrySelectorPanel from './CountrySelectorPanel.vue';
 import FlagIcon from './FlagIcon.vue';
 
+import analyticsMixin from '../mixins/analytics.mixin';
+
 export default {
     components: {
         ChevronRightIcon,
@@ -63,6 +65,8 @@ export default {
         FlagIcon,
         VPopover
     },
+
+    mixins: [analyticsMixin],
 
     props: {
         copy: {
@@ -83,11 +87,6 @@ export default {
         tabindex: {
             type: Number,
             required: true
-        },
-
-        globalTrackingContexts: {
-            type: Array,
-            default: () => []
         }
     },
 

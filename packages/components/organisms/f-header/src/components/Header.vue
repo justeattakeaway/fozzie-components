@@ -59,6 +59,8 @@ import SkipToMain from './SkipToMain.vue';
 import { tenantConfigs } from '../tenants';
 import Navigation from './Navigation.vue';
 
+import analyticsMixin from '../mixins/analytics.mixin';
+
 export default {
     name: 'VueHeader',
 
@@ -67,6 +69,8 @@ export default {
         SkipToMain,
         Navigation
     },
+
+    mixins: [analyticsMixin],
 
     props: {
         locale: {
@@ -162,11 +166,6 @@ export default {
         shouldUseJetLogo: {
             type: Boolean,
             default: false
-        },
-
-        globalTrackingContexts: {
-            type: Array,
-            default: () => []
         }
     },
 

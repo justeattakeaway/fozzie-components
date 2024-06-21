@@ -73,6 +73,8 @@ import FlagIcon from './FlagIcon.vue';
 import NavLink from './NavLink.vue';
 import { countries } from '../tenants';
 
+import analyticsMixin from '../mixins/analytics.mixin';
+
 export default {
     components: {
         FButton,
@@ -80,6 +82,9 @@ export default {
         FlagIcon,
         NavLink
     },
+
+    mixins: [analyticsMixin],
+
     props: {
         copy: {
             type: Object,
@@ -92,17 +97,15 @@ export default {
         isBelowMid: {
             type: Boolean,
             default: false
-        },
-        globalTrackingContexts: {
-            type: Array,
-            default: () => []
         }
     },
+
     data () {
         return {
             countries
         };
     },
+
     methods: {
         /**
          * Watch tab focus changes on non mobile version to trigger close event if the user tabs away from country selector panel

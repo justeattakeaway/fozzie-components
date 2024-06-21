@@ -22,6 +22,8 @@ import {
     LogoJetHorizontalIcon as JetLogo
 } from '@justeat/f-vue-icons';
 
+import analyticsMixin from '../mixins/analytics.mixin';
+
 export default {
     name: 'HeaderLogo',
     components: {
@@ -29,6 +31,9 @@ export default {
         MlLogo,
         JetLogo
     },
+
+    mixins: [analyticsMixin],
+
     props: {
         theme: {
             type: String,
@@ -57,19 +62,18 @@ export default {
         shouldResizeLogo: {
             type: Boolean,
             default: false
-        },
-        globalTrackingContexts: {
-            type: Array,
-            default: () => []
         }
     },
+
     computed: {
         iconComponent () {
             return `${this.theme}-logo`;
         },
+
         linkAltText () {
             return `Go to ${this.companyName} homepage`;
         },
+
         linkProperties () {
             return this.isLogoDisabled ? {
                 'data-test-id': 'disabled-wrapper-element'
@@ -88,12 +92,14 @@ export default {
                 })
             };
         },
+
         isAltLogo () {
             const isHighlight = this.headerBackgroundTheme === 'highlight';
             const isTransparent = this.headerBackgroundTheme === 'transparent';
 
             return isHighlight || (isTransparent && !this.isOpen);
         },
+
         wrapperComponent () {
             return this.isLogoDisabled ? 'span' : 'a';
         }

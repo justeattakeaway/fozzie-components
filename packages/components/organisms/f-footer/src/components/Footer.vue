@@ -96,6 +96,7 @@
 
 <script>
 import { globalisationServices } from '@justeat/f-services';
+
 import ButtonList from './ButtonList.vue';
 import CountrySelector from './CountrySelector.vue';
 import FeedbackBlock from './FeedbackBlock.vue';
@@ -103,9 +104,11 @@ import IconList from './IconList.vue';
 import LegalField from './LegalField.vue';
 import LinkList from './LinkList.vue';
 import { tenantConfigs, countries } from '../tenants';
+import analyticsMixin from '../mixins/analytics.mixin';
 
 export default {
     name: 'PageFooter',
+
     components: {
         ButtonList,
         CountrySelector,
@@ -114,6 +117,9 @@ export default {
         LegalField,
         LinkList
     },
+
+    mixins: [analyticsMixin],
+
     props: {
         locale: {
             type: String,
@@ -130,26 +136,27 @@ export default {
         content: {
             type: Object,
             default: () => {}
-        },
-        globalTrackingContexts: {
-            type: Array,
-            default: () => []
         }
     },
+
     computed: {
         footerLocale () {
             return globalisationServices.getLocale(tenantConfigs, this.locale, this.$i18n);
         },
+
         copy () {
             const localeConfig = tenantConfigs[this.footerLocale];
             return localeConfig;
         },
+
         theme () {
             return globalisationServices.getTheme(this.footerLocale);
         },
+
         metaLegalFieldEnabled () {
             return Object.keys(this.copy.metaLegalField).length > 0;
         },
+
         countryList () {
             return countries.filter(country => country.key !== this.copy.currentCountryKey);
         }

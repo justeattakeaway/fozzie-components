@@ -37,7 +37,11 @@
 </template>
 
 <script>
+import analyticsMixin from '../mixins/analytics.mixin';
+
 export default {
+    mixins: [analyticsMixin],
+
     props: {
         title: {
             type: String,
@@ -52,11 +56,6 @@ export default {
         buttonText: {
             type: String,
             default: ''
-        },
-
-        globalTrackingContexts: {
-            type: Array,
-            default: () => []
         }
     }
 };
