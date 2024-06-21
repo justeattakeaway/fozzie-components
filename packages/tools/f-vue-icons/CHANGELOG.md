@@ -3,12 +3,18 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html)
 
+## v3.14.2
+_June 20, 2024_
+
+### Fixes
+- Published NPM package is missing `esm` folder
+  - https://unpkg.com/browse/@justeat/f-vue-icons@3.14.1/
+
 ## v3.14.1
 _April 30, 2024_
 
 ### Removed
 - Unused `marked` dependency.
-
 
 ## v3.14.0
 
