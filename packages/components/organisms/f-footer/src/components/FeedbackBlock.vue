@@ -6,12 +6,15 @@
             $style['is-invisible']
         ]"
         data-gtm-feedback
-        data-trak='{
-            "trakEvent": "click",
-            "category": "engagement",
-            "action": "footer",
-            "label": "click_feedback"
-        }'>
+        :data-trak='JSON.stringify({
+            trakEvent: "click",
+            category: "engagement",
+            action: "footer",
+            label: "click_feedback",
+            ...(globalTrackingContexts.length ? {
+                context: globalTrackingContexts
+            } : {})
+        })'>
         <h2
             :class="[
                 $style['c-footer-heading'],
@@ -49,6 +52,11 @@ export default {
         buttonText: {
             type: String,
             default: ''
+        },
+
+        globalTrackingContexts: {
+            type: Array,
+            default: () => []
         }
     }
 };

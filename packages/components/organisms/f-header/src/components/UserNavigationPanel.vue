@@ -12,12 +12,15 @@
                 :tabindex="tabIndex"
                 :href="link.url"
                 :is-popover-link="!isBelowMid"
-                :data-trak="{
-                    trakEvent: 'click',
-                    category: 'engagement',
-                    action: 'header',
-                    label: `${link.gtm}`
-                }"
+                :data-trak='JSON.stringify({
+                    trakEvent: "click",
+                    category: "engagement",
+                    action: "header",
+                    label: link.gtm,
+                    ...(globalTrackingContexts.length ? {
+                        context: globalTrackingContexts
+                    } : {})
+                })'
                 :text="link.text"
                 has-border-top
                 :has-border-bottom="false"
@@ -33,12 +36,15 @@
                 :tabindex="isUserMenuOpen ? 0 : -1"
                 :href="returnLogoutUrl"
                 is-popover-link
-                :data-trak="{
-                    trakEvent: 'click',
-                    category: 'engagement',
-                    action: 'header',
-                    label: `${copy.accountLogout.gtm}`
-                }"
+                :data-trak='JSON.stringify({
+                    trakEvent: "click",
+                    category: "engagement",
+                    action: "header",
+                    label: copy.accountLogout.gtm,
+                    ...(globalTrackingContexts.length ? {
+                        context: globalTrackingContexts
+                    } : {})
+                })'
                 :text="copy.accountLogout.text"
                 has-border-top
                 :has-border-bottom="false"
@@ -80,6 +86,10 @@ export default {
         isCountrySelectorOpen: {
             type: Boolean,
             default: false
+        },
+        globalTrackingContexts: {
+            type: Array,
+            default: () => []
         }
     },
     computed: {

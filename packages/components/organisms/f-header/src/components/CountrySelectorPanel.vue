@@ -43,7 +43,10 @@
                             trakEvent: 'click',
                             category: 'engagement',
                             action: 'header',
-                            label: `${country.gtm}`
+                            label: `${country.gtm}`,
+                            ...(globalTrackingContexts.length ? {
+                                context: globalTrackingContexts
+                            } : {})
                         }"
                         :tabindex="isOpen ? 0 : -1"
                         :text="country.localisedName"
@@ -89,6 +92,10 @@ export default {
         isBelowMid: {
             type: Boolean,
             default: false
+        },
+        globalTrackingContexts: {
+            type: Array,
+            default: () => []
         }
     },
     data () {

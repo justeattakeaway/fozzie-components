@@ -55,12 +55,15 @@
                     :key="`${i}_Country`"
                     :data-test-id="[`countrySelector-country-${country.dataTestKey}`]">
                     <a
-                        :data-trak='`{
-                            "trakEvent": "click",
-                            "category": "engagement",
-                            "action": "footer",
-                            "label": "${country.gtm}"
-                        }`'
+                        :data-trak='JSON.stringify({
+                            trakEvent: "click",
+                            category: "engagement",
+                            action: "footer",
+                            label: country.gtm,
+                            ...(globalTrackingContexts.length ? {
+                                context: globalTrackingContexts
+                            } : {})
+                        })'
                         :href="country.siteUrl"
                         :class="$style['c-countrySelector-link']"
                         data-test-id="countrySelector-countryLink">
@@ -117,6 +120,11 @@ export default {
         changeCountryText: {
             type: String,
             default: ''
+        },
+
+        globalTrackingContexts: {
+            type: Array,
+            default: () => []
         }
     },
 

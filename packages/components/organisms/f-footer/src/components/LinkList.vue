@@ -52,12 +52,15 @@
                     :rel="link.rel"
                     :target="link.target"
                     :class="$style['c-footer-list-link']"
-                    :data-trak='`{
-                        "trakEvent": "click",
-                        "category": "engagement",
-                        "action": "footer",
-                        "label": "${link.gtmLabel}"
-                    }`'>
+                    :data-trak='JSON.stringify({
+                        trakEvent: "click",
+                        category: "engagement",
+                        action: "footer",
+                        label: link.gtmLabel,
+                        ...(globalTrackingContexts.length ? {
+                            context: globalTrackingContexts
+                        } : {})
+                    })'>
                     {{ link.text }}
                 </a>
             </li>
@@ -77,6 +80,11 @@ export default {
         linkList: {
             type: Object,
             default: () => ({})
+        },
+
+        globalTrackingContexts: {
+            type: Array,
+            default: () => []
         }
     },
     data () {

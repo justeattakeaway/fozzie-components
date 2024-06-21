@@ -31,12 +31,15 @@
                     :href="icon.url"
                     :title="icon.alt"
                     :class="$style['c-iconList-listLink']"
-                    :data-trak='`{
-                        "trakEvent": "click",
-                        "category": "engagement",
-                        "action": "footer",
-                        "label": "${icon.gtm}"
-                    }`'
+                    :data-trak='JSON.stringify({
+                        trakEvent: "click",
+                        category: "engagement",
+                        action: "footer",
+                        label: icon.gtm,
+                        ...(globalTrackingContexts.length ? {
+                            context: globalTrackingContexts
+                        } : {})
+                    })'
                     :data-test-id="`footerIcon ${icon.name}`">
                     <component
                         :is="iconChoice"
@@ -84,6 +87,11 @@ export default {
         locale: {
             type: String,
             default: 'en-GB'
+        },
+
+        globalTrackingContexts: {
+            type: Array,
+            default: () => []
         }
     },
 

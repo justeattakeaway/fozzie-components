@@ -27,7 +27,8 @@
                 :logo-gtm-label="copy.logo.gtm"
                 :header-background-theme="headerBackgroundTheme"
                 :should-resize-logo="showDeliveryEnquiryWithContent && showCountrySelector"
-                :is-open="mobileNavIsOpen" />
+                :is-open="mobileNavIsOpen"
+                :global-tracking-contexts="globalTrackingContexts" />
 
             <navigation
                 :copy="copy"
@@ -45,6 +46,7 @@
                 :show-login-info="showLoginInfo"
                 :show-country-selector="showCountrySelector"
                 :is-condensed="isCondensed"
+                :global-tracking-contexts="globalTrackingContexts"
                 @onMobileNavToggle="mobileNavToggled" />
         </div>
     </header>
@@ -160,6 +162,11 @@ export default {
         shouldUseJetLogo: {
             type: Boolean,
             default: false
+        },
+
+        globalTrackingContexts: {
+            type: Array,
+            default: () => []
         }
     },
 

@@ -43,6 +43,7 @@
                 :copy="copy"
                 :is-open="isCountrySelectorOpen"
                 :is-below-mid="isBelowMid"
+                :global-tracking-contexts="globalTrackingContexts"
                 @closeCountrySelector="closeCountrySelector"
             />
         </v-popover>
@@ -82,6 +83,11 @@ export default {
         tabindex: {
             type: Number,
             required: true
+        },
+
+        globalTrackingContexts: {
+            type: Array,
+            default: () => []
         }
     },
 

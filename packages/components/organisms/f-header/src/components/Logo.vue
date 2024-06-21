@@ -57,6 +57,10 @@ export default {
         shouldResizeLogo: {
             type: Boolean,
             default: false
+        },
+        globalTrackingContexts: {
+            type: Array,
+            default: () => []
         }
     },
     computed: {
@@ -73,12 +77,15 @@ export default {
                 'data-test-id': 'wrapper-element',
                 'aria-label': this.linkAltText,
                 href: '/',
-                'data-trak': `{
-                    "trakEvent": "click",
-                    "category": "engagement",
-                    "action": "header",
-                    "label": "${this.logoGtmLabel}"
-                }`
+                'data-trak': JSON.stringify({
+                    trakEvent: 'click',
+                    category: 'engagement',
+                    action: 'header',
+                    label: this.logoGtmLabel,
+                    ...(this.globalTrackingContexts.length ? {
+                        context: this.globalTrackingContexts
+                    } : {})
+                })
             };
         },
         isAltLogo () {

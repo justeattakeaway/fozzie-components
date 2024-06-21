@@ -14,7 +14,8 @@
             <link-list
                 v-for="(section, i) in content.sections"
                 :key="`${i}_LinkList`"
-                :link-list="section" />
+                :link-list="section"
+                :global-tracking-contexts="globalTrackingContexts" />
         </div>
 
         <div :class="$style['c-footer-light']">
@@ -30,7 +31,8 @@
                     <button-list
                         v-for="(buttonList, i) in copy.linkButtonList"
                         :key="`${i}_ButtonList`"
-                        :button-list="buttonList" />
+                        :button-list="buttonList"
+                        :global-tracking-contexts="globalTrackingContexts" />
                 </div>
 
                 <div
@@ -42,18 +44,21 @@
                         :title="copy.downloadOurApps"
                         :icons="copy.appStoreIcons"
                         :locale="copy.locale"
-                        list-type="apps" />
+                        list-type="apps"
+                        :global-tracking-contexts="globalTrackingContexts" />
 
                     <feedback-block
                         :title="copy.feedback"
                         :text="copy.improveOurWebsite"
                         :button-text="copy.sendFeedback"
-                        data-test-id="feedback-block" />
+                        data-test-id="feedback-block"
+                        :global-tracking-contexts="globalTrackingContexts" />
 
                     <icon-list
                         :icons="copy.socialIcons"
                         :title="copy.followUs"
-                        list-type="social" />
+                        list-type="social"
+                        :global-tracking-contexts="globalTrackingContexts" />
                 </div>
             </div>
         </div>
@@ -73,7 +78,8 @@
                 :current-country-name="copy.currentCountryName"
                 :current-country-key="copy.currentCountryKey"
                 :countries="countryList"
-                :change-country-text="copy.changeCurrentCountry" />
+                :change-country-text="copy.changeCurrentCountry"
+                :global-tracking-contexts="globalTrackingContexts" />
 
             <legal-field
                 v-if="metaLegalFieldEnabled"
@@ -82,7 +88,8 @@
 
             <icon-list
                 :icons="copy.paymentIcons"
-                list-type="payments" />
+                list-type="payments"
+                :global-tracking-contexts="globalTrackingContexts" />
         </div>
     </footer>
 </template>
@@ -123,6 +130,10 @@ export default {
         content: {
             type: Object,
             default: () => {}
+        },
+        globalTrackingContexts: {
+            type: Array,
+            default: () => []
         }
     },
     computed: {
