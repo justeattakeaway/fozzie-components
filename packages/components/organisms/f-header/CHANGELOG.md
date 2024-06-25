@@ -10,6 +10,7 @@ _June 24, 2024_
 ### Added
 
 - New prop `globalTrackingContexts` which are passed through to f-trak for analytics events.
+- Use `f-trak` v1+
 
 ## v10.20.0
 

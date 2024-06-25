@@ -56,7 +56,7 @@
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
     "@justeat/f-button": "4.x",
     "@justeat/f-popover": "3.x",
-    "@justeat/f-trak": ">=0.8.0"
+    "@justeat/f-trak": "1.x"
   },
   "devDependencies": {
     "@justeat/f-button": "4.x",
