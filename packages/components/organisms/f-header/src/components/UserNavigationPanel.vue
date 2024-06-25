@@ -16,7 +16,10 @@
                     trakEvent: 'click',
                     category: 'engagement',
                     action: 'header',
-                    label: `${link.gtm}`
+                    label: link.gtm,
+                    ...(globalTrackingContexts.length ? {
+                        context: globalTrackingContexts
+                    } : {})
                 }"
                 :text="link.text"
                 has-border-top
@@ -37,7 +40,10 @@
                     trakEvent: 'click',
                     category: 'engagement',
                     action: 'header',
-                    label: `${copy.accountLogout.gtm}`
+                    label: copy.accountLogout.gtm,
+                    ...(globalTrackingContexts.length ? {
+                        context: globalTrackingContexts
+                    } : {})
                 }"
                 :text="copy.accountLogout.text"
                 has-border-top
@@ -51,11 +57,15 @@
 
 <script>
 import NavLink from './NavLink.vue';
+import analyticsMixin from '../mixins/analytics.mixin';
 
 export default {
     components: {
         NavLink
     },
+
+    mixins: [analyticsMixin],
+
     props: {
         isUserMenuOpen: {
             type: Boolean,
@@ -82,6 +92,7 @@ export default {
             default: false
         }
     },
+
     computed: {
         tabIndex () {
             if (this.isBelowMid && this.isNavOpen && !this.isCountrySelectorOpen) {
@@ -93,10 +104,12 @@ export default {
             return 0;
         }
     },
+
     methods: {
         activateNav () {
             this.$emit('activateNav');
         },
+
         deactivateNav () {
             this.$emit('deactivateNav');
         }

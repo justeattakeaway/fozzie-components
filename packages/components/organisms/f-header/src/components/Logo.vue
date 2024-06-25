@@ -22,6 +22,8 @@ import {
     LogoJetHorizontalIcon as JetLogo
 } from '@justeat/f-vue-icons';
 
+import analyticsMixin from '../mixins/analytics.mixin';
+
 export default {
     name: 'HeaderLogo',
     components: {
@@ -29,6 +31,9 @@ export default {
         MlLogo,
         JetLogo
     },
+
+    mixins: [analyticsMixin],
+
     props: {
         theme: {
             type: String,
@@ -59,13 +64,16 @@ export default {
             default: false
         }
     },
+
     computed: {
         iconComponent () {
             return `${this.theme}-logo`;
         },
+
         linkAltText () {
             return `Go to ${this.companyName} homepage`;
         },
+
         linkProperties () {
             return this.isLogoDisabled ? {
                 'data-test-id': 'disabled-wrapper-element'
@@ -73,20 +81,25 @@ export default {
                 'data-test-id': 'wrapper-element',
                 'aria-label': this.linkAltText,
                 href: '/',
-                'data-trak': `{
-                    "trakEvent": "click",
-                    "category": "engagement",
-                    "action": "header",
-                    "label": "${this.logoGtmLabel}"
-                }`
+                'data-trak': JSON.stringify({
+                    trakEvent: 'click',
+                    category: 'engagement',
+                    action: 'header',
+                    label: this.logoGtmLabel,
+                    ...(this.globalTrackingContexts.length ? {
+                        context: this.globalTrackingContexts
+                    } : {})
+                })
             };
         },
+
         isAltLogo () {
             const isHighlight = this.headerBackgroundTheme === 'highlight';
             const isTransparent = this.headerBackgroundTheme === 'transparent';
 
             return isHighlight || (isTransparent && !this.isOpen);
         },
+
         wrapperComponent () {
             return this.isLogoDisabled ? 'span' : 'a';
         }

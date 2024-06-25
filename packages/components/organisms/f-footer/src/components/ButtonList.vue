@@ -9,12 +9,15 @@
                 v-for="(button, i) in buttonList.buttons"
                 :key="`${i}_Button`"
                 :href="button.url"
-                :data-trak='`{
-                    "trakEvent": "click",
-                    "category": "engagement",
-                    "action": "footer",
-                    "label": "${button.gtm}"
-                }`'
+                :data-trak='JSON.stringify({
+                    trakEvent: "click",
+                    category: "engagement",
+                    action: "footer",
+                    label: button.gtm,
+                    ...(globalTrackingContexts.length ? {
+                        context: globalTrackingContexts
+                    } : {})
+                })'
                 :class="$style['c-buttonList-button']"
                 target="_blank"
                 rel="noopener noreferrer">
@@ -25,7 +28,11 @@
 </template>
 
 <script>
+import analyticsMixin from '../mixins/analytics.mixin';
+
 export default {
+    mixins: [analyticsMixin],
+
     props: {
         buttonList: {
             type: Object,

@@ -1,7 +1,7 @@
 {
   "name": "@justeat/f-header",
   "description": "Fozzie Header - Globalised Header Component",
-  "version": "10.20.0",
+  "version": "10.21.0",
   "main": "dist/f-header.umd.min.js",
   "maxBundleSize": "55kB",
   "files": [
@@ -56,7 +56,7 @@
     "@justeat/browserslist-config-fozzie": ">=1.1.1",
     "@justeat/f-button": "4.x",
     "@justeat/f-popover": "3.x",
-    "@justeat/f-trak": ">=0.6.0"
+    "@justeat/f-trak": "1.x"
   },
   "devDependencies": {
     "@justeat/f-button": "4.x",

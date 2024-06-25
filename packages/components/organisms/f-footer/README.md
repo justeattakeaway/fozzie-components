@@ -90,6 +90,7 @@ The props that can be defined are as follows (if any):
 | `showCourierLinks`    | `Bool`   | `true`  | Controls whether to show courier links in footer.                                                             |
 | `showCountrySelector` | `Bool`   | `true`  | Controls whether to show country selector in footer.                                                          |
 | `content`             | `Object` | `{}`    | Content to be displayed in the footer (sections, links, etc.)                                                 |
+| `globalTrackingContexts` | `Array` | `[]`  | Array containing the global tracking contexts to be passed through to f-trak. |
 
 ### CSS Classes
 

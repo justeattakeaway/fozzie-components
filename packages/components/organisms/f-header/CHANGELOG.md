@@ -3,6 +3,15 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## v10.21.0
+
+_June 24, 2024_
+
+### Added
+
+- New prop `globalTrackingContexts` which are passed through to f-trak for analytics events.
+- Use `f-trak` v1+
+
 ## v10.20.0
 
 _May 16, 2024_

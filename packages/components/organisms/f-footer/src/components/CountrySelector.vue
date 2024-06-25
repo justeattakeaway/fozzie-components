@@ -55,12 +55,15 @@
                     :key="`${i}_Country`"
                     :data-test-id="[`countrySelector-country-${country.dataTestKey}`]">
                     <a
-                        :data-trak='`{
-                            "trakEvent": "click",
-                            "category": "engagement",
-                            "action": "footer",
-                            "label": "${country.gtm}"
-                        }`'
+                        :data-trak='JSON.stringify({
+                            trakEvent: "click",
+                            category: "engagement",
+                            action: "footer",
+                            label: country.gtm,
+                            ...(globalTrackingContexts.length ? {
+                                context: globalTrackingContexts
+                            } : {})
+                        })'
                         :href="country.siteUrl"
                         :class="$style['c-countrySelector-link']"
                         data-test-id="countrySelector-countryLink">
@@ -85,7 +88,9 @@ import {
     CrossIcon
 } from '@justeat/f-vue-icons';
 import vClickOutside from 'v-click-outside';
+
 import FlagIcon from './FlagIcon.vue';
+import analyticsMixin from '../mixins/analytics.mixin';
 
 export default {
     components: {
@@ -97,6 +102,8 @@ export default {
     directives: {
         clickOutside: vClickOutside.directive
     },
+
+    mixins: [analyticsMixin],
 
     props: {
         currentCountryName: {

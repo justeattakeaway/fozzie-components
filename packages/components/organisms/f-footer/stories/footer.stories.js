@@ -46,7 +46,8 @@ export const FooterComponent = (args, { argTypes }) => ({
             :showCourierLinks="showCourierLinks"
             :locale="locale"
             :showCountrySelector="showCountrySelector"
-            :content="contentByLocale" />`
+            :content="contentByLocale"
+            :globalTrackingContexts="globalTrackingContexts" />`
 });
 
 FooterComponent.storyName = 'f-footer';
@@ -56,7 +57,8 @@ FooterComponent.args = {
     showCourierLinks: false,
     showCountrySelector: false,
     showLinksContent: true,
-    content: contents['en-GB']
+    content: contents['en-GB'],
+    globalTrackingContexts: []
 };
 
 FooterComponent.argTypes = {
@@ -83,5 +85,10 @@ FooterComponent.argTypes = {
 
     content: {
         description: 'Consider changing the locale instead, as this determines which data file to read.'
+    },
+
+    globalTrackingContexts: {
+        control: { type: 'object' },
+        description: 'Array containing the global tracking contexts to be passed through to f-trak.'
     }
 };
