@@ -27,7 +27,8 @@
                 :logo-gtm-label="copy.logo.gtm"
                 :header-background-theme="headerBackgroundTheme"
                 :should-resize-logo="showDeliveryEnquiryWithContent && showCountrySelector"
-                :is-open="mobileNavIsOpen" />
+                :is-open="mobileNavIsOpen"
+                :global-tracking-contexts="globalTrackingContexts" />
 
             <navigation
                 :copy="copy"
@@ -45,6 +46,7 @@
                 :show-login-info="showLoginInfo"
                 :show-country-selector="showCountrySelector"
                 :is-condensed="isCondensed"
+                :global-tracking-contexts="globalTrackingContexts"
                 @onMobileNavToggle="mobileNavToggled" />
         </div>
     </header>
@@ -57,6 +59,8 @@ import SkipToMain from './SkipToMain.vue';
 import { tenantConfigs } from '../tenants';
 import Navigation from './Navigation.vue';
 
+import analyticsMixin from '../mixins/analytics.mixin';
+
 export default {
     name: 'VueHeader',
 
@@ -65,6 +69,8 @@ export default {
         SkipToMain,
         Navigation
     },
+
+    mixins: [analyticsMixin],
 
     props: {
         locale: {

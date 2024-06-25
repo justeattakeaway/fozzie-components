@@ -43,6 +43,7 @@
                 :copy="copy"
                 :is-open="isCountrySelectorOpen"
                 :is-below-mid="isBelowMid"
+                :global-tracking-contexts="globalTrackingContexts"
                 @closeCountrySelector="closeCountrySelector"
             />
         </v-popover>
@@ -55,6 +56,8 @@ import { ChevronRightIcon } from '@justeattakeaway/pie-icons-vue';
 import CountrySelectorPanel from './CountrySelectorPanel.vue';
 import FlagIcon from './FlagIcon.vue';
 
+import analyticsMixin from '../mixins/analytics.mixin';
+
 export default {
     components: {
         ChevronRightIcon,
@@ -62,6 +65,8 @@ export default {
         FlagIcon,
         VPopover
     },
+
+    mixins: [analyticsMixin],
 
     props: {
         copy: {

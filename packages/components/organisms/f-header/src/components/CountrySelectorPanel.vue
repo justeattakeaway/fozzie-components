@@ -43,7 +43,10 @@
                             trakEvent: 'click',
                             category: 'engagement',
                             action: 'header',
-                            label: `${country.gtm}`
+                            label: `${country.gtm}`,
+                            ...(globalTrackingContexts.length ? {
+                                context: globalTrackingContexts
+                            } : {})
                         }"
                         :tabindex="isOpen ? 0 : -1"
                         :text="country.localisedName"
@@ -70,6 +73,8 @@ import FlagIcon from './FlagIcon.vue';
 import NavLink from './NavLink.vue';
 import { countries } from '../tenants';
 
+import analyticsMixin from '../mixins/analytics.mixin';
+
 export default {
     components: {
         FButton,
@@ -77,6 +82,9 @@ export default {
         FlagIcon,
         NavLink
     },
+
+    mixins: [analyticsMixin],
+
     props: {
         copy: {
             type: Object,
@@ -91,11 +99,13 @@ export default {
             default: false
         }
     },
+
     data () {
         return {
             countries
         };
     },
+
     methods: {
         /**
          * Watch tab focus changes on non mobile version to trigger close event if the user tabs away from country selector panel

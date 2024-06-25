@@ -50,12 +50,15 @@
         <a
             v-if="showOffersLink && !navIsOpen"
             data-test-id="offers-iconLink"
-            data-trak='{
-                "trakEvent": "click",
-                "category": "header",
-                "action": "click - navigation",
-                "label": "offers_icon"
-            }'
+            :data-trak='JSON.stringify({
+                trakEvent: "click",
+                category: "header",
+                action: "click - navigation",
+                label: "offers_icon",
+                ...(globalTrackingContexts.length ? {
+                    context: globalTrackingContexts
+                } : {})
+            })'
             :href="copy.offers.url"
             :class="[
                 $style['c-nav-featureLink'],
@@ -94,7 +97,12 @@
                         :tabindex="tabIndex"
                         :text="customNavLink.text"
                         :href="customNavLink.url"
-                        :data-trak="customNavLink.gtm && analyticsObjects.navigation.clickHeaderLink({ ...customNavLink.gtm })"
+                        :data-trak="customNavLink.gtm && analyticsObjects.navigation.clickHeaderLink({
+                            ...customNavLink.gtm,
+                            ...(globalTrackingContexts.length ? {
+                                context: globalTrackingContexts
+                            } : {})
+                        })"
                         :is-alt-colour="isAltColour"
                         :is-condensed="isCondensed"
                         :background-theme="headerBackgroundTheme" />
@@ -107,7 +115,12 @@
                         :text="copy.offers.text"
                         :tabindex="tabIndex"
                         :href="copy.offers.url"
-                        :data-trak="analyticsObjects.navigation.offers.clickLink"
+                        :data-trak="{
+                            ...analyticsObjects.navigation.offers.clickLink,
+                            ...(globalTrackingContexts.length ? {
+                                context: globalTrackingContexts
+                            } : {})
+                        }"
                         :is-alt-colour="isAltColour"
                         :is-condensed="isCondensed"
                         :background-theme="headerBackgroundTheme"
@@ -131,7 +144,10 @@
                         :tabindex="tabIndex"
                         :href="copy.corporate.url"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
-                            label: copy.corporate.gtm
+                            label: copy.corporate.gtm,
+                            ...(globalTrackingContexts.length ? {
+                                context: globalTrackingContexts
+                            } : {})
                         })"
                         :is-alt-colour="isAltColour"
                         :is-condensed="isCondensed"
@@ -156,7 +172,10 @@
                         :tabindex="tabIndex"
                         :href="copy.deliveryEnquiry.url"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
-                            label: copy.deliveryEnquiry.gtm
+                            label: copy.deliveryEnquiry.gtm,
+                            ...(globalTrackingContexts.length ? {
+                                context: globalTrackingContexts
+                            } : {})
                         })"
                         :is-alt-colour="isAltColour"
                         :is-condensed="isCondensed"
@@ -232,6 +251,7 @@
                             :is-country-selector-open="countrySelectorIsOpen"
                             :copy="copy"
                             :return-logout-url="returnLogoutUrl"
+                            :global-tracking-contexts="globalTrackingContexts"
                             @activateNav="openUserMenu"
                             @deactivateNav="closeUserMenu" />
                     </v-popover>
@@ -245,7 +265,10 @@
                         :tabindex="tabIndex"
                         :href="returnLoginUrl"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
-                            label: copy.accountLogin.gtm
+                            label: copy.accountLogin.gtm,
+                            ...(globalTrackingContexts.length ? {
+                                context: globalTrackingContexts
+                            } : {})
                         })"
                         :is-alt-colour="isAltColour"
                         :is-condensed="isCondensed"
@@ -264,7 +287,10 @@
                         has-border-top
                         :href="copy.accountLogout.url"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
-                            label: copy.accountLogout.gtm
+                            label: copy.accountLogout.gtm,
+                            ...(globalTrackingContexts.length ? {
+                                context: globalTrackingContexts
+                            } : {})
                         })"
                         :is-alt-colour="isAltColour"
                         :background-theme="headerBackgroundTheme"
@@ -279,7 +305,10 @@
                         :tabindex="tabIndex"
                         :href="copy.help.url"
                         :data-trak="analyticsObjects.navigation.clickHeaderLink({
-                            label: copy.help.gtm
+                            label: copy.help.gtm,
+                            ...(globalTrackingContexts.length ? {
+                                context: globalTrackingContexts
+                            } : {})
                         })"
                         :is-alt-colour="isAltColour"
                         :is-condensed="isCondensed"
@@ -304,6 +333,7 @@
                         :is-nav-open="navIsOpen"
                         :copy="copy.countrySelector"
                         :tabindex="tabIndex"
+                        :global-tracking-contexts="globalTrackingContexts"
                         data-test-id="country-selector"
                         @close-country-selector="closeCountrySelector"
                         @open-country-selector="openCountrySelector"
@@ -315,11 +345,9 @@
 </template>
 
 <script>
-// Fozzie imports
+// Fozzie/PIE imports
 import { axiosServices, windowServices } from '@justeat/f-services';
 import VPopover from '@justeat/f-popover';
-
-// Internal
 import {
     OfficeSmallIcon,
     GiftSmallIcon,
@@ -327,11 +355,14 @@ import {
     MopedSmallIcon,
     UserCircleSmallIcon
 } from '@justeattakeaway/pie-icons-vue';
+
+// Internal
 import CountrySelector from './CountrySelector.vue';
 import NavLink from './NavLink.vue';
 import UserNavigationPanel from './UserNavigationPanel.vue';
 import { countries } from '../tenants';
 import analyticsObjects from '../services/analytics/objects';
+import analyticsMixin from '../mixins/analytics.mixin';
 
 export default {
     name: 'HeaderNavigation',
@@ -346,6 +377,8 @@ export default {
         UserNavigationPanel,
         VPopover
     },
+
+    mixins: [analyticsMixin],
 
     props: {
         copy: {

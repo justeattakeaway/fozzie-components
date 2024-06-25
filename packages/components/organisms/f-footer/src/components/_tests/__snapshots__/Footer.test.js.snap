@@ -3,26 +3,26 @@
 exports[`Footer should render default component markup 1`] = `
 <footer data-theme="je" data-test-id="footer-component">
   <div class="c-footer-row-linkLists">
-    <link-list-stub linklist="[object Object]"></link-list-stub>
-    <link-list-stub linklist="[object Object]"></link-list-stub>
-    <link-list-stub linklist="[object Object]"></link-list-stub>
-    <link-list-stub linklist="[object Object]"></link-list-stub>
-    <link-list-stub linklist="[object Object]"></link-list-stub>
+    <link-list-stub globaltrackingcontexts="" linklist="[object Object]"></link-list-stub>
+    <link-list-stub globaltrackingcontexts="" linklist="[object Object]"></link-list-stub>
+    <link-list-stub globaltrackingcontexts="" linklist="[object Object]"></link-list-stub>
+    <link-list-stub globaltrackingcontexts="" linklist="[object Object]"></link-list-stub>
+    <link-list-stub globaltrackingcontexts="" linklist="[object Object]"></link-list-stub>
   </div>
   <div>
     <div>
       <!---->
       <div class="c-footer-row-socialLinks">
-        <icon-list-stub icons="[object Object],[object Object],[object Object]" title="Download our apps" listtype="apps" locale="en-GB"></icon-list-stub>
-        <feedback-block-stub title="Feedback" text="Help us improve our website" buttontext="Send feedback" data-test-id="feedback-block"></feedback-block-stub>
-        <icon-list-stub icons="[object Object],[object Object],[object Object],[object Object],[object Object]" title="Follow us" listtype="social" locale="en-GB"></icon-list-stub>
+        <icon-list-stub globaltrackingcontexts="" icons="[object Object],[object Object],[object Object]" title="Download our apps" listtype="apps" locale="en-GB"></icon-list-stub>
+        <feedback-block-stub globaltrackingcontexts="" title="Feedback" text="Help us improve our website" buttontext="Send feedback" data-test-id="feedback-block"></feedback-block-stub>
+        <icon-list-stub globaltrackingcontexts="" icons="[object Object],[object Object],[object Object],[object Object],[object Object]" title="Follow us" listtype="social" locale="en-GB"></icon-list-stub>
       </div>
     </div>
   </div>
   <div class="">
-    <country-selector-stub currentcountryname="United Kingdom" currentcountrykey="gb" countries="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" changecountrytext="You are on the UK website, click here to change." data-test-id="country-selector"></country-selector-stub>
+    <country-selector-stub globaltrackingcontexts="" currentcountryname="United Kingdom" currentcountrykey="gb" countries="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" changecountrytext="You are on the UK website, click here to change." data-test-id="country-selector"></country-selector-stub>
     <!---->
-    <icon-list-stub icons="[object Object],[object Object],[object Object]" title="" listtype="payments" locale="en-GB"></icon-list-stub>
+    <icon-list-stub globaltrackingcontexts="" icons="[object Object],[object Object],[object Object]" title="" listtype="payments" locale="en-GB"></icon-list-stub>
   </div>
 </footer>
 `;
