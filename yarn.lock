@@ -3542,13 +3542,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justeat/f-alert@workspace:packages/components/molecules/f-alert"
   dependencies:
-    "@justeat/f-button": 4.x
+    "@justeat/f-button": 5.x
     "@justeat/f-services": 1.x
     "@justeat/f-wdio-utils": 1.x
     "@justeattakeaway/pie-icons-vue": 2.0.0-beta.1
   peerDependencies:
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
-    "@justeat/f-button": 4.x
+    "@justeat/f-button": 5.x
   languageName: unknown
   linkType: soft
 
@@ -3947,7 +3947,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@justeat/f-header@workspace:packages/components/organisms/f-header"
   dependencies:
-    "@justeat/f-button": 4.x
+    "@justeat/f-button": 5.x
     "@justeat/f-popover": 3.x
     "@justeat/f-services": 1.x
     "@justeat/f-vue-icons": 3.x
@@ -3955,7 +3955,7 @@ __metadata:
     "@justeattakeaway/pie-icons-vue": 2.0.0-beta.1
   peerDependencies:
     "@justeat/browserslist-config-fozzie": ">=1.1.1"
-    "@justeat/f-button": 4.x
+    "@justeat/f-button": 5.x
     "@justeat/f-popover": 3.x
     "@justeat/f-trak": 1.x
   languageName: unknown

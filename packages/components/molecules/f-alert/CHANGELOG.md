@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## v6.3.1
+
+_July 05, 2024_
+
+### Changed
+
+- Updated `@justeat/f-button@5.x` due to Node compatibility
+
 ## v6.3.0
 
 _March 13, 2024_
@@ -17,7 +25,7 @@ _December 5, 2022_
 
 - Updated to the new `pie-icons-vue` beta release.
 
-v6.2.0
+## v6.2.0
 
 ---
 
