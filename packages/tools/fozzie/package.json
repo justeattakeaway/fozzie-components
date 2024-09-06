@@ -63,7 +63,7 @@
     "postcss-cli": "10.0.0",
     "sass": "1.55.0",
     "sass-true": "6.1.0",
-    "stylelint": "14.14.0",
+    "stylelint": "16.6.1",
     "stylelint-config-standard-scss": "5.0.0"
   },
   "keywords": [
