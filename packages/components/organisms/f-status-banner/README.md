@@ -13,7 +13,6 @@ Global status page
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-status-banner.svg)](https://badge.fury.io/js/%40justeat%2Ff-status-banner)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-status-banner/badge.svg)](https://coveralls.io/github/justeat/f-status-banner)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-status-banner/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-status-banner?targetFile=package.json)
 
 ---
 
