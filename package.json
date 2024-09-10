@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "version": "7.57.1",
+  "version": "7.57.2",
   "private": true,
   "scripts": {
     "build": "NODE_OPTIONS=--openssl-legacy-provider cross-env-shell turbo run build --continue --token=${TURBO_TOKEN}",
@@ -89,7 +89,7 @@
     "babel-jest": "29.7.0",
     "babel-loader": "8.1.0",
     "bundlewatch": "0.3.3",
-    "chromedriver": "126.0.2",
+    "chromedriver": "128.0.1",
     "core-js": "3.36.1",
     "cross-env": "7.0.2",
     "css-loader": "1.0.1",
