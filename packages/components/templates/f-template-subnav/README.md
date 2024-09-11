@@ -15,7 +15,6 @@ On wider views, this will be laid out with the breadcrumb running along the top,
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-template-subnav.svg)](https://badge.fury.io/js/%40justeat%2Ff-template-subnav)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-template-subnav/badge.svg)](https://coveralls.io/github/justeat/f-template-subnav)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-template-subnav/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-template-subnav?targetFile=package.json)
 
 ---
 

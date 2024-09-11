@@ -14,7 +14,6 @@ An interactive tile component containing an image, text and link.
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-image-tile.svg)](https://badge.fury.io/js/%40justeat%2Ff-image-tile)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-image-tile/badge.svg)](https://coveralls.io/github/justeat/f-image-tile)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-image-tile/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-image-tile?targetFile=package.json)
 
 ---
 
@@ -73,12 +72,12 @@ The props that can be defined are as follows (if any):
 | Prop  | Type  | Default | Description |
 | ----- | ----- | ------- | ----------- |
 | `href` | `String` | `null` | The link URL |
-| `tileId` | `String` | `null` | The id of the tile | 
+| `tileId` | `String` | `null` | The id of the tile |
 | `isSelected` | `Boolean` | `false` | Marks the tile as selected |
-| `isLink` | `Boolean` | `false` | Component acts as a link, rather than default toggle | 
-| `displayText` | `String` | `null` | Component display text | 
-| `imgSrc` | `String` | `''` | Component image link | 
-| `altText` | `String` | `''` | Component image alt text | 
+| `isLink` | `Boolean` | `false` | Component acts as a link, rather than default toggle |
+| `displayText` | `String` | `null` | Component display text |
+| `imgSrc` | `String` | `''` | Component image link |
+| `altText` | `String` | `''` | Component image alt text |
 | `fallbackImage` | `String` | `''` | Component fallback image url
 
 ### Events
@@ -87,7 +86,7 @@ The events that can be subscribed to are as follows (if any):
 
 | Event | Description |
 | ----- | ----------- |
-| `toggleFilter` | Fired when a tile is interacted with, toggles between selected and not selected | 
+| `toggleFilter` | Fired when a tile is interacted with, toggles between selected and not selected |
 | `handleImgError` |  Fired there is an error with the component image |
 
 ## Development

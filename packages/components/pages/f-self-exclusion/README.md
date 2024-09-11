@@ -13,7 +13,6 @@ Customers must be able to voluntarily self-exclude or nominate themselves for se
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-self-exclusion.svg)](https://badge.fury.io/js/%40justeat%2Ff-self-exclusion)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-self-exclusion/badge.svg)](https://coveralls.io/github/justeat/f-self-exclusion)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-self-exclusion/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-self-exclusion?targetFile=package.json)
 
 ---
 

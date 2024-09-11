@@ -12,8 +12,8 @@
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-tabs.svg)](https://badge.fury.io/js/%40justeat%2Ff-tabs)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-tabs/badge.svg)](https://coveralls.io/github/justeat/f-tabs)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-tabs/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-tabs?targetFile=package.json)
 
+---
 
 ## Usage
 

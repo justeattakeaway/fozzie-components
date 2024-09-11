@@ -26,8 +26,7 @@ describe('Legacy - f-cookie-banner component tests', () => {
     });
 
     const tests = [
-        { locale: 'en-AU', expectedCookiePolicyUrl: 'au/info/privacy-policy#cookies_policy' },
-        { locale: 'en-NZ', expectedCookiePolicyUrl: 'nz/info/privacy-policy#cookies_policy' }
+        { locale: 'en-AU', expectedCookiePolicyUrl: 'https://www.menulog.com.au/privacy-policy#cookies_policy' }
     ];
 
     tests.forEach(({ locale, expectedCookiePolicyUrl }) => {

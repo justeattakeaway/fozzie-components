@@ -13,7 +13,6 @@ provides a way for customers to collect loyalty stamps for restaurants
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-loyalty.svg)](https://badge.fury.io/js/%40justeat%2Ff-loyalty)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-loyalty/badge.svg)](https://coveralls.io/github/justeat/f-loyalty)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-loyalty/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-loyalty?targetFile=package.json)
 
 ---
 

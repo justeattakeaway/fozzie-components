@@ -13,7 +13,6 @@ displays offers to the customers
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-offers.svg)](https://badge.fury.io/js/%40justeat%2Ff-offers)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-offers/badge.svg)](https://coveralls.io/github/justeat/f-offers)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-offers/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-offers?targetFile=package.json)
 
 ---
 
