@@ -12,7 +12,6 @@ A component to switch a single setting on/off.
 
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-toggle-switch.svg)](https://badge.fury.io/js/%40justeat%2Ff-toggle-switch)
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-toggle-switch/badge.svg)](https://coveralls.io/github/justeat/f-toggle-switch)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-toggle-switch/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-toggle-switch?targetFile=package.json)
 
 ---
 

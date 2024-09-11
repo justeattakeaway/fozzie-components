@@ -13,7 +13,6 @@ Encapsulates Snowplow & GTM (Google Analytics) functionality
 [![npm version](https://badge.fury.io/js/%40justeat%2Fcore-analytics.svg)](https://badge.fury.io/js/%40justeat%2Fcore-analytics)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
 [![Coverage Status](https://coveralls.io/repos/github/justeat/core-analytics/badge.svg)](https://coveralls.io/github/justeat/core-analytics)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/core-analytics/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/core-analytics?targetFile=package.json)
 
 ---
 This component abstracts away the gathering of the various data values needed for Google Analytics (GA) and the setting up of Google Tag Manager (GTM).<br>
@@ -113,7 +112,7 @@ You can see the GTM tag and any GA data by inspecting the `head` tag of the page
 
       This will be the model constructed and pushed to the `datalayer` (handy for testing and debugging)
       #### **Notes**
-      This is ideally only called everytime the `User` status changes so it might best suited in a `login` method.<br>     
+      This is ideally only called everytime the `User` status changes so it might best suited in a `login` method.<br>
       The method is very dependant on the `authToken` parameter and without it the `userData` model will only contain the anonymous user id.
       #### **Example**
       ```js

@@ -13,7 +13,8 @@ A service for publishing statistics from the client side
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-statistics.svg)](https://badge.fury.io/js/%40justeat%2Ff-statistics)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-statistics/badge.svg)](https://coveralls.io/github/justeat/f-statistics)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-statistics/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-statistics?targetFile=package.json)
+
+---
 
 > This package is an MVP (not yet stable), if you want to use it contact the team first.
 

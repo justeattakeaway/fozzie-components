@@ -10603,7 +10603,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.6.8, axios@npm:^1.6.7":
+"axios@npm:1.6.8":
   version: 1.6.8
   resolution: "axios@npm:1.6.8"
   dependencies:
@@ -10620,6 +10620,17 @@ __metadata:
   dependencies:
     follow-redirects: ^1.14.4
   checksum: 468cf496c08a6aadfb7e699bebdac02851e3043d4e7d282350804ea8900e30d368daa6e3cd4ab83b8ddb5a3b1e17a5a21ada13fc9cebd27b74828f47a4236316
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.7.4":
+  version: 1.7.7
+  resolution: "axios@npm:1.7.7"
+  dependencies:
+    follow-redirects: ^1.15.6
+    form-data: ^4.0.0
+    proxy-from-env: ^1.1.0
+  checksum: 882d4fe0ec694a07c7f5c1f68205eb6dc5a62aecdb632cc7a4a3d0985188ce3030e0b277e1a8260ac3f194d314ae342117660a151fabffdc5081ca0b5a8b47fe
   languageName: node
   linkType: hard
 
@@ -12308,12 +12319,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromedriver@npm:126.0.2":
-  version: 126.0.2
-  resolution: "chromedriver@npm:126.0.2"
+"chromedriver@npm:128.0.1":
+  version: 128.0.1
+  resolution: "chromedriver@npm:128.0.1"
   dependencies:
     "@testim/chrome-version": ^1.1.4
-    axios: ^1.6.7
+    axios: ^1.7.4
     compare-versions: ^6.1.0
     extract-zip: ^2.0.1
     proxy-agent: ^6.4.0
@@ -12321,7 +12332,7 @@ __metadata:
     tcp-port-used: ^1.0.2
   bin:
     chromedriver: bin/chromedriver
-  checksum: e364a29dda69eee2c34436d465c92c2632a7cc2f33f4fdcb1d88b56d8af678e492d6a6f7a8061f7b1a2821c334edba3414945cb4226ec0000cc9ef361e8711f3
+  checksum: a6a4ecaae204d748632cfb4d19071ebeef0303019b1acf6fd9a8e844ed597b96b7b93dafbdeb4215a6b073bb1628be084635d0559e6912d09cfe688b644418a0
   languageName: node
   linkType: hard
 
@@ -29666,7 +29677,7 @@ __metadata:
     babel-jest: 29.7.0
     babel-loader: 8.1.0
     bundlewatch: 0.3.3
-    chromedriver: 126.0.2
+    chromedriver: 128.0.1
     core-js: 3.36.1
     cross-env: 7.0.2
     css-loader: 1.0.1

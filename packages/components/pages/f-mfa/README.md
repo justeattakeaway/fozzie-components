@@ -13,7 +13,6 @@ Multi-factor Authenticator - Input Form
 [![npm version](https://badge.fury.io/js/%40justeat%2Ff-mfa.svg)](https://badge.fury.io/js/%40justeat%2Ff-mfa)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-mfa/badge.svg)](https://coveralls.io/github/justeat/f-mfa)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-mfa/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-mfa?targetFile=package.json)
 
 ---
 This form is for accepting a MFA token that has been sent to a user, then submitting it to be verified, if successful then an event to passed to the parent component to return the user to where they came from.

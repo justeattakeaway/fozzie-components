@@ -11,7 +11,6 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/justeat/f-user-message/badge.svg)](https://coveralls.io/github/justeat/f-user-message)
 [![CircleCI](https://circleci.com/gh/justeat/fozzie-components.svg?style=svg)](https://circleci.com/gh/justeat/workflows/fozzie-components)
-[![Known Vulnerabilities](https://snyk.io/test/github/justeat/f-user-message/badge.svg?targetFile=package.json)](https://snyk.io/test/github/justeat/f-user-message?targetFile=package.json)
 <!-- markdownlint-enable -->
 
 <!-- markdownlint-disable MD002 -->
