@@ -9,7 +9,6 @@ _November 27, 2024_
 
 ### Changed
 
-- Move `GET /consumer` request to `GET /applications/uk/consumer/me`
 - Send `Accept-Tenant` header for `ConsumerAPI` requests
 
 ## v1.8.1
