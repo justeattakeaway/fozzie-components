@@ -13,7 +13,6 @@ _November 27, 2024_
 
 ## v1.8.1
 
-
 _April 29, 2024_
 
 ### Changed
