@@ -1,6 +1,5 @@
 import {
-    GET_CONSUMER_DETAILS_URL,
-    PATCH_CONSUMER_DETAILS_URL,
+    CONSUMER_DETAILS_URL,
     CONSUMER_ADDRESSES_URL,
     AUTHORISATION_HEADER_NAME,
     ACCEPT_TENANT_HEADER_NAME
@@ -27,7 +26,7 @@ export default class ConsumerApi {
     async getConsumerDetails (authToken) {
         const headers = BuildHeaders(authToken);
 
-        const response = await this.#httpClient.get(`${this.#baseUrl}/${GET_CONSUMER_DETAILS_URL}`, headers);
+        const response = await this.#httpClient.get(`${this.#baseUrl}/${CONSUMER_DETAILS_URL}`, headers);
 
         return response;
     }
@@ -43,7 +42,7 @@ export default class ConsumerApi {
     async patchConsumer (authToken, body) {
         const headers = BuildHeaders(authToken);
 
-        const response = await this.#httpClient.patch(`${this.#baseUrl}/${PATCH_CONSUMER_DETAILS_URL}`, body, headers);
+        const response = await this.#httpClient.patch(`${this.#baseUrl}/${CONSUMER_DETAILS_URL}`, body, headers);
 
         return response;
     }

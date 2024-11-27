@@ -1,8 +1,7 @@
 import ConsumerApi from '../Consumer.api';
 
 import {
-    GET_CONSUMER_DETAILS_URL,
-    PATCH_CONSUMER_DETAILS_URL,
+    CONSUMER_DETAILS_URL,
     CONSUMER_ADDRESSES_URL,
     AUTHORISATION_HEADER_NAME,
     ACCEPT_TENANT_HEADER_NAME
@@ -54,7 +53,7 @@ describe('ConsumerApi Provider', () => {
     describe('When calling `getConsumerDetails`', () => {
         it('should send the correct parameters', async () => {
             // Arrange
-            const expectedUri = `${baseUrl}/${GET_CONSUMER_DETAILS_URL}`;
+            const expectedUri = `${baseUrl}/${CONSUMER_DETAILS_URL}`;
             const expectedHeaders = {
                 [AUTHORISATION_HEADER_NAME]: `Bearer ${token}`,
                 [ACCEPT_TENANT_HEADER_NAME]: 'uk'
@@ -88,7 +87,7 @@ describe('ConsumerApi Provider', () => {
     describe('When calling `patchConsumer`', () => {
         it('should send the correct parameters', async () => {
             // Arrange
-            const expectedUri = `${baseUrl}/${PATCH_CONSUMER_DETAILS_URL}`;
+            const expectedUri = `${baseUrl}/${CONSUMER_DETAILS_URL}`;
             const expectedBody = consumerUpdateBody;
             const expectedHeaders = {
                 [AUTHORISATION_HEADER_NAME]: `Bearer ${token}`,
