@@ -3,7 +3,17 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## v1.9.0
+
+_November 27, 2024_
+
+### Changed
+
+- Move `GET /consumer` request to `GET /applications/uk/consumer/me`
+- Send `Accept-Tenant` header for `ConsumerAPI` requests
+
 ## v1.8.1
+
 
 _April 29, 2024_
 
