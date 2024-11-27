@@ -200,7 +200,7 @@ describe('RestaurantRating component', () => {
             expect(countMessage.text()).toStrictEqual('200+');
         });
 
-        it('displays threshold with + when count is higher than threshold with default threshold value', () => {
+        it('displays count when threshold has default threshold value', () => {
             // arrange
             const propsData = {
                 mean: 5,
@@ -215,7 +215,7 @@ describe('RestaurantRating component', () => {
             // assert
             expect(countMessage.exists()).toBe(true);
 
-            expect(countMessage.text()).toStrictEqual('200+');
+            expect(countMessage.text()).toStrictEqual('250');
         });
     });
 
@@ -250,7 +250,7 @@ describe('RestaurantRating component', () => {
             expect(countMessage.exists()).toBe(true);
 
             expect(ratingsMeanElement.text()).toStrictEqual('5.0');
-            expect(countMessage.text()).toStrictEqual('200+');
+            expect(countMessage.text()).toStrictEqual('250');
         });
 
         it('shows an empty star and a no ratings message if `mean` is missing', () => {
