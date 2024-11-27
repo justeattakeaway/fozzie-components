@@ -9,7 +9,7 @@ import {
 const BuildHeaders = authToken => {
     const headers = {
         [AUTHORISATION_HEADER_NAME]: authToken ? `Bearer ${authToken}` : '',
-        [ACCEPT_TENANT_HEADER_NAME]: 'uk',
+        [ACCEPT_TENANT_HEADER_NAME]: 'uk'
     };
 
     return headers;
