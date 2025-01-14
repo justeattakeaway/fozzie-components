@@ -7,11 +7,6 @@ export default {
     navTitle: 'Menu principale',
 
     navLinks: {
-        accountInfo: {
-            text: 'Account',
-            url: '/account/info',
-            gtm: 'click_account_your_account'
-        },
         orderHistory: {
             text: 'Ordini',
             url: '/order-history',
@@ -21,21 +16,6 @@ export default {
             text: "Credito dell'account",
             url: '/account/credit',
             gtm: 'click_account_credit'
-        },
-        savedCards: {
-            text: 'Metodi di pagamento',
-            url: '/account/saved-cards',
-            gtm: 'click_account_saved_cards'
-        },
-        addressBook: {
-            text: 'Indirizzi di consegna',
-            url: '/account/addressbook',
-            gtm: 'click_account_address_books'
-        },
-        contactPreferences: {
-            text: 'Modalità di contatto',
-            url: '/account/contact-preferences/',
-            gtm: 'click_account_contact_preferences'
         }
     },
 

@@ -7,25 +7,10 @@ export default {
     navTitle: 'Main menu',
 
     navLinks: {
-        accountInfo: {
-            text: 'Your account',
-            url: '/account/info',
-            gtm: 'click_account_your_account'
-        },
         orderHistory: {
             text: 'Your orders',
             url: '/order-history',
             gtm: 'click_account_your_orders'
-        },
-        savedCards: {
-            text: 'Your saved cards',
-            url: '/account/paymentoptions',
-            gtm: 'click_account_saved_cards'
-        },
-        addressBook: {
-            text: 'Your address book',
-            url: '/account/addressbook',
-            gtm: 'click_account_address_books'
         },
         redeemAGiftcard: {
             text: 'Redeem a gift card',
@@ -36,11 +21,6 @@ export default {
             text: 'Redeem a voucher',
             url: '/account/credit',
             gtm: 'click_account_redeem_voucher'
-        },
-        contactPreferences: {
-            text: 'Contact preferences',
-            url: '/account/preferences',
-            gtm: 'click_account_contact_preferences'
         }
     },
 

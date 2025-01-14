@@ -3,6 +3,14 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## v10.22.0
+
+_Jan 15, 2025_
+
+### Changed
+
+- Removed deprecated account pages links from user navigation
+
 ## v10.21.1
 
 _July 05, 2024_
