@@ -9,7 +9,7 @@ _Jan 15, 2025_
 
 ### Changed
 
-- Removed deprecated account pages links from user navigation
+- Update and remove deprecated account pages links from user navigation
 
 ## v10.21.1
 
