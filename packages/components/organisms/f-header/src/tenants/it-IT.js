@@ -7,6 +7,11 @@ export default {
     navTitle: 'Menu principale',
 
     navLinks: {
+        accountInfo: {
+            text: 'Account',
+            url: '/#personalinfo',
+            gtm: 'click_account_your_account'
+        },
         orderHistory: {
             text: 'Ordini',
             url: '/order-history',
@@ -16,6 +21,11 @@ export default {
             text: "Credito dell'account",
             url: '/account/credit',
             gtm: 'click_account_credit'
+        },
+        contactPreferences: {
+            text: 'Modalità di contatto',
+            url: '/#personalinfo',
+            gtm: 'click_account_contact_preferences'
         }
     },
 

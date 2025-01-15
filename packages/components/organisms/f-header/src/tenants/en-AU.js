@@ -7,6 +7,11 @@ export default {
     navTitle: 'Main menu',
 
     navLinks: {
+        accountInfo: {
+            text: 'Account info',
+            url: '/#personalinfo',
+            gtm: 'click_account_your_account'
+        },
         orderHistory: {
             text: 'Orders',
             url: '/order-history',
