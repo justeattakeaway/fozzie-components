@@ -9,23 +9,18 @@ export default {
     navLinks: {
         accountInfo: {
             text: 'Account info',
-            url: '/account/info',
+            url: '/#personalinfo',
             gtm: 'click_account_your_account'
         },
         orderHistory: {
             text: 'Orders',
-            url: '/order-history',
+            url: '/#order-history',
             gtm: 'click_account_your_orders'
         },
         accountCredit: {
             text: 'Account credit',
             url: '/account/credit',
             gtm: 'click_account_credit'
-        },
-        addressBook: {
-            text: 'Delivery addresses',
-            url: '/account/addressbook',
-            gtm: 'click_account_address_books'
         }
     },
 

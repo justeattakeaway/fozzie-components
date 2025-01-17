@@ -9,12 +9,12 @@ export default {
     navLinks: {
         accountInfo: {
             text: 'Información de la cuenta',
-            url: '/account/info',
+            url: '/#personalinfo',
             gtm: 'click_account_your_account'
         },
         orderHistory: {
             text: 'Pedidos',
-            url: '/order-history',
+            url: '/#order-history',
             gtm: 'click_account_your_orders'
         },
         accountCredit: {
@@ -22,19 +22,9 @@ export default {
             url: '/account/credit',
             gtm: 'click_account_credit'
         },
-        savedCards: {
-            text: 'Métodos de pago',
-            url: '/account/saved-cards',
-            gtm: 'click_account_saved_cards'
-        },
-        addressBook: {
-            text: 'Direcciones de reparto',
-            url: '/account/addressbook',
-            gtm: 'click_account_address_books'
-        },
         contactPreferences: {
             text: 'Preferencias de contacto',
-            url: '/account/contact-preferences/',
+            url: '/#personalinfo',
             gtm: 'click_account_contact_preferences'
         }
     },
