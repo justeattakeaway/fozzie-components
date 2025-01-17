@@ -14,7 +14,7 @@ export default {
         },
         orderHistory: {
             text: 'Your orders',
-            url: '/order-history',
+            url: '/#order-history',
             gtm: 'click_account_your_orders'
         },
         redeemAGiftcard: {

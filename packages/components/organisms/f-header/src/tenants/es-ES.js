@@ -14,7 +14,7 @@ export default {
         },
         orderHistory: {
             text: 'Pedidos',
-            url: '/order-history',
+            url: '/#order-history',
             gtm: 'click_account_your_orders'
         },
         accountCredit: {
