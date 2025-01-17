@@ -11,6 +11,7 @@ _January 16, 2025_
 ### Changed
 
 - Update `chromedriver` to v132
+- Update `actions/upload-artifact` to v3
 
 
 ## v7.57.2
