@@ -9,23 +9,13 @@ export default {
     navLinks: {
         accountInfo: {
             text: 'Your account',
-            url: '/account/info',
+            url: '/#personalinfo',
             gtm: 'click_account_your_account'
         },
         orderHistory: {
             text: 'Your orders',
-            url: '/order-history',
+            url: '/#order-history',
             gtm: 'click_account_your_orders'
-        },
-        savedCards: {
-            text: 'Your saved cards',
-            url: '/account/paymentoptions',
-            gtm: 'click_account_saved_cards'
-        },
-        addressBook: {
-            text: 'Your address book',
-            url: '/account/addressbook',
-            gtm: 'click_account_address_books'
         },
         redeemAGiftcard: {
             text: 'Redeem a gift card',
@@ -39,7 +29,7 @@ export default {
         },
         contactPreferences: {
             text: 'Contact preferences',
-            url: '/account/preferences',
+            url: '/#personalinfo',
             gtm: 'click_account_contact_preferences'
         }
     },
