@@ -12319,9 +12319,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromedriver@npm:128.0.1":
-  version: 128.0.1
-  resolution: "chromedriver@npm:128.0.1"
+"chromedriver@npm:132.0.0":
+  version: 132.0.0
+  resolution: "chromedriver@npm:132.0.0"
   dependencies:
     "@testim/chrome-version": ^1.1.4
     axios: ^1.7.4
@@ -12332,7 +12332,7 @@ __metadata:
     tcp-port-used: ^1.0.2
   bin:
     chromedriver: bin/chromedriver
-  checksum: a6a4ecaae204d748632cfb4d19071ebeef0303019b1acf6fd9a8e844ed597b96b7b93dafbdeb4215a6b073bb1628be084635d0559e6912d09cfe688b644418a0
+  checksum: ee8d7592688e498666ab6384be84b31e0c4a095fac53727403ec5e84b93e35a0dbfc29c82f8582660043cf7af5cc0d011697f29e0088fae293b69a0b601409a2
   languageName: node
   linkType: hard
 
@@ -29677,7 +29677,7 @@ __metadata:
     babel-jest: 29.7.0
     babel-loader: 8.1.0
     bundlewatch: 0.3.3
-    chromedriver: 128.0.1
+    chromedriver: 132.0.0
     core-js: 3.36.1
     cross-env: 7.0.2
     css-loader: 1.0.1
