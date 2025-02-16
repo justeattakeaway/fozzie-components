@@ -56,7 +56,7 @@
   ],
   "devDependencies": {
     "@justeat/f-icons": "4.13.0",
-    "@rollup/plugin-commonjs": "25.0.7",
+    "@rollup/plugin-commonjs": "26.0.0",
     "@rollup/plugin-node-resolve": "15.1.0",
     "fs-extra": "9.0.1",
     "lodash.kebabcase": "4.1.1",
