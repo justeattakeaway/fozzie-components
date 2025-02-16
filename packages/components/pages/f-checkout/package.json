@@ -55,7 +55,7 @@
   "dependencies": {
     "@justeat/f-globalisation": "1.x",
     "@justeat/f-services": "1.x",
-    "axios": "1.6.8",
+    "axios": "1.7.4",
     "jwt-decode": "3.1.2",
     "vue-scrollto": "2.20.0",
     "vuelidate": "0.7.6"
