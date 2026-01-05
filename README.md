@@ -153,3 +153,5 @@ Fozzie Components were originally authored in Vue 2. To ensure they work in a Vu
 
 ## Links
 - [Just Eat Storybook production](https://vue.pie.design/)
+
+- Security verification
